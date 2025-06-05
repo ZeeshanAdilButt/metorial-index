@@ -1,0 +1,159 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../../../index.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+model PublicServerCategory {
+  identifier String @id
+
+  name        String
+  description String?
+
+  servers PublicServer[]
+}
+
+model PublicServerVendor {
+  identifier String @id
+
+  name        String
+  description String?
+  imageUrl    String?
+  websiteUrl  String?
+
+  servers PublicServer[]
+}
+
+model PublicRepository {
+  identifier String @id
+
+  slug String
+  name String
+
+  providerUrl String
+  websiteUrl  String?
+
+  provider String
+
+  providerId             String?
+  providerFullIdentifier String?
+  providerIdentifier     String?
+
+  providerOwnerId         String?
+  providerOwnerIdentifier String?
+  providerOwnerUrl        String?
+
+  isFork     Boolean
+  isArchived Boolean
+
+  starCount         Int
+  forkCount         Int
+  watcherCount      Int
+  openIssuesCount   Int
+  subscriptionCount Int
+  size              Int
+
+  defaultBranch String
+
+  licenseName   String?
+  licenseUrl    String?
+  licenseSpdxId String?
+
+  topics Json
+
+  language    String?
+  description String?
+
+  createdAt DateTime
+  updatedAt DateTime
+  pushedAt  DateTime?
+
+  servers PublicServer[]
+}
+
+model PublicServer {
+  identifier String @id
+  fullSlug   String @unique
+  slug       String
+
+  name        String
+  description String?
+  skills      Json
+
+  subdirectory String?
+  websiteUrl   String?
+
+  isOfficial  Boolean
+  isCommunity Boolean
+  isHostable  Boolean
+
+  tools Json?
+
+  readme String?
+
+  vendorIdentifier String
+  vendor           PublicServerVendor @relation(fields: [vendorIdentifier], references: [identifier])
+
+  repositoryIdentifier String
+  repository           PublicRepository @relation(fields: [repositoryIdentifier], references: [identifier])
+
+  variants   PublicServerVariant[]
+  categories PublicServerCategory[]
+}
+
+model PublicServerProvider {
+  identifier String @id
+
+  name        String
+  websiteUrl  String?
+  description String?
+  imageUrl    String?
+
+  variants PublicServerVariant[]
+}
+
+enum PublicServerVariantSourceType {
+  docker
+  remote
+}
+
+model PublicServerVariant {
+  identifier String @id
+
+  sourceType PublicServerVariantSourceType
+
+  providerIdentifier String
+  provider           PublicServerProvider @relation(fields: [providerIdentifier], references: [identifier])
+
+  serverIdentifier String
+  server           PublicServer @relation(fields: [serverIdentifier], references: [identifier])
+
+  dockerImage String?
+  remoteUrl   String?
+
+  PublicServerVariantVersion PublicServerVariantVersion[]
+}
+
+model PublicServerVariantVersion {
+  identifier String
+
+  variantIdentifier String
+  variant           PublicServerVariant @relation(fields: [variantIdentifier], references: [identifier])
+
+  config          Json
+  getLaunchParams String
+
+  sourceType  PublicServerVariantSourceType
+  dockerImage String?
+  dockerTag   String?
+
+  remoteUrl String?
+
+  createdAt DateTime
+
+  @@id([variantIdentifier, identifier])
+}
