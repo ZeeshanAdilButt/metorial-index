@@ -1,4 +1,4 @@
-import { req } from '@metorial/req';
+import { req } from './req';
 
 export let McpContainers = {
   list: async () => {

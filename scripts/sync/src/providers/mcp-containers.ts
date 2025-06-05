@@ -1,8 +1,8 @@
-import { Cases } from '@metorial/case';
 import fs from 'fs-extra';
 import { parse } from 'yaml';
 import type { PublicServer } from '../../prisma/generated';
 import { ensureProvider, ensureServerVariant, ensureServerVersion } from '../db';
+import { Cases } from '../lib/cases';
 import { format } from '../lib/format';
 import { McpContainers } from '../lib/mcpContainers';
 
