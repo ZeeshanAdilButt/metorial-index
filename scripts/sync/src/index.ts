@@ -24,7 +24,7 @@ await forEachServer(async ({ serverPath }) => {
     : null;
 
   let variantsPath = path.join(serverPath, 'variants');
-  let variants = await fs.readdir(variantsPath);
+  let variants = (await fs.exists(variantsPath)) ? await fs.readdir(variantsPath) : [];
 
   let generatedPath = path.join(serverPath, 'generated');
   await fs.ensureDir(generatedPath);
