@@ -1,0 +1,17 @@
+tools:
+  - name: send_message
+    description: Discordにメッセージを送信します
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: 送信するメッセージ内容
+        username:
+          type: string
+          description: 表示名（オプション）
+        avatar_url:
+          type: string
+          description: アバターURL（オプション）

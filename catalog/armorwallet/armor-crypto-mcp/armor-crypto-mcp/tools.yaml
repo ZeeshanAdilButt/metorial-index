@@ -1,0 +1,398 @@
+tools:
+  - name: get_wallet_token_balance
+    description: "
+
+      \    Get the balance for a list of wallet/token pairs.
+
+      \   \ 
+
+      \    Expects a list of dictionaries each with 'wallet' and 'token' keys.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_wallet_token_balanceArguments
+      required:
+        - wallet_token_pairs
+      properties:
+        wallet_token_pairs:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Wallet Token Pairs
+  - name: conversion_api
+    description: "
+
+      \    Perform token conversion.
+
+      \   \ 
+
+      \    Expects a list of conversion requests with keys: input_amount,
+      input_token, output_token.
+
+      \    "
+    inputSchema:
+      type: object
+      title: conversion_apiArguments
+      required:
+        - conversion_requests
+      properties:
+        conversion_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Conversion Requests
+  - name: swap_quote
+    description: "
+
+      \    Retrieve a swap quote.
+
+      \   \ 
+
+      \    Expects a list of swap quote requests.
+
+      \    "
+    inputSchema:
+      type: object
+      title: swap_quoteArguments
+      required:
+        - swap_quote_requests
+      properties:
+        swap_quote_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Swap Quote Requests
+  - name: swap_transaction
+    description: "
+
+      \    Execute a swap transaction.
+
+      \   \ 
+
+      \    Expects a list of swap transaction requests.
+
+      \    "
+    inputSchema:
+      type: object
+      title: swap_transactionArguments
+      required:
+        - swap_transaction_requests
+      properties:
+        swap_transaction_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Swap Transaction Requests
+  - name: get_token_details
+    description: "
+
+      \    Retrieve token details.
+
+      \   \ 
+
+      \    Expects a list of token details requests with keys such as 'query'
+      and 'include_details'.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_token_detailsArguments
+      required:
+        - token_details_requests
+      properties:
+        token_details_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Token Details Requests
+  - name: list_groups
+    description: "\n    List all wallet groups.\n    "
+    inputSchema:
+      type: object
+      title: list_groupsArguments
+      properties: {}
+  - name: list_single_group
+    description: "
+
+      \    Retrieve details for a single wallet group.
+
+      \   \ 
+
+      \    Expects the group name as a parameter.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_single_groupArguments
+      required:
+        - group_name
+      properties:
+        group_name:
+          type: string
+          title: Group Name
+  - name: create_wallet
+    description: "
+
+      \    Create new wallets.
+
+      \   \ 
+
+      \    Expects a list of wallet names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_walletArguments
+      required:
+        - wallet_names_list
+      properties:
+        wallet_names_list:
+          type: array
+          items:
+            type: string
+          title: Wallet Names List
+  - name: archive_wallets
+    description: "
+
+      \    Archive wallets.
+
+      \   \ 
+
+      \    Expects a list of wallet names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: archive_walletsArguments
+      required:
+        - wallet_names_list
+      properties:
+        wallet_names_list:
+          type: array
+          items:
+            type: string
+          title: Wallet Names List
+  - name: unarchive_wallets
+    description: "
+
+      \    Unarchive wallets.
+
+      \   \ 
+
+      \    Expects a list of wallet names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: unarchive_walletsArguments
+      required:
+        - wallet_names_list
+      properties:
+        wallet_names_list:
+          type: array
+          items:
+            type: string
+          title: Wallet Names List
+  - name: create_groups
+    description: "
+
+      \    Create new wallet groups.
+
+      \   \ 
+
+      \    Expects a list of group names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_groupsArguments
+      required:
+        - group_names_list
+      properties:
+        group_names_list:
+          type: array
+          items:
+            type: string
+          title: Group Names List
+  - name: add_wallets_to_group
+    description: "
+
+      \    Add wallets to a specified group.
+
+      \   \ 
+
+      \    Expects the group name and a list of wallet names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_wallets_to_groupArguments
+      required:
+        - group_name
+        - wallet_names_list
+      properties:
+        group_name:
+          type: string
+          title: Group Name
+        wallet_names_list:
+          type: array
+          items:
+            type: string
+          title: Wallet Names List
+  - name: archive_wallet_group
+    description: "
+
+      \    Archive wallet groups.
+
+      \   \ 
+
+      \    Expects a list of group names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: archive_wallet_groupArguments
+      required:
+        - group_names_list
+      properties:
+        group_names_list:
+          type: array
+          items:
+            type: string
+          title: Group Names List
+  - name: unarchive_wallet_group
+    description: "
+
+      \    Unarchive wallet groups.
+
+      \   \ 
+
+      \    Expects a list of group names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: unarchive_wallet_groupArguments
+      required:
+        - group_names_list
+      properties:
+        group_names_list:
+          type: array
+          items:
+            type: string
+          title: Group Names List
+  - name: remove_wallets_from_group
+    description: "
+
+      \    Remove wallets from a specified group.
+
+      \   \ 
+
+      \    Expects the group name and a list of wallet names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: remove_wallets_from_groupArguments
+      required:
+        - group_name
+        - wallet_names_list
+      properties:
+        group_name:
+          type: string
+          title: Group Name
+        wallet_names_list:
+          type: array
+          items:
+            type: string
+          title: Wallet Names List
+  - name: get_user_wallets_and_groups_list
+    description: "
+
+      \    Retrieve the list of user wallets and wallet groups.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_user_wallets_and_groups_listArguments
+      properties: {}
+  - name: transfer_tokens
+    description: "
+
+      \    Transfer tokens from one wallet to another.
+
+      \   \ 
+
+      \    Expects a list of transfer token requests with the necessary
+      parameters.
+
+      \    "
+    inputSchema:
+      type: object
+      title: transfer_tokensArguments
+      required:
+        - transfer_tokens_requests
+      properties:
+        transfer_tokens_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Transfer Tokens Requests
+  - name: create_dca_order
+    description: "
+
+      \    Create a DCA order.
+
+      \   \ 
+
+      \    Expects a list of DCA order requests with required parameters.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_dca_orderArguments
+      required:
+        - dca_order_requests
+      properties:
+        dca_order_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Dca Order Requests
+  - name: list_dca_orders
+    description: "\n    List all DCA orders.\n    "
+    inputSchema:
+      type: object
+      title: list_dca_ordersArguments
+      properties: {}
+  - name: cancel_dca_order
+    description: "
+
+      \    Cancel a DCA order.
+
+      \   \ 
+
+      \    Expects a list of cancel DCA order requests with the required order
+      IDs.
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_dca_orderArguments
+      required:
+        - cancel_dca_order_requests
+      properties:
+        cancel_dca_order_requests:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Cancel Dca Order Requests

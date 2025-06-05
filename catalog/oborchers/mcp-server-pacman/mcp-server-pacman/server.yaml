@@ -1,0 +1,19 @@
+identifier: oborchers/mcp-server-pacman/mcp-server-pacman
+repo:
+  provider: github.com
+  url: https://github.com/oborchers/mcp-server-pacman
+  name: mcp-server-pacman
+  owner: oborchers
+server:
+  subdirectory: /
+  name: Pacman Package Index Server
+  description: Enable LLMs to search and retrieve detailed information from
+    popular package repositories including PyPI, npm, crates.io, Docker Hub, and
+    Terraform Registry. Quickly find packages, Docker images, and Terraform
+    modules with rich metadata to support development and automation workflows.
+    Simplify package discovery and inspection through a unified protocol
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

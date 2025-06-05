@@ -1,0 +1,18 @@
+identifier: zaycruz/docker_mcp/docker_mcp
+repo:
+  provider: github.com
+  url: https://github.com/zaycruz/docker_mcp
+  name: docker_mcp
+  owner: zaycruz
+server:
+  subdirectory: /
+  name: Docker MCP Server
+  description: Run code securely in isolated Docker containers, enabling
+    multi-language support and robust error handling. Execute both simple
+    commands and complex scripts while receiving clear, color-coded feedback.
+    Integrate seamlessly with language models like Claude for enhanced
+    capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

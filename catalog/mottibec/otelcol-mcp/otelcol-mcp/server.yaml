@@ -1,0 +1,17 @@
+identifier: mottibec/otelcol-mcp/otelcol-mcp
+repo:
+  provider: github.com
+  url: https://github.com/mottibec/otelcol-mcp
+  name: otelcol-mcp
+  owner: mottibec
+server:
+  subdirectory: /
+  name: OpenTelemetry Collector Configuration Server
+  description: Configure OpenTelemetry Collectors dynamically and manage
+    components effortlessly. Add, remove, and configure receivers, processors,
+    and exporters to optimize your telemetry data collection. Streamline your
+    OpenTelemetry setup with this powerful MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

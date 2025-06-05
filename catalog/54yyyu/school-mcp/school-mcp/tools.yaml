@@ -1,0 +1,114 @@
+tools:
+  - name: get_deadlines
+    description: "
+
+      \    Get upcoming deadlines from Canvas and Gradescope.
+
+      \   \ 
+
+      \    Args:
+
+      \        days_ahead: Number of days to look ahead for assignments
+      (default: 14)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_deadlinesArguments
+      properties:
+        days_ahead:
+          type: integer
+          title: Days Ahead
+          default: 14
+  - name: add_to_reminders
+    description: "
+
+      \    Add upcoming deadlines to macOS Reminders.
+
+      \   \ 
+
+      \    Args:
+
+      \        days_ahead: Number of days to look ahead for assignments
+      (default: 14)
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_to_remindersArguments
+      properties:
+        days_ahead:
+          type: integer
+          title: Days Ahead
+          default: 14
+  - name: list_courses
+    description: "
+
+      \    List available courses from Canvas.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_coursesArguments
+      properties: {}
+  - name: download_course_files
+    description: "
+
+      \    Download files from a Canvas course.
+
+      \   \ 
+
+      \    Args:
+
+      \        course_id: Canvas course ID
+
+      \        download_path: Path to download files to (optional, will use
+      default if not provided)
+
+      \    "
+    inputSchema:
+      type: object
+      title: download_course_filesArguments
+      required:
+        - course_id
+      properties:
+        course_id:
+          type: integer
+          title: Course Id
+        download_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Download Path
+          default: null
+  - name: set_download_path
+    description: "
+
+      \    Set the default download path for Canvas files.
+
+      \   \ 
+
+      \    Args:
+
+      \        path: Path to save downloaded files to
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_download_pathArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: get_download_path_info
+    description: "
+
+      \    Get the current default download path for Canvas files.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_download_path_infoArguments
+      properties: {}

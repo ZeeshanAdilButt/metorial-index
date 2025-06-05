@@ -1,0 +1,16 @@
+identifier: props-labs/fireflies-mcp/fireflies-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Props-Labs/fireflies-mcp
+  name: fireflies-mcp
+  owner: Props-Labs
+server:
+  subdirectory: /
+  name: Fireflies MCP Server
+  description: Retrieve, search, and summarize meeting transcripts effortlessly.
+    Enhance your productivity by managing transcripts with advanced search
+    capabilities and generating concise summaries in various formats.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

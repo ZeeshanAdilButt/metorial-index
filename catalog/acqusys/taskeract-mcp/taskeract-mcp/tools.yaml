@@ -1,0 +1,47 @@
+tools:
+  - name: get-my-projects
+    description: Get all projects for the current user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-my-tasks-for-project
+    description: Get user's tasks for the project by project ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: The project ID to get tasks for
+      additionalProperties: false
+  - name: start-on-task
+    description: This will change the status of the task to "in progress" and return
+      information about the task, the story it is part of, and the feature it is
+      part of, and the project it is part of.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The task ID to start
+      additionalProperties: false
+  - name: task-is-ready-for-review
+    description: This will change the status of the task to "in review", and the
+      user can then decide on the next task to work on.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The task ID to check
+      additionalProperties: false

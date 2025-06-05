@@ -1,0 +1,17 @@
+identifier: bitscorp-mcp/mcp-adjust/mcp-adjust
+repo:
+  provider: github.com
+  url: https://github.com/bitscorp-mcp/mcp-adjust
+  name: mcp-adjust
+  owner: bitscorp-mcp
+server:
+  subdirectory: /
+  name: Adjust Reporting Server
+  description: Access your Adjust data seamlessly from any MCP client. Query
+    reports, metrics, and performance data on-demand to gain insights into your
+    campaigns. Perfect for quick lookups like install numbers for specific
+    campaigns.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

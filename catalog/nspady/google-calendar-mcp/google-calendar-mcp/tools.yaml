@@ -1,0 +1,116 @@
+tools:
+  - name: list-calendars
+    description: List all available calendars
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list-events
+    description: List events from a calendar
+    inputSchema:
+      type: object
+      required:
+        - calendarId
+      properties:
+        timeMax:
+          type: string
+          description: End time in ISO format (optional)
+        timeMin:
+          type: string
+          description: Start time in ISO format (optional)
+        calendarId:
+          type: string
+          description: ID of the calendar to list events from
+  - name: create-event
+    description: Create a new calendar event
+    inputSchema:
+      type: object
+      required:
+        - calendarId
+        - summary
+        - start
+        - end
+      properties:
+        end:
+          type: string
+          description: End time in ISO format
+        start:
+          type: string
+          description: Start time in ISO format
+        summary:
+          type: string
+          description: Title of the event
+        location:
+          type: string
+          description: Location of the event
+        attendees:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+                description: Email address of the attendee
+          description: List of attendees
+        calendarId:
+          type: string
+          description: ID of the calendar to create event in
+        description:
+          type: string
+          description: Description of the event
+  - name: update-event
+    description: Update an existing calendar event
+    inputSchema:
+      type: object
+      required:
+        - calendarId
+        - eventId
+      properties:
+        end:
+          type: string
+          description: New end time in ISO format
+        start:
+          type: string
+          description: New start time in ISO format
+        eventId:
+          type: string
+          description: ID of the event to update
+        summary:
+          type: string
+          description: New title of the event
+        location:
+          type: string
+          description: New location of the event
+        attendees:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+                description: Email address of the attendee
+          description: List of attendees
+        calendarId:
+          type: string
+          description: ID of the calendar containing the event
+        description:
+          type: string
+          description: New description of the event
+  - name: delete-event
+    description: Delete a calendar event
+    inputSchema:
+      type: object
+      required:
+        - calendarId
+        - eventId
+      properties:
+        eventId:
+          type: string
+          description: ID of the event to delete
+        calendarId:
+          type: string
+          description: ID of the calendar containing the event

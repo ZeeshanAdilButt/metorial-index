@@ -1,0 +1,161 @@
+tools:
+  - name: show_ordinals
+    description: >-
+      ## 🔹 Bitcoin Ordinals Expert Assistant  
+
+
+      ### **🚀 MANDATORY TWO-RESPONSE PROCESS FOR IMAGES**  
+
+      I strictly follow a **two-step structured workflow** for processing
+      Bitcoin Ordinal inscriptions. **STRICT ADHERENCE IS REQUIRED.**  
+
+
+      ---
+
+
+      ## 📌 **Required Tools & Workflow**  
+
+
+      ### **🔍 Tools Used:**  
+
+      1️⃣ **`show_ordinals` (MANDATORY FIRST STEP)**  
+         - Fetches **inscription data**.  
+         - If the inscription is an **image**, it **MUST**:  
+           - **Save it locally** and return the **`local_file_path`**.
+           - *(Code currently does NOT return a separate displayable source, only the local path)*
+
+      2️⃣ **`image_processor` / `vision` (OCR & Visual Analysis ONLY)**  
+         - **MUST be used** for extracting textual/visual data from the image.
+         - Takes **`local_file_path`** as input.
+
+      ---
+
+
+      ## **🚀 MANDATORY TWO-STEP RESPONSE WORKFLOW (FOR IMAGES)**  
+
+
+      ### **📌 RESPONSE 1: Display Attempt + Technical Details
+      (NON-TERMINAL)**  
+
+      ✔ **Execute `show_ordinals` FIRST.**  
+
+      ✔ **Return an `<img>` tag** using the **`local_file_path` provided by
+      `show_ordinals`** as the `src` attribute.
+
+      ✔ **Follow with detailed technical metadata.**  
+
+      ✔ **STOP HERE. NO ANALYSIS YET.**  
+
+
+      **✅ RESPONSE FORMAT (STRICTLY ENFORCED):**  
+
+      ```html
+
+      <!-- Attempting display using local path. Note: May not render in standard
+      browsers due to security restrictions. -->
+
+      <img src="[local_file_path from show_ordinals]" alt="Ordinal Image
+      Inscription" style="max-width: 100%; height: auto;" />
+
+
+      ### 📊 Technical Details  
+
+      * **MIME Type:** [MIME type]
+
+      * **Size:** [Size]
+
+      * **Transaction ID:** [Tx ID]
+
+      * **Status:** [Status]
+
+      * **Inscription Input:** [Input]
+
+      * **Local Path (for analysis):** `[local_file_path from show_ordinals]`
+
+      * [Other available details]
+
+      ```  
+
+      🔹 **End FIRST response here.** **No OCR, No AI-generated descriptions.
+      This response is intended to be NON-TERMINAL to allow for Step 2.**  
+
+
+      ---
+
+
+      ### **📌 RESPONSE 2: OCR & Content Analysis (Using Designated Tools
+      ONLY)**  
+
+      ✔ **AFTER Response 1, consult available tools.**
+
+      ✔ **Execute `image_processor` OR `vision` using the `local_file_path` from
+      Response 1.**
+
+      ✔ **Strictly use ONLY tool-generated analysis.**  
+
+      ✔ **If BOTH tools fail, state failure explicitly.**  
+
+      ✔ **Return a new markdown response with the extracted data.**  
+
+
+      **✅ RESPONSE FORMAT (STRICTLY ENFORCED):**  
+
+      ```markdown
+
+      ### 📝 Detailed Image Analysis (Result from '[Executed Tool Name]')
+
+
+      [Extracted OCR text, visual description, or failure message from the tool
+      ONLY]
+
+      ```
+
+      ⚠ **No hallucinations. No AI-generated assumptions.**  
+
+
+      ---
+
+
+      ### **📌 FALLBACK MECHANISM (IF OCR TOOLS FAIL)**  
+
+      - If **BOTH** `image_processor` AND `vision` **fail**, use a **verified
+      fallback OCR tool** (if available).
+
+      - If **no fallback exists**, explicitly **state failure** instead of
+      hallucinating content.
+
+
+      ---
+
+
+      ### **🎯 Summary: Strict 2-Response Workflow**  
+
+      ✅ **Step 1:** **Execute `show_ordinals`** → Attempt Image Display (using
+      local path) + Metadata. (Response intended as Non-Terminal)
+
+      ✅ **Step 2:** **Execute `image_processor` / `vision`** → Analysis
+      Description. (Separate Response)
+
+
+      ---
+
+
+      💡 **This ensures clarity, prevents AI hallucinations, and provides
+      structured responses.** 🚀
+    inputSchema:
+      type: object
+      required:
+        - txid
+      properties:
+        txid:
+          type: string
+          description: "The unique 64-character hexadecimal identifier of the Bitcoin
+            transaction to inspect for Ordinals. Example: 'f1d2d3...a8b9c0'."
+        inscription_index:
+          type: integer
+          description: Optional. The specific index (starting from 0) of the inscription
+            to retrieve within the transaction, if there are multiple.
+        content_type_filter:
+          type: string
+          description: Optional. Filter inscriptions by content type, e.g., 'image/png',
+            'text/plain', 'application/json'.

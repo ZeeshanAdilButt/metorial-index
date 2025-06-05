@@ -1,0 +1,14 @@
+identifier: qpd-v/mcp-communicator-telegram/mcp-communicator-telegram
+repo:
+  provider: github.com
+  url: https://github.com/qpd-v/mcp-communicator-telegram
+  name: mcp-communicator-telegram
+  owner: qpd-v
+server:
+  subdirectory: /
+  name: Telegram Communicator
+  description: An MCP server that enables communication with users through Telegram bots.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

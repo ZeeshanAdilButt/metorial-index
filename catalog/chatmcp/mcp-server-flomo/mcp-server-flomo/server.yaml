@@ -1,0 +1,17 @@
+identifier: chatmcp/mcp-server-flomo/mcp-server-flomo
+repo:
+  provider: github.com
+  url: https://github.com/chatmcp/mcp-server-flomo
+  name: mcp-server-flomo
+  owner: chatmcp
+server:
+  subdirectory: /
+  name: Flomo Note Writer
+  description: Write notes directly to Flomo from your applications. Easily
+    capture and send text content as notes to your Flomo account using a simple
+    MCP server integration. Streamline your note-taking workflow by automating
+    Flomo entries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

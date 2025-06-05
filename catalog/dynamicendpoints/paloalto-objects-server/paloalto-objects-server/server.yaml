@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/paloalto-objects-server/paloalto-objects-server
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/paloalto-objects-server
+  name: paloalto-objects-server
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Palo Alto Objects Management
+  description: Manage your Palo Alto Networks firewall objects effortlessly.
+    Create, update, and delete address, service, and application objects with
+    ease, ensuring your firewall is always optimized. Streamline your firewall
+    management tasks through a powerful and intuitive interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

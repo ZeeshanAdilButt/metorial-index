@@ -1,0 +1,255 @@
+tools:
+  - name: execute-query
+    description: Executes a SQL query in the Firebird database. Uses FIRST/ROWS for
+      pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          minLength: 1
+          description: SQL query to execute (Firebird uses FIRST/ROWS for pagination
+            instead of LIMIT)
+        params:
+          type: array
+          items:
+            anyOf:
+              - anyOf:
+                  - type:
+                      - string
+                      - number
+                  - type: boolean
+              - type: "null"
+          description: Parameters for parameterized queries to prevent SQL injection
+      additionalProperties: false
+  - name: list-tables
+    description: Lists all user tables in the current Firebird database.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: describe-table
+    description: Gets the detailed schema (columns, types, etc.) of a specific table.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        tableName:
+          type: string
+          minLength: 1
+          description: Name of the table to describe
+      additionalProperties: false
+  - name: get-field-descriptions
+    description: Gets the stored descriptions for fields of a specific table (if
+      they exist).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        tableName:
+          type: string
+          minLength: 1
+          description: Name of the table to get field descriptions for
+      additionalProperties: false
+  - name: analyze-query-performance
+    description: Analyzes the performance of a SQL query by executing it multiple
+      times and measuring execution time
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          minLength: 1
+          description: SQL query to analyze
+        params:
+          type: array
+          items:
+            anyOf:
+              - anyOf:
+                  - type:
+                      - string
+                      - number
+                  - type: boolean
+              - type: "null"
+          description: Parameters for parameterized queries
+        iterations:
+          type: integer
+          default: 3
+          description: Number of times to run the query for averaging performance
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: get-execution-plan
+    description: Gets the execution plan for a SQL query to understand how the
+      database will execute it
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          minLength: 1
+          description: SQL query to analyze
+        params:
+          type: array
+          items:
+            anyOf:
+              - anyOf:
+                  - type:
+                      - string
+                      - number
+                  - type: boolean
+              - type: "null"
+          description: Parameters for parameterized queries
+      additionalProperties: false
+  - name: analyze-missing-indexes
+    description: Analyzes a SQL query to identify missing indexes that could improve
+      performance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          minLength: 1
+          description: SQL query to analyze for missing indexes
+      additionalProperties: false
+  - name: backup-database
+    description: Creates a backup of the Firebird database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - backupPath
+      properties:
+        options:
+          type: object
+          properties:
+            format:
+              enum:
+                - gbak
+                - nbackup
+              type: string
+              default: gbak
+              description: "Backup format: gbak (full backup) or nbackup (incremental)"
+            verbose:
+              type: boolean
+              default: false
+              description: Whether to show detailed progress
+            compress:
+              type: boolean
+              default: false
+              description: Whether to compress the backup
+            metadata_only:
+              type: boolean
+              default: false
+              description: Whether to backup only metadata (no data)
+          additionalProperties: false
+        backupPath:
+          type: string
+          minLength: 1
+          description: Path where the backup file will be saved
+      additionalProperties: false
+  - name: restore-database
+    description: Restores a Firebird database from a backup
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - backupPath
+        - targetPath
+      properties:
+        options:
+          type: object
+          properties:
+            replace:
+              type: boolean
+              default: false
+              description: Whether to replace the target database if it exists
+            verbose:
+              type: boolean
+              default: false
+              description: Whether to show detailed progress
+            pageSize:
+              type: integer
+              default: 4096
+              maximum: 16384
+              minimum: 1024
+              description: Page size for the restored database
+          additionalProperties: false
+        backupPath:
+          type: string
+          minLength: 1
+          description: Path to the backup file
+        targetPath:
+          type: string
+          minLength: 1
+          description: Path where the database will be restored
+      additionalProperties: false
+  - name: validate-database
+    description: Validates the integrity of the Firebird database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        options:
+          type: object
+          properties:
+            verbose:
+              type: boolean
+              default: false
+              description: Whether to show detailed progress
+            checkData:
+              type: boolean
+              default: true
+              description: Whether to validate data integrity
+            fixErrors:
+              type: boolean
+              default: false
+              description: Whether to attempt to fix errors
+            checkIndexes:
+              type: boolean
+              default: true
+              description: Whether to validate indexes
+          additionalProperties: false
+      additionalProperties: false
+  - name: get-methods
+    description: Returns a description of all available MCP tools (methods)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: describe-method
+    description: Returns a description of a specific MCP tool (method)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the tool (method) to describe
+      additionalProperties: false
+  - name: ping
+    description: Tests connectivity to the Firebird MCP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

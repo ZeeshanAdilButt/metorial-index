@@ -1,0 +1,17 @@
+identifier: mrgoonie/searchapi-mcp-server/searchapi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mrgoonie/searchapi-mcp-server
+  name: searchapi-mcp-server
+  owner: mrgoonie
+server:
+  subdirectory: /
+  name: SearchAPI Server
+  description: Connect AI assistants to external search data sources like Google
+    and Bing via SearchAPI.site. Perform web, image, and YouTube searches
+    seamlessly through a standardized MCP interface. Enable easy integration
+    with AI systems using CLI or HTTP transports for flexible deployment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

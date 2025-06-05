@@ -1,0 +1,18 @@
+identifier: sbarbett/pihole-mcp-server/pihole-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/sbarbett/pihole-mcp-server
+  name: pihole-mcp-server
+  owner: sbarbett
+server:
+  subdirectory: /
+  name: Pi-hole MCP Server
+  description: Expose Pi-hole functionality as tools accessible to AI assistants,
+    enabling management and querying of Pi-hole DNS settings and metrics through
+    a standardized protocol. Integrate multiple Pi-hole instances and retrieve
+    detailed DNS query data and configurations. Simplify Pi-hole administration
+    by leveraging AI-driven interactions with your network's DNS infrastructure.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

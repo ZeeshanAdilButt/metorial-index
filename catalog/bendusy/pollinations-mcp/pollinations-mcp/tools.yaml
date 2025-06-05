@@ -1,0 +1,84 @@
+tools:
+  - name: generate_image
+    description: 使用Pollinations.ai生成图像
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        safe:
+          type: boolean
+          default: false
+          description: 启用安全过滤（过滤不适内容）
+        seed:
+          type: number
+          description: 随机种子值（用于生成一致的图像）
+        model:
+          type: string
+          default: flux
+          description: 要使用的模型（如flux、variation等）
+        width:
+          type: number
+          default: 1024
+          description: 图像宽度（像素）
+        height:
+          type: number
+          default: 1024
+          description: 图像高度（像素）
+        nologo:
+          type: boolean
+          default: true
+          description: 设置为true可去除水印
+        prompt:
+          type: string
+          description: 图像描述提示词
+        enhance:
+          type: boolean
+          default: false
+          description: 提高图像质量（应用增强滤镜）
+        private:
+          type: boolean
+          default: false
+          description: 设置为true可使图像私有
+  - name: download_image
+    description: 下载Pollinations.ai生成的图像到本地文件
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 要下载的图像URL
+        output_path:
+          type: string
+          default: image.jpg
+          description: 保存图像的路径（包括文件名）
+  - name: generate_text
+    description: 使用Pollinations.ai生成文本
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        json:
+          type: boolean
+          default: false
+          description: 是否返回JSON格式的响应
+        seed:
+          type: number
+          description: 随机种子值（用于生成一致的结果）
+        model:
+          type: string
+          default: openai
+          description: 要使用的模型（如openai、mistral等）
+        prompt:
+          type: string
+          description: 文本提示词
+        system:
+          type: string
+          description: 系统提示词（设置AI行为）
+        private:
+          type: boolean
+          default: false
+          description: 设置为true可使响应私有

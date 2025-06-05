@@ -1,0 +1,27 @@
+tools:
+  - name: create_database
+    description: Create a new Rapidapp PostgreSQL database
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the database to create
+  - name: list_databases
+    description: List all Rapidapp PostgreSQL databases
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_database
+    description: Get details of a Rapidapp PostgreSQL database
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of the database to retrieve

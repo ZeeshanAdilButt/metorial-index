@@ -1,0 +1,18 @@
+tools:
+  - name: get_transcript
+    description: Retrieves the transcript of a YouTube video.
+    inputSchema:
+      type: object
+      title: get_transcriptArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The URL of the YouTube video
+        lang:
+          type: string
+          title: Lang
+          default: en
+          description: The preferred language for the transcript

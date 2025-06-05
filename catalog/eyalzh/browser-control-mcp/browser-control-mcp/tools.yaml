@@ -1,0 +1,80 @@
+tools:
+  - name: open-browser-tab
+    description: Open a new tab in the user's browser
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+      additionalProperties: false
+  - name: close-browser-tabs
+    description: Close tabs in the user's browser by tab IDs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tabIds
+      properties:
+        tabIds:
+          type: array
+          items:
+            type: number
+      additionalProperties: false
+  - name: get-list-of-open-tabs
+    description: Get the list of open tabs in the user's browser
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-recent-browser-history
+    description: Get the list of recent browser history (to get all, don't use searchQuery)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        searchQuery:
+          type: string
+      additionalProperties: false
+  - name: get-tab-web-content
+    description: Get the full text content of the webpage and the list of links in
+      the webpage, by tab ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tabId
+      properties:
+        tabId:
+          type: number
+      additionalProperties: false
+  - name: reorder-browser-tabs
+    description: Change the order of open browser tabs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tabOrder
+      properties:
+        tabOrder:
+          type: array
+          items:
+            type: number
+      additionalProperties: false
+  - name: find-highlight-in-browser-tab
+    description: Find and highlight text in a browser tab
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tabId
+        - queryPhrase
+      properties:
+        tabId:
+          type: number
+        queryPhrase:
+          type: string
+      additionalProperties: false

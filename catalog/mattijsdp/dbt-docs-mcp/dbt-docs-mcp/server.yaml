@@ -1,0 +1,18 @@
+identifier: mattijsdp/dbt-docs-mcp/dbt-docs-mcp
+repo:
+  provider: github.com
+  url: https://github.com/mattijsdp/dbt-docs-mcp
+  name: dbt-docs-mcp
+  owner: mattijsdp
+server:
+  subdirectory: /
+  name: DBT Docs MCP Server
+  description: Enable interactive exploration and querying of dbt project metadata
+    including node details, lineage, and compiled SQL code. Search and inspect
+    dbt nodes and columns, trace upstream and downstream dependencies at both
+    node and column levels. Enhance your dbt documentation workflows with
+    powerful metadata insights and lineage tracing.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

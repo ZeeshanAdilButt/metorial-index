@@ -1,0 +1,1033 @@
+tools:
+  - name: get-track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: search-tracks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+        query:
+          type: string
+      additionalProperties: false
+  - name: get-trending-tracks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        genre:
+          type: string
+        limit:
+          type: number
+      additionalProperties: false
+  - name: get-track-comments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        limit:
+          type: number
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: get-user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: search-users
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+        query:
+          type: string
+      additionalProperties: false
+  - name: get-user-tracks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - playlistId
+      properties:
+        playlistId:
+          type: string
+      additionalProperties: false
+  - name: get-album
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - albumId
+      properties:
+        albumId:
+          type: string
+      additionalProperties: false
+  - name: search-all
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+        query:
+          type: string
+      additionalProperties: false
+  - name: advanced-search
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        key:
+          type: string
+        sort:
+          type: string
+        limit:
+          type: number
+        moods:
+          type: array
+          items:
+            type: string
+        query:
+          type: string
+        bpmMax:
+          type: number
+        bpmMin:
+          type: number
+        genres:
+          type: array
+          items:
+            type: string
+        onlyDownloadable:
+          type: boolean
+      additionalProperties: false
+  - name: trending-discovery
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        genre:
+          type: string
+        limit:
+          type: number
+        timeFrame:
+          type: string
+        underground:
+          type: boolean
+      additionalProperties: false
+  - name: similar-artists
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: user-favorites
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: user-reposts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: user-followers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: user-following
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: is-following
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - followeeId
+      properties:
+        userId:
+          type: string
+        followeeId:
+          type: string
+      additionalProperties: false
+  - name: track-favorites
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        limit:
+          type: number
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: track-reposts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        limit:
+          type: number
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: follow-user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - followeeId
+      properties:
+        userId:
+          type: string
+        followeeId:
+          type: string
+      additionalProperties: false
+  - name: favorite-track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - trackId
+      properties:
+        userId:
+          type: string
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: add-track-comment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+        - userId
+        - comment
+      properties:
+        userId:
+          type: string
+        comment:
+          type: string
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: delete-track-comment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - commentId
+        - userId
+      properties:
+        userId:
+          type: string
+        commentId:
+          type: string
+      additionalProperties: false
+  - name: upload-track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - title
+        - audioFileUrl
+      properties:
+        mood:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        genre:
+          type: string
+        title:
+          type: string
+        userId:
+          type: string
+        isPrivate:
+          type: boolean
+        artworkUrl:
+          type: string
+        description:
+          type: string
+        audioFileUrl:
+          type: string
+        isDownloadable:
+          type: boolean
+      additionalProperties: false
+  - name: update-track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+        - userId
+      properties:
+        mood:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        genre:
+          type: string
+        title:
+          type: string
+        userId:
+          type: string
+        trackId:
+          type: string
+        isPrivate:
+          type: boolean
+        artworkUrl:
+          type: string
+        description:
+          type: string
+        isDownloadable:
+          type: boolean
+      additionalProperties: false
+  - name: delete-track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+        - userId
+      properties:
+        userId:
+          type: string
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: create-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - playlistName
+      properties:
+        userId:
+          type: string
+        isAlbum:
+          type: boolean
+        trackIds:
+          type: array
+          items:
+            type: string
+        isPrivate:
+          type: boolean
+        artworkUrl:
+          type: string
+        description:
+          type: string
+        playlistName:
+          type: string
+      additionalProperties: false
+  - name: update-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - playlistId
+      properties:
+        userId:
+          type: string
+        isPrivate:
+          type: boolean
+        artworkUrl:
+          type: string
+        playlistId:
+          type: string
+        description:
+          type: string
+        playlistName:
+          type: string
+      additionalProperties: false
+  - name: delete-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - playlistId
+      properties:
+        userId:
+          type: string
+        playlistId:
+          type: string
+      additionalProperties: false
+  - name: add-tracks-to-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - playlistId
+        - trackIds
+      properties:
+        userId:
+          type: string
+        trackIds:
+          type: array
+          items:
+            type: string
+        playlistId:
+          type: string
+      additionalProperties: false
+  - name: remove-track-from-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - playlistId
+        - trackId
+      properties:
+        userId:
+          type: string
+        trackId:
+          type: string
+        playlistId:
+          type: string
+      additionalProperties: false
+  - name: reorder-playlist-tracks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - playlistId
+        - trackIds
+      properties:
+        userId:
+          type: string
+        trackIds:
+          type: array
+          items:
+            type: string
+        playlistId:
+          type: string
+      additionalProperties: false
+  - name: send-message
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fromUserId
+        - toUserId
+        - message
+      properties:
+        message:
+          type: string
+        toUserId:
+          type: string
+        fromUserId:
+          type: string
+      additionalProperties: false
+  - name: get-messages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - withUserId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+        withUserId:
+          type: string
+      additionalProperties: false
+  - name: get-message-threads
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: mark-message-read
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - messageId
+      properties:
+        userId:
+          type: string
+        messageId:
+          type: string
+      additionalProperties: false
+  - name: get-track-listen-counts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: get-user-track-listen-counts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-track-top-listeners
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        limit:
+          type: number
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: get-track-listener-insights
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: get-user-play-metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-track-monthly-trending
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: get-user-supporters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-user-supporting
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-user-wallets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-transaction-history
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-available-challenges
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-user-claimable-tokens
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: claim-tokens
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - challengeId
+      properties:
+        userId:
+          type: string
+        challengeId:
+          type: string
+      additionalProperties: false
+  - name: get-token-balance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - walletAddress
+        - blockchain
+      properties:
+        tokenMint:
+          type: string
+        blockchain:
+          type: string
+        walletAddress:
+          type: string
+      additionalProperties: false
+  - name: send-tokens
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - senderWalletAddress
+        - receiverWalletAddress
+        - amount
+        - privateKey
+      properties:
+        amount:
+          type: string
+        privateKey:
+          type: string
+        senderWalletAddress:
+          type: string
+        receiverWalletAddress:
+          type: string
+      additionalProperties: false
+  - name: get-track-access-gates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: check-nft-access
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+        - walletAddress
+      properties:
+        trackId:
+          type: string
+        walletAddress:
+          type: string
+      additionalProperties: false
+  - name: get-nft-gated-signature
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+        - walletAddress
+      properties:
+        trackId:
+          type: string
+        walletAddress:
+          type: string
+      additionalProperties: false
+  - name: get-purchase-options
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contentId
+        - contentType
+      properties:
+        contentId:
+          type: string
+        contentType:
+          type: string
+      additionalProperties: false
+  - name: check-purchase-access
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contentId
+        - contentType
+        - walletAddress
+      properties:
+        contentId:
+          type: string
+        contentType:
+          type: string
+        walletAddress:
+          type: string
+      additionalProperties: false
+  - name: get-supported-payment-tokens
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-usdc-gate-info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+      additionalProperties: false
+  - name: send-tip
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - senderUserId
+        - receiverUserId
+        - amount
+        - tokenType
+        - senderWalletAddress
+        - signerPrivateKey
+      properties:
+        amount:
+          type: string
+        message:
+          type: string
+        tokenType:
+          type: string
+        senderUserId:
+          type: string
+        receiverUserId:
+          type: string
+        signerPrivateKey:
+          type: string
+        senderWalletAddress:
+          type: string
+      additionalProperties: false
+  - name: get-sent-tips
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-received-tips
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-user-tip-stats
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: purchase-track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contentId
+        - walletAddress
+        - purchaseOption
+        - paymentToken
+        - amount
+        - signerPrivateKey
+      properties:
+        amount:
+          type: string
+        contentId:
+          type: string
+        paymentToken:
+          type: string
+        walletAddress:
+          type: string
+        purchaseOption:
+          type: string
+        signerPrivateKey:
+          type: string
+      additionalProperties: false
+  - name: get-notifications
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+        timestamp:
+          type: string
+      additionalProperties: false
+  - name: get-notification-settings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: update-notification-settings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        tips:
+          type: boolean
+        userId:
+          type: string
+        remixes:
+          type: boolean
+        reposts:
+          type: boolean
+        comments:
+          type: boolean
+        messages:
+          type: boolean
+        favorites:
+          type: boolean
+        followers:
+          type: boolean
+        milestones:
+          type: boolean
+        tastemakers:
+          type: boolean
+        announcements:
+          type: boolean
+        supporterRank:
+          type: boolean
+        supportingRank:
+          type: boolean
+      additionalProperties: false
+  - name: mark-notifications-read
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - notificationIds
+      properties:
+        userId:
+          type: string
+        notificationIds:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+  - name: mark-all-notifications-read
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-announcement-notifications
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+      additionalProperties: false
+  - name: get-milestone-notifications
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-notification-counts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+  - name: get-notification-history
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        limit:
+          type: number
+        userId:
+          type: string
+      additionalProperties: false
+  - name: send-notification
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+        - type
+        - message
+      properties:
+        type:
+          type: string
+        userId:
+          type: string
+        message:
+          type: string
+        relatedEntityId:
+          type: string
+        relatedEntityType:
+          type: string
+      additionalProperties: false

@@ -1,0 +1,17 @@
+identifier: kawakamidev/mcp-auth0-oidc/mcp-auth0-oidc
+repo:
+  provider: github.com
+  url: https://github.com/kawakamidev/mcp-auth0-oidc
+  name: mcp-auth0-oidc
+  owner: kawakamidev
+server:
+  subdirectory: /
+  name: Auth0 OIDC MCP Server
+  description: Authenticate users and enable secure access to protected APIs with
+    this server. Simplify your API interactions by leveraging OAuth2 for user
+    authentication and authorization. Get started quickly with local development
+    and seamless deployment to Cloudflare.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

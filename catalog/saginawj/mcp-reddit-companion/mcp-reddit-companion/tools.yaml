@@ -1,0 +1,113 @@
+tools:
+  - name: get_custom_feed
+    description: ""
+    inputSchema:
+      type: object
+      title: get_custom_feedArguments
+      required:
+        - feed_name
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        feed_name:
+          type: string
+          title: Feed Name
+  - name: get_post_comments
+    description: ""
+    inputSchema:
+      type: object
+      title: get_post_commentsArguments
+      required:
+        - post_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        post_id:
+          type: string
+          title: Post Id
+  - name: read_custom_feeds
+    description: ""
+    inputSchema:
+      type: object
+      title: read_custom_feedsArguments
+      properties: {}
+  - name: read_new_posts
+    description: ""
+    inputSchema:
+      type: object
+      title: read_new_postsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+  - name: get_user_activity
+    description: ""
+    inputSchema:
+      type: object
+      title: get_user_activityArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+  - name: get_post_engagement
+    description: ""
+    inputSchema:
+      type: object
+      title: get_post_engagementArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 5
+        post_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Post Id
+          default: null
+  - name: get_unread_messages
+    description: ""
+    inputSchema:
+      type: object
+      title: get_unread_messagesArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: get_saved_items
+    description: ""
+    inputSchema:
+      type: object
+      title: get_saved_itemsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: get_subscribed_subreddits
+    description: ""
+    inputSchema:
+      type: object
+      title: get_subscribed_subredditsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+  - name: get_upvoted
+    description: ""
+    inputSchema:
+      type: object
+      title: get_upvotedArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10

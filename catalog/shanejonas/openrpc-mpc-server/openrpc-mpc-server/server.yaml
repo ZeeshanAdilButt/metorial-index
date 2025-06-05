@@ -1,0 +1,15 @@
+identifier: shanejonas/openrpc-mpc-server/openrpc-mpc-server
+repo:
+  provider: github.com
+  url: https://github.com/shanejonas/openrpc-mpc-server
+  name: openrpc-mpc-server
+  owner: shanejonas
+server:
+  subdirectory: /
+  name: OpenRPC MCP Server
+  description: A Model Context Protocol (MCP) server that provides JSON-RPC
+    functionality through OpenRPC.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

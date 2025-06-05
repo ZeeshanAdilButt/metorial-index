@@ -1,0 +1,269 @@
+tools:
+  - name: SpotifyPlayback
+    description: "Manages the current playback with the following actions:
+
+      \    - get: Get information about user's current track.
+
+      \    - start: Starts of resumes playback.
+
+      \    - pause: Pauses current playback.
+
+      \    - skip: Skips current track.
+
+      \    "
+    inputSchema:
+      type: object
+      title: Playback
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'get', 'start', 'pause' or 'skip'."
+        track_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Track Id
+          default: null
+          description: Specifies track to play for 'start' action. If omitted, resumes
+            current playback.
+        num_skips:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Num Skips
+          default: 1
+          description: Number of tracks to skip for `skip` action.
+      description: |-
+        Manages the current playback with the following actions:
+        - get: Get information about user's current track.
+        - start: Starts of resumes playback.
+        - pause: Pauses current playback.
+        - skip: Skips current track.
+  - name: SpotifySearch
+    description: Search for tracks, albums, artists, or playlists on Spotify.
+    inputSchema:
+      type: object
+      title: Search
+      required:
+        - query
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+          description: Maximum number of items to return
+        qtype:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Qtype
+          default: track
+          description: Type of items to search for (track, album, artist, playlist, or
+            comma-separated combination)
+        query:
+          type: string
+          title: Query
+          description: query term
+      description: Search for tracks, albums, artists, or playlists on Spotify.
+  - name: SpotifyQueue
+    description: Manage the playback queue - get the queue or add tracks.
+    inputSchema:
+      type: object
+      title: Queue
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'add' or 'get'."
+        track_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Track Id
+          default: null
+          description: Track ID to add to queue (required for add action)
+      description: Manage the playback queue - get the queue or add tracks.
+  - name: SpotifyGetInfo
+    description: Get detailed information about a Spotify item (track, album,
+      artist, or playlist).
+    inputSchema:
+      type: object
+      title: GetInfo
+      required:
+        - item_id
+      properties:
+        qtype:
+          type: string
+          title: Qtype
+          default: track
+          description: "Type of item: 'track', 'album', 'artist', or 'playlist'. If
+            'playlist' or 'album', returns its tracks. If 'artist',returns
+            albums and top tracks."
+        item_id:
+          type: string
+          title: Item Id
+          description: ID of the item to get information about
+      description: Get detailed information about a Spotify item (track, album,
+        artist, or playlist).
+  - name: SpotifyPlaylistManage
+    description: Manage playlists - create, update details, or get details of playlists.
+    inputSchema:
+      type: object
+      title: PlaylistManage
+      required:
+        - action
+      properties:
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+          description: Playlist name (required for create action, optional for
+            update_details)
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'create', 'update_details', 'get'"
+        public:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Public
+          default: null
+          description: Whether the playlist should be public (optional)
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+          description: Playlist description (optional)
+        playlist_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Playlist Id
+          default: null
+          description: Playlist ID (required for update_details and get actions)
+      description: Manage playlists - create, update details, or get details of playlists.
+  - name: SpotifyPlaylistItems
+    description: Manage playlist items - add, remove, or update items in a playlist.
+    inputSchema:
+      type: object
+      title: PlaylistItems
+      required:
+        - action
+        - playlist_id
+        - uris
+      properties:
+        uris:
+          type: array
+          items:
+            type: string
+          title: Uris
+          description: List of Spotify URIs for tracks to add/remove/update
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'add', 'remove', 'update'"
+        position:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Position
+          default: null
+          description: Position to insert tracks (for add action)
+        playlist_id:
+          type: string
+          title: Playlist Id
+          description: Playlist ID
+        range_start:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Range Start
+          default: null
+          description: Start index for reordering (for update action)
+        snapshot_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Snapshot Id
+          default: null
+          description: Playlist's snapshot ID (optional)
+        range_length:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Range Length
+          default: null
+          description: Number of items to move (for update action)
+        insert_before:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Insert Before
+          default: null
+          description: Position to insert before (for update action)
+      description: Manage playlist items - add, remove, or update items in a playlist.
+  - name: SpotifyUserPlaylists
+    description: Get a user's playlists.
+    inputSchema:
+      type: object
+      title: UserPlaylists
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 20
+          description: Maximum number of playlists to return
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: 0
+          description: Offset for pagination
+        user_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: User Id
+          default: null
+          description: User ID (optional, if omitted returns current user's playlists)
+      description: Get a user's playlists.
+  - name: SpotifyPlaylistCover
+    description: Manage playlist cover image - get or upload custom cover.
+    inputSchema:
+      type: object
+      title: PlaylistCover
+      required:
+        - action
+        - playlist_id
+      properties:
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'get' or 'upload'"
+        image_data:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Image Data
+          default: null
+          description: Base64-encoded JPEG image data (required for upload action)
+        playlist_id:
+          type: string
+          title: Playlist Id
+          description: Playlist ID
+      description: Manage playlist cover image - get or upload custom cover.

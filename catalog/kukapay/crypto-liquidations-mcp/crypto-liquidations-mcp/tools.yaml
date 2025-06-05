@@ -1,0 +1,84 @@
+tools:
+  - name: get_latest_liquidations
+    description: "Retrieve the latest liquidation events from Binance in a table
+      format.
+
+
+      \    Args:
+
+      \        limit (int): The maximum number of liquidation events to return
+      (default: 10, max: 1000).
+
+      \        ctx (Context, optional): The MCP context for logging and server
+      interaction. Defaults to None.
+
+
+      \    Returns:
+
+      \        str: A Markdown table containing the latest liquidation events,
+      sorted by timestamp in descending order.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: get_latest_liquidationsArguments
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        limit:
+          type: integer
+          title: Limit
+          default: 10

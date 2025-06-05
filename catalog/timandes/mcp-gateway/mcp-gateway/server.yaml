@@ -1,0 +1,16 @@
+identifier: timandes/mcp-gateway/mcp-gateway
+repo:
+  provider: github.com
+  url: https://github.com/Timandes/mcp-gateway
+  name: mcp-gateway
+  owner: Timandes
+server:
+  subdirectory: /
+  name: MCP Gateway
+  description: Translate MCP tool calls into traditional HTTP API requests.
+    Configure existing APIs to seamlessly integrate with MCP, enhancing your
+    applications with powerful data access and manipulation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

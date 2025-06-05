@@ -1,0 +1,71 @@
+tools:
+  - name: search_works_by_query
+    description: ""
+    inputSchema:
+      type: object
+      title: search_works_by_queryArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+        mailto:
+          type: string
+          title: Mailto
+          default: null
+  - name: get_work_metadata
+    description: ""
+    inputSchema:
+      type: object
+      title: get_work_metadataArguments
+      required:
+        - doi
+      properties:
+        doi:
+          type: string
+          title: Doi
+        mailto:
+          type: string
+          title: Mailto
+          default: null
+  - name: search_journals
+    description: ""
+    inputSchema:
+      type: object
+      title: search_journalsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+          default: null
+        mailto:
+          type: string
+          title: Mailto
+          default: null
+  - name: search_funders
+    description: ""
+    inputSchema:
+      type: object
+      title: search_fundersArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+          default: null
+        mailto:
+          type: string
+          title: Mailto
+          default: null

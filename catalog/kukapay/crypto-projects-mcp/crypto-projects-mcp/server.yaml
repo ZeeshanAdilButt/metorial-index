@@ -1,0 +1,18 @@
+identifier: kukapay/crypto-projects-mcp/crypto-projects-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/crypto-projects-mcp
+  name: crypto-projects-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: Crypto Projects
+  description: Provide AI agents with comprehensive and structured cryptocurrency
+    project data from Mobula.io. Retrieve detailed market data, tokenomics,
+    investors, exchanges, and release schedules formatted in Markdown for easy
+    consumption. Customize output language to suit user preferences or system
+    locale.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

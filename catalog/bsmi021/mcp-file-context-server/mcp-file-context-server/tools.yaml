@@ -1,0 +1,120 @@
+tools:
+  - name: read_context
+    description: >-
+      Read and analyze code files with advanced filtering and chunking. The
+      server automatically ignores common artifact directories and files:
+
+      - Version Control: .git/
+
+      - Python: .venv/, __pycache__/, *.pyc, etc.
+
+      - JavaScript/Node.js: node_modules/, bower_components/, .next/, dist/,
+      etc.
+
+      - IDE/Editor: .idea/, .vscode/, .env, etc.
+
+
+      For large files or directories, use get_chunk_count first to determine
+      total chunks, then request specific chunks using chunkNumber parameter.
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to file or directory to read
+        maxSize:
+          type: number
+          default: 1048576
+          description: Maximum file size in bytes. Files larger than this will be chunked.
+        encoding:
+          type: string
+          default: utf8
+          description: File encoding (e.g., utf8, ascii, latin1)
+        fileTypes:
+          type:
+            - array
+            - string
+          items:
+            type: string
+          default: []
+          description: File extension(s) to include WITHOUT dots (e.g. ["ts", "js", "py"]
+            or just "ts"). Empty/undefined means all files.
+        recursive:
+          type: boolean
+          default: true
+          description: Whether to read directories recursively (includes subdirectories)
+        chunkNumber:
+          type: number
+          default: 0
+          description: Which chunk to return (0-based). Use with get_chunk_count to handle
+            large files/directories.
+  - name: get_chunk_count
+    description: >-
+      Get the total number of chunks that will be returned for a read_context
+      request.
+
+      Use this tool FIRST before reading content to determine how many chunks
+      you need to request.
+
+      The parameters should match what you'll use in read_context.
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to file or directory
+        maxSize:
+          type: number
+          default: 1048576
+          description: Maximum file size in bytes. Files larger than this will be chunked.
+        encoding:
+          type: string
+          default: utf8
+          description: File encoding (e.g., utf8, ascii, latin1)
+        fileTypes:
+          type:
+            - array
+            - string
+          items:
+            type: string
+          default: []
+          description: File extension(s) to include WITHOUT dots (e.g. ["ts", "js", "py"]
+            or just "ts"). Empty/undefined means all files.
+        recursive:
+          type: boolean
+          default: true
+          description: Whether to read directories recursively (includes subdirectories)
+  - name: set_profile
+    description: Set the active profile for context generation
+    inputSchema:
+      type: object
+      required:
+        - profile_name
+      properties:
+        profile_name:
+          type: string
+          description: Name of the profile to activate
+  - name: get_profile_context
+    description: Get repository context based on current profile settings
+    inputSchema:
+      type: object
+      properties:
+        refresh:
+          type: boolean
+          default: false
+          description: Whether to refresh file selection before generating context
+  - name: generate_outline
+    description: Generate a code outline for a file, showing its structure (classes,
+      functions, imports, etc). Supports TypeScript/JavaScript and Python files.
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the file to analyze

@@ -1,0 +1,111 @@
+tools:
+  - name: authenticate
+    description: Authenticate with Xero using OAuth2
+    inputSchema:
+      type: object
+      properties: {}
+  - name: create_bank_transactions
+    description: Creates one or more spent or received money transaction. Only use
+      this tool when user has directly and explicitly ask you to create
+      transactions.
+    inputSchema:
+      type: object
+      example: '{ bankTransactions: [{ type: "SPEND", date: "2023-01-01", reference:
+        "INV-001", subTotal: "100", total: "115", totalTax: "15", lineItems: [{
+        accountCode: "401", description: "taxi fare", lineAmount: "115" }],
+        contact: { contactId: "00000000-0000-0000-0000-000000000000", name:
+        "John Doe" }, "bankAccount": { "accountID":
+        "6f7594f2-f059-4d56-9e67-47ac9733bfe9", "Code": "088", "Name": "Business
+        Wells Fargo" } }]}'
+      properties:
+        Warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          description: Displays array of warning messages from the API
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+        BankTransactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/BankTransaction"
+      description: Transactions with an array of BankTransaction objects to create
+  - name: create_contacts
+    description: Creates one or multiple contacts in a Xero organisation. Only use
+      this tool when user has directly and explicitly ask you to create contact.
+    inputSchema:
+      type: object
+      example: '{ contacts: [{ name: "John Doe" }]}'
+      properties:
+        Contacts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Contact"
+        Warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          description: Displays array of warning messages from the API
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+      description: Contacts with an array of Contact objects to create
+  - name: get_balance_sheet
+    description: Returns a balance sheet for the end of the month of the specified
+      date. It also returns the value at the end of the same month for the
+      previous year.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_accounts
+    description: Retrieves the full chart of accounts
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_bank_transactions
+    description: Retrieves any spent or received money transactions
+    inputSchema:
+      type: object
+      properties:
+        where:
+          type: string
+          example: Date >= DateTime(2015, 01, 01) && Date < DateTime(2015, 12, 31)
+          description: Filter bank transactions. See example
+  - name: list_contacts
+    description: Retrieves all contacts in a Xero organisation
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_invoices
+    description: Retrieves sales invoices or purchase bills
+    inputSchema:
+      type: object
+      properties:
+        where:
+          type: string
+          example: Date >= DateTime(2015, 01, 01) && Date < DateTime(2015, 12, 31),
+            DueDate < DateTime(2015, 12, 31)
+          description: Filter invoices. See example
+  - name: list_journals
+    description: Retrieves journals
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_organisations
+    description: Retrieves Xero organisation details
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_payments
+    description: Retrieves payments for invoices and credit notes
+    inputSchema:
+      type: object
+      properties:
+        where:
+          type: string
+          example: Date >= DateTime(2015, 01, 01) && Date < DateTime(2015, 12, 31)
+          description: Filter payments. See example
+  - name: list_quotes
+    description: Retrieves sales quotes
+    inputSchema:
+      type: object
+      properties: {}

@@ -1,0 +1,18 @@
+identifier: skspade/mcp-linear-server/mcp-linear-management-server
+repo:
+  provider: github.com
+  url: https://github.com/skspade/mcp-linear-server
+  name: mcp-linear-server
+  owner: skspade
+server:
+  subdirectory: /
+  name: Linear Integration Server
+  description: Enable AI models to interact seamlessly with Linear for issue
+    tracking and project management. Create, search, update, and manage Linear
+    issues, teams, and sprints through a standardized protocol interface.
+    Improve productivity by automating project workflows and accessing detailed
+    issue data programmatically.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

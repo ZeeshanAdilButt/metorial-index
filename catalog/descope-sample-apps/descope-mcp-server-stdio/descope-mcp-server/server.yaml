@@ -1,0 +1,14 @@
+identifier: descope-sample-apps/descope-mcp-server-stdio/descope-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/descope-sample-apps/descope-mcp-server-stdio
+  name: descope-mcp-server-stdio
+  owner: descope-sample-apps
+server:
+  subdirectory: /
+  name: Descope MCP Server
+  description: Interact with Descope's Management APIs to manage users, audit, and more.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

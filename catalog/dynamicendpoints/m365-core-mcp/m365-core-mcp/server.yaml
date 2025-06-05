@@ -1,0 +1,20 @@
+identifier: dynamicendpoints/m365-core-mcp/m365-core-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/m365-core-mcp
+  name: m365-core-mcp
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Microsoft 365 Core Server
+  description: >-
+    *Updated May 3rd 2025**
+
+    Manage your Microsoft 365 services effortlessly. Create and manage
+    distribution lists, security groups, and user settings with ease, ensuring
+    streamlined operations and enhanced collaboration. Automate offboarding
+    processes to maintain security and compliance effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

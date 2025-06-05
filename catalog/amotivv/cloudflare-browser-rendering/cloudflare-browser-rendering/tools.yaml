@@ -1,0 +1,59 @@
+tools:
+  - name: fetch_page
+    description: Fetches and processes a web page for LLM context
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to fetch
+        maxContentLength:
+          type: number
+          description: Maximum content length to return
+        includeScreenshot:
+          type: boolean
+          description: Whether to include a screenshot (base64 encoded)
+  - name: search_documentation
+    description: Searches Cloudflare documentation and returns relevant content
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        maxResults:
+          type: number
+          description: Maximum number of results to return
+  - name: extract_structured_content
+    description: Extracts structured content from a web page using CSS selectors
+    inputSchema:
+      type: object
+      required:
+        - url
+        - selectors
+      properties:
+        url:
+          type: string
+          description: URL to extract content from
+        selectors:
+          type: object
+          description: CSS selectors to extract content
+          additionalProperties:
+            type: string
+  - name: summarize_content
+    description: Summarizes web content for more concise LLM context
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to summarize
+        maxLength:
+          type: number
+          description: Maximum length of the summary

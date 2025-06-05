@@ -1,0 +1,18 @@
+identifier: opensensor/bn_cline_mcp/bn_cline_mcp
+repo:
+  provider: github.com
+  url: https://github.com/opensensor/bn_cline_mcp
+  name: bn_cline_mcp
+  owner: opensensor
+server:
+  subdirectory: /
+  name: Binary Ninja Cline MCP Server
+  description: Analyze binaries efficiently with Cline using Binary Ninja's
+    powerful analysis capabilities. This server bridges the MCP framework with
+    Binary Ninja, enabling seamless integration and enhanced functionality for
+    binary analysis. Start your analysis quickly by setting up the server and
+    connecting it to Cline.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: metatool-ai/mcp-server-metamcp/mcp-server-metamcp
+repo:
+  provider: github.com
+  url: https://github.com/metatool-ai/mcp-server-metamcp
+  name: mcp-server-metamcp
+  owner: metatool-ai
+server:
+  subdirectory: /
+  name: MetaMCP Server
+  description: Manage multiple MCP servers seamlessly. Route requests and
+    configurations dynamically across various MCPs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

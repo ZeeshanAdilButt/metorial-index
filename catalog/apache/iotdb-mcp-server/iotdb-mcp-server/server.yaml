@@ -1,0 +1,16 @@
+identifier: apache/iotdb-mcp-server/iotdb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/apache/iotdb-mcp-server
+  name: iotdb-mcp-server
+  owner: apache
+server:
+  subdirectory: /
+  name: IoTDB MCP Server
+  description: Enable secure interaction with IoTDB databases. Run SQL queries to
+    read data and explore database schemas through a controlled interface,
+    making database exploration and analysis safer and more structured.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

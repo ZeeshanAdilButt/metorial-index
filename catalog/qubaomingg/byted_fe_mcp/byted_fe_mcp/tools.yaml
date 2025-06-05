@@ -1,0 +1,39 @@
+tools:
+  - name: search_component
+    description: 查找组件库使用
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        repo:
+          type: string
+          description: 组件库名称（可选）
+        query:
+          type: string
+          description: 搜索关键词
+  - name: search_components_multi
+    description: 使用多个关键词查找组件库使用
+    inputSchema:
+      type: object
+      required:
+        - queries
+      properties:
+        repo:
+          type: string
+          description: 组件库名称（可选）
+        queries:
+          type: array
+          items:
+            type: string
+          description: 搜索关键词数组
+  - name: list_library_components
+    description: 列出指定组件库的所有组件
+    inputSchema:
+      type: object
+      required:
+        - library
+      properties:
+        library:
+          type: string
+          description: 组件库名称（如 dprc, okee, auxo）

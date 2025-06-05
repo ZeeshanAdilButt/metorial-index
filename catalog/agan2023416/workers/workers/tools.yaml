@@ -1,0 +1,13 @@
+tools:
+  - name: generate
+    description: Generate image using Flux model
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: The prompt for the image
+      additionalProperties: false

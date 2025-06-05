@@ -1,0 +1,18 @@
+identifier: imoon/mcp-teams/mcp-teams
+repo:
+  provider: github.com
+  url: https://github.com/imoon/mcp-teams
+  name: mcp-teams
+  owner: imoon
+server:
+  subdirectory: /
+  name: Teams Messenger Integration Server
+  description: Integrate Microsoft Teams chat and messaging seamlessly with
+    MCP-compatible clients, enabling advanced search, persistent storage, and
+    live event streaming. Enhance your workflows with hybrid semantic and
+    lexical search powered by PostgreSQL and DuckDB. Manage and interact with
+    Teams data through a rich CLI and MCP tools without relying on REST APIs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

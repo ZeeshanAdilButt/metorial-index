@@ -1,0 +1,17 @@
+identifier: dcolley/swagger-mcp/swagger-mcp
+repo:
+  provider: github.com
+  url: https://github.com/dcolley/swagger-mcp
+  name: swagger-mcp
+  owner: dcolley
+server:
+  subdirectory: /
+  name: Swagger MCP Server
+  description: Ingest and serve Swagger/OpenAPI specifications seamlessly.
+    Automatically generate tools from API endpoints and support real-time
+    communication with Server-Sent Events. Enhance your API documentation and
+    interaction with robust authentication options.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

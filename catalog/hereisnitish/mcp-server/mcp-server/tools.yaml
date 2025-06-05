@@ -1,0 +1,16 @@
+tools:
+  - name: get_bmi
+    description: Calculate the BMI of a person given their height and weight
+    inputSchema:
+      type: object
+      title: get_bmiArguments
+      required:
+        - height
+        - weight
+      properties:
+        height:
+          type: number
+          title: Height
+        weight:
+          type: number
+          title: Weight

@@ -1,0 +1,14 @@
+identifier: phialsbasement/nmap-mcp-server/mcp-nmap-server
+repo:
+  provider: github.com
+  url: https://github.com/PhialsBasement/nmap-mcp-server
+  name: nmap-mcp-server
+  owner: PhialsBasement
+server:
+  subdirectory: /
+  name: NMAP Server
+  description: Perform network scanning operations using NMAP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: zekus/shortcut-mcp/shortcut-mcp
+repo:
+  provider: github.com
+  url: https://github.com/zekus/shortcut-mcp
+  name: shortcut-mcp
+  owner: zekus
+server:
+  subdirectory: /
+  name: Shortcut MCP Server
+  description: Interact with Shortcut to view and create projects, stories, epics,
+    and objectives. Safely manage your workflow with read-only operations and
+    the ability to create new items without modifying existing data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

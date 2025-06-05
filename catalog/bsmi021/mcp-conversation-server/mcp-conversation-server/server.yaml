@@ -1,0 +1,18 @@
+identifier: bsmi021/mcp-conversation-server/mcp-conversation-server
+repo:
+  provider: github.com
+  url: https://github.com/bsmi021/mcp-conversation-server
+  name: mcp-conversation-server
+  owner: bsmi021
+server:
+  subdirectory: /
+  name: Conversation Server for OpenRouter Models
+  description: Manage and interact with multiple conversations using OpenRouter's
+    language models through a unified, standardized interface. Create, send
+    messages, and list conversations with real-time streaming and token usage
+    monitoring. Persist conversation states with configurable storage and
+    leverage comprehensive error handling and recovery features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

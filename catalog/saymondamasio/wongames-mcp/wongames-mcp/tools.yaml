@@ -1,0 +1,25 @@
+tools:
+  - name: get_games
+    description: Get a list of games with optional filtering and pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: number
+          description: Filter games by ID
+        name:
+          type: string
+          description: Filter games by name
+        page:
+          type: number
+          description: Number page
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of games to return
+        start:
+          type: number
+          default: 0
+          description: Number of first entry
+      additionalProperties: false

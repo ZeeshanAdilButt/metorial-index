@@ -1,0 +1,18 @@
+identifier: msadministrator/enrichment-mcp/enrichment-mcp
+repo:
+  provider: github.com
+  url: https://github.com/MSAdministrator/enrichment-mcp
+  name: enrichment-mcp
+  owner: MSAdministrator
+server:
+  subdirectory: /
+  name: Enrichment MCP Server
+  description: Perform security data enrichment by querying multiple third-party
+    services based on provided observables such as IPs, domains, URLs, and
+    emails. Leverage integrated services like VirusTotal, Hybrid Analysis, and
+    Shodan to gather comprehensive threat intelligence. Easily extendable and
+    configurable to support additional enrichment services and observable types.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

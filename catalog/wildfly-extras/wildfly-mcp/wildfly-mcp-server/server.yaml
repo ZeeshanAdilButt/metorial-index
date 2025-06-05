@@ -1,0 +1,15 @@
+identifier: wildfly-extras/wildfly-mcp/wildfly-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/wildfly-extras/wildfly-mcp
+  name: wildfly-mcp
+  owner: wildfly-extras
+server:
+  subdirectory: /wildfly-mcp-server
+  name: WildFly MCP Server
+  description: Integrate with your AI chatbot to interact with WildFly servers
+    using natural language.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

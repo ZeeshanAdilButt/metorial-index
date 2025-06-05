@@ -1,0 +1,253 @@
+tools:
+  - name: get_url_report
+    description: Get a comprehensive URL analysis report including security scan
+      results and key relationships (communicating files, contacted domains/IPs,
+      downloaded files, redirects, threat actors). Returns both the basic
+      security analysis and automatically fetched relationship data.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL to analyze
+      additionalProperties: false
+  - name: get_url_relationship
+    description: Query a specific relationship type for a URL with pagination
+      support. Choose from 17 relationship types including analyses,
+      communicating files, contacted domains/IPs, downloaded files, graphs,
+      referrers, redirects, and threat actors. Useful for detailed investigation
+      of specific relationship types.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+        - relationship
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL to get relationships for
+        limit:
+          type: number
+          default: 10
+          maximum: 40
+          minimum: 1
+        cursor:
+          type: string
+        relationship:
+          enum:
+            - analyses
+            - comments
+            - communicating_files
+            - contacted_domains
+            - contacted_ips
+            - downloaded_files
+            - graphs
+            - last_serving_ip_address
+            - network_location
+            - referrer_files
+            - referrer_urls
+            - redirecting_urls
+            - redirects_to
+            - related_comments
+            - related_references
+            - related_threat_actors
+            - submissions
+          type: string
+          description: Type of relationship to query
+      additionalProperties: false
+  - name: get_file_report
+    description: Get a comprehensive file analysis report using its hash
+      (MD5/SHA-1/SHA-256). Includes detection results, file properties, and key
+      relationships (behaviors, dropped files, network connections, embedded
+      content, threat actors). Returns both the basic analysis and automatically
+      fetched relationship data.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          pattern: ^[a-fA-F0-9]{32,64}$
+          description: MD5, SHA-1 or SHA-256 hash of the file
+      additionalProperties: false
+  - name: get_file_relationship
+    description: Query a specific relationship type for a file with pagination
+      support. Choose from 41 relationship types including behaviors, network
+      connections, dropped files, embedded content, execution chains, and threat
+      actors. Useful for detailed investigation of specific relationship types.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - hash
+        - relationship
+      properties:
+        hash:
+          type: string
+          pattern: ^[a-fA-F0-9]{32,64}$
+          description: MD5, SHA-1 or SHA-256 hash of the file
+        limit:
+          type: number
+          default: 10
+          maximum: 40
+          minimum: 1
+        cursor:
+          type: string
+        relationship:
+          enum:
+            - analyses
+            - behaviours
+            - bundled_files
+            - carbonblack_children
+            - carbonblack_parents
+            - ciphered_bundled_files
+            - ciphered_parents
+            - clues
+            - collections
+            - comments
+            - compressed_parents
+            - contacted_domains
+            - contacted_ips
+            - contacted_urls
+            - dropped_files
+            - email_attachments
+            - email_parents
+            - embedded_domains
+            - embedded_ips
+            - embedded_urls
+            - execution_parents
+            - graphs
+            - itw_domains
+            - itw_ips
+            - itw_urls
+            - memory_pattern_domains
+            - memory_pattern_ips
+            - memory_pattern_urls
+            - overlay_children
+            - overlay_parents
+            - pcap_children
+            - pcap_parents
+            - pe_resource_children
+            - pe_resource_parents
+            - related_references
+            - related_threat_actors
+            - similar_files
+            - submissions
+            - screenshots
+            - urls_for_embedded_js
+            - votes
+          type: string
+          description: Type of relationship to query
+      additionalProperties: false
+  - name: get_ip_report
+    description: Get a comprehensive IP address analysis report including
+      geolocation, reputation data, and key relationships (communicating files,
+      historical certificates/WHOIS, resolutions). Returns both the basic
+      analysis and automatically fetched relationship data.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          anyOf:
+            - format: ipv4
+            - format: ipv6
+          description: IP address to analyze
+      additionalProperties: false
+  - name: get_ip_relationship
+    description: Query a specific relationship type for an IP address with
+      pagination support. Choose from 12 relationship types including
+      communicating files, historical SSL certificates, WHOIS records,
+      resolutions, and threat actors. Useful for detailed investigation of
+      specific relationship types.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ip
+        - relationship
+      properties:
+        ip:
+          type: string
+          anyOf:
+            - format: ipv4
+            - format: ipv6
+          description: IP address to analyze
+        limit:
+          type: number
+          default: 10
+          maximum: 40
+          minimum: 1
+        cursor:
+          type: string
+        relationship:
+          enum:
+            - comments
+            - communicating_files
+            - downloaded_files
+            - graphs
+            - historical_ssl_certificates
+            - historical_whois
+            - related_comments
+            - related_references
+            - related_threat_actors
+            - referrer_files
+            - resolutions
+            - urls
+          type: string
+          description: Type of relationship to query
+      additionalProperties: false
+  - name: get_domain_report
+    description: Get a comprehensive domain analysis report including DNS records,
+      WHOIS data, and key relationships (SSL certificates, subdomains,
+      historical data). Optionally specify which relationships to include in the
+      report. Returns both the basic analysis and relationship data.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          pattern: ^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$
+          description: Domain name to analyze
+        relationships:
+          type: array
+          items:
+            enum:
+              - caa_records
+              - cname_records
+              - comments
+              - communicating_files
+              - downloaded_files
+              - historical_ssl_certificates
+              - historical_whois
+              - immediate_parent
+              - mx_records
+              - ns_records
+              - parent
+              - referrer_files
+              - related_comments
+              - related_references
+              - related_threat_actors
+              - resolutions
+              - soa_records
+              - siblings
+              - subdomains
+              - urls
+              - user_votes
+            type: string
+          description: Optional array of relationships to include in the report
+      additionalProperties: false

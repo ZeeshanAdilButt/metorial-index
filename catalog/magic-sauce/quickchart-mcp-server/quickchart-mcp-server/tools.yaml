@@ -1,0 +1,61 @@
+tools:
+  - name: generate_chart
+    description: Generate a chart using QuickChart
+    inputSchema:
+      type: object
+      required:
+        - type
+        - datasets
+      properties:
+        type:
+          type: string
+          description: Chart type (bar, line, pie, doughnut, radar, polarArea, scatter,
+            bubble, radialGauge, speedometer)
+        title:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels for data points
+        options:
+          type: object
+        datasets:
+          type: array
+          items:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+              label:
+                type: string
+              borderColor:
+                oneOf:
+                  - type: string
+                  - type: array
+                    items:
+                      type: string
+              backgroundColor:
+                oneOf:
+                  - type: string
+                  - type: array
+                    items:
+                      type: string
+              additionalConfig:
+                type: object
+  - name: download_chart
+    description: Download a chart image to a local file
+    inputSchema:
+      type: object
+      required:
+        - config
+        - outputPath
+      properties:
+        config:
+          type: object
+          description: Chart configuration object
+        outputPath:
+          type: string
+          description: Path where the chart image should be saved

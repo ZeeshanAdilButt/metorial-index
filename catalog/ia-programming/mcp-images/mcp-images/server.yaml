@@ -1,0 +1,17 @@
+identifier: ia-programming/mcp-images/mcp-images
+repo:
+  provider: github.com
+  url: https://github.com/IA-Programming/mcp-images
+  name: mcp-images
+  owner: IA-Programming
+server:
+  subdirectory: /
+  name: Image Processing Server
+  description: Fetch and process images from URLs and local file paths with
+    automatic compression and MIME type handling. Retrieve images as
+    base64-encoded strings for easy integration. Enable parallel processing and
+    robust error handling for efficient image management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

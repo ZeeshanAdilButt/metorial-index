@@ -1,0 +1,18 @@
+identifier: baryhuang/mcp-headless-gmail/mcp-headless-gmail
+repo:
+  provider: github.com
+  url: https://github.com/baryhuang/mcp-headless-gmail
+  name: mcp-headless-gmail
+  owner: baryhuang
+server:
+  subdirectory: /
+  name: Headless Gmail Server
+  description: Access and send emails through Gmail without local credential
+    setup. Operate entirely in headless environments, ensuring a secure
+    separation of credential storage from server operations. Ideal for marketing
+    applications needing focused Gmail functionality without additional Google
+    services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

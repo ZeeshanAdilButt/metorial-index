@@ -1,0 +1,46 @@
+tools:
+  - name: get_state
+    description: Get the current state of a Home Assistant entity
+    inputSchema:
+      type: object
+      required:
+        - entity_id
+      properties:
+        entity_id:
+          type: string
+          description: The entity ID to get state for (e.g., light.living_room)
+  - name: toggle_entity
+    description: Toggle a Home Assistant entity on/off
+    inputSchema:
+      type: object
+      required:
+        - entity_id
+        - state
+      properties:
+        state:
+          enum:
+            - on
+            - off
+          type: string
+          description: The desired state (on/off)
+        entity_id:
+          type: string
+          description: The entity ID to toggle (e.g., switch.bedroom)
+  - name: trigger_automation
+    description: Trigger a Home Assistant automation
+    inputSchema:
+      type: object
+      required:
+        - automation_id
+      properties:
+        automation_id:
+          type: string
+          description: The automation ID to trigger (e.g., automation.morning_routine)
+  - name: list_entities
+    description: List all available entities in Home Assistant
+    inputSchema:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Optional domain filter (e.g., light, switch, automation)

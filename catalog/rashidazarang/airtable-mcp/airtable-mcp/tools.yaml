@@ -1,0 +1,98 @@
+tools:
+  - name: list_bases
+    description: List all accessible Airtable bases
+    inputSchema:
+      type: object
+      title: list_basesArguments
+      properties: {}
+  - name: list_tables
+    description: List all tables in the specified base or the default base
+    inputSchema:
+      type: object
+      title: list_tablesArguments
+      properties:
+        base_id_param:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Base Id Param
+          default: null
+  - name: list_records
+    description: List records from a table with optional filtering
+    inputSchema:
+      type: object
+      title: list_recordsArguments
+      required:
+        - table_name
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+        max_records:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Max Records
+          default: 100
+        filter_formula:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Filter Formula
+          default: null
+  - name: get_record
+    description: Get a specific record from a table
+    inputSchema:
+      type: object
+      title: get_recordArguments
+      required:
+        - table_name
+        - record_id
+      properties:
+        record_id:
+          type: string
+          title: Record Id
+        table_name:
+          type: string
+          title: Table Name
+  - name: create_records
+    description: Create records in a table from JSON string
+    inputSchema:
+      type: object
+      title: create_recordsArguments
+      required:
+        - table_name
+        - records_json
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+        records_json:
+          type: string
+          title: Records Json
+  - name: update_records
+    description: Update records in a table from JSON string
+    inputSchema:
+      type: object
+      title: update_recordsArguments
+      required:
+        - table_name
+        - records_json
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+        records_json:
+          type: string
+          title: Records Json
+  - name: set_base_id
+    description: Set the current Airtable base ID
+    inputSchema:
+      type: object
+      title: set_base_idArguments
+      required:
+        - base_id_param
+      properties:
+        base_id_param:
+          type: string
+          title: Base Id Param

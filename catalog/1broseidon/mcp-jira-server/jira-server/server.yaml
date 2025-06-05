@@ -1,0 +1,14 @@
+identifier: 1broseidon/mcp-jira-server/jira-server
+repo:
+  provider: github.com
+  url: https://github.com/1broseidon/mcp-jira-server
+  name: mcp-jira-server
+  owner: 1broseidon
+server:
+  subdirectory: /
+  name: Jira Server
+  description: Integrate with Jira's REST API for managing issues through MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

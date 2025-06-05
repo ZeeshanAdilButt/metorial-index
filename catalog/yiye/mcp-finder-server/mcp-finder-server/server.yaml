@@ -1,0 +1,17 @@
+identifier: yiye/mcp-finder-server/mcp-finder-server
+repo:
+  provider: github.com
+  url: https://github.com/yiye/MCP-Finder-Server
+  name: MCP-Finder-Server
+  owner: yiye
+server:
+  subdirectory: /
+  name: Finder Server
+  description: Search for MCP server implementations effortlessly. Filter results
+    by name, description, or tags to find the perfect MCP server for your needs.
+    Limit your search results to streamline your exploration of available MCP
+    servers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

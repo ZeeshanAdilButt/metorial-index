@@ -1,0 +1,16 @@
+identifier: direkt/mcp-test/mcp-test
+repo:
+  provider: github.com
+  url: https://github.com/direkt/mcp-test
+  name: mcp-test
+  owner: direkt
+server:
+  subdirectory: /
+  name: SQLite
+  description: Create and interact with an SQLite database from compressed log
+    files. Analyze log data efficiently using structured queries and gain
+    insights into application behavior and performance.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

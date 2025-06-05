@@ -1,0 +1,15 @@
+identifier: isaacwasserman/mcp-snowflake-server/mcp_snowflake_server
+repo:
+  provider: github.com
+  url: https://github.com/isaacwasserman/mcp-snowflake-server
+  name: mcp-snowflake-server
+  owner: isaacwasserman
+server:
+  subdirectory: /
+  name: Snowflake Server
+  description: A Model Context Protocol server implementation that provides
+    database interaction with Snowflake, allowing SQL queries and data insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

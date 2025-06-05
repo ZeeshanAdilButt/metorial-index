@@ -1,0 +1,18 @@
+identifier: sugerlcc/testgi/testgi
+repo:
+  provider: github.com
+  url: https://github.com/sugerlcc/testgi
+  name: testgi
+  owner: sugerlcc
+server:
+  subdirectory: /
+  name: TestGI MCP Server
+  description: Provide a simple MCP server implementation that demonstrates the
+    core features of the Model Context Protocol. Enable integration of LLMs with
+    external tools and resources through a minimal and easy-to-understand server
+    setup. Facilitate experimentation and learning of MCP capabilities in a
+    straightforward environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

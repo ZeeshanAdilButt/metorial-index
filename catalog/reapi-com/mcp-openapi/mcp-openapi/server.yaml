@@ -1,0 +1,18 @@
+identifier: reapi-com/mcp-openapi/mcp-openapi
+repo:
+  provider: github.com
+  url: https://github.com/ReAPI-com/mcp-openapi
+  name: mcp-openapi
+  owner: ReAPI-com
+server:
+  subdirectory: /
+  name: OpenAPI MCP Server
+  description: Load and serve multiple OpenAPI specifications to enhance your
+    LLM-powered IDE integrations. Enable seamless API context understanding and
+    intelligent code completion directly within your development tools. Simplify
+    API integration and boost productivity with powerful features tailored for
+    developers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

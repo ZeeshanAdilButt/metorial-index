@@ -1,0 +1,257 @@
+tools:
+  - name: get_user_info
+    description: Get information about the authenticated user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_user_notes
+    description: List all notes owned by the user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_note
+    description: Get a note by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - noteId
+      properties:
+        noteId:
+          type: string
+          description: Note ID
+      additionalProperties: false
+  - name: create_note
+    description: Create a new note
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - payload
+      properties:
+        payload:
+          type: object
+          properties:
+            title:
+              type: string
+              description: Note title
+            content:
+              type: string
+              description: Note content
+            permalink:
+              type: string
+              description: Custom permalink
+            readPermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Read permission
+            writePermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Write permission
+            commentPermission:
+              enum:
+                - disabled
+                - forbidden
+                - owners
+                - signed_in_users
+                - everyone
+              type: string
+              description: Comment permission
+          description: Create note options
+          additionalProperties: false
+      additionalProperties: false
+  - name: update_note
+    description: Update an existing note
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - noteId
+        - payload
+      properties:
+        noteId:
+          type: string
+          description: Note ID
+        payload:
+          type: object
+          properties:
+            content:
+              type: string
+              description: New note content
+            permalink:
+              type: string
+              description: Custom permalink
+            readPermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Read permission
+            writePermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Write permission
+          description: Update note options
+          additionalProperties: false
+      additionalProperties: false
+  - name: delete_note
+    description: Delete a note
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - noteId
+      properties:
+        noteId:
+          type: string
+          description: Note ID
+      additionalProperties: false
+  - name: get_history
+    description: Get user's reading history
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_teams
+    description: List all teams accessible to the user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_team_notes
+    description: List all notes in a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamPath
+      properties:
+        teamPath:
+          type: string
+          description: Team path
+      additionalProperties: false
+  - name: create_team_note
+    description: Create a new note in a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamPath
+        - payload
+      properties:
+        payload:
+          type: object
+          properties:
+            title:
+              type: string
+              description: Note title
+            content:
+              type: string
+              description: Note content
+            permalink:
+              type: string
+              description: Custom permalink
+            readPermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Read permission
+            writePermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Write permission
+            commentPermission:
+              enum:
+                - disabled
+                - forbidden
+                - owners
+                - signed_in_users
+                - everyone
+              type: string
+              description: Comment permission
+          description: Create note options
+          additionalProperties: false
+        teamPath:
+          type: string
+          description: Team path
+      additionalProperties: false
+  - name: update_team_note
+    description: Update an existing note in a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamPath
+        - noteId
+        - options
+      properties:
+        noteId:
+          type: string
+          description: Note ID
+        options:
+          type: object
+          properties:
+            content:
+              type: string
+              description: New note content
+            permalink:
+              type: string
+              description: Custom permalink
+            readPermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Read permission
+            writePermission:
+              enum:
+                - owner
+                - signed_in
+                - guest
+              type: string
+              description: Write permission
+          description: Update note options
+          additionalProperties: false
+        teamPath:
+          type: string
+          description: Team path
+      additionalProperties: false
+  - name: delete_team_note
+    description: Delete a note in a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamPath
+        - noteId
+      properties:
+        noteId:
+          type: string
+          description: Note ID
+        teamPath:
+          type: string
+          description: Team path
+      additionalProperties: false

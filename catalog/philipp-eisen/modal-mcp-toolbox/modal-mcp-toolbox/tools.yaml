@@ -1,0 +1,78 @@
+tools:
+  - name: run_python_code_in_sandbox
+    description: "
+
+      \    Runs python code in a safe environment and returns the output.
+
+
+      \    Usage:
+
+      \       run_python_code_in_sandbox(\"print('Hello, world!')\")
+
+      \       run_python_code_in_sandbox(\"import requests
+
+      print(requests.get('https://icanhazip.com').text)\",
+      requirements=[\"requests\"])
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_python_code_in_sandboxArguments
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: The python code to run.
+        pull_files:
+          anyOf:
+            - type: array
+              items:
+                type: array
+                maxItems: 2
+                minItems: 2
+                prefixItems:
+                  - type: string
+                  - type: string
+            - type: "null"
+          title: Pull Files
+          default: null
+          description: List of tuples (absolut_path_sandbox_file,
+            absolute_path_local_file). When provided downloads the file(s) from
+            the sandbox to the local file(s).
+        requirements:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Requirements
+          default: null
+          description: The requirements to install.
+        python_version:
+          type: string
+          title: Python Version
+          default: "3.13"
+          description: The python version to use. If not provided defaults to 3.13
+        mount_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Mount Directory
+          default: null
+          description: Allows you to make a local directory available at `/mounted-dir`
+            for the code in `code`. Needs to be an absolute path. Writes to this
+            directory will NOT be reflected in the local directory.
+  - name: generate_flux_image
+    description: Let's you generate an image using the Flux model.
+    inputSchema:
+      type: object
+      title: generate_flux_imageArguments
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+          description: The prompt to generate an image for

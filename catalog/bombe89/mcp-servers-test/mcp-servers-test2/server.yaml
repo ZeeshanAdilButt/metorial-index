@@ -1,0 +1,18 @@
+identifier: bombe89/mcp-servers-test/mcp-servers-test2
+repo:
+  provider: github.com
+  url: https://github.com/bombe89/mcp-servers-test
+  name: mcp-servers-test
+  owner: bombe89
+server:
+  subdirectory: /
+  name: Math Server
+  description: Provide mathematical computation capabilities to your agents by
+    enabling them to perform arithmetic operations through this server. Enhance
+    your applications with reliable and straightforward math functions
+    accessible via a standardized protocol. Simplify integration of math tools
+    into your workflows with this ready-to-use server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

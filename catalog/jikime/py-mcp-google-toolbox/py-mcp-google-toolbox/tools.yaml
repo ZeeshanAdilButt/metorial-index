@@ -1,0 +1,264 @@
+tools:
+  - name: list_emails
+    description: List recent emails from Gmail inbox
+    inputSchema:
+      type: object
+      title: list_emailsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: search_emails
+    description: Search emails with advanced query
+    inputSchema:
+      type: object
+      title: search_emailsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: send_email
+    description: Send a new email
+    inputSchema:
+      type: object
+      title: send_emailArguments
+      required:
+        - to
+        - subject
+        - body
+      properties:
+        cc:
+          anyOf:
+            - type: string
+              format: email
+            - type: "null"
+          title: Cc
+          default: null
+        to:
+          type: string
+          title: To
+          format: email
+        bcc:
+          anyOf:
+            - type: string
+              format: email
+            - type: "null"
+          title: Bcc
+          default: null
+        body:
+          type: string
+          title: Body
+        subject:
+          type: string
+          title: Subject
+  - name: modify_email
+    description: Modify email labels (archive, trash, mark read/unread, etc.)
+    inputSchema:
+      type: object
+      title: modify_emailArguments
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+        add_labels:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Add Labels
+          default: null
+        remove_labels:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Remove Labels
+          default: null
+  - name: list_events
+    description: List upcoming calendar events
+    inputSchema:
+      type: object
+      title: list_eventsArguments
+      properties:
+        time_max:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Max
+          default: null
+        time_min:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Min
+          default: null
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: create_event
+    description: Create a new calendar event
+    inputSchema:
+      type: object
+      title: create_eventArguments
+      required:
+        - summary
+        - start
+        - end
+      properties:
+        end:
+          type: string
+          title: End
+        start:
+          type: string
+          title: Start
+        summary:
+          type: string
+          title: Summary
+        location:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Location
+          default: null
+        attendees:
+          anyOf:
+            - type: array
+              items:
+                type: string
+                format: email
+            - type: "null"
+          title: Attendees
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: update_event
+    description: Update an existing calendar event
+    inputSchema:
+      type: object
+      title: update_eventArguments
+      required:
+        - event_id
+      properties:
+        end:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End
+          default: null
+        start:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start
+          default: null
+        summary:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Summary
+          default: null
+        event_id:
+          type: string
+          title: Event Id
+        location:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Location
+          default: null
+        attendees:
+          anyOf:
+            - type: array
+              items:
+                type: string
+                format: email
+            - type: "null"
+          title: Attendees
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: delete_event
+    description: Delete a calendar event
+    inputSchema:
+      type: object
+      title: delete_eventArguments
+      required:
+        - event_id
+      properties:
+        event_id:
+          type: string
+          title: Event Id
+  - name: search_google
+    description: Perform a Google search and return formatted results
+    inputSchema:
+      type: object
+      title: search_googleArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        num_results:
+          type: integer
+          title: Num Results
+          default: 5
+  - name: read_gdrive_file
+    description: Read contents of a file from Google Drive
+    inputSchema:
+      type: object
+      title: read_gdrive_fileArguments
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          title: File Id
+  - name: search_gdrive
+    description: Search for files in Google Drive
+    inputSchema:
+      type: object
+      title: search_gdriveArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        page_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page Size
+          default: 10
+        page_token:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Page Token
+          default: null

@@ -1,0 +1,15 @@
+tools:
+  - name: pubmed_search
+    description: Search PubMed medical literature database
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Medical/scientific search query
+        max_results:
+          type: number
+          default: 15
+          description: Maximum number of results (1-15)

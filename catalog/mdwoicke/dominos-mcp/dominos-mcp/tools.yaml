@@ -1,0 +1,230 @@
+tools:
+  - name: findNearbyStores
+    description: Find Domino's Pizza stores near an address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: Full address to search for nearby stores
+      additionalProperties: false
+  - name: getMenu
+    description: Get the menu for a specific Domino's store
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - storeId
+      properties:
+        storeId:
+          type: string
+          description: ID of the store to get menu from
+      additionalProperties: false
+  - name: createOrder
+    description: Create a new pizza order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - storeId
+        - customer
+        - address
+      properties:
+        address:
+          type: object
+          required:
+            - street
+            - city
+            - region
+            - postalCode
+          properties:
+            city:
+              type: string
+            region:
+              type: string
+            street:
+              type: string
+            postalCode:
+              type: string
+            deliveryInstructions:
+              type: string
+          description: Address object. Required for delivery orders. For carryout orders
+            paid by credit card, this address is used as the billing address and
+            is required.
+          additionalProperties: false
+        storeId:
+          type: string
+          description: ID of the store to order from
+        customer:
+          type: object
+          required:
+            - firstName
+            - lastName
+            - phone
+          properties:
+            email:
+              type: string
+            phone:
+              type: string
+            lastName:
+              type: string
+            firstName:
+              type: string
+          description: Customer information
+          additionalProperties: false
+        orderType:
+          enum:
+            - delivery
+            - carryout
+          type: string
+          default: delivery
+          description: Type of order - delivery or carryout
+      additionalProperties: false
+  - name: addItemToOrder
+    description: Add an item to an existing order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+        - item
+      properties:
+        item:
+          type: object
+          required:
+            - code
+          properties:
+            code:
+              type: string
+              description: Menu code for the item
+            options:
+              type: object
+              description: "Customization options using single-letter codes (e.g., 'P' for
+                Pepperoni). Format: { 'ToppingCode': { 'Portion': 'Quantity' }
+                }. Portions: '1/1' (whole), '1/2' (left), '2/2' (right).
+                Quantities: '0.5' (light), '1' (normal), '1.5' (extra), '2'
+                (double). Example: { 'P': { '1/2': '1.5' } } for extra pepperoni
+                on the left half."
+              additionalProperties: {}
+            quantity:
+              type: integer
+              default: 1
+              description: Number of this item to add
+          description: Item to add to the order
+          additionalProperties: false
+        orderId:
+          type: string
+          description: ID of the order to add item to
+      additionalProperties: false
+  - name: removeItemFromOrder
+    description: Remove an item from an existing order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+        - itemIndex
+      properties:
+        orderId:
+          type: string
+          description: ID of the order to remove item from
+        itemIndex:
+          type: integer
+          minimum: 0
+          description: Zero-based index of the item to remove from the order's list
+      additionalProperties: false
+  - name: getOrderState
+    description: Get the current state of an order from the session
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          description: ID of the order to retrieve state for
+      additionalProperties: false
+  - name: validateOrder
+    description: Validate an order before placing it
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          description: ID of the order to validate
+      additionalProperties: false
+  - name: priceOrder
+    description: Price an order to get total cost
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          description: ID of the order to price
+      additionalProperties: false
+  - name: placeOrder
+    description: Place an order with payment information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+        - payment
+      properties:
+        orderId:
+          type: string
+          description: ID of the order to place
+        payment:
+          type: object
+          required:
+            - type
+          properties:
+            type:
+              enum:
+                - credit
+                - cash
+              type: string
+              description: Payment method
+            tipAmount:
+              type: number
+            cardNumber:
+              type: string
+            expiration:
+              type: string
+            postalCode:
+              type: string
+              description: Billing postal code for credit card payments.
+            securityCode:
+              type: string
+          description: Payment information
+          additionalProperties: false
+      additionalProperties: false
+  - name: trackOrder
+    description: Track the status of an order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - phoneNumber
+        - storeId
+      properties:
+        orderId:
+          type: string
+          description: Optional order ID if available
+        storeId:
+          type: string
+          description: ID of the store the order was placed at
+        phoneNumber:
+          type: string
+          description: Phone number used for the order
+      additionalProperties: false

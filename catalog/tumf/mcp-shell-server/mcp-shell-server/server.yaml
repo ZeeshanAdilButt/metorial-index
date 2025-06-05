@@ -1,0 +1,14 @@
+identifier: tumf/mcp-shell-server/mcp-shell-server
+repo:
+  provider: github.com
+  url: https://github.com/tumf/mcp-shell-server
+  name: mcp-shell-server
+  owner: tumf
+server:
+  subdirectory: /
+  name: Shell Server
+  description: Execute whitelisted shell commands securely via MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

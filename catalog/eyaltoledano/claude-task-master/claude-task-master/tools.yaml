@@ -1,0 +1,135 @@
+tools:
+  - name: listTasks
+    description: List all tasks from Task Master
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectRoot
+      properties:
+        file:
+          type: string
+          description: Path to the tasks file
+        status:
+          type: string
+          description: Filter tasks by status
+        projectRoot:
+          type: string
+          description: "Root directory of the project (default: current working directory)"
+        withSubtasks:
+          type: boolean
+          description: Include subtasks in the response
+      additionalProperties: false
+  - name: showTask
+    description: Show detailed information about a specific task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - projectRoot
+      properties:
+        id:
+          type: string
+          description: Task ID to show
+        file:
+          type: string
+          description: Path to the tasks file
+        projectRoot:
+          type: string
+          description: "Root directory of the project (default: current working directory)"
+      additionalProperties: false
+  - name: setTaskStatus
+    description: Set the status of a task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - status
+        - projectRoot
+      properties:
+        id:
+          type: string
+          description: Task ID (can be comma-separated for multiple tasks)
+        file:
+          type: string
+          description: Path to the tasks file
+        status:
+          type: string
+          description: New status (todo, in-progress, review, done)
+        projectRoot:
+          type: string
+          description: "Root directory of the project (default: current working directory)"
+      additionalProperties: false
+  - name: expandTask
+    description: Break down a task into detailed subtasks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - projectRoot
+      properties:
+        id:
+          type: string
+          description: Task ID to expand
+        num:
+          type: number
+          description: Number of subtasks to generate
+        file:
+          type: string
+          description: Path to the tasks file
+        force:
+          type: boolean
+          description: Force regeneration of subtasks for tasks that already have them
+        prompt:
+          type: string
+          description: Additional context to guide subtask generation
+        research:
+          type: boolean
+          description: Enable Perplexity AI for research-backed subtask generation
+        projectRoot:
+          type: string
+          description: "Root directory of the project (default: current working directory)"
+      additionalProperties: false
+  - name: nextTask
+    description: Show the next task to work on based on dependencies and status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectRoot
+      properties:
+        file:
+          type: string
+          description: Path to the tasks file
+        projectRoot:
+          type: string
+          description: "Root directory of the project (default: current working directory)"
+      additionalProperties: false
+  - name: addTask
+    description: Add a new task using AI
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+        - projectRoot
+      properties:
+        file:
+          type: string
+          description: Path to the tasks file
+        prompt:
+          type: string
+          description: Description of the task to add
+        priority:
+          type: string
+          description: Task priority (high, medium, low)
+        projectRoot:
+          type: string
+          description: "Root directory of the project (default: current working directory)"
+        dependencies:
+          type: string
+          description: Comma-separated list of task IDs this task depends on
+      additionalProperties: false

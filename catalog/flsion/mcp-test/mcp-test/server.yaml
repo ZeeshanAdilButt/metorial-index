@@ -1,0 +1,16 @@
+identifier: flsion/mcp-test/mcp-test
+repo:
+  provider: github.com
+  url: https://github.com/flsion/mcp-test
+  name: mcp-test
+  owner: flsion
+server:
+  subdirectory: /
+  name: MCP Test Server
+  description: Integrate your applications with external data and tools
+    seamlessly. Enhance your workflows by allowing your LLMs to interact with
+    real-world resources and perform actions dynamically.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

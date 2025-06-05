@@ -1,0 +1,14 @@
+identifier: secretiveshell/mcp-searxng/mcp-searxng
+repo:
+  provider: github.com
+  url: https://github.com/SecretiveShell/MCP-searxng
+  name: MCP-searxng
+  owner: SecretiveShell
+server:
+  subdirectory: /
+  name: SearXNG Search Connector
+  description: An MCP server for connecting to SearXNG to perform web searches.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

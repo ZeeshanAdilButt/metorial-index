@@ -1,0 +1,19 @@
+identifier: aech-ai/mcp-teams-test/mcp-teams-test
+repo:
+  provider: github.com
+  url: https://github.com/aech-ai/mcp-teams-test
+  name: mcp-teams-test
+  owner: aech-ai
+server:
+  subdirectory: /
+  name: Teams Messenger Integration Server
+  description: Integrate Microsoft Teams chat and messaging seamlessly with
+    MCP-compatible clients, enabling advanced search, persistent storage, and
+    live event streaming. Leverage hybrid semantic and lexical search
+    capabilities with PostgreSQL and DuckDB for efficient message retrieval and
+    management. Use a rich CLI client for local testing and token management,
+    supporting both real and demo modes for flexible deployment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

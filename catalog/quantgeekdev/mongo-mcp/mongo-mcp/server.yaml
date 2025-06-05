@@ -1,0 +1,15 @@
+identifier: quantgeekdev/mongo-mcp/mongo-mcp
+repo:
+  provider: github.com
+  url: https://github.com/QuantGeekDev/mongo-mcp
+  name: mongo-mcp
+  owner: QuantGeekDev
+server:
+  subdirectory: /
+  name: MongoDB MCP Server
+  description: An MCP server that enables LLMs to interact directly with MongoDB
+    databases using natural language.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

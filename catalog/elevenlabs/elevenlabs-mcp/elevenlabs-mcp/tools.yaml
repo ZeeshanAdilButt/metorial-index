@@ -1,0 +1,729 @@
+tools:
+  - name: text_to_speech
+    description: "Convert text to speech with a given voice and save the output
+      audio file to a given directory.
+
+      \    Directory is optional, if not provided, the output file will be saved
+      to $HOME/Desktop.
+
+      \    Only one of voice_id or voice_name can be provided. If none are
+      provided, the default voice will be used.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+
+      \     Args:
+
+      \        text (str): The text to convert to speech.
+
+      \        voice_name (str, optional): The name of the voice to use.
+
+      \        stability (float, optional): Stability of the generated audio.
+      Determines how stable the voice is and the randomness between each
+      generation. Lower values introduce broader emotional range for the voice.
+      Higher values can result in a monotonous voice with limited emotion. Range
+      is 0 to 1.
+
+      \        similarity_boost (float, optional): Similarity boost of the
+      generated audio. Determines how closely the AI should adhere to the
+      original voice when attempting to replicate it. Range is 0 to 1.
+
+      \        style (float, optional): Style of the generated audio. Determines
+      the style exaggeration of the voice. This setting attempts to amplify the
+      style of the original speaker. It does consume additional computational
+      resources and might increase latency if set to anything other than 0.
+      Range is 0 to 1.
+
+      \        use_speaker_boost (bool, optional): Use speaker boost of the
+      generated audio. This setting boosts the similarity to the original
+      speaker. Using this setting requires a slightly higher computational load,
+      which in turn increases latency.
+
+      \        speed (float, optional): Speed of the generated audio. Controls
+      the speed of the generated speech. Values range from 0.7 to 1.2, with 1.0
+      being the default speed. Lower values create slower, more deliberate
+      speech while higher values produce faster-paced speech. Extreme values can
+      impact the quality of the generated speech. Range is 0.7 to 1.2.
+
+      \        output_directory (str, optional): Directory where files should be
+      saved.
+
+      \            Defaults to $HOME/Desktop if not provided.
+
+
+      \    Returns:
+
+      \        Text content with the path to the output file and name of the
+      voice used.
+
+      \    "
+    inputSchema:
+      type: object
+      title: text_to_speechArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        speed:
+          type: number
+          title: Speed
+          default: 1
+        style:
+          type: number
+          title: Style
+          default: 0
+        voice_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Voice Id
+          default: null
+        stability:
+          type: number
+          title: Stability
+          default: 0.5
+        voice_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Voice Name
+          default: null
+        output_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Directory
+          default: null
+        similarity_boost:
+          type: number
+          title: Similarity Boost
+          default: 0.75
+        use_speaker_boost:
+          type: boolean
+          title: Use Speaker Boost
+          default: true
+  - name: speech_to_text
+    description: "Transcribe speech from an audio file and either save the output
+      text file to a given directory or return the text to the client directly.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+
+      \    Args:
+
+      \        file_path: Path to the audio file to transcribe
+
+      \        language_code: ISO 639-3 language code for transcription
+      (default: \"eng\" for English)
+
+      \        diarize: Whether to diarize the audio file. If True, which
+      speaker is currently speaking will be annotated in the transcription.
+
+      \        save_transcript_to_file: Whether to save the transcript to a
+      file.
+
+      \        return_transcript_to_client_directly: Whether to return the
+      transcript to the client directly.
+
+      \        output_directory: Directory where files should be saved.
+
+      \            Defaults to $HOME/Desktop if not provided.
+
+
+      \    Returns:
+
+      \        TextContent containing the transcription. If
+      save_transcript_to_file is True, the transcription will be saved to a file
+      in the output directory.
+
+      \    "
+    inputSchema:
+      type: object
+      title: speech_to_textArguments
+      required:
+        - input_file_path
+      properties:
+        diarize:
+          type: boolean
+          title: Diarize
+          default: false
+        language_code:
+          type: string
+          title: Language Code
+          default: eng
+        input_file_path:
+          type: string
+          title: Input File Path
+        output_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Directory
+          default: null
+        save_transcript_to_file:
+          type: boolean
+          title: Save Transcript To File
+          default: true
+        return_transcript_to_client_directly:
+          type: boolean
+          title: Return Transcript To Client Directly
+          default: false
+  - name: text_to_sound_effects
+    description: "Convert text description of a sound effect to sound effect with a
+      given duration and save the output audio file to a given directory.
+
+      \    Directory is optional, if not provided, the output file will be saved
+      to $HOME/Desktop.
+
+      \    Duration must be between 0.5 and 5 seconds.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+
+      \    Args:
+
+      \        text: Text description of the sound effect
+
+      \        duration_seconds: Duration of the sound effect in seconds
+
+      \        output_directory: Directory where files should be saved.
+
+      \            Defaults to $HOME/Desktop if not provided.
+
+      \    "
+    inputSchema:
+      type: object
+      title: text_to_sound_effectsArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        duration_seconds:
+          type: number
+          title: Duration Seconds
+          default: 2
+        output_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Directory
+          default: null
+  - name: search_voices
+    description: "
+
+      \    Search for existing voices, a voice that has already been added to
+      the user's ElevenLabs voice library.\ 
+
+      \    Searches in name, description, labels and category.
+
+
+      \    Args:
+
+      \        search: Search term to filter voices by. Searches in name,
+      description, labels and category.
+
+      \        sort: Which field to sort by. `created_at_unix` might not be
+      available for older voices.
+
+      \        sort_direction: Sort order, either ascending or descending.
+
+
+      \    Returns:
+
+      \        List of voices that match the search criteria.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_voicesArguments
+      properties:
+        sort:
+          enum:
+            - created_at_unix
+            - name
+          type: string
+          title: Sort
+          default: name
+        search:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search
+          default: null
+        sort_direction:
+          enum:
+            - asc
+            - desc
+          type: string
+          title: Sort Direction
+          default: desc
+  - name: get_voice
+    description: Get details of a specific voice
+    inputSchema:
+      type: object
+      title: get_voiceArguments
+      required:
+        - voice_id
+      properties:
+        voice_id:
+          type: string
+          title: Voice Id
+  - name: voice_clone
+    description: "Clone a voice using provided audio files.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: voice_cloneArguments
+      required:
+        - name
+        - files
+      properties:
+        name:
+          type: string
+          title: Name
+        files:
+          type: array
+          items:
+            type: string
+          title: Files
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: isolate_audio
+    description: "Isolate audio from a file and save the output audio file to a
+      given directory.
+
+      \    Directory is optional, if not provided, the output file will be saved
+      to $HOME/Desktop.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: isolate_audioArguments
+      required:
+        - input_file_path
+      properties:
+        input_file_path:
+          type: string
+          title: Input File Path
+        output_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Directory
+          default: null
+  - name: check_subscription
+    description: Check the current subscription status. Could be used to measure the
+      usage of the API.
+    inputSchema:
+      type: object
+      title: check_subscriptionArguments
+      properties: {}
+  - name: create_agent
+    description: "Create a conversational AI agent with custom configuration.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+
+      \    Args:
+
+      \        name: Name of the agent
+
+      \        first_message: First message the agent will say i.e. \"Hi, how
+      can I help you today?\"
+
+      \        system_prompt: System prompt for the agent
+
+      \        voice_id: ID of the voice to use for the agent
+
+      \        language: ISO 639-1 language code for the agent
+
+      \        llm: LLM to use for the agent
+
+      \        temperature: Temperature for the agent. The lower the
+      temperature, the more deterministic the agent's responses will be. Range
+      is 0 to 1.
+
+      \        max_tokens: Maximum number of tokens to generate.
+
+      \        asr_quality: Quality of the ASR. `high` or `low`.
+
+      \        model_id: ID of the ElevenLabsmodel to use for the agent.
+
+      \        optimize_streaming_latency: Optimize streaming latency. Range is
+      0 to 4.
+
+      \        stability: Stability for the agent. Range is 0 to 1.
+
+      \        similarity_boost: Similarity boost for the agent. Range is 0 to
+      1.
+
+      \        turn_timeout: Timeout for the agent to respond in seconds.
+      Defaults to 7 seconds.
+
+      \        max_duration_seconds: Maximum duration of a conversation in
+      seconds. Defaults to 600 seconds (10 minutes).
+
+      \        record_voice: Whether to record the agent's voice.
+
+      \        retention_days: Number of days to retain the agent's data.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_agentArguments
+      required:
+        - name
+        - first_message
+        - system_prompt
+      properties:
+        llm:
+          type: string
+          title: Llm
+          default: gemini-2.0-flash-001
+        name:
+          type: string
+          title: Name
+        language:
+          type: string
+          title: Language
+          default: en
+        model_id:
+          type: string
+          title: Model Id
+          default: eleven_turbo_v2
+        voice_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Voice Id
+          default: cgSgspJ2msm6clMCkdW9
+        stability:
+          type: number
+          title: Stability
+          default: 0.5
+        max_tokens:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Max Tokens
+          default: null
+        asr_quality:
+          type: string
+          title: Asr Quality
+          default: high
+        temperature:
+          type: number
+          title: Temperature
+          default: 0.5
+        record_voice:
+          type: boolean
+          title: Record Voice
+          default: true
+        turn_timeout:
+          type: integer
+          title: Turn Timeout
+          default: 7
+        first_message:
+          type: string
+          title: First Message
+        system_prompt:
+          type: string
+          title: System Prompt
+        retention_days:
+          type: integer
+          title: Retention Days
+          default: 730
+        similarity_boost:
+          type: number
+          title: Similarity Boost
+          default: 0.8
+        max_duration_seconds:
+          type: integer
+          title: Max Duration Seconds
+          default: 300
+        optimize_streaming_latency:
+          type: integer
+          title: Optimize Streaming Latency
+          default: 3
+  - name: add_knowledge_base_to_agent
+    description: "Add a knowledge base to ElevenLabs workspace. Allowed types are
+      epub, pdf, docx, txt, html.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+
+      \    Args:
+
+      \        agent_id: ID of the agent to add the knowledge base to.
+
+      \        knowledge_base_name: Name of the knowledge base.
+
+      \        url: URL of the knowledge base.
+
+      \        input_file_path: Path to the file to add to the knowledge base.
+
+      \        text: Text to add to the knowledge base.
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_knowledge_base_to_agentArguments
+      required:
+        - agent_id
+        - knowledge_base_name
+      properties:
+        url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Url
+          default: null
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+        agent_id:
+          type: string
+          title: Agent Id
+        input_file_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Input File Path
+          default: null
+        knowledge_base_name:
+          type: string
+          title: Knowledge Base Name
+  - name: list_agents
+    description: List all available conversational AI agents
+    inputSchema:
+      type: object
+      title: list_agentsArguments
+      properties: {}
+  - name: get_agent
+    description: Get details about a specific conversational AI agent
+    inputSchema:
+      type: object
+      title: get_agentArguments
+      required:
+        - agent_id
+      properties:
+        agent_id:
+          type: string
+          title: Agent Id
+  - name: speech_to_speech
+    description: "Transform audio from one voice to another using provided audio
+      files.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: speech_to_speechArguments
+      required:
+        - input_file_path
+      properties:
+        voice_name:
+          type: string
+          title: Voice Name
+          default: Adam
+        input_file_path:
+          type: string
+          title: Input File Path
+        output_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Directory
+          default: null
+  - name: text_to_voice
+    description: "Create voice previews from a text prompt. Creates three previews
+      with slight variations. Saves the previews to a given directory. If no
+      text is provided, the tool will auto-generate text.
+
+
+      \    Voice preview files are saved as:
+      voice_design_(generated_voice_id)_(timestamp).mp3
+
+
+      \    Example file name:
+      voice_design_Ya2J5uIa5Pq14DNPsbC1_20250403_164949.mp3
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: text_to_voiceArguments
+      required:
+        - voice_description
+      properties:
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+        output_directory:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Directory
+          default: null
+        voice_description:
+          type: string
+          title: Voice Description
+  - name: create_voice_from_preview
+    description: "Add a generated voice to the voice library. Uses the voice ID from
+      the `text_to_voice` tool.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_voice_from_previewArguments
+      required:
+        - generated_voice_id
+        - voice_name
+        - voice_description
+      properties:
+        voice_name:
+          type: string
+          title: Voice Name
+        voice_description:
+          type: string
+          title: Voice Description
+        generated_voice_id:
+          type: string
+          title: Generated Voice Id
+  - name: make_outbound_call
+    description: "Make an outbound call via Twilio using an ElevenLabs agent.
+
+
+      \    ⚠️ COST WARNING: This tool makes an API call to ElevenLabs which may
+      incur costs. Only use when explicitly requested by the user.
+
+
+      \    Args:
+
+      \        agent_id: The ID of the agent that will handle the call
+
+      \        agent_phone_number_id: The ID of the phone number to use for the
+      call
+
+      \        to_number: The phone number to call (E.164 format: +1xxxxxxxxxx)
+
+
+      \    Returns:
+
+      \        TextContent containing information about the call
+
+      \    "
+    inputSchema:
+      type: object
+      title: make_outbound_callArguments
+      required:
+        - agent_id
+        - agent_phone_number_id
+        - to_number
+      properties:
+        agent_id:
+          type: string
+          title: Agent Id
+        to_number:
+          type: string
+          title: To Number
+        agent_phone_number_id:
+          type: string
+          title: Agent Phone Number Id
+  - name: search_voice_library
+    description: "Search for a voice across the entire ElevenLabs voice library.
+
+
+      \    Args:
+
+      \        page: Page number to return (0-indexed)
+
+      \        page_size: Number of voices to return per page (1-100)
+
+      \        search: Search term to filter voices by
+
+      \       \ 
+
+      \    Returns:
+
+      \        TextContent containing information about the shared voices
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_voice_libraryArguments
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 0
+        search:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search
+          default: null
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+  - name: list_phone_numbers
+    description: List all phone numbers associated with the ElevenLabs account
+    inputSchema:
+      type: object
+      title: list_phone_numbersArguments
+      properties: {}
+  - name: play_audio
+    description: Play an audio file. Supports WAV and MP3 formats.
+    inputSchema:
+      type: object
+      title: play_audioArguments
+      required:
+        - input_file_path
+      properties:
+        input_file_path:
+          type: string
+          title: Input File Path

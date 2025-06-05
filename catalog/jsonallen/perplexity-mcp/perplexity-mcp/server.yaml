@@ -1,0 +1,16 @@
+identifier: jsonallen/perplexity-mcp/perplexity-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jsonallen/perplexity-mcp
+  name: perplexity-mcp
+  owner: jsonallen
+server:
+  subdirectory: /
+  name: Perplexity MCP
+  description: An MCP server providing web search functionality using Perplexity
+    AI's API. You can select the model you want to use as well a search recency,
+    day, month, year, etc.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

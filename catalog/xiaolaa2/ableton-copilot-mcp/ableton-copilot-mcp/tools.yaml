@@ -1,0 +1,1107 @@
+tools:
+  - name: list_resources
+    description: List Ableton live Browser resources of specified type
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+      properties:
+        type:
+          enum:
+            - audio_effects
+            - instruments
+            - plugins
+            - samples
+            - drums
+            - midi_effects
+            - sounds
+          type: string
+          description: "[string] resources type"
+      additionalProperties: false
+  - name: load_device
+    description: >-
+      Load a resource which is loadable (audio
+      effect/instrument/plugin/drums/midi effect/sounds) into a track.
+              If track_id is not provided, will load to currently selected track.
+              If no track is selected, instruments will be loaded to the last MIDI track, 
+              and audio effects will be loaded to the last MIDI or audio track.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - device_id
+      properties:
+        track_id:
+          type: string
+          description: "[string] track id to load item to"
+        device_id:
+          type: string
+          description: "[string] id of device to load"
+      additionalProperties: false
+  - name: get_clip_properties
+    description: Get clip properties by clip id. To get specific properties, set the
+      corresponding property name to true in the properties parameter.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clip_id
+        - properties
+      properties:
+        clip_id:
+          type: string
+        properties:
+          type: object
+          properties:
+            gain:
+              type: boolean
+            name:
+              type: boolean
+            color:
+              type: boolean
+            muted:
+              type: boolean
+            notes:
+              type: boolean
+            length:
+              type: boolean
+            looping:
+              type: boolean
+            warping:
+              type: boolean
+            end_time:
+              type: boolean
+            loop_end:
+              type: boolean
+            position:
+              type: boolean
+            ram_mode:
+              type: boolean
+            file_path:
+              type: boolean
+            warp_mode:
+              type: boolean
+            end_marker:
+              type: boolean
+            is_playing:
+              type: boolean
+            loop_start:
+              type: boolean
+            pitch_fine:
+              type: boolean
+            start_time:
+              type: boolean
+            color_index:
+              type: boolean
+            launch_mode:
+              type: boolean
+            is_midi_clip:
+              type: boolean
+            is_recording:
+              type: boolean
+            is_triggered:
+              type: boolean
+            pitch_coarse:
+              type: boolean
+            start_marker:
+              type: boolean
+            warp_markers:
+              type: boolean
+            has_envelopes:
+              type: boolean
+            is_audio_clip:
+              type: boolean
+            sample_length:
+              type: boolean
+            is_overdubbing:
+              type: boolean
+            selected_notes:
+              type: boolean
+            velocity_amount:
+              type: boolean
+            playing_position:
+              type: boolean
+            gain_display_string:
+              type: boolean
+            is_arrangement_clip:
+              type: boolean
+            launch_quantization:
+              type: boolean
+            signature_numerator:
+              type: boolean
+            available_warp_modes:
+              type: boolean
+            will_record_on_start:
+              type: boolean
+            signature_denominator:
+              type: boolean
+          additionalProperties: false
+      additionalProperties: false
+  - name: remove_clip_notes
+    description: Remove clip notes by clip id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clip_id
+        - from_pitch
+        - pitch_span
+        - from_time
+        - time_span
+      properties:
+        clip_id:
+          type: string
+        from_time:
+          type: number
+        time_span:
+          type: number
+          description: The number of beats to remove. Must be a value greater than 0.
+        from_pitch:
+          type: number
+          maximum: 127
+          minimum: 0
+        pitch_span:
+          type: number
+          description: The number of semitones to remove. Must be a value greater than 0.
+      additionalProperties: false
+  - name: add_notes_to_clip
+    description: Add notes to clip by clip id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notes
+        - clip_id
+      properties:
+        notes:
+          type: array
+          items:
+            type: object
+            properties:
+              time:
+                type: number
+                description: "[float] the note start time in beats of absolute clip time."
+              muted:
+                type: boolean
+                description: "[bool] true = the note is deactivated (false by default)."
+              pitch:
+                type: number
+                maximum: 127
+                minimum: 0
+                description: "[int] the MIDI note number, 0...127, 60 is C3."
+              duration:
+                type: number
+                description: "[float] the note length in beats."
+              velocity:
+                type: number
+                maximum: 127
+                minimum: 0
+                description: "[float] the note velocity, 0 ... 127 (100 by default)."
+            additionalProperties: false
+          description: "[array] the notes to add."
+        clip_id:
+          type: string
+      additionalProperties: false
+  - name: replace_all_notes_to_clip
+    description: Replace clip all notes by clip id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notes
+        - clip_id
+      properties:
+        notes:
+          type: array
+          items:
+            type: object
+            properties:
+              time:
+                type: number
+                description: "[float] the note start time in beats of absolute clip time."
+              muted:
+                type: boolean
+                description: "[bool] true = the note is deactivated (false by default)."
+              pitch:
+                type: number
+                maximum: 127
+                minimum: 0
+                description: "[int] the MIDI note number, 0...127, 60 is C3."
+              duration:
+                type: number
+                description: "[float] the note length in beats."
+              velocity:
+                type: number
+                maximum: 127
+                minimum: 0
+                description: "[float] the note velocity, 0 ... 127 (100 by default)."
+            additionalProperties: false
+          description: "[array] the notes to remove."
+        clip_id:
+          type: string
+      additionalProperties: false
+  - name: set_clips_property
+    description: batch set clip property
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clips
+      properties:
+        clips:
+          type: array
+          items:
+            type: object
+            required:
+              - clip_id
+              - property
+            properties:
+              clip_id:
+                type: string
+              property:
+                type: object
+                properties:
+                  gain:
+                    type: number
+                  name:
+                    type: string
+                  color:
+                    type: number
+                    description: >-
+                      The RGB value of the track's color in 
+                              the form 0x00RRGGBB or (2^16 * red) + (2^8 * green) + blue, where red, 
+                              green and blue are values from 0 (dark) to 255 (light). Example: Red is (2^16 * 255) = 16711680
+                  muted:
+                    type: boolean
+                  looping:
+                    type: boolean
+                    description: true = clip is looped. Unwarped audio cannot be looped.
+                  warping:
+                    type: boolean
+                    description: Available for audio clips only.
+                  loop_end:
+                    type: number
+                    description: "[float] For looped clips: loop end. For unlooped clips: clip end."
+                  position:
+                    type: number
+                    description: >-
+                      [float] Get and set the clip's loop position. 
+                              The value will always equal loop_start, 
+                              however setting this property, unlike setting loop_start, preserves the loop length
+                  ram_mode:
+                    type: boolean
+                  warp_mode:
+                    type: number
+                    description: >-
+                      [int] The Warp Mode of the clip as an integer index.
+                      Available Warp Modes are:
+                              0 = Beats Mode
+                              1 = Tones Mode
+                              2 = Texture Mode
+                              3 = Re-Pitch Mode
+                              4 = Complex Mode
+                              5 = REX Mode
+                              6 = Complex Pro Mode
+                              Available for audio clips only.
+                  end_marker:
+                    type: number
+                  is_playing:
+                    type: boolean
+                  loop_start:
+                    type: number
+                    description: >-
+                      [float] For looped clips: loop start.
+                              loop_start and loop_end are in absolute clip beat time if clip is MIDI or warped. 
+                              The 1.1.1 position has beat time 0. If the clip is unwarped audio, they are given in seconds, 
+                              0 is the time of the first sample in the audio material.
+                  pitch_fine:
+                    type: number
+                    description: |-
+                      [float] Extra pitch shift in cents ("Detune"), -50 ... 49.
+                      Available for audio clips only.
+                  launch_mode:
+                    type: number
+                  pitch_coarse:
+                    type: number
+                    description: |-
+                      [int] Pitch shift in semitones ("Transpose"), -48 ... 48.
+                      Available for audio clips only.
+                  start_marker:
+                    type: number
+                    description: >-
+                      [float] The start marker of the clip in beats, 
+                              independent of the loop state. Cannot be set behind the end marker
+                  velocity_amount:
+                    type: number
+                  launch_quantization:
+                    type: number
+                  signature_numerator:
+                    type: number
+                  signature_denominator:
+                    type: number
+                additionalProperties: false
+            additionalProperties: false
+      additionalProperties: false
+  - name: crop_clip
+    description: >-
+      Crops the clip. The region that is cropped depends on whether the clip is
+      looped or not. 
+                  If looped, the region outside of the loop is removed. If not looped, 
+                  the region outside the start and end markers is removed.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clip_id
+      properties:
+        clip_id:
+          type: string
+      additionalProperties: false
+  - name: duplicate_clip_loop
+    description: |-
+      Makes the loop twice as long and duplicates notes and envelopes. 
+              Duplicates the clip start/end range if the clip is not looped.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clip_id
+      properties:
+        clip_id:
+          type: string
+      additionalProperties: false
+  - name: duplicate_clip_region
+    description: >-
+      Duplicates the notes in the specified region to the destination_time.
+                  Only notes of the specified pitch are duplicated if pitch is not -1.
+                  If the transposition_amount is not 0, the notes in the region will be
+                  transposed by the transposition_amount of semitones.
+                  Raises an error on audio clips..
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clip_id
+        - region_start
+        - region_end
+        - destination_time
+        - pitch
+        - transposition_amount
+      properties:
+        pitch:
+          type: number
+        clip_id:
+          type: string
+        region_end:
+          type: number
+        region_start:
+          type: number
+        destination_time:
+          type: number
+        transposition_amount:
+          type: number
+      additionalProperties: false
+  - name: get_device_properties
+    description: get device properties. To get specific properties, set the
+      corresponding property name to true in the properties parameter
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - device_id
+        - properties
+      properties:
+        device_id:
+          type: string
+        properties:
+          type: object
+          properties:
+            name:
+              type: boolean
+            type:
+              type: boolean
+            is_active:
+              type: boolean
+            class_name:
+              type: boolean
+            parameters:
+              type: boolean
+            can_have_chains:
+              type: boolean
+            can_have_drum_pads:
+              type: boolean
+            class_display_name:
+              type: boolean
+          additionalProperties: false
+      additionalProperties: false
+  - name: modify_device_parameter_value
+    description: set device parameter value, only support built-in Live devices
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - parameter_id
+        - value
+      properties:
+        value:
+          type: number
+        parameter_id:
+          type: string
+          description: parameter id, get from get_device_properties
+      additionalProperties: false
+  - name: get_operation_histories
+    description: get mcp tools operation histories by page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - page
+        - page_size
+      properties:
+        page:
+          type: number
+        page_size:
+          type: number
+      additionalProperties: false
+  - name: get_snapshot_by_history_id
+    description: get snapshot by history id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - history_id
+      properties:
+        history_id:
+          type: number
+          description: The id of the operation history. Must be a value greater than 0.
+      additionalProperties: false
+  - name: rollback_by_history_id
+    description: >-
+      rollback to the state before the operation corresponding to the history_id
+      was executed, 
+              currently supports Note operations
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - history_id
+      properties:
+        history_id:
+          type: number
+          description: The id of the operation history.
+      additionalProperties: false
+  - name: get_song_properties
+    description: get song properties. To get specific properties, set the
+      corresponding property name to true in the properties parameter.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        loop:
+          type: boolean
+        name:
+          type: boolean
+        tempo:
+          type: boolean
+        scenes:
+          type: boolean
+        tracks:
+          type: boolean
+        overdub:
+          type: boolean
+        can_redo:
+          type: boolean
+        can_undo:
+          type: boolean
+        nudge_up:
+          type: boolean
+        punch_in:
+          type: boolean
+        metronome:
+          type: boolean
+        punch_out:
+          type: boolean
+        root_note:
+          type: boolean
+        cue_points:
+          type: boolean
+        is_playing:
+          type: boolean
+        loop_start:
+          type: boolean
+        nudge_down:
+          type: boolean
+        scale_name:
+          type: boolean
+        loop_length:
+          type: boolean
+        record_mode:
+          type: boolean
+        song_length:
+          type: boolean
+        master_track:
+          type: boolean
+        swing_amount:
+          type: boolean
+        exclusive_arm:
+          type: boolean
+        groove_amount:
+          type: boolean
+        return_tracks:
+          type: boolean
+        exclusive_solo:
+          type: boolean
+        is_counting_in:
+          type: boolean
+        session_record:
+          type: boolean
+        visible_tracks:
+          type: boolean
+        last_event_time:
+          type: boolean
+        appointed_device:
+          type: boolean
+        back_to_arranger:
+          type: boolean
+        can_capture_midi:
+          type: boolean
+        select_on_launch:
+          type: boolean
+        count_in_duration:
+          type: boolean
+        current_song_time:
+          type: boolean
+        arrangement_overdub:
+          type: boolean
+        signature_numerator:
+          type: boolean
+        can_jump_to_next_cue:
+          type: boolean
+        can_jump_to_prev_cue:
+          type: boolean
+        session_record_status:
+          type: boolean
+        signature_denominator:
+          type: boolean
+        tempo_follower_enabled:
+          type: boolean
+        clip_trigger_quantization:
+          type: boolean
+        session_automation_record:
+          type: boolean
+        midi_recording_quantization:
+          type: boolean
+        re_enable_automation_enabled:
+          type: boolean
+      additionalProperties: false
+  - name: get_song_view_properties
+    description: get song view properties. To get specific properties, set the
+      corresponding property name to true in the properties parameter.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        draw_mode:
+          type: boolean
+          description: "[boolean] whether in draw mode"
+        detail_clip:
+          type: boolean
+          description: "[RawClip] details of currently selected clip"
+        follow_song:
+          type: boolean
+          description: "[boolean] whether following playback position"
+        selected_chain:
+          type: boolean
+          description: "[any] currently selected device chain"
+        selected_scene:
+          type: boolean
+          description: "[RawScene] currently selected scene"
+        selected_track:
+          type: boolean
+          description: "[RawTrack] currently selected track"
+        selected_parameter:
+          type: boolean
+          description: "[RawDeviceParameter] currently selected device parameter"
+        highlighted_clip_slot:
+          type: boolean
+          description: "[RawClipSlot] currently highlighted clip slot"
+      additionalProperties: false
+  - name: set_song_property
+    description: set song basic properties
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        loop:
+          type: boolean
+          description: true = arrangement loop is enabled
+        tempo:
+          type: number
+          description: "[float] the tempo of the song in BPM"
+        is_playing:
+          type: boolean
+          description: true = song is currently playing
+        loop_start:
+          type: number
+          description: "[float] start of the arrangement loop in beats"
+        loop_length:
+          type: number
+          description: "[float] length of the arrangement loop in beats"
+        record_mode:
+          type: number
+          description: "[int] 1 = the Arrangement Record button is on."
+        song_length:
+          type: number
+          description: "[float] the length of the song in beats"
+        swing_amount:
+          type: number
+          description: "[float] The amount of swing applied"
+        exclusive_arm:
+          type: number
+          description: "[int] The exclusive arm state"
+        groove_amount:
+          type: number
+          description: "[float] The amount of groove applied"
+        exclusive_solo:
+          type: number
+          description: "[int] The exclusive solo state"
+        is_counting_in:
+          type: boolean
+          description: "[boolean] true = count-in is active"
+        count_in_duration:
+          type: number
+          description: "[float] The duration of count-in in beats"
+        current_song_time:
+          type: number
+          description: "[float] the current song time in beats"
+        clip_trigger_quantization:
+          enum:
+            - q_8_bars
+            - q_4_bars
+            - q_2_bars
+            - q_bar
+            - q_half
+            - q_half_triplet
+            - q_quarter
+            - q_quarter_triplet
+            - q_eight
+            - q_eight_triplet
+            - q_sixtenth
+            - q_sixtenth_triplet
+            - q_thirtytwoth
+            - q_no_q
+          type: string
+          description: "[enum] The quantization value for clip triggering"
+        midi_recording_quantization:
+          enum:
+            - rec_q_eight
+            - rec_q_eight_eight_triplet
+            - rec_q_eight_triplet
+            - rec_q_no_q
+            - rec_q_quarter
+            - rec_q_sixtenth
+            - rec_q_sixtenth_sixtenth_triplet
+            - rec_q_sixtenth_triplet
+            - rec_q_thirtysecond
+          type: string
+          description: "[enum] The quantization value for MIDI recording"
+        re_enable_automation_enabled:
+          type: number
+          description: "[int] The state of re-enable automation feature"
+      additionalProperties: false
+  - name: set_song_view_property
+    description: set song view properties
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        draw_mode:
+          type: boolean
+          description: "[boolean] whether in draw mode"
+        detail_clip:
+          type: string
+          description: "[string] clip id to select"
+        follow_song:
+          type: boolean
+          description: "[boolean] whether following playback position"
+        selected_scene:
+          type: string
+          description: "[string] scene id to select"
+        selected_track:
+          type: string
+          description: "[string] track id to select"
+        highlighted_clip_slot:
+          type: number
+          description: "[RawClipSlot] currently highlighted clip slot"
+      additionalProperties: false
+  - name: create_track
+    description: create track and return raw track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+      properties:
+        type:
+          enum:
+            - return
+            - audio
+            - midi
+          type: string
+          description: the type of track, "return", "audio", "midi"
+        index:
+          type: number
+          default: 0
+          description: "[int] index of track default 0, range [0, track count]"
+      additionalProperties: false
+  - name: delete_track
+    description: delete track by index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - index
+        - type
+      properties:
+        type:
+          enum:
+            - return
+            - audio
+            - midi
+          type: string
+          description: the type of track, "return", "audio", "midi"
+        index:
+          type: number
+          description: "[int] index of track"
+      additionalProperties: false
+  - name: duplicate_track
+    description: duplicate midi or audio track by index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - index
+      properties:
+        index:
+          type: number
+          description: "[int] index of track"
+      additionalProperties: false
+  - name: record_by_time_range
+    description: >-
+      Opens Ableton's audio record button and starts playback from start_time to
+      end_time. 
+                  Before recording, please:
+                  ENSURE: 
+                  1. Set the recording track to record mode
+                  2. Set the recording track's input routing to Resample or a specific audio track/input routing(get from get_track_available_input_routings tool)
+                  3. After recording, disable the track's record mode
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - start_time
+        - end_time
+      properties:
+        end_time:
+          type: number
+          description: "[int] end time of record"
+        start_time:
+          type: number
+          description: "[float] the time in beats of absolute clip time. such as 4 is 4
+            beats"
+      additionalProperties: false
+  - name: get_track_properties
+    description: get track properties. To get specific properties, set the
+      corresponding property name to true in the properties parameter
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - track_id
+        - properties
+      properties:
+        track_id:
+          type: string
+        properties:
+          type: object
+          properties:
+            arm:
+              type: boolean
+            mute:
+              type: boolean
+            name:
+              type: boolean
+            solo:
+              type: boolean
+            color:
+              type: boolean
+            devices:
+              type: boolean
+            is_frozen:
+              type: boolean
+            fold_state:
+              type: boolean
+            is_grouped:
+              type: boolean
+            is_visible:
+              type: boolean
+            is_foldable:
+              type: boolean
+            can_be_armed:
+              type: boolean
+            implicit_arm:
+              type: boolean
+            mixer_device:
+              type: boolean
+            can_be_frozen:
+              type: boolean
+            has_midi_input:
+              type: boolean
+            muted_via_solo:
+              type: boolean
+            can_show_chains:
+              type: boolean
+            has_audio_input:
+              type: boolean
+            has_midi_output:
+              type: boolean
+            canonical_parent:
+              type: boolean
+            fired_slot_index:
+              type: boolean
+            has_audio_output:
+              type: boolean
+            input_meter_left:
+              type: boolean
+            arrangement_clips:
+              type: boolean
+            input_meter_level:
+              type: boolean
+            input_meter_right:
+              type: boolean
+            is_showing_chains:
+              type: boolean
+            output_meter_left:
+              type: boolean
+            output_meter_level:
+              type: boolean
+            output_meter_right:
+              type: boolean
+            playing_slot_index:
+              type: boolean
+            is_part_of_selection:
+              type: boolean
+            current_input_routing:
+              type: boolean
+            current_output_routing:
+              type: boolean
+            current_monitoring_state:
+              type: boolean
+            current_input_sub_routing:
+              type: boolean
+            current_output_sub_routing:
+              type: boolean
+            available_input_routing_types:
+              type: boolean
+            available_output_routing_types:
+              type: boolean
+            available_input_routing_channels:
+              type: boolean
+            available_output_routing_channels:
+              type: boolean
+          additionalProperties: false
+      additionalProperties: false
+  - name: create_empty_midi_clip
+    description: create empty midi clip on track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - track_id
+        - length
+        - time
+      properties:
+        time:
+          type: number
+          description: "[float] the time in beats of absolute clip time. such as 4 is 4
+            beats"
+        length:
+          type: number
+          description: Length is given in beats and must be a greater value than 0.0.
+        track_id:
+          type: string
+      additionalProperties: false
+  - name: set_tracks_property
+    description: batch set tracks property
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tracks
+      properties:
+        tracks:
+          type: array
+          items:
+            type: object
+            required:
+              - track_id
+              - property
+            properties:
+              property:
+                type: object
+                properties:
+                  arm:
+                    type: boolean
+                    description: true = track is armed for recording. [not in return/master tracks]
+                  mute:
+                    type: boolean
+                  name:
+                    type: string
+                  solo:
+                    type: boolean
+                    description: "solo = true = track is soloed. "
+                  color:
+                    type: number
+                    description: >-
+                      The RGB value of the track's color in 
+                              the form 0x00RRGGBB or (2^16 * red) + (2^8 * green) + blue, where red, 
+                              green and blue are values from 0 (dark) to 255 (light). Example: Red is (2^16 * 255) = 16711680
+                  fold_state:
+                    type: number
+                    description: >-
+                      0 = tracks within the Group Track are visible, 
+                              1 = Group Track is folded and the tracks within the Group Track are hidden[only available if is_foldable = 1
+                  implicit_arm:
+                    type: boolean
+                  mixer_device:
+                    type: object
+                    properties:
+                      volume:
+                        type: number
+                        maximum: 1
+                        minimum: 0
+                        description: >-
+                          [float] the volume of the device, 
+                                  linear range 0.0 to 1.0. 0.0 is approx -69 dB (mute), 1.0 is +6 dB.
+                      panning:
+                        type: number
+                        maximum: 1
+                        minimum: -1
+                        description: "[float] the pan of the device, -1... 1"
+                      panning_mode:
+                        type: number
+                        description: >-
+                          [int] Access to the 
+                                  Track mixer's pan mode: 0 = Stereo, 1 = Split Stereo..
+                      track_activator:
+                        type: number
+                        description: "[int] track activation state, 0 = track disabled, 1 = track
+                          enabled"
+                      left_split_stereo:
+                        type: number
+                        maximum: 1
+                        minimum: 0
+                        description: '[float] the stereo split of the device, -1... 1. Only works when
+                          panning_mode is "Split Stereo"'
+                      right_split_stereo:
+                        type: number
+                        maximum: 1
+                        minimum: 0
+                        description: '[float] the stereo split of the device, -1... 1. Only works when
+                          panning_mode is "Split Stereo"'
+                    additionalProperties: false
+                  fired_slot_index:
+                    type: number
+                  is_showing_chains:
+                    type: number
+                  playing_slot_index:
+                    type: number
+                  current_input_routing:
+                    type: string
+                    description: set the input routing ,such as "Resampling 3-MIDI 4 Audio"
+                  input_routing_channel:
+                    type: number
+                  current_output_routing:
+                    type: string
+                  current_monitoring_state:
+                    type: number
+                  current_input_sub_routing:
+                    type: string
+                  current_output_sub_routing:
+                    type: string
+                additionalProperties: false
+              track_id:
+                type: string
+                description: get track id by get_all_tracks
+            additionalProperties: false
+      additionalProperties: false
+  - name: duplicate_clip_to_track
+    description: duplicate clip to track
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clip_id
+        - track_id
+        - time
+      properties:
+        time:
+          type: number
+        clip_id:
+          type: string
+        track_id:
+          type: string
+      additionalProperties: false
+  - name: delete_device
+    description: delete device by index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - track_id
+        - index
+      properties:
+        index:
+          type: number
+        track_id:
+          type: string
+      additionalProperties: false
+  - name: create_audio_clip
+    description: >-
+      Create audio clip on track.
+              Given an absolute path to a valid audio file in a supported format, 
+              creates an audio clip that references the file at the specified position in the arrangement view.
+              Prints an error if:
+              - The track is not an audio track
+              - The track is frozen
+              - The track is being recorded into
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - track_id
+        - file_path
+        - position
+      properties:
+        position:
+          type: number
+          maximum: 1576800
+          minimum: 0
+          description: position in beats
+        track_id:
+          type: string
+        file_path:
+          type: string
+          description: absolute path to audio file
+      additionalProperties: false
+  - name: init_ableton_js
+    description: >-
+      Initialize ableton-js and copy its MIDI scripts to Ableton Live's MIDI
+      Remote Scripts folder. 
+                  If ableton-js is already installed, it will update the content.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

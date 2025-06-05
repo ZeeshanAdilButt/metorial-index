@@ -1,0 +1,18 @@
+identifier: maywzh/mcp-demo/mcp-demo
+repo:
+  provider: github.com
+  url: https://github.com/maywzh/mcp-demo
+  name: mcp-demo
+  owner: maywzh
+server:
+  subdirectory: /
+  name: MCP Demo Server
+  description: Provide a demonstration server implementing the Model Context
+    Protocol to showcase integration of tools, resources, and prompts with LLMs.
+    Enable developers to explore MCP capabilities through example
+    implementations. Facilitate understanding of MCP interactions and usage in
+    practical scenarios.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

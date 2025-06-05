@@ -1,0 +1,186 @@
+tools:
+  - name: get_account_info
+    description: Get the current account information including balances and status.
+    inputSchema:
+      type: object
+      title: get_account_infoArguments
+      properties: {}
+  - name: get_positions
+    description: Get all current positions in the portfolio.
+    inputSchema:
+      type: object
+      title: get_positionsArguments
+      properties: {}
+  - name: get_stock_quote
+    description: "
+
+      \    Get the latest quote for a stock.
+
+      \   \ 
+
+      \    Args:
+
+      \        symbol: Stock ticker symbol (e.g., AAPL, MSFT)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_stock_quoteArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_stock_bars
+    description: "
+
+      \    Get historical price bars for a stock.
+
+      \   \ 
+
+      \    Args:
+
+      \        symbol: Stock ticker symbol (e.g., AAPL, MSFT)
+
+      \        days: Number of trading days to look back (default: 5)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_stock_barsArguments
+      required:
+        - symbol
+      properties:
+        days:
+          type: integer
+          title: Days
+          default: 5
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_orders
+    description: "
+
+      \    Get orders with the specified status.
+
+      \   \ 
+
+      \    Args:
+
+      \        status: Order status to filter by (open, closed, all)
+
+      \        limit: Maximum number of orders to return (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ordersArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        status:
+          type: string
+          title: Status
+          default: all
+  - name: place_market_order
+    description: "
+
+      \    Place a market order.
+
+      \   \ 
+
+      \    Args:
+
+      \        symbol: Stock ticker symbol (e.g., AAPL, MSFT)
+
+      \        side: Order side (buy or sell)
+
+      \        quantity: Number of shares to buy or sell
+
+      \    "
+    inputSchema:
+      type: object
+      title: place_market_orderArguments
+      required:
+        - symbol
+        - side
+        - quantity
+      properties:
+        side:
+          type: string
+          title: Side
+        symbol:
+          type: string
+          title: Symbol
+        quantity:
+          type: number
+          title: Quantity
+  - name: place_limit_order
+    description: "
+
+      \    Place a limit order.
+
+      \   \ 
+
+      \    Args:
+
+      \        symbol: Stock ticker symbol (e.g., AAPL, MSFT)
+
+      \        side: Order side (buy or sell)
+
+      \        quantity: Number of shares to buy or sell
+
+      \        limit_price: Limit price for the order
+
+      \    "
+    inputSchema:
+      type: object
+      title: place_limit_orderArguments
+      required:
+        - symbol
+        - side
+        - quantity
+        - limit_price
+      properties:
+        side:
+          type: string
+          title: Side
+        symbol:
+          type: string
+          title: Symbol
+        quantity:
+          type: number
+          title: Quantity
+        limit_price:
+          type: number
+          title: Limit Price
+  - name: cancel_all_orders
+    description: Cancel all open orders.
+    inputSchema:
+      type: object
+      title: cancel_all_ordersArguments
+      properties: {}
+  - name: close_all_positions
+    description: "
+
+      \    Close all open positions.
+
+      \   \ 
+
+      \    Args:
+
+      \        cancel_orders: Whether to cancel all open orders before closing
+      positions (default: True)
+
+      \    "
+    inputSchema:
+      type: object
+      title: close_all_positionsArguments
+      properties:
+        cancel_orders:
+          type: boolean
+          title: Cancel Orders
+          default: true

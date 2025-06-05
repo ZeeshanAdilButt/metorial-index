@@ -1,0 +1,83 @@
+tools:
+  - name: convert_temperature
+    description: Convert between Celsius (C) and Fahrenheit (F) temperatures
+    inputSchema:
+      type: object
+      required:
+        - value
+        - from_unit
+        - to_unit
+      properties:
+        value:
+          type: number
+          description: Temperature value to convert
+        to_unit:
+          enum:
+            - C
+            - F
+          type: string
+          description: Target temperature unit (C or F)
+        from_unit:
+          enum:
+            - C
+            - F
+          type: string
+          description: Source temperature unit (C or F)
+  - name: convert_volume
+    description: Convert between volume units (ml, l, cup, tbsp, tsp)
+    inputSchema:
+      type: object
+      required:
+        - value
+        - from_unit
+        - to_unit
+      properties:
+        value:
+          type: number
+          description: Volume value to convert
+        to_unit:
+          enum:
+            - ml
+            - l
+            - cup
+            - tbsp
+            - tsp
+          type: string
+          description: Target volume unit (ml, l, cup, tbsp, tsp)
+        from_unit:
+          enum:
+            - ml
+            - l
+            - cup
+            - tbsp
+            - tsp
+          type: string
+          description: Source volume unit (ml, l, cup, tbsp, tsp)
+  - name: convert_weight
+    description: Convert between weight units (g, kg, oz, lb)
+    inputSchema:
+      type: object
+      required:
+        - value
+        - from_unit
+        - to_unit
+      properties:
+        value:
+          type: number
+          description: Weight value to convert
+        to_unit:
+          enum:
+            - g
+            - kg
+            - oz
+            - lb
+          type: string
+          description: Target weight unit (g, kg, oz, lb)
+        from_unit:
+          enum:
+            - g
+            - kg
+            - oz
+            - lb
+          type: string
+          description: Source weight unit (g, kg, oz, lb)

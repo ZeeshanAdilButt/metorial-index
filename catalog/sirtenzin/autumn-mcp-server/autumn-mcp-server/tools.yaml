@@ -1,0 +1,61 @@
+tools:
+  - name: get_autumn_user
+    description: Get a user by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the customer to fetch
+      additionalProperties: false
+  - name: get_billing_portal
+    description: Get the billing portal for a user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the customer to fetch the billing portal for
+      additionalProperties: false
+  - name: create_customer
+    description: Create a new customer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+          description: The ID of the customer to create
+        name:
+          type: string
+          description: The name of the customer to create
+        email:
+          type: string
+          description: The email of the customer to create
+      additionalProperties: false
+  - name: get_entitlement
+    description: Get a specific entitlement set for a user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - feature_id
+      properties:
+        id:
+          type: string
+          description: The ID of the customer to fetch the entitlements for
+        feature_id:
+          type: string
+          description: The ID of the feature to fetch the entitlements status for
+      additionalProperties: false

@@ -1,0 +1,208 @@
+tools:
+  - name: metacognitiveMonitoring
+    description: >-
+      A detailed tool for systematic self-monitoring of knowledge and reasoning
+      quality.
+
+      This tool helps models track knowledge boundaries, claim certainty, and
+      reasoning biases.
+
+      It provides a framework for metacognitive assessment across various
+      domains and reasoning tasks.
+
+
+      When to use this tool:
+
+      - Uncertain domains requiring calibrated confidence
+
+      - Complex reasoning chains with potential biases
+
+      - Technical domains with clear knowledge boundaries
+
+      - Scenarios requiring distinction between facts, inferences, and
+      speculation
+
+      - Claims requiring clear evidential basis
+
+
+      Key features:
+
+      - Knowledge boundary tracking
+
+      - Claim classification and confidence calibration
+
+      - Reasoning quality monitoring
+
+      - Bias and assumption detection
+
+      - Uncertainty area identification
+    inputSchema:
+      type: object
+      required:
+        - task
+        - stage
+        - overallConfidence
+        - uncertaintyAreas
+        - recommendedApproach
+        - monitoringId
+        - iteration
+        - nextAssessmentNeeded
+      properties:
+        task:
+          type: string
+          description: The task or question being addressed
+        stage:
+          enum:
+            - knowledge-assessment
+            - planning
+            - execution
+            - monitoring
+            - evaluation
+            - reflection
+          type: string
+          description: Current stage of metacognitive monitoring
+        claims:
+          type: array
+          items:
+            type: object
+            required:
+              - claim
+              - status
+              - confidenceScore
+              - evidenceBasis
+            properties:
+              claim:
+                type: string
+                description: The claim being assessed
+              status:
+                enum:
+                  - fact
+                  - inference
+                  - speculation
+                  - uncertain
+                type: string
+                description: Classification of the claim
+              evidenceBasis:
+                type: string
+                description: Evidence supporting the claim
+              confidenceScore:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Confidence in the claim (0.0-1.0)
+              falsifiabilityCriteria:
+                type: string
+                description: Criteria that would prove the claim false
+              alternativeInterpretations:
+                type: array
+                items:
+                  type: string
+                description: Alternative interpretations of the evidence
+          description: Assessments of specific claims
+        iteration:
+          type: number
+          minimum: 0
+          description: Current iteration of the monitoring process
+        monitoringId:
+          type: string
+          description: Unique identifier for this monitoring session
+        reasoningSteps:
+          type: array
+          items:
+            type: object
+            required:
+              - step
+              - potentialBiases
+              - assumptions
+              - logicalValidity
+              - inferenceStrength
+            properties:
+              step:
+                type: string
+                description: The reasoning step being assessed
+              assumptions:
+                type: array
+                items:
+                  type: string
+                description: Assumptions made in this step
+              logicalValidity:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Logical validity score (0.0-1.0)
+              potentialBiases:
+                type: array
+                items:
+                  type: string
+                description: Potential cognitive biases in this step
+              inferenceStrength:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Inference strength score (0.0-1.0)
+          description: Assessments of reasoning steps
+        uncertaintyAreas:
+          type: array
+          items:
+            type: string
+          description: Areas of significant uncertainty
+        overallConfidence:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Overall confidence in conclusions (0.0-1.0)
+        knowledgeAssessment:
+          type: object
+          required:
+            - domain
+            - knowledgeLevel
+            - confidenceScore
+            - supportingEvidence
+            - knownLimitations
+          properties:
+            domain:
+              type: string
+              description: The knowledge domain being assessed
+            knowledgeLevel:
+              enum:
+                - expert
+                - proficient
+                - familiar
+                - basic
+                - minimal
+                - none
+              type: string
+              description: Self-assessed knowledge level
+            confidenceScore:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Confidence in knowledge assessment (0.0-1.0)
+            knownLimitations:
+              type: array
+              items:
+                type: string
+              description: Known limitations of knowledge in this domain
+            supportingEvidence:
+              type: string
+              description: Evidence supporting the knowledge level claim
+            relevantTrainingCutoff:
+              type: string
+              description: Relevant training data cutoff date, if applicable
+          description: Assessment of knowledge in the relevant domain
+        recommendedApproach:
+          type: string
+          description: Recommended approach based on metacognitive assessment
+        nextAssessmentNeeded:
+          type: boolean
+          description: Whether further assessment is needed
+        suggestedAssessments:
+          type: array
+          items:
+            enum:
+              - knowledge
+              - claim
+              - reasoning
+              - overall
+            type: string
+          description: Suggested assessments to perform next

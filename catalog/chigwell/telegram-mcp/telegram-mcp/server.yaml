@@ -1,0 +1,16 @@
+identifier: chigwell/telegram-mcp/telegram-mcp
+repo:
+  provider: github.com
+  url: https://github.com/chigwell/telegram-mcp
+  name: telegram-mcp
+  owner: chigwell
+server:
+  subdirectory: /
+  name: Telegram MCP Server
+  description: Interact with your Telegram chats seamlessly. Retrieve chat lists,
+    fetch messages, and send messages directly through MCP-compatible hosts like
+    Claude for Desktop.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

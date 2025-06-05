@@ -1,0 +1,18 @@
+identifier: newerton/mcp-status-invest/mcp-status-invest
+repo:
+  provider: github.com
+  url: https://github.com/newerton/mcp-status-invest
+  name: mcp-status-invest
+  owner: newerton
+server:
+  subdirectory: /
+  name: Status Invest Stock Market Data Server
+  description: Provide real-time access to stock market data including stock
+    prices, indicators, and payment dates by integrating with the Status Invest
+    API. Enable seamless querying and retrieval of financial information through
+    validated MCP tools. Enhance your applications with up-to-date market
+    insights using this dedicated MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

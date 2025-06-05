@@ -1,0 +1,15 @@
+identifier: dsp/mcp-server-steam/mcp-server-steam
+repo:
+  provider: github.com
+  url: https://github.com/dsp/mcp-server-steam
+  name: mcp-server-steam
+  owner: dsp
+server:
+  subdirectory: /
+  name: Steam Gaming Context Server
+  description: Fetch user gaming information and preferences from Steam. Integrate
+    with AI assistants to enhance gaming interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

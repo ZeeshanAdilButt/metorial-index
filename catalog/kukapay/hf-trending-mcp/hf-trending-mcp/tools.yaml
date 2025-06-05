@@ -1,0 +1,107 @@
+tools:
+  - name: get_trending_models
+    description: "
+
+      \    Get trending models from Hugging Face.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        limit (int): Number of trending models to return (default: 10)
+
+      \        ctx (Context): MCP context providing access to lifespan resources
+      (automatically injected)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_trending_modelsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: get_trending_datasets
+    description: "
+
+      \    Get trending datasets from Hugging Face.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        limit (int): Number of trending datasets to return (default: 10)
+
+      \        ctx (Context): MCP context providing access to lifespan resources
+      (automatically injected)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_trending_datasetsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: get_trending_spaces
+    description: "
+
+      \    Get trending spaces from Hugging Face.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        limit (int): Number of trending spaces to return (default: 10)
+
+      \        ctx (Context): MCP context providing access to lifespan resources
+      (automatically injected)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_trending_spacesArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: search_trending
+    description: "
+
+      \    Search trending items on Hugging Face with a query.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        query (str): Search term to filter trending items
+
+      \        type (str): Type of items to search ('models', 'datasets', or
+      'spaces', default: 'models')
+
+      \        limit (int): Number of results to return (default: 5)
+
+      \        ctx (Context): MCP context providing access to lifespan resources
+      (automatically injected)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_trendingArguments
+      required:
+        - query
+      properties:
+        type:
+          type: string
+          title: Type
+          default: models
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        query:
+          type: string
+          title: Query

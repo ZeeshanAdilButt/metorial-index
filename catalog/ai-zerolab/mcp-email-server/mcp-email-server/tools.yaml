@@ -1,0 +1,168 @@
+tools:
+  - name: list_available_accounts
+    description: ""
+    inputSchema:
+      type: object
+      title: list_available_accountsArguments
+      properties: {}
+  - name: add_email_account
+    description: ""
+    inputSchema:
+      type: object
+      $defs:
+        EmailServer:
+          type: object
+          title: EmailServer
+          required:
+            - user_name
+            - password
+            - host
+            - port
+          properties:
+            host:
+              type: string
+              title: Host
+            port:
+              type: integer
+              title: Port
+            use_ssl:
+              type: boolean
+              title: Use Ssl
+              default: true
+            password:
+              type: string
+              title: Password
+            start_ssl:
+              type: boolean
+              title: Start Ssl
+              default: false
+            user_name:
+              type: string
+              title: User Name
+        EmailSettings:
+          type: object
+          title: EmailSettings
+          required:
+            - account_name
+            - full_name
+            - email_address
+            - incoming
+            - outgoing
+          properties:
+            incoming:
+              $ref: "#/$defs/EmailServer"
+            outgoing:
+              $ref: "#/$defs/EmailServer"
+            full_name:
+              type: string
+              title: Full Name
+            created_at:
+              type: string
+              title: Created At
+              format: date-time
+            updated_at:
+              type: string
+              title: Updated At
+              format: date-time
+            description:
+              type: string
+              title: Description
+              default: ""
+            account_name:
+              type: string
+              title: Account Name
+            email_address:
+              type: string
+              title: Email Address
+      title: add_email_accountArguments
+      required:
+        - email
+      properties:
+        email:
+          $ref: "#/$defs/EmailSettings"
+  - name: page_email
+    description: Paginate emails, page start at 1, before and since as UTC datetime.
+    inputSchema:
+      type: object
+      title: page_emailArguments
+      required:
+        - account_name
+      properties:
+        body:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Body
+          default: null
+        page:
+          type: integer
+          title: Page
+          default: 1
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+        since:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+          title: Since
+          default: null
+        before:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+          title: Before
+          default: null
+        subject:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Subject
+          default: null
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+        to_address:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: To Address
+          default: null
+        account_name:
+          type: string
+          title: Account Name
+        from_address:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: From Address
+          default: null
+  - name: send_email
+    description: ""
+    inputSchema:
+      type: object
+      title: send_emailArguments
+      required:
+        - account_name
+        - recipient
+        - subject
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        subject:
+          type: string
+          title: Subject
+        recipient:
+          type: string
+          title: Recipient
+        account_name:
+          type: string
+          title: Account Name

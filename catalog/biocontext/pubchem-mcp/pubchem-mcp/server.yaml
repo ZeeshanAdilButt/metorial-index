@@ -1,0 +1,18 @@
+identifier: biocontext/pubchem-mcp/pubchem-mcp
+repo:
+  provider: github.com
+  url: https://github.com/BioContext/PubChem-MCP
+  name: PubChem-MCP
+  owner: BioContext
+server:
+  subdirectory: /
+  name: PubChem Data Access Server
+  description: Provide seamless access to PubChem chemical and bioassay data
+    through a standardized MCP interface. Search compounds, retrieve detailed
+    chemical and bioassay information, and query molecular properties to enhance
+    your chemical data workflows. Integrate effortlessly with any MCP client to
+    enrich your applications with comprehensive PubChem data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

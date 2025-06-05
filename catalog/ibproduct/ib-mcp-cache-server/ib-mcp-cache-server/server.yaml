@@ -1,0 +1,18 @@
+identifier: ibproduct/ib-mcp-cache-server/ib-mcp-cache-server
+repo:
+  provider: github.com
+  url: https://github.com/ibproduct/ib-mcp-cache-server
+  name: ib-mcp-cache-server
+  owner: ibproduct
+server:
+  subdirectory: /
+  name: Memory Cache Server
+  description: Reduce token consumption by efficiently caching data between
+    language model interactions. Automatically store and retrieve frequently
+    accessed data to enhance performance without any extra effort from you.
+    Experience faster responses and optimized resource usage with seamless
+    caching integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

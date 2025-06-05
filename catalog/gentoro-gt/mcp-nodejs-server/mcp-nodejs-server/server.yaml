@@ -1,0 +1,16 @@
+identifier: gentoro-gt/mcp-nodejs-server/mcp-nodejs-server
+repo:
+  provider: github.com
+  url: https://github.com/gentoro-GT/mcp-nodejs-server
+  name: mcp-nodejs-server
+  owner: gentoro-GT
+server:
+  subdirectory: /
+  name: Gentoro MCP NodeJS Server
+  description: Integration layer between Model Context Protocol and Gentoro's MCP
+    Server implementation, enabling interaction with Gentoro bridges and
+    capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

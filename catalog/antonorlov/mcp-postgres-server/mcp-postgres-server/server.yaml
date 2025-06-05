@@ -1,0 +1,16 @@
+identifier: antonorlov/mcp-postgres-server/mcp-postgres-server
+repo:
+  provider: github.com
+  url: https://github.com/antonorlov/mcp-postgres-server
+  name: mcp-postgres-server
+  owner: antonorlov
+server:
+  subdirectory: /
+  name: PostgreSQL Database Operations Server
+  description: Interact with PostgreSQL databases seamlessly. Execute queries,
+    manage connections, and retrieve data securely through a standardized
+    interface. Enhance your AI models with powerful database capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,358 @@
+tools:
+  - name: leetcode_daily_challenge
+    description: Retrieves today's LeetCode Daily Challenge problem with complete
+      details, including problem description, constraints, and examples
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: leetcode_problem
+    description: Retrieves comprehensive details about a specific LeetCode problem,
+      including its description, examples, constraints, and related information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - titleSlug
+      properties:
+        titleSlug:
+          type: string
+          description: The URL slug/identifier of the problem (e.g., 'two-sum',
+            'add-two-numbers') as it appears in the LeetCode URL
+      additionalProperties: false
+  - name: leetcode_search_problems
+    description: Searches for LeetCode problems based on multiple filter criteria
+      including categories, tags, difficulty levels, and keywords, with
+      pagination support
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        tags:
+          type: array
+          items:
+            enum:
+              - array
+              - string
+              - hash-table
+              - dynamic-programming
+              - math
+              - sorting
+              - greedy
+              - depth-first-search
+              - binary-search
+              - database
+              - tree
+              - breadth-first-search
+              - matrix
+              - bit-manipulation
+              - two-pointers
+              - binary-tree
+              - heap-priority-queue
+              - prefix-sum
+              - stack
+              - simulation
+              - graph
+              - counting
+              - sliding-window
+              - design
+              - backtracking
+              - enumeration
+              - linked-list
+              - union-find
+              - ordered-set
+              - monotonic-stack
+              - number-theory
+              - trie
+              - segment-tree
+              - recursion
+              - divide-and-conquer
+              - queue
+              - combinatorics
+              - binary-search-tree
+              - bitmask
+              - memoization
+              - geometry
+              - binary-indexed-tree
+              - hash-function
+              - topological-sort
+              - string-matching
+              - shortest-path
+              - rolling-hash
+              - game-theory
+              - data-stream
+              - interactive
+              - monotonic-queue
+              - brainteaser
+              - doubly-linked-list
+              - merge-sort
+              - randomized
+              - quickselect
+              - counting-sort
+              - iterator
+              - probability-and-statistics
+              - concurrency
+              - bucket-sort
+              - suffix-array
+              - line-sweep
+              - minimum-spanning-tree
+              - shell
+              - reservoir-sampling
+              - strongly-connected-component
+              - eulerian-circuit
+              - radix-sort
+              - biconnected-component
+              - rejection-sampling
+            type: string
+          description: List of topic tags to filter problems by (e.g., ['array',
+            'dynamic-programming', 'tree'])
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of problems to return in a single request (for
+            pagination)
+        offset:
+          type: number
+          description: Number of problems to skip (for pagination)
+        category:
+          enum:
+            - all-code-essentials
+            - algorithms
+            - database
+            - pandas
+            - javascript
+            - shell
+            - concurrency
+          type: string
+          default: all-code-essentials
+          description: Problem category filter (e.g., 'algorithms', 'database', 'shell')
+            to narrow down the problem domain
+        difficulty:
+          enum:
+            - EASY
+            - MEDIUM
+            - HARD
+          type: string
+          description: Problem difficulty level filter to show only problems of a specific
+            difficulty
+        searchKeywords:
+          type: string
+          description: Keywords to search in problem titles and descriptions
+      additionalProperties: false
+  - name: leetcode_user_profile
+    description: Retrieves comprehensive profile information about a LeetCode user,
+      including user stats, solved problems, and profile details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: LeetCode username to retrieve profile information for
+      additionalProperties: false
+  - name: leetcode_recent_submissions
+    description: Retrieves a user's recent submissions on LeetCode Global, including
+      both accepted and failed submissions with detailed metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        limit:
+          type: number
+          description: Maximum number of submissions to return (optional, defaults to
+            server-defined limit)
+        username:
+          type: string
+          description: LeetCode username to retrieve recent submissions for
+      additionalProperties: false
+  - name: leetcode_recent_ac_submissions
+    description: Retrieves a user's recent accepted (AC) submissions on LeetCode
+      Global, focusing only on successfully completed problems
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        limit:
+          type: number
+          description: Maximum number of accepted submissions to return (optional,
+            defaults to server-defined limit)
+        username:
+          type: string
+          description: LeetCode username to retrieve recent accepted submissions for
+      additionalProperties: false
+  - name: leetcode_user_status
+    description: Retrieves the current authenticated user's status on LeetCode,
+      including login status, premium membership details, and user information
+      (requires authentication)
+    inputSchema:
+      type: object
+  - name: leetcode_problem_submission_detail
+    description: Retrieves detailed information about a specific LeetCode submission
+      by its ID, including source code, runtime stats, and test results
+      (requires authentication)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The numerical submission ID to retrieve detailed information for
+      additionalProperties: false
+  - name: leetcode_user_progress_questions
+    description: Retrieves the authenticated user's problem-solving status with
+      filtering options, including detailed solution history for attempted or
+      solved questions (requires authentication)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 200
+          description: The maximum number of questions to return in a single request
+        offset:
+          type: number
+          default: 0
+          description: The number of questions to skip for pagination purposes
+        difficulty:
+          type: array
+          items:
+            type: string
+          description: Filter by difficulty levels as an array (e.g., ['EASY', 'MEDIUM',
+            'HARD']); if not provided, questions of all difficulty levels will
+            be returned
+        questionStatus:
+          enum:
+            - ATTEMPTED
+            - SOLVED
+          type: string
+          description: "Filter by question status: 'ATTEMPTED' for questions that have
+            been tried but not necessarily solved, 'SOLVED' for questions that
+            have been successfully completed"
+      additionalProperties: false
+  - name: leetcode_user_all_submissions
+    description: Retrieves a paginated list of the authenticated user's submissions
+      for a specific problem or all problems on LeetCode Global, with detailed
+      submission metadata (requires authentication)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - limit
+        - offset
+      properties:
+        limit:
+          type: number
+          description: Maximum number of submissions to return per page (typically
+            defaults to 20 if not specified)
+        offset:
+          type: number
+          description: Number of submissions to skip for pagination purposes
+        questionSlug:
+          type: string
+          description: Optional problem identifier (slug) to filter submissions for a
+            specific problem (e.g., 'two-sum'); if omitted, returns submissions
+            across all problems
+      additionalProperties: false
+  - name: leetcode_user_contest_ranking
+    description: Retrieves a user's comprehensive contest ranking information on
+      LeetCode, including overall ranking, participation history, and
+      performance metrics across contests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        attended:
+          type: boolean
+          default: true
+          description: Whether to include only the contests the user has participated in
+            (true) or all contests (false); defaults to true
+        username:
+          type: string
+          description: LeetCode username to retrieve contest ranking information for
+      additionalProperties: false
+  - name: leetcode_solution_article_list
+    description: Retrieves a list of community solution articles for a specific
+      LeetCode problem, including only metadata like topicId. To view the full
+      content of a solution article, use the 'leetcode_solution_article' tool
+      with the topicId returned by this tool.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - questionSlug
+      properties:
+        skip:
+          type: number
+          description: Number of solution articles to skip before starting to collect
+            results. Used in conjunction with 'limit' for implementing
+            pagination. Default is 0 if not specified. Must be a non-negative
+            integer.
+        limit:
+          type: number
+          default: 5
+          description: Maximum number of solution articles to return per request. Used for
+            pagination and controlling response size. Default is 20 if not
+            specified. Must be a positive integer.
+        orderBy:
+          enum:
+            - HOT
+            - " MOST_RECENT"
+            - MOST_VOTES
+          type: string
+          default: HOT
+          description: Sorting criteria for the returned solution articles. 'DEFAULT'
+            sorts by LeetCode's default algorithm (typically a combination of
+            recency and popularity), 'MOST_VOTES' sorts by the number of upvotes
+            (highest first), and 'MOST_RECENT' sorts by publication date (newest
+            first).
+        tagSlugs:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Array of tag identifiers to filter solution articles by programming
+            languages (e.g., 'python', 'java') or problem
+            algorithm/data-structure tags (e.g., 'dynamic-programming',
+            'recursion'). Only articles tagged with at least one of the
+            specified tags will be returned.
+        userInput:
+          type: string
+          description: Search term to filter solution articles by title, content, or
+            author name. Case insensitive. Useful for finding specific
+            approaches or algorithms mentioned in solutions.
+        questionSlug:
+          type: string
+          description: The URL slug/identifier of the problem to retrieve solution
+            articles for (e.g., 'two-sum', 'add-two-numbers'). This is the same
+            string that appears in the LeetCode problem URL after '/problems/'
+      additionalProperties: false
+  - name: leetcode_solution_article
+    description: Retrieves the complete content and metadata of a specific solution
+      article, including the full article text, author information, and related
+      navigation links
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - topicId
+      properties:
+        topicId:
+          type: string
+          description: The unique topic ID of the solution article to retrieve. This ID
+            can be obtained from the 'topicId' field in the response of the
+            'leetcode_solution_article_list' tool. Format is typically a string
+            of numbers and letters that uniquely identifies the solution article
+            in LeetCode's database.
+      additionalProperties: false

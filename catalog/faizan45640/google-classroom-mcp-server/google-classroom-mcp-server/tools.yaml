@@ -1,0 +1,42 @@
+tools:
+  - name: add
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: number
+        b:
+          type: number
+      additionalProperties: false
+  - name: courses
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: course-details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - courseId
+      properties:
+        courseId:
+          type: string
+          description: The ID of the course to get details for
+      additionalProperties: false
+  - name: assignments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - courseId
+      properties:
+        courseId:
+          type: string
+          description: The ID of the course to get assignments for
+      additionalProperties: false

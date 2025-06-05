@@ -1,0 +1,227 @@
+tools:
+  - name: get_address
+    description: Get the address of the wallet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_chain
+    description: Get the chain of the wallet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_balance
+    description: Get the balance of the wallet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+      additionalProperties: false
+  - name: sign_message
+    description: Sign a message with the wallet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: false
+  - name: send_ETH
+    description: Send ETH to an address.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - amount
+      properties:
+        to:
+          type: string
+          description: The address to send ETH to
+        amount:
+          type: string
+          description: The amount of ETH to send
+      additionalProperties: false
+  - name: get_token_info_by_symbol
+    description: Get the ERC20 token info by its symbol, including the contract
+      address, decimals, and name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: The symbol of the token to get the info of
+      additionalProperties: false
+  - name: get_token_balance
+    description: Get the balance of an ERC20 token in base units. Convert to decimal
+      units before returning.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - wallet
+        - tokenAddress
+      properties:
+        wallet:
+          type: string
+          description: The address to get the balance of
+        tokenAddress:
+          type: string
+          description: The address of the token to get the balance of
+      additionalProperties: false
+  - name: transfer
+    description: Transfer an amount of an ERC20 token to an address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - to
+        - amount
+      properties:
+        to:
+          type: string
+          description: The address to transfer the token to
+        amount:
+          type: string
+          description: The amount of tokens to transfer in base units
+        tokenAddress:
+          type: string
+          description: The address of the token to transfer
+      additionalProperties: false
+  - name: get_token_total_supply
+    description: Get the total supply of an ERC20 token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+      properties:
+        tokenAddress:
+          type: string
+          description: The address of the token to get the total supply of
+      additionalProperties: false
+  - name: get_token_allowance
+    description: Get the allowance of an ERC20 token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - owner
+        - spender
+      properties:
+        owner:
+          type: string
+          description: The address to check the allowance of
+        spender:
+          type: string
+          description: The address to check the allowance for
+        tokenAddress:
+          type: string
+          description: The address of the token to check the allowance of
+      additionalProperties: false
+  - name: approve
+    description: Approve an amount of an ERC20 token to an address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - spender
+        - amount
+      properties:
+        amount:
+          type: string
+          description: The amount of tokens to approve in base units
+        spender:
+          type: string
+          description: The address to approve the allowance to
+        tokenAddress:
+          type: string
+          description: The address of the token to approve
+      additionalProperties: false
+  - name: revoke_approval
+    description: Revoke approval for an ERC20 token to an address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - spender
+      properties:
+        spender:
+          type: string
+          description: The address to revoke the allowance to
+        tokenAddress:
+          type: string
+          description: The address of the token to revoke
+      additionalProperties: false
+  - name: transfer_from
+    description: Transfer an amount of an ERC20 token from an address to another address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - from
+        - to
+        - amount
+      properties:
+        to:
+          type: string
+          description: The address to transfer the token to
+        from:
+          type: string
+          description: The address to transfer the token from
+        amount:
+          type: string
+          description: The amount of tokens to transfer in base units
+        tokenAddress:
+          type: string
+          description: The address of the token to transfer
+      additionalProperties: false
+  - name: convert_to_base_unit
+    description: Convert an amount of an ERC20 token to its base unit
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - amount
+        - decimals
+      properties:
+        amount:
+          type: number
+          description: The amount of tokens to convert from decimal units to base units
+        decimals:
+          type: number
+          description: The number of decimals of the token
+      additionalProperties: false
+  - name: convert_from_base_unit
+    description: Convert an amount of an ERC20 token from its base unit to its decimal unit
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - amount
+        - decimals
+      properties:
+        amount:
+          type: number
+          description: The amount of tokens to convert from base units to decimal units
+        decimals:
+          type: number
+          description: The number of decimals of the token
+      additionalProperties: false

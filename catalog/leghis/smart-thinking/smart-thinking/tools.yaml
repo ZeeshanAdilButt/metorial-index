@@ -1,0 +1,303 @@
+tools:
+  - name: smartthinking
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - thought
+      properties:
+        help:
+          type: boolean
+          default: true
+          description: Afficher le guide d'utilisation complet
+        userId:
+          type: string
+          description: Identifiant de l'utilisateur pour la personnalisation
+        thought:
+          type: string
+          description: Le contenu de la pensée à analyser - PARAMÈTRE OBLIGATOIRE - Cette
+            pensée sera ajoutée au graphe de raisonnement
+        sessionId:
+          type: string
+          description: Identifiant de session pour maintenir l'état entre les appels
+        connections:
+          type: array
+          items:
+            type: object
+            required:
+              - targetId
+              - type
+              - strength
+            properties:
+              type:
+                enum:
+                  - supports
+                  - contradicts
+                  - refines
+                  - branches
+                  - derives
+                  - associates
+                  - exemplifies
+                  - generalizes
+                  - compares
+                  - contrasts
+                  - questions
+                  - extends
+                  - analyzes
+                  - synthesizes
+                  - applies
+                  - evaluates
+                  - cites
+                  - extended-by
+                  - analyzed-by
+                  - component-of
+                  - applied-by
+                  - evaluated-by
+                  - cited-by
+                type: string
+                description: Type de connexion
+              inferred:
+                type: boolean
+                description: Si la connexion a été inférée automatiquement
+              strength:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Force de la connexion (0 à 1)
+              targetId:
+                type: string
+                description: ID de la pensée cible
+              attributes:
+                type: object
+                properties:
+                  scope:
+                    enum:
+                      - broad
+                      - specific
+                      - partial
+                      - complete
+                    type: string
+                  nature:
+                    enum:
+                      - causal
+                      - correlational
+                      - sequential
+                      - hierarchical
+                      - associative
+                    type: string
+                  certainty:
+                    enum:
+                      - definite
+                      - high
+                      - moderate
+                      - low
+                      - speculative
+                    type: string
+                  temporality:
+                    enum:
+                      - before
+                      - after
+                      - during
+                      - concurrent
+                    type: string
+                  directionality:
+                    enum:
+                      - unidirectional
+                      - bidirectional
+                      - multidirectional
+                    type: string
+                  customAttributes:
+                    type: object
+                    additionalProperties:
+                      type: string
+                additionalProperties: false
+              description:
+                type: string
+                description: Description optionnelle de la connexion
+              bidirectional:
+                type: boolean
+                description: Si la relation est intrinsèquement bidirectionnelle
+              inferenceConfidence:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Confiance dans l'inférence (0 à 1)
+            additionalProperties: false
+          default: []
+          description: Connexions à d'autres pensées - Permet de lier cette pensée à
+            d'autres pensées du graphe
+        thoughtType:
+          enum:
+            - regular
+            - revision
+            - meta
+            - hypothesis
+            - conclusion
+          type: string
+          default: regular
+          description: Type de pensée dans le graphe de raisonnement - Détermine la
+            fonction de cette pensée
+        suggestTools:
+          type: boolean
+          default: true
+          description: Suggérer des outils MCP pertinents pour cette étape du raisonnement
+        visualizationType:
+          enum:
+            - graph
+            - chronological
+            - thematic
+            - hierarchical
+            - force
+            - radial
+          type: string
+          default: graph
+          description: Type de visualisation à générer
+        requestSuggestions:
+          type: boolean
+          default: false
+          description: Demander des suggestions d'amélioration du raisonnement
+        requestVerification:
+          type: boolean
+          default: false
+          description: Demander explicitement une vérification des informations
+        containsCalculations:
+          type: boolean
+          default: false
+          description: Indique si la pensée contient des calculs à vérifier
+        visualizationOptions:
+          type: object
+          properties:
+            filters:
+              type: object
+              properties:
+                dateRange:
+                  type: array
+                  items:
+                    - type: string
+                      format: date-time
+                    - type: string
+                      format: date-time
+                  maxItems: 2
+                  minItems: 2
+                nodeTypes:
+                  type: array
+                  items:
+                    $ref: "#/properties/thoughtType"
+                textSearch:
+                  type: string
+                customFilters:
+                  type: object
+                  additionalProperties: {}
+                connectionTypes:
+                  type: array
+                  items:
+                    enum:
+                      - supports
+                      - contradicts
+                      - refines
+                      - branches
+                      - derives
+                      - associates
+                      - exemplifies
+                      - generalizes
+                      - compares
+                      - contrasts
+                      - questions
+                      - extends
+                      - analyzes
+                      - synthesizes
+                      - applies
+                      - evaluates
+                      - cites
+                      - extended-by
+                      - analyzed-by
+                      - component-of
+                      - applied-by
+                      - evaluated-by
+                      - cited-by
+                    type: string
+                metricThresholds:
+                  type: object
+                  properties:
+                    quality:
+                      type: array
+                      items:
+                        - type: number
+                        - type: number
+                      maxItems: 2
+                      minItems: 2
+                    relevance:
+                      type: array
+                      items:
+                        - type: number
+                        - type: number
+                      maxItems: 2
+                      minItems: 2
+                    confidence:
+                      type: array
+                      items:
+                        - type: number
+                        - type: number
+                      maxItems: 2
+                      minItems: 2
+                  additionalProperties: false
+              description: Options de filtrage des nœuds et des liens
+              additionalProperties: false
+            maxDepth:
+              type: number
+              description: Profondeur maximale pour les visualisations hiérarchiques ou
+                radiales
+            clusterBy:
+              enum:
+                - type
+                - theme
+                - metric
+                - connectivity
+              type: string
+              description: Critère de regroupement des nœuds en clusters
+            direction:
+              enum:
+                - LR
+                - RL
+                - TB
+                - BT
+              type: string
+              default: TB
+              description: Direction de la disposition hiérarchique
+            centerNode:
+              type: string
+              description: ID du nœud central pour les visualisations radiales ou
+                hiérarchiques
+            interactivity:
+              type: object
+              properties:
+                tooltips:
+                  type: boolean
+                zoomable:
+                  type: boolean
+                draggable:
+                  type: boolean
+                zoomRange:
+                  type: array
+                  items:
+                    - type: number
+                    - type: number
+                  maxItems: 2
+                  minItems: 2
+                selectable:
+                  type: boolean
+                initialZoom:
+                  type: number
+                expandableNodes:
+                  type: boolean
+                highlightOnHover:
+                  type: boolean
+              description: Options d'interactivité pour la visualisation
+              additionalProperties: false
+          description: Options avancées pour la visualisation
+          additionalProperties: false
+        generateVisualization:
+          type: boolean
+          default: false
+          description: Générer une visualisation du graphe de pensée
+      additionalProperties: false

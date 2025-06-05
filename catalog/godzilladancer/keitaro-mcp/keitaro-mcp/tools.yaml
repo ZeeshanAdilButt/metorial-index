@@ -1,0 +1,290 @@
+tools:
+  - name: list_campaigns
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of campaigns to return
+        search:
+          type: string
+          description: Search term to filter campaigns
+      additionalProperties: false
+  - name: get_campaign
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Campaign ID
+      additionalProperties: false
+  - name: create_campaign
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Campaign name
+        type:
+          type: string
+          description: Campaign type
+        state:
+          type: string
+          description: Campaign state
+        group_id:
+          type: number
+          description: Group ID
+        cost_type:
+          type: string
+          description: Cost type
+        cost_value:
+          type: number
+          description: Cost value
+        traffic_source_id:
+          type: number
+          description: Traffic source ID
+      additionalProperties: false
+  - name: update_campaign
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Campaign ID
+        name:
+          type: string
+          description: Campaign name
+        type:
+          type: string
+          description: Campaign type
+        state:
+          type: string
+          description: Campaign state
+        group_id:
+          type: number
+          description: Group ID
+        cost_type:
+          type: string
+          description: Cost type
+        cost_value:
+          type: number
+          description: Cost value
+        traffic_source_id:
+          type: number
+          description: Traffic source ID
+      additionalProperties: false
+  - name: delete_campaign
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Campaign ID
+      additionalProperties: false
+  - name: list_traffic_sources
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of traffic sources to return
+      additionalProperties: false
+  - name: get_traffic_source
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Traffic source ID
+      additionalProperties: false
+  - name: list_offers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of offers to return
+        search:
+          type: string
+          description: Search term to filter offers
+      additionalProperties: false
+  - name: get_offer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Offer ID
+      additionalProperties: false
+  - name: list_streams
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - campaign_id
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of streams to return
+        campaign_id:
+          type: number
+          description: Campaign ID
+      additionalProperties: false
+  - name: get_stream
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - campaign_id
+        - stream_id
+      properties:
+        stream_id:
+          type: number
+          description: Stream ID
+        campaign_id:
+          type: number
+          description: Campaign ID
+      additionalProperties: false
+  - name: get_report
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - from
+        - to
+      properties:
+        to:
+          type: string
+          description: End date (YYYY-MM-DD)
+        from:
+          type: string
+          description: Start date (YYYY-MM-DD)
+        group:
+          type: string
+          description: Grouping parameter (e.g., 'campaign', 'offer', 'day')
+        filters:
+          type: object
+          description: Filters as key-value pairs
+          additionalProperties: {}
+      additionalProperties: false
+  - name: list_clicks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        to:
+          type: string
+          description: End date (YYYY-MM-DD)
+        from:
+          type: string
+          description: Start date (YYYY-MM-DD)
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of clicks to return
+        campaign_id:
+          type: number
+          description: Filter by campaign ID
+      additionalProperties: false
+  - name: get_click
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Click ID
+      additionalProperties: false
+  - name: list_conversions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        to:
+          type: string
+          description: End date (YYYY-MM-DD)
+        from:
+          type: string
+          description: Start date (YYYY-MM-DD)
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of conversions to return
+        campaign_id:
+          type: number
+          description: Filter by campaign ID
+      additionalProperties: false
+  - name: get_conversion
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Conversion ID
+      additionalProperties: false
+  - name: list_domains
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        limit:
+          type: number
+          description: Maximum number of domains to return
+      additionalProperties: false
+  - name: get_domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Domain ID
+      additionalProperties: false

@@ -1,0 +1,26 @@
+tools:
+  - name: obsidian_notes_search
+    description: >-
+      Search Obsidian(옵시디언) notes and return absolute paths to the matching
+      notes.
+              The returned paths can be used with the read_note tool to view the note contents.
+    inputSchema:
+      type: object
+      title: obsidian_notes_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: read_note
+    description: Read and return the contents of an Obsidian note file.
+    inputSchema:
+      type: object
+      title: read_noteArguments
+      required:
+        - filepath
+      properties:
+        filepath:
+          type: string
+          title: Filepath

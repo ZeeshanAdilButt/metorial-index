@@ -1,0 +1,17 @@
+identifier: vaebe/mcp/github-search
+repo:
+  provider: github.com
+  url: https://github.com/vaebe/mcp
+  name: mcp
+  owner: vaebe
+server:
+  subdirectory: /packages/github-search
+  name: GitHub Search API Server
+  description: Leverage the GitHub search API to enhance your applications with
+    powerful search capabilities. Integrate seamlessly and retrieve relevant
+    data from GitHub repositories efficiently. Start building smarter
+    applications with enhanced search functionalities today.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

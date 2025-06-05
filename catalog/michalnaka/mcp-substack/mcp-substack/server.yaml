@@ -1,0 +1,17 @@
+identifier: michalnaka/mcp-substack/mcp-substack
+repo:
+  provider: github.com
+  url: https://github.com/michalnaka/mcp-substack
+  name: mcp-substack
+  owner: michalnaka
+server:
+  subdirectory: /
+  name: Substack Server
+  description: Download and summarize Substack posts effortlessly. Extract titles,
+    authors, subtitles, and content from public Substack articles directly
+    within your workflow. Enhance your reading experience with seamless
+    integration into the Claude desktop app.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

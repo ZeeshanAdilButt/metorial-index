@@ -1,0 +1,12 @@
+tools:
+  - name: query-docs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          description: The question to answer using the documentation
+      additionalProperties: false

@@ -1,0 +1,89 @@
+tools:
+  - name: track_file_versions
+    description: Track complete version history of a specific file, including
+      renames and moves
+    inputSchema:
+      type: object
+      required:
+        - repoPath
+        - file
+        - outputPath
+      properties:
+        file:
+          type: string
+          description: File to analyze
+        repoPath:
+          type: string
+          description: Path to git repository
+        outputPath:
+          type: string
+          description: Path to write analysis output
+  - name: analyze_file_diff
+    description: Analyze specific changes between any two versions of a file
+    inputSchema:
+      type: object
+      required:
+        - repoPath
+        - file
+        - versions
+        - outputPath
+      properties:
+        file:
+          type: string
+          description: File to analyze
+        repoPath:
+          type: string
+          description: Path to git repository
+        versions:
+          type: object
+          required:
+            - from
+            - to
+          properties:
+            to:
+              type: string
+            from:
+              type: string
+        outputPath:
+          type: string
+          description: Path to write analysis output
+  - name: analyze_file_context
+    description: Analyze broader context of file changes in a specific commit
+    inputSchema:
+      type: object
+      required:
+        - repoPath
+        - file
+        - commit
+        - outputPath
+      properties:
+        file:
+          type: string
+          description: File to analyze
+        commit:
+          type: string
+          description: Commit hash to analyze
+        repoPath:
+          type: string
+          description: Path to git repository
+        outputPath:
+          type: string
+          description: Path to write analysis output
+  - name: analyze_file_semantics
+    description: Analyze semantic changes and patterns in file history
+    inputSchema:
+      type: object
+      required:
+        - repoPath
+        - file
+        - outputPath
+      properties:
+        file:
+          type: string
+          description: File to analyze
+        repoPath:
+          type: string
+          description: Path to git repository
+        outputPath:
+          type: string
+          description: Path to write analysis output

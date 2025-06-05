@@ -1,0 +1,17 @@
+identifier: atlanhq/agent-toolkit/agent-toolkit
+repo:
+  provider: github.com
+  url: https://github.com/atlanhq/agent-toolkit
+  name: agent-toolkit
+  owner: atlanhq
+server:
+  subdirectory: /modelcontextprotocol
+  name: Atlan Model Context Protocol Server
+  description: Enable seamless interaction with Atlan services through a
+    standardized protocol. Use powerful tools to search assets, retrieve assets
+    via DSL queries, and explore asset lineage efficiently. Integrate easily
+    with Claude Desktop for enhanced data management workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

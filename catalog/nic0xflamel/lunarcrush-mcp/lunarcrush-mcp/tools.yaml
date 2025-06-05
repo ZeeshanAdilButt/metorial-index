@@ -1,0 +1,126 @@
+tools:
+  - name: API-get_public_coins_coin_time-series_v2
+    description: Get market time series data on a coin or token. Specify the coin to
+      be queried by providing the numeric ID or the symbol of the coin in the
+      input parameter, which can be found by calling the /coins/list endpoint.
+    inputSchema:
+      type: object
+      $defs: {}
+      required:
+        - coin
+      properties:
+        end:
+          type: integer
+          description: ""
+        coin:
+          type: string
+          description: The coin symbol or ID (e.g., 'BTC', 'ETH', or numeric ID from coins
+            list).
+        start:
+          type: integer
+          description: ""
+        bucket:
+          type: string
+          description: ""
+        interval:
+          type: string
+          description: ""
+  - name: API-get_public_coins_coin_v1
+    description: Get market data on a coin or token. Specify the coin to be queried
+      by providing the numeric ID or the symbol of the coin in the input
+      parameter, which can be found by calling the /coins/list endpoint.
+    inputSchema:
+      type: object
+      $defs: {}
+      required:
+        - coin
+      properties:
+        coin:
+          type: string
+          description: The coin symbol or ID (e.g., 'BTC', 'ETH', or numeric ID from coins
+            list).
+  - name: API-get_public_coins_list_v2
+    description: Get a general snapshot of LunarCrush metrics on the entire list of
+      tracked coins. It is designed as a lightweight mechanism for monitoring
+      the universe of available assets, either in aggregate or relative to each
+      other. Metrics include Galaxy Score™, AltRank™, price, volatility, 24h
+      percent change, market cap, social mentions, social interactions, social
+      contributors, social dominance, and categories.
+    inputSchema:
+      type: object
+      $defs: {}
+      required: []
+      properties:
+        desc:
+          type: boolean
+          description: ""
+        page:
+          description: ""
+        sort:
+          type: string
+          description: ""
+        limit:
+          type: number
+          description: ""
+        filter:
+          type: string
+          description: ""
+  - name: API-get_public_topic_topic_news_v1
+    description: Get the top news posts for a social topic. Top news is determined
+      by the metrics related to the social posts that mention the news posts.
+    inputSchema:
+      type: object
+      $defs: {}
+      required:
+        - topic
+      properties:
+        topic:
+          type: string
+          description: The specific social topic to query (e.g., 'bitcoin', 'ethereum').
+  - name: API-get_public_topic_topic_posts_v1
+    description: Get the top posts for a social topic. If start time is provided the
+      result will be the top posts by interactions for the time range. If start
+      is not provided it will be the most recent top posts by interactions from
+      the last 24 hours.
+    inputSchema:
+      type: object
+      $defs: {}
+      required:
+        - topic
+      properties:
+        end:
+          type: integer
+          description: ""
+        start:
+          type: integer
+          description: ""
+        topic:
+          type: string
+          description: The specific social topic to query (e.g., 'bitcoin', 'ethereum').
+  - name: API-get_public_topic_topic_time-series_v2
+    description: Get historical time series data for a social topic
+    inputSchema:
+      type: object
+      $defs: {}
+      required:
+        - topic
+      properties:
+        topic:
+          type: string
+          description: The specific social topic to query (e.g., 'bitcoin', 'ethereum').
+        bucket:
+          type: string
+          description: ""
+  - name: API-get_public_topic_topic_v1
+    description: Get summary information for a social topic. The output is a 24 hour
+      aggregation social activity with metrics comparing the latest 24 hours to
+      the previous 24 hours.
+    inputSchema:
+      type: object
+      $defs: {}
+      required:
+        - topic
+      properties:
+        topic:
+          type: string
+          description: The specific social topic to query (e.g., 'bitcoin', 'ethereum').

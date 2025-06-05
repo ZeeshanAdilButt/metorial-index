@@ -1,0 +1,53 @@
+tools:
+  - name: nano_send
+    description: Send a specified amount of Nano currency from a predefined account
+      to a destination Nano address.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - destination_address
+        - amount
+      properties:
+        amount:
+          type: string
+          description: Amount of Nano to send (max 0 by default)
+        destination_address:
+          type: string
+          description: Nano address to send the nano to
+      additionalProperties: false
+  - name: nano_account_info
+    description: Retrieve detailed information about a specific Nano
+      account/address, including balance (in Nano and raw units),
+      representative, and frontier block.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: Nano address/account to get information about
+      additionalProperties: false
+  - name: nano_my_account_info
+    description: Retrieve detailed information about my Nano account/address,
+      including balance (in Nano and raw units), representative, and frontier
+      block. This is the account that is used to send Nano from.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: block_info
+    description: Retrieve detailed information about a specific Nano block.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          description: Hash for the Nano block to get information about
+      additionalProperties: false

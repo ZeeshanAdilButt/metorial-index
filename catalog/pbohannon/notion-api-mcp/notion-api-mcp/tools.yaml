@@ -1,0 +1,312 @@
+tools:
+  - name: create_page
+    description: Create a new page in Notion
+    inputSchema:
+      type: object
+      title: handle_create_pageArguments
+      required:
+        - parent_id
+        - properties
+      properties:
+        children:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Children
+          default: null
+        parent_id:
+          type: string
+          title: Parent Id
+        properties:
+          type: object
+          title: Properties
+          additionalProperties: true
+        is_database:
+          type: boolean
+          title: Is Database
+          default: true
+  - name: get_page
+    description: Retrieve a Notion page by its ID
+    inputSchema:
+      type: object
+      title: handle_get_pageArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+  - name: update_page
+    description: Update a Notion page
+    inputSchema:
+      type: object
+      title: handle_update_pageArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+        archived:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Archived
+          default: null
+        properties:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Properties
+          default: null
+  - name: archive_page
+    description: Archive a Notion page
+    inputSchema:
+      type: object
+      title: handle_archive_pageArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+  - name: restore_page
+    description: Restore an archived Notion page
+    inputSchema:
+      type: object
+      title: handle_restore_pageArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+  - name: get_page_property
+    description: Get a page property item
+    inputSchema:
+      type: object
+      title: handle_get_property_itemArguments
+      required:
+        - page_id
+        - property_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+        page_size:
+          type: integer
+          title: Page Size
+          default: 100
+        property_id:
+          type: string
+          title: Property Id
+  - name: add_todo
+    description: Add a new todo with rich features
+    inputSchema:
+      type: object
+      title: handle_add_todoArguments
+      required:
+        - task
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        task:
+          type: string
+          title: Task
+        due_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Due Date
+          default: null
+        priority:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Priority
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: search_todos
+    description: Search todos with advanced filtering
+    inputSchema:
+      type: object
+      title: handle_search_todosArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        sort_by:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort By
+          default: null
+        property_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Property Name
+          default: null
+        sort_direction:
+          type: string
+          title: Sort Direction
+          default: ascending
+  - name: create_database
+    description: Create a new database with custom schema in a parent page
+    inputSchema:
+      type: object
+      title: handle_create_databaseArguments
+      required:
+        - parent_page_id
+        - title
+        - properties
+      properties:
+        title:
+          type: string
+          title: Title
+        properties:
+          type: object
+          title: Properties
+          additionalProperties: true
+        parent_page_id:
+          type: string
+          title: Parent Page Id
+  - name: query_database
+    description: Query database with filters and sorting
+    inputSchema:
+      type: object
+      title: handle_query_databaseArguments
+      required:
+        - database_id
+      properties:
+        sorts:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Sorts
+          default: null
+        database_id:
+          type: string
+          title: Database Id
+        filter_conditions:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Filter Conditions
+          default: null
+  - name: verify_connection
+    description: Verify authentication with Notion API
+    inputSchema:
+      type: object
+      title: handle_verify_connectionArguments
+      properties: {}
+  - name: get_database_info
+    description: Get information about the configured database
+    inputSchema:
+      type: object
+      title: handle_get_database_infoArguments
+      properties: {}
+  - name: add_content_blocks
+    description: Add content blocks with positioning support
+    inputSchema:
+      type: object
+      title: handle_add_blocksArguments
+      required:
+        - page_id
+        - blocks
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Blocks
+        page_id:
+          type: string
+          title: Page Id
+        batch_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Batch Size
+          default: null
+  - name: get_block_content
+    description: Get content of a specific block by its ID
+    inputSchema:
+      type: object
+      title: handle_get_blockArguments
+      required:
+        - block_id
+      properties:
+        block_id:
+          type: string
+          title: Block Id
+  - name: list_block_children
+    description: List all children of a block
+    inputSchema:
+      type: object
+      title: handle_list_block_childrenArguments
+      required:
+        - block_id
+      properties:
+        block_id:
+          type: string
+          title: Block Id
+        page_size:
+          type: integer
+          title: Page Size
+          default: 100
+  - name: update_block_content
+    description: Update a block's content by its ID
+    inputSchema:
+      type: object
+      title: handle_update_blockArguments
+      required:
+        - block_id
+        - content
+      properties:
+        content:
+          type: object
+          title: Content
+          additionalProperties: true
+        block_id:
+          type: string
+          title: Block Id
+  - name: delete_block
+    description: Delete blocks
+    inputSchema:
+      type: object
+      title: handle_delete_blockArguments
+      required:
+        - block_id
+      properties:
+        block_id:
+          type: string
+          title: Block Id

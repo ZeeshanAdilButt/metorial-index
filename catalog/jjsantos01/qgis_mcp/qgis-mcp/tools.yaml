@@ -1,0 +1,179 @@
+tools:
+  - name: ping
+    description: Simple ping command to check server connectivity
+    inputSchema:
+      type: object
+      title: pingArguments
+      properties: {}
+  - name: get_qgis_info
+    description: Get QGIS information
+    inputSchema:
+      type: object
+      title: get_qgis_infoArguments
+      properties: {}
+  - name: load_project
+    description: Load a QGIS project from the specified path.
+    inputSchema:
+      type: object
+      title: load_projectArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: create_new_project
+    description: Create a new project a save it
+    inputSchema:
+      type: object
+      title: create_new_projectArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: get_project_info
+    description: Get current project information
+    inputSchema:
+      type: object
+      title: get_project_infoArguments
+      properties: {}
+  - name: add_vector_layer
+    description: Add a vector layer to the project.
+    inputSchema:
+      type: object
+      title: add_vector_layerArguments
+      required:
+        - path
+      properties:
+        name:
+          type: string
+          title: Name
+          default: null
+        path:
+          type: string
+          title: Path
+        provider:
+          type: string
+          title: Provider
+          default: ogr
+  - name: add_raster_layer
+    description: Add a raster layer to the project.
+    inputSchema:
+      type: object
+      title: add_raster_layerArguments
+      required:
+        - path
+      properties:
+        name:
+          type: string
+          title: Name
+          default: null
+        path:
+          type: string
+          title: Path
+        provider:
+          type: string
+          title: Provider
+          default: gdal
+  - name: get_layers
+    description: Retrieve all layers in the current project.
+    inputSchema:
+      type: object
+      title: get_layersArguments
+      properties: {}
+  - name: remove_layer
+    description: Remove a layer from the project by its ID.
+    inputSchema:
+      type: object
+      title: remove_layerArguments
+      required:
+        - layer_id
+      properties:
+        layer_id:
+          type: string
+          title: Layer Id
+  - name: zoom_to_layer
+    description: Zoom to the extent of a specified layer.
+    inputSchema:
+      type: object
+      title: zoom_to_layerArguments
+      required:
+        - layer_id
+      properties:
+        layer_id:
+          type: string
+          title: Layer Id
+  - name: get_layer_features
+    description: Retrieve features from a vector layer with an optional limit.
+    inputSchema:
+      type: object
+      title: get_layer_featuresArguments
+      required:
+        - layer_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        layer_id:
+          type: string
+          title: Layer Id
+  - name: execute_processing
+    description: Execute a processing algorithm with the given parameters.
+    inputSchema:
+      type: object
+      title: execute_processingArguments
+      required:
+        - algorithm
+        - parameters
+      properties:
+        algorithm:
+          type: string
+          title: Algorithm
+        parameters:
+          type: object
+          title: Parameters
+          additionalProperties: true
+  - name: save_project
+    description: Save the current project to the given path, or to the current
+      project path if not specified.
+    inputSchema:
+      type: object
+      title: save_projectArguments
+      properties:
+        path:
+          type: string
+          title: Path
+          default: null
+  - name: render_map
+    description: Render the current map view to an image file with the specified dimensions.
+    inputSchema:
+      type: object
+      title: render_mapArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+        width:
+          type: integer
+          title: Width
+          default: 800
+        height:
+          type: integer
+          title: Height
+          default: 600
+  - name: execute_code
+    description: Execute arbitrary PyQGIS code provided as a string.
+    inputSchema:
+      type: object
+      title: execute_codeArguments
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          title: Code

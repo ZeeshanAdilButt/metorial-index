@@ -1,0 +1,13 @@
+tools:
+  - name: query_weather
+    description: 根据城市、地区、区县名称查询当地实时天气预报情况
+    inputSchema:
+      type: object
+      title: query_weatherArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City
+          description: 查询的城市名称，如北京、上海、广州、深圳、泰顺等；城市或区县或地区名使用简写，严格按照规范填写，否则会导致查询失败

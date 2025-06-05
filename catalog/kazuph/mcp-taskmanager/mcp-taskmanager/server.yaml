@@ -1,0 +1,16 @@
+identifier: kazuph/mcp-taskmanager/mcp-taskmanager
+repo:
+  provider: github.com
+  url: https://github.com/kazuph/mcp-taskmanager
+  name: mcp-taskmanager
+  owner: kazuph
+server:
+  subdirectory: /
+  name: TaskManager
+  description: Model Context Protocol server for Task Management, allowing Claude
+    Desktop (or any MCP client) to manage and execute tasks in a queue-based
+    system.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

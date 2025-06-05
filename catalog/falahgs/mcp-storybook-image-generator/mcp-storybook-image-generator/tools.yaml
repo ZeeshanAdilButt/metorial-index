@@ -1,0 +1,25 @@
+tools:
+  - name: generate_storybook_image
+    description: Generates a 3D style cartoon image with a children's story based on
+      the given prompt
+    inputSchema:
+      type: object
+      required:
+        - prompt
+        - fileName
+      properties:
+        prompt:
+          type: string
+          description: The prompt describing the storybook scene to generate
+        artStyle:
+          enum:
+            - 3d cartoon
+            - watercolor
+            - pixel art
+            - hand drawn
+            - claymation
+          type: string
+          description: "The art style for the image (default: '3d cartoon')"
+        fileName:
+          type: string
+          description: Base name for the output files (without extension)

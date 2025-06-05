@@ -1,0 +1,412 @@
+tools:
+  - name: search_research_areas
+    description: Search for research areas that exist in PapersWithCode
+    inputSchema:
+      type: object
+      title: search_research_areasArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: get_research_area
+    description: Get a research area by ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: get_research_areaArguments
+      required:
+        - area_id
+      properties:
+        area_id:
+          type: string
+          title: Area Id
+  - name: list_research_area_tasks
+    description: List the tasks for a given research area ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_research_area_tasksArguments
+      required:
+        - area_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        area_id:
+          type: string
+          title: Area Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: search_authors
+    description: Search for authors by name in PapersWithCode
+    inputSchema:
+      type: object
+      title: search_authorsArguments
+      required:
+        - full_name
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        full_name:
+          type: string
+          title: Full Name
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: get_paper_author
+    description: Get a paper author by ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: get_paper_authorArguments
+      required:
+        - author_id
+      properties:
+        author_id:
+          type: string
+          title: Author Id
+  - name: list_papers_by_author_id
+    description: List the papers for a given author ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_papers_by_author_idArguments
+      required:
+        - author_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        author_id:
+          type: string
+          title: Author Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: list_papers_by_author_name
+    description: List the papers written by a given author name in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_papers_by_author_nameArguments
+      required:
+        - author_name
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        author_name:
+          type: string
+          title: Author Name
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: list_conferences
+    description: List the conferences in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_conferencesArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+        conference_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Conference Name
+          default: null
+  - name: get_conference
+    description: Get a conference by ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: get_conferenceArguments
+      required:
+        - conference_id
+      properties:
+        conference_id:
+          type: string
+          title: Conference Id
+  - name: list_conference_proceedings
+    description: List the proceedings for a given conference ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_conference_proceedingsArguments
+      required:
+        - conference_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        conference_id:
+          type: string
+          title: Conference Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: get_conference_proceeding
+    description: Get a proceeding by ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: get_conference_proceedingArguments
+      required:
+        - conference_id
+        - proceeding_id
+      properties:
+        conference_id:
+          type: string
+          title: Conference Id
+        proceeding_id:
+          type: string
+          title: Proceeding Id
+  - name: list_conference_papers
+    description: List the papers for a given conference ID and proceeding ID in
+      PapersWithCode
+    inputSchema:
+      type: object
+      title: list_conference_papersArguments
+      required:
+        - conference_id
+        - proceeding_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        conference_id:
+          type: string
+          title: Conference Id
+        proceeding_id:
+          type: string
+          title: Proceeding Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: search_papers
+    description: Search for a paper in PapersWithCode
+    inputSchema:
+      type: object
+      title: search_papersArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        abstract:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Abstract
+          default: null
+        arxiv_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Arxiv Id
+          default: null
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: get_paper
+    description: Get a paper by ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: get_paperArguments
+      required:
+        - paper_id
+      properties:
+        paper_id:
+          type: string
+          title: Paper Id
+  - name: list_paper_repositories
+    description: List the repositories for a given paper ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_paper_repositoriesArguments
+      required:
+        - paper_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        paper_id:
+          type: string
+          title: Paper Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: list_paper_datasets
+    description: List the datasets for a given paper ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_paper_datasetsArguments
+      required:
+        - paper_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        paper_id:
+          type: string
+          title: Paper Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: list_paper_methods
+    description: List the methods for a given paper ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_paper_methodsArguments
+      required:
+        - paper_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        paper_id:
+          type: string
+          title: Paper Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: list_paper_results
+    description: List the results for a given paper ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_paper_resultsArguments
+      required:
+        - paper_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        paper_id:
+          type: string
+          title: Paper Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: list_paper_tasks
+    description: List the tasks for a given paper ID in PapersWithCode
+    inputSchema:
+      type: object
+      title: list_paper_tasksArguments
+      required:
+        - paper_id
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        paper_id:
+          type: string
+          title: Paper Id
+        items_per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Items Per Page
+          default: 20
+  - name: read_paper_from_url
+    description: Explain a paper by URL in PapersWithCode
+    inputSchema:
+      type: object
+      title: read_paper_from_urlArguments
+      required:
+        - paper_url
+      properties:
+        paper_url:
+          type: string
+          title: Paper Url

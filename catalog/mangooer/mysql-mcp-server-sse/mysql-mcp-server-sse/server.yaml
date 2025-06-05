@@ -1,0 +1,14 @@
+identifier: mangooer/mysql-mcp-server-sse/mysql-mcp-server-sse
+repo:
+  provider: github.com
+  url: https://github.com/mangooer/mysql-mcp-server-sse
+  name: mysql-mcp-server-sse
+  owner: mangooer
+server:
+  subdirectory: /
+  name: MySQL查询服务器
+  description: 提供实时的MySQL数据库查询功能，支持通过SSE进行数据传输。简化数据库操作，提升数据交互效率，适合需要实时数据更新的应用场景。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

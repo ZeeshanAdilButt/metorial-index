@@ -1,0 +1,58 @@
+tools:
+  - name: resolve-library-id
+    description: >-
+      Resolves a package name to a Context7-compatible library ID and returns a
+      list of matching libraries.
+
+
+      You MUST call this function before 'get-library-docs' to obtain a valid
+      Context7-compatible library ID.
+
+
+      When selecting the best match, consider:
+
+      - Name similarity to the query
+
+      - Description relevance
+
+      - Code Snippet count (documentation coverage)
+
+      - GitHub Stars (popularity)
+
+
+      Return the selected library ID and explain your choice. If there are
+      multiple good matches, mention this but proceed with the most relevant
+      one.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - libraryName
+      properties:
+        libraryName:
+          type: string
+          description: Library name to search for and retrieve a Context7-compatible
+            library ID.
+      additionalProperties: false
+  - name: get-library-docs
+    description: Fetches up-to-date documentation for a library. You must call
+      'resolve-library-id' first to obtain the exact Context7-compatible library
+      ID required to use this tool.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - context7CompatibleLibraryID
+      properties:
+        topic:
+          type: string
+          description: Topic to focus documentation on (e.g., 'hooks', 'routing').
+        tokens:
+          type: number
+          description: "Maximum number of tokens of documentation to retrieve (default:
+            10000). Higher values provide more context but consume more tokens."
+        context7CompatibleLibraryID:
+          type: string
+          description: Exact Context7-compatible library ID (e.g., 'mongodb/docs',
+            'vercel/nextjs') retrieved from 'resolve-library-id'.
+      additionalProperties: false

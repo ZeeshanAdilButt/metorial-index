@@ -1,0 +1,218 @@
+tools:
+  - name: log
+    description: Create or update today's daily log file. Optionally add notes to the log.
+    inputSchema:
+      type: object
+      required:
+        - notes
+        - tags
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: >-
+            Analyze the note's content and identify key themes, concepts, and
+            categories that connect it to other notes.
+                          Consider:
+                          - Core topics and themes present in the note
+                          - Broader domains or areas of knowledge
+                          - Types of information (decisions, ideas, research, etc.)
+                          - Projects or contexts that might want to reference this later
+                          Do not force tags - only add ones that naturally emerge from the content and would help build meaningful connections between notes.
+        notes:
+          type: string
+  - name: evaluateInsight
+    description: "
+
+      \      Evaluate the long-term value and significance of an insight or
+      thought based on the following criteria:\ 
+
+      \      1. Actionability (1-10): Can this be applied to future work? Is
+      there any information that can be used to apply this thought to future
+      work in different contexts? Is the problem it solves clear?
+
+      \      2. Longevity (1-10): Will this be relevant months or years from
+      now?
+
+      \      3. Findability (1-10): Would this be hard to rediscover if
+      forgotten?
+
+      \      4. Future Reference Value (1-10): How likely are you to need this
+      again?
+
+      \     \ 
+
+      \      Insights to ignore:\ 
+
+      \      1. Trivial syntax details
+
+      \      2. Redundant information
+
+      \      "
+    inputSchema:
+      type: object
+      required:
+        - thought
+        - evaluationStep
+        - totalSteps
+        - nextStepNeeded
+        - actionability
+        - longevity
+        - findability
+        - futureReferenceValue
+      properties:
+        thought:
+          type: string
+        longevity:
+          type: number
+        totalSteps:
+          type: number
+        findability:
+          type: number
+        actionability:
+          type: number
+        evaluationStep:
+          type: number
+        nextStepNeeded:
+          type: boolean
+        futureReferenceValue:
+          type: number
+  - name: rollup
+    description: "
+
+      \       Synthesize my daily note to create an organized rollup of the most
+      important notes with clear categories, connections, and action items.
+      Optionally specify a date (YYYY-MM-DD).
+
+      \       Only include notes that actually add long-term value. If you are
+      unsure, call the /evaluateInsight tool to evaluate the long-term value of
+      the thought.
+
+      \       If you do not have enough information, stop and ask the user for
+      more information.
+
+      \       It is better to not log anything than log something that is not
+      useful.
+
+      \      "
+    inputSchema:
+      type: object
+      required:
+        - accomplishments
+        - insights
+      properties:
+        date:
+          type: string
+        todos:
+          type: array
+          items:
+            type: string
+          description: A list of todos. Each todo should be a short description of the
+            task to be done. A todo should be actionable.
+        insights:
+          type: array
+          items:
+            type: string
+          description: A list of insights. Each insight should be a long-term storage.
+            Things like new knowledge gained. Do not force insights - only add
+            ones that naturally emerge from the content and would help build
+            meaningful connections between notes.
+        accomplishments:
+          type: array
+          items:
+            type: string
+          description: A list of accomplishments. Each accomplishment should be a short
+            description of the work done in the day so that it can answer the
+            question 'what did you do all day?'
+  - name: write_note
+    description: Create a new note or overwrite an existing note with content. Path
+      should be relative to your notes directory. Optionally include tags that
+      will be merged with any existing tags in the note.
+    inputSchema:
+      type: object
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          description: Path where the note should be saved, relative to notes directory
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to add to the note's frontmatter. Will be merged with existing
+            tags if present.
+        content:
+          type: string
+          description: Content to write to the note
+  - name: search_files
+    description: Recursively search for files and directories matching a pattern in
+      your notes directory. The search is case-insensitive and matches partial
+      names. Returns full paths to all matching items. Great for finding notes
+      when you don't know their exact location.
+    inputSchema:
+      type: object
+      required:
+        - pattern
+      properties:
+        pattern:
+          type: string
+          description: The pattern to search for in file and directory names
+        excludePatterns:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Glob patterns to exclude from search results
+  - name: read_note
+    description: Read the complete contents of a note file from your notes
+      directory. Specify the path relative to your notes directory (e.g.,
+      'Log/2023-01-01.md'). Returns the full text content of the note file.
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The path to the note file, relative to your notes directory
+  - name: read_multiple_notes
+    description: Read the contents of multiple note files simultaneously. Specify
+      paths relative to your notes directory (e.g., ['Log/2023-01-01.md',
+      'Rollups/2023-01-01-rollup.md']). Returns each file's content with its
+      path as a reference.
+    inputSchema:
+      type: object
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: Array of paths to note files, relative to your notes directory
+  - name: list_directory
+    description: List the contents of a directory in your notes. Shows all files and
+      directories with clear labels. Specify path relative to your notes
+      directory (e.g., 'Log' or 'Rollups').
+    inputSchema:
+      type: object
+      properties:
+        path:
+          type: string
+          default: ""
+          description: Directory path relative to notes directory (defaults to root notes
+            directory if not provided)
+  - name: create_directory
+    description: Create a new directory in your notes. Can create nested directories
+      in one operation. Path should be relative to your notes directory.
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Directory path to create, relative to notes directory

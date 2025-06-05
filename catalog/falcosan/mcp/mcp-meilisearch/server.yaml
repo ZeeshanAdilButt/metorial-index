@@ -1,0 +1,19 @@
+identifier: falcosan/mcp/mcp-meilisearch
+repo:
+  provider: github.com
+  url: https://github.com/falcosan/mcp
+  name: mcp
+  owner: falcosan
+server:
+  subdirectory: /
+  name: Meilisearch API Server
+  description: Provide AI models with seamless access to Meilisearch's powerful
+    search and indexing capabilities through a comprehensive MCP server
+    implementation. Enable real-time communication and advanced search
+    functionalities including vector search within AI workflows. Simplify
+    integration of Meilisearch APIs as callable tools for enhanced AI-driven
+    data retrieval and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

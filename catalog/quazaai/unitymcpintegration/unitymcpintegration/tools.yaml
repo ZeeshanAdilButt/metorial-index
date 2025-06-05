@@ -1,0 +1,301 @@
+tools:
+  - name: get_current_scene_info
+    description: Retrieve information about the current scene in Unity Editor with
+      configurable detail level
+    inputSchema:
+      type: object
+      properties:
+        detailLevel:
+          enum:
+            - RootObjectsOnly
+            - FullHierarchy
+          type: string
+          default: RootObjectsOnly
+          description: "RootObjectsOnly: Returns just root GameObjects. FullHierarchy:
+            Returns complete hierarchy with all children."
+      additionalProperties: false
+  - name: get_game_objects_info
+    description: Retrieve detailed information about specific GameObjects in the
+      current scene
+    inputSchema:
+      type: object
+      required:
+        - instanceIDs
+      properties:
+        detailLevel:
+          enum:
+            - BasicInfo
+            - IncludeComponents
+            - IncludeChildren
+            - IncludeComponentsAndChildren
+          type: string
+          default: IncludeComponents
+          description: "BasicInfo: Basic GameObject information. IncludeComponents:
+            Includes component details. IncludeChildren: Includes child
+            GameObjects. IncludeComponentsAndChildren: Includes both components
+            and a full hierarchy with components on children."
+        instanceIDs:
+          type: array
+          items:
+            type: number
+          minItems: 1
+          description: Array of GameObject instance IDs to get information for
+      additionalProperties: false
+  - name: execute_editor_command
+    description: Execute C# code directly in the Unity Editor - allows full
+      flexibility including custom namespaces and multiple classes
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          minLength: 1
+          description: 'C# code to execute in Unity Editor. You MUST define a public class
+            named "McpScript" with a public static method named "Execute" that
+            returns an object. Example: "public class McpScript { public static
+            object Execute() { /* your code here */ return result; } }". You can
+            include any necessary namespaces, additional classes, and methods.'
+      additionalProperties: false
+  - name: get_logs
+    description: Retrieve Unity Editor logs with filtering options
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          maximum: 1000
+          minimum: 1
+          description: Maximum number of log entries to return
+        types:
+          type: array
+          items:
+            enum:
+              - Log
+              - Warning
+              - Error
+              - Exception
+            type: string
+          description: Filter logs by type
+        fields:
+          type: array
+          items:
+            enum:
+              - message
+              - stackTrace
+              - logType
+              - timestamp
+            type: string
+          description: Specify which fields to include in the output
+        timestampAfter:
+          type: string
+          description: Filter logs after this ISO timestamp
+        messageContains:
+          type: string
+          description: Filter logs by message content
+        timestampBefore:
+          type: string
+          description: Filter logs before this ISO timestamp
+        stackTraceContains:
+          type: string
+          description: Filter logs by stack trace content
+      additionalProperties: false
+  - name: verify_connection
+    description: Verify that the MCP server has an active connection to Unity Editor
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: get_editor_state
+    description: Get the current Unity Editor state including project information
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: read_file
+    description: Read the contents of a file from the Unity project. Paths are
+      relative to the project's Assets folder. For example, use
+      'Scenes/MainScene.unity' to read Assets/Scenes/MainScene.unity.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the file to read. Can be absolute or relative to Unity
+            project Assets folder. If empty, defaults to the Assets folder.
+      additionalProperties: false
+  - name: read_multiple_files
+    description: Read the contents of multiple files from the Unity project simultaneously.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: Array of file paths to read. Paths can be absolute or relative to
+            Unity project Assets folder.
+      additionalProperties: false
+  - name: write_file
+    description: Create a new file or completely overwrite an existing file in the
+      Unity project.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          description: Path to the file to write. Can be absolute or relative to Unity
+            project Assets folder. If empty, defaults to the Assets folder.
+        content:
+          type: string
+          description: Content to write to the file
+      additionalProperties: false
+  - name: edit_file
+    description: Make precise edits to a text file in the Unity project. Returns a
+      git-style diff showing changes.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - edits
+      properties:
+        path:
+          type: string
+          description: Path to the file to edit. Can be absolute or relative to Unity
+            project Assets folder. If empty, defaults to the Assets folder.
+        edits:
+          type: array
+          items:
+            type: object
+            required:
+              - oldText
+              - newText
+            properties:
+              newText:
+                type: string
+                description: Text to replace with
+              oldText:
+                type: string
+                description: Text to search for - must match exactly
+            additionalProperties: false
+          description: Array of edit operations to apply
+        dryRun:
+          type: boolean
+          default: false
+          description: Preview changes using git-style diff format
+      additionalProperties: false
+  - name: list_directory
+    description: Get a listing of all files and directories in a specified path in
+      the Unity project. Paths are relative to the Assets folder unless
+      absolute. For example, use 'Scenes' to list all files in Assets/Scenes
+      directory. Use empty string to list the Assets folder.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: 'Path to the directory to list. Can be absolute or relative to
+            Unity project Assets folder. If empty, defaults to the Assets
+            folder. Example: "Scenes" will list all files in the Assets/Scenes
+            directory.'
+      additionalProperties: false
+  - name: directory_tree
+    description: Get a recursive tree view of files and directories in the Unity
+      project as a JSON structure.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: 'Path to the directory to get tree of. Can be absolute or relative
+            to Unity project Assets folder. If empty, defaults to the Assets
+            folder. Example: "Prefabs" will show the tree for Assets/Prefabs.'
+        maxDepth:
+          type: number
+          default: 5
+          description: Maximum depth to traverse
+      additionalProperties: false
+  - name: search_files
+    description: Recursively search for files and directories matching a pattern in
+      the Unity project.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - pattern
+      properties:
+        path:
+          type: string
+          description: 'Path to search from. Can be absolute or relative to Unity project
+            Assets folder. If empty, defaults to the Assets folder. Example:
+            "Scripts" will search within Assets/Scripts.'
+        pattern:
+          type: string
+          description: Pattern to search for
+        excludePatterns:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Patterns to exclude
+      additionalProperties: false
+  - name: get_file_info
+    description: Retrieve detailed metadata about a file or directory in the Unity project.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the file to get info for. Can be absolute or relative to
+            Unity project Assets folder. If empty, defaults to the Assets
+            folder.
+      additionalProperties: false
+  - name: find_assets_by_type
+    description: Find all Unity assets of a specified type (e.g., Material, Prefab,
+      Scene, Script) in the project. Set searchPath to an empty string to search
+      the entire Assets folder.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - assetType
+      properties:
+        maxDepth:
+          type: number
+          default: 1
+          description: Maximum depth to search. 1 means search only in the specified
+            directory, 2 includes immediate subdirectories, and so on. Set to -1
+            for unlimited depth.
+        assetType:
+          type: string
+          description: Type of assets to find (e.g., "Material", "Prefab", "Scene",
+            "Script")
+        searchPath:
+          type: string
+          default: ""
+          description: Directory to search in. Can be absolute or relative to Unity
+            project Assets folder. An empty string will search the entire Assets
+            folder.
+      additionalProperties: false

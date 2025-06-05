@@ -1,0 +1,16 @@
+identifier: bitrefill/bitrefill-mcp-server/bitrefill-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/bitrefill/bitrefill-mcp-server
+  name: bitrefill-mcp-server
+  owner: bitrefill
+server:
+  subdirectory: /
+  name: Bitrefill MCP Server
+  description: Access Bitrefill services to search for gift cards, mobile top-ups,
+    and more. Enhance your AI assistant's capabilities by integrating with
+    Bitrefill's offerings using the Model Context Protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

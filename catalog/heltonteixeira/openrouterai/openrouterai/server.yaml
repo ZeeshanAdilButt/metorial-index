@@ -1,0 +1,16 @@
+identifier: heltonteixeira/openrouterai/openrouterai
+repo:
+  provider: github.com
+  url: https://github.com/heltonteixeira/openrouterai
+  name: openrouterai
+  owner: heltonteixeira
+server:
+  subdirectory: /
+  name: OpenRouter MCP Server
+  description: A Model Context Protocol (MCP) server for integration with
+    OpenRouter.ai, allowing access to various AI models through a unified
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

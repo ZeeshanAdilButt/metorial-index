@@ -1,0 +1,18 @@
+identifier: pottekkat/sandbox-mcp/sandbox-mcp
+repo:
+  provider: github.com
+  url: https://github.com/pottekkat/sandbox-mcp
+  name: sandbox-mcp
+  owner: pottekkat
+server:
+  subdirectory: /
+  name: Sandbox
+  description: Enable LLMs to run code safely in secure, isolated Docker
+    containers, preventing unintended consequences from untested code execution.
+    Provide an easy-to-use, configurable execution environment that helps
+    generate more accurate code with fewer iterations. Empower LLMs with safe
+    code testing capabilities locally through a simple MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

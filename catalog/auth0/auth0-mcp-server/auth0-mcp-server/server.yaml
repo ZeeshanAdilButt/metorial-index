@@ -1,0 +1,18 @@
+identifier: auth0/auth0-mcp-server/auth0-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/auth0/auth0-mcp-server
+  name: auth0-mcp-server
+  owner: auth0
+server:
+  subdirectory: /
+  name: Auth0 Management Server
+  description: Manage your Auth0 tenant using natural language commands through
+    integration with large language models. Perform operations such as creating
+    applications, managing resource servers, deploying actions, and querying
+    logs securely and interactively. Simplify Auth0 management by leveraging AI
+    agents to handle complex tasks with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

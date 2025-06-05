@@ -1,0 +1,17 @@
+identifier: dealexpress/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DealExpress/mcp-server
+  name: mcp-server
+  owner: DealExpress
+server:
+  subdirectory: /
+  name: DealX Platform Server
+  description: Enable LLMs to search and interact with ads on the DealX platform
+    through a standardized interface. Facilitate natural language queries to
+    find, sort, and paginate ads efficiently. Easily extendable to support
+    additional DealX platform functionalities in the future.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

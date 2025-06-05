@@ -1,0 +1,720 @@
+tools:
+  - name: get_session_info
+    description: Get detailed information about the current Ableton session
+    inputSchema:
+      type: object
+      title: get_session_infoArguments
+      properties: {}
+  - name: get_track_info
+    description: "
+
+      \    Get detailed information about a specific track in Ableton.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to get information about
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_track_infoArguments
+      required:
+        - track_index
+      properties:
+        track_index:
+          type: integer
+          title: Track Index
+  - name: create_midi_track
+    description: "
+
+      \    Create a new MIDI track in the Ableton session.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - index: The index to insert the track at (-1 = end of list)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_midi_trackArguments
+      properties:
+        index:
+          type: integer
+          title: Index
+          default: -1
+  - name: create_return_track
+    description: "
+
+      \    Create a new return track in the Ableton session.
+
+      \   \ 
+
+      \    Return tracks are used for send effects and are added to the end of
+      the return track list.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_return_trackArguments
+      properties: {}
+  - name: set_track_name
+    description: "
+
+      \    Set the name of a track.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to rename
+
+      \    - name: The new name for the track
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_track_nameArguments
+      required:
+        - track_index
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        track_index:
+          type: integer
+          title: Track Index
+  - name: create_clip
+    description: "
+
+      \    Create a new MIDI clip in the specified track and clip slot.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to create the clip in
+
+      \    - clip_index: The index of the clip slot to create the clip in
+
+      \    - length: The length of the clip in beats (default: 4.0)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_clipArguments
+      required:
+        - track_index
+        - clip_index
+      properties:
+        length:
+          type: number
+          title: Length
+          default: 4
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: add_notes_to_clip
+    description: "
+
+      \    Add MIDI notes to a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    - notes: List of note dictionaries, each with pitch, start_time,
+      duration, velocity, and mute
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_notes_to_clipArguments
+      required:
+        - track_index
+        - clip_index
+        - notes
+      properties:
+        notes:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              anyOf:
+                - type: integer
+                - type: number
+                - type: boolean
+          title: Notes
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: set_clip_name
+    description: "
+
+      \    Set the name of a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    - name: The new name for the clip
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_clip_nameArguments
+      required:
+        - track_index
+        - clip_index
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: set_tempo
+    description: "
+
+      \    Set the tempo of the Ableton session.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - tempo: The new tempo in BPM
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_tempoArguments
+      required:
+        - tempo
+      properties:
+        tempo:
+          type: number
+          title: Tempo
+  - name: load_instrument_or_effect
+    description: "
+
+      \    Load an instrument or effect onto a track using its URI.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to load the instrument on
+
+      \    - uri: The URI of the instrument or effect to load (e.g.,
+      'query:Synths#Instrument%20Rack:Bass:FileId_5116')
+
+      \    "
+    inputSchema:
+      type: object
+      title: load_instrument_or_effectArguments
+      required:
+        - track_index
+        - uri
+      properties:
+        uri:
+          type: string
+          title: Uri
+        track_index:
+          type: integer
+          title: Track Index
+  - name: fire_clip
+    description: "
+
+      \    Start playing a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    "
+    inputSchema:
+      type: object
+      title: fire_clipArguments
+      required:
+        - track_index
+        - clip_index
+      properties:
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: stop_clip
+    description: "
+
+      \    Stop playing a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    "
+    inputSchema:
+      type: object
+      title: stop_clipArguments
+      required:
+        - track_index
+        - clip_index
+      properties:
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: start_playback
+    description: Start playing the Ableton session.
+    inputSchema:
+      type: object
+      title: start_playbackArguments
+      properties: {}
+  - name: stop_playback
+    description: Stop playing the Ableton session.
+    inputSchema:
+      type: object
+      title: stop_playbackArguments
+      properties: {}
+  - name: get_browser_tree
+    description: "
+
+      \    Get a hierarchical tree of browser categories from Ableton.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - category_type: Type of categories to get ('all', 'instruments',
+      'sounds', 'drums', 'audio_effects', 'midi_effects')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_browser_treeArguments
+      properties:
+        category_type:
+          type: string
+          title: Category Type
+          default: all
+  - name: get_browser_items_at_path
+    description: "
+
+      \    Get browser items at a specific path in Ableton's browser.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - path: Path in the format \"category/folder/subfolder\"
+
+      \            where category is one of the available browser categories in
+      Ableton
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_browser_items_at_pathArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: load_drum_kit
+    description: "
+
+      \    Load a drum rack and then load a specific drum kit into it.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to load on
+
+      \    - rack_uri: The URI of the drum rack to load (e.g., 'Drums/Drum
+      Rack')
+
+      \    - kit_path: Path to the drum kit inside the browser (e.g.,
+      'drums/acoustic/kit1')
+
+      \    "
+    inputSchema:
+      type: object
+      title: load_drum_kitArguments
+      required:
+        - track_index
+        - rack_uri
+        - kit_path
+      properties:
+        kit_path:
+          type: string
+          title: Kit Path
+        rack_uri:
+          type: string
+          title: Rack Uri
+        track_index:
+          type: integer
+          title: Track Index
+  - name: get_device_parameters
+    description: "
+
+      \    Get all parameters for a device.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the device
+
+      \    - device_index: The index of the device on the track
+
+      \   \ 
+
+      \    Returns:
+
+      \    - Dictionary with device information and parameters
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_device_parametersArguments
+      required:
+        - track_index
+        - device_index
+      properties:
+        track_index:
+          type: integer
+          title: Track Index
+        device_index:
+          type: integer
+          title: Device Index
+  - name: set_device_parameter
+    description: "
+
+      \    Set a device parameter by name or index.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the device
+
+      \    - device_index: The index of the device on the track
+
+      \    - parameter_name: The name of the parameter to set (alternative to
+      parameter_index)
+
+      \    - parameter_index: The index of the parameter to set (alternative to
+      parameter_name)
+
+      \    - value: The value to set the parameter to
+
+      \   \ 
+
+      \    Returns:
+
+      \    - String with the result of the operation
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_device_parameterArguments
+      required:
+        - track_index
+        - device_index
+      properties:
+        value:
+          anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: "null"
+          title: Value
+          default: null
+        track_index:
+          type: integer
+          title: Track Index
+        device_index:
+          type: integer
+          title: Device Index
+        parameter_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Parameter Name
+          default: null
+        parameter_index:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Parameter Index
+          default: null
+  - name: set_eq_band
+    description: "
+
+      \    Set parameters for a specific band in an EQ Eight device.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the EQ Eight
+
+      \    - device_index: The index of the EQ Eight device on the track
+
+      \    - band_index: The index of the band to modify (0-7)
+
+      \    - frequency: The frequency value to set (Hz)
+
+      \    - gain: The gain value to set (dB)
+
+      \    - q: The Q factor to set
+
+      \    - filter_type: The filter type to set (either index or name)
+
+      \   \ 
+
+      \    Returns:
+
+      \    - String with the result of the operation
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_eq_bandArguments
+      required:
+        - track_index
+        - device_index
+        - band_index
+      properties:
+        q:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Q
+          default: null
+        gain:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Gain
+          default: null
+        frequency:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Frequency
+          default: null
+        band_index:
+          type: integer
+          title: Band Index
+        filter_type:
+          anyOf:
+            - type: integer
+            - type: string
+            - type: "null"
+          title: Filter Type
+          default: null
+        track_index:
+          type: integer
+          title: Track Index
+        device_index:
+          type: integer
+          title: Device Index
+  - name: set_eq_global
+    description: "
+
+      \    Set global parameters for an EQ Eight device.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the EQ Eight
+
+      \    - device_index: The index of the EQ Eight device on the track
+
+      \    - scale: The scale value to set (0.5 = 50%, 1.0 = 100%, 2.0 = 200%,
+      etc.)
+
+      \    - mode: The mode to set (either index or name: \"Stereo\" or \"L/R\"
+      or \"M/S\")
+
+      \    - oversampling: Whether to enable oversampling (true/false)
+
+      \   \ 
+
+      \    Returns:
+
+      \    - String with the result of the operation
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_eq_globalArguments
+      required:
+        - track_index
+        - device_index
+      properties:
+        mode:
+          anyOf:
+            - type: integer
+            - type: string
+            - type: "null"
+          title: Mode
+          default: null
+        scale:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Scale
+          default: null
+        track_index:
+          type: integer
+          title: Track Index
+        device_index:
+          type: integer
+          title: Device Index
+        oversampling:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Oversampling
+          default: null
+  - name: apply_eq_preset
+    description: "
+
+      \    Apply a preset to an EQ Eight device.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the EQ Eight
+
+      \    - device_index: The index of the EQ Eight device on the track
+
+      \    - preset_type: The type of preset to apply (\"low_cut\",
+      \"high_cut\", \"low_shelf\", \"high_shelf\", \"bell\", \"notch\",
+      \"flat\")
+
+      \   \ 
+
+      \    Returns:
+
+      \    - String with the result of the operation
+
+      \    "
+    inputSchema:
+      type: object
+      title: apply_eq_presetArguments
+      required:
+        - track_index
+        - device_index
+        - preset_type
+      properties:
+        preset_type:
+          type: string
+          title: Preset Type
+        track_index:
+          type: integer
+          title: Track Index
+        device_index:
+          type: integer
+          title: Device Index
+  - name: set_send_level
+    description: "
+
+      \    Set the level of a send from a track to a return track.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the send
+
+      \    - send_index: The index of the send (corresponds to the return track
+      index)
+
+      \    - value: The value to set the send level to (0.0 to 1.0)
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_send_levelArguments
+      required:
+        - track_index
+        - send_index
+        - value
+      properties:
+        value:
+          type: number
+          title: Value
+        send_index:
+          type: integer
+          title: Send Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: set_track_volume
+    description: "
+
+      \    Set the volume of a track.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to set the volume for
+
+      \    - value: The volume value (0.0 to 1.0)
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_track_volumeArguments
+      required:
+        - track_index
+        - value
+      properties:
+        value:
+          type: number
+          title: Value
+        track_index:
+          type: integer
+          title: Track Index

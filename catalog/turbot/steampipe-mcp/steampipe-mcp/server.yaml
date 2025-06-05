@@ -1,0 +1,19 @@
+identifier: turbot/steampipe-mcp/steampipe-mcp
+repo:
+  provider: github.com
+  url: https://github.com/turbot/steampipe-mcp
+  name: steampipe-mcp
+  owner: turbot
+server:
+  subdirectory: /
+  name: Steampipe Cloud Infrastructure Query Server
+  description: Enable natural language exploration and analysis of your cloud
+    infrastructure data across AWS, Azure, GCP, and more. Query your cloud
+    estate, perform security and compliance checks, and optimize costs using SQL
+    queries powered by AI. Seamlessly integrates with local Steampipe
+    installations or Turbot Pipes workspaces for safe, read-only access to your
+    cloud and SaaS data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: gotohuman/gotohuman-mcp-server/gotohuman-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/gotohuman/gotohuman-mcp-server
+  name: gotohuman-mcp-server
+  owner: gotohuman
+server:
+  subdirectory: /
+  name: gotoHuman
+  description: Request human reviews for AI-generated content seamlessly. Enhance
+    your AI agents with the ability to seek human input and approvals through an
+    intuitive webhook-based workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

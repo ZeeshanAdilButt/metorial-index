@@ -1,0 +1,72 @@
+tools:
+  - name: list_jobs
+    description: List all Jenkins jobs
+    inputSchema:
+      type: object
+      title: list_jobsArguments
+      properties: {}
+  - name: trigger_build
+    description: "Trigger a Jenkins build
+
+
+      \    Args:
+
+      \        job_name: Name of the job to build
+
+      \        parameters: Optional build parameters as a dictionary (e.g.
+      {\"param1\": \"value1\"})
+
+
+      \    Returns:
+
+      \        Dictionary containing build information including the build
+      number
+
+      \    "
+    inputSchema:
+      type: object
+      title: trigger_buildArguments
+      required:
+        - job_name
+      properties:
+        job_name:
+          type: string
+          title: Job Name
+        parameters:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Parameters
+          default: null
+  - name: get_build_status
+    description: "Get build status
+
+
+      \    Args:
+
+      \        job_name: Name of the job
+
+      \        build_number: Build number to check, defaults to latest
+
+
+      \    Returns:
+
+      \        Build information dictionary
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_build_statusArguments
+      required:
+        - job_name
+      properties:
+        job_name:
+          type: string
+          title: Job Name
+        build_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Build Number
+          default: null

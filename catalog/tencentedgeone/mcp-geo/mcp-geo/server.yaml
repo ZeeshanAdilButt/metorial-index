@@ -1,0 +1,18 @@
+identifier: tencentedgeone/mcp-geo/mcp-geo
+repo:
+  provider: github.com
+  url: https://github.com/TencentEdgeOne/mcp-geo
+  name: mcp-geo
+  owner: TencentEdgeOne
+server:
+  subdirectory: /
+  name: EdgeOne Geo Location Service
+  description: Provide geolocation data to large language models by integrating
+    user location retrieval with AI through a simple MCP server. Enable AI
+    models to access real-time geolocation information via a dedicated tool.
+    Seamlessly connect geolocation services with language model workflows for
+    enhanced contextual understanding.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

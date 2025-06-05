@@ -1,0 +1,67 @@
+tools:
+  - name: create_wallet
+    description: Create a new Solana wallet
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: import_wallet
+    description: Import an existing Solana wallet using private key
+    inputSchema:
+      type: object
+      required:
+        - privateKey
+      properties:
+        privateKey:
+          type: string
+          description: Base58 encoded private key
+  - name: get_token_balance
+    description: Get token balance for a wallet
+    inputSchema:
+      type: object
+      required:
+        - walletAddress
+        - tokenMint
+      properties:
+        tokenMint:
+          type: string
+          description: Token mint address
+        walletAddress:
+          type: string
+          description: Solana wallet address
+  - name: get_swap_quote
+    description: Get a quote for swapping tokens
+    inputSchema:
+      type: object
+      required:
+        - inputMint
+        - outputMint
+        - amount
+        - slippage
+      properties:
+        amount:
+          type: string
+          description: Amount of input tokens (in smallest units)
+        slippage:
+          type: number
+          description: Slippage tolerance (0-100)
+        inputMint:
+          type: string
+          description: Input token mint address
+        outputMint:
+          type: string
+          description: Output token mint address
+  - name: execute_swap
+    description: Execute a token swap
+    inputSchema:
+      type: object
+      required:
+        - quote
+        - walletPrivateKey
+      properties:
+        quote:
+          type: object
+          description: Quote object from get_swap_quote
+        walletPrivateKey:
+          type: string
+          description: Base58 encoded private key of the wallet

@@ -1,0 +1,14 @@
+identifier: zueai/neon-mcp/neon-mcp
+repo:
+  provider: github.com
+  url: https://github.com/zueai/neon-mcp
+  name: neon-mcp
+  owner: zueai
+server:
+  subdirectory: /
+  name: Neon MCP Server
+  description: Deploy a lightweight server that interfaces with the Neon REST API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

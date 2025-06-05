@@ -1,0 +1,19 @@
+tools:
+  - name: get-meal-info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - atptCode
+        - schulCode
+      properties:
+        date:
+          type: string
+          description: 조회할 날짜 (YYYYMMDD 형식)
+        atptCode:
+          type: string
+          description: 시도교육청코드
+        schulCode:
+          type: string
+          description: 학교행정표준코드
+      additionalProperties: false

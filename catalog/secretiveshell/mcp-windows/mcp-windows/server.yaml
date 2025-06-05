@@ -1,0 +1,19 @@
+identifier: secretiveshell/mcp-windows/mcp-windows
+repo:
+  provider: github.com
+  url: https://github.com/SecretiveShell/mcp-windows
+  name: mcp-windows
+  owner: SecretiveShell
+server:
+  subdirectory: /
+  name: Windows API Integration Server
+  description: Control and interact with Windows system features such as media
+    playback, notifications, window management, screenshots, monitor power
+    states, theme settings, start menu actions, and clipboard operations.
+    Enhance your automation and agent capabilities by leveraging native Windows
+    functionalities through a standardized MCP interface. Simplify complex
+    Windows interactions with easy-to-use commands accessible via MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

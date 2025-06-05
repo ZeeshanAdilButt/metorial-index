@@ -1,0 +1,11 @@
+tools:
+  - name: get-user-todo-tickets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        email:
+          type: string
+        userId:
+          type: string
+      additionalProperties: false

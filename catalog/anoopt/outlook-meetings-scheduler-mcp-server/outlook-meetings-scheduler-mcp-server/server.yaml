@@ -1,0 +1,17 @@
+identifier: anoopt/outlook-meetings-scheduler-mcp-server/outlook-meetings-scheduler-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/anoopt/outlook-meetings-scheduler-mcp-server
+  name: outlook-meetings-scheduler-mcp-server
+  owner: anoopt
+server:
+  subdirectory: /
+  name: Outlook Meetings Scheduler
+  description: Schedule and manage Microsoft Outlook calendar events seamlessly
+    using Microsoft Graph API. Find attendees, create events with or without
+    attendees, update, list, and delete meetings efficiently. Integrate with
+    other MCP servers to enhance your productivity workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

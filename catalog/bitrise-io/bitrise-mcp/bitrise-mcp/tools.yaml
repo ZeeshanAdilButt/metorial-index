@@ -1,0 +1,1368 @@
+tools:
+  - name: list_apps
+    description: List all the apps available for the authenticated account.
+    inputSchema:
+      type: object
+      title: list_appsArguments
+      properties:
+        next:
+          type: string
+          title: Next
+          default: null
+          description: Slug of the first app in the response
+        limit:
+          type: integer
+          title: Limit
+          default: 50
+          description: "Max number of elements per page (default: 50)"
+        sort_by:
+          type: string
+          title: Sort By
+          default: last_build_at
+          description: "Order of the apps: last_build_at (default) or created_at. If set,
+            you should accept the response as sorted."
+  - name: register_app
+    description: Add a new app to Bitrise. After this app should be finished on
+      order to be registered completely on Bitrise (via the finish_bitrise_app
+      tool). Before doing this step, try understanding the repository details
+      from the repository URL. This is a two-step process. First, you register
+      the app with the Bitrise API, and then you finish the setup. The first
+      step creates a new app in Bitrise, and the second step configures it with
+      the necessary settings. If the user has multiple workspaces, always prompt
+      the user to choose which one you should use. Don't prompt the user for
+      finishing the app, just do it automatically.
+    inputSchema:
+      type: object
+      title: register_appArguments
+      required:
+        - repo_url
+        - is_public
+        - organization_slug
+      properties:
+        provider:
+          type: string
+          title: Provider
+          default: github
+          description: Repository provider
+        repo_url:
+          type: string
+          title: Repo Url
+          description: Repository URL
+        is_public:
+          type: boolean
+          title: Is Public
+          description: Whether the app's builds visibility is "public"
+        project_type:
+          type: string
+          title: Project Type
+          default: other
+          description: Type of project (ios, android, etc.)
+        organization_slug:
+          type: string
+          title: Organization Slug
+          description: The organization (aka workspace) the app to add to
+  - name: finish_bitrise_app
+    description: Finish the setup of a Bitrise app. If this is successful, a build
+      can be triggered via trigger_bitrise_build. If you have access to the
+      repository, decide the project type, the stack ID, and the config to use,
+      based on https://stacks.bitrise.io/, and the config should be also based
+      on the projec type.
+    inputSchema:
+      type: object
+      title: finish_bitrise_appArguments
+      required:
+        - app_slug
+      properties:
+        mode:
+          type: string
+          title: Mode
+          default: manual
+          description: The mode of setup.
+        config:
+          type: string
+          title: Config
+          default: other-config
+          description: The configuration to use for the app (default is
+            "default-android-config", other valid values are "other-config",
+            "default-ios-config", "default-macos-config", etc).
+        app_slug:
+          type: string
+          title: App Slug
+          description: The slug of the Bitrise app to finish setup for.
+        stack_id:
+          type: string
+          title: Stack Id
+          default: linux-docker-android-22.04
+          description: The stack ID to use for the app.
+        project_type:
+          type: string
+          title: Project Type
+          default: other
+          description: The type of project (e.g., android, ios, flutter, etc.).
+  - name: get_app
+    description: Get the details of a specific app.
+    inputSchema:
+      type: object
+      title: get_appArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: delete_app
+    description: Delete an app from Bitrise. When deleting apps belonging to
+      multiple workspaces always confirm that which workspaces' apps the user
+      wants to delete.
+    inputSchema:
+      type: object
+      title: delete_appArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: update_app
+    description: Update an app.
+    inputSchema:
+      type: object
+      title: update_appArguments
+      required:
+        - app_slug
+        - is_public
+        - project_type
+        - provider
+        - repo_url
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        provider:
+          type: string
+          title: Provider
+          description: Repository provider
+        repo_url:
+          type: string
+          title: Repo Url
+          description: Repository URL
+        is_public:
+          type: boolean
+          title: Is Public
+          description: Whether the app's builds visibility is "public"
+        project_type:
+          type: string
+          title: Project Type
+          description: Type of project
+  - name: get_bitrise_yml
+    description: Get the current Bitrise YML config file of a specified Bitrise app.
+    inputSchema:
+      type: object
+      title: get_bitrise_ymlArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app (e.g., "d8db74e2675d54c4" or
+            "8eb495d0-f653-4eed-910b-8d6b56cc0ec7")
+  - name: update_bitrise_yml
+    description: Update the Bitrise YML config file of a specified Bitrise app.
+    inputSchema:
+      type: object
+      title: update_bitrise_ymlArguments
+      required:
+        - app_slug
+        - bitrise_yml_as_json
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app (e.g., "d8db74e2675d54c4" or
+            "8eb495d0-f653-4eed-910b-8d6b56cc0ec7")
+        bitrise_yml_as_json:
+          type: string
+          title: Bitrise Yml As Json
+          description: The new Bitrise YML config file content to be updated. It must be a
+            string.
+  - name: list_branches
+    description: List the branches with existing builds of an app's repository.
+    inputSchema:
+      type: object
+      title: list_branchesArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: register_ssh_key
+    description: Add an SSH-key to a specific app.
+    inputSchema:
+      type: object
+      title: register_ssh_keyArguments
+      required:
+        - app_slug
+        - auth_ssh_private_key
+        - auth_ssh_public_key
+        - is_register_key_into_provider_service
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        auth_ssh_public_key:
+          type: string
+          title: Auth Ssh Public Key
+          description: Public SSH key
+        auth_ssh_private_key:
+          type: string
+          title: Auth Ssh Private Key
+          description: Private SSH key
+        is_register_key_into_provider_service:
+          type: boolean
+          title: Is Register Key Into Provider Service
+          description: Register the key in the provider service
+  - name: register_webhook
+    description: Register an incoming webhook for a specific application.
+    inputSchema:
+      type: object
+      title: register_webhookArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: list_builds
+    description: List all the builds of a specified Bitrise app or all accessible builds.
+    inputSchema:
+      type: object
+      title: list_buildsArguments
+      properties:
+        next:
+          type: string
+          title: Next
+          default: null
+          description: Slug of the first build in the response
+        limit:
+          type: integer
+          title: Limit
+          default: null
+          description: "Max number of elements per page (default: 50)"
+        branch:
+          type: string
+          title: Branch
+          default: null
+          description: Filter builds by branch
+        status:
+          type: integer
+          title: Status
+          default: null
+          description: "Filter builds by status (0: not finished, 1: successful, 2:
+            failed, 3: aborted, 4: in-progress)"
+        sort_by:
+          type: string
+          title: Sort By
+          default: created_at
+          description: "Order of builds: created_at (default), running_first"
+        app_slug:
+          type: string
+          title: App Slug
+          default: null
+          description: Identifier of the Bitrise app
+        workflow:
+          type: string
+          title: Workflow
+          default: null
+          description: Filter builds by workflow
+  - name: trigger_bitrise_build
+    description: Trigger a new build/pipeline for a specified Bitrise app.
+    inputSchema:
+      type: object
+      title: trigger_bitrise_buildArguments
+      required:
+        - app_slug
+      properties:
+        branch:
+          type: string
+          title: Branch
+          default: main
+          description: The branch to build
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app (e.g., "d8db74e2675d54c4" or
+            "8eb495d0-f653-4eed-910b-8d6b56cc0ec7")
+        commit_hash:
+          type: string
+          title: Commit Hash
+          default: null
+          description: The commit hash for the build
+        workflow_id:
+          type: string
+          title: Workflow Id
+          default: null
+          description: The workflow to build
+        commit_message:
+          type: string
+          title: Commit Message
+          default: null
+          description: The commit message for the build
+  - name: get_build
+    description: Get a specific build of a given app.
+    inputSchema:
+      type: object
+      title: get_buildArguments
+      required:
+        - app_slug
+        - build_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        build_slug:
+          type: string
+          title: Build Slug
+          description: Identifier of the build
+  - name: abort_build
+    description: Abort a specific build.
+    inputSchema:
+      type: object
+      title: abort_buildArguments
+      required:
+        - app_slug
+        - build_slug
+      properties:
+        reason:
+          type: string
+          title: Reason
+          default: null
+          description: Reason for aborting the build
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        build_slug:
+          type: string
+          title: Build Slug
+          description: Identifier of the build
+  - name: get_build_log
+    description: Get the build log of a specified build of a Bitrise app.
+    inputSchema:
+      type: object
+      title: get_build_logArguments
+      required:
+        - app_slug
+        - build_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app (e.g., "d8db74e2675d54c4" or
+            "8eb495d0-f653-4eed-910b-8d6b56cc0ec7")
+        build_slug:
+          type: string
+          title: Build Slug
+          description: Identifier of the Bitrise build
+  - name: get_build_bitrise_yml
+    description: Get the bitrise.yml of a build.
+    inputSchema:
+      type: object
+      title: get_build_bitrise_ymlArguments
+      required:
+        - app_slug
+        - build_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        build_slug:
+          type: string
+          title: Build Slug
+          description: Identifier of the build
+  - name: list_build_workflows
+    description: List the workflows of an app.
+    inputSchema:
+      type: object
+      title: list_build_workflowsArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: list_artifacts
+    description: Get a list of all build artifacts.
+    inputSchema:
+      type: object
+      title: list_artifactsArguments
+      required:
+        - app_slug
+        - build_slug
+      properties:
+        next:
+          type: string
+          title: Next
+          default: null
+          description: Slug of the first artifact in the response
+        limit:
+          type: integer
+          title: Limit
+          default: null
+          description: "Max number of elements per page (default: 50)"
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        build_slug:
+          type: string
+          title: Build Slug
+          description: Identifier of the build
+  - name: get_artifact
+    description: Get a specific build artifact.
+    inputSchema:
+      type: object
+      title: get_artifactArguments
+      required:
+        - app_slug
+        - build_slug
+        - artifact_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        build_slug:
+          type: string
+          title: Build Slug
+          description: Identifier of the build
+        artifact_slug:
+          type: string
+          title: Artifact Slug
+          description: Identifier of the artifact
+  - name: list_outgoing_webhooks
+    description: List the outgoing webhooks of an app.
+    inputSchema:
+      type: object
+      title: list_outgoing_webhooksArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: list_cache_items
+    description: List the key-value cache items belonging to an app.
+    inputSchema:
+      type: object
+      title: list_cache_itemsArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: delete_all_cache_items
+    description: Delete all key-value cache items belonging to an app.
+    inputSchema:
+      type: object
+      title: delete_all_cache_itemsArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: delete_cache_item
+    description: Delete a key-value cache item.
+    inputSchema:
+      type: object
+      title: delete_cache_itemArguments
+      required:
+        - app_slug
+        - cache_item_id
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        cache_item_id:
+          type: string
+          title: Cache Item Id
+          description: Key of the cache item
+  - name: get_cache_item_download_url
+    description: ""
+    inputSchema:
+      type: object
+      title: get_cache_item_download_urlArguments
+      required:
+        - app_slug
+        - cache_item_id
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        cache_item_id:
+          type: string
+          title: Cache Item Id
+          description: Key of the cache item
+  - name: list_pipelines
+    description: List all pipelines and standalone builds of an app.
+    inputSchema:
+      type: object
+      title: list_pipelinesArguments
+      required:
+        - app_slug
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+  - name: get_pipeline
+    description: Get a pipeline of a given app.
+    inputSchema:
+      type: object
+      title: get_pipelineArguments
+      required:
+        - app_slug
+        - pipeline_id
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        pipeline_id:
+          type: string
+          title: Pipeline Id
+          description: Identifier of the pipeline
+  - name: abort_pipeline
+    description: Abort a pipeline.
+    inputSchema:
+      type: object
+      title: abort_pipelineArguments
+      required:
+        - app_slug
+        - pipeline_id
+      properties:
+        reason:
+          type: string
+          title: Reason
+          default: null
+          description: Reason for aborting the pipeline
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        pipeline_id:
+          type: string
+          title: Pipeline Id
+          description: Identifier of the pipeline
+  - name: rebuild_pipeline
+    description: Rebuild a pipeline.
+    inputSchema:
+      type: object
+      title: rebuild_pipelineArguments
+      required:
+        - app_slug
+        - pipeline_id
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        pipeline_id:
+          type: string
+          title: Pipeline Id
+          description: Identifier of the pipeline
+  - name: list_group_roles
+    description: List group roles for an app
+    inputSchema:
+      type: object
+      title: list_group_rolesArguments
+      required:
+        - app_slug
+        - role_name
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        role_name:
+          type: string
+          title: Role Name
+          description: Name of the role
+  - name: replace_group_roles
+    description: Replace group roles for an app.
+    inputSchema:
+      type: object
+      title: replace_group_rolesArguments
+      required:
+        - app_slug
+        - role_name
+        - group_slugs
+      properties:
+        app_slug:
+          type: string
+          title: App Slug
+          description: Identifier of the Bitrise app
+        role_name:
+          type: string
+          title: Role Name
+          description: Name of the role
+        group_slugs:
+          type: array
+          items:
+            type: string
+          title: Group Slugs
+          description: List of group slugs
+  - name: list_workspaces
+    description: List the workspaces the user has access to
+    inputSchema:
+      type: object
+      title: list_workspacesArguments
+      properties: {}
+  - name: get_workspace
+    description: Get details for one workspace
+    inputSchema:
+      type: object
+      title: get_workspaceArguments
+      required:
+        - workspace_slug
+      properties:
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Slug of the Bitrise workspace
+  - name: get_workspace_groups
+    description: Get the groups in a workspace
+    inputSchema:
+      type: object
+      title: get_workspace_groupsArguments
+      required:
+        - workspace_slug
+      properties:
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Slug of the Bitrise workspace
+  - name: create_workspace_group
+    description: Create a new group in a workspace.
+    inputSchema:
+      type: object
+      title: create_workspace_groupArguments
+      required:
+        - workspace_slug
+        - group_name
+      properties:
+        group_name:
+          type: string
+          title: Group Name
+          description: Name of the group
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Slug of the Bitrise workspace
+  - name: get_workspace_members
+    description: Get the members of a workspace
+    inputSchema:
+      type: object
+      title: get_workspace_membersArguments
+      required:
+        - workspace_slug
+      properties:
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Slug of the Bitrise workspace
+  - name: invite_member_to_workspace
+    description: Invite new Bitrise users to a workspace.
+    inputSchema:
+      type: object
+      title: invite_member_to_workspaceArguments
+      required:
+        - workspace_slug
+        - email
+      properties:
+        email:
+          type: string
+          title: Email
+          description: Email address of the user
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Slug of the Bitrise workspace
+  - name: add_member_to_group
+    description: Add a member to a group.
+    inputSchema:
+      type: object
+      title: add_member_to_groupArguments
+      required:
+        - group_slug
+        - user_slug
+      properties:
+        user_slug:
+          type: string
+          title: User Slug
+          description: Slug of the user
+        group_slug:
+          type: string
+          title: Group Slug
+          description: Slug of the group
+  - name: me
+    description: Get user info for the currently authenticated user account
+    inputSchema:
+      type: object
+      title: meArguments
+      properties: {}
+  - name: create_connected_app
+    description: Add a new Release Management connected app to Bitrise.
+    inputSchema:
+      type: object
+      title: create_connected_appArguments
+      required:
+        - platform
+        - store_app_id
+        - workspace_slug
+      properties:
+        id:
+          type: string
+          title: Id
+          default: null
+          description: An uuidV4 identifier for your new connected app. If it is not
+            given, one will be generated. It is useful for making the request
+            idempotent or if the id is triggered outside of Bitrise and needs to
+            be stored separately as well.
+        platform:
+          type: string
+          title: Platform
+          description: The mobile platform for the connected app. Available values are
+            'ios' and 'android'.
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+          description: Specifies which Bitrise Project you want to get the connected app
+            to be associated with. If this field is not given a new project will
+            be created alongside with the connected app.
+        store_app_id:
+          type: string
+          title: Store App Id
+          description: "The app store identifier for the connected app. In case of 'ios'
+            platform it is the bundle id from App Store Connect. For additional
+            context you can check the property description:
+            https://developer.apple.com/documentation/bundleresources/informati\
+            on-property-list/cfbundleidentifierIn case of Android platform it is
+            the package name. Check the documentation:
+            https://developer.android.com/build/configure-app-module#set_the_ap\
+            plication_id"
+        store_app_name:
+          type: string
+          title: Store App Name
+          default: null
+          description: If you have no active app store API keys added on Bitrise, you can
+            decide to add your app manually by giving the app's name as well
+            while indicating manual connection with the similarly named boolean
+            flag.
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Identifier of the Bitrise workspace for the Release Management
+            connected app. This field is mandatory.
+        manual_connection:
+          type: boolean
+          title: Manual Connection
+          default: false
+          description: If set to true it indicates a manual connection (bypassing using
+            store api keys) and requires giving 'store_app_name' as well. This
+            can be especially useful for enterprise apps.
+        store_credential_id:
+          type: string
+          title: Store Credential Id
+          default: null
+          description: If you have credentials added on Bitrise, you can decide to select
+            one for your app. In case of ios platform it will be an Apple API
+            credential id. In case of android platform it will be a Google
+            Service credential id.
+  - name: list_connected_apps
+    description: List Release Management connected apps available for the
+      authenticated account within a workspace.
+    inputSchema:
+      type: object
+      title: list_connected_appsArguments
+      required:
+        - workspace_slug
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: Specifies which page should be returned from the whole result set
+            in a paginated scenario. Default value is 1.
+        search:
+          type: string
+          title: Search
+          default: null
+          description: Search by bundle ID (for ios), package name (for android), or app
+            title (for both platforms). The filter is case-sensitive.
+        platform:
+          type: string
+          title: Platform
+          default: null
+          description: "Filters for a specific mobile platform for the list of connected
+            apps. Available values are: 'ios' and 'android'."
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+          description: Specifies which Bitrise Project you want to get associated
+            connected apps for
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+          description: Specifies the maximum number of connected apps returned per page.
+            Default value is 10.
+        workspace_slug:
+          type: string
+          title: Workspace Slug
+          description: Identifier of the Bitrise workspace for the Release Management
+            connected apps. This field is mandatory.
+  - name: get_connected_app
+    description: Gives back a Release Management connected app for the authenticated
+      account.
+    inputSchema:
+      type: object
+      title: get_connected_appArguments
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Identifier of the Release Management connected app
+  - name: update_connected_app
+    description: Updates a connected app.
+    inputSchema:
+      type: object
+      title: update_connected_appArguments
+      required:
+        - connected_app_id
+        - store_app_id
+      properties:
+        store_app_id:
+          type: string
+          title: Store App Id
+          description: The store identifier for your app. You can change the previously
+            set store_app_id to match the one in the App Store or Google Play
+            depending on the app platform. This is especially useful if you want
+            to connect your app with the store as the system will validate the
+            given store_app_id against the Store. In case of iOS platform it is
+            the bundle id. In case of Android platform it is the package name.
+        connect_to_store:
+          type: boolean
+          title: Connect To Store
+          default: false
+          description: If true, will check connected app validity against the Apple App
+            Store or Google Play Store (dependent on the platform of your
+            connected app). This means, that the already set or just given
+            store_app_id will be validated against the Store, using the already
+            set or just given store credential id.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier for your connected app.
+        store_credential_id:
+          type: string
+          title: Store Credential Id
+          default: null
+          description: If you have credentials added on Bitrise, you can decide to select
+            one for your app. In case of ios platform it will be an Apple API
+            credential id. In case of android platform it will be a Google
+            Service credential id.
+  - name: list_installable_artifacts
+    description: List Release Management installable artifacts of a connected app
+      available for the authenticated account.
+    inputSchema:
+      type: object
+      title: list_installable_artifactsArguments
+      required:
+        - connected_app_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: Specifies which page should be returned from the whole result set
+            in a paginated scenario. Default value is 1.
+        branch:
+          type: string
+          title: Branch
+          default: null
+          description: Filters for the Bitrise CI branch of the installable artifact on
+            which it has been generated on.
+        search:
+          type: string
+          title: Search
+          default: null
+          description: Search by version, filename or build number (Bitrise CI). The
+            filter is case-sensitive.
+        source:
+          type: string
+          title: Source
+          default: null
+          description: Filters for the source of installable artifacts to be returned.
+            Available values are 'api' and 'ci'.
+        version:
+          type: string
+          title: Version
+          default: null
+          description: Filters for the version this installable artifact was created for.
+            This field is required if the distribution_ready filter is set to
+            true.
+        platform:
+          type: string
+          title: Platform
+          default: null
+          description: "Filters for a specific mobile platform for the list of installable
+            artifacts. Available values are: 'ios' and 'android'."
+        workflow:
+          type: string
+          title: Workflow
+          default: null
+          description: Filters for the Bitrise CI workflow of the installable artifact it
+            has been generated by.
+        after_date:
+          type: string
+          title: After Date
+          default: null
+          description: A date in ISO 8601 string format specifying the start of the
+            interval when the installable artifact to be returned was created or
+            uploaded. This value will be defaulted to 1 month ago if
+            distribution_ready filter is not set or set to false.
+        before_date:
+          type: string
+          title: Before Date
+          default: null
+          description: A date in ISO 8601 string format specifying the end of the interval
+            when the installable artifact to be returned was created or
+            uploaded. This value will be defaulted to the current time if
+            distribution_ready filter is not set or set to false.
+        store_signed:
+          type: boolean
+          title: Store Signed
+          default: null
+          description: Filters for store ready installable artifacts. This means signed
+            .aab and .ipa (with distribution type app-store) installable
+            artifacts.
+        artifact_type:
+          type: string
+          title: Artifact Type
+          default: null
+          description: "Filters for a specific artifact type or file extension for the
+            list of installable artifacts. Available values are: 'aab' and 'apk'
+            for android artifacts and 'ipa' for ios artifacts."
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+          description: Specifies the maximum number of installable artifacts to be
+            returned per page. Default value is 10.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: Identifier of the Release Management connected app for the
+            installable artifacts. This field is mandatory.
+        distribution_ready:
+          type: boolean
+          title: Distribution Ready
+          default: null
+          description: Filters for distribution ready installable artifacts. This means
+            .apk and .ipa (with distribution type ad-hoc, development, or
+            enterprise) installable artifacts.
+  - name: generate_installable_artifact_upload_url
+    description: Generates a signed upload url valid for 1 hour for an installable
+      artifact to be uploaded to Bitrise Release Management. The response will
+      contain an url that can be used to upload an artifact to Bitrise Release
+      Management using a simple curl request with the file data that should be
+      uploaded. The necessary headers and http method will also be in the
+      response. This artifact will need to be processed after upload to be
+      usable. The status of processing can be checked by making another
+      requestto a different url giving back the processed status of an
+      installable artifact.
+    inputSchema:
+      type: object
+      title: generate_installable_artifact_upload_urlArguments
+      required:
+        - connected_app_id
+        - installable_artifact_id
+        - file_name
+        - file_size_bytes
+      properties:
+        branch:
+          type: string
+          title: Branch
+          default: null
+          description: Optionally you can add the name of the CI branch the installable
+            artifact has been generated on.
+        workflow:
+          type: string
+          title: Workflow
+          default: null
+          description: Optionally you can add the name of the CI workflow this installable
+            artifact has been generated by.
+        file_name:
+          type: string
+          title: File Name
+          description: The name of the installable artifact file (with extension) to be
+            uploaded to Bitrise. This field is mandatory.
+        file_size_bytes:
+          type: string
+          title: File Size Bytes
+          description: The byte size of the installable artifact file to be uploaded.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: Identifier of the Release Management connected app for the
+            installable artifact. This field is mandatory.
+        with_public_page:
+          type: boolean
+          title: With Public Page
+          default: null
+          description: Optionally, you can enable public install page for your artifact.
+            This can only be enabled by Bitrise Project Admins, Bitrise Project
+            Owners and Bitrise Workspace Admins. Changing this value without
+            proper permissions will result in an error. The default value is
+            false.
+        installable_artifact_id:
+          type: string
+          title: Installable Artifact Id
+          description: An uuidv4 identifier generated on the client side for the
+            installable artifact. This field is mandatory.
+  - name: get_installable_artifact_upload_and_processing_status
+    description: Gets the processing and upload status of an installable artifact.
+      An artifact will need to be processed after upload to be usable. This
+      endpoint helps understanding when an uploaded installable artifacts
+      becomes usable for later purposes.
+    inputSchema:
+      type: object
+      title: get_installable_artifact_upload_and_processing_statusArguments
+      required:
+        - connected_app_id
+        - installable_artifact_id
+      properties:
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: Identifier of the Release Management connected app for the
+            installable artifact. This field is mandatory.
+        installable_artifact_id:
+          type: string
+          title: Installable Artifact Id
+          description: The uuidv4 identifier for the installable artifact. This field is
+            mandatory.
+  - name: set_installable_artifact_public_install_page
+    description: Changes whether public install page should be available for the
+      installable artifact or not.
+    inputSchema:
+      type: object
+      title: set_installable_artifact_public_install_pageArguments
+      required:
+        - connected_app_id
+        - installable_artifact_id
+        - with_public_page
+      properties:
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: Identifier of the Release Management connected app for the
+            installable artifact. This field is mandatory.
+        with_public_page:
+          type: boolean
+          title: With Public Page
+          description: Boolean flag for enabling/disabling public install page for the
+            installable artifact. This field is mandatory.
+        installable_artifact_id:
+          type: string
+          title: Installable Artifact Id
+          description: The uuidv4 identifier for the installable artifact. This field is
+            mandatory.
+  - name: list_build_distribution_versions
+    description: Lists Build Distribution versions. Release Management offers a
+      convenient, secure solution to distribute the builds of your mobile apps
+      to testers without having to engage with either TestFlight or Google Play.
+      Once you have installable artifacts, Bitrise can generate both private and
+      public install links that testers or other stakeholders can use to install
+      the app on real devices via over-the-air installation. Build distribution
+      allows you to define tester groups that can receive notifications about
+      installable artifacts. The email takes the notified testers to the test
+      build page, from where they can install the app on their own device. Build
+      distribution versions are the  app versions available for testers.
+    inputSchema:
+      type: object
+      title: list_build_distribution_versionsArguments
+      required:
+        - connected_app_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: Specifies which page should be returned from the whole result set
+            in a paginated scenario. Default value is 1.
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+          description: Specifies the maximum number of build distribution versions
+            returned per page. Default value is 10.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the app the build distribution is
+            connected to. This field is mandatory.
+  - name: list_build_distribution_version_test_builds
+    description: Gives back a list of test builds for the given build distribution version.
+    inputSchema:
+      type: object
+      title: list_build_distribution_version_test_buildsArguments
+      required:
+        - connected_app_id
+        - version
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: Specifies which page should be returned from the whole result set
+            in a paginated scenario. Default value is 1.
+        version:
+          type: string
+          title: Version
+          description: The version of the build distribution. This field is mandatory.
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+          description: Specifies the maximum number of test builds to return for a build
+            distribution version per page. Default value is 10.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the app the build distribution is
+            connected to. This field is mandatory.
+  - name: create_tester_group
+    description: Creates a tester group for a Release Management connected app.
+      Tester groups can be used to distribute installable artifacts to testers
+      automatically. When a new installable artifact is available, the tester
+      groups can either automatically or manually be notified via email. The
+      notification email will contain a link to the installable artifact page
+      for the artifact within Bitrise Release Management. A Release Management
+      connected app can have multiple tester groups. Project team members of the
+      connected app can be selected to be testers and added to the tester group.
+      This endpoint has an elevated access level requirement. Only the owner of
+      the related Bitrise Workspace, a workspace manager or the related
+      project's admin can manage tester groups.
+    inputSchema:
+      type: object
+      title: create_tester_groupArguments
+      required:
+        - connected_app_id
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name for the new tester group. Must be unique in the scope of
+            the connected app.
+        auto_notify:
+          type: boolean
+          title: Auto Notify
+          default: false
+          description: If set to true it indicates that the tester group will receive
+            notifications automatically.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the related Release Management connected
+            app.
+  - name: notify_tester_group
+    description: Notifies a tester group about a new test build.
+    inputSchema:
+      type: object
+      title: notify_tester_groupArguments
+      required:
+        - connected_app_id
+        - id
+        - test_build_id
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The uuidV4 identifier of the tester group whose members will be
+            notified about the test build.
+        test_build_id:
+          type: string
+          title: Test Build Id
+          description: The unique identifier of the test build what will be sent in the
+            notification of the tester group.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the related Release Management connected
+            app.
+  - name: add_testers_to_tester_group
+    description: Adds testers to a tester group of a connected app.
+    inputSchema:
+      type: object
+      title: add_testers_to_tester_groupArguments
+      required:
+        - connected_app_id
+        - id
+        - user_slugs
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The uuidV4 identifier of the tester group to which testers will be
+            added.
+        user_slugs:
+          type: array
+          items:
+            type: string
+          title: User Slugs
+          description: The list of users identified by slugs that will be added to the
+            tester group.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the related Release Management connected
+            app.
+  - name: update_tester_group
+    description: Updates the given tester group. The name and the auto notification
+      setting can be updated optionally.
+    inputSchema:
+      type: object
+      title: update_tester_groupArguments
+      required:
+        - connected_app_id
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The uuidV4 identifier of the tester group to which testers will be
+            added.
+        name:
+          type: string
+          title: Name
+          default: null
+          description: The new name for the tester group. Must be unique in the scope of
+            the related connected app.
+        auto_notify:
+          type: boolean
+          title: Auto Notify
+          default: false
+          description: If set to true it indicates the tester group will receive email
+            notifications automatically from now on about new installable
+            builds.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the related Release Management connected
+            app.
+  - name: list_tester_groups
+    description: Gives back a list of tester groups related to a specific Release
+      Management connected app.
+    inputSchema:
+      type: object
+      title: list_tester_groupsArguments
+      required:
+        - connected_app_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: Specifies which page should be returned from the whole result set
+            in a paginated scenario. Default value is 1.
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+          description: Specifies the maximum number of tester groups to return related to
+            a specific connected app. Default value is 10.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the app the tester group is connected to.
+            This field is mandatory.
+  - name: get_tester_group
+    description: Gives back the details of the selected tester group.
+    inputSchema:
+      type: object
+      title: get_tester_groupArguments
+      required:
+        - connected_app_id
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The uuidV4 identifier of the tester group. This field is mandatory.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the app the tester group is connected to.
+            This field is mandatory.
+  - name: get_potential_testers
+    description: Gets a list of potential testers whom can be added as testers to a
+      specific tester group. The list consists of Bitrise users having access to
+      the related Release Management connected app.
+    inputSchema:
+      type: object
+      title: get_potential_testersArguments
+      required:
+        - connected_app_id
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The uuidV4 identifier of the tester group. This field is mandatory.
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: Specifies which page should be returned from the whole result set
+            in a paginated scenario. Default value is 1.
+        search:
+          type: string
+          title: Search
+          default: null
+          description: Searches for potential testers based on email or username using a
+            case-insensitive approach.
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+          description: Specifies the maximum number of potential testers to return having
+            access to a specific connected app. Default value is 10.
+        connected_app_id:
+          type: string
+          title: Connected App Id
+          description: The uuidV4 identifier of the app the tester group is connected to.
+            This field is mandatory.

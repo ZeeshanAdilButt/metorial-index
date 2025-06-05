@@ -1,0 +1,17 @@
+identifier: semgrep/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/semgrep/mcp
+  name: mcp
+  owner: semgrep
+server:
+  subdirectory: /
+  name: Semgrep MCP Server
+  description: Scan your code for security vulnerabilities and create custom rules
+    effortlessly. Leverage the power of Semgrep through a comprehensive
+    interface that enhances your coding tools and AI agents. Simplify your code
+    analysis and improve security with advanced scanning capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,45 @@
+tools:
+  - name: brave_web_search
+    description: |
+      Execute web search using Brave Search API with improved results
+
+      Args:
+          query: Search terms
+          count: Desired number of results (10-20)
+    inputSchema:
+      type: object
+      title: brave_web_searchArguments
+      required:
+        - query
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 20
+        query:
+          type: string
+          title: Query
+  - name: brave_local_search
+    description: |
+      Search for local businesses and places
+
+      Args:
+          query: Location terms
+          count: Desired number of results (10-20)
+    inputSchema:
+      type: object
+      title: brave_local_searchArguments
+      required:
+        - query
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 20
+        query:
+          type: string
+          title: Query

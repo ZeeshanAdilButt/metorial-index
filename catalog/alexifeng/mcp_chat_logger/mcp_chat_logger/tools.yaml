@@ -1,0 +1,31 @@
+tools:
+  - name: save_chat_history
+    description: "
+
+      \    Save chat history as a Markdown file
+
+      \   \ 
+
+      \    Args:
+
+      \        messages: List of chat messages, each containing role and content
+
+      \        conversation_id: Optional conversation ID for file naming
+
+      \    "
+    inputSchema:
+      type: object
+      title: save_chat_historyArguments
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Messages
+        conversation_id:
+          type: string
+          title: Conversation Id
+          default: null

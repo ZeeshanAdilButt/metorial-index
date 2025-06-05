@@ -1,0 +1,119 @@
+tools:
+  - name: query
+    description: Execute a SQL query against the PostgreSQL database.
+    inputSchema:
+      type: object
+      title: queryArguments
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          title: Sql
+        parameters:
+          anyOf:
+            - type: array
+              items: {}
+            - type: "null"
+          title: Parameters
+          default: null
+  - name: list_schemas
+    description: List all schemas in the database.
+    inputSchema:
+      type: object
+      title: list_schemasArguments
+      properties: {}
+  - name: list_tables
+    description: "List all tables in a specific schema.
+
+      \   \ 
+
+      \    Args:
+
+      \        schema: The schema name to list tables from (defaults to
+      'public')
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_tablesArguments
+      properties:
+        schema:
+          type: string
+          title: Schema
+          default: public
+  - name: describe_table
+    description: "Get detailed information about a table.
+
+      \   \ 
+
+      \    Args:
+
+      \        table_name: The name of the table to describe
+
+      \        schema: The schema name (defaults to 'public')
+
+      \    "
+    inputSchema:
+      type: object
+      title: describe_tableArguments
+      required:
+        - table_name
+      properties:
+        schema:
+          type: string
+          title: Schema
+          default: public
+        table_name:
+          type: string
+          title: Table Name
+  - name: get_foreign_keys
+    description: "Get foreign key information for a table.
+
+      \   \ 
+
+      \    Args:
+
+      \        table_name: The name of the table to get foreign keys from
+
+      \        schema: The schema name (defaults to 'public')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_foreign_keysArguments
+      required:
+        - table_name
+      properties:
+        schema:
+          type: string
+          title: Schema
+          default: public
+        table_name:
+          type: string
+          title: Table Name
+  - name: find_relationships
+    description: "Find both explicit and implied relationships for a table.
+
+      \   \ 
+
+      \    Args:
+
+      \        table_name: The name of the table to analyze relationships for
+
+      \        schema: The schema name (defaults to 'public')
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_relationshipsArguments
+      required:
+        - table_name
+      properties:
+        schema:
+          type: string
+          title: Schema
+          default: public
+        table_name:
+          type: string
+          title: Table Name

@@ -1,0 +1,18 @@
+identifier: nickclyde/duckduckgo-mcp-server/duckduckgo-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nickclyde/duckduckgo-mcp-server
+  name: duckduckgo-mcp-server
+  owner: nickclyde
+server:
+  subdirectory: /
+  name: DuckDuckGo Search Server
+  description: Provide web search capabilities through DuckDuckGo with advanced
+    rate limiting and intelligent content fetching. Retrieve and parse webpage
+    content with results formatted specifically for large language model
+    consumption. Benefit from comprehensive error handling and optimized output
+    for seamless integration with LLM applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

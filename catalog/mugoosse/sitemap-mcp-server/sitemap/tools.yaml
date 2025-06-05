@@ -1,0 +1,85 @@
+tools:
+  - name: get_sitemap_tree
+    description: Fetch and parse the sitemap tree from a website URL
+    inputSchema:
+      type: object
+      title: get_sitemap_treeArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The URL of the website homepage (e.g., https://example.com)
+        include_pages:
+          type: boolean
+          title: Include Pages
+          default: false
+          description: Whether to include page details in the response
+  - name: get_sitemap_pages
+    description: Get all pages from a website's sitemap with optional limits and
+      filtering options. Supports cursor-based pagination.
+    inputSchema:
+      type: object
+      title: get_sitemap_pagesArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The URL of the website homepage (e.g., https://example.com)
+        limit:
+          type: integer
+          title: Limit
+          default: 0
+          description: Maximum number of pages to return per page (0 for default of 100)
+        route:
+          type: string
+          title: Route
+          default: ""
+          description: Optional route path to filter pages by (e.g., '/blog')
+        cursor:
+          type: string
+          title: Cursor
+          default: ""
+          description: Pagination cursor for fetching the next page of results
+        sitemap_url:
+          type: string
+          title: Sitemap Url
+          default: ""
+          description: Optional URL of a specific sitemap to get pages from
+        include_metadata:
+          type: boolean
+          title: Include Metadata
+          default: false
+          description: Whether to include additional page metadata (priority, lastmod, etc.)
+  - name: get_sitemap_stats
+    description: Get comprehensive statistics about a website's sitemap structure
+    inputSchema:
+      type: object
+      title: get_sitemap_statsArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: The URL of the website homepage (e.g., https://example.com)
+  - name: parse_sitemap_content
+    description: Parse a sitemap directly from its XML or text content
+    inputSchema:
+      type: object
+      title: parse_sitemap_contentArguments
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+          description: The content of the sitemap (XML, text, etc.)
+        include_pages:
+          type: boolean
+          title: Include Pages
+          default: false
+          description: Whether to include page details in the response

@@ -1,0 +1,24 @@
+tools:
+  - name: search_web_tool
+    description: "
+
+      \    Search the web for a given query.
+
+      \    Args:
+
+      \        query: The search query.
+
+      \    Returns:
+
+      \        The search results.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_web_toolArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

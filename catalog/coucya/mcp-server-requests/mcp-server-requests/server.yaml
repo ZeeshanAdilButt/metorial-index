@@ -1,0 +1,17 @@
+identifier: coucya/mcp-server-requests/mcp-server-requests
+repo:
+  provider: github.com
+  url: https://github.com/coucya/mcp-server-requests
+  name: mcp-server-requests
+  owner: coucya
+server:
+  subdirectory: /
+  name: Web Requests Server
+  description: Enable your LLM to read web pages and perform HTTP requests
+    effortlessly. Convert web content to Markdown, customize headers, and
+    utilize various HTTP methods to interact with online resources. Enhance your
+    applications with real-time web data access and manipulation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

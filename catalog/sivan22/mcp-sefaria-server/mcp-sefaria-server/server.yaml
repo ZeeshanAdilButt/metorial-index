@@ -1,0 +1,14 @@
+identifier: sivan22/mcp-sefaria-server/mcp-sefaria-server
+repo:
+  provider: github.com
+  url: https://github.com/Sivan22/mcp-sefaria-server
+  name: mcp-sefaria-server
+  owner: Sivan22
+server:
+  subdirectory: /
+  name: Sefaria Jewish Library
+  description: Access Jewish texts from the Sefaria library via MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

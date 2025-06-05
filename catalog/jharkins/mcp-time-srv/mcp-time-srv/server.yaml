@@ -1,0 +1,17 @@
+identifier: jharkins/mcp-time-srv/mcp-time-srv
+repo:
+  provider: github.com
+  url: https://github.com/jharkins/mcp-time-srv
+  name: mcp-time-srv
+  owner: jharkins
+server:
+  subdirectory: /
+  name: Time Server
+  description: Provide accurate current time information and timezone conversions
+    through simple, easy-to-use tools. Query the current time in any IANA
+    timezone or convert times between different timezones effortlessly. Enhance
+    your applications with reliable time-related data and conversions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: henkdz/selfhosted-supabase-mcp/selfhosted-supabase-mcp
+repo:
+  provider: github.com
+  url: https://github.com/HenkDz/selfhosted-supabase-mcp
+  name: selfhosted-supabase-mcp
+  owner: HenkDz
+server:
+  subdirectory: /
+  name: Self-Hosted Supabase MCP Server
+  description: Enable seamless interaction with your self-hosted Supabase instance
+    through MCP clients. Manage database schemas, migrations, authentication
+    users, storage, and realtime publications directly from your development
+    environment. Streamline your Supabase project management with a focused,
+    minimal MCP server tailored for self-hosted setups.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

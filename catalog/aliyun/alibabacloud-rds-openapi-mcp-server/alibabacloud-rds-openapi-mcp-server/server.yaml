@@ -1,0 +1,19 @@
+identifier: aliyun/alibabacloud-rds-openapi-mcp-server/alibabacloud-rds-openapi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/aliyun/alibabacloud-rds-openapi-mcp-server
+  name: alibabacloud-rds-openapi-mcp-server
+  owner: aliyun
+server:
+  subdirectory: /
+  name: Alibaba Cloud RDS OpenAPI Server
+  description: Provide seamless integration with Alibaba Cloud RDS services to
+    manage and query relational database instances efficiently. Enable users to
+    perform operations such as creating instances, querying performance data,
+    and modifying configurations through a standardized MCP interface. Simplify
+    RDS management with automated tool invocations and precise time-based
+    queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

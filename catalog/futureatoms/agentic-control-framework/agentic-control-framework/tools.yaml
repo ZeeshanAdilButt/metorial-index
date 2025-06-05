@@ -1,0 +1,206 @@
+tools:
+  - name: setWorkspace
+    description: Sets the workspace directory for the task manager.
+    inputSchema:
+      type: object
+      required:
+        - workspacePath
+      properties:
+        workspacePath:
+          type: string
+          description: The path to the workspace directory.
+  - name: initProject
+    description: Initializes the task manager project.
+    inputSchema:
+      type: object
+      properties:
+        projectName:
+          type: string
+          description: Optional name for the project.
+        projectDescription:
+          type: string
+          description: Optional goal or description for the project.
+  - name: addTask
+    description: Adds a new task to the task list.
+    inputSchema:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: The title of the task.
+        priority:
+          enum:
+            - low
+            - medium
+            - high
+          type: string
+          description: Optional priority (low, medium, high). Defaults to medium.
+        dependsOn:
+          type: string
+          description: Optional comma-separated string of task IDs it depends on.
+        description:
+          type: string
+          description: Optional description for the task.
+        relatedFiles:
+          type: string
+          description: Optional comma-separated string of relevant file paths.
+  - name: addSubtask
+    description: Adds a subtask to a specified parent task.
+    inputSchema:
+      type: object
+      required:
+        - parentId
+        - title
+      properties:
+        title:
+          type: string
+          description: The title of the subtask.
+        parentId:
+          type: number
+          description: The ID of the parent task.
+  - name: listTasks
+    description: Lists tasks, optionally filtered by status.
+    inputSchema:
+      type: object
+      properties:
+        format:
+          enum:
+            - json
+            - table
+            - human
+          type: string
+          description: Optional output format. "human" provides a readable format with
+            checkboxes.
+        status:
+          enum:
+            - todo
+            - inprogress
+            - done
+            - blocked
+            - error
+          type: string
+          description: Optional status to filter by.
+  - name: updateStatus
+    description: Updates the status of a task or subtask.
+    inputSchema:
+      type: object
+      required:
+        - id
+        - newStatus
+      properties:
+        id:
+          type: string
+          description: The ID of the task or subtask (e.g., 1 or 1.1).
+        message:
+          type: string
+          description: Optional message to add to the activity log.
+        newStatus:
+          enum:
+            - todo
+            - inprogress
+            - done
+            - blocked
+            - error
+          type: string
+          description: The new status.
+  - name: getNextTask
+    description: Gets the next actionable task based on status, dependencies, and priority.
+    inputSchema:
+      type: object
+  - name: updateTask
+    description: Updates the details of a task or subtask.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the task or subtask.
+        title:
+          type: string
+          description: Optional new title.
+        message:
+          type: string
+          description: Optional message to add to the activity log.
+        priority:
+          enum:
+            - low
+            - medium
+            - high
+          type: string
+          description: Optional new priority (applies to main tasks).
+        description:
+          type: string
+          description: Optional new description (applies to main tasks).
+        relatedFiles:
+          type: string
+          description: Optional comma-separated string of relevant file paths (replaces
+            existing).
+  - name: removeTask
+    description: Removes a task or subtask by its ID.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the task or subtask to remove.
+  - name: getContext
+    description: Retrieves detailed context for a specific task or subtask.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the task or subtask (e.g., 1 or 1.1).
+  - name: generateTaskFiles
+    description: Generates individual Markdown files for each task in the tasks/ directory.
+    inputSchema:
+      type: object
+  - name: parsePrd
+    description: Parses a Product Requirements Document (PRD) file using the Gemini
+      API to generate tasks.
+    inputSchema:
+      type: object
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: Path to the PRD file to parse.
+  - name: expandTask
+    description: Uses the Gemini API to break down a task into subtasks (overwrites
+      existing subtasks).
+    inputSchema:
+      type: object
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The ID of the task to expand.
+  - name: reviseTasks
+    description: Uses the Gemini API to revise future tasks based on a
+      prompt/change, starting from a specific task ID.
+    inputSchema:
+      type: object
+      required:
+        - fromTaskId
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: User prompt describing the change.
+        fromTaskId:
+          type: string
+          description: Task ID from which revision should start.
+  - name: generateTaskTable
+    description: Generates a human-readable Markdown file with task statuses and checkboxes.
+    inputSchema:
+      type: object

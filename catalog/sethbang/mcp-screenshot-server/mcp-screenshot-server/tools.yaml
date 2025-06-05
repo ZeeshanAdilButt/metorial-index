@@ -1,0 +1,27 @@
+tools:
+  - name: take_screenshot
+    description: Capture a screenshot of any web page or local GUI
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to capture (can be http://, https://, or file:///)
+        width:
+          type: number
+          maximum: 3840
+          minimum: 1
+          description: Viewport width in pixels
+        height:
+          type: number
+          maximum: 2160
+          minimum: 1
+          description: Viewport height in pixels
+        fullPage:
+          type: boolean
+          description: Capture full scrollable page
+        outputPath:
+          type: string
+          description: Custom output path (optional)

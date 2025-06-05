@@ -1,0 +1,99 @@
+tools:
+  - name: list_projects
+    description: List all Supabase projects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        ref:
+          type: string
+      additionalProperties: false
+  - name: get_project
+    description: Get details of a specific Supabase project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ref
+      properties:
+        ref:
+          type: string
+      additionalProperties: false
+  - name: create_project
+    description: Create a new Supabase project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - organization_id
+        - region
+        - db_pass
+      properties:
+        name:
+          type: string
+        plan:
+          type: string
+        region:
+          type: string
+        db_pass:
+          type: string
+        organization_id:
+          type: string
+      additionalProperties: false
+  - name: delete_project
+    description: Delete a Supabase project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ref
+      properties:
+        ref:
+          type: string
+      additionalProperties: false
+  - name: list_organizations
+    description: List all organizations
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_organization
+    description: Get details of a specific organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+      additionalProperties: false
+  - name: create_organization
+    description: Create a new organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - billing_email
+      properties:
+        name:
+          type: string
+        billing_email:
+          type: string
+      additionalProperties: false
+  - name: get_project_api_keys
+    description: Get API keys for a specific Supabase project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ref
+      properties:
+        ref:
+          type: string
+        name:
+          type: string
+      additionalProperties: false

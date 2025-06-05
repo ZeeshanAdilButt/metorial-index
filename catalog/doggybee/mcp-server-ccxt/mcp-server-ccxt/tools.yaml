@@ -1,0 +1,225 @@
+tools:
+  - name: cache-stats
+    description: Get CCXT cache statistics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: clear-cache
+    description: Clear CCXT cache
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: set-log-level
+    description: Set logging level
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - level
+      properties:
+        level:
+          enum:
+            - debug
+            - info
+            - warning
+            - error
+          type: string
+          description: Logging level to set
+      additionalProperties: false
+  - name: list-exchanges
+    description: List all available cryptocurrency exchanges
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-ticker
+    description: Get current ticker information for a trading pair
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: Trading pair symbol (e.g., BTC/USDT)
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false
+  - name: batch-get-tickers
+    description: Get ticker information for multiple trading pairs at once
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - symbols
+      properties:
+        symbols:
+          type: array
+          items:
+            type: string
+          description: List of trading pair symbols (e.g., ['BTC/USDT', 'ETH/USDT'])
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false
+  - name: get-orderbook
+    description: Get market order book for a trading pair
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - symbol
+      properties:
+        limit:
+          type: number
+          default: 20
+          description: Depth of the orderbook
+        symbol:
+          type: string
+          description: Trading pair symbol (e.g., BTC/USDT)
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false
+  - name: get-ohlcv
+    description: Get OHLCV candlestick data for a trading pair
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - symbol
+      properties:
+        limit:
+          type: number
+          default: 100
+          description: Number of candles to fetch (max 1000)
+        symbol:
+          type: string
+          description: Trading pair symbol (e.g., BTC/USDT)
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+        timeframe:
+          type: string
+          default: 1d
+          description: Timeframe (e.g., 1m, 5m, 1h, 1d)
+      additionalProperties: false
+  - name: get-trades
+    description: Get recent trades for a trading pair
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - symbol
+      properties:
+        limit:
+          type: number
+          default: 50
+          description: Number of trades to fetch
+        symbol:
+          type: string
+          description: Trading pair symbol (e.g., BTC/USDT)
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false
+  - name: get-markets
+    description: Get all available markets for an exchange
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+        pageSize:
+          type: number
+          default: 100
+          description: Items per page
+      additionalProperties: false
+  - name: get-exchange-info
+    description: Get exchange information and status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+      properties:
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false
+  - name: account-balance
+    description: Get your account balance from a crypto exchange
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - apiKey
+        - secret
+      properties:
+        apiKey:
+          type: string
+          description: API key for authentication
+        secret:
+          type: string
+          description: API secret for authentication
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false
+  - name: place-market-order
+    description: Place a market order on an exchange
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exchange
+        - symbol
+        - side
+        - amount
+        - apiKey
+        - secret
+      properties:
+        side:
+          enum:
+            - buy
+            - sell
+          type: string
+          description: "Order side: buy or sell"
+        amount:
+          type: number
+          description: Amount to buy/sell
+          exclusiveMinimum: 0
+        apiKey:
+          type: string
+          description: API key for authentication
+        secret:
+          type: string
+          description: API secret for authentication
+        symbol:
+          type: string
+          description: Trading pair symbol (e.g., BTC/USDT)
+        exchange:
+          type: string
+          description: Exchange ID (e.g., binance, coinbase)
+      additionalProperties: false

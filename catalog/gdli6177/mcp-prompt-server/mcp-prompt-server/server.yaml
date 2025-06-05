@@ -1,0 +1,19 @@
+identifier: gdli6177/mcp-prompt-server/mcp-prompt-server
+repo:
+  provider: github.com
+  url: https://github.com/gdli6177/mcp-prompt-server
+  name: mcp-prompt-server
+  owner: gdli6177
+server:
+  subdirectory: /
+  name: Prompt Server
+  description: Provide preset prompt templates as tools to help users efficiently
+    perform various tasks such as code review, API documentation generation, and
+    code refactoring. Enable dynamic parameter replacement for flexible prompt
+    usage and allow developers to easily add or modify prompt templates.
+    Optimize integration with editors like Cursor and Windsurf for a seamless
+    user experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

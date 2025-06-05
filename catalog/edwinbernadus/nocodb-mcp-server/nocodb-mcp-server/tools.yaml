@@ -1,0 +1,402 @@
+tools:
+  - name: nocodb-get-records
+    description: |
+      Nocodb - Get Recordshint:
+          1. Get all records from a table (limited to 10):
+             retrieve_records(table_name="customers")
+             
+          3. Filter records with conditions:
+             retrieve_records(
+                 table_name="customers", 
+                 filters="(age,gt,30)~and(status,eq,active)"
+             )
+             
+          4. Paginate results:
+             retrieve_records(table_name="customers", limit=20, offset=40)
+             
+          5. Sort results:
+             retrieve_records(table_name="customers", sort="-created_at")
+             
+          6. Select specific fields:
+             retrieve_records(table_name="customers", fields="id,name,email")
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        sort:
+          type: string
+          description: "Example: sort=field1,-field2 will sort the records first by
+            'field1' in ascending order and then by 'field2' in descending
+            order."
+        limit:
+          type: number
+        fields:
+          type: string
+          description: "Example: fields=field1,field2 will include only 'field1' and
+            'field2' in the API response."
+        offset:
+          type: number
+        filters:
+          type: string
+          description: >
+            Example: where=(field1,eq,value1)~and(field2,eq,value2) will filter
+            records where 'field1' is equal to 'value1' AND 'field2' is equal to
+            'value2'.
+
+            You can also use other comparison operators like 'ne' (not equal),
+            'gt' (greater than), 'lt' (less than), and more, to create complex
+            filtering rules.
+             
+            Comparison Operators
+
+            Operation Meaning Example
+
+            eq  equal (colName,eq,colValue)
+
+            neq not equal (colName,neq,colValue)
+
+            not not equal (alias of neq)  (colName,not,colValue)
+
+            gt  greater than  (colName,gt,colValue)
+
+            ge  greater or equal  (colName,ge,colValue)
+
+            lt  less than (colName,lt,colValue)
+
+            le  less or equal (colName,le,colValue)
+
+            is  is  (colName,is,true/false/null)
+
+            isnot is not  (colName,isnot,true/false/null)
+
+            in  in  (colName,in,val1,val2,val3,val4)
+
+            btw between (colName,btw,val1,val2)
+
+            nbtw  not between (colName,nbtw,val1,val2)
+
+            like  like  (colName,like,%name)
+
+            isWithin  is Within (Available in Date and DateTime only)
+            (colName,isWithin,sub_op)
+
+            allof includes all of (colName,allof,val1,val2,...)
+
+            anyof includes any of (colName,anyof,val1,val2,...)
+
+            nallof  does not include all of (includes none or some, but not all
+            of) (colName,nallof,val1,val2,...)
+
+            nanyof  does not include any of (includes none
+            of)  (colName,nanyof,val1,val2,...)
+
+
+
+            Comparison Sub-Operators
+
+            The following sub-operators are available in Date and DateTime
+            columns.
+
+
+            Operation Meaning Example
+
+            today today (colName,eq,today)
+
+            tomorrow  tomorrow  (colName,eq,tomorrow)
+
+            yesterday yesterday (colName,eq,yesterday)
+
+            oneWeekAgo  one week ago  (colName,eq,oneWeekAgo)
+
+            oneWeekFromNow  one week from now (colName,eq,oneWeekFromNow)
+
+            oneMonthAgo one month ago (colName,eq,oneMonthAgo)
+
+            oneMonthFromNow one month from now  (colName,eq,oneMonthFromNow)
+
+            daysAgo number of days ago  (colName,eq,daysAgo,10)
+
+            daysFromNow number of days from now (colName,eq,daysFromNow,10)
+
+            exactDate exact date  (colName,eq,exactDate,2022-02-02)
+
+
+            For isWithin in Date and DateTime columns, the different set of
+            sub-operators are used.
+
+
+            Operation Meaning Example
+
+            pastWeek  the past week (colName,isWithin,pastWeek)
+
+            pastMonth the past month  (colName,isWithin,pastMonth)
+
+            pastYear  the past year (colName,isWithin,pastYear)
+
+            nextWeek  the next week (colName,isWithin,nextWeek)
+
+            nextMonth the next month  (colName,isWithin,nextMonth)
+
+            nextYear  the next year (colName,isWithin,nextYear)
+
+            nextNumberOfDays  the next number of days
+            (colName,isWithin,nextNumberOfDays,10)
+
+            pastNumberOfDays  the past number of days
+            (colName,isWithin,pastNumberOfDays,10)
+
+            Logical Operators
+
+
+            Operation Example
+
+            ~or (checkNumber,eq,JM555205)~or((amount, gt, 200)~and(amount, lt,
+            2000))
+
+            ~and  (checkNumber,eq,JM555205)~and((amount, gt, 200)~and(amount,
+            lt, 2000))
+
+            ~not  ~not(checkNumber,eq,JM555205)
+
+
+
+            For date null rule
+
+            (date,isnot,null) -> (date,notblank).
+
+            (date,is,null) -> (date,blank).
+        tableName:
+          type: string
+      additionalProperties: false
+  - name: nocodb-get-list-tables
+    description: |
+      Nocodb - Get List Tables
+      notes: only show result from output to user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: nocodb-post-records
+    description: Nocodb - Post Records
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        data:
+          description: >-
+            The data to be inserted into the table. 
+
+            [WARNING] The structure of this object should match the columns of
+            the table.
+
+            example:
+
+            const response = await postRecords("Shinobi", {
+                    Title: "sasuke"
+            })
+        tableName:
+          type: string
+          description: table name
+      additionalProperties: false
+  - name: nocodb-post-records-bulk
+    description: Nocodb - Post Records Multiple Records
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - uploadItems
+      properties:
+        tableName:
+          type: string
+          description: table name
+        uploadItems:
+          type: array
+          items:
+            type: object
+            properties:
+              data:
+                description: >-
+                  The data to be inserted into the table. 
+
+                  [WARNING] The structure of this object should match the
+                  columns of the table.
+
+                  example:
+
+                  const response = await postRecords("Shinobi", {
+                          Title: "sasuke"
+                  })
+            additionalProperties: false
+          description: array of data to be inserted into the table
+      additionalProperties: false
+  - name: nocodb-patch-records
+    description: Nocodb - Patch Records
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - rowId
+      properties:
+        data:
+          description: >-
+            The data to be updated in the table.
+
+            [WARNING] The structure of this object should match the columns of
+            the table.
+
+            example:
+
+            const response = await patchRecords("Shinobi", 2, {
+                        Title: "sasuke-updated"
+            })
+        rowId:
+          type: number
+        tableName:
+          type: string
+      additionalProperties: false
+  - name: nocodb-delete-records
+    description: Nocodb - Delete Records
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - rowId
+      properties:
+        rowId:
+          type: number
+        tableName:
+          type: string
+      additionalProperties: false
+  - name: nocodb-delete-records-bulk
+    description: Nocodb - Delete Records Multiple Records
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - deleteRowsId
+      properties:
+        tableName:
+          type: string
+          description: table name
+        deleteRowsId:
+          type: array
+          items:
+            type: object
+            required:
+              - rowId
+            properties:
+              rowId:
+                type: number
+            additionalProperties: false
+          description: array of data to be deleted from the table
+      additionalProperties: false
+  - name: nocodb-get-table-metadata
+    description: Nocodb - Get Table Metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        tableName:
+          type: string
+      additionalProperties: false
+  - name: nocodb-alter-table-add-column
+    description: Nocodb - Alter Table Add Column
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - columnName
+        - columnType
+      properties:
+        tableName:
+          type: string
+        columnName:
+          type: string
+        columnType:
+          type: string
+          description: SingleLineText, Number, Decimals, DateTime, Checkbox
+      additionalProperties: false
+  - name: nocodb-alter-table-remove-column
+    description: "Nocodb - Alter Table Remove Column get columnId from
+      getTableMetadata notes: remove column by columnId example: c7uo2ruwc053a3a
+      [WARNING] this action is irreversible [RECOMMENDATION] give warning to
+      user"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - columnId
+      properties:
+        columnId:
+          type: string
+      additionalProperties: false
+  - name: nocodb-create-table
+    description: Nocodb - Create Table
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - uidt
+            properties:
+              uidt:
+                enum:
+                  - SingleLineText
+                  - Number
+                  - Checkbox
+                  - DateTime
+                type: string
+                description: SingleLineText, Number, Checkbox, DateTime
+              title:
+                type: string
+            description: >-
+              The data to be inserted into the table.
+
+              [WARNING] The structure of this object should match the columns of
+              the table.
+
+              example:
+
+              const response = await createTable("Shinobi", [
+                      {
+                          title: "Name",
+                          uidt: "SingleLineText"
+                      },
+                      {
+                          title: "Age",
+                          uidt: "Number"
+                      },
+                      {
+                          title: "isHokage",
+                          uidt: "Checkbox"
+                      },
+                      {
+                          title: "Birthday",
+                          uidt: "DateTime"
+                      }
+                  ]
+              )
+            additionalProperties: false
+        tableName:
+          type: string
+      additionalProperties: false

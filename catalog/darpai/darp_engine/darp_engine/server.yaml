@@ -1,0 +1,19 @@
+identifier: darpai/darp_engine/darp_engine
+repo:
+  provider: github.com
+  url: https://github.com/DARPAI/darp_engine
+  name: darp_engine
+  owner: DARPAI
+server:
+  subdirectory: /
+  name: DARPEngine
+  description: Provide smart search capabilities for MCP servers hosted online,
+    enabling users to find and connect to relevant MCP tools easily. Facilitate
+    integration with MCP clients through a simple CLI and API access, enhancing
+    the discovery and routing of MCP servers based on user queries. Improve user
+    experience by enabling routing of requests to appropriate MCP tools for
+    comprehensive answers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

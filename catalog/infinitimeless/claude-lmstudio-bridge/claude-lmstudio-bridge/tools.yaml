@@ -1,0 +1,123 @@
+tools:
+  - name: check_lmstudio_connection
+    description: "Check if the LM Studio server is running and accessible.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Connection status and model information
+
+      \        "
+    inputSchema:
+      type: object
+      title: check_lmstudio_connectionArguments
+      properties: {}
+  - name: list_lmstudio_models
+    description: "List available LLM models in LM Studio.
+
+      \       \ 
+
+      \        Returns:
+
+      \            A formatted list of available models with their details.
+
+      \        "
+    inputSchema:
+      type: object
+      title: list_lmstudio_modelsArguments
+      properties: {}
+  - name: generate_text
+    description: "Generate text using a local LLM in LM Studio.
+
+      \       \ 
+
+      \        Args:
+
+      \            prompt: The text prompt to send to the model
+
+      \            model_id: ID of the model to use (leave empty for default
+      model)
+
+      \            max_tokens: Maximum number of tokens in the response
+      (default: 1000)
+
+      \            temperature: Randomness of the output (0-1, default: 0.7)
+
+      \       \ 
+
+      \        Returns:
+
+      \            The generated text from the local LLM
+
+      \        "
+    inputSchema:
+      type: object
+      title: generate_textArguments
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+        model_id:
+          type: string
+          title: Model Id
+          default: ""
+        max_tokens:
+          type: integer
+          title: Max Tokens
+          default: 1000
+        temperature:
+          type: number
+          title: Temperature
+          default: 0.7
+  - name: chat_completion
+    description: "Generate a chat completion using a local LLM in LM Studio.
+
+      \       \ 
+
+      \        Args:
+
+      \            messages: JSON string of messages in the format [{\"role\":
+      \"user\", \"content\": \"Hello\"}, ...]
+
+      \              or a simple text string which will be treated as a user
+      message
+
+      \            model_id: ID of the model to use (leave empty for default
+      model)
+
+      \            max_tokens: Maximum number of tokens in the response
+      (default: 1000)
+
+      \            temperature: Randomness of the output (0-1, default: 0.7)
+
+      \       \ 
+
+      \        Returns:
+
+      \            The generated text from the local LLM
+
+      \        "
+    inputSchema:
+      type: object
+      title: chat_completionArguments
+      required:
+        - messages
+      properties:
+        messages:
+          type: string
+          title: Messages
+        model_id:
+          type: string
+          title: Model Id
+          default: ""
+        max_tokens:
+          type: integer
+          title: Max Tokens
+          default: 1000
+        temperature:
+          type: number
+          title: Temperature
+          default: 0.7

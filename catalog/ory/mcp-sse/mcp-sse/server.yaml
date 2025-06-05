@@ -1,0 +1,18 @@
+identifier: ory/mcp-sse/mcp-sse
+repo:
+  provider: github.com
+  url: https://github.com/ory/mcp-sse
+  name: mcp-sse
+  owner: ory
+server:
+  subdirectory: /
+  name: Ory SSE MCP Server
+  description: Provide a secure MCP server with real-time communication using
+    Server-Sent Events and OAuth 2.1 integration via Ory Network. Manage OAuth
+    clients dynamically and handle Ory Network projects with built-in tools.
+    Enhance AI model interactions with robust authentication and project
+    management capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

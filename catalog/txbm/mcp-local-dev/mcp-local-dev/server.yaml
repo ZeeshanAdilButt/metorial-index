@@ -1,0 +1,15 @@
+identifier: txbm/mcp-local-dev/mcp-local-dev
+repo:
+  provider: github.com
+  url: https://github.com/txbm/mcp-local-dev
+  name: mcp-local-dev
+  owner: txbm
+server:
+  subdirectory: /
+  name: Local Development Environment Manager
+  description: Automatically set up, manage, and test local development
+    environments from GitHub repositories or local paths.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

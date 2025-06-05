@@ -1,0 +1,43 @@
+tools:
+  - name: read_query
+    description: "Execute a SELECT query on the IoTDB. Please use table sql_dialect
+      when generating SQL queries.
+
+
+      \    Args:
+
+      \        query_sql: The SQL query to execute (using TABLE dialect)
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_queryArguments
+      required:
+        - query_sql
+      properties:
+        query_sql:
+          type: string
+          title: Query Sql
+  - name: list_tables
+    description: List all tables in the IoTDB database.
+    inputSchema:
+      type: object
+      title: list_tablesArguments
+      properties: {}
+  - name: describe_table
+    description: "Get the schema information for a specific table
+
+      \    Args:
+
+      \         table_name: name of the table to describe
+
+      \    "
+    inputSchema:
+      type: object
+      title: describe_tableArguments
+      required:
+        - table_name
+      properties:
+        table_name:
+          type: string
+          title: Table Name

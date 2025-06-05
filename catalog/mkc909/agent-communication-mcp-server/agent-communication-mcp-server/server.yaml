@@ -1,0 +1,18 @@
+identifier: mkc909/agent-communication-mcp-server/agent-communication-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mkc909/agent-communication-mcp-server
+  name: agent-communication-mcp-server
+  owner: mkc909
+server:
+  subdirectory: /
+  name: Cross-System Agent Communication Server
+  description: Facilitate seamless collaboration among specialized LLM agents
+    across multiple systems. Enable agents to share context, manage tasks, and
+    communicate asynchronously, enhancing productivity and coordination.
+    Integrate with GitHub and PlanetScale for efficient issue tracking and
+    scalable data management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

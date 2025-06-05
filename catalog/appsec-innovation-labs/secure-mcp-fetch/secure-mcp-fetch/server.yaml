@@ -1,0 +1,17 @@
+identifier: appsec-innovation-labs/secure-mcp-fetch/secure-mcp-fetch
+repo:
+  provider: github.com
+  url: https://github.com/appsec-innovation-labs/secure-mcp-fetch
+  name: secure-mcp-fetch
+  owner: appsec-innovation-labs
+server:
+  subdirectory: /
+  name: Secure Fetch
+  description: Enable secure URL fetching with domain resolution, IP checks, and
+    redirect handling to ensure safe HTTP requests. Use an allowlist to restrict
+    access to trusted domains and prevent private/internal IP access. Customize
+    HTTP methods and headers while maintaining security best practices.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

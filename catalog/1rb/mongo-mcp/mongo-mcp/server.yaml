@@ -1,0 +1,16 @@
+identifier: 1rb/mongo-mcp/mongo-mcp
+repo:
+  provider: github.com
+  url: https://github.com/1RB/mongo-mcp
+  name: mongo-mcp
+  owner: 1RB
+server:
+  subdirectory: /
+  name: MongoDB MCP Server
+  description: Enable LLMs to interact directly with MongoDB databases. Query
+    collections, inspect schemas, and manage data seamlessly through natural
+    language, enhancing your AI's capabilities with real-time data access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: rt96-hub/prompt-tester/prompt-tester
+repo:
+  provider: github.com
+  url: https://github.com/rt96-hub/prompt-tester
+  name: prompt-tester
+  owner: rt96-hub
+server:
+  subdirectory: /
+  name: Prompt Tester
+  description: Test and compare LLM prompts across different providers seamlessly.
+    Evaluate responses from OpenAI and Anthropic models to optimize your prompt
+    strategies. Easily manage multi-turn conversations and track performance
+    with a user-friendly interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

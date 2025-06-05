@@ -1,0 +1,18 @@
+identifier: lxe/chrome-mcp/chrome-mcp
+repo:
+  provider: github.com
+  url: https://github.com/lxe/chrome-mcp
+  name: chrome-mcp
+  owner: lxe
+server:
+  subdirectory: /
+  name: Chrome Browser Control Server
+  description: Control a Chrome browser instance programmatically through a Model
+    Context Protocol server. Navigate pages, interact with elements, and
+    retrieve page information to enhance automation workflows. Seamlessly
+    integrate browser control into your applications or agents using this MCP
+    server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

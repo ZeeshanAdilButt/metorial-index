@@ -1,0 +1,18 @@
+identifier: eriktilio/mcp-langchain-integration/mcp-langchain-integration
+repo:
+  provider: github.com
+  url: https://github.com/eriktilio/mcp-langchain-integration
+  name: mcp-langchain-integration
+  owner: eriktilio
+server:
+  subdirectory: /
+  name: LangChain Gemini Tool Server
+  description: Enable natural language interpretation and mathematical expression
+    calculation by integrating LangChain with Google's Gemini model and custom
+    tools via MCP. Run a local tool server that processes math expressions and
+    connects seamlessly with your chain. Enhance your AI workflows with dynamic
+    tool invocation and computation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

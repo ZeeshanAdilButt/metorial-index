@@ -1,0 +1,43 @@
+tools:
+  - name: execute_jmeter_test
+    description: "Execute a JMeter test.
+
+
+      \    Args:
+
+      \        test_file: Path to the JMeter test file (.jmx)
+
+      \        gui_mode: Whether to run in GUI mode (default: False)
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_jmeter_testArguments
+      required:
+        - test_file
+      properties:
+        gui_mode:
+          type: boolean
+          title: Gui Mode
+          default: false
+        test_file:
+          type: string
+          title: Test File
+  - name: execute_jmeter_test_non_gui
+    description: "Execute a JMeter test in non-GUI mode.
+
+
+      \    Args:
+
+      \        test_file: Path to the JMeter test file (.jmx)
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_jmeter_test_non_guiArguments
+      required:
+        - test_file
+      properties:
+        test_file:
+          type: string
+          title: Test File

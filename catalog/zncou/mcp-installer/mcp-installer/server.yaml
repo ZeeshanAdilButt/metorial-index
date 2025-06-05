@@ -1,0 +1,17 @@
+identifier: zncou/mcp-installer/mcp-installer
+repo:
+  provider: github.com
+  url: https://github.com/ZNCOU/mcp-installer
+  name: mcp-installer
+  owner: ZNCOU
+server:
+  subdirectory: /
+  name: MCP Installer
+  description: Install and manage MCP servers effortlessly. Use simple commands to
+    set up various MCP servers hosted on npm or PyPi, streamlining your
+    development process. Just ask Claude to handle the installations for you,
+    saving time and effort.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

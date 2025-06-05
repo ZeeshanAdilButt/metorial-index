@@ -1,0 +1,31 @@
+tools:
+  - name: execute_sql
+    description: Execute a SQL query in the Adb MySQL Cluster
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL query to execute
+  - name: get_query_plan
+    description: Get the query plan for a SQL query
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL query to analyze
+  - name: get_execution_plan
+    description: Get the actual execution plan with runtime statistics for a SQL query
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL query to analyze

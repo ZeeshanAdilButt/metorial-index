@@ -1,0 +1,28 @@
+tools:
+  - name: format_markdown
+    description: "
+
+      \    Format plain text into markdown by adding common markdown syntax.
+
+      \   \ 
+
+      \    Args:
+
+      \        text: The plain text to format
+
+      \   \ 
+
+      \    Returns:
+
+      \        The formatted markdown text
+
+      \    "
+    inputSchema:
+      type: object
+      title: format_markdownArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text

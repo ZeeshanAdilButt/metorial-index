@@ -1,0 +1,238 @@
+tools:
+  - name: login_linkedin
+    description: >-
+      Open LinkedIn login page in browser for manual login.
+          Username and password are optional - if not provided, user will need to enter them manually.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: login_linkedinArguments
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        password:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Password
+          default: null
+        username:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Username
+          default: null
+  - name: login_linkedin_secure
+    description: "Open LinkedIn login page in browser for manual login using
+      environment credentials as default values.
+
+      \   \ 
+
+      \    Optional environment variables:
+
+      \    - LINKEDIN_USERNAME: Your LinkedIn email/username (will be pre-filled
+      if provided)
+
+      \    - LINKEDIN_PASSWORD: Your LinkedIn password (will be pre-filled if
+      provided)
+
+      \   \ 
+
+      \    Returns:
+
+      \        dict: Login status and message
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: login_linkedin_secureArguments
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+  - name: get_linkedin_profile
+    description: Get LinkedIn profile information
+    inputSchema:
+      type: object
+      title: get_linkedin_profileArguments
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          title: Username
+  - name: browse_linkedin_feed
+    description: "Browse LinkedIn feed and return recent posts
+
+      \   \ 
+
+      \    Args:
+
+      \        ctx: MCP context for logging and progress reporting
+
+      \        count: Number of posts to retrieve (default: 5)
+
+      \       \ 
+
+      \    Returns:
+
+      \        dict: Contains status, posts array, and any errors
+
+      \    "
+    inputSchema:
+      type: object
+      title: browse_linkedin_feedArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 5
+  - name: search_linkedin_profiles
+    description: Search for LinkedIn profiles matching a query
+    inputSchema:
+      type: object
+      title: search_linkedin_profilesArguments
+      required:
+        - query
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 5
+        query:
+          type: string
+          title: Query
+  - name: view_linkedin_profile
+    description: Visit and extract data from a specific LinkedIn profile
+    inputSchema:
+      type: object
+      title: view_linkedin_profileArguments
+      required:
+        - profile_url
+      properties:
+        profile_url:
+          type: string
+          title: Profile Url
+  - name: interact_with_linkedin_post
+    description: Interact with a LinkedIn post (like, comment)
+    inputSchema:
+      type: object
+      title: interact_with_linkedin_postArguments
+      required:
+        - post_url
+      properties:
+        action:
+          type: string
+          title: Action
+          default: like
+        comment:
+          type: string
+          title: Comment
+          default: null
+        post_url:
+          type: string
+          title: Post Url

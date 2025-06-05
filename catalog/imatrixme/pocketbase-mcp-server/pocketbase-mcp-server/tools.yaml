@@ -1,0 +1,433 @@
+tools:
+  - name: create_collection
+    description: Create a new collection in PocketBase
+    inputSchema:
+      type: object
+      required:
+        - name
+        - schema
+      properties:
+        name:
+          type: string
+          description: Collection name
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              options:
+                type: object
+              required:
+                type: boolean
+          description: Collection schema fields
+  - name: create_record
+    description: Create a new record in a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - data
+      properties:
+        data:
+          type: object
+          description: Record data
+        collection:
+          type: string
+          description: Collection name
+  - name: list_records
+    description: List records from a collection with optional filters
+    inputSchema:
+      type: object
+      required:
+        - collection
+      properties:
+        page:
+          type: number
+          description: Page number
+        sort:
+          type: string
+          description: Sort field and direction
+        filter:
+          type: string
+          description: Filter query
+        perPage:
+          type: number
+          description: Items per page
+        collection:
+          type: string
+          description: Collection name
+  - name: update_record
+    description: Update an existing record
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - id
+        - data
+      properties:
+        id:
+          type: string
+          description: Record ID
+        data:
+          type: object
+          description: Updated record data
+        collection:
+          type: string
+          description: Collection name
+  - name: delete_record
+    description: Delete a record
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - id
+      properties:
+        id:
+          type: string
+          description: Record ID
+        collection:
+          type: string
+          description: Collection name
+  - name: list_auth_methods
+    description: List all available authentication methods
+    inputSchema:
+      type: object
+      properties:
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: authenticate_user
+    description: Authenticate a user with email and password
+    inputSchema:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: User email
+        isAdmin:
+          type: boolean
+          default: true
+          description: Whether to authenticate as an admin (uses _superusers collection)
+        password:
+          type: string
+          description: User password
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: authenticate_with_oauth2
+    description: Authenticate a user with OAuth2
+    inputSchema:
+      type: object
+      required:
+        - provider
+        - code
+        - codeVerifier
+        - redirectUrl
+      properties:
+        code:
+          type: string
+          description: The authorization code returned from the OAuth2 provider
+        provider:
+          type: string
+          description: OAuth2 provider name (e.g., google, facebook, github)
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+        redirectUrl:
+          type: string
+          description: The redirect URL used in the OAuth2 flow
+        codeVerifier:
+          type: string
+          description: PKCE code verifier
+  - name: authenticate_with_otp
+    description: Authenticate a user with one-time password
+    inputSchema:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: User email
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: auth_refresh
+    description: Refresh authentication token
+    inputSchema:
+      type: object
+      properties:
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: request_verification
+    description: Request email verification
+    inputSchema:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: User email
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: confirm_verification
+    description: Confirm email verification with token
+    inputSchema:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: Verification token
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: request_password_reset
+    description: Request password reset
+    inputSchema:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: User email
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: confirm_password_reset
+    description: Confirm password reset with token
+    inputSchema:
+      type: object
+      required:
+        - token
+        - password
+        - passwordConfirm
+      properties:
+        token:
+          type: string
+          description: Reset token
+        password:
+          type: string
+          description: New password
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+        passwordConfirm:
+          type: string
+          description: Confirm new password
+  - name: request_email_change
+    description: Request email change
+    inputSchema:
+      type: object
+      required:
+        - newEmail
+      properties:
+        newEmail:
+          type: string
+          description: New email address
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: confirm_email_change
+    description: Confirm email change with token
+    inputSchema:
+      type: object
+      required:
+        - token
+        - password
+      properties:
+        token:
+          type: string
+          description: Email change token
+        password:
+          type: string
+          description: Current password for confirmation
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: impersonate_user
+    description: Impersonate another user (admin only)
+    inputSchema:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+          description: ID of the user to impersonate
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+  - name: create_user
+    description: Create a new user account
+    inputSchema:
+      type: object
+      required:
+        - email
+        - password
+        - passwordConfirm
+      properties:
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        password:
+          type: string
+          description: User password
+        collection:
+          type: string
+          default: users
+          description: "Collection name (default: users)"
+        passwordConfirm:
+          type: string
+          description: Password confirmation
+  - name: get_collection_schema
+    description: Get schema details for a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+      properties:
+        collection:
+          type: string
+          description: Collection name
+  - name: backup_database
+    description: Create a backup of the PocketBase database
+    inputSchema:
+      type: object
+      properties:
+        format:
+          enum:
+            - json
+            - csv
+          type: string
+          description: "Export format (default: json)"
+  - name: import_data
+    description: Import data into a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+          description: Array of records to import
+        mode:
+          enum:
+            - create
+            - update
+            - upsert
+          type: string
+          description: "Import mode (default: create)"
+        collection:
+          type: string
+          description: Collection name
+  - name: migrate_collection
+    description: Migrate collection schema with data preservation
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - newSchema
+      properties:
+        newSchema:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              options:
+                type: object
+              required:
+                type: boolean
+          description: New collection schema
+        collection:
+          type: string
+          description: Collection name
+        dataTransforms:
+          type: object
+          description: Field transformation mappings
+  - name: query_collection
+    description: Advanced query with filtering, sorting, and aggregation
+    inputSchema:
+      type: object
+      required:
+        - collection
+      properties:
+        sort:
+          type: string
+          description: Sort expression
+        expand:
+          type: string
+          description: Relations to expand
+        filter:
+          type: string
+          description: Filter expression
+        aggregate:
+          type: object
+          description: Aggregation settings
+        collection:
+          type: string
+          description: Collection name
+  - name: manage_indexes
+    description: Manage collection indexes
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - action
+      properties:
+        index:
+          type: object
+          properties:
+            name:
+              type: string
+            fields:
+              type: array
+              items:
+                type: string
+            unique:
+              type: boolean
+          description: Index configuration (for create)
+        action:
+          enum:
+            - create
+            - delete
+            - list
+          type: string
+          description: Action to perform
+        collection:
+          type: string
+          description: Collection name

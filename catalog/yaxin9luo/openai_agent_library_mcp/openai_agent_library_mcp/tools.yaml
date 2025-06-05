@@ -1,0 +1,128 @@
+tools:
+  - name: search_docs
+    description: Search for a specific term across OpenAI Agents SDK documentation.
+    inputSchema:
+      type: object
+      title: search_docsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: search_github
+    description: Search for a specific term across the GitHub repository.
+    inputSchema:
+      type: object
+      title: search_githubArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: get_section
+    description: Get a specific section from a documentation page.
+    inputSchema:
+      type: object
+      title: get_sectionArguments
+      required:
+        - page
+        - section
+      properties:
+        page:
+          type: string
+          title: Page
+        section:
+          type: string
+          title: Section
+  - name: search_files
+    description: "Search for files by name across the GitHub repository.
+
+      \   \ 
+
+      \    Args:
+
+      \        filename_pattern: Part of the filename to search for. Can be a
+      full filename or a partial name.
+
+      \   \ 
+
+      \    Returns:
+
+      \        JSON array of matching files with their paths and URLs.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_filesArguments
+      required:
+        - filename_pattern
+      properties:
+        filename_pattern:
+          type: string
+          title: Filename Pattern
+  - name: get_code_examples
+    description: Get code examples related to a specific OpenAI Agents SDK topic.
+    inputSchema:
+      type: object
+      title: get_code_examplesArguments
+      required:
+        - topic
+      properties:
+        topic:
+          type: string
+          title: Topic
+  - name: get_api_docs
+    description: Get API documentation for a specific class or function in the
+      OpenAI Agents SDK.
+    inputSchema:
+      type: object
+      title: get_api_docsArguments
+      required:
+        - class_or_function
+      properties:
+        class_or_function:
+          type: string
+          title: Class Or Function
+  - name: get_github_file
+    description: Get content of a specific file from the GitHub repository.
+    inputSchema:
+      type: object
+      title: get_github_fileArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: get_doc_index
+    description: Get the index of all OpenAI Agents SDK documentation pages.
+    inputSchema:
+      type: object
+      title: get_doc_indexArguments
+      properties: {}
+  - name: get_doc
+    description: Get content of a specific documentation page.
+    inputSchema:
+      type: object
+      title: get_docArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: list_github_structure
+    description: List the structure of the GitHub repository.
+    inputSchema:
+      type: object
+      title: list_github_structureArguments
+      properties: {}
+  - name: run_diagnostics
+    description: Run diagnostics to check the health of the OpenAI Agents SDK
+      documentation and GitHub repository.
+    inputSchema:
+      type: object
+      title: run_diagnosticsArguments
+      properties: {}

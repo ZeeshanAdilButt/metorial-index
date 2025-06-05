@@ -1,0 +1,17 @@
+identifier: characat0/databricks-mcp-server/databricks-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/characat0/databricks-mcp-server
+  name: databricks-mcp-server
+  owner: characat0
+server:
+  subdirectory: /
+  name: Databricks MCP Server
+  description: Provide seamless interaction with Databricks workspaces through a
+    Model Context Protocol interface. List catalogs, schemas, tables, SQL
+    warehouses, and execute SQL queries efficiently. Enhance your data workflows
+    by integrating Databricks capabilities directly into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

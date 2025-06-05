@@ -1,0 +1,17 @@
+identifier: ocean-zhc/seatunnel-mcp/seatunnel-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ocean-zhc/seatunnel-mcp
+  name: seatunnel-mcp
+  owner: ocean-zhc
+server:
+  subdirectory: /
+  name: SeaTunnel MCP Server
+  description: Manage and monitor SeaTunnel jobs and system status through an
+    intuitive LLM interface. Submit, stop, and track jobs dynamically while
+    configuring connections on the fly. Gain comprehensive insights into your
+    SeaTunnel cluster with built-in monitoring tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

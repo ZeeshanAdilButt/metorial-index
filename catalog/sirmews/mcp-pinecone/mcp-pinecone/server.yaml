@@ -1,0 +1,15 @@
+identifier: sirmews/mcp-pinecone/mcp-pinecone
+repo:
+  provider: github.com
+  url: https://github.com/sirmews/mcp-pinecone
+  name: mcp-pinecone
+  owner: sirmews
+server:
+  subdirectory: /
+  name: Pinecone MCP Server
+  description: Read and write to Pinecone from Claude Desktop using the Model
+    Context Protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

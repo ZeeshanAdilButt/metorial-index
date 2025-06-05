@@ -1,0 +1,14 @@
+identifier: bigsy/clojars-mcp-server/clojars-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Bigsy/Clojars-MCP-Server
+  name: Clojars-MCP-Server
+  owner: Bigsy
+server:
+  subdirectory: /
+  name: Clojars Dependency Server
+  description: Server providing tools to fetch dependency information from Clojars.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

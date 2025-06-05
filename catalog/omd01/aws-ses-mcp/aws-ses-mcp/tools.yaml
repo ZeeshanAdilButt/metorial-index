@@ -1,0 +1,40 @@
+tools:
+  - name: send-email
+    description: Send an email using AWS SES
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - subject
+        - text
+      properties:
+        cc:
+          type: array
+          items:
+            type: string
+            format: email
+          description: Optional array of CC email addresses. You MUST ask the user for
+            this parameter. Under no circumstance provide it yourself
+        to:
+          type: string
+          format: email
+          description: Recipient email address
+        bcc:
+          type: array
+          items:
+            type: string
+            format: email
+          description: Optional array of BCC email addresses. You MUST ask the user for
+            this parameter. Under no circumstance provide it yourself
+        html:
+          type: string
+          description: HTML email content. When provided, the plain text argument MUST be
+            provided as well.
+        text:
+          type: string
+          description: Plain text email content
+        subject:
+          type: string
+          description: Email subject line
+      additionalProperties: false

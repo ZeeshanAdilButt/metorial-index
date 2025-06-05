@@ -1,0 +1,18 @@
+identifier: kocierik/mcp-nomad/mcp-nomad
+repo:
+  provider: github.com
+  url: https://github.com/kocierik/mcp-nomad
+  name: mcp-nomad
+  owner: kocierik
+server:
+  subdirectory: /
+  name: MCP Nomad
+  description: Manage and monitor Nomad jobs, deployments, namespaces, nodes,
+    allocations, variables, volumes, and ACLs through a comprehensive set of
+    tools. Perform real-time monitoring and secure operations with token-based
+    authentication. Simplify Nomad cluster administration and automation by
+    integrating with this server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

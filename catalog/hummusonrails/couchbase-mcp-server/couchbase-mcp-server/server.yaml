@@ -1,0 +1,17 @@
+identifier: hummusonrails/couchbase-mcp-server/couchbase-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hummusonrails/couchbase-mcp-server
+  name: couchbase-mcp-server
+  owner: hummusonrails
+server:
+  subdirectory: /
+  name: Couchbase MCP Server
+  description: Execute natural language queries on Couchbase Capella clusters
+    effortlessly. Transform plain English requests into SQL++ queries and
+    retrieve results in a user-friendly format. Enhance your data interaction
+    capabilities with seamless integration into your LLM applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

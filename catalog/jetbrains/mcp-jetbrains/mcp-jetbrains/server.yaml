@@ -1,0 +1,14 @@
+identifier: jetbrains/mcp-jetbrains/mcp-jetbrains
+repo:
+  provider: github.com
+  url: https://github.com/JetBrains/mcp-jetbrains
+  name: mcp-jetbrains
+  owner: JetBrains
+server:
+  subdirectory: /
+  name: JetBrains MCP Proxy Server
+  description: A MCP proxy to redirect requests to JetBrains IDEs
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

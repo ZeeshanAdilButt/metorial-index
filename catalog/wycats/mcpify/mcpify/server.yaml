@@ -1,0 +1,19 @@
+identifier: wycats/mcpify/mcpify
+repo:
+  provider: github.com
+  url: https://github.com/wycats/mcpify
+  name: mcpify
+  owner: wycats
+server:
+  subdirectory: /
+  name: MCPify
+  description: Convert OpenAPI Specification endpoints into MCP tools dynamically
+    to enable seamless integration between REST APIs and AI agents. Proxy
+    requests in real-time, allowing AI agents to use existing REST APIs as
+    native MCP tools without manual implementation. Provide debugging,
+    authentication support, and flexible configuration for enhanced API
+    interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

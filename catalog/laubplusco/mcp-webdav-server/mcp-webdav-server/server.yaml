@@ -1,0 +1,18 @@
+identifier: laubplusco/mcp-webdav-server/mcp-webdav-server
+repo:
+  provider: github.com
+  url: https://github.com/LaubPlusCo/mcp-webdav-server
+  name: mcp-webdav-server
+  owner: LaubPlusCo
+server:
+  subdirectory: /
+  name: WebDAV Server Integration
+  description: Enable natural language interaction with WebDAV file systems by
+    performing CRUD operations through a secure MCP server. Connect to any
+    WebDAV endpoint with optional authentication and manage files and
+    directories seamlessly. Integrate easily with Claude Desktop or other MCP
+    clients via stdio or HTTP/SSE transport.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

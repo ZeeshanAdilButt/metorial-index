@@ -1,0 +1,221 @@
+tools:
+  - name: ADB_shell
+    description: 执行ADB shell命令
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          title: Command
+      additionalProperties: false
+  - name: get_packages
+    description: 获取已安装的应用包列表
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: get_screenshot
+    description: 获取屏幕截图
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: click_element
+    description: 点击界面元素
+    inputSchema:
+      type: object
+      properties:
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+        xpath:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Xpath
+          default: null
+        resourceId:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Resourceid
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+      additionalProperties: false
+  - name: input_text
+    description: 输入文本
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        clear:
+          type: boolean
+          title: Clear
+          default: true
+      additionalProperties: false
+  - name: swipe_screen
+    description: 滑动屏幕
+    inputSchema:
+      type: object
+      required:
+        - direction
+      properties:
+        scale:
+          type: number
+          title: Scale
+          default: 0.9
+        direction:
+          type: string
+          title: Direction
+      additionalProperties: false
+  - name: wait_and_click
+    description: 等待元素出现并点击
+    inputSchema:
+      type: object
+      properties:
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+        timeout:
+          type: integer
+          title: Timeout
+          default: 10
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+      additionalProperties: false
+  - name: scroll_to_element
+    description: 滚动到指定元素
+    inputSchema:
+      type: object
+      properties:
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+      additionalProperties: false
+  - name: start_app
+    description: 启动应用
+    inputSchema:
+      type: object
+      required:
+        - package_name
+      properties:
+        package_name:
+          type: string
+          title: Package Name
+      additionalProperties: false
+  - name: stop_app
+    description: 停止应用
+    inputSchema:
+      type: object
+      required:
+        - package_name
+      properties:
+        package_name:
+          type: string
+          title: Package Name
+      additionalProperties: false
+  - name: get_current_app
+    description: 获取当前运行的应用信息
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: UIAutomator2
+    description: 初始化UIAutomator2
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: check_uiautomator2
+    description: 检查UIAutomator2状态
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: restart_uiautomator2
+    description: 重启UIAutomator2服务
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: OCR
+    description: 获取当前屏幕的OCR识别结果
+    inputSchema:
+      type: object
+      properties: {}
+      additionalProperties: false
+  - name: find_text
+    description: 查找文本位置
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        confidence_threshold:
+          type: number
+          title: Confidence Threshold
+          default: 0.5
+      additionalProperties: false
+  - name: click_text
+    description: 点击指定文本
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        confidence_threshold:
+          type: number
+          title: Confidence Threshold
+          default: 0.5
+      additionalProperties: false
+  - name: click_position
+    description: 点击指定坐标
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+          title: X
+        y:
+          type: integer
+          title: Y
+      additionalProperties: false

@@ -1,0 +1,234 @@
+tools:
+  - name: writeSandboxFiles
+    description: Import files from public URLs into a sandbox. Supports batch import
+      of multiple files. If the target file already exists, it will be
+      overwritten. If the target directory doesn't exist, it will be
+      automatically created.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sandbox_id
+        - file_list
+      properties:
+        file_list:
+          type: array
+          items:
+            type: object
+            required:
+              - file
+              - save_path
+            properties:
+              file:
+                type: string
+                description: Public URL of the source file
+              save_path:
+                type: string
+                description: Target path in the sandbox where the file will be saved (Linux path
+                  format) e.g. /home/user
+            additionalProperties: false
+          description: List of files to import into the sandbox
+        sandbox_id:
+          type: string
+          description: The ID of the sandbox to write files to
+      additionalProperties: false
+  - name: directRunCode
+    description: Automatically creates a sandbox, executes code, and immediately
+      destroys the sandbox after execution. Optionally exports sandbox files
+      (compresses multiple files into a zip archive if there are multiple files
+      in the specified path, or exports a single file directly). Recommended for
+      use cases that don't require continuous sandbox operations.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - language
+        - code
+      properties:
+        code:
+          type: string
+          description: The source code to be executed in the sandbox
+        envs:
+          type: object
+          description: Environment variables to be set during code execution. Supports
+            passing custom environment variables as key-value pairs
+          additionalProperties:
+            type: string
+        timeout:
+          type: number
+          description: Maximum execution time in seconds for the sandbox. If code
+            execution exceeds this time, it will be terminated and return a
+            timeout error. Default is 5
+        language:
+          enum:
+            - python
+            - r
+            - java
+            - bash
+            - js
+          type: string
+          description: The programming language to execute the code. If not provided or if
+            the value is not in the allowed options, it will be treated as
+            Python code
+        is_download:
+          type: boolean
+          description: Flag to indicate whether to download generated files. Must be
+            enabled if the code generates files that need to be retrieved
+      additionalProperties: false
+  - name: listSandboxFiles
+    description: List files and directories at specified paths within a sandbox.
+      Supports batch queries with multiple paths. This operation can be used
+      before downloadSandboxFiles to check if the file exists.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sandbox_id
+        - path
+      properties:
+        path: {}
+        sandbox_id:
+          type: string
+          description: The ID of the sandbox to query files from
+      additionalProperties: false
+  - name: downloadSandboxFiles
+    description: Export files from a sandbox directory or file path to downloadable
+      urls. Supports batch export of multiple directories or files. When
+      exporting directories, only common file formats are included (documents,
+      images, audio, video, compressed files, web files, and programming
+      language files).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sandbox_id
+        - path
+      properties:
+        path:
+          description: Path(s) to export from the sandbox.
+        sandbox_id:
+          type: string
+          description: The ID of the sandbox to export files from
+      additionalProperties: false
+  - name: runCode
+    description: Run code on a specific sandbox. This returns text output only. For
+      operations that generate files, you'll need to use separate file viewing
+      and export endpoints. Default file saving path is /home/user.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+        - sandbox_id
+      properties:
+        code:
+          type: string
+          description: The code to run
+        envs:
+          type: object
+          description: Environment variables to set when running the code
+          additionalProperties:
+            type: string
+        timeout:
+          type: integer
+          default: 5
+          description: The timeout for code execution in seconds
+        language:
+          enum:
+            - python
+            - r
+            - java
+            - bash
+            - js
+          type: string
+          default: python
+          description: The programming language to use. If not specified or if the value
+            is not in the allowed range, it will be treated as Python code.
+        sandbox_id:
+          type: string
+          description: The ID of the sandbox to run the code on
+      additionalProperties: false
+  - name: runCommand
+    description: Run a command line command on a specific linux sandbox. This
+      returns text output only. For operations that generate files, you'll need
+      to use separate file viewing and download endpoints.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cmd
+        - sandbox_id
+      properties:
+        cmd:
+          type: string
+          description: The command line command to run
+        envs:
+          type: object
+          description: Environment variables to set when running the command
+          additionalProperties:
+            type: string
+        timeout:
+          type: integer
+          default: 5
+          description: The timeout for command execution in seconds
+        sandbox_id:
+          type: string
+          description: The ID of the sandbox to run the command on
+      additionalProperties: false
+  - name: listSandboxes
+    description: Query the list of sandboxes associated with the current API key. If
+      no parameters are passed, all current sandboxes will be returned.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sandbox_id:
+          type: string
+          description: Filter by sandbox ID (optional)
+        sandbox_name:
+          type: string
+          description: Filter by sandbox name provided during creation (optional)
+      additionalProperties: false
+  - name: killSandbox
+    description: Destroy a sandbox by its ID.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sandbox_id
+      properties:
+        sandbox_id:
+          type: string
+          description: The ID of the sandbox to destroy
+      additionalProperties: false
+  - name: createSandbox
+    description: Create a Linux sandbox that can execute code, run commands, upload
+      and download files, and has complete Linux functionality. After successful
+      creation, a sandbox_id will be returned, and all subsequent operations
+      will need to include this sandbox_id to specify the corresponding sandbox.
+      After successful creation, the sandbox will automatically pause. When
+      calling other sandbox operation interfaces later, it will automatically
+      reconnect and pause again after execution to avoid generating extra costs.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - max_alive_time
+      properties:
+        envs:
+          type: object
+          description: Environment variables to set (optional)
+          additionalProperties:
+            type: string
+        metadata:
+          type: object
+          description: Sandbox metadata (optional)
+          additionalProperties:
+            type: string
+        sandbox_name:
+          type: string
+          description: Custom sandbox name (optional)
+        max_alive_time:
+          type: integer
+          description: Maximum alive time of the sandbox (seconds), recommand 300.
+      additionalProperties: false

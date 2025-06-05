@@ -1,0 +1,16 @@
+identifier: oraichain/orai-mcp/orai-multichain-mcp
+repo:
+  provider: github.com
+  url: https://github.com/oraichain/orai-mcp
+  name: orai-mcp
+  owner: oraichain
+server:
+  subdirectory: /packages/mcp-server
+  name: Oraichain Multichain Server
+  description: Connect and interact with multichain data seamlessly. Leverage the
+    power of Oraichain to query blockchain information and integrate with AI
+    agents effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

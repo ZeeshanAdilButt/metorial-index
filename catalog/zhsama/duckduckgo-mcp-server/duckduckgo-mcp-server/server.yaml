@@ -1,0 +1,17 @@
+identifier: zhsama/duckduckgo-mcp-server/duckduckgo-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/zhsama/duckduckgo-mcp-server
+  name: duckduckgo-mcp-server
+  owner: zhsama
+server:
+  subdirectory: /
+  name: DuckDuckGo Search
+  description: Perform web searches using DuckDuckGo's API with ease. Get
+    formatted Markdown search results while enjoying built-in rate limiting and
+    error handling. Enhance your applications with powerful search capabilities
+    seamlessly integrated into your workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

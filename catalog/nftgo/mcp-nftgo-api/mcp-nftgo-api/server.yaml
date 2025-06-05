@@ -1,0 +1,19 @@
+identifier: nftgo/mcp-nftgo-api/mcp-nftgo-api
+repo:
+  provider: github.com
+  url: https://github.com/NFTGo/mcp-nftgo-api
+  name: mcp-nftgo-api
+  owner: NFTGo
+server:
+  subdirectory: /
+  name: NFTGo API Server
+  description: Provide seamless access to NFTGo's comprehensive NFT data and
+    analytics through a standardized protocol. Retrieve detailed NFT collection
+    and asset information, market trends, wallet holdings, and real-time updates
+    to empower your NFT applications. Enhance your workflows with advanced
+    search, filtering, and webhook notifications for dynamic NFT ecosystem
+    insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

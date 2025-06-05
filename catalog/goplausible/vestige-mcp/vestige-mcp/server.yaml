@@ -1,0 +1,18 @@
+identifier: goplausible/vestige-mcp/vestige-mcp
+repo:
+  provider: github.com
+  url: https://github.com/GoPlausible/vestige-mcp
+  name: vestige-mcp
+  owner: GoPlausible
+server:
+  subdirectory: /packages/server
+  name: Vestige MCP
+  description: Provide comprehensive access to Vestige API data and analytics
+    through a standardized protocol interface. Query networks, protocols,
+    assets, pools, trades, balances, notes, and vaults with flexible filtering
+    and pagination. Enable seamless integration of Vestige's DeFi insights into
+    LLM applications and workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

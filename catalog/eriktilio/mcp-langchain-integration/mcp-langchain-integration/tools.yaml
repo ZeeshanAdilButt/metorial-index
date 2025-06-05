@@ -1,0 +1,12 @@
+tools:
+  - name: calculate_expression
+    description: Avalia expressões matemáticas simples de forma segura.
+    inputSchema:
+      type: object
+      title: calculate_expressionArguments
+      required:
+        - expr
+      properties:
+        expr:
+          type: string
+          title: Expr

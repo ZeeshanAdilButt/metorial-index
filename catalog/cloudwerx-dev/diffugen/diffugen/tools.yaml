@@ -1,0 +1,138 @@
+tools:
+  - name: generate_stable_diffusion_image
+    description: "
+
+      \    Generate an image using various Stable Diffusion models.
+
+      \   \ 
+
+      \    Args:
+
+      \        prompt: The image description to generate
+
+      \        model: Model to use (flux-schnell, flux-dev, sdxl, sd3, sd15)
+
+      \        output_dir: Directory to save the image (defaults to current
+      directory)
+
+      \        width: Image width in pixels
+
+      \        height: Image height in pixels
+
+      \        steps: Number of diffusion steps
+
+      \        cfg_scale: CFG scale parameter
+
+      \        seed: Seed for reproducibility (-1 for random)
+
+      \        sampling_method: Sampling method (euler, euler_a, heun, dpm2,
+      dpm++2s_a, dpm++2m, dpm++2mv2, lcm)
+
+      \        negative_prompt: Negative prompt (for supported models)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the path to the generated image and the
+      command used
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_stable_diffusion_imageArguments
+      required:
+        - prompt
+      properties:
+        seed:
+          type: integer
+          title: Seed
+          default: -1
+        model:
+          type: string
+          title: Model
+          default: flux-schnell
+        steps:
+          type: integer
+          title: Steps
+          default: 20
+        width:
+          type: integer
+          title: Width
+          default: 512
+        height:
+          type: integer
+          title: Height
+          default: 512
+        prompt:
+          type: string
+          title: Prompt
+        cfg_scale:
+          type: number
+          title: Cfg Scale
+          default: 7
+        output_dir:
+          type: string
+          title: Output Dir
+          default: null
+        negative_prompt:
+          type: string
+          title: Negative Prompt
+          default: ""
+        sampling_method:
+          type: string
+          title: Sampling Method
+          default: euler_a
+  - name: generate_flux_image
+    description: "
+
+      \    Generate an image using Flux stable diffusion model.
+
+      \   \ 
+
+      \    Args:
+
+      \        prompt: The image description to generate
+
+      \        output_dir: Directory to save the image (defaults to current
+      directory)
+
+      \        cfg_scale: CFG scale parameter (default: 1.0)
+
+      \        sampling_method: Sampling method to use (default: euler)
+
+      \        steps: Number of diffusion steps (default: 4)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the path to the generated image and the
+      command used
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_flux_imageArguments
+      required:
+        - prompt
+      properties:
+        steps:
+          type: integer
+          title: Steps
+          default: 4
+        prompt:
+          type: string
+          title: Prompt
+        cfg_scale:
+          type: number
+          title: Cfg Scale
+          default: 1
+        output_dir:
+          type: string
+          title: Output Dir
+          default: null
+        sampling_method:
+          type: string
+          title: Sampling Method
+          default: euler

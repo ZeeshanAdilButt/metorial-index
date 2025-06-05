@@ -1,0 +1,423 @@
+tools:
+  - name: start_codegen_session
+    description: Start a new code generation session to record Playwright actions
+    inputSchema:
+      type: object
+      required:
+        - options
+      properties:
+        options:
+          type: object
+          required:
+            - outputPath
+          properties:
+            outputPath:
+              type: string
+              description: Directory path where generated tests will be saved (use absolute
+                path)
+            testNamePrefix:
+              type: string
+              description: "Prefix to use for generated test names (default: 'GeneratedTest')"
+            includeComments:
+              type: boolean
+              description: Whether to include descriptive comments in generated tests
+          description: Code generation options
+  - name: end_codegen_session
+    description: End a code generation session and generate the test file
+    inputSchema:
+      type: object
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+          description: ID of the session to end
+  - name: get_codegen_session
+    description: Get information about a code generation session
+    inputSchema:
+      type: object
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+          description: ID of the session to retrieve
+  - name: clear_codegen_session
+    description: Clear a code generation session without generating a test
+    inputSchema:
+      type: object
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+          description: ID of the session to clear
+  - name: playwright_navigate
+    description: Navigate to a URL
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to navigate to the website specified
+        width:
+          type: number
+          description: "Viewport width in pixels (default: 1280)"
+        height:
+          type: number
+          description: "Viewport height in pixels (default: 720)"
+        timeout:
+          type: number
+          description: Navigation timeout in milliseconds
+        headless:
+          type: boolean
+          description: "Run browser in headless mode (default: false)"
+        waitUntil:
+          type: string
+          description: Navigation wait condition
+        browserType:
+          enum:
+            - chromium
+            - firefox
+            - webkit
+          type: string
+          description: Browser type to use (chromium, firefox, webkit). Defaults to chromium
+  - name: playwright_screenshot
+    description: Take a screenshot of the current page or a specific element
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the screenshot
+        width:
+          type: number
+          description: "Width in pixels (default: 800)"
+        height:
+          type: number
+          description: "Height in pixels (default: 600)"
+        savePng:
+          type: boolean
+          description: "Save screenshot as PNG file (default: false)"
+        fullPage:
+          type: boolean
+          description: "Store screenshot of the entire page (default: false)"
+        selector:
+          type: string
+          description: CSS selector for element to screenshot
+        storeBase64:
+          type: boolean
+          description: "Store screenshot in base64 format (default: true)"
+        downloadsDir:
+          type: string
+          description: "Custom downloads directory path (default: user's Downloads folder)"
+  - name: playwright_click
+    description: Click an element on the page
+    inputSchema:
+      type: object
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for the element to click
+  - name: playwright_iframe_click
+    description: Click an element in an iframe on the page
+    inputSchema:
+      type: object
+      required:
+        - iframeSelector
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for the element to click
+        iframeSelector:
+          type: string
+          description: CSS selector for the iframe containing the element to click
+  - name: playwright_fill
+    description: fill out an input field
+    inputSchema:
+      type: object
+      required:
+        - selector
+        - value
+      properties:
+        value:
+          type: string
+          description: Value to fill
+        selector:
+          type: string
+          description: CSS selector for input field
+  - name: playwright_select
+    description: Select an element on the page with Select tag
+    inputSchema:
+      type: object
+      required:
+        - selector
+        - value
+      properties:
+        value:
+          type: string
+          description: Value to select
+        selector:
+          type: string
+          description: CSS selector for element to select
+  - name: playwright_hover
+    description: Hover an element on the page
+    inputSchema:
+      type: object
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for element to hover
+  - name: playwright_evaluate
+    description: Execute JavaScript in the browser console
+    inputSchema:
+      type: object
+      required:
+        - script
+      properties:
+        script:
+          type: string
+          description: JavaScript code to execute
+  - name: playwright_console_logs
+    description: Retrieve console logs from the browser with filtering options
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        type:
+          enum:
+            - all
+            - error
+            - warning
+            - log
+            - info
+            - debug
+          type: string
+          description: Type of logs to retrieve (all, error, warning, log, info, debug)
+        clear:
+          type: boolean
+          description: "Whether to clear logs after retrieval (default: false)"
+        limit:
+          type: number
+          description: Maximum number of logs to return
+        search:
+          type: string
+          description: Text to search for in logs (handles text with square brackets)
+  - name: playwright_close
+    description: Close the browser and release all resources
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: playwright_get
+    description: Perform an HTTP GET request
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to perform GET operation
+  - name: playwright_post
+    description: Perform an HTTP POST request
+    inputSchema:
+      type: object
+      required:
+        - url
+        - value
+      properties:
+        url:
+          type: string
+          description: URL to perform POST operation
+        token:
+          type: string
+          description: Bearer token for authorization
+        value:
+          type: string
+          description: Data to post in the body
+        headers:
+          type: object
+          description: Additional headers to include in the request
+          additionalProperties:
+            type: string
+  - name: playwright_put
+    description: Perform an HTTP PUT request
+    inputSchema:
+      type: object
+      required:
+        - url
+        - value
+      properties:
+        url:
+          type: string
+          description: URL to perform PUT operation
+        value:
+          type: string
+          description: Data to PUT in the body
+  - name: playwright_patch
+    description: Perform an HTTP PATCH request
+    inputSchema:
+      type: object
+      required:
+        - url
+        - value
+      properties:
+        url:
+          type: string
+          description: URL to perform PUT operation
+        value:
+          type: string
+          description: Data to PATCH in the body
+  - name: playwright_delete
+    description: Perform an HTTP DELETE request
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to perform DELETE operation
+  - name: playwright_expect_response
+    description: Ask Playwright to start waiting for a HTTP response. This tool
+      initiates the wait operation but does not wait for its completion.
+    inputSchema:
+      type: object
+      required:
+        - id
+        - url
+      properties:
+        id:
+          type: string
+          description: Unique & arbitrary identifier to be used for retrieving this
+            response later with `Playwright_assert_response`.
+        url:
+          type: string
+          description: URL pattern to match in the response.
+  - name: playwright_assert_response
+    description: Wait for and validate a previously initiated HTTP response wait operation.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Identifier of the HTTP response initially expected using
+            `Playwright_expect_response`.
+        value:
+          type: string
+          description: Data to expect in the body of the HTTP response. If provided, the
+            assertion will fail if this value is not found in the response body.
+  - name: playwright_custom_user_agent
+    description: Set a custom User Agent for the browser
+    inputSchema:
+      type: object
+      required:
+        - userAgent
+      properties:
+        userAgent:
+          type: string
+          description: Custom User Agent for the Playwright browser instance
+  - name: playwright_get_visible_text
+    description: Get the visible text content of the current page
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: playwright_get_visible_html
+    description: Get the HTML content of the current page
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: playwright_go_back
+    description: Navigate back in browser history
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: playwright_go_forward
+    description: Navigate forward in browser history
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: playwright_drag
+    description: Drag an element to a target location
+    inputSchema:
+      type: object
+      required:
+        - sourceSelector
+        - targetSelector
+      properties:
+        sourceSelector:
+          type: string
+          description: CSS selector for the element to drag
+        targetSelector:
+          type: string
+          description: CSS selector for the target location
+  - name: playwright_press_key
+    description: Press a keyboard key
+    inputSchema:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Key to press (e.g. 'Enter', 'ArrowDown', 'a')
+        selector:
+          type: string
+          description: Optional CSS selector to focus before pressing key
+  - name: playwright_save_as_pdf
+    description: Save the current page as a PDF file
+    inputSchema:
+      type: object
+      required:
+        - outputPath
+      properties:
+        format:
+          type: string
+          description: Page format (e.g. 'A4', 'Letter')
+        margin:
+          type: object
+          properties:
+            top:
+              type: string
+            left:
+              type: string
+            right:
+              type: string
+            bottom:
+              type: string
+          description: Page margins
+        filename:
+          type: string
+          description: "Name of the PDF file (default: page.pdf)"
+        outputPath:
+          type: string
+          description: Directory path where PDF will be saved
+        printBackground:
+          type: boolean
+          description: Whether to print background graphics
+  - name: playwright_click_and_switch_tab
+    description: Click a link and switch to the newly opened tab
+    inputSchema:
+      type: object
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for the link to click

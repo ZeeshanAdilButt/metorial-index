@@ -1,0 +1,19 @@
+identifier: mouadenna/mcp-code-executor-server/mcp-code-executor-server
+repo:
+  provider: github.com
+  url: https://github.com/mouadenna/mcp-code-executor-server
+  name: mcp-code-executor-server
+  owner: mouadenna
+server:
+  subdirectory: /
+  name: Code Executor Server
+  description: Enable AI agents to execute code securely across multiple
+    programming languages including Java, Python, JavaScript, TypeScript, and
+    C++. Provide detailed feedback on compilation and runtime errors while
+    managing resources and execution timeouts automatically. Seamlessly
+    integrate with MCP-compatible clients to extend AI capabilities with real
+    code execution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

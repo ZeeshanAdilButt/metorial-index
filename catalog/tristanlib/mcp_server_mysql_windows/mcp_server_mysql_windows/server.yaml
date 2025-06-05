@@ -1,0 +1,14 @@
+identifier: tristanlib/mcp_server_mysql_windows/mcp_server_mysql_windows
+repo:
+  provider: github.com
+  url: https://github.com/TristanLib/mcp_server_mysql_windows
+  name: mcp_server_mysql_windows
+  owner: TristanLib
+server:
+  subdirectory: /
+  name: MySQL数据库服务
+  description: 连接和操作本地MySQL数据库，轻松执行各种数据库操作。通过RESTful API和SSE推送能力，提升数据交互效率。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: cr7258/elasticsearch-mcp-server/elasticsearch-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cr7258/elasticsearch-mcp-server
+  name: elasticsearch-mcp-server
+  owner: cr7258
+server:
+  subdirectory: /
+  name: Elasticsearch/OpenSearch MCP Server
+  description: Enable natural language interaction with your Elasticsearch or
+    OpenSearch clusters. Perform operations like searching documents, managing
+    indices, and monitoring cluster health through a comprehensive set of tools.
+    Simplify cluster management and data querying with intuitive commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

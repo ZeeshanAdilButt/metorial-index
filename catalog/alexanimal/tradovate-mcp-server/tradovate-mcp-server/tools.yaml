@@ -1,0 +1,131 @@
+tools:
+  - name: get_contract_details
+    description: Get detailed information about a specific contract by symbol
+    inputSchema:
+      type: object
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: Symbol of the contract (e.g., ESZ4, NQZ4)
+  - name: list_positions
+    description: List all positions for the account
+    inputSchema:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: Account ID (optional, defaults to primary account)
+  - name: place_order
+    description: Place a new order
+    inputSchema:
+      type: object
+      required:
+        - symbol
+        - action
+        - orderType
+        - quantity
+      properties:
+        price:
+          type: number
+          description: Price for limit orders
+        action:
+          enum:
+            - Buy
+            - Sell
+          type: string
+          description: Buy or Sell
+        symbol:
+          type: string
+          description: Symbol of the contract (e.g., ESZ4, NQZ4)
+        quantity:
+          type: number
+          description: Number of contracts
+        orderType:
+          enum:
+            - Market
+            - Limit
+            - Stop
+            - StopLimit
+          type: string
+          description: Type of order
+        stopPrice:
+          type: number
+          description: Stop price for stop orders
+  - name: modify_order
+    description: Modify an existing order
+    inputSchema:
+      type: object
+      required:
+        - orderId
+      properties:
+        price:
+          type: number
+          description: New price for limit orders
+        orderId:
+          type: string
+          description: ID of the order to modify
+        quantity:
+          type: number
+          description: New quantity
+        stopPrice:
+          type: number
+          description: New stop price for stop orders
+  - name: cancel_order
+    description: Cancel an existing order
+    inputSchema:
+      type: object
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          description: ID of the order to cancel
+  - name: liquidate_position
+    description: Close an existing position
+    inputSchema:
+      type: object
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: Symbol of the contract (e.g., ESZ4, NQZ4)
+  - name: get_account_summary
+    description: Get account summary information
+    inputSchema:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: Account ID (optional, defaults to primary account)
+  - name: get_market_data
+    description: Get market data for a specific contract
+    inputSchema:
+      type: object
+      required:
+        - symbol
+        - dataType
+      properties:
+        symbol:
+          type: string
+          description: Symbol of the contract (e.g., ESZ4, NQZ4)
+        dataType:
+          enum:
+            - Quote
+            - DOM
+            - Chart
+          type: string
+          description: Type of market data
+        chartTimeframe:
+          enum:
+            - 1min
+            - 5min
+            - 15min
+            - 30min
+            - 1hour
+            - 4hour
+            - 1day
+          type: string
+          description: Timeframe for chart data

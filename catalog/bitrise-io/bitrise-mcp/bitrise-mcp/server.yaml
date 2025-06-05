@@ -1,0 +1,18 @@
+identifier: bitrise-io/bitrise-mcp/bitrise-mcp
+repo:
+  provider: github.com
+  url: https://github.com/bitrise-io/bitrise-mcp
+  name: bitrise-mcp
+  owner: bitrise-io
+server:
+  subdirectory: /
+  name: Bitrise API Server
+  description: Enable seamless management of Bitrise apps, builds, artifacts, and
+    more through a secure API token-based interface. Access comprehensive
+    Bitrise API functionalities including app registration, build triggering,
+    artifact handling, and release management. Optimize your CI/CD workflows by
+    integrating Bitrise operations directly into your MCP-compatible client.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

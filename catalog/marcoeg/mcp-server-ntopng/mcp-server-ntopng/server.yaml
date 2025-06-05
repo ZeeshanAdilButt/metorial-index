@@ -1,0 +1,17 @@
+identifier: marcoeg/mcp-server-ntopng/mcp-server-ntopng
+repo:
+  provider: github.com
+  url: https://github.com/marcoeg/mcp-server-ntopng
+  name: mcp-server-ntopng
+  owner: marcoeg
+server:
+  subdirectory: /
+  name: NTOPNG Model Context Protocol Server
+  description: Enable AI agents to query network monitoring data seamlessly.
+    Leverage the power of the NTOPNG database for insightful traffic analysis
+    and reporting. Integrate effortlessly with Claude Desktop and other MCP
+    compliant clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

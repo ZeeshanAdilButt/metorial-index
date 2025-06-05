@@ -1,0 +1,70 @@
+tools:
+  - name: save_memory
+    description: Save a memory to Memory Box with proper formatting
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: The memory content to save
+        type:
+          type: string
+          description: 'The type of memory (TECHNICAL, DECISION, SOLUTION, CONCEPT,
+            REFERENCE, APPLICATION, FACT) for formatting (default: "TECHNICAL")'
+        format:
+          type: boolean
+          description: "Whether to format the memory according to the system prompt
+            (default: true)"
+        bucket_id:
+          type: string
+          description: 'The bucket to save the memory to (default: "Default bucket to
+            store or query memories.")'
+  - name: search_memories
+    description: Search for memories using semantic search
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        debug:
+          type: boolean
+          description: "Include debug information in results (default: false)"
+        query:
+          type: string
+          description: The search query
+  - name: get_all_memories
+    description: Retrieve all memories
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_bucket_memories
+    description: Get memories from a specific bucket
+    inputSchema:
+      type: object
+      required:
+        - bucket_id
+      properties:
+        bucket_id:
+          type: string
+          description: The bucket to retrieve memories from
+  - name: format_memory
+    description: Format a text according to the memory system prompt without saving
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: The text to format
+        type:
+          type: string
+          description: 'The type of memory (TECHNICAL, DECISION, SOLUTION, CONCEPT,
+            REFERENCE, APPLICATION, FACT) (default: "TECHNICAL")'
+  - name: get_usage_stats
+    description: Retrieve user usage statistics and plan information
+    inputSchema:
+      type: object
+      properties: {}

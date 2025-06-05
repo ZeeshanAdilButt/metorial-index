@@ -1,0 +1,14 @@
+identifier: emgeee/mcp-ollama/mcp-ollama
+repo:
+  provider: github.com
+  url: https://github.com/emgeee/mcp-ollama
+  name: mcp-ollama
+  owner: emgeee
+server:
+  subdirectory: /
+  name: Ollama Integration Server
+  description: Integrate Ollama models with various MCP clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

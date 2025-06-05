@@ -1,0 +1,1018 @@
+tools:
+  - name: databases_create
+    description: Create database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Parameter 'name'
+        enabled:
+          type: boolean
+          description: Parameter 'enabled'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+  - name: databases_create_boolean_attribute
+    description: Create boolean attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: boolean
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_collection
+    description: Create collection
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Parameter 'name'
+        enabled:
+          type: boolean
+          description: Parameter 'enabled'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        permissions:
+          type: string
+          description: Parameter 'permissions'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+        document_security:
+          type: boolean
+          description: Parameter 'document_security'
+  - name: databases_create_datetime_attribute
+    description: Create datetime attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: string
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_document
+    description: Create document
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - document_id
+        - data
+      properties:
+        data:
+          type: object
+          description: Parameter 'data'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        document_id:
+          type: string
+          description: Parameter 'document_id'
+        permissions:
+          type: string
+          description: Parameter 'permissions'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_email_attribute
+    description: Create email attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: string
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_enum_attribute
+    description: Create enum attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - elements
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: string
+          description: Parameter 'default'
+        elements:
+          type: string
+          description: Parameter 'elements'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_float_attribute
+    description: Create float attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        max:
+          type: number
+          description: Parameter 'max'
+        min:
+          type: number
+          description: Parameter 'min'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: number
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_index
+    description: Create index
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - type
+        - attributes
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        type:
+          type: string
+          description: Parameter 'type'
+        orders:
+          type: string
+          description: Parameter 'orders'
+        attributes:
+          type: string
+          description: Parameter 'attributes'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_integer_attribute
+    description: Create integer attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        max:
+          type: number
+          description: Parameter 'max'
+        min:
+          type: number
+          description: Parameter 'min'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: number
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_ip_attribute
+    description: Create IP address attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: string
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_relationship_attribute
+    description: Create relationship attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - related_collection_id
+        - type
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        type:
+          type: string
+          description: Parameter 'type'
+        two_way:
+          type: boolean
+          description: Parameter 'two_way'
+        on_delete:
+          type: string
+          description: Parameter 'on_delete'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        two_way_key:
+          type: string
+          description: Parameter 'two_way_key'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+        related_collection_id:
+          type: string
+          description: Parameter 'related_collection_id'
+  - name: databases_create_string_attribute
+    description: Create string attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - size
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        size:
+          type: number
+          description: Parameter 'size'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: string
+          description: Parameter 'default'
+        encrypt:
+          type: boolean
+          description: Parameter 'encrypt'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_create_url_attribute
+    description: Create URL attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        array:
+          type: boolean
+          description: Parameter 'array'
+        default:
+          type: string
+          description: Parameter 'default'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_delete
+    description: Delete database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+      properties:
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+  - name: databases_delete_attribute
+    description: Delete attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_delete_collection
+    description: Delete collection
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+      properties:
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_delete_document
+    description: Delete document
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - document_id
+      properties:
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        document_id:
+          type: string
+          description: Parameter 'document_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_delete_index
+    description: Delete index
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_get
+    description: Get database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+      properties:
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+  - name: databases_get_attribute
+    description: Get attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_get_collection
+    description: Get collection
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+      properties:
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_get_document
+    description: Get document
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - document_id
+      properties:
+        queries:
+          type: string
+          description: Parameter 'queries'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        document_id:
+          type: string
+          description: Parameter 'document_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_get_index
+    description: Get index
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_list
+    description: List databases
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        search:
+          type: string
+          description: Parameter 'search'
+        queries:
+          type: string
+          description: Parameter 'queries'
+  - name: databases_list_attributes
+    description: List attributes
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+      properties:
+        queries:
+          type: string
+          description: Parameter 'queries'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_list_collections
+    description: List collections
+    inputSchema:
+      type: object
+      required:
+        - database_id
+      properties:
+        search:
+          type: string
+          description: Parameter 'search'
+        queries:
+          type: string
+          description: Parameter 'queries'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+  - name: databases_list_documents
+    description: List documents
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+      properties:
+        queries:
+          type: string
+          description: Parameter 'queries'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_list_indexes
+    description: List indexes
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+      properties:
+        queries:
+          type: string
+          description: Parameter 'queries'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update
+    description: Update database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Parameter 'name'
+        enabled:
+          type: boolean
+          description: Parameter 'enabled'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+  - name: databases_update_boolean_attribute
+    description: Update boolean attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        default:
+          type: boolean
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_collection
+    description: Update collection
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Parameter 'name'
+        enabled:
+          type: boolean
+          description: Parameter 'enabled'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        permissions:
+          type: string
+          description: Parameter 'permissions'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+        document_security:
+          type: boolean
+          description: Parameter 'document_security'
+  - name: databases_update_datetime_attribute
+    description: Update dateTime attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        default:
+          type: string
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_document
+    description: Update document
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - document_id
+      properties:
+        data:
+          type: object
+          description: Parameter 'data'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        document_id:
+          type: string
+          description: Parameter 'document_id'
+        permissions:
+          type: string
+          description: Parameter 'permissions'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_email_attribute
+    description: Update email attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        default:
+          type: string
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_enum_attribute
+    description: Update enum attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - elements
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        default:
+          type: string
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        elements:
+          type: string
+          description: Parameter 'elements'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_float_attribute
+    description: Update float attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        max:
+          type: number
+          description: Parameter 'max'
+        min:
+          type: number
+          description: Parameter 'min'
+        default:
+          type: number
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_integer_attribute
+    description: Update integer attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        max:
+          type: number
+          description: Parameter 'max'
+        min:
+          type: number
+          description: Parameter 'min'
+        default:
+          type: number
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_ip_attribute
+    description: Update IP address attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        default:
+          type: string
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_relationship_attribute
+    description: Update relationship attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        on_delete:
+          type: string
+          description: Parameter 'on_delete'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_string_attribute
+    description: Update string attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        size:
+          type: number
+          description: Parameter 'size'
+        default:
+          type: string
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'
+  - name: databases_update_url_attribute
+    description: Update URL attribute
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - collection_id
+        - key
+        - required
+        - default
+      properties:
+        key:
+          type: string
+          description: Parameter 'key'
+        default:
+          type: string
+          description: Parameter 'default'
+        new_key:
+          type: string
+          description: Parameter 'new_key'
+        required:
+          type: boolean
+          description: Parameter 'required'
+        database_id:
+          type: string
+          description: Parameter 'database_id'
+        collection_id:
+          type: string
+          description: Parameter 'collection_id'

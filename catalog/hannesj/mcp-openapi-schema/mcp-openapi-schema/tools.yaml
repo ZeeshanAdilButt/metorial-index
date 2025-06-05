@@ -1,0 +1,131 @@
+tools:
+  - name: list-endpoints
+    description: Lists all API paths and their HTTP methods with summaries,
+      organized by path
+    inputSchema:
+      type: object
+  - name: get-endpoint
+    description: Gets detailed information about a specific API endpoint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - method
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+      additionalProperties: false
+  - name: get-request-body
+    description: Gets the request body schema for a specific endpoint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - method
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+      additionalProperties: false
+  - name: get-response-schema
+    description: Gets the response schema for a specific endpoint, method, and status code
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - method
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+        statusCode:
+          type: string
+          default: "200"
+      additionalProperties: false
+  - name: get-path-parameters
+    description: Gets the parameters for a specific path
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+      additionalProperties: false
+  - name: list-components
+    description: Lists all schema components (schemas, parameters, responses, etc.)
+    inputSchema:
+      type: object
+  - name: get-component
+    description: Gets detailed definition for a specific component
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+        - name
+      properties:
+        name:
+          type: string
+          description: Component name
+        type:
+          type: string
+          description: Component type (e.g., schemas, parameters, responses)
+      additionalProperties: false
+  - name: list-security-schemes
+    description: Lists all available security schemes
+    inputSchema:
+      type: object
+  - name: get-examples
+    description: Gets examples for a specific component or endpoint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+      properties:
+        path:
+          type: string
+          description: API path (required for request/response examples)
+        type:
+          enum:
+            - request
+            - response
+            - component
+          type: string
+          description: Type of example to retrieve
+        method:
+          type: string
+          description: HTTP method (required for request/response examples)
+        statusCode:
+          type: string
+          description: Status code (for response examples)
+        componentName:
+          type: string
+          description: Component name (required for component examples)
+        componentType:
+          type: string
+          description: Component type (required for component examples)
+      additionalProperties: false
+  - name: search-schema
+    description: Searches across paths, operations, and schemas
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pattern
+      properties:
+        pattern:
+          type: string
+          description: Search pattern (case-insensitive)
+      additionalProperties: false

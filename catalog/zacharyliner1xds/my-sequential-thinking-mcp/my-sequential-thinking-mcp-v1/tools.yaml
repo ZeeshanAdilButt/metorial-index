@@ -1,0 +1,183 @@
+tools:
+  - name: create_thinking_chain
+    description: Create a new sequential thinking process with specified parameters
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional tags to categorize this thinking chain
+        context:
+          type: string
+          description: Additional context information
+        problem:
+          type: string
+          description: Problem description
+        thinking_type:
+          enum:
+            - analytical
+            - creative
+            - critical
+            - systems
+            - first-principles
+            - divergent
+            - convergent
+            - inductive
+            - deductive
+          type: string
+          description: Type of thinking to apply (e.g., "analytical", "creative",
+            "critical", "systems")
+  - name: add_thinking_step
+    description: Add a step to an existing thinking chain
+    inputSchema:
+      type: object
+      required:
+        - chain_id
+        - description
+        - reasoning
+      properties:
+        chain_id:
+          type: string
+          description: Identifier of the thinking chain
+        evidence:
+          type: string
+          description: Supporting evidence for this step
+        reasoning:
+          type: string
+          description: Reasoning for this step
+        confidence:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Confidence level (0-1)
+        description:
+          type: string
+          description: Step description
+  - name: validate_step
+    description: Validate logical connections between steps
+    inputSchema:
+      type: object
+      required:
+        - chain_id
+        - step_id
+      properties:
+        step_id:
+          type: string
+          description: Identifier of the step to validate
+        chain_id:
+          type: string
+          description: Identifier of the thinking chain
+  - name: get_chain
+    description: Retrieve a complete thinking chain
+    inputSchema:
+      type: object
+      required:
+        - chain_id
+      properties:
+        chain_id:
+          type: string
+          description: Identifier of the thinking chain
+        include_metadata:
+          type: boolean
+          default: false
+          description: Whether to include metadata in the response
+  - name: generate_visualization
+    description: Create visual representation of a thinking chain
+    inputSchema:
+      type: object
+      required:
+        - chain_id
+      properties:
+        format:
+          enum:
+            - mermaid
+            - json
+            - text
+          type: string
+          default: mermaid
+          description: Format of visualization (mermaid, json, text)
+        options:
+          type: object
+          description: Additional options for visualization
+        chain_id:
+          type: string
+          description: Identifier of the thinking chain
+  - name: save_to_memory
+    description: Save a thinking chain to Memory Bank
+    inputSchema:
+      type: object
+      required:
+        - chain_id
+        - memory_name
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for the memory
+        chain_id:
+          type: string
+          description: Identifier of the thinking chain
+        memory_name:
+          type: string
+          description: Name for the memory
+        update_active_context:
+          type: boolean
+          default: false
+          description: Whether to update activeContext.md
+  - name: load_from_memory
+    description: Load a thinking chain from Memory Bank
+    inputSchema:
+      type: object
+      required:
+        - memory_id
+      properties:
+        query:
+          type: object
+          description: Search parameters if memory_id is not provided
+        memory_id:
+          type: string
+          description: Identifier of the memory
+  - name: search_related_thinking
+    description: Find related thinking chains based on parameters
+    inputSchema:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to filter by
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of results to return
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Keywords to search for
+        thinking_type:
+          type: string
+          description: Type of thinking to filter by
+  - name: apply_template
+    description: Apply a reasoning template to current thinking
+    inputSchema:
+      type: object
+      required:
+        - template_name
+        - problem_context
+      properties:
+        customize:
+          type: object
+          description: Custom parameters for the template
+        template_name:
+          type: string
+          description: Name of the template to apply
+        problem_context:
+          type: string
+          description: Context for the problem

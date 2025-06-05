@@ -1,0 +1,15 @@
+identifier: allenporter/mcp-server-home-assistant/mcp-server-home-assistant
+repo:
+  provider: github.com
+  url: https://github.com/allenporter/mcp-server-home-assistant
+  name: mcp-server-home-assistant
+  owner: allenporter
+server:
+  subdirectory: /
+  name: mcp-server-home-assistant
+  description: A Model Context Protocol Server for Home Assistant. See [Model
+    Context Protocol](https://modelcontextprotocol.io/)
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

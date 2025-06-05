@@ -1,0 +1,72 @@
+tools:
+  - name: analyze_repo
+    description: Use this tool when you need to analyze a code repository structure
+      without performing a detailed review. This tool flattens the repository
+      into a textual representation and is ideal for getting a high-level
+      overview of code organization, directory structure, and file contents. Use
+      it before code_review when you need to understand the codebase structure
+      first, or when a full code review is not needed.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repoPath
+      properties:
+        repoPath:
+          type: string
+          description: Path to the repository to analyze
+        fileTypes:
+          type: array
+          items:
+            type: string
+          description: File types to include in the analysis
+        specificFiles:
+          type: array
+          items:
+            type: string
+          description: Specific files to analyze
+      additionalProperties: false
+  - name: code_review
+    description: Use this tool when you need a comprehensive code review with
+      specific feedback on code quality, security issues, performance problems,
+      and maintainability concerns. This tool performs in-depth analysis on a
+      repository or specific files and returns structured results including
+      issues found, their severity, recommendations for fixes, and overall
+      strengths of the codebase. Use it when you need actionable insights to
+      improve code quality or when evaluating a codebase for potential problems.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repoPath
+      properties:
+        repoPath:
+          type: string
+          description: Path to the repository to analyze
+        fileTypes:
+          type: array
+          items:
+            type: string
+          description: File types to include in the review
+        focusAreas:
+          type: array
+          items:
+            enum:
+              - security
+              - performance
+              - quality
+              - maintainability
+            type: string
+          description: Areas to focus on during the code review
+        detailLevel:
+          enum:
+            - basic
+            - detailed
+          type: string
+          description: Level of detail for the code review
+        specificFiles:
+          type: array
+          items:
+            type: string
+          description: Specific files to review
+      additionalProperties: false

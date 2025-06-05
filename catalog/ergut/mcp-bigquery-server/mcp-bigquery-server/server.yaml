@@ -1,0 +1,15 @@
+identifier: ergut/mcp-bigquery-server/mcp-bigquery-server
+repo:
+  provider: github.com
+  url: https://github.com/ergut/mcp-bigquery-server
+  name: mcp-bigquery-server
+  owner: ergut
+server:
+  subdirectory: /
+  name: BigQuery
+  description: Provides secure, read-only access to BigQuery datasets. Enables
+    natural language querying of BigQuery data with a 1GB processing limit.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

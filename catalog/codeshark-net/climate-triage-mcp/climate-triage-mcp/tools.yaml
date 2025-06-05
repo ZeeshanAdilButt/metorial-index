@@ -1,0 +1,79 @@
+tools:
+  - name: search_climate_triage_issues
+    description: Searches for open source issues related to climate change,
+      sustainability and more. Use this tool to find opportunities to contribute
+      to projects addressing climate challenges, explore issues in specific
+      programming languages, or discover projects in various sustainability
+      categories. Returns information about issues including project details,
+      descriptions, and links. Supports filtering, pagination, and sorting to
+      help find relevant issues.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Pagination page number (starts at 1)
+        sort:
+          enum:
+            - created_at
+            - updated_at
+            - stars
+          type: string
+          default: created_at
+          description: "Field to sort by (default: created_at). Use created_at for most
+            recent issues first."
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: "Sort order (asc or desc) (default: desc for most recent first)"
+        keyword:
+          type: string
+          description: Filter issues by project keyword (e.g., 'bug', 'help wanted',
+            'enhancement')
+        category:
+          enum:
+            - Climate Change
+            - Energy Systems
+            - Emissions
+            - Consumption
+            - Biosphere
+            - Hydrosphere
+            - Sustainable Development
+          type: string
+          description: Filter issues by project category
+        language:
+          enum:
+            - JavaScript
+            - TypeScript
+            - Python
+            - Java
+            - C#
+            - C++
+            - C
+            - Ruby
+            - Go
+            - Rust
+            - Swift
+            - Kotlin
+            - PHP
+            - HTML
+            - CSS
+            - Shell
+            - Dart
+            - Scala
+            - R
+            - Elixir
+            - Clojure
+          type: string
+          description: Filter issues by programming language
+        per_page:
+          type: integer
+          default: 10
+          minimum: 1
+          description: "Number of records per page (default: 10)"
+      additionalProperties: false

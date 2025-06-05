@@ -1,0 +1,296 @@
+tools:
+  - name: aes_encrypt
+    description: encrypt text with aes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        iv:
+          type: string
+          default: your-iv-01234567
+          description: iv, default is your-iv-01234567
+        key:
+          type: string
+          description: encrypt key, default is your-key-0123456
+        mode:
+          type: string
+          default: ECB
+          description: mode, default is ECB
+        content:
+          type: string
+          description: text to encrypt and decrypt
+        padding:
+          enum:
+            - Pkcs7
+            - Iso97971
+            - AnsiX923
+            - Iso10126
+            - ZeroPadding
+            - NoPadding
+          type: string
+          default: Pkcs7
+          description: padding mode, default is Pkcs7
+        outputFormat:
+          enum:
+            - base64
+            - hex
+          type: string
+          default: base64
+          description: output format, default is base64
+      additionalProperties: false
+  - name: aes_decrypt
+    description: decrypt text with aes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        iv:
+          type: string
+          description: iv, default is your-iv-01234567
+        key:
+          type: string
+          description: decrypt key, default is your-key-0123456
+        mode:
+          enum:
+            - ECB
+            - CBC
+            - CFB
+            - OFB
+            - CTR
+          type: string
+          default: ECB
+          description: mode, default is ECB
+        content:
+          type: string
+          description: text to encrypt and decrypt
+        padding:
+          enum:
+            - Pkcs7
+            - Iso97971
+            - AnsiX923
+            - Iso10126
+            - ZeroPadding
+            - NoPadding
+          type: string
+          default: Pkcs7
+          description: padding mode, default is Pkcs7
+        inputFormat:
+          enum:
+            - base64
+            - hex
+          type: string
+          default: base64
+          description: input format, default is base64
+      additionalProperties: false
+  - name: md5
+    description: Calculate MD5 hash of a string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: The input string to hash
+      additionalProperties: false
+  - name: sha1
+    description: Calculate SHA-1 hash of a string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: The input string to hash
+      additionalProperties: false
+  - name: sha256
+    description: Calculate SHA-256 hash of a string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: The input string to hash
+      additionalProperties: false
+  - name: sha384
+    description: Calculate SHA-384 hash of a string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: The input string to hash
+      additionalProperties: false
+  - name: sha512
+    description: Calculate SHA-512 hash of a string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: The input string to hash
+      additionalProperties: false
+  - name: sha224
+    description: Calculate SHA-224 hash of a string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: The input string to hash
+      additionalProperties: false
+  - name: des_encrypt
+    description: encrypt text with des
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        iv:
+          type: string
+          default: your-iv-
+          description: initialization vector, default is your-iv-
+        key:
+          type: string
+          description: encryption key, default is your-key
+        mode:
+          type: string
+          default: ECB
+          description: mode, default is ECB
+        content:
+          type: string
+          description: text to encrypt
+        padding:
+          enum:
+            - Pkcs7
+            - Iso97971
+            - AnsiX923
+            - Iso10126
+            - ZeroPadding
+            - NoPadding
+          type: string
+          default: Pkcs7
+          description: padding mode, default is Pkcs7
+        outputFormat:
+          enum:
+            - base64
+            - hex
+          type: string
+          default: base64
+          description: output format, default is base64
+      additionalProperties: false
+  - name: des_decrypt
+    description: decrypt text with des
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        iv:
+          type: string
+          default: your-iv-
+          description: initialization vector, default is your-iv-
+        key:
+          type: string
+          description: decryption key, default is your-key
+        mode:
+          enum:
+            - ECB
+            - CBC
+            - CFB
+            - OFB
+            - CTR
+          type: string
+          default: ECB
+          description: mode, default is ECB
+        content:
+          type: string
+          description: text to decrypt
+        padding:
+          enum:
+            - Pkcs7
+            - Iso97971
+            - AnsiX923
+            - Iso10126
+            - ZeroPadding
+            - NoPadding
+          type: string
+          default: Pkcs7
+          description: padding mode, default is Pkcs7
+        inputFormat:
+          enum:
+            - base64
+            - hex
+          type: string
+          default: base64
+          description: input format, default is base64
+      additionalProperties: false
+  - name: base64_encode
+    description: encode text to base64
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: text to encode
+      additionalProperties: false
+  - name: base64_decode
+    description: decode base64 to text
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: base64 text to decode
+      additionalProperties: false
+  - name: hex_encode
+    description: encode text to hex
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: text to encode
+      additionalProperties: false
+  - name: hex_decode
+    description: decode hex to text
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: hex to decode
+      additionalProperties: false

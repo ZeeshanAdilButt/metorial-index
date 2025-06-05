@@ -1,0 +1,17 @@
+identifier: ramp-public/ramp_mcp/ramp-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ramp-public/ramp_mcp
+  name: ramp_mcp
+  owner: ramp-public
+server:
+  subdirectory: /
+  name: Ramp MCP Server
+  description: Retrieve and analyze data or run tasks seamlessly with Ramp's
+    Developer API. Enhance your applications by leveraging an in-memory database
+    for efficient data processing and analysis. Simplify your data interactions
+    and maximize your productivity with powerful tools at your fingertips.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

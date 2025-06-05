@@ -1,0 +1,51 @@
+tools:
+  - name: run-lighthouse
+    description: Runs a Lighthouse performance analysis on the currently open page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the website you want to analyze
+        maxItems:
+          type: number
+          default: 3
+          maximum: 5
+          minimum: 1
+          description: Maximum number of improvement items to display for each category
+        categories:
+          type: array
+          items:
+            enum:
+              - performance
+              - accessibility
+              - best-practices
+              - seo
+              - pwa
+            type: string
+          default:
+            - performance
+          description: Categories to analyze (performance, accessibility, best-practices,
+            seo, pwa)
+      additionalProperties: false
+  - name: take-screenshot
+    description: Takes a screenshot of the currently open page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the website you want to capture
+        fullPage:
+          type: boolean
+          default: false
+          description: If true, captures a screenshot of the entire page
+      additionalProperties: false

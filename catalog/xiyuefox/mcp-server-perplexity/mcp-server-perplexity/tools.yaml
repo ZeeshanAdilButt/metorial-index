@@ -1,0 +1,56 @@
+tools:
+  - name: ask_perplexity
+    description: |
+      
+      Perplexity equips agents with a specialized tool for efficiently
+      gathering source-backed information from the internet, ideal for
+      scenarios requiring research, fact-checking, or contextual data to
+      inform decisions and responses.
+      Each response includes citations, which provide transparent references
+      to the sources used for the generated answer, and choices, which
+      contain the model's suggested responses, enabling users to access
+      reliable information and diverse perspectives.
+      This function may encounter timeout errors due to long processing times,
+      but retrying the operation can lead to successful completion.
+      [Response structure]
+      - id: An ID generated uniquely for each response.
+      - model: The model used to generate the response.
+      - object: The object type, which always equals `chat.completion`.
+      - created: The Unix timestamp (in seconds) of when the completion was
+        created.
+      - citations[]: Citations for the generated answer.
+      - choices[]: The list of completion choices the model generated for the
+        input prompt.
+      - usage: Usage statistics for the completion request.
+    inputSchema:
+      type: object
+      required:
+        - model
+        - messages
+      properties:
+        model:
+          enum:
+            - llama-3.1-sonar-small-128k-online
+          type: string
+          description: The name of the model that will complete your prompt.
+        messages:
+          type: array
+          items:
+            type: object
+            required:
+              - content
+              - role
+            properties:
+              role:
+                enum:
+                  - system
+                  - user
+                  - assistant
+                type: string
+                description: The role of the speaker in this turn of conversation. After the
+                  (optional) system message, user and assistant roles should
+                  alternate with user then assistant, ending in user.
+              content:
+                type: string
+                description: The contents of the message in this turn of conversation.
+          description: A list of messages comprising the conversation so far.

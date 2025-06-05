@@ -1,0 +1,63 @@
+tools:
+  - name: jupiter_get_quote
+    description: Get a quote for swapping tokens on Jupiter
+    inputSchema:
+      type: object
+      required:
+        - inputMint
+        - outputMint
+        - amount
+      properties:
+        amount:
+          type: string
+        swapMode:
+          type: string
+        inputMint:
+          type: string
+        outputMint:
+          type: string
+        maxAccounts:
+          type: number
+        slippageBps:
+          type: number
+        excludeDexes:
+          type: array
+          items:
+            type: string
+        platformFeeBps:
+          type: number
+        onlyDirectRoutes:
+          type: boolean
+        asLegacyTransaction:
+          type: boolean
+  - name: jupiter_build_swap_transaction
+    description: Build a swap transaction on Jupiter
+    inputSchema:
+      type: object
+      required:
+        - quoteResponse
+        - userPublicKey
+      properties:
+        quoteResponse:
+          type: string
+        userPublicKey:
+          type: string
+        asLegacyTransaction:
+          type: boolean
+        prioritizationFeeLamports:
+          type: number
+        computeUnitPriceMicroLamports:
+          type: number
+  - name: jupiter_send_swap_transaction
+    description: Send a swap transaction on Jupiter
+    inputSchema:
+      type: object
+      properties:
+        maxRetries:
+          type: number
+        skipPreflight:
+          type: boolean
+        swapTransaction:
+          type: string
+        serializedTransaction:
+          type: string

@@ -1,0 +1,17 @@
+identifier: positivewith/mcp-bigquery-server/mcp-bigquery-server
+repo:
+  provider: github.com
+  url: https://github.com/positivewith/mcp-bigquery-server
+  name: mcp-bigquery-server
+  owner: positivewith
+server:
+  subdirectory: /
+  name: BigQuery Server
+  description: Enable natural language querying of your BigQuery datasets by
+    connecting your AI assistant directly to your data. Run SQL queries, explore
+    schemas, and analyze data securely with read-only access and query limits.
+    Simplify data interaction without writing SQL manually.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

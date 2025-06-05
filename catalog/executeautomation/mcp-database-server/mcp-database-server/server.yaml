@@ -1,0 +1,17 @@
+identifier: executeautomation/mcp-database-server/mcp-database-server
+repo:
+  provider: github.com
+  url: https://github.com/executeautomation/mcp-database-server
+  name: mcp-database-server
+  owner: executeautomation
+server:
+  subdirectory: /
+  name: ExecuteAutomation Database Server
+  description: Enable your LLMs to interact with SQLite and SQL Server databases
+    seamlessly. Execute SQL queries, manage schemas, and gain insights from your
+    data effortlessly. Streamline your data operations and enhance your
+    applications with powerful database capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

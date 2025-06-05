@@ -1,0 +1,20 @@
+identifier: jigsawstack/jigsawstack-mcp-server/vocr
+repo:
+  provider: github.com
+  url: https://github.com/JigsawStack/jigsawstack-mcp-server
+  name: jigsawstack-mcp-server
+  owner: JigsawStack
+server:
+  subdirectory: /vOCR
+  name: JigsawStack vOCR
+  description: >-
+    OCR + AI = Magic: 
+
+    Extract data from any image in a consistent structure with fine-tuned vLLMs
+    for the highest accuracy. Learn more about AI backed OCR here:
+    https://jigsawstack.com/docs/api-reference/ai/vocr Get your jigsawstack API
+    key here: https://jigsawstack.com/dashboard/
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

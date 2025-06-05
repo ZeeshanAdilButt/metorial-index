@@ -1,0 +1,17 @@
+identifier: ashgw/s3-mcp/s3-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ashgw/s3-mcp
+  name: s3-mcp
+  owner: ashgw
+server:
+  subdirectory: /
+  name: S3 Management Server
+  description: Manage your S3 buckets and objects effortlessly. Create, list, and
+    configure buckets, handle object uploads and downloads, and set policies
+    with ease. Streamline your cloud storage operations and enhance your
+    workflow with powerful S3 management capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

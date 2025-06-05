@@ -1,0 +1,14 @@
+identifier: chuanmingliu/servers/fetch
+repo:
+  provider: github.com
+  url: https://github.com/chuanmingliu/servers
+  name: servers
+  owner: chuanmingliu
+server:
+  subdirectory: /src/fetch
+  name: Fetch Server
+  description: Fetch web content and convert it to markdown for LLMs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,19 @@
+identifier: monsterxx03/gospy/gospy
+repo:
+  provider: github.com
+  url: https://github.com/monsterxx03/gospy
+  name: gospy
+  owner: monsterxx03
+server:
+  subdirectory: /
+  name: Go Process Inspector
+  description: Inspect and analyze running Go processes with detailed goroutine
+    states, memory statistics, and binary information. Use an interactive
+    terminal UI or HTTP API for programmatic access. Enable the MCP server to
+    interact with Go process data via a Server-Sent Events endpoint and
+    available tools for goroutines, memory stats, runtime info, and process
+    lookup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

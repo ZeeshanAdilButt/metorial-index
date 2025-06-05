@@ -1,0 +1,16 @@
+identifier: jonator/osmosis-agent-toolkit/osmosis-agent-toolkit
+repo:
+  provider: github.com
+  url: https://github.com/jonator/osmosis-agent-toolkit
+  name: osmosis-agent-toolkit
+  owner: jonator
+server:
+  subdirectory: /packages/mcp
+  name: Osmosis
+  description: Buy and sell crypto with the Osmosis MCP server. View balances,
+    swap quotes, and execute swap transactions directly from Claude, Cursor, or
+    your favorite MCP client.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

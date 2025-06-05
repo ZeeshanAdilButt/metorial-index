@@ -1,0 +1,387 @@
+tools:
+  - name: get_cloud_incidents
+    description: Get cloud incidents
+    inputSchema:
+      type: object
+      properties:
+        filter:
+          type: string
+          description: "Filter string in format 'key:value|key:value'. Multiple values for
+            same key are treated as OR, different keys as AND. Example:
+            'platform:google-cloud|status:active' or
+            'platform:google-cloud|platform:amazon-web-services'"
+        platform:
+          enum:
+            - amazon-web-services
+            - google-cloud-project
+            - g-suite
+            - office-365
+            - google-cloud
+            - open-ai
+          type: string
+          description: platform name
+        pageToken:
+          type: string
+          description: Token for pagination. Use this to get the next page of results.
+  - name: get_cloud_incident
+    description: Get a specific cloud incident by ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: incident ID
+  - name: get_anomalies
+    description: List anomalies detected in cloud costs
+    inputSchema:
+      type: object
+      properties:
+        filter:
+          type: string
+          description: Filter string in format 'key:value|key:value'. Multiple values for
+            same key are treated as OR, different keys as AND.
+        pageToken:
+          type: string
+          description: Token for pagination. Use this to get the next page of results.
+  - name: get_anomaly
+    description: Get a specific anomaly by ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: anomaly ID
+  - name: list_reports
+    description: Lists Cloud Analytics reports that your account has access to
+    inputSchema:
+      type: object
+      properties:
+        filter:
+          type: string
+          description: "Filter string in format 'key:value|key:value'. Multiple values for
+            same key are treated as OR, different keys as AND. Possible filter
+            keys: reportName, owner, type, updateTime, use the filter property
+            only if you know for sure the value is a valid filter key, do not
+            guess it."
+        pageToken:
+          type: string
+          description: Token for pagination. Use this to get the next page of results.
+  - name: run_query
+    description: >-
+      Runs a report query with the specified configuration without persisting
+      it. 
+          Fields that are not populated will use their default values if needed.
+          Use the dimension tool before running the query to get the list of dimensions and their types.
+    inputSchema:
+      type: object
+      required:
+        - config
+      properties:
+        config:
+          type: object
+          properties:
+            group:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  limit:
+                    type: object
+                    properties:
+                      sort:
+                        type: string
+                      value:
+                        type: number
+                      metric:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          value:
+                            type: string
+              description: The rows that appear in the tabular format of the report
+            layout:
+              enum:
+                - column_chart
+                - stacked_column_chart
+                - bar_chart
+                - stacked_bar_chart
+                - line_chart
+                - spline_chart
+                - area_chart
+                - area_spline_chart
+                - stacked_area_chart
+                - treemap_chart
+                - table
+                - table_heatmap
+                - table_row_heatmap
+                - table_col_heatmap
+                - csv_export
+                - sheets_export
+              type: string
+              description: The visualization of the report
+            metric:
+              type: object
+              properties:
+                type:
+                  enum:
+                    - basic
+                    - custom
+                    - extended
+                  type: string
+                value:
+                  type: string
+                  description: "For basic metrics: 'cost', 'usage', or 'savings'. For custom
+                    metrics, the value must refer to an existing custom id."
+              description: The metric to apply (e.g., cost, usage, savings)
+            splits:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  mode:
+                    enum:
+                      - even
+                      - custom
+                      - proportional
+                    type: string
+                  type:
+                    type: string
+                  targets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        value:
+                          type: number
+                  includeOrigin:
+                    type: boolean
+              description: The splits to use in the report
+            filters:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The field to filter on
+                  type:
+                    enum:
+                      - datetime
+                      - fixed
+                      - optional
+                      - label
+                      - tag
+                      - project_label
+                      - system_label
+                      - attribution
+                      - attribution_group
+                      - gke
+                      - gke_label
+                    type: string
+                  values:
+                    type: array
+                    items:
+                      type: string
+                    description: Values to filter on
+                  inverse:
+                    type: boolean
+                    description: Set to true to exclude the values
+              description: Filters to apply to the report
+            currency:
+              type: string
+              description: Currency code (e.g., USD)
+            timeRange:
+              type: object
+              properties:
+                mode:
+                  enum:
+                    - last
+                    - latest
+                    - custom
+                  type: string
+                unit:
+                  enum:
+                    - day
+                    - week
+                    - month
+                    - quarter
+                    - year
+                  type: string
+                amount:
+                  type: number
+                includeCurrent:
+                  type: boolean
+              description: The time range for the report
+            dataSource:
+              enum:
+                - billing
+                - bqlens
+                - billing_datahub
+              type: string
+              description: Data source of the report
+            dimensions:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+              description: Dimensions to include in the report
+            aggregation:
+              enum:
+                - total
+                - percent_total
+                - percent_col
+                - percent_row
+              type: string
+              description: How to aggregate the metric values
+            metricFilter:
+              type: object
+              properties:
+                metric:
+                  type: object
+                  properties:
+                    type:
+                      enum:
+                        - basic
+                        - custom
+                        - extended
+                      type: string
+                    value:
+                      type: string
+                  description: Metric definition
+                values:
+                  type: array
+                  items:
+                    type: number
+                  description: Values to filter by
+                operator:
+                  enum:
+                    - gt
+                    - lt
+                    - lte
+                    - gte
+                    - b
+                    - nb
+                    - e
+                    - ne
+                  type: string
+                  description: "Filter operator: gt (greater than), lt (less than), etc."
+              description: The metric filter to limit the report results by value
+            timeInterval:
+              enum:
+                - hour
+                - day
+                - dayCumSum
+                - week
+                - isoweek
+                - month
+                - quarter
+                - year
+                - week_day
+              type: string
+              description: Time interval for the report
+            displayValues:
+              enum:
+                - actuals_only
+                - absolute_change
+                - percentage_change
+                - absolute_and_percentage
+              type: string
+              description: How to display comparative data
+            customTimeRange:
+              type: object
+              properties:
+                to:
+                  type: string
+                  format: date-time
+                  description: The end timestamp in RFC3339 format (e.g., 2024-03-12T23:00:00Z)
+                from:
+                  type: string
+                  format: date-time
+                  description: The start timestamp in RFC3339 format (e.g., 2024-03-10T23:00:00Z)
+              description: Required when the time range is set to 'custom'
+            includeSubtotals:
+              type: boolean
+              description: Whether to include subgroup totals
+            includePromotionalCredits:
+              type: boolean
+              description: Whether to include promotional credits. If true, timeInterval must
+                be month, quarter, or year.
+          description: The configuration for the query, including dimensions, metrics,
+            filters, etc.
+  - name: get_report_results
+    description: Get the results of a specific report by ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the report to retrieve results for
+  - name: validate_user
+    description: Validates the current API user and returns domain and email information
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_dimensions
+    description: Lists Cloud Analytics dimensions that your account has access to.
+      Use this tool to get the dimensions that you can use in the run_query
+      tool.
+    inputSchema:
+      type: object
+      properties:
+        filter:
+          type: string
+          description: >-
+            Filter string (optional) in format 'key:value|key:value'. Multiple
+            values for same key are treated as OR, different keys as AND. The
+            fields eligible for filtering are: type, label, key. 
+                      use the filter parameter only if you know the exact value of the key, otherwise the filter should be empty.
+        pageToken:
+          type: string
+          description: Token for pagination. Use this to get the next page of results.
+  - name: get_dimension
+    description: Get a specific Cloud Analytics dimension by type and ID
+    inputSchema:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        id:
+          type: string
+          description: Dimension id
+        type:
+          enum:
+            - datetime
+            - fixed
+            - optional
+            - label
+            - tag
+            - project_label
+            - system_label
+            - attribution
+            - attribution_group
+            - gke
+            - gke_label
+          type: string
+          description: Dimension type

@@ -1,0 +1,17 @@
+identifier: hdresearch/mcp-shell/mcp-shell
+repo:
+  provider: github.com
+  url: https://github.com/hdresearch/mcp-shell
+  name: mcp-shell
+  owner: hdresearch
+server:
+  subdirectory: /
+  name: Shell MCP Server
+  description: Execute shell commands securely in a controlled environment.
+    Integrate seamlessly with your AI models to enhance their capabilities with
+    command execution. Benefit from built-in security measures that prevent
+    dangerous operations while allowing safe command execution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

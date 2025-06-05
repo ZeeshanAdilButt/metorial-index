@@ -1,0 +1,90 @@
+tools:
+  - name: chargebee_documentation_search
+    description: >
+      
+      Do not use this tool for code generation. For code generation use
+      "chargebee_code_planner" tool. 
+
+      This tool will take in parameters about integrating with Chargebee in
+      their application, then search and retrieve relevant Chargebee
+      documentation content.
+
+
+      It takes the following arguments:
+
+      - query (string): The user query to search an answer for in the Chargebee
+      documentation.
+
+      - language (enum): The programming language for the documentation. Check
+      the user's application language.
+
+      - userRequest (string): User's original request to you.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user query to search an answer for in the Chargebee
+            documentation.
+        language:
+          enum:
+            - node
+            - python
+            - curl
+            - java
+            - go
+            - java
+            - ruby
+            - php
+            - dotnet
+          type: string
+          description: The programming language for the documentation. Check the user's
+            application language.
+        userRequest:
+          type: string
+          description: User's original request to you.
+      additionalProperties: false
+  - name: chargebee_code_planner
+    description: >
+      
+      Always use this tool to get the accurate integeration code guide for
+      Chargebee.
+
+      This tool will take in parameters about integrating with Chargebee in
+      their application and generates a integration workflow along with the code
+      snippets.
+
+
+      It takes the following arguments:
+
+      - goal (string): What is the user's goal?
+
+      - language (enum): Programming language the code to be generated in. Check
+      the user's application language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - goal
+      properties:
+        goal:
+          type: string
+          description: What is the user's goal?
+        language:
+          enum:
+            - node
+            - python
+            - curl
+            - java
+            - go
+            - java
+            - ruby
+            - php
+            - dotnet
+          type: string
+          description: Programming language the code to be generated in. Check the user's
+            application language.
+      additionalProperties: false

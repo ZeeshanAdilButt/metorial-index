@@ -1,0 +1,264 @@
+tools:
+  - name: Gitlab Accept MR Tool
+    description: 接受并合并指定项目的合并请求，支持自定义合并选项。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - mergeRequestId
+      properties:
+        fields:
+          type: array
+          items:
+            type: string
+          description: 需要返回的字段路径数组
+        projectId:
+          type: string
+          description: 项目 ID
+        mergeOptions:
+          type: object
+          properties:
+            squash:
+              type: boolean
+            mergeCommitMessage:
+              type: string
+            shouldRemoveSourceBranch:
+              type: boolean
+          description: 合并选项
+          additionalProperties: false
+        mergeRequestId:
+          type: number
+          description: 合并请求 ID
+      additionalProperties: false
+  - name: Gitlab Create MR Comment Tool
+    description: 为指定项目的合并请求添加评论。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - mergeRequestId
+        - comment
+      properties:
+        fields:
+          type: array
+          items:
+            type: string
+          description: 需要返回的字段路径数组
+        comment:
+          type: string
+          description: 评论内容
+        projectId:
+          type: string
+          description: 项目 ID
+        mergeRequestId:
+          type: number
+          description: 合并请求 ID
+      additionalProperties: false
+  - name: Gitlab Create MR Tool
+    description: 创建新的 Merge Request，支持指派 assignee 和 reviewers。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - sourceBranch
+        - targetBranch
+        - title
+      properties:
+        title:
+          type: string
+          description: 标题
+        fields:
+          type: array
+          items:
+            type: string
+          description: 需要返回的字段路径数组
+        labels:
+          type: array
+          items:
+            type: string
+          description: 标签数组
+        projectId:
+          type: string
+          description: 项目 ID
+        assigneeId:
+          type: number
+          description: 指派的用户 ID
+        description:
+          type: string
+          description: 描述
+        reviewerIds:
+          type: array
+          items:
+            type: number
+          description: Reviewer 用户 ID 列表
+        sourceBranch:
+          type: string
+          description: 源分支
+        targetBranch:
+          type: string
+          description: 目标分支
+      additionalProperties: false
+  - name: Gitlab Get User Tasks Tool
+    description: 获取当前用户的待办任务，支持多种过滤条件。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          description: |-
+            需要返回的字段路径数组，支持数组或逗号分隔字符串，用于过滤 API 响应字段。
+            示例：
+            - ["id", "name", "owner.username"]
+            - "id,name,owner.username"
+            - undefined
+        taskFilterType:
+          enum:
+            - ALL
+            - ASSIGNED_MRS
+            - REVIEW_MRS
+            - MY_ISSUES
+            - MY_PIPELINES
+            - MR_CREATED_TODAY
+            - ISSUES_CREATED_TODAY
+            - CUSTOM
+          type: string
+          description: 任务过滤类型
+      additionalProperties: false
+  - name: Gitlab Raw API Tool
+    description: 支持自定义调用任意 GitLab REST API，适合调试和高级用法。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - endpoint
+        - method
+      properties:
+        data:
+          type: object
+          description: 请求体
+          additionalProperties: {}
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          description: |-
+            需要返回的字段路径数组，支持数组或逗号分隔字符串，用于过滤 API 响应字段。
+            示例：
+            - ["id", "name", "owner.username"]
+            - "id,name,owner.username"
+            - undefined
+        method:
+          enum:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - PATCH
+          type: string
+          description: HTTP 方法
+        params:
+          type: object
+          description: 查询参数
+          additionalProperties: {}
+        endpoint:
+          type: string
+          description: GitLab API 路径，如 /projects
+      additionalProperties: false
+  - name: Gitlab Search Project Details Tool
+    description: 根据项目名称搜索项目及其详细信息，支持字段过滤，提升响应效率。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectName
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          description: |-
+            需要返回的字段路径数组，支持数组或逗号分隔字符串，用于过滤 API 响应字段。
+            示例：
+            - ["id", "name", "owner.username"]
+            - "id,name,owner.username"
+            - undefined
+        projectName:
+          type: string
+          description: 项目名称
+      additionalProperties: false
+  - name: Gitlab Search User Projects Tool
+    description: 根据用户名搜索用户信息及其活跃项目。支持字段过滤，提升响应效率。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          description: |-
+            需要返回的字段路径数组，支持数组或逗号分隔字符串，用于过滤 API 响应字段。
+            示例：
+            - ["id", "name", "owner.username"]
+            - "id,name,owner.username"
+            - undefined
+        username:
+          type: string
+          description: 用户名
+      additionalProperties: false
+  - name: Gitlab Update MR Tool
+    description: 更新指定项目的 Merge Request，包括指派 assignee 和 reviewers。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - mergeRequestId
+      properties:
+        title:
+          type: string
+          description: 新的标题
+        fields:
+          type: array
+          items:
+            type: string
+          description: 需要返回的字段路径数组
+        labels:
+          type: array
+          items:
+            type: string
+          description: 标签数组
+        projectId:
+          type: string
+          description: 项目 ID
+        assigneeId:
+          type: number
+          description: 指派的用户 ID
+        description:
+          type: string
+          description: 新的描述
+        reviewerIds:
+          type: array
+          items:
+            type: number
+          description: Reviewer 用户 ID 列表
+        mergeRequestId:
+          type: number
+          description: Merge Request ID
+      additionalProperties: false

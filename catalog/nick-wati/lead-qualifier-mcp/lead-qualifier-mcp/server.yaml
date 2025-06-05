@@ -1,0 +1,18 @@
+identifier: nick-wati/lead-qualifier-mcp/lead-qualifier-mcp
+repo:
+  provider: github.com
+  url: https://github.com/nick-wati/lead-qualifier-mcp
+  name: lead-qualifier-mcp
+  owner: nick-wati
+server:
+  subdirectory: /
+  name: Lead Qualifier Tool
+  description: Qualify leads interactively using a conversational flow based on
+    the BANT framework (Budget, Authority, Need, Timeline). Extract and score
+    lead qualification information with an LLM-powered tool that guides users
+    question by question. Integrate seamlessly with platforms like Dify or
+    Cursor via MCP for fast and session-aware lead qualification.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

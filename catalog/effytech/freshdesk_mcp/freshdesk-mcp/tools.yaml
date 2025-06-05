@@ -1,0 +1,301 @@
+tools:
+  - name: get_ticket_fields
+    description: Get ticket fields from Freshdesk.
+    inputSchema:
+      type: object
+      title: get_ticket_fieldsArguments
+      properties: {}
+  - name: get_tickets
+    description: Get tickets from Freshdesk with pagination support.
+    inputSchema:
+      type: object
+      title: get_ticketsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: create_ticket
+    description: Create a ticket in Freshdesk
+    inputSchema:
+      type: object
+      title: create_ticketArguments
+      required:
+        - subject
+        - description
+        - source
+        - priority
+        - status
+      properties:
+        email:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Email
+          default: null
+        source:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Source
+        status:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Status
+        subject:
+          type: string
+          title: Subject
+        priority:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Priority
+        description:
+          type: string
+          title: Description
+        requester_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Requester Id
+          default: null
+        custom_fields:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Custom Fields
+          default: null
+  - name: update_ticket
+    description: Update a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: update_ticketArguments
+      required:
+        - ticket_id
+        - ticket_fields
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+        ticket_fields:
+          type: object
+          title: Ticket Fields
+          additionalProperties: true
+  - name: delete_ticket
+    description: Delete a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: delete_ticketArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: get_ticket
+    description: Get a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: get_ticketArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: search_tickets
+    description: Search for tickets in Freshdesk.
+    inputSchema:
+      type: object
+      title: search_ticketsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: get_ticket_conversation
+    description: Get a ticket conversation in Freshdesk.
+    inputSchema:
+      type: object
+      title: get_ticket_conversationArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: create_ticket_reply
+    description: Create a reply to a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: create_ticket_replyArguments
+      required:
+        - ticket_id
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: create_ticket_note
+    description: Create a note for a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: create_ticket_noteArguments
+      required:
+        - ticket_id
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: update_ticket_conversation
+    description: Update a conversation for a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: update_ticket_conversationArguments
+      required:
+        - conversation_id
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        conversation_id:
+          type: integer
+          title: Conversation Id
+  - name: get_agents
+    description: Get all agents in Freshdesk with pagination support.
+    inputSchema:
+      type: object
+      title: get_agentsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: list_contacts
+    description: List all contacts in Freshdesk with pagination support.
+    inputSchema:
+      type: object
+      title: list_contactsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: get_contact
+    description: Get a contact in Freshdesk.
+    inputSchema:
+      type: object
+      title: get_contactArguments
+      required:
+        - contact_id
+      properties:
+        contact_id:
+          type: integer
+          title: Contact Id
+  - name: search_contacts
+    description: Search for contacts in Freshdesk.
+    inputSchema:
+      type: object
+      title: search_contactsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: update_contact
+    description: Update a contact in Freshdesk.
+    inputSchema:
+      type: object
+      title: update_contactArguments
+      required:
+        - contact_id
+        - contact_fields
+      properties:
+        contact_id:
+          type: integer
+          title: Contact Id
+        contact_fields:
+          type: object
+          title: Contact Fields
+          additionalProperties: true
+  - name: list_canned_responses
+    description: List all canned responses in Freshdesk.
+    inputSchema:
+      type: object
+      title: list_canned_responsesArguments
+      required:
+        - folder_id
+      properties:
+        folder_id:
+          type: integer
+          title: Folder Id
+  - name: list_canned_response_folders
+    description: List all canned response folders in Freshdesk.
+    inputSchema:
+      type: object
+      title: list_canned_response_foldersArguments
+      properties: {}
+  - name: list_solution_articles
+    description: List all solution articles in Freshdesk.
+    inputSchema:
+      type: object
+      title: list_solution_articlesArguments
+      required:
+        - folder_id
+      properties:
+        folder_id:
+          type: integer
+          title: Folder Id
+  - name: list_solution_folders
+    description: ""
+    inputSchema:
+      type: object
+      title: list_solution_foldersArguments
+      required:
+        - category_id
+      properties:
+        category_id:
+          type: integer
+          title: Category Id
+  - name: list_solution_categories
+    description: List all solution categories in Freshdesk.
+    inputSchema:
+      type: object
+      title: list_solution_categoriesArguments
+      properties: {}

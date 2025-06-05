@@ -1,0 +1,27 @@
+tools:
+  - name: deepview
+    description: >
+      
+      Ask a question about the codebase using Gemini.
+
+
+      Args:
+          question: The question to ask about the codebase
+          codebase_file: Optional path to the codebase file. If provided, will load this file
+                        instead of using the globally loaded codebase.
+
+      Returns:
+          Dictionary with the query result or error
+    inputSchema:
+      type: object
+      title: deepviewArguments
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          title: Question
+        codebase_file:
+          type: string
+          title: Codebase File
+          default: null

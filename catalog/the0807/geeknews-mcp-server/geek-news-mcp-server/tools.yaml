@@ -1,0 +1,65 @@
+tools:
+  - name: get_articles
+    description: "
+
+      \            GeekNews에서 아티클을 가져오는 도구
+
+      \           \ 
+
+      \            Args:
+
+      \                type: 아티클 유형 (top, new, ask, show)
+
+      \                limit: 반환할 아티클 수 (최대 30)
+
+      \           \ 
+
+      \            Returns:
+
+      \                List[Dict[str, Any]]: 아티클 목록
+
+      \               \ 
+
+      \            Raises:
+
+      \                ValueError: 유효하지 않은 아티클 유형이 지정된 경우
+
+      \            "
+    inputSchema:
+      type: object
+      title: get_articlesArguments
+      properties:
+        type:
+          type: string
+          title: Type
+          default: top
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: get_weekly_news
+    description: "
+
+      \            GeekNews에서 주간 뉴스를 가져오는 도구
+
+      \           \ 
+
+      \            Args:
+
+      \                weekly_id: 주간 뉴스 ID (빈 문자열인 경우 가장 최근 주간 뉴스를 가져옴)
+
+      \               \ 
+
+      \            Returns:
+
+      \                Dict[str, Any]: 주간 뉴스 정보
+
+      \            "
+    inputSchema:
+      type: object
+      title: get_weekly_newsArguments
+      properties:
+        weekly_id:
+          type: string
+          title: Weekly Id
+          default: ""

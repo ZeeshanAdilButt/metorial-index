@@ -1,0 +1,174 @@
+tools:
+  - name: get_recommendations_by_genre
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - genre
+      properties:
+        genre:
+          type: string
+          description: 电视剧类型，如"喜剧"、"科幻"、"悬疑"等，支持中英文
+      additionalProperties: false
+  - name: get_similar_shows
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - show_title
+      properties:
+        show_title:
+          type: string
+          description: 剧集名称，如"怪奇物语"、"绝命毒师"等
+      additionalProperties: false
+  - name: get_show_details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - show_title
+      properties:
+        show_title:
+          type: string
+          description: 剧集名称，用于获取详细信息
+      additionalProperties: false
+  - name: get_watch_providers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - show_title
+      properties:
+        show_title:
+          type: string
+          description: 剧集名称，如"怪奇物语"、"绝命毒师"等
+        country_code:
+          type: string
+          description: 可选的国家/地区代码，如"US"、"CN"等，默认为"US"
+      additionalProperties: false
+  - name: discover_shows
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: 页码，默认为1
+        sort_by:
+          type: string
+          description: 排序方式，如"popularity.desc"
+        with_genres:
+          type: array
+          items:
+            type: string
+          description: 类型数组，如["喜剧", "科幻"]
+        with_keywords:
+          type: array
+          items:
+            type: string
+          description: 关键词数组，如["机器人", "太空"]
+        with_networks:
+          type: array
+          items:
+            type: number
+          description: 电视网络ID数组，如[213]表示Netflix
+        vote_average_gte:
+          type: number
+          description: 最低评分，如8.0
+        first_air_date_year:
+          type: number
+          description: 首播年份，如2022
+        with_original_language:
+          type: string
+          description: 原始语言，如"en"表示英语
+      additionalProperties: false
+  - name: find_shows_by_actor
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - actor_name
+      properties:
+        actor_name:
+          type: string
+          description: 演员名称，如"布莱恩·科兰斯顿"、"安东尼·斯塔尔"等
+      additionalProperties: false
+  - name: get_recommendations_by_actor
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - actor_name
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: 返回结果数量限制，默认为10
+        actor_name:
+          type: string
+          description: 演员名称，如"布莱恩·科兰斯顿"、"安东尼·斯塔尔"等
+      additionalProperties: false
+  - name: get_actor_details_and_credits
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - actor_name
+      properties:
+        actor_name:
+          type: string
+          description: 演员名称，如"布莱恩·科兰斯顿"、"安东尼·斯塔尔"等
+      additionalProperties: false
+  - name: get_show_reviews
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - show_title
+      properties:
+        page:
+          type: number
+          default: 1
+          description: 页码，默认为1
+        show_title:
+          type: string
+          description: 剧集名称，用于获取评论
+      additionalProperties: false
+  - name: get_popular_shows
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: 页码，默认为1
+      additionalProperties: false
+  - name: get_trending_shows
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: 页码，默认为1
+        time_window:
+          enum:
+            - day
+            - week
+          type: string
+          default: week
+          description: 时间窗口，day表示日趋势，week表示周趋势，默认为week
+      additionalProperties: false
+  - name: get_show_videos
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - show_title
+      properties:
+        show_title:
+          type: string
+          description: 剧集名称，用于获取预告片和视频
+      additionalProperties: false

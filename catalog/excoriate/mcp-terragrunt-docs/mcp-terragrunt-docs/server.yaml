@@ -1,0 +1,18 @@
+identifier: excoriate/mcp-terragrunt-docs/mcp-terragrunt-docs
+repo:
+  provider: github.com
+  url: https://github.com/Excoriate/mcp-terragrunt-docs
+  name: mcp-terragrunt-docs
+  owner: Excoriate
+server:
+  subdirectory: /
+  name: Terragrunt Docs Provider
+  description: Provide AI agents with up-to-date Terragrunt documentation and
+    GitHub issue information to enhance infrastructure-as-code development.
+    Enable accurate autocompletion and context-aware assistance by exposing
+    categorized docs and open issues as MCP tools. Simplify access to Terragrunt
+    knowledge directly within your AI workflows or IDE integrations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

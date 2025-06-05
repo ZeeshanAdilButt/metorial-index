@@ -1,0 +1,76 @@
+tools:
+  - name: search_pubchem_by_name
+    description: ""
+    inputSchema:
+      type: object
+      title: search_pubchem_by_nameArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+  - name: search_pubchem_by_smiles
+    description: ""
+    inputSchema:
+      type: object
+      title: search_pubchem_by_smilesArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+  - name: get_pubchem_compound_by_cid
+    description: ""
+    inputSchema:
+      type: object
+      title: get_pubchem_compound_by_cidArguments
+      required:
+        - cid
+      properties:
+        cid:
+          type: integer
+          title: Cid
+  - name: search_pubchem_advanced
+    description: ""
+    inputSchema:
+      type: object
+      title: search_pubchem_advancedArguments
+      properties:
+        cid:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Cid
+          default: null
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+        smiles:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Smiles
+          default: null
+        formula:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Formula
+          default: null
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5

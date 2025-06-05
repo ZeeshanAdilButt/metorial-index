@@ -1,0 +1,18 @@
+identifier: korchasa/speelka-agent/speelka-agent
+repo:
+  provider: github.com
+  url: https://github.com/korchasa/speelka-agent
+  name: speelka-agent
+  owner: korchasa
+server:
+  subdirectory: /
+  name: Speelka Agent
+  description: Orchestrate and enhance LLM workflows by integrating multiple MCP
+    servers and tools seamlessly. Improve accuracy, reduce costs, and manage
+    complex multi-step tasks with flexible configuration and robust retry
+    mechanisms. Easily switch between LLM providers and control tool
+    availability for precise agent behavior.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

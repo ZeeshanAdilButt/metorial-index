@@ -1,0 +1,195 @@
+tools:
+  - name: direction_search_by_coords
+    description: Search for directions between two points using their coordinates
+      (longitude and latitude). This tool provides navigation information
+      including distance, duration, and route details.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - originLongitude
+        - originLatitude
+        - destLongitude
+        - destLatitude
+      properties:
+        destLatitude:
+          type: number
+        destLongitude:
+          type: number
+        originLatitude:
+          type: number
+        originLongitude:
+          type: number
+      additionalProperties: false
+  - name: direction_search_by_address
+    description: Search for directions between two locations using their addresses.
+      The tool first geocodes the addresses to coordinates, then finds the
+      optimal route between them.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - originAddress
+        - destAddress
+      properties:
+        destAddress:
+          type: string
+        originAddress:
+          type: string
+      additionalProperties: false
+  - name: address_search_by_place_name
+    description: Search for addresses using a place name or keyword. Returns
+      detailed location information including coordinates and address details.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - placeName
+      properties:
+        placeName:
+          type: string
+      additionalProperties: false
+  - name: geocode
+    description: Convert an address into geographic coordinates (geocoding). Returns
+      the exact location coordinates and address details for the given place
+      name.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - placeName
+      properties:
+        placeName:
+          type: string
+      additionalProperties: false
+  - name: future_direction_search_by_coords
+    description: Search for directions with future departure time. Provides
+      navigation information considering traffic predictions for a specific
+      future time. Supports various options like waypoints, route preferences,
+      and vehicle details.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - originLatitude
+        - originLongitude
+        - destinationLatitude
+        - destinationLongitude
+        - departureTime
+      properties:
+        avoid:
+          type: string
+        carFuel:
+          enum:
+            - GASOLINE
+            - DIESEL
+            - LPG
+          type: string
+        carType:
+          type: number
+        summary:
+          type: boolean
+        priority:
+          enum:
+            - RECOMMEND
+            - TIME
+            - DISTANCE
+          type: string
+        carHipass:
+          type: boolean
+        roadEvent:
+          type: number
+        waypoints:
+          type: string
+        roadDetails:
+          type: boolean
+        alternatives:
+          type: boolean
+        departureTime:
+          type: string
+        originLatitude:
+          type: number
+        originLongitude:
+          type: number
+        destinationLatitude:
+          type: number
+        destinationLongitude:
+          type: number
+      additionalProperties: false
+  - name: multi_destination_direction_search
+    description: Search for directions between a starting point and multiple
+      destinations with coordinates. Returns a summary of the route including
+      distance, duration, and route details. For detailed route information,
+      additional calls to the car navigation API are required.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - origin
+        - destinations
+        - radius
+      properties:
+        avoid:
+          type: array
+          items:
+            enum:
+              - ferries
+              - toll
+              - motorway
+              - schoolzone
+              - uturn
+            type: string
+          description: 경로 탐색 시 제외할 도로 옵션 배열
+        origin:
+          type: object
+          required:
+            - x
+            - y
+          properties:
+            x:
+              type: number
+              description: 출발지 X 좌표 (경도)
+            y:
+              type: number
+              description: 출발지 Y 좌표 (위도)
+            name:
+              type: string
+          description: 출발지 정보
+          additionalProperties: false
+        radius:
+          type: integer
+          maximum: 10000
+          description: 길찾기 반경 (미터, 최대 10000)
+        priority:
+          enum:
+            - TIME
+            - DISTANCE
+          type: string
+          description: "경로 탐색 우선순위 (TIME: 최단 시간, DISTANCE: 최단 경로)"
+        roadevent:
+          type: integer
+          maximum: 2
+          minimum: 0
+          description: "도로 통제 정보 반영 옵션 (0: 전체 반영, 1: 출발/목적지 주변 미반영, 2: 전체 미반영)"
+        destinations:
+          type: array
+          items:
+            type: object
+            required:
+              - key
+              - x
+              - y
+            properties:
+              x:
+                type: number
+                description: 목적지 X 좌표 (경도)
+              y:
+                type: number
+                description: 목적지 Y 좌표 (위도)
+              key:
+                type: string
+                description: 목적지 구분용 임의 문자열
+            additionalProperties: false
+          maxItems: 30
+          description: 목적지 정보 배열 (최대 30개)
+      additionalProperties: false

@@ -1,0 +1,17 @@
+identifier: getfounded/mcp-tool-kit/mcptoolkit
+repo:
+  provider: github.com
+  url: https://github.com/getfounded/mcp-tool-kit
+  name: mcp-tool-kit
+  owner: getfounded
+server:
+  subdirectory: /
+  name: MCP Unified Server
+  description: Enable Claude to interact with various external systems and tools
+    seamlessly. Perform file operations, automate browser tasks, and access APIs
+    to enhance your AI's capabilities. Build custom tools tailored to your
+    specific needs with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

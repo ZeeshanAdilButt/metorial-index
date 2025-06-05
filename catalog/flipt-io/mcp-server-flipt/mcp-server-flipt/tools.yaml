@@ -1,0 +1,594 @@
+tools:
+  - name: list_namespaces
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create_namespace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+        - name
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+      additionalProperties: false
+  - name: update_namespace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+        - name
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+      additionalProperties: false
+  - name: delete_namespace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: list_flags
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+      properties:
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+      properties:
+        flagKey:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - key
+        - name
+        - type
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        type:
+          enum:
+            - VARIANT_FLAG_TYPE
+            - BOOLEAN_FLAG_TYPE
+          type: string
+        enabled:
+          type: boolean
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: update_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - key
+        - name
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        enabled:
+          type: boolean
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: delete_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - key
+      properties:
+        key:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: toggle_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - enabled
+      properties:
+        enabled:
+          type: boolean
+        flagKey:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: list_segments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+      properties:
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_segment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - segmentKey
+      properties:
+        segmentKey:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_segment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - key
+        - name
+        - matchType
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        matchType:
+          enum:
+            - ALL_MATCH_TYPE
+            - ANY_MATCH_TYPE
+          type: string
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: update_segment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - key
+        - name
+        - matchType
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        matchType:
+          enum:
+            - ALL_MATCH_TYPE
+            - ANY_MATCH_TYPE
+          type: string
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: delete_segment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - key
+      properties:
+        key:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: evaluate_boolean_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - entityId
+      properties:
+        context:
+          type: object
+          additionalProperties:
+            type: string
+        flagKey:
+          type: string
+          minLength: 1
+        entityId:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: evaluate_variant_flag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - entityId
+      properties:
+        context:
+          type: object
+          additionalProperties:
+            type: string
+        flagKey:
+          type: string
+          minLength: 1
+        entityId:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: evaluate_batch
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - requests
+      properties:
+        requests:
+          type: array
+          items:
+            type: object
+            required:
+              - namespaceKey
+              - flagKey
+              - entityId
+            properties:
+              context:
+                type: object
+                additionalProperties:
+                  type: string
+              flagKey:
+                type: string
+                minLength: 1
+              entityId:
+                type: string
+                minLength: 1
+              namespaceKey:
+                type: string
+                minLength: 1
+            additionalProperties: false
+      additionalProperties: false
+  - name: create_constraint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - segmentKey
+        - type
+        - property
+        - operator
+      properties:
+        type:
+          enum:
+            - STRING_COMPARISON_TYPE
+            - NUMBER_COMPARISON_TYPE
+            - BOOLEAN_COMPARISON_TYPE
+            - DATETIME_COMPARISON_TYPE
+            - ENTITY_ID_COMPARISON_TYPE
+          type: string
+        value:
+          type: string
+        operator:
+          type: string
+          minLength: 1
+        property:
+          type: string
+          minLength: 1
+        segmentKey:
+          type: string
+          minLength: 1
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: delete_constraint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - segmentKey
+        - constraintId
+      properties:
+        segmentKey:
+          type: string
+          minLength: 1
+        constraintId:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_variant
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - key
+      properties:
+        key:
+          type: string
+          minLength: 1
+        name:
+          type: string
+        flagKey:
+          type: string
+          minLength: 1
+        attachment:
+          type: string
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: delete_variant
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - variantId
+      properties:
+        flagKey:
+          type: string
+          minLength: 1
+        variantId:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_rule
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - segmentKey
+      properties:
+        rank:
+          type: integer
+        flagKey:
+          type: string
+          minLength: 1
+        segmentKey:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+        segmentOperator:
+          enum:
+            - OR_SEGMENT_OPERATOR
+            - AND_SEGMENT_OPERATOR
+          type: string
+      additionalProperties: false
+  - name: delete_rule
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - ruleId
+      properties:
+        ruleId:
+          type: string
+          minLength: 1
+        flagKey:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_distribution
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - ruleId
+        - variantId
+        - rollout
+      properties:
+        ruleId:
+          type: string
+          minLength: 1
+        flagKey:
+          type: string
+          minLength: 1
+        rollout:
+          type: number
+          maximum: 100
+          minimum: 0
+        variantId:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: delete_distribution
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - ruleId
+        - distributionId
+      properties:
+        ruleId:
+          type: string
+          minLength: 1
+        flagKey:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+        distributionId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_rollout
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - rank
+      properties:
+        rank:
+          type: integer
+          minimum: 1
+        flagKey:
+          type: string
+          minLength: 1
+        segment:
+          type: object
+          required:
+            - segmentKey
+          properties:
+            value:
+              type: boolean
+            segmentKey:
+              type: string
+              minLength: 1
+          additionalProperties: false
+        threshold:
+          type: object
+          required:
+            - percentage
+            - value
+          properties:
+            value:
+              type: boolean
+            percentage:
+              type: number
+              maximum: 100
+              minimum: 0
+          additionalProperties: false
+        description:
+          type: string
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: delete_rollout
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - namespaceKey
+        - flagKey
+        - rolloutId
+      properties:
+        flagKey:
+          type: string
+          minLength: 1
+        rolloutId:
+          type: string
+          minLength: 1
+        namespaceKey:
+          type: string
+          minLength: 1
+      additionalProperties: false

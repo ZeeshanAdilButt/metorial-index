@@ -1,0 +1,18 @@
+identifier: root-signals/root-signals-mcp/root-signals-mcp
+repo:
+  provider: github.com
+  url: https://github.com/root-signals/root-signals-mcp
+  name: root-signals-mcp
+  owner: root-signals
+server:
+  subdirectory: /
+  name: Root Signals Evaluator Server
+  description: Expose Root Signals evaluators as tools for AI assistants and
+    agents to evaluate and improve responses based on quality criteria. Enable
+    seamless integration with MCP clients to run standard and RAG evaluations,
+    enhancing AI response quality through automated feedback. Support network
+    deployment with SSE transport for flexible usage across various MCP clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

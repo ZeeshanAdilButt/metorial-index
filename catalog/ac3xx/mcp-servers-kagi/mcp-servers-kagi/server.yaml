@@ -1,0 +1,15 @@
+identifier: ac3xx/mcp-servers-kagi/mcp-servers-kagi
+repo:
+  provider: github.com
+  url: https://github.com/ac3xx/mcp-servers-kagi
+  name: mcp-servers-kagi
+  owner: ac3xx
+server:
+  subdirectory: /
+  name: Kagi Search
+  description: Access Kagi's powerful search engine functionality. Enables web
+    searches with high-quality, ad-free results from Kagi's search API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

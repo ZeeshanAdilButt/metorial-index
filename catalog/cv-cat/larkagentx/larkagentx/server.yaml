@@ -1,0 +1,20 @@
+identifier: cv-cat/larkagentx/larkagentx
+repo:
+  provider: github.com
+  url: https://github.com/cv-cat/LarkAgentX
+  name: LarkAgentX
+  owner: cv-cat
+server:
+  subdirectory: /
+  name: Lark Function Call AI Agent
+  description: Enable seamless AI-driven function calls and message handling
+    within the Lark (Feishu) ecosystem using your Lark account as the AI
+    assistant. Automatically analyze user input to invoke the most relevant
+    functions without manual matching, while persisting messages in a MySQL
+    database for comprehensive chat management. Simplify integration with a
+    modern Python application featuring asynchronous communication, flexible
+    configuration, and containerized deployment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

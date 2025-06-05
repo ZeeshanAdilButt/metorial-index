@@ -1,0 +1,16 @@
+identifier: bankless/onchain-mcp/onchain-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Bankless/onchain-mcp
+  name: onchain-mcp
+  owner: Bankless
+server:
+  subdirectory: /
+  name: Bankless Onchain Server
+  description: Interact with blockchain data seamlessly through the Bankless API.
+    Access smart contract states, event logs, and transaction histories to
+    enhance your AI models with real-time blockchain insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

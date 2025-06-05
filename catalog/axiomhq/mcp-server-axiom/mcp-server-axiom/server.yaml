@@ -1,0 +1,15 @@
+identifier: axiomhq/mcp-server-axiom/mcp-server-axiom
+repo:
+  provider: github.com
+  url: https://github.com/axiomhq/mcp-server-axiom
+  name: mcp-server-axiom
+  owner: axiomhq
+server:
+  subdirectory: /
+  name: Axiom MCP Server
+  description: An MCP server for querying Axiom datasets using Axiom Processing
+    Language (APL).
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

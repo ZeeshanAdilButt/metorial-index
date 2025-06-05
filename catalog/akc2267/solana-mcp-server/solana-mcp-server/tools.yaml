@@ -1,0 +1,72 @@
+tools:
+  - name: getSlot
+    description: Get the current slot
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getBalance
+    description: Get balance for a Solana address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: Solana account address
+      additionalProperties: false
+  - name: getKeypairInfo
+    description: Get information about a keypair from its secret key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - secretKey
+      properties:
+        secretKey:
+          type: string
+          description: Base58 encoded secret key or array of bytes
+      additionalProperties: false
+  - name: getAccountInfo
+    description: Get detailed account information for a Solana address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: Solana account address
+        encoding:
+          enum:
+            - base58
+            - base64
+            - jsonParsed
+          type: string
+          description: Data encoding format
+      additionalProperties: false
+  - name: transfer
+    description: Transfer SOL from your keypair to another address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - secretKey
+        - toAddress
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount of SOL to send
+          exclusiveMinimum: 0
+        secretKey:
+          type: string
+          description: Your keypair's secret key (as comma-separated numbers or JSON array)
+        toAddress:
+          type: string
+          description: Destination wallet address
+      additionalProperties: false

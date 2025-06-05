@@ -1,0 +1,1123 @@
+tools:
+  - name: login_tool
+    description: "
+
+      \        Initiate the OAuth2 flow by providing a link to the Google
+      authorization page.
+
+      \       \ 
+
+      \        Returns:
+
+      \            str: The authorization URL to redirect to.
+
+      \        "
+    inputSchema:
+      type: object
+      title: login_toolArguments
+      properties: {}
+  - name: authenticate
+    description: "
+
+      \        Start the complete OAuth authentication process.
+
+      \       \ 
+
+      \        This tool opens a browser window and starts a local server to
+      handle the callback.
+
+      \       \ 
+
+      \        Returns:
+
+      \            str: A message indicating that the authentication process has
+      started.
+
+      \        "
+    inputSchema:
+      type: object
+      title: authenticateArguments
+      properties: {}
+  - name: process_auth_code_tool
+    description: "
+
+      \        Process the OAuth2 authorization code and state.
+
+      \       \ 
+
+      \        Args:
+
+      \            code (str): The authorization code from Google.
+
+      \            state (str): The state parameter from Google.
+
+      \           \ 
+
+      \        Returns:
+
+      \            str: A success or error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: process_auth_code_toolArguments
+      required:
+        - code
+        - state
+      properties:
+        code:
+          type: string
+          title: Code
+        state:
+          type: string
+          title: State
+  - name: logout
+    description: "
+
+      \        Log out by revoking the access token and clearing the stored
+      credentials.
+
+      \       \ 
+
+      \        Returns:
+
+      \            str: A success or error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: logoutArguments
+      properties: {}
+  - name: check_auth_status
+    description: "
+
+      \        Check the current authentication status.
+
+      \       \ 
+
+      \        This tool provides a direct way to check if the user is
+      authenticated
+
+      \        without having to access the auth://status resource.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The authentication status.
+
+      \        "
+    inputSchema:
+      type: object
+      title: check_auth_statusArguments
+      properties: {}
+  - name: get_email_count
+    description: "
+
+      \        Get the count of emails in the user's inbox.
+
+      \       \ 
+
+      \        This tool retrieves the total number of messages in the user's
+      Gmail account
+
+      \        and the number of messages in the inbox.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated. Check auth://status resource
+      first.
+
+      \        - If not authenticated, guide the user through the authentication
+      process.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The email count information including:
+
+      \                - email: The user's email address
+
+      \                - total_messages: Total number of messages in the account
+
+      \                - inbox_messages: Number of messages in the inbox
+
+      \                - next_page_token: Token for pagination (if applicable)
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. First check authentication: access auth://status resource
+
+      \        2. If authenticated, call get_email_count()
+
+      \        3. If not authenticated, guide user to authenticate first
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_email_countArguments
+      properties: {}
+  - name: list_emails
+    description: "
+
+      \        List emails from the user's mailbox.
+
+      \       \ 
+
+      \        This tool retrieves a list of emails from the specified label in
+      the user's
+
+      \        Gmail account, with basic information about each email.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated. Check auth://status resource
+      first.
+
+      \        - If not authenticated, guide the user through the authentication
+      process.
+
+      \       \ 
+
+      \        Args:
+
+      \            max_results (int, optional): Maximum number of emails to
+      return. Defaults to 10.
+
+      \            label (str, optional): The label to filter by. Defaults to
+      \"INBOX\".
+
+      \                Common labels: \"INBOX\", \"SENT\", \"DRAFT\", \"TRASH\",
+      \"SPAM\", \"STARRED\"
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The list of emails including:
+
+      \                - emails: List of email objects with basic information
+      and links
+
+      \                - next_page_token: Token for pagination (if applicable)
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. First check authentication: access auth://status resource
+
+      \        2. If authenticated, call list_emails(max_results=5,
+      label=\"INBOX\")
+
+      \        3. If not authenticated, guide user to authenticate first
+
+      \        4. Always include the email_link when discussing specific emails
+      with the user
+
+      \        "
+    inputSchema:
+      type: object
+      title: list_emailsArguments
+      properties:
+        label:
+          type: string
+          title: Label
+          default: INBOX
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: get_email
+    description: "
+
+      \        Get a specific email by ID.
+
+      \       \ 
+
+      \        This tool retrieves the full details of a specific email,
+      including
+
+      \        the body content, headers, and other metadata.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated. Check auth://status resource
+      first.
+
+      \        - You need an email ID, which can be obtained from list_emails()
+      or search_emails()
+
+      \       \ 
+
+      \        Args:
+
+      \            email_id (str): The ID of the email to retrieve. This ID
+      comes from the
+
+      \                            list_emails() or search_emails() results.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The email details including:
+
+      \                - id: Email ID
+
+      \                - thread_id: Thread ID
+
+      \                - subject: Email subject
+
+      \                - from: Sender information
+
+      \                - to: Recipient information
+
+      \                - cc: CC recipients
+
+      \                - date: Email date
+
+      \                - body: Email body content
+
+      \                - snippet: Short snippet of the email
+
+      \                - labels: Email labels
+
+      \                - email_link: Direct link to the email in Gmail web
+      interface
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. First check authentication: access auth://status resource
+
+      \        2. Get a list of emails: list_emails()
+
+      \        3. Extract an email ID from the results
+
+      \        4. Get the full email: get_email(email_id=\"...\")
+
+      \        5. Always include the email_link when discussing the email with
+      the user
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_emailArguments
+      required:
+        - email_id
+      properties:
+        email_id:
+          type: string
+          title: Email Id
+  - name: search_emails
+    description: "
+
+      \        Search for emails using Gmail's search syntax.
+
+      \       \ 
+
+      \        This tool searches for emails matching the specified query using
+
+      \        Gmail's powerful search syntax.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated. Check auth://status resource
+      first.
+
+      \        - If not authenticated, guide the user through the authentication
+      process.
+
+      \       \ 
+
+      \        Args:
+
+      \            query (str): The search query using Gmail's search syntax.
+
+      \                Examples:
+
+      \                - \"from:example@gmail.com\" - Emails from a specific
+      sender
+
+      \                - \"to:example@gmail.com\" - Emails to a specific
+      recipient
+
+      \                - \"subject:meeting\" - Emails with \"meeting\" in the
+      subject
+
+      \                - \"has:attachment\" - Emails with attachments
+
+      \                - \"is:unread\" - Unread emails
+
+      \                - \"after:2023/01/01\" - Emails after January 1, 2023
+
+      \            max_results (int, optional): Maximum number of emails to
+      return. Defaults to 10.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The search results including:
+
+      \                - query: The search query used
+
+      \                - emails: List of email objects matching the query with
+      links
+
+      \                - next_page_token: Token for pagination (if applicable)
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. First check authentication: access auth://status resource
+
+      \        2. If authenticated, search for emails:
+      search_emails(query=\"from:example@gmail.com\")
+
+      \        3. If not authenticated, guide user to authenticate first
+
+      \        4. Always include the email_link when discussing specific emails
+      with the user
+
+      \        "
+    inputSchema:
+      type: object
+      title: search_emailsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: get_email_overview
+    description: "
+
+      \        Get a simple overview of the user's emails.
+
+      \       \ 
+
+      \        This tool provides a quick summary of the user's Gmail account,
+
+      \        including counts and recent emails, all in one call.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The email overview including:
+
+      \                - account: Account information
+
+      \                - counts: Email counts by label
+
+      \                - recent_emails: List of recent emails with links
+
+      \                - unread_count: Number of unread emails
+
+      \               \ 
+
+      \        Note: Always include the email_link when discussing specific
+      emails with the user.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_email_overviewArguments
+      properties: {}
+  - name: prepare_email_reply
+    description: "
+
+      \        Prepare a context-rich reply to an email.
+
+      \       \ 
+
+      \        This tool gathers comprehensive context for replying to an email,
+
+      \        including the original email, thread history, sender information,
+
+      \        communication patterns, and related emails.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated. Check auth://status resource
+      first.
+
+      \        - You need an email ID, which can be obtained from list_emails()
+      or search_emails()
+
+      \       \ 
+
+      \        Args:
+
+      \            email_id (str): The ID of the email to reply to.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: Comprehensive context for generating a reply,
+      including:
+
+      \                - original_email: The email being replied to
+
+      \                - thread_context: Information about the thread
+
+      \                - sender_context: Information about the sender
+
+      \                - communication_patterns: Analysis of communication
+      patterns
+
+      \                - entities: Entities extracted from the email
+
+      \                - related_emails: Related emails for context
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. First check authentication: access auth://status resource
+
+      \        2. Get a list of emails: list_emails()
+
+      \        3. Extract an email ID from the results
+
+      \        4. Prepare a reply: prepare_email_reply(email_id=\"...\")
+
+      \        5. Use the returned context to craft a personalized reply
+
+      \        "
+    inputSchema:
+      type: object
+      title: prepare_email_replyArguments
+      required:
+        - email_id
+      properties:
+        email_id:
+          type: string
+          title: Email Id
+  - name: send_email_reply
+    description: "
+
+      \        Create a draft reply to an email.
+
+      \       \ 
+
+      \        This tool creates a draft reply to the specified email with the
+      provided text.
+
+      \        The draft is saved but NOT sent automatically - user confirmation
+      is required.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated. Check auth://status resource
+      first.
+
+      \        - You need an email ID, which can be obtained from list_emails()
+      or search_emails()
+
+      \        - You should use prepare_email_reply() first to get context for
+      crafting a personalized reply
+
+      \       \ 
+
+      \        Args:
+
+      \            email_id (str): The ID of the email to reply to.
+
+      \            reply_text (str): The text of the reply.
+
+      \            include_original (bool, optional): Whether to include the
+      original email in the reply. Defaults to True.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The result of the operation, including:
+
+      \                - success: Whether the operation was successful
+
+      \                - message: A message describing the result
+
+      \                - draft_id: The ID of the created draft
+
+      \                - confirmation_required: Always True to indicate user
+      confirmation is needed
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. First check authentication: access auth://status resource
+
+      \        2. Get a list of emails: list_emails()
+
+      \        3. Extract an email ID from the results
+
+      \        4. Prepare a reply: prepare_email_reply(email_id=\"...\")
+
+      \        5. Create a draft reply: send_email_reply(email_id=\"...\",
+      reply_text=\"...\")
+
+      \        6. IMPORTANT: Always ask for user confirmation before sending
+
+      \        7. After user confirms, use confirm_send_email(draft_id='\" +
+      draft[\"id\"] + \"')
+
+      \       \ 
+
+      \        IMPORTANT: You must ALWAYS ask for user confirmation before
+      sending any email.
+
+      \        Never assume the email should be sent automatically.
+
+      \        "
+    inputSchema:
+      type: object
+      title: send_email_replyArguments
+      required:
+        - email_id
+        - reply_text
+      properties:
+        email_id:
+          type: string
+          title: Email Id
+        reply_text:
+          type: string
+          title: Reply Text
+        include_original:
+          type: boolean
+          title: Include Original
+          default: true
+  - name: confirm_send_email
+    description: "
+
+      \        Send a draft email after user confirmation.
+
+      \       \ 
+
+      \        This tool sends a previously created draft email. It should ONLY
+      be used
+
+      \        after explicit user confirmation to send the email.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated
+
+      \        - You need a draft_id from send_email_reply()
+
+      \        - You MUST have explicit user confirmation to send the email
+
+      \       \ 
+
+      \        Args:
+
+      \            draft_id (str): The ID of the draft to send.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The result of the operation, including:
+
+      \                - success: Whether the operation was successful
+
+      \                - message: A message describing the result
+
+      \                - email_id: The ID of the sent email (if successful)
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. Create a draft: send_email_reply(email_id=\"...\",
+      reply_text=\"...\")
+
+      \        2. Ask for user confirmation: \"Would you like me to send this
+      email?\"
+
+      \        3. ONLY after user confirms: confirm_send_email(draft_id=\"...\")
+
+      \       \ 
+
+      \        IMPORTANT: Never call this function without explicit user
+      confirmation.
+
+      \        "
+    inputSchema:
+      type: object
+      title: confirm_send_emailArguments
+      required:
+        - draft_id
+      properties:
+        draft_id:
+          type: string
+          title: Draft Id
+  - name: create_calendar_event
+    description: "
+
+      \        Create a new event in the user's Google Calendar.
+
+      \       \ 
+
+      \        This tool creates a new calendar event with the specified
+      details.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated with Google Calendar access
+
+      \       \ 
+
+      \        Args:
+
+      \            summary (str): The title/summary of the event
+
+      \            start_time (str): The start time of the event in ISO format
+      (YYYY-MM-DDTHH:MM:SS) or simple date/time format (\"5pm\", \"tomorrow
+      3pm\")
+
+      \            end_time (str, optional): The end time of the event. If not
+      provided, you should ask the user for this information.
+
+      \            description (str, optional): Description or notes for the
+      event. If not provided, leave it blank.
+
+      \            location (str, optional): Location of the event. If not
+      provided, leave it blank.
+
+      \            attendees (List[str], optional): List of email addresses of
+      attendees. The current user will always be added automatically.
+
+      \            color_name (str, optional): Color name for the event (e.g.,
+      \"red\", \"blue\", \"green\", \"purple\", \"yellow\", \"orange\")
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The result of the operation, including:
+
+      \                - success: Whether the operation was successful
+
+      \                - message: A message describing the result
+
+      \                - event_id: The ID of the created event
+
+      \                - event_link: Direct link to the event in Google Calendar
+
+      \                - missing_info: List of missing information that should
+      be asked from the user
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. Create a simple event:
+
+      \           create_calendar_event(summary=\"Team Meeting\",
+      start_time=\"2023-12-01T14:00:00\")
+
+      \          \ 
+
+      \        2. Create a detailed event:
+
+      \           create_calendar_event(
+
+      \               summary=\"Project Kickoff\",
+
+      \               start_time=\"next monday at 10am\",
+
+      \               end_time=\"next monday at 11:30am\",
+
+      \               description=\"Initial meeting to discuss project scope\",
+
+      \               location=\"Conference Room A\",
+
+      \               attendees=[\"colleague@example.com\",
+      \"manager@example.com\"],
+
+      \               color_id=\"2\"
+
+      \           )
+
+      \        "
+    inputSchema:
+      type: object
+      title: create_calendar_eventArguments
+      required:
+        - summary
+        - start_time
+      properties:
+        summary:
+          type: string
+          title: Summary
+        end_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Time
+          default: null
+        location:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Location
+          default: null
+        attendees:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Attendees
+          default: null
+        color_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Color Name
+          default: null
+        start_time:
+          type: string
+          title: Start Time
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: detect_events_from_email
+    description: "
+
+      \        Detect potential calendar events from an email.
+
+      \       \ 
+
+      \        This tool analyzes an email to identify potential calendar events
+
+      \        based on dates, times, and contextual clues.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated
+
+      \        - You need an email ID from list_emails() or search_emails()
+
+      \       \ 
+
+      \        Args:
+
+      \            email_id (str): The ID of the email to analyze for events
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The detected events including:
+
+      \                - success: Whether the operation was successful
+
+      \                - events: List of potential events with details
+
+      \                - email_link: Link to the original email
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. Get an email: email = get_email(email_id=\"...\")
+
+      \        2. Detect events: events =
+      detect_events_from_email(email_id=\"...\")
+
+      \        3. Ask the user if they want to add the events to their calendar
+
+      \        4. Ask the user for any missing information (end time, location,
+      description, attendees)
+
+      \        5. If confirmed, create the events using create_calendar_event()
+
+      \       \ 
+
+      \        Important:
+
+      \        - Always ask for user confirmation before creating calendar
+      events
+
+      \        - Always ask for missing information like end time, location,
+      description, and attendees
+
+      \        - Never use default values without user input
+
+      \        - Always include the event_link when discussing events with the
+      user
+
+      \        "
+    inputSchema:
+      type: object
+      title: detect_events_from_emailArguments
+      required:
+        - email_id
+      properties:
+        email_id:
+          type: string
+          title: Email Id
+  - name: list_calendar_events
+    description: "
+
+      \        List events from the user's Google Calendar.
+
+      \       \ 
+
+      \        This tool retrieves a list of upcoming events from the user's
+      calendar.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated with Google Calendar access
+
+      \       \ 
+
+      \        Args:
+
+      \            max_results (int, optional): Maximum number of events to
+      return. Defaults to 10.
+
+      \            time_min (str, optional): Start time for the search in ISO
+      format or natural language.
+
+      \                                     Defaults to now.
+
+      \            time_max (str, optional): End time for the search in ISO
+      format or natural language.
+
+      \                                     Defaults to unlimited.
+
+      \            query (str, optional): Free text search terms to find events
+      that match.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The list of events including:
+
+      \                - events: List of calendar events with details and links
+
+      \                - next_page_token: Token for pagination (if applicable)
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. List upcoming events:
+
+      \           list_calendar_events()
+
+      \          \ 
+
+      \        2. List events for a specific time range:
+
+      \           list_calendar_events(time_min=\"tomorrow\",
+      time_max=\"tomorrow at 11:59pm\")
+
+      \          \ 
+
+      \        3. Search for specific events:
+
+      \           list_calendar_events(query=\"meeting\")
+
+      \          \ 
+
+      \        Important:
+
+      \        - Always include the event_link when discussing specific events
+      with the user
+
+      \        - The event_link allows users to directly access their events in
+      Google Calendar
+
+      \        - When listing multiple events, include the event_link for each
+      event
+
+      \        "
+    inputSchema:
+      type: object
+      title: list_calendar_eventsArguments
+      properties:
+        query:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Query
+          default: null
+        time_max:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Max
+          default: null
+        time_min:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Min
+          default: null
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: suggest_meeting_times
+    description: "
+
+      \        Suggest available meeting times within a date range.
+
+      \       \ 
+
+      \        This tool analyzes the user's calendar and suggests available
+      time slots
+
+      \        for scheduling meetings based on their existing calendar events.
+
+      \       \ 
+
+      \        Prerequisites:
+
+      \        - The user must be authenticated with Google Calendar access
+
+      \       \ 
+
+      \        Args:
+
+      \            start_date (str): The start date of the range to check (can
+      be natural language like \"tomorrow\")
+
+      \            end_date (str): The end date of the range to check (can be
+      natural language like \"next friday\")
+
+      \            duration_minutes (int, optional): The desired meeting
+      duration in minutes. Defaults to 60.
+
+      \            working_hours (str, optional): Working hours in format
+      \"9-17\" (9am to 5pm). Defaults to 9am-5pm.
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: The suggested meeting times including:
+
+      \                - success: Whether the operation was successful
+
+      \                - suggestions: List of suggested meeting times with
+      formatted date/time
+
+      \                - message: A message describing the result
+
+      \               \ 
+
+      \        Example usage:
+
+      \        1. Find meeting times for tomorrow:
+
+      \           suggest_meeting_times(start_date=\"tomorrow\",
+      end_date=\"tomorrow\")
+
+      \          \ 
+
+      \        2. Find meeting times for next week with custom duration:
+
+      \           suggest_meeting_times(
+
+      \               start_date=\"next monday\",\ 
+
+      \               end_date=\"next friday\",\ 
+
+      \               duration_minutes=30
+
+      \           )
+
+      \          \ 
+
+      \        3. Find meeting times with custom working hours:
+
+      \           suggest_meeting_times(
+
+      \               start_date=\"tomorrow\",\ 
+
+      \               end_date=\"friday\",\ 
+
+      \               working_hours=\"10-16\"
+
+      \           )
+
+      \          \ 
+
+      \        Important:
+
+      \        - The tool respects the user's existing calendar events
+
+      \        - Suggestions are limited to working hours (default 9am-5pm)
+
+      \        - Weekends are excluded by default
+
+      \        - The tool will return at most 10 suggestions
+
+      \        "
+    inputSchema:
+      type: object
+      title: suggest_meeting_timesArguments
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+        working_hours:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Working Hours
+          default: null
+        duration_minutes:
+          type: integer
+          title: Duration Minutes
+          default: 60

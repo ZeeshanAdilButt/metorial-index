@@ -1,0 +1,17 @@
+identifier: brianellin/bsky-mcp-server/bsky-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/brianellin/bsky-mcp-server
+  name: bsky-mcp-server
+  owner: brianellin
+server:
+  subdirectory: /
+  name: Bluesky MCP Server
+  description: Connect to Bluesky and interact with the ATProtocol using natural
+    language. Fetch, analyze, and post content seamlessly within your LLM
+    applications. Enhance your experience by leveraging Bluesky's features
+    directly in your context window.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

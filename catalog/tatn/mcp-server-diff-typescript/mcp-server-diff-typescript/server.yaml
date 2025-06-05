@@ -1,0 +1,14 @@
+identifier: tatn/mcp-server-diff-typescript/mcp-server-diff-typescript
+repo:
+  provider: github.com
+  url: https://github.com/tatn/mcp-server-diff-typescript
+  name: mcp-server-diff-typescript
+  owner: tatn
+server:
+  subdirectory: /
+  name: Diff Generation Server
+  description: Generate unified diffs between two text strings.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

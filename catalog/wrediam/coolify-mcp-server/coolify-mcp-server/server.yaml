@@ -1,0 +1,17 @@
+identifier: wrediam/coolify-mcp-server/coolify-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/wrediam/coolify-mcp-server
+  name: coolify-mcp-server
+  owner: wrediam
+server:
+  subdirectory: /
+  name: Coolify Server Integration
+  description: Enable seamless management of Coolify instances through a Model
+    Context Protocol server. Manage teams, servers, services, applications,
+    deployments, and private keys with ease. Monitor version and health status
+    to ensure smooth operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

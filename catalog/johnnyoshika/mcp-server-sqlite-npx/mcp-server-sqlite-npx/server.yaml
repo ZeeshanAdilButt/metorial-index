@@ -1,0 +1,16 @@
+identifier: johnnyoshika/mcp-server-sqlite-npx/mcp-server-sqlite-npx
+repo:
+  provider: github.com
+  url: https://github.com/johnnyoshika/mcp-server-sqlite-npx
+  name: mcp-server-sqlite-npx
+  owner: johnnyoshika
+server:
+  subdirectory: /
+  name: SQLite Server
+  description: A Node.js implementation of the Model Context Protocol SQLite
+    server, providing an npx-based alternative for environments lacking Python's
+    UVX runner.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

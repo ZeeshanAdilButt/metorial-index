@@ -1,0 +1,15 @@
+identifier: twolven/mcp-stockscreen/mcp-stockscreen
+repo:
+  provider: github.com
+  url: https://github.com/twolven/mcp-stockscreen
+  name: mcp-stockscreen
+  owner: twolven
+server:
+  subdirectory: /
+  name: StockScreen
+  description: A server providing comprehensive stock screening capabilities
+    through Yahoo Finance.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

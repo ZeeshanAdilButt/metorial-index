@@ -1,0 +1,19 @@
+identifier: theshewaspretty/server/server
+repo:
+  provider: github.com
+  url: https://github.com/theshewaspretty/server
+  name: server
+  owner: theshewaspretty
+server:
+  subdirectory: /
+  name: Server
+  description: Provide a server implementation that supports the Model Context
+    Protocol (MCP) to enable dynamic integration of large language models with
+    external data and tools. Facilitate seamless interaction between LLM clients
+    and resources, tools, and prompts through standardized JSON-RPC methods.
+    Enhance LLM applications by exposing actionable capabilities and data in a
+    structured and secure manner.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

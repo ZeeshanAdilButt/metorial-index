@@ -1,0 +1,17 @@
+identifier: nash-app/nash-mcp/nash-mcp
+repo:
+  provider: github.com
+  url: https://github.com/nash-app/nash-mcp
+  name: nash-mcp
+  owner: nash-app
+server:
+  subdirectory: /
+  name: Nash MCP Server
+  description: Execute commands, run Python code, and fetch web content
+    seamlessly. Manage reusable tasks and securely handle credentials without
+    exposing sensitive data. Enhance your workflows with powerful tools for
+    command execution and web interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

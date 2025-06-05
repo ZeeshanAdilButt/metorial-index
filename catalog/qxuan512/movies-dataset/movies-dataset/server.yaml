@@ -1,0 +1,17 @@
+identifier: qxuan512/movies-dataset/movies-dataset
+repo:
+  provider: github.com
+  url: https://github.com/qxuan512/movies-dataset
+  name: movies-dataset
+  owner: qxuan512
+server:
+  subdirectory: /
+  name: Movies Dataset Viewer
+  description: Display and explore movie data interactively using a simple
+    Streamlit application. Access comprehensive movie metadata sourced from The
+    Movie Database (TMDB) to gain insights and visualize information. Easily
+    deploy and run the app locally to analyze movie datasets.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

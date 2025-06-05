@@ -1,0 +1,18 @@
+identifier: johnagan/buildinglink-mcp/buildinglink-mcp
+repo:
+  provider: github.com
+  url: https://github.com/johnagan/buildinglink-mcp
+  name: buildinglink-mcp
+  owner: johnagan
+server:
+  subdirectory: /
+  name: BuildingLink Data Connector
+  description: Connect your LLM to BuildingLink data to access occupant profiles,
+    vendors, deliveries, announcements, and more. Seamlessly retrieve
+    personalized building and user information to enhance your applications.
+    Simplify integration with BuildingLink's data through this dedicated MCP
+    server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

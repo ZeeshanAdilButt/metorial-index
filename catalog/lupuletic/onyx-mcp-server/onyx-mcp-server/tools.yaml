@@ -1,0 +1,60 @@
+tools:
+  - name: search_onyx
+    description: Search the Onyx backend for relevant documents
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The topic to search for
+        maxResults:
+          type: integer
+          maximum: 10
+          minimum: 1
+          description: "Maximum number of results to return (default: 5)"
+        chunksAbove:
+          type: integer
+          default: 1
+          description: "Number of chunks to include above the matching chunk (default: 1)"
+        chunksBelow:
+          type: integer
+          default: 1
+          description: "Number of chunks to include below the matching chunk (default: 1)"
+        documentSets:
+          type: array
+          items:
+            type: string
+          description: List of document set names to search within (empty for all)
+        retrieveFullDocuments:
+          type: boolean
+          default: false
+          description: "Whether to retrieve full documents instead of just matching chunks
+            (default: false)"
+  - name: chat_with_onyx
+    description: Chat with Onyx to get comprehensive answers
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The question to ask Onyx
+        personaId:
+          type: integer
+          default: 15
+          description: "The ID of the persona to use (default: 15)"
+        documentSets:
+          type: array
+          items:
+            type: string
+          description: List of document set names to search within (empty for all)
+        chatSessionId:
+          type: string
+          description: Existing chat session ID to continue a conversation (optional)
+        enableAutoDetectFilters:
+          type: boolean
+          default: true
+          description: "Whether to enable auto-detection of filters (default: true)"

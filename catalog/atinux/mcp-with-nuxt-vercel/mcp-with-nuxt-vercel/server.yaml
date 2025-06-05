@@ -1,0 +1,18 @@
+identifier: atinux/mcp-with-nuxt-vercel/mcp-with-nuxt-vercel
+repo:
+  provider: github.com
+  url: https://github.com/atinux/mcp-with-nuxt-vercel
+  name: mcp-with-nuxt-vercel
+  owner: atinux
+server:
+  subdirectory: /
+  name: Nuxt MCP Server on Vercel
+  description: Serve an MCP server within a Nuxt application deployed on Vercel to
+    enable dynamic integration of LLMs with external tools, resources, and
+    prompts. Easily add MCP capabilities to your Nuxt project routes and
+    leverage Redis for efficient SSE transport. Simplify building and deploying
+    MCP servers with a ready-to-use template optimized for Vercel's environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

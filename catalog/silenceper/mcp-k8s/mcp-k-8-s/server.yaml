@@ -1,0 +1,15 @@
+identifier: silenceper/mcp-k8s/mcp-k-8-s
+repo:
+  provider: github.com
+  url: https://github.com/silenceper/mcp-k8s
+  name: mcp-k8s
+  owner: silenceper
+server:
+  subdirectory: /
+  name: mcp-k8s
+  description: A Kubernetes MCP (Model Control Protocol) server that enables
+    interaction with Kubernetes clusters through MCP tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

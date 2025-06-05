@@ -1,0 +1,1240 @@
+tools:
+  - name: get_release
+    description: Get a release
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - release_id
+      properties:
+        curr_abbr:
+          enum:
+            - USD
+            - GBP
+            - EUR
+            - CAD
+            - AUD
+            - JPY
+            - CHF
+            - MXN
+            - BRL
+            - NZD
+            - SEK
+            - ZAR
+          type: string
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: get_release_rating_by_user
+    description: Retrieves the release's rating for a given user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: edit_release_rating
+    description: Updates the release's rating for a given user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+        - rating
+      properties:
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: delete_release_rating
+    description: Deletes the release's rating for a given user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: get_release_community_rating
+    description: Retrieves the release community rating average and count
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - release_id
+      properties:
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: get_master_release
+    description: Get a master release
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - master_id
+      properties:
+        master_id:
+          type: integer
+      additionalProperties: false
+  - name: get_master_release_versions
+    description: Retrieves a list of all Releases that are versions of this master
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - master_id
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - released
+            - title
+            - format
+            - label
+            - catno
+            - country
+          type: string
+        label:
+          type: string
+        format:
+          type: string
+        country:
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        released:
+          type: string
+        master_id:
+          type: integer
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: get_artist
+    description: Get an artist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - artist_id
+      properties:
+        artist_id:
+          type: number
+      additionalProperties: false
+  - name: get_artist_releases
+    description: Get an artist's releases
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - artist_id
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - year
+            - title
+            - format
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        artist_id:
+          type: number
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: get_label
+    description: Get a label
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label_id
+      properties:
+        label_id:
+          type: number
+      additionalProperties: false
+  - name: get_label_releases
+    description: Returns a list of Releases associated with the label
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label_id
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum: []
+          type: string
+        label_id:
+          type: number
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: search
+    description: Issue a search query to the Discogs database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        q:
+          type: string
+        anv:
+          type: string
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - title
+            - artist
+            - year
+          type: string
+        type:
+          enum:
+            - artist
+            - label
+            - master
+            - release
+          type: string
+        year:
+          type: string
+        catno:
+          type: string
+        genre:
+          type: string
+        label:
+          type: string
+        style:
+          type: string
+        title:
+          type: string
+        track:
+          type: string
+        artist:
+          type: string
+        credit:
+          type: string
+        format:
+          type: string
+        barcode:
+          type: string
+        country:
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        submitter:
+          type: string
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+        contributor:
+          type: string
+        release_title:
+          type: string
+      additionalProperties: false
+  - name: get_user_inventory
+    description: Returns the list of listings in a user's inventory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - listed
+            - price
+            - item
+            - artist
+            - label
+            - catno
+            - audio
+            - status
+            - location
+          type: string
+        status:
+          enum:
+            - For Sale
+            - Expired
+            - Draft
+            - Pending
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: get_marketplace_listing
+    description: Get a listing from the marketplace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - listing_id
+      properties:
+        curr_abbr:
+          enum:
+            - USD
+            - GBP
+            - EUR
+            - CAD
+            - AUD
+            - JPY
+            - CHF
+            - MXN
+            - BRL
+            - NZD
+            - SEK
+            - ZAR
+          type: string
+        listing_id:
+          type: integer
+      additionalProperties: false
+  - name: create_marketplace_listing
+    description: Create a new marketplace listing
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - release_id
+        - condition
+        - price
+        - status
+      properties:
+        price:
+          type: number
+        status:
+          enum:
+            - For Sale
+            - Expired
+            - Draft
+            - Pending
+          type: string
+        weight:
+          type: number
+        comments:
+          type: string
+        location:
+          type: string
+        condition:
+          enum:
+            - Mint (M)
+            - Near Mint (NM or M-)
+            - Very Good Plus (VG+)
+            - Very Good (VG)
+            - Good Plus (G+)
+            - Good (G)
+            - Fair (F)
+            - Poor (P)
+          type: string
+        release_id:
+          type: integer
+        external_id:
+          type: string
+        allow_offers:
+          type: boolean
+        format_quantity:
+          type: number
+        sleeve_condition:
+          enum:
+            - Mint (M)
+            - Near Mint (NM or M-)
+            - Very Good Plus (VG+)
+            - Very Good (VG)
+            - Good Plus (G+)
+            - Good (G)
+            - Fair (F)
+            - Poor (P)
+            - Generic
+            - Not Graded
+            - No Cover
+          type: string
+      additionalProperties: false
+  - name: update_marketplace_listing
+    description: Update a marketplace listing
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - listing_id
+        - release_id
+        - condition
+        - price
+        - status
+      properties:
+        price:
+          type: number
+        status:
+          enum:
+            - For Sale
+            - Expired
+            - Draft
+            - Pending
+          type: string
+        weight:
+          type: number
+        comments:
+          type: string
+        location:
+          type: string
+        condition:
+          enum:
+            - Mint (M)
+            - Near Mint (NM or M-)
+            - Very Good Plus (VG+)
+            - Very Good (VG)
+            - Good Plus (G+)
+            - Good (G)
+            - Fair (F)
+            - Poor (P)
+          type: string
+        listing_id:
+          type: integer
+        release_id:
+          type: integer
+        external_id:
+          type: string
+        allow_offers:
+          type: boolean
+        format_quantity:
+          type: number
+        sleeve_condition:
+          enum:
+            - Mint (M)
+            - Near Mint (NM or M-)
+            - Very Good Plus (VG+)
+            - Very Good (VG)
+            - Good Plus (G+)
+            - Good (G)
+            - Fair (F)
+            - Poor (P)
+            - Generic
+            - Not Graded
+            - No Cover
+          type: string
+      additionalProperties: false
+  - name: delete_marketplace_listing
+    description: Delete a marketplace listing
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - listing_id
+      properties:
+        listing_id:
+          type: integer
+      additionalProperties: false
+  - name: get_marketplace_order
+    description: Get a marketplace order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - order_id
+      properties:
+        order_id:
+          type: number
+      additionalProperties: false
+  - name: edit_marketplace_order
+    description: Edit a marketplace order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - order_id
+      properties:
+        status:
+          enum:
+            - New Order
+            - Buyer Contacted
+            - Invoice Sent
+            - Payment Pending
+            - Payment Received
+            - Shipped
+            - Refund Sent
+            - Cancelled (Non-Paying Buyer)
+            - Cancelled (Item Unavailable)
+            - Cancelled (Per Buyer's Request)
+          type: string
+        order_id:
+          type: number
+        shipping:
+          type: number
+      additionalProperties: false
+  - name: get_marketplace_orders
+    description: Get a list of marketplace orders
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - id
+            - buyer
+            - created
+            - status
+            - last_activity
+          type: string
+        status:
+          enum:
+            - New Order
+            - Buyer Contacted
+            - Invoice Sent
+            - Payment Pending
+            - Payment Received
+            - Shipped
+            - Refund Sent
+            - Cancelled (Non-Paying Buyer)
+            - Cancelled (Item Unavailable)
+            - Cancelled (Per Buyer's Request)
+          type: string
+        archived:
+          type: boolean
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+        created_after:
+          type: string
+        created_before:
+          type: string
+      additionalProperties: false
+  - name: get_marketplace_order_messages
+    description: Get a list of an order's messages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - order_id
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum: []
+          type: string
+        order_id:
+          type: number
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: create_marketplace_order_message
+    description: Adds a new message to the order's message log
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - order_id
+      properties:
+        status:
+          enum:
+            - New Order
+            - Buyer Contacted
+            - Invoice Sent
+            - Payment Pending
+            - Payment Received
+            - Shipped
+            - Refund Sent
+            - Cancelled (Non-Paying Buyer)
+            - Cancelled (Item Unavailable)
+            - Cancelled (Per Buyer's Request)
+          type: string
+        message:
+          type: string
+        order_id:
+          type: number
+      additionalProperties: false
+  - name: get_marketplace_release_stats
+    description: Retrieve marketplace statistics for the provided Release ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - release_id
+      properties:
+        curr_abbr:
+          enum:
+            - USD
+            - GBP
+            - EUR
+            - CAD
+            - AUD
+            - JPY
+            - CHF
+            - MXN
+            - BRL
+            - NZD
+            - SEK
+            - ZAR
+          type: string
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: inventory_export
+    description: Request an export of your inventory as a CSV
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_inventory_exports
+    description: Get a list of all recent exports of your inventory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_inventory_export
+    description: Get details about an inventory export
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+      additionalProperties: false
+  - name: download_inventory_export
+    description: Download an inventory export as a CSV
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+      additionalProperties: false
+  - name: get_user_identity
+    description: Retrieve basic information about the authenticated user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_user_profile
+    description: Retrieve a user by username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: edit_user_profile
+    description: Edit a user's profile data
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        name:
+          type: string
+        profile:
+          type: string
+        location:
+          type: string
+        username:
+          type: string
+          minLength: 1
+        curr_abbr:
+          enum:
+            - USD
+            - GBP
+            - EUR
+            - CAD
+            - AUD
+            - JPY
+            - CHF
+            - MXN
+            - BRL
+            - NZD
+            - SEK
+            - ZAR
+          type: string
+        home_page:
+          type: string
+      additionalProperties: false
+  - name: get_user_submissions
+    description: Retrieve a user's submissions by username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_user_contributions
+    description: Retrieve a user's contributions by username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - label
+            - artist
+            - title
+            - catno
+            - format
+            - rating
+            - year
+            - added
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: get_user_collection_folders
+    description: Retrieve a list of folders in a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_user_collection_folder
+    description: Create a new folder in a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_user_collection_folder
+    description: Retrieve metadata about a folder in a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 0
+      additionalProperties: false
+  - name: edit_user_collection_folder
+    description: Edit a folder's metadata. Folders 0 and 1 cannot be renamed.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 0
+      additionalProperties: false
+  - name: delete_user_collection_folder
+    description: Delete a folder from a user's collection. A folder must be empty
+      before it can be deleted.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 0
+      additionalProperties: false
+  - name: find_release_in_user_collection
+    description: Find a release in a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum: []
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: get_user_collection_items
+    description: Retrieve a list of items in a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - added
+            - artist
+            - catno
+            - format
+            - label
+            - rating
+            - title
+            - year
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 0
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: add_release_to_user_collection_folder
+    description: Add a release to a folder in a user's collection. The folder_id
+      must be non-zero.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+        - release_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: rate_release_in_user_collection
+    description: Rate a release in a user's collection. The folder_id must be non-zero.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+        - release_id
+        - instance_id
+      properties:
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 1
+        release_id:
+          type: number
+          minimum: 1
+        instance_id:
+          type: integer
+      additionalProperties: false
+  - name: move_release_in_user_collection
+    description: Move a release in a user's collection to another folder
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+        - release_id
+        - instance_id
+        - destination_folder_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 1
+        release_id:
+          type: number
+          minimum: 1
+        instance_id:
+          type: integer
+        destination_folder_id:
+          type: number
+      additionalProperties: false
+  - name: delete_release_from_user_collection_folder
+    description: Remove an instance of a release from a user's collection folder.
+      The folder_id must be non-zero.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+        - release_id
+        - instance_id
+      properties:
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 1
+        release_id:
+          type: number
+          minimum: 1
+        instance_id:
+          type: integer
+      additionalProperties: false
+  - name: get_user_collection_custom_fields
+    description: Retrieve a list of user-defined collection notes fields. These
+      fields are available on every release in the collection.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: edit_user_collection_custom_field_value
+    description: Edit a custom field value for a release in a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - folder_id
+        - value
+        - release_id
+        - instance_id
+        - field_id
+      properties:
+        value:
+          type: string
+        field_id:
+          type: number
+        username:
+          type: string
+          minLength: 1
+        folder_id:
+          type: integer
+          minimum: 0
+        release_id:
+          type:
+            - number
+            - string
+        instance_id:
+          type:
+            - number
+            - string
+      additionalProperties: false
+  - name: get_user_collection_value
+    description: Returns the minimum, median, and maximum value of a user's collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_user_wantlist
+    description: Returns the list of releases in a user's wantlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum:
+            - added
+            - artist
+            - label
+            - rating
+            - title
+            - year
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: add_to_wantlist
+    description: Add a release to a user's wantlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+      properties:
+        notes:
+          type: string
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 0
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: edit_item_in_wantlist
+    description: Edit a release in a user's wantlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+      properties:
+        notes:
+          type: string
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 0
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: delete_item_in_wantlist
+    description: Delete a release from a user's wantlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - release_id
+      properties:
+        notes:
+          type: string
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 0
+        username:
+          type: string
+          minLength: 1
+        release_id:
+          type: number
+          minimum: 1
+      additionalProperties: false
+  - name: get_user_lists
+    description: Get a user's lists
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        sort:
+          enum: []
+          type: string
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+        username:
+          type: string
+          minLength: 1
+        sort_order:
+          enum:
+            - asc
+            - desc
+          type: string
+      additionalProperties: false
+  - name: get_list
+    description: Get a list by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - list_id
+      properties:
+        list_id:
+          type: number
+      additionalProperties: false
+  - name: fetch_image
+    description: Fetch an image by URL
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+      additionalProperties: false

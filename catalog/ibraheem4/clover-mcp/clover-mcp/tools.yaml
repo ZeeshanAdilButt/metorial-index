@@ -1,0 +1,52 @@
+tools:
+  - name: list_inventory
+    description: List inventory items with optional filters
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of items to return
+        query:
+          type: string
+          description: Filter query for inventory items
+        offset:
+          type: number
+          description: Offset for pagination
+  - name: list_orders
+    description: List orders with optional filters
+    inputSchema:
+      type: object
+      properties:
+        end:
+          type: string
+          description: End date for filtering orders (ISO format)
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of orders to return
+        start:
+          type: string
+          description: Start date for filtering orders (ISO format)
+        filter:
+          type: string
+          description: Filter query for orders
+  - name: get_merchant_info
+    description: Get information about the merchant
+    inputSchema:
+      type: object
+      properties: {}
+  - name: initiate_oauth_flow
+    description: Initiate the OAuth flow to get tokens
+    inputSchema:
+      type: object
+      properties:
+        port:
+          type: number
+          description: "Port to run the OAuth server on (default: 4000)"
+  - name: get_oauth_status
+    description: Check if OAuth credentials are available
+    inputSchema:
+      type: object
+      properties: {}

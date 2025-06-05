@@ -1,0 +1,65 @@
+tools:
+  - name: get_current_fng_tool
+    description: Get the current Crypto Fear & Greed Index as a tool.
+    inputSchema:
+      type: object
+      title: get_current_fng_toolArguments
+      properties: {}
+  - name: get_historical_fng_tool
+    description: "
+
+      \    Get historical Fear & Greed Index for specified number of days as a
+      tool.
+
+
+      \    Parameters:
+
+      \        days (int): Number of days to retrieve (must be a positive
+      integer).
+
+
+      \    Returns:
+
+      \        str: Historical Fear & Greed Index values for the specified
+      period.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_historical_fng_toolArguments
+      required:
+        - days
+      properties:
+        days:
+          type: integer
+          title: Days
+  - name: analyze_fng_trend
+    description: "
+
+      \    Analyze trends in Crypto Fear & Greed Index over specified days.
+
+
+      \    Parameters:
+
+      \        days (int): Number of days to analyze (must be a positive
+      integer).
+
+
+      \    Returns:
+
+      \        str: A string containing the analysis results, including latest
+      value,
+
+      \             average value, trend direction, and number of data points
+      analyzed.
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_fng_trendArguments
+      required:
+        - days
+      properties:
+        days:
+          type: integer
+          title: Days

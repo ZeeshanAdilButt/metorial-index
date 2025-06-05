@@ -1,0 +1,57 @@
+tools:
+  - name: get_completion
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+      additionalProperties: false
+  - name: analyze_code
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+      additionalProperties: false
+  - name: developer_tip
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        topic:
+          type: string
+      additionalProperties: false
+  - name: gc
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+      additionalProperties: false
+  - name: ac
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+      additionalProperties: false
+  - name: tip
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        topic:
+          type: string
+      additionalProperties: false

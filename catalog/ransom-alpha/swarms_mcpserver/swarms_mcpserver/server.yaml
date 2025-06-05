@@ -1,0 +1,19 @@
+identifier: ransom-alpha/swarms_mcpserver/swarms_mcpserver
+repo:
+  provider: github.com
+  url: https://github.com/Ransom-Alpha/Swarms_MCPserver
+  name: Swarms_MCPserver
+  owner: Ransom-Alpha
+server:
+  subdirectory: /
+  name: Swarms Documentation Server
+  description: Enable AI agents to efficiently retrieve and interact with your
+    documentation database using hybrid semantic and keyword search.
+    Automatically index and reindex local repositories with support for multiple
+    file types and live file watching. Integrate seamlessly with AI workflows
+    through a robust FastMCP tools API for low-latency, local-first document
+    querying and retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

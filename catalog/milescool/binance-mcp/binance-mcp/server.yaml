@@ -1,0 +1,17 @@
+identifier: milescool/binance-mcp/binance-mcp
+repo:
+  provider: github.com
+  url: https://github.com/MilesCool/binance-mcp
+  name: binance-mcp
+  owner: MilesCool
+server:
+  subdirectory: /
+  name: Binance Bitcoin Price Tool
+  description: Provide real-time and historical Bitcoin market data from Binance
+    to large language models. Enable access to ticker data, order book prices,
+    recent trades, and price history through a standardized interface. Stream
+    short-duration real-time Bitcoin price updates for enhanced market insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,54 @@
+tools:
+  - name: listEmails
+    description: List emails from Gmail with subject, sender, and body in Markdown
+      format. Optionally filter and summarize results.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        query:
+          type: string
+          default: in:inbox
+          description: The search query to filter emails. Use 'in:inbox','in:spam'
+            'in:unread', 'in:starred', 'in:sent', 'in:all',
+            'in:category_social', 'in:category_promotions',
+            'in:category_updates', 'in:category_forums', 'in:primary' or
+            'in:draft' to filter by label.
+        maxResults:
+          type: number
+          default: 3
+          description: The maximum number of emails to retrieve.
+      additionalProperties: false
+  - name: getEmailContent
+    description: Retrieve the full content of an email from Gmail.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - emailIndex
+      properties:
+        emailIndex:
+          type: number
+          description: The index of the email to retrieve.
+      additionalProperties: false
+  - name: sendEmail
+    description: Send an email from Gmail.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - subject
+        - body
+      properties:
+        to:
+          type: string
+          format: email
+          description: Recipient email address.
+        body:
+          type: string
+          description: Email body.
+        subject:
+          type: string
+          description: Email subject.
+      additionalProperties: false

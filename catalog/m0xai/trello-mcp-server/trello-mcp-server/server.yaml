@@ -1,0 +1,16 @@
+identifier: m0xai/trello-mcp-server/trello-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/m0xai/trello-mcp-server
+  name: trello-mcp-server
+  owner: m0xai
+server:
+  subdirectory: /
+  name: Trello MCP Server
+  description: Interact with your Trello boards, lists, and cards seamlessly
+    through AI Hosts. Manage your Trello tasks effortlessly by using natural
+    language commands to read, create, and update your boards and cards.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

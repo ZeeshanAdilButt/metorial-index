@@ -1,0 +1,22 @@
+identifier: neo4j-contrib/mcp-neo4j/mcp-neo4j
+repo:
+  provider: github.com
+  url: https://github.com/neo4j-contrib/mcp-neo4j
+  name: mcp-neo4j
+  owner: neo4j-contrib
+server:
+  subdirectory: /servers/mcp-neo4j-memory
+  name: mcp-neo4j-memory
+  description: >-
+    A Model Context Protocol (MCP) server implementation that provides
+    persistent memory capabilities through Neo4j graph database integration.
+
+
+    By storing information in a graph structure, this server maintains complex
+    relationships between entities as memory nodes and enables long-term
+    retention of knowledge that can be queried and analyzed across multiple
+    conversations or sessions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,15 @@
+identifier: railsware/mailtrap-mcp/mailtrap-mcp
+repo:
+  provider: github.com
+  url: https://github.com/railsware/mailtrap-mcp
+  name: mailtrap-mcp
+  owner: railsware
+server:
+  subdirectory: /
+  name: "Mailtrap Send Email "
+  description: An MCP server that provides a tool for sending transactional emails
+    via Mailtrap.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: coyasong/youtube-mcp-server/youtube-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/coyaSONG/youtube-mcp-server
+  name: youtube-mcp-server
+  owner: coyaSONG
+server:
+  subdirectory: /
+  name: Advanced YouTube
+  description: A Model Context Protocol (MCP) server for interacting with YouTube
+    data. This server provides resources and tools to query YouTube videos,
+    channels, comments, and transcripts through a stdio interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

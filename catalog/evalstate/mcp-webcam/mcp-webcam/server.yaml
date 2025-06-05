@@ -1,0 +1,14 @@
+identifier: evalstate/mcp-webcam/mcp-webcam
+repo:
+  provider: github.com
+  url: https://github.com/evalstate/mcp-webcam
+  name: mcp-webcam
+  owner: evalstate
+server:
+  subdirectory: /
+  name: Webcam
+  description: Use your webcam to send live images to an MCP Client.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,71 @@
+tools:
+  - name: get_switches
+    description: Get a list of all connected OpenFlow switches
+    inputSchema:
+      type: object
+      title: get_switchesArguments
+      properties: {}
+  - name: get_switch_desc
+    description: Get detailed information about a specific switch
+    inputSchema:
+      type: object
+      title: get_switch_descArguments
+      required:
+        - dpid
+      properties:
+        dpid:
+          type: string
+          title: Dpid
+  - name: get_flow_stats
+    description: Get flow statistics from a switch
+    inputSchema:
+      type: object
+      title: get_flow_statsArguments
+      required:
+        - dpid
+      properties:
+        dpid:
+          type: string
+          title: Dpid
+        match:
+          type: object
+          title: Match
+          default: null
+          additionalProperties: true
+        out_port:
+          type: string
+          title: Out Port
+          default: null
+        table_id:
+          type: string
+          title: Table Id
+          default: null
+  - name: set_table
+    description: Set the flow table on a switch
+    inputSchema:
+      type: object
+      title: set_tableArguments
+      required:
+        - dpid
+        - flows
+      properties:
+        dpid:
+          type: string
+          title: Dpid
+        flows:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Flows
+  - name: append_insight
+    description: Add a network insight to the configuration memo
+    inputSchema:
+      type: object
+      title: append_insightArguments
+      required:
+        - insight
+      properties:
+        insight:
+          type: string
+          title: Insight

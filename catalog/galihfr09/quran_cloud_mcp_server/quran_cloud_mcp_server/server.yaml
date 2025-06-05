@@ -1,0 +1,18 @@
+identifier: galihfr09/quran_cloud_mcp_server/quran_cloud_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/galihfr09/quran_cloud_mcp_server
+  name: quran_cloud_mcp_server
+  owner: galihfr09
+server:
+  subdirectory: /
+  name: Search-Quran
+  description: Provide LLMs with accurate access to Quran text by connecting them
+    to a free Quran API, reducing hallucination when working with sensitive
+    religious content. Retrieve only the necessary Quranic data efficiently
+    without sending large text chunks in each request. Easily integrate with
+    applications like Claude Desktop to enhance response reliability.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

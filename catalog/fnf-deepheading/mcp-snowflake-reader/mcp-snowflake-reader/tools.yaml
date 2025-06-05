@@ -1,0 +1,19 @@
+tools:
+  - name: query
+    description: |-
+      Executes a read-only SQL query against the Snowflake database.
+          Args:
+              sql: SQL query string to execute (must be read-only)
+          Returns:
+              Query results as a JSON-formatted string
+          Note: 
+              This function is restricted to read-only operations for security
+    inputSchema:
+      type: object
+      title: queryArguments
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          title: Sql

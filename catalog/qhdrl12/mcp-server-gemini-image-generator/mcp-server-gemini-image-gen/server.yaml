@@ -1,0 +1,17 @@
+identifier: qhdrl12/mcp-server-gemini-image-generator/mcp-server-gemini-image-gen
+repo:
+  provider: github.com
+  url: https://github.com/qhdrl12/mcp-server-gemini-image-generator
+  name: mcp-server-gemini-image-generator
+  owner: qhdrl12
+server:
+  subdirectory: /
+  name: Gemini Image Generator
+  description: Generate high-quality images from text prompts using Google's
+    Gemini AI model. Easily create and transform images with intelligent
+    filename generation and local storage. Supports both raw image data and file
+    path access for seamless integration with AI assistants.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,17 @@
+identifier: programmeragua/jenkins-mcp-server/jenkins-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ProgrammerAgua/jenkins-mcp-server
+  name: jenkins-mcp-server
+  owner: ProgrammerAgua
+server:
+  subdirectory: /
+  name: Jenkins API Server
+  description: Manage your Jenkins jobs effortlessly. Create, trigger, and
+    configure jobs through a unified API interface, streamlining your CI/CD
+    processes. Enhance your automation capabilities with easy access to job
+    information and logs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

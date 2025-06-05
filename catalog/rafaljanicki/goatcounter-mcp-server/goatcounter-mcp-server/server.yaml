@@ -1,0 +1,18 @@
+identifier: rafaljanicki/goatcounter-mcp-server/goatcounter-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/rafaljanicki/goatcounter-mcp-server
+  name: goatcounter-mcp-server
+  owner: rafaljanicki
+server:
+  subdirectory: /
+  name: GoatCounter MCP Server
+  description: Provide web analytics data through a Model Context Protocol server,
+    enabling LLMs to query and analyze website traffic metrics seamlessly.
+    Facilitate integration of real-time analytics into AI workflows for enhanced
+    decision-making. Simplify access to visitor statistics and trends via
+    standardized MCP methods.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

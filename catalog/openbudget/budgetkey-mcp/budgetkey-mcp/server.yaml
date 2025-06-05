@@ -1,0 +1,17 @@
+identifier: openbudget/budgetkey-mcp/budgetkey-mcp
+repo:
+  provider: github.com
+  url: https://github.com/OpenBudget/budgetkey-mcp
+  name: budgetkey-mcp
+  owner: OpenBudget
+server:
+  subdirectory: /
+  name: OpenBudget Data Server
+  description: Provide seamless access to Israel's governmental budget data
+    through a standardized MCP interface. Enable real-time querying, searching,
+    and analysis of budget, contracts, and support payment datasets. Empower
+    client applications to integrate comprehensive budget insights effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,559 @@
+tools:
+  - name: get_memory_info
+    description: 获取本地服务器内存信息
+    inputSchema:
+      type: object
+      title: get_memory_infoArguments
+      properties: {}
+  - name: remote_server_inspection
+    description: 执行远程服务器巡检
+    inputSchema:
+      type: object
+      title: remote_server_inspectionArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+        inspection_modules:
+          type: array
+          items:
+            type: string
+          title: Inspection Modules
+          default:
+            - cpu
+            - memory
+            - disk
+        use_connection_cache:
+          type: boolean
+          title: Use Connection Cache
+          default: true
+  - name: get_system_load
+    description: 获取系统负载信息
+    inputSchema:
+      type: object
+      title: get_system_loadArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: monitor_processes
+    description: 监控远程服务器进程，返回占用资源最多的进程
+    inputSchema:
+      type: object
+      title: monitor_processesArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        top_n:
+          type: integer
+          title: Top N
+          default: 10
+        sort_by:
+          type: string
+          title: Sort By
+          default: cpu
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: check_service_status
+    description: 检查指定服务的运行状态
+    inputSchema:
+      type: object
+      title: check_service_statusArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        services:
+          type: array
+          items:
+            type: string
+          title: Services
+          default: []
+        username:
+          type: string
+          title: Username
+  - name: get_os_details
+    description: 获取操作系统详细信息
+    inputSchema:
+      type: object
+      title: get_os_detailsArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: check_ssh_risk_logins
+    description: 检查SSH登录风险，包括失败尝试和可疑IP
+    inputSchema:
+      type: object
+      title: check_ssh_risk_loginsArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        log_file:
+          type: string
+          title: Log File
+          default: /var/log/auth.log
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+        threshold:
+          type: integer
+          title: Threshold
+          default: 5
+  - name: check_firewall_config
+    description: 检查防火墙配置和开放端口
+    inputSchema:
+      type: object
+      title: check_firewall_configArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: security_vulnerability_scan
+    description: 执行基础安全漏洞扫描
+    inputSchema:
+      type: object
+      title: security_vulnerability_scanArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 60
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+        scan_type:
+          type: string
+          title: Scan Type
+          default: basic
+  - name: backup_critical_files
+    description: 备份重要系统配置文件
+    inputSchema:
+      type: object
+      title: backup_critical_filesArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        files:
+          type: array
+          items:
+            type: string
+          title: Files
+          default:
+            - /etc/passwd
+            - /etc/shadow
+            - /etc/fstab
+            - /etc/hosts
+        timeout:
+          type: integer
+          title: Timeout
+          default: 60
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+        backup_dir:
+          type: string
+          title: Backup Dir
+          default: /tmp/backup
+  - name: inspect_network
+    description: 检查网络接口和连接状态
+    inputSchema:
+      type: object
+      title: inspect_networkArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: analyze_logs
+    description: 分析服务器日志文件中的错误和警告
+    inputSchema:
+      type: object
+      title: analyze_logsArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        lines:
+          type: integer
+          title: Lines
+          default: 100
+        pattern:
+          type: string
+          title: Pattern
+          default: error|fail|critical
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        log_file:
+          type: string
+          title: Log File
+          default: /var/log/syslog
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: list_docker_containers
+    description: 列出Docker容器及其信息
+    inputSchema:
+      type: object
+      title: list_docker_containersArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        show_all:
+          type: boolean
+          title: Show All
+          default: false
+        username:
+          type: string
+          title: Username
+  - name: list_docker_images
+    description: 列出Docker镜像
+    inputSchema:
+      type: object
+      title: list_docker_imagesArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: list_docker_volumes
+    description: 列出Docker卷
+    inputSchema:
+      type: object
+      title: list_docker_volumesArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: get_container_logs
+    description: 获取指定容器的日志
+    inputSchema:
+      type: object
+      title: get_container_logsArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        tail:
+          type: integer
+          title: Tail
+          default: 100
+        since:
+          type: string
+          title: Since
+          default: ""
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+        container:
+          type: string
+          title: Container
+          default: ""
+  - name: monitor_container_stats
+    description: 监控容器的资源使用情况
+    inputSchema:
+      type: object
+      title: monitor_container_statsArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+        containers:
+          type: array
+          items:
+            type: string
+          title: Containers
+          default: []
+  - name: check_docker_health
+    description: 检查Docker服务的健康状态和基本信息
+    inputSchema:
+      type: object
+      title: check_docker_healthArguments
+      required:
+        - hostname
+        - username
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 22
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+        hostname:
+          type: string
+          title: Hostname
+        password:
+          type: string
+          title: Password
+          default: ""
+        username:
+          type: string
+          title: Username
+  - name: _list_available_tools
+    description: ""
+    inputSchema:
+      type: object
+      title: _list_available_toolsArguments
+      properties: {}

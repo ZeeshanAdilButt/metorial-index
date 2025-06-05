@@ -1,0 +1,167 @@
+tools:
+  - name: create_record
+    description: 创建飞书多维表格记录
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - tableId
+        - fields
+      properties:
+        fields:
+          type: string
+          description: '要增加一行多维表格记录的字段内容，JSON格式。例如：{"多行文本":"内容","单选":"选项1","多选":["选项1","选项2"],"复选框":true,"日期":1674206443000,"超链接":
+            {"text": "飞书多维表格官网", "link": "https://www.feishu.cn/product/base"
+            }]}'
+        tableId:
+          type: string
+          description: 多维表格数据表的唯一标识符 table_id
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+      additionalProperties: false
+  - name: search_records
+    description: 搜索飞书多维表格记录
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - tableId
+      properties:
+        filter:
+          type: string
+          description: 过滤条件，用于筛选记录的JSON字符串。例如：{"and":[{"field_name":"姓名","operator":"contains","value":"张"}]}
+        viewId:
+          type: string
+          description: 视图的唯一标识符
+        tableId:
+          type: string
+          description: 多维表格数据表的唯一标识符 table_id
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+      additionalProperties: false
+  - name: delete_record
+    description: 删除飞书多维表格记录
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - tableId
+        - recordId
+      properties:
+        tableId:
+          type: string
+          description: 多维表格数据表的唯一标识符 table_id
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+        recordId:
+          type: string
+          description: 要删除的单条记录的ID
+      additionalProperties: false
+  - name: update_record
+    description: 更新飞书多维表格记录
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - tableId
+        - recordId
+        - fields
+      properties:
+        fields:
+          type: string
+          description: '要增加一行多维表格记录的字段内容，JSON格式。例如：{"多行文本":"内容","单选":"选项1","多选":["选项1","选项2"],"复选框":true,"日期":1674206443000,"超链接":
+            {"text": "飞书多维表格官网", "link": "https://www.feishu.cn/product/base"
+            }]}'
+        tableId:
+          type: string
+          description: 多维表格数据表的唯一标识符 table_id
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+        recordId:
+          type: string
+          description: 要更新的记录的ID
+      additionalProperties: false
+  - name: list_fields
+    description: 获取多维表格数据表中的的所有字段
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - tableId
+      properties:
+        tableId:
+          type: string
+          description: 多维表格数据表的唯一标识符 table_id
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+      additionalProperties: false
+  - name: create_bitable_app
+    description: 创建飞书多维表格应用
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 多维表格应用的名称
+        folderToken:
+          type: string
+          description: 文件夹的唯一标识符(非必须)，用于指定新创建的多维表格所在的位置
+      additionalProperties: false
+  - name: create_table
+    description: 创建飞书多维表格数据表
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - name
+      properties:
+        name:
+          type: string
+          description: 要创建的数据表名称
+        fields:
+          type: string
+          description: |-
+            要创建的字段列表，JSON格式。例如：[
+            {"name":"表头名称(多行文本)","type":"text"},
+            {"name":"表头名称(数值)","type":"number"},
+            {"name":"表头名称(单选)","type":"singleSelect","property":{"options":[{"name":"未开始"},{"name":"进行中"},{"name":"已完成"}]}},
+            {"name":"表头名称(多选)","type":"multipleSelect","property":{"options":[{"name":"未开始"},{"name":"进行中"},{"name":"已完成"}]}},
+            {"name":"表头名称(复选框)","type":"checkbox"},
+            {"name":"表头名称(日期)","type":"date"}
+            {"name":"表头名称(超链接)","type":"link"}
+            ]
+            只能创建以上类型的字段
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+      additionalProperties: false
+  - name: delete_table
+    description: 删除飞书多维表格数据表
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appToken
+        - tableId
+      properties:
+        tableId:
+          type: string
+          description: 多维表格数据表的唯一标识符 table_id
+        appToken:
+          type: string
+          description: 多维表格的唯一标识符app_token
+      additionalProperties: false

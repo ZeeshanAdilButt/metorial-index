@@ -1,0 +1,304 @@
+tools:
+  - name: list_projects
+    description: List all projects in the system and their basic information (ID,
+      initial prompt, task counts), optionally filtered by state (open,
+      pending_approval, completed, all).
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        state:
+          enum:
+            - open
+            - pending_approval
+            - completed
+            - all
+          type: string
+          description: Filter projects by state. 'open' (any incomplete task),
+            'pending_approval' (any tasks awaiting approval), 'completed' (all
+            tasks done and approved), or 'all' to skip filtering.
+  - name: read_project
+    description: Read all information for a given project, by its ID, including its
+      tasks' statuses.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: The ID of the project to read (e.g., proj-1).
+  - name: create_project
+    description: Create a new project with an initial prompt and a list of tasks.
+      This is typically the first step in any workflow.
+    inputSchema:
+      type: object
+      required:
+        - initialPrompt
+        - tasks
+      properties:
+        tasks:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - description
+            properties:
+              title:
+                type: string
+                description: The title of the task.
+              description:
+                type: string
+                description: A detailed description of the task.
+              ruleRecommendations:
+                type: string
+                description: Recommendations for relevant rules to review when completing the
+                  task.
+              toolRecommendations:
+                type: string
+                description: Recommendations for tools to use to complete the task.
+          description: An array of task objects.
+        autoApprove:
+          type: boolean
+          description: If true, tasks will be automatically approved when marked as done.
+            If false or not provided, tasks require manual approval.
+        projectPlan:
+          type: string
+          description: A more detailed plan for the project. If not provided, the initial
+            prompt will be used.
+        initialPrompt:
+          type: string
+          description: The initial prompt or goal for the project.
+  - name: delete_project
+    description: Delete a project and all its associated tasks.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: The ID of the project to delete (e.g., proj-1).
+  - name: add_tasks_to_project
+    description: Add new tasks to an existing project.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - tasks
+      properties:
+        tasks:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - description
+            properties:
+              title:
+                type: string
+                description: The title of the task.
+              description:
+                type: string
+                description: A detailed description of the task.
+              ruleRecommendations:
+                type: string
+                description: Recommendations for relevant rules to review when completing the
+                  task.
+              toolRecommendations:
+                type: string
+                description: Recommendations for tools to use to complete the task.
+          description: An array of task objects to add.
+        projectId:
+          type: string
+          description: The ID of the project to add tasks to (e.g., proj-1).
+  - name: finalize_project
+    description: Mark a project as complete. Can only be called when all tasks are
+      both done and approved. This is typically the last step in a project
+      workflow.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: The ID of the project to finalize (e.g., proj-1).
+  - name: generate_project_plan
+    description: Use an LLM to generate a project plan and tasks from a prompt. The
+      LLM will analyze the prompt and any attached files to create a structured
+      project plan.
+    inputSchema:
+      type: object
+      required:
+        - prompt
+        - provider
+        - model
+      properties:
+        model:
+          type: string
+          description: The specific model to use (e.g., 'gpt-4-turbo' for OpenAI).
+        prompt:
+          type: string
+          description: The prompt text or file path to use for generating the project plan.
+        provider:
+          enum:
+            - openai
+            - google
+            - deepseek
+          type: string
+          description: The LLM provider to use (requires corresponding API key to be set).
+        attachments:
+          type: array
+          items:
+            type: string
+          description: Optional array of paths to files to attach as context. There is no
+            need to read the files before calling this tool!
+  - name: list_tasks
+    description: List all tasks, optionally filtered by project ID and/or state
+      (open, pending_approval, completed, all). Tasks may include tool and rule
+      recommendations to guide their completion.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        state:
+          enum:
+            - open
+            - pending_approval
+            - completed
+            - all
+          type: string
+          description: Filter tasks by state. 'open' (not started/in progress),
+            'pending_approval', 'completed', or 'all' to skip filtering.
+        projectId:
+          type: string
+          description: The ID of the project to list tasks from. If omitted, list all tasks.
+  - name: read_task
+    description: Get details of a specific task by its ID. The task may include
+      toolRecommendations and ruleRecommendations fields that should be used to
+      guide task completion.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The ID of the task to read (e.g., task-1).
+        projectId:
+          type: string
+          description: The ID of the project containing the task (e.g., proj-1).
+  - name: create_task
+    description: Create a new task within an existing project. You can optionally
+      include tool and rule recommendations to guide task completion.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          description: The title of the task.
+        projectId:
+          type: string
+          description: The ID of the project to add the task to (e.g., proj-1).
+        description:
+          type: string
+          description: A detailed description of the task.
+        ruleRecommendations:
+          type: string
+          description: Recommendations for relevant rules to review when completing the
+            task.
+        toolRecommendations:
+          type: string
+          description: Recommendations for tools to use to complete the task.
+  - name: update_task
+    description: "Modify a task's properties. Note: (1) completedDetails are
+      required when setting status to 'done', (2) approved tasks cannot be
+      modified, (3) status must follow valid transitions: not started → in
+      progress → done. You can also update tool and rule recommendations to
+      guide task completion."
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - taskId
+      properties:
+        title:
+          type: string
+          description: The new title for the task (optional).
+        status:
+          enum:
+            - not started
+            - in progress
+            - done
+          type: string
+          description: The new status for the task (optional).
+        taskId:
+          type: string
+          description: The ID of the task to update (e.g., task-1).
+        projectId:
+          type: string
+          description: The ID of the project containing the task (e.g., proj-1).
+        description:
+          type: string
+          description: The new description for the task (optional).
+        completedDetails:
+          type: string
+          description: Details about the task completion (required if status is set to
+            'done').
+        ruleRecommendations:
+          type: string
+          description: Recommendations for relevant rules to review when completing the
+            task.
+        toolRecommendations:
+          type: string
+          description: Recommendations for tools to use to complete the task.
+  - name: delete_task
+    description: Remove a task from a project.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The ID of the task to delete (e.g., task-1).
+        projectId:
+          type: string
+          description: The ID of the project containing the task (e.g., proj-1).
+  - name: approve_task
+    description: "Approve a completed task. Tasks must be marked as 'done' with
+      completedDetails before approval. Note: This is a CLI-only operation that
+      requires human intervention."
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The ID of the task to approve (e.g., task-1).
+        projectId:
+          type: string
+          description: The ID of the project containing the task (e.g., proj-1).
+  - name: get_next_task
+    description: Get the next task to be done in a project. Returns the first
+      non-approved task in sequence, regardless of status. The task may include
+      toolRecommendations and ruleRecommendations fields that should be used to
+      guide task completion.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: The ID of the project to get the next task from (e.g., proj-1).

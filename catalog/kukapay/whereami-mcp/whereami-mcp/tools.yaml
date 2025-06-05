@@ -1,0 +1,35 @@
+tools:
+  - name: get_location
+    description: "
+
+      \    Get detailed location information based on current IP.
+
+      \   \ 
+
+      \    Returns a Markdown table containing:
+
+      \    - IP: The current public IP address
+
+      \    - Country: Full country name
+
+      \    - Country Code: Two-letter country code (ISO 3166-1 alpha-2)
+
+      \    - Region: State or region name
+
+      \    - City: City name
+
+      \    - Latitude: Geographic latitude coordinate
+
+      \    - Longitude: Geographic longitude coordinate
+
+      \    - Timezone: IANA timezone identifier
+
+      \    - ISP: Internet Service Provider name
+
+      \    - ASN: Autonomous System Number
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_locationArguments
+      properties: {}

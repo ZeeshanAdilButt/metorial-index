@@ -1,0 +1,404 @@
+tools:
+  - name: get_user_profile
+    description: Get detailed profile information for a user
+    inputSchema:
+      type: object
+      title: get_user_profileArguments
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          title: User Id
+  - name: get_user_by_screen_name
+    description: Fetches a user by screen name
+    inputSchema:
+      type: object
+      title: get_user_by_screen_nameArguments
+      required:
+        - screen_name
+      properties:
+        screen_name:
+          type: string
+          title: Screen Name
+  - name: get_user_by_id
+    description: Fetches a user by ID
+    inputSchema:
+      type: object
+      title: get_user_by_idArguments
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          title: User Id
+  - name: get_user_followers
+    description: Retrieves a list of followers for a given user
+    inputSchema:
+      type: object
+      title: get_user_followersArguments
+      required:
+        - user_id
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        user_id:
+          type: string
+          title: User Id
+  - name: get_user_following
+    description: Retrieves users the given user is following
+    inputSchema:
+      type: object
+      title: get_user_followingArguments
+      required:
+        - user_id
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        user_id:
+          type: string
+          title: User Id
+  - name: get_user_followers_you_know
+    description: Retrieves a list of common followers
+    inputSchema:
+      type: object
+      title: get_user_followers_you_knowArguments
+      required:
+        - user_id
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        user_id:
+          type: string
+          title: User Id
+  - name: get_user_subscriptions
+    description: Retrieves a list of users to which the specified user is subscribed
+    inputSchema:
+      type: object
+      title: get_user_subscriptionsArguments
+      required:
+        - user_id
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        user_id:
+          type: string
+          title: User Id
+  - name: post_tweet
+    description: Post a tweet with optional media, reply, and tags
+    inputSchema:
+      type: object
+      title: post_tweetArguments
+      required:
+        - text
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        text:
+          type: string
+          title: Text
+        reply_to:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Reply To
+          default: null
+        media_paths:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Media Paths
+          default: null
+  - name: delete_tweet
+    description: Delete a tweet by its ID
+    inputSchema:
+      type: object
+      title: delete_tweetArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: get_tweet_details
+    description: Get detailed information about a specific tweet
+    inputSchema:
+      type: object
+      title: get_tweet_detailsArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: create_poll_tweet
+    description: Create a tweet with a poll
+    inputSchema:
+      type: object
+      title: create_poll_tweetArguments
+      required:
+        - text
+        - choices
+        - duration_minutes
+      properties:
+        text:
+          type: string
+          title: Text
+        choices:
+          type: array
+          items:
+            type: string
+          title: Choices
+        duration_minutes:
+          type: integer
+          title: Duration Minutes
+  - name: vote_on_poll
+    description: Vote on a poll
+    inputSchema:
+      type: object
+      title: vote_on_pollArguments
+      required:
+        - tweet_id
+        - choice
+      properties:
+        choice:
+          type: string
+          title: Choice
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: favorite_tweet
+    description: Favorites a tweet
+    inputSchema:
+      type: object
+      title: favorite_tweetArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: unfavorite_tweet
+    description: Unfavorites a tweet
+    inputSchema:
+      type: object
+      title: unfavorite_tweetArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: bookmark_tweet
+    description: Adds the tweet to bookmarks
+    inputSchema:
+      type: object
+      title: bookmark_tweetArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+        folder_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Folder Id
+          default: null
+  - name: delete_bookmark
+    description: Removes the tweet from bookmarks
+    inputSchema:
+      type: object
+      title: delete_bookmarkArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: delete_all_bookmarks
+    description: Deletes all bookmarks
+    inputSchema:
+      type: object
+      title: delete_all_bookmarksArguments
+      properties: {}
+  - name: get_timeline
+    description: Get tweets from your home timeline (For You)
+    inputSchema:
+      type: object
+      title: get_timelineArguments
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        seen_tweet_ids:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Seen Tweet Ids
+          default: null
+  - name: get_latest_timeline
+    description: Get tweets from your home timeline (Following)
+    inputSchema:
+      type: object
+      title: get_latest_timelineArguments
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+  - name: search_twitter
+    description: Search Twitter with a query
+    inputSchema:
+      type: object
+      title: search_twitterArguments
+      required:
+        - query
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        query:
+          type: string
+          title: Query
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        product:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Product
+          default: Top
+  - name: get_trends
+    description: Retrieves trending topics on Twitter
+    inputSchema:
+      type: object
+      title: get_trendsArguments
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 50
+        category:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Category
+          default: null
+  - name: get_highlights_tweets
+    description: Retrieves highlighted tweets from a user’s timeline
+    inputSchema:
+      type: object
+      title: get_highlights_tweetsArguments
+      required:
+        - user_id
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        user_id:
+          type: string
+          title: User Id
+  - name: get_user_mentions
+    description: Get tweets mentioning a specific user
+    inputSchema:
+      type: object
+      title: get_user_mentionsArguments
+      required:
+        - user_id
+      properties:
+        count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Count
+          default: 100
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        user_id:
+          type: string
+          title: User Id

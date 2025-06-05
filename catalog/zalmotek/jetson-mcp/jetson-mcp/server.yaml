@@ -1,0 +1,17 @@
+identifier: zalmotek/jetson-mcp/jetson-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Zalmotek/jetson-mcp
+  name: jetson-mcp
+  owner: Zalmotek
+server:
+  subdirectory: /
+  name: Nvidia Jetson MCP
+  description: Enable natural language monitoring and remote control of Nvidia
+    Jetson boards over the network. Access hardware and software information
+    tools via MCP clients using SSE transport. Simplify Jetson management with
+    easy installation and systemd service setup scripts.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

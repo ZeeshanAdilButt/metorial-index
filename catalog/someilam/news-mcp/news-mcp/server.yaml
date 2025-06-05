@@ -1,0 +1,18 @@
+identifier: someilam/news-mcp/news-mcp
+repo:
+  provider: github.com
+  url: https://github.com/SomeiLam/news-mcp
+  name: news-mcp
+  owner: SomeiLam
+server:
+  subdirectory: /
+  name: NewsDigest
+  description: Aggregate, search, and format news articles into reader-friendly
+    Markdown digests using real-time news data and large language models. Fetch
+    top headlines by country, language, and category or perform full-text
+    searches with filters. Enhance your applications with up-to-date news
+    summaries powered by NewsAPI.org and advanced LLMs like Gemini and Claude.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

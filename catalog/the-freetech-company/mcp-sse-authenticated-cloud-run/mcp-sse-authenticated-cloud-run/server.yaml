@@ -1,0 +1,18 @@
+identifier: the-freetech-company/mcp-sse-authenticated-cloud-run/mcp-sse-authenticated-cloud-run
+repo:
+  provider: github.com
+  url: https://github.com/the-freetech-company/mcp-sse-authenticated-cloud-run
+  name: mcp-sse-authenticated-cloud-run
+  owner: the-freetech-company
+server:
+  subdirectory: /
+  name: MCP SSE Server
+  description: Host a secure MCP server on Google Cloud Run to enable your team to
+    access real-time data and tools. Simplify your integration process with
+    minimal configuration and leverage Google Cloud's IAM for secure access.
+    Start using your MCP server immediately without waiting for full
+    authentication features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

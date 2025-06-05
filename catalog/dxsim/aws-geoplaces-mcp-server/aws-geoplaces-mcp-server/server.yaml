@@ -1,0 +1,18 @@
+identifier: dxsim/aws-geoplaces-mcp-server/aws-geoplaces-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dxsim/AWS-GeoPlaces-MCP-Server
+  name: AWS-GeoPlaces-MCP-Server
+  owner: dxsim
+server:
+  subdirectory: /
+  name: AWS GeoPlaces Location Service
+  description: Provide direct access to AWS Location Service's GeoPlaces v2 API
+    for geocoding and reverse-geocoding capabilities. Enable your applications
+    to seamlessly convert addresses to geographic coordinates and vice versa
+    using AWS infrastructure. Simplify location-based queries with this MCP
+    server integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

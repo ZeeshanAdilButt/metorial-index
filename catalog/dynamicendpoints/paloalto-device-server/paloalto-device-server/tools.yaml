@@ -1,0 +1,36 @@
+tools:
+  - name: get_system_info
+    description: Get system information from the Palo Alto firewall
+    inputSchema:
+      type: object
+      properties: {}
+  - name: upgrade_firewall
+    description: Upgrade the Palo Alto firewall to the latest PAN-OS version
+    inputSchema:
+      type: object
+      properties: {}
+  - name: upgrade_ha_firewalls_from_panorama
+    description: Upgrade PAN-OS on Multiple HA Firewalls through Panorama
+    inputSchema:
+      type: object
+      properties: {}
+  - name: check_install_content_updates
+    description: Automatically Check for and Install Content Updates
+    inputSchema:
+      type: object
+      properties: {}
+  - name: manage_certificates
+    description: Manage certificates on the Palo Alto firewall
+    inputSchema:
+      type: object
+      properties: {}
+  - name: run_operational_mode_command
+    description: Run an operational mode command on the Palo Alto firewall
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: Command to run

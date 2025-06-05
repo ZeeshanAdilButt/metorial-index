@@ -1,0 +1,52 @@
+tools:
+  - name: pinterest_search
+    description: Search for images on Pinterest by keyword
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        limit:
+          type: integer
+          default: 10
+          description: "Number of images to return (default: 10)"
+        keyword:
+          type: string
+          description: Search keyword
+        headless:
+          type: boolean
+          default: true
+          description: "Whether to use headless browser mode (default: true)"
+  - name: pinterest_get_image_info
+    description: Get Pinterest image information
+    inputSchema:
+      type: object
+      required:
+        - image_url
+      properties:
+        image_url:
+          type: string
+          description: Image URL
+  - name: pinterest_search_and_download
+    description: Search for images on Pinterest by keyword and download them
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        limit:
+          type: integer
+          default: 10
+          description: "Number of images to return and download (default: 10)"
+        keyword:
+          type: string
+          description: Search keyword
+        headless:
+          type: boolean
+          default: true
+          description: "Whether to use headless browser mode (default: true)"
+        download_dir:
+          type: string
+          default: /usr/src/app/downloads
+          description: "Directory to save downloaded images (default:
+            /usr/src/app/downloads)"

@@ -1,0 +1,17 @@
+identifier: vapiai/mcp-server/vapi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/VapiAI/mcp-server
+  name: mcp-server
+  owner: VapiAI
+server:
+  subdirectory: /
+  name: Vapi MCP Server
+  description: Integrate your applications with Vapi APIs through seamless
+    function calling. Enable scheduling and managing calls, assistants, and
+    phone numbers directly from your MCP-enabled environment. Access Vapi's
+    capabilities locally or remotely with ease and security.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: codyde/mcp-file-tool/mcp-file-tool
+repo:
+  provider: github.com
+  url: https://github.com/codyde/mcp-file-tool
+  name: mcp-file-tool
+  owner: codyde
+server:
+  subdirectory: /
+  name: File Server
+  description: Enable AI models to perform file operations on the local file
+    system through a standardized API. Create, read, and list files
+    effortlessly, enhancing your model's capabilities with file management.
+    Monitor performance and errors seamlessly with built-in Sentry integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

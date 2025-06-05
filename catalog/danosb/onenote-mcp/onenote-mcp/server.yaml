@@ -1,0 +1,17 @@
+identifier: danosb/onenote-mcp/onenote-mcp
+repo:
+  provider: github.com
+  url: https://github.com/danosb/onenote-mcp
+  name: onenote-mcp
+  owner: danosb
+server:
+  subdirectory: /
+  name: OneNote MCP Server
+  description: Access and manage your OneNote notebooks seamlessly through AI
+    assistants. Create, read, and summarize notes without switching contexts,
+    enhancing your productivity. Authenticate easily with Microsoft using device
+    code flow, no Azure setup required.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,99 @@
+tools:
+  - name: sequentialthinking
+    description: "
+
+      \    Processes one step in a sequential thinking chain using the Agno team
+      in coordinate mode.
+
+
+      \    The Coordinator agent within the team receives the thought, breaks it
+      down,
+
+      \    delegates to specialists (Planner, Researcher, Analyzer, Critic,
+      Synthesizer),
+
+      \    and synthesizes their outputs into a final response. The
+      Coordinator's response
+
+      \    may include suggestions for revision or branching.
+
+
+      \    Parameters:
+
+      \        thought (str): The current thinking step.
+
+      \        thoughtNumber (int): Current sequence number (≥1)
+
+      \        totalThoughts (int): Estimated total thoughts needed (≥5
+      suggested)
+
+      \        nextThoughtNeeded (bool): Whether another thought step is needed
+
+      \        isRevision (bool, optional): Whether this revises previous
+      thinking
+
+      \        revisesThought (int, optional): Which thought is being
+      reconsidered
+
+      \        branchFromThought (int, optional): If branching, which thought
+      number is the branch point
+
+      \        branchId (str, optional): Branch identifier
+
+      \        needsMoreThoughts (bool, optional): If more thoughts are needed
+      beyond current estimate
+
+
+      \    Returns:
+
+      \        str: JSON string containing the Coordinator's synthesized
+      response and status.
+
+      \    "
+    inputSchema:
+      type: object
+      title: sequentialthinkingArguments
+      required:
+        - thought
+        - thoughtNumber
+        - totalThoughts
+        - nextThoughtNeeded
+      properties:
+        thought:
+          type: string
+          title: Thought
+        branchId:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branchid
+          default: null
+        isRevision:
+          type: boolean
+          title: Isrevision
+          default: false
+        thoughtNumber:
+          type: integer
+          title: Thoughtnumber
+        totalThoughts:
+          type: integer
+          title: Totalthoughts
+        revisesThought:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Revisesthought
+          default: null
+        branchFromThought:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Branchfromthought
+          default: null
+        needsMoreThoughts:
+          type: boolean
+          title: Needsmorethoughts
+          default: false
+        nextThoughtNeeded:
+          type: boolean
+          title: Nextthoughtneeded

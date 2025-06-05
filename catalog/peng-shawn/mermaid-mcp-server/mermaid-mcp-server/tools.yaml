@@ -1,0 +1,29 @@
+tools:
+  - name: generate
+    description: Generate PNG image from mermaid markdown
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: The mermaid markdown to generate an image from
+        name:
+          type: string
+          description: Name of the diagram (optional)
+        theme:
+          enum:
+            - default
+            - forest
+            - dark
+            - neutral
+          type: string
+          description: Theme for the diagram (optional)
+        folder:
+          type: string
+          description: Absolute path to save the image to (optional)
+        backgroundColor:
+          type: string
+          description: Background color for the diagram, e.g. 'white', 'transparent',
+            '#F0F0F0' (optional)

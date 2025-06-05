@@ -1,0 +1,30 @@
+tools:
+  - name: generate_text
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        topK:
+          type: number
+          maximum: 40
+          minimum: 1
+        topP:
+          type: number
+          maximum: 1
+          minimum: 0
+        prompt:
+          type: string
+          minLength: 1
+        stream:
+          type: boolean
+        temperature:
+          type: number
+          maximum: 1
+          minimum: 0
+        maxOutputTokens:
+          type: number
+          maximum: 8192
+          minimum: 1
+      additionalProperties: false

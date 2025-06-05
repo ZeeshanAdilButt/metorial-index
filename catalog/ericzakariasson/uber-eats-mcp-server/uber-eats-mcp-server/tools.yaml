@@ -1,0 +1,45 @@
+tools:
+  - name: find_menu_options
+    description: "Search Uber Eats for restaurants or food items.
+
+      \   \ 
+
+      \    Args:
+
+      \        search_term: Food or restaurant to search for
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_menu_optionsArguments
+      required:
+        - search_term
+      properties:
+        search_term:
+          type: string
+          title: Search Term
+  - name: order_food
+    description: "Order food from a restaurant.
+
+      \   \ 
+
+      \    Args:
+
+      \        restaurant_url: URL of the restaurant
+
+      \        item_name: Name of the item to order
+
+      \    "
+    inputSchema:
+      type: object
+      title: order_foodArguments
+      required:
+        - item_url
+        - item_name
+      properties:
+        item_url:
+          type: string
+          title: Item Url
+        item_name:
+          type: string
+          title: Item Name

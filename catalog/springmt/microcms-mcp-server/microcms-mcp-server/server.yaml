@@ -1,0 +1,17 @@
+identifier: springmt/microcms-mcp-server/microcms-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/SpringMT/microcms-mcp-server
+  name: microcms-mcp-server
+  owner: SpringMT
+server:
+  subdirectory: /
+  name: microCMS Search Server
+  description: Search and retrieve content from microCMS using the MCP protocol.
+    Integrate seamlessly with LLM clients to access and manage your microCMS
+    content efficiently. Enhance your applications with powerful content
+    retrieval capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

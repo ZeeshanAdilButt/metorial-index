@@ -1,0 +1,15 @@
+identifier: gerred/mcp-server-replicate/mcp-server-replicate
+repo:
+  provider: github.com
+  url: https://github.com/gerred/mcp-server-replicate
+  name: mcp-server-replicate
+  owner: gerred
+server:
+  subdirectory: /
+  name: Replicate
+  description: Resource-based access to AI model inference focusing on image
+    generation using the Replicate API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

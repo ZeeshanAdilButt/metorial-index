@@ -1,0 +1,19 @@
+identifier: boorich/mcp-human-loop/mcp-human-loop
+repo:
+  provider: github.com
+  url: https://github.com/boorich/mcp-human-loop
+  name: mcp-human-loop
+  owner: boorich
+server:
+  subdirectory: /
+  name: Human Loop Server
+  description: Manage human-agent collaboration efficiently by determining when
+    human intervention is necessary in AI operations. Utilize a sequential
+    scoring system to evaluate requests across multiple dimensions, ensuring
+    that only truly complex or sensitive cases reach human operators. Enhance
+    decision-making transparency and system learning through tracked outcomes
+    and adjustable thresholds.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

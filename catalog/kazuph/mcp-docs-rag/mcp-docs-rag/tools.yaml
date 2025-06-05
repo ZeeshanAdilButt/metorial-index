@@ -1,0 +1,61 @@
+tools:
+  - name: list_documents
+    description: List all available documents in the DOCS_PATH directory. Always use
+      this tool first to check if desired documents already exist before adding
+      new ones.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: rag_query
+    description: "Query a document using RAG. Note: If the index does not exist, it
+      will be created when you query, which may take some time."
+    inputSchema:
+      type: object
+      required:
+        - document_id
+        - query
+      properties:
+        query:
+          type: string
+          description: Query to run against the document
+        document_id:
+          type: string
+          description: ID of the document to query
+  - name: add_git_repository
+    description: Add a git repository to the docs directory with optional sparse
+      checkout. Please do not use 'docs' in the document name.
+    inputSchema:
+      type: object
+      required:
+        - repository_url
+      properties:
+        subdirectory:
+          type: string
+          description: "Optional: Specific subdirectory to sparse checkout (e.g.
+            'path/to/specific/dir'). This uses Git's sparse-checkout feature to
+            only download the specified directory."
+        document_name:
+          type: string
+          description: "Optional: Custom name for the document (defaults to repository
+            name). Use a simple, descriptive name without '-docs' suffix. For
+            example, use 'react' instead of 'react-docs'."
+        repository_url:
+          type: string
+          description: URL of the git repository to clone
+  - name: add_text_file
+    description: Add a text file to the docs directory with a specified name. Please
+      do not use 'docs' in the document name.
+    inputSchema:
+      type: object
+      required:
+        - file_url
+        - document_name
+      properties:
+        file_url:
+          type: string
+          description: URL of the text file to download
+        document_name:
+          type: string
+          description: Name of the document (will be used as directory name). Choose a
+            descriptive name rather than using the URL filename (e.g. 'hono'
+            instead of 'llms-full.txt')

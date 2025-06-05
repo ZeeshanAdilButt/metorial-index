@@ -1,0 +1,40 @@
+tools:
+  - name: upload_document
+    description: Upload a document to Handwriting OCR API for transcription
+    inputSchema:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          description: Path to the document (PDF, JPG, PNG, etc.)
+        prompt_id:
+          type: string
+          description: Prompt ID (requires Enterprise subscription, will be ignored)
+        delete_after:
+          type: integer
+          description: Seconds until auto-deletion (optional)
+        extractor_id:
+          type: string
+          description: Extractor ID (required if action is extractor, will be ignored)
+  - name: check_status
+    description: Check the status of a document
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Document ID
+  - name: get_text
+    description: Retrieve the transcribed text from a document
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Document ID

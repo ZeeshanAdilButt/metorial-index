@@ -1,0 +1,17 @@
+identifier: mrcare/mcp_tool/mcp_tool
+repo:
+  provider: github.com
+  url: https://github.com/MrCare/mcp_tool
+  name: mcp_tool
+  owner: MrCare
+server:
+  subdirectory: /
+  name: Weather MCP Tool
+  description: Check global weather effortlessly with a single sentence. Enjoy
+    seamless integration with the Cursor editor, allowing for natural language
+    queries in both Chinese and English. Get accurate weather forecasts for
+    major cities worldwide with minimal setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

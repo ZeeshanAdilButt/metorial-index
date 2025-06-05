@@ -1,0 +1,17 @@
+identifier: flexpa/mcp-fhir/mcp-fhir
+repo:
+  provider: github.com
+  url: https://github.com/flexpa/mcp-fhir
+  name: mcp-fhir
+  owner: flexpa
+server:
+  subdirectory: /
+  name: FHIR Integration Server
+  description: Access and search FHIR resources seamlessly. Interact with
+    healthcare data using standardized FHIR formats to enhance your
+    applications. Leverage powerful tools to read and search FHIR resources
+    effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

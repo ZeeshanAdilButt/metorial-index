@@ -1,0 +1,17 @@
+identifier: aitiwari/weather/weather
+repo:
+  provider: github.com
+  url: https://github.com/aitiwari/weather
+  name: weather
+  owner: aitiwari
+server:
+  subdirectory: /
+  name: Weather Server
+  description: Fetch real-time weather alerts and forecasts to enhance your LLM's
+    environmental awareness. Connect seamlessly with Claude for Desktop to
+    access up-to-date weather information for any US location. Stay informed
+    with alerts and forecasts at your fingertips.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

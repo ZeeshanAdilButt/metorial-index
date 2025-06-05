@@ -1,0 +1,16 @@
+identifier: mcp-examples/weather/weather
+repo:
+  provider: github.com
+  url: https://github.com/mcp-examples/weather
+  name: weather
+  owner: mcp-examples
+server:
+  subdirectory: /
+  name: Weather
+  description: Provide real-time weather information to your applications.
+    Integrate weather data seamlessly and enhance user experiences with accurate
+    forecasts and conditions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

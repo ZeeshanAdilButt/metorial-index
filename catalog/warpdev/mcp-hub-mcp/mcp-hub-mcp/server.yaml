@@ -1,0 +1,17 @@
+identifier: warpdev/mcp-hub-mcp/mcp-hub-mcp
+repo:
+  provider: github.com
+  url: https://github.com/warpdev/mcp-hub-mcp
+  name: mcp-hub-mcp
+  owner: warpdev
+server:
+  subdirectory: /
+  name: MCP Hub Server
+  description: Connect and manage multiple MCP servers seamlessly. Bypass tool
+    limits and reduce AI errors by consolidating infrequently used tools into a
+    single hub. Enhance your workflow with easy access to all available tools
+    across connected servers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,104 @@
+tools:
+  - name: chat_completion
+    description: Send a message to OpenRouter.ai and get a response
+    inputSchema:
+      type: object
+      required:
+        - messages
+      properties:
+        model:
+          type: string
+          description: The model to use (e.g.,
+            "google/gemini-2.0-flash-thinking-exp:free",
+            "undi95/toppy-m-7b:free"). If not provided, uses the default model
+            if set.
+        messages:
+          type: array
+          items:
+            type: object
+            required:
+              - role
+              - content
+            properties:
+              role:
+                enum:
+                  - system
+                  - user
+                  - assistant
+                type: string
+                description: The role of the message sender
+              content:
+                type: string
+                description: The content of the message
+          maxItems: 100
+          minItems: 1
+          description: An array of conversation messages with roles and content
+        temperature:
+          type: number
+          maximum: 2
+          minimum: 0
+          description: Sampling temperature (0-2)
+  - name: search_models
+    description: Search and filter OpenRouter.ai models based on various criteria
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          maximum: 50
+          minimum: 1
+          description: "Maximum number of results to return (default: 10)"
+        query:
+          type: string
+          description: Optional search query to filter by name, description, or provider
+        provider:
+          type: string
+          description: Filter by specific provider (e.g., "anthropic", "openai", "cohere")
+        capabilities:
+          type: object
+          properties:
+            tools:
+              type: boolean
+              description: Requires tools capability
+            vision:
+              type: boolean
+              description: Requires vision capability
+            functions:
+              type: boolean
+              description: Requires function calling capability
+            json_mode:
+              type: boolean
+              description: Requires JSON mode capability
+          description: Filter by model capabilities
+        maxPromptPrice:
+          type: number
+          description: Maximum price per 1K tokens for prompts
+        maxContextLength:
+          type: number
+          description: Maximum context length in tokens
+        minContextLength:
+          type: number
+          description: Minimum context length in tokens
+        maxCompletionPrice:
+          type: number
+          description: Maximum price per 1K tokens for completions
+  - name: get_model_info
+    description: Get detailed information about a specific model
+    inputSchema:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: The model ID to get information for
+  - name: validate_model
+    description: Check if a model ID is valid
+    inputSchema:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: The model ID to validate

@@ -1,0 +1,18 @@
+identifier: leee62/sentry-issues-mcp/sentry-issues-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Leee62/sentry-issues-mcp
+  name: sentry-issues-mcp
+  owner: Leee62
+server:
+  subdirectory: /
+  name: Sentry Issue MCP Server
+  description: Provide easy access to Sentry issues and events for LLMs to analyze
+    and retrieve detailed or summarized error information. Enable LLMs to fetch
+    single event details or lists of project events with flexible modes for
+    concise or comprehensive data. Simplify integration with Sentry to empower
+    intelligent issue analysis and troubleshooting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

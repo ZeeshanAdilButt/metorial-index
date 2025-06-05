@@ -1,0 +1,16 @@
+identifier: yap-audio/tiktok-mcp/tiktok-mcp
+repo:
+  provider: github.com
+  url: https://github.com/yap-audio/tiktok-mcp
+  name: tiktok-mcp
+  owner: yap-audio
+server:
+  subdirectory: /
+  name: TikTok Video Search
+  description: Discover and extract metadata from TikTok videos effortlessly.
+    Search for trending content by hashtags and manage API sessions with
+    built-in error handling and anti-detection measures.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

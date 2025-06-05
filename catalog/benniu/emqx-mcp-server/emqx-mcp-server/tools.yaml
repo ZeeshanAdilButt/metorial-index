@@ -1,0 +1,46 @@
+tools:
+  - name: publish_mqtt_message
+    description: Publish an MQTT Message to Your EMQX Cluster on EMQX Cloud or
+      Self-Managed Deployment
+    inputSchema:
+      type: object
+      title: publishArguments
+      required:
+        - request
+      properties:
+        request:
+          type: string
+          title: request
+  - name: list_mqtt_clients
+    description: List MQTT clients connected to your EMQX Cluster
+    inputSchema:
+      type: object
+      title: list_clientsArguments
+      required:
+        - request
+      properties:
+        request:
+          type: string
+          title: request
+  - name: get_mqtt_client
+    description: Get detailed information about a specific MQTT client by client ID
+    inputSchema:
+      type: object
+      title: get_client_infoArguments
+      required:
+        - request
+      properties:
+        request:
+          type: string
+          title: request
+  - name: kick_mqtt_client
+    description: Disconnect a client from the MQTT broker by client ID
+    inputSchema:
+      type: object
+      title: kick_clientArguments
+      required:
+        - request
+      properties:
+        request:
+          type: string
+          title: request

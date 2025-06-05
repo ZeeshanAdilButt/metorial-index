@@ -1,0 +1,14 @@
+identifier: mathd/govee_mcp_server/govee_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/mathd/govee_mcp_server
+  name: govee_mcp_server
+  owner: mathd
+server:
+  subdirectory: /
+  name: Govee MCP Server
+  description: Control Govee LED devices through the Govee API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

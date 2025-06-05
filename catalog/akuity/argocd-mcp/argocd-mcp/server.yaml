@@ -1,0 +1,18 @@
+identifier: akuity/argocd-mcp/argocd-mcp
+repo:
+  provider: github.com
+  url: https://github.com/akuity/argocd-mcp
+  name: argocd-mcp
+  owner: akuity
+server:
+  subdirectory: /
+  name: Argo CD MCP Server
+  description: Enable AI assistants to interact with your Argo CD applications
+    through natural language. Seamlessly integrate Argo CD management into your
+    development environment using stdio or Server-Sent Events transport
+    protocols. Manage applications, resources, and workflows with pre-configured
+    tools designed for AI interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

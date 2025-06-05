@@ -1,0 +1,27 @@
+tools:
+  - name: get-run
+    description: Get run details for a defined run ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - runId
+      properties:
+        runId:
+          type: string
+      additionalProperties: false
+  - name: get-spec-file-attempts-and-errors
+    description: Get spec file attempts and errors
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: string
+      additionalProperties: false
+  - name: get-api-config
+    description: Get Currents API config currently used for Currents API requests
+    inputSchema:
+      type: object

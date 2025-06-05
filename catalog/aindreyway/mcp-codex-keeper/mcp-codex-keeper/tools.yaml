@@ -1,0 +1,89 @@
+tools:
+  - name: list_documentation
+    description: List all available documentation sources. Use this tool to discover
+      relevant documentation before starting tasks to ensure best practices and
+      standards compliance.
+    inputSchema:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: Filter documentation by tag
+        category:
+          type: string
+          description: Filter documentation by category
+  - name: add_documentation
+    description: Add a new documentation source. When working on tasks, add any
+      useful documentation you discover to help maintain a comprehensive
+      knowledge base.
+    inputSchema:
+      type: object
+      required:
+        - name
+        - url
+        - category
+      properties:
+        url:
+          type: string
+          description: URL of the documentation
+        name:
+          type: string
+          description: Name of the documentation
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for additional categorization
+        version:
+          type: string
+          description: Version information
+        category:
+          type: string
+          description: Category of the documentation
+        description:
+          type: string
+          description: Description of the documentation
+  - name: update_documentation
+    description: Update documentation content from source. Always update relevant
+      documentation before starting a task to ensure you have the latest
+      information and best practices.
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the documentation to update
+        force:
+          type: boolean
+          description: Force update even if recently updated
+  - name: search_documentation
+    description: Search through documentation content. Use this to find specific
+      information, best practices, or guidelines relevant to your current task.
+      Remember to check documentation before making important decisions.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        tag:
+          type: string
+          description: Filter by tag
+        query:
+          type: string
+          description: Search query
+        category:
+          type: string
+          description: Filter by category
+  - name: remove_documentation
+    description: Remove a documentation source. Use this when you no longer need
+      specific documentation.
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the documentation to remove

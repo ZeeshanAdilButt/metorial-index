@@ -1,0 +1,19 @@
+identifier: aegntic/aegntic-mcp/claude-export-mcp
+repo:
+  provider: github.com
+  url: https://github.com/aegntic/aegntic-MCP
+  name: aegntic-MCP
+  owner: aegntic
+server:
+  subdirectory: /https:/github.com/aegntic/aegntic-MCP
+  name: Aegntic MCP Servers
+  description: Provide specialized MCP servers that extend AI assistants with
+    access to external tools and services, enabling enhanced functionality
+    directly within conversations. Use these servers to export projects,
+    automate workflows, or access cloud services seamlessly. Easily install and
+    run each server independently to integrate powerful capabilities into your
+    AI interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

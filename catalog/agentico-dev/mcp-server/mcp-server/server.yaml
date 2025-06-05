@@ -1,0 +1,14 @@
+identifier: agentico-dev/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/agentico-dev/mcp-server
+  name: mcp-server
+  owner: agentico-dev
+server:
+  subdirectory: /
+  name: Agentico MCP Server
+  description: A facade to simplify the implementation of MCP agents.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

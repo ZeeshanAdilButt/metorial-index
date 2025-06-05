@@ -1,0 +1,304 @@
+tools:
+  - name: get_bank_accounts
+    description: Retrieve information about your bank accounts (not including
+      treasury accounts).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_bank_account_by_id
+    description: Retrieve information about a specific bank account.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Your 36-character account UUID.
+      additionalProperties: false
+  - name: get_credit_cards
+    description: Retrieve information about cards associated with a specific
+      account. Note that status and physical card status are two separate
+      concepts. Either one being set to something other than "active" could
+      cause a transaction to be declined.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Your 36-character account UUID.
+      additionalProperties: false
+  - name: get_treasury
+    description: Retrieve treasury account information from Mercury.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_transactions
+    description: Retrieve incoming and outgoing money transactions for a specific
+      bank account.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - account_id
+      properties:
+        end:
+          type: string
+          description: Latest createdAt date to filter for (YYYY-MM-DD or ISO 8601)
+        limit:
+          type: number
+          description: "Limit how many transactions to retrieve (default: 500)"
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: "Sort order for transactions based on createdAt date (default: desc)"
+        start:
+          type: string
+          description: Earliest createdAt date to filter for (YYYY-MM-DD or ISO 8601)
+        offset:
+          type: number
+          description: "Number of most recent transactions to omit (default: 0)"
+        search:
+          type: string
+          description: Search term to look for in transaction descriptions
+        status:
+          enum:
+            - pending
+            - sent
+            - cancelled
+            - failed
+          type: string
+          description: Filter transactions by status
+        account_id:
+          type: string
+          description: The ID of the bank account to retrieve transactions for.
+      additionalProperties: false
+  - name: get_bank_transaction_by_id
+    description: Retrieve detailed information about a specific transaction for a
+      specific account, including counterparty information, transaction status,
+      and any attachments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - account_id
+        - transaction_id
+      properties:
+        account_id:
+          type: string
+          description: The 36-character account UUID.
+        transaction_id:
+          type: string
+          description: The ID of the specific transaction to retrieve details for.
+      additionalProperties: false
+  - name: send_money
+    description: "Create a new transaction for ACH payments. Note: This tool
+      requires additional permissions and IP whitelisting with Mercury, so ask
+      the user to clarify if they have whitelisted their IP first. If they have
+      not, use the request_send_money tool instead. Only use for valid purposes
+      like paying invoices or automating bill payments."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - account_id
+        - recipient_id
+        - amount
+      properties:
+        note:
+          type: string
+          description: An optional internal note for the transaction (not visible to the
+            recipient).
+        amount:
+          type: number
+          description: The amount to send in USD (positive number).
+          exclusiveMinimum: 0
+        account_id:
+          type: string
+          description: The 36-character account UUID to send money from.
+        recipient_id:
+          type: string
+          description: The recipient ID to send money to.
+        external_memo:
+          type: string
+          description: An optional memo to be included with the transaction (visible to
+            the recipient).
+        idempotency_key:
+          type: string
+          description: A unique identifier for this transaction request to prevent
+            duplicates. If not provided, a UUID will be generated.
+      additionalProperties: false
+  - name: request_send_money
+    description: Create an ACH payment that requires admin approval from the Mercury
+      web interface. Unlike the direct send_money tool, this endpoint does not
+      require IP whitelisting when using a Custom token, so ask the user to
+      clarify if they have whitelisted their IP.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - account_id
+        - recipient_id
+        - amount
+      properties:
+        memo:
+          type: string
+          description: An optional memo to be included with the transaction (visible to
+            the recipient).
+        amount:
+          type: number
+          description: The amount to send in USD (positive number).
+          exclusiveMinimum: 0
+        account_id:
+          type: string
+          description: The 36-character account UUID to send money from.
+        recipient_id:
+          type: string
+          description: The recipient ID to send money to.
+        payment_method:
+          type: string
+          description: The payment method to use. Default is ACH.
+        idempotency_key:
+          type: string
+          description: A unique identifier for this transaction request to prevent
+            duplicates. If not provided, a UUID will be generated.
+      additionalProperties: false
+  - name: get_bank_statements
+    description: "Retrieve statement information for a depository account in a given
+      time period (Note: For now, treasury and credit accounts are not supported
+      on this endpoint)."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - account_id
+      properties:
+        end:
+          type: string
+          description: "Filter the statements so that their endDate is less than or equal
+            to this date. Format: YYYY-MM-DD."
+        start:
+          type: string
+          description: "Filter the statements so that their startDate is equal to or later
+            than this date. Format: YYYY-MM-DD."
+        account_id:
+          type: string
+          description: Your 36-character account UUID.
+      additionalProperties: false
+  - name: get_payment_recipients
+    description: Retrieve information about all of your payment recipients in
+      Mercury, including their banking details, routing information, payment
+      methods, and status.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: add_payment_recipient
+    description: Add a new payment recipient to Mercury. You must provide the
+      recipient's name, email(s), and default payment method, along with the
+      appropriate routing information for the chosen payment method.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - emails
+        - default_payment_method
+      properties:
+        city:
+          type: string
+          description: The city of the recipient's address.
+        name:
+          type: string
+          description: The name of the recipient.
+        emails:
+          type: array
+          items:
+            type: string
+            format: email
+          description: An array of email addresses for the recipient.
+        region:
+          type: string
+          description: The state/region of the recipient's address.
+        country:
+          type: string
+          description: The country of the recipient's address (ISO 3166-1 alpha-2 code).
+        nickname:
+          type: string
+          description: An optional nickname for the recipient.
+        postal_code:
+          type: string
+          description: The postal code of the recipient's address.
+        ach_bank_name:
+          type: string
+          description: The recipient's bank name for ACH transfers.
+        address_line1:
+          type: string
+          description: The first line of the recipient's address.
+        address_line2:
+          type: string
+          description: The second line of the recipient's address.
+        idempotency_key:
+          type: string
+          description: A unique identifier for this request to prevent duplicates. If not
+            provided, a UUID will be generated.
+        ach_account_type:
+          enum:
+            - businessChecking
+            - businessSavings
+            - personalChecking
+            - personalSavings
+          type: string
+          description: The type of account for ACH transfers.
+        ach_account_number:
+          type: string
+          description: The recipient's account number for ACH transfers.
+        ach_routing_number:
+          type: string
+          description: The recipient's routing number for ACH transfers.
+        default_payment_method:
+          enum:
+            - ACH
+            - Check
+            - DomesticWire
+            - InternationalWire
+          type: string
+          description: The default payment method to use for this recipient.
+        domestic_wire_bank_name:
+          type: string
+          description: The recipient's bank name for domestic wire transfers.
+        international_wire_iban:
+          type: string
+          description: The recipient's IBAN for international wire transfers.
+        domestic_wire_account_number:
+          type: string
+          description: The recipient's account number for domestic wire transfers.
+        domestic_wire_routing_number:
+          type: string
+          description: The recipient's routing number for domestic wire transfers.
+        international_wire_bank_name:
+          type: string
+          description: The recipient's bank name for international wire transfers.
+        international_wire_swift_code:
+          type: string
+          description: The recipient's SWIFT code for international wire transfers.
+        international_wire_bank_country:
+          type: string
+          description: The country of the recipient's bank for international wire
+            transfers (ISO 3166-1 alpha-2 code).
+        international_wire_bank_city_state:
+          type: string
+          description: The city and state of the recipient's bank for international wire
+            transfers.
+      additionalProperties: false

@@ -1,0 +1,52 @@
+tools:
+  - name: prometheus_query_range
+    description: "
+
+      \    Query Prometheus /query_range API endpoint and return
+
+      \    an image of a plot of the time series monitoring data.
+
+      \    Use this tool whenever the user asks about the status
+
+      \    of their compute infrastructure.
+
+      \    "
+    inputSchema:
+      type: object
+      title: prometheus_query_rangeArguments
+      required:
+        - query
+        - start_time
+        - end_time
+        - step
+      properties:
+        step:
+          type: string
+          title: Step
+        query:
+          type: string
+          title: Query
+        end_time:
+          type: string
+          title: End Time
+        start_time:
+          type: string
+          title: Start Time
+  - name: prometheus_alert_rules
+    description: "
+
+      \    Query the Prometheus /rules API.
+
+      \    Returns a list of alerting and recording rules that are currently
+      loaded.
+
+      \    In addition it returns the currently active alerts fired by the
+      Prometheus
+
+      \    instance of each alerting rule.
+
+      \    "
+    inputSchema:
+      type: object
+      title: prometheus_alert_rulesArguments
+      properties: {}

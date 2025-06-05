@@ -1,0 +1,20 @@
+tools:
+  - name: run_coze_workflow
+    description: ""
+    inputSchema:
+      type: object
+      title: run_coze_workflowArguments
+      required:
+        - workflow_id
+        - token
+      properties:
+        token:
+          type: string
+          title: Token
+        workflow_id:
+          type: string
+          title: Workflow Id
+        parameters_json:
+          type: string
+          title: Parameters Json
+          default: "{}"

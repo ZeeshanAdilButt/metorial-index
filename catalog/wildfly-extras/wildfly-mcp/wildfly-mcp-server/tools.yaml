@@ -1,0 +1,198 @@
+tools:
+  - name: disableWildFlyLoggingCategory
+    description: Disable a logging category for the WildFly server running on the
+      provided host and port arguments.
+    inputSchema:
+      type: object
+      required:
+        - loggingCategory
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+        loggingCategory:
+          type: string
+  - name: enableWildFlyLoggingCategory
+    description: Enable a logging category for the WildFly server running on the
+      provided host and port arguments.
+    inputSchema:
+      type: object
+      required:
+        - loggingCategory
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+        loggingCategory:
+          type: string
+  - name: getWildFlyConsumedCPU
+    description: Get the percentage of cpu consumed by the WildFly server running on
+      the provided host and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+  - name: getWildFlyConsumedMemory
+    description: Get the percentage of memory consumed by the WildFly server running
+      on the provided host and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+  - name: getWildFlyLogFileContent
+    description: Get the log file content of the WildFly server running on the
+      provided host and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+        numberOfLines:
+          type: string
+          description: The optional number of log file lines to retrieve. By default the
+            last 200 lines are retrieved. Use `-1` to get all lines.
+  - name: getWildFlyLoggingCategories
+    description: Get the list of the enabled logging categories for the WildFly
+      server running on the provided host and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+  - name: getWildFlyPrometheusMetrics
+    description: Get the metrics (in prometheus format) of the WildFly server
+      running on the provided host and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+  - name: getWildFlyServerConfiguration
+    description: Gets the server configuration in JSON format of the WildFly server
+      running on the provided host and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+  - name: getWildFlyStatus
+    description: Get the status of the WildFly server running on the provided host
+      and port arguments.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        userPassword:
+          type: string
+          description: Optional user password
+  - name: invokeWildFlyCLIOperation
+    description: Invoke a single WildFly CLI operation on the WildFly server running
+      on the provided host and port arguments.
+    inputSchema:
+      type: object
+      required:
+        - operation
+      properties:
+        host:
+          type: string
+          description: Optional WildFly server host name. By default localhost is used.
+        port:
+          type: string
+          description: Optional WildFly server port. By default 9990 is used.
+        userName:
+          type: string
+          description: Optional user name
+        operation:
+          type: string
+        userPassword:
+          type: string
+          description: Optional user password

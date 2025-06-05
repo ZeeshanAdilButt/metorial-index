@@ -1,0 +1,17 @@
+identifier: merge-api/merge-mcp/merge-mcp
+repo:
+  provider: github.com
+  url: https://github.com/merge-api/merge-mcp
+  name: merge-mcp
+  owner: merge-api
+server:
+  subdirectory: /
+  name: Merge MCP Server
+  description: Integrate your Merge data with any LLM provider using natural
+    language. Query, create, and update entities seamlessly through
+    conversational interfaces. Unlock the power of your Merge API with easy
+    access to data models and fields.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

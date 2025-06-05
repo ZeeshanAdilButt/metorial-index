@@ -1,0 +1,40 @@
+tools:
+  - name: Search Hyperspell
+    description: Search Hyperspell for documents and data.
+    inputSchema:
+      type: object
+      title: queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: Add File
+    description: Add a file or website from a URL to Hyperspell.
+    inputSchema:
+      type: object
+      title: add_fileArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: Add Memory
+    description: Add a plain text document or memory to Hyperspell.
+    inputSchema:
+      type: object
+      title: add_memoryArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null

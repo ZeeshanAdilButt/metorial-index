@@ -1,0 +1,34 @@
+identifier: fourcolors/think-tool/think-tool
+repo:
+  provider: github.com
+  url: https://github.com/fourcolors/think-tool
+  name: think-tool
+  owner: fourcolors
+server:
+  subdirectory: /
+  name: think-tool
+  description: >+
+    Think Tool - A local-first MCP server that provides AI assistants with a
+    dedicated "thinking space" to reason through complex problems step-by-step. 
+
+
+    Includes built-in template prompts for various thinking frameworks, enabling
+    structured reasoning, policy verification, and custom domain-specific
+    thinking patterns. Unlike the other thinking tools, this has a few main
+    advantages:
+
+    1. conserves prompt tokens (the other tools are doubling your context tokens
+    for no reason).
+
+    2. prompt templates for thinking step examples
+
+    3. local only! You don't need to send a request to a server for this tool. 
+
+
+    Built with Deno and FastMCP to enhance AI reasoning capabilities while
+    running entirely on your local machine.
+
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

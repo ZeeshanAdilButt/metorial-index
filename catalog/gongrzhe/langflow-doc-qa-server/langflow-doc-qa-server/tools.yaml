@@ -1,0 +1,11 @@
+tools:
+  - name: query_docs
+    description: Query the document Q&A system with a prompt
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The query prompt to search for in the documents

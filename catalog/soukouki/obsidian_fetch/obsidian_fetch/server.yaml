@@ -1,0 +1,30 @@
+identifier: soukouki/obsidian_fetch/obsidian_fetch
+repo:
+  provider: github.com
+  url: https://github.com/soukouki/obsidian_fetch
+  name: obsidian_fetch
+  owner: soukouki
+server:
+  subdirectory: /
+  name: ObsidianFetch
+  description: >-
+    Retrieve and load notes efficiently from Obsidian vaults to enhance LLM
+    interactions. Automatically clean link queries and display backlinks to
+    opened files, enabling powerful network-style note exploration. Simplify and
+    speed up note retrieval, especially on local GPU setups with limited
+    computational resources.
+
+
+    Install:
+
+    - `apt-get update && apt-get install -y ruby-full && gem install
+    obsidian_fetch`
+
+
+    Usage:
+
+    - `obsidian_fetch /path/to/your/vault`
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

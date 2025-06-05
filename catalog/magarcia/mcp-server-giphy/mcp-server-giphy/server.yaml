@@ -1,0 +1,16 @@
+identifier: magarcia/mcp-server-giphy/mcp-server-giphy
+repo:
+  provider: github.com
+  url: https://github.com/magarcia/mcp-server-giphy
+  name: mcp-server-giphy
+  owner: magarcia
+server:
+  subdirectory: /
+  name: Giphy API Integration
+  description: Search, retrieve, and utilize GIFs from Giphy seamlessly. Filter
+    content by rating and access trending GIFs to enhance your AI models with
+    engaging visuals.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

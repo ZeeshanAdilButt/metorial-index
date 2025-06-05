@@ -1,0 +1,18 @@
+identifier: intersective/practera-mcp-server/practera-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/intersective/practera-mcp-server
+  name: practera-mcp-server
+  owner: intersective
+server:
+  subdirectory: /
+  name: Practera Learning Data Server
+  description: Enable AI models to query and analyze Practera learning projects
+    and assessments through a secure MCP server. Use this server to generate
+    project blueprints, restructure content for different audiences, and improve
+    assessments with ease. Integrate seamlessly with Practera's GraphQL API and
+    leverage API key or OAuth 2.1 authentication for secure access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

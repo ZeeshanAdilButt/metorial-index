@@ -1,0 +1,17 @@
+identifier: upstash/context7/context7-mcp
+repo:
+  provider: github.com
+  url: https://github.com/upstash/context7
+  name: context7
+  owner: upstash
+server:
+  subdirectory: /
+  name: Context7
+  description: Fetch up-to-date, version-specific documentation and code examples
+    directly into your prompts. Enhance your coding experience by eliminating
+    outdated information and hallucinated APIs. Simply add `use context7` to
+    your questions for accurate and relevant answers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: teddylee777/mcpdoc/mcpdoc
+repo:
+  provider: github.com
+  url: https://github.com/teddylee777/mcpdoc
+  name: mcpdoc
+  owner: teddylee777
+server:
+  subdirectory: /
+  name: Documentation Server
+  description: Provide a user-defined list of llms.txt files and a simple
+    fetch_docs tool to read URLs within those files. This allows users to audit
+    tool calls and the context returned, enhancing transparency and control over
+    LLM interactions. Connect seamlessly with various IDEs and applications to
+    enrich your development experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

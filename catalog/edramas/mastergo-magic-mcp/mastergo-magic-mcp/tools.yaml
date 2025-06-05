@@ -1,0 +1,52 @@
+tools:
+  - name: mcp__getDsl
+    description: >
+      
+      "Use this tool to retrieve the DSL (Domain Specific Language) data from
+      MasterGo design files and the rules you must follow when generating code.
+
+      This tool is useful when you need to analyze the structure of a design,
+      understand component hierarchy, or extract design properties.
+
+      You must provide a fileId and layerId to identify the specific design
+      element.
+
+      This tool returns the raw DSL data in JSON format that you can then parse
+      and analyze.
+
+      This tool also returns the rules you must follow when generating code.
+
+      The DSL data can also be used to transform and generate code for different
+      frameworks."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileId
+        - layerId
+      properties:
+        fileId:
+          type: string
+          description: "MasterGo design file ID (format: file/<fileId> in MasterGo URL)"
+        layerId:
+          type: string
+          description: "Layer ID of the specific component or element to retrieve (format:
+            ?layer_id=<layerId> / file=<fileId> in MasterGo URL)"
+      additionalProperties: false
+  - name: mcp__getComponentLink
+    description: When the data returned by mcp__getDsl contains a non-empty
+      componentDocumentLinks array, this tool is used to sequentially retrieve
+      URLs from the componentDocumentLinks array and then obtain component
+      documentation data. The returned document data is used for you to generate
+      frontend code based on components.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Component documentation link URL, from the componentDocumentLinks
+            property, please ensure the URL is valid
+      additionalProperties: false

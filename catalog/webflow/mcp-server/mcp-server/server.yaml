@@ -1,0 +1,16 @@
+identifier: webflow/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/webflow/mcp-server
+  name: mcp-server
+  owner: webflow
+server:
+  subdirectory: /
+  name: Webflow MCP Server
+  description: Enable AI agents to seamlessly interact with Webflow's powerful
+    APIs. Simplify your web development workflow by automating tasks like site
+    publishing and content management directly from your AI tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

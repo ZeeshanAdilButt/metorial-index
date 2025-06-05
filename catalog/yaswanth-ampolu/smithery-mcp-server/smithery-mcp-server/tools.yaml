@@ -1,0 +1,70 @@
+tools:
+  - name: runShellCommand
+    description: Run a terminal command in the system shell
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: The shell command to execute
+      additionalProperties: false
+  - name: runPythonFile
+    description: Execute a Python file and return output
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        args:
+          type: string
+          description: Optional arguments to pass to the Python script
+        filePath:
+          type: string
+          description: Path to the Python file to execute
+      additionalProperties: false
+  - name: readDirectory
+    description: List files and folders in a directory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        dirPath:
+          type: string
+          description: "Path to the directory to read (default: workspace root)"
+      additionalProperties: false
+  - name: copyFile
+    description: Copy a file from one location to another
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourcePath
+        - destinationPath
+      properties:
+        sourcePath:
+          type: string
+          description: Path to the source file
+        destinationPath:
+          type: string
+          description: Path to the destination file
+      additionalProperties: false
+  - name: createFile
+    description: Create a new file with specified contents
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - content
+      properties:
+        content:
+          type: string
+          description: Content to write to the file
+        filePath:
+          type: string
+          description: Path to the file to create
+      additionalProperties: false

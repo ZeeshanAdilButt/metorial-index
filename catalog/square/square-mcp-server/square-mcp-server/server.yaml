@@ -1,0 +1,19 @@
+identifier: square/square-mcp-server/square-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/square/square-mcp-server
+  name: square-mcp-server
+  owner: square
+server:
+  subdirectory: /
+  name: Square API Server
+  description: Enable AI assistants to interact seamlessly with Square's
+    comprehensive API ecosystem. Discover available services, understand
+    parameter requirements, and execute API operations efficiently through a
+    streamlined set of tools. Simplify integration with Square's payment, order,
+    customer, and inventory management services for enhanced automation and
+    insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

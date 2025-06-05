@@ -1,0 +1,18 @@
+identifier: privilegemendes/amadeus-mcp-server-standalone/amadeus-mcp-server-standalone
+repo:
+  provider: github.com
+  url: https://github.com/privilegemendes/amadeus-mcp-server-standalone
+  name: amadeus-mcp-server-standalone
+  owner: privilegemendes
+server:
+  subdirectory: /
+  name: Amadeus Flight Search Server
+  description: Provide AI assistants with powerful flight search, booking, and
+    price analysis capabilities using the Amadeus API. Enable users to find
+    flights, search airports, analyze prices, and discover the cheapest travel
+    dates effortlessly. Enhance travel planning with detailed flight information
+    and optimized multi-city itineraries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

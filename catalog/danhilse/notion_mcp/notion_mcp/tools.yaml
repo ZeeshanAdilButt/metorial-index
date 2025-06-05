@@ -1,0 +1,40 @@
+tools:
+  - name: add_todo
+    description: Add a new todo item
+    inputSchema:
+      type: object
+      required:
+        - task
+        - when
+      properties:
+        task:
+          type: string
+          description: The todo task description
+        when:
+          enum:
+            - today
+            - later
+          type: string
+          description: When the task should be done (today or later)
+  - name: show_all_todos
+    description: Show all todo items from Notion
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: show_today_todos
+    description: Show today's todo items from Notion
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: complete_todo
+    description: Mark a todo item as complete
+    inputSchema:
+      type: object
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          description: The ID of the todo task to mark as complete

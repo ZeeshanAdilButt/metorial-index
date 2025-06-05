@@ -1,0 +1,17 @@
+identifier: thirdguard/mcp-etherscan-server/mcp-etherscan-server
+repo:
+  provider: github.com
+  url: https://github.com/ThirdGuard/mcp-etherscan-server
+  name: mcp-etherscan-server
+  owner: ThirdGuard
+server:
+  subdirectory: /
+  name: Etherscan Tools
+  description: Access Ethereum blockchain data effortlessly. Check balances, view
+    transaction history, track token transfers, and fetch contract ABIs with
+    ease. Enhance your Ethereum interactions with real-time gas prices and ENS
+    name resolution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

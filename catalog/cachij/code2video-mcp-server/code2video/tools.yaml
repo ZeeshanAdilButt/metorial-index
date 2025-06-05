@@ -1,0 +1,27 @@
+tools:
+  - name: react_code_to_video
+    description: convert react code to video
+    inputSchema:
+      type: object
+      required:
+        - code
+        - width
+        - height
+        - duration
+      properties:
+        fps:
+          type: number
+          default: 30
+          description: fps of the video
+        code:
+          type: string
+          description: react code using remotion library
+        width:
+          type: number
+          description: width of the video
+        height:
+          type: number
+          description: height of the video
+        duration:
+          type: number
+          description: duration of the video

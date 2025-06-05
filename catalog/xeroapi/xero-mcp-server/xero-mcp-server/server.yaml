@@ -1,0 +1,16 @@
+identifier: xeroapi/xero-mcp-server/xero-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/XeroAPI/xero-mcp-server
+  name: xero-mcp-server
+  owner: XeroAPI
+server:
+  subdirectory: /
+  name: Xero MCP Server
+  description: Connect to Xero's accounting features seamlessly. Manage contacts,
+    invoices, and accounts through a standardized interface, enhancing your
+    business operations with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,36 @@
+tools:
+  - name: dry_run_query
+    description: Perform a dry run of a BigQuery query to check if it's valid and
+      estimate its size
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL query to dry run
+        projectId:
+          type: string
+          description: Google Cloud project ID (optional, uses default if not provided)
+      additionalProperties: false
+  - name: run_query_with_validation
+    description: Run a BigQuery query with dry run validation (fails if query
+      exceeds 1 TB or contains DML statements)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL query to run (only SELECT queries are allowed)
+        projectId:
+          type: string
+          description: Google Cloud project ID (optional, uses default if not provided)
+        maxResults:
+          type: number
+          description: "Maximum number of results to return (default: 100)"
+      additionalProperties: false

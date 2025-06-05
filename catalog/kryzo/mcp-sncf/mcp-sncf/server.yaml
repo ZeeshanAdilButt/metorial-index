@@ -1,0 +1,17 @@
+identifier: kryzo/mcp-sncf/mcp-sncf
+repo:
+  provider: github.com
+  url: https://github.com/Kryzo/mcp-sncf
+  name: mcp-sncf
+  owner: Kryzo
+server:
+  subdirectory: /
+  name: SNCF API Server
+  description: Plan your train journeys across France effortlessly. Access
+    real-time train schedules, station details, and monitor service disruptions
+    with ease. Enhance your travel experience with intelligent journey planning
+    and comprehensive transport information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

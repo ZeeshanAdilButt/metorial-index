@@ -1,0 +1,18 @@
+tools:
+  - name: get-logs
+    description: Retrieve logs from the named pipe with optional filtering
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        lines:
+          type: number
+          default: 50
+          description: Number of log lines to return
+        since:
+          type: number
+          description: Timestamp to get logs after
+        filter:
+          type: string
+          description: Text to filter logs by
+      additionalProperties: false

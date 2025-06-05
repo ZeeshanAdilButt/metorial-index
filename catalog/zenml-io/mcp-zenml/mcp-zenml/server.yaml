@@ -1,0 +1,17 @@
+identifier: zenml-io/mcp-zenml/mcp-zenml
+repo:
+  provider: github.com
+  url: https://github.com/zenml-io/mcp-zenml
+  name: mcp-zenml
+  owner: zenml-io
+server:
+  subdirectory: /
+  name: ZenML MCP Server
+  description: Connect your AI applications to ZenML's powerful ML and AI pipeline
+    management. Access live information about users, pipelines, and artifacts,
+    and trigger new pipeline runs seamlessly. Enhance your AI workflows with
+    standardized data interactions and tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

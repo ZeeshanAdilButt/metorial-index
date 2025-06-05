@@ -1,0 +1,41 @@
+tools:
+  - name: get_deep_directory_tree
+    description: Get deep directory tree
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to get the directory tree (preferably absolute path)
+        options:
+          type: object
+          default:
+            depth: 3
+            excludePatterns:
+              - node_modules
+              - .git
+              - .turbo
+              - dist
+              - .next
+          properties:
+            depth:
+              type: number
+              default: 3
+              description: Depth of the directory tree
+            excludePatterns:
+              type: array
+              items:
+                type: string
+              default:
+                - node_modules
+                - .git
+                - .turbo
+                - dist
+                - .next
+              description: Patterns to exclude from the tree (e.g., ['node_modules', '*.log'])
+          description: Tree generation options
+          additionalProperties: false
+      additionalProperties: false

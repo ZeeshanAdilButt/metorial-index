@@ -1,0 +1,16 @@
+identifier: itzg/docker-minecraft-server/rcon-mcp
+repo:
+  provider: github.com
+  url: https://github.com/itzg/docker-minecraft-server
+  name: docker-minecraft-server
+  owner: itzg
+server:
+  subdirectory: /
+  name: Minecraft Docker MCP
+  description: Enable AI interactions with a running Minecraft server in Docker.
+    Expose server administration and allow programmatic creation of Minecraft
+    builds.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

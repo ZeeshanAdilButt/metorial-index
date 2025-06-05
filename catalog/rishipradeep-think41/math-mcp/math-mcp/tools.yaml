@@ -1,0 +1,301 @@
+tools:
+  - name: calculateTotalExpenses
+    description: Sum up the total amount from all expenses, grouped by month (YYYY-MM).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - expenses
+      properties:
+        expenses:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - amount
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              category:
+                type: string
+              createdAt:
+                type: string
+              description:
+                type: string
+              account_name:
+                type: string
+              created_time:
+                type: string
+              amount_with_tax:
+                type: number
+            additionalProperties: false
+          description: Array of expense objects
+      additionalProperties: false
+  - name: calculateExpenseGrowthMoM
+    description: Calculate the month-over-month percentage growth in total expenses.
+      Returns an object mapping YYYY-MM to growth percentage (first month is
+      null).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - expenses
+      properties:
+        expenses:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - amount
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              category:
+                type: string
+              createdAt:
+                type: string
+              description:
+                type: string
+              account_name:
+                type: string
+              created_time:
+                type: string
+              amount_with_tax:
+                type: number
+            additionalProperties: false
+          description: Array of expense objects
+      additionalProperties: false
+  - name: taxImpactAnalysis
+    description: Calculates the tax paid per transaction (amount_with_tax - amount)
+      and the total tax paid.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - expenses
+      properties:
+        expenses:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - amount
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              category:
+                type: string
+              createdAt:
+                type: string
+              description:
+                type: string
+              account_name:
+                type: string
+              created_time:
+                type: string
+              amount_with_tax:
+                type: number
+            additionalProperties: false
+          description: Array of expense objects
+      additionalProperties: false
+  - name: summarizeExpensesByAccountAndDescription
+    description: Group and sum expenses by account_name and description (e.g., 'TDS
+      194C | Payment to vendor').
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - expenses
+      properties:
+        expenses:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - amount
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              category:
+                type: string
+              createdAt:
+                type: string
+              description:
+                type: string
+              account_name:
+                type: string
+              created_time:
+                type: string
+              amount_with_tax:
+                type: number
+            additionalProperties: false
+          description: Array of expense objects
+      additionalProperties: false
+  - name: getTopVendorsByExpense
+    description: Identify vendors with the highest total spending, using description
+      and account_name as the vendor identifier. Returns a sorted array of
+      vendors by total expense.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - expenses
+      properties:
+        topN:
+          type: number
+          description: Number of top vendors to return. If omitted, returns all sorted.
+        expenses:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - amount
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              category:
+                type: string
+              createdAt:
+                type: string
+              description:
+                type: string
+              account_name:
+                type: string
+              created_time:
+                type: string
+              amount_with_tax:
+                type: number
+            additionalProperties: false
+          description: Array of expense objects
+      additionalProperties: false
+  - name: forecastExpensesSimple
+    description: Forecast future expenses based on historical expense data using
+      exponential smoothing.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - historicalExpenses
+      properties:
+        alpha:
+          type: number
+          default: 0.3
+          maximum: 1
+          minimum: 0
+          description: Smoothing factor (0-1) for exponential smoothing. Higher values
+            give more weight to recent observations.
+        periodsToForecast:
+          type: integer
+          default: 1
+          description: Number of future periods to forecast
+          exclusiveMinimum: 0
+        historicalExpenses:
+          type: array
+          items:
+            type: object
+            required:
+              - date
+              - amount
+            properties:
+              date:
+                type: string
+                description: The date of the expense entry in ISO format (YYYY-MM-DD)
+              amount:
+                type: number
+                description: The total expense amount for this date/period
+            additionalProperties: false
+          description: Array of historical expense data points with dates and amounts
+      additionalProperties: false
+  - name: forecastExpensesArima
+    description: Forecast future expenses using ARIMA (AutoRegressive Integrated
+      Moving Average) model.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - historicalExpenses
+      properties:
+        d:
+          type: integer
+          default: 1
+          minimum: 0
+          description: I (Integrated/Differencing) order parameter
+        p:
+          type: integer
+          default: 1
+          minimum: 0
+          description: AR (Auto-Regressive) order parameter
+        q:
+          type: integer
+          default: 1
+          minimum: 0
+          description: MA (Moving Average) order parameter
+        periodsToForecast:
+          type: integer
+          default: 1
+          description: Number of future periods to forecast
+          exclusiveMinimum: 0
+        historicalExpenses:
+          type: array
+          items:
+            type: object
+            required:
+              - date
+              - amount
+            properties:
+              date:
+                type: string
+                description: The date of the expense entry in ISO format (YYYY-MM-DD)
+              amount:
+                type: number
+                description: The total expense amount for this date/period
+            additionalProperties: false
+          description: Array of historical expense data points with dates and amounts
+      additionalProperties: false
+  - name: calculate_add
+    description: Adds two numbers.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: number
+          description: The first number to add.
+        b:
+          type: number
+          description: The second number to add.
+      additionalProperties: false
+  - name: calculate_percentage_of
+    description: Calculates a specified percentage of a given number (e.g., 20% of 150).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - percentage
+        - number
+      properties:
+        number:
+          type: number
+          description: The number to calculate the percentage of.
+        percentage:
+          type: number
+          description: The percentage value (e.g., 20 for 20%).
+      additionalProperties: false

@@ -1,0 +1,19 @@
+identifier: lasso-security/mcp-gateway/mcp-gateway
+repo:
+  provider: github.com
+  url: https://github.com/lasso-security/mcp-gateway
+  name: mcp-gateway
+  owner: lasso-security
+server:
+  subdirectory: /
+  name: MCP Gateway
+  description: Centralize and enhance your AI infrastructure by routing and
+    managing multiple MCP servers through a single interface. Apply configurable
+    security filters to prevent sensitive data exposure and gain unified
+    visibility with real-time monitoring and risk assessment. Track detailed
+    usage analytics and sanitize data to optimize and secure your MCP
+    interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

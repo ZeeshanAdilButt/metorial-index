@@ -1,0 +1,17 @@
+identifier: tmrichrd/0xbot-weather/weather
+repo:
+  provider: github.com
+  url: https://github.com/TmRichrd/0xbot-weather
+  name: 0xbot-weather
+  owner: TmRichrd
+server:
+  subdirectory: /
+  name: Weather Server
+  description: Provide real-time weather information and forecasts through a
+    standardized interface. Enable applications to query weather data seamlessly
+    for various locations. Enhance user experience by integrating accurate and
+    up-to-date meteorological data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

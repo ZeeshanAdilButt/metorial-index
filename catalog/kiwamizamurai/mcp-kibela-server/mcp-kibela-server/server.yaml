@@ -1,0 +1,14 @@
+identifier: kiwamizamurai/mcp-kibela-server/mcp-kibela-server
+repo:
+  provider: github.com
+  url: https://github.com/kiwamizamurai/mcp-kibela-server
+  name: mcp-kibela-server
+  owner: kiwamizamurai
+server:
+  subdirectory: /
+  name: Kibela MCP Server
+  description: Integrate with Kibela API to search and retrieve notes.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

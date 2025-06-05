@@ -1,0 +1,15 @@
+identifier: hmk/box-mcp-server/box-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hmk/box-mcp-server
+  name: box-mcp-server
+  owner: hmk
+server:
+  subdirectory: /
+  name: Box
+  description: Access and manage files in Box, including searching and reading PDF
+    and Word documents.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

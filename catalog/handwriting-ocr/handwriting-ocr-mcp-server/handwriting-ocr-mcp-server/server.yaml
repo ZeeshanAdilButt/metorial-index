@@ -1,0 +1,17 @@
+identifier: handwriting-ocr/handwriting-ocr-mcp-server/handwriting-ocr-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Handwriting-OCR/handwriting-ocr-mcp-server
+  name: handwriting-ocr-mcp-server
+  owner: Handwriting-OCR
+server:
+  subdirectory: /
+  name: Handwriting OCR
+  description: Integrate your applications with the Handwriting OCR service to
+    effortlessly upload documents, check their processing status, and retrieve
+    OCR results in Markdown format. Enhance your workflows by automating text
+    extraction from images and PDFs with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

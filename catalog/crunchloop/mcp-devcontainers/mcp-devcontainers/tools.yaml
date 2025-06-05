@@ -1,0 +1,51 @@
+tools:
+  - name: devcontainer_up
+    description: Start or initialize a devcontainer environment in the specified
+      workspace folder.Use this to ensure the devcontainer is running and ready
+      for development tasks.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceFolder
+      properties:
+        outputFilePath:
+          type: string
+        workspaceFolder:
+          type: string
+      additionalProperties: false
+  - name: devcontainer_run_user_commands
+    description: Run the user-defined postCreateCommand and postStartCommand scripts
+      in the devcontainerfor the specified workspace folder. Use this to execute
+      setup or initialization commandsafter the devcontainer starts.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceFolder
+      properties:
+        outputFilePath:
+          type: string
+        workspaceFolder:
+          type: string
+      additionalProperties: false
+  - name: devcontainer_exec
+    description: Execute an arbitrary shell command inside the devcontainer for the
+      specified workspace folder.Use this to run custom commands or scripts
+      within the devcontainer context.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceFolder
+        - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+        outputFilePath:
+          type: string
+        workspaceFolder:
+          type: string
+      additionalProperties: false

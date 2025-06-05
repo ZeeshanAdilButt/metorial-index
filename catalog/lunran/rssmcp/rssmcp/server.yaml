@@ -1,0 +1,24 @@
+identifier: lunran/rssmcp/rssmcp
+repo:
+  provider: github.com
+  url: https://github.com/Lunran/rssmcp
+  name: rssmcp
+  owner: Lunran
+server:
+  subdirectory: /
+  name: RSS Feed Fetcher
+  description: >-
+    The server implements one tool:
+
+    # get_rss: Fetches RSS feeds and returns entries as formatted text
+
+    Takes "feed_name" and "since" as required string arguments
+
+    "export_result" as an optional boolean parameter (defaults to false)
+
+    Returns formatted feed entries as markdown text and optionally exports to a
+    file
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

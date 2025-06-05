@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/mesh-scanner/mesh-scanner
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/mesh-scanner
+  name: mesh-scanner
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Mesh Scanner
+  description: Create and manage text notes effortlessly. Generate summaries of
+    your notes with a simple command, enhancing your productivity and
+    organization. Access your notes through unique URIs for easy retrieval and
+    management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

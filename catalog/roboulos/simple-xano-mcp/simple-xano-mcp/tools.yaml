@@ -1,0 +1,3812 @@
+tools:
+  - name: xano_list_instances
+    description: "
+
+      \    List all Xano instances associated with the account.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A dictionary containing a list of Xano instances under the
+      'instances' key.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        result = await xano_list_instances()
+
+      \        # Returns: {\"instances\": [{\"name\": \"instance-name\", ...}]}
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_list_instancesArguments
+      properties: {}
+  - name: xano_get_instance_details
+    description: "
+
+      \    Get details for a specific Xano instance.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the specified Xano
+      instance.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        result = await xano_get_instance_details(\"xnwv-v1z6-dvnr\")
+
+      \        # Returns instance details as a dictionary
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_instance_detailsArguments
+      required:
+        - instance_name
+      properties:
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_list_databases
+    description: "
+
+      \    List all databases (workspaces) in a specific Xano instance.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing a list of databases/workspaces under the
+      'databases' key.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        result = await xano_list_databases(\"xnwv-v1z6-dvnr\")
+
+      \        # Returns: {\"databases\": [{\"id\": \"123\", \"name\":
+      \"MyDatabase\", ...}]}
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_list_databasesArguments
+      required:
+        - instance_name
+      properties:
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_get_workspace_details
+    description: "
+
+      \    Get details for a specific Xano workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the specified workspace.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both of these will work:
+
+      \        result = await xano_get_workspace_details(\"xnwv-v1z6-dvnr\",
+      \"5\")
+
+      \        result = await xano_get_workspace_details(\"xnwv-v1z6-dvnr\", 5)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_workspace_detailsArguments
+      required:
+        - instance_name
+        - workspace_id
+      properties:
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_list_tables
+    description: "
+
+      \    List all tables in a specific Xano database (workspace).
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        database_id: The ID of the Xano workspace/database (can be
+      provided as string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing a list of tables under the 'tables' key.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both of these will work:
+
+      \        result = await xano_list_tables(\"xnwv-v1z6-dvnr\", \"5\")
+
+      \        result = await xano_list_tables(\"xnwv-v1z6-dvnr\", 5)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_list_tablesArguments
+      required:
+        - instance_name
+        - database_id
+      properties:
+        database_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Database Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_get_table_details
+    description: "
+
+      \    Get details for a specific Xano table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the specified table.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # All of these formats will work:
+
+      \        result = await xano_get_table_details(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        result = await xano_get_table_details(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_get_table_details(\"xnwv-v1z6-dvnr\", \"5\",
+      10)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_table_detailsArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_table
+    description: "
+
+      \    Create a new table in a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        name: The name of the new table
+
+      \        description: Table description
+
+      \        docs: Documentation text
+
+      \        auth: Whether authentication is required
+
+      \        tag: List of tags for the table
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the newly created table.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        result = await xano_create_table(\"xnwv-v1z6-dvnr\", 5,
+      \"Users\",\ 
+
+      \                                        description=\"Stores user
+      information\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_tableArguments
+      required:
+        - instance_name
+        - workspace_id
+        - name
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: Tag
+          default: null
+        auth:
+          type: boolean
+          title: Auth
+          default: false
+        docs:
+          type: string
+          title: Docs
+          default: ""
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+          default: ""
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_update_table
+    description: "
+
+      \    Update an existing table in a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table to update (can be provided as
+      string or number)
+
+      \        name: The new name of the table
+
+      \        description: New table description
+
+      \        docs: New documentation text
+
+      \        auth: New authentication setting
+
+      \        tag: New list of tags for the table
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the updated table.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_update_table(\"xnwv-v1z6-dvnr\", 5, 10,
+      name=\"NewTableName\")
+
+      \        result = await xano_update_table(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\", description=\"Updated description\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_update_tableArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: Tag
+          default: null
+        auth:
+          type: boolean
+          title: Auth
+          default: null
+        docs:
+          type: string
+          title: Docs
+          default: null
+        name:
+          type: string
+          title: Name
+          default: null
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        description:
+          type: string
+          title: Description
+          default: null
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_table
+    description: "
+
+      \    Delete a table from a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table to delete (can be provided as
+      string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the delete operation.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_delete_table(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_delete_table(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_tableArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_get_table_schema
+    description: "
+
+      \    Get schema for a specific Xano table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the schema of the specified table under
+      the 'schema' key.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_get_table_schema(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_get_table_schema(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_table_schemaArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_browse_table_content
+    description: "
+
+      \    Browse content for a specific Xano table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        page: Page number (default: 1)
+
+      \        per_page: Number of records per page (default: 50)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the table content with pagination.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Any of these formats will work:
+
+      \        result = await xano_browse_table_content(\"xnwv-v1z6-dvnr\", 5,
+      10)
+
+      \        result = await xano_browse_table_content(\"xnwv-v1z6-dvnr\",
+      \"5\", \"10\", page=2)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_browse_table_contentArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        per_page:
+          type: integer
+          title: Per Page
+          default: 50
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_add_field_to_schema
+    description: "
+
+      \    Add a new field to a table schema.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        field_name: The name of the new field
+
+      \        field_type: The type of the field (e.g., \"text\", \"int\",
+      \"decimal\", \"boolean\", \"date\")
+
+      \        description: Field description
+
+      \        nullable: Whether the field can be null
+
+      \        default: Default value for the field
+
+      \        required: Whether the field is required
+
+      \        access: Field access level (\"public\", \"private\",
+      \"internal\")
+
+      \        sensitive: Whether the field contains sensitive data
+
+      \        style: Field style (\"single\" or \"list\")
+
+      \        validators: Validation rules specific to the field type
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the updated schema information
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Add a simple text field
+
+      \        result = await xano_add_field_to_schema(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,\ 
+
+      \            field_name=\"email\",\ 
+
+      \            field_type=\"text\"
+
+      \        )
+
+      \       \ 
+
+      \        # Add a numeric field with validation
+
+      \        result = await xano_add_field_to_schema(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",\ 
+
+      \            field_name=\"age\",\ 
+
+      \            field_type=\"int\",
+
+      \            required=True,
+
+      \            validators={\"min\": 18, \"max\": 120}
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_add_field_to_schemaArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - field_name
+        - field_type
+      properties:
+        style:
+          type: string
+          title: Style
+          default: single
+        access:
+          type: string
+          title: Access
+          default: public
+        default:
+          title: Default
+          default: null
+        nullable:
+          type: boolean
+          title: Nullable
+          default: false
+        required:
+          type: boolean
+          title: Required
+          default: false
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        sensitive:
+          type: boolean
+          title: Sensitive
+          default: false
+        field_name:
+          type: string
+          title: Field Name
+        field_type:
+          type: string
+          title: Field Type
+        validators:
+          type: object
+          title: Validators
+          default: null
+          additionalProperties: true
+        description:
+          type: string
+          title: Description
+          default: ""
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_rename_schema_field
+    description: "
+
+      \    Rename a field in a table schema.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        old_name: The current name of the field
+
+      \        new_name: The new name for the field
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the rename operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Rename a field
+
+      \        result = await xano_rename_schema_field(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,\ 
+
+      \            old_name=\"user_email\",\ 
+
+      \            new_name=\"email_address\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_rename_schema_fieldArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - old_name
+        - new_name
+      properties:
+        new_name:
+          type: string
+          title: New Name
+        old_name:
+          type: string
+          title: Old Name
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_field
+    description: "
+
+      \    Delete a field from a table schema.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        field_name: The name of the field to delete
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the delete operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Delete a field
+
+      \        result = await xano_delete_field(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,\ 
+
+      \            field_name=\"obsolete_field\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_fieldArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - field_name
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        field_name:
+          type: string
+          title: Field Name
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_list_indexes
+    description: "
+
+      \    List all indexes for a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing all indexes defined on the table
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Get all indexes for a table
+
+      \        result = await xano_list_indexes(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_list_indexesArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_btree_index
+    description: "
+
+      \    Create a btree index on a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        fields: List of fields and operations for the index [{\"name\":
+      \"field_name\", \"op\": \"asc/desc\"}]
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the index creation
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create an index on a single field
+
+      \        result = await xano_create_btree_index(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            fields=[{\"name\": \"email\", \"op\": \"asc\"}]
+
+      \        )
+
+      \       \ 
+
+      \        # Create a composite index on multiple fields
+
+      \        result = await xano_create_btree_index(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            fields=[
+
+      \                {\"name\": \"last_name\", \"op\": \"asc\"},
+
+      \                {\"name\": \"first_name\", \"op\": \"asc\"}
+
+      \            ]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_btree_indexArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - fields
+      properties:
+        fields:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+          title: Fields
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_unique_index
+    description: "
+
+      \    Create a unique index on a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        fields: List of fields and operations for the index [{\"name\":
+      \"field_name\", \"op\": \"asc/desc\"}]
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the unique index creation
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create a unique index on email field
+
+      \        result = await xano_create_unique_index(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            fields=[{\"name\": \"email\", \"op\": \"asc\"}]
+
+      \        )
+
+      \       \ 
+
+      \        # Create a composite unique index
+
+      \        result = await xano_create_unique_index(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            fields=[
+
+      \                {\"name\": \"company_id\", \"op\": \"asc\"},
+
+      \                {\"name\": \"employee_id\", \"op\": \"asc\"}
+
+      \            ]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_unique_indexArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - fields
+      properties:
+        fields:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+          title: Fields
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_search_index
+    description: "
+
+      \    Create a search index on a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        name: Name for the search index
+
+      \        lang: Language for the search index (e.g., \"english\",
+      \"spanish\", etc.)
+
+      \        fields: List of fields and priorities [{\"name\": \"field_name\",
+      \"priority\": 1}]
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the search index creation
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create a search index on multiple text fields
+
+      \        result = await xano_create_search_index(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            name=\"content_search\",
+
+      \            lang=\"english\",
+
+      \            fields=[
+
+      \                {\"name\": \"title\", \"priority\": 1},
+
+      \                {\"name\": \"description\", \"priority\": 0.5},
+
+      \                {\"name\": \"keywords\", \"priority\": 0.8}
+
+      \            ]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_search_indexArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - name
+        - lang
+        - fields
+      properties:
+        lang:
+          type: string
+          title: Lang
+        name:
+          type: string
+          title: Name
+        fields:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Fields
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_index
+    description: "
+
+      \    Delete an index from a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        index_id: The ID of the index to delete (can be provided as
+      string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the index deletion
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Delete an index
+
+      \        result = await xano_delete_index(\"xnwv-v1z6-dvnr\", 5, 10, 15)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_indexArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - index_id
+      properties:
+        index_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Index Id
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_search_table_content
+    description: "
+
+      \    Search table content using complex filtering.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        search_conditions: List of search conditions
+
+      \        sort: Dictionary with field names as keys and \"asc\" or \"desc\"
+      as values
+
+      \        page: Page number (default: 1)
+
+      \        per_page: Number of records per page (default: 50)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the search results and pagination
+      information
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Simple search for active users
+
+      \        result = await xano_search_table_content(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            search_conditions=[
+
+      \                {\"field\": \"status\", \"operator\": \"equals\",
+      \"value\": \"active\"}
+
+      \            ],
+
+      \            sort={\"created_at\": \"desc\"}
+
+      \        )
+
+      \       \ 
+
+      \        # Complex search with multiple conditions
+
+      \        result = await xano_search_table_content(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            search_conditions=[
+
+      \                {\"field\": \"age\", \"operator\": \"greater_than\",
+      \"value\": 18},
+
+      \                {\"field\": \"subscribed\", \"operator\": \"equals\",
+      \"value\": true},
+
+      \                {\"field\": \"last_login\", \"operator\":
+      \"greater_than\", \"value\": \"2023-01-01\"}
+
+      \            ],
+
+      \            sort={\"last_name\": \"asc\", \"first_name\": \"asc\"},
+
+      \            page=2,
+
+      \            per_page=25
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_search_table_contentArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: object
+          title: Sort
+          default: null
+          additionalProperties:
+            type: string
+        per_page:
+          type: integer
+          title: Per Page
+          default: 50
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+        search_conditions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Search Conditions
+          default: null
+  - name: xano_get_table_record
+    description: "
+
+      \    Get a specific record from a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        record_id: The ID of the record to retrieve (can be provided as
+      string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the record data
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_get_table_record(\"xnwv-v1z6-dvnr\", 5, 10,
+      100)
+
+      \        result = await xano_get_table_record(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\", \"100\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_table_recordArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - record_id
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        record_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Record Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_table_record
+    description: "
+
+      \    Create a new record in a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        record_data: The data for the new record
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the created record data
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create a user record
+
+      \        result = await xano_create_table_record(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            record_data={
+
+      \                \"first_name\": \"John\",
+
+      \                \"last_name\": \"Doe\",
+
+      \                \"email\": \"john.doe@example.com\",
+
+      \                \"status\": \"active\"
+
+      \            }
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_table_recordArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - record_data
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        record_data:
+          type: object
+          title: Record Data
+          additionalProperties: true
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_update_table_record
+    description: "
+
+      \    Update an existing record in a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        record_id: The ID of the record to update (can be provided as
+      string or number)
+
+      \        record_data: The updated data for the record
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the updated record data
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Update a user's status
+
+      \        result = await xano_update_table_record(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10, 100,
+
+      \            record_data={
+
+      \                \"status\": \"inactive\",
+
+      \                \"last_updated\": \"2023-08-15T14:30:00Z\"
+
+      \            }
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_update_table_recordArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - record_id
+        - record_data
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        record_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Record Id
+        record_data:
+          type: object
+          title: Record Data
+          additionalProperties: true
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_table_record
+    description: "
+
+      \    Delete a specific record from a table.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        record_id: The ID of the record to delete (can be provided as
+      string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the delete operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_delete_table_record(\"xnwv-v1z6-dvnr\", 5,
+      10, 100)
+
+      \        result = await xano_delete_table_record(\"xnwv-v1z6-dvnr\",
+      \"5\", \"10\", \"100\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_table_recordArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - record_id
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        record_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Record Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_bulk_create_records
+    description: "
+
+      \    Create multiple records in a table in a single operation.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        records: List of record data to insert
+
+      \        allow_id_field: Whether to allow setting the ID field
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing information about the batch insertion
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create multiple users at once
+
+      \        result = await xano_bulk_create_records(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            records=[
+
+      \                {
+
+      \                    \"first_name\": \"John\",
+
+      \                    \"last_name\": \"Doe\",
+
+      \                    \"email\": \"john@example.com\"
+
+      \                },
+
+      \                {
+
+      \                    \"first_name\": \"Jane\",
+
+      \                    \"last_name\": \"Smith\",
+
+      \                    \"email\": \"jane@example.com\"
+
+      \                }
+
+      \            ]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_bulk_create_recordsArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - records
+      properties:
+        records:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Records
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+        allow_id_field:
+          type: boolean
+          title: Allow Id Field
+          default: false
+  - name: xano_bulk_update_records
+    description: "
+
+      \    Update multiple records in a table in a single operation.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        updates: List of update operations, each containing row_id and
+      updates
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing information about the batch update
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Update multiple user records
+
+      \        result = await xano_bulk_update_records(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            updates=[
+
+      \                {
+
+      \                    \"row_id\": 100,
+
+      \                    \"updates\": {
+
+      \                        \"status\": \"active\",
+
+      \                        \"last_login\": \"2023-08-15T10:30:00Z\"
+
+      \                    }
+
+      \                },
+
+      \                {
+
+      \                    \"row_id\": 101,
+
+      \                    \"updates\": {
+
+      \                        \"status\": \"inactive\",
+
+      \                        \"last_login\": \"2023-08-10T14:45:00Z\"
+
+      \                    }
+
+      \                }
+
+      \            ]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_bulk_update_recordsArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - updates
+      properties:
+        updates:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Updates
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_bulk_delete_records
+    description: "
+
+      \    Delete multiple records from a table in a single operation.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        record_ids: List of record IDs to delete (can be provided as
+      strings or numbers)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing information about the batch deletion
+      operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Delete multiple records
+
+      \        result = await xano_bulk_delete_records(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            record_ids=[100, 101, 102]
+
+      \        )
+
+      \       \ 
+
+      \        # Also works with string IDs
+
+      \        result = await xano_bulk_delete_records(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            record_ids=[\"100\", \"101\", \"102\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_bulk_delete_recordsArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+        - record_ids
+      properties:
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        record_ids:
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          title: Record Ids
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_truncate_table
+    description: "
+
+      \    Truncate a table, optionally resetting the primary key.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        table_id: The ID of the table (can be provided as string or
+      number)
+
+      \        reset: Whether to reset the primary key counter
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the truncate operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Truncate a table but keep the ID counter
+
+      \        result = await xano_truncate_table(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \       \ 
+
+      \        # Truncate a table and reset the ID counter to 1
+
+      \        result = await xano_truncate_table(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\", reset=True)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_truncate_tableArguments
+      required:
+        - instance_name
+        - workspace_id
+        - table_id
+      properties:
+        reset:
+          type: boolean
+          title: Reset
+          default: false
+        table_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Table Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_list_files
+    description: "
+
+      \    List files within a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        page: Page number (default: 1)
+
+      \        per_page: Number of files per page (default: 50)
+
+      \        search: Search term for filtering files
+
+      \        access: Filter by access level (\"public\" or \"private\")
+
+      \        sort: Field to sort by (\"created_at\", \"name\", \"size\",
+      \"mime\")
+
+      \        order: Sort order (\"asc\" or \"desc\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing a list of files and pagination
+      information
+
+      \           \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # List all files in a workspace
+
+      \        result = await xano_list_files(\"xnwv-v1z6-dvnr\", 5)
+
+      \           \ 
+
+      \        # List files with filtering and sorting
+
+      \        result = await xano_list_files(
+
+      \                \"xnwv-v1z6-dvnr\", \"5\",
+
+      \                search=\"report\",
+
+      \                access=\"public\",
+
+      \                sort=\"created_at\",
+
+      \                order=\"desc\",
+
+      \                page=2,
+
+      \                per_page=25
+
+      \            )
+
+      \            ```
+
+      \        "
+    inputSchema:
+      type: object
+      title: xano_list_filesArguments
+      required:
+        - instance_name
+        - workspace_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: null
+        order:
+          type: string
+          title: Order
+          default: desc
+        access:
+          type: string
+          title: Access
+          default: null
+        search:
+          type: string
+          title: Search
+          default: null
+        per_page:
+          type: integer
+          title: Per Page
+          default: 50
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_get_file_details
+    description: "
+
+      \    Get details for a specific file.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        file_id: The ID of the file (can be provided as string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the specified file
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_get_file_details(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_get_file_details(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_file_detailsArguments
+      required:
+        - instance_name
+        - workspace_id
+        - file_id
+      properties:
+        file_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: File Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_file
+    description: "
+
+      \    Delete a file from a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        file_id: The ID of the file to delete (can be provided as string
+      or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the delete operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_delete_file(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_delete_file(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_fileArguments
+      required:
+        - instance_name
+        - workspace_id
+        - file_id
+      properties:
+        file_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: File Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_bulk_delete_files
+    description: "
+
+      \    Delete multiple files from a workspace in a single operation.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        file_ids: List of file IDs to delete (can be provided as strings
+      or numbers)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the bulk delete operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Delete multiple files at once
+
+      \        result = await xano_bulk_delete_files(
+
+      \            \"xnwv-v1z6-dvnr\", 5,\ 
+
+      \            file_ids=[10, 11, 12]
+
+      \        )
+
+      \       \ 
+
+      \        # Also works with string IDs
+
+      \        result = await xano_bulk_delete_files(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\",\ 
+
+      \            file_ids=[\"10\", \"11\", \"12\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_bulk_delete_filesArguments
+      required:
+        - instance_name
+        - workspace_id
+        - file_ids
+      properties:
+        file_ids:
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          title: File Ids
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_browse_request_history
+    description: "
+
+      \    Browse request history for a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        page: Page number (default: 1)
+
+      \        per_page: Number of results per page (default: 50)
+
+      \        branch: Filter by branch
+
+      \        api_id: Filter by API ID (can be provided as string or number)
+
+      \        query_id: Filter by query ID (can be provided as string or
+      number)
+
+      \        include_output: Whether to include response output
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing request history entries and pagination
+      information
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Get recent request history
+
+      \        result = await xano_browse_request_history(\"xnwv-v1z6-dvnr\", 5)
+
+      \       \ 
+
+      \        # Get filtered request history with response output
+
+      \        result = await xano_browse_request_history(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\",
+
+      \            branch=\"main\",
+
+      \            api_id=10,
+
+      \            include_output=True,
+
+      \            page=2,
+
+      \            per_page=25
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_browse_request_historyArguments
+      required:
+        - instance_name
+        - workspace_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        api_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Api Id
+          default: null
+        branch:
+          type: string
+          title: Branch
+          default: null
+        per_page:
+          type: integer
+          title: Per Page
+          default: 50
+        query_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Query Id
+          default: null
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+        include_output:
+          type: boolean
+          title: Include Output
+          default: false
+  - name: xano_export_workspace
+    description: "
+
+      \    Export a workspace to a file.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace to export (can be provided
+      as string or number)
+
+      \        branch: Branch to export (defaults to live branch if not
+      specified)
+
+      \        password: Password to encrypt the export (optional)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing export information, including a download
+      URL
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Export the live branch
+
+      \        result = await xano_export_workspace(\"xnwv-v1z6-dvnr\", 5)
+
+      \       \ 
+
+      \        # Export a specific branch with password protection
+
+      \        result = await xano_export_workspace(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\",
+
+      \            branch=\"development\",
+
+      \            password=\"secure_password\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_export_workspaceArguments
+      required:
+        - instance_name
+        - workspace_id
+      properties:
+        branch:
+          type: string
+          title: Branch
+          default: null
+        password:
+          type: string
+          title: Password
+          default: null
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_export_workspace_schema
+    description: "
+
+      \    Export only the schema of a workspace to a file.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        branch: Branch to export (defaults to live branch if not
+      specified)
+
+      \        password: Password to encrypt the export (optional)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing export information, including a download
+      URL
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Export only the schema of the live branch
+
+      \        result = await xano_export_workspace_schema(\"xnwv-v1z6-dvnr\",
+      5)
+
+      \       \ 
+
+      \        # Export the schema of a specific branch with password protection
+
+      \        result = await xano_export_workspace_schema(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\",
+
+      \            branch=\"development\",
+
+      \            password=\"secure_password\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_export_workspace_schemaArguments
+      required:
+        - instance_name
+        - workspace_id
+      properties:
+        branch:
+          type: string
+          title: Branch
+          default: null
+        password:
+          type: string
+          title: Password
+          default: null
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_browse_api_groups
+    description: "
+
+      \    Browse API groups in a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        branch: Filter by branch name
+
+      \        page: Page number (default: 1)
+
+      \        per_page: Number of results per page (default: 50)
+
+      \        search: Search term for filtering API groups
+
+      \        sort: Field to sort by (\"created_at\", \"updated_at\", \"name\")
+
+      \        order: Sort order (\"asc\" or \"desc\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing a list of API groups and pagination
+      information
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # List all API groups in a workspace
+
+      \        result = await xano_browse_api_groups(\"xnwv-v1z6-dvnr\", 5)
+
+      \       \ 
+
+      \        # Search for API groups with pagination and sorting
+
+      \        result = await xano_browse_api_groups(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\",
+
+      \            search=\"auth\",
+
+      \            sort=\"name\",
+
+      \            order=\"asc\",
+
+      \            page=2,
+
+      \            per_page=25
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_browse_api_groupsArguments
+      required:
+        - instance_name
+        - workspace_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: null
+        order:
+          type: string
+          title: Order
+          default: desc
+        branch:
+          type: string
+          title: Branch
+          default: null
+        search:
+          type: string
+          title: Search
+          default: null
+        per_page:
+          type: integer
+          title: Per Page
+          default: 50
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_get_api_group
+    description: "
+
+      \    Get details for a specific API group.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the specified API group
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_get_api_group(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_get_api_group(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_api_groupArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+      properties:
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_api_group
+    description: "
+
+      \    Create a new API group in a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        name: The name of the new API group
+
+      \        description: API group description
+
+      \        docs: Documentation text
+
+      \        branch: Branch to create the API group in (defaults to current
+      branch)
+
+      \        swagger: Whether to enable Swagger documentation
+
+      \        tag: List of tags for the API group
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the newly created API group
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create a simple API group
+
+      \        result = await xano_create_api_group(
+
+      \            \"xnwv-v1z6-dvnr\", 5,\ 
+
+      \            name=\"Authentication APIs\"
+
+      \        )
+
+      \       \ 
+
+      \        # Create an API group with additional details
+
+      \        result = await xano_create_api_group(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\",
+
+      \            name=\"User Management\",
+
+      \            description=\"APIs for user management operations\",
+
+      \            docs=\"Use these endpoints to create, update, and delete
+      users\",
+
+      \            branch=\"development\",
+
+      \            tag=[\"auth\", \"users\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_api_groupArguments
+      required:
+        - instance_name
+        - workspace_id
+        - name
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: Tag
+          default: null
+        docs:
+          type: string
+          title: Docs
+          default: ""
+        name:
+          type: string
+          title: Name
+        branch:
+          type: string
+          title: Branch
+          default: null
+        swagger:
+          type: boolean
+          title: Swagger
+          default: true
+        description:
+          type: string
+          title: Description
+          default: ""
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_update_api_group
+    description: "
+
+      \    Update an existing API group in a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group to update (can be provided
+      as string or number)
+
+      \        name: The new name of the API group
+
+      \        description: New API group description
+
+      \        docs: New documentation text
+
+      \        swagger: Whether to enable Swagger documentation
+
+      \        tag: New list of tags for the API group
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the updated API group
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Update the name of an API group
+
+      \        result = await xano_update_api_group(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            name=\"Updated API Group Name\"
+
+      \        )
+
+      \       \ 
+
+      \        # Update multiple properties
+
+      \        result = await xano_update_api_group(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            description=\"Updated description\",
+
+      \            docs=\"New documentation\",
+
+      \            tag=[\"updated\", \"api\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_update_api_groupArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: Tag
+          default: null
+        docs:
+          type: string
+          title: Docs
+          default: null
+        name:
+          type: string
+          title: Name
+          default: null
+        swagger:
+          type: boolean
+          title: Swagger
+          default: null
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        description:
+          type: string
+          title: Description
+          default: null
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_api_group
+    description: "
+
+      \    Delete an API group from a workspace.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group to delete (can be provided
+      as string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the delete operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Both formats work:
+
+      \        result = await xano_delete_api_group(\"xnwv-v1z6-dvnr\", 5, 10)
+
+      \        result = await xano_delete_api_group(\"xnwv-v1z6-dvnr\", \"5\",
+      \"10\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_api_groupArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+      properties:
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_update_api_group_security
+    description: "
+
+      \    Update the security settings for an API group.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        guid: The new GUID for the API group
+
+      \        canonical: The canonical URL for the API group
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the updated API group details
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Update security settings
+
+      \        result = await xano_update_api_group_security(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            guid=\"new-guid-value\",
+
+      \            canonical=\"https://api.example.com/v1\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_update_api_group_securityArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+        - guid
+        - canonical
+      properties:
+        guid:
+          type: string
+          title: Guid
+        canonical:
+          type: string
+          title: Canonical
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_browse_apis_in_group
+    description: "
+
+      \    Browse APIs within a specific API group.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        page: Page number (default: 1)
+
+      \        per_page: Number of APIs per page (default: 50)
+
+      \        search: Search term for filtering APIs
+
+      \        sort: Field to sort by (\"created_at\", \"updated_at\", \"name\")
+
+      \        order: Sort order (\"asc\" or \"desc\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing a list of APIs and pagination information
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # List all APIs in a group
+
+      \        result = await xano_browse_apis_in_group(\"xnwv-v1z6-dvnr\", 5,
+      10)
+
+      \       \ 
+
+      \        # Search for APIs with sorting
+
+      \        result = await xano_browse_apis_in_group(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            search=\"user\",
+
+      \            sort=\"name\",
+
+      \            order=\"asc\",
+
+      \            page=2,
+
+      \            per_page=25
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_browse_apis_in_groupArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: null
+        order:
+          type: string
+          title: Order
+          default: desc
+        search:
+          type: string
+          title: Search
+          default: null
+        per_page:
+          type: integer
+          title: Per Page
+          default: 50
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_get_api
+    description: "
+
+      \    Get details for a specific API.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        api_id: The ID of the API (can be provided as string or number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the specified API
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # All of these formats work:
+
+      \        result = await xano_get_api(\"xnwv-v1z6-dvnr\", 5, 10, 15)
+
+      \        result = await xano_get_api(\"xnwv-v1z6-dvnr\", \"5\", \"10\",
+      \"15\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_get_apiArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+        - api_id
+      properties:
+        api_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Api Id
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_create_api
+    description: "
+
+      \    Create a new API within an API group.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        name: The name of the new API
+
+      \        description: API description
+
+      \        docs: Documentation text
+
+      \        verb: HTTP method (GET, POST, PUT, DELETE, PATCH, HEAD)
+
+      \        tag: List of tags for the API
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing details about the newly created API
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Create a GET API
+
+      \        result = await xano_create_api(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10,
+
+      \            name=\"Get User Profile\",
+
+      \            verb=\"GET\"
+
+      \        )
+
+      \       \ 
+
+      \        # Create a POST API with more details
+
+      \        result = await xano_create_api(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\",
+
+      \            name=\"Create User\",
+
+      \            description=\"Creates a new user in the system\",
+
+      \            docs=\"Use this endpoint to register new users\",
+
+      \            verb=\"POST\",
+
+      \            tag=[\"users\", \"auth\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_create_apiArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+        - name
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: Tag
+          default: null
+        docs:
+          type: string
+          title: Docs
+          default: ""
+        name:
+          type: string
+          title: Name
+        verb:
+          type: string
+          title: Verb
+          default: GET
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        description:
+          type: string
+          title: Description
+          default: ""
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_update_api
+    description: "
+
+      \    Update an existing API.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        api_id: The ID of the API to update (can be provided as string or
+      number)
+
+      \        name: The new name of the API
+
+      \        description: New API description
+
+      \        docs: New documentation text
+
+      \        verb: New HTTP method (GET, POST, PUT, DELETE, PATCH, HEAD)
+
+      \        auth: Authentication settings
+
+      \        tag: New list of tags for the API
+
+      \        cache: Cache settings
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the update operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Update the name of an API
+
+      \        result = await xano_update_api(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10, 15,
+
+      \            name=\"Updated API Name\"
+
+      \        )
+
+      \       \ 
+
+      \        # Update multiple properties
+
+      \        result = await xano_update_api(
+
+      \            \"xnwv-v1z6-dvnr\", \"5\", \"10\", \"15\",
+
+      \            description=\"Updated description\",
+
+      \            docs=\"New documentation\",
+
+      \            verb=\"PUT\",
+
+      \            tag=[\"updated\", \"api\"],
+
+      \            cache={\"active\": True, \"ttl\": 300}
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_update_apiArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+        - api_id
+      properties:
+        tag:
+          type: array
+          items:
+            type: string
+          title: Tag
+          default: null
+        auth:
+          type: object
+          title: Auth
+          default: null
+          additionalProperties: true
+        docs:
+          type: string
+          title: Docs
+          default: null
+        name:
+          type: string
+          title: Name
+          default: null
+        verb:
+          type: string
+          title: Verb
+          default: null
+        cache:
+          type: object
+          title: Cache
+          default: null
+          additionalProperties: true
+        api_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Api Id
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        description:
+          type: string
+          title: Description
+          default: null
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_delete_api
+    description: "
+
+      \    Delete an API from an API group.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        api_id: The ID of the API to delete (can be provided as string or
+      number)
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the delete operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # All formats work:
+
+      \        result = await xano_delete_api(\"xnwv-v1z6-dvnr\", 5, 10, 15)
+
+      \        result = await xano_delete_api(\"xnwv-v1z6-dvnr\", \"5\", \"10\",
+      \"15\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_delete_apiArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+        - api_id
+      properties:
+        api_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Api Id
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name
+  - name: xano_update_api_security
+    description: "
+
+      \    Update the security settings for an API.
+
+
+      \    Args:
+
+      \        instance_name: The name of the Xano instance (e.g.,
+      \"xnwv-v1z6-dvnr\")
+
+      \        workspace_id: The ID of the workspace (can be provided as string
+      or number)
+
+      \        apigroup_id: The ID of the API group (can be provided as string
+      or number)
+
+      \        api_id: The ID of the API (can be provided as string or number)
+
+      \        guid: The new GUID for the API
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing the result of the update operation
+
+      \       \ 
+
+      \    Example:
+
+      \        ```
+
+      \        # Update API security settings
+
+      \        result = await xano_update_api_security(
+
+      \            \"xnwv-v1z6-dvnr\", 5, 10, 15,
+
+      \            guid=\"new-api-guid-value\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: xano_update_api_securityArguments
+      required:
+        - instance_name
+        - workspace_id
+        - apigroup_id
+        - api_id
+        - guid
+      properties:
+        guid:
+          type: string
+          title: Guid
+        api_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Api Id
+        apigroup_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Apigroup Id
+        workspace_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Workspace Id
+        instance_name:
+          type: string
+          title: Instance Name

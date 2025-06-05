@@ -1,0 +1,18 @@
+identifier: kenhuangus/mcp-vulnerable-server-demo/mcp-vulnerable-server-demo
+repo:
+  provider: github.com
+  url: https://github.com/kenhuangus/mcp-vulnerable-server-demo
+  name: mcp-vulnerable-server-demo
+  owner: kenhuangus
+server:
+  subdirectory: /
+  name: Insecure MCP Demo Server
+  description: Demonstrate potential security vulnerabilities in MCP servers by
+    exposing insecure tools for educational purposes. Showcase common attack
+    vectors such as SQL injection, arbitrary SQL execution, and sensitive
+    environment variable leaks. Help users understand risks and mitigation
+    strategies to secure MCP implementations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,97 @@
+tools:
+  - name: contacts
+    description: Search and retrieve contacts from Apple Contacts app
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name to search for (optional - if not provided, returns all
+            contacts). Can be partial name to search.
+  - name: notes
+    description: Search and retrieve notes from Apple Notes app
+    inputSchema:
+      type: object
+      properties:
+        searchText:
+          type: string
+          description: Text to search for in notes (optional - if not provided, returns
+            all notes)
+  - name: messages
+    description: Interact with Apple Messages app - send, read, schedule messages
+      and check unread messages
+    inputSchema:
+      type: object
+      required:
+        - operation
+      properties:
+        limit:
+          type: number
+          description: Number of messages to read (optional, for read and unread operations)
+        message:
+          type: string
+          description: Message to send (required for send and schedule operations)
+        operation:
+          enum:
+            - send
+            - read
+            - schedule
+            - unread
+          type: string
+          description: "Operation to perform: 'send', 'read', 'schedule', or 'unread'"
+        phoneNumber:
+          type: string
+          description: Phone number to send message to (required for send, read, and
+            schedule operations)
+        scheduledTime:
+          type: string
+          description: ISO string of when to send the message (required for schedule
+            operation)
+  - name: mail
+    description: Interact with Apple Mail app - read unread emails, search emails,
+      and send emails
+    inputSchema:
+      type: object
+      required:
+        - operation
+      properties:
+        cc:
+          type: string
+          description: CC email address (optional for send operation)
+        to:
+          type: string
+          description: Recipient email address (required for send operation)
+        bcc:
+          type: string
+          description: BCC email address (optional for send operation)
+        body:
+          type: string
+          description: Email body content (required for send operation)
+        limit:
+          type: number
+          description: Number of emails to retrieve (optional, for unread and search
+            operations)
+        account:
+          type: string
+          description: Email account to use (optional - if not provided, searches across
+            all accounts)
+        mailbox:
+          type: string
+          description: Mailbox to use (optional - if not provided, uses inbox or searches
+            across all mailboxes)
+        subject:
+          type: string
+          description: Email subject (required for send operation)
+        operation:
+          enum:
+            - unread
+            - search
+            - send
+            - mailboxes
+            - accounts
+          type: string
+          description: "Operation to perform: 'unread', 'search', 'send', 'mailboxes', or
+            'accounts'"
+        searchTerm:
+          type: string
+          description: Text to search for in emails (required for search operation)

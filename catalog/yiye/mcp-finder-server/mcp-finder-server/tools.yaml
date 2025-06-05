@@ -1,0 +1,20 @@
+tools:
+  - name: find-mcp-servers
+    description: Find MCP servers from the awesome-mcp-servers list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        tag:
+          type: string
+          description: Filter servers by tag (e.g., 'Databases', '🐍', '🏠')
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of results to return
+        search:
+          type: string
+          description: Text to search for in server names, descriptions, or tags
+      additionalProperties: false

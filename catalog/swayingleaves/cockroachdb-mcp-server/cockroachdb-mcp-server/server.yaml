@@ -1,0 +1,17 @@
+identifier: swayingleaves/cockroachdb-mcp-server/cockroachdb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Swayingleaves/cockroachdb-mcp-server
+  name: cockroachdb-mcp-server
+  owner: Swayingleaves
+server:
+  subdirectory: /
+  name: CockroachDB MCP Server
+  description: Connect directly to your CockroachDB database and execute SQL
+    queries seamlessly. Retrieve table structures, manage connections, and
+    utilize SQL query templates to enhance your database interactions.
+    Experience automatic reconnection and detailed logging for troubleshooting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

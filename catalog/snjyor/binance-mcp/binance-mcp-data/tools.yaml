@@ -1,0 +1,224 @@
+tools:
+  - name: get_order_book
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+      properties:
+        limit:
+          type: number
+          description: Order book depth, default 100, max 5000
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+      additionalProperties: false
+  - name: get_recent_trades
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+      properties:
+        limit:
+          type: number
+          description: Number of trades to return, default 500, max 1000
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+      additionalProperties: false
+  - name: get_historical_trades
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+      properties:
+        limit:
+          type: number
+          description: Number of trades to return, default 500, max 1000
+        fromId:
+          type: number
+          description: Trade ID to start from, default returns the most recent trades
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+      additionalProperties: false
+  - name: get_aggregate_trades
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+      properties:
+        limit:
+          type: number
+          description: Number of trades to return, default 500, max 1000
+        fromId:
+          type: number
+          description: Aggregate trade ID to start from
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        endTime:
+          type: number
+          description: End timestamp (milliseconds)
+        startTime:
+          type: number
+          description: Start timestamp (milliseconds)
+      additionalProperties: false
+  - name: get_klines
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+        - interval
+      properties:
+        limit:
+          type: number
+          description: Number of K-lines to return, default 500, max 1000
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        endTime:
+          type: number
+          description: End timestamp (milliseconds)
+        interval:
+          type: string
+          description: K-line interval, e.g. 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h,
+            12h, 1d, 3d, 1w, 1M
+        timeZone:
+          type: string
+          description: Time zone, default UTC
+        startTime:
+          type: number
+          description: Start timestamp (milliseconds)
+      additionalProperties: false
+  - name: get_ui_klines
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+        - interval
+      properties:
+        limit:
+          type: number
+          description: Number of K-lines to return, default 500, max 1000
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        endTime:
+          type: number
+          description: End timestamp (milliseconds)
+        interval:
+          type: string
+          description: K-line interval, e.g. 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h,
+            12h, 1d, 3d, 1w, 1M
+        timeZone:
+          type: string
+          description: Time zone, default UTC
+        startTime:
+          type: number
+          description: Start timestamp (milliseconds)
+      additionalProperties: false
+  - name: get_avg_price
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+      additionalProperties: false
+  - name: get_24hr_ticker
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        symbols:
+          type: array
+          items:
+            type: string
+          description: Array of multiple trading pair symbols
+      additionalProperties: false
+  - name: get_trading_day_ticker
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          enum:
+            - FULL
+            - MINI
+          type: string
+          description: Return data type, FULL or MINI
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        symbols:
+          type: array
+          items:
+            type: string
+          description: Array of multiple trading pair symbols
+        timeZone:
+          type: number
+          description: Time zone, default 0
+      additionalProperties: false
+  - name: get_price
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        symbols:
+          type: array
+          items:
+            type: string
+          description: Array of multiple trading pair symbols
+      additionalProperties: false
+  - name: get_book_ticker
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        symbols:
+          type: array
+          items:
+            type: string
+          description: Array of multiple trading pair symbols
+      additionalProperties: false
+  - name: get_rolling_window_ticker
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          enum:
+            - FULL
+            - MINI
+          type: string
+          description: Return data type, FULL or MINI
+        symbol:
+          type: string
+          description: Trading pair symbol, e.g. BTCUSDT
+        symbols:
+          type: array
+          items:
+            type: string
+          description: Array of multiple trading pair symbols
+        windowSize:
+          type: string
+          description: Window size, e.g. 1m, 4h, 1d
+      additionalProperties: false

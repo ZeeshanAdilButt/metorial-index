@@ -1,0 +1,14 @@
+identifier: superseoworld/mcp-spotify/mcp-spotify
+repo:
+  provider: github.com
+  url: https://github.com/superseoworld/mcp-spotify
+  name: mcp-spotify
+  owner: superseoworld
+server:
+  subdirectory: /
+  name: Spotify Server
+  description: Access Spotify's music catalog and interact with tracks, albums, and artists.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

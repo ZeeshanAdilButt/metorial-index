@@ -1,0 +1,16 @@
+identifier: iamadk/reference-servers/fetch
+repo:
+  provider: github.com
+  url: https://github.com/iamadk/reference-servers
+  name: reference-servers
+  owner: iamadk
+server:
+  subdirectory: /src/fetch
+  name: Fetch Server
+  description: Retrieve and process web content effortlessly. Convert HTML to
+    markdown for easier consumption by LLMs, allowing models to extract
+    information from web pages in manageable chunks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

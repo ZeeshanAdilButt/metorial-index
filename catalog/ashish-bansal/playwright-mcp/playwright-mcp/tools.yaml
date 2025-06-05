@@ -1,0 +1,39 @@
+tools:
+  - name: init-browser
+    description: Initialize a browser with a URL
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL to navigate to
+      additionalProperties: false
+  - name: get-dom
+    description: Get the DOM of the required element
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-url
+    description: Get the URL of a page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-selector-count
+    description: Get the count of elements matching a selector
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+      additionalProperties: false

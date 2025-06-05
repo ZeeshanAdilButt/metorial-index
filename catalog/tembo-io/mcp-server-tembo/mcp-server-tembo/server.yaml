@@ -1,0 +1,15 @@
+identifier: tembo-io/mcp-server-tembo/mcp-server-tembo
+repo:
+  provider: github.com
+  url: https://github.com/tembo-io/mcp-server-tembo
+  name: mcp-server-tembo
+  owner: tembo-io
+server:
+  subdirectory: /
+  name: Tembo Cloud API
+  description: Provide a standardized interface for integrating with the Tembo
+    Cloud platform.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

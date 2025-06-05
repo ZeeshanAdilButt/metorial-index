@@ -1,0 +1,21 @@
+tools:
+  - name: read_query
+    description: Execute a SELECT query.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: SELECT SQL query to execute
+  - name: append_insight
+    description: Add a data insight to the memo
+    inputSchema:
+      type: object
+      required:
+        - insight
+      properties:
+        insight:
+          type: string
+          description: Data insight discovered from analysis

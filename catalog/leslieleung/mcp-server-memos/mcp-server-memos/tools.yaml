@@ -1,0 +1,46 @@
+tools:
+  - name: search_memos
+    description: |
+      
+      Search memos using the Memos API.
+
+      Args:
+          query: Search query string
+
+      Returns:
+          A list of memo objects matching the query
+    inputSchema:
+      type: object
+      title: search_memosArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: create_memo
+    description: |
+      
+      Create a new memo with the Memos API.
+
+      Args:
+          content: Content of the memo
+          tags: List of tags for the memo (will always include the default tag)
+
+      Returns:
+          The created memo object
+    inputSchema:
+      type: object
+      title: create_memoArguments
+      required:
+        - content
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          title: Tags
+          default: []
+        content:
+          type: string
+          title: Content

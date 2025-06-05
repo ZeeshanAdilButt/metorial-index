@@ -1,0 +1,17 @@
+identifier: overstarry/qweather-mcp/qweather-mcp
+repo:
+  provider: github.com
+  url: https://github.com/overstarry/qweather-mcp
+  name: qweather-mcp
+  owner: overstarry
+server:
+  subdirectory: /
+  name: QWeather API MCP Server
+  description: Access real-time weather information effortlessly. Query city
+    details and current weather conditions using a simple command-line
+    interface. Enhance your applications with reliable weather data from
+    QWeather.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

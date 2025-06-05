@@ -1,0 +1,100 @@
+tools:
+  - name: execute_query
+    description: Execute a PromQL instant query against Prometheus
+    inputSchema:
+      type: object
+      title: execute_queryArguments
+      required:
+        - query
+      properties:
+        time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        query:
+          type: string
+          title: Query
+        timeout:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Timeout
+          default: null
+  - name: execute_range_query
+    description: Execute a PromQL range query with start time, end time, and step interval
+    inputSchema:
+      type: object
+      title: execute_range_queryArguments
+      required:
+        - query
+        - start
+        - end
+        - step
+      properties:
+        end:
+          type: string
+          title: End
+        step:
+          type: string
+          title: Step
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        query:
+          type: string
+          title: Query
+        start:
+          type: string
+          title: Start
+        timeout:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Timeout
+          default: null
+  - name: get_rules
+    description: Get all alerting and recording rules currently loaded in Prometheus
+    inputSchema:
+      type: object
+      title: get_rulesArguments
+      properties:
+        type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Type
+          default: null
+  - name: list_metrics
+    description: List all available metrics in Prometheus
+    inputSchema:
+      type: object
+      title: list_metricsArguments
+      properties: {}
+  - name: get_labels
+    description: List all available label names
+    inputSchema:
+      type: object
+      title: get_labelsArguments
+      properties: {}
+  - name: get_label_values
+    description: Get all values for a specific label
+    inputSchema:
+      type: object
+      title: get_label_valuesArguments
+      required:
+        - label
+      properties:
+        label:
+          type: string
+          title: Label

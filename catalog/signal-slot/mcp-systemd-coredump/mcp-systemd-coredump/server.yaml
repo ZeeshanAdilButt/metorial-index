@@ -1,0 +1,17 @@
+identifier: signal-slot/mcp-systemd-coredump/mcp-systemd-coredump
+repo:
+  provider: github.com
+  url: https://github.com/signal-slot/mcp-systemd-coredump
+  name: mcp-systemd-coredump
+  owner: signal-slot
+server:
+  subdirectory: /
+  name: systemd-coredump MCP Server
+  description: Access, manage, and analyze system core dumps seamlessly. Interact
+    with systemd-coredump functionality to list, extract, and remove core dumps
+    with ease. Enhance your debugging capabilities by leveraging core dump data
+    effectively.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

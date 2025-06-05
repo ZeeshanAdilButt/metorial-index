@@ -1,0 +1,47 @@
+tools:
+  - name: get_memory_bank_structure
+    description: Get a detailed description of the Memory Bank file structure.
+    inputSchema:
+      type: object
+      title: get_memory_bank_structureArguments
+      properties: {}
+  - name: generate_memory_bank_template
+    description: "Generate a template for a specific Memory Bank file.
+
+      \   \ 
+
+      \    Args:
+
+      \        file_name: The name of the file to generate a template for (e.g.,
+      \"projectbrief.md\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_memory_bank_templateArguments
+      required:
+        - file_name
+      properties:
+        file_name:
+          type: string
+          title: File Name
+  - name: analyze_project_summary
+    description: "Analyze a project summary and provide suggestions for Memory Bank
+      content.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_summary: A summary of the project
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_project_summaryArguments
+      required:
+        - project_summary
+      properties:
+        project_summary:
+          type: string
+          title: Project Summary

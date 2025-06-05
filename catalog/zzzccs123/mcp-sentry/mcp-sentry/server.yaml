@@ -1,0 +1,17 @@
+identifier: zzzccs123/mcp-sentry/mcp-sentry
+repo:
+  provider: github.com
+  url: https://github.com/Zzzccs123/mcp-sentry
+  name: mcp-sentry
+  owner: Zzzccs123
+server:
+  subdirectory: /
+  name: Sentry Server
+  description: Connect to Sentry's error tracking service to retrieve and analyze
+    error reports. Gain insights into issues with detailed information,
+    including status and stack traces, to enhance your application's
+    reliability.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

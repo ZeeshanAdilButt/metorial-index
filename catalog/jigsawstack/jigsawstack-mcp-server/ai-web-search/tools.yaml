@@ -1,0 +1,25 @@
+tools:
+  - name: ai_web_search
+    description: Perform a JigsawStack search powered by AI. Get better. Faster.
+      Smarter. Results.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        ai_overview:
+          type: boolean
+          description: AI overview
+        safe_search:
+          enum:
+            - strict
+            - moderate
+            - off
+          type: string
+          description: Safe search level
+        spell_check:
+          type: boolean
+          description: Spell check

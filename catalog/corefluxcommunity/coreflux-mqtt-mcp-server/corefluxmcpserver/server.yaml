@@ -1,0 +1,17 @@
+identifier: corefluxcommunity/coreflux-mqtt-mcp-server/corefluxmcpserver
+repo:
+  provider: github.com
+  url: https://github.com/CorefluxCommunity/Coreflux-MQTT-MCP-Server
+  name: Coreflux-MQTT-MCP-Server
+  owner: CorefluxCommunity
+server:
+  subdirectory: /
+  name: Coreflux MQTT Broker Control
+  description: Connect to the Coreflux MQTT broker and access a variety of
+    Coreflux actions as tools for your AI assistants. Simplify your interactions
+    with Coreflux commands and enhance your AI's capabilities seamlessly. Get
+    started quickly with Docker or Python for local development.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: adarshem/mcp-server-learn/mcp-server-learn
+repo:
+  provider: github.com
+  url: https://github.com/adarshem/mcp-server-learn
+  name: mcp-server-learn
+  owner: adarshem
+server:
+  subdirectory: /
+  name: Weather Server
+  description: Provide real-time weather alerts and forecasts for US locations
+    using official National Weather Service data. Enable applications to
+    retrieve accurate weather information dynamically through simple tool calls.
+    Enhance your projects with up-to-date weather context seamlessly integrated
+    via MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

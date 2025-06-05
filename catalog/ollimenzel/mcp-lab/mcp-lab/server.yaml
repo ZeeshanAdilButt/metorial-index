@@ -1,0 +1,18 @@
+identifier: ollimenzel/mcp-lab/mcp-lab
+repo:
+  provider: github.com
+  url: https://github.com/ollimenzel/MCP-Lab
+  name: MCP-Lab
+  owner: ollimenzel
+server:
+  subdirectory: /
+  name: Jokes MCP Server
+  description: Provide a humor-focused MCP server that delivers concise, engaging
+    jokes on demand, including Chuck Norris, Dad, and Yo Mama jokes. Integrate
+    seamlessly with Microsoft Copilot Studio to enable AI agents to fetch and
+    tell jokes tailored to user preferences. Enhance user interactions with
+    witty, appropriate humor while filtering out offensive content.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

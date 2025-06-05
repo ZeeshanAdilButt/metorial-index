@@ -1,0 +1,171 @@
+tools:
+  - name: get_projects
+    description: Get a list of projects with id, name, description, web_url and
+      other useful information.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: By default a filtered version is returned, suitable for most cases.
+            Only set true if more information is needed.
+      additionalProperties: false
+  - name: list_open_merge_requests
+    description: Lists all open merge requests in the project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: By default a filtered version is returned, suitable for most cases.
+            Only set true if more information is needed.
+        project_id:
+          type: number
+          description: The project ID of the merge request
+      additionalProperties: false
+  - name: get_merge_request_details
+    description: Get details about a specific merge request of a project like title,
+      source-branch, target-branch, web_url, ...
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+        - merge_request_iid
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: By default a filtered version is returned, suitable for most cases.
+            Only set true if more information is needed.
+        project_id:
+          type: number
+          description: The project ID of the merge request
+        merge_request_iid:
+          type: number
+          description: The internal ID of the merge request within the project
+      additionalProperties: false
+  - name: get_merge_request_comments
+    description: Get general and file diff comments of a certain merge request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+        - merge_request_iid
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: By default a filtered version is returned, suitable for most cases.
+            Only set true if more information is needed.
+        project_id:
+          type: number
+          description: The project ID of the merge request
+        merge_request_iid:
+          type: number
+          description: The internal ID of the merge request within the project
+      additionalProperties: false
+  - name: add_merge_request_comment
+    description: Add a general comment to a merge request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+        - merge_request_iid
+        - comment
+      properties:
+        comment:
+          type: string
+          description: The comment text
+        project_id:
+          type: number
+          description: The project ID of the merge request
+        merge_request_iid:
+          type: number
+          description: The internal ID of the merge request within the project
+      additionalProperties: false
+  - name: add_merge_request_diff_comment
+    description: Add a comment of a merge request at a specific line in a file diff
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+        - merge_request_iid
+        - comment
+        - base_sha
+        - start_sha
+        - head_sha
+        - file_path
+        - line_number
+      properties:
+        comment:
+          type: string
+          description: The comment text
+        base_sha:
+          type: string
+          description: The SHA of the base commit
+        head_sha:
+          type: string
+          description: The SHA of the head commit
+        file_path:
+          type: string
+          description: The path to the file being commented on
+        start_sha:
+          type: string
+          description: The SHA of the start commit
+        project_id:
+          type: number
+          description: The project ID of the merge request
+        line_number:
+          type: number
+          description: The line number in the new version of the file
+        merge_request_iid:
+          type: number
+          description: The internal ID of the merge request within the project
+      additionalProperties: false
+  - name: get_merge_request_diff
+    description: Get the file diffs of a certain merge request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+        - merge_request_iid
+      properties:
+        project_id:
+          type: number
+          description: The project ID of the merge request
+        merge_request_iid:
+          type: number
+          description: The internal ID of the merge request within the project
+      additionalProperties: false
+  - name: get_issue_details
+    description: Get details of an issue within a certain project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+        - issue_iid
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: By default a filtered version is returned, suitable for most cases.
+            Only set true if more information is needed.
+        issue_iid:
+          type: number
+          description: The internal ID of the issue within the project
+        project_id:
+          type: number
+          description: The project ID of the issue
+      additionalProperties: false

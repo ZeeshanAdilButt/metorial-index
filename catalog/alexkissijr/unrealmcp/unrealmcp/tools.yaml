@@ -1,0 +1,355 @@
+tools:
+  - name: execute_python
+    description: "Execute Python code or a Python script file in Unreal Engine.
+
+      \       \ 
+
+      \        This function allows you to execute arbitrary Python code
+      directly in the Unreal Engine
+
+      \        environment. You can either provide Python code as a string or
+      specify a path to a Python
+
+      \        script file to execute.
+
+      \       \ 
+
+      \        The Python code will have access to the full Unreal Engine Python
+      API, including the 'unreal'
+
+      \        module, allowing you to interact with and manipulate the Unreal
+      Engine editor and its assets.
+
+      \       \ 
+
+      \        Args:
+
+      \            code: Python code to execute as a string. Can be multiple
+      lines.
+
+      \            file: Path to a Python script file to execute.
+
+      \           \ 
+
+      \        Note:\ 
+
+      \            - You must provide either code or file, but not both.
+
+      \            - The output of the Python code will be visible in the Unreal
+      Engine log.
+
+      \            - The Python code runs in the Unreal Engine process, so it
+      has full access to the engine.
+
+      \            - Be careful with destructive operations as they can affect
+      your project.
+
+      \           \ 
+
+      \        Examples:
+
+      \            # Execute simple Python code
+
+      \            execute_python(code=\"print('Hello from Unreal Engine!')\")
+
+      \           \ 
+
+      \            # Get information about the current level
+
+      \            execute_python(code='''
+
+      \            import unreal
+
+      \            level = unreal.EditorLevelLibrary.get_editor_world()
+
+      \            print(f\"Current level: {level.get_name()}\")
+
+      \            actors = unreal.EditorLevelLibrary.get_all_level_actors()
+
+      \            print(f\"Number of actors: {len(actors)}\")
+
+      \            ''')
+
+      \           \ 
+
+      \            # Execute a Python script file
+
+      \            execute_python(file=\"D:/my_scripts/create_assets.py\")
+
+      \        "
+    inputSchema:
+      type: object
+      title: execute_pythonArguments
+      properties:
+        code:
+          type: string
+          title: Code
+          default: null
+        file:
+          type: string
+          title: File
+          default: null
+  - name: get_scene_info
+    description: Get detailed information about the current Unreal scene.
+    inputSchema:
+      type: object
+      title: get_scene_infoArguments
+      properties: {}
+  - name: create_object
+    description: "Create a new object in the Unreal scene.
+
+      \       \ 
+
+      \        Args:
+
+      \            type: The type of object to create (e.g., 'StaticMeshActor',
+      'PointLight', etc.)
+
+      \            location: Optional 3D location as [x, y, z]
+
+      \            label: Optional label for the object
+
+      \        "
+    inputSchema:
+      type: object
+      title: create_objectArguments
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          title: Type
+        label:
+          type: string
+          title: Label
+          default: null
+        location:
+          type: array
+          items: {}
+          title: Location
+          default: null
+  - name: modify_object
+    description: "Modify an existing object in the Unreal scene.
+
+      \       \ 
+
+      \        Args:
+
+      \            name: The name of the object to modify
+
+      \            location: Optional 3D location as [x, y, z]
+
+      \            rotation: Optional rotation as [pitch, yaw, roll]
+
+      \            scale: Optional scale as [x, y, z]
+
+      \        "
+    inputSchema:
+      type: object
+      title: modify_objectArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        scale:
+          type: array
+          items: {}
+          title: Scale
+          default: null
+        location:
+          type: array
+          items: {}
+          title: Location
+          default: null
+        rotation:
+          type: array
+          items: {}
+          title: Rotation
+          default: null
+  - name: delete_object
+    description: "Delete an object from the Unreal scene.
+
+      \       \ 
+
+      \        Args:
+
+      \            name: The name of the object to delete
+
+      \        "
+    inputSchema:
+      type: object
+      title: delete_objectArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: create_material
+    description: "Create a new material in the Unreal project.
+
+      \       \ 
+
+      \        Args:
+
+      \            package_path: The path where the material should be created
+      (e.g., '/Game/Materials')
+
+      \            name: The name of the material
+
+      \            properties: Optional dictionary of material properties to
+      set. Can include:
+
+      \                - shading_model: str (e.g., \"DefaultLit\", \"Unlit\",
+      \"Subsurface\", etc.)
+
+      \                - blend_mode: str (e.g., \"Opaque\", \"Masked\",
+      \"Translucent\", etc.)
+
+      \                - two_sided: bool
+
+      \                - dithered_lod_transition: bool
+
+      \                - cast_contact_shadow: bool
+
+      \                - base_color: list[float] (RGBA values 0-1)
+
+      \                - metallic: float (0-1)
+
+      \                - roughness: float (0-1)
+
+      \        "
+    inputSchema:
+      type: object
+      title: create_materialArguments
+      required:
+        - package_path
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        properties:
+          type: object
+          title: Properties
+          default: null
+          additionalProperties: true
+        package_path:
+          type: string
+          title: Package Path
+  - name: modify_material
+    description: "Modify an existing material's properties.
+
+      \       \ 
+
+      \        Args:
+
+      \            path: The full path to the material (e.g.,
+      '/Game/Materials/MyMaterial')
+
+      \            properties: Dictionary of material properties to set. Can
+      include:
+
+      \                - shading_model: str (e.g., \"DefaultLit\", \"Unlit\",
+      \"Subsurface\", etc.)
+
+      \                - blend_mode: str (e.g., \"Opaque\", \"Masked\",
+      \"Translucent\", etc.)
+
+      \                - two_sided: bool
+
+      \                - dithered_lod_transition: bool
+
+      \                - cast_contact_shadow: bool
+
+      \                - base_color: list[float] (RGBA values 0-1)
+
+      \                - metallic: float (0-1)
+
+      \                - roughness: float (0-1)
+
+      \        "
+    inputSchema:
+      type: object
+      title: modify_materialArguments
+      required:
+        - path
+        - properties
+      properties:
+        path:
+          type: string
+          title: Path
+        properties:
+          type: object
+          title: Properties
+          additionalProperties: true
+  - name: get_material_info
+    description: "Get information about a material.
+
+      \       \ 
+
+      \        Args:
+
+      \            path: The full path to the material (e.g.,
+      '/Game/Materials/MyMaterial')
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary containing material information including:
+
+      \                - name: str
+
+      \                - path: str
+
+      \                - shading_model: str
+
+      \                - blend_mode: str
+
+      \                - two_sided: bool
+
+      \                - dithered_lod_transition: bool
+
+      \                - cast_contact_shadow: bool
+
+      \                - base_color: list[float]
+
+      \                - metallic: float
+
+      \                - roughness: float
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_material_infoArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: my_custom_tool
+    description: ""
+    inputSchema:
+      type: object
+      title: my_custom_toolArguments
+      required:
+        - ctx
+      properties:
+        ctx:
+          type: string
+          title: ctx
+  - name: get_actor_count
+    description: Get the number of actors in the current Unreal Engine scene.
+    inputSchema:
+      type: object
+      title: get_actor_countArguments
+      required:
+        - ctx
+      properties:
+        ctx:
+          type: string
+          title: ctx

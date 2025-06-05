@@ -1,0 +1,76 @@
+tools:
+  - name: check_balance
+    description: Check the airtime balance for your Africa's Talking account.
+    inputSchema:
+      type: object
+      title: check_balanceArguments
+      properties: {}
+  - name: load_airtime
+    description: "
+
+      \    Load airtime to a specified telephone number and save the
+      transaction.
+
+
+      \    Args:
+
+      \        phone_number: The phone number to send airtime to
+
+      \        amount: The amount of airtime to send
+
+      \        currency_code: The currency code
+
+
+      \    Returns:
+
+      \        A message indicating success or failure
+
+      \    "
+    inputSchema:
+      type: object
+      title: load_airtimeArguments
+      required:
+        - phone_number
+        - amount
+        - currency_code
+      properties:
+        amount:
+          type: number
+          title: Amount
+        phone_number:
+          type: string
+          title: Phone Number
+        currency_code:
+          type: string
+          title: Currency Code
+  - name: get_last_topups
+    description: Get the last N top-up transactions
+    inputSchema:
+      type: object
+      title: get_last_topupsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+  - name: sum_last_n_topups
+    description: Calculate the sum of the last n successful top-ups, defaulting to 3.
+    inputSchema:
+      type: object
+      title: sum_last_n_topupsArguments
+      properties:
+        n:
+          type: integer
+          title: N
+          default: 3
+  - name: count_topups_by_number
+    description: Count the number of successful top-ups to a specific phone number.
+    inputSchema:
+      type: object
+      title: count_topups_by_numberArguments
+      required:
+        - phone_number
+      properties:
+        phone_number:
+          type: string
+          title: Phone Number

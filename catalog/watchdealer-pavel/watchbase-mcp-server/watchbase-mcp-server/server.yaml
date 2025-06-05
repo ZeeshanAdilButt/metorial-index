@@ -1,0 +1,18 @@
+identifier: watchdealer-pavel/watchbase-mcp-server/watchbase-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/watchdealer-pavel/watchbase-mcp-server
+  name: watchbase-mcp-server
+  owner: watchdealer-pavel
+server:
+  subdirectory: /
+  name: WatchBase Data Feed Server
+  description: Provide structured and standardized access to comprehensive watch
+    metadata including brands, families, models, and technical details. Enable
+    seamless querying of watch information through a set of tools that interface
+    with the WatchBase Data Feed API. Integrate detailed watch data into your
+    applications effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

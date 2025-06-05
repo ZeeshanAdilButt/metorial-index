@@ -1,0 +1,17 @@
+identifier: funchs/ifly-spark-agent-mcp/ifly-spark-agent-mcp
+repo:
+  provider: github.com
+  url: https://github.com/funchs/ifly-spark-agent-mcp
+  name: ifly-spark-agent-mcp
+  owner: funchs
+server:
+  subdirectory: /
+  name: iFlytek SparkAgent Task Chain Server
+  description: Invoke the task chain of the iFlytek SparkAgent Platform through a
+    simple MCP server interface. Upload files and interact with the platform's
+    capabilities seamlessly via MCP tools. Enable integration with LLM clients
+    for automated workflows and task execution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

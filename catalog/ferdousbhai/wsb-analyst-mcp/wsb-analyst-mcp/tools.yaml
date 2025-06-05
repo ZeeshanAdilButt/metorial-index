@@ -1,0 +1,178 @@
+tools:
+  - name: find_top_posts
+    description: >
+      
+      Fetch and filter WSB posts based on criteria. Caches results for 5
+      minutes.
+
+
+      Args:
+          min_score: Minimum score (upvotes) required
+          min_comments: Minimum number of comments required
+          limit: Maximum number of posts to return
+          excluded_flairs: List of post flairs to exclude. Defaults to ["Meme", "Shitpost", "Gain", "Loss"].
+
+      Returns:
+          A dictionary with filtered posts data
+    inputSchema:
+      type: object
+      title: find_top_postsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        min_score:
+          type: integer
+          title: Min Score
+          default: 100
+        min_comments:
+          type: integer
+          title: Min Comments
+          default: 10
+        excluded_flairs:
+          type: array
+          items:
+            type: string
+          title: Excluded Flairs
+          default:
+            - Meme
+            - Shitpost
+            - Gain
+            - Loss
+  - name: fetch_post_details
+    description: >
+      
+      Fetch detailed information about a specific WSB post including top
+      comments. Caches results for 5 minutes.
+
+
+      Args:
+          post_id: Reddit post ID
+
+      Returns:
+          Detailed post data including comments and extracted links
+    inputSchema:
+      type: object
+      title: fetch_post_detailsArguments
+      required:
+        - post_id
+      properties:
+        post_id:
+          type: string
+          title: Post Id
+  - name: fetch_batch_post_details
+    description: |
+      
+      Fetch details for multiple posts efficiently.
+
+      Args:
+          post_ids: List of Reddit post IDs
+
+      Returns:
+          Dictionary with details for all requested posts
+    inputSchema:
+      type: object
+      title: fetch_batch_post_detailsArguments
+      required:
+        - post_ids
+      properties:
+        post_ids:
+          type: array
+          items:
+            type: string
+          title: Post Ids
+  - name: fetch_detailed_wsb_posts
+    description: >
+      
+      Fetch and filter WSB posts, then get detailed information including top
+      comments and links for each.
+
+
+      Args:
+          min_score: Minimum score (upvotes) required
+          min_comments: Minimum number of comments required
+          limit: Maximum number of posts to return
+          excluded_flairs: List of post flairs to exclude. Defaults to ["Meme", "Shitpost", "Gain", "Loss"].
+
+      Returns:
+          A dictionary with detailed data for the filtered posts.
+    inputSchema:
+      type: object
+      title: fetch_detailed_wsb_postsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        min_score:
+          type: integer
+          title: Min Score
+          default: 100
+        min_comments:
+          type: integer
+          title: Min Comments
+          default: 10
+        excluded_flairs:
+          type: array
+          items:
+            type: string
+          title: Excluded Flairs
+          default:
+            - Meme
+            - Shitpost
+            - Gain
+            - Loss
+  - name: get_top_trending_tickers
+    description: >
+      
+      Fetch top trending stock tickers from ApeWisdom, filtered by valid NASDAQ
+      symbols.
+
+
+      Args:
+          num_stocks: Number of top stocks to consider based on upvotes and mentions. Defaults to 20.
+          filter: ApeWisdom filter category (e.g., 'wallstreetbets', 'all'). Defaults to 'wallstreetbets'.
+
+      Returns:
+          A list of valid, trending tickers.
+    inputSchema:
+      type: object
+      title: get_top_trending_tickersArguments
+      properties:
+        filter:
+          type: string
+          title: Filter
+          default: wallstreetbets
+        num_stocks:
+          type: integer
+          title: Num Stocks
+          default: 20
+  - name: get_external_links
+    description: |
+      
+      Get all external links from top WSB posts.
+
+      Args:
+          min_score: Minimum score (upvotes) required
+          min_comments: Minimum number of comments required
+          limit: Maximum number of posts to scan
+
+      Returns:
+          Dictionary with all unique external links found
+    inputSchema:
+      type: object
+      title: get_external_linksArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        min_score:
+          type: integer
+          title: Min Score
+          default: 100
+        min_comments:
+          type: integer
+          title: Min Comments
+          default: 10

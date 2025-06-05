@@ -1,0 +1,1438 @@
+tools:
+  - name: get_ticket_fields
+    description: Get ticket fields from Freshservice.
+    inputSchema:
+      type: object
+      title: get_ticket_fieldsArguments
+      properties: {}
+  - name: get_tickets
+    description: Get tickets from Freshservice with pagination support.
+    inputSchema:
+      type: object
+      title: get_ticketsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: create_ticket
+    description: >
+      
+      Create a ticket in Freshservice.
+
+
+      Accepted values for:
+
+
+      - source (int or str):
+          'email' (1), 'portal' (2), 'phone' (3), 'yammer' (6), 'chat' (7), 'aws_cloudwatch' (7),
+          'pagerduty' (8), 'walk_up' (9), 'slack' (10), 'workplace' (12),
+          'employee_onboarding' (13), 'alerts' (14), 'ms_teams' (15), 'employee_offboarding' (18)
+
+      - priority (int or str):
+          'low' (1), 'medium' (2), 'high' (3), 'urgent' (4)
+
+      - status (int or str):
+          'open' (2), 'pending' (3), 'resolved' (4), 'closed' (5)
+
+      Either `email` or `requester_id` must be provided.
+    inputSchema:
+      type: object
+      title: create_ticketArguments
+      required:
+        - subject
+        - description
+        - source
+        - priority
+        - status
+      properties:
+        email:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Email
+          default: null
+        source:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Source
+        status:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Status
+        subject:
+          type: string
+          title: Subject
+        priority:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Priority
+        description:
+          type: string
+          title: Description
+        requester_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Requester Id
+          default: null
+        custom_fields:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Custom Fields
+          default: null
+  - name: update_ticket
+    description: Update a ticket in Freshservice.
+    inputSchema:
+      type: object
+      title: update_ticketArguments
+      required:
+        - ticket_id
+        - ticket_fields
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+        ticket_fields:
+          type: object
+          title: Ticket Fields
+          additionalProperties: true
+  - name: filter_tickets
+    description: |
+      
+      Filter tickets based on a query string.
+
+      Notes:
+      - Query must be properly URL encoded.
+      - Logical operators AND, OR can be used.
+      - String values must be enclosed in single quotes.
+      - Date format: 'yyyy-mm-dd'.
+      - Supported operators: =, :>, :<
+
+      Example query (before encoding):
+      "priority: 1 AND status: 2 OR urgency: 3"
+    inputSchema:
+      type: object
+      title: filter_ticketsArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        query:
+          type: string
+          title: Query
+        workspace_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Workspace Id
+          default: null
+  - name: delete_ticket
+    description: Delete a ticket in Freshdesk.
+    inputSchema:
+      type: object
+      title: delete_ticketArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: get_ticket_by_id
+    description: Get a specific ticket by its ID
+    inputSchema:
+      type: object
+      title: get_ticket_by_idArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: list_service_items
+    description: Get list of service items from Freshservice
+    inputSchema:
+      type: object
+      title: list_service_itemsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: get_requested_items
+    description: Fetch requested items for a specific ticket if the ticket is a
+      service request.
+    inputSchema:
+      type: object
+      title: get_requested_itemsArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: create_service_request
+    description: >
+      
+      Place a service request in Freshservice.
+
+
+      Args:
+          display_id (int): The display ID of the service catalog item.
+          email (str): Email of the requester.
+          requested_for (Optional[str]): Email of the person the request is for.
+          quantity (int): Number of items requested (must be a positive integer).
+
+      Returns:
+          dict: The response from the API.
+    inputSchema:
+      type: object
+      title: create_service_requestArguments
+      required:
+        - display_id
+        - email
+      properties:
+        email:
+          type: string
+          title: Email
+        quantity:
+          type: integer
+          title: Quantity
+          default: 1
+        display_id:
+          type: integer
+          title: Display Id
+        requested_for:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Requested For
+          default: null
+  - name: send_ticket_reply
+    description: |
+      
+      Send a reply to a ticket in Freshservice.
+
+      Required:
+          - ticket_id (int): Must be >= 1
+          - body (str): Message content
+
+      Optional:
+          - from_email (str): Sender's email
+          - user_id (int): Agent user ID
+          - cc_emails (list or str): List of emails to CC
+          - bcc_emails (list or str): List of emails to BCC
+
+      Note: Attachments are not supported in this version.
+    inputSchema:
+      type: object
+      title: send_ticket_replyArguments
+      required:
+        - ticket_id
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        user_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: User Id
+          default: null
+        cc_emails:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Cc Emails
+          default: null
+        ticket_id:
+          type: integer
+          title: Ticket Id
+        bcc_emails:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Bcc Emails
+          default: null
+        from_email:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: From Email
+          default: null
+  - name: create_ticket_note
+    description: Create a note for a ticket in Freshservice.
+    inputSchema:
+      type: object
+      title: create_ticket_noteArguments
+      required:
+        - ticket_id
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: update_ticket_conversation
+    description: Update a conversation for a ticket in Freshservice.
+    inputSchema:
+      type: object
+      title: update_ticket_conversationArguments
+      required:
+        - conversation_id
+        - body
+      properties:
+        body:
+          type: string
+          title: Body
+        conversation_id:
+          type: integer
+          title: Conversation Id
+  - name: list_all_ticket_conversation
+    description: List all conversation of a ticket in freshservice
+    inputSchema:
+      type: object
+      title: list_all_ticket_conversationArguments
+      required:
+        - ticket_id
+      properties:
+        ticket_id:
+          type: integer
+          title: Ticket Id
+  - name: get_all_products
+    description: |
+      
+      Fetch one page of products from Freshservice with pagination support.
+      Returns the page data and info about whether a next page exists.
+    inputSchema:
+      type: object
+      title: get_all_productsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: get_products_by_id
+    description: List all products of a ticket in freshservice
+    inputSchema:
+      type: object
+      title: get_products_by_idArguments
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: integer
+          title: Product Id
+  - name: create_product
+    description: >
+      
+      Create a product in Freshservice with required and optional fields.
+
+      Validates 'status' to be one of: 'In Production', 'In Pipeline', 'Retired'
+      or corresponding integer values.
+    inputSchema:
+      type: object
+      title: create_productArguments
+      required:
+        - name
+        - asset_type_id
+      properties:
+        name:
+          type: string
+          title: Name
+        status:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Status
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+        manufacturer:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Manufacturer
+          default: null
+        asset_type_id:
+          type: integer
+          title: Asset Type Id
+        description_text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description Text
+          default: null
+        mode_of_procurement:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Mode Of Procurement
+          default: null
+        depreciation_type_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Depreciation Type Id
+          default: null
+  - name: update_product
+    description: >
+      
+      Update a product in Freshservice. Requires 'id', 'name', and
+      'asset_type_id'.
+
+      Optional fields: manufacturer, status, mode_of_procurement,
+      depreciation_type_id, description, description_text.
+    inputSchema:
+      type: object
+      title: update_productArguments
+      required:
+        - id
+        - name
+        - asset_type_id
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        status:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Status
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+        manufacturer:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Manufacturer
+          default: null
+        asset_type_id:
+          type: integer
+          title: Asset Type Id
+        description_text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description Text
+          default: null
+        mode_of_procurement:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Mode Of Procurement
+          default: null
+        depreciation_type_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Depreciation Type Id
+          default: null
+  - name: create_requester
+    description: >
+      
+      Creates a requester in Freshservice.
+
+      'first_name' is required. Also requires at least one of: 'primary_email',
+      'work_phone_number', or 'mobile_phone_number'.
+    inputSchema:
+      type: object
+      title: create_requesterArguments
+      required:
+        - first_name
+      properties:
+        address:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Address
+          default: null
+        language:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Language
+          default: null
+        job_title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Job Title
+          default: null
+        last_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Last Name
+          default: null
+        time_zone:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Zone
+          default: null
+        first_name:
+          type: string
+          title: First Name
+        location_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Location Id
+          default: null
+        time_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Format
+          default: null
+        custom_fields:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Custom Fields
+          default: null
+        primary_email:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Primary Email
+          default: null
+        department_ids:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Department Ids
+          default: null
+        secondary_emails:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Secondary Emails
+          default: null
+        work_phone_number:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Work Phone Number
+          default: null
+        mobile_phone_number:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Mobile Phone Number
+          default: null
+        reporting_manager_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Reporting Manager Id
+          default: null
+        background_information:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Background Information
+          default: null
+        can_see_all_tickets_from_associated_departments:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Can See All Tickets From Associated Departments
+          default: null
+  - name: get_all_requesters
+    description: Fetch all requesters from Freshservice.
+    inputSchema:
+      type: object
+      title: get_all_requestersArguments
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        per_page:
+          type: integer
+          title: Per Page
+          default: 30
+  - name: get_requester_id
+    description: Get requester by ID in Freshservice
+    inputSchema:
+      type: object
+      title: get_requester_idArguments
+      required:
+        - requester_id
+      properties:
+        requester_id:
+          type: integer
+          title: Requester Id
+  - name: list_all_requester_fields
+    description: List all requester fields in Freshservice
+    inputSchema:
+      type: object
+      title: list_all_requester_fieldsArguments
+      properties: {}
+  - name: update_requester
+    description: Update a requester in Freshservice
+    inputSchema:
+      type: object
+      title: update_requesterArguments
+      required:
+        - requester_id
+      properties:
+        address:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Address
+          default: null
+        language:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Language
+          default: null
+        job_title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Job Title
+          default: null
+        last_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Last Name
+          default: null
+        time_zone:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Zone
+          default: null
+        first_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: First Name
+          default: null
+        location_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Location Id
+          default: null
+        time_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Format
+          default: null
+        requester_id:
+          type: integer
+          title: Requester Id
+        custom_fields:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Custom Fields
+          default: null
+        primary_email:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Primary Email
+          default: null
+        department_ids:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Department Ids
+          default: null
+        secondary_emails:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Secondary Emails
+          default: null
+        work_phone_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Work Phone Number
+          default: null
+        mobile_phone_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Mobile Phone Number
+          default: null
+        reporting_manager_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Reporting Manager Id
+          default: null
+        background_information:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Background Information
+          default: null
+        can_see_all_tickets_from_associated_departments:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Can See All Tickets From Associated Departments
+          default: false
+  - name: filter_requesters
+    description: >
+      
+      Filter requesters based on requester attributes and custom fields.
+
+
+      Notes:
+
+      - Query must be URL encoded.
+
+      - Logical operators AND, OR can be used.
+
+      - To filter for empty fields, use `null`.
+
+      - Use `~` for "starts with" text searches.
+
+      - `include_agents=true` will include agents in the results (requires
+      permissions).
+
+
+      Example query (before encoding):
+
+      "~name:'john' AND created_at:> '2024-01-01'"
+    inputSchema:
+      type: object
+      title: filter_requestersArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        include_agents:
+          type: boolean
+          title: Include Agents
+          default: false
+  - name: create_agent
+    description: Create a new agent in Freshservice.
+    inputSchema:
+      type: object
+      title: create_agentArguments
+      required:
+        - first_name
+      properties:
+        email:
+          type: string
+          title: Email
+          default: null
+        job_title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Job Title
+          default: null
+        last_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Last Name
+          default: null
+        first_name:
+          type: string
+          title: First Name
+        occasional:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Occasional
+          default: false
+        work_phone_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Work Phone Number
+          default: null
+        mobile_phone_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Mobile Phone Number
+          default: null
+  - name: get_agent
+    description: Get agent by id in Freshservice
+    inputSchema:
+      type: object
+      title: get_agentArguments
+      required:
+        - agent_id
+      properties:
+        agent_id:
+          type: integer
+          title: Agent Id
+  - name: get_all_agents
+    description: Fetch agents from Freshservice.
+    inputSchema:
+      type: object
+      title: get_all_agentsArguments
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        per_page:
+          type: integer
+          title: Per Page
+          default: 30
+  - name: filter_agents
+    description: >
+      
+      Filter Freshservice agents based on a query.
+
+
+      Args:
+          query: The filter query in URL-encoded format (e.g., "department_id:123 AND created_at:>'2024-01-01'")
+
+      Returns:
+          A list of matching agent records.
+    inputSchema:
+      type: object
+      title: filter_agentsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: update_agent
+    description: Update the agent details in the Freshservice
+    inputSchema:
+      type: object
+      title: update_agentArguments
+      required:
+        - agent_id
+      properties:
+        email:
+          type: string
+          title: email
+          default: null
+        address:
+          type: string
+          title: address
+          default: null
+        agent_id:
+          type: string
+          title: agent_id
+        language:
+          type: string
+          title: language
+          default: null
+        time_zone:
+          type: string
+          title: time_zone
+          default: null
+        occasional:
+          type: string
+          title: occasional
+          default: null
+        location_id:
+          type: string
+          title: location_id
+          default: null
+        time_format:
+          type: string
+          title: time_format
+          default: null
+        department_ids:
+          type: string
+          title: department_ids
+          default: null
+        scoreboard_level_id:
+          type: string
+          title: scoreboard_level_id
+          default: null
+        reporting_manager_id:
+          type: string
+          title: reporting_manager_id
+          default: null
+        background_information:
+          type: string
+          title: background_information
+          default: null
+        can_see_all_tickets_from_associated_departments:
+          type: string
+          title: can_see_all_tickets_from_associated_departments
+          default: null
+  - name: get_agent_fields
+    description: Get all agent fields in Freshservice
+    inputSchema:
+      type: object
+      title: get_agent_fieldsArguments
+      properties: {}
+  - name: get_all_agent_groups
+    description: Get all agent groups in Freshservice
+    inputSchema:
+      type: object
+      title: get_all_agent_groupsArguments
+      properties: {}
+  - name: getAgentGroupById
+    description: Get agent groups by its group id in Freshservice.
+    inputSchema:
+      type: object
+      title: getAgentGroupByIdArguments
+      required:
+        - group_id
+      properties:
+        group_id:
+          type: integer
+          title: Group Id
+  - name: add_requester_to_group
+    description: Add a requester to a manual requester group in Freshservice.
+    inputSchema:
+      type: object
+      title: add_requester_to_groupArguments
+      required:
+        - group_id
+        - requester_id
+      properties:
+        group_id:
+          type: integer
+          title: Group Id
+        requester_id:
+          type: integer
+          title: Requester Id
+  - name: create_group
+    description: |
+      
+      Create a group in Freshservice using a plain dictionary.
+
+      Required:
+        - name: str
+      Optional:
+        - description: str
+        - agent_ids: List[int]
+        - auto_ticket_assign: bool
+        - escalate_to: int
+        - unassigned_for: str (e.g. "thirty_minutes")
+    inputSchema:
+      type: object
+      title: create_groupArguments
+      required:
+        - group_data
+      properties:
+        group_data:
+          type: object
+          title: Group Data
+          additionalProperties: true
+  - name: update_group
+    description: Update a group in Freshdesk.
+    inputSchema:
+      type: object
+      title: update_groupArguments
+      required:
+        - group_id
+        - group_fields
+      properties:
+        group_id:
+          type: integer
+          title: Group Id
+        group_fields:
+          type: object
+          title: Group Fields
+          additionalProperties: true
+  - name: get_all_requester_groups
+    description: Get all requester groups in Freshservice with pagination support.
+    inputSchema:
+      type: object
+      title: get_all_requester_groupsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: 1
+        per_page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Per Page
+          default: 30
+  - name: get_requester_groups_by_id
+    description: Get requester groups by ID
+    inputSchema:
+      type: object
+      title: get_requester_groups_by_idArguments
+      required:
+        - requester_group_id
+      properties:
+        requester_group_id:
+          type: integer
+          title: Requester Group Id
+  - name: create_requester_group
+    description: Create a requester group in Freshservice.
+    inputSchema:
+      type: object
+      title: create_requester_groupArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: update_requester_group
+    description: Update an existing requester group in Freshservice.
+    inputSchema:
+      type: object
+      title: update_requester_groupArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: list_requester_group_members
+    description: List all members of a requester group in Freshservice.
+    inputSchema:
+      type: object
+      title: list_requester_group_membersArguments
+      required:
+        - group_id
+      properties:
+        group_id:
+          type: integer
+          title: Group Id
+  - name: get_all_canned_response
+    description: List all canned response in Freshservice.
+    inputSchema:
+      type: object
+      title: get_all_canned_responseArguments
+      properties: {}
+  - name: get_canned_response
+    description: Get a canned response in Freshservice.
+    inputSchema:
+      type: object
+      title: get_canned_responseArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: list_all_canned_response_folder
+    description: List all canned response of a folder in Freshservice.
+    inputSchema:
+      type: object
+      title: list_all_canned_response_folderArguments
+      properties: {}
+  - name: list_canned_response_folder
+    description: List canned response folder in Freshservice.
+    inputSchema:
+      type: object
+      title: list_canned_response_folderArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: list_all_workspaces
+    description: List all workspaces in Freshservice.
+    inputSchema:
+      type: object
+      title: list_all_workspacesArguments
+      properties: {}
+  - name: get_workspace
+    description: Get a workspace by its ID in Freshservice.
+    inputSchema:
+      type: object
+      title: get_workspaceArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: get_all_solution_category
+    description: Get all solution category in Freshservice.
+    inputSchema:
+      type: object
+      title: get_all_solution_categoryArguments
+      properties: {}
+  - name: get_solution_category
+    description: Get solution category by its ID in Freshservice.
+    inputSchema:
+      type: object
+      title: get_solution_categoryArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: create_solution_category
+    description: Create a new solution category in Freshservice.
+    inputSchema:
+      type: object
+      title: create_solution_categoryArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+          default: null
+        workspace_id:
+          type: integer
+          title: Workspace Id
+          default: null
+  - name: update_solution_category
+    description: Update a solution category in Freshservice.
+    inputSchema:
+      type: object
+      title: update_solution_categoryArguments
+      required:
+        - category_id
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        category_id:
+          type: integer
+          title: Category Id
+        description:
+          type: string
+          title: Description
+          default: null
+        workspace_id:
+          type: integer
+          title: Workspace Id
+          default: null
+        default_category:
+          type: boolean
+          title: Default Category
+          default: null
+  - name: get_list_of_solution_folder
+    description: Get list of solution folder by its ID in Freshservice.
+    inputSchema:
+      type: object
+      title: get_list_of_solution_folderArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: get_solution_folder
+    description: Get solution folder by its ID in Freshservice.
+    inputSchema:
+      type: object
+      title: get_solution_folderArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: get_list_of_solution_article
+    description: Get list of solution article in Freshservice.
+    inputSchema:
+      type: object
+      title: get_list_of_solution_articleArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: get_solution_article
+    description: Get solution article by id in Freshservice.
+    inputSchema:
+      type: object
+      title: get_solution_articleArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+  - name: create_solution_article
+    description: Create a new solution article in Freshservice.
+    inputSchema:
+      type: object
+      title: create_solution_articleArguments
+      required:
+        - title
+        - description
+        - folder_id
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        title:
+          type: string
+          title: Title
+        status:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Status
+          default: 1
+        keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Keywords
+          default: null
+        folder_id:
+          type: integer
+          title: Folder Id
+        description:
+          type: string
+          title: Description
+        review_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Review Date
+          default: null
+        article_type:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Article Type
+          default: 1
+  - name: update_solution_article
+    description: Update a solution article in Freshservice.
+    inputSchema:
+      type: object
+      title: update_solution_articleArguments
+      required:
+        - article_id
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        status:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Status
+          default: null
+        keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Keywords
+          default: null
+        folder_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Folder Id
+          default: null
+        article_id:
+          type: integer
+          title: Article Id
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+        review_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Review Date
+          default: null
+        article_type:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Article Type
+          default: null
+  - name: create_solution_folder
+    description: Create a new folder under a solution category in Freshservice.
+    inputSchema:
+      type: object
+      title: create_solution_folderArguments
+      required:
+        - name
+        - category_id
+        - department_ids
+      properties:
+        name:
+          type: string
+          title: Name
+        visibility:
+          type: integer
+          title: Visibility
+          default: 4
+        category_id:
+          type: integer
+          title: Category Id
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+        department_ids:
+          type: array
+          items:
+            type: integer
+          title: Department Ids
+  - name: update_solution_folder
+    description: Update an existing solution folder's details in Freshservice.
+    inputSchema:
+      type: object
+      title: update_solution_folderArguments
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+        visibility:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Visibility
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+  - name: publish_solution_article
+    description: Publish a solution article in Freshservice (status = 2).
+    inputSchema:
+      type: object
+      title: publish_solution_articleArguments
+      required:
+        - article_id
+      properties:
+        article_id:
+          type: integer
+          title: Article Id

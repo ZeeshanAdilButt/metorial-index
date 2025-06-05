@@ -1,0 +1,17 @@
+identifier: omd01/aws-ses-mcp/aws-ses-mcp
+repo:
+  provider: github.com
+  url: https://github.com/omd01/aws-ses-mcp
+  name: aws-ses-mcp
+  owner: omd01
+server:
+  subdirectory: /
+  name: AWS SES Email Sender
+  description: Send emails directly from your applications using AWS SES.
+    Integrate seamlessly with Cursor or Claude Desktop to compose and dispatch
+    emails without manual copy-pasting. Enjoy features like CC, BCC, and
+    customizable sender addresses for enhanced email management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

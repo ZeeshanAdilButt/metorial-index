@@ -1,0 +1,23 @@
+tools:
+  - name: connect_database
+    description: Connect to a specific MySQL database
+    inputSchema:
+      type: object
+      title: connect_databaseArguments
+      required:
+        - database
+      properties:
+        database:
+          type: string
+          title: Database
+  - name: execute_query
+    description: Execute MySQL queries
+    inputSchema:
+      type: object
+      title: execute_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

@@ -1,0 +1,18 @@
+identifier: webconsulting/mcp-server-wsl-filesystem/mcp-server-wsl-filesystem
+repo:
+  provider: github.com
+  url: https://github.com/webconsulting/mcp-server-wsl-filesystem
+  name: mcp-server-wsl-filesystem
+  owner: webconsulting
+server:
+  subdirectory: /
+  name: WSL Filesystem Server
+  description: Provide fast and efficient filesystem operations within Windows
+    Subsystem for Linux (WSL) environments. Access, read, write, and manage
+    files and directories across multiple WSL distributions with enhanced
+    performance using native Linux commands. Optimize file listing and search
+    tasks for large directory trees or performance-critical applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

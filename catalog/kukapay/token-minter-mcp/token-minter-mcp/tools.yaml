@@ -1,0 +1,128 @@
+tools:
+  - name: deployToken
+    description: Deploys a new ERC-20 token on the specified EVM-compatible chain
+      with customizable decimals and initial supply. Returns the transaction
+      hash without waiting for confirmation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - symbol
+      properties:
+        name:
+          type: string
+          maxLength: 32
+          minLength: 1
+          description: Token name
+        symbol:
+          type: string
+          maxLength: 10
+          minLength: 1
+          description: Token symbol
+        chainId:
+          type: number
+          default: 1
+          description: Target chain ID (e.g., 1 for Ethereum, 137 for Polygon)
+        decimals:
+          type: number
+          default: 18
+          maximum: 18
+          minimum: 0
+          description: Number of decimal places (0-18, default 18)
+        initialSupply:
+          type: number
+          default: 1000000
+          description: Initial supply in token units (will be multiplied by 10^decimals,
+            default 1,000,000)
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: getTokenInfo
+    description: Queries information about an existing ERC-20 token, including name,
+      symbol, decimals, and total supply.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+      properties:
+        chainId:
+          type: number
+          default: 1
+          description: Chain ID (e.g., 1 for Ethereum, 137 for Polygon)
+        tokenAddress:
+          type: string
+          description: Token contract address
+      additionalProperties: false
+  - name: getBalance
+    description: Queries the native token balance (e.g., ETH or POL) of the current
+      account on the specified chain.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        chainId:
+          type: number
+          default: 1
+          description: Chain ID (e.g., 1 for Ethereum, 137 for Polygon)
+      additionalProperties: false
+  - name: getTokenBalance
+    description: Queries the balance of a specific ERC-20 token for the current
+      account on the specified chain.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+      properties:
+        chainId:
+          type: number
+          default: 1
+          description: Chain ID (e.g., 1 for Ethereum, 137 for Polygon)
+        tokenAddress:
+          type: string
+          description: Token contract address
+      additionalProperties: false
+  - name: transferToken
+    description: Transfers a specified amount of ERC-20 tokens to a recipient
+      address and waits for transaction confirmation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - toAddress
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount to transfer in token units (will be multiplied by 10^decimals)
+          exclusiveMinimum: 0
+        chainId:
+          type: number
+          default: 1
+          description: Chain ID (e.g., 1 for Ethereum, 137 for Polygon)
+        toAddress:
+          type: string
+          description: Recipient address
+        tokenAddress:
+          type: string
+          description: Token contract address
+      additionalProperties: false
+  - name: getTransactionInfo
+    description: Retrieves details about a transaction, including sender, recipient,
+      value, status, and deployed contract address if applicable.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - txHash
+      properties:
+        txHash:
+          type: string
+          description: Transaction hash
+        chainId:
+          type: number
+          default: 1
+          description: Chain ID (e.g., 1 for Ethereum, 137 for Polygon)
+      additionalProperties: false

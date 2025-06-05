@@ -1,0 +1,14 @@
+identifier: btwiuse/npm-search-mcp-server/npm-search-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/btwiuse/npm-search-mcp-server
+  name: npm-search-mcp-server
+  owner: btwiuse
+server:
+  subdirectory: /
+  name: NPM Search
+  description: Search for npm packages using `npm search`.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

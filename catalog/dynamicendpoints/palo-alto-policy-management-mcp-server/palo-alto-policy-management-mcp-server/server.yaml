@@ -1,0 +1,18 @@
+identifier: dynamicendpoints/palo-alto-policy-management-mcp-server/palo-alto-policy-management-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/Palo-Alto-Policy-Management-MCP-Server
+  name: Palo-Alto-Policy-Management-MCP-Server
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Palo Alto Policy Management Server
+  description: Manage your Palo Alto Networks firewall policies efficiently.
+    Interact with firewall configurations through a standardized interface,
+    enabling seamless policy management and integration with Palo Alto Networks
+    API. Simplify your security management tasks with powerful tools for
+    querying and modifying firewall rules.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

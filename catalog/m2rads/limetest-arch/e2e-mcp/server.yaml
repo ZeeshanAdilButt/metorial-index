@@ -1,0 +1,18 @@
+identifier: m2rads/limetest-arch/e2e-mcp
+repo:
+  provider: github.com
+  url: https://github.com/m2rads/limetest-arch
+  name: limetest-arch
+  owner: m2rads
+server:
+  subdirectory: /
+  name: End to End Testing Server
+  description: Automate your testing processes with LLM-driven validation,
+    ensuring your applications are robust and reliable. This server leverages
+    Playwright for fast, lightweight, and deterministic testing without the need
+    for vision models. Streamline your end-to-end testing and focus on
+    delivering quality software efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: stippi/code-assistant/code-assistant
+repo:
+  provider: github.com
+  url: https://github.com/stippi/code-assistant
+  name: code-assistant
+  owner: stippi
+server:
+  subdirectory: /
+  name: Code Assistant
+  description: Assist with code-related tasks by intelligently exploring
+    codebases, managing working memory, and summarizing files. Enhance your
+    coding experience with interactive communication and file manipulation
+    capabilities. Run as a server to integrate seamlessly with LLMs in MCP
+    client applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

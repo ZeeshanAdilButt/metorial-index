@@ -1,0 +1,41 @@
+tools:
+  - name: store_data
+    description: Store data in the cache with optional TTL
+    inputSchema:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          description: Unique identifier for the cached data
+        ttl:
+          type: number
+          description: Time-to-live in seconds (optional)
+        value:
+          type: any
+          description: Data to cache
+  - name: retrieve_data
+    description: Retrieve data from the cache
+    inputSchema:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Key of the cached data to retrieve
+  - name: clear_cache
+    description: Clear specific or all cache entries
+    inputSchema:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Specific key to clear (optional - clears all if not provided)
+  - name: get_cache_stats
+    description: Get cache statistics
+    inputSchema:
+      type: object
+      properties: {}

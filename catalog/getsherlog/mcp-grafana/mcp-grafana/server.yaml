@@ -1,0 +1,19 @@
+identifier: getsherlog/mcp-grafana/mcp-grafana
+repo:
+  provider: github.com
+  url: https://github.com/GetSherlog/mcp-grafana
+  name: mcp-grafana
+  owner: GetSherlog
+server:
+  subdirectory: /
+  name: Grafana Server Integration
+  description: Provide seamless access to your Grafana instance and its ecosystem
+    through a set of configurable tools. Search dashboards, query datasources
+    like Prometheus and Loki, manage incidents, alerts, and on-call schedules
+    directly from your MCP client. Enhance your monitoring and incident response
+    workflows by integrating Grafana data and operations into your LLM
+    environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

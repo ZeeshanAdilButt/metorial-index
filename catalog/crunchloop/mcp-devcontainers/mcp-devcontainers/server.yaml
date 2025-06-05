@@ -1,0 +1,18 @@
+identifier: crunchloop/mcp-devcontainers/mcp-devcontainers
+repo:
+  provider: github.com
+  url: https://github.com/crunchloop/mcp-devcontainers
+  name: mcp-devcontainers
+  owner: crunchloop
+server:
+  subdirectory: /
+  name: Devcontainers Integration Server
+  description: Manage and interact with development containers seamlessly by
+    starting environments, running user setup commands, and executing arbitrary
+    shell commands inside devcontainers. Simplify your development workflow by
+    controlling devcontainers directly through this server. Requires Docker and
+    the devcontainers CLI for operation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

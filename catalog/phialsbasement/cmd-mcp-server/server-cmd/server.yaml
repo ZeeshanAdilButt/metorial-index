@@ -1,0 +1,14 @@
+identifier: phialsbasement/cmd-mcp-server/server-cmd
+repo:
+  provider: github.com
+  url: https://github.com/PhialsBasement/CMD-MCP-Server
+  name: CMD-MCP-Server
+  owner: PhialsBasement
+server:
+  subdirectory: /
+  name: CMD Server
+  description: MCP server for executing CMD and SSH commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

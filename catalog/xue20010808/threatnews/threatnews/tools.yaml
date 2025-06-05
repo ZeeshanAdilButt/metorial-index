@@ -1,0 +1,47 @@
+tools:
+  - name: addtest
+    description: Add two numbers
+    inputSchema:
+      type: object
+      title: addtestArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: collect_threat_info
+    description: Collect threat info from start_date to end_date
+    inputSchema:
+      type: object
+      title: collect_threat_infoArguments
+      required:
+        - start_year
+        - start_month
+        - start_day
+        - end_year
+        - end_month
+        - end_day
+      properties:
+        end_day:
+          type: string
+          title: end_day
+        end_year:
+          type: string
+          title: end_year
+        end_month:
+          type: string
+          title: end_month
+        start_day:
+          type: string
+          title: start_day
+        start_year:
+          type: string
+          title: start_year
+        start_month:
+          type: string
+          title: start_month

@@ -1,0 +1,15 @@
+identifier: delano/postman-mcp-server/postman-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/delano/postman-mcp-server
+  name: postman-mcp-server
+  owner: delano
+server:
+  subdirectory: /
+  name: Postman MCP Server
+  description: An MCP server that integrates with Postman for managing
+    collections, environments, and APIs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

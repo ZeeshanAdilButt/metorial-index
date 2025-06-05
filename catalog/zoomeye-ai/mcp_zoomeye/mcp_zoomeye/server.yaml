@@ -1,0 +1,17 @@
+identifier: zoomeye-ai/mcp_zoomeye/mcp_zoomeye
+repo:
+  provider: github.com
+  url: https://github.com/zoomeye-ai/mcp_zoomeye
+  name: mcp_zoomeye
+  owner: zoomeye-ai
+server:
+  subdirectory: /
+  name: ZoomEye MCP Server
+  description: Query network asset information efficiently using ZoomEye dorks.
+    Leverage advanced caching and error handling to enhance your LLM's
+    capabilities in retrieving real-time data. Simplify your network asset
+    searches with a robust API designed for seamless integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

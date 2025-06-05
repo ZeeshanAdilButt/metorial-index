@@ -1,0 +1,16 @@
+identifier: ashdevfr/discourse-mcp-server/discourse-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/AshDevFr/discourse-mcp-server
+  name: discourse-mcp-server
+  owner: AshDevFr
+server:
+  subdirectory: /
+  name: Discourse MCP Server
+  description: Search posts on a Discourse forum using the Model Context Protocol.
+    Effortlessly integrate forum search capabilities into your applications and
+    enhance user engagement with real-time access to discussions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

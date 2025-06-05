@@ -1,0 +1,14 @@
+identifier: lars-hagen/slack-user-mcp/slack-user-mcp
+repo:
+  provider: github.com
+  url: https://github.com/lars-hagen/slack-user-mcp
+  name: slack-user-mcp
+  owner: lars-hagen
+server:
+  subdirectory: /
+  name: Slack User MCP Server
+  description: Enable interaction with Slack workspaces as a user.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

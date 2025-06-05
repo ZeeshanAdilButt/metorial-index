@@ -1,0 +1,16 @@
+identifier: joshuarileydev/simulator-mcp-server/simulator-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/JoshuaRileyDev/simulator-mcp-server
+  name: simulator-mcp-server
+  owner: JoshuaRileyDev
+server:
+  subdirectory: /
+  name: iOS Simulator Server
+  description: An MCP server that provides programmatic control over iOS
+    simulators, allowing users to list available simulators, boot and shutdown
+    simulators, install .app bundles, and launch apps by bundle ID.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: adrian-dotco/harvest-mcp-server/harvest-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/adrian-dotco/harvest-mcp-server
+  name: harvest-mcp-server
+  owner: adrian-dotco
+server:
+  subdirectory: /
+  name: Harvest Natural Language Time Entry Server
+  description: Log Harvest time entries using natural language. Simplify time
+    tracking with intuitive commands and automatic handling of leave requests.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

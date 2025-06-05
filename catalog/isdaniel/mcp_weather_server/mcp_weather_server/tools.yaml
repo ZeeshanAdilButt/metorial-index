@@ -1,0 +1,60 @@
+tools:
+  - name: get_current_weather
+    description: >
+      Get current weather information for a specified city.
+
+      It extracts the current hour's temperature and weather code, maps
+
+      the weather code to a human-readable description, and returns a formatted
+      summary.
+    inputSchema:
+      type: object
+      title: get_current_weatherArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City
+          description: The name of the city to fetch weather information for, PLEASE NOTE
+            English name only, if the parameter city isn't English please
+            translate to English before invoking this function.
+  - name: get_weather_by_datetime_range
+    description: |
+      
+      Get weather information for a specified city between start and end dates.
+    inputSchema:
+      type: object
+      title: get_weather_by_datetime_rangeArguments
+      required:
+        - city
+        - start_date
+        - end_date
+      properties:
+        city:
+          type: string
+          title: City
+          description: The name of the city to fetch weather information for, PLEASE NOTE
+            English name only, if the parameter city isn't English please
+            translate to English before invoking this function.
+        end_date:
+          type: string
+          title: End Date
+          description: End date in format YYYY-MM-DD , please follow ISO 8601 format
+        start_date:
+          type: string
+          title: Start Date
+          description: Start date in format YYYY-MM-DD, please follow ISO 8601 format
+  - name: get_current_datetime
+    description: Get current time in specified timezone
+    inputSchema:
+      type: object
+      title: get_current_datetimeArguments
+      required:
+        - timezone_name
+      properties:
+        timezone_name:
+          type: string
+          title: Timezone Name
+          description: IANA timezone name (e.g., 'America/New_York', 'Europe/London'). Use
+            UTC timezone if no timezone provided by the user.

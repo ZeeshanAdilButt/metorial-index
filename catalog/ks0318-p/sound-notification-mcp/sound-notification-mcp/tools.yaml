@@ -1,0 +1,13 @@
+tools:
+  - name: play-completion-sound
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        soundType:
+          enum:
+            - default
+            - success
+            - error
+          type: string
+      additionalProperties: false

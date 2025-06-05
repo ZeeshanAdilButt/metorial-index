@@ -1,0 +1,586 @@
+tools:
+  - name: add-note
+    description: Add a new note
+    inputSchema:
+      type: object
+      required:
+        - name
+        - content
+      properties:
+        name:
+          type: string
+        content:
+          type: string
+  - name: get-workloads
+    description: Get workloads from the PCE
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+  - name: update-workload
+    description: Update a workload in the PCE
+    inputSchema:
+      type: object
+      required:
+        - name
+        - ip_addresses
+      properties:
+        name:
+          type: string
+        labels:
+          type: array
+          items:
+            key:
+              type: string
+            value:
+              type: string
+        ip_addresses:
+          type: array
+          items:
+            type: string
+  - name: get-labels
+    description: Get all labels from PCE
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        name:
+          type: string
+  - name: create-workload
+    description: Create a Illumio Core unmanaged workload in the PCE
+    inputSchema:
+      type: object
+      required:
+        - name
+        - ip_addresses
+      properties:
+        name:
+          type: string
+        labels:
+          type: array
+          items:
+            key:
+              type: string
+            value:
+              type: string
+        ip_addresses:
+          type: array
+          items:
+            type: string
+  - name: create-label
+    description: Create a label of a specific type and the value in the PCE
+    inputSchema:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+  - name: delete-label
+    description: Delete a label in the PCE
+    inputSchema:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+  - name: delete-workload
+    description: Delete a workload from the PCE
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+  - name: get-traffic-flows
+    description: Get traffic flows from the PCE with comprehensive filtering options
+    inputSchema:
+      type: object
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          description: Ending datetime (YYYY-MM-DD or timestamp)
+        query_name:
+          type: string
+        start_date:
+          type: string
+          description: Starting datetime (YYYY-MM-DD or timestamp)
+        max_results:
+          type: integer
+        exclude_sources:
+          type: array
+          items:
+            type: string
+          description: Sources to exclude (label/IP list/workload HREFs, FQDNs, IPs)
+        include_sources:
+          type: array
+          items:
+            type: string
+          description: Sources to include (label/IP list/workload HREFs, FQDNs, IPs)
+        exclude_services:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              proto:
+                type: string
+        include_services:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              proto:
+                type: string
+        policy_decisions:
+          type: array
+          items:
+            enum:
+              - allowed
+              - blocked
+              - potentially_blocked
+              - unknown
+            type: string
+        exclude_destinations:
+          type: array
+          items:
+            type: string
+          description: Destinations to exclude (label/IP list/workload HREFs, FQDNs, IPs)
+        include_destinations:
+          type: array
+          items:
+            type: string
+          description: Destinations to include (label/IP list/workload HREFs, FQDNs, IPs)
+        exclude_workloads_from_ip_list_query:
+          type: boolean
+  - name: get-traffic-flows-summary
+    description: "Get traffic flows from the PCE in a summarized text format, this
+      is a text format that is not a dataframe, it also is not json, the form
+      is: 'From <source> to <destination> on <port> <proto>: <number of
+      connections>'"
+    inputSchema:
+      type: object
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          description: Ending datetime (YYYY-MM-DD or timestamp)
+        query_name:
+          type: string
+        start_date:
+          type: string
+          description: Starting datetime (YYYY-MM-DD or timestamp)
+        max_results:
+          type: integer
+        exclude_sources:
+          type: array
+          items:
+            type: string
+          description: Sources to exclude (label/IP list/workload HREFs, FQDNs, IPs). Best
+            case these are hrefs like /orgs/1/labels/57 or similar. Other way is
+            app=env as an example (label key and value)
+        include_sources:
+          type: array
+          items:
+            type: string
+          description: Sources to include (label/IP list/workload HREFs, FQDNs, IPs). Best
+            case these are hrefs like /orgs/1/labels/57 or similar. Other way is
+            app=env as an example (label key and value)
+        exclude_services:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              proto:
+                type: string
+        include_services:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              proto:
+                type: string
+        policy_decisions:
+          type: array
+          items:
+            enum:
+              - allowed
+              - potentially_blocked
+              - blocked
+              - unknown
+            type: string
+        exclude_destinations:
+          type: array
+          items:
+            type: string
+          description: Destinations to exclude (label/IP list/workload HREFs, FQDNs, IPs).
+            Best case these are hrefs like /orgs/1/labels/57 or similar. Other
+            way is app=env as an example (label key and value)
+        include_destinations:
+          type: array
+          items:
+            type: string
+          description: Destinations to include (label/IP list/workload HREFs, FQDNs, IPs).
+            Best case these are hrefs like /orgs/1/labels/57 or similar. Other
+            way is app=env as an example (label key and value)
+        exclude_workloads_from_ip_list_query:
+          type: boolean
+  - name: check-pce-connection
+    description: Are my credentials and the connection to the PCE working?
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get-rulesets
+    description: Get rulesets from the PCE
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filter rulesets by name (optional)
+        enabled:
+          type: boolean
+          description: Filter by enabled/disabled status (optional)
+  - name: delete-ruleset
+    description: Delete a ruleset from the PCE
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - href
+        - required:
+            - name
+      properties:
+        href:
+          type: string
+        name:
+          type: string
+  - name: get-iplists
+    description: Get IP lists from the PCE
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filter IP lists by name (optional)
+        ip_ranges:
+          type: array
+          items:
+            type: string
+          description: Filter by IP ranges (optional)
+        description:
+          type: string
+          description: Filter by description (optional)
+  - name: get-events
+    description: Get events from the PCE
+    inputSchema:
+      type: object
+      properties:
+        status:
+          enum:
+            - success
+            - failure
+          type: string
+          description: Filter by event status
+        severity:
+          enum:
+            - emerg
+            - alert
+            - crit
+            - err
+            - warning
+            - notice
+            - info
+            - debug
+          type: string
+          description: Filter by event severity
+        event_type:
+          type: string
+          description: Filter by event type (e.g.,
+            'system_task.expire_service_account_api_keys')
+        max_results:
+          type: integer
+          default: 100
+          description: Maximum number of events to return
+  - name: create-ruleset
+    description: Create a ruleset in the PCE with support for ring-fencing patterns
+    inputSchema:
+      type: object
+      required:
+        - name
+        - scopes
+      properties:
+        name:
+          type: string
+          description: Name of the ruleset (e.g., 'RS-ELK'). Must be unique in the PCE.
+        rules:
+          type: array
+          items:
+            type: object
+            required:
+              - providers
+              - consumers
+              - ingress_services
+            properties:
+              consumers:
+                type: array
+                items:
+                  type: string
+                description: Array of consumer labels, 'ams' for all workloads, or IP list
+                  references (e.g., 'iplist:Any (0.0.0.0/0)')
+              providers:
+                type: array
+                items:
+                  type: string
+                description: Array of provider labels, 'ams' for all workloads, or IP list
+                  references (e.g., 'iplist:Any (0.0.0.0/0)')
+              ingress_services:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - port
+                    - proto
+                  properties:
+                    port:
+                      type: integer
+                    proto:
+                      type: string
+              unscoped_consumers:
+                type: boolean
+                default: false
+                description: Whether to allow unscoped consumers (extra-scope rule)
+        scopes:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+          description: List of label combinations that define scopes. Each scope is an
+            array of label values. This need to be label references like
+            /orgs/1/labels/57 or similar. Get the label href from the get-labels
+            tool.
+        description:
+          type: string
+          description: Description of the ruleset (optional)
+  - name: get-services
+    description: Get services from the PCE with optional filtering
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filter services by name
+        port:
+          type: integer
+          description: Filter services by port number
+        proto:
+          type: string
+          description: Filter services by protocol (e.g., tcp, udp)
+        description:
+          type: string
+          description: Filter services by description
+        process_name:
+          type: string
+          description: Filter services by process name
+  - name: update-label
+    description: Update an existing label in the PCE
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - href
+            - key
+            - new_value
+        - required:
+            - key
+            - value
+            - new_value
+      properties:
+        key:
+          type: string
+          description: Label type (e.g., role, app, env, loc)
+        href:
+          type: string
+          description: Label href (e.g., /orgs/1/labels/42). Either href or both key and
+            value must be provided to identify the label.
+        value:
+          type: string
+          description: Current value of the label
+        new_value:
+          type: string
+          description: New value for the label
+  - name: create-iplist
+    description: Create a new IP List in the PCE
+    inputSchema:
+      type: object
+      required:
+        - name
+        - ip_ranges
+      properties:
+        fqdn:
+          type: string
+          description: Fully Qualified Domain Name (optional)
+        name:
+          type: string
+          description: Name of the IP List
+        ip_ranges:
+          type: array
+          items:
+            type: object
+            required:
+              - from_ip
+            properties:
+              to_ip:
+                type: string
+                description: Ending IP address (optional, for ranges)
+              from_ip:
+                type: string
+                description: Starting IP address (IPv4 or IPv6)
+              exclusion:
+                type: boolean
+                default: false
+                description: Whether this is an exclusion range
+              description:
+                type: string
+                description: Description of this IP range (optional)
+          description: List of IP ranges to include
+        description:
+          type: string
+          description: Description of the IP List
+  - name: update-iplist
+    description: Update an existing IP List in the PCE
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - href
+        - required:
+            - name
+      properties:
+        fqdn:
+          type: string
+          description: New Fully Qualified Domain Name (optional)
+        href:
+          type: string
+          description: Href of the IP List to update
+        name:
+          type: string
+          description: Name of the IP List to update (alternative to href)
+        ip_ranges:
+          type: array
+          items:
+            type: object
+            required:
+              - from_ip
+            properties:
+              to_ip:
+                type: string
+                description: Ending IP address (optional, for ranges)
+              from_ip:
+                type: string
+                description: Starting IP address (IPv4 or IPv6)
+              exclusion:
+                type: boolean
+                default: false
+                description: Whether this is an exclusion range
+              description:
+                type: string
+                description: Description of this IP range (optional)
+          description: New list of IP ranges
+        description:
+          type: string
+          description: New description for the IP List (optional)
+  - name: delete-iplist
+    description: Delete an IP List from the PCE
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - href
+        - required:
+            - name
+      properties:
+        href:
+          type: string
+          description: Href of the IP List to delete
+        name:
+          type: string
+          description: Name of the IP List to delete (alternative to href)
+  - name: update-ruleset
+    description: Update an existing ruleset in the PCE
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - href
+        - required:
+            - name
+      properties:
+        href:
+          type: string
+          description: Href of the ruleset to update
+        name:
+          type: string
+          description: Name of the ruleset to update (alternative to href)
+        scopes:
+          type: array
+          items:
+            type: array
+            items:
+              oneOf:
+                - type: string
+                  description: Label href or key=value string
+                - type: object
+                  required:
+                    - href
+                  properties:
+                    href:
+                      type: string
+                      description: Label href
+          description: New scopes for the ruleset
+        enabled:
+          type: boolean
+          description: Whether the ruleset is enabled
+        description:
+          type: string
+          description: New description for the ruleset
+  - name: delete-ruleset
+    description: Delete a ruleset from the PCE
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - href
+        - required:
+            - name
+      properties:
+        href:
+          type: string
+          description: Href of the ruleset to delete
+        name:
+          type: string
+          description: Name of the ruleset to delete (alternative to href)

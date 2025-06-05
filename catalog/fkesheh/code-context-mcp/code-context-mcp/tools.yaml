@@ -1,0 +1,57 @@
+tools:
+  - name: query_repo
+    description: Queries a git repository using semantic and keyword search. Use
+      keywords and file patterns if you want to targer specific files or terms
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repoUrl
+        - semanticSearch
+        - keywordsSearch
+        - filePatterns
+      properties:
+        _meta:
+          type: object
+          properties:
+            progressToken:
+              type:
+                - string
+                - number
+          additionalProperties: false
+        limit:
+          type: number
+          description: Maximum number of results to return
+        branch:
+          type: string
+          description: Branch name to query (defaults to repository's default branch)
+        repoUrl:
+          type: string
+          description: GitHub repository URL
+        filePatterns:
+          type: array
+          items:
+            type: string
+          description: Array of glob patterns to filter files (e.g. '**/*.ts',
+            'src/*.js'). Use it for a more effective search or to target
+            specific files for example 'somefile.tsx'. Leave empty to disable
+        keywordsSearch:
+          type: array
+          items:
+            type: string
+          description: Search to the files that contain at least one of the keywords in
+            this list. Leave empty to disable. This can work in conjunction with
+            the semantic search.
+        semanticSearch:
+          type: string
+          description: "Query for semantic search. This search is not exact, it will try
+            to find the most relevant files, it doesn't accept file: or path:
+            prefixes."
+        excludePatterns:
+          type: array
+          items:
+            type: string
+          description: Array of glob patterns to exclude files (e.g. '**/node_modules/**',
+            '**/dist/**'). Use it to exclude files that are not relevant to the
+            search. Leave empty to disable
+      additionalProperties: false

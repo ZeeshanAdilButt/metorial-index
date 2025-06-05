@@ -1,0 +1,18 @@
+identifier: kesslerio/yourls-mcp/yourls-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kesslerio/yourls-mcp
+  name: yourls-mcp
+  owner: kesslerio
+server:
+  subdirectory: /
+  name: YOURLS URL Shortener Integration Server
+  description: Enable seamless URL shortening and management by integrating your
+    YOURLS instance with Claude Desktop. Shorten, expand, and analyze URLs
+    directly through natural language commands, with support for custom
+    keywords, analytics, and QR code generation. Benefit from intelligent
+    fallbacks and plugin compatibility to maximize your YOURLS capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

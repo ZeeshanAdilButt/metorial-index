@@ -1,0 +1,17 @@
+tools:
+  - name: grant_lakeformation_permissions_on_table
+    description: Grants lakeformation permissions on a table
+    inputSchema:
+      type: object
+      required:
+        - table
+        - roleName
+      properties:
+        table:
+          type: string
+          description: "Name of the table to get permissions on (fotmat:
+            <database_name>.<table_name>"
+        roleName:
+          type: string
+          default: 3
+          description: Name of the role for that will be granted (in arn format)

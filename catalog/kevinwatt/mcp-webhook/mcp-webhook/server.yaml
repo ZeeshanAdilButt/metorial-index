@@ -1,0 +1,14 @@
+identifier: kevinwatt/mcp-webhook/mcp-webhook
+repo:
+  provider: github.com
+  url: https://github.com/kevinwatt/mcp-webhook
+  name: mcp-webhook
+  owner: kevinwatt
+server:
+  subdirectory: /
+  name: Webhook Server
+  description: Send messages to webhook endpoints.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

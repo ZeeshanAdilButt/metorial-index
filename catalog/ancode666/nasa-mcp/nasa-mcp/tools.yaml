@@ -1,0 +1,583 @@
+tools:
+  - name: get_astronomy_picture_of_day
+    description: "Get NASA's astronomy picture of the day.
+
+      \   \ 
+
+      \    Args:
+
+      \        date: Date of the image in YYYY-MM-DD format. If not specified,
+      the current date is used.
+
+      \        count: If specified, returns 'count' random images. Cannot be
+      used with 'date'.
+
+      \        thumbs: If True, returns the thumbnail URL for videos. If APOD is
+      not a video, this parameter is ignored.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_astronomy_picture_of_dayArguments
+      properties:
+        date:
+          type: string
+          title: Date
+          default: null
+        count:
+          type: integer
+          title: Count
+          default: null
+        thumbs:
+          type: boolean
+          title: Thumbs
+          default: false
+  - name: get_asteroids_feed
+    description: "Get a list of asteroids based on their closest approach date to
+      Earth.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date for asteroid search in YYYY-MM-DD format.
+
+      \        end_date: End date for asteroid search in YYYY-MM-DD format.\ 
+
+      \        The Feed date limit is only 7 Days. If not specified, 7 days
+      after start_date is used.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_asteroids_feedArguments
+      required:
+        - start_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_asteroid_lookup
+    description: "Look up a specific asteroid based on its NASA JPL ID.
+
+      \   \ 
+
+      \    Args:
+
+      \        asteroid_id: Asteroid ID in the NASA JPL small body (SPK-ID)
+      system.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_asteroid_lookupArguments
+      required:
+        - asteroid_id
+      properties:
+        asteroid_id:
+          type: string
+          title: Asteroid Id
+  - name: browse_asteroids
+    description: Browse the asteroid dataset.
+    inputSchema:
+      type: object
+      title: browse_asteroidsArguments
+      properties: {}
+  - name: get_coronal_mass_ejection
+    description: "Get coronal mass ejection (CME) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_coronal_mass_ejectionArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_geomagnetic_storm
+    description: "Get geomagnetic storm (GST) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_geomagnetic_stormArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_solar_flare
+    description: "Get solar flare (FLR) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_solar_flareArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_solar_energetic_particle
+    description: "Get solar energetic particle (SEP) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_solar_energetic_particleArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_magnetopause_crossing
+    description: "Get magnetopause crossing (MPC) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_magnetopause_crossingArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_radiation_belt_enhancement
+    description: "Get radiation belt enhancement (RBE) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_radiation_belt_enhancementArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_hight_speed_stream
+    description: "Get high speed stream (HSS) data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 30 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hight_speed_streamArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_wsa_enlil_simulation
+    description: "Get WSA+Enlil simulation data.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 7 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_wsa_enlil_simulationArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_notifications
+    description: "Get DONKI notifications.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format. Defaults to 7 days
+      before current date.
+
+      \        end_date: End date in YYYY-MM-DD format. Defaults to current
+      date.
+
+      \        notification_type: Notification type. Options: all, FLR, SEP,
+      CME, IPS, MPC, GST, RBE, report.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_notificationsArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+        notification_type:
+          type: string
+          title: Notification Type
+          default: all
+  - name: get_earth_imagery
+    description: "Get Earth imagery from Landsat 8 satellite.
+
+      \   \ 
+
+      \    Args:
+
+      \        lat: Latitude.
+
+      \        lon: Longitude.
+
+      \        date: Image date in YYYY-MM-DD format. If not specified, the most
+      recent image is used.
+
+      \        dim: Width and height of the image in degrees (0.025 degrees is
+      approximately 2.7 km).
+
+      \        cloud_score: Calculate the percentage of the image covered by
+      clouds (currently not available).
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_earth_imageryArguments
+      required:
+        - lat
+        - lon
+      properties:
+        dim:
+          type: number
+          title: Dim
+          default: 0.025
+        lat:
+          type: number
+          title: Lat
+        lon:
+          type: number
+          title: Lon
+        date:
+          type: string
+          title: Date
+          default: null
+        cloud_score:
+          type: boolean
+          title: Cloud Score
+          default: false
+  - name: get_earth_assets
+    description: "Get information about available imagery assets for a specific
+      location and date.
+
+      \   \ 
+
+      \    Args:
+
+      \        lat: Latitude.
+
+      \        lon: Longitude.
+
+      \        date: Date in YYYY-MM-DD format.
+
+      \        dim: Width and height of the image in degrees (0.025 degrees is
+      approximately 2.7 km).
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_earth_assetsArguments
+      required:
+        - lat
+        - lon
+        - date
+      properties:
+        dim:
+          type: number
+          title: Dim
+          default: 0.025
+        lat:
+          type: number
+          title: Lat
+        lon:
+          type: number
+          title: Lon
+        date:
+          type: string
+          title: Date
+  - name: get_epic_imagery
+    description: "Get images from the EPIC (Earth Polychromatic Imaging Camera).
+
+      \   \ 
+
+      \    Args:
+
+      \        collection: Collection type. Options: natural, enhanced.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_epic_imageryArguments
+      properties:
+        collection:
+          type: string
+          title: Collection
+          default: natural
+  - name: get_epic_imagery_by_date
+    description: "Get images from the EPIC (Earth Polychromatic Imaging Camera) for
+      a specific date.
+
+      \   \ 
+
+      \    Args:
+
+      \        date: Date in YYYY-MM-DD format.
+
+      \        collection: Collection type. Options: natural, enhanced.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_epic_imagery_by_dateArguments
+      required:
+        - date
+      properties:
+        date:
+          type: string
+          title: Date
+        collection:
+          type: string
+          title: Collection
+          default: natural
+  - name: get_epic_dates
+    description: "Get available dates for EPIC images.
+
+      \   \ 
+
+      \    Args:
+
+      \        collection: Collection type. Options: natural, enhanced.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_epic_datesArguments
+      properties:
+        collection:
+          type: string
+          title: Collection
+          default: natural
+  - name: get_exoplanet_data
+    description: "Get data from NASA's Exoplanet Archive.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Specific query to filter results using Exoplanet Archive
+      syntax. Example: \"pl_orbper > 300 and pl_rade < 2\"
+
+      \        table: Table to query. Common options: exoplanets (confirmed
+      planets), cumulative (Kepler Objects of Interest), koi (subset of
+      cumulative), tce (Threshold Crossing Events).
+
+      \        format: Output format. Options: json, csv, xml, ipac. Default:
+      json.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_exoplanet_dataArguments
+      properties:
+        query:
+          type: string
+          title: Query
+          default: null
+        table:
+          type: string
+          title: Table
+          default: exoplanets
+        format:
+          type: string
+          title: Format
+          default: json
+  - name: get_mars_rover_photos
+    description: "Get photos from a Mars rover (Curiosity, Opportunity, Spirit).
+
+      \    Specify either sol (Martian day) or earth_date (YYYY-MM-DD), but not
+      both.
+
+      \   \ 
+
+      \    Args:
+
+      \        rover_name: Name of the rover (curiosity, opportunity, spirit).
+
+      \        sol: Martian sol (day number, starting from landing). Use if not
+      using earth_date.
+
+      \        earth_date: Earth date in YYYY-MM-DD format. Use if not using
+      sol.
+
+      \        camera: Filter by camera abbreviation (e.g., FHAZ, RHAZ, MAST,
+      NAVCAM, PANCAM). See documentation for full list per rover.
+
+      \        page: Page number for results (25 photos per page).
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_mars_rover_photosArguments
+      required:
+        - rover_name
+      properties:
+        sol:
+          type: integer
+          title: Sol
+          default: null
+        page:
+          type: integer
+          title: Page
+          default: 1
+        camera:
+          type: string
+          title: Camera
+          default: null
+        earth_date:
+          type: string
+          title: Earth Date
+          default: null
+        rover_name:
+          type: string
+          title: Rover Name
+  - name: get_mars_rover_manifest
+    description: "Get the mission manifest for a Mars rover (Curiosity, Opportunity,
+      Spirit).
+
+      \    Provides mission details like landing/launch dates, status, max
+      sol/date, total photos, and photo counts per sol.
+
+      \   \ 
+
+      \    Args:
+
+      \        rover_name: Name of the rover (curiosity, opportunity, spirit).
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_mars_rover_manifestArguments
+      required:
+        - rover_name
+      properties:
+        rover_name:
+          type: string
+          title: Rover Name

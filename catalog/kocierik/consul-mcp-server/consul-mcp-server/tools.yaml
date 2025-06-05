@@ -1,0 +1,293 @@
+tools:
+  - name: get-services
+    description: Get running services
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: register-health-check
+    description: Register a health check with Consul
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          default: ""
+          description: ID of the health check (defaults to name if not provided)
+        ttl:
+          type: string
+          default: ""
+          description: Time to live for the check (e.g., '10s', '1m')
+        http:
+          type: string
+          default: ""
+          description: HTTP endpoint to check
+        name:
+          type: string
+          default: ""
+          description: Name of the health check
+        notes:
+          type: string
+          default: ""
+          description: Notes about the health check
+        timeout:
+          type: string
+          default: ""
+          description: Timeout for the check (e.g., '5s', '30s')
+        interval:
+          type: string
+          default: ""
+          description: Interval for the check (e.g., '10s', '1m')
+        serviceId:
+          type: string
+          default: ""
+          description: ID of the service to associate the check with
+      additionalProperties: false
+  - name: deregister-health-check
+    description: Deregister a health check from Consul
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          default: ""
+          description: ID of the health check to deregister
+      additionalProperties: false
+  - name: get-health-checks
+    description: Get health checks for a service
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        service:
+          type: string
+          default: ""
+          description: Name of the service to get health checks for
+      additionalProperties: false
+  - name: get-catalog-nodes
+    description: Get nodes from the catalog
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-catalog-services
+    description: List all services in the catalog
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-catalog-service
+    description: Get information about a specific service from the catalog
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        service:
+          type: string
+          default: ""
+          description: Name of the service to get information for
+      additionalProperties: false
+  - name: register-service
+    description: Register a service with Consul
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          default: ""
+          description: ID of the service (defaults to name if not provided)
+        name:
+          type: string
+          default: ""
+          description: Name of the service to register
+        port:
+          type: number
+          description: Port the service is running on
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to associate with the service
+        address:
+          type: string
+          default: ""
+          description: Address the service is running on
+      additionalProperties: false
+  - name: deregister-service
+    description: Deregister a service from Consul
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          default: ""
+          description: ID of the service to deregister
+      additionalProperties: false
+  - name: get-kv
+    description: Get a value from the KV store
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        key:
+          type: string
+          default: ""
+          description: Key to get from the KV store
+      additionalProperties: false
+  - name: list-kv
+    description: List keys in the KV store
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        prefix:
+          type: string
+          default: ""
+          description: Prefix to filter keys by
+      additionalProperties: false
+  - name: put-kv
+    description: Put a value in the KV store
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        key:
+          type: string
+          default: ""
+          description: Key to put in the KV store
+        value:
+          type: string
+          default: ""
+          description: Value to put in the KV store
+      additionalProperties: false
+  - name: delete-kv
+    description: Delete a key from the KV store
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        key:
+          type: string
+          default: ""
+          description: Key to delete from the KV store
+      additionalProperties: false
+  - name: list-sessions
+    description: List all sessions in Consul
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: destroy-session
+    description: Destroy a session in Consul
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          default: ""
+          description: ID of the session to destroy
+      additionalProperties: false
+  - name: fire-event
+    description: Fire a new event
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          default: ""
+          description: Name of the event
+        payload:
+          type: string
+          default: ""
+          description: Event payload
+      additionalProperties: false
+  - name: list-events
+    description: List all events
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          default: ""
+          description: Filter events by name
+      additionalProperties: false
+  - name: create-prepared-query
+    description: Create a new prepared query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          default: ""
+          description: Name of the prepared query
+        service:
+          type: string
+          default: ""
+          description: Service to query
+        nearestN:
+          type: number
+          description: Number of nearest nodes to return
+        datacenters:
+          type: array
+          items:
+            type: string
+          description: Datacenters to query
+      additionalProperties: false
+  - name: execute-prepared-query
+    description: Execute a prepared query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          default: ""
+          description: ID of the prepared query
+      additionalProperties: false
+  - name: get-leader
+    description: Get the current leader
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-peers
+    description: Get the current peers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-agent-members
+    description: Get agent members
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: reload-agent
+    description: Reload agent configuration
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-agent-self
+    description: Get agent self information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

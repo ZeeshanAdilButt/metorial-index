@@ -1,0 +1,16 @@
+identifier: seriawei/mcp-developer-name/mcp-developer-name
+repo:
+  provider: github.com
+  url: https://github.com/SeriaWei/MCP-Developer-Name
+  name: MCP-Developer-Name
+  owner: SeriaWei
+server:
+  subdirectory: /
+  name: Developer Name
+  description: An MCP server implementation that provides a tool for current
+    developer name to LLM. Return the name from environment variable
+    DEVELOPER_NAME
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

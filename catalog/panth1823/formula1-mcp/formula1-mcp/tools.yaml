@@ -1,0 +1,205 @@
+tools:
+  - name: getLiveTimingData
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getCurrentSessionStatus
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getDriverInfo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - driverId
+      properties:
+        driverId:
+          type: string
+      additionalProperties: false
+  - name: getHistoricalSessions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        year:
+          type: number
+        location:
+          type: string
+        country_name:
+          type: string
+        session_name:
+          type: string
+        circuit_short_name:
+          type: string
+      additionalProperties: false
+  - name: getHistoricRaceResults
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - year
+        - round
+      properties:
+        year:
+          type: number
+        round:
+          type: number
+      additionalProperties: false
+  - name: getDriverStandings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - year
+      properties:
+        year:
+          type: number
+      additionalProperties: false
+  - name: getConstructorStandings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - year
+      properties:
+        year:
+          type: number
+      additionalProperties: false
+  - name: getLapTimes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - year
+        - round
+        - driverId
+      properties:
+        year:
+          type: number
+        round:
+          type: number
+        driverId:
+          type: string
+      additionalProperties: false
+  - name: getWeatherData
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sessionKey:
+          type: string
+      additionalProperties: false
+  - name: getCarData
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - driverNumber
+      properties:
+        filters:
+          type: string
+        sessionKey:
+          type: string
+        driverNumber:
+          type: string
+      additionalProperties: false
+  - name: getPitStopData
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sessionKey:
+          type: string
+        driverNumber:
+          type: string
+      additionalProperties: false
+  - name: getTeamRadio
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sessionKey:
+          type: string
+        driverNumber:
+          type: string
+      additionalProperties: false
+  - name: getRaceControlMessages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sessionKey:
+          type: string
+      additionalProperties: false
+  - name: getRaceCalendar
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - year
+      properties:
+        year:
+          type: number
+      additionalProperties: false
+  - name: getCircuitInfo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - circuitId
+      properties:
+        circuitId:
+          type: string
+      additionalProperties: false
+  - name: getSeasonList
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+      additionalProperties: false
+  - name: getQualifyingResults
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - year
+        - round
+      properties:
+        year:
+          type: number
+        round:
+          type: number
+      additionalProperties: false
+  - name: getDriverInformation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - driverId
+      properties:
+        driverId:
+          type: string
+      additionalProperties: false
+  - name: getConstructorInformation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - constructorId
+      properties:
+        constructorId:
+          type: string
+      additionalProperties: false
+  - name: clearCache
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

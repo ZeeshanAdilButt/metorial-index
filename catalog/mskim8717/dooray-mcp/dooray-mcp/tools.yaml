@@ -1,0 +1,100 @@
+tools:
+  - name: add_schedule
+    description: "
+
+      \    Target: dooray API를 호출하여 두레이 일정을 추가합니다.
+
+
+      \    Args:
+
+      \        title               : 일정 제목
+
+      \        start_date          : 시작 날짜 (예: '2025-04-04'), 입력하지 않으면 오늘 날짜로 해줘
+
+      \        start_time          : 시작 시간 (예: '14:00'), 입력하지 않으면 현재 시간으로 해줘
+
+      \        end_date            : 종료 날짜 (예: '2025-04-05'), 입력하지 않으면 오늘 날짜로 해줘
+
+      \        end_time            : 종료 시간 (예: '15:00'), 입력하지 않으면 현재 시간으로 해줘
+
+      \        start_iso_format    : ISO 8601 형식으로 변환된 날짜/시간 문자열(예:
+      '2025-04-04T14:00:00+09:00')
+
+      \        end_iso_format      : ISO 8601 형식으로 변환된 날짜/시간 문자열(예:
+      '2025-04-04T14:00:00+09:00')
+
+      \        location            : 일정 장소 (선택사항)
+
+      \        description         : 일정 설명 (선택사항)
+
+
+      \    Returns:
+
+      \        str: 일정 추가 결과 메시지
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_scheduleArguments
+      required:
+        - start_date
+        - start_time
+        - end_date
+        - end_time
+        - start_iso_format
+        - end_iso_format
+        - location
+      properties:
+        title:
+          type: string
+          title: Title
+          default: 새 일정
+          description: The title of the schedule
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          description: The end date of the schedule
+        end_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Time
+          description: The end time of the schedule
+        location:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Location
+          description: The location of the schedule
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          description: The start date of the schedule
+        start_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Time
+          description: The start time of the schedule
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+        end_iso_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Iso Format
+          description: The end date time of the schedule in ISO 8601 format
+        start_iso_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Iso Format
+          description: The start date time of the schedule in ISO 8601 format

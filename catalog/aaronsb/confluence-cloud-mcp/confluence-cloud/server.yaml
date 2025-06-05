@@ -1,0 +1,14 @@
+identifier: aaronsb/confluence-cloud-mcp/confluence-cloud
+repo:
+  provider: github.com
+  url: https://github.com/aaronsb/confluence-cloud-mcp
+  name: confluence-cloud-mcp
+  owner: aaronsb
+server:
+  subdirectory: /
+  name: Confluence Cloud
+  description: Interact with Confluence Cloud to manage spaces, pages, and content.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

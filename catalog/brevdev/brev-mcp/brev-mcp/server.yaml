@@ -1,0 +1,14 @@
+identifier: brevdev/brev-mcp/brev-mcp
+repo:
+  provider: github.com
+  url: https://github.com/brevdev/brev-mcp
+  name: brev-mcp
+  owner: brevdev
+server:
+  subdirectory: /
+  name: Brev MCP server
+  description: Connect to Brev's API and manage your organization resources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

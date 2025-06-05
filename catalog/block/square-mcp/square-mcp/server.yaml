@@ -1,0 +1,15 @@
+identifier: block/square-mcp/square-mcp
+repo:
+  provider: github.com
+  url: https://github.com/block/square-mcp
+  name: square-mcp
+  owner: block
+server:
+  subdirectory: /
+  name: Square API Server
+  description: Access Square API functionality seamlessly. Integrate payment
+    processing and other Square services into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

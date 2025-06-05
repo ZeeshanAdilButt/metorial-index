@@ -1,0 +1,18 @@
+identifier: hks-anakin/openapi-mcp-server/openapi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hks-anakin/openapi-mcp-server
+  name: openapi-mcp-server
+  owner: hks-anakin
+server:
+  subdirectory: /
+  name: OpenAPI MCP Server
+  description: Enable exploration and understanding of OpenAPI specifications
+    through simple language summaries and detailed operation insights. Quickly
+    get overviews and specific endpoint details for any OpenAPI spec without
+    needing to handle authentication. Ideal for generating code and learning how
+    APIs work.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

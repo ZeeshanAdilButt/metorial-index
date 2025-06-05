@@ -1,0 +1,31 @@
+tools:
+  - name: search
+    description: Perform a search using the configured SearxNG instance
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query string
+        format:
+          type: string
+          description: 'Result format (default: "json", options: "json", "html")'
+        language:
+          type: string
+          description: Language code for search results (e.g., "en-US", "fr", "de")
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories to search in (e.g., ["general", "images", "news"])
+        safesearch:
+          type: number
+          description: "Safe search level (0: off, 1: moderate, 2: strict)"
+        time_range:
+          type: string
+          description: Time range for results (e.g., "day", "week", "month", "year")
+        max_results:
+          type: number
+          description: Maximum number of results to return

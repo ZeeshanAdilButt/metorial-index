@@ -1,0 +1,744 @@
+tools:
+  - name: tool_add_cookie
+    description: 쿠키를 추가합니다.
+    inputSchema:
+      type: object
+      title: tool_add_cookieArguments
+      required:
+        - cookie
+      properties:
+        cookie:
+          type: object
+          title: Cookie
+          additionalProperties: true
+  - name: tool_back
+    description: 브라우저 히스토리에서 뒤로 이동합니다.
+    inputSchema:
+      type: object
+      title: tool_backArguments
+      properties: {}
+  - name: tool_click
+    description: "Click an element on the page.
+
+      \       \ 
+
+      \        This tool finds and clicks an element on the page using either
+      CSS selector
+
+      \        or XPath. It will wait for the element to be clickable before
+      attempting
+
+      \        to click it.
+
+      \       \ 
+
+      \        Args:
+
+      \            selector (str): The selector to find the element
+
+      \            by (str, optional): The selector type. Either \"css\" or
+      \"xpath\". Defaults to \"css\"
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"click\", \"args\": {\"selector\":
+      \"#submit-button\"}}
+
+      \            {\"tool\": \"click\", \"args\": {\"selector\":
+      \"//button[@type='submit']\", \"by\": \"xpath\"}}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_clickArguments
+      required:
+        - selector
+      properties:
+        by:
+          type: string
+          title: By
+          default: css
+        selector:
+          type: string
+          title: Selector
+  - name: tool_close_browser
+    description: "Close the browser instance.
+
+      \       \ 
+
+      \        This tool closes the current Chrome browser window and cleans up
+      resources.
+
+      \        It's safe to call this even if no browser is open.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"close_browser\"}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_close_browserArguments
+      properties: {}
+  - name: tool_delete_all_cookies
+    description: 모든 쿠키를 삭제합니다.
+    inputSchema:
+      type: object
+      title: tool_delete_all_cookiesArguments
+      properties: {}
+  - name: tool_delete_cookie
+    description: 특정 이름의 쿠키를 삭제합니다.
+    inputSchema:
+      type: object
+      title: tool_delete_cookieArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: tool_execute_script
+    description: JavaScript 코드를 실행합니다.
+    inputSchema:
+      type: object
+      title: tool_execute_scriptArguments
+      required:
+        - script
+        - args
+      properties:
+        args:
+          type: string
+          title: args
+        script:
+          type: string
+          title: Script
+  - name: tool_forward
+    description: 브라우저 히스토리에서 앞으로 이동합니다.
+    inputSchema:
+      type: object
+      title: tool_forwardArguments
+      properties: {}
+  - name: tool_fullscreen_window
+    description: 브라우저 창을 전체 화면으로 전환합니다.
+    inputSchema:
+      type: object
+      title: tool_fullscreen_windowArguments
+      properties: {}
+  - name: tool_get_cookies
+    description: 현재 페이지의 모든 쿠키를 반환합니다.
+    inputSchema:
+      type: object
+      title: tool_get_cookiesArguments
+      properties: {}
+  - name: tool_get_credentials
+    description: "
+
+      \        저장된 자격 증명 조회
+
+      \       \ 
+
+      \        Args:
+
+      \            site: 웹사이트 도메인
+
+      \            username: 사용자 이름
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_get_credentialsArguments
+      required:
+        - site
+        - username
+      properties:
+        site:
+          type: string
+          title: Site
+        username:
+          type: string
+          title: Username
+  - name: tool_get_current_url
+    description: 현재 페이지의 URL을 반환합니다.
+    inputSchema:
+      type: object
+      title: tool_get_current_urlArguments
+      properties: {}
+  - name: tool_get_elements
+    description: "Get multiple elements matching a selector.
+
+      \       \ 
+
+      \        This tool finds all elements matching the selector and returns
+      their text
+
+      \        content and HTML.
+
+      \       \ 
+
+      \        Args:
+
+      \            selector (str): The selector to find the elements
+
+      \            by (str, optional): The selector type. Either \"css\" or
+      \"xpath\". Defaults to \"css\"
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \                - data (List[Dict]): List of elements, each containing:
+
+      \                    - text (str): The text content of the element
+
+      \                    - html (str): The outer HTML of the element
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"get_elements\", \"args\": {\"selector\":
+      \".item\"}}
+
+      \            {\"tool\": \"get_elements\", \"args\": {\"selector\":
+      \"//li[@class='item']\", \"by\": \"xpath\"}}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_get_elementsArguments
+      required:
+        - selector
+      properties:
+        by:
+          type: string
+          title: By
+          default: css
+        selector:
+          type: string
+          title: Selector
+  - name: tool_get_log
+    description: 브라우저 로그를 가져옵니다.
+    inputSchema:
+      type: object
+      title: tool_get_logArguments
+      required:
+        - log_type
+      properties:
+        log_type:
+          type: string
+          title: Log Type
+  - name: tool_get_page_source
+    description: 현재 페이지의 HTML 소스를 반환합니다.
+    inputSchema:
+      type: object
+      title: tool_get_page_sourceArguments
+      properties: {}
+  - name: tool_get_text
+    description: "Get text from an element.
+
+      \       \ 
+
+      \        This tool finds an element and returns its text content.
+
+      \       \ 
+
+      \        Args:
+
+      \            selector (str): The selector to find the element
+
+      \            by (str, optional): The selector type. Either \"css\" or
+      \"xpath\". Defaults to \"css\"
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \                - data (str): The text content of the element
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"get_text\", \"args\": {\"selector\": \"h1\"}}
+
+      \            {\"tool\": \"get_text\", \"args\": {\"selector\":
+      \"//div[@class='content']\", \"by\": \"xpath\"}}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_get_textArguments
+      required:
+        - selector
+      properties:
+        by:
+          type: string
+          title: By
+          default: css
+        selector:
+          type: string
+          title: Selector
+  - name: tool_get_title
+    description: 현재 페이지의 제목을 반환합니다.
+    inputSchema:
+      type: object
+      title: tool_get_titleArguments
+      properties: {}
+  - name: tool_get_window_handles
+    description: 모든 윈도우 핸들을 반환합니다.
+    inputSchema:
+      type: object
+      title: tool_get_window_handlesArguments
+      properties: {}
+  - name: tool_get_window_size
+    description: 현재 브라우저 창 크기를 반환합니다.
+    inputSchema:
+      type: object
+      title: tool_get_window_sizeArguments
+      properties: {}
+  - name: tool_implicitly_wait
+    description: 암시적 대기 시간을 설정합니다.
+    inputSchema:
+      type: object
+      title: tool_implicitly_waitArguments
+      required:
+        - seconds
+      properties:
+        seconds:
+          type: integer
+          title: Seconds
+  - name: tool_maximize_window
+    description: 브라우저 창을 최대화합니다.
+    inputSchema:
+      type: object
+      title: tool_maximize_windowArguments
+      properties: {}
+  - name: tool_minimize_window
+    description: 브라우저 창을 최소화합니다.
+    inputSchema:
+      type: object
+      title: tool_minimize_windowArguments
+      properties: {}
+  - name: tool_navigate
+    description: "Navigate to a URL.
+
+      \       \ 
+
+      \        This tool navigates the browser to the specified URL. If no
+      browser
+
+      \        is open, it will automatically open one.
+
+      \       \ 
+
+      \        Args:
+
+      \            url (str): The URL to navigate to (must include protocol,
+      e.g., 'https://')
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"navigate\", \"args\": {\"url\":
+      \"https://www.example.com\"}}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_navigateArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: tool_open_browser
+    description: "Open a new Chrome browser instance.
+
+      \       \ 
+
+      \        This tool initializes a new Chrome browser window. If a browser
+      instance
+
+      \        already exists, it will reuse that instance.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"open_browser\"}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_open_browserArguments
+      properties: {}
+  - name: tool_refresh
+    description: 현재 페이지를 새로고침합니다.
+    inputSchema:
+      type: object
+      title: tool_refreshArguments
+      properties: {}
+  - name: tool_save_credentials
+    description: "
+
+      \        자격 증명을 안전하게 저장
+
+      \       \ 
+
+      \        Args:
+
+      \            site: 웹사이트 도메인
+
+      \            username: 사용자 이름
+
+      \            password: 비밀번호
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_save_credentialsArguments
+      required:
+        - site
+        - username
+        - password
+      properties:
+        site:
+          type: string
+          title: Site
+        password:
+          type: string
+          title: Password
+        username:
+          type: string
+          title: Username
+  - name: tool_set_page_load_timeout
+    description: 페이지 로드 타임아웃을 설정합니다.
+    inputSchema:
+      type: object
+      title: tool_set_page_load_timeoutArguments
+      required:
+        - seconds
+      properties:
+        seconds:
+          type: integer
+          title: Seconds
+  - name: tool_set_script_timeout
+    description: 스크립트 실행 타임아웃을 설정합니다.
+    inputSchema:
+      type: object
+      title: tool_set_script_timeoutArguments
+      required:
+        - seconds
+      properties:
+        seconds:
+          type: integer
+          title: Seconds
+  - name: tool_set_window_size
+    description: 브라우저 창 크기를 설정합니다.
+    inputSchema:
+      type: object
+      title: tool_set_window_sizeArguments
+      required:
+        - width
+        - height
+      properties:
+        width:
+          type: integer
+          title: Width
+        height:
+          type: integer
+          title: Height
+  - name: tool_switch_to_default_content
+    description: 기본 컨텐츠로 돌아갑니다.
+    inputSchema:
+      type: object
+      title: tool_switch_to_default_contentArguments
+      properties: {}
+  - name: tool_switch_to_frame
+    description: 특정 프레임으로 전환합니다.
+    inputSchema:
+      type: object
+      title: tool_switch_to_frameArguments
+      required:
+        - frame_reference
+      properties:
+        frame_reference:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Frame Reference
+  - name: tool_switch_to_window
+    description: 특정 윈도우로 전환합니다.
+    inputSchema:
+      type: object
+      title: tool_switch_to_windowArguments
+      required:
+        - window_handle
+      properties:
+        window_handle:
+          type: string
+          title: Window Handle
+  - name: tool_take_screenshot
+    description: 현재 페이지의 스크린샷을 저장합니다.
+    inputSchema:
+      type: object
+      title: tool_take_screenshotArguments
+      properties:
+        filename:
+          type: string
+          title: Filename
+          default: null
+  - name: tool_type
+    description: "Type text into an element.
+
+      \       \ 
+
+      \        This tool finds an input element and types the specified text
+      into it.
+
+      \        It will clear any existing text in the element before typing.
+
+      \       \ 
+
+      \        Args:
+
+      \            selector (str): The selector to find the element
+
+      \            text (str): The text to type into the element
+
+      \            by (str, optional): The selector type. Either \"css\" or
+      \"xpath\". Defaults to \"css\"
+
+      \       \ 
+
+      \        Returns:
+
+      \            Dict[str, Any]: A dictionary containing:
+
+      \                - success (bool): Whether the operation was successful
+
+      \                - message (str): Status message
+
+      \       \ 
+
+      \        Example:
+
+      \            {\"tool\": \"type\", \"args\": {\"selector\":
+      \"#search-input\", \"text\": \"search query\"}}
+
+      \            {\"tool\": \"type\", \"args\": {\"selector\":
+      \"//input[@name='q']\", \"text\": \"search\", \"by\": \"xpath\"}}
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_typeArguments
+      required:
+        - selector
+        - text
+      properties:
+        by:
+          type: string
+          title: By
+          default: css
+        text:
+          type: string
+          title: Text
+        selector:
+          type: string
+          title: Selector
+  - name: tool_web_login
+    description: "
+
+      \        웹사이트 로그인 수행
+
+
+      \        이 도구는 제공된 URL로 이동하여 로그인을 시도합니다. 자동입력방지(CAPTCHA)가\ 
+
+      \        감지되면 사용자가 직접 해결할 때까지 대기합니다.
+
+
+      \        Args:
+
+      \            url (str): 로그인 페이지 URL
+
+      \            credentials (Dict[str, str]): 로그인 정보
+
+      \                - username: 사용자 아이디
+
+      \                - password: 비밀번호
+
+      \            selectors (Dict[str, str]): 로그인 폼 요소의 선택자들
+
+      \                - username: 아이디 입력 필드 선택자
+
+      \                - password: 비밀번호 입력 필드 선택자
+
+      \                - submit: 로그인 버튼 선택자
+
+      \            auth_type (str, optional): 인증 방식. Defaults to \"form\"
+
+      \                - form: 일반적인 폼 기반 로그인
+
+      \                - oauth: OAuth 인증
+
+      \                - api: API 기반 인증
+
+      \            wait_for (Optional[str], optional): 로그인 성공 후 기다릴 요소의 선택자
+
+
+      \        Returns:
+
+      \            Dict[str, Any]: 로그인 결과
+
+      \                - success (bool): 로그인 성공 여부
+
+      \                - message (str): 상태 메시지
+
+      \                - session_data (Dict): 로그인 성공시 세션 정보
+
+      \                    - cookies: 쿠키 정보
+
+      \                    - localStorage: 로컬 스토리지 데이터
+
+      \                    - sessionStorage: 세션 스토리지 데이터
+
+
+      \        특별한 처리:
+
+      \            1. CAPTCHA 감지
+
+      \                - reCAPTCHA나 일반 CAPTCHA가 감지되면 사용자가 직접 해결할 때까지 대기
+
+      \                - 해결 후 자동으로 로그인 프로세스 계속 진행
+
+      \            2. 네이버 로그인
+
+      \                - 자동입력방지, 2단계 인증 등 특수한 상황 자동 감지
+
+      \                - 에러 메시지 상세 분석 및 반환
+
+
+      \        Example:
+
+      \            >>> result = tool_web_login(
+
+      \            ...     url=\"https://nid.naver.com/nidlogin.login\",
+
+      \            ...     credentials={
+
+      \            ...         \"username\": \"your_username\",
+
+      \            ...         \"password\": \"your_password\"
+
+      \            ...     },
+
+      \            ...     selectors={
+
+      \            ...         \"username\": \"#id\",
+
+      \            ...         \"password\": \"#pw\",
+
+      \            ...         \"submit\": \".btn_login\"
+
+      \            ...     }
+
+      \            ... )
+
+      \            >>> if not result[\"success\"] and \"CAPTCHA\" in
+      result[\"message\"]:
+
+      \            ...     # CAPTCHA 해결을 위해 사용자 입력 대기
+
+      \            ...     print(\"Please solve the CAPTCHA in the browser\")
+
+      \        "
+    inputSchema:
+      type: object
+      title: tool_web_loginArguments
+      required:
+        - url
+        - credentials
+        - selectors
+      properties:
+        url:
+          type: string
+          title: Url
+        wait_for:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Wait For
+          default: null
+        auth_type:
+          type: string
+          title: Auth Type
+          default: form
+        selectors:
+          type: object
+          title: Selectors
+          additionalProperties:
+            type: string
+        credentials:
+          type: object
+          title: Credentials
+          additionalProperties:
+            type: string

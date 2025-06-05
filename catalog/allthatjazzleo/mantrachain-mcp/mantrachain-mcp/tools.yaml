@@ -1,0 +1,475 @@
+tools:
+  - name: bank-send
+    description: Send tokens to another address. Supports sending multiple coins in
+      one transaction.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - recipientAddress
+        - coins
+        - networkName
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        coins:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                required:
+                  - amount
+                properties:
+                  denom:
+                    type: string
+                  amount:
+                    type: string
+                additionalProperties: false
+            - type: object
+              required:
+                - amount
+              properties:
+                denom:
+                  type: string
+                amount:
+                  type: string
+              additionalProperties: false
+          description: Array of coins to send, each with denom and amount
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+        recipientAddress:
+          type: string
+          description: Address of the recipient
+      additionalProperties: false
+  - name: get-balance
+    description: Get balance of an address (defaults to your own address if none provided)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        address:
+          type: string
+          description: Optional address to get balance for, defaults to current address
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+      additionalProperties: false
+  - name: delegate
+    description: Delegate/Stake tokens to a validator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - operatorAddress
+        - amount
+        - networkName
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        denom:
+          type: string
+          description: Optional denomination of the tokens, default is network's default
+            denom
+        amount:
+          type: string
+          description: Amount of tokens to delegate
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+        operatorAddress:
+          type: string
+          description: Address of the validator to delegate to
+      additionalProperties: false
+  - name: undelegate
+    description: Undelegate/Unstake tokens from a validator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - operatorAddress
+        - amount
+        - networkName
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        denom:
+          type: string
+          description: Optional denomination of the tokens, default is network's default
+            denom
+        amount:
+          type: string
+          description: Amount of tokens to undelegate
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+        operatorAddress:
+          type: string
+          description: Address of the validator to undelegate from
+      additionalProperties: false
+  - name: claim-rewards
+    description: Claim rewards for a specific validator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - operatorAddress
+        - networkName
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+        operatorAddress:
+          type: string
+          description: Address of the validator to claim rewards from
+      additionalProperties: false
+  - name: get-validators
+    description: Get all validators
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+      additionalProperties: false
+  - name: get-delegations
+    description: Get current staking information for an address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        address:
+          type: string
+          description: Address to query for delegations
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+      additionalProperties: false
+  - name: get-available-rewards
+    description: Get all available rewards for an address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        address:
+          type: string
+          description: Address to query for available rewards
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+      additionalProperties: false
+  - name: get-account-info
+    description: Get current account information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+      additionalProperties: false
+  - name: get-block-info
+    description: Get block information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        height:
+          type: number
+          description: Optional block height to query, defaults to latest block
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+      additionalProperties: false
+  - name: query-network
+    description: Execute a generic network gRPC Gateway query against chain APIs
+      when you cannot find the required information from other tools. You MUST
+      first check the available query/service by reading the openapi
+      specification from the resource `openapi://{networkName}` to understand
+      available query/service, methods, required parameters and body structure.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+        - path
+        - method
+      properties:
+        body:
+          description: Request body for POST/PUT requests
+        path:
+          type: string
+          description: API endpoint path from the OpenAPI spec, e.g.,
+            '/cosmos/bank/v1beta1/balances/{address}'
+        method:
+          enum:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+          type: string
+          description: HTTP method to use for the request
+        pathParams:
+          type: object
+          description: Path parameters to substitute in the URL path
+          additionalProperties:
+            type: string
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+        queryParams:
+          type: object
+          description: Query parameters to add to the request
+          additionalProperties:
+            type: string
+      additionalProperties: false
+  - name: ibc-transfer
+    description: Send tokens via IBC transfer.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - recipientAddress
+        - transferAmount
+        - sourceChannel
+        - networkName
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        ibcMemo:
+          type: string
+          description: Optional memo for the IBC transfer
+        sourcePort:
+          type: string
+          description: Source port for the IBC transfer
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the mantrachain-mcp server by accessing the
+            networks resource `networks://all` before you pass this arguments
+        sourceChannel:
+          type: string
+          description: Source channel for the IBC transfer
+        timeoutHeight:
+          type: object
+          required:
+            - revisionNumber
+            - revisionHeight
+          properties:
+            revisionHeight:
+              type: number
+            revisionNumber:
+              type: number
+          description: Timeout height for the IBC transfer
+          additionalProperties: false
+        transferAmount:
+          type: object
+          required:
+            - denom
+            - amount
+          properties:
+            denom:
+              type: string
+            amount:
+              type: string
+          description: Amount to send
+          additionalProperties: false
+        recipientAddress:
+          type: string
+          description: Address of the recipient
+        timeoutTimestamp:
+          type: number
+          description: Timeout timestamp for the IBC transfer
+      additionalProperties: false
+  - name: contract-query
+    description: Query a smart contract by executing a read-only function
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - queryMsg
+        - networkName
+      properties:
+        queryMsg:
+          type: object
+          description: The query message to send to the contract as a JSON object
+          additionalProperties: {}
+        networkName:
+          type: string
+          description: Name of the network to use - must first check what networks are
+            available through the networks resource
+        contractAddress:
+          type: string
+          description: Address of the smart contract to query
+      additionalProperties: false
+  - name: contract-execute
+    description: Execute a function on a smart contract that changes state
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - executeMsg
+        - networkName
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        funds:
+          type: array
+          items:
+            type: object
+            required:
+              - amount
+            properties:
+              denom:
+                type: string
+              amount:
+                type: string
+            additionalProperties: false
+          description: Optional funds to send with the execution
+        executeMsg:
+          type: object
+          description: The execute message to send to the contract as a JSON object
+          additionalProperties: {}
+        networkName:
+          type: string
+          description: Name of the network to use - must first check available networks
+        contractAddress:
+          type: string
+          description: Address of the smart contract to execute
+      additionalProperties: false
+  - name: dex-get-pools
+    description: Get all available liquidity pools from the DEX
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+      properties:
+        networkName:
+          type: string
+          description: Name of the network to use - must first check available networks
+            through `networks://all`
+      additionalProperties: false
+  - name: dex-find-routes
+    description: Find available swap routes between two tokens - must first check
+      two tokens are available in the DEX pools by using `dex-get-pools`
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+        - tokenInDenom
+        - tokenOutDenom
+      properties:
+        networkName:
+          type: string
+          description: Name of the network to use
+        tokenInDenom:
+          type: string
+          description: Denomination of the token to swap from
+        tokenOutDenom:
+          type: string
+          description: Denomination of the token to swap to
+      additionalProperties: false
+  - name: dex-simulate-swap
+    description: Simulate a token swap to get expected outcome without executing it
+      - must first check two tokens are available in the DEX pools by using
+      `dex-get-pools`
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+        - tokenInDenom
+        - tokenInAmount
+        - tokenOutDenom
+      properties:
+        networkName:
+          type: string
+          description: Name of the network to use
+        tokenInDenom:
+          type: string
+          description: Denomination of the token to swap from
+        tokenInAmount:
+          type: string
+          description: Amount of tokens to swap
+        tokenOutDenom:
+          type: string
+          description: Denomination of the token to swap to
+      additionalProperties: false
+  - name: dex-swap
+    description: Execute a token swap on the DEX - must first check two tokens are
+      available in the DEX pools by using `dex-get-pools`
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - networkName
+        - tokenInDenom
+        - tokenInAmount
+        - tokenOutDenom
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the transaction
+        slippage:
+          type: string
+          description: Maximum acceptable slippage percentage (e.g., '1' for 1%)
+        networkName:
+          type: string
+          description: Name of the network to use
+        tokenInDenom:
+          type: string
+          description: Denomination of the token to swap from
+        tokenInAmount:
+          type: string
+          description: Amount of tokens to swap
+        tokenOutDenom:
+          type: string
+          description: Denomination of the token to swap to
+      additionalProperties: false

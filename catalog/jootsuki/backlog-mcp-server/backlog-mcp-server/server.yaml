@@ -1,0 +1,17 @@
+identifier: jootsuki/backlog-mcp-server/backlog-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/jootsuki/backlog-mcp-server
+  name: backlog-mcp-server
+  owner: jootsuki
+server:
+  subdirectory: /
+  name: Backlog API Integration Server
+  description: Connect to Backlog's API to search, retrieve, and update issues
+    efficiently. Enable seamless management of project tasks through simple
+    commands. Enhance your workflow by integrating Backlog issue handling
+    directly into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

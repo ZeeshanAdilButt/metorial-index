@@ -1,0 +1,17 @@
+identifier: iamadk/reference-servers/github
+repo:
+  provider: github.com
+  url: https://github.com/iamadk/reference-servers
+  name: reference-servers
+  owner: iamadk
+server:
+  subdirectory: /src/github
+  name: GitHub API MCP Server
+  description: Manage your GitHub repositories effortlessly. Create, update, and
+    search for files, issues, and pull requests with ease, all while preserving
+    your Git history. Streamline your development workflow by automating
+    repository management tasks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

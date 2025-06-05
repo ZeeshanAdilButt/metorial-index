@@ -1,0 +1,17 @@
+identifier: finack/aviation-mcp/aviation-mcp
+repo:
+  provider: github.com
+  url: https://github.com/finack/aviation-mcp
+  name: aviation-mcp
+  owner: finack
+server:
+  subdirectory: /
+  name: Aviation Weather Server
+  description: Fetch real-time aviation weather data to assist in flight planning.
+    Access METARs, TAFs, and PIREPs seamlessly through a type-safe API. Enhance
+    your decision-making with reliable weather information tailored for aviation
+    needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

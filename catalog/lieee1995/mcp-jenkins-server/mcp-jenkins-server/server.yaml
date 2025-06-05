@@ -1,0 +1,18 @@
+identifier: lieee1995/mcp-jenkins-server/mcp-jenkins-server
+repo:
+  provider: github.com
+  url: https://github.com/lieee1995/mcp-jenkins-server
+  name: mcp-jenkins-server
+  owner: lieee1995
+server:
+  subdirectory: /
+  name: Jenkins Integration Server
+  description: Integrate your Jenkins server with powerful tools to manage jobs,
+    retrieve build information, and trigger builds effortlessly. Streamline your
+    CI/CD processes by accessing Jenkins data directly through this MCP server.
+    Enhance your automation capabilities with easy-to-use commands and real-time
+    insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

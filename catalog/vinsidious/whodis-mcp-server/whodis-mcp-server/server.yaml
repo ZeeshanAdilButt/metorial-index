@@ -1,0 +1,18 @@
+identifier: vinsidious/whodis-mcp-server/whodis-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/vinsidious/whodis-mcp-server
+  name: whodis-mcp-server
+  owner: vinsidious
+server:
+  subdirectory: /
+  name: Whodis Domain Availability Server
+  description: Check the availability of domain names using WHOIS lookups
+    integrated as an MCP tool. Enable AI assistants and other tools to
+    seamlessly verify domain registration status within their workflows.
+    Provides a CLI interface and detailed logging for easy testing and
+    monitoring.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

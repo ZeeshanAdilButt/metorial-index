@@ -1,0 +1,17 @@
+identifier: tizee/mcp-server-ietf/mcp-server-ietf
+repo:
+  provider: github.com
+  url: https://github.com/tizee/mcp-server-ietf
+  name: mcp-server-ietf
+  owner: tizee
+server:
+  subdirectory: /
+  name: IETF Document Fetcher
+  description: Access and retrieve IETF RFC documents seamlessly. Search for
+    specific RFCs by keywords and manage document pagination effortlessly.
+    Enhance your Large Language Models with standardized access to essential
+    specifications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

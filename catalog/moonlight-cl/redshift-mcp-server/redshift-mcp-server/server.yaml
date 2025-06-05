@@ -1,0 +1,19 @@
+identifier: moonlight-cl/redshift-mcp-server/redshift-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Moonlight-CL/redshift-mcp-server
+  name: redshift-mcp-server
+  owner: Moonlight-CL
+server:
+  subdirectory: /
+  name: Redshift MCP Server
+  description: Enable AI assistants to interact seamlessly with Amazon Redshift
+    databases by listing schemas and tables, retrieving table DDL and
+    statistics, executing SQL queries, analyzing tables, and obtaining execution
+    plans. Simplify database operations and insights through standardized MCP
+    tools and resources. Enhance your AI workflows with direct Redshift
+    integration for efficient data management and querying.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

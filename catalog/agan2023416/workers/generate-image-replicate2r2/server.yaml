@@ -1,0 +1,17 @@
+identifier: agan2023416/workers/generate-image-replicate2r2
+repo:
+  provider: github.com
+  url: https://github.com/agan2023416/workers
+  name: workers
+  owner: agan2023416
+server:
+  subdirectory: /
+  name: Generate Image
+  description: Interface with Replicate's AI image generation to create and manage
+    images seamlessly. Generate images, store them in Cloudflare R2, and receive
+    real-time updates on the generation status. Simplify your workflow with
+    type-safe API calls and webhook notifications for enhanced functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+identifier: ancode666/aemet-mcp/aemet-mcp
+repo:
+  provider: github.com
+  url: https://github.com/AnCode666/aemet-mcp
+  name: aemet-mcp
+  owner: AnCode666
+server:
+  subdirectory: /
+  name: AEMET Weather Data Server
+  description: Provide direct access to historical and current meteorological data
+    from Spain's State Meteorological Agency through natural language queries.
+    Retrieve detailed climate summaries, daily weather values, and beach
+    condition reports with filtering options by date and location. Enable
+    seamless integration with MCP-compatible clients to enrich conversations
+    with accurate weather information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

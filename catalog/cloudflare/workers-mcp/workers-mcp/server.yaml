@@ -1,0 +1,17 @@
+identifier: cloudflare/workers-mcp/workers-mcp
+repo:
+  provider: github.com
+  url: https://github.com/cloudflare/workers-mcp
+  name: workers-mcp
+  owner: cloudflare
+server:
+  subdirectory: /
+  name: Cloudflare Worker Integration
+  description: Connect your Cloudflare Workers to Claude Desktop and other MCP
+    clients seamlessly. Enhance your applications by leveraging the power of
+    serverless functions with real-time interaction and customization
+    capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

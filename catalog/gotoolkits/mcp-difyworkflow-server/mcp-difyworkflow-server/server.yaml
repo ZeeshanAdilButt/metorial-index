@@ -1,0 +1,14 @@
+identifier: gotoolkits/mcp-difyworkflow-server/mcp-difyworkflow-server
+repo:
+  provider: github.com
+  url: https://github.com/gotoolkits/mcp-difyworkflow-server
+  name: mcp-difyworkflow-server
+  owner: gotoolkits
+server:
+  subdirectory: /
+  name: Dify Workflow Server
+  description: A server to manage and execute Dify workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

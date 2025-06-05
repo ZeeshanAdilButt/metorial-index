@@ -1,0 +1,18 @@
+identifier: kkarra111/jokesmcp/jokesmcp
+repo:
+  provider: github.com
+  url: https://github.com/kkarra111/JokesMCP
+  name: JokesMCP
+  owner: kkarra111
+server:
+  subdirectory: /
+  name: Jokes MCP Server
+  description: Provide a humor-focused agent that delivers concise, engaging jokes
+    on demand, adapting style to user preferences. Fetch jokes from popular joke
+    APIs including Chuck Norris, Dad, and Yo Mama jokes. Enable seamless
+    integration with Microsoft Copilot Studio for real-time joke delivery
+    through a standardized MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

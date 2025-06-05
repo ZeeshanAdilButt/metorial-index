@@ -1,0 +1,24 @@
+identifier: ralf-boltshauser/mcp-domain-checker-server/mcp-domain-checker-server
+repo:
+  provider: github.com
+  url: https://github.com/ralf-boltshauser/mcp-domain-checker-server
+  name: mcp-domain-checker-server
+  owner: ralf-boltshauser
+server:
+  subdirectory: /
+  name: DomainGenuis MCP Server
+  description: The DomainGenius MCP server is a powerful domain availability
+    checking service that powers the domain search functionality of
+    DomainGenius. This server provides real-time domain availability checks and
+    pricing information through integration with Vercel's API. It features
+    intelligent TLD handling (automatically defaulting to .com when no TLD is
+    specified) and delivers comprehensive responses including domain
+    availability status, registration pricing, and detailed error information.
+    Built with TypeScript and following the ModelContextProtocol (MCP)
+    specification, this server enables seamless integration with AI-powered
+    domain search tools, making it an essential component of the DomainGenius
+    platform's domain discovery capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,652 @@
+tools:
+  - name: getCollection
+    description: Get a specific collection by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Collection ID
+      additionalProperties: false
+  - name: getCollections
+    description: Get all collections
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: createCollection
+    description: Create a new collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Collection title
+        isPublic:
+          type: boolean
+          description: Whether the collection is public
+      additionalProperties: false
+  - name: updateCollection
+    description: Update an existing collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Collection ID
+        sort:
+          enum:
+            - title
+            - -created
+          type: string
+          description: Sort order
+        view:
+          enum:
+            - list
+            - simple
+            - grid
+            - masonry
+          type: string
+          description: View type
+        title:
+          type: string
+          description: New title
+        isPublic:
+          type: boolean
+          description: Whether the collection is public
+      additionalProperties: false
+  - name: deleteCollection
+    description: Delete a collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Collection ID
+      additionalProperties: false
+  - name: shareCollection
+    description: Share a collection with others
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - level
+      properties:
+        id:
+          type: number
+          description: Collection ID
+        level:
+          enum:
+            - view
+            - edit
+            - remove
+          type: string
+          description: Access level
+        emails:
+          type: array
+          items:
+            type: string
+            format: email
+          description: Email addresses to share with
+      additionalProperties: false
+  - name: mergeCollections
+    description: Merge multiple collections into one target collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - targetId
+        - sourceIds
+      properties:
+        targetId:
+          type: number
+          description: Target Collection ID
+        sourceIds:
+          type: array
+          items:
+            type: number
+          description: Source Collection IDs to merge
+      additionalProperties: false
+  - name: removeEmptyCollections
+    description: Remove all empty collections
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: emptyTrash
+    description: Empty the trash by permanently deleting all raindrops in it
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getBookmark
+    description: Get a specific bookmark by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Bookmark ID
+      additionalProperties: false
+  - name: getBookmarks
+    description: Get bookmarks with optional filtering
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number
+        sort:
+          enum:
+            - title
+            - -title
+            - domain
+            - -domain
+            - created
+            - -created
+            - lastUpdate
+            - -lastUpdate
+          type: string
+          description: Sort order
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter by tags
+        search:
+          type: string
+          description: Search query
+        perPage:
+          type: number
+          description: Items per page (max 50)
+        collection:
+          type: number
+          description: Collection ID
+      additionalProperties: false
+  - name: searchBookmarks
+    description: Search bookmarks with advanced filters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number
+        sort:
+          type: string
+          description: Sort order (e.g., "title", "-created")
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter by tags
+        media:
+          enum:
+            - image
+            - video
+            - document
+            - audio
+          type: string
+          description: Media type filter
+        search:
+          type: string
+          description: Search query
+        perPage:
+          type: number
+          description: Items per page (max 50)
+        important:
+          type: boolean
+          description: Only important bookmarks
+        collection:
+          type: number
+          description: Collection ID
+        createdEnd:
+          type: string
+          description: Created before date (ISO format)
+        createdStart:
+          type: string
+          description: Created after date (ISO format)
+      additionalProperties: false
+  - name: createBookmark
+    description: Create a new bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - link
+        - collectionId
+      properties:
+        link:
+          type: string
+          format: uri
+          description: URL of the bookmark
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags
+        title:
+          type: string
+          description: Title of the bookmark
+        excerpt:
+          type: string
+          description: Short description
+        important:
+          type: boolean
+          description: Mark as important
+        collectionId:
+          type: number
+          description: Collection ID
+      additionalProperties: false
+  - name: updateBookmark
+    description: Update an existing bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Bookmark ID
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags
+        title:
+          type: string
+          description: Title of the bookmark
+        excerpt:
+          type: string
+          description: Short excerpt or description
+        important:
+          type: boolean
+          description: Mark as important
+        collectionId:
+          type: number
+          description: Collection ID to move the bookmark to
+      additionalProperties: false
+  - name: deleteBookmark
+    description: Delete a bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Bookmark ID
+        permanent:
+          type: boolean
+          description: Permanently delete (skip trash)
+      additionalProperties: false
+  - name: batchUpdateBookmarks
+    description: Update multiple bookmarks at once
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ids
+      properties:
+        ids:
+          type: array
+          items:
+            type: number
+          description: List of bookmark IDs
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to all bookmarks
+        important:
+          type: boolean
+          description: Mark as important
+        collectionId:
+          type: number
+          description: Collection ID to move bookmarks to
+      additionalProperties: false
+  - name: bulkMoveBookmarks
+    description: Move multiple bookmarks to another collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ids
+        - collectionId
+      properties:
+        ids:
+          type: array
+          items:
+            type: number
+          description: List of bookmark IDs to move
+        collectionId:
+          type: number
+          description: Target collection ID
+      additionalProperties: false
+  - name: bulkTagBookmarks
+    description: Add or remove tags from multiple bookmarks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ids
+        - tags
+        - operation
+      properties:
+        ids:
+          type: array
+          items:
+            type: number
+          description: List of bookmark IDs
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply
+        operation:
+          enum:
+            - add
+            - remove
+          type: string
+          description: Whether to add or remove the specified tags
+      additionalProperties: false
+  - name: batchDeleteBookmarks
+    description: Delete multiple bookmarks at once
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ids
+      properties:
+        ids:
+          type: array
+          items:
+            type: number
+          description: List of bookmark IDs to delete
+        permanent:
+          type: boolean
+          description: Permanently delete (skip trash)
+      additionalProperties: false
+  - name: setReminder
+    description: Set a reminder for a bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - raindropId
+        - date
+      properties:
+        date:
+          type: string
+          description: Reminder date (ISO format)
+        note:
+          type: string
+          description: Reminder note
+        raindropId:
+          type: number
+          description: Bookmark ID
+      additionalProperties: false
+  - name: deleteReminder
+    description: Delete a reminder from a bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - raindropId
+      properties:
+        raindropId:
+          type: number
+          description: Bookmark ID
+      additionalProperties: false
+  - name: getTags
+    description: Get all tags
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        collectionId:
+          type: number
+          description: Filter tags by collection
+      additionalProperties: false
+  - name: renameTag
+    description: Rename a tag across all bookmarks or in a specific collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - oldName
+        - newName
+      properties:
+        newName:
+          type: string
+          description: New tag name
+        oldName:
+          type: string
+          description: Current tag name
+        collectionId:
+          type: number
+          description: Collection ID (optional)
+      additionalProperties: false
+  - name: deleteTag
+    description: Remove a tag from all bookmarks or in a specific collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tag
+      properties:
+        tag:
+          type: string
+          description: Tag to delete
+        collectionId:
+          type: number
+          description: Collection ID (optional)
+      additionalProperties: false
+  - name: mergeTags
+    description: Merge multiple tags into one destination tag
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceTags
+        - destinationTag
+      properties:
+        sourceTags:
+          type: array
+          items:
+            type: string
+          description: List of source tags to merge
+        collectionId:
+          type: number
+          description: Collection ID (optional)
+        destinationTag:
+          type: string
+          description: Destination tag name
+      additionalProperties: false
+  - name: deleteTags
+    description: Delete tags from all bookmarks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tags
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags to delete
+        collectionId:
+          type: number
+          description: Collection ID (optional)
+      additionalProperties: false
+  - name: getHighlights
+    description: Get highlights for a specific bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - raindropId
+      properties:
+        raindropId:
+          type: number
+          description: Bookmark ID
+      additionalProperties: false
+  - name: getAllHighlights
+    description: Get all highlights across all bookmarks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number, starting from 0
+        perPage:
+          type: number
+          description: Number of highlights per page (max 50)
+      additionalProperties: false
+  - name: getHighlightsByCollection
+    description: Get highlights for bookmarks in a specific collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collectionId
+      properties:
+        collectionId:
+          type: number
+          description: Collection ID
+      additionalProperties: false
+  - name: createHighlight
+    description: Create a new highlight for a bookmark
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - raindropId
+        - text
+      properties:
+        note:
+          type: string
+          description: Additional note for the highlight
+        text:
+          type: string
+          description: Highlighted text
+        color:
+          type: string
+          description: Color for the highlight (e.g., "yellow", "#FFFF00")
+        raindropId:
+          type: number
+          description: Bookmark ID
+      additionalProperties: false
+  - name: updateHighlight
+    description: Update an existing highlight
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Highlight ID
+        note:
+          type: string
+          description: New note
+        text:
+          type: string
+          description: New highlighted text
+        color:
+          type: string
+          description: New color
+      additionalProperties: false
+  - name: deleteHighlight
+    description: Delete a highlight
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Highlight ID
+      additionalProperties: false
+  - name: getUserInfo
+    description: Get user information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getUserStats
+    description: Get user statistics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        collectionId:
+          type: number
+          description: Collection ID for specific collection stats
+      additionalProperties: false
+  - name: getImportStatus
+    description: Check the status of an ongoing import
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getExportStatus
+    description: Check the status of an ongoing export
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: exportBookmarks
+    description: Export bookmarks in various formats
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - format
+      properties:
+        broken:
+          type: boolean
+          description: Include broken links
+        format:
+          enum:
+            - csv
+            - html
+            - pdf
+          type: string
+          description: Export format
+        duplicates:
+          type: boolean
+          description: Include duplicates
+        collectionId:
+          type: number
+          description: Export specific collection
+      additionalProperties: false

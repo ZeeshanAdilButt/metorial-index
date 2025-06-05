@@ -1,0 +1,21 @@
+tools:
+  - name: set-github-token
+    description: Set the GitHub Personal Access Token for authentication
+    inputSchema:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: GitHub Personal Access Token
+  - name: map-github-repo
+    description: Map a GitHub repository structure and provide summary information
+    inputSchema:
+      type: object
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          type: string
+          description: URL of the GitHub repository (e.g., https://github.com/username/repo)

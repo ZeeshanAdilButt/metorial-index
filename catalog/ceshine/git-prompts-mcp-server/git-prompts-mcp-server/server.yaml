@@ -1,0 +1,17 @@
+identifier: ceshine/git-prompts-mcp-server/git-prompts-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ceshine/git-prompts-mcp-server
+  name: git-prompts-mcp-server
+  owner: ceshine
+server:
+  subdirectory: /
+  name: Git Prompts Server
+  description: Generate insightful prompts based on your Git repository's content.
+    Enhance your development workflow by automatically creating pull request
+    descriptions and other useful prompts directly from your code changes.
+    Integrate seamlessly with Zed Editor for a streamlined experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

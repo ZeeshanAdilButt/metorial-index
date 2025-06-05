@@ -1,0 +1,550 @@
+tools:
+  - name: retrieveContent
+    description: >-
+      Retrieve content from Graphlit knowledge base.
+         Accepts a search prompt, optional recency filter (defaults to last 30 days), and optional content type and file type filters.
+         Prompt should be optimized for vector search, via text embeddings. Rewrite prompt as appropriate for higher relevance to search results.
+         Returns the content sources in XML format, including metadata and Markdown text.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        inLast:
+          type: string
+          default: P30D
+          description: Recency filter for content 'in last' timespan, optional. Should be
+            ISO 8601 format, for example, 'PT1H' for last hour, 'P1D' for last
+            day, 'P7D' for last week, 'P30D' for last month. Doesn't support
+            weeks or months explicitly.
+        prompt:
+          type: string
+          description: Search prompt for content retrieval.
+        fileType:
+          enum:
+            - ANIMATION
+            - AUDIO
+            - CODE
+            - DATA
+            - DOCUMENT
+            - DRAWING
+            - EMAIL
+            - GEOMETRY
+            - IMAGE
+            - MANIFEST
+            - PACKAGE
+            - POINT_CLOUD
+            - SHAPE
+            - UNKNOWN
+            - VIDEO
+          type: string
+          description: "File type filter, optional. One of: Animation, Audio, Code, Data,
+            Document, Drawing, Email, Geometry, Image, Package, PointCloud,
+            Shape, Video."
+        contentType:
+          enum:
+            - EMAIL
+            - EVENT
+            - FILE
+            - ISSUE
+            - MESSAGE
+            - PAGE
+            - POST
+            - TEXT
+          type: string
+          description: "Content type filter, optional. One of: Email, Event, File, Issue,
+            Message, Page, Post, Text."
+      additionalProperties: false
+  - name: queryFeeds
+    description: |-
+      Query feeds by name and/or feed type.
+         Returns the feed name, identifier and other feed properties.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          description: Feed name.
+        feedType:
+          enum:
+            - DISCORD
+            - EMAIL
+            - INTERCOM
+            - ISSUE
+            - MICROSOFT_TEAMS
+            - NOTION
+            - REDDIT
+            - RSS
+            - SEARCH
+            - SITE
+            - SLACK
+            - WEB
+            - YOU_TUBE
+            - ZENDESK
+          type: string
+          description: "Feed type filter, optional. One of: Discord, Email, Intercom,
+            Issue, MicrosoftTeams, Notion, Reddit, Rss, Search, Site, Slack,
+            Web, YouTube, Zendesk."
+      additionalProperties: false
+  - name: deleteFeed
+    description: >-
+      Delete a feed and all of its ingested content.
+         Accepts a feed identifier which was returned from one of the ingestion tools, like ingestGoogleDriveFiles.
+         Content deletion will happen asynchronously.
+         Returns the feed identifier and feed state, i.e. Deleted.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Feed identifier.
+      additionalProperties: false
+  - name: isFeedDone
+    description: >-
+      Check if an asynchronous feed has completed ingesting all the available
+      content.
+         Accepts a feed identifier which was returned from one of the ingestion tools, like ingestGoogleDriveFiles.
+         Returns whether the feed is done or not.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Feed identifier.
+      additionalProperties: false
+  - name: listMicrosoftTeamsTeams
+    description: >-
+      Lists available Microsoft Teams teams.
+          Returns a list of Microsoft Teams teams, where the team identifier can be used with listMicrosoftTeamsChannels to enumerate Microsoft Teams channels.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: listMicrosoftTeamsChannels
+    description: >-
+      Lists available Microsoft Teams channels.
+          Returns a list of Microsoft Teams channels, where the channel identifier can be used with ingestMicrosoftTeamsMessages to ingest messages into Graphlit knowledge base.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+      properties:
+        teamId:
+          type: string
+      additionalProperties: false
+  - name: listSlackChannels
+    description: >-
+      Lists available Slack channels.
+          Returns a list of Slack channels, where the channel name can be used with ingestSlackMessages to ingest messages into Graphlit knowledge base.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: listSharePointLibraries
+    description: >-
+      Lists available SharePoint libraries.
+         Returns a list of SharePoint libraries, where the selected libraryId can be used with listSharePointFolders to enumerate SharePoint folders in a library.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: listSharePointFolders
+    description: >-
+      Lists available SharePoint folders.
+          Returns a list of SharePoint folders, which can be used with ingestSharePointFiles to ingest files into Graphlit knowledge base.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - libraryId
+      properties:
+        libraryId:
+          type: string
+      additionalProperties: false
+  - name: ingestSharePointFiles
+    description: >-
+      Ingests files from SharePoint library into Graphlit knowledge base.
+         Accepts a SharePoint libraryId and an optional folderId to ingest files from a specific SharePoint folder.
+         Libraries can be enumerated with listSharePointLibraries and library folders with listSharePointFolders.
+         Accepts an optional read limit for the number of files to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - libraryId
+      properties:
+        folderId:
+          type: string
+        libraryId:
+          type: string
+        readLimit:
+          type: number
+          description: Number of files to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestOneDriveFiles
+    description: |-
+      Ingests files from OneDrive folder into Graphlit knowledge base.
+         Accepts an optional read limit for the number of files to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        readLimit:
+          type: number
+          description: Number of files to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestGoogleDriveFiles
+    description: |-
+      Ingests files from Google Drive folder into Graphlit knowledge base.
+         Accepts an optional read limit for the number of files to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        readLimit:
+          type: number
+          description: Number of files to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestDropboxFiles
+    description: >-
+      Ingests files from Dropbox folder into Graphlit knowledge base.
+         Accepts optional relative path to Dropbox folder (i.e. /Pictures), and an optional read limit for the number of files to ingest.
+         If no path provided, ingests files from root Dropbox folder.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        path:
+          type: string
+        readLimit:
+          type: number
+          description: Number of files to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestBoxFiles
+    description: >-
+      Ingests files from Box folder into Graphlit knowledge base.
+         Accepts optional Box folder identifier, and an optional read limit for the number of files to ingest.
+         If no folder identifier provided, ingests files from root Box folder (i.e. "0").
+         Folder identifier can be inferred from Box URL. https://app.box.com/folder/123456 -> folder identifier is "123456".
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        folderId:
+          type: string
+          default: "0"
+        readLimit:
+          type: number
+          description: Number of files to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestGitHubFiles
+    description: >-
+      Ingests files from GitHub repository into Graphlit knowledge base.
+         Accepts GitHub repository owner and repository name and an optional read limit for the number of files to ingest.
+         For example, for GitHub repository (https://github.com/openai/tiktoken), 'openai' is the repository owner, and 'tiktoken' is the repository name.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryName
+        - repositoryOwner
+      properties:
+        readLimit:
+          type: number
+          description: Number of files to ingest, optional. Defaults to 100.
+        repositoryName:
+          type: string
+          description: GitHub repository name.
+        repositoryOwner:
+          type: string
+          description: GitHub repository owner.
+      additionalProperties: false
+  - name: ingestNotionPages
+    description: |-
+      Ingests pages from Notion database into Graphlit knowledge base.
+          Accepts an optional read limit for the number of messages to ingest.
+          Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        readLimit:
+          type: number
+          description: Number of pages to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestMicrosoftTeamsMessages
+    description: >-
+      Ingests messages from Microsoft Teams channel into Graphlit knowledge
+      base.
+         Accepts Microsoft Teams team identifier and channel identifier, and an optional read limit for the number of messages to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+        - channelId
+      properties:
+        teamId:
+          type: string
+        channelId:
+          type: string
+        readLimit:
+          type: number
+          description: Number of messages to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestSlackMessages
+    description: >-
+      Ingests messages from Slack channel into Graphlit knowledge base.
+          Accepts Slack channel name and an optional read limit for the number of messages to ingest.
+          Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - channelName
+      properties:
+        readLimit:
+          type: number
+          description: Number of messages to ingest, optional. Defaults to 100.
+        channelName:
+          type: string
+      additionalProperties: false
+  - name: ingestDiscordMessages
+    description: >-
+      Ingests messages from Discord channel into Graphlit knowledge base.
+          Accepts Discord channel name and an optional read limit for the number of messages to ingest.
+          Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - channelName
+      properties:
+        readLimit:
+          type: number
+          description: Number of messages to ingest, optional. Defaults to 100.
+        channelName:
+          type: string
+      additionalProperties: false
+  - name: ingestRedditPosts
+    description: >-
+      Ingests posts from Reddit subreddit into Graphlit knowledge base.
+          Accepts a subreddit name and an optional read limit for the number of posts to ingest.
+          Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - subredditName
+      properties:
+        readLimit:
+          type: number
+          description: Number of posts to ingest, optional. Defaults to 100.
+        subredditName:
+          type: string
+      additionalProperties: false
+  - name: ingestGoogleEmail
+    description: |-
+      Ingests emails from Google Email account into Graphlit knowledge base.
+         Accepts an optional read limit for the number of emails to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        readLimit:
+          type: number
+          description: Number of emails to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestMicrosoftEmail
+    description: |-
+      Ingests emails from Microsoft Email account into Graphlit knowledge base.
+         Accepts an optional read limit for the number of emails to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        readLimit:
+          type: number
+          description: Number of emails to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: ingestLinearIssues
+    description: >-
+      Ingests issues from Linear project into Graphlit knowledge base.
+         Accepts Linear project name and an optional read limit for the number of issues to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectName
+      properties:
+        readLimit:
+          type: number
+          description: Number of issues to ingest, optional. Defaults to 100.
+        projectName:
+          type: string
+      additionalProperties: false
+  - name: ingestGitHubIssues
+    description: >-
+      Ingests issues from GitHub repository into Graphlit knowledge base.
+         Accepts GitHub repository owner and repository name and an optional read limit for the number of issues to ingest.
+         For example, for GitHub repository (https://github.com/openai/tiktoken), 'openai' is the repository owner, and 'tiktoken' is the repository name.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryName
+        - repositoryOwner
+      properties:
+        readLimit:
+          type: number
+          description: Number of issues to ingest, optional. Defaults to 100.
+        repositoryName:
+          type: string
+          description: GitHub repository name.
+        repositoryOwner:
+          type: string
+          description: GitHub repository owner.
+      additionalProperties: false
+  - name: ingestJiraIssues
+    description: >-
+      Ingests issues from Atlassian Jira repository into Graphlit knowledge
+      base.
+         Accepts Atlassian Jira server URL and project name, and an optional read limit for the number of issues to ingest.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+        - projectName
+      properties:
+        url:
+          type: string
+        readLimit:
+          type: number
+          description: Number of issues to ingest, optional. Defaults to 100.
+        projectName:
+          type: string
+      additionalProperties: false
+  - name: webCrawl
+    description: >-
+      Crawls web pages from web site into Graphlit knowledge base.
+         Accepts a URL and an optional read limit for the number of pages to crawl.
+         Uses sitemap.xml to discover pages to be crawled from website.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+        readLimit:
+          type: number
+          description: Number of web pages to ingest, optional. Defaults to 100.
+      additionalProperties: false
+  - name: webScrape
+    description: |-
+      Scrapes web page into Graphlit knowledge base.
+         Returns Markdown text and metadata extracted from web page.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+      additionalProperties: false
+  - name: webMap
+    description: |-
+      Enumerates the web pages at or beneath the provided URL using web sitemap.
+         Accepts web page URL as string.
+         Returns list of mapped URIs from web site.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+      additionalProperties: false
+  - name: webSearch
+    description: >-
+      Performs web search based on search query. Format the search query as what
+      would be entered into a Google search.
+         Accepts search query as string, and optional search service type.
+         Search service types: Tavily, Exa. Defaults to Tavily.
+         Returns URL, title and relevant Markdown text from resulting web pages.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - search
+      properties:
+        search:
+          type: string
+        searchService:
+          enum:
+            - EXA
+            - TAVILY
+          type: string
+          default: TAVILY
+      additionalProperties: false
+  - name: ingestRSS
+    description: >-
+      Ingests posts from RSS feed into Graphlit knowledge base.
+         For podcast RSS feeds, audio will be downloaded, transcribed and ingested into Graphlit knowledge base.
+         Accepts RSS URL and an optional read limit for the number of posts to read.
+         Executes asynchonously and returns the feed identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+        readLimit:
+          type: number
+          description: Number of issues to posts, optional. Defaults to 25.
+      additionalProperties: false
+  - name: ingestUrl
+    description: >-
+      Ingests content from URL into Graphlit knowledge base.
+         Can ingest individual Word documents, PDFs, audio recordings, videos, images, or any other unstructured data.
+         Executes asynchonously and returns the content identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+      additionalProperties: false

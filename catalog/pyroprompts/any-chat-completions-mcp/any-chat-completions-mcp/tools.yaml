@@ -1,0 +1,11 @@
+tools:
+  - name: chat-with-string
+    description: Text chat with string
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: The content of the chat to send to string

@@ -1,0 +1,26 @@
+identifier: dragonkhoi/mixpanel-mcp/mixpanel-mcp
+repo:
+  provider: github.com
+  url: https://github.com/dragonkhoi/mixpanel-mcp
+  name: mixpanel-mcp
+  owner: dragonkhoi
+server:
+  subdirectory: /
+  name: Mixpanel Integration
+  description: >-
+    Talk to your Mixpanel analytics events data seamlessly! Query retention
+    number, event data, funnels and more from any MCP client. Great for
+    on-demand look ups like: "What's the weekly retention for users in the Feb 1
+    cohort?"
+
+
+    I am adding more coverage of the Mixpanel API over time, let me know which
+    tools you need or just open a PR.
+
+
+    Make sure you go to your Mixpanel Organization Settings and create a service
+    account. Then get your project ID from your project settings.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

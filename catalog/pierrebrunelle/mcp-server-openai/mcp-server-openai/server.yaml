@@ -1,0 +1,14 @@
+identifier: pierrebrunelle/mcp-server-openai/mcp-server-openai
+repo:
+  provider: github.com
+  url: https://github.com/pierrebrunelle/mcp-server-openai
+  name: mcp-server-openai
+  owner: pierrebrunelle
+server:
+  subdirectory: /
+  name: OpenAI Server
+  description: MCP server for OpenAI API integration
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

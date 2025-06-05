@@ -1,0 +1,17 @@
+identifier: mcp-router/mcp-router/mcp-router
+repo:
+  provider: github.com
+  url: https://github.com/mcp-router/mcp-router
+  name: mcp-router
+  owner: mcp-router
+server:
+  subdirectory: /
+  name: MCP Router
+  description: Provide a routing solution for MCP (Model Context Protocol) servers
+    to manage and direct MCP requests efficiently. Simplify the integration and
+    handling of multiple MCP tools, resources, and prompts in a unified
+    interface. Enhance the scalability and modularity of MCP-based applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

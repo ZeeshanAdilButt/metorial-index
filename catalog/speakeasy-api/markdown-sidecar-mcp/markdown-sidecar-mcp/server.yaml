@@ -1,0 +1,17 @@
+identifier: speakeasy-api/markdown-sidecar-mcp/markdown-sidecar-mcp
+repo:
+  provider: github.com
+  url: https://github.com/speakeasy-api/markdown-sidecar-mcp
+  name: markdown-sidecar-mcp
+  owner: speakeasy-api
+server:
+  subdirectory: /
+  name: Markdown Sidecar Server
+  description: Serve and access markdown documentation seamlessly from your local
+    environment. Enhance your code generation process by exposing markdown files
+    as resources or tools for various package managers. Simplify documentation
+    access for NPM, Go Modules, and PyPi packages with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

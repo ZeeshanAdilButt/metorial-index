@@ -1,0 +1,18 @@
+identifier: springwq/kayzen-mcp/kayzen-mcp
+repo:
+  provider: github.com
+  url: https://github.com/springwq/kayzen-mcp
+  name: kayzen-mcp
+  owner: springwq
+server:
+  subdirectory: /
+  name: Kayzen Analytics Server
+  description: Enable AI models to seamlessly access and analyze Kayzen
+    advertising campaign data through a standardized interface. Automate
+    authentication and report management to gain insights into campaign
+    performance and trends. Simplify integration with environment-based
+    configuration and comprehensive error handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

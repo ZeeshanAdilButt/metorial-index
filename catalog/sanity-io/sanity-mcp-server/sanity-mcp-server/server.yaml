@@ -1,0 +1,18 @@
+identifier: sanity-io/sanity-mcp-server/sanity-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/sanity-io/sanity-mcp-server
+  name: sanity-mcp-server
+  owner: sanity-io
+server:
+  subdirectory: /
+  name: Sanity Content AI Server
+  description: Enable AI-powered content operations and exploration for your
+    Sanity projects through natural language conversations. Automate content
+    creation, updates, semantic search, and release management while respecting
+    your content schema and validation rules. Seamlessly integrate AI tools with
+    your content workflows to boost productivity and insight.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

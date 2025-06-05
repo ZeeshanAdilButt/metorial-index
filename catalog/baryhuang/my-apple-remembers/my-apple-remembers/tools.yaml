@@ -1,0 +1,37 @@
+tools:
+  - name: my_apple_recall_memory
+    description: Run Apple Script on a remote MacOs machine. This call should be
+      used to recall the apple notes, apple calendar, imessages, chat messages,
+      files, context or any other information of a MacOs machine can have access
+      to.
+    inputSchema:
+      type: object
+      required:
+        - code_snippet
+      properties:
+        timeout:
+          type: integer
+          description: "Command execution timeout in seconds (default: 60)"
+        code_snippet:
+          type: string
+          description: AppleScript code to execute on the remote machine. Can be a single
+            line or multi-line script. You should prefer multi-line scripts for
+            complex operations.
+  - name: my_apple_save_memory
+    description: Run Apple Script on a remote MacOs machine. This call should be
+      used to save relevant information to the apple notes. You decide what
+      information to save. You should always add a new notes with a timestamp as
+      the title.
+    inputSchema:
+      type: object
+      required:
+        - code_snippet
+      properties:
+        timeout:
+          type: integer
+          description: "Command execution timeout in seconds (default: 60)"
+        code_snippet:
+          type: string
+          description: AppleScript code to execute on the remote machine. Can be a single
+            line or multi-line script. You should prefer multi-line scripts for
+            complex operations.

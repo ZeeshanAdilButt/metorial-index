@@ -1,0 +1,19 @@
+identifier: falahgs/mcp-minimax-music-server/mcp-minimax-music-server
+repo:
+  provider: github.com
+  url: https://github.com/falahgs/mcp-minimax-music-server
+  name: mcp-minimax-music-server
+  owner: falahgs
+server:
+  subdirectory: /
+  name: MiniMax Music Server
+  description: Enable AI agents to generate music and audio content using the
+    MiniMax Music API through a seamless integration with MCP hosts like Claude
+    Desktop. Generate high-quality musical output based on text prompts with
+    support for status checking and reference audio. Simplify AI-powered audio
+    creation with detailed error handling and environment variable support for
+    API keys.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

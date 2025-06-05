@@ -1,0 +1,26 @@
+tools:
+  - name: list_calls
+    description: List Gong calls with optional date range filtering. Returns call
+      details including ID, title, start/end times, participants, and duration.
+    inputSchema:
+      type: object
+      properties:
+        toDateTime:
+          type: string
+          description: End date/time in ISO format (e.g. 2024-03-31T23:59:59Z)
+        fromDateTime:
+          type: string
+          description: Start date/time in ISO format (e.g. 2024-03-01T00:00:00Z)
+  - name: retrieve_transcripts
+    description: Retrieve transcripts for specified call IDs. Returns detailed
+      transcripts including speaker IDs, topics, and timestamped sentences.
+    inputSchema:
+      type: object
+      required:
+        - callIds
+      properties:
+        callIds:
+          type: array
+          items:
+            type: string
+          description: Array of Gong call IDs to retrieve transcripts for

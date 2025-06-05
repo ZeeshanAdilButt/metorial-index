@@ -1,0 +1,36 @@
+tools:
+  - name: get_rss
+    description: "
+
+      \    Fetch RSS feeds
+
+      \    Args:
+
+      \        feed_name: Feed name (e.g. \"Example\")
+
+      \        since: Get feeds after this date (e.g. \"2025-04-13\")
+
+      \        export_result: Whether to export the result to a text file
+
+      \    Returns:
+
+      \        Fetched text
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_rssArguments
+      required:
+        - feed_name
+        - since
+      properties:
+        since:
+          type: string
+          title: Since
+        feed_name:
+          type: string
+          title: Feed Name
+        export_result:
+          type: boolean
+          title: Export Result
+          default: false

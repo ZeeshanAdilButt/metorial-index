@@ -1,0 +1,20 @@
+identifier: aipotheosis-labs/aci-mcp/aci-mcp
+repo:
+  provider: github.com
+  url: https://github.com/aipotheosis-labs/aci-mcp
+  name: aci-mcp
+  owner: aipotheosis-labs
+server:
+  subdirectory: /
+  name: ACI MCP Server
+  description: "Provide dynamic access to a wide range of functions (tools)
+    managed by ACI.dev through two MCP server types: one for direct app-specific
+    tool access and another for unified dynamic discovery and execution of all
+    available tools. Simplify integration with LLM clients by enabling efficient
+    tool calling without overloading the model's context window. Enhance your
+    agents with seamless, scalable function calling capabilities across multiple
+    apps."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

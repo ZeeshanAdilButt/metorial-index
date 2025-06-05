@@ -1,0 +1,117 @@
+tools:
+  - name: analyze_contract_abi
+    description: Analyze the functions provided in the solidity contract.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - abi
+      properties:
+        abi:
+          type: string
+          description: Solidity contract ABI JSON string.
+      additionalProperties: false
+  - name: call_contract
+    description: Call a function in the solidity contract.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - abi
+        - networkName
+        - contractAddress
+        - functionName
+      properties:
+        abi:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - inputs
+              - outputs
+              - stateMutability
+              - type
+            properties:
+              name:
+                type: string
+                description: Function name in ABI.
+              type:
+                type: string
+                const: function
+                description: The type of the function, always 'function' for contract methods.
+              inputs:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - type
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                  additionalProperties: false
+                description: Function inputs.
+              outputs:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - type
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                  additionalProperties: false
+                description: Function outputs.
+              stateMutability:
+                enum:
+                  - view
+                  - nonpayable
+                  - payable
+                  - pure
+                type: string
+                description: Function state mutability.
+            additionalProperties: false
+          description: Contract function ABI part, only the relevant function.
+        args:
+          type: array
+          items:
+            type:
+              - string
+              - number
+              - boolean
+          description: Function arguments. Make sure no comments are included.
+        value:
+          type: number
+          description: Transfer native token value when calling payable function. When
+            native token decimal is 18, input 0.001 for 0.001 ETH
+            (1000000000000000 wei). Be careful not to add additional code
+            comments
+        networkName:
+          enum:
+            - mainnet
+            - sepolia
+            - base
+            - baseSepolia
+          type: string
+          description: Blockchain network name.
+        functionName:
+          type: string
+          description: Function name.
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: Contract address, must start with '0x' and be 40 hex characters long.
+      additionalProperties: false
+  - name: local_wallet_address
+    description: Get the local wallet evm address.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

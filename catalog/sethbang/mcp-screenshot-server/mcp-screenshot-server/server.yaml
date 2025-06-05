@@ -1,0 +1,14 @@
+identifier: sethbang/mcp-screenshot-server/mcp-screenshot-server
+repo:
+  provider: github.com
+  url: https://github.com/sethbang/mcp-screenshot-server
+  name: mcp-screenshot-server
+  owner: sethbang
+server:
+  subdirectory: /
+  name: Screenshot Server
+  description: Capture screenshots of web pages and local HTML files using Puppeteer.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

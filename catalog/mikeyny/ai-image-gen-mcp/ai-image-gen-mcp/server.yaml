@@ -1,0 +1,14 @@
+identifier: mikeyny/ai-image-gen-mcp/ai-image-gen-mcp
+repo:
+  provider: github.com
+  url: https://github.com/mikeyny/ai-image-gen-mcp
+  name: ai-image-gen-mcp
+  owner: mikeyny
+server:
+  subdirectory: /
+  name: Image Generation Server
+  description: Generate images from text prompts using Replicate's flux-schnell model.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

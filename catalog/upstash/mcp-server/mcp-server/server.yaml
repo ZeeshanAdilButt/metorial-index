@@ -1,0 +1,15 @@
+identifier: upstash/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/upstash/mcp-server
+  name: mcp-server
+  owner: upstash
+server:
+  subdirectory: /
+  name: Upstash
+  description: MCP server for managing Upstash Developer API operations via
+    natural language commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

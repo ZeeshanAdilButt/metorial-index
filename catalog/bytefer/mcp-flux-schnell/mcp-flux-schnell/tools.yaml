@@ -1,0 +1,13 @@
+tools:
+  - name: generate_image
+    description: Generate an image from a text prompt using Flux Schnell model
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          maxLength: 2048
+          minLength: 1
+          description: A text description of the image you want to generate.

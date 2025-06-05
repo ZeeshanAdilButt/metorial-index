@@ -1,0 +1,17 @@
+identifier: mongodb-developer/mcp-mongodb-atlas/mcp-mongodb-atlas
+repo:
+  provider: github.com
+  url: https://github.com/mongodb-developer/mcp-mongodb-atlas
+  name: mcp-mongodb-atlas
+  owner: mongodb-developer
+server:
+  subdirectory: /
+  name: MongoDB Atlas Project Manager
+  description: Manage MongoDB Atlas projects, clusters, users, and network access
+    through a standardized MCP interface. Simplify integration of MongoDB Atlas
+    operations into AI workflows and tools. Enable seamless control of Atlas
+    resources directly from your LLM environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

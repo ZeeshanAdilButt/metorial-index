@@ -1,0 +1,29 @@
+tools:
+  - name: getStockQuote
+    description: Get the current quote for a stock.
+    inputSchema:
+      type: object
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: The stock symbol (e.g., AAPL)
+  - name: getHistoricalData
+    description: Get historical data for a stock.
+    inputSchema:
+      type: object
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: The stock symbol (e.g., AAPL)
+        interval:
+          type: string
+          default: daily
+          description: The time interval for the data (daily, weekly, or monthly)
+        outputsize:
+          type: string
+          default: compact
+          description: The size of the output (compact or full)

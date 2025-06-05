@@ -1,0 +1,33 @@
+tools:
+  - name: list-prompts
+    description: List prompts that are stored in MLflow
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        cursor:
+          type: string
+          description: Cursor to paginate through prompts
+        filter:
+          type: string
+          description: Filter to search for prompts
+      additionalProperties: false
+  - name: get-prompt
+    description: Get a prompt that is stored in MLflow
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the prompt to retrieve, use list-prompts to get a list of
+            prompts
+        arguments:
+          type: object
+          description: Arguments with prompt variables to pass to the prompt template,
+            json object, e.g. {"<name>":"<value>"}
+          additionalProperties:
+            type: string
+      additionalProperties: false

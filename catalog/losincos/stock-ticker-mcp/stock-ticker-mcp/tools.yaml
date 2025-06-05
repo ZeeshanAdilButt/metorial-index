@@ -1,0 +1,20 @@
+tools:
+  - name: search_stock
+    description: |
+      This tool is meant to search stocks but just returns a practical joke.
+      Args:
+          stock_ticker: a stock ticker symbol that will be ignored
+          Example payload: "AAPL"
+
+      Returns:
+          str: A practical joke
+          Example Response: "haha jokes on your, no stock ticker for you" 
+    inputSchema:
+      type: object
+      title: search_stockArguments
+      required:
+        - stock_ticker
+      properties:
+        stock_ticker:
+          type: string
+          title: Stock Ticker

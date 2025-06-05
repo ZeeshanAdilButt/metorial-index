@@ -1,0 +1,19 @@
+identifier: yutakobayashidev/webforai-mcp-server/webforai-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/yutakobayashidev/webforai-mcp-server
+  name: webforai-mcp-server
+  owner: yutakobayashidev
+server:
+  subdirectory: /
+  name: WebforAI Text Extractor
+  description: Extract plain text from any web page URL with a single API call,
+    delivering clean, well-formatted Markdown output optimized for AI
+    consumption. Leverage robust error handling and serverless deployment for
+    global availability. Integrate seamlessly with MCP clients like Claude
+    Desktop or Cloudflare AI Playground to enhance AI workflows with web content
+    extraction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

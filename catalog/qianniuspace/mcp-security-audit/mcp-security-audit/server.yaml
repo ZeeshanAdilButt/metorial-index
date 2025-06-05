@@ -1,0 +1,16 @@
+identifier: qianniuspace/mcp-security-audit/mcp-security-audit
+repo:
+  provider: github.com
+  url: https://github.com/qianniuspace/mcp-security-audit
+  name: mcp-security-audit
+  owner: qianniuspace
+server:
+  subdirectory: /
+  name: Mcp Security Audit
+  description: A powerful MCP (Model Context Protocol) Server that audits npm
+    package dependencies for security vulnerabilities. Built with remote npm
+    registry integration for real-time security checks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,80 @@
+tools:
+  - name: fetch_gerrit_change
+    description: "
+
+      \    Fetch a Gerrit change and its contents.
+
+      \   \ 
+
+      \    Args:
+
+      \        change_id: The Gerrit change ID to fetch
+
+      \        patchset_number: Optional patchset number to fetch (defaults to
+      latest)
+
+      \    Returns:
+
+      \        Dict containing the raw change information including files and
+      diffs
+
+      \    "
+    inputSchema:
+      type: object
+      title: fetch_gerrit_changeArguments
+      required:
+        - change_id
+      properties:
+        change_id:
+          type: string
+          title: Change Id
+        patchset_number:
+          type: string
+          title: Patchset Number
+          default: null
+  - name: fetch_patchset_diff
+    description: "
+
+      \    Fetch differences between two patchsets of a Gerrit change.
+
+      \   \ 
+
+      \    Args:
+
+      \        change_id: The Gerrit change ID
+
+      \        base_patchset: The base patchset number to compare from
+
+      \        target_patchset: The target patchset number to compare to
+
+      \        file_path: Optional specific file path to get diff for. If not
+      provided, returns diffs for all changed files.
+
+      \    Returns:
+
+      \        Dict containing the diff information between the patchsets
+
+      \    "
+    inputSchema:
+      type: object
+      title: fetch_patchset_diffArguments
+      required:
+        - change_id
+        - base_patchset
+        - target_patchset
+      properties:
+        change_id:
+          type: string
+          title: Change Id
+        file_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: File Path
+          default: null
+        base_patchset:
+          type: string
+          title: Base Patchset
+        target_patchset:
+          type: string
+          title: Target Patchset

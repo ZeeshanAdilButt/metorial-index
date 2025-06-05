@@ -1,0 +1,369 @@
+tools:
+  - name: read_file
+    description: >-
+      Read the complete contents of a file from the file system. Handles UTF-8
+      encoding. Fails if the path is not a file or not accessible. Only works
+      within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: ReadFileInput
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+          description: Path to the file to read
+      description: >-
+        Input model for reading a single file.
+
+
+        Attributes:
+            path (str): Path to the file to read. Must be within allowed directories.
+  - name: read_multiple_files
+    description: >-
+      Read the contents of multiple files simultaneously.Returns results
+      separated by '---'.Individual file read errors are reported inline.Only
+      works within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: ReadMultipleFilesInput
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          title: Paths
+          description: List of file paths to read
+      description: >-
+        Input model for reading multiple files.
+
+
+        Attributes:
+            paths (list[str]): List of file paths to read. All paths must be within allowed directories.
+  - name: write_file
+    description: >-
+      Create a new file or completely overwrite an existing file with new
+      content. Use with caution. Creates parent directories if needed. Only
+      works within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: WriteFileInput
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          title: Path
+          description: Path to the file to write
+        content:
+          type: string
+          title: Content
+          description: Content to write
+      description: >-
+        Input model for writing to a file.
+
+
+        Attributes:
+            path (str): Path to the file to write. Must be within allowed directories.
+            content (str): Content to write to the file.
+  - name: edit_file
+    description: >-
+      Make selective edits to a text file based on exact line matches (or
+      whitespace normalized). Each edit replaces an existing sequence of lines
+      (`old_text`) with new lines (`new_text`). Returns a git-style diff of the
+      changes. Use `dry_run` to preview. Only works within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      $defs:
+        EditOperation:
+          type: object
+          title: EditOperation
+          required:
+            - old_text
+            - new_text
+          properties:
+            new_text:
+              type: string
+              title: New Text
+              description: Lines to insert (must include newlines)
+            old_text:
+              type: string
+              title: Old Text
+              description: Exact lines to replace (must include newlines)
+          description: |-
+            Model for a single file edit operation.
+
+            Attributes:
+                old_text (str): Exact lines to replace, including newlines.
+                new_text (str): New lines to insert, including newlines.
+      title: EditFileInput
+      required:
+        - path
+        - edits
+      properties:
+        path:
+          type: string
+          title: Path
+          description: Path to the file to edit
+        edits:
+          type: array
+          items:
+            $ref: "#/$defs/EditOperation"
+          title: Edits
+          description: List of edit operations
+        dry_run:
+          type: boolean
+          title: Dry Run
+          default: false
+          description: Preview changes without applying
+      description: >-
+        Input model for editing a file with multiple operations.
+
+
+        Attributes:
+            path (str): Path to the file to edit. Must be within allowed directories.
+            edits (list[EditOperation]): List of edit operations.
+            dry_run (bool): If True, preview changes without applying.
+  - name: create_directory
+    description: >-
+      Create a new directory, including parent directories if needed. Succeeds
+      silently if the directory already exists. Only works within allowed
+      directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: CreateDirectoryInput
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+          description: Path to the directory to create
+      description: >-
+        Input model for creating a directory.
+
+
+        Attributes:
+            path (str): Path where the directory should be created. Must be within allowed directories.
+  - name: list_directory
+    description: >-
+      List directory contents with [FILE] or [DIR] prefixes. Only works within
+      allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: ListDirectoryInput
+      properties:
+        path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Path
+          default: null
+          description: "Path to the directory to list (default: current shell directory)"
+      description: >-
+        Input model for listing directory contents.
+
+
+        Attributes:
+            path (str | None): Path to the directory to list. If None, uses current shell directory.
+  - name: directory_tree
+    description: >-
+      Get a recursive tree view of files and directories as a JSON structure.
+      Each entry includes 'name', 'type' (file/directory), and potentially
+      'children' for directories. Only works within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: DirectoryTreeInput
+      properties:
+        path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Path
+          default: null
+          description: "Path to the directory (default: current shell directory)"
+      description: >-
+        Input model for generating a directory tree.
+
+
+        Attributes:
+            path (str | None): Path to the directory. If None, uses current shell directory.
+  - name: move_file
+    description: >-
+      Move or rename files and directories. Fails if the destination already
+      exists.Both source and destination must resolve within allowed
+      directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: MoveFileInput
+      required:
+        - source
+        - destination
+      properties:
+        source:
+          type: string
+          title: Source
+          description: Source path
+        destination:
+          type: string
+          title: Destination
+          description: Destination path
+      description: >-
+        Input model for moving or renaming a file/directory.
+
+
+        Attributes:
+            source (str): Source path to move from. Must be within allowed directories.
+            destination (str): Destination path to move to. Must be within allowed directories.
+  - name: search_files
+    description: >-
+      Recursively search for files/directories matching a pattern
+      (case-insensitive). Use `exclude_patterns` (glob format relative to search
+      path) to ignore paths. Only searches within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: SearchFilesInput
+      required:
+        - pattern
+      properties:
+        path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Path
+          default: null
+          description: "Base directory to search in (default: current shell directory)"
+        pattern:
+          type: string
+          title: Pattern
+          description: Search pattern (substring match)
+        exclude_patterns:
+          type: array
+          items:
+            type: string
+          title: Exclude Patterns
+          default: []
+          description: List of glob patterns to exclude (relative to search path)
+      description: >-
+        Input model for searching files and directories.
+
+
+        Attributes:
+            path (str | None): Base directory to search in. If None, uses current shell directory.
+            pattern (str): Search pattern for substring matching.
+            exclude_patterns (list[str]): List of glob patterns to exclude from search.
+  - name: get_file_info
+    description: >-
+      Retrieve detailed metadata about a file or directory (size, dates, type,
+      permissions). Only works within allowed directories:
+
+      - /app
+    inputSchema:
+      type: object
+      title: GetFileInput
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+          description: Path to the file or directory
+      description: >-
+        Input model for getting file/directory information.
+
+
+        Attributes:
+            path (str): Path to the file or directory. Must be within allowed directories.
+  - name: list_allowed_directories
+    description: List all directories the server's FileSystem module is allowed to access.
+    inputSchema:
+      type: object
+      title: NoInput
+      properties: {}
+      description: Empty input model for tools that require no arguments.
+  - name: execute_command
+    description: >-
+      Execute a shell command in the current shell working directory or a
+      specified one. Command execution context is limited to: /app
+
+
+      Available commands: cat, echo, ls, pwd
+
+      Available flags: --help, -a, -h, -l
+
+
+      Note: Shell operators (&&, |, >, etc.) are NOT supported. Paths in
+      arguments are validated against the primary directory context.
+    inputSchema:
+      type: object
+      title: ExecuteCommandInput
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          title: Command
+          description: The command string to execute (e.g., 'ls -l')
+        working_dir:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Working Dir
+          default: null
+          description: Optional directory path to run the command in (must be within
+            primary allowed dir)
+      description: |-
+        Input model for executing a shell command.
+
+        Attributes:
+            command (str): The command string to execute (e.g., 'ls -l').
+            working_dir (str | None): Optional directory to run the command in.
+                Must be within primary allowed directory.
+  - name: change_directory
+    description: Change the shell's current working directory. The path must be
+      within the primary allowed directory context:/app
+    inputSchema:
+      type: object
+      title: ChangeDirectoryInput
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+          description: Path to change to
+      description: |-
+        Input model for changing the working directory.
+
+        Attributes:
+            path (str): Path to change to. Must be within allowed directories.
+  - name: show_security_rules
+    description: Show security configuration for command execution (allowed
+      commands, flags, primary directory context).
+    inputSchema:
+      type: object
+      title: NoInput
+      properties: {}
+      description: Empty input model for tools that require no arguments.

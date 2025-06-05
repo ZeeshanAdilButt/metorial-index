@@ -1,0 +1,273 @@
+tools:
+  - name: get-org-information
+    description: Get general information about the organization including org name,
+      camera configuration defaults, contact information, and org settings.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+      additionalProperties: false
+  - name: create-tool
+    description: Tool for creating many entity types such as video walls.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entityType
+      properties:
+        entityType:
+          enum:
+            - video-wall
+          type: string
+          description: "The entity type to create.  Example: video wall."
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+        videoWallCreateOptions:
+          type: object
+          required:
+            - orgUuid
+            - deviceList
+            - settings
+          properties:
+            orgUuid:
+              type: string
+              description: The uuid of the organization
+            settings:
+              type: object
+              required:
+                - rowCount
+                - columnCount
+                - rotateStrategy
+              properties:
+                rowCount:
+                  type: number
+                columnCount:
+                  type: number
+                rotateStrategy:
+                  enum:
+                    - none
+                    - motion
+                    - interval
+                  type: string
+                intervalSeconds:
+                  type: number
+              additionalProperties: false
+            deviceList:
+              type: array
+              items:
+                type: string
+              minItems: 1
+              description: The list of camera uuids (unique identifiers) to exist in the video
+                wall.  You must provide this manually by prompting the user at
+                least once.
+            displayName:
+              type: string
+              description: What to call the video wall
+            othersCanEdit:
+              type: boolean
+              default: false
+              description: Whether or not other users can edit the wall, defaults to false
+          additionalProperties: false
+      additionalProperties: false
+  - name: time-tool
+    description: Tool for converting a natural language time description into a
+      timestamp in milliseconds.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - time_description
+      properties:
+        timezone:
+          type: string
+          description: Optional IANA timezone string (e.g., 'America/Los_Angeles', 'UTC').
+            Defaults to system timezone.
+        time_description:
+          type: string
+          description: A natural language description of the time (e.g., '2pm today',
+            'tomorrow at noon').
+      additionalProperties: false
+  - name: get-entity-tool
+    description: get a list of entities like cameras, access controlled doors, sensors, etc
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entityType
+      properties:
+        entityType:
+          enum:
+            - camera
+            - access-controlled-doors
+          type: string
+          description: "The entity type to retreive.  Example: cameras."
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+      additionalProperties: false
+  - name: camera-tool
+    description: >-
+      This tool captures and returns a real-time snapshot from a designated
+      security camera. The image reflects the current scene in the camera's
+      field of view and serves as a contextual input source for downstream tasks
+      such as object recognition, anomaly detection, incident investigation, or
+      situational assessment. When invoked, the tool provides the following: 
+       •	Visual Scene Capture: A high-resolution image of what the camera is actively observing, including people, vehicles, license plates, and any detectable objects. 
+      •	Scene Context: Metadata such as camera ID, location name, timestamp, and
+      motion detection status if available. 
+
+      •	Enriched Data Potential: The image can be paired with AI models or
+      downstream analytics to extract insights such as: 
+
+      •	Number and type of objects in frame (e.g., humans, cars, packages) 
+
+      •	Unusual behaviors (e.g., loitering, unauthorized access) 
+
+      •	Environmental conditions (e.g., lighting, obstruction, cleanliness) 
+
+      Use Cases: 
+
+      •	Verify what triggered a motion alert or analytic rule. 
+
+      •	Provide visual context for access events or alarms. 
+
+      •	Support live incident triage or retrospective investigations. 
+
+      •	Feed contextual imagery to agents making security or operational
+      decisions. 
+
+      Invocation Notes: 
+
+      To use this tool correctly, the agent should provide the specific camera
+      identifier or location name. If possible, include the intent (e.g.,
+      "verify unauthorized access", "identify vehicle", "check for
+      obstructions") to enhance downstream processing or summarization.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - requestType
+      properties:
+        cameraUuid:
+          type: string
+          description: the camera uuid requested
+        requestType:
+          enum:
+            - image
+          type: string
+        timestampMs:
+          type: number
+          description: the timestamp in milliseconds which should always be obtained using
+            time-tool
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+      additionalProperties: false
+  - name: events-tool
+    description: event data for certain types of information like faces and license plates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - eventType
+      properties:
+        eventType:
+          enum:
+            - faces
+            - people
+            - access-control
+          type: string
+        locationUuid:
+          type: string
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+        accessControlledDoorUuid:
+          type: string
+      additionalProperties: false
+  - name: location-tool
+    description: contains basic operations for locations and response in JSON format.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - update
+          type: string
+        locationUpdate:
+          type: object
+          required:
+            - uuid
+          properties:
+            name:
+              type: string
+            uuid:
+              type: string
+          additionalProperties: false
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+      additionalProperties: false
+  - name: reboot-cameras
+    description: this tool is for rebooting one or more cameras causing them to
+      reconnect to the server, this is a helpful option when a camera is
+      experiencing connectivity issues or is in need of troubleshooting
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cameraUuids
+      properties:
+        cameraUuids:
+          type: array
+          items:
+            type: string
+          description: An array of camera UUID strings which are unique identifiers for
+            cameras
+        requestModifiers:
+          type: object
+          properties:
+            query: {}
+            headers: {}
+          description: Optional headers accepted by tools.  LLM should never ever use
+            this. 😅
+          additionalProperties: false
+      additionalProperties: false

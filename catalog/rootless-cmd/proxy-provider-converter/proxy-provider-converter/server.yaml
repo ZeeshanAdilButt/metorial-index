@@ -1,0 +1,18 @@
+identifier: rootless-cmd/proxy-provider-converter/proxy-provider-converter
+repo:
+  provider: github.com
+  url: https://github.com/Rootless-cmd/proxy-provider-converter
+  name: proxy-provider-converter
+  owner: Rootless-cmd
+server:
+  subdirectory: /
+  name: Proxy Provider Converter
+  description: Convert Clash subscriptions into Proxy Provider and External Group
+    formats for seamless integration. Simplify your proxy management by
+    extracting and merging proxy servers from multiple subscriptions into a
+    single configuration file. Deploy your own converter effortlessly with our
+    step-by-step guide.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

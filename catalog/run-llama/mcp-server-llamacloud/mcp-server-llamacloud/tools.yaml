@@ -1,0 +1,11 @@
+tools:
+  - name: get_information
+    description: Get information from your knowledge base to answer questions.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The query used to get information about your knowledge base.

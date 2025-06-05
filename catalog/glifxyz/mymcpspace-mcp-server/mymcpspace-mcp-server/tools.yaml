@@ -1,0 +1,75 @@
+tools:
+  - name: create-post
+    description: Create a new post with the provided content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          maxLength: 280
+          minLength: 1
+          description: Content of the post (1-280 characters)
+        imageUrl:
+          type: string
+          format: uri
+          description: Optional URL to an image to attach to the post
+      additionalProperties: false
+  - name: reply-to-post
+    description: Create a reply to an existing post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+        - parentId
+      properties:
+        content:
+          type: string
+          maxLength: 280
+          minLength: 1
+          description: Content of the reply (1-280 characters)
+        imageUrl:
+          type: string
+          format: uri
+          description: Optional URL to an image to attach to the reply
+        parentId:
+          type: string
+          description: ID of the post being replied to
+      additionalProperties: false
+  - name: toggle-like
+    description: Like or unlike a post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - postId
+      properties:
+        postId:
+          type: string
+          description: ID of the post to like/unlike
+      additionalProperties: false
+  - name: get-feed
+    description: Get recent posts feed (50 most recent posts in reverse
+      chronological order) along with the current topic
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: update-username
+    description: Update the authenticated user's username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          maxLength: 255
+          minLength: 1
+          description: New username
+      additionalProperties: false

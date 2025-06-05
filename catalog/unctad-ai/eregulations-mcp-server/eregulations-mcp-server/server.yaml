@@ -1,0 +1,17 @@
+identifier: unctad-ai/eregulations-mcp-server/eregulations-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/unctad-ai/eregulations-mcp-server
+  name: eregulations-mcp-server
+  owner: unctad-ai
+server:
+  subdirectory: /
+  name: eRegulations MCP Server
+  description: Access eRegulations data seamlessly through a standardized
+    protocol. Query administrative procedures, steps, requirements, and costs
+    effortlessly, enhancing your AI's ability to assist users. Utilize prompt
+    templates to guide LLMs in effectively using the available tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

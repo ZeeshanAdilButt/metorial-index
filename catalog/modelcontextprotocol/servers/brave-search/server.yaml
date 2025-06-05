@@ -1,0 +1,15 @@
+identifier: modelcontextprotocol/servers/brave-search
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol/servers
+  name: servers
+  owner: modelcontextprotocol
+server:
+  subdirectory: /src/brave-search
+  name: Brave Search MCP Server
+  description: An MCP server implementation that integrates the Brave Search API,
+    providing both web and local search capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

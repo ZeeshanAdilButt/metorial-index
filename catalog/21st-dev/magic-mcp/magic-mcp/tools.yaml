@@ -1,0 +1,101 @@
+tools:
+  - name: 21st_magic_component_builder
+    description: >
+      
+      "Use this tool when the user requests a new UI component—e.g., mentions
+      /ui, /21 /21st, or asks for a button, input, dialog, table, form, banner,
+      card, or other React component.
+
+      This tool ONLY returns the text snippet for that UI component. 
+
+      After calling this tool, you must edit or add files to integrate the
+      snippet into the codebase."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - searchQuery
+      properties:
+        message:
+          type: string
+          description: Full users message
+        searchQuery:
+          type: string
+          description: Generate a search query for 21st.dev (library for searching UI
+            components) to find a UI component that matches the user's message.
+            Must be a two-four words max or phrase
+      additionalProperties: false
+  - name: logo_search
+    description: |
+      
+      Search and return logos in specified format (JSX, TSX, SVG).
+      Supports single and multiple logo searches with category filtering.
+      Can return logos in different themes (light/dark) if available.
+
+      When to use this tool:
+      1. When user types "/logo" command (e.g., "/logo GitHub")
+      2. When user asks to add a company logo that's not in the local project
+
+      Example queries:
+      - Single company: ["discord"]
+      - Multiple companies: ["discord", "github", "slack"]
+      - Specific brand: ["microsoft office"]
+      - Command style: "/logo GitHub" -> ["github"]
+      - Request style: "Add Discord logo to the project" -> ["discord"]
+
+      Format options:
+      - TSX: Returns TypeScript React component
+      - JSX: Returns JavaScript React component
+      - SVG: Returns raw SVG markup
+
+      Each result includes:
+      - Component name (e.g., DiscordIcon)
+      - Component code
+      - Import instructions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queries
+        - format
+      properties:
+        format:
+          enum:
+            - JSX
+            - TSX
+            - SVG
+          type: string
+          description: Output format
+        queries:
+          type: array
+          items:
+            type: string
+          description: List of company names to search for logos
+      additionalProperties: false
+  - name: 21st_magic_component_inspiration
+    description: >
+      
+      "Use this tool when the user wants to see component, get inspiration, or
+      /21st fetch data and previews from 21st.dev. This tool returns the JSON
+      data of matching components without generating new code. This tool ONLY
+      returns the text snippet for that UI component. 
+
+      After calling this tool, you must edit or add files to integrate the
+      snippet into the codebase."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - searchQuery
+      properties:
+        message:
+          type: string
+          description: Full users message
+        searchQuery:
+          type: string
+          description: Search query for 21st.dev (library for searching UI components) to
+            find a UI component that matches the user's message. Must be a
+            two-four words max or phrase
+      additionalProperties: false

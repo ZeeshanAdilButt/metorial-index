@@ -1,0 +1,353 @@
+tools:
+  - name: oxylabs_universal_scraper
+    description: Scrape url using Oxylabs Web API with universal scraper
+    inputSchema:
+      type: object
+      title: scrape_universal_urlArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: Url to scrape with web scraper.
+        parse:
+          type: boolean
+          title: Parse
+          default: true
+          description: Should result be parsed. If result should not be parsed then html
+            will be stripped and converted to markdown file.
+        render:
+          enum:
+            - ""
+            - html
+          type: string
+          title: Render
+          default: ""
+          description: "Whether a headless browser should be used to render the page. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /javascript-rendering `html` will return rendered html page `None`
+            will not use render for scraping."
+  - name: oxylabs_web_unblocker
+    description: Scrape url using Oxylabs Web Unblocker
+    inputSchema:
+      type: object
+      title: scrape_with_web_unblockerArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: Url to scrape with web scraper.
+        render:
+          enum:
+            - ""
+            - html
+          type: string
+          title: Render
+          default: ""
+          description: "Whether a headless browser should be used to render the page. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /javascript-rendering `html` will return rendered html page `None`
+            will not use render for scraping."
+  - name: oxylabs_google_search_scraper
+    description: Scrape Google Search results using Oxylabs Web API
+    inputSchema:
+      type: object
+      title: scrape_google_searchArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 0
+          minimum: 1
+          description: Number of results to retrieve in each page.
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+          minimum: 1
+          description: Number of pages to retrieve.
+        parse:
+          type: boolean
+          title: Parse
+          default: true
+          description: Should result be parsed. If result should not be parsed then html
+            will be stripped and converted to markdown file.
+        query:
+          type: string
+          title: Query
+          description: URL-encoded keyword to search for.
+        domain:
+          type: string
+          title: Domain
+          default: ""
+          description: "Domain localization for Google. See:
+            https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%\
+            2FiwDdoZGfMbUe5cRL2417%2Fuploads%2FS6e9iUtXb5YkRLlfQdm6%2Flocale.js\
+            on?alt=media&token=435886ac-6223-42d4-8204-1e7d53512a42"
+        locale:
+          type: string
+          title: Locale
+          default: ""
+          description: "'Accept-Language' header value which changes your Google search
+            page web interface language. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /domain-locale-results-language#locale-1"
+        render:
+          enum:
+            - ""
+            - html
+          type: string
+          title: Render
+          default: ""
+          description: "Whether a headless browser should be used to render the page. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /javascript-rendering `html` will return rendered html page `None`
+            will not use render for scraping."
+        ad_mode:
+          type: boolean
+          title: Ad Mode
+          default: false
+          description: "If true will use the Google Ads source optimized for the paid ads.
+            See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/google/a\
+            ds"
+        start_page:
+          type: integer
+          title: Start Page
+          default: 0
+          minimum: 1
+          description: Starting page number.
+        geo_location:
+          type: string
+          title: Geo Location
+          default: ""
+          description: "The geographical location that the result should be adapted for.
+            See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /serp-localization#google"
+        user_agent_type:
+          enum:
+            - ""
+            - desktop
+            - desktop_chrome
+            - desktop_firefox
+            - desktop_safari
+            - desktop_edge
+            - desktop_opera
+            - mobile
+            - mobile_ios
+            - mobile_android
+            - tablet
+          type: string
+          title: User Agent Type
+          default: ""
+          description: "Device type and browser that will be used to determine User-Agent
+            header value. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /user-agent-type"
+  - name: oxylabs_amazon_search_scraper
+    description: Scrape Amazon Search results using Oxylabs Web API
+    inputSchema:
+      type: object
+      title: scrape_amazon_searchArguments
+      required:
+        - query
+      properties:
+        pages:
+          type: integer
+          title: Pages
+          default: 0
+          minimum: 1
+          description: Number of pages to retrieve.
+        parse:
+          type: boolean
+          title: Parse
+          default: true
+          description: Should result be parsed. If result should not be parsed then html
+            will be stripped and converted to markdown file.
+        query:
+          type: string
+          title: Query
+          description: Keyword to search for.
+        domain:
+          type: string
+          title: Domain
+          default: ""
+          description: "Domain localization for Google. See:
+            https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%\
+            2FiwDdoZGfMbUe5cRL2417%2Fuploads%2FS6e9iUtXb5YkRLlfQdm6%2Flocale.js\
+            on?alt=media&token=435886ac-6223-42d4-8204-1e7d53512a42"
+        locale:
+          type: string
+          title: Locale
+          default: ""
+          description: "'Accept-Language' header value which changes your Google search
+            page web interface language. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /domain-locale-results-language#locale-1"
+        render:
+          enum:
+            - ""
+            - html
+          type: string
+          title: Render
+          default: ""
+          description: "Whether a headless browser should be used to render the page. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /javascript-rendering `html` will return rendered html page `None`
+            will not use render for scraping."
+        currency:
+          type: string
+          title: Currency
+          default: ""
+          examples:
+            - USD
+            - EUR
+            - AUD
+          description: "Currency that will be used to display the prices. See:
+            https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%\
+            2FzrXw45naRpCZ0Ku9AjY1%2Fuploads%2FIAHLazcDOwZSiZ6s8IJt%2FAmazon_se\
+            arch_currency_values.json?alt=media&token=b72b5c4d-3820-42a6-8e74-7\
+            8ea6b44e93f"
+        start_page:
+          type: integer
+          title: Start Page
+          default: 0
+          minimum: 1
+          description: Starting page number.
+        category_id:
+          type: string
+          title: Category Id
+          default: ""
+          description: Search for items in a particular browse node (product category).
+        merchant_id:
+          type: string
+          title: Merchant Id
+          default: ""
+          description: Search for items sold by a particular seller.
+        geo_location:
+          type: string
+          title: Geo Location
+          default: ""
+          description: "The geographical location that the result should be adapted for.
+            See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /serp-localization#google"
+        user_agent_type:
+          enum:
+            - ""
+            - desktop
+            - desktop_chrome
+            - desktop_firefox
+            - desktop_safari
+            - desktop_edge
+            - desktop_opera
+            - mobile
+            - mobile_ios
+            - mobile_android
+            - tablet
+          type: string
+          title: User Agent Type
+          default: ""
+          description: "Device type and browser that will be used to determine User-Agent
+            header value. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /user-agent-type"
+  - name: oxylabs_amazon_product_scraper
+    description: Scrape Amazon Products using Oxylabs Web API
+    inputSchema:
+      type: object
+      title: scrape_amazon_productsArguments
+      required:
+        - query
+      properties:
+        parse:
+          type: boolean
+          title: Parse
+          default: true
+          description: Should result be parsed. If result should not be parsed then html
+            will be stripped and converted to markdown file.
+        query:
+          type: string
+          title: Query
+          description: Keyword to search for.
+        domain:
+          type: string
+          title: Domain
+          default: ""
+          description: "Domain localization for Google. See:
+            https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%\
+            2FiwDdoZGfMbUe5cRL2417%2Fuploads%2FS6e9iUtXb5YkRLlfQdm6%2Flocale.js\
+            on?alt=media&token=435886ac-6223-42d4-8204-1e7d53512a42"
+        locale:
+          type: string
+          title: Locale
+          default: ""
+          description: "'Accept-Language' header value which changes your Google search
+            page web interface language. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /domain-locale-results-language#locale-1"
+        render:
+          enum:
+            - ""
+            - html
+          type: string
+          title: Render
+          default: ""
+          description: "Whether a headless browser should be used to render the page. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /javascript-rendering `html` will return rendered html page `None`
+            will not use render for scraping."
+        currency:
+          type: string
+          title: Currency
+          default: ""
+          examples:
+            - USD
+            - EUR
+            - AUD
+          description: "Currency that will be used to display the prices. See:
+            https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%\
+            2FzrXw45naRpCZ0Ku9AjY1%2Fuploads%2FIAHLazcDOwZSiZ6s8IJt%2FAmazon_se\
+            arch_currency_values.json?alt=media&token=b72b5c4d-3820-42a6-8e74-7\
+            8ea6b44e93f"
+        geo_location:
+          type: string
+          title: Geo Location
+          default: ""
+          description: "The geographical location that the result should be adapted for.
+            See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /serp-localization#google"
+        user_agent_type:
+          enum:
+            - ""
+            - desktop
+            - desktop_chrome
+            - desktop_firefox
+            - desktop_safari
+            - desktop_edge
+            - desktop_opera
+            - mobile
+            - mobile_ios
+            - mobile_android
+            - tablet
+          type: string
+          title: User Agent Type
+          default: ""
+          description: "Device type and browser that will be used to determine User-Agent
+            header value. See:
+            https://developers.oxylabs.io/scraper-apis/web-scraper-api/features\
+            /user-agent-type"
+        autoselect_variant:
+          type: boolean
+          title: Autoselect Variant
+          default: false
+          description: To get accurate pricing/buybox data, set this parameter to true
+            (which tells us to append the th=1&psc=1 URL parameters to the end
+            of the product URL).

@@ -1,0 +1,1172 @@
+tools:
+  - name: example_activity
+    description: "Get activity data for the specified assay_chembl_id
+
+      \   \ 
+
+      \    Args:
+
+      \        assay_chembl_id: ChEMBL assay ID
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of activity data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_activityArguments
+      required:
+        - assay_chembl_id
+      properties:
+        assay_chembl_id:
+          type: string
+          title: Assay Chembl Id
+  - name: example_activity_supplementary_data_by_activity
+    description: "Get supplementary activity data for the specified
+      activity_chembl_id
+
+      \   \ 
+
+      \    Args:
+
+      \        activity_chembl_id: ChEMBL activity ID
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of supplementary activity data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_activity_supplementary_data_by_activityArguments
+      required:
+        - activity_chembl_id
+      properties:
+        activity_chembl_id:
+          type: string
+          title: Activity Chembl Id
+  - name: example_assay
+    description: "Get assay data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        assay_type: Assay type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of assay data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_assayArguments
+      required:
+        - assay_type
+      properties:
+        assay_type:
+          type: string
+          title: Assay Type
+  - name: example_assay_class
+    description: "Get assay classification data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        assay_class_type: Assay classification type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of assay classification data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_assay_classArguments
+      required:
+        - assay_class_type
+      properties:
+        assay_class_type:
+          type: string
+          title: Assay Class Type
+  - name: example_atc_class
+    description: "Get ATC classification data for the specified level1
+
+      \   \ 
+
+      \    Args:
+
+      \        level1: Level1 value of ATC classification
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of ATC classification data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_atc_classArguments
+      required:
+        - level1
+      properties:
+        level1:
+          type: string
+          title: Level1
+  - name: example_binding_site
+    description: "Get binding site data for the specified name
+
+      \   \ 
+
+      \    Args:
+
+      \        site_name: Binding site name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of binding site data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_binding_siteArguments
+      required:
+        - site_name
+      properties:
+        site_name:
+          type: string
+          title: Site Name
+  - name: example_biotherapeutic
+    description: "Get biotherapeutic data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        biotherapeutic_type: Biotherapeutic type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of biotherapeutic data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_biotherapeuticArguments
+      required:
+        - biotherapeutic_type
+      properties:
+        biotherapeutic_type:
+          type: string
+          title: Biotherapeutic Type
+  - name: example_cell_line
+    description: "Get cell line data for the specified name
+
+      \   \ 
+
+      \    Args:
+
+      \        cell_line_name: Cell line name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of cell line data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_cell_lineArguments
+      required:
+        - cell_line_name
+      properties:
+        cell_line_name:
+          type: string
+          title: Cell Line Name
+  - name: example_chembl_id_lookup
+    description: "Look up ChEMBL IDs for the specified type and query
+
+      \   \ 
+
+      \    Args:
+
+      \        available_type: Available type
+
+      \        q: Query string
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of ChEMBL IDs
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_chembl_id_lookupArguments
+      required:
+        - available_type
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+        available_type:
+          type: string
+          title: Available Type
+  - name: example_chembl_release
+    description: "Get all ChEMBL release information
+
+      \   \ 
+
+      \    Returns:
+
+      \        List of ChEMBL release information
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_chembl_releaseArguments
+      properties: {}
+  - name: example_compound_record
+    description: "Get compound records for the specified name
+
+      \   \ 
+
+      \    Args:
+
+      \        compound_name: Compound name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of compound records
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_compound_recordArguments
+      required:
+        - compound_name
+      properties:
+        compound_name:
+          type: string
+          title: Compound Name
+  - name: example_compound_structural_alert
+    description: "Get compound structural alerts for the specified name
+
+      \   \ 
+
+      \    Args:
+
+      \        alert_name: Alert name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of compound structural alerts
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_compound_structural_alertArguments
+      required:
+        - alert_name
+      properties:
+        alert_name:
+          type: string
+          title: Alert Name
+  - name: example_description
+    description: "Get description data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        description_type: Description type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of description data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_descriptionArguments
+      required:
+        - description_type
+      properties:
+        description_type:
+          type: string
+          title: Description Type
+  - name: example_document
+    description: "Get document data for the specified journal
+
+      \   \ 
+
+      \    Args:
+
+      \        journal: Journal name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of document data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_documentArguments
+      required:
+        - journal
+      properties:
+        journal:
+          type: string
+          title: Journal
+  - name: example_drug
+    description: "Get drug data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        drug_type: Drug type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of drug data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_drugArguments
+      required:
+        - drug_type
+      properties:
+        drug_type:
+          type: string
+          title: Drug Type
+  - name: example_drug_indication
+    description: "Get drug indication data for the specified MeSH heading
+
+      \   \ 
+
+      \    Args:
+
+      \        mesh_heading: MeSH heading
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of drug indication data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_drug_indicationArguments
+      required:
+        - mesh_heading
+      properties:
+        mesh_heading:
+          type: string
+          title: Mesh Heading
+  - name: example_drug_warning
+    description: "Get drug warning data for the specified MedDRA term
+
+      \   \ 
+
+      \    Args:
+
+      \        meddra_term: MedDRA term
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of drug warning data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_drug_warningArguments
+      required:
+        - meddra_term
+      properties:
+        meddra_term:
+          type: string
+          title: Meddra Term
+  - name: example_go_slim
+    description: "Get data for the specified GO Slim term
+
+      \   \ 
+
+      \    Args:
+
+      \        go_slim_term: GO Slim term
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of GO Slim data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_go_slimArguments
+      required:
+        - go_slim_term
+      properties:
+        go_slim_term:
+          type: string
+          title: Go Slim Term
+  - name: example_mechanism
+    description: "Get data for the specified mechanism of action
+
+      \   \ 
+
+      \    Args:
+
+      \        mechanism_of_action: Mechanism of action
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of mechanism data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_mechanismArguments
+      required:
+        - mechanism_of_action
+      properties:
+        mechanism_of_action:
+          type: string
+          title: Mechanism Of Action
+  - name: example_molecule
+    description: "Get molecule data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        molecule_type: Molecule type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of molecule data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_moleculeArguments
+      required:
+        - molecule_type
+      properties:
+        molecule_type:
+          type: string
+          title: Molecule Type
+  - name: example_molecule_form
+    description: "Get molecule form data for the specified description
+
+      \   \ 
+
+      \    Args:
+
+      \        form_description: Form description
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of molecule form data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_molecule_formArguments
+      required:
+        - form_description
+      properties:
+        form_description:
+          type: string
+          title: Form Description
+  - name: example_organism
+    description: "Get organism data for the specified taxonomy ID
+
+      \   \ 
+
+      \    Args:
+
+      \        tax_id: Taxonomy ID
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of organism data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_organismArguments
+      required:
+        - tax_id
+      properties:
+        tax_id:
+          type: integer
+          title: Tax Id
+  - name: example_protein_classification
+    description: "Get protein classification data for the specified class name
+
+      \   \ 
+
+      \    Args:
+
+      \        protein_class_name: Protein class name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of protein classification data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_protein_classificationArguments
+      required:
+        - protein_class_name
+      properties:
+        protein_class_name:
+          type: string
+          title: Protein Class Name
+  - name: example_source
+    description: "Get source information for the specified description
+
+      \   \ 
+
+      \    Args:
+
+      \        source_description: Source description
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of source information
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_sourceArguments
+      required:
+        - source_description
+      properties:
+        source_description:
+          type: string
+          title: Source Description
+  - name: example_target
+    description: "Get target data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        target_type: Target type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of target data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_targetArguments
+      required:
+        - target_type
+      properties:
+        target_type:
+          type: string
+          title: Target Type
+  - name: example_target_component
+    description: "Get target component data for the specified type
+
+      \   \ 
+
+      \    Args:
+
+      \        component_type: Component type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of target component data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_target_componentArguments
+      required:
+        - component_type
+      properties:
+        component_type:
+          type: string
+          title: Component Type
+  - name: example_target_relation
+    description: "Get target relationship data for the specified relationship type
+
+      \   \ 
+
+      \    Args:
+
+      \        relationship_type: Relationship type
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of target relationship data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_target_relationArguments
+      required:
+        - relationship_type
+      properties:
+        relationship_type:
+          type: string
+          title: Relationship Type
+  - name: example_tissue
+    description: "Get tissue data for the specified name
+
+      \   \ 
+
+      \    Args:
+
+      \        tissue_name: Tissue name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of tissue data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_tissueArguments
+      required:
+        - tissue_name
+      properties:
+        tissue_name:
+          type: string
+          title: Tissue Name
+  - name: example_xref_source
+    description: "Get cross-reference source data for the specified name
+
+      \   \ 
+
+      \    Args:
+
+      \        xref_name: Cross-reference source name
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of cross-reference source data
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_xref_sourceArguments
+      required:
+        - xref_name
+      properties:
+        xref_name:
+          type: string
+          title: Xref Name
+  - name: example_canonicalizeSmiles
+    description: "Convert SMILES string to canonical form
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        Canonicalized SMILES string
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_canonicalizeSmilesArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_chemblDescriptors
+    description: "Get ChEMBL descriptors for the SMILES string
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary of ChEMBL descriptors
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_chemblDescriptorsArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_description_utils
+    description: "
+
+      \    Get description information for the ChEMBL ID
+
+      \   \ 
+
+      \    Args:
+
+      \        chembl_id: ChEMBL ID
+
+      \       \ 
+
+      \    Returns:
+
+      \        Description information
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_description_utilsArguments
+      required:
+        - chembl_id
+      properties:
+        chembl_id:
+          type: string
+          title: Chembl Id
+  - name: example_descriptors
+    description: "
+
+      \    Get descriptors for the SMILES string
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary of descriptors
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_descriptorsArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_getParent
+    description: "
+
+      \    Get parent ChEMBL ID for the given ChEMBL ID
+
+      \   \ 
+
+      \    Args:
+
+      \        chembl_id: ChEMBL ID
+
+      \       \ 
+
+      \    Returns:
+
+      \        Parent ChEMBL ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_getParentArguments
+      required:
+        - chembl_id
+      properties:
+        chembl_id:
+          type: string
+          title: Chembl Id
+  - name: example_highlightSmilesFragmentSvg
+    description: "
+
+      \    Generate SVG image with highlighted fragment for SMILES string
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \        fragment: Fragment to highlight
+
+      \       \ 
+
+      \    Returns:
+
+      \        SVG image string
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_highlightSmilesFragmentSvgArguments
+      required:
+        - smiles
+        - fragment
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+        fragment:
+          type: string
+          title: Fragment
+  - name: example_inchi2inchiKey
+    description: "
+
+      \    Convert InChI to InChI Key
+
+      \   \ 
+
+      \    Args:
+
+      \        inchi: InChI string
+
+      \       \ 
+
+      \    Returns:
+
+      \        InChI Key
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_inchi2inchiKeyArguments
+      required:
+        - inchi
+      properties:
+        inchi:
+          type: string
+          title: Inchi
+  - name: example_inchi2svg
+    description: "
+
+      \    Convert InChI to SVG image
+
+      \   \ 
+
+      \    Args:
+
+      \        inchi: InChI string
+
+      \       \ 
+
+      \    Returns:
+
+      \        SVG image string
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_inchi2svgArguments
+      required:
+        - inchi
+      properties:
+        inchi:
+          type: string
+          title: Inchi
+  - name: example_is3D
+    description: "
+
+      \    Check if SMILES string represents a 3D structure
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        True if 3D structure, False otherwise
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_is3DArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_official_utils
+    description: "
+
+      \    Get official name for the ChEMBL ID
+
+      \   \ 
+
+      \    Args:
+
+      \        chembl_id: ChEMBL ID
+
+      \       \ 
+
+      \    Returns:
+
+      \        Official name
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_official_utilsArguments
+      required:
+        - chembl_id
+      properties:
+        chembl_id:
+          type: string
+          title: Chembl Id
+  - name: example_removeHs
+    description: "
+
+      \    Remove hydrogen atoms from SMILES string
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        SMILES string without hydrogen atoms
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_removeHsArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_smiles2inchi
+    description: "
+
+      \    Convert SMILES string to InChI
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        InChI string
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_smiles2inchiArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_smiles2inchiKey
+    description: "
+
+      \    Convert SMILES string to InChI Key
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        InChI Key
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_smiles2inchiKeyArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_smiles2svg
+    description: "
+
+      \    Convert SMILES string to SVG image
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        SVG image string
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_smiles2svgArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_standardize
+    description: "
+
+      \    Standardize SMILES string
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        Standardized SMILES string
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_standardizeArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles
+  - name: example_status
+    description: "
+
+      \    Get status information for ChEMBL Web Services
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dictionary of status information
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_statusArguments
+      properties: {}
+  - name: example_structuralAlerts
+    description: "
+
+      \    Get structural alerts for SMILES string
+
+      \   \ 
+
+      \    Args:
+
+      \        smiles: SMILES string
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of structural alerts
+
+      \    "
+    inputSchema:
+      type: object
+      title: example_structuralAlertsArguments
+      required:
+        - smiles
+      properties:
+        smiles:
+          type: string
+          title: Smiles

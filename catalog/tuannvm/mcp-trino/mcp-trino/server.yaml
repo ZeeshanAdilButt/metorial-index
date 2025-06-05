@@ -1,0 +1,17 @@
+identifier: tuannvm/mcp-trino/mcp-trino
+repo:
+  provider: github.com
+  url: https://github.com/tuannvm/mcp-trino
+  name: mcp-trino
+  owner: tuannvm
+server:
+  subdirectory: /
+  name: Trino MCP Server
+  description: Enable AI assistants to interact with Trino's distributed SQL query
+    engine through standardized tools. Execute complex SQL queries and discover
+    data catalogs seamlessly. Enhance your data analytics capabilities with a
+    high-performance MCP server built in Go.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,96 @@
+tools:
+  - name: vibe_check
+    description: Metacognitive questioning tool that identifies assumptions and
+      breaks tunnel vision to prevent cascading errors
+    inputSchema:
+      type: object
+      required:
+        - plan
+        - userRequest
+      properties:
+        plan:
+          type: string
+          description: Current plan or thinking
+        phase:
+          enum:
+            - planning
+            - implementation
+            - review
+          type: string
+          description: Current project phase for context-appropriate feedback
+        sessionId:
+          type: string
+          description: Optional session ID for state management
+        confidence:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Agent's confidence level (0-1)
+        focusAreas:
+          type: array
+          items:
+            type: string
+          description: Optional specific focus areas
+        thinkingLog:
+          type: string
+          description: Raw sequential thinking transcript
+        userRequest:
+          type: string
+          description: Original user request - critical for alignment checking
+        availableTools:
+          type: array
+          items:
+            type: string
+          description: List of available MCP tools
+        previousAdvice:
+          type: string
+          description: Previous feedback to avoid repetition and ensure progression
+  - name: vibe_distill
+    description: Plan simplification tool that reduces complexity and extracts
+      essential elements to prevent over-engineering
+    inputSchema:
+      type: object
+      required:
+        - plan
+        - userRequest
+      properties:
+        plan:
+          type: string
+          description: The plan to distill
+        sessionId:
+          type: string
+          description: Optional session ID for state management
+        userRequest:
+          type: string
+          description: Original user request
+  - name: vibe_learn
+    description: Pattern recognition system that tracks common errors and solutions
+      to prevent recurring issues
+    inputSchema:
+      type: object
+      required:
+        - mistake
+        - category
+        - solution
+      properties:
+        mistake:
+          type: string
+          description: One-sentence description of the mistake
+        category:
+          enum:
+            - Complex Solution Bias
+            - Feature Creep
+            - Premature Implementation
+            - Misalignment
+            - Overtooling
+            - Other
+          type: string
+          description: "Category of mistake (standard categories: Complex Solution Bias,
+            Feature Creep, Premature Implementation, Misalignment, Overtooling,
+            Other)"
+        solution:
+          type: string
+          description: How it was corrected (one sentence)
+        sessionId:
+          type: string
+          description: Optional session ID for state management

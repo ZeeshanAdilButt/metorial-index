@@ -1,0 +1,17 @@
+identifier: echo-help/jenkins-demo/jenkins-demo
+repo:
+  provider: github.com
+  url: https://github.com/echo-help/jenkins-demo
+  name: jenkins-demo
+  owner: echo-help
+server:
+  subdirectory: /
+  name: Jenkins Demo Server
+  description: Provide a demonstration server for Jenkins integration showcasing
+    continuous integration and delivery workflows. Enable users to explore
+    Jenkins capabilities through a simple MCP interface. Facilitate learning and
+    testing of Jenkins automation features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

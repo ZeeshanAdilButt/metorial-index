@@ -1,0 +1,22 @@
+tools:
+  - name: OmniTask Agent
+    description: A powerful multi-model task management system that can both
+      integrate with various task management systems and help users choose and
+      use the most suitable task management solution
+    inputSchema:
+      type: object
+      title: Task_Master_AgentArguments
+      required:
+        - prompt
+        - projectRoot
+        - file
+      properties:
+        file:
+          type: string
+          title: File
+        prompt:
+          type: string
+          title: Prompt
+        projectRoot:
+          type: string
+          title: Projectroot

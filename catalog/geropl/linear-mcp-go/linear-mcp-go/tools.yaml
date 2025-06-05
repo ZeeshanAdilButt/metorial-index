@@ -1,0 +1,89 @@
+tools:
+  - name: linear_get_issue
+    description: Retrieves a single Linear issue.
+    inputSchema:
+      type: object
+      required:
+        - issue
+      properties:
+        issue:
+          type: string
+          description: ID or identifier (e.g., 'TEAM-123') of the issue to retrieve
+  - name: linear_get_issue_comments
+    description: Retrieves paginated comments for a Linear issue. Supports
+      navigating through comment threads and pagination.
+    inputSchema:
+      type: object
+      required:
+        - issue
+      properties:
+        after:
+          type: string
+          description: Cursor for pagination, to get comments after this point
+        issue:
+          type: string
+          description: ID or identifier (e.g., 'TEAM-123') of the issue to retrieve
+            comments for
+        limit:
+          type: number
+          description: "Maximum number of comments to return (default: 10)"
+        thread:
+          type: string
+          description: Optional UUID of the parent comment / thread to retrieve replies
+            for. If not provided, returns top-level comments.
+  - name: linear_get_teams
+    description: Retrieves Linear teams.
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Optional team name filter. Returns teams whose names contain this
+            string.
+  - name: linear_get_user_issues
+    description: Retrieves issues assigned to a user.
+    inputSchema:
+      type: object
+      properties:
+        user:
+          type: string
+          description: Optional user identifier (UUID, name, or email). If not provided,
+            returns authenticated user's issues
+        limit:
+          type: number
+          description: "Maximum number of issues to return (default: 50)"
+        includeArchived:
+          type: boolean
+          description: Include archived issues in results
+  - name: linear_search_issues
+    description: Searches Linear issues.
+    inputSchema:
+      type: object
+      properties:
+        team:
+          type: string
+          description: Filter by team identifier (UUID, name, or key)
+        limit:
+          type: number
+          description: "Max results to return (default: 10)"
+        query:
+          type: string
+          description: Optional text to search in title and description
+        labels:
+          type: string
+          description: Filter by label names (comma-separated)
+        status:
+          type: string
+          description: Filter by status name (e.g., 'In Progress', 'Done')
+        assignee:
+          type: string
+          description: Filter by assignee identifier (UUID, name, or email)
+        estimate:
+          type: number
+          description: Filter by estimate points
+        priority:
+          type: number
+          description: Filter by priority (1=urgent, 2=high, 3=normal, 4=low)
+        includeArchived:
+          type: boolean
+          description: "Include archived issues in results (default: false)"

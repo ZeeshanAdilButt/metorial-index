@@ -1,0 +1,17 @@
+identifier: gamunu/mcp-unix-shell/mcp-unix-shell
+repo:
+  provider: github.com
+  url: https://github.com/gamunu/mcp-unix-shell
+  name: mcp-unix-shell
+  owner: gamunu
+server:
+  subdirectory: /
+  name: Unix Shell Server
+  description: Execute unix shell commands securely and efficiently. List previous
+    command executions and configure allowed commands to enhance security.
+    Integrate with your applications to leverage shell capabilities without
+    compromising safety.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

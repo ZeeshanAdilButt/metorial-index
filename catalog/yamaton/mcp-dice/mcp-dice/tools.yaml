@@ -1,0 +1,12 @@
+tools:
+  - name: roll_dice
+    description: Roll dice using standard notation (e.g., '2d6+3', '1d20-2')
+    inputSchema:
+      type: object
+      required:
+        - notation
+      properties:
+        notation:
+          type: string
+          pattern: ^\d+d\d+([+-]\d+)?$
+          description: Dice notation (e.g., '2d6+3', '1d20-2')

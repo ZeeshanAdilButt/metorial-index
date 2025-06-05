@@ -1,0 +1,18 @@
+identifier: oraichain/ragflow-mcp/ragflow-mcp
+repo:
+  provider: github.com
+  url: https://github.com/oraichain/ragflow-mcp
+  name: ragflow-mcp
+  owner: oraichain
+server:
+  subdirectory: /
+  name: RAGFlow
+  description: Launch a simple MCP server tailored for RAGFlow applications.
+    Enhance your projects with dynamic integration capabilities and real-time
+    data manipulation. Ideal for developers looking to streamline their
+    workflows with a lightweight solution until the official server is
+    available.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: tecnologiacomigo/server-wp-mcp/server-wp-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tecnologiacomigo/server-wp-mcp
+  name: server-wp-mcp
+  owner: tecnologiacomigo
+server:
+  subdirectory: /
+  name: WordPress Server
+  description: Enable AI assistants to interact with multiple WordPress sites
+    securely through natural language. Manage content, posts, users, plugins,
+    and site settings via the WordPress REST API with dynamic endpoint discovery
+    and flexible operations. Simplify WordPress site management with secure
+    authentication and easy configuration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

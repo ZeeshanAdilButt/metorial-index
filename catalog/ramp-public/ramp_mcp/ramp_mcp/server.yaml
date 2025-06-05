@@ -1,0 +1,18 @@
+identifier: ramp-public/ramp_mcp/ramp_mcp
+repo:
+  provider: github.com
+  url: https://github.com/ramp-public/ramp_mcp
+  name: ramp_mcp
+  owner: ramp-public
+server:
+  subdirectory: /
+  name: Ramp Data Analysis Server
+  description: Enable seamless retrieval and analysis of Ramp financial data
+    through a Model Context Protocol server. Integrate with Ramp's Developer API
+    to process large datasets efficiently using an ephemeral in-memory database.
+    Simplify data querying and management with built-in tools for database
+    operations and direct data fetching.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

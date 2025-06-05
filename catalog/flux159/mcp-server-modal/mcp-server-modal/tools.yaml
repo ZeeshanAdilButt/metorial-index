@@ -1,0 +1,10 @@
+tools:
+  - name: deploy
+    description: some description
+    inputSchema:
+      type: object
+      required:
+        - message
+      properties:
+        modal_path:
+          type: string

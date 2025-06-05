@@ -1,0 +1,862 @@
+tools:
+  - name: create_branch
+    description: Create a new branch in a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - branch
+      properties:
+        ref:
+          type: string
+          default: master
+          description: Source branch name, the new branch will be created based on this
+            branch, default value is master
+        branch:
+          type: string
+          description: Name of the branch to be created
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: get_branch
+    description: Get information about a branch in a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - branchName
+      properties:
+        branchName:
+          type: string
+          description: "Branch name (if it contains special characters, use URL encoding),
+            example: master or feature%2Fdev"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: delete_branch
+    description: Delete a branch from a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - branchName
+      properties:
+        branchName:
+          type: string
+          description: "Branch name (use URL-Encoder for encoding, example: feature%2Fdev)"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: list_branches
+    description: List branches in a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+      properties:
+        page:
+          type: integer
+          default: 1
+          description: Page number
+        sort:
+          enum:
+            - name_asc
+            - name_desc
+            - updated_asc
+            - updated_desc
+          type: string
+          default: name_asc
+          description: "Sort order: name_asc - name ascending, name_desc - name
+            descending, updated_asc - update time ascending, updated_desc -
+            update time descending"
+        search:
+          type:
+            - string
+            - "null"
+          description: Search query
+        perPage:
+          type: integer
+          default: 20
+          description: Items per page
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: get_file_blobs
+    description: Get file content from a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - filePath
+        - ref
+      properties:
+        ref:
+          type: string
+          description: Reference name, usually branch name, can be branch name, tag name
+            or commit SHA. If not provided, the default branch of the repository
+            will be used, such as master
+        filePath:
+          type: string
+          description: "File path, needs to be URL encoded, for example:
+            /src/main/java/com/aliyun/test.java"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: create_file
+    description: Create a new file in a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - filePath
+        - content
+        - commitMessage
+        - branch
+      properties:
+        branch:
+          type: string
+          description: Branch name
+        content:
+          type: string
+          description: File content
+        encoding:
+          type: string
+          description: Encoding rule, options {text, base64}, default is text
+        filePath:
+          type: string
+          description: "File path, needs to be URL encoded, for example:
+            /src/main/java/com/aliyun/test.java"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        commitMessage:
+          type: string
+          description: Commit message, not empty, no more than 102400 characters
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: update_file
+    description: Update an existing file in a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - filePath
+        - content
+        - commitMessage
+        - branch
+      properties:
+        branch:
+          type: string
+          description: Branch name
+        content:
+          type: string
+          description: File content
+        encoding:
+          type: string
+          default: text
+          description: Encoding rule, options {text, base64}, default is text
+        filePath:
+          type: string
+          description: "File path, needs to be URL encoded, for example:
+            /src/main/java/com/aliyun/test.java"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        commitMessage:
+          type: string
+          description: Commit message, not empty, no more than 102400 characters
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: delete_file
+    description: Delete a file from a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - filePath
+        - commitMessage
+        - branch
+      properties:
+        branch:
+          type: string
+          description: Branch name
+        filePath:
+          type: string
+          description: "File path, needs to be URL encoded, for example:
+            /src/main/java/com/aliyun/test.java"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        commitMessage:
+          type: string
+          description: Commit message
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: compare
+    description: Query code to compare content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - from
+        - to
+      properties:
+        to:
+          type: string
+          description: Can be CommitSHA, branch name or tag name
+        from:
+          type: string
+          description: Can be CommitSHA, branch name or tag name
+        straight:
+          anyOf:
+            - type: string
+              default: "false"
+            - type: "null"
+          description: "Whether to use Merge-Base: straight=false means using Merge-Base;
+            straight=true means not using Merge-Base; default is false, meaning
+            using Merge-Base"
+        sourceType:
+          type:
+            - string
+            - "null"
+          description: "Options: branch, tag; if it's a commit comparison, you can omit
+            this; if it's a branch comparison, you need to provide: branch, or
+            you can omit it but ensure there are no branch or tag name
+            conflicts; if it's a tag comparison, you need to provide: tag; if
+            there are branches and tags with the same name, you need to strictly
+            provide branch or tag"
+        targetType:
+          type:
+            - string
+            - "null"
+          description: "Options: branch, tag; if it's a commit comparison, you can omit
+            this; if it's a branch comparison, you need to provide: branch, or
+            you can omit it but ensure there are no branch or tag name
+            conflicts; if it's a tag comparison, you need to provide: tag; if
+            there are branches and tags with the same name, you need to strictly
+            provide branch or tag"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: get_repository
+    description: Get information about a Codeup repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+      properties:
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: list_repositories
+    description: List repositories in an organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        page:
+          type: integer
+          default: 1
+          description: Page number, default starts from 1, generally should not exceed 150
+            pages
+        sort:
+          type: string
+          default: desc
+          description: Sort order, options include {asc, desc}, default is desc
+        search:
+          type:
+            - string
+            - "null"
+          description: Search keyword, used to fuzzy match repository paths
+        orderBy:
+          type: string
+          default: created_at
+          description: Sort field, options include {created_at, name, path,
+            last_activity_at}, default is created_at
+        perPage:
+          type: integer
+          default: 20
+          description: Items per page, default 20, value range [1, 100]
+        archived:
+          type: boolean
+          default: false
+          description: Whether archived
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: get_change_request
+    description: Get information about a change request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - localId
+      properties:
+        localId:
+          type: string
+          description: Local ID, represents the nth merge request in the repository
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: list_change_requests
+    description: List change requests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        page:
+          type: integer
+          default: 1
+          description: Page number
+        sort:
+          type: string
+          default: desc
+          description: "Sort order. Possible values: asc (ascending), desc (descending,
+            default)"
+        state:
+          type:
+            - string
+            - "null"
+          description: "Merge request filter status. Possible values: opened, merged,
+            closed. Default is null, which queries all statuses"
+        search:
+          type:
+            - string
+            - "null"
+          description: Title keyword search
+        orderBy:
+          type: string
+          default: updated_at
+          description: "Sort field. Possible values: created_at (creation time),
+            updated_at (update time, default)"
+        perPage:
+          type: integer
+          default: 20
+          description: Items per page
+        authorIds:
+          type:
+            - string
+            - "null"
+          description: Creator user ID list, multiple separated by commas
+        projectIds:
+          type:
+            - string
+            - "null"
+          description: "Repository ID or a combination of organization ID and repository
+            name list, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F), multiple separated by
+            commas"
+        reviewerIds:
+          type:
+            - string
+            - "null"
+          description: Reviewer user ID list, multiple separated by commas
+        createdAfter:
+          type:
+            - string
+            - "null"
+          description: "End creation time, time format is ISO 8601, for example:
+            2019-03-15T08:00:00Z"
+        createdBefore:
+          type:
+            - string
+            - "null"
+          description: "Start creation time, time format is ISO 8601, for example:
+            2019-03-15T08:00:00Z"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: create_change_request
+    description: Create a new change request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - title
+        - sourceBranch
+        - targetBranch
+      properties:
+        title:
+          type: string
+          description: Title, no more than 256 characters
+        createFrom:
+          type: string
+          default: WEB
+          description: "Creation source. Possible values: WEB (created from web page),
+            COMMAND_LINE (created from command line). Default is WEB"
+        description:
+          type:
+            - string
+            - "null"
+          description: Description, no more than 10000 characters
+        workItemIds:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          description: Associated work item ID list
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        sourceBranch:
+          type: string
+          description: Source branch name
+        targetBranch:
+          type: string
+          description: Target branch name
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+        reviewerUserIds:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          description: Reviewer user ID list
+        sourceProjectId:
+          type: number
+          description: Source repository ID (if not provided, will try to get automatically)
+        targetProjectId:
+          type: number
+          description: Target repository ID (if not provided, will try to get automatically)
+      additionalProperties: false
+  - name: create_change_request_comment
+    description: Create a comment on a change request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - localId
+        - content
+        - patchset_biz_id
+      properties:
+        draft:
+          type: boolean
+          default: false
+          description: Whether it is a draft comment
+        content:
+          type: string
+          description: Comment content, length must be between 1 and 65535
+        localId:
+          type: string
+          description: Local ID, represents the nth merge request in the repository
+        resolved:
+          type: boolean
+          default: false
+          description: Whether to mark as resolved
+        file_path:
+          type:
+            - string
+            - "null"
+          description: File name, only for inline comments
+        line_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          description: Line number, only for inline comments
+        comment_type:
+          type: string
+          default: GLOBAL_COMMENT
+          description: "Comment type. Possible values: GLOBAL_COMMENT, INLINE_COMMENT"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+        patchset_biz_id:
+          type: string
+          description: Associated version ID, if it's INLINE_COMMENT, choose one from
+            from_patchset_biz_id or to_patchset_biz_id
+        to_patchset_biz_id:
+          type:
+            - string
+            - "null"
+          description: Target version ID for comparison, required for INLINE_COMMENT type
+        from_patchset_biz_id:
+          type:
+            - string
+            - "null"
+          description: Start version ID for comparison, required for INLINE_COMMENT type
+        parent_comment_biz_id:
+          type:
+            - string
+            - "null"
+          description: Parent comment ID
+      additionalProperties: false
+  - name: list_change_request_comments
+    description: List comments on a change request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - localId
+      properties:
+        state:
+          type: string
+          default: OPENED
+          description: "Comment state. Possible values: OPENED, DRAFT"
+        localId:
+          type: string
+          description: Local ID, represents the nth merge request in the repository
+        filePath:
+          type:
+            - string
+            - "null"
+          description: File name, only for inline comments
+        resolved:
+          type: boolean
+          default: false
+          description: Whether marked as resolved
+        commentType:
+          type: string
+          default: GLOBAL_COMMENT
+          description: "Comment type. Possible values: GLOBAL_COMMENT, INLINE_COMMENT"
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+        patchSetBizIds:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          description: Associated version ID list, each comment is associated with a
+            version, indicating which version the comment was posted on, for
+            global comments, it's associated with the latest merge source
+            version
+      additionalProperties: false
+  - name: list_change_request_patch_sets
+    description: List patch sets for a change request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - repositoryId
+        - localId
+      properties:
+        localId:
+          type: string
+          description: Local ID, represents the nth merge request in the repository
+        repositoryId:
+          type: string
+          description: "Repository ID or a combination of organization ID and repository
+            name, for example: 2835387 or organizationId%2Frepo-name (Note:
+            slashes need to be URL encoded as %2F)"
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: get_current_organization_info
+    description: Get information about the current user and organization based on the token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_user_organizations
+    description: Get the list of organizations the current user belongs to
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_project
+    description: Get information about a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - id
+      properties:
+        id:
+          type: string
+          description: Project unique identifier
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: search_projects
+    description: Search projects with various filter conditions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        name:
+          type:
+            - string
+            - "null"
+          description: Text contained in project name
+        page:
+          type: integer
+          default: 1
+          description: Pagination parameter, page number
+        sort:
+          type: string
+          default: desc
+          description: "Sort order, default is desc, options: desc (descending), asc
+            (ascending)"
+        admin:
+          type:
+            - string
+            - "null"
+          description: Administrator
+        status:
+          type:
+            - string
+            - "null"
+          description: Project status ID, multiple separated by commas
+        creator:
+          type:
+            - string
+            - "null"
+          description: Creator
+        orderBy:
+          type: string
+          default: gmtCreate
+          description: "Sort field, default is gmtCreate, supports: gmtCreate (creation
+            time), name (name)"
+        perPage:
+          type: integer
+          default: 20
+          description: Pagination parameter, page size, 0-200, default value is 20
+        createdAfter:
+          type:
+            - string
+            - "null"
+          description: "Created not earlier than, format: YYYY-MM-DD"
+        createdBefore:
+          type:
+            - string
+            - "null"
+          description: "Created not later than, format: YYYY-MM-DD"
+        logicalStatus:
+          type:
+            - string
+            - "null"
+          description: Logical status, e.g., NORMAL
+        organizationId:
+          type: string
+          description: Organization ID
+        extraConditions:
+          type:
+            - string
+            - "null"
+          description: Additional filter conditions, e.g., projects I manage, projects I
+            participate in, projects I favorited, etc.
+        advancedConditions:
+          type:
+            - string
+            - "null"
+          description: Advanced filter conditions, JSON format
+      additionalProperties: false
+  - name: get_work_item
+    description: Get information about a work item
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workItemId
+      properties:
+        workItemId:
+          type: string
+          description: Work item unique identifier, required parameter
+        organizationId:
+          type: string
+          description: Organization ID, can be found in the basic information page of the
+            organization admin console
+      additionalProperties: false
+  - name: search_workitems
+    description: Search work items with various filter conditions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - category
+        - spaceId
+      properties:
+        status:
+          type:
+            - string
+            - "null"
+          description: "Status ID, multiple separated by commas. Status names and their
+            IDs: Pending Confirmation (28), Pending Processing (100005),
+            Reopened (30), Deferred Fix (34), Confirmed (32), Selected (625489),
+            In Analysis (154395), Analysis Complete (165115), In Progress
+            (100010), In Design (156603), Design Complete (307012), In
+            Development (142838), Development Complete (100011), In Testing
+            (100012)"
+        creator:
+          type:
+            - string
+            - "null"
+          description: Creator ID, multiple separated by commas
+        orderBy:
+          type: string
+          default: gmtCreate
+          description: "Sort field, default is gmtCreate. Possible values: gmtCreate,
+            subject, status, priority, assignedTo"
+        spaceId:
+          type: string
+          description: Project ID, project unique identifier
+        subject:
+          type:
+            - string
+            - "null"
+          description: Text contained in the title
+        category:
+          type: string
+          description: Search for work item types, such as Req (requirement), Task (task),
+            Bug (defect), etc., multiple values separated by commas
+        assignedTo:
+          type:
+            - string
+            - "null"
+          description: Assignee ID, multiple separated by commas
+        createdAfter:
+          type:
+            - string
+            - "null"
+          description: "Created not earlier than, format: YYYY-MM-DD"
+        createdBefore:
+          type:
+            - string
+            - "null"
+          description: "Created not later than, format: YYYY-MM-DD"
+        organizationId:
+          type: string
+          description: Organization ID
+        advancedConditions:
+          type:
+            - string
+            - "null"
+          description: Advanced filter conditions, JSON format
+      additionalProperties: false

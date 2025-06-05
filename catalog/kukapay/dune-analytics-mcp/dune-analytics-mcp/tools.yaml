@@ -1,0 +1,24 @@
+tools:
+  - name: get_latest_result
+    description: Get the latest results for a specific query ID as a CSV string on
+      dune analytics
+    inputSchema:
+      type: object
+      title: get_latest_resultArguments
+      required:
+        - query_id
+      properties:
+        query_id:
+          type: integer
+          title: Query Id
+  - name: run_query
+    description: Run a query by ID and return results as a CSV string on dune analytics
+    inputSchema:
+      type: object
+      title: run_queryArguments
+      required:
+        - query_id
+      properties:
+        query_id:
+          type: integer
+          title: Query Id

@@ -1,0 +1,11 @@
+tools:
+  - name: get_token_price
+    description: Get token current price
+    inputSchema:
+      type: object
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          description: The token symbol

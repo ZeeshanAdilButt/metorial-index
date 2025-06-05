@@ -1,0 +1,25 @@
+tools:
+  - name: cal
+    description: >-
+      Use the expr-eval library to evaluate the input mathematical expression
+      and return the result.
+
+
+      Constant 	Description
+
+      E 	The value of Math.E from your JavaScript runtime
+
+      PI 	The value of Math.PI from your JavaScript runtime
+
+      true 	Logical true value
+
+      false 	Logical false value
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - exp
+      properties:
+        exp:
+          type: string
+      additionalProperties: false

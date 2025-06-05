@@ -1,0 +1,22 @@
+tools:
+  - name: search
+    description: 查询12306火车票
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - date
+        - fromCity
+        - toCity
+      properties:
+        date:
+          type: string
+          format: date
+          description: 出发日期 格式：YYYY-MM-DD
+        toCity:
+          type: string
+          description: 到达城市
+        fromCity:
+          type: string
+          description: 出发城市
+      additionalProperties: false

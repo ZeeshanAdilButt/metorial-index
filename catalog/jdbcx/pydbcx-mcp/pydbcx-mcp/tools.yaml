@@ -1,0 +1,94 @@
+tools:
+  - name: list_database_servers
+    description: >
+      List all available database servers configured in the JDBCX server.
+
+
+      Args:
+          query_timeout_seconds (int, optional): Maximum time to wait for the request in seconds.
+              Defaults to DEFAULT_QUERY_TIMEOUT_SECONDS.
+
+      Returns:
+          str: JSON string containing the list of database servers along with their corresponding descriptions
+    inputSchema:
+      type: object
+      title: list_database_serversArguments
+      properties:
+        query_timeout_seconds:
+          type: integer
+          title: Query Timeout Seconds
+          default: 10
+  - name: inspect_database_server
+    description: >
+      Get detailed configuration information for a specific database server.
+
+
+      Args:
+          database_server (str): The name of the database server to inspect
+          query_timeout_seconds (int, optional): Maximum time to wait for the request in seconds.
+              Defaults to DEFAULT_QUERY_TIMEOUT_SECONDS.
+
+      Returns:
+          str: JSON string containing the detailed configuration of the specified database server
+    inputSchema:
+      type: object
+      title: inspect_database_serverArguments
+      required:
+        - database_server
+      properties:
+        database_server:
+          type: string
+          title: Database Server
+        query_timeout_seconds:
+          type: integer
+          title: Query Timeout Seconds
+          default: 10
+  - name: query_database
+    description: >
+      Execute a SQL query against a specified database server and return
+      formatted results.
+
+
+      Args:
+          database_server (str): The name of the database server to query (must be registered)
+          sql_query (str): The SQL query to execute (will be wrapped in a SELECT statement)
+          query_timeout_seconds (int, optional): Maximum time in seconds to wait for query execution.
+              Defaults to DEFAULT_QUERY_TIMEOUT_SECONDS.
+          data_format (str, optional): Output format for results. Options:
+              "md" - Markdown table format
+              "jsonl" - JSON Lines format (one JSON object per row)
+              "csv" - Comma-separated values with header row
+              Defaults to DEFAULT_DATA_FORMAT.
+          rows_limit (int, optional): Maximum number of rows to return. Defaults to DEFAULT_ROWS_LIMIT.
+
+      Returns:
+          str: Query results as a string in the specified format
+    inputSchema:
+      type: object
+      title: query_databaseArguments
+      required:
+        - database_server
+        - sql_query
+      properties:
+        sql_query:
+          type: string
+          title: Sql Query
+        rows_limit:
+          type: integer
+          title: Rows Limit
+          default: 100
+        data_format:
+          enum:
+            - md
+            - jsonl
+            - csv
+          type: string
+          title: Data Format
+          default: csv
+        database_server:
+          type: string
+          title: Database Server
+        query_timeout_seconds:
+          type: integer
+          title: Query Timeout Seconds
+          default: 10

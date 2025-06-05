@@ -1,0 +1,143 @@
+tools:
+  - name: create-twitter-report
+    description: Creates a new report that analyzes Twitter/X data based on a search
+      query. The report provides statistics and tweet data. Returns raw JSON
+      response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          description: Maximum number of tweets to retrieve (up to 50,000).
+        query:
+          type: string
+          description: The search query for Twitter data. Can include operators like AND,
+            OR, hashtags, mentions, etc.
+        endDate:
+          type: number
+          description: End date as Unix timestamp (seconds since epoch).
+        startDate:
+          type: number
+          description: Start date as Unix timestamp (seconds since epoch).
+        reportType:
+          enum:
+            - 7-day
+            - historical
+          type: string
+          default: 7-day
+          description: "Type of report to create: '7-day' for last week or 'historical'
+            for all time."
+      additionalProperties: false
+  - name: get-report-status
+    description: Checks the current status of a TweetBinder report. Returns raw JSON
+      response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+      properties:
+        reportId:
+          type: string
+          description: The ID of the report to check.
+      additionalProperties: false
+  - name: get-report-stats
+    description: Retrieves comprehensive statistics and analytics for a TweetBinder
+      report. The report must be in 'Generated' status to access statistics.
+      Returns raw JSON response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+      properties:
+        reportId:
+          type: string
+          description: The ID of the report to retrieve statistics for.
+      additionalProperties: false
+  - name: get-account-balances
+    description: Retrieves information about your account's credit balance, usage,
+      and remaining quota. Returns raw JSON response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create-twitter-count
+    description: Creates a new report that counts tweets matching a search query.
+      Returns raw JSON response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query for Twitter data. Can include operators like AND,
+            OR, hashtags, mentions, etc.
+        reportType:
+          enum:
+            - 7-day
+            - historical
+          type: string
+          default: 7-day
+          description: "Type of report to create: '7-day' for last week or 'historical'
+            for all time."
+      additionalProperties: false
+  - name: list-reports
+    description: Retrieves a list of all your TweetBinder reports. Reports can be
+      sorted by different fields. Returns raw JSON response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        order:
+          type: string
+          description: "Optional sorting parameter in the format 'field|direction'.
+            Example: 'createdAt|-1' for newest first, 'createdAt|1' for oldest
+            first."
+      additionalProperties: false
+  - name: get-report-content
+    description: Retrieves the content (tweets or users) of a TweetBinder report.
+      The report must be in 'Generated' status. Returns raw JSON response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+        - contentType
+      properties:
+        page:
+          type: number
+          description: Page number for pagination. Starts at 1.
+        filter:
+          type: string
+          description: "JSON string with filter criteria. Example:
+            '{\"counts.favorites\":{\"$gt\":10}}'"
+        sortBy:
+          type: string
+          description: Field to sort by (e.g., 'createdAt', 'counts.favorites').
+        perPage:
+          type: number
+          description: Number of items per page (default varies by endpoint).
+        reportId:
+          type: string
+          description: The ID of the report to retrieve content for.
+        contentType:
+          enum:
+            - tweets
+            - users
+          type: string
+          description: "The type of content to retrieve: 'tweets' for tweet IDs or 'users'
+            for user IDs."
+        sortDirection:
+          enum:
+            - "1"
+            - "-1"
+          type: string
+          description: "Sort direction: '1' for ascending, '-1' for descending."
+      additionalProperties: false

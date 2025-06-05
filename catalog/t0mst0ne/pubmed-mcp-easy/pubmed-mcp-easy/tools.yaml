@@ -1,0 +1,268 @@
+tools:
+  - name: pubmed_search
+    description: "
+
+      \    Searches PubMed for biomedical literature and research papers. Best
+      for queries related to\ 
+
+      \    medical research, clinical studies, scientific publications, and
+      health topics. Returns information\ 
+
+      \    including: titles, authors, publication dates, PMIDs, PMCs, and DOIs.
+      Use this when the query\ 
+
+      \    is related to medical or scientific research. Results are sorted by
+      relevance to the search query.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_searchArguments
+      required:
+        - query
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        query:
+          type: string
+          title: Query
+  - name: pubmed_similar
+    description: "
+
+      \    Finds similar articles to a specific PubMed article based on its
+      PMID.\ 
+
+      \    Best for finding related articles to a specific paper. Returns
+      information\ 
+
+      \    including: titles, authors, publication dates, PMIDs, PMCs, and DOIs.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_similarArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: integer
+          title: Pmid
+  - name: pubmed_cites
+    description: "
+
+      \    Finds articles that a specific PubMed article cites based on its
+      PMID.\ 
+
+      \    Best for finding articles that a specific paper cites. Returns
+      information\ 
+
+      \    including: titles, authors, publication dates, PMIDs, PMCs, and DOIs.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_citesArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: integer
+          title: Pmid
+  - name: pubmed_cited_by
+    description: "
+
+      \    Finds articles that cite a specific PubMed article based on its
+      PMID.\ 
+
+      \    Best for finding articles that have cited a specific paper. Returns
+      information\ 
+
+      \    including: titles, authors, publication dates, PMIDs, PMCs, and DOIs.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_cited_byArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: integer
+          title: Pmid
+  - name: pubmed_abstract
+    description: "
+
+      \    Retrieves the abstract text of a specific PubMed article based on its
+      PMID.\ 
+
+      \    Returns only the abstract text.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_abstractArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: integer
+          title: Pmid
+  - name: pubmed_open_access
+    description: "
+
+      \    Checks if a specific PubMed article is open access based on its
+      PMID.\ 
+
+      \    Returns true if the article is open access, false otherwise.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_open_accessArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: integer
+          title: Pmid
+  - name: pubmed_full_text
+    description: "
+
+      \    Retrieves the full text of an open access PubMed article based on its
+      PMID.\ 
+
+      \    Please check if a PMID is open access before using this tool.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_full_textArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: integer
+          title: Pmid
+  - name: pubmed_batch_search
+    description: "
+
+      \    Performs multiple PubMed searches in parallel for efficient batch
+      processing.
+
+      \    Returns results for each query in the same order as the input
+      queries.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_batch_searchArguments
+      required:
+        - queries
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        queries:
+          type: array
+          items:
+            type: string
+          title: Queries
+  - name: pubmed_author_search
+    description: "
+
+      \    Searches for papers by a specific author.
+
+      \    The author name should be in the format \"Last Name, First Initial\"
+      (e.g., \"Smith, J\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_author_searchArguments
+      required:
+        - author
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        author:
+          type: string
+          title: Author
+  - name: pubmed_advanced_search
+    description: "
+
+      \    Performs an advanced PubMed search using field tags.
+
+      \   \ 
+
+      \    Example params:
+
+      \    {
+
+      \        \"author\": \"Smith J\",
+
+      \        \"journal\": \"Nature\",
+
+      \        \"year\": \"2020\",
+
+      \        \"title\": \"cancer\",
+
+      \        \"mesh\": \"Drug Therapy\"
+
+      \    }
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_advanced_searchArguments
+      required:
+        - params
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        params:
+          type: object
+          title: Params
+          additionalProperties:
+            type: string
+  - name: pubmed_journal_search
+    description: "
+
+      \    Searches for papers published in a specific journal.
+
+      \    "
+    inputSchema:
+      type: object
+      title: pubmed_journal_searchArguments
+      required:
+        - journal
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        journal:
+          type: string
+          title: Journal

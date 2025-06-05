@@ -1,0 +1,38 @@
+tools:
+  - name: getFileContents
+    description: Get the contents of a specific file in the configured repository
+      (string/string).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: Path to the file within the repository.
+      additionalProperties: false
+  - name: searchFiles
+    description: Search for files within the configured repository (string/string).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query (uses GitHub Code Search syntax)
+      additionalProperties: false
+  - name: searchIssues
+    description: Search for issues within the configured repository (string/string).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query (uses GitHub Issue Search syntax)
+      additionalProperties: false

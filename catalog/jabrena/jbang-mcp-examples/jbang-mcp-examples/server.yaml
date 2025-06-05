@@ -1,0 +1,37 @@
+identifier: jabrena/jbang-mcp-examples/jbang-mcp-examples
+repo:
+  provider: github.com
+  url: https://github.com/jabrena/jbang-mcp-examples
+  name: jbang-mcp-examples
+  owner: jabrena
+server:
+  subdirectory: /
+  name: MCPStopWatch
+  description: |-
+    Update in Cursor MCP configuration:
+
+    ```
+    {
+    "mcpServers": {
+        "MCP Stopwatch": {
+          "command": "jbang",
+            "args": [
+              "mcp-stopwatch@jabrena"
+            ]
+    }
+    }
+    ```
+
+    How to use in the mode ask/agent with cursor?
+
+    type in the chat:
+
+    start the StopWatch
+    ...
+    Do Task X
+    ...
+    stop the StopWatch
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: wrdan/mcp-server-canteen/mcp-server-canteen
+repo:
+  provider: github.com
+  url: https://github.com/wrdan/mcp-server-canteen
+  name: mcp-server-canteen
+  owner: wrdan
+server:
+  subdirectory: /
+  name: Canteen Data Server
+  description: Provide quick access to employee canteen dining statistics over
+    specified date ranges. Query breakfast and lunch attendance counts easily to
+    monitor canteen usage. Simplify data retrieval for workforce dining
+    analytics.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

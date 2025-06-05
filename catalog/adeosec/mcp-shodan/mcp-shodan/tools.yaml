@@ -1,0 +1,349 @@
+tools:
+  - name: host-info
+    description: Get detailed information about a host from Shodan
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          description: IP address to look up
+        minify:
+          type: boolean
+          description: "Return only basic host information (default: false)"
+        history:
+          type: boolean
+          description: "Include historical information (default: false)"
+      additionalProperties: false
+  - name: dns-lookup
+    description: Resolve hostnames to IP addresses
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - hostnames
+      properties:
+        hostnames:
+          type: string
+          description: Comma-separated list of hostnames to resolve (e.g.,
+            'google.com,facebook.com')
+      additionalProperties: false
+  - name: reverse-dns
+    description: Look up hostnames for IP addresses
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ips
+      properties:
+        ips:
+          type: string
+          description: Comma-separated list of IP addresses (e.g., '8.8.8.8,1.1.1.1')
+      additionalProperties: false
+  - name: domain-info
+    description: Get DNS entries and subdomains for a domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: Domain name to look up (e.g., 'example.com')
+      additionalProperties: false
+  - name: hello
+    description: Test if the Shodan MCP server is working
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: search-host
+    description: Search Shodan
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          description: Page number for results (1 credit per page after 1st)
+        query:
+          type: string
+          description: Shodan search query (e.g. 'apache country:DE')
+        facets:
+          type: string
+          description: Comma-separated list of properties to get summary information
+      additionalProperties: false
+  - name: search-host-count
+    description: Search Shodan without Results
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Shodan search query (e.g. 'apache country:DE')
+        facets:
+          type: string
+          description: Comma-separated list of properties to get summary information
+      additionalProperties: false
+  - name: list-search-facets
+    description: List all search facets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-search-filters
+    description: List all filters that can be used when searching
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: search-tokens
+    description: Break the search query into tokens
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Shodan search query to analyze
+      additionalProperties: false
+  - name: list-ports
+    description: List all ports that Shodan is crawling on the Internet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-protocols
+    description: List all protocols that can be used for scanning
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: request-scan
+    description: Request Shodan to scan an IP/network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ips
+      properties:
+        ips:
+          type: string
+          description: Comma-separated list of IPs or networks in CIDR notation (e.g.
+            '8.8.8.8,1.1.1.1/24')
+      additionalProperties: false
+  - name: get-scan-status
+    description: Get the status of a scan request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The unique scan ID returned by request-scan
+      additionalProperties: false
+  - name: list-scans
+    description: Get list of all submitted scans
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-triggers
+    description: List available triggers for network alerts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create-alert
+    description: Create a network alert for monitoring
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - filters
+      properties:
+        name:
+          type: string
+          description: Name of the alert
+        expires:
+          type: number
+          description: Number of seconds the alert should be active (optional)
+        filters:
+          type: object
+          properties:
+            ip:
+              type: array
+              items:
+                type: string
+              description: List of IP addresses to monitor
+            port:
+              type: array
+              items:
+                type: number
+              description: List of ports to monitor
+          description: Filters to apply (can include IP addresses and ports)
+          additionalProperties: false
+      additionalProperties: false
+  - name: get-alert-info
+    description: Get information about a specific alert
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Alert ID to get information about
+      additionalProperties: false
+  - name: delete-alert
+    description: Delete a network alert
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Alert ID to delete
+      additionalProperties: false
+  - name: edit-alert
+    description: Edit an existing alert
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Alert ID to edit
+        name:
+          type: string
+          description: New name for the alert
+        filters:
+          type: object
+          properties:
+            ip:
+              type: array
+              items:
+                type: string
+              description: New list of IP addresses to monitor
+            port:
+              type: array
+              items:
+                type: number
+              description: New list of ports to monitor
+          description: New filters to apply
+          additionalProperties: false
+      additionalProperties: false
+  - name: list-alerts
+    description: List all active alerts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-queries
+    description: List saved search queries
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: "Page number of results (default: 1)"
+        sort:
+          enum:
+            - votes
+            - timestamp
+          type: string
+          description: Sort queries by (votes or timestamp)
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sort order (asc or desc)
+      additionalProperties: false
+  - name: search-queries
+    description: Search through saved queries
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          description: "Page number of results (default: 1)"
+        query:
+          type: string
+          description: Search term to find queries
+      additionalProperties: false
+  - name: list-query-tags
+    description: List popular tags for saved queries
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        size:
+          type: number
+          description: "Number of tags to return (default: 10)"
+      additionalProperties: false
+  - name: get-profile
+    description: Get account profile information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-api-info
+    description: Get API subscription information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-billing
+    description: Get billing profile information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-http-headers
+    description: View the HTTP headers that you're sending in requests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-my-ip
+    description: View your current IP address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

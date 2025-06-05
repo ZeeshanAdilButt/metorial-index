@@ -1,0 +1,18 @@
+identifier: cdatasoftware/postgresql-mcp-server-by-cdata/postgresql-mcp-server-by-cdata
+repo:
+  provider: github.com
+  url: https://github.com/CDataSoftware/postgresql-mcp-server-by-cdata
+  name: postgresql-mcp-server-by-cdata
+  owner: CDataSoftware
+server:
+  subdirectory: /
+  name: PostgreSQL MCP Server by CData
+  description: Enable natural language querying of live PostgreSQL data without
+    writing SQL by connecting LLMs to your PostgreSQL databases. Access your
+    data through a simple MCP interface powered by the CData JDBC Driver for
+    PostgreSQL. Easily integrate with AI clients like Claude Desktop to ask
+    questions and retrieve insights from your data in real time.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

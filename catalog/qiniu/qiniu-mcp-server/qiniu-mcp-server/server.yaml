@@ -1,0 +1,18 @@
+identifier: qiniu/qiniu-mcp-server/qiniu-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/qiniu/qiniu-mcp-server
+  name: qiniu-mcp-server
+  owner: qiniu
+server:
+  subdirectory: /
+  name: Qiniu Cloud Storage MCP Server
+  description: Enable seamless access to Qiniu Cloud Storage and intelligent
+    multimedia services within AI large model clients. Interact with your Qiniu
+    buckets and files directly through the MCP interface to enhance your AI
+    workflows. Simplify cloud storage operations and multimedia processing by
+    integrating with this MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

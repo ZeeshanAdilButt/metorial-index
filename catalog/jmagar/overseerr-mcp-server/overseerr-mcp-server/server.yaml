@@ -1,0 +1,17 @@
+identifier: jmagar/overseerr-mcp-server/overseerr-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/jmagar/overseerr-mcp-server
+  name: overseerr-mcp-server
+  owner: jmagar
+server:
+  subdirectory: /
+  name: Overseerr MCP Server
+  description: Interact with Overseerr to manage your media requests effortlessly.
+    Search for movies and TV shows, get detailed information, and request new
+    media to be added to your library with ease. Streamline your media discovery
+    and management process using this powerful tool.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

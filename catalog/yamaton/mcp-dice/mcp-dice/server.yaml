@@ -1,0 +1,15 @@
+identifier: yamaton/mcp-dice/mcp-dice
+repo:
+  provider: github.com
+  url: https://github.com/yamaton/mcp-dice
+  name: mcp-dice
+  owner: yamaton
+server:
+  subdirectory: /
+  name: Dice Roller
+  description: Roll dice using standard dice notation and return results with
+    their total sum.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

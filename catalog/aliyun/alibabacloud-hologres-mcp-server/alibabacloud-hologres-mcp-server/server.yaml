@@ -1,0 +1,16 @@
+identifier: aliyun/alibabacloud-hologres-mcp-server/alibabacloud-hologres-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/aliyun/alibabacloud-hologres-mcp-server
+  name: alibabacloud-hologres-mcp-server
+  owner: aliyun
+server:
+  subdirectory: /
+  name: Hologres MCP Server
+  description: Facilitate seamless communication between AI Agents and Hologres
+    databases. Retrieve metadata and execute SQL operations effortlessly,
+    enhancing your AI capabilities with database interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

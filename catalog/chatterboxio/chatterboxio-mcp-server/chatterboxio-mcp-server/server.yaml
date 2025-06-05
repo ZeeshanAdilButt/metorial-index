@@ -1,0 +1,17 @@
+identifier: chatterboxio/chatterboxio-mcp-server/chatterboxio-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ChatterBoxIO/chatterboxio-mcp-server
+  name: chatterboxio-mcp-server
+  owner: ChatterBoxIO
+server:
+  subdirectory: /
+  name: ChatterBox Meeting Integration Server
+  description: Enable AI agents to join online meetings, capture transcripts and
+    recordings, and generate concise meeting summaries. Seamlessly integrate
+    with Zoom and Google Meet to enhance meeting productivity and insights.
+    Simplify meeting data access and summarization for AI-driven workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: multiversx/mx-mcp/mx-mcp
+repo:
+  provider: github.com
+  url: https://github.com/multiversx/mx-mcp
+  name: mx-mcp
+  owner: multiversx
+server:
+  subdirectory: /
+  name: MultiversX MCP Server
+  description: Create and manage PEM wallets for the MultiversX blockchain.
+    Effortlessly retrieve wallet addresses, check balances, and send various
+    token types including EGLD and NFTs. Enhance your blockchain interactions
+    with secure and efficient wallet management capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

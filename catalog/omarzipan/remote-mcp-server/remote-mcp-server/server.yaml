@@ -1,0 +1,18 @@
+identifier: omarzipan/remote-mcp-server/remote-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Omarzipan/remote-mcp-server
+  name: remote-mcp-server
+  owner: Omarzipan
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare
+  description: Host a remote MCP server on Cloudflare Workers with OAuth login
+    support to securely expose tools and resources. Easily connect and interact
+    with your MCP server locally or remotely using the MCP Inspector or Claude
+    Desktop. Deploy seamlessly to Cloudflare and enable remote MCP clients to
+    call your server's tools over HTTP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: simonb97/win-cli-mcp-server/server-win-cli
+repo:
+  provider: github.com
+  url: https://github.com/SimonB97/win-cli-mcp-server
+  name: win-cli-mcp-server
+  owner: SimonB97
+server:
+  subdirectory: /
+  name: Windows CLI Server
+  description: MCP server for secure command-line interactions on Windows systems,
+    enabling controlled access to PowerShell, CMD, Git Bash shells, and remote
+    systems via SSH.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

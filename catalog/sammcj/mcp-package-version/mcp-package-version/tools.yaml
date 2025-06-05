@@ -1,0 +1,303 @@
+tools:
+  - name: check_npm_versions
+    description: Check latest stable versions for npm packages
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        constraints:
+          type: object
+          description: Optional constraints for specific packages
+          additionalProperties:
+            type: object
+            properties:
+              majorVersion:
+                type: number
+                description: Limit updates to this major version
+              excludePackage:
+                type: boolean
+                description: Exclude this package from updates
+        dependencies:
+          type: object
+          description: Dependencies object from package.json
+          additionalProperties:
+            type: string
+  - name: check_python_versions
+    description: Check latest stable versions for Python packages
+    inputSchema:
+      type: object
+      required:
+        - requirements
+      properties:
+        requirements:
+          type: array
+          items:
+            type: string
+          description: Array of requirements from requirements.txt
+  - name: check_pyproject_versions
+    description: Check latest stable versions for Python packages in pyproject.toml
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        dependencies:
+          type: object
+          properties:
+            dependencies:
+              type: object
+              description: Project dependencies from pyproject.toml
+              additionalProperties:
+                type: string
+            dev-dependencies:
+              type: object
+              description: Development dependencies from pyproject.toml
+              additionalProperties:
+                type: string
+            optional-dependencies:
+              type: object
+              description: Optional dependencies from pyproject.toml
+              additionalProperties:
+                type: object
+                additionalProperties:
+                  type: string
+          description: Dependencies object from pyproject.toml
+  - name: check_maven_versions
+    description: Check latest stable versions for Java packages in pom.xml
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        dependencies:
+          type: array
+          items:
+            type: object
+            required:
+              - groupId
+              - artifactId
+            properties:
+              scope:
+                type: string
+                description: Dependency scope (e.g., compile, test, provided)
+              groupId:
+                type: string
+                description: Maven group ID
+              version:
+                type: string
+                description: Current version (optional)
+              artifactId:
+                type: string
+                description: Maven artifact ID
+          description: Array of Maven dependencies
+  - name: check_gradle_versions
+    description: Check latest stable versions for Java packages in build.gradle
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        dependencies:
+          type: array
+          items:
+            type: object
+            required:
+              - configuration
+              - group
+              - name
+            properties:
+              name:
+                type: string
+                description: Package name
+              group:
+                type: string
+                description: Package group
+              version:
+                type: string
+                description: Current version (optional)
+              configuration:
+                type: string
+                description: Gradle configuration (e.g., implementation, testImplementation)
+          description: Array of Gradle dependencies
+  - name: check_go_versions
+    description: Check latest stable versions for Go packages in go.mod
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        dependencies:
+          type: object
+          required:
+            - module
+          properties:
+            module:
+              type: string
+              description: Module name
+            replace:
+              type: array
+              items:
+                type: object
+                required:
+                  - old
+                  - new
+                properties:
+                  new:
+                    type: string
+                    description: Replacement package path
+                  old:
+                    type: string
+                    description: Original package path
+                  version:
+                    type: string
+                    description: Current version
+              description: Replacement dependencies
+            require:
+              type: array
+              items:
+                type: object
+                required:
+                  - path
+                properties:
+                  path:
+                    type: string
+                    description: Package import path
+                  version:
+                    type: string
+                    description: Current version
+              description: Required dependencies
+          description: Dependencies from go.mod
+  - name: check_bedrock_models
+    description: Search, list, and get information about Amazon Bedrock models
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: 'Search query for model name or ID (used with action: "search")'
+        action:
+          enum:
+            - list
+            - search
+            - get
+          type: string
+          default: list
+          description: "Action to perform: list all models, search for models, or get a
+            specific model"
+        region:
+          type: string
+          description: 'Filter by AWS region (used with action: "search")'
+        modelId:
+          type: string
+          description: 'Model ID to retrieve (used with action: "get")'
+        provider:
+          type: string
+          description: 'Filter by provider name (used with action: "search")'
+  - name: get_latest_bedrock_model
+    description: Get the latest Claude Sonnet model from Amazon Bedrock (best for
+      coding tasks)
+    inputSchema:
+      type: object
+      properties: {}
+  - name: check_docker_tags
+    description: Check available tags for Docker container images from Docker Hub,
+      GitHub Container Registry, or custom registries
+    inputSchema:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: Docker image name (e.g., "nginx", "ubuntu", "ghcr.io/owner/repo")
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of tags to return
+        registry:
+          enum:
+            - dockerhub
+            - ghcr
+            - custom
+          type: string
+          default: dockerhub
+          description: Registry to check (dockerhub, ghcr, or custom)
+        filterTags:
+          type: array
+          items:
+            type: string
+          description: Array of regex patterns to filter tags
+        includeDigest:
+          type: boolean
+          default: false
+          description: Include image digest in results
+        customRegistry:
+          type: string
+          description: URL for custom registry (required when registry is "custom")
+  - name: check_swift_versions
+    description: Check latest stable versions for Swift packages in Package.swift
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        constraints:
+          type: object
+          description: Optional constraints for specific packages
+          additionalProperties:
+            type: object
+            properties:
+              majorVersion:
+                type: number
+                description: Limit updates to this major version
+              excludePackage:
+                type: boolean
+                description: Exclude this package from updates
+        dependencies:
+          type: array
+          items:
+            type: object
+            required:
+              - url
+            properties:
+              url:
+                type: string
+                description: Package URL (e.g.,
+                  "https://github.com/apple/swift-argument-parser")
+              version:
+                type: string
+                description: Current version (optional)
+              requirement:
+                type: string
+                description: Version requirement type (e.g., "from", "upToNextMajor", "exact")
+          description: Array of Swift package dependencies
+  - name: check_github_actions
+    description: Check latest versions for GitHub Actions
+    inputSchema:
+      type: object
+      required:
+        - actions
+      properties:
+        actions:
+          type: array
+          items:
+            type: object
+            required:
+              - owner
+              - repo
+            properties:
+              repo:
+                type: string
+                description: GitHub Action repository name
+              owner:
+                type: string
+                description: GitHub Action owner (username or organization)
+              currentVersion:
+                type: string
+                description: Current version (optional)
+          description: Array of GitHub Actions to check
+        includeDetails:
+          type: boolean
+          default: false
+          description: Include additional details like published date and URL

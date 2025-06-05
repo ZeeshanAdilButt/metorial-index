@@ -1,0 +1,18 @@
+identifier: vikramdse/docs-mcp-server/docs-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/vikramdse/docs-mcp-server
+  name: docs-mcp-server
+  owner: vikramdse
+server:
+  subdirectory: /
+  name: Docs MCP Server
+  description: Fetch real-time documentation for popular libraries like Langchain,
+    Llama-Index, MCP, and OpenAI using natural language queries. Improve the
+    accuracy of your LLM responses with up-to-date information directly from
+    official sources. Enhance your development and troubleshooting with the
+    latest library updates at your fingertips.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

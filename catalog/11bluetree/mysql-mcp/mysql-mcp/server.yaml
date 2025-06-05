@@ -1,0 +1,18 @@
+identifier: 11bluetree/mysql-mcp/mysql-mcp
+repo:
+  provider: github.com
+  url: https://github.com/11bluetree/mysql-mcp
+  name: mysql-mcp
+  owner: 11bluetree
+server:
+  subdirectory: /
+  name: MySQL MCP Server
+  description: Execute SELECT queries and retrieve database schema information
+    from MySQL databases securely. Access table structures, column details, and
+    relationships with JSON-formatted results. Enhance your LLM agents with live
+    MySQL data querying capabilities restricted to read-only operations for
+    safety.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

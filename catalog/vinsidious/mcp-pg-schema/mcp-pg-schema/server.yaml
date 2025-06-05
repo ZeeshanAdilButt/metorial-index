@@ -1,0 +1,15 @@
+identifier: vinsidious/mcp-pg-schema/mcp-pg-schema
+repo:
+  provider: github.com
+  url: https://github.com/vinsidious/mcp-pg-schema
+  name: mcp-pg-schema
+  owner: vinsidious
+server:
+  subdirectory: /
+  name: PostgreSQL Read-Only Server
+  description: Provide read-only access to PostgreSQL databases for LLMs. Enable
+    inspection of database schemas and execution of read-only queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

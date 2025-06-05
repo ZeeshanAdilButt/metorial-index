@@ -1,0 +1,16 @@
+identifier: heroku/heroku-mcp-server/heroku-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/heroku/heroku-mcp-server
+  name: heroku-mcp-server
+  owner: heroku
+server:
+  subdirectory: /
+  name: Heroku Platform MCP Server
+  description: Interact seamlessly with Heroku Platform resources using natural
+    language. Manage applications, dynos, add-ons, and more through LLM-driven
+    tools. Enhance your development workflow with secure access to Heroku APIs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

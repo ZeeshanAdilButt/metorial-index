@@ -1,0 +1,19 @@
+identifier: canopy-land/fastapi_mcp/new_gen_product_mcp
+repo:
+  provider: github.com
+  url: https://github.com/canopy-land/fastapi_mcp
+  name: fastapi_mcp
+  owner: canopy-land
+server:
+  subdirectory: /backend/fast-api-server
+  name: FastAPI-MCP
+  description: Automatically expose your FastAPI endpoints as Model Context
+    Protocol (MCP) tools with zero configuration. Easily integrate an MCP server
+    directly into your FastAPI app to enable seamless discovery and invocation
+    of your API endpoints as MCP tools. Customize which endpoints are exposed
+    and deploy flexibly to enhance your API's interoperability with LLM
+    applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

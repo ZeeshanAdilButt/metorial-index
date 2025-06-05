@@ -1,0 +1,61 @@
+tools:
+  - name: getSubgraphSchema
+    description: "Fetch the schema of a specified subgraph using GraphQL
+      introspection.
+
+
+      \    Args:
+
+      \        subgraphId (str): The ID of the subgraph to query.
+
+      \        asText (bool): If True, return schema as GraphQL text; otherwise,
+      return JSON.
+
+
+      \    Returns:
+
+      \        str: Schema in JSON or GraphQL text format, or an error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: getSubgraphSchemaArguments
+      required:
+        - subgraphId
+      properties:
+        asText:
+          type: boolean
+          title: Astext
+          default: false
+        subgraphId:
+          type: string
+          title: Subgraphid
+  - name: querySubgraph
+    description: "Execute a GraphQL query against a specified subgraph.
+
+
+      \    Args:
+
+      \        subgraphId (str): The ID of the subgraph to query.
+
+      \        query (str): The GraphQL query string to execute.
+
+
+      \    Returns:
+
+      \        str: Query result in JSON format, or an error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: querySubgraphArguments
+      required:
+        - subgraphId
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        subgraphId:
+          type: string
+          title: Subgraphid

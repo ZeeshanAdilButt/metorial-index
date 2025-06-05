@@ -1,0 +1,56 @@
+tools:
+  - name: semantic_search_papers_on_huggingface
+    description: "Search for papers on HuggingFace using semantic search.
+
+
+      \    Args:
+
+      \        query (str): The query term to search for. It will automatically
+      determine if it should use keywords or a natural language query, so format
+      your queries accordingly.
+
+      \        top_n (int): The number of papers to return. Default is 10, but
+      you can set it to any number.
+
+
+      \    Returns:
+
+      \        str: A list of papers with the title, summary, ID, and upvotes.
+
+      \    "
+    inputSchema:
+      type: object
+      title: semantic_search_papers_on_huggingfaceArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        top_n:
+          type: integer
+          title: Top N
+          default: 10
+  - name: fetch_paper_details_from_arxiv
+    description: "Get the Arxiv info for a list of papers.
+
+
+      \    Args:
+
+      \        arxiv_ids (list[str] | str): The IDs of the papers to get the
+      Arxiv info for, e.g. [\"2503.01469\", \"2503.01470\"]
+
+      \    "
+    inputSchema:
+      type: object
+      title: fetch_paper_details_from_arxivArguments
+      required:
+        - arxiv_ids
+      properties:
+        arxiv_ids:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          title: Arxiv Ids

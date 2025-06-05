@@ -1,0 +1,19 @@
+identifier: tutumomo/mcp-civil-tools/mcp-civil-tools
+repo:
+  provider: github.com
+  url: https://github.com/tutumomo/MCP-civil-tools
+  name: MCP-civil-tools
+  owner: tutumomo
+server:
+  subdirectory: /
+  name: Civil Engineering Tools Server
+  description: Provide a suite of civil engineering calculation tools including
+    coordinate conversions between latitude/longitude and UTM/TWD97, Manning's
+    coefficient lookup, soil pressure coefficient calculations, and drainage
+    flow computations. Enable seamless integration with LLM applications and AI
+    tools for civil engineering workflows. Simplify complex engineering
+    computations with easy-to-use API endpoints and CLI or HTTP server modes.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

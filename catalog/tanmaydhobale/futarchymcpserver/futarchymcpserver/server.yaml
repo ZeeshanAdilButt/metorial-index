@@ -1,0 +1,18 @@
+identifier: tanmaydhobale/futarchymcpserver/futarchymcpserver
+repo:
+  provider: github.com
+  url: https://github.com/TanmayDhobale/FutarchyMCPServer
+  name: FutarchyMCPServer
+  owner: TanmayDhobale
+server:
+  subdirectory: /
+  name: Futarchy Protocol Server
+  description: Provide seamless interaction with the Futarchy protocol on Solana
+    by querying DAOs and proposals or creating new proposals. Enable integration
+    with Cursor through custom MCP tools to access and manipulate Futarchy
+    backend data efficiently. Simplify decentralized governance data retrieval
+    and proposal management for end-users and developers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

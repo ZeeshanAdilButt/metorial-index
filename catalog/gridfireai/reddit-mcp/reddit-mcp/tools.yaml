@@ -1,0 +1,258 @@
+tools:
+  - name: get_submission
+    description: "
+
+      \    Retrieve a specific submission by ID.
+
+
+      \    Args:
+
+      \        submission_id: ID of the submission to retrieve
+
+
+      \    Returns:
+
+      \        Detailed information about the submission
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_submissionArguments
+      required:
+        - submission_id
+      properties:
+        submission_id:
+          type: string
+          title: Submission Id
+  - name: get_subreddit
+    description: "
+
+      \    Retrieve a subreddit by name.
+
+
+      \    Args:
+
+      \        subreddit_name: Name of the subreddit to retrieve
+
+
+      \    Returns:
+
+      \        Detailed information about the subreddit
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_subredditArguments
+      required:
+        - subreddit_name
+      properties:
+        subreddit_name:
+          type: string
+          title: Subreddit Name
+  - name: get_comments_by_submission
+    description: "
+
+      \    Retrieve comments from a specific submission.
+
+
+      \    Args:
+
+      \        submission_id: ID of the submission to get comments from
+
+      \        replace_more: Whether to replace MoreComments objects with actual
+      comments
+
+
+      \    Returns:
+
+      \        List of comments with their replies
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_comments_by_submissionArguments
+      required:
+        - submission_id
+      properties:
+        replace_more:
+          type: boolean
+          title: Replace More
+          default: true
+        submission_id:
+          type: string
+          title: Submission Id
+  - name: get_comment_by_id
+    description: "
+
+      \    Retrieve a specific comment by ID.
+
+
+      \    Args:
+
+      \        comment_id: ID of the comment to retrieve
+
+
+      \    Returns:
+
+      \        Comment details with any replies
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_comment_by_idArguments
+      required:
+        - comment_id
+      properties:
+        comment_id:
+          type: string
+          title: Comment Id
+  - name: search_posts
+    description: "
+
+      \    Search for posts within a subreddit.
+
+
+      \    Args:
+
+      \        params: Search parameters including subreddit name, query, and
+      filters
+
+
+      \    Returns:
+
+      \        List of matching posts with their details
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        SearchPostsParams:
+          type: object
+          title: SearchPostsParams
+          required:
+            - subreddit_name
+            - query
+          properties:
+            sort:
+              enum:
+                - relevance
+                - hot
+                - top
+                - new
+                - comments
+              type: string
+              title: Sort
+              default: relevance
+              description: How to sort the results
+            query:
+              type: string
+              title: Query
+              description: Search query string
+            syntax:
+              enum:
+                - cloudsearch
+                - lucene
+                - plain
+              type: string
+              title: Syntax
+              default: lucene
+              description: Query syntax to use
+            time_filter:
+              enum:
+                - all
+                - year
+                - month
+                - week
+                - day
+                - hour
+              type: string
+              title: Time Filter
+              default: all
+              description: Time period to limit results to
+            subreddit_name:
+              type: string
+              title: Subreddit Name
+              description: Name of the subreddit to search in
+          description: Parameters for searching posts within a subreddit
+      title: search_postsArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/SearchPostsParams"
+  - name: search_subreddits
+    description: "
+
+      \    Search for subreddits using either name-based or description-based
+      search.
+
+
+      \    Args:
+
+      \        by: Search parameters, either SearchByName or SearchByDescription
+
+
+      \    Returns:
+
+      \        List of matching subreddits with their details
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        SearchByName:
+          type: object
+          title: SearchByName
+          required:
+            - type
+            - query
+          properties:
+            type:
+              type: string
+              const: name
+              title: Type
+            query:
+              type: string
+              title: Query
+            exact_match:
+              type: boolean
+              title: Exact Match
+              default: false
+              description: If True, only return exact name matches
+            include_nsfw:
+              type: boolean
+              title: Include Nsfw
+              default: false
+              description: Whether to include NSFW subreddits in search results
+          description: Parameters for searching subreddits by name
+        SearchByDescription:
+          type: object
+          title: SearchByDescription
+          required:
+            - type
+            - query
+          properties:
+            type:
+              type: string
+              const: description
+              title: Type
+            query:
+              type: string
+              title: Query
+            include_full_description:
+              type: boolean
+              title: Include Full Description
+              default: false
+              description: Whether to include the full subreddit description (aka sidebar
+                description) in results -- can be very long and contain markdown
+                formatting
+          description: Parameters for searching subreddits by description
+      title: search_subredditsArguments
+      required:
+        - by
+      properties:
+        by:
+          anyOf:
+            - $ref: "#/$defs/SearchByName"
+            - $ref: "#/$defs/SearchByDescription"
+          title: By

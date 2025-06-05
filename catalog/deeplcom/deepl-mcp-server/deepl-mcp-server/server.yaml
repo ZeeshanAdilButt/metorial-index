@@ -1,0 +1,18 @@
+identifier: deeplcom/deepl-mcp-server/deepl-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DeepLcom/deepl-mcp-server
+  name: deepl-mcp-server
+  owner: DeepLcom
+server:
+  subdirectory: /
+  name: DeepL Translation Server
+  description: Provide seamless translation and rephrasing capabilities using the
+    DeepL API directly within your conversations. Translate text between
+    numerous languages with automatic language detection and control over
+    formality. Enhance your communication by integrating powerful multilingual
+    support effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+tools:
+  - name: image_generation
+    description: Generate images using JigsawStack's image generation API.
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        steps:
+          type: string
+          description: The number of steps for image generation.
+        prompt:
+          type: string
+          description: The prompt to generate the image.
+        negative_prompt:
+          type: string
+          description: Negative prompt to avoid certain elements.

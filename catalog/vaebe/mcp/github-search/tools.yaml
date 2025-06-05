@@ -1,0 +1,41 @@
+tools:
+  - name: github_search
+    description: 在 GitHub 上搜索仓库、代码、Issues 或用户
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          default: 1
+          description: 当前页码，用于分页查询
+        type:
+          enum:
+            - repositories
+            - code
+            - issues
+            - users
+          type: string
+          description: 搜索类型，可选值为 repositories、code、issues 或 users
+        query:
+          type: string
+          description: 搜索关键词，用于匹配 GitHub 中的内容
+        perPage:
+          type: number
+          default: 30
+          description: 每页返回的搜索结果数量
+      additionalProperties: false
+  - name: get_github_user
+    description: 获取指定 GitHub 用户的详细信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: GitHub 的用户名
+      additionalProperties: false

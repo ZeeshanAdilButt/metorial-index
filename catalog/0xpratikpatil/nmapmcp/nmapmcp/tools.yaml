@@ -1,0 +1,381 @@
+tools:
+  - name: scan_top_ports
+    description: |
+      
+      Scan the top ports of the specified target with optional custom arguments.
+
+      Args:
+          target (str): The target hostname or IP address.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The scan results in JSON format.
+    inputSchema:
+      type: object
+      title: scan_top_portsArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: dns_brute_force
+    description: |
+      
+      Perform DNS brute-force to discover subdomains of the specified target.
+
+      Args:
+          target (str): The target domain to scan.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The DNS brute-force scan results.
+    inputSchema:
+      type: object
+      title: dns_brute_forceArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: list_scan
+    description: >
+      
+      Perform a list scan on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The list scan results.
+    inputSchema:
+      type: object
+      title: list_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: os_detection
+    description: >
+      
+      Perform OS detection on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The OS detection results.
+    inputSchema:
+      type: object
+      title: os_detectionArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: version_detection
+    description: >
+      
+      Detect service versions on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The version detection results.
+    inputSchema:
+      type: object
+      title: version_detectionArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: fin_scan
+    description: |
+      
+      Perform a FIN scan on the specified target with optional custom arguments.
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The FIN scan results.
+    inputSchema:
+      type: object
+      title: fin_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: idle_scan
+    description: >
+      
+      Perform an idle scan on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The idle scan results.
+    inputSchema:
+      type: object
+      title: idle_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: ping_scan
+    description: >
+      
+      Perform a ping scan on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The ping scan results.
+    inputSchema:
+      type: object
+      title: ping_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: syn_scan
+    description: |
+      
+      Perform a SYN scan on the specified target with optional custom arguments.
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The SYN scan results.
+    inputSchema:
+      type: object
+      title: syn_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: tcp_scan
+    description: >
+      
+      Perform a TCP connect scan on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The TCP scan results.
+    inputSchema:
+      type: object
+      title: tcp_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: udp_scan
+    description: |
+      
+      Perform a UDP scan on the specified target with optional custom arguments.
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The UDP scan results.
+    inputSchema:
+      type: object
+      title: udp_scanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: portscan_only
+    description: >
+      
+      Perform a port scan only on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The port scan results.
+    inputSchema:
+      type: object
+      title: portscan_onlyArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: no_portscan
+    description: >
+      
+      Perform host discovery without port scanning on the specified target with
+      optional custom arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The host discovery results.
+    inputSchema:
+      type: object
+      title: no_portscanArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: arp_discovery
+    description: >
+      
+      Perform ARP discovery on the specified target with optional custom
+      arguments.
+
+
+      Args:
+          target (str): The target IP address or subnet (e.g., '192.168.1.0/24').
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The ARP discovery results.
+    inputSchema:
+      type: object
+      title: arp_discoveryArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target
+  - name: disable_dns_resolution
+    description: >
+      
+      Perform a scan on the specified target with DNS resolution disabled and
+      optional custom arguments.
+
+
+      Args:
+          target (str): The target IP address or hostname.
+          args (str): Additional Nmap command-line arguments.
+
+      Returns:
+          dict: The scan results with DNS resolution disabled.
+    inputSchema:
+      type: object
+      title: disable_dns_resolutionArguments
+      required:
+        - target
+      properties:
+        args:
+          type: string
+          title: Args
+          default: ""
+        target:
+          type: string
+          title: Target

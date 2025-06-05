@@ -1,0 +1,77 @@
+tools:
+  - name: ssh_exec
+    description: Execute command over SSH using private key file path
+    inputSchema:
+      type: object
+      required:
+        - host
+        - command
+        - username
+        - privateKeyPath
+      properties:
+        host:
+          type: string
+        command:
+          type: string
+        username:
+          type: string
+        privateKeyPath:
+          type: string
+  - name: add_credential
+    description: Add a new SSH credential with private key file path
+    inputSchema:
+      type: object
+      required:
+        - name
+        - host
+        - username
+        - privateKeyPath
+      properties:
+        host:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        privateKeyPath:
+          type: string
+  - name: list_credentials
+    description: List all stored SSH credentials
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: remove_credential
+    description: Remove a stored SSH credential
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+  - name: rsync_copy
+    description: Copy files/directories between local and remote server via rsync
+    inputSchema:
+      type: object
+      required:
+        - credentialName
+        - localPath
+        - remotePath
+        - direction
+      properties:
+        direction:
+          enum:
+            - toRemote
+            - fromRemote
+          type: string
+          description: Direction of copy (toRemote or fromRemote)
+        localPath:
+          type: string
+          description: Path on the local machine
+        remotePath:
+          type: string
+          description: Path on the remote server
+        credentialName:
+          type: string
+          description: Name of the stored credential to use

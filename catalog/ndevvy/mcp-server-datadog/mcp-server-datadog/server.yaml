@@ -1,0 +1,19 @@
+identifier: ndevvy/mcp-server-datadog/mcp-server-datadog
+repo:
+  provider: github.com
+  url: https://github.com/ndevvy/mcp-server-datadog
+  name: mcp-server-datadog
+  owner: ndevvy
+server:
+  subdirectory: /
+  name: Datadog API Integration Server
+  description: Enable seamless interaction with Datadog's monitoring and incident
+    management features through a standardized MCP server interface. Retrieve
+    and manage incidents, monitors, logs, dashboards, metrics, traces, hosts,
+    and downtimes efficiently. Extend your observability workflows by
+    integrating Datadog data and actions directly into your LLM-powered
+    applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

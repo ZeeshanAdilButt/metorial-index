@@ -1,0 +1,481 @@
+tools:
+  - name: browser_navigate
+    description: Navigate to a URL
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The URL to navigate to
+      additionalProperties: false
+  - name: browser_go_back
+    description: Go back to the previous page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: browser_go_forward
+    description: Go forward to the next page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: browser_choose_file
+    description: Choose one or multiple files to upload
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: The absolute paths to the files to upload. Can be a single file or
+            multiple files.
+      additionalProperties: false
+  - name: browser_snapshot
+    description: Capture accessibility snapshot of the current page, this is better
+      than screenshot
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: browser_click
+    description: Perform click on a web page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - element
+        - ref
+      properties:
+        ref:
+          type: string
+          description: Exact target element reference from the page snapshot
+        element:
+          type: string
+          description: Human-readable element description used to obtain permission to
+            interact with the element
+      additionalProperties: false
+  - name: browser_drag
+    description: Perform drag and drop between two elements
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - startElement
+        - startRef
+        - endElement
+        - endRef
+      properties:
+        endRef:
+          type: string
+          description: Exact target element reference from the page snapshot
+        startRef:
+          type: string
+          description: Exact source element reference from the page snapshot
+        endElement:
+          type: string
+          description: Human-readable target element description used to obtain the
+            permission to interact with the element
+        startElement:
+          type: string
+          description: Human-readable source element description used to obtain the
+            permission to interact with the element
+      additionalProperties: false
+  - name: browser_hover
+    description: Hover over element on page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - element
+        - ref
+      properties:
+        ref:
+          type: string
+          description: Exact target element reference from the page snapshot
+        element:
+          type: string
+          description: Human-readable element description used to obtain permission to
+            interact with the element
+      additionalProperties: false
+  - name: browser_type
+    description: Type text into editable element
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - element
+        - ref
+        - text
+        - submit
+      properties:
+        ref:
+          type: string
+          description: Exact target element reference from the page snapshot
+        text:
+          type: string
+          description: Text to type into the element
+        submit:
+          type: boolean
+          description: Whether to submit entered text (press Enter after)
+        element:
+          type: string
+          description: Human-readable element description used to obtain permission to
+            interact with the element
+      additionalProperties: false
+  - name: browser_select_option
+    description: Select an option in a dropdown
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - element
+        - ref
+        - values
+      properties:
+        ref:
+          type: string
+          description: Exact target element reference from the page snapshot
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values to select in the dropdown. This can be a single
+            value or multiple values.
+        element:
+          type: string
+          description: Human-readable element description used to obtain permission to
+            interact with the element
+      additionalProperties: false
+  - name: browser_take_screenshot
+    description: Take a screenshot of the current page. You can't perform actions
+      based on the screenshot, use browser_snapshot for actions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        raw:
+          type: boolean
+          description: Whether to return without compression (in PNG format). Default is
+            false, which returns a JPEG image.
+      additionalProperties: false
+  - name: browser_batch
+    description: "TOOL CALL REQUIREMENT: MUST CALL browser_navigate TOOL FIRST IN
+      THE TARGET URLS BEFORE CALLING THIS TOOL TO GET THE CORRECT ARIA REFS.
+      This tool runs a bunch of steps at once."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: object
+          required:
+            - test_cases
+          properties:
+            test_cases:
+              type: array
+              items:
+                type: object
+                required:
+                  - definition
+                  - steps
+                properties:
+                  steps:
+                    type: array
+                    items:
+                      anyOf:
+                        - anyOf:
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_navigate
+                                params:
+                                  type: object
+                                  required:
+                                    - url
+                                  properties:
+                                    url:
+                                      type: string
+                                      description: The URL to navigate to
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_press_key
+                                params:
+                                  type: object
+                                  required:
+                                    - key
+                                  properties:
+                                    key:
+                                      type: string
+                                      description: Name of the key to press or a character to generate, such as
+                                        `ArrowLeft` or `a`
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_wait
+                                params:
+                                  type: object
+                                  required:
+                                    - time
+                                  properties:
+                                    time:
+                                      type: number
+                                      description: The time to wait in seconds
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_save_as_pdf
+                                params:
+                                  type: object
+                                  properties: {}
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_close
+                                params:
+                                  type: object
+                                  properties: {}
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_go_back
+                                params:
+                                  type: object
+                                  properties: {}
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_go_forward
+                                params:
+                                  type: object
+                                  properties: {}
+                                  additionalProperties: false
+                              additionalProperties: false
+                        - anyOf:
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_drag
+                                params:
+                                  type: object
+                                  required:
+                                    - startElement
+                                    - startRef
+                                    - endElement
+                                    - endRef
+                                  properties:
+                                    endRef:
+                                      type: string
+                                      description: Exact target element reference from the page snapshot
+                                    startRef:
+                                      type: string
+                                      description: Exact source element reference from the page snapshot
+                                    endElement:
+                                      type: string
+                                      description: Human-readable target element description used to obtain the
+                                        permission to interact with the element
+                                    startElement:
+                                      type: string
+                                      description: Human-readable source element description used to obtain the
+                                        permission to interact with the element
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_click
+                                params:
+                                  type: object
+                                  required:
+                                    - element
+                                    - ref
+                                  properties:
+                                    ref:
+                                      type: string
+                                      description: Exact target element reference from the page snapshot
+                                    element:
+                                      type: string
+                                      description: Human-readable element description used to obtain permission to
+                                        interact with the element
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_hover
+                                params:
+                                  $ref: "#/properties/input/properties/test_cases/items/properties/steps/items/an\
+                                    yOf/1/anyOf/1/properties/params"
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_type
+                                params:
+                                  type: object
+                                  required:
+                                    - element
+                                    - ref
+                                    - text
+                                    - submit
+                                  properties:
+                                    ref:
+                                      $ref: "#/properties/input/properties/test_cases/items/properties/steps/items/an\
+                                        yOf/1/anyOf/1/properties/params/propert\
+                                        ies/ref"
+                                    text:
+                                      type: string
+                                      description: Text to type into the element
+                                    submit:
+                                      type: boolean
+                                      description: Whether to submit entered text (press Enter after)
+                                    element:
+                                      $ref: "#/properties/input/properties/test_cases/items/properties/steps/items/an\
+                                        yOf/1/anyOf/1/properties/params/propert\
+                                        ies/element"
+                                  additionalProperties: false
+                              additionalProperties: false
+                            - type: object
+                              required:
+                                - name
+                                - params
+                              properties:
+                                name:
+                                  type: string
+                                  const: browser_select_option
+                                params:
+                                  type: object
+                                  required:
+                                    - element
+                                    - ref
+                                    - values
+                                  properties:
+                                    ref:
+                                      $ref: "#/properties/input/properties/test_cases/items/properties/steps/items/an\
+                                        yOf/1/anyOf/1/properties/params/propert\
+                                        ies/ref"
+                                    values:
+                                      type: array
+                                      items:
+                                        type: string
+                                      description: Array of values to select in the dropdown. This can be a single
+                                        value or multiple values.
+                                    element:
+                                      $ref: "#/properties/input/properties/test_cases/items/properties/steps/items/an\
+                                        yOf/1/anyOf/1/properties/params/propert\
+                                        ies/element"
+                                  additionalProperties: false
+                              additionalProperties: false
+                  definition:
+                    type: string
+                additionalProperties: false
+          additionalProperties: false
+      additionalProperties: false
+  - name: browser_press_key
+    description: Press a key on the keyboard
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Name of the key to press or a character to generate, such as
+            `ArrowLeft` or `a`
+      additionalProperties: false
+  - name: browser_wait
+    description: Wait for a specified time in seconds
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - time
+      properties:
+        time:
+          type: number
+          description: The time to wait in seconds
+      additionalProperties: false
+  - name: browser_save_as_pdf
+    description: Save page as PDF
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: browser_close
+    description: Close the page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

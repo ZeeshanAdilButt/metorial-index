@@ -1,0 +1,37 @@
+tools:
+  - name: es-ping
+    description: Ping Elasticsearch server
+    inputSchema:
+      type: object
+      title: _handle_pingArguments
+      required:
+        - req
+      properties:
+        req:
+          type: object
+          title: Req
+          additionalProperties: true
+  - name: es-info
+    description: Get Elasticsearch info
+    inputSchema:
+      type: object
+      title: _handle_infoArguments
+      required:
+        - req
+      properties:
+        req:
+          type: object
+          title: Req
+          additionalProperties: true
+  - name: es-search
+    description: Search documents in Elasticsearch index
+    inputSchema:
+      type: object
+      title: _handle_searchArguments
+      required:
+        - req
+      properties:
+        req:
+          type: object
+          title: Req
+          additionalProperties: true

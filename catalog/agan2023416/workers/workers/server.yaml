@@ -1,0 +1,26 @@
+identifier: agan2023416/workers/workers
+repo:
+  provider: github.com
+  url: https://github.com/agan2023416/workers
+  name: workers
+  owner: agan2023416
+server:
+  subdirectory: /mcps/generate-image
+  name: R2 Gen
+  description: >-
+    An MCP server for image generation, utilizing Cloudflare Workers to store
+    images in R2.
+
+    - Seamless integration with replicate-2-r2 worker
+
+    - Asynchronous image generation support
+
+    - Real-time status feedback
+
+    - Type-safe API calls
+
+    - Comprehensive error handling
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

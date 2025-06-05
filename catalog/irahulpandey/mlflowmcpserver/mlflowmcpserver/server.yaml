@@ -1,0 +1,18 @@
+identifier: irahulpandey/mlflowmcpserver/mlflowmcpserver
+repo:
+  provider: github.com
+  url: https://github.com/iRahulPandey/mlflowMCPServer
+  name: mlflowMCPServer
+  owner: iRahulPandey
+server:
+  subdirectory: /
+  name: MLflow Natural Language Interface Server
+  description: Provide a natural language interface to your MLflow tracking
+    server, enabling easy querying and exploration of machine learning
+    experiments and models. Manage and retrieve information about registered
+    models, experiments, and system status using plain English. Simplify MLflow
+    interaction with conversational AI capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

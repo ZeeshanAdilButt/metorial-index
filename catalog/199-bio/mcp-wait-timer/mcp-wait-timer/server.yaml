@@ -1,0 +1,18 @@
+identifier: 199-bio/mcp-wait-timer/mcp-wait-timer
+repo:
+  provider: github.com
+  url: https://github.com/199-bio/mcp-wait-timer
+  name: mcp-wait-timer
+  owner: 199-bio
+server:
+  subdirectory: /
+  name: Wait Timer Server
+  description: Introduce deliberate pauses in your workflows to ensure
+    time-dependent operations complete successfully. Use the `wait` tool to
+    instruct your MCP client to pause for a specified duration, preventing
+    premature execution of subsequent steps. Perfect for web automation, command
+    line operations, and API interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: comet-ml/opik-mcp/opik-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/comet-ml/opik-mcp
+  name: opik-mcp
+  owner: comet-ml
+server:
+  subdirectory: /
+  name: Opik MCP Server
+  description: Integrate seamlessly with your IDE and access all Opik features
+    through a standardized protocol. Manage prompts, projects, and metrics
+    efficiently with a unified interface. Leverage multiple transport options
+    for flexible integration into various environments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

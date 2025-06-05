@@ -1,0 +1,17 @@
+identifier: cognitive-stack/volume-wall-detector-mcp/volume-wall-detector-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Cognitive-Stack/volume-wall-detector-mcp
+  name: volume-wall-detector-mcp
+  owner: Cognitive-Stack
+server:
+  subdirectory: /
+  name: Volume Wall Detector
+  description: Provide real-time stock trading volume analysis and detect
+    significant price levels to enhance trading decisions. Track trading
+    imbalances and analyze after-hours trading to gain deeper market insights.
+    Persist data securely using MongoDB for reliable and efficient access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

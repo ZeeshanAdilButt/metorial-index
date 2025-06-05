@@ -1,0 +1,19 @@
+identifier: mehmetakinn/gitlab-mcp-code-review/gitlab-mcp-code-review
+repo:
+  provider: github.com
+  url: https://github.com/mehmetakinn/gitlab-mcp-code-review
+  name: gitlab-mcp-code-review
+  owner: mehmetakinn
+server:
+  subdirectory: /
+  name: GitLab Code Review Integration
+  description: Enable AI assistants to perform comprehensive code reviews on
+    GitLab merge requests by accessing diffs, commits, comments, and managing
+    reviews directly through the GitLab API. Streamline code review workflows
+    with tools for version comparison, commenting, and approval management.
+    Integrate seamlessly with development environments like Cursor IDE for
+    enhanced productivity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: burakdirin/clickhouse-mcp-server/clickhouse-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/burakdirin/clickhouse-mcp-server
+  name: clickhouse-mcp-server
+  owner: burakdirin
+server:
+  subdirectory: /
+  name: Clickhouse MCP Server
+  description: An MCP server implementation that enables Claude AI to interact
+    with Clickhouse databases. Features include secure database connections,
+    query execution, read-only mode support, and multi-query capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

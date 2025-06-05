@@ -1,0 +1,14 @@
+identifier: gotoolkits/mcp-wecombot-server/mcp-wecombot-server
+repo:
+  provider: github.com
+  url: https://github.com/gotoolkits/mcp-wecombot-server
+  name: mcp-wecombot-server
+  owner: gotoolkits
+server:
+  subdirectory: /
+  name: WeComBot Server
+  description: Send various message types to a WeCom group robot.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

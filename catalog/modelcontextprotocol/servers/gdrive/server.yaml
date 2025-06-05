@@ -1,0 +1,15 @@
+identifier: modelcontextprotocol/servers/gdrive
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol/servers
+  name: servers
+  owner: modelcontextprotocol
+server:
+  subdirectory: /src/gdrive
+  name: Google Drive server
+  description: This MCP server integrates with Google Drive to allow listing,
+    reading, and searching over files.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

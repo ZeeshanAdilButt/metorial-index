@@ -1,0 +1,14 @@
+identifier: motherduckdb/mcp-server-motherduck/mcp-server-motherduck
+repo:
+  provider: github.com
+  url: https://github.com/motherduckdb/mcp-server-motherduck
+  name: mcp-server-motherduck
+  owner: motherduckdb
+server:
+  subdirectory: /
+  name: MotherDuck
+  description: Connect and query MotherDuck and local DuckDB databases.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

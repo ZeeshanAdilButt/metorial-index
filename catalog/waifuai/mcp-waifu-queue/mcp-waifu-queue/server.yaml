@@ -1,0 +1,17 @@
+identifier: waifuai/mcp-waifu-queue/mcp-waifu-queue
+repo:
+  provider: github.com
+  url: https://github.com/waifuai/mcp-waifu-queue
+  name: mcp-waifu-queue
+  owner: waifuai
+server:
+  subdirectory: /
+  name: Waifu Queue
+  description: Generate engaging conversations with a virtual waifu character.
+    Leverage GPU acceleration and a Redis queue for efficient text generation
+    and job management. Experience seamless interaction through a compliant MCP
+    API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

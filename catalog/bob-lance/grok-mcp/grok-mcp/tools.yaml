@@ -1,0 +1,110 @@
+tools:
+  - name: chat_completion
+    description: Generate a response using Grok AI chat completion
+    inputSchema:
+      type: object
+      required:
+        - messages
+      properties:
+        model:
+          type: string
+          default: grok-2-latest
+          description: Grok model to use (defaults to grok-2-latest)
+        messages:
+          type: array
+          items:
+            type: object
+            required:
+              - role
+              - content
+            properties:
+              role:
+                enum:
+                  - system
+                  - user
+                  - assistant
+                type: string
+                description: Role of the message sender (system, user, assistant)
+              content:
+                type: string
+                description: Content of the message
+          description: Array of message objects with role and content
+        max_tokens:
+          type: integer
+          default: 16384
+          description: Maximum number of tokens to generate
+        temperature:
+          type: number
+          default: 1
+          maximum: 2
+          minimum: 0
+          description: Sampling temperature (0-2)
+  - name: image_understanding
+    description: Analyze images using Grok AI vision capabilities
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        model:
+          type: string
+          default: grok-2-vision-latest
+          description: Grok vision model to use (defaults to grok-2-vision-latest)
+        prompt:
+          type: string
+          description: Text prompt to accompany the image
+        image_url:
+          type: string
+          description: URL of the image to analyze
+        base64_image:
+          type: string
+          description: Base64-encoded image data (without the data:image prefix)
+  - name: function_calling
+    description: Use Grok AI to call functions based on user input
+    inputSchema:
+      type: object
+      required:
+        - messages
+        - tools
+      properties:
+        model:
+          type: string
+          default: grok-2-latest
+          description: Grok model to use (defaults to grok-2-latest)
+        tools:
+          type: array
+          items:
+            type: object
+          description: Array of tool objects with type, function name, description, and
+            parameters
+        messages:
+          type: array
+          items:
+            type: object
+            required:
+              - role
+              - content
+            properties:
+              role:
+                enum:
+                  - system
+                  - user
+                  - assistant
+                  - tool
+                type: string
+                description: Role of the message sender (system, user, assistant, tool)
+              content:
+                type: string
+                description: Content of the message
+              tool_call_id:
+                type: string
+                description: ID of the tool call (for tool messages)
+          description: Array of message objects with role and content
+        tool_choice:
+          enum:
+            - auto
+            - required
+            - none
+          type: string
+          default: auto
+          description: Tool choice mode (auto, required, none)

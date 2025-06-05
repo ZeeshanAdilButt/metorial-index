@@ -1,0 +1,16 @@
+identifier: browserbase/mcp-server-browserbase/browserbase
+repo:
+  provider: github.com
+  url: https://github.com/browserbase/mcp-server-browserbase
+  name: mcp-server-browserbase
+  owner: browserbase
+server:
+  subdirectory: /browserbase
+  name: Browserbase
+  description: Provides cloud browser automation capabilities using Browserbase,
+    enabling LLMs to interact with web pages, take screenshots, and execute
+    JavaScript in a cloud browser environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

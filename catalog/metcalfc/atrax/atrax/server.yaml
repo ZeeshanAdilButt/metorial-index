@@ -1,0 +1,18 @@
+identifier: metcalfc/atrax/atrax
+repo:
+  provider: github.com
+  url: https://github.com/metcalfc/atrax
+  name: atrax
+  owner: metcalfc
+server:
+  subdirectory: /
+  name: Atrax Proxy Server
+  description: Aggregate multiple MCP servers into a single unified interface to
+    simplify client interactions. Securely proxy and combine resources with
+    configurable conflict resolution and token-based authentication. Enable
+    seamless web integration with support for multiple transport types including
+    STDIO, HTTP/SSE, and Docker.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

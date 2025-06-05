@@ -1,0 +1,16 @@
+identifier: norbinsh/cursor-mcp-trivy/cursor-mcp-trivy
+repo:
+  provider: github.com
+  url: https://github.com/norbinsh/cursor-mcp-trivy
+  name: cursor-mcp-trivy
+  owner: norbinsh
+server:
+  subdirectory: /
+  name: Trivy Security Scanner
+  description: Automatically scan your project for security vulnerabilities and
+    update vulnerable dependencies to secure versions. Support multiple package
+    managers to ensure your project remains secure throughout development.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

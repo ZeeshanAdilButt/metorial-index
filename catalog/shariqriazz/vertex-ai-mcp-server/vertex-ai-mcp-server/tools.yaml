@@ -1,0 +1,431 @@
+tools:
+  - name: answer_query_websearch
+    description: Answers a natural language query using the configured Vertex AI
+      model (gemini-1.5-pro-latest) enhanced with Google Search results for
+      up-to-date information. Requires a 'query' string.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The natural language question to answer using web search.
+  - name: answer_query_direct
+    description: Answers a natural language query using only the internal knowledge
+      of the configured Vertex AI model (gemini-1.5-pro-latest). Does not use
+      web search. Requires a 'query' string.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The natural language question to answer using only the model's
+            internal knowledge.
+  - name: explain_topic_with_docs
+    description: Provides a detailed explanation for a query about a specific
+      software topic by synthesizing information primarily from official
+      documentation found via web search. Focuses on comprehensive answers,
+      context, and adherence to documented details. Uses the configured Vertex
+      AI model (gemini-1.5-pro-latest) with Google Search. Requires 'topic' and
+      'query'.
+    inputSchema:
+      type: object
+      required:
+        - topic
+        - query
+      properties:
+        query:
+          type: string
+          description: The specific question to answer based on the documentation.
+        topic:
+          type: string
+          description: The software/library/framework topic (e.g., 'React Router', 'Python
+            requests').
+  - name: get_doc_snippets
+    description: Provides precise, authoritative code snippets or concise answers
+      for technical queries by searching official documentation. Focuses on
+      delivering exact solutions without unnecessary explanation. Uses the
+      configured Vertex AI model (gemini-1.5-pro-latest) with Google Search.
+      Requires 'topic' and 'query'.
+    inputSchema:
+      type: object
+      required:
+        - topic
+        - query
+      properties:
+        query:
+          type: string
+          description: The specific question or use case to find a snippet or concise
+            answer for.
+        topic:
+          type: string
+          description: The software/library/framework topic (e.g., 'React Router', 'Python
+            requests', 'PostgreSQL 14').
+        version:
+          type: string
+          default: ""
+          description: Optional. Specific version of the software to target (e.g., '6.4',
+            '2.28.2'). If provided, only documentation for this version will be
+            used.
+        include_examples:
+          type: boolean
+          default: true
+          description: Optional. Whether to include additional usage examples beyond the
+            primary snippet. Defaults to true.
+  - name: generate_project_guidelines
+    description: Generates a structured project guidelines document (e.g., Markdown)
+      based on a specified list of technologies and versions (tech stack). Uses
+      web search to find the latest official documentation, style guides, and
+      best practices for each component and synthesizes them into actionable
+      rules and recommendations. Uses the configured Vertex AI model
+      (gemini-1.5-pro-latest) with Google Search. Requires 'tech_stack'.
+    inputSchema:
+      type: object
+      required:
+        - tech_stack
+      properties:
+        tech_stack:
+          type: array
+          items:
+            type: string
+          description: An array of strings specifying the project's technologies and
+            versions (e.g., ['React 18.3', 'TypeScript 5.2', 'Node.js 20.10',
+            'Express 5.0', 'PostgreSQL 16.1']).
+  - name: read_file_content
+    description: Read the complete contents of a file from the workspace filesystem.
+      Handles various text encodings and provides detailed error messages if the
+      file cannot be read. Use this tool when you need to examine the contents
+      of a single file within the workspace.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The path of the file to read (relative to the workspace directory).
+      additionalProperties: false
+  - name: read_multiple_files_content
+    description: Read the contents of multiple files simultaneously from the
+      workspace filesystem. This is more efficient than reading files one by one
+      when you need to analyze or compare multiple files. Each file's content is
+      returned with its path as a reference. Failed reads for individual files
+      won't stop the entire operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: An array of file paths to read (relative to the workspace directory).
+      additionalProperties: false
+  - name: write_file_content
+    description: Create a new file or completely overwrite an existing file in the
+      workspace filesystem with new content. Use with caution as it will
+      overwrite existing files without warning. Handles text content with proper
+      encoding.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          description: The path of the file to write (relative to the workspace directory).
+        content:
+          type: string
+          description: The full content to write to the file.
+      additionalProperties: false
+  - name: edit_file_content
+    description: Make line-based edits to a text file in the workspace filesystem.
+      Each edit attempts to replace an exact match of 'oldText' with 'newText'.
+      If no exact match is found, it attempts a line-by-line match ignoring
+      leading/trailing whitespace. Indentation of the first line is preserved,
+      and relative indentation of subsequent lines is attempted. Returns a
+      git-style diff showing the changes made (or previewed if dryRun is true).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - edits
+      properties:
+        path:
+          type: string
+          description: The path of the file to edit (relative to the workspace directory).
+        edits:
+          type: array
+          items:
+            type: object
+            required:
+              - oldText
+              - newText
+            properties:
+              newText:
+                type: string
+                description: Text to replace with, preserving indentation where possible.
+              oldText:
+                type: string
+                description: Text to search for - attempts exact match first, then line-by-line
+                  whitespace-insensitive match.
+            additionalProperties: false
+          description: An array of edit operations to apply sequentially.
+        dryRun:
+          type: boolean
+          default: false
+          description: If true, preview changes using git-style diff format without saving.
+      additionalProperties: false
+  - name: create_directory
+    description: Create a new directory or ensure a directory exists in the
+      workspace filesystem. Can create multiple nested directories in one
+      operation (like mkdir -p). If the directory already exists, this operation
+      will succeed silently. Perfect for setting up directory structures for
+      projects.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The path of the directory to create (relative to the workspace
+            directory). Can include nested paths.
+      additionalProperties: false
+  - name: list_directory_contents
+    description: Get a detailed listing of all files and directories directly within
+      a specified path in the workspace filesystem. Results clearly distinguish
+      between files and directories with [FILE] and [DIR] prefixes. This tool is
+      essential for understanding directory structure and finding specific files
+      within a directory. Does not list recursively.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The path of the directory to list (relative to the workspace
+            directory).
+      additionalProperties: false
+  - name: get_directory_tree
+    description: Get a recursive tree view of files and directories within the
+      workspace filesystem as a JSON structure. Each entry includes 'name',
+      'type' (file/directory), and 'children' (an array) for directories. Files
+      have no 'children' array. The output is formatted JSON text. Useful for
+      understanding the complete structure of a project directory.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The root path for the directory tree (relative to the workspace
+            directory).
+      additionalProperties: false
+  - name: move_file_or_directory
+    description: Move or rename files and directories within the workspace
+      filesystem. Can move items between directories and rename them in a single
+      operation. If the destination path already exists, the operation will
+      likely fail (OS-dependent).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - source
+        - destination
+      properties:
+        source:
+          type: string
+          description: The current path of the file or directory to move (relative to the
+            workspace directory).
+        destination:
+          type: string
+          description: The new path for the file or directory (relative to the workspace
+            directory).
+      additionalProperties: false
+  - name: search_filesystem
+    description: Recursively search for files and directories within the workspace
+      filesystem matching a pattern in their name. Searches through all
+      subdirectories from the starting path. The search is case-insensitive and
+      matches partial names. Returns full paths (relative to workspace) to all
+      matching items. Supports excluding paths using glob patterns.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - pattern
+      properties:
+        path:
+          type: string
+          description: The starting directory path for the search (relative to the
+            workspace directory).
+        pattern:
+          type: string
+          description: The case-insensitive text pattern to search for in file/directory
+            names.
+        excludePatterns:
+          type: array
+          items:
+            type: string
+          default: []
+          description: An array of glob patterns (e.g., 'node_modules', '*.log') to
+            exclude from the search.
+      additionalProperties: false
+  - name: get_filesystem_info
+    description: Retrieve detailed metadata about a file or directory within the
+      workspace filesystem. Returns comprehensive information including size
+      (bytes), creation time, last modified time, last accessed time, type
+      (file/directory), and permissions (octal string). This tool is perfect for
+      understanding file characteristics without reading the actual content.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The path of the file or directory to get info for (relative to the
+            workspace directory).
+      additionalProperties: false
+  - name: save_generate_project_guidelines
+    description: Generates comprehensive project guidelines based on a tech stack
+      using web search and saves the result to a specified file path. Uses the
+      configured Vertex AI model (gemini-1.5-pro-latest). Requires 'tech_stack'
+      and 'output_path'.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tech_stack
+        - output_path
+      properties:
+        tech_stack:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: An array of strings specifying the project's technologies,
+            optionally with versions (e.g., ['React', 'TypeScript 5.x',
+            'Node.js', 'Express 4.18', 'PostgreSQL 16.x']). If no version is
+            specified, the latest stable version will be assumed.
+        output_path:
+          type: string
+          description: The relative path where the generated guidelines Markdown file
+            should be saved (e.g., 'docs/PROJECT_GUIDELINES.md').
+      additionalProperties: false
+  - name: save_doc_snippet
+    description: Provides precise code snippets or concise answers for technical
+      queries by searching official documentation and saves the result to a
+      file. Uses the configured Vertex AI model (gemini-1.5-pro-latest) with
+      Google Search. Requires 'topic', 'query', and 'output_path'.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - topic
+        - query
+        - output_path
+      properties:
+        query:
+          type: string
+          description: The specific question or use case to find a snippet or concise
+            answer for.
+        topic:
+          type: string
+          description: The software/library/framework topic (e.g., 'React Router', 'Python
+            requests', 'PostgreSQL 14').
+        version:
+          type: string
+          default: ""
+          description: Optional. Specific version of the software to target (e.g., '6.4',
+            '2.28.2'). If provided, only documentation for this version will be
+            used.
+        output_path:
+          type: string
+          description: The relative path where the generated snippet(s) should be saved
+            (e.g., 'snippets/react-hook-example.ts').
+        include_examples:
+          type: boolean
+          default: true
+          description: Optional. Whether to include additional usage examples beyond the
+            primary snippet. Defaults to true.
+      additionalProperties: false
+  - name: save_topic_explanation
+    description: Provides a detailed explanation for a query about a specific
+      software topic using official documentation found via web search and saves
+      the result to a file. Uses the configured Vertex AI model
+      (gemini-1.5-pro-latest). Requires 'topic', 'query', and 'output_path'.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - topic
+        - query
+        - output_path
+      properties:
+        query:
+          type: string
+          description: The specific question to answer based on the documentation.
+        topic:
+          type: string
+          description: The software/library/framework topic (e.g., 'React Router', 'Python
+            requests').
+        output_path:
+          type: string
+          description: The relative path where the generated explanation should be saved
+            (e.g., 'explanations/react-router-hooks.md').
+      additionalProperties: false
+  - name: save_answer_query_direct
+    description: Answers a natural language query using only the internal knowledge
+      of the configured Vertex AI model (gemini-1.5-pro-latest), does not use
+      web search, and saves the answer to a file. Requires 'query' and
+      'output_path'.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+        - output_path
+      properties:
+        query:
+          type: string
+          description: The natural language question to answer using only the model's
+            internal knowledge.
+        output_path:
+          type: string
+          description: The relative path where the generated answer should be saved.
+      additionalProperties: false
+  - name: save_answer_query_websearch
+    description: Answers a natural language query using Google Search results and
+      saves the answer to a file. Uses the configured Vertex AI model
+      (gemini-1.5-pro-latest). Requires 'query' and 'output_path'.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+        - output_path
+      properties:
+        query:
+          type: string
+          description: The natural language question to answer using web search.
+        output_path:
+          type: string
+          description: The relative path where the generated answer should be saved.
+      additionalProperties: false

@@ -1,0 +1,16 @@
+identifier: mammothgrowth/dbt-cli-mcp/dbt-cli-mcp
+repo:
+  provider: github.com
+  url: https://github.com/MammothGrowth/dbt-cli-mcp
+  name: dbt-cli-mcp
+  owner: MammothGrowth
+server:
+  subdirectory: /
+  name: DBT CLI MCP Server
+  description: Execute dbt commands seamlessly through standardized tools. Enhance
+    your AI coding agents' capabilities by integrating with dbt projects for
+    efficient data transformation and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

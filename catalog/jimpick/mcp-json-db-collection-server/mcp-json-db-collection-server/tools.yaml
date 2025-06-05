@@ -1,0 +1,103 @@
+tools:
+  - name: create_json_doc_database
+    description: Create a JSON document database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - databaseName
+      properties:
+        databaseName:
+          type: string
+      additionalProperties: false
+  - name: delete_json_doc_database
+    description: Delete a JSON document database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - databaseName
+      properties:
+        databaseName:
+          type: string
+      additionalProperties: false
+  - name: connect_json_doc_database_to_cloud
+    description: Connect a JSON document database to cloud sync service. Show the
+      dashboard URL after connecting.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - databaseName
+      properties:
+        databaseName:
+          type: string
+      additionalProperties: false
+  - name: list_json_doc_databases
+    description: Returns the list of JSON document databases. Use this to understand
+      which databases are available before trying to access JSON documents.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: save_json_doc_to_db
+    description: Save a JSON document to a document database
+    inputSchema:
+      type: object
+      required:
+        - doc
+        - databaseName
+      properties:
+        doc:
+          type: object
+          description: JSON document to save
+        databaseName:
+          type: string
+          description: document database to save to
+  - name: query_json_docs_from_db
+    description: Query JSON documents sorted by a field from a document database. If
+      no sortField is provided, use the _id field.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - databaseName
+        - sortField
+      properties:
+        sortField:
+          type: string
+        databaseName:
+          type: string
+      additionalProperties: false
+  - name: load_json_doc_from_db
+    description: Load a JSON document by ID from a document database
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of document to load
+        databaseName:
+          type: string
+          description: name of document database to load from
+  - name: delete_json_doc_from_db
+    description: Delete a JSON document by ID from a document database
+    inputSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of document to delete
+        databaseName:
+          type: string
+          description: name of document database to delete from
+  - name: connect_json_doc_database_to_cloud
+    description: Connect a JSON document database to cloud sync service
+    inputSchema:
+      type: object
+      properties:
+        databaseName:
+          type: string
+          description: name of document database to connect to cloud

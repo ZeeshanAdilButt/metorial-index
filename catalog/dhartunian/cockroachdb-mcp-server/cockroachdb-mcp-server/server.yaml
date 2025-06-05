@@ -1,0 +1,17 @@
+identifier: dhartunian/cockroachdb-mcp-server/cockroachdb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dhartunian/cockroachdb-mcp-server
+  name: cockroachdb-mcp-server
+  owner: dhartunian
+server:
+  subdirectory: /
+  name: CockroachDB Integration Server
+  description: Connect to your CockroachDB instance and execute SQL queries
+    seamlessly. Access database schemas and cluster metadata to enhance your
+    data analysis capabilities. Simplify your database interactions with
+    powerful tools and prompts for query optimization.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

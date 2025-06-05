@@ -1,0 +1,17 @@
+identifier: uraoz/bouyomichan-mcp-nodejs/bouyomichan-mcp-nodejs
+repo:
+  provider: github.com
+  url: https://github.com/uraoz/bouyomichan-mcp-nodejs
+  name: bouyomichan-mcp-nodejs
+  owner: uraoz
+server:
+  subdirectory: /
+  name: BouyomiChan Text-to-Speech Server
+  description: Provide AI assistants with text-to-speech capabilities using
+    BouyomiChan's Yukkuri voice. Customize voice type, volume, speed, and pitch
+    to enhance user interaction with natural-sounding speech. Easily integrate
+    with Claude for Desktop to enable seamless voice output from text commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

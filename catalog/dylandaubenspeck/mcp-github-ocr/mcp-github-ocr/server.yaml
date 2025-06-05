@@ -1,0 +1,16 @@
+identifier: dylandaubenspeck/mcp-github-ocr/mcp-github-ocr
+repo:
+  provider: github.com
+  url: https://github.com/dylandaubenspeck/mcp-github-ocr
+  name: mcp-github-ocr
+  owner: dylandaubenspeck
+server:
+  subdirectory: /
+  name: GitHub Repository Scanner
+  description: A service that scans GitHub repositories and provides structured
+    access to their file trees and contents. Users provide their own GitHub
+    tokens for secure access to public and private repositories.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

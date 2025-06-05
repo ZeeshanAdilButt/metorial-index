@@ -1,0 +1,12 @@
+tools:
+  - name: get_1password_credentials
+    description: Get 1Password credentials for a given site.
+    inputSchema:
+      type: object
+      title: get_1password_credentialsArguments
+      required:
+        - item_name
+      properties:
+        item_name:
+          type: string
+          title: Item Name

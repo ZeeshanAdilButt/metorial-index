@@ -1,0 +1,17 @@
+identifier: ks-gen-ai/confluence-mcp-server/confluence-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/KS-GEN-AI/confluence-mcp-server
+  name: confluence-mcp-server
+  owner: KS-GEN-AI
+server:
+  subdirectory: /
+  name: Confluence Communication Server
+  description: Interact with Confluence to execute CQL queries and retrieve page
+    content seamlessly. Enhance your workflow by integrating Confluence data
+    directly into your applications. Simplify your Confluence interactions with
+    powerful tools designed for efficiency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,110 @@
+tools:
+  - name: list_spaces
+    description: "List available Confluence spaces with optional filtering.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Optional search text to filter spaces by name/description
+
+      \        limit: Maximum number of spaces to return (default: 25)
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_spacesArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        query:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Query
+          default: null
+  - name: get_page_content
+    description: "Get the content of a specific Confluence page.
+
+      \   \ 
+
+      \    Args:
+
+      \        page_id: The ID of the Confluence page
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_page_contentArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+  - name: search_content
+    description: "Search for content in Confluence.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Text to search for
+
+      \        space_key: Optional space key to limit search to
+
+      \        limit: Maximum number of results to return (default: 25)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_contentArguments
+      required:
+        - query
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        query:
+          type: string
+          title: Query
+        space_key:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Space Key
+          default: null
+  - name: list_pages_in_space
+    description: "List all pages in a Confluence space.
+
+      \   \ 
+
+      \    Args:
+
+      \        space_key: The key of the space to list pages from
+
+      \        limit: Maximum number of pages to return (default: 25)
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_pages_in_spaceArguments
+      required:
+        - space_key
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        space_key:
+          type: string
+          title: Space Key

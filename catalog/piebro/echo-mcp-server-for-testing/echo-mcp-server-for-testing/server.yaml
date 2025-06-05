@@ -1,0 +1,16 @@
+identifier: piebro/echo-mcp-server-for-testing/echo-mcp-server-for-testing
+repo:
+  provider: github.com
+  url: https://github.com/piebro/echo-mcp-server-for-testing
+  name: echo-mcp-server-for-testing
+  owner: piebro
+server:
+  subdirectory: /
+  name: Echo MCP Server for Testing
+  description: Provide a simple echo tool to test MCP clients effectively. Serve
+    as a straightforward template for developing new MCP servers. Facilitate
+    easy integration and testing of MCP functionalities with minimal setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

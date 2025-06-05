@@ -1,0 +1,579 @@
+tools:
+  - name: git_directory_structure
+    description: Clone a Git repository and return its directory structure in a tree format.
+    inputSchema:
+      type: object
+      required:
+        - repo_url
+      properties:
+        repo_url:
+          type: string
+          description: The URL of the Git repository
+  - name: git_read_files
+    description: Read the contents of specified files in a given git repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_url
+        - file_paths
+      properties:
+        repo_url:
+          type: string
+          description: The URL of the Git repository
+        file_paths:
+          type: array
+          items:
+            type: string
+          description: List of file paths to read (relative to repository root)
+  - name: git_branch_diff
+    description: Compare two branches and show files changed between them.
+    inputSchema:
+      type: object
+      required:
+        - repo_url
+        - source_branch
+        - target_branch
+      properties:
+        repo_url:
+          type: string
+          description: The URL of the Git repository
+        show_patch:
+          type: boolean
+          default: false
+          description: Whether to include the actual diff patches
+        source_branch:
+          type: string
+          description: The source branch name
+        target_branch:
+          type: string
+          description: The target branch name
+  - name: git_checkout_branch
+    description: Create and/or checkout a branch.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - branch_name
+      properties:
+        create:
+          type: boolean
+          default: false
+          description: Whether to create a new branch
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+        branch_name:
+          type: string
+          description: The name of the branch to checkout
+        start_point:
+          type: string
+          description: Starting point for the branch (optional)
+  - name: git_delete_branch
+    description: Delete a branch from the repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - branch_name
+      properties:
+        force:
+          type: boolean
+          default: false
+          description: Whether to force deletion
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+        branch_name:
+          type: string
+          description: The name of the branch to delete
+  - name: git_merge_branch
+    description: Merge a source branch into the current or target branch.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - source_branch
+      properties:
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+        source_branch:
+          type: string
+          description: Branch to merge from
+        target_branch:
+          type: string
+          description: Branch to merge into (optional, uses current branch if not provided)
+        no_fast_forward:
+          type: boolean
+          default: false
+          description: Whether to create a merge commit even if fast-forward is possible
+  - name: git_commit_history
+    description: Get commit history for a branch with optional filtering.
+    inputSchema:
+      type: object
+      required:
+        - repo_url
+      properties:
+        grep:
+          type: string
+          description: Filter commits by message content (optional)
+        since:
+          type: string
+          description: Get commits after this date (e.g., "1 week ago", "2023-01-01")
+        until:
+          type: string
+          description: Get commits before this date (e.g., "yesterday", "2023-12-31")
+        author:
+          type: string
+          description: Filter by author (optional)
+        branch:
+          type: string
+          default: main
+          description: The branch to get history from
+        repo_url:
+          type: string
+          description: The URL of the Git repository
+        max_count:
+          type: integer
+          default: 10
+          description: Maximum number of commits to retrieve
+  - name: git_commits_details
+    description: Get detailed information about commits including full messages and diffs.
+    inputSchema:
+      type: object
+      required:
+        - repo_url
+      properties:
+        grep:
+          type: string
+          description: Filter commits by message content (optional)
+        since:
+          type: string
+          description: Get commits after this date (e.g., "1 week ago", "2023-01-01")
+        until:
+          type: string
+          description: Get commits before this date (e.g., "yesterday", "2023-12-31")
+        author:
+          type: string
+          description: Filter by author (optional)
+        branch:
+          type: string
+          default: main
+          description: The branch to get commits from
+        repo_url:
+          type: string
+          description: The URL of the Git repository
+        max_count:
+          type: integer
+          default: 10
+          description: Maximum number of commits to retrieve
+        include_diff:
+          type: boolean
+          default: false
+          description: Whether to include the commit diffs
+  - name: git_commit
+    description: Create a commit with the specified message.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - message
+      properties:
+        message:
+          type: string
+          description: The commit message
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_track
+    description: Track (stage) specific files or all files.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+          default:
+            - .
+          description: Array of file paths to track/stage (use ["."] for all files)
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_local_changes
+    description: Get uncommitted changes in the working directory.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_search_code
+    description: Search for patterns in repository code.
+    inputSchema:
+      type: object
+      required:
+        - repo_url
+        - pattern
+      properties:
+        pattern:
+          type: string
+          description: Search pattern (regex or string)
+        repo_url:
+          type: string
+          description: The URL of the Git repository
+        context_lines:
+          type: integer
+          default: 2
+          description: Number of context lines to include
+        file_patterns:
+          type: array
+          items:
+            type: string
+          description: Optional file patterns to filter (e.g., "*.js")
+        case_sensitive:
+          type: boolean
+          default: false
+          description: Whether the search is case sensitive
+  - name: git_push
+    description: Push changes to a remote repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        force:
+          type: boolean
+          default: false
+          description: Whether to force push
+        branch:
+          type: string
+          description: "Branch to push (default: current branch)"
+        remote:
+          type: string
+          default: origin
+          description: Remote name
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_pull
+    description: Pull changes from a remote repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        branch:
+          type: string
+          description: "Branch to pull (default: current branch)"
+        rebase:
+          type: boolean
+          default: false
+          description: Whether to rebase instead of merge
+        remote:
+          type: string
+          default: origin
+          description: Remote name
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_stash
+    description: Create or apply a stash.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        index:
+          type: integer
+          default: 0
+          description: Stash index (for pop, apply, drop actions)
+        action:
+          enum:
+            - save
+            - pop
+            - apply
+            - list
+            - drop
+          type: string
+          default: save
+          description: Stash action (save, pop, apply, list, drop)
+        message:
+          type: string
+          default: ""
+          description: Stash message (for save action)
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_create_tag
+    description: Create a tag.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - tag_name
+      properties:
+        message:
+          type: string
+          default: ""
+          description: Tag message (for annotated tags)
+        tag_name:
+          type: string
+          description: Name of the tag
+        annotated:
+          type: boolean
+          default: true
+          description: Whether to create an annotated tag
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_rebase
+    description: Rebase the current branch onto another branch or commit.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - onto
+      properties:
+        onto:
+          type: string
+          description: Branch or commit to rebase onto
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+        interactive:
+          type: boolean
+          default: false
+          description: Whether to perform an interactive rebase
+  - name: git_config
+    description: Configure git settings for the repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          description: Configuration key
+        scope:
+          enum:
+            - local
+            - global
+            - system
+          type: string
+          default: local
+          description: Configuration scope (local, global, system)
+        value:
+          type: string
+          description: Configuration value
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_reset
+    description: Reset repository to specified commit or state.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        to:
+          type: string
+          default: HEAD
+          description: Commit or reference to reset to
+        mode:
+          enum:
+            - soft
+            - mixed
+            - hard
+          type: string
+          default: mixed
+          description: Reset mode (soft, mixed, hard)
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_archive
+    description: Create a git archive (zip or tar).
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - output_path
+      properties:
+        format:
+          enum:
+            - zip
+            - tar
+          type: string
+          default: zip
+          description: Archive format (zip or tar)
+        prefix:
+          type: string
+          description: Prefix for files in the archive
+        treeish:
+          type: string
+          default: HEAD
+          description: "Tree-ish to archive (default: HEAD)"
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+        output_path:
+          type: string
+          description: Output path for the archive
+  - name: git_attributes
+    description: Manage git attributes for files.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - set
+            - list
+          type: string
+          default: list
+          description: Action (get, set, list)
+        pattern:
+          type: string
+          description: File pattern
+        attribute:
+          type: string
+          description: Attribute to set
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_blame
+    description: Get blame information for a file.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - file_path
+      properties:
+        rev:
+          type: string
+          default: HEAD
+          description: "Revision to blame (default: HEAD)"
+        file_path:
+          type: string
+          description: Path to the file
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_clean
+    description: Perform git clean operations.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        force:
+          type: boolean
+          default: false
+          description: Whether to force clean
+        dry_run:
+          type: boolean
+          default: true
+          description: Whether to perform a dry run
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+        directories:
+          type: boolean
+          default: false
+          description: Whether to remove directories as well
+  - name: git_hooks
+    description: Manage git hooks in the repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - action
+      properties:
+        action:
+          enum:
+            - list
+            - get
+            - create
+            - enable
+            - disable
+          type: string
+          default: list
+          description: Hook action (list, get, create, enable, disable)
+        script:
+          type: string
+          description: Script content for the hook (for create action)
+        hook_name:
+          type: string
+          description: Name of the hook (e.g., 'pre-commit', 'post-merge')
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_lfs
+    description: Manage Git LFS (Large File Storage).
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+        - action
+      properties:
+        action:
+          enum:
+            - install
+            - track
+            - untrack
+            - list
+          type: string
+          default: list
+          description: LFS action (install, track, untrack, list)
+        patterns:
+          type: array
+          items:
+            type: string
+          description: File patterns for track/untrack
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_lfs_fetch
+    description: Fetch LFS objects from the remote repository.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        dry_run:
+          type: boolean
+          default: false
+          description: Whether to perform a dry run
+        pointers:
+          type: boolean
+          default: false
+          description: Whether to convert pointers to objects
+        repo_path:
+          type: string
+          description: The path to the local Git repository
+  - name: git_revert
+    description: Revert the current branch to a commit or state.
+    inputSchema:
+      type: object
+      required:
+        - repo_path
+      properties:
+        commit:
+          type: string
+          description: Commit hash or reference to revert
+        no_commit:
+          type: boolean
+          default: false
+          description: Whether to stage changes without committing
+        repo_path:
+          type: string
+          description: The path to the local Git repository

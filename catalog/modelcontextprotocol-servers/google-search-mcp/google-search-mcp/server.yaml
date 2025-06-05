@@ -1,0 +1,17 @@
+identifier: modelcontextprotocol-servers/google-search-mcp/google-search-mcp
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol-servers/google-search-mcp
+  name: google-search-mcp
+  owner: modelcontextprotocol-servers
+server:
+  subdirectory: /
+  name: Google Search
+  description: Perform real-time Google searches with anti-bot bypass and
+    automatic CAPTCHA handling. Extract structured search results in multiple
+    languages and regions for AI assistants. Save browser session state to
+    improve search efficiency and reliability.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

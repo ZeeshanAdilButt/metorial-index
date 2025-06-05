@@ -1,0 +1,884 @@
+tools:
+  - name: sls_list_projects
+    description: "列出阿里云日志服务中的所有项目。
+
+
+      \            ## 功能概述
+
+
+      \            该工具可以列出指定区域中的所有SLS项目，支持通过项目名进行模糊搜索。如果不提供项目名称，则返回该区域的所有项目。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要查找特定项目是否存在时
+
+      \            - 当需要获取某个区域下所有可用的SLS项目列表时
+
+      \            - 当需要根据项目名称的部分内容查找相关项目时
+
+
+      \            ## 返回数据结构
+
+
+      \            返回的项目信息包含：
+
+      \            - project_name: 项目名称
+
+      \            - description: 项目描述
+
+      \            - region_id: 项目所在区域
+
+
+      \            ## 查询示例
+
+
+      \            - \"有没有叫 XXX 的 project\"
+
+      \            - \"列出所有SLS项目\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                project_name_query: 项目名称查询字符串，支持模糊搜索
+
+      \                limit: 返回结果的最大数量，范围1-100，默认10
+
+      \                region_id: 阿里云区域ID,region id format like \"xx-xxx\",like
+      \"cn-hangzhou\"
+
+
+      \            Returns:
+
+      \                包含项目信息的字典列表，每个字典包含project_name、description和region_id
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_list_projectsArguments
+      required:
+        - region_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: limit,max is 100
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id
+        project_name_query:
+          type: string
+          title: Project Name Query
+          default: null
+          description: project name,fuzzy search
+  - name: sls_list_logstores
+    description: "列出SLS项目中的日志库。
+
+
+      \            ## 功能概述
+
+
+      \            该工具可以列出指定SLS项目中的所有日志库，如果不选，则默认为日志库类型
+
+      \            支持通过日志库名称进行模糊搜索。如果不提供日志库名称，则返回项目中的所有日志库。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要查找特定项目下是否存在某个日志库时
+
+      \            - 当需要获取项目中所有可用的日志库列表时
+
+      \            - 当需要根据日志库名称的部分内容查找相关日志库时
+
+      \            - 如果从上下文未指定 project参数，除非用户说了遍历，则可使用 sls_list_projects
+      工具获取项目列表
+
+
+      \            ## 是否指标库
+
+
+      \            如果需要查找指标或者时序相关的库,请将is_metric_store参数设置为True
+
+
+      \            ## 查询示例
+
+
+      \            - \"我想查询有没有 XXX 的日志库\"
+
+      \            - \"某个 project 有哪些 log store\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                project: SLS项目名称，必须精确匹配
+
+      \                log_store: 日志库名称，支持模糊搜索
+
+      \                limit: 返回结果的最大数量，范围1-100，默认10
+
+      \                is_metric_store: 是否指标库，可选值为True或False，默认为False
+
+      \                region_id: 阿里云区域ID
+
+
+      \            Returns:
+
+      \                日志库名称的字符串列表
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_list_logstoresArguments
+      required:
+        - project
+        - region_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: limit,max is 100
+        project:
+          type: string
+          title: Project
+          description: sls project name,must exact match,should not contain chinese
+            characters
+        log_store:
+          type: string
+          title: Log Store
+          default: null
+          description: log store name,fuzzy search
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+        log_store_type:
+          type: string
+          title: Log Store Type
+          default: null
+          description: log store type,default is logs,should be logs,metrics
+        is_metric_store:
+          type: boolean
+          title: Is Metric Store
+          default: false
+          description: is metric store,default is False,only use want to find metric store
+  - name: sls_describe_logstore
+    description: "获取SLS日志库的结构信息。
+
+
+      \            ## 功能概述
+
+
+      \            该工具用于获取指定SLS项目中日志库的索引信息和结构定义，包括字段类型、别名、是否大小写敏感等信息。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要了解日志库的字段结构时
+
+      \            - 当需要获取日志库的索引配置信息时
+
+      \            - 当构建查询语句前需要了解可用字段时
+
+      \            - 当需要分析日志数据结构时
+
+
+      \            ## 返回数据结构
+
+
+      \            返回一个字典，键为字段名，值包含以下信息：
+
+      \            - alias: 字段别名
+
+      \            - sensitive: 是否大小写敏感
+
+      \            - type: 字段类型
+
+      \            - json_keys: JSON字段的子字段信息
+
+
+      \            ## 查询示例
+
+
+      \            - \"我想查询 XXX 的日志库的 schema\"
+
+      \            - \"我想查询 XXX 的日志库的 index\"
+
+      \            - \"我想查询 XXX 的日志库的结构信息\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                project: SLS项目名称，必须精确匹配
+
+      \                log_store: SLS日志库名称，必须精确匹配
+
+      \                region_id: 阿里云区域ID
+
+
+      \            Returns:
+
+      \                包含日志库结构信息的字典
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_describe_logstoreArguments
+      required:
+        - project
+        - log_store
+        - region_id
+      properties:
+        project:
+          type: string
+          title: Project
+          description: sls project name,must exact match,not fuzzy search
+        log_store:
+          type: string
+          title: Log Store
+          description: sls log store name,must exact match,not fuzzy search
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+  - name: sls_execute_query
+    description: "执行SLS日志查询。
+
+
+      \            ## 功能概述
+
+
+      \            该工具用于在指定的SLS项目和日志库上执行查询语句，并返回查询结果。查询将在指定的时间范围内执行。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要根据特定条件查询日志数据时
+
+      \            - 当需要分析特定时间范围内的日志信息时
+
+      \            - 当需要检索日志中的特定事件或错误时
+
+      \            - 当需要统计日志数据的聚合信息时
+
+
+
+
+      \            ## 查询语法
+
+
+      \            查询必须使用SLS有效的查询语法，而非自然语言。如果不了解日志库的结构，可以先使用sls_describe_logsto\
+      re工具获取索引信息。
+
+
+      \            ## 时间范围
+
+
+      \            查询必须指定时间范围：
+
+      \            - from_timestamp: 开始时间戳（秒）
+
+      \            - to_timestamp: 结束时间戳（秒）
+
+
+      \            ## 查询示例
+
+
+      \            - \"帮我查询下 XXX 的日志信息\"
+
+      \            - \"查找最近一小时内的错误日志\"
+
+
+      \            ## 错误处理
+
+      \            - Column xxx can not be resolved 如果是
+      sls_translate_natural_language_to_query 工具生成的查询语句
+      可能存在查询列未开启统计，可以提示用户增加相对应的信息，或者调用 sls_describe_logstore
+      工具获取索引信息之后，要用户选择正确的字段或者提示用户对列开启统计。当确定列开启统计之后，可以再次调用sls_translate_natural_\
+      language_to_query 工具生成查询语句
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                project: SLS项目名称
+
+      \                log_store: SLS日志库名称
+
+      \                query: SLS查询语句
+
+      \                from_timestamp: 查询开始时间戳（秒）
+
+      \                to_timestamp: 查询结束时间戳（秒）
+
+      \                limit: 返回结果的最大数量，范围1-100，默认10
+
+      \                region_id: 阿里云区域ID
+
+
+      \            Returns:
+
+      \                查询结果列表，每个元素为一条日志记录
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_execute_queryArguments
+      required:
+        - project
+        - log_store
+        - query
+        - from_timestamp
+        - to_timestamp
+        - region_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: limit,max is 100
+        query:
+          type: string
+          title: Query
+          description: query
+        project:
+          type: string
+          title: Project
+          description: sls project name
+        log_store:
+          type: string
+          title: Log Store
+          description: sls log store name
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+        to_timestamp:
+          type: integer
+          title: To Timestamp
+          description: to timestamp,unit is second,should be unix timestamp
+        from_timestamp:
+          type: integer
+          title: From Timestamp
+          description: from timestamp,unit is second,should be unix timestamp
+  - name: sls_translate_natural_language_to_log_query
+    description: "将自然语言转换为SLS查询语句。
+
+
+      \            ## 功能概述
+
+
+      \            该工具可以将自然语言描述转换为有效的SLS查询语句，便于用户使用自然语言表达查询需求。用户有任何 SLS
+      日志查询需求时，都需要优先使用该工具。
+
+
+      \            ## 使用场景
+
+
+      \            - 当用户不熟悉SLS查询语法时
+
+      \            - 当需要快速构建复杂查询时
+
+      \            - 当需要从自然语言描述中提取查询意图时
+
+
+      \            ## 使用限制
+
+
+      \            - 仅支持生成SLS查询，不支持其他数据库的SQL如MySQL、PostgreSQL等
+
+      \            - 生成的是查询语句，而非查询结果，需要配合sls_execute_query工具使用
+
+      \            - 如果查询涉及ARMS应用，应优先使用arms_generate_trace_query工具
+
+      \            - 需要对应的 log_sotre
+      已经设定了索引信息，如果生成的结果里面有字段没有索引或者开启统计，可能会导致查询失败，需要友好的提示用户增加相对应的索引信息
+
+
+      \            ## 最佳实践
+
+
+      \            - 提供清晰简洁的自然语言描述
+
+      \            - 不要在描述中包含项目或日志库名称
+
+      \            - 如有需要，指定查询的时间范围
+
+      \            - 首次生成的查询可能不完全符合要求，可能需要多次尝试
+
+
+      \            ## 查询示例
+
+
+      \            - \"帮我生成下 XXX 的日志查询语句\"
+
+      \            - \"查找最近一小时内的错误日志\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                text: 用于生成查询的自然语言文本
+
+      \                project: SLS项目名称
+
+      \                log_store: SLS日志库名称
+
+      \                region_id: 阿里云区域ID
+
+
+      \            Returns:
+
+      \                生成的SLS查询语句
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_translate_natural_language_to_log_queryArguments
+      required:
+        - text
+        - project
+        - log_store
+        - region_id
+      properties:
+        text:
+          type: string
+          title: Text
+          description: the natural language text to generate sls log store query
+        project:
+          type: string
+          title: Project
+          description: sls project name
+        log_store:
+          type: string
+          title: Log Store
+          description: sls log store name
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+  - name: sls_diagnose_query
+    description: "诊断SLS查询语句。
+
+
+      \            ## 功能概述
+
+
+      \            当 SLS
+      查询语句执行失败时，可以调用该工具，根据错误信息，生成诊断结果。诊断结果会包含查询语句的正确性、性能分析、优化建议等信息。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要诊断SLS查询语句的正确性时
+
+      \            - 当 SQL 执行错误需要查找原因时
+
+
+      \            ## 查询示例
+
+
+      \            - \"帮我诊断下 XXX 的日志查询语句\"
+
+      \            - \"帮我分析下 XXX 的日志查询语句\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                query: SLS查询语句
+
+      \                error_message: 错误信息
+
+      \                project: SLS项目名称
+
+      \                log_store: SLS日志库名称
+
+      \                region_id: 阿里云区域ID
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_diagnose_queryArguments
+      required:
+        - query
+        - error_message
+        - project
+        - log_store
+        - region_id
+      properties:
+        query:
+          type: string
+          title: Query
+          description: sls query
+        project:
+          type: string
+          title: Project
+          description: sls project name
+        log_store:
+          type: string
+          title: Log Store
+          description: sls log store name
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+        error_message:
+          type: string
+          title: Error Message
+          description: error message
+  - name: sls_get_current_time
+    description: "获取当前时间信息。
+
+
+      \            ## 功能概述
+
+
+      \            该工具用于获取当前的时间戳和格式化的时间字符串，便于在执行SLS查询时指定时间范围。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要获取当前时间以设置查询的结束时间
+
+      \            - 当需要获取当前时间戳进行时间计算
+
+      \            - 在构建查询时间范围时使用当前时间作为参考点
+
+
+      \            ## 返回数据格式
+
+
+      \            返回包含两个字段的字典：
+
+      \            - current_time: 格式化的时间字符串 (YYYY-MM-DD HH:MM:SS)
+
+      \            - current_timestamp: 整数形式的Unix时间戳（秒）
+
+
+      \            Args:
+
+      \                ctx: MCP上下文
+
+
+      \            Returns:
+
+      \                包含当前时间信息的字典
+
+      \            "
+    inputSchema:
+      type: object
+      title: sls_get_current_timeArguments
+      properties: {}
+  - name: arms_search_apps
+    description: "搜索ARMS应用。
+
+
+      \            ## 功能概述
+
+
+      \            该工具用于根据应用名称搜索ARMS应用，返回应用的基本信息，包括应用名称、PID、用户ID和类型。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要查找特定名称的应用时
+
+      \            - 当需要获取应用的PID以便进行其他ARMS操作时
+
+      \            - 当需要检查用户拥有的应用列表时
+
+
+      \            ## 搜索条件
+
+
+      \            - app_name_query必须是应用名称的一部分，而非自然语言
+
+      \            - 搜索结果将分页返回，可以指定页码和每页大小
+
+
+      \            ## 返回数据结构
+
+
+      \            返回一个字典，包含以下信息：
+
+      \            - total: 符合条件的应用总数
+
+      \            - page_size: 每页大小
+
+      \            - page_number: 当前页码
+
+      \            - trace_apps: 应用列表，每个应用包含app_name、pid、user_id和type
+
+
+      \            ## 查询示例
+
+
+      \            - \"帮我查询下 XXX 的应用\"
+
+      \            - \"找出名称包含'service'的应用\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问ARMS客户端
+
+      \                app_name_query: 应用名称查询字符串
+
+      \                region_id: 阿里云区域ID
+
+      \                page_size: 每页大小，范围1-100，默认20
+
+      \                page_number: 页码，默认1
+
+
+      \            Returns:
+
+      \                包含应用信息的字典
+
+      \            "
+    inputSchema:
+      type: object
+      title: arms_search_appsArguments
+      required:
+        - app_name_query
+        - region_id
+      properties:
+        page_size:
+          type: integer
+          title: Page Size
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: page size,max is 100
+        region_id:
+          type: string
+          title: Region Id
+          description: region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+        page_number:
+          type: integer
+          title: Page Number
+          default: 1
+          minimum: 1
+          description: page number,default is 1
+        app_name_query:
+          type: string
+          title: App Name Query
+          description: app name query
+  - name: arms_generate_trace_query
+    description: "生成ARMS应用的调用链查询语句。
+
+
+      \            ## 功能概述
+
+
+      \            该工具用于将自然语言描述转换为ARMS调用链查询语句，便于分析应用性能和问题。
+
+
+      \            ## 使用场景
+
+
+      \            - 当需要查询应用的调用链信息时
+
+      \            - 当需要分析应用性能问题时
+
+      \            - 当需要跟踪特定请求的执行路径时
+
+      \            - 当需要分析服务间调用关系时
+
+
+      \            ## 查询处理
+
+
+      \            工具会将自然语言问题转换为SLS查询，并返回：
+
+      \            - 生成的SLS查询语句
+
+      \            - 存储调用链数据的项目名
+
+      \            - 存储调用链数据的日志库名
+
+
+      \            ## 查询上下文
+
+
+      \            查询会考虑以下信息：
+
+      \            - 应用的PID
+
+      \            - 响应时间以纳秒存储，需转换为毫秒
+
+      \            - 数据以span记录存储，查询耗时需要对符合条件的span进行求和
+
+      \            - 服务相关信息使用serviceName字段
+
+      \            - 如果用户明确提出要查询 trace信息，则需要在查询问题上question 上添加说明返回trace信息
+
+
+      \            ## 查询示例
+
+
+      \            - \"帮我查询下 XXX 的 trace 信息\"
+
+      \            - \"分析最近一小时内响应时间超过1秒的调用链\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问ARMS和SLS客户端
+
+      \                user_id: 用户阿里云账号ID
+
+      \                pid: 应用的PID
+
+      \                region_id: 阿里云区域ID
+
+      \                question: 查询调用链的自然语言问题
+
+
+      \            Returns:
+
+      \                包含查询信息的字典，包括sls_query、project和log_store
+
+      \            "
+    inputSchema:
+      type: object
+      title: arms_generate_trace_queryArguments
+      required:
+        - user_id
+        - pid
+        - region_id
+        - question
+      properties:
+        pid:
+          type: string
+          title: Pid
+          description: pid,the pid of the app
+        user_id:
+          type: integer
+          title: User Id
+          description: user aliyun account id
+        question:
+          type: string
+          title: Question
+          description: question,the question to query the trace
+        region_id:
+          type: string
+          title: Region Id
+          description: region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+  - name: cms_translate_natural_language_to_promql
+    description: "将自然语言转换为Prometheus PromQL查询语句。
+
+
+      \            ## 功能概述
+
+
+      \            该工具可以将自然语言描述转换为有效的PromQL查询语句，便于用户使用自然语言表达查询需求。
+
+
+      \            ## 使用场景
+
+
+      \            - 当用户不熟悉PromQL查询语法时
+
+      \            - 当需要快速构建复杂查询时
+
+      \            - 当需要从自然语言描述中提取查询意图时
+
+
+      \            ## 使用限制
+
+
+      \            - 仅支持生成PromQL查询
+
+      \            - 生成的是查询语句，而非查询结果
+
+      \            - 禁止使用sls_execute_query工具执行，两者接口不兼容
+
+
+      \            ## 最佳实践
+
+
+      \            - 提供清晰简洁的自然语言描述
+
+      \            - 不要在描述中包含项目或时序库名称
+
+      \            - 首次生成的查询可能不完全符合要求，可能需要多次尝试
+
+
+      \            ## 查询示例
+
+
+      \            - \"帮我生成 XXX 的PromQL查询语句\"
+
+      \            - \"查询每个namespace下的Pod数量\"
+
+
+      \            Args:
+
+      \                ctx: MCP上下文，用于访问SLS客户端
+
+      \                text: 用于生成查询的自然语言文本
+
+      \                project: SLS项目名称
+
+      \                metric_store: SLS时序库名称
+
+      \                region_id: 阿里云区域ID
+
+
+      \            Returns:
+
+      \                生成的PromQL查询语句
+
+      \            "
+    inputSchema:
+      type: object
+      title: cms_translate_natural_language_to_promqlArguments
+      required:
+        - text
+        - project
+        - metric_store
+        - region_id
+      properties:
+        text:
+          type: string
+          title: Text
+          description: the natural language text to generate promql
+        project:
+          type: string
+          title: Project
+          description: sls project name
+        region_id:
+          type: string
+          title: Region Id
+          description: aliyun region id,region id format like 'xx-xxx',like 'cn-hangzhou'
+        metric_store:
+          type: string
+          title: Metric Store
+          description: sls metric store name

@@ -1,0 +1,17 @@
+identifier: mattweg/ynab-mcp/ynab-mcp
+repo:
+  provider: github.com
+  url: https://github.com/mattweg/ynab-mcp
+  name: ynab-mcp
+  owner: mattweg
+server:
+  subdirectory: /
+  name: YNAB Budget Management Server
+  description: Enable seamless interaction with your You Need A Budget (YNAB)
+    accounts through natural language. Manage budgets, track transactions, and
+    gain financial insights with OAuth-secured access. Improve your budgeting
+    workflow by integrating with Claude Code effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

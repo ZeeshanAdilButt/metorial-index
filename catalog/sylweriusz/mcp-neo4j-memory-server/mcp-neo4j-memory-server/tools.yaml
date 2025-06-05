@@ -1,0 +1,229 @@
+tools:
+  - name: create_entities
+    description: Create multiple new entities in the knowledge graph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entities
+      properties:
+        entities:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - entityType
+              - observations
+            properties:
+              name:
+                type: string
+                description: The name of the entity
+              entityType:
+                type: string
+                description: The type of the entity
+              observations:
+                type: array
+                items:
+                  type: string
+                description: An array of observation contents associated with the entity
+            additionalProperties: false
+      additionalProperties: false
+  - name: create_relations
+    description: Create multiple new relations between entities in the knowledge
+      graph. Relations should be in active voice
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - relations
+      properties:
+        relations:
+          type: array
+          items:
+            type: object
+            required:
+              - from
+              - to
+              - relationType
+            properties:
+              to:
+                type: string
+                description: The name of the entity where the relation ends
+              from:
+                type: string
+                description: The name of the entity where the relation starts
+              relationType:
+                type: string
+                description: The type of the relation
+            additionalProperties: false
+      additionalProperties: false
+  - name: add_observations
+    description: Add new observations to existing entities in the knowledge graph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - observations
+      properties:
+        observations:
+          type: array
+          items:
+            type: object
+            required:
+              - entityName
+              - contents
+            properties:
+              contents:
+                type: array
+                items:
+                  type: string
+                description: An array of observation contents to add
+              entityName:
+                type: string
+                description: The name of the entity to add the observations to
+            additionalProperties: false
+      additionalProperties: false
+  - name: delete_entities
+    description: Delete multiple entities and their associated relations from the
+      knowledge graph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entityNames
+      properties:
+        entityNames:
+          type: array
+          items:
+            type: string
+          description: An array of entity names to delete
+      additionalProperties: false
+  - name: delete_observations
+    description: Delete specific observations from entities in the knowledge graph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deletions
+      properties:
+        deletions:
+          type: array
+          items:
+            type: object
+            required:
+              - entityName
+              - contents
+            properties:
+              contents:
+                type: array
+                items:
+                  type: string
+                description: An array of observations to delete
+              entityName:
+                type: string
+                description: The name of the entity containing the observations
+            additionalProperties: false
+      additionalProperties: false
+  - name: delete_relations
+    description: Delete multiple relations from the knowledge graph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - relations
+      properties:
+        relations:
+          type: array
+          items:
+            type: object
+            required:
+              - from
+              - to
+              - relationType
+            properties:
+              to:
+                type: string
+                description: The name of the entity where the relation ends
+              from:
+                type: string
+                description: The name of the entity where the relation starts
+              relationType:
+                type: string
+                description: The type of the relation
+            additionalProperties: false
+          description: An array of relations to delete
+      additionalProperties: false
+  - name: search_nodes
+    description: Search for nodes in the knowledge graph based on a query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query to match against entity names, types, and
+            observation content
+      additionalProperties: false
+  - name: open_nodes
+    description: Open specific nodes in the knowledge graph by their names
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - names
+      properties:
+        names:
+          type: array
+          items:
+            type: string
+          description: An array of entity names to retrieve
+      additionalProperties: false
+  - name: list_entities
+    description: Get a lightweight list of all entities with their names and types
+      (without loading full observation content)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: switch_database
+    description: Switch to a different Neo4j database or create a new one if it
+      doesn't exist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - databaseName
+      properties:
+        databaseName:
+          type: string
+          description: The name of the database to switch to
+        createIfNotExists:
+          type: boolean
+          description: Whether to create the database if it doesn't exist
+      additionalProperties: false
+  - name: get_current_database
+    description: Get information about the current Neo4j database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_databases
+    description: List all available Neo4j databases
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_entity_list
+    description: Get a simple list of all entity names and types without loading
+      observations (lightweight operation)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

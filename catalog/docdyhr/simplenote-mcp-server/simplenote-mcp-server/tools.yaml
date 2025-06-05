@@ -1,0 +1,106 @@
+tools:
+  - name: create_note
+    description: Create a new note in Simplenote
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        tags:
+          type: string
+          description: Tags for the note (comma-separated)
+        content:
+          type: string
+          description: The content of the note
+  - name: update_note
+    description: Update an existing note in Simplenote
+    inputSchema:
+      type: object
+      required:
+        - note_id
+        - content
+      properties:
+        tags:
+          type: string
+          description: Tags for the note (comma-separated)
+        content:
+          type: string
+          description: The new content of the note
+        note_id:
+          type: string
+          description: The ID of the note to update
+  - name: delete_note
+    description: Delete a note from Simplenote
+    inputSchema:
+      type: object
+      required:
+        - note_id
+      properties:
+        note_id:
+          type: string
+          description: The ID of the note to delete
+  - name: search_notes
+    description: Search for notes in Simplenote
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of results to return
+        query:
+          type: string
+          description: The search query
+  - name: get_note
+    description: Get a note by ID from Simplenote
+    inputSchema:
+      type: object
+      required:
+        - note_id
+      properties:
+        note_id:
+          type: string
+          description: The ID of the note to retrieve
+  - name: add_tags
+    description: Add tags to an existing note
+    inputSchema:
+      type: object
+      required:
+        - note_id
+        - tags
+      properties:
+        tags:
+          type: string
+          description: Tags to add (comma-separated)
+        note_id:
+          type: string
+          description: The ID of the note to modify
+  - name: remove_tags
+    description: Remove tags from an existing note
+    inputSchema:
+      type: object
+      required:
+        - note_id
+        - tags
+      properties:
+        tags:
+          type: string
+          description: Tags to remove (comma-separated)
+        note_id:
+          type: string
+          description: The ID of the note to modify
+  - name: replace_tags
+    description: Replace all tags on an existing note
+    inputSchema:
+      type: object
+      required:
+        - note_id
+        - tags
+      properties:
+        tags:
+          type: string
+          description: New tags (comma-separated)
+        note_id:
+          type: string
+          description: The ID of the note to modify

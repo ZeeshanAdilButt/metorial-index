@@ -1,0 +1,46 @@
+tools:
+  - name: create_user
+    description: Create a new user with the given username and email
+    inputSchema:
+      type: object
+      title: create_userArguments
+      required:
+        - username
+        - email
+      properties:
+        email:
+          type: string
+          title: Email
+        username:
+          type: string
+          title: Username
+  - name: create_post
+    description: Create a new post with the given title, content, and user ID
+    inputSchema:
+      type: object
+      title: create_postArguments
+      required:
+        - title
+        - content
+        - user_id
+      properties:
+        title:
+          type: string
+          title: Title
+        content:
+          type: string
+          title: Content
+        user_id:
+          type: integer
+          title: User Id
+  - name: search_posts
+    description: Search posts by title or content
+    inputSchema:
+      type: object
+      title: search_postsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

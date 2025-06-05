@@ -1,0 +1,11 @@
+tools:
+  - name: check-domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+      additionalProperties: false

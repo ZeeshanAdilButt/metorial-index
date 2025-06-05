@@ -1,0 +1,18 @@
+identifier: ropon/mcp-gitee/mcp-gitee
+repo:
+  provider: github.com
+  url: https://github.com/ropon/mcp-gitee
+  name: mcp-gitee
+  owner: ropon
+server:
+  subdirectory: /
+  name: Gitee MCP Server
+  description: Interact with Gitee's API to manage repositories, issues, and pull
+    requests seamlessly. Automate your workflow by leveraging AI assistants to
+    handle tasks like creating issues and pull requests efficiently. Enhance
+    your development process with easy configuration and powerful tools for
+    Gitee operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

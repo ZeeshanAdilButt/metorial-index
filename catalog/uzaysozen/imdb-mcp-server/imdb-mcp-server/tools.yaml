@@ -1,0 +1,434 @@
+tools:
+  - name: search_imdb
+    description: >
+      Search for movies on IMDb. First 5 results are returned.
+
+      Args:
+          original_title: The original title of the movie to search for. Searches the whole word.
+          original_title_autocomplete: The autocomplete title of the movie to search for. Searches the partial word.
+          primary_title: The primary title of the movie to search for. Searches the whole word.
+          primary_title_autocomplete: The autocomplete primary title of the movie to search for. Searches the partial word.
+          type: The type of the movie to search for. Get all possible types with get_types().
+          genre: The genre of the movie to search for. Get all possible genres with get_genres().
+          genres: The genres of the movie to search for. List of Genres. Get all possible genres with get_genres().
+          is_adult: Whether to include adult movies in the search results.
+          average_rating_from: The minimum average rating of the movie to search for.
+          average_rating_to: The maximum average rating of the movie to search for.
+          num_votes_from: The minimum number of votes of the movie to search for.
+          num_votes_to: The maximum number of votes of the movie to search for.
+          start_year_from: The minimum start year of the movie to search for.
+          start_year_to: The maximum start year of the movie to search for.
+          countries_of_origin: The countries of origin of the movie to search for. In ISO 3166-1 alpha-2 format list of strings. Get all possible countries with get_countries().
+          spoken_languages: The spoken languages of the movie to search for. In ISO 639-1 format list of strings. Get all possible languages with get_languages().
+          sort_order: The order of the search results. Possible values: "ASC", "DESC".
+          sort_field: The field to sort the search results by. Possible values: "id", "averageRating", "numVotes", "startYear".
+      Returns:
+          JSON object containing the first 5 search results.
+    inputSchema:
+      type: object
+      title: search_imdbArguments
+      properties:
+        type:
+          type: string
+          title: Type
+          default: null
+        genre:
+          type: string
+          title: Genre
+          default: null
+        genres:
+          type: array
+          items:
+            type: string
+          title: Genres
+          default: null
+        is_adult:
+          type: boolean
+          title: Is Adult
+          default: null
+        sort_field:
+          type: string
+          title: Sort Field
+          default: null
+        sort_order:
+          type: string
+          title: Sort Order
+          default: null
+        num_votes_to:
+          type: integer
+          title: Num Votes To
+          default: null
+        primary_title:
+          type: string
+          title: Primary Title
+          default: null
+        start_year_to:
+          type: integer
+          title: Start Year To
+          default: null
+        num_votes_from:
+          type: integer
+          title: Num Votes From
+          default: null
+        original_title:
+          type: string
+          title: Original Title
+          default: null
+        start_year_from:
+          type: integer
+          title: Start Year From
+          default: null
+        spoken_languages:
+          type: string
+          title: Spoken Languages
+          default: null
+        average_rating_to:
+          type: number
+          title: Average Rating To
+          default: null
+        average_rating_from:
+          type: number
+          title: Average Rating From
+          default: null
+        countries_of_origin:
+          type: string
+          title: Countries Of Origin
+          default: null
+        primary_title_autocomplete:
+          type: string
+          title: Primary Title Autocomplete
+          default: null
+        original_title_autocomplete:
+          type: string
+          title: Original Title Autocomplete
+          default: null
+  - name: get_imdb_details
+    description: |
+      Get more in depth details about a movie/series from IMDb.
+      Args:
+          imdbId: The IMDb ID of the movie/series to get details for.
+      Returns:
+          JSON object containing the movie/series details.
+    inputSchema:
+      type: object
+      title: get_imdb_detailsArguments
+      required:
+        - imdb_id
+      properties:
+        imdb_id:
+          type: string
+          title: Imdb Id
+  - name: get_directors
+    description: |
+      Get the directors of a movie from IMDb.
+      Args:
+          imdbId: The IMDb ID of the movie to get directors for.
+      Returns:
+          JSON object containing the directors of the movie.
+    inputSchema:
+      type: object
+      title: get_directorsArguments
+      required:
+        - imdb_id
+      properties:
+        imdb_id:
+          type: string
+          title: Imdb Id
+  - name: get_cast
+    description: |
+      Get the cast of a movie from IMDb.
+      Args:
+          imdbId: The IMDb ID of the movie to get cast for.
+      Returns:
+          JSON object containing the cast of the movie.
+    inputSchema:
+      type: object
+      title: get_castArguments
+      required:
+        - imdb_id
+      properties:
+        imdb_id:
+          type: string
+          title: Imdb Id
+  - name: get_writers
+    description: |
+      Get the writers of a movie from IMDb.
+      Args:
+          imdbId: The IMDb ID of the movie to get writers for.
+      Returns:
+          JSON object containing the writers of the movie.
+    inputSchema:
+      type: object
+      title: get_writersArguments
+      required:
+        - imdb_id
+      properties:
+        imdb_id:
+          type: string
+          title: Imdb Id
+  - name: get_types
+    description: |
+      Get all types.
+      Returns:
+          JSON object containing all types.
+    inputSchema:
+      type: object
+      title: get_typesArguments
+      properties: {}
+  - name: get_genres
+    description: |
+      Get all genres.
+      Returns:
+          JSON object containing all genres.
+    inputSchema:
+      type: object
+      title: get_genresArguments
+      properties: {}
+  - name: get_countries
+    description: |
+      Get all countries.
+      Returns:
+          JSON object containing all countries.
+    inputSchema:
+      type: object
+      title: get_countriesArguments
+      properties: {}
+  - name: get_languages
+    description: |
+      Get all languages.
+      Returns:
+          JSON object containing all languages.
+    inputSchema:
+      type: object
+      title: get_languagesArguments
+      properties: {}
+  - name: get_top_250_movies
+    description: >
+      Get the top 250 movies from IMDb with pagination.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 top movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_250_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_top_box_office_us
+    description: >
+      Get the top box office data for the US from IMDb with pagination.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 top box office movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_box_office_usArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_most_popular_movies
+    description: >
+      Get the most popular movies from IMDb with pagination.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 most popular movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_most_popular_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_top_250_tv_shows
+    description: >
+      Get the top 250 TV shows from IMDb with pagination.
+
+      Args:
+          start: The starting index (0-based) to retrieve TV shows from.
+      Returns:
+          JSON object containing 10 top TV shows starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_250_tv_showsArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_most_popular_tv_shows
+    description: >
+      Get the most popular TV shows from IMDb with pagination.
+
+      Args:
+          start: The starting index (0-based) to retrieve TV shows from.
+      Returns:
+          JSON object containing 10 most popular TV shows starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_most_popular_tv_showsArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_upcoming_releases
+    description: >
+      Get the upcoming releases from IMDb with pagination.
+
+      Args:
+          country_code: The country code to get the upcoming releases for.
+          type: The type of the upcoming releases to get. Possible values: "TV", "MOVIE".
+          start: The starting index (0-based) to retrieve releases from.
+      Returns:
+          JSON object containing 10 upcoming releases starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_upcoming_releasesArguments
+      required:
+        - country_code
+        - type
+      properties:
+        type:
+          type: string
+          title: Type
+        start:
+          type: integer
+          title: Start
+          default: 0
+        country_code:
+          type: string
+          title: Country Code
+  - name: get_available_country_codes_for_upcoming_releases
+    description: >
+      Get the available country codes for upcoming releases from IMDb.
+
+      Returns:
+          JSON object containing the available country codes for upcoming releases.
+    inputSchema:
+      type: object
+      title: get_available_country_codes_for_upcoming_releasesArguments
+      properties: {}
+  - name: get_top_rated_malayalam_movies
+    description: >
+      Top 50 Malayalam movies as rated by the IMDb users.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 top rated Malayalam movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_rated_malayalam_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_upcoming_indian_movies
+    description: >
+      Get the most anticipated Indian movies on IMDb based on real-time
+      popularity.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 most anticipated Indian movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_upcoming_indian_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_trending_tamil_movies
+    description: >
+      Get the trending Tamil movies on IMDb.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 trending Tamil movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_trending_tamil_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_trending_telugu_movies
+    description: >
+      Get the trending Telugu movies on IMDb.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 trending Telugu movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_trending_telugu_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_top_rated_tamil_movies
+    description: >
+      Top 50 rated Tamil movies on IMDb.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 top rated Tamil movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_rated_tamil_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_top_rated_telugu_movies
+    description: >
+      Top 50 rated Telugu movies on IMDb.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 top rated Telugu movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_rated_telugu_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+  - name: get_top_rated_indian_movies
+    description: >
+      Top 250 rated Indian movies on IMDb with pagination.
+
+      Args:
+          start: The starting index (0-based) to retrieve movies from.
+      Returns:
+          JSON object containing 10 top rated Indian movies starting from the specified index.
+    inputSchema:
+      type: object
+      title: get_top_rated_indian_moviesArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0

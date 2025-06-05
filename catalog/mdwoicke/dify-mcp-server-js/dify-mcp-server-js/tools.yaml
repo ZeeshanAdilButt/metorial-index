@@ -1,0 +1,14 @@
+tools:
+  - name: antd-component-codegen-mcp-tool
+    description: Send a message to Dify chat API for generating antd biz components code
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The message to send
+        imageFilePath:
+          type: string
+          description: The image file absolute path to send

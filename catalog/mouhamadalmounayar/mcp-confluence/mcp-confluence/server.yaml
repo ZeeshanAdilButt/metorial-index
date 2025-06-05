@@ -1,0 +1,14 @@
+identifier: mouhamadalmounayar/mcp-confluence/mcp-confluence
+repo:
+  provider: github.com
+  url: https://github.com/mouhamadalmounayar/mcp-confluence
+  name: mcp-confluence
+  owner: mouhamadalmounayar
+server:
+  subdirectory: /
+  name: Confluence Context Server
+  description: Get context from your Confluence account using slash commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

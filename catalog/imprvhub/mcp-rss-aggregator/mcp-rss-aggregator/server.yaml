@@ -1,0 +1,18 @@
+identifier: imprvhub/mcp-rss-aggregator/mcp-rss-aggregator
+repo:
+  provider: github.com
+  url: https://github.com/imprvhub/mcp-rss-aggregator
+  name: mcp-rss-aggregator
+  owner: imprvhub
+server:
+  subdirectory: /
+  name: RSS Aggregator
+  description: Fetch and read content from your favorite RSS feeds directly within
+    Claude Desktop. Organize and filter feeds by categories, import
+    subscriptions via OPML, and get well-formatted article presentations with
+    titles, snippets, and links. Stay updated with the latest articles across
+    all your feeds using simple commands or natural language queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

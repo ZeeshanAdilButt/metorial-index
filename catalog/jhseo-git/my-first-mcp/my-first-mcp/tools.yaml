@@ -1,0 +1,34 @@
+tools:
+  - name: echo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: false
+  - name: calculate-bmi
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - weightKg
+        - heightM
+      properties:
+        heightM:
+          type: number
+        weightKg:
+          type: number
+      additionalProperties: false
+  - name: fetch-weather
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - city
+      properties:
+        city:
+          type: string
+      additionalProperties: false

@@ -1,0 +1,566 @@
+tools:
+  - name: wallet_provider_set
+    description: Set the provider URL. By default, the provider URL is set to the
+      ETH mainnet or the URL set in the PROVIDER_URL environment variable.
+    inputSchema:
+      type: object
+      required:
+        - providerURL
+      properties:
+        providerURL:
+          type: string
+          description: The provider RPC URL
+  - name: wallet_create_random
+    description: Create a new wallet with a random private key
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        path:
+          type: string
+          description: Optional HD path
+        locale:
+          type: string
+          description: Optional locale for the wordlist
+        password:
+          type: string
+          description: Optional password to encrypt the wallet
+  - name: wallet_from_private_key
+    description: Create a wallet from a private key
+    inputSchema:
+      type: object
+      required:
+        - privateKey
+      properties:
+        privateKey:
+          type: string
+          description: The private key
+  - name: wallet_create_mnemonic_phrase
+    description: Create a mnemonic phrase
+    inputSchema:
+      type: object
+      required:
+        - length
+      properties:
+        length:
+          enum:
+            - 12
+            - 15
+            - 18
+            - 21
+            - 24
+          type: number
+          description: The length of the mnemonic phrase
+        locale:
+          type: string
+          description: Optional locale for the wordlist
+  - name: wallet_from_mnemonic
+    description: Create a wallet from a mnemonic phrase
+    inputSchema:
+      type: object
+      required:
+        - mnemonic
+      properties:
+        path:
+          type: string
+          description: Optional HD path
+        locale:
+          type: string
+          description: Optional locale for the wordlist
+        mnemonic:
+          type: string
+          description: The mnemonic phrase
+  - name: wallet_from_encrypted_json
+    description: Create a wallet by decrypting an encrypted JSON wallet
+    inputSchema:
+      type: object
+      required:
+        - json
+        - password
+      properties:
+        json:
+          type: string
+          description: The encrypted JSON wallet
+        password:
+          type: string
+          description: The password to decrypt the wallet
+  - name: wallet_encrypt
+    description: Encrypt a wallet with a password
+    inputSchema:
+      type: object
+      required:
+        - wallet
+        - password
+      properties:
+        wallet:
+          type: string
+          description: The wallet to encrypt (private key, mnemonic, or JSON)
+        options:
+          type: object
+          properties:
+            scrypt:
+              type: object
+              properties:
+                N:
+                  type: number
+                p:
+                  type: number
+                r:
+                  type: number
+          description: Optional encryption options
+        password:
+          type: string
+          description: The password to encrypt the wallet
+  - name: wallet_get_address
+    description: Get the wallet address
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+  - name: wallet_get_public_key
+    description: Get the wallet public key
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+  - name: wallet_get_private_key
+    description: Get the wallet private key (with appropriate security warnings)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        password:
+          type: string
+          description: The password to decrypt the wallet if it's encrypted
+  - name: wallet_get_balance
+    description: Get the balance of the wallet
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        blockTag:
+          type: string
+          description: Optional block tag (latest, pending, etc.)
+  - name: wallet_get_chain_id
+    description: Get the chain ID the wallet is connected to
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+  - name: wallet_get_gas_price
+    description: Get the current gas price
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+  - name: wallet_get_transaction_count
+    description: Get the number of transactions sent from this account (nonce)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        blockTag:
+          type: string
+          description: Optional block tag (latest, pending, etc.)
+  - name: wallet_call
+    description: Call a contract method without sending a transaction
+    inputSchema:
+      type: object
+      required:
+        - transaction
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        blockTag:
+          type: string
+          description: Optional block tag (latest, pending, etc.)
+        transaction:
+          type: object
+          required:
+            - to
+          properties:
+            to:
+              type: string
+            data:
+              type: string
+            from:
+              type: string
+            value:
+              type: string
+            gasLimit:
+              type: string
+            gasPrice:
+              type: string
+          description: The transaction to call
+  - name: wallet_send_transaction
+    description: Send a transaction
+    inputSchema:
+      type: object
+      required:
+        - transaction
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        transaction:
+          type: object
+          required:
+            - to
+          properties:
+            to:
+              type: string
+            data:
+              type: string
+            from:
+              type: string
+            type:
+              type: number
+            nonce:
+              type: number
+            value:
+              type: string
+            gasLimit:
+              type: string
+            gasPrice:
+              type: string
+            maxFeePerGas:
+              type: string
+            maxPriorityFeePerGas:
+              type: string
+          description: The transaction to send
+  - name: wallet_sign_transaction
+    description: Sign a transaction without sending it
+    inputSchema:
+      type: object
+      required:
+        - transaction
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        transaction:
+          type: object
+          required:
+            - to
+          properties:
+            to:
+              type: string
+            data:
+              type: string
+            from:
+              type: string
+            type:
+              type: number
+            nonce:
+              type: number
+            value:
+              type: string
+            gasLimit:
+              type: string
+            gasPrice:
+              type: string
+            maxFeePerGas:
+              type: string
+            maxPriorityFeePerGas:
+              type: string
+          description: The transaction to sign
+  - name: wallet_populate_transaction
+    description: Populate a transaction with missing fields
+    inputSchema:
+      type: object
+      required:
+        - transaction
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        transaction:
+          type: object
+          required:
+            - to
+          properties:
+            to:
+              type: string
+            data:
+              type: string
+            from:
+              type: string
+            type:
+              type: number
+            nonce:
+              type: number
+            value:
+              type: string
+            gasLimit:
+              type: string
+            gasPrice:
+              type: string
+            maxFeePerGas:
+              type: string
+            maxPriorityFeePerGas:
+              type: string
+          description: The transaction to populate
+  - name: wallet_sign_message
+    description: Sign a message
+    inputSchema:
+      type: object
+      required:
+        - message
+      properties:
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+        message:
+          type: string
+          description: The message to sign
+  - name: wallet_sign_typed_data
+    description: Sign typed data (EIP-712)
+    inputSchema:
+      type: object
+      required:
+        - domain
+        - types
+        - value
+      properties:
+        types:
+          type: object
+          description: The type definitions
+        value:
+          type: object
+          description: The value to sign
+        domain:
+          type: object
+          description: The domain data
+        wallet:
+          type: string
+          description: The wallet (private key, mnemonic, or JSON). If not provided, uses
+            PRIVATE_KEY environment variable if set.
+  - name: wallet_verify_message
+    description: Verify a signed message
+    inputSchema:
+      type: object
+      required:
+        - message
+        - signature
+        - address
+      properties:
+        address:
+          type: string
+          description: The address that supposedly signed the message
+        message:
+          type: string
+          description: The original message
+        signature:
+          type: string
+          description: The signature to verify
+  - name: wallet_verify_typed_data
+    description: Verify signed typed data
+    inputSchema:
+      type: object
+      required:
+        - domain
+        - types
+        - value
+        - signature
+        - address
+      properties:
+        types:
+          type: object
+          description: The type definitions
+        value:
+          type: object
+          description: The value that was signed
+        domain:
+          type: object
+          description: The domain data
+        address:
+          type: string
+          description: The address that supposedly signed the data
+        signature:
+          type: string
+          description: The signature to verify
+  - name: provider_get_block
+    description: Get a block by number or hash
+    inputSchema:
+      type: object
+      required:
+        - blockHashOrBlockTag
+      properties:
+        blockHashOrBlockTag:
+          type: string
+          description: Block hash or block tag (latest, pending, etc.)
+        includeTransactions:
+          type: boolean
+          description: Whether to include full transactions or just hashes
+  - name: provider_get_transaction
+    description: Get a transaction by hash
+    inputSchema:
+      type: object
+      required:
+        - transactionHash
+      properties:
+        transactionHash:
+          type: string
+          description: The transaction hash
+  - name: provider_get_transaction_receipt
+    description: Get a transaction receipt
+    inputSchema:
+      type: object
+      required:
+        - transactionHash
+      properties:
+        transactionHash:
+          type: string
+          description: The transaction hash
+  - name: provider_get_code
+    description: Get the code at an address
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The address to get code from
+        blockTag:
+          type: string
+          description: Optional block tag (latest, pending, etc.)
+  - name: provider_get_storage_at
+    description: Get the storage at a position for an address
+    inputSchema:
+      type: object
+      required:
+        - address
+        - position
+      properties:
+        address:
+          type: string
+          description: The address to get storage from
+        blockTag:
+          type: string
+          description: Optional block tag (latest, pending, etc.)
+        position:
+          type: string
+          description: The storage position
+  - name: provider_estimate_gas
+    description: Estimate the gas required for a transaction
+    inputSchema:
+      type: object
+      required:
+        - transaction
+      properties:
+        transaction:
+          type: object
+          properties:
+            to:
+              type: string
+            data:
+              type: string
+            from:
+              type: string
+            value:
+              type: string
+          description: The transaction to estimate gas for
+  - name: provider_get_logs
+    description: Get logs that match a filter
+    inputSchema:
+      type: object
+      required:
+        - filter
+      properties:
+        filter:
+          type: object
+          properties:
+            topics:
+              type: array
+              items:
+                type: string
+            address:
+              type: string
+            toBlock:
+              type: string
+            fromBlock:
+              type: string
+          description: The filter to apply
+  - name: provider_get_ens_resolver
+    description: Get the ENS resolver for a name
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The ENS name
+  - name: provider_lookup_address
+    description: Lookup the ENS name for an address
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The address to lookup
+  - name: provider_resolve_name
+    description: Resolve an ENS name to an address
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The ENS name to resolve
+  - name: network_get_network
+    description: Get the current network information
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: network_get_block_number
+    description: Get the current block number
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: network_get_fee_data
+    description: Get the current fee data (base fee, max priority fee, etc.)
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

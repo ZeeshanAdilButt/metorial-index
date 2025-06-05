@@ -1,0 +1,18 @@
+identifier: taejulee/opsnow-mcp-cost-server-no-server-test/opsnow-mcp-cost-server-no-server-test
+repo:
+  provider: github.com
+  url: https://github.com/taejulee/opsnow-mcp-cost-server-no-server-test
+  name: opsnow-mcp-cost-server-no-server-test
+  owner: taejulee
+server:
+  subdirectory: /
+  name: OpsNow Cost Server Test
+  description: Provide real-time OpsNow cost data to MCP clients like Claude
+    Desktop App using the MCP protocol. Enable efficient communication and data
+    delivery of asset and cost information for enhanced LLM integration.
+    Simplify access to OpsNow's resource and cost data through a standardized
+    server interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

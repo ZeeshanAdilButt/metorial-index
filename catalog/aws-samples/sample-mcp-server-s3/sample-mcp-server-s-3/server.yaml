@@ -1,0 +1,14 @@
+identifier: aws-samples/sample-mcp-server-s3/sample-mcp-server-s-3
+repo:
+  provider: github.com
+  url: https://github.com/aws-samples/sample-mcp-server-s3
+  name: sample-mcp-server-s3
+  owner: aws-samples
+server:
+  subdirectory: /
+  name: Sample S3 Server
+  description: Expose AWS S3 data such as PDFs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

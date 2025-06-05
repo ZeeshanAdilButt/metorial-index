@@ -1,0 +1,18 @@
+identifier: ydb-platform/ydb-mcp/ydb-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ydb-platform/ydb-mcp
+  name: ydb-mcp
+  owner: ydb-platform
+server:
+  subdirectory: /
+  name: YDB Database Server
+  description: Enable natural language interactions and AI-powered operations on
+    YDB databases through seamless integration with large language models. Run
+    SQL queries, list directories, and manage database paths using intuitive
+    commands. Simplify database management by connecting your YDB instances to
+    any LLM supporting the Model Context Protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

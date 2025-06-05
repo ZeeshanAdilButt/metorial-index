@@ -1,0 +1,17 @@
+identifier: lutfi-haslab/mcp-server-netlify/mcp-server-netlify
+repo:
+  provider: github.com
+  url: https://github.com/lutfi-haslab/mcp-server-netlify
+  name: mcp-server-netlify
+  owner: lutfi-haslab
+server:
+  subdirectory: /
+  name: Netlify Express MCP Server
+  description: Deploy and run a serverless MCP server using Netlify Functions with
+    Express. Quickly set up and customize your own MCP serverless backend to
+    integrate with LLM applications. Benefit from easy deployment and local
+    development with Netlify CLI and Express routing.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,66 @@
+tools:
+  - name: generate-thinking
+    description: Generate detailed thinking process text using Gemini's experimental
+      thinking model
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Prompt for generating thinking process text
+        outputDir:
+          type: string
+          description: Directory to save output responses (optional)
+  - name: analyze-csv
+    description: Analyze CSV file using Gemini's AI capabilities for EDA and data
+      science insights
+    inputSchema:
+      type: object
+      required:
+        - csvPath
+      properties:
+        csvPath:
+          type: string
+          description: Path to the CSV file to analyze
+        outputDir:
+          type: string
+          description: Directory to save analysis results (optional)
+        analysisType:
+          enum:
+            - basic
+            - detailed
+          type: string
+          default: detailed
+          description: Type of analysis to perform (basic or detailed)
+  - name: visualize-data
+    description: Generate visualizations from CSV data using Chart.js
+    inputSchema:
+      type: object
+      required:
+        - csvPath
+      properties:
+        title:
+          type: string
+          description: Chart title (optional)
+        columns:
+          type: array
+          items:
+            type: string
+          description: Columns to visualize (first column for labels, second for values)
+        csvPath:
+          type: string
+          description: Path to the CSV file to visualize
+        outputDir:
+          type: string
+          description: Directory to save visualization results (optional)
+        visualizationType:
+          enum:
+            - bar
+            - line
+            - scatter
+            - pie
+          type: string
+          default: bar
+          description: Type of visualization to generate

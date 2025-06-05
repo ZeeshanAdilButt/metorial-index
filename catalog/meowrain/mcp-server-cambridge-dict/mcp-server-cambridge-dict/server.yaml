@@ -1,0 +1,17 @@
+identifier: meowrain/mcp-server-cambridge-dict/mcp-server-cambridge-dict
+repo:
+  provider: github.com
+  url: https://github.com/meowrain/mcp-server-cambridge-dict
+  name: mcp-server-cambridge-dict
+  owner: meowrain
+server:
+  subdirectory: /
+  name: Dictionary Server
+  description: Retrieve word meanings seamlessly from the Cambridge Dictionary.
+    Enhance your AI assistants with robust dictionary query tools through the
+    MCP protocol. Integrate effortlessly into your command line for quick access
+    to definitions and examples.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

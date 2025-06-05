@@ -1,0 +1,17 @@
+identifier: deploya-labs/mcp-resend/mcp-resend
+repo:
+  provider: github.com
+  url: https://github.com/Deploya-labs/mcp-resend
+  name: mcp-resend
+  owner: Deploya-labs
+server:
+  subdirectory: /
+  name: Email sending (used by Deploya.dev)
+  description: Compose and send emails directly from your LLM applications without
+    the hassle of copying and pasting. Integrate seamlessly with Resend's API to
+    streamline your email communication. Enhance your productivity by letting
+    your agents handle email tasks effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

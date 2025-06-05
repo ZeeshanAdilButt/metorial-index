@@ -1,0 +1,10 @@
+tools:
+  - name: get_watch_later_urls
+    description: Get URLs of videos added to Watch Later within specified days
+    inputSchema:
+      type: object
+      properties:
+        daysBack:
+          type: number
+          default: 1
+          description: "Number of days to look back (default: 1)"

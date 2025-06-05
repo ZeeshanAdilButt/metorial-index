@@ -1,0 +1,16 @@
+identifier: r-huijts/rijksmuseum-mcp/rijksmuseum-mcp
+repo:
+  provider: github.com
+  url: https://github.com/r-huijts/rijksmuseum-mcp
+  name: rijksmuseum-mcp
+  owner: r-huijts
+server:
+  subdirectory: /
+  name: Rijksmuseum Server
+  description: Interact with the Rijksmuseum API for artwork searches, retrieval
+    of artwork details, and access to high-resolution images and user
+    collections.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

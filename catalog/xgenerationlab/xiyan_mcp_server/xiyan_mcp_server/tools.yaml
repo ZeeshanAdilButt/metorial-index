@@ -1,0 +1,19 @@
+tools:
+  - name: get_data
+    description: "Fetch the data from database through a natural language query
+
+
+      \    Args:
+
+      \        query: The query in natual language
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_dataArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

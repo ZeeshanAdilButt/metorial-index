@@ -1,0 +1,97 @@
+tools:
+  - name: get_security_rules
+    description: Get security policy rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_nat_rules
+    description: Get NAT policy rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_qos_rules
+    description: Get QoS policy rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_policy_based_forwarding_rules
+    description: Get policy-based forwarding rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_decryption_rules
+    description: Get decryption policy rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_tunnel_inspection_rules
+    description: Get tunnel inspection rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_application_override_rules
+    description: Get application override rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_authentication_rules
+    description: Get authentication policy rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_dos_rules
+    description: Get DoS protection rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_sdwan_rules
+    description: Get SD-WAN policy rules
+    inputSchema:
+      type: object
+      properties: {}
+  - name: create_rule
+    description: Create a new policy rule
+    inputSchema:
+      type: object
+      required:
+        - rule_type
+        - rule_data
+      properties:
+        rule_data:
+          type: object
+          description: Rule configuration data
+        rule_type:
+          type: string
+          description: Type of rule (security, nat, qos, etc.)
+  - name: update_rule
+    description: Update an existing policy rule
+    inputSchema:
+      type: object
+      required:
+        - rule_type
+        - rule_name
+        - rule_data
+      properties:
+        rule_data:
+          type: object
+          description: Updated rule configuration data
+        rule_name:
+          type: string
+          description: Name of the rule to update
+        rule_type:
+          type: string
+          description: Type of rule (security, nat, qos, etc.)
+  - name: delete_rule
+    description: Delete a policy rule
+    inputSchema:
+      type: object
+      required:
+        - rule_type
+        - rule_name
+      properties:
+        rule_name:
+          type: string
+          description: Name of the rule to delete
+        rule_type:
+          type: string
+          description: Type of rule (security, nat, qos, etc.)

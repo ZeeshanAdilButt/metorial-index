@@ -1,0 +1,103 @@
+tools:
+  - name: get_next_bus
+    description: "Get the next arrival time for a specified bus route at a stop.
+
+      \   \ 
+
+      \    Args:
+
+      \        route: The bus route number (e.g., \"1A\", \"6\", \"960\")
+
+      \        stop_name: The name of the bus stop
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_next_busArguments
+      required:
+        - route
+        - stop_name
+      properties:
+        route:
+          type: string
+          title: Route
+        stop_name:
+          type: string
+          title: Stop Name
+  - name: find_buses_to_destination
+    description: "Find bus routes that go to a specified destination.
+
+      \   \ 
+
+      \    Args:
+
+      \        destination: The destination to search for (e.g., \"Central\",
+      \"Mong Kok\", \"Airport\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_buses_to_destinationArguments
+      required:
+        - destination
+      properties:
+        destination:
+          type: string
+          title: Destination
+  - name: get_route_stops_info
+    description: "Get all stops along a specified bus route.
+
+      \   \ 
+
+      \    Args:
+
+      \        route: The bus route number (e.g., \"1A\", \"6\", \"960\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_route_stops_infoArguments
+      required:
+        - route
+      properties:
+        route:
+          type: string
+          title: Route
+  - name: find_stop_by_name
+    description: "Find bus stops matching a name or partial name.
+
+      \   \ 
+
+      \    Args:
+
+      \        stop_name: Full or partial name of the bus stop to search for
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_stop_by_nameArguments
+      required:
+        - stop_name
+      properties:
+        stop_name:
+          type: string
+          title: Stop Name
+  - name: get_all_routes_at_stop
+    description: "Get all bus routes that pass through a specified bus stop.
+
+      \   \ 
+
+      \    Args:
+
+      \        stop_name: Name of the bus stop
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_all_routes_at_stopArguments
+      required:
+        - stop_name
+      properties:
+        stop_name:
+          type: string
+          title: Stop Name

@@ -1,0 +1,2872 @@
+tools:
+  - name: get_resource
+    description: Get resource details by ID or list all resources
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+      properties:
+        id:
+          type: string
+          description: resource id
+        uri:
+          type: string
+          description: filter uri
+        name:
+          type: string
+          description: filter name
+        page:
+          type: number
+          default: 1
+          description: page number
+        type:
+          enum:
+            - routes
+            - services
+            - upstreams
+            - consumers
+            - ssls
+            - consumer_groups
+            - plugin_configs
+            - global_rules
+            - stream_routes
+            - protos
+            - plugin_configs
+          type: string
+          description: resource type
+        labels:
+          type: object
+          description: filter labels
+          additionalProperties:
+            type: string
+        page_size:
+          type: number
+          default: 50
+          maximum: 500
+          minimum: 10
+          description: page size
+      additionalProperties: false
+  - name: delete_resource
+    description: Delete a resource by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: resource id
+        type:
+          enum:
+            - routes
+            - services
+            - upstreams
+            - consumers
+            - ssls
+            - consumer_groups
+            - plugin_configs
+            - global_rules
+            - stream_routes
+            - protos
+            - plugin_configs
+          type: string
+          description: resource type
+      additionalProperties: false
+  - name: create_route
+    description: Create a route
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - route
+      properties:
+        id:
+          type: string
+          description: route id
+        route:
+          type: object
+          required:
+            - uri
+          properties:
+            uri:
+              type: string
+              description: route path
+            desc:
+              type: string
+              maxLength: 256
+              description: route description
+            host:
+              type: string
+              description: route host
+            name:
+              type: string
+              description: route name
+            uris:
+              type: array
+              items:
+                type: string
+              description: multiple route paths
+            vars:
+              type: array
+              items:
+                type: array
+              description: route match variables
+            hosts:
+              type: array
+              items:
+                type: string
+              description: allowed hosts
+            labels:
+              type: object
+              description: route labels
+              additionalProperties:
+                type: string
+            script:
+              type: object
+              description: route script configuration
+              additionalProperties: {}
+            status:
+              enum:
+                - 0
+                - 1
+              type: number
+              description: route status
+            methods:
+              type: array
+              items:
+                enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                  - HEAD
+                  - OPTIONS
+                  - TRACE
+                  - CONNECT
+                  - PURGE
+                type: string
+              description: allowed HTTP methods
+            plugins:
+              type: object
+              description: plugins
+              additionalProperties: {}
+            priority:
+              type: number
+              default: 0
+              description: route priority
+            upstream:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: hash key for chash algorithm
+                tls:
+                  type: object
+                  properties:
+                    verify:
+                      type: boolean
+                      description: TLS verification
+                    client_key:
+                      type: string
+                      description: TLS key
+                    client_cert:
+                      type: string
+                      description: TLS certificate
+                    client_cert_id:
+                      type: array
+                      items:
+                        type: string
+                      description: TLS certificate id
+                  description: TLS configuration
+                  additionalProperties: false
+                desc:
+                  type: string
+                  maxLength: 256
+                  description: upstream description
+                name:
+                  type: string
+                  description: upstream name
+                type:
+                  enum:
+                    - roundrobin
+                    - chash
+                    - ewma
+                    - least_conn
+                  type: string
+                  default: roundrobin
+                  description: load balancing algorithm
+                nodes:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - host
+                      - port
+                    properties:
+                      host:
+                        type: string
+                        description: upstream host
+                      port:
+                        type: number
+                        description: upstream port
+                      weight:
+                        type: number
+                        minimum: 0
+                        description: upstream weight
+                      priority:
+                        type: number
+                        minimum: 0
+                        description: upstream priority
+                    additionalProperties: false
+                  description: upstream nodes with weights
+                checks:
+                  type: object
+                  properties:
+                    active:
+                      type: object
+                      properties:
+                        host:
+                          type: string
+                          description: host for health check
+                        port:
+                          type: number
+                          description: port for health check
+                        healthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for healthy status
+                            successes:
+                              type: number
+                              description: success count threshold
+                          additionalProperties: false
+                        timeout:
+                          type: number
+                          description: timeout for health check
+                        http_path:
+                          type: string
+                          description: HTTP path for health check
+                        unhealthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for unhealthy status
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                          additionalProperties: false
+                        https_verify_certificate:
+                          type: boolean
+                          description: verify HTTPS certificate
+                      description: active health check configuration
+                      additionalProperties: false
+                    passive:
+                      type: object
+                      properties:
+                        healthy:
+                          type: object
+                          properties:
+                            successes:
+                              type: number
+                              description: success count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for healthy state
+                          additionalProperties: false
+                        unhealthy:
+                          type: object
+                          properties:
+                            timeout:
+                              type: number
+                              description: timeout threshold
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for unhealthy state
+                          additionalProperties: false
+                      description: passive health check configuration
+                      additionalProperties: false
+                  description: health check configuration
+                  additionalProperties: false
+                labels:
+                  type: object
+                  description: upstream labels
+                  additionalProperties:
+                    type: string
+                scheme:
+                  enum:
+                    - http
+                    - https
+                    - grpc
+                    - grpcs
+                    - tcp
+                    - tls
+                    - udp
+                    - kafka
+                  type: string
+                  default: http
+                  description: upstream scheme
+                hash_on:
+                  enum:
+                    - vars
+                    - header
+                    - cookie
+                    - consumer
+                    - vars_combinations
+                  type: string
+                  description: hash on type for chash algorithm
+                retries:
+                  type: number
+                  minimum: 0
+                  description: retry count
+                timeout:
+                  type: object
+                  properties:
+                    read:
+                      type: number
+                      description: read timeout in seconds
+                    send:
+                      type: number
+                      description: send timeout in seconds
+                    connect:
+                      type: number
+                      description: connection timeout in seconds
+                  description: timeout configuration
+                  additionalProperties: false
+                pass_host:
+                  enum:
+                    - pass
+                    - node
+                    - rewrite
+                  type: string
+                  default: pass
+                  description: host passing mode
+                retry_timeout:
+                  type: number
+                  minimum: 0
+                  description: retry timeout
+                upstream_host:
+                  type: string
+                  description: upstream host for rewrite mode
+                keepalive_pool:
+                  type: object
+                  properties:
+                    size:
+                      type: number
+                      default: 320
+                      description: size
+                    requests:
+                      type: number
+                      default: 1000
+                      description: requests
+                    idle_timeout:
+                      type: number
+                      default: 60
+                      description: idle timeout
+                  description: keepalive pool configuration
+                  additionalProperties: false
+              description: upstream configuration
+              additionalProperties: true
+            service_id:
+              type: string
+              description: service id
+            filter_func:
+              type: string
+              description: route filter function
+            remote_addr:
+              type: string
+              description: allowed remote address
+            upstream_id:
+              type: string
+              description: upstream id
+            remote_addrs:
+              type: array
+              items:
+                type: string
+              description: allowed remote addresses
+            enable_websocket:
+              type: boolean
+              description: enable websocket
+            service_protocol:
+              type: string
+              description: service protocol
+          description: route configuration
+          additionalProperties: true
+      additionalProperties: false
+  - name: update_route
+    description: Update specific attributes of an existing route
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - route
+      properties:
+        id:
+          type: string
+          description: route id
+        route:
+          type: object
+          properties:
+            uri:
+              type: string
+              description: route path
+            desc:
+              type: string
+              maxLength: 256
+              description: route description
+            host:
+              type: string
+              description: route host
+            name:
+              type: string
+              description: route name
+            uris:
+              type: array
+              items:
+                type: string
+              description: multiple route paths
+            vars:
+              type: array
+              items:
+                type: array
+              description: route match variables
+            hosts:
+              type: array
+              items:
+                type: string
+              description: allowed hosts
+            labels:
+              type: object
+              description: route labels
+              additionalProperties:
+                type: string
+            script:
+              type: object
+              description: route script configuration
+              additionalProperties: {}
+            status:
+              enum:
+                - 0
+                - 1
+              type: number
+              description: route status
+            methods:
+              type: array
+              items:
+                enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                  - HEAD
+                  - OPTIONS
+                  - TRACE
+                  - CONNECT
+                  - PURGE
+                type: string
+              description: allowed HTTP methods
+            plugins:
+              type: object
+              description: plugins
+              additionalProperties: {}
+            priority:
+              type: number
+              default: 0
+              description: route priority
+            upstream:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: hash key for chash algorithm
+                tls:
+                  type: object
+                  properties:
+                    verify:
+                      type: boolean
+                      description: TLS verification
+                    client_key:
+                      type: string
+                      description: TLS key
+                    client_cert:
+                      type: string
+                      description: TLS certificate
+                    client_cert_id:
+                      type: array
+                      items:
+                        type: string
+                      description: TLS certificate id
+                  description: TLS configuration
+                  additionalProperties: false
+                desc:
+                  type: string
+                  maxLength: 256
+                  description: upstream description
+                name:
+                  type: string
+                  description: upstream name
+                type:
+                  enum:
+                    - roundrobin
+                    - chash
+                    - ewma
+                    - least_conn
+                  type: string
+                  default: roundrobin
+                  description: load balancing algorithm
+                nodes:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - host
+                      - port
+                    properties:
+                      host:
+                        type: string
+                        description: upstream host
+                      port:
+                        type: number
+                        description: upstream port
+                      weight:
+                        type: number
+                        minimum: 0
+                        description: upstream weight
+                      priority:
+                        type: number
+                        minimum: 0
+                        description: upstream priority
+                    additionalProperties: false
+                  description: upstream nodes with weights
+                checks:
+                  type: object
+                  properties:
+                    active:
+                      type: object
+                      properties:
+                        host:
+                          type: string
+                          description: host for health check
+                        port:
+                          type: number
+                          description: port for health check
+                        healthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for healthy status
+                            successes:
+                              type: number
+                              description: success count threshold
+                          additionalProperties: false
+                        timeout:
+                          type: number
+                          description: timeout for health check
+                        http_path:
+                          type: string
+                          description: HTTP path for health check
+                        unhealthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for unhealthy status
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                          additionalProperties: false
+                        https_verify_certificate:
+                          type: boolean
+                          description: verify HTTPS certificate
+                      description: active health check configuration
+                      additionalProperties: false
+                    passive:
+                      type: object
+                      properties:
+                        healthy:
+                          type: object
+                          properties:
+                            successes:
+                              type: number
+                              description: success count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for healthy state
+                          additionalProperties: false
+                        unhealthy:
+                          type: object
+                          properties:
+                            timeout:
+                              type: number
+                              description: timeout threshold
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for unhealthy state
+                          additionalProperties: false
+                      description: passive health check configuration
+                      additionalProperties: false
+                  description: health check configuration
+                  additionalProperties: false
+                labels:
+                  type: object
+                  description: upstream labels
+                  additionalProperties:
+                    type: string
+                scheme:
+                  enum:
+                    - http
+                    - https
+                    - grpc
+                    - grpcs
+                    - tcp
+                    - tls
+                    - udp
+                    - kafka
+                  type: string
+                  default: http
+                  description: upstream scheme
+                hash_on:
+                  enum:
+                    - vars
+                    - header
+                    - cookie
+                    - consumer
+                    - vars_combinations
+                  type: string
+                  description: hash on type for chash algorithm
+                retries:
+                  type: number
+                  minimum: 0
+                  description: retry count
+                timeout:
+                  type: object
+                  properties:
+                    read:
+                      type: number
+                      description: read timeout in seconds
+                    send:
+                      type: number
+                      description: send timeout in seconds
+                    connect:
+                      type: number
+                      description: connection timeout in seconds
+                  description: timeout configuration
+                  additionalProperties: false
+                pass_host:
+                  enum:
+                    - pass
+                    - node
+                    - rewrite
+                  type: string
+                  default: pass
+                  description: host passing mode
+                retry_timeout:
+                  type: number
+                  minimum: 0
+                  description: retry timeout
+                upstream_host:
+                  type: string
+                  description: upstream host for rewrite mode
+                keepalive_pool:
+                  type: object
+                  properties:
+                    size:
+                      type: number
+                      default: 320
+                      description: size
+                    requests:
+                      type: number
+                      default: 1000
+                      description: requests
+                    idle_timeout:
+                      type: number
+                      default: 60
+                      description: idle timeout
+                  description: keepalive pool configuration
+                  additionalProperties: false
+              description: upstream configuration
+              additionalProperties: true
+            service_id:
+              type: string
+              description: service id
+            filter_func:
+              type: string
+              description: route filter function
+            remote_addr:
+              type: string
+              description: allowed remote address
+            upstream_id:
+              type: string
+              description: upstream id
+            remote_addrs:
+              type: array
+              items:
+                type: string
+              description: allowed remote addresses
+            enable_websocket:
+              type: boolean
+              description: enable websocket
+            service_protocol:
+              type: string
+              description: service protocol
+          description: route configuration
+          additionalProperties: true
+      additionalProperties: false
+  - name: create_service
+    description: Create a service
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - service
+      properties:
+        id:
+          type: string
+          description: service id
+        service:
+          type: object
+          properties:
+            desc:
+              type: string
+              maxLength: 256
+              description: service description
+            name:
+              type: string
+              maxLength: 100
+              minLength: 1
+              description: service name
+            vars:
+              type: array
+              items:
+                type: array
+              description: service match variables
+            hosts:
+              type: array
+              items:
+                type: string
+              description: allowed hosts
+            labels:
+              type: object
+              description: service labels
+              additionalProperties:
+                type: string
+            script:
+              type: object
+              description: service script configuration
+              additionalProperties: {}
+            plugins:
+              type: object
+              description: plugins
+              additionalProperties: {}
+            upstream:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: hash key for chash algorithm
+                tls:
+                  type: object
+                  properties:
+                    verify:
+                      type: boolean
+                      description: TLS verification
+                    client_key:
+                      type: string
+                      description: TLS key
+                    client_cert:
+                      type: string
+                      description: TLS certificate
+                    client_cert_id:
+                      type: array
+                      items:
+                        type: string
+                      description: TLS certificate id
+                  description: TLS configuration
+                  additionalProperties: false
+                desc:
+                  type: string
+                  maxLength: 256
+                  description: upstream description
+                name:
+                  type: string
+                  description: upstream name
+                type:
+                  enum:
+                    - roundrobin
+                    - chash
+                    - ewma
+                    - least_conn
+                  type: string
+                  default: roundrobin
+                  description: load balancing algorithm
+                nodes:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - host
+                      - port
+                    properties:
+                      host:
+                        type: string
+                        description: upstream host
+                      port:
+                        type: number
+                        description: upstream port
+                      weight:
+                        type: number
+                        minimum: 0
+                        description: upstream weight
+                      priority:
+                        type: number
+                        minimum: 0
+                        description: upstream priority
+                    additionalProperties: false
+                  description: upstream nodes with weights
+                checks:
+                  type: object
+                  properties:
+                    active:
+                      type: object
+                      properties:
+                        host:
+                          type: string
+                          description: host for health check
+                        port:
+                          type: number
+                          description: port for health check
+                        healthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for healthy status
+                            successes:
+                              type: number
+                              description: success count threshold
+                          additionalProperties: false
+                        timeout:
+                          type: number
+                          description: timeout for health check
+                        http_path:
+                          type: string
+                          description: HTTP path for health check
+                        unhealthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for unhealthy status
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                          additionalProperties: false
+                        https_verify_certificate:
+                          type: boolean
+                          description: verify HTTPS certificate
+                      description: active health check configuration
+                      additionalProperties: false
+                    passive:
+                      type: object
+                      properties:
+                        healthy:
+                          type: object
+                          properties:
+                            successes:
+                              type: number
+                              description: success count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for healthy state
+                          additionalProperties: false
+                        unhealthy:
+                          type: object
+                          properties:
+                            timeout:
+                              type: number
+                              description: timeout threshold
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for unhealthy state
+                          additionalProperties: false
+                      description: passive health check configuration
+                      additionalProperties: false
+                  description: health check configuration
+                  additionalProperties: false
+                labels:
+                  type: object
+                  description: upstream labels
+                  additionalProperties:
+                    type: string
+                scheme:
+                  enum:
+                    - http
+                    - https
+                    - grpc
+                    - grpcs
+                    - tcp
+                    - tls
+                    - udp
+                    - kafka
+                  type: string
+                  default: http
+                  description: upstream scheme
+                hash_on:
+                  enum:
+                    - vars
+                    - header
+                    - cookie
+                    - consumer
+                    - vars_combinations
+                  type: string
+                  description: hash on type for chash algorithm
+                retries:
+                  type: number
+                  minimum: 0
+                  description: retry count
+                timeout:
+                  type: object
+                  properties:
+                    read:
+                      type: number
+                      description: read timeout in seconds
+                    send:
+                      type: number
+                      description: send timeout in seconds
+                    connect:
+                      type: number
+                      description: connection timeout in seconds
+                  description: timeout configuration
+                  additionalProperties: false
+                pass_host:
+                  enum:
+                    - pass
+                    - node
+                    - rewrite
+                  type: string
+                  default: pass
+                  description: host passing mode
+                retry_timeout:
+                  type: number
+                  minimum: 0
+                  description: retry timeout
+                upstream_host:
+                  type: string
+                  description: upstream host for rewrite mode
+                keepalive_pool:
+                  type: object
+                  properties:
+                    size:
+                      type: number
+                      default: 320
+                      description: size
+                    requests:
+                      type: number
+                      default: 1000
+                      description: requests
+                    idle_timeout:
+                      type: number
+                      default: 60
+                      description: idle timeout
+                  description: keepalive pool configuration
+                  additionalProperties: false
+              description: upstream service configuration object
+              additionalProperties: true
+            upstream_id:
+              type: string
+              description: upstream id
+            enable_websocket:
+              type: boolean
+              description: enable websocket
+          description: service configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: update_service
+    description: Update specific attributes of an existing service
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - service
+      properties:
+        id:
+          type: string
+          description: service id
+        service:
+          type: object
+          properties:
+            desc:
+              type: string
+              maxLength: 256
+              description: service description
+            name:
+              type: string
+              maxLength: 100
+              minLength: 1
+              description: service name
+            vars:
+              type: array
+              items:
+                type: array
+              description: service match variables
+            hosts:
+              type: array
+              items:
+                type: string
+              description: allowed hosts
+            labels:
+              type: object
+              description: service labels
+              additionalProperties:
+                type: string
+            script:
+              type: object
+              description: service script configuration
+              additionalProperties: {}
+            plugins:
+              type: object
+              description: plugins
+              additionalProperties: {}
+            upstream:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: hash key for chash algorithm
+                tls:
+                  type: object
+                  properties:
+                    verify:
+                      type: boolean
+                      description: TLS verification
+                    client_key:
+                      type: string
+                      description: TLS key
+                    client_cert:
+                      type: string
+                      description: TLS certificate
+                    client_cert_id:
+                      type: array
+                      items:
+                        type: string
+                      description: TLS certificate id
+                  description: TLS configuration
+                  additionalProperties: false
+                desc:
+                  type: string
+                  maxLength: 256
+                  description: upstream description
+                name:
+                  type: string
+                  description: upstream name
+                type:
+                  enum:
+                    - roundrobin
+                    - chash
+                    - ewma
+                    - least_conn
+                  type: string
+                  default: roundrobin
+                  description: load balancing algorithm
+                nodes:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - host
+                      - port
+                    properties:
+                      host:
+                        type: string
+                        description: upstream host
+                      port:
+                        type: number
+                        description: upstream port
+                      weight:
+                        type: number
+                        minimum: 0
+                        description: upstream weight
+                      priority:
+                        type: number
+                        minimum: 0
+                        description: upstream priority
+                    additionalProperties: false
+                  description: upstream nodes with weights
+                checks:
+                  type: object
+                  properties:
+                    active:
+                      type: object
+                      properties:
+                        host:
+                          type: string
+                          description: host for health check
+                        port:
+                          type: number
+                          description: port for health check
+                        healthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for healthy status
+                            successes:
+                              type: number
+                              description: success count threshold
+                          additionalProperties: false
+                        timeout:
+                          type: number
+                          description: timeout for health check
+                        http_path:
+                          type: string
+                          description: HTTP path for health check
+                        unhealthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for unhealthy status
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                          additionalProperties: false
+                        https_verify_certificate:
+                          type: boolean
+                          description: verify HTTPS certificate
+                      description: active health check configuration
+                      additionalProperties: false
+                    passive:
+                      type: object
+                      properties:
+                        healthy:
+                          type: object
+                          properties:
+                            successes:
+                              type: number
+                              description: success count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for healthy state
+                          additionalProperties: false
+                        unhealthy:
+                          type: object
+                          properties:
+                            timeout:
+                              type: number
+                              description: timeout threshold
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for unhealthy state
+                          additionalProperties: false
+                      description: passive health check configuration
+                      additionalProperties: false
+                  description: health check configuration
+                  additionalProperties: false
+                labels:
+                  type: object
+                  description: upstream labels
+                  additionalProperties:
+                    type: string
+                scheme:
+                  enum:
+                    - http
+                    - https
+                    - grpc
+                    - grpcs
+                    - tcp
+                    - tls
+                    - udp
+                    - kafka
+                  type: string
+                  default: http
+                  description: upstream scheme
+                hash_on:
+                  enum:
+                    - vars
+                    - header
+                    - cookie
+                    - consumer
+                    - vars_combinations
+                  type: string
+                  description: hash on type for chash algorithm
+                retries:
+                  type: number
+                  minimum: 0
+                  description: retry count
+                timeout:
+                  type: object
+                  properties:
+                    read:
+                      type: number
+                      description: read timeout in seconds
+                    send:
+                      type: number
+                      description: send timeout in seconds
+                    connect:
+                      type: number
+                      description: connection timeout in seconds
+                  description: timeout configuration
+                  additionalProperties: false
+                pass_host:
+                  enum:
+                    - pass
+                    - node
+                    - rewrite
+                  type: string
+                  default: pass
+                  description: host passing mode
+                retry_timeout:
+                  type: number
+                  minimum: 0
+                  description: retry timeout
+                upstream_host:
+                  type: string
+                  description: upstream host for rewrite mode
+                keepalive_pool:
+                  type: object
+                  properties:
+                    size:
+                      type: number
+                      default: 320
+                      description: size
+                    requests:
+                      type: number
+                      default: 1000
+                      description: requests
+                    idle_timeout:
+                      type: number
+                      default: 60
+                      description: idle timeout
+                  description: keepalive pool configuration
+                  additionalProperties: false
+              description: upstream service configuration object
+              additionalProperties: true
+            upstream_id:
+              type: string
+              description: upstream id
+            enable_websocket:
+              type: boolean
+              description: enable websocket
+          description: service configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: create_upstream
+    description: Create an upstream service with load balancing settings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - upstream
+      properties:
+        id:
+          type: string
+          description: upstream id
+        upstream:
+          type: object
+          required:
+            - nodes
+          properties:
+            key:
+              type: string
+              description: hash key for chash algorithm
+            tls:
+              type: object
+              properties:
+                verify:
+                  type: boolean
+                  description: TLS verification
+                client_key:
+                  type: string
+                  description: TLS key
+                client_cert:
+                  type: string
+                  description: TLS certificate
+                client_cert_id:
+                  type: array
+                  items:
+                    type: string
+                  description: TLS certificate id
+              description: TLS configuration
+              additionalProperties: false
+            desc:
+              type: string
+              maxLength: 256
+              description: upstream description
+            name:
+              type: string
+              description: upstream name
+            type:
+              enum:
+                - roundrobin
+                - chash
+                - ewma
+                - least_conn
+              type: string
+              default: roundrobin
+              description: load balancing algorithm
+            nodes:
+              type: array
+              items:
+                type: object
+                required:
+                  - host
+                  - port
+                properties:
+                  host:
+                    type: string
+                    description: upstream host
+                  port:
+                    type: number
+                    description: upstream port
+                  weight:
+                    type: number
+                    minimum: 0
+                    description: upstream weight
+                  priority:
+                    type: number
+                    minimum: 0
+                    description: upstream priority
+                additionalProperties: false
+              description: upstream nodes with weights
+            checks:
+              type: object
+              properties:
+                active:
+                  type: object
+                  properties:
+                    host:
+                      type: string
+                      description: host for health check
+                    port:
+                      type: number
+                      description: port for health check
+                    healthy:
+                      type: object
+                      properties:
+                        interval:
+                          type: number
+                          description: check interval for healthy status
+                        successes:
+                          type: number
+                          description: success count threshold
+                      additionalProperties: false
+                    timeout:
+                      type: number
+                      description: timeout for health check
+                    http_path:
+                      type: string
+                      description: HTTP path for health check
+                    unhealthy:
+                      type: object
+                      properties:
+                        interval:
+                          type: number
+                          description: check interval for unhealthy status
+                        http_failures:
+                          type: number
+                          description: HTTP failure count threshold
+                      additionalProperties: false
+                    https_verify_certificate:
+                      type: boolean
+                      description: verify HTTPS certificate
+                  description: active health check configuration
+                  additionalProperties: false
+                passive:
+                  type: object
+                  properties:
+                    healthy:
+                      type: object
+                      properties:
+                        successes:
+                          type: number
+                          description: success count threshold
+                        http_statuses:
+                          type: array
+                          items:
+                            type: number
+                          description: HTTP status codes for healthy state
+                      additionalProperties: false
+                    unhealthy:
+                      type: object
+                      properties:
+                        timeout:
+                          type: number
+                          description: timeout threshold
+                        http_failures:
+                          type: number
+                          description: HTTP failure count threshold
+                        http_statuses:
+                          type: array
+                          items:
+                            type: number
+                          description: HTTP status codes for unhealthy state
+                      additionalProperties: false
+                  description: passive health check configuration
+                  additionalProperties: false
+              description: health check configuration
+              additionalProperties: false
+            labels:
+              type: object
+              description: upstream labels
+              additionalProperties:
+                type: string
+            scheme:
+              enum:
+                - http
+                - https
+                - grpc
+                - grpcs
+                - tcp
+                - tls
+                - udp
+                - kafka
+              type: string
+              default: http
+              description: upstream scheme
+            hash_on:
+              enum:
+                - vars
+                - header
+                - cookie
+                - consumer
+                - vars_combinations
+              type: string
+              description: hash on type for chash algorithm
+            retries:
+              type: number
+              minimum: 0
+              description: retry count
+            timeout:
+              type: object
+              properties:
+                read:
+                  type: number
+                  description: read timeout in seconds
+                send:
+                  type: number
+                  description: send timeout in seconds
+                connect:
+                  type: number
+                  description: connection timeout in seconds
+              description: timeout configuration
+              additionalProperties: false
+            pass_host:
+              enum:
+                - pass
+                - node
+                - rewrite
+              type: string
+              default: pass
+              description: host passing mode
+            retry_timeout:
+              type: number
+              minimum: 0
+              description: retry timeout
+            upstream_host:
+              type: string
+              description: upstream host for rewrite mode
+            keepalive_pool:
+              type: object
+              properties:
+                size:
+                  type: number
+                  default: 320
+                  description: size
+                requests:
+                  type: number
+                  default: 1000
+                  description: requests
+                idle_timeout:
+                  type: number
+                  default: 60
+                  description: idle timeout
+              description: keepalive pool configuration
+              additionalProperties: false
+          description: upstream service configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: update_upstream
+    description: Update specific attributes of an existing upstream
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - upstream
+      properties:
+        id:
+          type: string
+          description: upstream id
+        upstream:
+          type: object
+          properties:
+            key:
+              type: string
+              description: hash key for chash algorithm
+            tls:
+              type: object
+              properties:
+                verify:
+                  type: boolean
+                  description: TLS verification
+                client_key:
+                  type: string
+                  description: TLS key
+                client_cert:
+                  type: string
+                  description: TLS certificate
+                client_cert_id:
+                  type: array
+                  items:
+                    type: string
+                  description: TLS certificate id
+              description: TLS configuration
+              additionalProperties: false
+            desc:
+              type: string
+              maxLength: 256
+              description: upstream description
+            name:
+              type: string
+              description: upstream name
+            type:
+              enum:
+                - roundrobin
+                - chash
+                - ewma
+                - least_conn
+              type: string
+              default: roundrobin
+              description: load balancing algorithm
+            nodes:
+              type: array
+              items:
+                type: object
+                required:
+                  - host
+                  - port
+                properties:
+                  host:
+                    type: string
+                    description: upstream host
+                  port:
+                    type: number
+                    description: upstream port
+                  weight:
+                    type: number
+                    minimum: 0
+                    description: upstream weight
+                  priority:
+                    type: number
+                    minimum: 0
+                    description: upstream priority
+                additionalProperties: false
+              description: upstream nodes with weights
+            checks:
+              type: object
+              properties:
+                active:
+                  type: object
+                  properties:
+                    host:
+                      type: string
+                      description: host for health check
+                    port:
+                      type: number
+                      description: port for health check
+                    healthy:
+                      type: object
+                      properties:
+                        interval:
+                          type: number
+                          description: check interval for healthy status
+                        successes:
+                          type: number
+                          description: success count threshold
+                      additionalProperties: false
+                    timeout:
+                      type: number
+                      description: timeout for health check
+                    http_path:
+                      type: string
+                      description: HTTP path for health check
+                    unhealthy:
+                      type: object
+                      properties:
+                        interval:
+                          type: number
+                          description: check interval for unhealthy status
+                        http_failures:
+                          type: number
+                          description: HTTP failure count threshold
+                      additionalProperties: false
+                    https_verify_certificate:
+                      type: boolean
+                      description: verify HTTPS certificate
+                  description: active health check configuration
+                  additionalProperties: false
+                passive:
+                  type: object
+                  properties:
+                    healthy:
+                      type: object
+                      properties:
+                        successes:
+                          type: number
+                          description: success count threshold
+                        http_statuses:
+                          type: array
+                          items:
+                            type: number
+                          description: HTTP status codes for healthy state
+                      additionalProperties: false
+                    unhealthy:
+                      type: object
+                      properties:
+                        timeout:
+                          type: number
+                          description: timeout threshold
+                        http_failures:
+                          type: number
+                          description: HTTP failure count threshold
+                        http_statuses:
+                          type: array
+                          items:
+                            type: number
+                          description: HTTP status codes for unhealthy state
+                      additionalProperties: false
+                  description: passive health check configuration
+                  additionalProperties: false
+              description: health check configuration
+              additionalProperties: false
+            labels:
+              type: object
+              description: upstream labels
+              additionalProperties:
+                type: string
+            scheme:
+              enum:
+                - http
+                - https
+                - grpc
+                - grpcs
+                - tcp
+                - tls
+                - udp
+                - kafka
+              type: string
+              default: http
+              description: upstream scheme
+            hash_on:
+              enum:
+                - vars
+                - header
+                - cookie
+                - consumer
+                - vars_combinations
+              type: string
+              description: hash on type for chash algorithm
+            retries:
+              type: number
+              minimum: 0
+              description: retry count
+            timeout:
+              type: object
+              properties:
+                read:
+                  type: number
+                  description: read timeout in seconds
+                send:
+                  type: number
+                  description: send timeout in seconds
+                connect:
+                  type: number
+                  description: connection timeout in seconds
+              description: timeout configuration
+              additionalProperties: false
+            pass_host:
+              enum:
+                - pass
+                - node
+                - rewrite
+              type: string
+              default: pass
+              description: host passing mode
+            retry_timeout:
+              type: number
+              minimum: 0
+              description: retry timeout
+            upstream_host:
+              type: string
+              description: upstream host for rewrite mode
+            keepalive_pool:
+              type: object
+              properties:
+                size:
+                  type: number
+                  default: 320
+                  description: size
+                requests:
+                  type: number
+                  default: 1000
+                  description: requests
+                idle_timeout:
+                  type: number
+                  default: 60
+                  description: idle timeout
+              description: keepalive pool configuration
+              additionalProperties: false
+          description: upstream service configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: create_or_update_consumer
+    description: Create a consumer, if the consumer already exists, it will be updated
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        desc:
+          type: string
+          description: consumer description
+        labels:
+          type: object
+          description: consumer labels
+          additionalProperties:
+            type: string
+        plugins:
+          type: object
+          description: consumer plugins
+          additionalProperties: {}
+        group_id:
+          type: string
+          description: consumer group id
+        username:
+          type: string
+          description: consumer username
+      additionalProperties: false
+  - name: get_credential
+    description: Get all credentials or a specific credential for a consumer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        id:
+          type: string
+          description: credential id
+        username:
+          type: string
+          description: consumer username
+      additionalProperties: false
+  - name: create_or_update_credential
+    description: Create or update a credential for a consumer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - id
+        - credential
+      properties:
+        id:
+          type: string
+          description: credential id
+        username:
+          type: string
+          description: consumer username
+        credential:
+          type: object
+          required:
+            - name
+          properties:
+            desc:
+              type: string
+              maxLength: 256
+              description: credential description
+            name:
+              type: string
+              description: credential name
+            labels:
+              type: object
+              description: credential labels
+              additionalProperties:
+                type: string
+            plugins:
+              type: object
+              description: credential plugins
+              additionalProperties: {}
+          description: credential configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: delete_credential
+    description: Delete a credential for a consumer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - id
+      properties:
+        id:
+          type: string
+          description: credential id
+        username:
+          type: string
+          description: consumer username
+      additionalProperties: false
+  - name: create_ssl
+    description: Create an SSL certificate
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ssl
+      properties:
+        id:
+          type: string
+          description: SSL certificate ID
+        ssl:
+          type: object
+          required:
+            - cert
+            - key
+          properties:
+            key:
+              type: string
+              description: SSL private key in PEM format
+            sni:
+              type: string
+              description: Server Name Indication
+            cert:
+              type: string
+              description: SSL certificate in PEM format
+            keys:
+              type: array
+              items:
+                type: string
+              description: SSL private keys in PEM format
+            snis:
+              type: array
+              items:
+                type: string
+              description: Server Name Indications
+            type:
+              enum:
+                - server
+                - client
+              type: string
+              default: server
+              description: SSL type
+            certs:
+              type: array
+              items:
+                type: string
+              description: SSL certificates in PEM format
+            label:
+              type: string
+              description: SSL label
+            client:
+              type: object
+              required:
+                - ca
+              properties:
+                ca:
+                  type: string
+                  description: SSL client CA certificate in PEM format
+                depth:
+                  type: number
+                  default: 1
+                  description: SSL client verification depth
+                skip_mtls_uri_regex:
+                  type: array
+                  items:
+                    type: string
+                  description: URIs to skip mTLS verification
+              description: SSL client configuration
+              additionalProperties: false
+            status:
+              enum:
+                - 0
+                - 1
+              type: number
+              description: SSL certificate status
+            validity_end:
+              type: number
+              description: SSL certificate validity end timestamp
+            validity_start:
+              type: number
+              description: SSL certificate validity start timestamp
+          description: SSL certificate configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: update_ssl
+    description: Update specific attributes of an existing SSL certificate
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - ssl
+      properties:
+        id:
+          type: string
+          description: SSL certificate ID
+        ssl:
+          type: object
+          properties:
+            key:
+              type: string
+              description: SSL private key in PEM format
+            sni:
+              type: string
+              description: Server Name Indication
+            cert:
+              type: string
+              description: SSL certificate in PEM format
+            keys:
+              type: array
+              items:
+                type: string
+              description: SSL private keys in PEM format
+            snis:
+              type: array
+              items:
+                type: string
+              description: Server Name Indications
+            type:
+              enum:
+                - server
+                - client
+              type: string
+              default: server
+              description: SSL type
+            certs:
+              type: array
+              items:
+                type: string
+              description: SSL certificates in PEM format
+            label:
+              type: string
+              description: SSL label
+            client:
+              type: object
+              required:
+                - ca
+              properties:
+                ca:
+                  type: string
+                  description: SSL client CA certificate in PEM format
+                depth:
+                  type: number
+                  default: 1
+                  description: SSL client verification depth
+                skip_mtls_uri_regex:
+                  type: array
+                  items:
+                    type: string
+                  description: URIs to skip mTLS verification
+              description: SSL client configuration
+              additionalProperties: false
+            status:
+              enum:
+                - 0
+                - 1
+              type: number
+              description: SSL certificate status
+            validity_end:
+              type: number
+              description: SSL certificate validity end timestamp
+            validity_start:
+              type: number
+              description: SSL certificate validity start timestamp
+          description: SSL certificate configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: create_global_rule
+    description: Create a global rule
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - plugins
+      properties:
+        id:
+          type: string
+          description: global rule ID
+        plugins:
+          type: object
+          description: plugins configuration
+          additionalProperties: {}
+      additionalProperties: false
+  - name: update_global_rule
+    description: Update specific attributes of an existing global rule
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - plugins
+      properties:
+        id:
+          type: string
+          description: global rule ID
+        plugins:
+          type: object
+          description: plugins configuration
+          additionalProperties: {}
+      additionalProperties: false
+  - name: create_consumer_group
+    description: Create a consumer group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - consumerGroup
+      properties:
+        id:
+          type: string
+          description: consumer group ID
+        consumerGroup:
+          type: object
+          properties:
+            desc:
+              type: string
+              description: consumer group description
+            labels:
+              type: object
+              description: consumer group labels
+              additionalProperties:
+                type: string
+            plugins:
+              type: object
+              description: consumer group plugins
+              additionalProperties: {}
+          description: consumer group configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: update_consumer_group
+    description: Update specific attributes of an existing consumer group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - consumerGroup
+      properties:
+        id:
+          type: string
+          description: consumer group ID
+        consumerGroup:
+          type: object
+          properties:
+            desc:
+              type: string
+              description: consumer group description
+            labels:
+              type: object
+              description: consumer group labels
+              additionalProperties:
+                type: string
+            plugins:
+              type: object
+              description: consumer group plugins
+              additionalProperties: {}
+          description: consumer group configuration object
+          additionalProperties: true
+      additionalProperties: false
+  - name: get_all_plugin_names
+    description: Get all plugin names
+    inputSchema:
+      type: object
+  - name: get_plugin_schema
+    description: Get all plugins schema or a specific plugin schema by name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: plugins name
+        type:
+          enum:
+            - http
+            - stream
+          type: string
+          description: plugins type
+      additionalProperties: false
+  - name: get_plugin_metadata
+    description: Get metadata for a specific plugin
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: plugins name
+      additionalProperties: false
+  - name: create_plugin_config
+    description: Create a new plugin config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - plugins
+      properties:
+        id:
+          type: string
+          description: plugin config ID
+        plugins:
+          type: object
+          required:
+            - desc
+            - labels
+            - plugins
+          properties:
+            desc:
+              type: string
+              description: plugin config description
+            labels:
+              type: object
+              description: plugin config labels
+              additionalProperties:
+                type: string
+            plugins:
+              type: object
+              description: plugins configuration
+              additionalProperties: {}
+          additionalProperties: false
+      additionalProperties: false
+  - name: update_plugin_config
+    description: Update a plugin config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - plugins
+      properties:
+        id:
+          type: string
+          description: plugin config ID
+        plugins:
+          type: object
+          required:
+            - desc
+            - labels
+            - plugins
+          properties:
+            desc:
+              type: string
+              description: plugin config description
+            labels:
+              type: object
+              description: plugin config labels
+              additionalProperties:
+                type: string
+            plugins:
+              type: object
+              description: plugins configuration
+              additionalProperties: {}
+          additionalProperties: false
+      additionalProperties: false
+  - name: create_or_update_plugin_metadata
+    description: Create or update plugin metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - metadata
+      properties:
+        name:
+          type: string
+          description: plugins name
+        metadata:
+          type: object
+          description: plugins configuration
+          additionalProperties: {}
+      additionalProperties: false
+  - name: delete_plugin_metadata
+    description: Delete plugin metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: plugins name
+      additionalProperties: false
+  - name: create_or_update_stream_route
+    description: Create a stream route, if the stream route already exists, it will
+      be updated
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - route
+      properties:
+        id:
+          type: string
+          description: stream route id
+        route:
+          type: object
+          required:
+            - server_addr
+            - server_port
+          properties:
+            sni:
+              type: string
+              description: SNI
+            desc:
+              type: string
+              maxLength: 256
+              description: stream route description
+            plugins:
+              type: object
+              description: plugins
+              additionalProperties: {}
+            protocol:
+              type: object
+              required:
+                - name
+              properties:
+                conf:
+                  type: object
+                  description: protocol-specific configuration
+                  additionalProperties: {}
+                name:
+                  type: string
+                logger:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - name
+                    properties:
+                      conf:
+                        type: object
+                        description: logger plugin configuration
+                        additionalProperties: {}
+                      name:
+                        type: string
+                      filter:
+                        type: array
+                        items:
+                          type: string
+                        description: logger filter rules
+                    additionalProperties: false
+                superior_id:
+                  type: string
+              additionalProperties: false
+            upstream:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: hash key for chash algorithm
+                tls:
+                  type: object
+                  properties:
+                    verify:
+                      type: boolean
+                      description: TLS verification
+                    client_key:
+                      type: string
+                      description: TLS key
+                    client_cert:
+                      type: string
+                      description: TLS certificate
+                    client_cert_id:
+                      type: array
+                      items:
+                        type: string
+                      description: TLS certificate id
+                  description: TLS configuration
+                  additionalProperties: false
+                desc:
+                  type: string
+                  maxLength: 256
+                  description: upstream description
+                name:
+                  type: string
+                  description: upstream name
+                type:
+                  enum:
+                    - roundrobin
+                    - chash
+                    - ewma
+                    - least_conn
+                  type: string
+                  default: roundrobin
+                  description: load balancing algorithm
+                nodes:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - host
+                      - port
+                    properties:
+                      host:
+                        type: string
+                        description: upstream host
+                      port:
+                        type: number
+                        description: upstream port
+                      weight:
+                        type: number
+                        minimum: 0
+                        description: upstream weight
+                      priority:
+                        type: number
+                        minimum: 0
+                        description: upstream priority
+                    additionalProperties: false
+                  description: upstream nodes with weights
+                checks:
+                  type: object
+                  properties:
+                    active:
+                      type: object
+                      properties:
+                        host:
+                          type: string
+                          description: host for health check
+                        port:
+                          type: number
+                          description: port for health check
+                        healthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for healthy status
+                            successes:
+                              type: number
+                              description: success count threshold
+                          additionalProperties: false
+                        timeout:
+                          type: number
+                          description: timeout for health check
+                        http_path:
+                          type: string
+                          description: HTTP path for health check
+                        unhealthy:
+                          type: object
+                          properties:
+                            interval:
+                              type: number
+                              description: check interval for unhealthy status
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                          additionalProperties: false
+                        https_verify_certificate:
+                          type: boolean
+                          description: verify HTTPS certificate
+                      description: active health check configuration
+                      additionalProperties: false
+                    passive:
+                      type: object
+                      properties:
+                        healthy:
+                          type: object
+                          properties:
+                            successes:
+                              type: number
+                              description: success count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for healthy state
+                          additionalProperties: false
+                        unhealthy:
+                          type: object
+                          properties:
+                            timeout:
+                              type: number
+                              description: timeout threshold
+                            http_failures:
+                              type: number
+                              description: HTTP failure count threshold
+                            http_statuses:
+                              type: array
+                              items:
+                                type: number
+                              description: HTTP status codes for unhealthy state
+                          additionalProperties: false
+                      description: passive health check configuration
+                      additionalProperties: false
+                  description: health check configuration
+                  additionalProperties: false
+                labels:
+                  type: object
+                  description: upstream labels
+                  additionalProperties:
+                    type: string
+                scheme:
+                  enum:
+                    - http
+                    - https
+                    - grpc
+                    - grpcs
+                    - tcp
+                    - tls
+                    - udp
+                    - kafka
+                  type: string
+                  default: http
+                  description: upstream scheme
+                hash_on:
+                  enum:
+                    - vars
+                    - header
+                    - cookie
+                    - consumer
+                    - vars_combinations
+                  type: string
+                  description: hash on type for chash algorithm
+                retries:
+                  type: number
+                  minimum: 0
+                  description: retry count
+                timeout:
+                  type: object
+                  properties:
+                    read:
+                      type: number
+                      description: read timeout in seconds
+                    send:
+                      type: number
+                      description: send timeout in seconds
+                    connect:
+                      type: number
+                      description: connection timeout in seconds
+                  description: timeout configuration
+                  additionalProperties: false
+                pass_host:
+                  enum:
+                    - pass
+                    - node
+                    - rewrite
+                  type: string
+                  default: pass
+                  description: host passing mode
+                retry_timeout:
+                  type: number
+                  minimum: 0
+                  description: retry timeout
+                upstream_host:
+                  type: string
+                  description: upstream host for rewrite mode
+                keepalive_pool:
+                  type: object
+                  properties:
+                    size:
+                      type: number
+                      default: 320
+                      description: size
+                    requests:
+                      type: number
+                      default: 1000
+                      description: requests
+                    idle_timeout:
+                      type: number
+                      default: 60
+                      description: idle timeout
+                  description: keepalive pool configuration
+                  additionalProperties: false
+              description: upstream service configuration object
+              additionalProperties: true
+            service_id:
+              type: string
+              description: service id
+            remote_addr:
+              anyOf:
+                - $ref: "#/properties/route/properties/server_addr/anyOf/0"
+                - $ref: "#/properties/route/properties/server_addr/anyOf/1"
+                - $ref: "#/properties/route/properties/server_addr/anyOf/2"
+                - $ref: "#/properties/route/properties/server_addr/anyOf/3"
+              description: client IP
+            server_addr:
+              anyOf:
+                - type: string
+                  format: ipv4
+                  description: IPv4
+                - type: string
+                  pattern: ^([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\/([12]?[0-9]|3[0-2])$
+                  description: IPv4/CIDR
+                - type: string
+                  format: ipv6
+                  description: IPv6
+                - type: string
+                  pattern: ^([a-fA-F0-9]{0,4}:){1,8}(:[a-fA-F0-9]{0,4}){0,8}([a-fA-F0-9]{0,4})?\/[0-9]{1,3}$
+                  description: IPv6/CIDR
+              description: server IP
+            server_port:
+              type: number
+              description: server port
+            upstream_id:
+              type: string
+              description: upstream id
+          description: stream route configuration
+          additionalProperties: true
+      additionalProperties: false
+  - name: get_secret_by_id
+    description: Get a secret by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - manager
+      properties:
+        id:
+          type: string
+          description: secret id
+        page:
+          type: number
+          default: 1
+          description: page number
+        manager:
+          enum:
+            - vault
+            - aws
+            - gcp
+          type: string
+          description: secret manager type
+        page_size:
+          type: number
+          default: 50
+          maximum: 500
+          minimum: 10
+          description: page size
+      additionalProperties: false
+  - name: create_secret
+    description: Create a secret
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - manager
+        - secret
+      properties:
+        id:
+          type: string
+          description: secret id
+        secret:
+          anyOf:
+            - type: object
+              required:
+                - type
+                - uri
+                - prefix
+                - token
+              properties:
+                uri:
+                  type: string
+                  description: address of the Vault server
+                type:
+                  type: string
+                  const: vault
+                token:
+                  type: string
+                  description: token for Vault authentication
+                prefix:
+                  type: string
+                  description: path prefix of the secret engine
+                namespace:
+                  type: string
+                  description: Vault namespace
+              additionalProperties: false
+            - type: object
+              required:
+                - type
+                - region
+                - access_key_id
+                - secret_access_key
+              properties:
+                type:
+                  type: string
+                  const: aws
+                region:
+                  type: string
+                  description: AWS region
+                endpoint_url:
+                  type: string
+                  description: AWS secret manager endpoint url
+                access_key_id:
+                  type: string
+                  description: AWS access key
+                session_token:
+                  type: string
+                  description: AWS session token
+                secret_access_key:
+                  type: string
+                  description: AWS secret key
+              additionalProperties: false
+            - type: object
+              required:
+                - type
+                - project_id
+              properties:
+                type:
+                  type: string
+                  const: gcp
+                auth_file:
+                  type: string
+                  description: Path to the Google Cloud service account authentication JSON file
+                project_id:
+                  type: string
+                  description: GCP project ID
+                ssl_verify:
+                  type: boolean
+                  default: true
+                  description: Enable SSL verification
+                auth_config:
+                  type: object
+                  required:
+                    - client_email
+                    - private_key
+                    - project_id
+                  properties:
+                    scope:
+                      type: string
+                      default: https://www.googleapis.com/auth/cloud-platform
+                      description: Access scopes of the Google Cloud service account
+                    token_uri:
+                      type: string
+                      default: https://oauth2.googleapis.com/token
+                      description: Token URI of the Google Cloud service account
+                    project_id:
+                      type: string
+                      description: Project ID in the Google Cloud service account
+                    entries_uri:
+                      type: string
+                      default: https://secretmanager.googleapis.com/v1
+                      description: The API access endpoint for the Google Secrets Manager
+                    private_key:
+                      type: string
+                      description: Private key of the Google Cloud service account
+                    client_email:
+                      type: string
+                      description: Email address of the Google Cloud service account
+                  additionalProperties: false
+              additionalProperties: false
+        manager:
+          enum:
+            - vault
+            - aws
+            - gcp
+          type: string
+          description: secret manager type
+      additionalProperties: false
+  - name: update_secret
+    description: Update specific attributes of an existing secret
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - manager
+        - secret
+      properties:
+        id:
+          type: string
+          description: secret id
+        secret:
+          anyOf:
+            - type: object
+              required:
+                - type
+                - uri
+                - prefix
+                - token
+              properties:
+                uri:
+                  type: string
+                  description: address of the Vault server
+                type:
+                  type: string
+                  const: vault
+                token:
+                  type: string
+                  description: token for Vault authentication
+                prefix:
+                  type: string
+                  description: path prefix of the secret engine
+                namespace:
+                  type: string
+                  description: Vault namespace
+              additionalProperties: false
+            - type: object
+              required:
+                - type
+                - region
+                - access_key_id
+                - secret_access_key
+              properties:
+                type:
+                  type: string
+                  const: aws
+                region:
+                  type: string
+                  description: AWS region
+                endpoint_url:
+                  type: string
+                  description: AWS secret manager endpoint url
+                access_key_id:
+                  type: string
+                  description: AWS access key
+                session_token:
+                  type: string
+                  description: AWS session token
+                secret_access_key:
+                  type: string
+                  description: AWS secret key
+              additionalProperties: false
+            - type: object
+              required:
+                - type
+                - project_id
+              properties:
+                type:
+                  type: string
+                  const: gcp
+                auth_file:
+                  type: string
+                  description: Path to the Google Cloud service account authentication JSON file
+                project_id:
+                  type: string
+                  description: GCP project ID
+                ssl_verify:
+                  type: boolean
+                  default: true
+                  description: Enable SSL verification
+                auth_config:
+                  type: object
+                  required:
+                    - client_email
+                    - private_key
+                    - project_id
+                  properties:
+                    scope:
+                      type: string
+                      default: https://www.googleapis.com/auth/cloud-platform
+                      description: Access scopes of the Google Cloud service account
+                    token_uri:
+                      type: string
+                      default: https://oauth2.googleapis.com/token
+                      description: Token URI of the Google Cloud service account
+                    project_id:
+                      type: string
+                      description: Project ID in the Google Cloud service account
+                    entries_uri:
+                      type: string
+                      default: https://secretmanager.googleapis.com/v1
+                      description: The API access endpoint for the Google Secrets Manager
+                    private_key:
+                      type: string
+                      description: Private key of the Google Cloud service account
+                    client_email:
+                      type: string
+                      description: Email address of the Google Cloud service account
+                  additionalProperties: false
+              additionalProperties: false
+        manager:
+          enum:
+            - vault
+            - aws
+            - gcp
+          type: string
+          description: secret manager type
+      additionalProperties: false
+  - name: delete_secret
+    description: Delete a secret by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - manager
+      properties:
+        id:
+          type: string
+          description: secret id
+        manager:
+          enum:
+            - vault
+            - aws
+            - gcp
+          type: string
+          description: secret manager type
+      additionalProperties: false
+  - name: create_or_update_proto
+    description: Create a proto, if the proto already exists, it will be updated
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - proto
+      properties:
+        id:
+          type: string
+          description: proto id
+        proto:
+          type: object
+          required:
+            - content
+          properties:
+            content:
+              type: string
+              description: proto content
+          additionalProperties: false
+      additionalProperties: false

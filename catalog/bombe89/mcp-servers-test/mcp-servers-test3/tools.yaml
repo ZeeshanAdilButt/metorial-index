@@ -1,0 +1,31 @@
+tools:
+  - name: add
+    description: Add two integers.
+    inputSchema:
+      type: object
+      title: addArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: multiply
+    description: Multiply two integers.
+    inputSchema:
+      type: object
+      title: multiplyArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B

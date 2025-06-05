@@ -1,0 +1,14 @@
+identifier: grafana/mcp-grafana/mcp-grafana
+repo:
+  provider: github.com
+  url: https://github.com/grafana/mcp-grafana
+  name: mcp-grafana
+  owner: grafana
+server:
+  subdirectory: /
+  name: Grafana
+  description: Access your Grafana instance and the surrounding ecosystem.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

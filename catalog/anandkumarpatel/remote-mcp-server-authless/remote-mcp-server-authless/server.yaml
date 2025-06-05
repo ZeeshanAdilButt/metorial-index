@@ -1,0 +1,18 @@
+identifier: anandkumarpatel/remote-mcp-server-authless/remote-mcp-server-authless
+repo:
+  provider: github.com
+  url: https://github.com/anandkumarpatel/remote-mcp-server-authless
+  name: remote-mcp-server-authless
+  owner: anandkumarpatel
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare Workers
+  description: Deploy a remote MCP server effortlessly on Cloudflare Workers
+    without requiring authentication. Enable seamless integration with MCP
+    clients like Cloudflare AI Playground and Claude Desktop to access your
+    custom tools remotely. Customize your server by defining tools easily within
+    the provided codebase to extend its capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

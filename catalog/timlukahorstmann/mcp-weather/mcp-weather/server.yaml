@@ -1,0 +1,18 @@
+identifier: timlukahorstmann/mcp-weather/mcp-weather
+repo:
+  provider: github.com
+  url: https://github.com/TimLukaHorstmann/mcp-weather
+  name: mcp-weather
+  owner: TimLukaHorstmann
+server:
+  subdirectory: /
+  name: Weather Forecast Server
+  description: Provide hourly weather forecasts using real-time data from the
+    AccuWeather API. Enable large language models to fetch accurate and
+    up-to-date weather information for any location, including temperature and
+    conditions. Enhance your AI applications with reliable weather insights
+    seamlessly integrated via MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

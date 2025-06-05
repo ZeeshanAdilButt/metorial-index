@@ -1,0 +1,17 @@
+identifier: descope-sample-apps/descope-mcp-server-stdio/descope-mcp-server-stdio
+repo:
+  provider: github.com
+  url: https://github.com/descope-sample-apps/descope-mcp-server-stdio
+  name: descope-mcp-server-stdio
+  owner: descope-sample-apps
+server:
+  subdirectory: /
+  name: Descope MCP Server
+  description: Interact with Descope's Management APIs to efficiently search and
+    retrieve project-related information. Simplify user management by creating
+    and inviting users directly through the server. Enhance your project
+    workflows with seamless integration into Claude Desktop.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

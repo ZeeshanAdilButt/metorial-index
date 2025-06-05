@@ -1,0 +1,14 @@
+identifier: surest-sky/docker-compose-baota/docker-compose-baota
+repo:
+  provider: github.com
+  url: https://github.com/surest-sky/docker-compose-baota
+  name: docker-compose-baota
+  owner: surest-sky
+server:
+  subdirectory: /
+  name: 一键快速搭建集成环境
+  description: 快速搭建和部署集成环境，支持 Docker 和 Docker-compose，简化开发流程。通过简单的命令，轻松启动和管理容器，提升开发效率。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

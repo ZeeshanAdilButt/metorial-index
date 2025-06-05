@@ -1,0 +1,11 @@
+tools:
+  - name: write_note
+    description: Write note to flomo
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: Text content of the note with markdown format

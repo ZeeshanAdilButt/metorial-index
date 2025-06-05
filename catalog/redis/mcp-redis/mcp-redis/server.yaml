@@ -1,0 +1,18 @@
+identifier: redis/mcp-redis/mcp-redis
+repo:
+  provider: github.com
+  url: https://github.com/redis/mcp-redis
+  name: mcp-redis
+  owner: redis
+server:
+  subdirectory: /
+  name: Redis
+  description: Enable AI agents to manage and search data in Redis using natural
+    language queries. Seamlessly integrate with MCP clients to interact with
+    Redis data structures like hashes, lists, sets, streams, and more. Enhance
+    your applications with scalable, high-performance Redis data operations and
+    real-time insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

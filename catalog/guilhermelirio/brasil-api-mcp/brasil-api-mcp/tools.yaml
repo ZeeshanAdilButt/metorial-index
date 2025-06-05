@@ -1,0 +1,130 @@
+tools:
+  - name: cep-search
+    description: Query address information from a Brazilian postal code (CEP)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cep
+      properties:
+        cep:
+          type: string
+          pattern: ^\d+$
+          maxLength: 8
+          minLength: 8
+          description: Postal code to be queried (only numbers, 8 digits)
+      additionalProperties: false
+  - name: cnpj-search
+    description: Query information about a Brazilian company by its CNPJ (National
+      Registry of Legal Entities)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cnpj
+      properties:
+        cnpj:
+          type: string
+          pattern: ^\d{14}$
+          description: CNPJ to be queried (only numbers, 14 digits)
+      additionalProperties: false
+  - name: bank-search
+    description: Find information about a Brazilian bank by its code
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Bank code to search for
+      additionalProperties: false
+  - name: bank-list
+    description: List all Brazilian banks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: ddd-info
+    description: Get information about a Brazilian area code (DDD) including state
+      and cities
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ddd
+      properties:
+        ddd:
+          type: string
+          pattern: ^\d{2}$
+          description: Area code (DDD) to be queried (only numbers, 2 digits)
+      additionalProperties: false
+  - name: ibge-states-list
+    description: List all Brazilian states with their information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: ibge-state-search
+    description: Find information about a Brazilian state by its code or abbreviation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: State code or abbreviation (e.g., SP, RJ, 35)
+      additionalProperties: false
+  - name: ibge-municipalities-list
+    description: List all municipalities of a Brazilian state by its abbreviation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - uf
+      properties:
+        uf:
+          type: string
+          description: State abbreviation (e.g., SP, RJ)
+      additionalProperties: false
+  - name: cambio-currencies-list
+    description: List all available currencies for exchange rates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: cambio-rate
+    description: Get exchange rates for a specific currency on a specific date
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - currency
+        - date
+      properties:
+        date:
+          type: string
+          description: Date in YYYY-MM-DD format. For weekends and holidays, the returned
+            date will be the last available business day.
+        currency:
+          type: string
+          description: Currency symbol (e.g., USD, EUR, GBP)
+      additionalProperties: false
+  - name: registrobr-domain-check
+    description: Check the status and availability of a .br domain name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: Domain name to check (with or without .br extension)
+      additionalProperties: false

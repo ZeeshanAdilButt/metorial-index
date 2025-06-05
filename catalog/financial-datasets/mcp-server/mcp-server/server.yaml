@@ -1,0 +1,16 @@
+identifier: financial-datasets/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/financial-datasets/mcp-server
+  name: mcp-server
+  owner: financial-datasets
+server:
+  subdirectory: /
+  name: Financial Datasets MCP Server
+  description: Access stock market data seamlessly. Retrieve income statements,
+    balance sheets, cash flow statements, stock prices, and market news directly
+    through the MCP interface for enhanced financial insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

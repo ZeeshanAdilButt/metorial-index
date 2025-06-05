@@ -1,0 +1,17 @@
+identifier: ropon/mcp_weather/mcp_weather
+repo:
+  provider: github.com
+  url: https://github.com/ropon/mcp_weather
+  name: mcp_weather
+  owner: ropon
+server:
+  subdirectory: /
+  name: Weather MCP Server
+  description: Provide real-time weather forecasts and city information queries
+    for LLMs. Get accurate weather data for the next 24 hours using city names
+    or coordinates. Enhance your applications with reliable weather insights
+    effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: joebuildsstuff/mcp-jina-ai/jina-ai-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/JoeBuildsStuff/mcp-jina-ai
+  name: mcp-jina-ai
+  owner: JoeBuildsStuff
+server:
+  subdirectory: /
+  name: Jina AI
+  description: Provides access to Jina AI's web services through Claude, including
+    web page reading, web search, and fact checking.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

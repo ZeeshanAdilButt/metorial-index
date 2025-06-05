@@ -1,0 +1,17 @@
+identifier: sseaan/mcp-server-inbox/mcp-server-inbox
+repo:
+  provider: github.com
+  url: https://github.com/sseaan/mcp-server-inbox
+  name: mcp-server-inbox
+  owner: sseaan
+server:
+  subdirectory: /
+  name: Inbox Note Sender
+  description: Send notes directly to your Inbox API endpoint with ease. Configure
+    your user token via environment variables and send notes up to 3000
+    characters through a simple API interface. Streamline your note-taking
+    workflow by integrating this tool into your MCP-enabled environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: heskeybaozi/servers/servers
+repo:
+  provider: github.com
+  url: https://github.com/HeskeyBaozi/servers
+  name: servers
+  owner: HeskeyBaozi
+server:
+  subdirectory: /src/github
+  name: GitHub MCP Server
+  description: Enable seamless integration with the GitHub API for file
+    operations, repository management, and advanced search functionalities.
+    Automate your workflows with features like automatic branch creation and
+    comprehensive error handling. Enhance your development process by managing
+    repositories and issues directly from your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

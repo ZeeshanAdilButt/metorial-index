@@ -1,0 +1,17 @@
+identifier: bitscorp-mcp/mcp-ffmpeg/mcp-ffmpeg
+repo:
+  provider: github.com
+  url: https://github.com/bitscorp-mcp/mcp-ffmpeg
+  name: mcp-ffmpeg
+  owner: bitscorp-mcp
+server:
+  subdirectory: /
+  name: FFmpeg Video Processor
+  description: Manipulate video files effortlessly with this server. Resize videos
+    to various resolutions and extract audio in multiple formats through simple
+    API calls. Enhance your video processing capabilities with natural language
+    requests using Claude Desktop integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

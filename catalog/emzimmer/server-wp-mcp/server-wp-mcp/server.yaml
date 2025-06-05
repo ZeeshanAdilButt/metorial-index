@@ -1,0 +1,17 @@
+identifier: emzimmer/server-wp-mcp/server-wp-mcp
+repo:
+  provider: github.com
+  url: https://github.com/emzimmer/server-wp-mcp
+  name: server-wp-mcp
+  owner: emzimmer
+server:
+  subdirectory: /
+  name: WordPress Server
+  description: The WordPress MCP server enables AI assistants to interact with
+    WordPress sites through a standardized interface. It handles authentication
+    and provides a secure way to discover and interact with WordPress REST API
+    endpoints.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

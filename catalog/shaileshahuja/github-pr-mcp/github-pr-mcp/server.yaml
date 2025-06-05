@@ -1,0 +1,17 @@
+identifier: shaileshahuja/github-pr-mcp/github-pr-mcp
+repo:
+  provider: github.com
+  url: https://github.com/shaileshahuja/github-pr-mcp
+  name: github-pr-mcp
+  owner: shaileshahuja
+server:
+  subdirectory: /
+  name: GitHub PR Comments Server
+  description: Fetch GitHub Pull Request comments effortlessly. Retrieve
+    structured comments, including file paths and replies, using your GitHub
+    personal access token. Enhance your development workflow with easy access to
+    PR discussions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: kaancl/spotify-mcp-server/spotify-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/KaanCL/Spotify-MCP-Server
+  name: Spotify-MCP-Server
+  owner: KaanCL
+server:
+  subdirectory: /
+  name: Spotify Control Server
+  description: A Model-Context-Protocol (MCP) server implementation for Spotify
+    that enables AI assistants and other clients to control Spotify playback
+    through a standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

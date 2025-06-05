@@ -1,0 +1,17 @@
+identifier: confluentinc/mcp-confluent/mcp-confluent
+repo:
+  provider: github.com
+  url: https://github.com/confluentinc/mcp-confluent
+  name: mcp-confluent
+  owner: confluentinc
+server:
+  subdirectory: /
+  name: Confluent MCP Server
+  description: Interact seamlessly with Confluent Kafka and Confluent Cloud REST
+    APIs. Manage your Kafka resources and data schemas effortlessly through a
+    user-friendly interface. Enhance your applications with powerful data
+    streaming capabilities using this MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: toolhouse-community/mcp-server-toolhouse/mcp-server-toolhouse
+repo:
+  provider: github.com
+  url: https://github.com/toolhouse-community/mcp-server-toolhouse
+  name: mcp-server-toolhouse
+  owner: toolhouse-community
+server:
+  subdirectory: /
+  name: Toolhouse MCP Server
+  description: Connects MCP clients with Toolhouse's tools, built on Toolhouse and
+    Groq's API for fast inference.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

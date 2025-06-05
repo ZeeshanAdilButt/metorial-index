@@ -1,0 +1,511 @@
+tools:
+  - name: list_organizations
+    description: |-
+      List all organizations that the user has access to in Sentry.
+
+      Use this tool when you need to:
+      - View all organizations in Sentry
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_teams
+    description: |-
+      List all teams in an organization in Sentry.
+
+      Use this tool when you need to:
+      - View all teams in a Sentry organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: list_projects
+    description: |-
+      Retrieve a list of projects in Sentry.
+
+      Use this tool when you need to:
+      - View all projects in a Sentry organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: list_issues
+    description: >-
+      List all issues in Sentry.
+
+
+      Use this tool when you need to:
+
+      - View all issues in a Sentry organization
+
+
+      If you're looking for more granular data beyond a summary of identified
+      problems, you should use the `search_errors()` or `search_transactions()`
+      tools instead.
+
+      <examples>
+
+      ### Find the newest unresolved issues in the 'my-project' project
+
+
+      ```
+
+      list_issues(organizationSlug='my-organization', projectSlug='my-project',
+      query='is:unresolved', sortBy='last_seen')
+
+      ```
+
+
+      ### Find the most frequently occurring crashes in the 'my-project' project
+
+
+      ```
+
+      list_issues(organizationSlug='my-organization', projectSlug='my-project',
+      query='is:unresolved error.handled:false', sortBy='count')
+
+      ```
+
+
+      ### Find the oldest unresolved issues in the 'my-project' project
+
+
+      ```
+
+      list_issues(organizationSlug='my-organization', projectSlug='my-project',
+      query='is:unresolved', sortBy='first_seen')
+
+      ```
+
+      </examples>
+
+
+      <query_syntax>
+
+      Use the tool `help('query_syntax')` to get more information about the
+      query syntax.
+
+
+      There are some common query parameters that are useful for searching
+      errors:
+
+
+      - `is:unresolved` - Find unresolved issues
+
+      - `release:[1.0, 2.0]` - Find issues in a specific release
+
+      - `release:latest` - Find issues in the latest release only
+
+      </query_syntax>
+
+
+      <hints>
+
+      If only one parameter is provided, and it could be either
+      `organizationSlug` or `projectSlug`, its probably `organizationSlug`, but
+      if you're really uncertain you should call `list_organizations()` first.
+
+      </hints>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        query:
+          type: string
+          description: The search query to apply. Use the `help(subject="query_syntax")`
+            tool to get more information about the query syntax rather than
+            guessing.
+        sortBy:
+          enum:
+            - last_seen
+            - first_seen
+            - count
+            - userCount
+          type: string
+          description: Sort the results either by the last time they occurred, the first
+            time they occurred, the count of occurrences, or the number of users
+            affected.
+        projectSlug:
+          type: string
+          description: The project's slug. This will default to all projects you have
+            access to. It is encouraged to specify this when possible.
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: list_releases
+    description: >-
+      List all releases in Sentry.
+
+
+      Use this tool when you need to:
+
+      - Find recent releases in a Sentry organization
+
+      - Find the most recent version released of a specific project
+
+      - Determine when a release was deployed to an environment
+
+      <hints>
+
+      If only one parameter is provided, and it could be either
+      `organizationSlug` or `projectSlug`, its probably `organizationSlug`, but
+      if you're really uncertain you should call `list_organizations()` first.
+
+      </hints>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        projectSlug:
+          type: string
+          description: The project's slug. This will default to all projects you have
+            access to. It is encouraged to specify this when possible.
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: get_issue_summary
+    description: >-
+      Retrieve a summary of an issue in Sentry.
+
+
+      Use this tool when you need to:
+
+      - View a summary of an issue in Sentry
+
+
+      If the issue is an error, or you want additional information like the
+      stacktrace, you should use `get_issue_details()` tool instead.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        issueId:
+          type: string
+          description: The Issue ID. e.g. `PROJECT-1Z43`
+        issueUrl:
+          type: string
+          format: uri
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: get_issue_details
+    description: >-
+      Retrieve issue details from Sentry for a specific Issue ID, including the
+      stacktrace and error message if available. Either issueId or issueUrl MUST
+      be provided.
+
+
+      Use this tool when you need to:
+
+      - Investigate a specific production error
+
+      - Access detailed error information and stacktraces from Sentry
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        issueId:
+          type: string
+          description: The Issue ID. e.g. `PROJECT-1Z43`
+        issueUrl:
+          type: string
+          format: uri
+          description: The URL of the issue to retrieve details for.
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: search_errors
+    description: >-
+      Query Sentry for errors using advanced search syntax.
+
+
+      Use this tool when you need to:
+
+      - Search for production errors in a specific file.
+
+      - Analyze error patterns and frequencies.
+
+      - Find recent or frequently occurring errors.
+
+
+      <examples>
+
+      ### Find common errors within a file
+
+
+      To find common errors within a file, you can use the `filename` parameter.
+      This is a suffix based search, so only using the filename or the direct
+      parent folder of the file. The parent folder is preferred when the
+      filename is in a subfolder or a common filename. If you provide generic
+      filenames like `index.js` you're going to end up finding errors that are
+      might be from completely different projects.
+
+
+      ```
+
+      search_errors(organizationSlug='my-organization', filename='index.js',
+      sortBy='count')
+
+      ```
+
+
+      ### Find recent crashes from the 'peated' project
+
+
+      ```
+
+      search_errors(organizationSlug='my-organization', query='is:unresolved
+      error.handled:false', projectSlug='peated', sortBy='last_seen')
+
+      ```
+
+
+      </examples>
+
+
+      <query_syntax>
+
+      Use the tool `help('query_syntax')` to get more information about the
+      query syntax.
+
+
+      There are some common query parameters that are useful for searching
+      errors:
+
+
+      - `is:unresolved` - Find unresolved errors
+
+      - `error.handled:false` - Find errors that are not handled (otherwise
+      known as uncaught exceptions or crashes)
+
+      </query_syntax>
+
+
+      <hints>
+
+      If only one parameter is provided, and it could be either
+      `organizationSlug` or `projectSlug`, its probably `organizationSlug`, but
+      if you're really uncertain you should call `list_organizations()` first.
+
+      </hints>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        query:
+          type: string
+          description: The search query to apply. Use the `help(subject="query_syntax")`
+            tool to get more information about the query syntax rather than
+            guessing.
+        sortBy:
+          enum:
+            - last_seen
+            - count
+          type: string
+          default: last_seen
+          description: Sort the results either by the last time they occurred or the count
+            of occurrences.
+        filename:
+          type: string
+          description: The filename to search for errors in.
+        projectSlug:
+          type: string
+          description: The project's slug. This will default to all projects you have
+            access to. It is encouraged to specify this when possible.
+        transaction:
+          type: string
+          description: The transaction name (also known as the endpoint, or route name).
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: search_transactions
+    description: >-
+      Query Sentry for transactions using advanced search syntax.
+
+
+      Transactions are segments of traces that are associated with a specific
+      route or endpoint.
+
+
+      Use this tool when you need to:
+
+      - Search for production transaction data to understand performance.
+
+      - Analyze traces and latency patterns.
+
+      - Find examples of recent requests to endpoints.
+
+
+      <examples>
+
+      ### Find slow requests to a route
+
+
+      ...
+
+
+      ```
+
+      search_transactions(organizationSlug='my-organization',
+      transaction='/checkout', sortBy='latency')
+
+      ```
+
+
+      </examples>
+
+
+      <hints>
+
+      If only one parameter is provided, and it could be either
+      `organizationSlug` or `projectSlug`, its probably `organizationSlug`, but
+      if you're really uncertain you might want to call `list_organizations()`
+      first.
+
+      </hints>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        query:
+          type: string
+          description: The search query to apply. Use the `help(subject="query_syntax")`
+            tool to get more information about the query syntax rather than
+            guessing.
+        sortBy:
+          enum:
+            - timestamp
+            - duration
+          type: string
+          default: timestamp
+          description: Sort the results either by the timestamp of the request (most
+            recent first) or the duration of the request (longest first).
+        projectSlug:
+          type: string
+          description: The project's slug. This will default to all projects you have
+            access to. It is encouraged to specify this when possible.
+        transaction:
+          type: string
+          description: The transaction name (also known as the endpoint, or route name).
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: create_team
+    description: >-
+      Create a new team in Sentry.
+
+
+      Use this tool when you need to:
+
+      - Create a new team in a Sentry organization
+
+
+      <hints>
+
+      - If any parameter is ambiguous, you should clarify with the user what
+      they meant.
+
+      </hints>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the team to create.
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: create_project
+    description: >-
+      Create a new project in Sentry, giving you access to a new SENTRY_DSN.
+
+
+      Use this tool when you need to:
+
+      - Create a new project in a Sentry organization
+
+
+      <hints>
+
+      - If any parameter is ambiguous, you should clarify with the user what
+      they meant.
+
+      </hints>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamSlug
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the project to create. Typically this is commonly the
+            name of the repository or service. It is only used as a visual label
+            in Sentry.
+        platform:
+          type: string
+          description: The platform for the project (e.g., python, javascript, react, etc.)
+        teamSlug:
+          type: string
+          description: The team's slug. This will default to the first team you have
+            access to.
+        organizationSlug:
+          type: string
+          description: The organization's slug. This will default to the first org you
+            have access to.
+      additionalProperties: false
+  - name: help
+    description: |-
+      Get information to help you better work with Sentry.
+
+      Use this tool when you need to:
+      - Understand the Sentry search syntax
+
+      <examples>
+      ### Get help with the Sentry search syntax
+
+      ```
+      help('query_syntax')
+      ```
+      </examples>
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - subject
+      properties:
+        subject:
+          enum:
+            - query_syntax
+          type: string
+          description: The subject to get help with.
+      additionalProperties: false

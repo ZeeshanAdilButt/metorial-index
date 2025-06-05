@@ -1,0 +1,87 @@
+tools:
+  - name: getSecondOpinion
+    description: Get responses from various LLM providers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+        - provider
+        - model
+      properties:
+        model:
+          type: string
+          minLength: 1
+        top_k:
+          type: number
+          exclusiveMinimum: 0
+        top_p:
+          type: number
+          maximum: 1
+          minimum: 0
+        prompt:
+          type: string
+          minLength: 1
+        stream:
+          type: boolean
+        provider:
+          enum:
+            - openai
+            - anthropic
+            - deepseek
+            - google
+            - openrouter
+            - ollama
+            - openaiCompatible
+          type: string
+        maxTokens:
+          type: number
+          default: 1024
+          exclusiveMinimum: 0
+        temperature:
+          type: number
+          maximum: 1
+          minimum: 0
+        systemPrompt:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+        stop_sequences:
+          type: array
+          items:
+            type: string
+        presence_penalty:
+          type: number
+          maximum: 2
+          minimum: -2
+        reasoning_effort:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - enum:
+                    - low
+                    - medium
+                    - high
+                  type: string
+            - type: "null"
+        frequency_penalty:
+          type: number
+          maximum: 2
+          minimum: -2
+      additionalProperties: false
+  - name: listProviders
+    description: List all configured LLM providers and their available models
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: listReasoningModels
+    description: List all available models that support reasoning capabilities
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

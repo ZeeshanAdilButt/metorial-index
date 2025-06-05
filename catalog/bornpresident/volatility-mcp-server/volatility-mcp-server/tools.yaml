@@ -1,0 +1,322 @@
+tools:
+  - name: list_available_plugins
+    description: List all available Volatility plugins
+    inputSchema:
+      type: object
+      title: list_available_pluginsArguments
+      properties: {}
+  - name: get_image_info
+    description: "
+
+      \    Get information about a memory dump file
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_image_infoArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_pstree
+    description: "
+
+      \    Run the PsTree plugin to show process tree
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_pstreeArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_pslist
+    description: "
+
+      \    Run the PsList plugin to list processes
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_pslistArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_psscan
+    description: "
+
+      \    Run the PsScan plugin to scan for processes that might be hidden
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_psscanArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_netscan
+    description: "
+
+      \    Run the NetScan plugin to show network connections
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_netscanArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_malfind
+    description: "
+
+      \    Run the MalFind plugin to detect injected code/DLLs
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \        dump_dir: Optional directory to dump suspicious memory sections
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_malfindArguments
+      required:
+        - memory_dump_path
+      properties:
+        dump_dir:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Dump Dir
+          default: null
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_cmdline
+    description: "
+
+      \    Run the CmdLine plugin to show process command line arguments
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_cmdlineArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_dlllist
+    description: "
+
+      \    Run the DllList plugin to list loaded DLLs for processes
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \        pid: Optional process ID to filter results
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_dlllistArguments
+      required:
+        - memory_dump_path
+      properties:
+        pid:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Pid
+          default: null
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_handles
+    description: "
+
+      \    Run the Handles plugin to list open handles for processes
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \        pid: Optional process ID to filter results
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_handlesArguments
+      required:
+        - memory_dump_path
+      properties:
+        pid:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Pid
+          default: null
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_filescan
+    description: "
+
+      \    Run the FileScan plugin to scan for file objects
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_filescanArguments
+      required:
+        - memory_dump_path
+      properties:
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_memmap
+    description: "
+
+      \    Run the MemMap plugin to show memory map for a specific process
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \        pid: Process ID to analyze
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_memmapArguments
+      required:
+        - memory_dump_path
+        - pid
+      properties:
+        pid:
+          type: integer
+          title: Pid
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: run_custom_plugin
+    description: "
+
+      \    Run a custom Volatility plugin
+
+      \   \ 
+
+      \    Args:
+
+      \        memory_dump_path: Full path to the memory dump file
+
+      \        plugin_name: Name of the plugin to run
+
+      \        additional_args: Optional additional arguments for the plugin
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_custom_pluginArguments
+      required:
+        - memory_dump_path
+        - plugin_name
+      properties:
+        plugin_name:
+          type: string
+          title: Plugin Name
+        additional_args:
+          type: string
+          title: Additional Args
+          default: ""
+        memory_dump_path:
+          type: string
+          title: Memory Dump Path
+  - name: list_memory_dumps
+    description: "
+
+      \    List available memory dump files in a directory
+
+      \   \ 
+
+      \    Args:
+
+      \        search_dir: Directory to search for memory dumps (defaults to
+      current directory)
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_memory_dumpsArguments
+      properties:
+        search_dir:
+          type: string
+          title: Search Dir
+          default: null

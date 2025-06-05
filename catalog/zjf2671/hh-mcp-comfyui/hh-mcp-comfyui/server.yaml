@@ -1,0 +1,18 @@
+identifier: zjf2671/hh-mcp-comfyui/hh-mcp-comfyui
+repo:
+  provider: github.com
+  url: https://github.com/zjf2671/hh-mcp-comfyui
+  name: hh-mcp-comfyui
+  owner: zjf2671
+server:
+  subdirectory: /
+  name: ComfyUI Image Generation Service
+  description: Provide an image generation service that integrates with local
+    ComfyUI instances via API calls, enabling natural language-driven image
+    creation. Support dynamic parameter replacement in workflows and automatic
+    loading of workflow files as resources. Easily extend and customize
+    workflows for flexible image generation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

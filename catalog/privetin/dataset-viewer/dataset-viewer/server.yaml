@@ -1,0 +1,15 @@
+identifier: privetin/dataset-viewer/dataset-viewer
+repo:
+  provider: github.com
+  url: https://github.com/privetin/dataset-viewer
+  name: dataset-viewer
+  owner: privetin
+server:
+  subdirectory: /
+  name: Dataset Viewer
+  description: Interact with the Hugging Face Dataset Viewer API to browse and
+    analyze datasets hosted on the Hugging Face Hub.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

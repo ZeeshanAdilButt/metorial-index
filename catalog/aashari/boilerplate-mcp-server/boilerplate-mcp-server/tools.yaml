@@ -1,0 +1,11 @@
+tools:
+  - name: get-ip-details
+    description: Get details about a specific IP address or the current device (if
+      no IP address is provided)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        ipAddress:
+          type: string
+      additionalProperties: false

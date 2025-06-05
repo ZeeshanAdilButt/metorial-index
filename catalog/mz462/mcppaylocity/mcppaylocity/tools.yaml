@@ -1,0 +1,160 @@
+tools:
+  - name: fetch_employees
+    description: >
+      
+      Fetch all employees for a company.
+
+
+      Args:
+          company_id: Optional company ID (string or integer). If not provided, uses the first company ID from configuration.
+    inputSchema:
+      type: object
+      title: fetch_employeesArguments
+      properties:
+        company_id:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Company Id
+          default: null
+  - name: fetch_employee_details
+    description: >
+      
+      Fetch details for a specific employee.
+
+
+      Args:
+          company_id: Optional company ID (string or integer). If not provided, uses the first company ID from configuration.
+          employee_id: Employee ID (string or integer) to get details for.
+    inputSchema:
+      type: object
+      title: fetch_employee_detailsArguments
+      properties:
+        company_id:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Company Id
+          default: null
+        employee_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Employee Id
+          default: null
+  - name: fetch_employee_earnings
+    description: >
+      
+      Fetch earnings data for a specific employee.
+
+
+      Args:
+          company_id: Optional company ID (string or integer). If not provided, uses the first company ID from configuration.
+          employee_id: Employee ID (string or integer) to get earnings for.
+    inputSchema:
+      type: object
+      title: fetch_employee_earningsArguments
+      properties:
+        company_id:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Company Id
+          default: null
+        employee_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Employee Id
+          default: null
+  - name: fetch_company_codes
+    description: >
+      
+      Fetch company codes for a specific resource.
+
+
+      Args:
+          company_id: Optional company ID (string or integer). If not provided, uses the first company ID from configuration.
+          code_resource: Code resource to fetch (e.g., 'earnings', 'deductions', 'costcenter1', etc.)
+    inputSchema:
+      type: object
+      title: fetch_company_codesArguments
+      properties:
+        company_id:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Company Id
+          default: null
+        code_resource:
+          type: string
+          title: Code Resource
+          default: null
+  - name: fetch_employee_local_taxes
+    description: >
+      
+      Fetch local taxes for a specific employee.
+
+
+      Args:
+          company_id: Optional company ID (string or integer). If not provided, uses the first company ID from configuration.
+          employee_id: Employee ID (string or integer) to get local taxes for.
+    inputSchema:
+      type: object
+      title: fetch_employee_local_taxesArguments
+      properties:
+        company_id:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Company Id
+          default: null
+        employee_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Employee Id
+          default: null
+  - name: fetch_employee_paystatement_details
+    description: >
+      
+      Fetch pay statement details for a specific employee, year and check date.
+
+
+      Args:
+          company_id: Optional company ID (string or integer). If not provided, uses the first company ID from configuration.
+          employee_id: Employee ID (string or integer) to get pay statement details for.
+          year: The year to get pay statement details for.
+          check_date: The check date to get pay statement details for (format: MM/DD/YYYY).
+    inputSchema:
+      type: object
+      title: fetch_employee_paystatement_detailsArguments
+      properties:
+        year:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Year
+          default: null
+        check_date:
+          type: string
+          title: Check Date
+          default: null
+        company_id:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Company Id
+          default: null
+        employee_id:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Employee Id
+          default: null

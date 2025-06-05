@@ -1,0 +1,16 @@
+identifier: kukapay/cryptopanic-mcp-server/cryptopanic-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/cryptopanic-mcp-server
+  name: cryptopanic-mcp-server
+  owner: kukapay
+server:
+  subdirectory: /
+  name: Cryptocurrency News Server
+  description: Fetch the latest cryptocurrency news for your AI agents. Stay
+    updated with real-time insights and trends in the crypto market. Enhance
+    your applications with timely information from CryptoPanic.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

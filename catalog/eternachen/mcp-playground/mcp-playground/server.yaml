@@ -1,0 +1,17 @@
+identifier: eternachen/mcp-playground/mcp-playground
+repo:
+  provider: github.com
+  url: https://github.com/eternachen/mcp-playground
+  name: mcp-playground
+  owner: eternachen
+server:
+  subdirectory: /
+  name: Weather Query Server/Client
+  description: Fetch and display real-time weather information for any city.
+    Connect seamlessly to an MCP server to access weather data and receive
+    formatted updates on temperature, humidity, and more. Enhance your
+    applications with live weather insights effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,128 @@
+tools:
+  - name: create-simulator-session
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        timeout:
+          type: number
+        autoboot:
+          type: boolean
+        deviceName:
+          type: string
+        platformVersion:
+          type: string
+      additionalProperties: false
+  - name: terminate-simulator-session
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: install-app
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - appPath
+      properties:
+        appPath:
+          type: string
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: launch-app
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - bundleId
+      properties:
+        bundleId:
+          type: string
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: terminate-app
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - bundleId
+      properties:
+        bundleId:
+          type: string
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: tap
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - x
+        - y
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: list-available-simulators
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: boot-simulator-by-udid
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - udid
+      properties:
+        udid:
+          type: string
+      additionalProperties: false
+  - name: shutdown-simulator-by-udid
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - udid
+      properties:
+        udid:
+          type: string
+      additionalProperties: false
+  - name: list-booted-simulators
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-simulator-sessions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: shutdown-simulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+      additionalProperties: false

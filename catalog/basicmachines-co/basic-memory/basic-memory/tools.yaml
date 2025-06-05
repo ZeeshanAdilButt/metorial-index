@@ -1,0 +1,336 @@
+tools:
+  - name: delete_note
+    description: Delete a note by title or permalink
+    inputSchema:
+      type: object
+      title: delete_noteArguments
+      required:
+        - identifier
+      properties:
+        identifier:
+          type: string
+          title: Identifier
+  - name: read_content
+    description: Read a file's raw content by path or permalink
+    inputSchema:
+      type: object
+      title: read_contentArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: build_context
+    description: "Build context from a memory:// URI to continue conversations
+      naturally.
+
+      \   \ 
+
+      \    Use this to follow up on previous discussions or explore related
+      topics.
+
+      \    Timeframes support natural language like:
+
+      \    - \"2 days ago\"
+
+      \    - \"last week\"\ 
+
+      \    - \"today\"
+
+      \    - \"3 months ago\"
+
+      \    Or standard formats like \"7d\", \"24h\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: build_contextArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          maxLength: 2028
+          minLength: 1
+        page:
+          type: integer
+          title: Page
+          default: 1
+        depth:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Depth
+          default: 1
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+        timeframe:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Timeframe
+          default: 7d
+        max_related:
+          type: integer
+          title: Max Related
+          default: 10
+  - name: recent_activity
+    description: "Get recent activity from across the knowledge base.
+
+      \   \ 
+
+      \    Timeframe supports natural language formats like:
+
+      \    - \"2 days ago\" \ 
+
+      \    - \"last week\"
+
+      \    - \"yesterday\"\ 
+
+      \    - \"today\"
+
+      \    - \"3 weeks ago\"
+
+      \    Or standard formats like \"7d\"
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        SearchItemType:
+          enum:
+            - entity
+            - observation
+            - relation
+          type: string
+          title: SearchItemType
+          description: Types of searchable items.
+      title: recent_activityArguments
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        type:
+          anyOf:
+            - type: array
+              items:
+                $ref: "#/$defs/SearchItemType"
+            - type: "null"
+          title: Type
+          default: null
+        depth:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Depth
+          default: 1
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+        timeframe:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Timeframe
+          default: 7d
+        max_related:
+          type: integer
+          title: Max Related
+          default: 10
+  - name: search
+    description: Search across all content in basic-memory, including documents and entities
+    inputSchema:
+      type: object
+      $defs:
+        SearchQuery:
+          type: object
+          title: SearchQuery
+          properties:
+            text:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Text
+              default: null
+            title:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Title
+              default: null
+            types:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/SearchItemType"
+                - type: "null"
+              title: Types
+              default: null
+            permalink:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Permalink
+              default: null
+            after_date:
+              anyOf:
+                - type: string
+                  format: date-time
+                - type: string
+                - type: "null"
+              title: After Date
+              default: null
+            entity_types:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Entity Types
+              default: null
+            permalink_match:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Permalink Match
+              default: null
+          description: >-
+            Search query parameters.
+
+
+            Use ONE of these primary search modes:
+
+            - permalink: Exact permalink match
+
+            - permalink_match: Path pattern with *
+
+            - text: Full-text search of title/content (supports boolean
+            operators: AND, OR, NOT)
+
+
+            Optionally filter results by:
+
+            - types: Limit to specific item types
+
+            - entity_types: Limit to specific entity types
+
+            - after_date: Only items after date
+
+
+            Boolean search examples:
+
+            - "python AND flask" - Find items with both terms
+
+            - "python OR django" - Find items with either term
+
+            - "python NOT django" - Find items with python but not django
+
+            - "(python OR flask) AND web" - Use parentheses for grouping
+        SearchItemType:
+          enum:
+            - entity
+            - observation
+            - relation
+          type: string
+          title: SearchItemType
+          description: Types of searchable items.
+      title: searchArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        query:
+          $ref: "#/$defs/SearchQuery"
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+  - name: read_note
+    description: Read a markdown note by title or permalink.
+    inputSchema:
+      type: object
+      title: read_noteArguments
+      required:
+        - identifier
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+        identifier:
+          type: string
+          title: Identifier
+  - name: write_note
+    description: Create or update a markdown note. Returns a markdown formatted
+      summary of the semantic content.
+    inputSchema:
+      type: object
+      title: write_noteArguments
+      required:
+        - title
+        - content
+        - folder
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        title:
+          type: string
+          title: Title
+        folder:
+          type: string
+          title: Folder
+        content:
+          type: string
+          title: Content
+  - name: canvas
+    description: Create an Obsidian canvas file to visualize concepts and connections.
+    inputSchema:
+      type: object
+      title: canvasArguments
+      required:
+        - nodes
+        - edges
+        - title
+        - folder
+      properties:
+        edges:
+          type: array
+          items:
+            type: object
+          title: Edges
+        nodes:
+          type: array
+          items:
+            type: object
+          title: Nodes
+        title:
+          type: string
+          title: Title
+        folder:
+          type: string
+          title: Folder
+  - name: project_info
+    description: Get information and statistics about the current Basic Memory project.
+    inputSchema:
+      type: object
+      title: project_infoArguments
+      properties: {}

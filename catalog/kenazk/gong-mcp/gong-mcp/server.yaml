@@ -1,0 +1,17 @@
+identifier: kenazk/gong-mcp/gong-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kenazk/gong-mcp
+  name: gong-mcp
+  owner: kenazk
+server:
+  subdirectory: /
+  name: Gong MCP Server
+  description: Access Gong's API to retrieve call recordings and transcripts
+    seamlessly. Integrate with Claude to enhance your data interaction
+    capabilities through a standardized interface. Securely authenticate and
+    filter calls with ease, improving your workflow efficiency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

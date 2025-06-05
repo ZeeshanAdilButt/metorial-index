@@ -1,0 +1,18 @@
+identifier: tuki0918/eagle-mcp-server/eagle-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/tuki0918/eagle-mcp-server
+  name: eagle-mcp-server
+  owner: tuki0918
+server:
+  subdirectory: /
+  name: Eagle Server
+  description: Provide seamless integration with the Eagle app to manage and
+    interact with your digital assets through a standardized MCP interface.
+    Enable operations like folder and item management, metadata retrieval, and
+    media handling to enhance your workflow. Connect easily with popular MCP
+    clients using SSE for efficient communication.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

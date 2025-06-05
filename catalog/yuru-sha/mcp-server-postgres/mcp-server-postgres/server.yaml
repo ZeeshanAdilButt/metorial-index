@@ -1,0 +1,18 @@
+identifier: yuru-sha/mcp-server-postgres/mcp-server-postgres
+repo:
+  provider: github.com
+  url: https://github.com/yuru-sha/mcp-server-postgres
+  name: mcp-server-postgres
+  owner: yuru-sha
+server:
+  subdirectory: /
+  name: PostgreSQL Database Server
+  description: Enable LLMs to safely inspect and query PostgreSQL databases with
+    read-only access. Execute queries within read-only transactions to protect
+    your data while gaining insights from your database schema and content.
+    Easily deploy using Docker or integrate via NPM for seamless database
+    interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

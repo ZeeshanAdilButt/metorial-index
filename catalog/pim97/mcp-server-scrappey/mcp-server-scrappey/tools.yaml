@@ -1,0 +1,103 @@
+tools:
+  - name: scrappey_create_session
+    description: Create a new browser session in Scrappey
+    inputSchema:
+      type: object
+      properties:
+        proxy:
+          type: string
+          description: Use with http://user:pass@ip:port, keep blank to use in built
+            proxy, which is fine for most use cases
+  - name: scrappey_destroy_session
+    description: Destroy an existing browser session in Scrappey
+    inputSchema:
+      type: object
+      required:
+        - session
+      properties:
+        session:
+          type: string
+  - name: scrappey_request
+    description: Send a request using Scrappey
+    inputSchema:
+      type: object
+      required:
+        - url
+        - cmd
+        - session
+      properties:
+        cmd:
+          enum:
+            - request.get
+            - request.post
+            - request.put
+            - request.delete
+            - request.patch
+          type: string
+        url:
+          type: string
+        session:
+          type: string
+        postData:
+          type: string
+        customHeaders:
+          type: object
+  - name: scrappey_browser_action
+    description: Execute browser actions in a session
+    inputSchema:
+      type: object
+      required:
+        - session
+        - browserActions
+        - url
+        - cmd
+      properties:
+        cmd:
+          enum:
+            - request.get
+            - request.post
+            - request.put
+            - request.delete
+            - request.patch
+          type: string
+        url:
+          type: string
+        session:
+          type: string
+        keepSamePage:
+          type: boolean
+          description: Keep the same page before performing the browser actions
+        browserActions:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+            properties:
+              url:
+                type: string
+                description: URL to navigate to, only used for goto action
+              code:
+                type: string
+                description: Javascript code to execute, only used for execute_js action
+              text:
+                type: string
+                description: Text to type, only used for type action
+              type:
+                enum:
+                  - click
+                  - hover
+                  - type
+                  - scroll
+                  - wait
+                  - goto
+                  - execute_js
+                type: string
+              wait:
+                type: number
+                description: Wait for the specified number of seconds before performing the next
+                  action
+              cssSelector:
+                type: string
+                description: "CSS selector to use for the action, such as #id, .class, tag, etc.
+                  for click, type, hover, scroll, goto, execute_js"

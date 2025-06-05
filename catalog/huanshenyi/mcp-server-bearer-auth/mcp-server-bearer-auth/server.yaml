@@ -1,0 +1,17 @@
+identifier: huanshenyi/mcp-server-bearer-auth/mcp-server-bearer-auth
+repo:
+  provider: github.com
+  url: https://github.com/huanshenyi/mcp-server-bearer-auth
+  name: mcp-server-bearer-auth
+  owner: huanshenyi
+server:
+  subdirectory: /
+  name: Remote MCP Server with Bearer Authentication
+  description: Enable secure remote access to MCP servers using bearer token
+    authentication and OAuth login. Deploy easily on Cloudflare Workers to
+    provide a scalable and protected MCP API endpoint. Connect with MCP clients
+    and tools seamlessly for authenticated interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

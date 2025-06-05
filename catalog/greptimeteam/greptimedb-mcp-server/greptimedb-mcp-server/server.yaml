@@ -1,0 +1,16 @@
+identifier: greptimeteam/greptimedb-mcp-server/greptimedb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/GreptimeTeam/greptimedb-mcp-server
+  name: greptimedb-mcp-server
+  owner: GreptimeTeam
+server:
+  subdirectory: /
+  name: GreptimeDB MCP Server
+  description: Enable AI assistants to securely explore and analyze GreptimeDB
+    databases. List tables, read data, and execute SQL queries through a
+    controlled interface for responsible database access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

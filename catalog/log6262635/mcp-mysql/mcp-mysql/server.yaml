@@ -1,0 +1,17 @@
+identifier: log6262635/mcp-mysql/mcp-mysql
+repo:
+  provider: github.com
+  url: https://github.com/log6262635/mcp-mysql
+  name: mcp-mysql
+  owner: log6262635
+server:
+  subdirectory: /
+  name: MySQL数据库服务
+  description: Interact with MySQL databases seamlessly through the MCP protocol.
+    Create, read, update, and delete database tables and execute custom SQL
+    queries effortlessly. Enhance your applications with robust database
+    capabilities using this service.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

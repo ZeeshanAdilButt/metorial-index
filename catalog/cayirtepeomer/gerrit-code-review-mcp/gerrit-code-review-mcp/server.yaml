@@ -1,0 +1,17 @@
+identifier: cayirtepeomer/gerrit-code-review-mcp/gerrit-code-review-mcp
+repo:
+  provider: github.com
+  url: https://github.com/cayirtepeomer/gerrit-code-review-mcp
+  name: gerrit-code-review-mcp
+  owner: cayirtepeomer
+server:
+  subdirectory: /
+  name: Gerrit Code Review Server
+  description: Enable AI assistants to review Gerrit changes and patchsets through
+    a streamlined interface. Fetch detailed change information, compare patchset
+    differences, and analyze file modifications efficiently. Simplify code
+    review workflows by integrating Gerrit data directly into your tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

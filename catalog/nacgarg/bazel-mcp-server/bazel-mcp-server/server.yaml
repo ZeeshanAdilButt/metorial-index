@@ -1,0 +1,17 @@
+identifier: nacgarg/bazel-mcp-server/bazel-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nacgarg/bazel-mcp-server
+  name: bazel-mcp-server
+  owner: nacgarg
+server:
+  subdirectory: /
+  name: Bazel MCP Server
+  description: Expose Bazel build system functionality to your AI agents. Build,
+    query, and test Bazel targets seamlessly, even in misconfigured
+    environments. Enhance your development workflow with powerful tools for
+    managing Bazel projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

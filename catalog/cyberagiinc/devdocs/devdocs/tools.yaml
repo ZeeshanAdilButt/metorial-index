@@ -1,0 +1,80 @@
+tools:
+  - name: sync_file
+    description: Force sync a specific file
+    inputSchema:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: ID of the file to sync (without .md extension)
+  - name: get_status
+    description: Get server status
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_files
+    description: List all available markdown files
+    inputSchema:
+      type: object
+      properties: {}
+  - name: read_file
+    description: Read the content of a markdown file
+    inputSchema:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: ID of the file to read (without .md extension)
+  - name: search_files
+    description: Search content across all markdown files
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query to find in markdown content
+  - name: search_by_tag
+    description: Search files by metadata tags
+    inputSchema:
+      type: object
+      required:
+        - tag
+      properties:
+        tag:
+          type: string
+          description: Tag to search for in file metadata
+  - name: get_stats
+    description: Get statistics about all markdown files
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_section
+    description: Get a specific section from a markdown file
+    inputSchema:
+      type: object
+      required:
+        - file_id
+        - section_id
+      properties:
+        file_id:
+          type: string
+          description: ID of the file (without .md extension)
+        section_id:
+          type: string
+          description: ID of the section to retrieve
+  - name: get_table_of_contents
+    description: Get table of contents for a markdown file
+    inputSchema:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: ID of the file (without .md extension)

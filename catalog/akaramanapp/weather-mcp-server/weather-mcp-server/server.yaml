@@ -1,0 +1,17 @@
+identifier: akaramanapp/weather-mcp-server/weather-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/akaramanapp/weather-mcp-server
+  name: weather-mcp-server
+  owner: akaramanapp
+server:
+  subdirectory: /
+  name: Weather MCP Server
+  description: Provide real-time weather information and alerts for any US
+    location. Get detailed forecasts and alerts through a simple API, enhancing
+    your AI agents with up-to-date weather data. Leverage the National Weather
+    Service API for accurate and timely weather insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

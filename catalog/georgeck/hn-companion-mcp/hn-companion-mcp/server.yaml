@@ -1,0 +1,16 @@
+identifier: georgeck/hn-companion-mcp/hn-companion-mcp
+repo:
+  provider: github.com
+  url: https://github.com/georgeck/hn-companion-mcp
+  name: hn-companion-mcp
+  owner: georgeck
+server:
+  subdirectory: /
+  name: Hacker News Companion
+  description: Summarize Hacker News discussions effortlessly. Fetch and process
+    comments to generate high-quality summaries tailored for Claude. Enhance
+    your engagement with community insights and structured data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

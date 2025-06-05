@@ -1,0 +1,18 @@
+identifier: noeatme/java-hello-world/java-hello-world
+repo:
+  provider: github.com
+  url: https://github.com/noeatme/java-hello-world
+  name: java-hello-world
+  owner: noeatme
+server:
+  subdirectory: /
+  name: Cloud Run Template Microservice
+  description: Deploy and manage a Java-based microservice on Google Cloud Run
+    with ease. Utilize Spring Boot for web server capabilities, containerize
+    your application without Dockerfiles using Jib, and benefit from structured
+    logging and local development utilities. Streamline your development,
+    testing, and deployment workflows for scalable cloud-native applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

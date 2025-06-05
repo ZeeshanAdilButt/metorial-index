@@ -1,0 +1,276 @@
+tools:
+  - name: send_email
+    description: >-
+      Send an email using SMTP.
+
+
+      Parameters:
+
+      - to_email (string, required): The recipient's email address. Example:
+      "recipient@example.com"
+
+      - subject (string, required): The subject line of the email. Example:
+      "Meeting Reminder"
+
+      - body (string, required): The content of the email message. Can be plain
+      text.
+
+      - cc (string, optional): List of email addresses to CC. Example:
+      "cc1@example.com, cc2@example.com"
+
+
+      Returns:
+
+      - Confirmation message if the email was sent successfully
+
+      - Error message if the email failed to send
+
+
+      Example usage:
+
+      - Send a simple email: to_email="john@example.com", subject="Hello",
+      body="This is a test email" (MUST be in HTML format)
+
+      - Send with CC: to_email="john@example.com", subject="Meeting",
+      body="Please join" (MUST be in HTML format), cc="team@example.com,
+      team2@example.com"
+    inputSchema:
+      type: object
+      title: send_emailArguments
+      required:
+        - to_email
+        - subject
+        - body
+      properties:
+        cc:
+          type: string
+          title: Cc
+          default: ""
+          description: "List of email addresses to CC. Example: 'cc1@example.com,
+            cc2@example.com'"
+        body:
+          type: string
+          title: Body
+          description: The content of the email message. MUST be in HTML format.
+        subject:
+          type: string
+          title: Subject
+          description: "The subject line of the email. Example: 'Meeting Reminder'"
+        to_email:
+          type: string
+          title: To Email
+          description: "The recipient's email addresses. Example: 'recipient@example.com,
+            recipient2@example.com'"
+  - name: search_mailbox
+    description: >-
+      Search emails in a mailbox using IMAP.
+
+
+      Parameters:
+
+      - search_criteria (list of strings, required): The search criteria for the
+      emails. See detailed options below.
+
+      - folder (string, optional): The mailbox folder to search in. Default is
+      "INBOX".
+
+      - limit (integer, optional): Maximum number of results to return. Default
+      is 10.
+
+
+      Available search criteria:
+
+
+      Basic Search:
+
+      - ALL - return all messages
+
+      - NEW - match new messages
+
+      - OLD - match old messages
+
+      - RECENT - match messages with the \RECENT flag set
+
+
+      Message Status:
+
+      - ANSWERED - match messages with the \ANSWERED flag set
+
+      - DELETED - match deleted messages
+
+      - FLAGGED - match messages with the \FLAGGED flag set
+
+      - SEEN - match messages that have been read
+
+      - UNANSWERED - match messages that have not been answered
+
+      - UNDELETED - match messages that are not deleted
+
+      - UNFLAGGED - match messages that are not flagged
+
+      - UNSEEN - match messages which have not been read yet
+
+
+      Header Fields:
+
+      - BCC "string" - match messages with "string" in the Bcc: field
+
+      - CC "string" - match messages with "string" in the Cc: field
+
+      - FROM "string" - match messages with "string" in the From: field
+
+      - SUBJECT "string" - match messages with "string" in the Subject:
+
+      - TO "string" - match messages with "string" in the To:
+
+
+      Content Search:
+
+      - BODY "string" - match messages with "string" in the body
+
+      - TEXT "string" - match messages with text "string"
+
+
+      Date Search:
+
+      - BEFORE "date" - match messages with Date: before "date"
+
+      - ON "date" - match messages with Date: matching "date"
+
+      - SINCE "date" - match messages with Date: after "date"
+
+
+      Keywords:
+
+      - KEYWORD "string" - match messages with "string" as a keyword
+
+      - UNKEYWORD "string" - match messages that do not have the keyword
+      "string"
+
+
+      Returns:
+
+      - List of matching emails with their details (from, to, subject, date, and
+      body preview)
+
+      - Error message if the search failed
+
+
+      Example usage:
+
+      - Search unread emails: search_criteria="UNSEEN"
+
+      - Search by subject: search_criteria="SUBJECT 'Meeting'"
+
+      - Search by sender: search_criteria="FROM 'john@example.com'"
+
+      - Search recent emails: search_criteria="SINCE '01-Jan-2024'"
+
+      - Search in specific folder: search_criteria="UNSEEN", folder="Work"
+
+      - Limit results: search_criteria="ALL", limit=5
+    inputSchema:
+      type: object
+      title: search_mailboxArguments
+      required:
+        - search_criteria
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 1
+          description: Maximum number of results to return. Default is 1
+        folder:
+          type: string
+          title: Folder
+          default: INBOX
+          description: The mailbox folder to search in. Default is 'INBOX'
+        search_criteria:
+          type: array
+          items: {}
+          title: Search Criteria
+          description: >-
+            The search criteria for the emails in a list of strings. Available
+            options:
+
+
+            Basic Search:
+
+            - ALL - return all messages
+
+            - NEW - match new messages
+
+            - OLD - match old messages
+
+            - RECENT - match messages with the \RECENT flag set
+
+
+            Message Status:
+
+            - ANSWERED - match messages with the \ANSWERED flag set
+
+            - DELETED - match deleted messages
+
+            - FLAGGED - match messages with the \FLAGGED flag set
+
+            - SEEN - match messages that have been read
+
+            - UNANSWERED - match messages that have not been answered
+
+            - UNDELETED - match messages that are not deleted
+
+            - UNFLAGGED - match messages that are not flagged
+
+            - UNSEEN - match messages which have not been read yet
+
+
+            Header Fields:
+
+            - BCC "string" - match messages with "string" in the Bcc: field
+
+            - CC "string" - match messages with "string" in the Cc: field
+
+            - FROM "string" - match messages with "string" in the From: field
+
+            - SUBJECT "string" - match messages with "string" in the Subject:
+
+            - TO "string" - match messages with "string" in the To:
+
+
+            Content Search:
+
+            - BODY "string" - match messages with "string" in the body
+
+            - TEXT "string" - match messages with text "string"
+
+
+            Date Search:
+
+            - BEFORE "date" - match messages with Date: before "date"
+
+            - ON "date" - match messages with Date: matching "date"
+
+            - SINCE "date" - match messages with Date: after "date"
+
+
+            Keywords:
+
+            - KEYWORD "string" - match messages with "string" as a keyword
+
+            - UNKEYWORD "string" - match messages that do not have the keyword
+            "string"
+
+
+            EXAMPLE:
+
+            - ["SUBJECT", "some subject"]
+
+            - ["FROM", "john@example.com"]
+
+            - ["SINCE", "01-Jan-2024"]
+
+            - ["UNSEEN"]
+
+            - ["FLAGGED"]
+
+            - ["TEXT", "some text"]

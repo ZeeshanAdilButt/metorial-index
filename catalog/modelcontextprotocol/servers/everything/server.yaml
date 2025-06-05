@@ -1,0 +1,17 @@
+identifier: modelcontextprotocol/servers/everything
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol/servers
+  name: servers
+  owner: modelcontextprotocol
+server:
+  subdirectory: /src/everything
+  name: Everything MCP Server
+  description: This MCP server attempts to exercise all the features of the MCP
+    protocol. It is not intended to be a useful server, but rather a test server
+    for builders of MCP clients. It implements prompts, tools, resources,
+    sampling, and more to showcase MCP capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

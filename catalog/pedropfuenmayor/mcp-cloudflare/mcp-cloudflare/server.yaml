@@ -1,0 +1,18 @@
+identifier: pedropfuenmayor/mcp-cloudflare/mcp-cloudflare
+repo:
+  provider: github.com
+  url: https://github.com/Pedropfuenmayor/mcp-cloudflare
+  name: mcp-cloudflare
+  owner: Pedropfuenmayor
+server:
+  subdirectory: /
+  name: MCP Server on Cloudflare Workers
+  description: Deploy an MCP server on Cloudflare's edge network with simple
+    bearer token authentication. Enable seamless integration of tools and
+    resources in a serverless architecture, enhancing your applications with
+    real-time capabilities. Experience the benefits of a scalable and secure
+    environment for your LLM applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

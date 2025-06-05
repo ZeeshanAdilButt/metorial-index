@@ -1,0 +1,47 @@
+tools:
+  - name: get_risk_score
+    description: "Get Risk Score for Crypto, Domain Name, ENS, CNS, KNS or even
+      Hostname Address
+
+
+      \    Args:
+
+      \        address: EOA, CA, ENS, CNS, KNS or even HostName
+
+      \    Returns:
+
+      \        Dict: where summary.bicscan_score is from 0 to 100. 100 is high
+      risk.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_risk_scoreArguments
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          title: Address
+  - name: get_assets
+    description: "Get Assets holdings by CryptoAddress
+
+
+      \    Args:
+
+      \        address: EOA, CA, ENS, CNS, KNS.
+
+      \    Returns:
+
+      \        Dict: where assets is a list of assets
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_assetsArguments
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          title: Address

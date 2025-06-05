@@ -1,0 +1,19 @@
+identifier: boostspace/integrator-mcp-server/integrator-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/boostspace/integrator-mcp-server
+  name: integrator-mcp-server
+  owner: boostspace
+server:
+  subdirectory: /
+  name: Integrator Automation Server
+  description: Enable AI assistants to invoke and interact with your Integrator
+    automation workflows as callable tools. Seamlessly connect your existing
+    automation scenarios with AI systems to create bidirectional communication
+    and leverage complex automation logic. Simplify AI integration by exposing
+    your Integrator scenarios with meaningful parameter descriptions and
+    structured JSON outputs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

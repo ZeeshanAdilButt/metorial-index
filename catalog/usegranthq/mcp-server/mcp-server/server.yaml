@@ -1,0 +1,18 @@
+identifier: usegranthq/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/usegranthq/mcp-server
+  name: mcp-server
+  owner: usegranthq
+server:
+  subdirectory: /
+  name: UseGrant Server
+  description: Manage providers, clients, tenants, and access tokens through the
+    UseGrant platform with this MCP server. Streamline your identity and access
+    management workflows by leveraging a comprehensive set of tools for domain
+    verification, policy management, and token validation. Integrate seamlessly
+    with your applications to automate and secure access control.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

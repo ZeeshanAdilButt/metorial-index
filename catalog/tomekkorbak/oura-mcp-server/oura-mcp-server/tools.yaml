@@ -1,0 +1,139 @@
+tools:
+  - name: get_sleep_data
+    description: "
+
+      \    Get sleep data for a specific date range.
+
+
+      \    Args:
+
+      \        start_date: Start date in ISO format (YYYY-MM-DD)
+
+      \        end_date: End date in ISO format (YYYY-MM-DD)
+
+
+      \    Returns:
+
+      \        Dictionary containing sleep data
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_sleep_dataArguments
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_readiness_data
+    description: "
+
+      \    Get readiness data for a specific date range.
+
+
+      \    Args:
+
+      \        start_date: Start date in ISO format (YYYY-MM-DD)
+
+      \        end_date: End date in ISO format (YYYY-MM-DD)
+
+
+      \    Returns:
+
+      \        Dictionary containing readiness data
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_readiness_dataArguments
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_resilience_data
+    description: "
+
+      \    Get resilience data for a specific date range.
+
+
+      \    Args:
+
+      \        start_date: Start date in ISO format (YYYY-MM-DD)
+
+      \        end_date: End date in ISO format (YYYY-MM-DD)
+
+
+      \    Returns:
+
+      \        Dictionary containing resilience data
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_resilience_dataArguments
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_today_sleep_data
+    description: "
+
+      \    Get sleep data for today.
+
+
+      \    Returns:
+
+      \        Dictionary containing sleep data for today
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_today_sleep_dataArguments
+      properties: {}
+  - name: get_today_readiness_data
+    description: "
+
+      \    Get readiness data for today.
+
+
+      \    Returns:
+
+      \        Dictionary containing readiness data for today
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_today_readiness_dataArguments
+      properties: {}
+  - name: get_today_resilience_data
+    description: "
+
+      \    Get resilience data for today.
+
+
+      \    Returns:
+
+      \        Dictionary containing resilience data for today
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_today_resilience_dataArguments
+      properties: {}

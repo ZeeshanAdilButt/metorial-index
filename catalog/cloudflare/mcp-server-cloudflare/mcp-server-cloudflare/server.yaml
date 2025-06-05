@@ -1,0 +1,17 @@
+identifier: cloudflare/mcp-server-cloudflare/mcp-server-cloudflare
+repo:
+  provider: github.com
+  url: https://github.com/cloudflare/mcp-server-cloudflare
+  name: mcp-server-cloudflare
+  owner: cloudflare
+server:
+  subdirectory: /
+  name: Cloudflare
+  description: Interact with Cloudflare services including Workers, KV Store, R2
+    Storage, D1 Database, and Analytics. Deploy and manage Workers, handle data
+    in KV stores, manage R2 buckets, execute SQL queries in D1 databases, and
+    retrieve analytics data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

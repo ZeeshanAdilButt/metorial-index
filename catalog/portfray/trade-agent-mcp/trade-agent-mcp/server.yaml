@@ -1,0 +1,18 @@
+identifier: portfray/trade-agent-mcp/trade-agent-mcp
+repo:
+  provider: github.com
+  url: https://github.com/PortFray/trade-agent-mcp
+  name: trade-agent-mcp
+  owner: PortFray
+server:
+  subdirectory: /
+  name: Trade Agent
+  description: Enable natural-language trading interactions with stock and crypto
+    brokerages through a conversational interface. Execute trades, query
+    portfolio performance, and access market insights by sending plain-English
+    requests. Connect remotely without local deployment to streamline your
+    trading workflows securely.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

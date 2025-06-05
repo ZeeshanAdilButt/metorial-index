@@ -1,0 +1,16 @@
+identifier: threatflux/yaraflux/yaraflux
+repo:
+  provider: github.com
+  url: https://github.com/ThreatFlux/YaraFlux
+  name: YaraFlux
+  owner: ThreatFlux
+server:
+  subdirectory: /
+  name: YaraFlux MCP Server
+  description: Enable AI assistants to perform YARA rule-based threat analysis
+    seamlessly. Analyze files and manage YARA rules through a standardized
+    interface, enhancing security and efficiency in threat detection.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

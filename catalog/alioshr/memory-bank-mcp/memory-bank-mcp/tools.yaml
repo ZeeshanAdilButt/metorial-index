@@ -1,0 +1,67 @@
+tools:
+  - name: list_projects
+    description: List all projects in the memory bank
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_project_files
+    description: List all files within a specific project
+    inputSchema:
+      type: object
+      required:
+        - projectName
+      properties:
+        projectName:
+          type: string
+          description: The name of the project
+  - name: memory_bank_read
+    description: Read a memory bank file for a specific project
+    inputSchema:
+      type: object
+      required:
+        - projectName
+        - fileName
+      properties:
+        fileName:
+          type: string
+          description: The name of the file
+        projectName:
+          type: string
+          description: The name of the project
+  - name: memory_bank_write
+    description: Create a new memory bank file for a specific project
+    inputSchema:
+      type: object
+      required:
+        - projectName
+        - fileName
+        - content
+      properties:
+        content:
+          type: string
+          description: The content of the file
+        fileName:
+          type: string
+          description: The name of the file
+        projectName:
+          type: string
+          description: The name of the project
+  - name: memory_bank_update
+    description: Update an existing memory bank file for a specific project
+    inputSchema:
+      type: object
+      required:
+        - projectName
+        - fileName
+        - content
+      properties:
+        content:
+          type: string
+          description: The content of the file
+        fileName:
+          type: string
+          description: The name of the file
+        projectName:
+          type: string
+          description: The name of the project

@@ -1,0 +1,185 @@
+tools:
+  - name: listIndexes
+    description: List all available indexes in OpenSearch
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        pattern:
+          type: string
+          default: "*"
+          description: Index pattern to filter (e.g., 'logs-*')
+      additionalProperties: false
+  - name: searchLogs
+    description: Search for logs in any OpenSearch index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+        - index
+      properties:
+        index:
+          type: string
+          description: Index pattern to search
+        query:
+          type: string
+          description: The search query text
+        fields:
+          type: string
+          description: Comma-separated list of fields to return
+        timeField:
+          type: string
+          default: "@timestamp"
+          description: Name of the timestamp field
+        timeRange:
+          type: string
+          default: 24h
+          description: Time range (e.g., 1h, 24h, 7d)
+        maxResults:
+          type: number
+          default: 20
+          description: Maximum number of results to return
+      additionalProperties: false
+  - name: getIndexMapping
+    description: Get the field mappings for an index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - index
+      properties:
+        index:
+          type: string
+          description: Index name to inspect
+      additionalProperties: false
+  - name: exploreFieldValues
+    description: Explore possible values for a field in an index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - index
+        - field
+      properties:
+        field:
+          type: string
+          description: Field name to explore
+        index:
+          type: string
+          description: Index pattern to search
+        query:
+          type: string
+          default: "*"
+          description: Optional query to filter documents
+        maxValues:
+          type: number
+          default: 20
+          description: Maximum number of values to return
+      additionalProperties: false
+  - name: monitorLogs
+    description: Monitor logs in real-time (simulated)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - index
+      properties:
+        index:
+          type: string
+          description: Index pattern to monitor
+        query:
+          type: string
+          default: "*"
+          description: Filter query
+        maxResults:
+          type: number
+          default: 10
+          description: Number of logs to show
+        refreshInterval:
+          type: number
+          default: 5
+          description: Refresh interval in seconds
+      additionalProperties: false
+  - name: searchAlerts
+    description: Search for security alerts in Wazuh data
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        index:
+          type: string
+          default: wazuh-alerts-*
+          description: Index pattern to search
+        query:
+          type: string
+          description: The search query text
+        timeRange:
+          type: string
+          default: 24h
+          description: Time range (e.g., 1h, 24h, 7d)
+        maxResults:
+          type: number
+          default: 10
+          description: Maximum number of results to return
+      additionalProperties: false
+  - name: getAlertDetails
+    description: Get detailed information about a specific alert by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The alert ID
+        index:
+          type: string
+          default: wazuh-alerts-*
+          description: Index pattern
+      additionalProperties: false
+  - name: alertStatistics
+    description: Get statistics about security alerts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        field:
+          type: string
+          default: rule.level
+          description: Field to aggregate by
+        index:
+          type: string
+          default: wazuh-alerts-*
+          description: Index pattern
+        timeRange:
+          type: string
+          default: 24h
+          description: Time range (e.g., 1h, 24h, 7d)
+      additionalProperties: false
+  - name: visualizeAlertTrend
+    description: Visualize alert trends over time
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        index:
+          type: string
+          default: wazuh-alerts-*
+          description: Index pattern
+        query:
+          type: string
+          default: "*"
+          description: Query to filter alerts
+        interval:
+          type: string
+          default: 1d
+          description: Time interval for grouping (e.g., 1h, 1d)
+        timeRange:
+          type: string
+          default: 7d
+          description: Time range (e.g., 1h, 24h, 7d)
+      additionalProperties: false

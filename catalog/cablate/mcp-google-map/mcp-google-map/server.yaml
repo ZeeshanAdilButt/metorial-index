@@ -1,0 +1,18 @@
+identifier: cablate/mcp-google-map/mcp-google-map
+repo:
+  provider: github.com
+  url: https://github.com/cablate/mcp-google-map
+  name: mcp-google-map
+  owner: cablate
+server:
+  subdirectory: /
+  name: Google Map Server
+  description: Provide comprehensive Google Maps API integration with LLM
+    processing capabilities. Search locations, get place details, geocode
+    addresses, calculate distances, retrieve directions, and obtain elevation
+    data seamlessly. Enhance your applications with rich geographic data and
+    travel information through an easy-to-use MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

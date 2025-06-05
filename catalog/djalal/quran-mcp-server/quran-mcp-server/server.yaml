@@ -1,0 +1,16 @@
+identifier: djalal/quran-mcp-server/quran-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/djalal/quran-mcp-server
+  name: quran-mcp-server
+  owner: djalal
+server:
+  subdirectory: /
+  name: Quran.com API Server
+  description: Interact with the Quran.com corpus seamlessly. Access chapters,
+    verses, translations, and tafsirs through a standardized API. Enhance your
+    applications with rich Quranic content effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

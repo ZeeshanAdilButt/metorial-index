@@ -1,0 +1,23 @@
+tools:
+  - name: web_search
+    description: ""
+    inputSchema:
+      type: object
+      title: web_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: perplexity_summary_search
+    description: ""
+    inputSchema:
+      type: object
+      title: perplexity_summary_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

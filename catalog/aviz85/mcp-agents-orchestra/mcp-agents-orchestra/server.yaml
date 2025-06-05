@@ -1,0 +1,19 @@
+identifier: aviz85/mcp-agents-orchestra/mcp-agents-orchestra
+repo:
+  provider: github.com
+  url: https://github.com/aviz85/mcp-agents-orchestra
+  name: mcp-agents-orchestra
+  owner: aviz85
+server:
+  subdirectory: /
+  name: Agent Orchestration System
+  description: Implement a state-based agent orchestration system that manages
+    task planning, researching, executing, and reviewing through defined agent
+    states. Enable seamless interaction with LLMs by exposing resources, tools,
+    and prompts to maintain conversation context and state transitions.
+    Facilitate integration with Claude for Desktop to enhance agent workflows
+    and knowledge management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

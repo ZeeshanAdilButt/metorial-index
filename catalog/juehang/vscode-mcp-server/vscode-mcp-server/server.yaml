@@ -1,0 +1,19 @@
+identifier: juehang/vscode-mcp-server/vscode-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/juehang/vscode-mcp-server
+  name: vscode-mcp-server
+  owner: juehang
+server:
+  subdirectory: /
+  name: VS Code MCP Server
+  description: Enable AI models and MCP clients to interact directly with your VS
+    Code workspace by listing files, reading and editing code, searching
+    symbols, checking diagnostics, and executing shell commands. Seamlessly
+    integrate coding capabilities into your AI workflows with this extension.
+    Toggle the server on or off easily via the status bar for secure and
+    flexible usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

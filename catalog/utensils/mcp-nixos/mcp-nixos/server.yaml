@@ -1,0 +1,17 @@
+identifier: utensils/mcp-nixos/mcp-nixos
+repo:
+  provider: github.com
+  url: https://github.com/utensils/mcp-nixos
+  name: mcp-nixos
+  owner: utensils
+server:
+  subdirectory: /
+  name: mcp-nixos
+  description: "MCP-NixOS is a Model Context Protocol server that stops your AI
+    assistant from making stuff up about NixOS. Because let's face it—the only
+    thing worse than confusing NixOS documentation is an AI confidently
+    hallucinating about it. "
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

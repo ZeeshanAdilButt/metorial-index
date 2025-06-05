@@ -1,0 +1,19 @@
+identifier: pewterzz/canvaslms-modelcontextprotocol/canvaslms-modelcontextprotocol
+repo:
+  provider: github.com
+  url: https://github.com/PewterZz/CanvasLMS-ModelContextProtocol
+  name: CanvasLMS-ModelContextProtocol
+  owner: PewterZz
+server:
+  subdirectory: /
+  name: Canvas LMS Server
+  description: Provide seamless access to Canvas LMS course data, assignments,
+    discussions, and PDF content extraction for integration with language models
+    or other applications. Fetch detailed course and assignment information,
+    including attached files and grades, and extract text from PDFs hosted on
+    Canvas. Support both standard and AWS-hosted Canvas instances with a simple
+    API interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

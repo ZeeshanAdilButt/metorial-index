@@ -1,0 +1,79 @@
+tools:
+  - name: ask_perplexity
+    description: >
+      
+      Provides expert programming assistance through Perplexity.
+
+      This tool only has access to the context you have provided. It cannot read
+      any file unless you provide it with the file content.
+
+      Focuses on coding solutions, error debugging, and technical explanations.
+
+      Returns responses with source citations and alternative suggestions.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Technical question or problem to solve
+  - name: chat_perplexity
+    description: >
+      
+      Maintains ongoing conversations with Perplexity AI.
+
+      Creates new chats or continues existing ones with full history context.
+
+      This tool only has access to the context you have provided. It cannot read
+      any file unless you provide it with the file content.
+
+      Returns chat ID for future continuation.
+
+
+      For new chats: Provide 'message' and 'title'
+
+      For existing chats: Provide 'chat_id' and 'message'
+    inputSchema:
+      type: object
+      required:
+        - message
+      properties:
+        title:
+          type: string
+          description: Title for the new chat. Required when creating a new chat (when
+            chat_id is not provided).
+        chat_id:
+          type: string
+          description: ID of an existing chat to continue. If not provided, a new chat
+            will be created and title is required.
+        message:
+          type: string
+          description: New message to add to the conversation
+  - name: list_chats_perplexity
+    description: |
+      
+      Lists all available chat conversations with Perplexity AI.
+      Returns chat IDs, titles, and creation dates.
+      Results are paginated with 50 chats per page.
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number (defaults to 1)
+  - name: read_chat_perplexity
+    description: |
+      
+      Retrieves the complete conversation history for a specific chat.
+      Returns the full chat history with all messages and their timestamps.
+      No API calls are made to Perplexity - this only reads from local storage.
+    inputSchema:
+      type: object
+      required:
+        - chat_id
+      properties:
+        chat_id:
+          type: string
+          description: ID of the chat to retrieve

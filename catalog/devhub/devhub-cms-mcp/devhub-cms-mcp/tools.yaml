@@ -1,0 +1,239 @@
+tools:
+  - name: get_hours_of_operation
+    description: "Get the hours of operation for a DevHub location
+
+
+      \    Returns a list of items representing days of the week
+
+
+      \    Except for the special case formatting, this object is a list of 7
+      items which represent each day.
+
+
+      \    Each day can can have one-four time ranges. For example, two time
+      ranges denotes a \"lunch-break\". No time ranges denotes closed.
+
+
+      \    Examples:
+
+      \    9am-5pm [[\"09:00:00\", \"17:00:00\"]]
+
+      \    9am-12pm and 1pm-5pm [[\"09:00:00\", \"12:00:00\"], [\"13:00:00\",
+      \"17:00:00\"]]
+
+      \    Closed - an empty list []
+
+
+      \    Args:
+
+      \        location_id: DevHub Location ID
+
+      \        hours_type: Defaults to 'primary' unless the user specifies a
+      different type
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hours_of_operationArguments
+      required:
+        - location_id
+      properties:
+        hours_type:
+          type: string
+          title: Hours Type
+          default: primary
+        location_id:
+          type: integer
+          title: Location Id
+  - name: update_hours
+    description: "Update the hours of operation for a DevHub location
+
+
+      \    Send a list of items representing days of the week
+
+
+      \    Except for the special case formatting, this object is a list of 7
+      items which represent each day.
+
+
+      \    Each day can can have one-four time ranges. For example, two time
+      ranges denotes a \"lunch-break\". No time ranges denotes closed.
+
+
+      \    Examples:
+
+      \    9am-5pm [[\"09:00:00\", \"17:00:00\"]]
+
+      \    9am-12pm and 1pm-5pm [[\"09:00:00\", \"12:00:00\"], [\"13:00:00\",
+      \"17:00:00\"]]
+
+      \    Closed - an empty list []
+
+
+      \    Args:
+
+      \        location_id: DevHub Location ID
+
+      \        new_hours: Structured format of the new hours
+
+      \        hours_type: Defaults to 'primary' unless the user specifies a
+      different type
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_hoursArguments
+      required:
+        - location_id
+        - new_hours
+      properties:
+        new_hours:
+          type: array
+          items: {}
+          title: New Hours
+        hours_type:
+          type: string
+          title: Hours Type
+          default: primary
+        location_id:
+          type: integer
+          title: Location Id
+  - name: upload_image
+    description: "Upload an image to the DevHub media gallery
+
+
+      \    Supports webp, jpeg and png images
+
+
+      \    Args:
+
+      \        base64_image_content: Base 64 encoded content of the image file
+
+      \        filename: Filename including the extension
+
+      \    "
+    inputSchema:
+      type: object
+      title: upload_imageArguments
+      required:
+        - base64_image_content
+        - filename
+      properties:
+        filename:
+          type: string
+          title: Filename
+        base64_image_content:
+          type: string
+          title: Base64 Image Content
+  - name: get_blog_post
+    description: "Get a single blog post
+
+
+      \    Args:
+
+      \        post_id: Blog post id
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_blog_postArguments
+      required:
+        - post_id
+      properties:
+        post_id:
+          type: integer
+          title: Post Id
+  - name: create_blog_post
+    description: "Create a new blog post
+
+
+      \    Args:
+
+      \        site_id: Website ID where the post will be published. Prompt the
+      user for this ID.
+
+      \        title: Blog post title
+
+      \        content: HTML content of blog post. Should not include a <h1>
+      tag, only h2+
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_blog_postArguments
+      required:
+        - site_id
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          title: Title
+        content:
+          type: string
+          title: Content
+        site_id:
+          type: integer
+          title: Site Id
+  - name: update_blog_post
+    description: "Update a single blog post
+
+
+      \    Args:
+
+      \        post_id: Blog post ID
+
+      \        title: Blog post title
+
+      \        content: HTML content of blog post. Should not include a <h1>
+      tag, only h2+
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_blog_postArguments
+      required:
+        - post_id
+      properties:
+        title:
+          type: string
+          title: Title
+          default: null
+        content:
+          type: string
+          title: Content
+          default: null
+        post_id:
+          type: integer
+          title: Post Id
+  - name: get_nearest_location
+    description: "Get the nearest DevHub location
+
+
+      \    Args:
+
+      \        business_id: DevHub Business ID associated with the location.
+      Prompt the user for this ID
+
+      \        latitude: Latitude of the location
+
+      \        longitude: Longitude of the location
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_nearest_locationArguments
+      required:
+        - business_id
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          title: Latitude
+        longitude:
+          type: number
+          title: Longitude
+        business_id:
+          type: integer
+          title: Business Id

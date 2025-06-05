@@ -1,0 +1,12 @@
+tools:
+  - name: sleep
+    description: Wait for a specified duration
+    inputSchema:
+      type: object
+      required:
+        - milliseconds
+      properties:
+        milliseconds:
+          type: number
+          minimum: 0
+          description: Duration to wait in milliseconds

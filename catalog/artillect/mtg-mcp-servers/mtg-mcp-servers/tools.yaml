@@ -1,0 +1,123 @@
+tools:
+  - name: upload_deck
+    description: "Upload a Magic: The Gathering deck list.
+
+      \   \ 
+
+      \    Args:
+
+      \        deck_list: Text format deck list with \"Deck\" and \"Sideboard\"
+      sections
+
+      \    "
+    inputSchema:
+      type: object
+      title: upload_deckArguments
+      required:
+        - deck_list
+      properties:
+        deck_list:
+          type: string
+          title: Deck List
+  - name: draw_card
+    description: "Draw cards from your deck to your hand.
+
+      \   \ 
+
+      \    Args:
+
+      \        count: Number of cards to draw (default: 1)
+
+      \    "
+    inputSchema:
+      type: object
+      title: draw_cardArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 1
+  - name: play_card
+    description: "Play a card from your hand to the battlefield/stack.
+
+      \   \ 
+
+      \    Args:
+
+      \        card_name: Name of the card to play
+
+      \    "
+    inputSchema:
+      type: object
+      title: play_cardArguments
+      required:
+        - card_name
+      properties:
+        card_name:
+          type: string
+          title: Card Name
+  - name: view_hand
+    description: View the cards in your hand.
+    inputSchema:
+      type: object
+      title: view_handArguments
+      properties: {}
+  - name: view_deck_stats
+    description: View statistics about your current deck.
+    inputSchema:
+      type: object
+      title: view_deck_statsArguments
+      properties: {}
+  - name: mulligan
+    description: "Perform a mulligan, shuffling your hand into your deck and drawing
+      a new hand.
+
+      \   \ 
+
+      \    Args:
+
+      \        new_hand_size: Number of cards to draw for new hand (default:
+      same as current hand)
+
+      \    "
+    inputSchema:
+      type: object
+      title: mulliganArguments
+      properties:
+        new_hand_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: New Hand Size
+          default: null
+  - name: sideboard_swap
+    description: "Swap a card from your deck with a card from your sideboard.
+
+      \   \ 
+
+      \    Args:
+
+      \        remove_card: Name of card to remove from deck
+
+      \        add_card: Name of card to add from sideboard
+
+      \    "
+    inputSchema:
+      type: object
+      title: sideboard_swapArguments
+      required:
+        - remove_card
+        - add_card
+      properties:
+        add_card:
+          type: string
+          title: Add Card
+        remove_card:
+          type: string
+          title: Remove Card
+  - name: reset_game
+    description: Reset the game state completely.
+    inputSchema:
+      type: object
+      title: reset_gameArguments
+      properties: {}

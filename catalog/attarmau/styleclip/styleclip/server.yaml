@@ -1,0 +1,18 @@
+identifier: attarmau/styleclip/styleclip
+repo:
+  provider: github.com
+  url: https://github.com/attarmau/StyleCLIP
+  name: StyleCLIP
+  owner: attarmau
+server:
+  subdirectory: /
+  name: FastMCP_RecSys
+  description: Provide a CLIP-based fashion recommendation system that integrates
+    with MCP to enhance user experience. Enable users to upload images and
+    receive clothing tag recommendations through an interactive web interface.
+    Facilitate easy deployment with Docker and seamless backend and frontend
+    integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

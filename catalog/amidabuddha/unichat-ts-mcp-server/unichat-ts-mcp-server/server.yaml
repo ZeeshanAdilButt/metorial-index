@@ -1,0 +1,15 @@
+identifier: amidabuddha/unichat-ts-mcp-server/unichat-ts-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/amidabuddha/unichat-ts-mcp-server
+  name: unichat-ts-mcp-server
+  owner: amidabuddha
+server:
+  subdirectory: /
+  name: Unichat MCP Server
+  description: A server that allows sending requests to various AI models like
+    OpenAI, MistralAI, Anthropic, xAI, or Google AI using the MCP protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: jkingsman/qanon-mcp-server/qanon-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/jkingsman/qanon-mcp-server
+  name: qanon-mcp-server
+  owner: jkingsman
+server:
+  subdirectory: /
+  name: Q-Anon Posts/Drops Server
+  description: Access and analyze a dataset of Q-Anon posts for research purposes.
+    Search, filter, and gain insights into the Q-Anon drops using AI assistants
+    like Claude. Utilize this tool to explore sociological aspects of the
+    dataset safely and responsibly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

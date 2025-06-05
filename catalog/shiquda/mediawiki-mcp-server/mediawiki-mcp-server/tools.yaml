@@ -1,0 +1,42 @@
+tools:
+  - name: search
+    description: >
+      
+      Search for a wiki page. The shorter the request, the better, preferably
+      containing only the main term to be searched.
+
+      Args:
+          query: The query to search for
+          limit: The number of results to return
+      Returns:
+          A list of pages that match the query
+    inputSchema:
+      type: object
+      title: searchArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 5
+        query:
+          type: string
+          title: Query
+  - name: get_page
+    description: >
+      Get a page from mediawiki.org
+
+      Args:
+          title: The title of the page to get, which can be found in title field of the search results
+      Returns:
+          The page content
+    inputSchema:
+      type: object
+      title: get_pageArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title

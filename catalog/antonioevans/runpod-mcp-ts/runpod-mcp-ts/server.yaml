@@ -1,0 +1,18 @@
+identifier: antonioevans/runpod-mcp-ts/runpod-mcp-ts
+repo:
+  provider: github.com
+  url: https://github.com/antonioevans/runpod-mcp-ts
+  name: runpod-mcp-ts
+  owner: antonioevans
+server:
+  subdirectory: /
+  name: RunPod Server Manager
+  description: Manage your RunPod resources seamlessly through an MCP-compatible
+    client. Create, list, update, and delete pods, serverless endpoints,
+    templates, network volumes, and container registry authentications with
+    ease. Streamline your RunPod operations directly from your preferred LLM
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: markvp/mcp-lambda-sam/mcp-lambda-layer
+repo:
+  provider: github.com
+  url: https://github.com/markvp/mcp-lambda-sam
+  name: mcp-lambda-sam
+  owner: markvp
+server:
+  subdirectory: /
+  name: Lambda Server
+  description: Create a server for the Model Context Protocol on AWS Lambda with
+    support for streaming responses. Easily implement tools and prompts to
+    enhance your server's capabilities. Streamline your server setup with
+    TypeScript support and built-in CORS handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

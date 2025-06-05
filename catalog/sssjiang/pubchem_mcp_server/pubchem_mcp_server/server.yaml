@@ -1,0 +1,17 @@
+identifier: sssjiang/pubchem_mcp_server/pubchem_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/sssjiang/pubchem_mcp_server
+  name: pubchem_mcp_server
+  owner: sssjiang
+server:
+  subdirectory: /
+  name: PubChem Drug Info Extractor
+  description: Extract basic chemical information about drugs from the PubChem
+    API. Retrieve detailed drug data such as molecular weight, formula,
+    synonyms, and identifiers in a structured format. Integrate seamlessly with
+    MCP clients to enrich chemical and pharmaceutical knowledge bases.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

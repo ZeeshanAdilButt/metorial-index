@@ -1,0 +1,103 @@
+tools:
+  - name: get_documentation
+    description: Get a comprehensive user guide on how to use the dbt Semantic Layer
+      MCP Server tools. Use this tool to understand the available tools, their
+      parameters, and see workflow examples.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: fetch_metrics
+    description: Fetches metrics from the semantic layer. Use this to get a list of
+      metrics available in the semantic layer with their description and
+      dimensions. Invoke this tool prior to creating a query to get a list of
+      metrics to use in the query.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create_query
+    description: Creates a query to the semantic layer. Use this tool to create a
+      query to the semantic layer. Returns the query id which can be used to
+      fetch the results of the query.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - metrics
+      properties:
+        limit:
+          type: number
+        where:
+          type: array
+          items:
+            type: object
+            required:
+              - sql
+            properties:
+              sql:
+                type: string
+            additionalProperties: false
+        groupBy:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+            additionalProperties: false
+        metrics:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+            additionalProperties: false
+        orderBy:
+          type: array
+          items:
+            type: object
+            required:
+              - descending
+              - groupBy
+              - metric
+            properties:
+              metric:
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+                additionalProperties: false
+              groupBy:
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+                additionalProperties: false
+              descending:
+                type: boolean
+            additionalProperties: false
+      additionalProperties: false
+  - name: fetch_query_result
+    description: Fetches the results of a query from the semantic layer. You have to
+      poll this tool until the query status is SUCCESSFUL.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryId
+      properties:
+        queryId:
+          type: string
+      additionalProperties: false

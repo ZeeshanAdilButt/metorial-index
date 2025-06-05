@@ -1,0 +1,517 @@
+tools:
+  - name: add_activity_to_incident
+    description: Add a note to an incident's timeline. The note will appear in the
+      incident's activity feed. Use this if there is a request to add context to
+      an incident with a note.
+    inputSchema:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The body of the activity. URLs will be parsed and attached as context
+        eventTime:
+          type: string
+          description: The time that the activity occurred. If not provided, the current
+            time will be used
+        incidentId:
+          type: string
+          description: The ID of the incident to add the activity to
+  - name: create_incident
+    description: Create an incident
+    inputSchema:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the incident
+        labels:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              label:
+                type: string
+              colorHex:
+                type: string
+              description:
+                type: string
+          description: The labels to add to the incident
+        status:
+          type: string
+          description: The status of the incident
+        isDrill:
+          type: boolean
+          description: Whether the incident is a drill incident
+        severity:
+          type: string
+          description: The severity of the incident
+        attachUrl:
+          type: string
+          description: The URL of the attachment
+        roomPrefix:
+          type: string
+          description: The prefix of the room to create the incident in
+        attachCaption:
+          type: string
+          description: The caption of the attachment
+  - name: get_alert_rule_by_uid
+    description: Retrieves detailed information about a specific alert rule by its UID.
+    inputSchema:
+      type: object
+      required:
+        - uid
+      properties:
+        uid:
+          type: string
+          description: The uid of the alert rule
+  - name: get_current_oncall_users
+    description: Get users currently on-call for a specific schedule. A schedule is
+      a calendar-based system defining when team members are on-call. This tool
+      will return info about all users currently on-call for the schedule,
+      regardless of team.
+    inputSchema:
+      type: object
+      required:
+        - scheduleId
+      properties:
+        scheduleId:
+          type: string
+          description: The ID of the schedule to get current on-call users for
+  - name: get_dashboard_by_uid
+    description: Get dashboard by uid
+    inputSchema:
+      type: object
+      required:
+        - uid
+      properties:
+        uid:
+          type: string
+          description: The UID of the dashboard
+  - name: get_datasource_by_name
+    description: Get datasource by name
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the datasource
+  - name: get_datasource_by_uid
+    description: Get datasource by uid
+    inputSchema:
+      type: object
+      required:
+        - uid
+      properties:
+        uid:
+          type: string
+          description: The uid of the datasource
+  - name: get_incident
+    description: Get a single incident by ID. Returns the full incident details
+      including title, status, severity, and other metadata.
+    inputSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the incident to retrieve
+  - name: get_oncall_shift
+    description: Get details for a specific OnCall shift. A shift represents a
+      designated time period within a rotation when a team or individual is
+      actively on-call
+    inputSchema:
+      type: object
+      required:
+        - shiftId
+      properties:
+        shiftId:
+          type: string
+          description: The ID of the shift to get details for
+  - name: list_alert_rules
+    description: Lists alert rules with their current states (pending, firing,
+      error, recovering, inactive) and labels. Inactive state means the alert
+      state is normal, not firing.
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The page number to return.
+        limit:
+          type: integer
+          description: The maximum number of results to return. Default is 100.
+        label_selectors:
+          type: array
+          items:
+            type: object
+            properties:
+              filters:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - value
+                    - type
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the label to match against
+                    type:
+                      type: string
+                      description: One of the '=' or '!=' or '=~' or '!~'
+                    value:
+                      type: string
+                      description: The value to match against
+          description: Optionally, a list of matchers to filter alert rules by labels
+  - name: list_contact_points
+    description: Lists notification contact points with their type, name, and configuration.
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filter contact points by name
+        limit:
+          type: integer
+          description: The maximum number of results to return. Default is 100.
+  - name: list_datasources
+    description: List datasources
+    inputSchema:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of datasources to search for. For example, 'prometheus',
+            'loki', 'tempo', etc...
+  - name: list_incidents
+    description: List incidents
+    inputSchema:
+      type: object
+      properties:
+        drill:
+          type: boolean
+          description: Whether to include drill incidents
+        limit:
+          type: integer
+          description: The maximum number of incidents to return
+        status:
+          type: string
+          description: "The status of the incidents to include. Valid values: 'active',
+            'resolved'"
+  - name: list_loki_label_names
+    description: List all available label names in a Loki datasource for the given
+      time range. Returns the set of unique label keys found in the logs.
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+      properties:
+        endRfc3339:
+          type: string
+          description: Optionally, the end time of the query in RFC3339 format (defaults
+            to now)
+        startRfc3339:
+          type: string
+          description: Optionally, the start time of the query in RFC3339 format (defaults
+            to 1 hour ago)
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: list_loki_label_values
+    description: Retrieve all possible values for a specific label in Loki within
+      the given time range. Useful for exploring available options for filtering
+      logs.
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+        - labelName
+      properties:
+        labelName:
+          type: string
+          description: The name of the label to retrieve values for (e.g. 'app', 'env',
+            'pod')
+        endRfc3339:
+          type: string
+          description: Optionally, the end time of the query in RFC3339 format (defaults
+            to now)
+        startRfc3339:
+          type: string
+          description: Optionally, the start time of the query in RFC3339 format (defaults
+            to 1 hour ago)
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: list_oncall_schedules
+    description: List OnCall schedules. A schedule is a calendar-based system
+      defining when team members are on-call. Optionally provide a scheduleId to
+      get details for a specific schedule
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The page number to return (1-based)
+        teamId:
+          type: string
+          description: The ID of the team to list schedules for
+        scheduleId:
+          type: string
+          description: The ID of the schedule to get details for. If provided, returns
+            only that schedule's details
+  - name: list_oncall_teams
+    description: List teams from Grafana OnCall
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The page number to return
+  - name: list_oncall_users
+    description: List users from Grafana OnCall. If user ID is provided, returns
+      details for that specific user. If username is provided, returns the user
+      matching that username
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The page number to return
+        userId:
+          type: string
+          description: The ID of the user to get details for. If provided, returns only
+            that user's details
+        username:
+          type: string
+          description: The username to filter users by. If provided, returns only the user
+            matching this username
+  - name: list_prometheus_label_names
+    description: List the label names in a Prometheus datasource
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+      properties:
+        limit:
+          type: integer
+          description: Optionally, the maximum number of results to return
+        matches:
+          type: array
+          items:
+            type: object
+            properties:
+              filters:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - value
+                    - type
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the label to match against
+                    type:
+                      type: string
+                      description: One of the '=' or '!=' or '=~' or '!~'
+                    value:
+                      type: string
+                      description: The value to match against
+          description: Optionally, a list of label matchers to filter the results by
+        endRfc3339:
+          type: string
+          description: Optionally, the end time of the time range to filter the results by
+        startRfc3339:
+          type: string
+          description: Optionally, the start time of the time range to filter the results by
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: list_prometheus_label_values
+    description: Get the values of a label in Prometheus
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+        - labelName
+      properties:
+        limit:
+          type: integer
+          description: Optionally, the maximum number of results to return
+        matches:
+          type: array
+          items:
+            type: object
+            properties:
+              filters:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - value
+                    - type
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the label to match against
+                    type:
+                      type: string
+                      description: One of the '=' or '!=' or '=~' or '!~'
+                    value:
+                      type: string
+                      description: The value to match against
+          description: Optionally, a list of selectors to filter the results by
+        labelName:
+          type: string
+          description: The name of the label to query
+        endRfc3339:
+          type: string
+          description: Optionally, the end time of the query
+        startRfc3339:
+          type: string
+          description: Optionally, the start time of the query
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: list_prometheus_metric_metadata
+    description: List Prometheus metric metadata
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+      properties:
+        limit:
+          type: integer
+          description: The maximum number of metrics to return
+        metric:
+          type: string
+          description: The metric to query
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+        limitPerMetric:
+          type: integer
+          description: The maximum number of metrics to return per metric
+  - name: list_prometheus_metric_names
+    description: List metric names in a Prometheus datasource that match the given regex
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+      properties:
+        page:
+          type: integer
+          description: The page number to return
+        limit:
+          type: integer
+          description: The maximum number of results to return
+        regex:
+          type: string
+          description: The regex to match against the metric names
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: query_loki_logs
+    description: Query and retrieve log entries or metric values from a Loki
+      datasource using LogQL. Returns either log lines or numeric values with
+      timestamps and labels. Use `query_loki_stats` first to check stream size,
+      then `list_loki_label_names` and `list_loki_label_values` to verify labels
+      exist. Supports full LogQL syntax including both log queries and metric
+      queries (e.g., rate, count_over_time).
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+        - logql
+      properties:
+        limit:
+          type: integer
+          description: "Optionally, the maximum number of log lines to return (default:
+            10, max: 100)"
+        logql:
+          type: string
+          description: The LogQL query to execute against Loki. This can be a simple label
+            matcher or a complex query with filters, parsers, and expressions.
+            Supports full LogQL syntax including label matchers, filter
+            operators, pattern expressions, and pipeline operations.
+        direction:
+          type: string
+          description: "Optionally, the direction of the query: 'forward' (oldest first)
+            or 'backward' (newest first, default)"
+        endRfc3339:
+          type: string
+          description: Optionally, the end time of the query in RFC3339 format
+        startRfc3339:
+          type: string
+          description: Optionally, the start time of the query in RFC3339 format
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: query_loki_stats
+    description: Query statistics about log streams in a Loki datasource, using
+      LogQL selectors to select streams
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+        - logql
+      properties:
+        logql:
+          type: string
+          description: The LogQL matcher expression to execute. This parameter only
+            accepts label matcher expressions and does not support full LogQL
+            queries. Line filters, pattern operations, and metric aggregations
+            are not supported by the stats API endpoint. Only simple label
+            selectors can be used here.
+        endRfc3339:
+          type: string
+          description: Optionally, the end time of the query in RFC3339 format
+        startRfc3339:
+          type: string
+          description: Optionally, the start time of the query in RFC3339 format
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: query_prometheus
+    description: Query Prometheus using a range or instant request
+    inputSchema:
+      type: object
+      required:
+        - datasourceUid
+        - expr
+        - startRfc3339
+      properties:
+        expr:
+          type: string
+          description: The PromQL expression to query
+        queryType:
+          type: string
+          description: The type of query to use. Either 'range' or 'instant'
+        endRfc3339:
+          type: string
+          description: The end time in RFC3339 format. Required if queryType is 'range',
+            ignored if queryType is 'instant'
+        stepSeconds:
+          type: integer
+          description: The time series step size in seconds. Required if queryType is
+            'range', ignored if queryType is 'instant'
+        startRfc3339:
+          type: string
+          description: The start time in RFC3339 format
+        datasourceUid:
+          type: string
+          description: The UID of the datasource to query
+  - name: search_dashboards
+    description: Search for dashboards
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The query to search for

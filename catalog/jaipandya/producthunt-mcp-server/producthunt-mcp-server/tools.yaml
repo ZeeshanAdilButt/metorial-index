@@ -1,0 +1,639 @@
+tools:
+  - name: check_server_status
+    description: "
+
+      \        Check the status of the Product Hunt MCP server and
+      authentication.
+
+
+      \        Returns:
+
+      \        - status (str): \"Ready\", \"Not initialized\", \"Token
+      invalid\", or \"Error\".
+
+      \        - authenticated (bool, optional): True if authenticated, False
+      otherwise.
+
+      \        - user (dict, optional): User details if authenticated.
+
+      \        - rate_limits (dict, optional): API rate limit information.
+
+      \        - message (str, optional): Additional status or error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: check_server_statusArguments
+      properties: {}
+  - name: get_post_details
+    description: "
+
+      \        Retrieve detailed information about a specific Product Hunt post
+      by ID or slug.
+
+
+      \        Parameters:
+
+      \        - id (str, optional): The post's unique ID.
+
+      \        - slug (str, optional): The post's slug (e.g.,
+      \"product-hunt-api\").
+
+      \        - comments_count (int, optional): Number of comments to return
+      (default: 10, max: 20).
+
+      \        - comments_after (str, optional): Pagination cursor for fetching
+      the next page of comments.
+
+
+      \        At least one of `id` or `slug` must be provided.
+
+
+      \        Returns:
+
+      \        - success (bool): Whether the request was successful.
+
+      \        - data (dict): If successful, contains:
+
+      \            - id, name, description, tagline, votes, makers, topics,
+      media, and
+
+      \            - comments (paginated): { edges: [...], pageInfo: {
+      endCursor, hasNextPage } }
+
+      \        - error (dict, optional): If unsuccessful, contains error code
+      and message.
+
+      \        - rate_limits (dict): API rate limit information.
+
+
+      \        Notes:
+
+      \        - If neither `id` nor `slug` is provided, an error is returned.
+
+      \        - If the post is not found, an error is returned.
+
+      \        - The dedicated `get_post_comments` tool is deprecated; use this
+      tool for paginated comments.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_post_detailsArguments
+      properties:
+        id:
+          type: string
+          title: Id
+          default: null
+        slug:
+          type: string
+          title: Slug
+          default: null
+        comments_after:
+          type: string
+          title: Comments After
+          default: null
+        comments_count:
+          type: integer
+          title: Comments Count
+          default: 10
+  - name: get_posts
+    description: "
+
+      \        Retrieve a list of Product Hunt posts with various filtering and
+      sorting options.
+
+
+      \        Parameters:
+
+      \        - featured (bool, optional): Only return featured posts if True.
+
+      \        - topic (str, optional): Filter by topic slug.
+
+      \        - order (str, optional): Sorting order. Valid values: RANKING
+      (default), NEWEST, VOTES, FEATURED_AT.
+
+      \        - count (int, optional): Number of posts to return (default: 10,
+      max: 20).
+
+      \        - after (str, optional): Pagination cursor for next page.
+
+      \        - url (str, optional): Filter posts by URL.
+
+      \        - twitter_url (str, optional): Filter posts by Twitter URL.
+
+      \        - posted_before (str, optional): ISO datetime to filter posts
+      posted before this date.
+
+      \        - posted_after (str, optional): ISO datetime to filter posts
+      posted after this date.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains:
+
+      \            - posts (list): List of post objects (id, name, description,
+      etc.)
+
+      \            - pagination (dict): { end_cursor, has_next_page }
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - This is not a keyword search; use filters to narrow results.
+
+      \        - If no posts match, `posts` will be an empty list.
+
+      \        - Invalid date formats return a user-friendly error.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_postsArguments
+      properties:
+        url:
+          type: string
+          title: Url
+          default: null
+        after:
+          type: string
+          title: After
+          default: null
+        count:
+          type: integer
+          title: Count
+          default: 10
+        order:
+          type: string
+          title: Order
+          default: RANKING
+        topic:
+          type: string
+          title: Topic
+          default: null
+        featured:
+          type: boolean
+          title: Featured
+          default: null
+        twitter_url:
+          type: string
+          title: Twitter Url
+          default: null
+        posted_after:
+          type: string
+          title: Posted After
+          default: null
+        posted_before:
+          type: string
+          title: Posted Before
+          default: null
+  - name: get_comment
+    description: "
+
+      \        Retrieve detailed information about a specific comment by ID.
+
+
+      \        Parameters:
+
+      \        - id (str, required): The comment's unique ID.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains comment details:
+
+      \            - id, content, created_at, user, post, etc.
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - Returns an error if the comment is not found.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_commentArguments
+      properties:
+        id:
+          type: string
+          title: Id
+          default: null
+  - name: get_post_comments
+    description: "
+
+      \        Retrieve comments for a specific post by post ID or slug, with
+      optional sorting and pagination.
+
+
+      \        Parameters:
+
+      \        - post_id (str, optional): The post's unique ID.
+
+      \        - slug (str, optional): The post's slug.
+
+      \        - order (str, optional): Sorting order. Valid values: NEWEST
+      (default), OLDEST, VOTES.
+
+      \        - count (int, optional): Number of comments to return (default:
+      10, max: 20).
+
+      \        - after (str, optional): Pagination cursor for next page.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains:
+
+      \            - comments (list): List of comment objects (id, content,
+      etc.)
+
+      \            - pagination (dict): { end_cursor, has_next_page }
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - Returns an error if the post is not found.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_post_commentsArguments
+      properties:
+        slug:
+          type: string
+          title: Slug
+          default: null
+        after:
+          type: string
+          title: After
+          default: null
+        count:
+          type: integer
+          title: Count
+          default: null
+        order:
+          type: string
+          title: Order
+          default: null
+        post_id:
+          type: string
+          title: Post Id
+          default: null
+  - name: get_collection
+    description: "
+
+      \        Retrieve detailed information about a specific collection by ID
+      or slug.
+
+
+      \        Parameters:
+
+      \        - id (str, optional): The collection's unique ID.
+
+      \        - slug (str, optional): The collection's slug (e.g.,
+      \"best-productivity-apps\").
+
+
+      \        At least one of `id` or `slug` must be provided.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains collection details:
+
+      \            - id, name, description, follower_count, posts, etc.
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - Returns an error if neither `id` nor `slug` is provided, or if
+      the collection is not found.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_collectionArguments
+      properties:
+        id:
+          type: string
+          title: Id
+          default: null
+        slug:
+          type: string
+          title: Slug
+          default: null
+  - name: get_collections
+    description: "
+
+      \        Retrieve a list of collections with optional filters.
+
+
+      \        Parameters:
+
+      \        - featured (bool, optional): Only return featured collections if
+      True.
+
+      \        - user_id (str, optional): Filter to collections created by this
+      user ID.
+
+      \        - post_id (str, optional): Filter to collections that include
+      this post ID.
+
+      \        - order (str, optional): Sorting order. Valid values:
+      FOLLOWERS_COUNT (default), NEWEST.
+
+      \        - count (int, optional): Number of collections to return
+      (default: 10, max: 20).
+
+      \        - after (str, optional): Pagination cursor for next page.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains:
+
+      \            - collections (list): List of collection objects (id, name,
+      etc.)
+
+      \            - pagination (dict): { end_cursor, has_next_page }
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - If no collections match, `collections` will be an empty list.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_collectionsArguments
+      properties:
+        after:
+          type: string
+          title: After
+          default: null
+        count:
+          type: integer
+          title: Count
+          default: 10
+        order:
+          type: string
+          title: Order
+          default: FOLLOWERS_COUNT
+        post_id:
+          type: string
+          title: Post Id
+          default: null
+        user_id:
+          type: string
+          title: User Id
+          default: null
+        featured:
+          type: boolean
+          title: Featured
+          default: null
+  - name: get_topic
+    description: "
+
+      \        Retrieve detailed information about a specific topic by ID or
+      slug.
+
+
+      \        Parameters:
+
+      \        - id (str, optional): The topic's unique ID.
+
+      \        - slug (str, optional): The topic's slug (e.g.,
+      \"artificial-intelligence\").
+
+
+      \        At least one of `id` or `slug` must be provided.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains topic details:
+
+      \            - id, name, description, follower_count, posts, etc.
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - Returns an error if neither `id` nor `slug` is provided, or if
+      the topic is not found.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_topicArguments
+      properties:
+        id:
+          type: string
+          title: Id
+          default: null
+        slug:
+          type: string
+          title: Slug
+          default: null
+  - name: search_topics
+    description: "
+
+      \        Search for topics by name or filter by user following, with
+      optional sorting and pagination.
+
+
+      \        Parameters:
+
+      \        - query (str, optional): Search term to find topics by name.
+
+      \        - followed_by_user_id (str, optional): Only topics followed by
+      this user ID.
+
+      \        - order (str, optional): Sorting order. Valid values:
+      FOLLOWERS_COUNT (default), NAME, NEWEST.
+
+      \        - count (int, optional): Number of topics to return (default: 10,
+      max: 20).
+
+      \        - after (str, optional): Pagination cursor for next page.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains:
+
+      \            - topics (list): List of topic objects (id, name, etc.)
+
+      \            - pagination (dict): { end_cursor, has_next_page }
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - If no topics match, `topics` will be an empty list.
+
+      \        "
+    inputSchema:
+      type: object
+      title: search_topicsArguments
+      properties:
+        after:
+          type: string
+          title: After
+          default: null
+        count:
+          type: integer
+          title: Count
+          default: 10
+        order:
+          type: string
+          title: Order
+          default: FOLLOWERS_COUNT
+        query:
+          type: string
+          title: Query
+          default: null
+        followed_by_user_id:
+          type: string
+          title: Followed By User Id
+          default: null
+  - name: get_user
+    description: "
+
+      \        Retrieve user information by ID or username, with optional
+      retrieval of their posts.
+
+
+      \        Parameters:
+
+      \        - id (str, optional): The user's unique ID.
+
+      \        - username (str, optional): The user's username.
+
+      \        - posts_type (str, optional): Type of posts to retrieve. Valid
+      values: MADE (default), VOTED.
+
+      \        - posts_count (int, optional): Number of posts to return
+      (default: 10, max: 20).
+
+      \        - posts_after (str, optional): Pagination cursor for next page of
+      posts.
+
+
+      \        At least one of `id` or `username` must be provided.
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains user details and
+      optionally their posts.
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - Returns an error if neither `id` nor `username` is provided, or
+      if the user is not found.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_userArguments
+      properties:
+        id:
+          type: string
+          title: Id
+          default: null
+        username:
+          type: string
+          title: Username
+          default: null
+        posts_type:
+          type: string
+          title: Posts Type
+          default: null
+        posts_after:
+          type: string
+          title: Posts After
+          default: null
+        posts_count:
+          type: integer
+          title: Posts Count
+          default: null
+  - name: get_viewer
+    description: "
+
+      \        Retrieve information about the currently authenticated user.
+
+
+      \        Parameters:
+
+      \        - None
+
+
+      \        Returns:
+
+      \        - success (bool)
+
+      \        - data (dict): If successful, contains user details.
+
+      \        - error (dict, optional)
+
+      \        - rate_limits (dict)
+
+
+      \        Notes:
+
+      \        - Returns an error if the token is invalid or expired.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_viewerArguments
+      properties: {}

@@ -1,0 +1,248 @@
+tools:
+  - name: generateBanner
+    description: Generates a banner containing memory system statistics and status
+    inputSchema:
+      type: object
+      properties: {}
+  - name: checkHealth
+    description: Checks the health of the memory system and its database
+    inputSchema:
+      type: object
+      properties: {}
+  - name: initConversation
+    description: Initializes a conversation by storing the user message, generating
+      a banner, and retrieving context in one operation
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: Content of the user message
+        metadata:
+          type: object
+          description: Optional metadata for the message
+          additionalProperties: true
+        importance:
+          type: string
+          default: low
+          description: Importance level (low, medium, high)
+  - name: endConversation
+    description: Ends a conversation by storing the assistant message, recording a
+      milestone, and logging an episode in one operation
+    inputSchema:
+      type: object
+      required:
+        - content
+        - milestone_title
+        - milestone_description
+      properties:
+        content:
+          type: string
+          description: Content of the assistant's final message
+        metadata:
+          type: object
+          description: Optional metadata
+          additionalProperties: true
+        importance:
+          type: string
+          default: medium
+          description: Importance level (low, medium, high)
+        milestone_title:
+          type: string
+          description: Title of the milestone to record
+        milestone_description:
+          type: string
+          description: Description of what was accomplished
+  - name: storeUserMessage
+    description: Stores a user message in the short-term memory
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: Content of the message
+        metadata:
+          type: object
+          description: Optional metadata for the message
+          additionalProperties: true
+        importance:
+          type: string
+          default: low
+          description: Importance level (low, medium, high)
+  - name: storeAssistantMessage
+    description: Stores an assistant message in the short-term memory
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: Content of the message
+        metadata:
+          type: object
+          description: Optional metadata for the message
+          additionalProperties: true
+        importance:
+          type: string
+          default: low
+          description: Importance level (low, medium, high)
+  - name: trackActiveFile
+    description: Tracks an active file being accessed by the user
+    inputSchema:
+      type: object
+      required:
+        - filename
+        - action
+      properties:
+        action:
+          type: string
+          description: Action performed on the file (open, edit, close, etc.)
+        filename:
+          type: string
+          description: Path to the file being tracked
+        metadata:
+          type: object
+          description: Optional metadata for the file
+          additionalProperties: true
+  - name: getRecentMessages
+    description: Retrieves recent messages from the short-term memory
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of messages to retrieve
+        importance:
+          type: string
+          description: Filter by importance level (low, medium, high)
+  - name: getActiveFiles
+    description: Retrieves active files from the short-term memory
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of files to retrieve
+  - name: storeMilestone
+    description: Stores a project milestone in the long-term memory
+    inputSchema:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          description: Title of the milestone
+        metadata:
+          type: object
+          description: Optional metadata for the milestone
+          additionalProperties: true
+        importance:
+          type: string
+          default: medium
+          description: Importance level (low, medium, high)
+        description:
+          type: string
+          description: Description of the milestone
+  - name: storeDecision
+    description: Stores a project decision in the long-term memory
+    inputSchema:
+      type: object
+      required:
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          description: Title of the decision
+        content:
+          type: string
+          description: Content of the decision
+        metadata:
+          type: object
+          description: Optional metadata for the decision
+          additionalProperties: true
+        reasoning:
+          type: string
+          description: Reasoning behind the decision
+        importance:
+          type: string
+          default: medium
+          description: Importance level (low, medium, high)
+  - name: storeRequirement
+    description: Stores a project requirement in the long-term memory
+    inputSchema:
+      type: object
+      required:
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          description: Title of the requirement
+        content:
+          type: string
+          description: Content of the requirement
+        metadata:
+          type: object
+          description: Optional metadata for the requirement
+          additionalProperties: true
+        importance:
+          type: string
+          default: medium
+          description: Importance level (low, medium, high)
+  - name: recordEpisode
+    description: Records an episode (action) in the episodic memory
+    inputSchema:
+      type: object
+      required:
+        - actor
+        - action
+        - content
+      properties:
+        actor:
+          type: string
+          description: Actor performing the action (user, assistant, system)
+        action:
+          type: string
+          description: Type of action performed
+        content:
+          type: string
+          description: Content or details of the action
+        context:
+          type: string
+          description: Context for the episode
+        importance:
+          type: string
+          default: low
+          description: Importance level (low, medium, high)
+  - name: getRecentEpisodes
+    description: Retrieves recent episodes from the episodic memory
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of episodes to retrieve
+        context:
+          type: string
+          description: Filter by context
+  - name: getComprehensiveContext
+    description: Retrieves comprehensive context from all memory systems
+    inputSchema:
+      type: object
+      properties: {}
+  - name: getMemoryStats
+    description: Retrieves statistics about the memory system
+    inputSchema:
+      type: object
+      properties: {}

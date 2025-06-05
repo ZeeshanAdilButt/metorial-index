@@ -1,0 +1,14 @@
+identifier: epaproditus/google-workspace-mcp-server/google-workspace-server
+repo:
+  provider: github.com
+  url: https://github.com/epaproditus/google-workspace-mcp-server
+  name: google-workspace-mcp-server
+  owner: epaproditus
+server:
+  subdirectory: /
+  name: Google Workspace MCP Server
+  description: Interact with Gmail and Calendar APIs via MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

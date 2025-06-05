@@ -1,0 +1,29 @@
+tools:
+  - name: detect_file_type
+    description: Detect file type by sending the first 200 bytes of the file to
+      Convert.Guru API.
+    inputSchema:
+      type: object
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+      additionalProperties: false
+  - name: convert_file
+    description: Convert a file to other format via Convert.Guru API. Pass the file
+      path and output extension.
+    inputSchema:
+      type: object
+      required:
+        - file_path
+        - ext_out
+      properties:
+        ext_out:
+          type: string
+          title: Ext Out
+        file_path:
+          type: string
+          title: File Path
+      additionalProperties: false

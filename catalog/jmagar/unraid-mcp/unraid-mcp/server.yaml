@@ -1,0 +1,24 @@
+identifier: jmagar/unraid-mcp/unraid-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jmagar/unraid-mcp
+  name: unraid-mcp
+  owner: jmagar
+server:
+  subdirectory: /
+  name: Unraid MCP Server
+  description: The Unraid MCP Server is a Python-based bridge that enables AI
+    assistants to interact with Unraid servers through natural language. Using
+    the Model Context Protocol (MCP) with stdio transport, it provides
+    comprehensive management capabilities including system monitoring, array
+    operations, Docker container management, VM control, disk operations, user
+    administration, API key management, remote access configuration,
+    notification handling, and share management. This integration allows users
+    to query system status, manage resources, and perform administrative tasks
+    through conversational AI, eliminating the need for command-line expertise
+    while maintaining robust error handling, timeout management, and detailed
+    logging for reliable server management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

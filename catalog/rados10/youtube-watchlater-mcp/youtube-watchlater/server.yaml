@@ -1,0 +1,15 @@
+identifier: rados10/youtube-watchlater-mcp/youtube-watchlater
+repo:
+  provider: github.com
+  url: https://github.com/rados10/youtube-watchlater-mcp
+  name: youtube-watchlater-mcp
+  owner: rados10
+server:
+  subdirectory: /
+  name: YouTube Watch Later
+  description: MCP server for retrieving YouTube video URLs from a custom playlist
+    within a specified timeframe.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

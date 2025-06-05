@@ -1,0 +1,17 @@
+identifier: tpavelek/mcp-hub-mcp/mcp-hub-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tpavelek/mcp-hub-mcp
+  name: mcp-hub-mcp
+  owner: tpavelek
+server:
+  subdirectory: /
+  name: Hub Server for MCP
+  description: Connect to and manage multiple MCP servers seamlessly. Aggregate
+    and list tools from connected servers and execute them through a unified
+    interface. Simplify tool management and reduce AI errors by hiding
+    infrequently used tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

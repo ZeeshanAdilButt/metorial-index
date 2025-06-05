@@ -1,0 +1,14 @@
+identifier: spathodea-network/opencti-mcp/opencti-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Spathodea-Network/opencti-mcp
+  name: opencti-mcp
+  owner: Spathodea-Network
+server:
+  subdirectory: /
+  name: OpenCTI Server
+  description: Integrate with OpenCTI to access cyber threat intelligence data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+tools:
+  - name: get_hn_post_formatted_comments
+    description: Retrieves and formats comments from a Hacker News discussion post
+      for summarization by an LLM. Use the
+      `hacker_news_summarization_user_prompt` prompts to generate a summary.
+    inputSchema:
+      type: object
+      required:
+        - post_url
+      properties:
+        post_url:
+          type: string
+          description: The URL or ID for the Hacker News post to analyze. Can be a full
+            URL (https://news.ycombinator.com/item?id=43456723) or just the
+            numeric post ID e.g. 43456723.

@@ -1,0 +1,16 @@
+tools:
+  - name: Votars fetch a specific transcript
+    description: Retrive the transcript from the workspace by its ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Transcript ID to retrieve
+  - name: Votars fetch recent transcripts
+    description: Retrive recent transcripts from workspace
+    inputSchema:
+      type: object
+      properties: {}

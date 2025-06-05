@@ -1,0 +1,62 @@
+tools:
+  - name: GetUser
+    description: Retrieves information about the authenticated YNAB user, including
+      user ID and email.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: ListBudgets
+    description: Lists all budgets accessible to the authenticated user, including
+      budget IDs and names.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: GetBudget
+    description: Retrieves detailed information about a specific budget, including
+      transactions, categories, and balances. The API returns monetary amounts
+      in milliunits (e.g., 1000 = $1.00). Supports optional date filtering and
+      transaction limiting.
+    inputSchema:
+      type: object
+      required:
+        - budget_id
+      properties:
+        end_date:
+          type: string
+          default: current_month_end
+          description: End date in YYYY-MM-DD format (client-side filter)
+        budget_id:
+          type: string
+          description: The ID of the budget to fetch
+        start_date:
+          type: string
+          default: current_month_start
+          description: Start date in YYYY-MM-DD format (client-side filter)
+        max_transactions:
+          type: number
+          default: "10"
+          description: Number of transactions to return
+  - name: GetBudgetCategories
+    description: Retrieves all categories defined in the specified budget, including
+      category groups, names, and IDs.
+    inputSchema:
+      type: object
+      required:
+        - budget_id
+      properties:
+        budget_id:
+          type: string
+          description: The ID of the budget to fetch
+  - name: GetBudgetSettings
+    description: Retrieves settings for the specified budget, including currency
+      format, date format, and other preferences.
+    inputSchema:
+      type: object
+      required:
+        - budget_id
+      properties:
+        budget_id:
+          type: string
+          description: The ID of the budget to fetch settings for

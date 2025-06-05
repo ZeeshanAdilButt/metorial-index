@@ -1,0 +1,17 @@
+identifier: capoom/houdini-mcp/houdini-mcp
+repo:
+  provider: github.com
+  url: https://github.com/capoom/houdini-mcp
+  name: houdini-mcp
+  owner: capoom
+server:
+  subdirectory: /
+  name: Houdini Integration
+  description: Connect Claude AI to Houdini for prompt-assisted 3D modeling, scene
+    creation, and simulation setup. Control and manipulate Houdini nodes, create
+    geometry, and execute Python code directly from Claude, enhancing your
+    creative workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

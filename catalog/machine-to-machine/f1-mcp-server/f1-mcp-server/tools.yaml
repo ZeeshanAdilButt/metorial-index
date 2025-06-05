@@ -1,0 +1,155 @@
+tools:
+  - name: get_event_schedule
+    description: Get Formula One race calendar for a specific season
+    inputSchema:
+      type: object
+      required:
+        - year
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+  - name: get_event_info
+    description: Get detailed information about a specific Formula One Grand Prix
+    inputSchema:
+      type: object
+      required:
+        - year
+        - identifier
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        identifier:
+          type: string
+          description: Event name or round number (e.g., 'Monaco' or '7')
+  - name: get_session_results
+    description: Get results for a specific Formula One session
+    inputSchema:
+      type: object
+      required:
+        - year
+        - event_identifier
+        - session_name
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        session_name:
+          type: string
+          description: Session name (e.g., 'Race', 'Qualifying', 'Sprint', 'FP1', 'FP2',
+            'FP3')
+        event_identifier:
+          type: string
+          description: Event name or round number (e.g., 'Monaco' or '7')
+  - name: get_driver_info
+    description: Get information about a specific Formula One driver
+    inputSchema:
+      type: object
+      required:
+        - year
+        - event_identifier
+        - session_name
+        - driver_identifier
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        session_name:
+          type: string
+          description: Session name (e.g., 'Race', 'Qualifying', 'Sprint', 'FP1', 'FP2',
+            'FP3')
+        event_identifier:
+          type: string
+          description: Event name or round number (e.g., 'Monaco' or '7')
+        driver_identifier:
+          type: string
+          description: Driver identifier (number, code, or name; e.g., '44', 'HAM',
+            'Hamilton')
+  - name: analyze_driver_performance
+    description: Analyze a driver's performance in a Formula One session
+    inputSchema:
+      type: object
+      required:
+        - year
+        - event_identifier
+        - session_name
+        - driver_identifier
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        session_name:
+          type: string
+          description: Session name (e.g., 'Race', 'Qualifying', 'Sprint', 'FP1', 'FP2',
+            'FP3')
+        event_identifier:
+          type: string
+          description: Event name or round number (e.g., 'Monaco' or '7')
+        driver_identifier:
+          type: string
+          description: Driver identifier (number, code, or name; e.g., '44', 'HAM',
+            'Hamilton')
+  - name: compare_drivers
+    description: Compare performance between multiple Formula One drivers
+    inputSchema:
+      type: object
+      required:
+        - year
+        - event_identifier
+        - session_name
+        - drivers
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        drivers:
+          type: string
+          description: Comma-separated list of driver codes (e.g., 'HAM,VER,LEC')
+        session_name:
+          type: string
+          description: Session name (e.g., 'Race', 'Qualifying', 'Sprint', 'FP1', 'FP2',
+            'FP3')
+        event_identifier:
+          type: string
+          description: Event name or round number (e.g., 'Monaco' or '7')
+  - name: get_telemetry
+    description: Get telemetry data for a specific Formula One lap
+    inputSchema:
+      type: object
+      required:
+        - year
+        - event_identifier
+        - session_name
+        - driver_identifier
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        lap_number:
+          type: number
+          description: Lap number (optional, gets fastest lap if not provided)
+        session_name:
+          type: string
+          description: Session name (e.g., 'Race', 'Qualifying', 'Sprint', 'FP1', 'FP2',
+            'FP3')
+        event_identifier:
+          type: string
+          description: Event name or round number (e.g., 'Monaco' or '7')
+        driver_identifier:
+          type: string
+          description: Driver identifier (number, code, or name; e.g., '44', 'HAM',
+            'Hamilton')
+  - name: get_championship_standings
+    description: Get Formula One championship standings
+    inputSchema:
+      type: object
+      required:
+        - year
+      properties:
+        year:
+          type: number
+          description: Season year (e.g., 2023)
+        round_num:
+          type: number
+          description: Round number (optional, gets latest standings if not provided)

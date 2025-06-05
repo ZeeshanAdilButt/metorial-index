@@ -1,0 +1,17 @@
+identifier: loglmhq/mcp-server-github-repo/mcp-server-github-repo
+repo:
+  provider: github.com
+  url: https://github.com/loglmhq/mcp-server-github-repo
+  name: mcp-server-github-repo
+  owner: loglmhq
+server:
+  subdirectory: /
+  name: GitHub Repository Access Server
+  description: Browse and read files from specified GitHub repositories
+    effortlessly. Access any file in a repository via URI and navigate
+    directories with ease. Enhance your AI assistants with the ability to
+    interact with GitHub content directly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

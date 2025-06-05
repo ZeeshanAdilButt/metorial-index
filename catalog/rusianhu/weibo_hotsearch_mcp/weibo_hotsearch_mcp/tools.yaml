@@ -1,0 +1,16 @@
+tools:
+  - name: get_hot_search
+    description: "
+
+      \    获取微博热搜榜前10条内容
+
+
+      \    Returns:
+
+      \        List[str]: 热搜列表，如果获取失败则返回错误信息
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hot_searchArguments
+      properties: {}

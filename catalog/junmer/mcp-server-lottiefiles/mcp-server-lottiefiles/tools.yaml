@@ -1,0 +1,48 @@
+tools:
+  - name: search_animations
+    description: Search for Lottie animations by keywords, tags, and other criteria.
+      Supports pagination.
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          default: 1
+          minimum: 1
+          description: Page number, starting from 1
+        limit:
+          type: integer
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Number of items per page
+        query:
+          type: string
+          description: Search keywords that match animation names, descriptions, tags, etc.
+  - name: get_animation_details
+    description: Get detailed information about a specific Lottie animation,
+      including animation data, preview images, and tags.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the animation
+  - name: get_popular_animations
+    description: Get a list of currently popular Lottie animations.
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: integer
+          default: 1
+          minimum: 1
+          description: Page number, starting from 1
+        limit:
+          type: integer
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Number of items per page

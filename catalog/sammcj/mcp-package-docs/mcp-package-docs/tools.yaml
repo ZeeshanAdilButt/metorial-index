@@ -1,0 +1,78 @@
+tools:
+  - name: search_package_docs
+    description: Search for symbols or content within package documentation
+    inputSchema:
+      type: object
+      required:
+        - package
+        - query
+        - language
+      properties:
+        fuzzy:
+          type: boolean
+          default: true
+          description: Enable fuzzy matching
+        query:
+          type: string
+          description: Search query
+        package:
+          type: string
+          description: Package name to search within
+        language:
+          enum:
+            - go
+            - python
+            - npm
+          type: string
+          description: Package language/ecosystem
+        projectPath:
+          type: string
+          description: Optional path to project directory for local .npmrc files
+  - name: lookup_go_doc
+    description: Look up Go package documentation
+    inputSchema:
+      type: object
+      required:
+        - package
+      properties:
+        symbol:
+          type: string
+          description: Optional symbol name to look up specific documentation
+        package:
+          type: string
+          description: Full package import path (e.g. encoding/json)
+        projectPath:
+          type: string
+          description: Optional path to project directory for local .npmrc files
+  - name: lookup_python_doc
+    description: Look up Python package documentation
+    inputSchema:
+      type: object
+      required:
+        - package
+      properties:
+        symbol:
+          type: string
+          description: Optional symbol name to look up specific documentation
+        package:
+          type: string
+          description: Package name (e.g. requests)
+        projectPath:
+          type: string
+          description: Optional path to project directory for local .npmrc files
+  - name: lookup_npm_doc
+    description: Look up NPM package documentation
+    inputSchema:
+      type: object
+      required:
+        - package
+      properties:
+        package:
+          type: string
+          description: Package name (e.g. axios)
+        version:
+          type: string
+          description: Optional package version
+        projectPath:
+          type: string
+          description: Optional path to project directory for local .npmrc files

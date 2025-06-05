@@ -1,0 +1,87 @@
+tools:
+  - name: browsercat_navigate
+    description: Navigate to a URL
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+  - name: browsercat_screenshot
+    description: Take a screenshot of the current page or a specific element
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the screenshot
+        width:
+          type: number
+          description: "Width in pixels (default: 800)"
+        height:
+          type: number
+          description: "Height in pixels (default: 600)"
+        selector:
+          type: string
+          description: CSS selector for element to screenshot
+  - name: browsercat_click
+    description: Click an element on the page
+    inputSchema:
+      type: object
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for element to click
+  - name: browsercat_fill
+    description: Fill out an input field
+    inputSchema:
+      type: object
+      required:
+        - selector
+        - value
+      properties:
+        value:
+          type: string
+          description: Value to fill
+        selector:
+          type: string
+          description: CSS selector for input field
+  - name: browsercat_select
+    description: Select an option from a dropdown menu
+    inputSchema:
+      type: object
+      required:
+        - selector
+        - value
+      properties:
+        value:
+          type: string
+          description: Value to select
+        selector:
+          type: string
+          description: CSS selector for select element
+  - name: browsercat_hover
+    description: Hover over an element on the page
+    inputSchema:
+      type: object
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for element to hover
+  - name: browsercat_evaluate
+    description: Execute JavaScript in the browser console
+    inputSchema:
+      type: object
+      required:
+        - script
+      properties:
+        script:
+          type: string
+          description: JavaScript code to execute

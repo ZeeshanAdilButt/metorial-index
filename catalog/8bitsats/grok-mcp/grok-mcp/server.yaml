@@ -1,0 +1,48 @@
+identifier: 8bitsats/grok-mcp/grok-mcp
+repo:
+  provider: github.com
+  url: https://github.com/8bitsats/Grok-MCP
+  name: Grok-MCP
+  owner: 8bitsats
+server:
+  subdirectory: /
+  name: Grokart
+  description: >-
+    MCP server that allows you to generate images using Grok's AI image
+    generation capabilities. The server is configured with a xAI API key and is
+    now available for use.
+
+
+    How to Use Image Generation
+
+    You can now ask me to generate images with commands like:
+
+
+    "Generate an image of a cat sitting on a mountain"
+
+    "Create an illustration of a futuristic city"
+
+    "Make a picture of an astronaut riding a horse"
+
+    "Show me what a dragon in a library would look like"
+
+    The MCP server supports generating multiple images (up to 10) and can return
+    either URLs or base64-encoded images.
+
+
+    Behind the scenes, the server:
+
+
+    Takes your text prompt
+
+    Sends it to the Grok AI image generation API (grok-2-image model)
+
+    Returns the generated image(s) with their URLs or base64 data
+
+    Also provides the revised prompt that was used for generation
+
+    The implementation is complete and ready to use immediately!
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,37 @@
+identifier: xiispace/docker-mcp/docker-mcp
+repo:
+  provider: github.com
+  url: https://github.com/xiispace/docker-mcp
+  name: docker-mcp
+  owner: xiispace
+server:
+  subdirectory: /
+  name: Docker Server
+  description: >-
+    # Docker MCP Server
+
+
+    This is a Model Context Protocol (MCP) server that provides tools and
+    resources for interacting with Docker containers and images. It uses the
+    stream HTTP transport method for communication and the Python Docker SDK
+    (docker-py) for Docker operations.
+
+
+    ## Features
+
+
+    - List Docker containers and images
+
+    - Run, stop, and remove containers
+
+    - View container logs
+
+    - Pull Docker images
+
+    - Inspect container details
+
+    - Access Docker information as resources
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,10 @@
+description: Enables AI assistants to control robots through ROS 2 topics using
+  natural language commands, executing movement as timed velocity commands on
+  robots. It processes commands and publishes `geometry_msgs/Twist` messages to
+  manage robot movements efficiently in both simulation and real environments.
+skills:
+  - Control robots via natural language commands
+  - Execute timed velocity commands
+  - Publish ROS 2 messages to `/cmd_vel`
+  - Handle commands from MCP clients using FastMCP
+  - Support duration-based movement commands

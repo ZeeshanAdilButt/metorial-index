@@ -1,0 +1,17 @@
+identifier: kortexa-ai/mcp-slop-adapter/mcp-slop-adapter
+repo:
+  provider: github.com
+  url: https://github.com/kortexa-ai/mcp-slop-adapter
+  name: mcp-slop-adapter
+  owner: kortexa-ai
+server:
+  subdirectory: /
+  name: MCP to SLOP Adapter
+  description: Connect your MCP clients to SLOP-compatible servers seamlessly.
+    This adapter translates MCP messages into SLOP API calls, enabling enhanced
+    interactions with SLOP resources and tools. Simplify your integration
+    process and leverage the capabilities of both protocols effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

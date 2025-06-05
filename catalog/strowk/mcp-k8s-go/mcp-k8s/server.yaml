@@ -1,0 +1,16 @@
+identifier: strowk/mcp-k8s-go/mcp-k8s
+repo:
+  provider: github.com
+  url: https://github.com/strowk/mcp-k8s-go
+  name: mcp-k8s-go
+  owner: strowk
+server:
+  subdirectory: /
+  name: MCP K8S Go
+  description: MCP server and library for Kubernetes, providing tools to list
+    contexts, pods, events, services, and fetch pod logs in specified
+    namespaces.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

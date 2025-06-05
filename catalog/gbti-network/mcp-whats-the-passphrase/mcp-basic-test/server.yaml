@@ -1,0 +1,14 @@
+identifier: gbti-network/mcp-whats-the-passphrase/mcp-basic-test
+repo:
+  provider: github.com
+  url: https://github.com/gbti-network/mcp-whats-the-passphrase
+  name: mcp-whats-the-passphrase
+  owner: gbti-network
+server:
+  subdirectory: /
+  name: Super Secret MCP Server
+  description: Generate random US State and signature soup combinations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

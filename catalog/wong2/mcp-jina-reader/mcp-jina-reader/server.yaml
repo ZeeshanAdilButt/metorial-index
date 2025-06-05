@@ -1,0 +1,14 @@
+identifier: wong2/mcp-jina-reader/mcp-jina-reader
+repo:
+  provider: github.com
+  url: https://github.com/wong2/mcp-jina-reader
+  name: mcp-jina-reader
+  owner: wong2
+server:
+  subdirectory: /
+  name: Jina Reader MCP Server
+  description: Fetch the content of a remote URL as Markdown with Jina Reader
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

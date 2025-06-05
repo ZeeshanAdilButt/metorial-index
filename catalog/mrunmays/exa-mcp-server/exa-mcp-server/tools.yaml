@@ -1,0 +1,16 @@
+tools:
+  - name: search
+    description: Search the web using Exa AI
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        numResults:
+          type: number
+          maximum: 50
+          minimum: 1
+          description: "Number of results to return (default: 10)"

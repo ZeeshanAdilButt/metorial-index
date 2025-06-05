@@ -1,0 +1,17 @@
+identifier: idoru/influxdb-mcp-server/influxdb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/idoru/influxdb-mcp-server
+  name: influxdb-mcp-server
+  owner: idoru
+server:
+  subdirectory: /
+  name: InfluxDB MCP Server
+  description: Access and manage your InfluxDB time-series data effortlessly.
+    Execute queries, write data, and utilize templates for common operations
+    with ease. Enhance your AI assistants' capabilities by integrating with
+    InfluxDB through a standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

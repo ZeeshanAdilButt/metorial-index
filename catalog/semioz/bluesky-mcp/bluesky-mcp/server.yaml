@@ -1,0 +1,18 @@
+identifier: semioz/bluesky-mcp/bluesky-mcp
+repo:
+  provider: github.com
+  url: https://github.com/semioz/bluesky-mcp
+  name: bluesky-mcp
+  owner: semioz
+server:
+  subdirectory: /
+  name: Bluesky MCP Server
+  description: Enable seamless posting and interaction on Bluesky through the AT
+    Protocol using a Model Context Protocol server. Authenticate, create posts
+    with text and images, manage likes and reposts, and fetch profiles and
+    timelines effortlessly. Integrate with Claude for Desktop to enhance your
+    Bluesky experience with automated and programmable social media actions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

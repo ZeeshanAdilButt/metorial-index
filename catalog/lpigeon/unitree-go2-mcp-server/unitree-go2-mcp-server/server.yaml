@@ -1,0 +1,18 @@
+identifier: lpigeon/unitree-go2-mcp-server/unitree-go2-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lpigeon/unitree-go2-mcp-server
+  name: unitree-go2-mcp-server
+  owner: lpigeon
+server:
+  subdirectory: /
+  name: Unitree Go2 Robot Control Server
+  description: Enable natural language control of the Unitree Go2 robot by
+    translating LLM commands into ROS2 instructions. Easily command the robot to
+    perform actions using intuitive language, enhancing interaction and
+    automation. Simplify robot operation with seamless integration of language
+    models and robotic control.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

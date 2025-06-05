@@ -1,0 +1,43 @@
+tools:
+  - name: linear-search-issues
+    description: Search for issues in Linear
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: "Max results to return (default: 10)"
+        query:
+          type: string
+          description: Search term
+        labels:
+          type: array
+          items:
+            type: string
+          description: Filter by label names
+        status:
+          type: string
+          description: Filter by status name (e.g., 'In Progress', 'Done')
+        teamId:
+          type: string
+          description: Filter by team ID
+        project:
+          type: string
+          description: Filter by project name
+        estimate:
+          type: number
+          description: Filter by estimate points
+        priority:
+          type: number
+          description: Filter by priority (1=urgent, 2=high, 3=normal, 4=low)
+        assigneeId:
+          type: string
+          description: Filter by assignee's user ID
+        includeArchived:
+          type: boolean
+          description: "Include archived issues in results (default: false)"
+      additionalProperties: false

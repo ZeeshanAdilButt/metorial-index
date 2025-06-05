@@ -1,0 +1,15 @@
+identifier: bsmi021/mcp-server-webscan/mcp-server-webscan
+repo:
+  provider: github.com
+  url: https://github.com/bsmi021/mcp-server-webscan
+  name: mcp-server-webscan
+  owner: bsmi021
+server:
+  subdirectory: /
+  name: Webscan
+  description: Scan and analyze web content with features like page fetching, link
+    extraction, and sitemap generation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

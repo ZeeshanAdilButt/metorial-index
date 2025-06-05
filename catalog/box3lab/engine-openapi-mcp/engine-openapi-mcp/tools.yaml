@@ -1,0 +1,208 @@
+tools:
+  - name: script.saveOrUpdate
+    description: 保存或更新神岛引擎脚本
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mapId
+        - name
+        - type
+        - file
+        - token
+        - userAgent
+      properties:
+        file:
+          type: string
+          description: 脚本内容
+        name:
+          type: string
+          description: 脚本名称（.js后缀必传）
+        type:
+          type: string
+          description: 脚本类型：0-服务器脚本、1-客户端脚本
+        mapId:
+          type: string
+          description: 地图ID
+        token:
+          type: string
+          description: 认证Token
+        userAgent:
+          type: string
+          description: 用户请求头
+      additionalProperties: false
+  - name: script.rename
+    description: 重命名神岛引擎脚本
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mapId
+        - name
+        - newName
+        - token
+        - userAgent
+      properties:
+        name:
+          type: string
+          description: 脚本名称（.js后缀必传）
+        mapId:
+          type: string
+          description: 地图ID
+        token:
+          type: string
+          description: 认证Token
+        newName:
+          type: string
+          description: 新脚本名称（.js后缀必传）
+        userAgent:
+          type: string
+          description: 用户请求头
+      additionalProperties: false
+  - name: storage.get
+    description: 存储空间单key值查询
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+        - mapId
+        - storageName
+        - token
+        - userAgent
+      properties:
+        key:
+          type: string
+          description: 存储空间key，key(length<=1000)
+        mapId:
+          type: string
+          description: 地图id(扩展地图为主图id)
+        token:
+          type: string
+          description: 认证Token
+        isGroup:
+          type: boolean
+          description: 是否为扩展地图组（缺省：false）
+        userAgent:
+          type: string
+          description: 用户请求头
+        storageName:
+          type: string
+          description: 操作空间名(length<=50 && ^[a-zA-Z0-9_]+$)
+      additionalProperties: false
+  - name: storage.set
+    description: 存储空间单key值写入/更新
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+        - mapId
+        - storageName
+        - value
+        - token
+        - userAgent
+      properties:
+        key:
+          type: string
+          description: 存储空间key，key(length<=1000)
+        mapId:
+          type: string
+          description: 地图id(扩展地图为主图id)
+        token:
+          type: string
+          description: 认证Token
+        value:
+          type: string
+          description: 'json字符串值(json, size<=2MB)，格式必须是{"content": value}，value为用户输入的内容'
+        isGroup:
+          type: boolean
+          description: 是否为扩展地图组（缺省：false）
+        userAgent:
+          type: string
+          description: 用户请求头
+        storageName:
+          type: string
+          description: 操作空间名(length<=50 && ^[a-zA-Z0-9_]+$)
+      additionalProperties: false
+  - name: storage.remove
+    description: 存储空间单key值删除
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+        - mapId
+        - storageName
+        - token
+        - userAgent
+      properties:
+        key:
+          type: string
+          description: 存储空间key，key(length<=1000)
+        mapId:
+          type: string
+          description: 地图id(扩展地图为主图id)
+        token:
+          type: string
+          description: 认证Token
+        isGroup:
+          type: boolean
+          description: 是否为扩展地图组（缺省：false）
+        userAgent:
+          type: string
+          description: 用户请求头
+        storageName:
+          type: string
+          description: 操作空间名(length<=50 && ^[a-zA-Z0-9_]+$)
+      additionalProperties: false
+  - name: storage.page
+    description: 存储空间分页查询
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mapId
+        - storageName
+        - token
+        - userAgent
+      properties:
+        limit:
+          type: number
+          description: 查询数量(缺省：10，最大：100)
+        mapId:
+          type: string
+          description: 地图id(扩展地图为主图id)
+        token:
+          type: string
+          description: 认证Token
+        offset:
+          type: number
+          description: 偏移量(缺省：0)
+        isGroup:
+          type: boolean
+          description: 是否为扩展地图组（缺省：false）
+        userAgent:
+          type: string
+          description: 用户请求头
+        constraint:
+          type: object
+          properties:
+            max:
+              type: number
+              description: 限定查询最大值(<=)，缺省：不限制
+            min:
+              type: number
+              description: 限定查询最小值(>=)，缺省：不限制
+            target:
+              type: string
+              description: 约束目标值的路径(a.b.c)，当值是JSON格式时，指定用作排序的值的路径。例如传入
+                score时，会取值上score属性的值作为排序、最大最小值的限制目标
+            ascending:
+              type: boolean
+              description: 是否升序，true：升序，false：降序, 缺省：不排序
+          additionalProperties: false
+        storageName:
+          type: string
+          description: 操作空间名(length<=50 && ^[a-zA-Z0-9_]+$)
+      additionalProperties: false

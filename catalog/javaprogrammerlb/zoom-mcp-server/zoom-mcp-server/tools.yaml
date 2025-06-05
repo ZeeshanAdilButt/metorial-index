@@ -1,0 +1,33 @@
+tools:
+  - name: create_meeting
+    description: Create a meeting
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        topic:
+          type: string
+          maxLength: 200
+          description: The meeting's topic.
+        agenda:
+          type: string
+          default: New Meeting
+          maxLength: 2000
+          description: The meeting's agenda
+        timezone:
+          type: string
+          description: Timezone for the meeting's start time
+        start_time:
+          type: string
+          description: The meeting's start time
+      additionalProperties: false
+  - name: list_meetings
+    description: List scheduled meetings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          type: string
+          description: The type of meeting.
+      additionalProperties: false

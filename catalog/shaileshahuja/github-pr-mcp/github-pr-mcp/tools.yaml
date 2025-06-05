@@ -1,0 +1,23 @@
+tools:
+  - name: get_pr_comments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - pull_number
+      properties:
+        repo:
+          type: string
+          minLength: 1
+          description: Repository name
+        owner:
+          type: string
+          minLength: 1
+          description: Repository owner (username or organization)
+        pull_number:
+          type: integer
+          description: Pull request number
+          exclusiveMinimum: 0
+      additionalProperties: false

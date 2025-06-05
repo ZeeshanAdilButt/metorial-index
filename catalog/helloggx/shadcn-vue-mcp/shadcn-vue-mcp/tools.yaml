@@ -1,0 +1,68 @@
+tools:
+  - name: read-usage-doc
+    description: read usage doc of a component， Use this tool when mentions /usedoc.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: name of the component, lowercase, kebab-case
+      additionalProperties: false
+  - name: read-full-doc
+    description: read full doc of a component, Use this tool when mentions /doc.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: name of the component, lowercase, kebab-case
+      additionalProperties: false
+  - name: create-ui
+    description: create Web UI with shadcn/ui components and tailwindcss, Use this
+      tool when mentions /ui
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: description of the Web UI
+      additionalProperties: false
+  - name: refine-code
+    description: >-
+      refine code with shadcn/ui components and tailwindcss,
+        Use this tool when the user requests to refine/improve current UI component with /ui commands
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userMessage
+        - absolutePathToRefiningFile
+        - context
+      properties:
+        context:
+          type: string
+          description: Extract the specific UI elements and aspects that need improvement
+            based on user messages, code, and conversation history. Identify
+            exactly which components (buttons, forms, modals, etc.) the user is
+            referring to and what aspects (styling, layout, responsiveness,
+            etc.) they want to enhance. Do not include generic improvements -
+            focus only on what the user explicitly mentions or what can be
+            reasonably inferred from the available context. If nothing specific
+            is mentioned or you cannot determine what needs improvement, return
+            an empty string.
+        userMessage:
+          type: string
+          description: Full user's message about UI refinement
+        absolutePathToRefiningFile:
+          type: string
+          description: Absolute path to the file that needs to be refined
+      additionalProperties: false

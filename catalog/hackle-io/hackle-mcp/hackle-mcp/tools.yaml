@@ -1,0 +1,60 @@
+tools:
+  - name: active-user-series
+    description: Fetches active user series
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        unit:
+          type: string
+          description: Specifies the time unit for metric data. Data can be aggregated on
+            a daily (DAY), weekly (WEEK), or monthly (MONTH) basis.
+  - name: experiment-detail
+    description: Fetch a experiment(A/B Test) detail.
+    inputSchema:
+      type: object
+      properties:
+        experimentId:
+          type: number
+          description: experiment id
+  - name: experiment-list
+    description: Fetches experiment(A/B Test) list
+    inputSchema:
+      type: object
+      properties:
+        pageSize:
+          type: number
+          description: Number of items to display per page (min 1, default 100)
+        pageNumber:
+          type: number
+          description: page number (min 0, default 0)
+        searchKeyword:
+          type: string
+          description: "Parameter used to filter experiments by keyword. Allows searching
+            for experiments containing the specified text. "
+  - name: retention-series
+    description: Fetches user retention series
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        unit:
+          type: string
+          description: Specifies the time unit for metric data. Data can be aggregated on
+            a daily (DAY), weekly (WEEK), or monthly (MONTH) basis.
+  - name: stickiness-series
+    description: Fetches stickiness series
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        unit:
+          type: string
+          description: Specifies the time unit for metric data. Data can be aggregated on
+            a weekly (WEEK) or monthly (MONTH) basis.

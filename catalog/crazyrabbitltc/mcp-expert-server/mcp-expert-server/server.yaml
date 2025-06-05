@@ -1,0 +1,15 @@
+identifier: crazyrabbitltc/mcp-expert-server/mcp-expert-server
+repo:
+  provider: github.com
+  url: https://github.com/crazyrabbitLTC/mcp-expert-server
+  name: mcp-expert-server
+  owner: crazyrabbitLTC
+server:
+  subdirectory: /
+  name: Expert Server
+  description: Provides intelligent query generation and documentation assistance
+    using Claude AI.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

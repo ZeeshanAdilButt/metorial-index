@@ -1,0 +1,35 @@
+tools:
+  - name: get_trending_videos
+    description: Fetch trending YouTube videos.
+    inputSchema:
+      type: object
+      title: get_trending_videosArguments
+      properties:
+        max_results:
+          type: string
+          title: max_results
+          default: 30
+        region_code:
+          type: string
+          title: region_code
+          default: US
+  - name: get_subscribed_channels
+    description: Fetch the most recent uploads from subscribed YouTube channels.
+    inputSchema:
+      type: object
+      title: get_subscribed_channelsArguments
+      properties:
+        max_channels:
+          type: string
+          title: max_channels
+          default: 10
+  - name: get_user_activity
+    description: Fetch the most recent activity from the authenticated user.
+    inputSchema:
+      type: object
+      title: get_user_activityArguments
+      properties:
+        max_results:
+          type: string
+          title: max_results
+          default: 10

@@ -1,0 +1,17 @@
+identifier: karayaman/lichess-mcp/lichess-mcp
+repo:
+  provider: github.com
+  url: https://github.com/karayaman/lichess-mcp
+  name: lichess-mcp
+  owner: karayaman
+server:
+  subdirectory: /
+  name: Lichess Integration
+  description: Interact with the Lichess chess platform using natural language.
+    Manage your account, play games, analyze positions, and join tournaments
+    effortlessly. Enhance your chess experience with seamless communication
+    through Claude Desktop.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

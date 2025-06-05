@@ -1,0 +1,21 @@
+identifier: jobsonlook/xhs-mcp/xhs-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jobsonlook/xhs-mcp
+  name: xhs-mcp
+  owner: jobsonlook
+server:
+  subdirectory: /
+  name: 小红书 MCP 服务  xiaohongshu
+  description: |2-
+     采用js逆向出x-s,x-t,直接请求http接口,无须笨重的playwright
+     搜索笔记
+     获取笔记内容
+     获取笔记的评论
+     发表评论
+    RedNote
+    xiaohongshu
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

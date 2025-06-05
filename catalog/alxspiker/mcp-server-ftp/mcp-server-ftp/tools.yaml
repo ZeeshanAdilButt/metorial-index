@@ -1,0 +1,77 @@
+tools:
+  - name: list-directory
+    description: List contents of an FTP directory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - remotePath
+      properties:
+        remotePath:
+          type: string
+          description: Path of the directory on the FTP server
+      additionalProperties: false
+  - name: download-file
+    description: Download a file from the FTP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - remotePath
+      properties:
+        remotePath:
+          type: string
+          description: Path of the file on the FTP server
+      additionalProperties: false
+  - name: upload-file
+    description: Upload a file to the FTP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - remotePath
+        - content
+      properties:
+        content:
+          type: string
+          description: Content to upload to the file
+        remotePath:
+          type: string
+          description: Destination path on the FTP server
+      additionalProperties: false
+  - name: create-directory
+    description: Create a new directory on the FTP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - remotePath
+      properties:
+        remotePath:
+          type: string
+          description: Path of the directory to create
+      additionalProperties: false
+  - name: delete-file
+    description: Delete a file from the FTP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - remotePath
+      properties:
+        remotePath:
+          type: string
+          description: Path of the file to delete
+      additionalProperties: false
+  - name: delete-directory
+    description: Delete a directory from the FTP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - remotePath
+      properties:
+        remotePath:
+          type: string
+          description: Path of the directory to delete
+      additionalProperties: false

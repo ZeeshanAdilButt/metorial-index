@@ -1,0 +1,32 @@
+identifier: hyun-me/thumbnail_agent/thumbnail_agent
+repo:
+  provider: github.com
+  url: https://github.com/Hyun-me/thumbnail_agent
+  name: thumbnail_agent
+  owner: Hyun-me
+server:
+  subdirectory: /
+  name: Thumbnail Agent
+  description: >-
+    A modular agent that generates clean, optimized product thumbnails from raw
+    image URLs.
+
+
+    1. Background Removal: Automatically removes backgrounds using advanced AI
+    segmentation.
+
+    2. Thumbnail Optimization: Adds a white background, resizes to 1000×1000px,
+    and compresses for web use.
+
+    3. Product-Linked Output: Saves the generated thumbnail with the associated
+    product_id and updates the database.
+
+    4. MCP-Ready: Designed to run inside MCP workflows, easily integrated into
+    multi-step product content pipelines.
+
+    5. Secure Configuration: Connects to MySQL using environment variables to
+    avoid hardcoded credentials.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

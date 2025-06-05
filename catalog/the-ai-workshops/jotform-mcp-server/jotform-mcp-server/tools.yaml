@@ -1,0 +1,1534 @@
+tools:
+  - name: get_user
+    description: "Get user account details for a JotForm user.
+
+
+      \    Returns:
+
+      \        User account type, avatar URL, name, email, website URL and
+      account limits as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_userArguments
+      properties: {}
+  - name: get_usage
+    description: "Get number of form submissions received this month.
+
+
+      \    Returns:
+
+      \        Number of submissions, SSL submissions, payment submissions, and
+      upload space used as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_usageArguments
+      properties: {}
+  - name: get_forms
+    description: "Get a list of forms for this account.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        offset (Optional[int]): Start of each result set for form list.
+
+      \        limit (Optional[int]): Number of results in each result set for
+      form list.
+
+      \        filter_array (Optional[Dict[str, Any]]): Filters the query
+      results. Example: {\"status:eq\": \"ENABLED\"}
+
+      \        order_by (Optional[str]): Order results by a form field name.
+
+
+      \    Returns:
+
+      \        Basic details of forms as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_formsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        order_by:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Order By
+          default: null
+        filter_array:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Filter Array
+          default: null
+  - name: get_submissions
+    description: "Get a list of submissions for this account.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        offset (Optional[int]): Start of each result set.
+
+      \        limit (Optional[int]): Number of results in each result set.
+
+      \        filter_array (Optional[Dict[str, Any]]): Filters the query
+      results.
+
+      \        order_by (Optional[str]): Order results by a field name.
+
+
+      \    Returns:
+
+      \        Basic details of submissions as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_submissionsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        order_by:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Order By
+          default: null
+        filter_array:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Filter Array
+          default: null
+  - name: get_subusers
+    description: "Get a list of sub users for this account.
+
+
+      \    Returns:
+
+      \        List of forms and form folders with access privileges as a JSON
+      string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_subusersArguments
+      properties: {}
+  - name: get_folders
+    description: "Get a list of form folders for this account.
+
+
+      \    Returns:
+
+      \        Name of the folder and owner of the folder for shared folders as
+      a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_foldersArguments
+      properties: {}
+  - name: get_reports
+    description: "List of URLs for reports in this account.
+
+
+      \    Returns:
+
+      \        Reports for all of the forms (Excel, CSV, etc.) as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_reportsArguments
+      properties: {}
+  - name: get_settings
+    description: "Get user's settings for this account.
+
+
+      \    Returns:
+
+      \        User's time zone and language as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_settingsArguments
+      properties: {}
+  - name: update_settings
+    description: "Update user's settings.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        settings (Dict[str, Any]): New user setting values with setting
+      keys.
+
+
+      \    Returns:
+
+      \        Changes on user settings as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_settingsArguments
+      required:
+        - settings
+      properties:
+        settings:
+          type: object
+          title: Settings
+          additionalProperties: true
+  - name: get_history
+    description: "Get user activity log.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        action (Optional[str]): Filter results by activity performed.
+      Default is 'all'.
+
+      \        date (Optional[str]): Limit results by a date range.
+
+      \        sort_by (Optional[str]): Lists results by ascending and
+      descending order.
+
+      \        start_date (Optional[str]): Limit results to only after a
+      specific date. Format: MM/DD/YYYY.
+
+      \        end_date (Optional[str]): Limit results to only before a specific
+      date. Format: MM/DD/YYYY.
+
+
+      \    Returns:
+
+      \        Activity log as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_historyArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+        action:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Action
+          default: null
+        sort_by:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort By
+          default: null
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_form
+    description: "Get basic information about a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Form details as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_formArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: get_form_questions
+    description: "Get a list of all questions on a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Question properties of a form as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_questionsArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: get_form_question
+    description: "Get details about a question.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        qid (str): Question ID.
+
+
+      \    Returns:
+
+      \        Question properties as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_questionArguments
+      required:
+        - form_id
+        - qid
+      properties:
+        qid:
+          type: string
+          title: Qid
+        form_id:
+          type: string
+          title: Form Id
+  - name: get_form_submissions
+    description: "List of a form submissions.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        offset (Optional[int]): Start of each result set.
+
+      \        limit (Optional[int]): Number of results in each result set.
+
+      \        filter_array (Optional[Dict[str, Any]]): Filters the query
+      results.
+
+      \        order_by (Optional[str]): Order results by a field name.
+
+
+      \    Returns:
+
+      \        Submissions of a specific form as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_submissionsArguments
+      required:
+        - form_id
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        form_id:
+          type: string
+          title: Form Id
+        order_by:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Order By
+          default: null
+        filter_array:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Filter Array
+          default: null
+  - name: create_form_submission
+    description: "Submit data to this form using the API.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        submission (Dict[str, Any]): Submission data with question IDs.
+
+      \            Example: {\"1_first\": \"John\", \"1_last\": \"Doe\", \"2\":
+      \"test@example.com\"}
+
+      \            For complex fields like name (qid_first, qid_last) or address
+      (qid_addr_line1), use the underscore notation.
+
+
+      \    Returns:
+
+      \        Posted submission ID and URL as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_form_submissionArguments
+      required:
+        - form_id
+        - submission
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        submission:
+          type: object
+          title: Submission
+          additionalProperties: true
+  - name: create_form_submissions
+    description: "Submit multiple data entries to a form using the API (via PUT
+      request).
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        submissions (Union[List[Dict[str, Any]], str]): A list of
+      submission objects or a JSON string representing the list.
+
+      \            Each submission object is a dictionary of submission data
+      with question IDs.
+
+      \            Example: [{\"1_first\": \"Jane\", \"2\":
+      \"jane@example.com\"}, {\"1_first\": \"Mike\", \"2\":
+      \"mike@example.com\"}]
+
+
+      \    Returns:
+
+      \        Response from the API, typically indicating success or failure,
+      as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_form_submissionsArguments
+      required:
+        - form_id
+        - submissions
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        submissions:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: string
+          title: Submissions
+  - name: get_form_files
+    description: "List of files uploaded on a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Uploaded file information and URLs as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_filesArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: get_form_webhooks
+    description: "Get list of webhooks for a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        List of webhooks as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_webhooksArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: create_form_webhook
+    description: "Add a new webhook.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        webhook_url (str): Webhook URL.
+
+
+      \    Returns:
+
+      \        List of webhooks for the form as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_form_webhookArguments
+      required:
+        - form_id
+        - webhook_url
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        webhook_url:
+          type: string
+          title: Webhook Url
+  - name: delete_form_webhook
+    description: "Delete a specific webhook of a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        webhook_id (str): Webhook ID.
+
+
+      \    Returns:
+
+      \        Remaining webhook URLs of form as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_form_webhookArguments
+      required:
+        - form_id
+        - webhook_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        webhook_id:
+          type: string
+          title: Webhook Id
+  - name: get_submission
+    description: "Get submission data.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        sid (str): Submission ID.
+
+
+      \    Returns:
+
+      \        Information and answers of a specific submission as a JSON
+      string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_submissionArguments
+      required:
+        - sid
+      properties:
+        sid:
+          type: string
+          title: Sid
+  - name: delete_submission
+    description: "Delete a single submission.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        sid (str): Submission ID.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_submissionArguments
+      required:
+        - sid
+      properties:
+        sid:
+          type: string
+          title: Sid
+  - name: edit_submission
+    description: "Edit a single submission.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        sid (str): Submission ID.
+
+      \        submission (Dict[str, Any]): New submission data with question
+      IDs.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: edit_submissionArguments
+      required:
+        - sid
+        - submission
+      properties:
+        sid:
+          type: string
+          title: Sid
+        submission:
+          type: object
+          title: Submission
+          additionalProperties: true
+  - name: get_report
+    description: "Get report details.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        report_id (str): Report ID.
+
+
+      \    Returns:
+
+      \        Properties of a specific report as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_reportArguments
+      required:
+        - report_id
+      properties:
+        report_id:
+          type: string
+          title: Report Id
+  - name: create_report
+    description: "Create new report of a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        report (Dict[str, Any]): Report details (list_type, title, etc.).
+
+
+      \    Returns:
+
+      \        Report details and URL as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_reportArguments
+      required:
+        - form_id
+        - report
+      properties:
+        report:
+          type: object
+          title: Report
+          additionalProperties: true
+        form_id:
+          type: string
+          title: Form Id
+  - name: delete_report
+    description: "Delete a specific report.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        report_id (str): Report ID.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_reportArguments
+      required:
+        - report_id
+      properties:
+        report_id:
+          type: string
+          title: Report Id
+  - name: get_folder
+    description: "Get folder details.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        folder_id (str): Folder ID.
+
+
+      \    Returns:
+
+      \        A list of forms in a folder and other details as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_folderArguments
+      required:
+        - folder_id
+      properties:
+        folder_id:
+          type: string
+          title: Folder Id
+  - name: create_folder
+    description: "Create a new folder.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        folder_properties (Dict[str, Any]): Properties of the new folder.
+
+
+      \    Returns:
+
+      \        New folder details as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_folderArguments
+      required:
+        - folder_properties
+      properties:
+        folder_properties:
+          type: object
+          title: Folder Properties
+          additionalProperties: true
+  - name: delete_folder
+    description: "Delete a specific folder and its subfolders.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        folder_id (str): Folder ID.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_folderArguments
+      required:
+        - folder_id
+      properties:
+        folder_id:
+          type: string
+          title: Folder Id
+  - name: update_folder
+    description: "Update a specific folder.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        folder_id (str): Folder ID.
+
+      \        folder_properties (Union[Dict[str, Any], str]): New properties of
+      the folder (dict or JSON string).
+
+      \            The client method expects a JSON string for the PUT body.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_folderArguments
+      required:
+        - folder_id
+        - folder_properties
+      properties:
+        folder_id:
+          type: string
+          title: Folder Id
+        folder_properties:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: string
+          title: Folder Properties
+  - name: add_forms_to_folder
+    description: "Add forms to a folder.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        folder_id (str): Folder ID.
+
+      \        form_ids (List[str]): List of Form IDs.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_forms_to_folderArguments
+      required:
+        - folder_id
+        - form_ids
+      properties:
+        form_ids:
+          type: array
+          items:
+            type: string
+          title: Form Ids
+        folder_id:
+          type: string
+          title: Folder Id
+  - name: add_form_to_folder
+    description: "Add a specific form to a folder.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        folder_id (str): Folder ID.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_form_to_folderArguments
+      required:
+        - folder_id
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        folder_id:
+          type: string
+          title: Folder Id
+  - name: get_form_properties
+    description: "Get a list of all properties on a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Form properties as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_propertiesArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: get_form_property
+    description: "Get a specific property of the form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        property_key (str): Property key.
+
+
+      \    Returns:
+
+      \        Given property key value as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_propertyArguments
+      required:
+        - form_id
+        - property_key
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        property_key:
+          type: string
+          title: Property Key
+  - name: set_form_properties
+    description: "Add or edit properties of a specific form (POST).
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        form_properties (Dict[str, Any]): New properties.
+
+
+      \    Returns:
+
+      \        Edited properties as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_form_propertiesArguments
+      required:
+        - form_id
+        - form_properties
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        form_properties:
+          type: object
+          title: Form Properties
+          additionalProperties: true
+  - name: set_multiple_form_properties
+    description: "Add or edit properties of a specific form (PUT).
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        form_properties (Union[Dict[str, Any], str]): New properties
+      (dict or JSON string).
+
+      \            The client method expects a JSON string for the PUT body.
+
+
+      \    Returns:
+
+      \        Edited properties as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_multiple_form_propertiesArguments
+      required:
+        - form_id
+        - form_properties
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        form_properties:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: string
+          title: Form Properties
+  - name: get_form_reports
+    description: "Get all the reports of a form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        List of all reports in a form as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_form_reportsArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: clone_form
+    description: "Clone a single form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Status of request (details of the new cloned form) as a JSON
+      string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: clone_formArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: delete_form_question
+    description: "Delete a single form question.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        qid (str): Question ID.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_form_questionArguments
+      required:
+        - form_id
+        - qid
+      properties:
+        qid:
+          type: string
+          title: Qid
+        form_id:
+          type: string
+          title: Form Id
+  - name: create_form_question
+    description: "Add new question to specified form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        question (Dict[str, Any]): New question properties.
+
+
+      \    Returns:
+
+      \        Properties of new question as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_form_questionArguments
+      required:
+        - form_id
+        - question
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        question:
+          type: object
+          title: Question
+          additionalProperties: true
+  - name: create_form_questions
+    description: "Add new questions to specified form (PUT).
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        questions (Union[List[Dict[str, Any]], str]): New questions (list
+      of dicts or JSON string).
+
+      \            The client method expects a JSON string for the PUT body.
+
+
+      \    Returns:
+
+      \        Properties of new questions as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_form_questionsArguments
+      required:
+        - form_id
+        - questions
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+        questions:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: string
+          title: Questions
+  - name: edit_form_question
+    description: "Add or edit a single question properties.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+      \        qid (str): Question ID.
+
+      \        question_properties (Dict[str, Any]): New question properties.
+
+
+      \    Returns:
+
+      \        Edited property and type of question as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: edit_form_questionArguments
+      required:
+        - form_id
+        - qid
+        - question_properties
+      properties:
+        qid:
+          type: string
+          title: Qid
+        form_id:
+          type: string
+          title: Form Id
+        question_properties:
+          type: object
+          title: Question Properties
+          additionalProperties: true
+  - name: create_form
+    description: "Create a new form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_definition (Dict[str, Any]): Questions, properties, and
+      emails of the new form.
+
+      \            Example: {\"questions\": [{\"type\": \"control_textbox\",
+      \"text\": \"Name\", \"order\": \"1\"}],
+
+      \                      \"properties\": {\"title\": \"My New Form\"}}
+
+
+      \    Returns:
+
+      \        New form details as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_formArguments
+      required:
+        - form_definition
+      properties:
+        form_definition:
+          type: object
+          title: Form Definition
+          additionalProperties: true
+  - name: create_forms
+    description: "Create new forms (PUT).
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        forms_definition (Union[List[Dict[str, Any]], str]): List of form
+      definitions or a JSON string.
+
+      \            The client method expects a JSON string for the PUT body.
+
+
+      \    Returns:
+
+      \        New forms details as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_formsArguments
+      required:
+        - forms_definition
+      properties:
+        forms_definition:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: string
+          title: Forms Definition
+  - name: delete_form
+    description: "Delete a specific form.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_id (str): Form ID.
+
+
+      \    Returns:
+
+      \        Properties of deleted form as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_formArguments
+      required:
+        - form_id
+      properties:
+        form_id:
+          type: string
+          title: Form Id
+  - name: register_user
+    description: "Register with username, password and email.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        user_details (Dict[str, str]): Username, password, and email.
+
+
+      \    Returns:
+
+      \        New user's details as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: register_userArguments
+      required:
+        - user_details
+      properties:
+        user_details:
+          type: object
+          title: User Details
+          additionalProperties:
+            type: string
+  - name: login_user
+    description: "Login user with given credentials.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        credentials (Dict[str, str]): Username, password, application
+      name, and access type.
+
+
+      \    Returns:
+
+      \        Logged in user's settings and app key as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: login_userArguments
+      required:
+        - credentials
+      properties:
+        credentials:
+          type: object
+          title: Credentials
+          additionalProperties:
+            type: string
+  - name: logout_user
+    description: "Logout user.
+
+
+      \    Returns:
+
+      \        Status of request as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: logout_userArguments
+      properties: {}
+  - name: get_plan
+    description: "Get details of a plan.
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        plan_name (str): Name of the requested plan (e.g., FREE,
+      PREMIUM).
+
+
+      \    Returns:
+
+      \        Details of a plan as a JSON string.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_planArguments
+      required:
+        - plan_name
+      properties:
+        plan_name:
+          type: string
+          title: Plan Name
+  - name: search_submissions_by_date
+    description: "Search submissions by date range or period across specified forms
+      or all enabled forms.
+
+
+      \    Provide EITHER 'period' OR ('start_date' and/or 'end_date').
+
+
+      \    Args:
+
+      \        ctx: The MCP server context.
+
+      \        form_ids (Optional[List[str]]): List of form IDs to search. If
+      None or empty, searches all *enabled* forms.
+
+      \        start_date (Optional[str]): Start date in YYYY-MM-DD format
+      (inclusive). Use with end_date.
+
+      \        end_date (Optional[str]): End date in YYYY-MM-DD format
+      (inclusive). Use with start_date.
+
+      \        period (Optional[str]): Relative period. Options: \"today\",
+      \"last_7_days\", \"last_30_days\",
+
+      \                                \"current_month\", \"last_month\",
+      \"current_accounting_month\",
+
+      \                                \"last_accounting_month\". Cannot be used
+      with start_date/end_date.
+
+      \        limit_per_form (Optional[int]): Max submissions per form request
+      (default/max 1000).
+
+
+      \    Returns:
+
+      \        A JSON string containing a list of submissions aggregated from
+      all searched forms,
+
+      \        or an error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_submissions_by_dateArguments
+      properties:
+        period:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Period
+          default: null
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        form_ids:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Form Ids
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+        limit_per_form:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit Per Form
+          default: 1000

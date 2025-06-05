@@ -1,0 +1,17 @@
+identifier: madebynando/mcp-postgres-server/mcp-postgres-server
+repo:
+  provider: github.com
+  url: https://github.com/MadeByNando/mcp-postgres-server
+  name: mcp-postgres-server
+  owner: MadeByNando
+server:
+  subdirectory: /
+  name: Postgres Server
+  description: Leverage PostgreSQL databases for your model contexts. Execute
+    read-only SQL queries and explore database schemas securely with ease.
+    Enhance your applications by integrating powerful database capabilities
+    directly into your workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

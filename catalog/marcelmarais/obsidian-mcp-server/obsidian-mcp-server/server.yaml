@@ -1,0 +1,18 @@
+identifier: marcelmarais/obsidian-mcp-server/obsidian-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/marcelmarais/obsidian-mcp-server
+  name: obsidian-mcp-server
+  owner: marcelmarais
+server:
+  subdirectory: /
+  name: Obsidian Vault Integration Server
+  description: Enable AI assistants to interact seamlessly with your Obsidian
+    vault by reading notes, retrieving todos, and updating or creating markdown
+    files. Manage your vault content through natural language commands to
+    streamline note-taking and project tracking. Benefit from direct filesystem
+    access without needing the Obsidian app running.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

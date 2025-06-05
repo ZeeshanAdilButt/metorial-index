@@ -1,0 +1,237 @@
+tools:
+  - name: create_lipsync_video_by_audio
+    description: "
+
+      \    Create lipsync video by audio input. The tool will animate a digital
+      human avatar to speak in sync with the provided audio.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - avatar: Digital human avatar ID. Either this or avatar creation
+      parameters must be provided.
+
+      \    - avatar_video_url: URL of a video to create the avatar from.
+
+      \    - avatar_image_url: URL of an image to create the avatar from.
+
+      \    - avatar_video_file: Local path to a video file to create the avatar
+      from.
+
+      \    - avatar_image_file: Local path to an image file to create the avatar
+      from.
+
+      \    - audio_url: Remote URL of the audio file. One of audio_url or
+      audio_file must be provided.
+
+      \    - audio_file: Local path to the audio file. One of audio_url or
+      audio_file must be provided.
+
+      \    - title: Optional title for the created video.
+
+      \    - async_mode: If true, returns task_id immediately. If false, waits
+      for completion and downloads the video. Default is false.
+
+      \    - output_path: Where to save the downloaded video if async_mode is
+      false. Default is \"output.mp4\".
+
+      \   \ 
+
+      \    Avatar creation: Provide exactly ONE of avatar_video_url,
+      avatar_image_url, avatar_video_file, or avatar_image_file to create a new
+      avatar.
+
+      \    If avatar ID is directly provided, these parameters will be ignored.
+
+      \   \ 
+
+      \    Audio file should be mp3, m4a, or wav format, within 20MB, and
+      between 1 second and 3 minutes.
+
+      \   \ 
+
+      \    Returns:
+
+      \    - If async_mode is true: task_id for checking status later
+
+      \    - If async_mode is false: downloaded video path and task result
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_lipsync_video_by_audioArguments
+      properties:
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        avatar:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar
+          default: null
+        audio_url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Audio Url
+          default: null
+        async_mode:
+          type: boolean
+          title: Async Mode
+          default: false
+        audio_file:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Audio File
+          default: null
+        output_path:
+          type: string
+          title: Output Path
+          default: ./output/output.mp4
+        avatar_image_url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Image Url
+          default: null
+        avatar_video_url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Video Url
+          default: null
+        avatar_image_file:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Image File
+          default: null
+        avatar_video_file:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Video File
+          default: null
+  - name: create_lipsync_video_by_text
+    description: "
+
+      \    Create lipsync video by text input. The tool will generate audio from
+      the text and animate a digital human avatar to speak it.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - avatar: Digital human avatar ID. Either this or avatar creation
+      parameters must be provided.
+
+      \    - avatar_video_url: URL of a video to create the avatar from.
+
+      \    - avatar_image_url: URL of an image to create the avatar from.
+
+      \    - avatar_video_file: Local path to a video file to create the avatar
+      from.
+
+      \    - avatar_image_file: Local path to an image file to create the avatar
+      from.
+
+      \    - text: Text content to be spoken by the avatar. Required.
+
+      \    - voice: Voice ID to use for text-to-speech. If not provided, a
+      random voice will be selected.
+
+      \    - title: Optional title for the created video.
+
+      \    - async_mode: If true, returns task_id immediately. If false, waits
+      for completion and downloads the video. Default is false.
+
+      \    - output_path: Where to save the downloaded video if async_mode is
+      false. Default is \"output.mp4\".
+
+      \   \ 
+
+      \    Avatar creation: Provide exactly ONE of avatar_video_url,
+      avatar_image_url, avatar_video_file, or avatar_image_file to create a new
+      avatar.
+
+      \    If avatar ID is directly provided, these parameters will be ignored.
+
+      \   \ 
+
+      \    Text should be between 1 and 500 characters.
+
+      \   \ 
+
+      \    Returns:
+
+      \    - If async_mode is true: task_id for checking status later, selected
+      voice ID
+
+      \    - If async_mode is false: downloaded video path, task result, and
+      selected voice ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_lipsync_video_by_textArguments
+      properties:
+        text:
+          type: string
+          title: Text
+          default: ""
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        voice:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Voice
+          default: null
+        avatar:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar
+          default: null
+        async_mode:
+          type: boolean
+          title: Async Mode
+          default: false
+        output_path:
+          type: string
+          title: Output Path
+          default: ./output/output.mp4
+        avatar_image_url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Image Url
+          default: null
+        avatar_video_url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Video Url
+          default: null
+        avatar_image_file:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Image File
+          default: null
+        avatar_video_file:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Avatar Video File
+          default: null

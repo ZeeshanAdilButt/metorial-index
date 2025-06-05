@@ -1,0 +1,16 @@
+tools:
+  - name: create_whimsical_diagram
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mermaid_markup
+        - title
+      properties:
+        title:
+          type: string
+          description: The title of the Whimsical diagram
+        mermaid_markup:
+          type: string
+          description: The mermaid markup for the diagram
+      additionalProperties: false

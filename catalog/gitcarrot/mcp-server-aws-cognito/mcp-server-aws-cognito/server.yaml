@@ -1,0 +1,18 @@
+identifier: gitcarrot/mcp-server-aws-cognito/mcp-server-aws-cognito
+repo:
+  provider: github.com
+  url: https://github.com/gitCarrot/mcp-server-aws-cognito
+  name: mcp-server-aws-cognito
+  owner: gitCarrot
+server:
+  subdirectory: /
+  name: AWS Cognito Authentication Server
+  description: Enable secure user authentication and management by integrating AWS
+    Cognito with your applications. Perform user sign-up, sign-in, password
+    resets, and multi-factor authentication seamlessly through a standardized
+    MCP interface. Simplify authentication workflows and enhance security with
+    this dedicated MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

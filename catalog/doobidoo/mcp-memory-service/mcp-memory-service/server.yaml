@@ -1,0 +1,14 @@
+identifier: doobidoo/mcp-memory-service/mcp-memory-service
+repo:
+  provider: github.com
+  url: https://github.com/doobidoo/mcp-memory-service
+  name: mcp-memory-service
+  owner: doobidoo
+server:
+  subdirectory: /
+  name: Memory Service
+  description: Provide semantic memory and persistent storage using ChromaDB.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

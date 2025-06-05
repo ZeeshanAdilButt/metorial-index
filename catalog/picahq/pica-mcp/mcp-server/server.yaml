@@ -1,0 +1,17 @@
+identifier: picahq/pica-mcp/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/picahq/pica-mcp
+  name: pica-mcp
+  owner: picahq
+server:
+  subdirectory: /
+  name: Pica MCP Server
+  description: Connect your applications seamlessly with Pica's powerful API.
+    Enable your agents to perform actions like sending emails, managing
+    calendars, and querying databases effortlessly. Enhance your workflows by
+    integrating real-world data and tools with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

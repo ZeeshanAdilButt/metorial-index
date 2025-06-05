@@ -1,0 +1,259 @@
+tools:
+  - name: search_disclosure
+    description: "
+
+      \    회사의 주요 재무 정보를 검색하여 제공하는 도구.
+
+      \    requested_items가 주어지면 해당 항목 관련 데이터가 있는 공시만 필터링합니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        company_name: 회사명 (예: 삼성전자, 네이버 등)
+
+      \        start_date: 시작일 (YYYYMMDD 형식, 예: 20230101)
+
+      \        end_date: 종료일 (YYYYMMDD 형식, 예: 20231231)
+
+      \        ctx: MCP Context 객체
+
+      \        requested_items: 사용자가 요청한 재무 항목 이름 리스트 (예: [\"매출액\", \"영업이익\"]).
+      None이면 모든 주요 항목을 대상으로 함. 사용 가능한 항목: 매출액, 영업이익, 당기순이익, 영업활동 현금흐름, 투자활동
+      현금흐름, 재무활동 현금흐름, 자산총계, 부채총계, 자본총계
+
+      \       \ 
+
+      \    Returns:
+
+      \        검색된 각 공시의 주요 재무 정보 요약 텍스트 (요청 항목 관련 데이터가 있는 경우만)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_disclosureArguments
+      required:
+        - company_name
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+        company_name:
+          type: string
+          title: Company Name
+        requested_items:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Requested Items
+          default: null
+  - name: search_detailed_financial_data
+    description: "
+
+      \    회사의 세부적인 재무 정보를 제공하는 도구.
+
+      \    XBRL 파일을 파싱하여 상세한 재무 데이터를 추출합니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        company_name: 회사명 (예: 삼성전자, 네이버 등)
+
+      \        start_date: 시작일 (YYYYMMDD 형식, 예: 20230101)
+
+      \        end_date: 종료일 (YYYYMMDD 형식, 예: 20231231)
+
+      \        ctx: MCP Context 객체
+
+      \        statement_type: 재무제표 유형 (\"재무상태표\", \"손익계산서\", \"현금흐름표\" 중 하나 또는
+      None)
+
+      \                       None인 경우 모든 유형의 재무제표 정보를 반환합니다.
+
+      \       \ 
+
+      \    Returns:
+
+      \        선택한 재무제표 유형(들)의 세부 항목 정보가 포함된 텍스트
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_detailed_financial_dataArguments
+      required:
+        - company_name
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+        company_name:
+          type: string
+          title: Company Name
+        statement_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Statement Type
+          default: null
+  - name: search_business_information
+    description: "
+
+      \    회사의 사업 관련 현황 정보를 제공하는 도구
+
+      \   \ 
+
+      \    Args:
+
+      \        company_name: 회사명 (예: 삼성전자, 네이버 등)
+
+      \        start_date: 시작일 (YYYYMMDD 형식, 예: 20230101)
+
+      \        end_date: 종료일 (YYYYMMDD 형식, 예: 20231231)
+
+      \        information_type: 조회할 정보 유형\ 
+
+      \            '사업의 개요' - 회사의 전반적인 사업 내용
+
+      \            '주요 제품 및 서비스' - 회사의 주요 제품과 서비스 정보
+
+      \            '원재료 및 생산설비' - 원재료 조달 및 생산 설비 현황
+
+      \            '매출 및 수주상황' - 매출과 수주 현황 정보
+
+      \            '위험관리 및 파생거래' - 리스크 관리 방안 및 파생상품 거래 정보
+
+      \            '주요계약 및 연구개발활동' - 주요 계약 현황 및 R&D 활동
+
+      \            '기타 참고사항' - 기타 사업 관련 참고 정보
+
+      \        ctx: MCP Context 객체
+
+      \       \ 
+
+      \    Returns:
+
+      \        요청한 정보 유형에 대한 해당 회사의 사업 정보 텍스트
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_business_informationArguments
+      required:
+        - company_name
+        - start_date
+        - end_date
+        - information_type
+      properties:
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+        company_name:
+          type: string
+          title: Company Name
+        information_type:
+          type: string
+          title: Information Type
+  - name: get_current_date
+    description: "
+
+      \    현재 날짜를 YYYYMMDD 형식으로 반환하는 도구
+
+      \   \ 
+
+      \    Args:
+
+      \        ctx: MCP Context 객체 (선택 사항)
+
+      \       \ 
+
+      \    Returns:
+
+      \        YYYYMMDD 형식의 현재 날짜 문자열
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_current_dateArguments
+      properties: {}
+  - name: search_json_financial_data
+    description: "
+
+      \    회사의 재무 정보를 JSON API를 통해 제공하는 실패시 보완하는 보조 도구.
+
+      \    search_disclosure, search_detailed_financial_data이 2023년 9월 이전 자료 분석에
+      실패했을 때 대안으로 활용.
+
+      \   \ 
+
+      \    Args:
+
+      \        company_name: 회사명 (예: 삼성전자, 네이버 등)
+
+      \        bsns_year: 사업연도 (4자리, 예: \"2023\")
+
+      \        ctx: MCP Context 객체
+
+      \        reprt_code: 보고서 코드 (\"11011\": 사업보고서, \"11012\": 반기보고서,
+      \"11013\": 1분기보고서, \"11014\": 3분기보고서)
+
+      \        fs_div: 개별/연결구분 (\"OFS\": 재무제표, \"CFS\": 연결재무제표)
+
+      \        statement_type: 재무제표 유형 (\"BS\": 재무상태표, \"IS\": 손익계산서, \"CIS\":
+      포괄손익계산서, \"CF\": 현금흐름표, \"SCE\": 자본변동표)
+
+      \                       None인 경우 모든 유형의 재무제표 정보를 반환합니다.
+
+      \       \ 
+
+      \    Returns:
+
+      \        선택한 재무제표 유형(들)의 세부 항목 정보가 포함된 텍스트 (당기 데이터만 표시)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_json_financial_dataArguments
+      required:
+        - company_name
+        - bsns_year
+      properties:
+        fs_div:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Fs Div
+          default: OFS
+        bsns_year:
+          type: string
+          title: Bsns Year
+        reprt_code:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Reprt Code
+          default: "11011"
+        company_name:
+          type: string
+          title: Company Name
+        statement_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Statement Type
+          default: null

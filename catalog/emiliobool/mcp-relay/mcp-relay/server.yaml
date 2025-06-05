@@ -1,0 +1,14 @@
+identifier: emiliobool/mcp-relay/mcp-relay
+repo:
+  provider: github.com
+  url: https://github.com/emiliobool/MCP-Relay
+  name: MCP-Relay
+  owner: emiliobool
+server:
+  subdirectory: /
+  name: Discord Relay
+  description: Send messages and prompts to a Discord channel and receive responses.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,80 @@
+tools:
+  - name: get_transcript
+    description: Get the transcript of a YouTube video
+    inputSchema:
+      type: object
+      title: get_transcriptArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: get_translation
+    description: Get a translated transcript of a YouTube video
+    inputSchema:
+      type: object
+      title: get_translationArguments
+      required:
+        - url
+        - language
+      properties:
+        url:
+          type: string
+          title: Url
+        language:
+          type: string
+          title: Language
+  - name: get_subtitles
+    description: Generate subtitle files for a YouTube video
+    inputSchema:
+      type: object
+      title: get_subtitlesArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+        format:
+          type: string
+          title: Format
+          default: srt
+        language:
+          type: string
+          title: Language
+          default: en
+  - name: get_summary
+    description: Generate a summary of a YouTube video
+    inputSchema:
+      type: object
+      title: get_summaryArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+        length:
+          type: string
+          title: Length
+          default: medium
+        language:
+          type: string
+          title: Language
+          default: en
+  - name: search_video
+    description: Search for specific content within a YouTube video's transcript
+    inputSchema:
+      type: object
+      title: search_videoArguments
+      required:
+        - url
+        - query
+      properties:
+        url:
+          type: string
+          title: Url
+        query:
+          type: string
+          title: Query

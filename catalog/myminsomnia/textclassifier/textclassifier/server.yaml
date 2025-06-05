@@ -1,0 +1,20 @@
+identifier: myminsomnia/textclassifier/textclassifier
+repo:
+  provider: github.com
+  url: https://github.com/MymInsomnia/textClassifier
+  name: textClassifier
+  owner: MymInsomnia
+server:
+  subdirectory: /
+  name: Text Classifier
+  description: Provide multiple common text classification models based on CNN,
+    RNN, and pre-trained NLP models to perform sentiment analysis and other text
+    classification tasks. Enable users to preprocess data, train word
+    embeddings, and apply advanced models like Bi-LSTM, Transformer, ELMo, and
+    BERT for accurate text classification. Facilitate easy experimentation with
+    various architectures and improve classification performance with attention
+    mechanisms and adversarial training.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

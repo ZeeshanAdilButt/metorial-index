@@ -1,0 +1,17 @@
+identifier: kw510/strava-mcp/strava-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kw510/strava-mcp
+  name: strava-mcp
+  owner: kw510
+server:
+  subdirectory: /
+  name: Model Context Protocol (MCP) Server + Strava OAuth
+  description: This is a [Model Context Protocol
+    (MCP)](https://modelcontextprotocol.io/introduction) server that supports
+    remote MCP connections, with Strava OAuth built-in. It allows users to
+    connect to your MCP server by signing in with their Strava account.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

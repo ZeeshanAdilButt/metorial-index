@@ -1,0 +1,342 @@
+tools:
+  - name: search_tourism_by_keyword
+    description: "
+
+      \    Search for tourism information in Korea by keyword.
+
+      \   \ 
+
+      \    Args:
+
+      \        keyword: Search keyword (e.g., \"Gyeongbokgung\", \"Hanok\",
+      \"Bibimbap\")
+
+      \        content_type: Type of content to search for (e.g., \"Tourist
+      Attraction\", \"Restaurant\", \"Festival Event\")
+
+      \        area_code: Area code to filter results (e.g., \"1\" for Seoul)
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\"),
+      default is \"en\"
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing search results with tourism information.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_tourism_by_keywordArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+        language:
+          type: string
+          title: Language
+          default: null
+        area_code:
+          type: string
+          title: Area Code
+          default: null
+        content_type:
+          type: string
+          title: Content Type
+          default: null
+  - name: get_tourism_by_area
+    description: "
+
+      \    Browse tourism information by geographic areas in Korea.
+
+      \   \ 
+
+      \    Args:
+
+      \        area_code: Area code (e.g., \"1\" for Seoul)
+
+      \        sigungu_code: Sigungu (district) code within the area
+
+      \        content_type: Type of content to filter (e.g., \"Tourist
+      Attraction\", \"Restaurant\")
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing tourism information in the specified
+      area.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_tourism_by_areaArguments
+      required:
+        - area_code
+      properties:
+        language:
+          type: string
+          title: Language
+          default: null
+        area_code:
+          type: string
+          title: Area Code
+        content_type:
+          type: string
+          title: Content Type
+          default: null
+        sigungu_code:
+          type: string
+          title: Sigungu Code
+          default: null
+  - name: find_nearby_attractions
+    description: "
+
+      \    Find tourism attractions near a specific location in Korea.
+
+      \   \ 
+
+      \    Args:
+
+      \        longitude: Longitude coordinate (e.g., 126.9780)
+
+      \        latitude: Latitude coordinate (e.g., 37.5665)
+
+      \        radius: Search radius in meters (default: 1000)
+
+      \        content_type: Type of content to filter (e.g., \"Tourist
+      Attraction\", \"Restaurant\")
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing tourism attractions near the specified
+      coordinates.
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_nearby_attractionsArguments
+      required:
+        - longitude
+        - latitude
+      properties:
+        radius:
+          type: integer
+          title: Radius
+          default: 1000
+        language:
+          type: string
+          title: Language
+          default: null
+        latitude:
+          type: number
+          title: Latitude
+        longitude:
+          type: number
+          title: Longitude
+        content_type:
+          type: string
+          title: Content Type
+          default: null
+  - name: search_festivals_by_date
+    description: "
+
+      \    Find festivals in Korea by date range.
+
+      \   \ 
+
+      \    Args:
+
+      \        start_date: Start date in YYYYMMDD format (e.g., \"20250501\")
+
+      \        end_date: Optional end date in YYYYMMDD format (e.g.,
+      \"20250531\")
+
+      \        area_code: Area code to filter results (e.g., \"1\" for Seoul)
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing festivals occurring within the specified
+      date range.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_festivals_by_dateArguments
+      required:
+        - start_date
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        language:
+          type: string
+          title: Language
+          default: null
+        area_code:
+          type: string
+          title: Area Code
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+  - name: find_accommodations
+    description: "
+
+      \    Find accommodations in Korea by area.
+
+      \   \ 
+
+      \    Args:
+
+      \        area_code: Area code (e.g., \"1\" for Seoul)
+
+      \        sigungu_code: Sigungu (district) code within the area
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing accommodation options in the specified
+      area.
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_accommodationsArguments
+      properties:
+        language:
+          type: string
+          title: Language
+          default: null
+        area_code:
+          type: string
+          title: Area Code
+          default: null
+        sigungu_code:
+          type: string
+          title: Sigungu Code
+          default: null
+  - name: get_detailed_information
+    description: "
+
+      \    Get detailed information about a specific tourism item in Korea.
+
+      \   \ 
+
+      \    Args:
+
+      \        content_id: Content ID of the tourism item
+
+      \        content_type: Type of content (e.g., \"Tourist Attraction\",
+      \"Restaurant\")
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing detailed information about the specified
+      tourism item.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_detailed_informationArguments
+      required:
+        - content_id
+      properties:
+        language:
+          type: string
+          title: Language
+          default: null
+        content_id:
+          type: string
+          title: Content Id
+        content_type:
+          type: string
+          title: Content Type
+          default: null
+  - name: get_tourism_images
+    description: "
+
+      \    Get images for a specific tourism item in Korea.
+
+      \   \ 
+
+      \    Args:
+
+      \        content_id: Content ID of the tourism item
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing images for the specified tourism item.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_tourism_imagesArguments
+      required:
+        - content_id
+      properties:
+        language:
+          type: string
+          title: Language
+          default: null
+        content_id:
+          type: string
+          title: Content Id
+  - name: get_area_codes
+    description: "
+
+      \    Get area codes for regions in Korea.
+
+      \   \ 
+
+      \    Args:
+
+      \        parent_area_code: Parent area code to get sub-areas (None for
+      top-level areas)
+
+      \        language: Language for results (e.g., \"en\", \"jp\", \"zh-cn\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing area codes and names.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_area_codesArguments
+      properties:
+        language:
+          type: string
+          title: Language
+          default: null
+        parent_area_code:
+          type: string
+          title: Parent Area Code
+          default: null

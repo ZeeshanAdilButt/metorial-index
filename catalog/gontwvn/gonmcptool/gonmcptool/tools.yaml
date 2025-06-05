@@ -1,0 +1,641 @@
+tools:
+  - name: add
+    description: 簡單的加法計算工具
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: number
+        b:
+          type: number
+      additionalProperties: false
+  - name: npmBuild
+    description: 執行npm build命令構建專案
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        path:
+          type: string
+        options:
+          type: string
+      additionalProperties: false
+  - name: npmInstall
+    description: 執行npm install命令安裝依賴
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        path:
+          type: string
+        options:
+          type: string
+      additionalProperties: false
+  - name: codeFileRead
+    description: 讀取程式碼檔案並顯示行號，用於確認檔案實際行數以便編輯操作。(如果不影響編譯器的話，不需要針對縮排等小問題修改。提醒User就好了)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: codeLineInsert
+    description: 每次使用前、使用後必須先使用(codeFileRead)。在程式碼檔案指定行插入內容，原內容將向下移動。(如果不影響編譯器的話，不需要針對縮排等小問題修改。提醒User就好了)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - lineNumber
+        - content
+      properties:
+        content:
+          type: string
+        filePath:
+          type: string
+        lineNumber:
+          type: number
+        indentToMatch:
+          type: boolean
+      additionalProperties: false
+  - name: codeLineDelete
+    description: 每次使用前、使用後必須先使用(codeFileRead)。刪除程式碼檔案指定範圍的行。(如果不影響編譯器的話，不需要針對縮排等小問題修改。提醒User就好了)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - startLine
+      properties:
+        endLine:
+          type: number
+        filePath:
+          type: string
+        startLine:
+          type: number
+      additionalProperties: false
+  - name: fileWrite
+    description: 檔案寫入功能，為文件提供建立、編輯與寫入功能
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - content
+      properties:
+        mode:
+          enum:
+            - write
+            - append
+            - json
+          type: string
+          default: write
+        content:
+          type: string
+        filePath:
+          type: string
+        prettify:
+          type: boolean
+        createDirs:
+          type: boolean
+      additionalProperties: false
+  - name: fileRead
+    description: 讀取檔案內容，支援純文本和JSON格式
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        mode:
+          enum:
+            - text
+            - json
+          type: string
+          default: text
+        encoding:
+          type: string
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: edit_file
+    description: 對檔案進行精確的編輯，可以替換特定文字內容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - edits
+      properties:
+        path:
+          type: string
+        edits:
+          type: array
+          items:
+            type: object
+            required:
+              - oldText
+              - newText
+            properties:
+              newText:
+                type: string
+                description: 替換成的新文字
+              oldText:
+                type: string
+                description: 要搜尋的文字 - 必須完全匹配
+            additionalProperties: false
+        dryRun:
+          type: boolean
+          default: false
+          description: 預覽變更而不實際修改檔案
+      additionalProperties: false
+  - name: insert_to_file
+    description: 在檔案的特定位置插入新內容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - position
+        - content
+      properties:
+        path:
+          type: string
+        dryRun:
+          type: boolean
+          default: false
+          description: 預覽變更而不實際修改檔案
+        content:
+          type: string
+          description: 要插入的內容
+        position:
+          type:
+            - number
+            - string
+      additionalProperties: false
+  - name: delete_from_file
+    description: 從檔案中刪除特定內容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - selector
+      properties:
+        path:
+          type: string
+        dryRun:
+          type: boolean
+          default: false
+          description: 預覽變更而不實際修改檔案
+        selector:
+          anyOf:
+            - type: string
+              description: 要刪除的確切文字
+            - type: object
+              required:
+                - startLine
+              properties:
+                endLine:
+                  type: number
+                  description: 結束行號，如果省略則只刪除單行
+                startLine:
+                  type: number
+                  description: 開始行號 (從1開始)
+              additionalProperties: false
+            - type: object
+              required:
+                - start
+                - end
+              properties:
+                end:
+                  type: string
+                  description: 結束標記文字
+                start:
+                  type: string
+                  description: 開始標記文字
+              additionalProperties: false
+      additionalProperties: false
+  - name: localizationGetByKey
+    description: 根據Key查詢特定翻譯項目
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - key
+      properties:
+        key:
+          type: string
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: localizationSearch
+    description: 搜尋包含特定文字的翻譯項目
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - searchText
+      properties:
+        limit:
+          type: number
+        filePath:
+          type: string
+        language:
+          type: string
+        searchText:
+          type: string
+      additionalProperties: false
+  - name: localizationAdd
+    description: 新增一個完整的翻譯項目
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - entry
+      properties:
+        entry:
+          type: object
+          required:
+            - Key
+            - zh-TW
+            - zh-CN
+            - en
+          properties:
+            en:
+              type: string
+            Key:
+              type: string
+            zh-CN:
+              type: string
+            zh-TW:
+              type: string
+          additionalProperties: true
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: localizationUpdate
+    description: 更新現有翻譯項目的內容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - key
+        - updateData
+      properties:
+        key:
+          type: string
+        filePath:
+          type: string
+        updateData:
+          type: object
+          properties:
+            en:
+              type: string
+            zh-CN:
+              type: string
+            zh-TW:
+              type: string
+          additionalProperties: true
+      additionalProperties: false
+  - name: localizationDelete
+    description: 刪除指定Key的翻譯項目
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - key
+      properties:
+        key:
+          type: string
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: localizationExportJson
+    description: 將特定語言的翻譯導出為JSON格式
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - language
+      properties:
+        filePath:
+          type: string
+        language:
+          type: string
+      additionalProperties: false
+  - name: localizationFindMissing
+    description: 查找有Key值但缺少特定語言翻譯的項目
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - language
+      properties:
+        limit:
+          type: number
+        filePath:
+          type: string
+        language:
+          type: string
+      additionalProperties: false
+  - name: localizationFindLongValues
+    description: 查找超過特定字數的翻譯項目
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - threshold
+      properties:
+        limit:
+          type: number
+        filePath:
+          type: string
+        language:
+          type: string
+        threshold:
+          type: number
+      additionalProperties: false
+  - name: find_files
+    description: 在允許的目錄中找尋所有符合檔名模式的檔案並標示其檔案路徑
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePattern
+      properties:
+        excludeDirs:
+          type: array
+          items:
+            type: string
+        filePattern:
+          type: string
+      additionalProperties: false
+  - name: search_code
+    description: 在允許的目錄中搜尋包含特定文字的程式碼
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - searchText
+      properties:
+        maxResults:
+          type: number
+        searchText:
+          type: string
+        excludeDirs:
+          type: array
+          items:
+            type: string
+        filePattern:
+          type: string
+        caseSensitive:
+          type: boolean
+        maxContextLines:
+          type: number
+      additionalProperties: false
+  - name: taskCreate
+    description: 創建新的任務，可以包含多個步驟
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - description
+        - steps
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        steps:
+          type: array
+          items:
+            type: object
+            required:
+              - description
+            properties:
+              order:
+                type: number
+              completed:
+                type: boolean
+              description:
+                type: string
+              estimatedTime:
+                type: number
+            additionalProperties: false
+        title:
+          type: string
+        dueDate:
+          type: string
+        priority:
+          type: number
+        description:
+          type: string
+      additionalProperties: false
+  - name: taskGetAll
+    description: 獲取所有任務列表
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: taskGetById
+    description: 根據ID獲取特定任務
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+      additionalProperties: false
+  - name: taskUpdate
+    description: 更新現有任務信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - updates
+      properties:
+        id:
+          type: string
+        updates:
+          type: object
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+            title:
+              type: string
+            status:
+              enum:
+                - pending
+                - in_progress
+                - completed
+                - cancelled
+              type: string
+            dueDate:
+              type: string
+            priority:
+              type: number
+            description:
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: taskDelete
+    description: 刪除指定ID的任務
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+      additionalProperties: false
+  - name: taskStepUpdate
+    description: 更新任務的特定步驟
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - stepId
+        - updates
+      properties:
+        stepId:
+          type: string
+        taskId:
+          type: string
+        updates:
+          type: object
+          properties:
+            order:
+              type: number
+            completed:
+              type: boolean
+            description:
+              type: string
+            estimatedTime:
+              type: number
+          additionalProperties: false
+      additionalProperties: false
+  - name: taskStepAdd
+    description: 為任務添加新步驟
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - description
+      properties:
+        order:
+          type: number
+        taskId:
+          type: string
+        description:
+          type: string
+        estimatedTime:
+          type: number
+      additionalProperties: false
+  - name: taskStepDelete
+    description: 刪除任務的特定步驟
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - stepId
+      properties:
+        stepId:
+          type: string
+        taskId:
+          type: string
+      additionalProperties: false
+  - name: taskSearch
+    description: 根據條件搜索任務
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filter
+      properties:
+        filter:
+          type: object
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+            status:
+              enum:
+                - pending
+                - in_progress
+                - completed
+                - cancelled
+              type: string
+            priority:
+              type: number
+            dueDateTo:
+              type: string
+            searchText:
+              type: string
+            dueDateFrom:
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: taskAnalyze
+    description: 獲取任務狀態分析報告
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: taskSetAllSteps
+    description: 設定某個任務所有步驟的完成狀態
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - completed
+      properties:
+        taskId:
+          type: string
+        completed:
+          type: boolean
+      additionalProperties: false
+  - name: taskGenerateReport
+    description: 生成任務進度Markdown報告，可選擇日期篩選範圍
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        endDate:
+          type: string
+          description: 結束日期範圍 (YYYY-MM-DD 格式)
+        startDate:
+          type: string
+          description: 起始日期範圍 (YYYY-MM-DD 格式)
+        outputPath:
+          type: string
+      additionalProperties: false

@@ -1,0 +1,18 @@
+identifier: rusianhu/githubdailytrendingfetcher-mcp/githubdailytrendingfetcher-mcp
+repo:
+  provider: github.com
+  url: https://github.com/RusianHu/GitHubDailyTrendingFetcher-mcp
+  name: GitHubDailyTrendingFetcher-mcp
+  owner: RusianHu
+server:
+  subdirectory: /
+  name: GitHub Trending Fetcher
+  description: Fetch the daily trending GitHub repositories with detailed
+    information including name, link, description, and README content. Customize
+    the number of repositories fetched, use proxy settings, and save results as
+    Markdown files automatically. Save time by avoiding manual reading and
+    summarizing of multiple repositories.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

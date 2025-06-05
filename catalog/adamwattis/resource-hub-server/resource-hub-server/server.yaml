@@ -1,0 +1,17 @@
+identifier: adamwattis/resource-hub-server/resource-hub-server
+repo:
+  provider: github.com
+  url: https://github.com/adamwattis/resource-hub-server
+  name: resource-hub-server
+  owner: adamwattis
+server:
+  subdirectory: /
+  name: Resource Hub Server
+  description: Connect to a centralized hub for managing and configuring your MCP
+    servers. Access shared tools and resources seamlessly across different
+    environments. Simplify your MCP server management with a single
+    configuration point.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

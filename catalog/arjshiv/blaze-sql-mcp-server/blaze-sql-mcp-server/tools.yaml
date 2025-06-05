@@ -1,0 +1,17 @@
+tools:
+  - name: blazesql_query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - db_id
+        - natural_language_request
+      properties:
+        db_id:
+          type: string
+          description: The ID of the BlazeSQL database connection to query.
+        natural_language_request:
+          type: string
+          description: The query expressed in natural language (e.g., 'show me total users
+            per city').
+      additionalProperties: false

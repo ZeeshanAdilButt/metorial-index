@@ -1,0 +1,378 @@
+tools:
+  - name: get_contact_by_id
+    description: "
+
+      \    Get a HubSpot contact by ID
+
+
+      \    Args:
+
+      \        contact_id: The HubSpot contact ID. Can be provided as integer or
+      string.
+
+
+      \    Returns:
+
+      \        The contact information as a dictionary
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_contact_by_idArguments
+      properties:
+        contact_id:
+          type: string
+          title: contact_id
+          default: null
+  - name: get_contact_by_email
+    description: "
+
+      \    Get a HubSpot contact by email address
+
+
+      \    Args:
+
+      \        email: The contact's email address
+
+
+      \    Returns:
+
+      \        The contact information as a dictionary or an error message
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_contact_by_emailArguments
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          title: Email
+  - name: search_contacts
+    description: "
+
+      \    Search for HubSpot contacts based on property criteria
+
+
+      \    Args:
+
+      \        property_name: The contact property to search (e.g., firstname,
+      lastname, email)
+
+      \        operator: The operator to use for searching (EQ, CONTAINS, NEQ,
+      GT, LT, GTE, LTE)
+
+      \        value: The value to search for
+
+      \        limit: Maximum number of results to return (default: 10)
+
+
+      \    Returns:
+
+      \        A dictionary containing matching contacts
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_contactsArguments
+      required:
+        - property_name
+        - operator
+        - value
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        value:
+          type: string
+          title: Value
+        operator:
+          type: string
+          title: Operator
+        property_name:
+          type: string
+          title: Property Name
+  - name: get_deal_by_id
+    description: "
+
+      \    Get a HubSpot deal by ID
+
+
+      \    Args:
+
+      \        deal_id: The HubSpot deal ID. Can be provided as integer or
+      string.
+
+
+      \    Returns:
+
+      \        The deal information as a dictionary
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_deal_by_idArguments
+      properties:
+        deal_id:
+          type: string
+          title: deal_id
+          default: null
+  - name: get_contact_deals
+    description: "
+
+      \    Get all deals associated with a HubSpot contact
+
+
+      \    Args:
+
+      \        contact_id: The HubSpot contact ID. Can be provided as integer or
+      string.
+
+
+      \    Returns:
+
+      \        A dictionary containing the deals associated with the contact
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_contact_dealsArguments
+      properties:
+        contact_id:
+          type: string
+          title: contact_id
+          default: null
+  - name: get_deal_contacts
+    description: "
+
+      \    Get all contacts associated with a HubSpot deal
+
+
+      \    Args:
+
+      \        deal_id: The HubSpot deal ID. Can be provided as integer or
+      string.
+
+
+      \    Returns:
+
+      \        A dictionary containing the contacts associated with the deal
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_deal_contactsArguments
+      properties:
+        deal_id:
+          type: string
+          title: deal_id
+          default: null
+  - name: get_latest_marketing_campaign
+    description: "
+
+      \    Get the most recent marketing campaigns
+
+
+      \    Args:
+
+      \        limit: Number of campaigns to retrieve (default: 1)
+
+      \        type: Campaign type (EMAIL, SOCIAL, etc.)
+
+
+      \    Returns:
+
+      \        Information about the latest marketing campaigns
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_latest_marketing_campaignArguments
+      properties:
+        type:
+          type: string
+          title: Type
+          default: EMAIL
+        limit:
+          type: integer
+          title: Limit
+          default: 1
+  - name: get_campaign_engagement
+    description: "
+
+      \    Get contacts who engaged with a specific marketing campaign
+
+
+      \    Args:
+
+      \        campaign_id: ID of the marketing campaign
+
+      \        engagement_type: Type of engagement (OPEN, CLICK, etc.)
+
+      \        limit: Maximum number of contacts to return
+
+
+      \    Returns:
+
+      \        List of contacts with engagement data
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_campaign_engagementArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        campaign_id:
+          type: string
+          title: campaign_id
+          default: null
+        engagement_type:
+          type: string
+          title: Engagement Type
+          default: OPEN
+  - name: get_page_visits
+    description: "
+
+      \    Get contacts who visited a specific page in the given time period
+
+
+      \    Args:
+
+      \        page_path: URL path of the page (e.g., \"/pricing\")
+
+      \        days_ago: How many days back to look for visits
+
+      \        limit: Maximum number of contacts to return
+
+
+      \    Returns:
+
+      \        List of contacts with visit data
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_page_visitsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        days_ago:
+          type: integer
+          title: Days Ago
+          default: 7
+        page_path:
+          type: string
+          title: Page Path
+          default: /pricing
+  - name: get_contact_analytics
+    description: "
+
+      \    Get analytics data for a specific contact
+
+
+      \    Args:
+
+      \        contact_id: ID of the contact
+
+      \        metrics: Types of metrics to retrieve (page_views,
+      form_submissions, etc.)
+
+      \        timeframe: Time period for data (last_7_days, last_30_days, etc.)
+
+
+      \    Returns:
+
+      \        Analytics data for the contact
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_contact_analyticsArguments
+      properties:
+        metrics:
+          type: string
+          title: Metrics
+          default: page_views
+        timeframe:
+          type: string
+          title: Timeframe
+          default: last_7_days
+        contact_id:
+          type: string
+          title: contact_id
+          default: null
+  - name: get_scheduled_meetings
+    description: "
+
+      \    Get meetings scheduled within a time period
+
+
+      \    Args:
+
+      \        start_date: Start of time period (first day of current month by
+      default)
+
+      \        end_date: End of time period (last day of current month by
+      default)
+
+      \        owner_id: Optional filter for meetings with a specific owner
+
+      \        limit: Maximum number of meetings to return
+
+
+      \    Returns:
+
+      \        List of meetings with associated contact information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_scheduled_meetingsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        owner_id:
+          type: string
+          title: Owner Id
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+  - name: get_meeting_details
+    description: "
+
+      \    Get detailed information about a specific meeting
+
+
+      \    Args:
+
+      \        meeting_id: ID of the meeting
+
+
+      \    Returns:
+
+      \        Detailed meeting information including attendees, notes, etc.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_meeting_detailsArguments
+      properties:
+        meeting_id:
+          type: string
+          title: meeting_id
+          default: null

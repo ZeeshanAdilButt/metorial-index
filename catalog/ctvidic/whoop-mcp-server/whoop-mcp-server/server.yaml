@@ -1,0 +1,16 @@
+identifier: ctvidic/whoop-mcp-server/whoop-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ctvidic/whoop-mcp-server
+  name: whoop-mcp-server
+  owner: ctvidic
+server:
+  subdirectory: /
+  name: Whoop MCP Server
+  description: Access your Whoop data seamlessly. Query your cycles, recovery,
+    strain, and workout metrics directly from the Whoop API, enhancing your
+    language model's capabilities with real-time health insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

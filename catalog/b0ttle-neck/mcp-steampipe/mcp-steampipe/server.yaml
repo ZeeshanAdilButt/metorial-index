@@ -1,0 +1,18 @@
+identifier: b0ttle-neck/mcp-steampipe/mcp-steampipe
+repo:
+  provider: github.com
+  url: https://github.com/b0ttle-neck/mcp-steampipe
+  name: mcp-steampipe
+  owner: b0ttle-neck
+server:
+  subdirectory: /
+  name: Steampipe Bridge
+  description: Enable your AI model to run Steampipe queries seamlessly by
+    bridging it with the Steampipe tool. Execute SQL queries on various data
+    sources through Steampipe and retrieve structured results directly within
+    your AI workflows. Simplify data access and integration for enhanced
+    AI-driven insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: csonigo/datagouv-mcp-server/datagouv-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/csonigo/datagouv-mcp-server
+  name: datagouv-mcp-server
+  owner: csonigo
+server:
+  subdirectory: /
+  name: Data Gouv MCP Server
+  description: Interact with Datagouv APIs to retrieve up-to-date company
+    information in France. Search for companies by name, CEO, or address
+    effortlessly. Enhance your applications with real-time data access through a
+    simple API interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

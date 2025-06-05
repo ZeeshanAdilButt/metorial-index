@@ -1,0 +1,14 @@
+identifier: erithwik/mcp-hn/mcp-hn
+repo:
+  provider: github.com
+  url: https://github.com/erithwik/mcp-hn
+  name: mcp-hn
+  owner: erithwik
+server:
+  subdirectory: /
+  name: Hacker News
+  description: Fetch stories, comments, and user info from Hacker News.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

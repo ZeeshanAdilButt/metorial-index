@@ -1,0 +1,104 @@
+tools:
+  - name: set-spotify-credentials
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clientId
+        - clientSecret
+        - accessToken
+        - refreshToken
+      properties:
+        clientId:
+          type: string
+          description: The Spotify Client ID
+        accessToken:
+          type: string
+          description: The Spotify Access Token
+        clientSecret:
+          type: string
+          description: The Spotify Client Secret
+        refreshToken:
+          type: string
+          description: The Spotify Refresh Token
+      additionalProperties: false
+  - name: check-credentials-status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: search-tracks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Number of results to return
+        query:
+          type: string
+          description: Search query for tracks
+      additionalProperties: false
+  - name: get-current-user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the playlist
+        description:
+          type: string
+          description: Description of the playlist
+      additionalProperties: false
+  - name: add-tracks-to-playlist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - playlistId
+        - trackUris
+      properties:
+        trackUris:
+          type: array
+          items:
+            type: string
+          description: Array of Spotify track URIs to add
+        playlistId:
+          type: string
+          description: The Spotify playlist ID
+      additionalProperties: false
+  - name: get-recommendations
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - seedTracks
+      properties:
+        limit:
+          type: number
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Number of recommendations to return
+        seedTracks:
+          type: array
+          items:
+            type: string
+          maxItems: 5
+          description: Spotify track IDs to use as seeds (max 5)
+      additionalProperties: false

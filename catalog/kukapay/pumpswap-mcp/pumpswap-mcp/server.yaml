@@ -1,0 +1,18 @@
+identifier: kukapay/pumpswap-mcp/pumpswap-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/pumpswap-mcp
+  name: pumpswap-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: PumpSwap Token Trading Server
+  description: Enable AI agents to perform real-time token swaps and automated
+    on-chain trading on the Solana blockchain using PumpSwap. Buy and sell
+    tokens, query token prices, and retrieve detailed pool data with
+    customizable transaction parameters. Securely manage transactions with your
+    Solana private key for seamless DeFi interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

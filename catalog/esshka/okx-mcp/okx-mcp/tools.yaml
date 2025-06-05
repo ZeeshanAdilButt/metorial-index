@@ -1,0 +1,29 @@
+tools:
+  - name: get_price
+    description: Get latest price for an OKX instrument
+    inputSchema:
+      type: object
+      required:
+        - instrument
+      properties:
+        instrument:
+          type: string
+          description: Instrument ID (e.g. BTC-USDT)
+  - name: get_candlesticks
+    description: Get candlestick data for an OKX instrument
+    inputSchema:
+      type: object
+      required:
+        - instrument
+      properties:
+        bar:
+          type: string
+          default: 1m
+          description: Time interval (e.g. 1m, 5m, 1H, 1D)
+        limit:
+          type: number
+          default: 100
+          description: Number of candlesticks (max 100)
+        instrument:
+          type: string
+          description: Instrument ID (e.g. BTC-USDT)

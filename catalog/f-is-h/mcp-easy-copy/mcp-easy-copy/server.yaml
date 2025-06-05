@@ -1,0 +1,18 @@
+identifier: f-is-h/mcp-easy-copy/mcp-easy-copy
+repo:
+  provider: github.com
+  url: https://github.com/f-is-h/mcp-easy-copy
+  name: mcp-easy-copy
+  owner: f-is-h
+server:
+  subdirectory: /
+  name: Easy Copy Service
+  description: Provide a convenient MCP server that lists all available MCP
+    services configured in Claude Desktop for easy reference and copying.
+    Simplify the process of discovering and specifying MCP services without
+    searching through configuration files. Keep the list dynamically updated and
+    accessible at the top of the tools menu for quick selection.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

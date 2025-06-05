@@ -1,0 +1,90 @@
+tools:
+  - name: get_recent_transcripts
+    description: Get and download transcripts from recent Zoom meetings. This tool
+      will access the Zoom cloud API to fetch and download recent meeting
+      transcripts.
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          maximum: 30
+          minimum: 1
+          description: "Number of recent meetings to fetch (default: 5)"
+  - name: search_transcripts
+    description: Search across Zoom meeting transcripts for specific content. This
+      tool will search through locally stored transcripts first.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        dateRange:
+          type: object
+          properties:
+            to:
+              type: string
+              description: End date (ISO format)
+            from:
+              type: string
+              description: Start date (ISO format)
+  - name: extract_action_items
+    description: Identify and extract action items, tasks and commitments from
+      meeting transcripts
+    inputSchema:
+      type: object
+      required:
+        - meetingId
+      properties:
+        meetingId:
+          type: string
+          description: Meeting ID to extract action items from. Can be either the numeric
+            ID or UUID.
+        participant:
+          type: string
+          description: Optional filter to only show action items from or assigned to a
+            specific participant
+  - name: check_local_transcripts
+    description: Check what transcripts are already downloaded and available locally
+    inputSchema:
+      type: object
+      properties:
+        dateRange:
+          type: object
+          properties:
+            to:
+              type: string
+              description: End date (ISO format)
+            from:
+              type: string
+              description: Start date (ISO format)
+  - name: download_transcript
+    description: Download a specific Zoom meeting transcript from the cloud to local storage
+    inputSchema:
+      type: object
+      required:
+        - meetingId
+      properties:
+        meetingId:
+          type: string
+          description: Zoom meeting ID or UUID
+  - name: list_meetings
+    description: List available Zoom meetings with recordings that exist in the cloud
+    inputSchema:
+      type: object
+      properties:
+        dateRange:
+          type: object
+          properties:
+            to:
+              type: string
+              description: End date (ISO format)
+            from:
+              type: string
+              description: Start date (ISO format)
+        participant:
+          type: string
+          description: Filter by participant name

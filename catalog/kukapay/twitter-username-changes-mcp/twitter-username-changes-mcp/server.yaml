@@ -1,0 +1,18 @@
+identifier: kukapay/twitter-username-changes-mcp/twitter-username-changes-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/twitter-username-changes-mcp
+  name: twitter-username-changes-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: Twitter Username Changes
+  description: Track and query the historical changes of Twitter usernames to
+    identify potential scam risks from frequent screen name changes. Easily
+    retrieve username change histories by providing a current Twitter handle.
+    Utilize a lightweight server with prompt support for seamless integration
+    and querying.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

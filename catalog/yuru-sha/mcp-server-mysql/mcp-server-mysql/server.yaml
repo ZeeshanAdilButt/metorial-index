@@ -1,0 +1,14 @@
+identifier: yuru-sha/mcp-server-mysql/mcp-server-mysql
+repo:
+  provider: github.com
+  url: https://github.com/yuru-sha/mcp-server-mysql
+  name: mcp-server-mysql
+  owner: yuru-sha
+server:
+  subdirectory: /
+  name: MySQL Database Server
+  description: Enable LLMs to inspect database schemas and execute read-only queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

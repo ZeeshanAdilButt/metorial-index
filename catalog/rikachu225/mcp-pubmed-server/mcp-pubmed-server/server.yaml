@@ -1,0 +1,18 @@
+identifier: rikachu225/mcp-pubmed-server/mcp-pubmed-server
+repo:
+  provider: github.com
+  url: https://github.com/rikachu225/mcp-pubmed-server
+  name: mcp-pubmed-server
+  owner: rikachu225
+server:
+  subdirectory: /
+  name: PubMed Server
+  description: Access and search for open access research articles from the PubMed
+    database. Retrieve detailed article information, including abstracts and
+    free full-text links, while ensuring compliance with API rate limits.
+    Enhance your research capabilities with easy integration into your
+    applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

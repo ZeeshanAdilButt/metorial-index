@@ -1,0 +1,16 @@
+identifier: mcp-get/community-servers/server-macos
+repo:
+  provider: github.com
+  url: https://github.com/mcp-get/community-servers
+  name: community-servers
+  owner: mcp-get
+server:
+  subdirectory: /src/server-macos
+  name: macOS MCP Server
+  description: A Model Context Protocol server that provides macOS-specific system
+    information and operations, such as CPU, memory, disk, network retrieval,
+    and macOS native notifications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: lanbaoshen/mcp-jenkins/mcp-jenkins
+repo:
+  provider: github.com
+  url: https://github.com/lanbaoshen/mcp-jenkins
+  name: mcp-jenkins
+  owner: lanbaoshen
+server:
+  subdirectory: /
+  name: Jenkins MCP Server
+  description: Connect Jenkins with AI language models to automate and manage your
+    CI/CD pipelines. Leverage the power of AI to interact with Jenkins tools
+    securely and efficiently, enhancing your development workflow. Simplify job
+    management and build monitoring with easy access to Jenkins functionalities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

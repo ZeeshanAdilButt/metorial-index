@@ -1,0 +1,16 @@
+identifier: goern/forgejo-mcp/forgejo-mcp
+repo:
+  provider: github.com
+  url: https://github.com/goern/forgejo-mcp
+  name: forgejo-mcp
+  owner: goern
+server:
+  subdirectory: /
+  name: forgejo-mcp
+  description: This Model Context Protocol (MCP) server provides tools and
+    resources for interacting with the Forgejo (specifically Codeberg.org) REST
+    API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

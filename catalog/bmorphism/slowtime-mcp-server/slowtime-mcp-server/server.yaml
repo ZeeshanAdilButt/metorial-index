@@ -1,0 +1,15 @@
+identifier: bmorphism/slowtime-mcp-server/slowtime-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/bmorphism/slowtime-mcp-server
+  name: slowtime-mcp-server
+  owner: bmorphism
+server:
+  subdirectory: /
+  name: Slowtime
+  description: Provides time-based operations with timing protection and timelock
+    encryption.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,17 @@
+identifier: fortunto2/prefect-mcp-server/prefect-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/fortunto2/prefect-mcp-server
+  name: prefect-mcp-server
+  owner: fortunto2
+server:
+  subdirectory: /
+  name: Prefect MCP Server
+  description: Interact seamlessly with the Prefect API to enhance your workflow.
+    Set up a reliable server configuration tailored for the Cursor IDE, enabling
+    efficient management of your Prefect tasks and resources. Simplify your
+    development process with easy installation and configuration steps.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

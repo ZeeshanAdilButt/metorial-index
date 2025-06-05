@@ -1,0 +1,68 @@
+tools:
+  - name: get-budget-summary
+    description: Get budget summary for a specific time period
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - start_date
+        - end_date
+      properties:
+        end_date:
+          type: string
+          description: End date (YYYY-MM-DD, should be end of month)
+        start_date:
+          type: string
+          description: Start date (YYYY-MM-DD, should be start of month)
+      additionalProperties: false
+  - name: get-recent-transactions
+    description: Get recent transactions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        days:
+          type: number
+          default: 30
+          description: Number of days to look back
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of transactions to return
+      additionalProperties: false
+  - name: search-transactions
+    description: Search transactions by keyword
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - keyword
+      properties:
+        days:
+          type: number
+          default: 90
+          description: Number of days to look back
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of transactions to return
+        keyword:
+          type: string
+          description: Search term to look for
+      additionalProperties: false
+  - name: get-category-spending
+    description: Get spending in a category
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - category
+      properties:
+        days:
+          type: number
+          default: 30
+          description: Number of days to look back
+        category:
+          type: string
+          description: Category name
+      additionalProperties: false

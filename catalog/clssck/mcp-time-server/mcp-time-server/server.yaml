@@ -1,0 +1,14 @@
+identifier: clssck/mcp-time-server/mcp-time-server
+repo:
+  provider: github.com
+  url: https://github.com/clssck/mcp-time-server
+  name: mcp-time-server
+  owner: clssck
+server:
+  subdirectory: /
+  name: Time Server
+  description: Provide timezone conversions and time-related operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

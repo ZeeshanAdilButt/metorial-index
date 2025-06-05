@@ -1,0 +1,14 @@
+identifier: secretiveshell/mcp-timeserver/mcp-timeserver
+repo:
+  provider: github.com
+  url: https://github.com/SecretiveShell/MCP-timeserver
+  name: MCP-timeserver
+  owner: SecretiveShell
+server:
+  subdirectory: /
+  name: Time Server
+  description: Provide the current date and time in various timezones.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

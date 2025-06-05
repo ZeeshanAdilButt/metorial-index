@@ -1,0 +1,18 @@
+identifier: jktfe/servemyapi/servemyapi
+repo:
+  provider: github.com
+  url: https://github.com/Jktfe/serveMyAPI
+  name: serveMyAPI
+  owner: Jktfe
+server:
+  subdirectory: /
+  name: ServeMyAPI
+  description: Store API keys securely in the macOS Keychain and access them
+    through a consistent interface. Eliminate the risks of .ENV files by
+    providing a centralized, secure solution for managing sensitive credentials
+    across projects. Enhance your AI assistant's capabilities by allowing it to
+    retrieve keys using natural language commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

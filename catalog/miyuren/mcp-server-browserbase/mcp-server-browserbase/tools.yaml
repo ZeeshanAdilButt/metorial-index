@@ -1,0 +1,54 @@
+tools:
+  - name: browserbase_create_session
+    description: Create a new cloud browser session using Browserbase
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: browserbase_navigate
+    description: Navigate to a URL
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+  - name: browserbase_screenshot
+    description: Takes a screenshot of the current page. Use this tool to learn
+      where you are on the page when controlling the browser with Stagehand.
+      Only use this tool when the other tools are not sufficient to get the
+      information you need.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: browserbase_click
+    description: Click an element on the page
+    inputSchema:
+      type: object
+      required:
+        - selector
+      properties:
+        selector:
+          type: string
+          description: CSS selector for element to click
+  - name: browserbase_fill
+    description: Fill out an input field
+    inputSchema:
+      type: object
+      required:
+        - selector
+        - value
+      properties:
+        value:
+          type: string
+          description: Value to fill
+        selector:
+          type: string
+          description: CSS selector for input field
+  - name: browserbase_get_text
+    description: Extract all text content from the current page
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

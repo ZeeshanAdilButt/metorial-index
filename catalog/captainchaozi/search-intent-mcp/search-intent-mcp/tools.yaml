@@ -1,0 +1,31 @@
+tools:
+  - name: search_intent_analysis
+    description: |-
+      A tool for analyzing search intent and user behavior.
+
+      Features:
+      - Analyze search query intent
+      - Identify relevant topic categories
+      - Provide search suggestions
+      - Offer reference links
+
+      Examples:
+      "iphone 15" → Product research/purchase intent
+      "python tutorial" → Learning intent
+
+      Response format:
+      - query: Original search term
+      - intent: Search intention
+      - categories: Related categories
+      - suggestions: Related search terms
+      - references: Reference links
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Enter a search term to analyze
+      additionalProperties: false

@@ -1,0 +1,16 @@
+identifier: edenyavin/osv-mcp/osv-mcp
+repo:
+  provider: github.com
+  url: https://github.com/EdenYavin/OSV-MCP
+  name: OSV-MCP
+  owner: EdenYavin
+server:
+  subdirectory: /
+  name: OSV Database API Server
+  description: Fetch and manage vulnerability data for software packages. Get
+    detailed information on CVEs, affected versions, and fixes to enhance your
+    security posture.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

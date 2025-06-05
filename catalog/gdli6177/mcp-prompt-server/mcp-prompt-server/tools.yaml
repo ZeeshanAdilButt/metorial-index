@@ -1,0 +1,144 @@
+tools:
+  - name: api_documentation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - language
+        - code
+        - format
+      properties:
+        code:
+          type: string
+          description: 要生成文档的API代码
+        format:
+          type: string
+          description: 文档格式(markdown/html/jsdoc等)
+        language:
+          type: string
+          description: 编程语言
+      additionalProperties: false
+  - name: build_mcp_server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: code_refactoring
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - language
+        - code
+        - focus_areas
+      properties:
+        code:
+          type: string
+          description: 要重构的代码
+        language:
+          type: string
+          description: 编程语言
+        focus_areas:
+          type: string
+          description: 重点关注的重构领域(如性能、可读性、模块化等)
+      additionalProperties: false
+  - name: code_review
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - language
+        - code
+      properties:
+        code:
+          type: string
+          description: 要审查的代码
+        language:
+          type: string
+          description: 编程语言
+      additionalProperties: false
+  - name: project_architecture
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_type
+        - technologies
+        - features
+      properties:
+        features:
+          type: string
+          description: 项目主要功能和特性
+        project_type:
+          type: string
+          description: 项目类型(如Web应用、移动应用、API服务等)
+        technologies:
+          type: string
+          description: 使用的技术栈(如React, Node.js, Python等)
+      additionalProperties: false
+  - name: prompt_template_generator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt_name
+        - prompt_description
+        - task_type
+      properties:
+        task_type:
+          type: string
+          description: 任务类型（如代码生成、文档编写、数据分析等）
+        prompt_name:
+          type: string
+          description: 新prompt的名称（唯一标识符）
+        prompt_description:
+          type: string
+          description: 对prompt功能的描述
+      additionalProperties: false
+  - name: test_case_generator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - language
+        - code
+        - test_framework
+      properties:
+        code:
+          type: string
+          description: 要测试的代码
+        language:
+          type: string
+          description: 编程语言
+        test_framework:
+          type: string
+          description: 测试框架(如Jest, Pytest, JUnit等)
+      additionalProperties: false
+  - name: writing_assistant
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - draft
+        - platform
+      properties:
+        draft:
+          type: string
+          description: 用户提供的草稿内容
+        platform:
+          type: string
+          description: 目标平台（如公众号、小红书、推特等）
+      additionalProperties: false
+  - name: reload_prompts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_prompt_names
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

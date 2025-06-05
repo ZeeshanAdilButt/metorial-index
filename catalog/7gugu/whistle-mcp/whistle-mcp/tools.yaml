@@ -1,0 +1,413 @@
+tools:
+  - name: getRules
+    description: 获取所有规则&分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: createRule
+    description: 创建新规则
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 规则名称
+      additionalProperties: false
+  - name: updateRule
+    description: 更新规则内容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ruleName
+        - ruleValue
+      properties:
+        ruleName:
+          type: string
+          description: 规则名称
+        ruleValue:
+          type: string
+          description: 规则内容
+      additionalProperties: false
+  - name: renameRule
+    description: 重命名规则
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ruleName
+        - newName
+      properties:
+        newName:
+          type: string
+          description: 规则的新名称
+        ruleName:
+          type: string
+          description: 规则现有名称
+      additionalProperties: false
+  - name: deleteRule
+    description: 删除规则
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ruleName
+      properties:
+        ruleName:
+          type: string
+          description: 要删除的规则名称
+      additionalProperties: false
+  - name: enableRule
+    description: 启用规则
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ruleName
+      properties:
+        ruleName:
+          type: string
+          description: 规则名称
+      additionalProperties: false
+  - name: disableRule
+    description: 禁用规则
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ruleName
+      properties:
+        ruleName:
+          type: string
+          description: 规则名称
+      additionalProperties: false
+  - name: createGroup
+    description: 创建新分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 分组名称
+      additionalProperties: false
+  - name: renameGroup
+    description: 重命名分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupName
+        - newName
+      properties:
+        newName:
+          type: string
+          description: 分组的新名称
+        groupName:
+          type: string
+          description: 分组的现有名称
+      additionalProperties: false
+  - name: deleteGroup
+    description: 删除分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupName
+      properties:
+        groupName:
+          type: string
+          description: 分组名称
+      additionalProperties: false
+  - name: addRuleToGroup
+    description: 将规则添加到分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupName
+        - ruleName
+      properties:
+        ruleName:
+          type: string
+          description: 要添加的规则名称
+        groupName:
+          type: string
+          description: 分组名称
+      additionalProperties: false
+  - name: removeRuleFromGroup
+    description: 将规则移出分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ruleName
+      properties:
+        ruleName:
+          type: string
+          description: 规则名称
+      additionalProperties: false
+  - name: getAllValues
+    description: 获取所有规则的值
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: createValuesGroup
+    description: 创建新的值分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 分组名称
+      additionalProperties: false
+  - name: createValue
+    description: 创建新的值
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 值名称
+      additionalProperties: false
+  - name: updateValue
+    description: 更新值内容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          description: 值名称
+        value:
+          type: string
+          description: 新值内容
+      additionalProperties: false
+  - name: renameValue
+    description: 重命名值
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - newName
+      properties:
+        name:
+          type: string
+          description: 值现有名称
+        newName:
+          type: string
+          description: 值的新名称
+      additionalProperties: false
+  - name: renameValueGroup
+    description: 重命名值分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupName
+        - newName
+      properties:
+        newName:
+          type: string
+          description: 分组的新名称
+        groupName:
+          type: string
+          description: 分组现有名称
+      additionalProperties: false
+  - name: deleteValue
+    description: 删除值
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 值名称
+      additionalProperties: false
+  - name: deleteValueGroup
+    description: 删除值分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupName
+      properties:
+        groupName:
+          type: string
+          description: 分组名称
+      additionalProperties: false
+  - name: addValueToGroup
+    description: 将值添加到分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupName
+        - valueName
+      properties:
+        groupName:
+          type: string
+          description: 分组名称
+        valueName:
+          type: string
+          description: 要添加的值名称
+      additionalProperties: false
+  - name: removeValueFromGroup
+    description: 将值移出分组
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - valueName
+      properties:
+        valueName:
+          type: string
+          description: 值名称
+      additionalProperties: false
+  - name: getWhistleStatus
+    description: 获取whistle服务器的当前状态
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: toggleProxy
+    description: 启用或禁用whistle代理
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: 是否启用代理
+      additionalProperties: false
+  - name: toggleHttpInterception
+    description: 启用或禁用HTTP拦截
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: 是否启用HTTP拦截
+      additionalProperties: false
+  - name: toggleHttpsInterception
+    description: 启用或禁用HTTPS拦截
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: 是否启用HTTPS拦截
+      additionalProperties: false
+  - name: toggleHttp2
+    description: 启用或禁用HTTP/2
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: 是否启用HTTP/2
+      additionalProperties: false
+  - name: toggleMultiRuleMode
+    description: 启用或禁用多规则模式
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - enabled
+      properties:
+        enabled:
+          type: boolean
+          description: 是否启用多规则模式
+      additionalProperties: false
+  - name: getInterceptInfo
+    description: 获取URL的拦截信息(请求/响应皆以base64编码)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        url:
+          type: string
+          description: 要检查拦截信息的URL (支持正则表达式)
+        count:
+          type: number
+          description: 请求数量（可选）
+        startTime:
+          type: string
+          description: 开始时间ms（可选）
+      additionalProperties: false
+  - name: replayRequest
+    description: 在whistle中重放捕获的请求(本接口请求后不会直接返回结果, 需要使用getInterceptInfo接口获取结果)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 请求URL
+        body:
+          type: string
+          description: 请求体，可以是字符串或对象
+        useH2:
+          type: boolean
+          description: 是否使用HTTP/2
+        method:
+          type: string
+          description: 请求方法，默认为GET
+        headers:
+          type: string
+          description: 请求头，可以是对象或字符串
+      additionalProperties: false
+  - name: setAllRulesState
+    description: 控制所有规则的启用状态（启用/禁用）
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - disabled
+      properties:
+        disabled:
+          type: boolean
+          description: true表示禁用所有规则，false表示启用所有规则
+      additionalProperties: false
+  - name: getCurrentTimestamp
+    description: 获取当前本地时间戳
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

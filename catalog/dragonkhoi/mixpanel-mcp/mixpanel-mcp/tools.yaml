@@ -1,0 +1,827 @@
+tools:
+  - name: get_today_top_events
+    description: Get today's top events from Mixpanel. Useful for quickly
+      identifying the most active events happening today, spotting trends, and
+      monitoring real-time user activity.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          enum:
+            - general
+            - average
+            - unique
+          type: string
+          description: The type of events to fetch, either general, average, or unique,
+            defaults to general
+        limit:
+          type: number
+          description: Maximum number of events to return
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+      additionalProperties: false
+  - name: profile_event_activity
+    description: Get data for a profile's event activity. Useful for understanding
+      individual user journeys, troubleshooting user-specific issues, and
+      analyzing behavior patterns of specific users.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - distinct_ids
+        - from_date
+        - to_date
+      properties:
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        distinct_ids:
+          type: string
+          description: 'A JSON array as a string representing the `distinct_ids` to return
+            activity feeds for. Example:
+            `["12a34aa567eb8d-9ab1c26f345b67-89123c45-6aeaa7-89f12af345f678"]`'
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: get_top_events
+    description: Get a list of the most common events over the last 31 days. Useful
+      for identifying key user actions, prioritizing feature development, and
+      understanding overall platform usage patterns.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          enum:
+            - general
+            - average
+            - unique
+          type: string
+          description: The type of events to fetch, either general, average, or unique,
+            defaults to general
+        limit:
+          type: number
+          description: Maximum number of events to return
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+      additionalProperties: false
+  - name: aggregate_event_counts
+    description: Get unique, general, or average data for a set of events over N
+      days, weeks, or months. Useful for trend analysis, comparing event
+      performance over time, and creating time-series visualizations.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - unit
+      properties:
+        type:
+          enum:
+            - general
+            - unique
+            - average
+          type: string
+          description: The type of data to fetch, either general, unique, or average,
+            defaults to general
+        unit:
+          enum:
+            - minute
+            - hour
+            - day
+            - week
+            - month
+          type: string
+          description: The level of granularity of the data you get back
+        event:
+          type: string
+          description: 'The event or events that you wish to get data for, a string
+            encoded as a JSON array. Example format: "["play song", "log in",
+            "add playlist"]"'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        interval:
+          type: number
+          description: The number of units to return data for. Specify either interval or
+            from_date and to_date
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+      additionalProperties: false
+  - name: aggregated_event_property_values
+    description: Get unique, general, or average data for a single event and
+      property over days, weeks, or months. Useful for analyzing how specific
+      properties affect event performance, segmenting users, and identifying
+      valuable user attributes.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - name
+        - unit
+      properties:
+        name:
+          type: string
+          description: The name of the property you would like to get data for
+        type:
+          enum:
+            - general
+            - unique
+            - average
+          type: string
+          description: The analysis type - general, unique, or average events, defaults to
+            general
+        unit:
+          enum:
+            - minute
+            - hour
+            - day
+            - week
+            - month
+          type: string
+          description: The level of granularity of the data (minute, hour, day, week, or
+            month)
+        event:
+          type: string
+          description: The event that you wish to get data for (a single event name, not
+            an array)
+        limit:
+          type: number
+          description: "The maximum number of values to return (default: 255)"
+        values:
+          type: string
+          description: 'The specific property values to get data for, encoded as a JSON
+            array. Example: "["female", "unknown"]"'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        interval:
+          type: number
+          description: The number of units to return data for. Specify either interval or
+            from_date and to_date
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+      additionalProperties: false
+  - name: query_insights_report
+    description: Get data from your Insights reports. Useful for accessing saved
+      analyses, sharing standardized metrics across teams, and retrieving
+      complex pre-configured visualizations.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - bookmark_id
+      properties:
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        bookmark_id:
+          type: string
+          description: The ID of your Insights report
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: query_funnel_report
+    description: "Get data for a funnel based on a funnel_id. Useful for analyzing
+      user conversion paths, identifying drop-off points in user journeys, and
+      optimizing multi-step processes. Funnel IDs should be retrieved using the
+      list_saved_funnels tool. "
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - funnel_id
+        - from_date
+        - to_date
+      properties:
+        unit:
+          enum:
+            - day
+            - week
+            - month
+          type: string
+          description: Alternate way of specifying interval
+        length:
+          type: number
+          description: The number of units each user has to complete the funnel
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        interval:
+          type: number
+          description: The number of days you want each bucket to contain
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        funnel_id:
+          type: string
+          description: The Mixpanel funnel ID that you wish to get data for
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        length_unit:
+          enum:
+            - day
+            - hour
+            - minute
+            - second
+          type: string
+          description: The unit applied to the length parameter
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: list_saved_funnels
+    description: Get the names and IDs of your saved funnels. Useful for discovering
+      available funnels for analysis and retrieving funnel IDs needed for the
+      query_funnel_report tool.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: list_saved_cohorts
+    description: Get all cohorts in a given project. Useful for discovering user
+      segments, planning targeted analyses, and retrieving cohort IDs for
+      filtering in other reports.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: query_retention_report
+    description: Get data from your Retention reports. Useful for analyzing user
+      engagement over time, measuring product stickiness, and understanding how
+      well your product retains users after specific actions. Only use params
+      interval or unit, not both.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - from_date
+        - to_date
+      properties:
+        on:
+          type: string
+          description: The property expression to segment the second event on
+        unit:
+          enum:
+            - day
+            - week
+            - month
+          type: string
+          description: "The interval unit: 'day' (eg use if asked for D7 or D30), 'week'
+            (eg use if asked for W12), or 'month' (eg use if asked for M6).
+            Default is 'day'. DO NOT USE IF ALREADY PROVIDING INTERVAL."
+        event:
+          type: string
+          description: The event to generate returning counts for. If not specified, looks
+            across all events
+        limit:
+          type: number
+          description: Return the top limit segmentation values. Only applies when 'on' is
+            specified
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        interval:
+          type: number
+          description: The number of units per individual bucketed interval. Default is 1.
+            DO NOT USE IF ALREADY PROVIDING UNIT.
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        born_event:
+          type: string
+          description: The first event a user must do to be counted in a birth retention
+            cohort, required if retention_type is 'birth'. Can use
+            $mp_web_page_view as the born_event for general cases.
+        born_where:
+          type: string
+          description: >-
+            An expression to filter born_events by based on the grammar:
+            <expression> ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        return_where:
+          type: string
+          description: >-
+            An expression to filter return events by based on the grammar:
+            <expression> ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+        interval_count:
+          type: number
+          description: The number of individual buckets/intervals to return. Default is 1.
+            DO NOT USE IF ALREADY PROVIDING UNIT.
+        retention_type:
+          enum:
+            - birth
+            - compounded
+          type: string
+          description: "Type of retention: 'birth' (first time) or 'compounded'
+            (recurring). Defaults to 'birth'"
+      additionalProperties: false
+  - name: custom_jql
+    description: Run a custom JQL (JSON Query Language) script against your Mixpanel
+      data. Useful for complex custom analyses, advanced data transformations,
+      and queries that can't be handled by standard report types.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - script
+      properties:
+        params:
+          type: string
+          description: A JSON string containing parameters to pass to the script (will be
+            available as the 'params' variable)
+        script:
+          type: string
+          description: The JQL script to run (JavaScript code that uses Mixpanel's JQL
+            functions)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: query_segmentation_sum
+    description: Sum a numeric expression for events over time. Useful for
+      calculating revenue metrics, aggregating quantitative values, and tracking
+      cumulative totals across different time periods.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - from_date
+        - to_date
+        - on
+      properties:
+        on:
+          type: string
+          description: The expression to sum per unit time (should result in a numeric
+            value)
+        unit:
+          enum:
+            - hour
+            - day
+          type: string
+          description: "Time bucket size: 'hour' or 'day'. Default is 'day'"
+        event:
+          type: string
+          description: The event that you wish to get data for (single event name, not an
+            array)
+        where:
+          type: string
+          description: >-
+            An expression to filter events by based on the grammar: <expression>
+            ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: query_profiles
+    description: Query Mixpanel user profiles with filtering options. Useful for
+      retrieving detailed user profiles, filtering by specific properties, and
+      analyzing user behavior across different dimensions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Which page of the results to retrieve. Pages start at zero. If the
+            'page' parameter is provided, the session_id parameter must also be
+            provided
+        where:
+          type: string
+          description: >-
+            An expression to filter users (or groups) by. Using the following
+            grammar: <expression> ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <typecast op> '(' <expression> ')'
+                            | '(' <expression> ')'
+                            | <boolean literal>
+                            | <numeric literal>
+                            | <string literal>
+              <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+               <unary op> ::= '-' | 'not'
+                <math op> ::= 'floor' | 'round' | 'ceil'
+            <typecast op> ::= 'boolean' | 'number' | 'string'
+               <property> ::= 'properties["' <property name> '"]'
+        behaviors:
+          type: number
+          description: If you are exporting user profiles using an event selector, you use
+            a 'behaviors' parameter in your request
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.. Optional
+            since it has a default.
+        session_id:
+          type: string
+          description: A string id provided in the results of a previous query. Using a
+            session_id speeds up api response, and allows paging through results
+        distinct_id:
+          type: string
+          description: A unique identifier used to distinguish an individual profile
+        distinct_ids:
+          type: string
+          description: "A JSON array of distinct_ids to retrieve profiles for. Example:
+            '[\"id1\", \"id2\"]'"
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+        data_group_id:
+          type: string
+          description: The ID of the group key, used when querying group profiles
+        as_of_timestamp:
+          type: number
+          description: This parameter is only useful when also using 'behaviors'
+        filter_by_cohort:
+          type: string
+          description: "Takes a JSON object with a single key called 'id' whose value is
+            the cohort ID. Example: '{\"id\":12345}'"
+        include_all_users:
+          type: boolean
+          description: Only applicable with 'filter_by_cohort' parameter. Default is true
+        output_properties:
+          type: string
+          description: "A JSON array of names of properties you want returned. Example:
+            '[\"$last_name\", \"$email\", \"Total Spent\"]'"
+      additionalProperties: false
+  - name: query_frequency_report
+    description: Get data for frequency of actions over time. Useful for analyzing
+      how often users perform specific actions, identifying patterns of
+      behavior, and tracking user engagement over time.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - from_date
+        - to_date
+        - unit
+        - addiction_unit
+        - where
+      properties:
+        on:
+          type: string
+          description: The property expression to segment the second event on
+        unit:
+          enum:
+            - day
+            - week
+            - month
+          type: string
+          description: The overall time period to return frequency of actions for
+        event:
+          type: string
+          description: The event to generate returning counts for
+        limit:
+          type: number
+          description: Return the top limit segmentation values. This parameter does
+            nothing if 'on' is not specified
+        where:
+          type: string
+          description: >-
+            An expression to filter the returning events by based on the
+            grammar: <expression> ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+        addiction_unit:
+          enum:
+            - hour
+            - day
+          type: string
+          description: The granularity to return frequency of actions at
+      additionalProperties: false
+  - name: query_segmentation_report
+    description: Get data for an event, segmented and filtered by properties. Useful
+      for breaking down event data by user attributes, comparing performance
+      across segments, and identifying which user groups perform specific
+      actions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - from_date
+        - to_date
+        - where
+      properties:
+        on:
+          type: string
+          description: The property expression to segment the event on
+        type:
+          enum:
+            - general
+            - unique
+            - average
+          type: string
+          description: The type of analysis to perform, either general, unique, or
+            average, defaults to general
+        unit:
+          enum:
+            - minute
+            - hour
+            - day
+            - month
+          type: string
+          description: The buckets into which the property values that you segment on are
+            placed. Default is 'day'
+        event:
+          type: string
+          description: "The event that you wish to get data for. Note: this is a single
+            event name, not an array"
+        limit:
+          type: number
+          description: Return the top property values. Defaults to 60. Maximum value
+            10,000. This parameter does nothing if 'on' is not specified
+        where:
+          type: string
+          description: >-
+            An expression to filter events by based on the grammar: <expression>
+            ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        format:
+          enum:
+            - csv
+          type: string
+          description: Can be set to 'csv'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        interval:
+          type: number
+          description: Optional parameter in lieu of 'unit' when 'type' is not 'general'.
+            Determines the number of days your results are bucketed into
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: query_segmentation_bucket
+    description: Get data for an event, segmented and filtered by properties, with
+      values placed into numeric buckets. Useful for analyzing distributions of
+      numeric values, creating histograms, and understanding the range of
+      quantitative metrics.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - from_date
+        - to_date
+        - on
+        - where
+      properties:
+        on:
+          type: string
+          description: The property expression to segment the event on. This expression
+            must be a numeric property
+        type:
+          enum:
+            - general
+            - unique
+            - average
+          type: string
+          description: The type of analysis to perform, either general, unique, or
+            average, defaults to general
+        unit:
+          enum:
+            - hour
+            - day
+          type: string
+          description: The buckets into which the property values that you segment on are
+            placed. Default is 'day'
+        event:
+          type: string
+          description: "The event that you wish to get data for. Note: this is a single
+            event name, not an array"
+        where:
+          type: string
+          description: >-
+            An expression to filter events by based on the grammar: <expression>
+            ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: query_segmentation_average
+    description: Averages an expression for events per unit time. Useful for
+      calculating average values like purchase amounts, session durations, or
+      any numeric metric, and tracking how these averages change over time.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - from_date
+        - to_date
+        - on
+      properties:
+        on:
+          type: string
+          description: The expression to average per unit time. The result of the
+            expression should be a numeric value
+        unit:
+          enum:
+            - hour
+            - day
+          type: string
+          description: The buckets [hour, day] into which the property values are placed.
+            Default is 'day'
+        event:
+          type: string
+          description: "The event that you wish to get data for. Note: this is a single
+            event name, not an array"
+        where:
+          type: string
+          description: >-
+            An expression to filter events by based on the grammar: <expression>
+            ::= 'properties["' <property> '"]'
+                            | <expression> <binary op> <expression>
+                            | <unary op> <expression>
+                            | <math op> '(' <expression> ')'
+                            | <string literal>
+               <binary op> ::= '+' | '-' | '*' | '/' | '%' | '==' | '!=' |
+                              '>' | '>=' | '<' | '<=' | 'in' | 'and' | 'or'
+                            | <unary op> ::= '-' | 'not'
+        to_date:
+          type: string
+          description: The date in yyyy-mm-dd format to query to (inclusive)
+        from_date:
+          type: string
+          description: The date in yyyy-mm-dd format to begin querying from (inclusive)
+        project_id:
+          type: string
+          description: The Mixpanel project ID. Optional since it has a default.
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: top_event_properties
+    description: Get the top property names for an event. Useful for discovering
+      which properties are most commonly associated with an event, prioritizing
+      which dimensions to analyze, and understanding event structure.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+      properties:
+        event:
+          type: string
+          description: "The event that you wish to get data for. Note: this is a single
+            event name, not an array"
+        limit:
+          type: number
+          description: The maximum number of properties to return. Defaults to 10
+        project_id:
+          type: string
+          description: The Mixpanel project ID
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false
+  - name: top_event_property_values
+    description: Get the top values for a property. Useful for understanding the
+      distribution of values for a specific property, identifying the most
+      common categories or segments, and planning further targeted analyses.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - event
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the property you would like to get data for
+        event:
+          type: string
+          description: "The event that you wish to get data for. Note: this is a single
+            event name, not an array"
+        limit:
+          type: number
+          description: The maximum number of values to return. Defaults to 255
+        project_id:
+          type: string
+          description: The Mixpanel project ID
+        workspace_id:
+          type: string
+          description: The ID of the workspace if applicable
+      additionalProperties: false

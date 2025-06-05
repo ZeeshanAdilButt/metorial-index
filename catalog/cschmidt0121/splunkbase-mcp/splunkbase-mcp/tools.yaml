@@ -1,0 +1,109 @@
+tools:
+  - name: search
+    description: "
+
+      \    Search Splunkbase for apps.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: The search query to search Splunkbase for
+
+
+      \    Returns:
+
+      \        A list of results from the search
+
+      \    "
+    inputSchema:
+      type: object
+      title: searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: get_app_latest_version
+    description: "
+
+      \    Get the latest compatible version of an app for a specific Splunk
+      version.
+
+
+      \    Args:
+
+      \        app: The name or numeric ID of the Splunkbase app
+
+      \        splunk_version: The Splunk version to check compatibility with
+
+      \        is_cloud: Whether to check compatibility with Splunk Cloud
+
+
+      \    Returns:
+
+      \        Dictionary containing release information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_app_latest_versionArguments
+      required:
+        - app
+        - splunk_version
+      properties:
+        app:
+          anyOf:
+            - type: string
+            - type: integer
+          title: App
+        is_cloud:
+          type: boolean
+          title: Is Cloud
+          default: false
+        splunk_version:
+          type: string
+          title: Splunk Version
+  - name: download_app
+    description: "
+
+      \    Download a specific version of an app. If no version is specified,
+      downloads the latest.
+
+
+      \    Args:
+
+      \        app: The name or numeric ID of the Splunkbase app
+
+      \        output_dir: Directory to save the downloaded app
+
+      \        version: Optional specific version to download
+
+
+      \    Returns:
+
+      \        Success message with download details
+
+      \    "
+    inputSchema:
+      type: object
+      title: download_appArguments
+      required:
+        - app
+        - output_dir
+      properties:
+        app:
+          anyOf:
+            - type: string
+            - type: integer
+          title: App
+        version:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Version
+          default: null
+        output_dir:
+          type: string
+          title: Output Dir

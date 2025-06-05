@@ -1,0 +1,99 @@
+tools:
+  - name: gemini_search
+    description: Generates responses based on the latest information using Gemini
+      2.0 Flash and Google Search. Best for general knowledge questions,
+      fact-checking, and information retrieval.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Your search query or question
+        model_id:
+          type: string
+          description: Optional model ID override (advanced users only)
+        file_path:
+          type: string
+          description: Optional file path to include with the query
+        enable_thinking:
+          type: boolean
+          description: Enable thinking mode for step-by-step reasoning
+  - name: gemini_reason
+    description: Solves complex problems with step-by-step reasoning using Gemini
+      2.0 Flash Thinking. Best for math and science problems, coding challenges,
+      and tasks requiring transparent reasoning process.
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        problem:
+          type: string
+          description: The complex problem or question to solve
+        model_id:
+          type: string
+          description: Optional model ID override (advanced users only)
+        file_path:
+          type: string
+          description: Optional file path to include with the problem
+        show_steps:
+          type: boolean
+          default: false
+          description: "Whether to show detailed reasoning steps (default: false)"
+  - name: gemini_code
+    description: Analyzes codebases using Repomix and Gemini 2.5 Pro. Answers
+      questions about code structure, logic, and potential improvements.
+    inputSchema:
+      type: object
+      required:
+        - question
+      properties:
+        model_id:
+          type: string
+          description: Optional model ID override (advanced users only)
+        question:
+          type: string
+          description: Question about the codebase
+        codebase_path:
+          type: string
+          description: Path to pre-packed Repomix file
+        directory_path:
+          type: string
+          description: Path to the code directory
+  - name: gemini_fileops
+    description: Performs efficient operations on files (text, PDF, images, etc.)
+      using appropriate Gemini models (Flash-Lite or 1.5 Pro for large files).
+      Use for summarization, extraction, or basic analysis.
+    inputSchema:
+      type: object
+      required:
+        - file_path
+      properties:
+        model_id:
+          type: string
+          description: Optional model ID override (advanced users only)
+        file_path:
+          oneOf:
+            - type: string
+              description: Path to a single file
+            - type: array
+              items:
+                type: string
+              description: Array of file paths
+          description: Path to the file or array of file paths
+        operation:
+          enum:
+            - summarize
+            - extract
+            - analyze
+          type: string
+          description: Specific operation type
+        instruction:
+          type: string
+          description: Specific instruction for processing
+        use_large_context_model:
+          type: boolean
+          default: false
+          description: Set true if the file is very large to use Gemini 1.5 Pro

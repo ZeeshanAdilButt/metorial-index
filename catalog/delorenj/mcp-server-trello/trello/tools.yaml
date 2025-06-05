@@ -1,0 +1,111 @@
+tools:
+  - name: get_cards_by_list_id
+    description: Fetch cards from a specific Trello list
+    inputSchema:
+      type: object
+      required:
+        - listId
+      properties:
+        listId:
+          type: string
+          description: ID of the Trello list
+  - name: get_lists
+    description: Retrieve all lists from the specified board
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_recent_activity
+    description: Fetch recent activity on the Trello board
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        limit:
+          type: number
+          description: "Number of activities to fetch (default: 10)"
+  - name: add_card_to_list
+    description: Add a new card to a specified list
+    inputSchema:
+      type: object
+      required:
+        - listId
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the card
+        labels:
+          type: array
+          items:
+            type: string
+          description: Array of label IDs to apply to the card
+        listId:
+          type: string
+          description: ID of the list to add the card to
+        dueDate:
+          type: string
+          description: Due date for the card (ISO 8601 format)
+        description:
+          type: string
+          description: Description of the card
+  - name: update_card_details
+    description: Update an existing card's details
+    inputSchema:
+      type: object
+      required:
+        - cardId
+      properties:
+        name:
+          type: string
+          description: New name for the card
+        cardId:
+          type: string
+          description: ID of the card to update
+        labels:
+          type: array
+          items:
+            type: string
+          description: New array of label IDs for the card
+        dueDate:
+          type: string
+          description: New due date for the card (ISO 8601 format)
+        description:
+          type: string
+          description: New description for the card
+  - name: archive_card
+    description: Send a card to the archive
+    inputSchema:
+      type: object
+      required:
+        - cardId
+      properties:
+        cardId:
+          type: string
+          description: ID of the card to archive
+  - name: add_list_to_board
+    description: Add a new list to the board
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the new list
+  - name: archive_list
+    description: Send a list to the archive
+    inputSchema:
+      type: object
+      required:
+        - listId
+      properties:
+        listId:
+          type: string
+          description: ID of the list to archive
+  - name: get_my_cards
+    description: Fetch all cards assigned to the current user
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

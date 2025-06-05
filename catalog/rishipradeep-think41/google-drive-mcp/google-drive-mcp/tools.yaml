@@ -1,0 +1,31 @@
+tools:
+  - name: gdrive_search
+    description: Search for files in Google Drive
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Name of the file to be searched for
+        pageSize:
+          type: number
+          description: Number of results per page (max 100)
+        pageToken:
+          type: string
+          description: Token for the next page of results
+      additionalProperties: false
+  - name: gdrive_read_file
+    description: Read contents of a file from Google Drive
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileId
+      properties:
+        fileId:
+          type: string
+          description: ID of the file to read
+      additionalProperties: false

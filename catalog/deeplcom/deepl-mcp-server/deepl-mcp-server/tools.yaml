@@ -1,0 +1,86 @@
+tools:
+  - name: get-source-languages
+    description: Get list of available source languages for translation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-target-languages
+    description: Get list of available target languages for translation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: translate-text
+    description: Translate text to a target language using DeepL API
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+        - targetLang
+      properties:
+        text:
+          type: string
+          description: Text to translate
+        formality:
+          enum:
+            - less
+            - more
+            - default
+            - prefer_less
+            - prefer_more
+          type: string
+          description: Controls whether translations should lean toward informal or formal
+            language
+        targetLang:
+          type: string
+          description: Target language code (e.g. 'en-US', 'de', 'fr')
+      additionalProperties: false
+  - name: get-writing-styles-and-tones
+    description: Get list of available writing styles and tones for rephrasing
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: rephrase-text
+    description: Rephrase text in the same language using DeepL API
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Text to rephrase
+        tone:
+          enum:
+            - confident
+            - default
+            - diplomatic
+            - enthusiastic
+            - friendly
+            - prefer_confident
+            - prefer_diplomatic
+            - prefer_enthusiastic
+            - prefer_friendly
+          type: string
+          description: Writing tone for rephrasing
+        style:
+          enum:
+            - academic
+            - business
+            - casual
+            - default
+            - prefer_academic
+            - prefer_business
+            - prefer_casual
+            - prefer_simple
+            - simple
+          type: string
+          description: Writing style for rephrasing
+      additionalProperties: false

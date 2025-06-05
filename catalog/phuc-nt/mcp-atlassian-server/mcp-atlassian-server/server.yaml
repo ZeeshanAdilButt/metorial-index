@@ -1,0 +1,18 @@
+identifier: phuc-nt/mcp-atlassian-server/mcp-atlassian-server
+repo:
+  provider: github.com
+  url: https://github.com/phuc-nt/mcp-atlassian-server
+  name: mcp-atlassian-server
+  owner: phuc-nt
+server:
+  subdirectory: /
+  name: Atlassian Integration Server
+  description: Connect AI agents to Atlassian Jira and Confluence to query data
+    and perform actions through a standardized interface. Enable seamless
+    management of issues, projects, pages, and comments directly from AI
+    assistants. Simplify workflows and reduce context switching for developers
+    and teams using Atlassian tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,122 @@
+tools:
+  - name: search
+    description: Search for stories and comments on Hacker News
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          default: 0
+          description: The page number
+        type:
+          enum:
+            - all
+            - story
+            - comment
+          type: string
+          default: all
+          description: The type of content to search for
+        query:
+          type: string
+          description: The search query
+        hitsPerPage:
+          type: number
+          default: 20
+          description: The number of results per page
+  - name: getStory
+    description: Get a single story by ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the story
+  - name: getStoryWithComments
+    description: Get a story with its comments
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the story
+  - name: getStories
+    description: Get multiple stories by type (top, new, best, ask, show, job)
+    inputSchema:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          enum:
+            - top
+            - new
+            - best
+            - ask
+            - show
+            - job
+          type: string
+          description: The type of stories to fetch
+        limit:
+          type: number
+          default: 30
+          description: The maximum number of stories to fetch
+  - name: getComment
+    description: Get a single comment by ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the comment
+  - name: getComments
+    description: Get comments for a story
+    inputSchema:
+      type: object
+      required:
+        - storyId
+      properties:
+        limit:
+          type: number
+          default: 30
+          description: The maximum number of comments to fetch
+        storyId:
+          type: number
+          description: The ID of the story
+  - name: getCommentTree
+    description: Get a comment tree for a story
+    inputSchema:
+      type: object
+      required:
+        - storyId
+      properties:
+        storyId:
+          type: number
+          description: The ID of the story
+  - name: getUser
+    description: Get a user profile by ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the user
+  - name: getUserSubmissions
+    description: Get a user's submissions
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the user

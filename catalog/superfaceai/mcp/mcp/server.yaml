@@ -1,0 +1,18 @@
+identifier: superfaceai/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/superfaceai/mcp
+  name: mcp
+  owner: superfaceai
+server:
+  subdirectory: /
+  name: Superface Server
+  description: Enable seamless integration of Superface tools with your AI agents
+    using the Model Context Protocol. Access a variety of external APIs and
+    services through a standardized interface to enhance your AI's capabilities.
+    Easily configure and run the server locally or via Docker with your
+    Superface API key.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

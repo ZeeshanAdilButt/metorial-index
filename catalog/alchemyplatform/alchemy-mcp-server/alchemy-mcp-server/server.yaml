@@ -1,0 +1,18 @@
+identifier: alchemyplatform/alchemy-mcp-server/alchemy-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/alchemyplatform/alchemy-mcp-server
+  name: alchemy-mcp-server
+  owner: alchemyplatform
+server:
+  subdirectory: /
+  name: Alchemy Blockchain API Server
+  description: Enable AI agents to seamlessly query blockchain data such as token
+    prices, NFT ownership, transaction history, and token balances across
+    multiple networks using Alchemy's APIs. Simplify blockchain data access
+    without requiring any coding. Empower your AI workflows with real-time and
+    historical blockchain insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

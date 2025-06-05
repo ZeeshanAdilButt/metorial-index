@@ -1,0 +1,155 @@
+tools:
+  - name: say-hello
+    description: Say hello to the user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the user to say hello to
+      additionalProperties: false
+  - name: configure
+    description: Configure FamilySearch API credentials
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+          description: Your FamilySearch API client ID
+        redirectUri:
+          type: string
+          description: "OAuth redirect URI (default: https://localhost:8080/oauth-redirect)"
+      additionalProperties: false
+  - name: authenticate
+    description: Authenticate with FamilySearch
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - password
+      properties:
+        password:
+          type: string
+          description: Your FamilySearch password
+        username:
+          type: string
+          description: Your FamilySearch username
+      additionalProperties: false
+  - name: get-current-user
+    description: Get information about the currently authenticated user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: search-persons
+    description: Search for person records in FamilySearch
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          description: Name to search for
+        limit:
+          type: number
+          description: "Maximum number of results (default: 10)"
+        gender:
+          enum:
+            - MALE
+            - FEMALE
+          type: string
+          description: Gender
+        birthDate:
+          type: string
+          description: Birth date (YYYY-MM-DD)
+        deathDate:
+          type: string
+          description: Death date (YYYY-MM-DD)
+        birthPlace:
+          type: string
+          description: Birth place
+        deathPlace:
+          type: string
+          description: Death place
+      additionalProperties: false
+  - name: get-person
+    description: Get detailed information about a specific person
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - personId
+      properties:
+        personId:
+          type: string
+          description: Person ID
+      additionalProperties: false
+  - name: get-ancestors
+    description: Get ancestors of a specific person
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - personId
+      properties:
+        personId:
+          type: string
+          description: Person ID
+        generations:
+          type: number
+          description: "Number of generations (default: 4, max: 8)"
+      additionalProperties: false
+  - name: get-descendants
+    description: Get descendants of a specific person
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - personId
+      properties:
+        personId:
+          type: string
+          description: Person ID
+        generations:
+          type: number
+          description: "Number of generations (default: 2, max: 3)"
+      additionalProperties: false
+  - name: search-records
+    description: Search for historical records in FamilySearch
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of results (default: 10)"
+        surname:
+          type: string
+          description: Surname/last name
+        birthDate:
+          type: string
+          description: Birth date (YYYY-MM-DD)
+        deathDate:
+          type: string
+          description: Death date (YYYY-MM-DD)
+        givenName:
+          type: string
+          description: Given name
+        birthPlace:
+          type: string
+          description: Birth place
+        deathPlace:
+          type: string
+          description: Death place
+        collectionId:
+          type: string
+          description: Specific collection ID to search in
+      additionalProperties: false

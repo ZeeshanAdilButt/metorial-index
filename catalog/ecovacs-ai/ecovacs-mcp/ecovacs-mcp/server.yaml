@@ -1,0 +1,18 @@
+identifier: ecovacs-ai/ecovacs-mcp/ecovacs-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ecovacs-ai/ecovacs-mcp
+  name: ecovacs-mcp
+  owner: ecovacs-ai
+server:
+  subdirectory: /
+  name: Ecovacs Robot Control Server
+  description: Control and monitor Ecovacs cleaning robots through a simple MCP
+    interface. Quickly integrate robot services like device listing, cleaning
+    control, recharge control, and status queries into your intelligent agents.
+    Reduce development complexity and accelerate building robot-enabled
+    applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

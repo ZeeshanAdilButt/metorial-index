@@ -1,0 +1,16 @@
+identifier: chenyeju295/mcp_generate_images/mcp_generate_images
+repo:
+  provider: github.com
+  url: https://github.com/chenyeju295/mcp_generate_images
+  name: mcp_generate_images
+  owner: chenyeju295
+server:
+  subdirectory: /
+  name: AI Image Generation Service
+  description: An image generation service based on Together AI, specially
+    designed to integrate with Cursor IDE. Supports customizing image aspect
+    ratios, save paths, and provides high-quality image generation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,307 @@
+tools:
+  - name: getItems
+    description: Get items from a collection in Directus
+    inputSchema:
+      type: object
+      required:
+        - collection
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters like filter, sort, limit, etc. (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name
+  - name: getItem
+    description: Get a single item from a collection by ID
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - id
+      properties:
+        id:
+          type: string
+          description: Item ID
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name
+  - name: createItem
+    description: Create a new item in a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - data
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        data:
+          type: object
+          description: Item data
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name
+  - name: updateItem
+    description: Update an existing item in a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - id
+        - data
+      properties:
+        id:
+          type: string
+          description: Item ID
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        data:
+          type: object
+          description: Updated item data
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name
+  - name: deleteItem
+    description: Delete an item from a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+        - id
+      properties:
+        id:
+          type: string
+          description: Item ID
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name
+  - name: getSystemInfo
+    description: Get system information from Directus
+    inputSchema:
+      type: object
+      required:
+        - endpoint
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        endpoint:
+          type: string
+          description: System endpoint (e.g. 'health', 'info', 'activity')
+  - name: getCollections
+    description: Get all collection schemas from Directus
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: login
+    description: Login to Directus and get an access token
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        email:
+          type: string
+          description: User email (default from config)
+        password:
+          type: string
+          description: User password (default from config)
+  - name: getActivity
+    description: Get activity logs from Directus
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters like filter, sort, limit, etc. (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: getFields
+    description: Get fields for a collection
+    inputSchema:
+      type: object
+      required:
+        - collection
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name
+  - name: getRelations
+    description: Get relations for a collection
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        collection:
+          type: string
+          description: Collection name (optional)
+  - name: getFiles
+    description: Get files from Directus
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters like filter, sort, limit, etc. (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: uploadFile
+    description: Upload a file to Directus
+    inputSchema:
+      type: object
+      required:
+        - fileName
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        title:
+          type: string
+          description: File title (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+        fileUrl:
+          type: string
+          description: URL of the file to upload (either fileUrl or fileData must be
+            provided)
+        storage:
+          type: string
+          description: Storage location (optional)
+        fileData:
+          type: string
+          description: Base64 encoded file data (either fileUrl or fileData must be
+            provided)
+        fileName:
+          type: string
+          description: Name of the file
+        mimeType:
+          type: string
+          description: MIME type of the file
+  - name: getUsers
+    description: Get users from Directus
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters like filter, sort, limit, etc. (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: getCurrentUser
+    description: Get the current user info
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: getRoles
+    description: Get roles from Directus
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters like filter, sort, limit, etc. (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: getPermissions
+    description: Get permissions from Directus
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        url:
+          type: string
+          description: Directus API URL (default from config)
+        query:
+          type: object
+          description: Query parameters like filter, sort, limit, etc. (optional)
+        token:
+          type: string
+          description: Authentication token (default from config)
+  - name: getConfig
+    description: Get current configuration information (without secrets)
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

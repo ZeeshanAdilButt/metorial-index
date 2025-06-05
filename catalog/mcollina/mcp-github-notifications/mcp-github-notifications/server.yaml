@@ -1,0 +1,18 @@
+identifier: mcollina/mcp-github-notifications/mcp-github-notifications
+repo:
+  provider: github.com
+  url: https://github.com/mcollina/mcp-github-notifications
+  name: mcp-github-notifications
+  owner: mcollina
+server:
+  subdirectory: /
+  name: GitHub Notifications Server
+  description: Manage your GitHub notifications effortlessly with natural language
+    commands. This server allows you to list, read, and organize notifications,
+    ensuring you never miss important updates. Streamline your workflow by
+    controlling repository notifications and settings directly through AI
+    assistance.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

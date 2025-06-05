@@ -1,0 +1,15 @@
+identifier: weaviate/mcp-server-weaviate/mcp-server-weaviate
+repo:
+  provider: github.com
+  url: https://github.com/weaviate/mcp-server-weaviate
+  name: mcp-server-weaviate
+  owner: weaviate
+server:
+  subdirectory: /
+  name: Weaviate MCP Server
+  description: Integrate Weaviate with LLMs to enhance data retrieval and
+    manipulation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

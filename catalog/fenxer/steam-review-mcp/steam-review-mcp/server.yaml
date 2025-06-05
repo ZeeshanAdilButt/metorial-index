@@ -1,0 +1,17 @@
+identifier: fenxer/steam-review-mcp/steam-review-mcp
+repo:
+  provider: github.com
+  url: https://github.com/fenxer/steam-review-mcp
+  name: steam-review-mcp
+  owner: fenxer
+server:
+  subdirectory: /
+  name: Steam Review
+  description: Retrieve and analyze Steam game reviews and information to help
+    LLMs provide detailed insights. Summarize pros and cons and get recent
+    player feedback for any Steam game by appid. Enhance your applications with
+    rich Steam store review data effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

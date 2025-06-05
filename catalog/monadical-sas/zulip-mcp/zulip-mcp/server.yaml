@@ -1,0 +1,19 @@
+identifier: monadical-sas/zulip-mcp/zulip-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Monadical-SAS/zulip-mcp
+  name: zulip-mcp
+  owner: Monadical-SAS
+server:
+  subdirectory: /
+  name: Zulip Integration Server
+  description: Enable AI assistants to interact seamlessly with Zulip workspaces
+    by listing channels, posting messages, sending direct messages, adding
+    reactions, and retrieving conversation history. Facilitate efficient
+    communication and automation within your Zulip organization through a
+    comprehensive set of tools. Simplify bot setup and integration with
+    straightforward configuration options for various deployment methods.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

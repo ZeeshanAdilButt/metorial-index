@@ -1,0 +1,187 @@
+tools:
+  - name: get_booted_sim_id
+    description: Get the ID of the currently booted iOS simulator
+    inputSchema:
+      type: object
+  - name: ui_describe_all
+    description: Describes accessibility information for the entire screen in the
+      iOS Simulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        udid:
+          type: string
+          description: Udid of target, can also be set with the IDB_UDID env var
+      additionalProperties: false
+  - name: ui_tap
+    description: Tap on the screen in the iOS Simulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          description: The x-coordinate
+        y:
+          type: number
+          description: The x-coordinate
+        udid:
+          type: string
+          description: Udid of target, can also be set with the IDB_UDID env var
+        duration:
+          type: string
+          description: Press duration
+      additionalProperties: false
+  - name: ui_type
+    description: Input text into the iOS Simulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Text to input
+        udid:
+          type: string
+          description: Udid of target, can also be set with the IDB_UDID env var
+      additionalProperties: false
+  - name: ui_swipe
+    description: Swipe on the screen in the iOS Simulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - x_start
+        - y_start
+        - x_end
+        - y_end
+      properties:
+        udid:
+          type: string
+          description: Udid of target, can also be set with the IDB_UDID env var
+        delta:
+          type: number
+          default: 1
+          description: The size of each step in the swipe (default is 1)
+        x_end:
+          type: number
+          description: The ending x-coordinate
+        y_end:
+          type: number
+          description: The ending y-coordinate
+        x_start:
+          type: number
+          description: The starting x-coordinate
+        y_start:
+          type: number
+          description: The starting y-coordinate
+      additionalProperties: false
+  - name: ui_describe_point
+    description: Returns the accessibility element at given co-ordinates on the iOS
+      Simulator's screen
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          description: The x-coordinate
+        y:
+          type: number
+          description: The y-coordinate
+        udid:
+          type: string
+          description: Udid of target, can also be set with the IDB_UDID env var
+      additionalProperties: false
+  - name: screenshot
+    description: Takes a screenshot of the iOS Simulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - output_path
+      properties:
+        mask:
+          enum:
+            - ignored
+            - alpha
+            - black
+          type: string
+          description: For non-rectangular displays, handle the mask by policy (ignored,
+            alpha, or black)
+        type:
+          enum:
+            - png
+            - tiff
+            - bmp
+            - gif
+            - jpeg
+          type: string
+          description: Image format (png, tiff, bmp, gif, or jpeg). Default is png.
+        udid:
+          type: string
+          description: Udid of target, can also be set with the IDB_UDID env var
+        display:
+          enum:
+            - internal
+            - external
+          type: string
+          description: Display to capture (internal or external). Default depends on
+            device type.
+        output_path:
+          type: string
+          description: File path where the screenshot will be saved (if relative,
+            ~/Downloads will be used as base directory)
+      additionalProperties: false
+  - name: record_video
+    description: Records a video of the iOS Simulator using simctl directly
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        mask:
+          enum:
+            - ignored
+            - alpha
+            - black
+          type: string
+          description: 'For non-rectangular displays, handle the mask by policy:
+            "ignored", "alpha", or "black".'
+        codec:
+          enum:
+            - h264
+            - hevc
+          type: string
+          description: 'Specifies the codec type: "h264" or "hevc". Default is "hevc".'
+        force:
+          type: boolean
+          description: Force the output file to be written to, even if the file already
+            exists.
+        display:
+          enum:
+            - internal
+            - external
+          type: string
+          description: 'Display to capture: "internal" or "external". Default depends on
+            device type.'
+        output_path:
+          type: string
+          description: Optional output path (defaults to
+            ~/Downloads/simulator_recording_$DATE.mp4)
+      additionalProperties: false
+  - name: stop_recording
+    description: Stops the simulator video recording using killall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

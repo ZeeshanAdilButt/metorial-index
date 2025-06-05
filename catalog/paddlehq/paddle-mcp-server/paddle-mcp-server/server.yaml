@@ -1,0 +1,17 @@
+identifier: paddlehq/paddle-mcp-server/paddle-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/PaddleHQ/paddle-mcp-server
+  name: paddle-mcp-server
+  owner: PaddleHQ
+server:
+  subdirectory: /
+  name: Paddle Billing MCP Server
+  description: Interact seamlessly with the Paddle API to manage payments,
+    subscriptions, and customer data. Simplify your billing processes with a
+    unified API that handles everything from product creation to financial
+    reporting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

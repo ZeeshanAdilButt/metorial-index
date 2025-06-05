@@ -1,0 +1,18 @@
+identifier: brianstone/jira-mcp-server/jira-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/brianstone/jira-mcp-server
+  name: jira-mcp-server
+  owner: brianstone
+server:
+  subdirectory: /
+  name: Jira Integration Server
+  description: Enable seamless interaction with Jira from your MCP client by
+    managing issues directly through the protocol. Create, search, assign,
+    unassign, and edit Jira issues effortlessly to streamline your project
+    management workflows. Connect your MCP client to Jira Cloud endpoints
+    securely using your API credentials.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

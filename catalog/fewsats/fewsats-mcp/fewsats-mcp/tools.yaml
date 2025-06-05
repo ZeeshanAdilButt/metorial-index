@@ -1,0 +1,77 @@
+tools:
+  - name: balance
+    description: >-
+      Retrieve the balance of the user's wallet.
+          You will rarely need to call this unless instructed by the user, or to troubleshoot payment issues.
+          Fewsats will automatically add balance when needed.
+    inputSchema:
+      type: object
+      title: balanceArguments
+      properties: {}
+  - name: payment_methods
+    description: >-
+      Retrieve the user's payment methods.
+          You will rarely need to call this unless instructed by the user, or to troubleshoot payment issues.
+          Fewsats will automatically select the best payment method.
+    inputSchema:
+      type: object
+      title: payment_methodsArguments
+      properties: {}
+  - name: pay_offer
+    description: >-
+      Pays an offer_id from the l402_offers.
+
+          The l402_offer parameter must be a dict with this structure:
+          {
+              'offers': [
+                  {
+                      'offer_id': 'test_offer_2',  # String identifier for the offer
+                      'amount': 1,                 # Numeric cost value
+                      'currency': 'usd',           # Currency code
+                      'description': 'Test offer', # Text description
+                      'title': 'Test Package'      # Title of the package
+                  }
+              ],
+              'payment_context_token': '60a8e027-8b8b-4ccf-b2b9-380ed0930283',  # Payment context token
+              'payment_request_url': 'https://api.fewsats.com/v0/l402/payment-request',  # Payment URL
+              'version': '0.2.2'  # API version
+          }
+
+          Returns payment status response. 
+          If payment status is `needs_review` inform the user he will have to approve it at app.fewsats.com
+    inputSchema:
+      type: object
+      title: pay_offerArguments
+      required:
+        - offer_id
+        - l402_offer
+      properties:
+        offer_id:
+          type: string
+          title: Offer Id
+        l402_offer:
+          type: object
+          title: L402 Offer
+          additionalProperties: true
+  - name: payment_info
+    description: >-
+      Retrieve the details of a payment.
+          If payment status is `needs_review` inform the user he will have to approve it at app.fewsats.com
+    inputSchema:
+      type: object
+      title: payment_infoArguments
+      required:
+        - pid
+      properties:
+        pid:
+          type: string
+          title: Pid
+  - name: billing_info
+    description: >-
+      Retrieve the user's billing information.
+          Returns billing details including name, address, and other relevant information.
+          This information can also be used as shipping address for purchases.
+    inputSchema:
+      type: object
+      title: billing_infoArguments
+      properties: {}

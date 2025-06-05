@@ -1,0 +1,18 @@
+identifier: nulab/backlog-mcp-server/backlog-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nulab/backlog-mcp-server
+  name: backlog-mcp-server
+  owner: nulab
+server:
+  subdirectory: /
+  name: Backlog Server
+  description: Manage your Backlog projects, issues, wiki pages, pull requests,
+    and notifications through AI agents seamlessly. Optimize responses with
+    GraphQL-style field selection and control token limits for efficient
+    interactions. Enhance your project management workflow by integrating
+    Backlog API capabilities directly into your AI assistant.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

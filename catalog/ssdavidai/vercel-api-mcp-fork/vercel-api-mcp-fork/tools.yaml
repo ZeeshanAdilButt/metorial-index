@@ -1,0 +1,192 @@
+tools:
+  - name: getDeploymentEvents
+    description: Gets deployment events by deployment ID and build ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        name:
+          type: string
+          description: Filter events by name
+        slug:
+          type: string
+          description: Slug
+        limit:
+          type: number
+          description: Limit on number of events to return
+        since:
+          type: number
+          description: Timestamp to get events from
+        until:
+          type: number
+          description: Timestamp to get events until
+        builds:
+          type: number
+          description: Builds parameter
+        follow:
+          type: number
+          description: Follow parameter for events
+        teamId:
+          type: string
+          description: Team ID
+        delimiter:
+          type: number
+          description: Delimiter for events
+        direction:
+          enum:
+            - forward
+            - backward
+          type: string
+          description: Direction of events retrieval
+        statusCode:
+          type: string
+          description: Filter events by status code
+        deploymentId:
+          type: string
+          description: The ID or URL of the deployment
+      additionalProperties: false
+  - name: getDeployment
+    description: Gets a deployment by ID or URL
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        slug:
+          type: string
+          description: Slug
+        teamId:
+          type: string
+          description: Team ID
+        deploymentId:
+          type: string
+          description: The ID or URL of the deployment
+        withGitRepoInfo:
+          type: string
+          description: Include git repository info
+      additionalProperties: false
+  - name: cancelDeployment
+    description: Cancels a deployment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        slug:
+          type: string
+          description: Slug
+        teamId:
+          type: string
+          description: Team ID
+        deploymentId:
+          type: string
+          description: The ID of the deployment to cancel
+      additionalProperties: false
+  - name: listDeploymentFiles
+    description: Lists deployment files
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        slug:
+          type: string
+          description: Slug
+        teamId:
+          type: string
+          description: Team ID
+        deploymentId:
+          type: string
+          description: The ID of the deployment
+      additionalProperties: false
+  - name: getDeploymentFileContents
+    description: Gets deployment file contents
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+        - fileId
+      properties:
+        slug:
+          type: string
+          description: Slug
+        fileId:
+          type: string
+          description: The ID of the file
+        teamId:
+          type: string
+          description: Team ID
+        deploymentId:
+          type: string
+          description: The ID of the deployment
+      additionalProperties: false
+  - name: getDeployments
+    description: Lists deployments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        to:
+          type: number
+          description: Timestamp to list deployments until
+        app:
+          type: string
+          description: Application name
+        from:
+          type: number
+          description: Timestamp to list deployments from
+        slug:
+          type: string
+          description: Slug
+        limit:
+          type: number
+          description: Limit on number of deployments to return
+        since:
+          type: number
+          description: Timestamp to get deployments from
+        state:
+          type: string
+          description: Deployment state
+        until:
+          type: number
+          description: Timestamp to get deployments until
+        users:
+          type: string
+          description: Filter by users
+        target:
+          type: string
+          description: Deployment target
+        teamId:
+          type: string
+          description: Team ID
+        projectId:
+          type: string
+          description: Project ID
+      additionalProperties: false
+  - name: deleteDeployment
+    description: Deletes a deployment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        url:
+          type: string
+          description: The URL of the deployment
+        slug:
+          type: string
+          description: Slug
+        teamId:
+          type: string
+          description: Team ID
+        deploymentId:
+          type: string
+          description: The ID of the deployment to delete
+      additionalProperties: false

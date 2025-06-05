@@ -1,0 +1,32 @@
+tools:
+  - name: get_profile
+    description: "
+
+      \    Retrieves the User Profile
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_profileArguments
+      properties: {}
+  - name: get_feed_posts
+    description: "
+
+      \    Retrieve LinkedIn feed posts.
+
+
+      \    :return: List of feed post details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_feed_postsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        offset:
+          type: integer
+          title: Offset
+          default: 0

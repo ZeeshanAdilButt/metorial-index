@@ -1,0 +1,179 @@
+tools:
+  - name: getProfile
+    description: Get a Nostr profile by public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pubkey
+      properties:
+        pubkey:
+          type: string
+          description: Public key of the Nostr user (hex format or npub format)
+        relays:
+          type: array
+          items:
+            type: string
+          description: Optional list of relays to query
+      additionalProperties: false
+  - name: getKind1Notes
+    description: Get text notes (kind 1) by public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pubkey
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of notes to fetch
+        pubkey:
+          type: string
+          description: Public key of the Nostr user (hex format or npub format)
+        relays:
+          type: array
+          items:
+            type: string
+          description: Optional list of relays to query
+      additionalProperties: false
+  - name: getReceivedZaps
+    description: Get zaps received by a public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pubkey
+      properties:
+        debug:
+          type: boolean
+          default: false
+          description: Enable verbose debug logging
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of zaps to fetch
+        pubkey:
+          type: string
+          description: Public key of the Nostr user (hex format or npub format)
+        relays:
+          type: array
+          items:
+            type: string
+          description: Optional list of relays to query
+        validateReceipts:
+          type: boolean
+          default: true
+          description: Whether to validate zap receipts according to NIP-57
+      additionalProperties: false
+  - name: getSentZaps
+    description: Get zaps sent by a public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pubkey
+      properties:
+        debug:
+          type: boolean
+          default: false
+          description: Enable verbose debug logging
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of zaps to fetch
+        pubkey:
+          type: string
+          description: Public key of the Nostr user (hex format or npub format)
+        relays:
+          type: array
+          items:
+            type: string
+          description: Optional list of relays to query
+        validateReceipts:
+          type: boolean
+          default: true
+          description: Whether to validate zap receipts according to NIP-57
+      additionalProperties: false
+  - name: getAllZaps
+    description: Get all zaps (sent and received) for a public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pubkey
+      properties:
+        debug:
+          type: boolean
+          default: false
+          description: Enable verbose debug logging
+        limit:
+          type: number
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Maximum number of total zaps to fetch
+        pubkey:
+          type: string
+          description: Public key of the Nostr user (hex format or npub format)
+        relays:
+          type: array
+          items:
+            type: string
+          description: Optional list of relays to query
+        validateReceipts:
+          type: boolean
+          default: true
+          description: Whether to validate zap receipts according to NIP-57
+      additionalProperties: false
+  - name: getLongFormNotes
+    description: Get long-form notes (kind 30023) by public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pubkey
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of notes to fetch
+        pubkey:
+          type: string
+          description: Public key of the Nostr user (hex format or npub format)
+        relays:
+          type: array
+          items:
+            type: string
+          description: Optional list of relays to query
+      additionalProperties: false
+  - name: searchNips
+    description: Search through Nostr Implementation Possibilities (NIPs)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results to return
+        query:
+          type: string
+          description: Search query to find relevant NIPs
+        includeContent:
+          type: boolean
+          default: false
+          description: Whether to include the full content of each NIP in the results
+      additionalProperties: false

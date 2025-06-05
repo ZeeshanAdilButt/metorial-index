@@ -1,0 +1,30 @@
+tools:
+  - name: createBrowserAgentTask
+    description: Create a browser agent task, and return the task id. This agent can
+      handle continuous complex tasks, and you do not need to break down the
+      tasks. Just input them directly. Clearly return the task_id to the user
+      for use in the next request.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task
+      properties:
+        task:
+          type: string
+          description: The task that you want to execute, natural language.
+      additionalProperties: false
+  - name: getBrowserAgentTaskResult
+    description: Get the result of the browser agent task. If no results are
+      obtained, clearly return the task_id to the user for use in the next
+      request.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          description: The task id that you want to get the result.
+      additionalProperties: false

@@ -1,0 +1,17 @@
+identifier: portone-io/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/portone-io/mcp-server
+  name: mcp-server
+  owner: portone-io
+server:
+  subdirectory: /
+  name: PortOne MCP Server
+  description: Provide easy and accurate access to PortOne developer documentation
+    for LLMs. Enhance your applications by integrating comprehensive
+    service-related information seamlessly. Simplify the retrieval of relevant
+    data for developers using PortOne services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

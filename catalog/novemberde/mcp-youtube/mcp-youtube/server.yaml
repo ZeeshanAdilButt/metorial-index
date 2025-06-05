@@ -1,0 +1,17 @@
+identifier: novemberde/mcp-youtube/mcp-youtube
+repo:
+  provider: github.com
+  url: https://github.com/novemberde/mcp-youtube
+  name: mcp-youtube
+  owner: novemberde
+server:
+  subdirectory: /
+  name: YouTube Finder, Downloader and Subtitle Extractor
+  description: Download subtitles, search videos, and capture screenshots from
+    YouTube videos to enrich your LLM interactions. Easily summarize or analyze
+    YouTube content by integrating video data directly into your workflows.
+    Requires yt-dlp and ffmpeg installed locally for full functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

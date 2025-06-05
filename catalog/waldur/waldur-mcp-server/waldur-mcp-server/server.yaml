@@ -1,0 +1,14 @@
+identifier: waldur/waldur-mcp-server/waldur-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/waldur/waldur-mcp-server
+  name: waldur-mcp-server
+  owner: waldur
+server:
+  subdirectory: /
+  name: Waldur MCP Server
+  description: Connect to your Waldur instance and manage resources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,207 @@
+tools:
+  - name: sys_find_gdb_processes
+    description: 查找系统中运行的所有GDB进程
+    inputSchema:
+      type: object
+      title: sys_find_gdb_processesArguments
+      properties:
+        random_string:
+          type: string
+          title: random_string
+          default: dummy
+  - name: sys_attach_to_gdb
+    description: 附加到现有的GDB进程
+    inputSchema:
+      type: object
+      title: sys_attach_to_gdbArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+        tty_device:
+          type: string
+          title: tty_device
+          default: null
+  - name: sys_start_gdb_with_remote
+    description: 启动GDB并连接到远程调试目标
+    inputSchema:
+      type: object
+      title: sys_start_gdb_with_remoteArguments
+      required:
+        - target_address
+      properties:
+        executable:
+          type: string
+          title: executable
+          default: null
+        target_address:
+          type: string
+          title: target_address
+  - name: gdb_execute_command
+    description: 执行GDB命令
+    inputSchema:
+      type: object
+      title: gdb_execute_commandArguments
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          title: command
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_set_breakpoint
+    description: 设置断点
+    inputSchema:
+      type: object
+      title: gdb_set_breakpointArguments
+      required:
+        - location
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+        location:
+          type: string
+          title: location
+  - name: gdb_delete_breakpoint
+    description: 删除断点
+    inputSchema:
+      type: object
+      title: gdb_delete_breakpointArguments
+      required:
+        - number
+      properties:
+        number:
+          type: string
+          title: number
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_step
+    description: 单步执行
+    inputSchema:
+      type: object
+      title: gdb_stepArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_next
+    description: 下一步执行
+    inputSchema:
+      type: object
+      title: gdb_nextArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_finish
+    description: 运行至函数返回
+    inputSchema:
+      type: object
+      title: gdb_finishArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_continue
+    description: 继续执行
+    inputSchema:
+      type: object
+      title: gdb_continueArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_get_registers
+    description: 获取寄存器值
+    inputSchema:
+      type: object
+      title: gdb_get_registersArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_examine_memory
+    description: 检查内存
+    inputSchema:
+      type: object
+      title: gdb_examine_memoryArguments
+      required:
+        - address
+      properties:
+        count:
+          type: string
+          title: count
+          default: "10"
+        address:
+          type: string
+          title: address
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+        format_type:
+          type: string
+          title: format_type
+          default: x
+  - name: gdb_get_stack
+    description: 获取堆栈信息
+    inputSchema:
+      type: object
+      title: gdb_get_stackArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_get_locals
+    description: 获取局部变量
+    inputSchema:
+      type: object
+      title: gdb_get_localsArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+  - name: gdb_disassemble
+    description: 反汇编代码
+    inputSchema:
+      type: object
+      title: gdb_disassembleArguments
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+        location:
+          type: string
+          title: location
+          default: ""
+  - name: gdb_connect_remote
+    description: 连接到远程调试目标
+    inputSchema:
+      type: object
+      title: gdb_connect_remoteArguments
+      required:
+        - target_address
+      properties:
+        gdb_pid:
+          type: string
+          title: gdb_pid
+          default: null
+        target_address:
+          type: string
+          title: target_address

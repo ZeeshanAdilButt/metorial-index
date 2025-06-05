@@ -1,0 +1,151 @@
+tools:
+  - name: gumroad_get_user
+    description: Retrieves the authenticated user's data. Available with any scope.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: gumroad_get_product
+    description: Retrieves a single product by its ID
+    inputSchema:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product to retrieve
+  - name: gumroad_get_products
+    description: Retrieves all of the products
+    inputSchema:
+      type: object
+      properties: {}
+  - name: gumroad_get_sales
+    description: Retrieves all of the successful sales
+    inputSchema:
+      type: object
+      properties:
+        after:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          description: Only return sales after this date (YYYY-MM-DD)
+        email:
+          type: string
+          description: Filter sales by this email
+        before:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          description: Only return sales before this date (YYYY-MM-DD)
+        order_id:
+          type: string
+          description: Filter sales by this Order ID
+        page_key:
+          type: string
+          description: A key representing a page of results
+        product_id:
+          type: string
+          description: Filter sales by this product
+  - name: gumroad_disable_product
+    description: Disables a product by its ID
+    inputSchema:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product to disable
+  - name: gumroad_enable_product
+    description: Enables a product by its ID
+    inputSchema:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product to enable
+  - name: gumroad_get_offer_codes
+    description: Retrieves all offer codes for a product
+    inputSchema:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          description: The product ID to get offer codes for
+  - name: gumroad_get_offer_code
+    description: Retrieves a single offer code by its ID for a specific product
+    inputSchema:
+      type: object
+      required:
+        - product_id
+        - offer_code_id
+      properties:
+        product_id:
+          type: string
+          description: The product ID the offer code belongs to
+        offer_code_id:
+          type: string
+          description: The ID of the offer code to retrieve
+  - name: gumroad_create_offer_code
+    description: Creates a new offer code for a product
+    inputSchema:
+      type: object
+      required:
+        - product_id
+        - name
+        - amount_off
+      properties:
+        name:
+          type: string
+          description: The name/code of the offer (coupon code used at checkout)
+        universal:
+          type: boolean
+          description: "Whether this offer applies to all products. Default: false"
+        amount_off:
+          type: number
+          description: The amount to discount
+        offer_type:
+          enum:
+            - cents
+            - percent
+          type: string
+          description: "The type of offer (cents or percent). Default: cents"
+        product_id:
+          type: string
+          description: The ID of the product this offer applies to
+        max_purchase_count:
+          type: number
+          description: Maximum number of times this offer can be used
+  - name: gumroad_update_offer_code
+    description: Updates the max purchase count of an existing offer code for a product
+    inputSchema:
+      type: object
+      required:
+        - product_id
+        - offer_code_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product this offer applies to
+        offer_code_id:
+          type: string
+          description: The ID of the offer code to update
+        max_purchase_count:
+          type: number
+          description: Maximum number of times this offer can be used
+  - name: gumroad_delete_offer_code
+    description: Deletes an offer code for a product
+    inputSchema:
+      type: object
+      required:
+        - product_id
+        - offer_code_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product this offer applies to
+        offer_code_id:
+          type: string
+          description: The ID of the offer code to delete

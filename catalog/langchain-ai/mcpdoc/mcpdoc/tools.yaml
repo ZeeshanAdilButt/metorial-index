@@ -1,0 +1,51 @@
+tools:
+  - name: list_doc_sources
+    description: "List all available documentation sources.
+
+
+      \        This is the first tool you should call in the documentation
+      workflow.
+
+      \        It provides URLs to llms.txt files or local file paths that the
+      user has made available.
+
+
+      \        Returns:
+
+      \            A string containing a formatted list of documentation sources
+      with their URLs or file paths
+
+      \        "
+    inputSchema:
+      type: object
+      title: list_doc_sourcesArguments
+      properties: {}
+  - name: fetch_docs
+    description: >-
+      Fetch and parse documentation from a given URL or local file.
+
+
+      Use this tool after list_doc_sources to:
+
+      1. First fetch the llms.txt file from a documentation source
+
+      2. Analyze the URLs listed in the llms.txt file
+
+      3. Then fetch specific documentation pages relevant to the user's question
+
+
+      Args:
+          url: The URL to fetch documentation from.
+
+      Returns:
+          The fetched documentation content converted to markdown, or an error message
+          if the request fails or the URL is not from an allowed domain.
+    inputSchema:
+      type: object
+      title: fetch_docsArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url

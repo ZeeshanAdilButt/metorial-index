@@ -1,0 +1,14 @@
+identifier: privsim/mcp-test-runner/mcp-test-runner
+repo:
+  provider: github.com
+  url: https://github.com/privsim/mcp-test-runner
+  name: mcp-test-runner
+  owner: privsim
+server:
+  subdirectory: /
+  name: Test Runner
+  description: Run and parse test results from multiple testing frameworks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

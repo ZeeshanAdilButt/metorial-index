@@ -1,0 +1,17 @@
+identifier: laity624/my-mcp-server/my-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Laity624/my-mcp-server
+  name: my-mcp-server
+  owner: Laity624
+server:
+  subdirectory: /
+  name: Remote MCP Server
+  description: Set up a remote server to enable seamless integration with Large
+    Language Models. Connect your applications securely and efficiently using
+    OAuth for authentication. Easily deploy on Cloudflare Workers and interact
+    with your MCP server from various clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

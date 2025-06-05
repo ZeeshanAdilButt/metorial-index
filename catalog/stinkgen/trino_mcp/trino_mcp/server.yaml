@@ -1,0 +1,17 @@
+identifier: stinkgen/trino_mcp/trino_mcp
+repo:
+  provider: github.com
+  url: https://github.com/stinkgen/trino_mcp
+  name: trino_mcp
+  owner: stinkgen
+server:
+  subdirectory: /
+  name: Trino MCP Server
+  description: Enable AI models to seamlessly query and analyze data using Trino's
+    distributed SQL engine. Simplify complex data interactions with a reliable
+    API that integrates directly with your LLM applications. Experience powerful
+    data insights and analytics with minimal setup and maximum efficiency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

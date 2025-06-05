@@ -1,0 +1,18 @@
+identifier: line/line-bot-mcp-server/line-bot-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/line/line-bot-mcp-server
+  name: line-bot-mcp-server
+  owner: line
+server:
+  subdirectory: /
+  name: LINE Bot Integration Server
+  description: Enable AI agents to interact seamlessly with your LINE Official
+    Account by sending messages and retrieving user profiles. Push text and rich
+    flex messages to individual users or broadcast to all followers
+    effortlessly. Enhance your chatbot capabilities with direct LINE Messaging
+    API integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

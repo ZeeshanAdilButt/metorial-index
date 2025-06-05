@@ -1,0 +1,75 @@
+tools:
+  - name: extract_image_from_url
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the image to extract
+        resize:
+          type: boolean
+          default: true
+          description: Whether to resize the image to optimize for LLM processing
+        max_width:
+          type: number
+          default: 800
+          description: Maximum width of the resized image (if resize is true)
+        max_height:
+          type: number
+          default: 800
+          description: Maximum height of the resized image (if resize is true)
+      additionalProperties: false
+  - name: extract_image_from_base64
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - base64
+      properties:
+        base64:
+          type: string
+          description: Base64-encoded image data
+        resize:
+          type: boolean
+          default: true
+          description: Whether to resize the image to optimize for LLM processing
+        max_width:
+          type: number
+          default: 800
+          description: Maximum width of the resized image (if resize is true)
+        mime_type:
+          type: string
+          default: image/png
+          description: MIME type of the image
+        max_height:
+          type: number
+          default: 800
+          description: Maximum height of the resized image (if resize is true)
+      additionalProperties: false
+  - name: save_screenshot
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - base64
+      properties:
+        base64:
+          type: string
+          description: Base64-encoded image data
+        format:
+          enum:
+            - png
+            - jpg
+            - jpeg
+            - webp
+          type: string
+          default: png
+          description: Image format to save as
+        filename:
+          type: string
+          default: ""
+          description: Name to save the file as (without extension)
+      additionalProperties: false

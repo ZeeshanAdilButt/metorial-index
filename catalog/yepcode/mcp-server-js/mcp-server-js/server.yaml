@@ -1,0 +1,57 @@
+identifier: yepcode/mcp-server-js/mcp-server-js
+repo:
+  provider: github.com
+  url: https://github.com/yepcode/mcp-server-js
+  name: mcp-server-js
+  owner: yepcode
+server:
+  subdirectory: /
+  name: YepCode MCP Server
+  description: >-
+    📌 YepCode MCP Server — Summary
+
+
+    YepCode MCP Server is a powerful integration layer that connects AI
+    platforms (like Cursor, Claude Desktop, or custom LLM tools) with YepCode’s
+    cloud infrastructure via the Model Context Protocol (MCP).
+
+
+    🔧 Main Use Cases
+
+
+    * Run AI-generated code securely: Execute Python or JavaScript code, with
+    full npm and PyPI dependency support, inside YepCode’s isolated,
+    production-ready sandboxes. See our playground for more details.
+
+    * Turn YepCode processes into AI tools: Expose your existing YepCode
+    processes — with all your business logic and input parameters — as MCP tools
+    that AI assistants can call in real-time. Here you have a demo video.
+
+    * Manage environments dynamically: Set, update, or remove environment
+    variables within your YepCode workspace programmatically via AI tools.
+
+    * Track and retrieve executions: Easily monitor, log, and fetch results from
+    any code or process execution.
+
+
+    🎯 Key Benefits for Users
+
+
+    * Seamless AI integration — Connect AI systems with your existing workflows
+    effortlessly, with no extra configuration.
+
+    * Enterprise-grade security — All executions run in YepCode’s secure,
+    isolated infrastructure.
+
+    * Flexible deployment — Run the MCP server remotely via YepCode Cloud or
+    locally via NPX or Docker.
+
+    * Real-time control & monitoring — Execute, track, and retrieve process
+    outcomes programmatically.
+
+    * AI-friendly tools — Convert custom processes and workflows into AI-usable
+    tools instantly via simple tagging.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: dazeb/mcp-github-mapper/github-mapper-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dazeb/MCP-Github-Mapper
+  name: MCP-Github-Mapper
+  owner: dazeb
+server:
+  subdirectory: /
+  name: GitHub Mapper
+  description: An MCP server that maps and analyzes GitHub repository structures,
+    providing summary statistics and detailed file structures.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

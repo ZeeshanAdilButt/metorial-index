@@ -1,0 +1,17 @@
+identifier: getsentry/sentry-mcp/sentry-mcp
+repo:
+  provider: github.com
+  url: https://github.com/getsentry/sentry-mcp
+  name: sentry-mcp
+  owner: getsentry
+server:
+  subdirectory: /
+  name: Sentry
+  description: Connect to the Sentry API seamlessly and enhance your applications
+    with powerful monitoring tools. Utilize a remote middleware to access
+    Sentry's capabilities directly from your LLM clients. Simplify your
+    development workflow by integrating Sentry's features effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

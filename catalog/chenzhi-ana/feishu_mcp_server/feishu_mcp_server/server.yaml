@@ -1,0 +1,18 @@
+identifier: chenzhi-ana/feishu_mcp_server/feishu_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/Chenzhi-Ana/feishu_mcp_server
+  name: feishu_mcp_server
+  owner: Chenzhi-Ana
+server:
+  subdirectory: /
+  name: 飞书MCP机器人
+  description: Enable users of Claude or Cursor to execute business logic using
+    the Feishu bot through an MCP server proxy. Seamlessly integrate LLM
+    capabilities with Feishu's API for enhanced automation and interaction.
+    Simplify your workflow by leveraging the power of language models in your
+    Feishu applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

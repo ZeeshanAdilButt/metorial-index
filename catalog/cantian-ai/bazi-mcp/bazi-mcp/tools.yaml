@@ -1,0 +1,39 @@
+tools:
+  - name: buildBaziFromLunarDatetime
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - lunarDatetime
+        - gender
+      properties:
+        gender:
+          type: number
+          description: 传0表示女性，传1表示男性。
+        lunarDatetime:
+          type: string
+          description: 农历时间。例如：`2000-5-15 12:00:00`。
+        eightCharProviderSect:
+          type: number
+          default: 2
+          description: 早晚子时配置。传1表示23:00-23:59日干支为明天，传2表示23:00-23:59日干支为当天。
+      additionalProperties: false
+  - name: buildBaziFromSolarDatetime
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - solarDatetime
+        - gender
+      properties:
+        gender:
+          type: number
+          description: 传0表示女性，传1表示男性。
+        solarDatetime:
+          type: string
+          description: 用ISO时间格式表示的阳历时间. 例如：`2008-03-01T13:00:00+08:00`。
+        eightCharProviderSect:
+          type: number
+          default: 2
+          description: 早晚子时配置。传1表示23:00-23:59日干支为明天，传2表示23:00-23:59日干支为当天。
+      additionalProperties: false

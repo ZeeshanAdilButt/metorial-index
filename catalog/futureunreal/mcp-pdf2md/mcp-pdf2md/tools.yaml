@@ -1,0 +1,67 @@
+tools:
+  - name: convert_pdf_url
+    description: "
+
+      \    Convert PDF URL to Markdown, supports single URL or URL list
+
+      \   \ 
+
+      \    Args:
+
+      \        url: PDF file URL or URL list, can be separated by spaces,
+      commas, or newlines
+
+      \        enable_ocr: Whether to enable OCR (default: True)
+
+
+      \    Returns:
+
+      \        dict: Conversion result information
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_pdf_urlArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+        enable_ocr:
+          type: boolean
+          title: Enable Ocr
+          default: true
+  - name: convert_pdf_file
+    description: "
+
+      \    Convert local PDF file to Markdown, supports single file or file list
+
+      \   \ 
+
+      \    Args:
+
+      \        file_path: PDF file local path or path list, can be separated by
+      spaces, commas, or newlines
+
+      \        enable_ocr: Whether to enable OCR (default: True)
+
+
+      \    Returns:
+
+      \        dict: Conversion result information
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_pdf_fileArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+        enable_ocr:
+          type: boolean
+          title: Enable Ocr
+          default: true

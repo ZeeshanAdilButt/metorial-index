@@ -1,0 +1,17 @@
+identifier: vectorinstitute/mcp-goodnews/mcp-goodnews
+repo:
+  provider: github.com
+  url: https://github.com/VectorInstitute/mcp-goodnews
+  name: mcp-goodnews
+  owner: VectorInstitute
+server:
+  subdirectory: /
+  name: Goodnews
+  description: Fetch uplifting and positive news stories effortlessly. Leverage
+    modern LLMs to analyze sentiment and deliver the best news articles,
+    brightening your day with positivity. Stay informed about the good things
+    happening in the world with just a simple request.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

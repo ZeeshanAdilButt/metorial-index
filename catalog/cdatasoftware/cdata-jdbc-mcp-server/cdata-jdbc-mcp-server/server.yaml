@@ -1,0 +1,18 @@
+identifier: cdatasoftware/cdata-jdbc-mcp-server/cdata-jdbc-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/CDataSoftware/cdata-jdbc-mcp-server
+  name: cdata-jdbc-mcp-server
+  owner: CDataSoftware
+server:
+  subdirectory: /
+  name: CData JDBC MCP Server
+  description: Enable LLMs to query live data from over 300+ sources via CData
+    JDBC Drivers using natural language without needing SQL. Access data from
+    SaaS apps, NoSQL stores, and APIs through a simple MCP interface. Easily
+    integrate with AI clients like Claude Desktop to retrieve real-time
+    information from your data sources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

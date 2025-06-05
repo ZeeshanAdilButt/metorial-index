@@ -1,0 +1,344 @@
+tools:
+  - name: plan_journey_by_city_names
+    description: "
+
+      \    All-in-one journey planning tool that takes city names and returns
+      journey details.
+
+      \    This function handles the entire process:
+
+      \    1. Finds stations in both cities
+
+      \    2. Extracts their coordinates and IDs
+
+      \    3. Uses the station IDs to plan a journey
+
+      \   \ 
+
+      \    Args:
+
+      \        from_city: Departure city name (e.g., \"Paris\").
+
+      \        to_city: Destination city name (e.g., \"Marseille\").
+
+      \        datetime: Date and time in format YYYYMMDDTHHMMSS (default: now).
+
+      \        datetime_represents: \"departure\" or \"arrival\" (default:
+      \"departure\").
+
+      \        include_station_details: Whether to include station details in
+      the response.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A dictionary containing journey details and optionally station
+      information.
+
+      \    "
+    inputSchema:
+      type: object
+      title: plan_journey_by_city_namesArguments
+      required:
+        - from_city
+        - to_city
+      properties:
+        to_city:
+          type: string
+          title: To City
+        datetime:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Datetime
+          default: null
+        from_city:
+          type: string
+          title: From City
+        datetime_represents:
+          type: string
+          title: Datetime Represents
+          default: departure
+        include_station_details:
+          type: boolean
+          title: Include Station Details
+          default: false
+  - name: check_disruptions
+    description: "
+
+      \    Check for current disruptions in the SNCF transport network.
+
+      \   \ 
+
+      \    Args:
+
+      \        coverage: The coverage area to use for the request.
+
+      \        count: The maximum number of disruptions to return.
+
+      \        station_id: Filter disruptions affecting a specific station.
+
+      \        line_id: Filter disruptions affecting a specific line.
+
+      \        since: Only disruptions valid after this date (format
+      YYYYMMDDTHHMMSS).
+
+      \        until: Only disruptions valid before this date (format
+      YYYYMMDDTHHMMSS).
+
+      \        fetch_train_details: Whether to fetch additional details about
+      affected trains.
+
+      \        debug: Whether to include debug information in the response.
+
+      \       \ 
+
+      \    Returns:
+
+      \        A dictionary containing information about the disruptions.
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_disruptionsArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 10
+        debug:
+          type: boolean
+          title: Debug
+          default: false
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        line_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Line Id
+          default: null
+        coverage:
+          type: string
+          title: Coverage
+          default: sncf
+        station_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Station Id
+          default: null
+        fetch_train_details:
+          type: boolean
+          title: Fetch Train Details
+          default: true
+  - name: get_station_schedule
+    description: "
+
+      \    Get both departures and arrivals schedule for a station.
+
+      \   \ 
+
+      \    This tool finds stations in the specified city and returns schedule
+      information.
+
+      \    If multiple stations exist in the city and no specific station is
+      provided,
+
+      \    it will return information about all available stations.
+
+      \    If a station_id is provided, it will directly use that instead of
+      searching by city/name.
+
+      \   \ 
+
+      \    You can search for stations by providing either:
+
+      \    1. A city name (e.g., \"Paris\")
+
+      \    2. A station name (e.g., \"Montparnasse\")
+
+      \    3. Both city and station name (e.g., city=\"Paris\",
+      station=\"Montparnasse\")
+
+      \    4. A direct station ID if you know it
+
+      \   \ 
+
+      \    Args:
+
+      \        city_name: Name of the city to search for stations
+
+      \        station_name: Optional name of a specific station to filter by
+
+      \        station_id: Optional direct station ID (if you know the exact ID)
+
+      \        count: Number of departures/arrivals to return
+
+      \        datetime: Optional datetime to start from (ISO format)
+
+      \        duration: Optional duration in seconds
+
+      \        data_freshness: Data freshness level (realtime or base_schedule)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with station information and schedules
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_station_scheduleArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 10
+        datetime:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Datetime
+          default: null
+        duration:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Duration
+          default: null
+        city_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: City Name
+          default: null
+        station_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Station Id
+          default: null
+        station_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Station Name
+          default: null
+        data_freshness:
+          type: string
+          title: Data Freshness
+          default: realtime
+  - name: get_station_details
+    description: "
+
+      \    Get comprehensive details about stations in a city or a specific
+      station.
+
+      \   \ 
+
+      \    This tool provides detailed information about stations, including:
+
+      \    1. Basic station information (name, ID, coordinates)
+
+      \    2. Available transport types at each station (buses, trains, rapid
+      transit, etc.)
+
+      \    3. Nearby places and stop points
+
+      \   \ 
+
+      \    You can search for stations by providing either:
+
+      \    1. A city name (e.g., \"Grenoble\")
+
+      \    2. A station name (e.g., \"Gare de Grenoble\")
+
+      \    3. Both city and station name (e.g., city=\"Grenoble\",
+      station=\"Gare de Grenoble\")
+
+      \    4. A direct station ID if you know it
+
+      \   \ 
+
+      \    Args:
+
+      \        city_name: Name of the city to search for stations
+
+      \        station_name: Optional name of a specific station to filter by
+
+      \        station_id: Optional direct station ID (if you know the exact ID)
+
+      \        include_transport_types: Whether to include transport type
+      analysis
+
+      \        include_nearby_places: Whether to include nearby places
+      information
+
+      \        nearby_distance: Search radius in meters for nearby places
+
+      \        nearby_count: Maximum number of nearby places to return
+
+      \        debug: Whether to include debug information in the response
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with comprehensive station information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_station_detailsArguments
+      properties:
+        debug:
+          type: boolean
+          title: Debug
+          default: false
+        city_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: City Name
+          default: null
+        station_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Station Id
+          default: null
+        nearby_count:
+          type: integer
+          title: Nearby Count
+          default: 20
+        station_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Station Name
+          default: null
+        nearby_distance:
+          type: integer
+          title: Nearby Distance
+          default: 500
+        include_nearby_places:
+          type: boolean
+          title: Include Nearby Places
+          default: true
+        include_transport_types:
+          type: boolean
+          title: Include Transport Types
+          default: true

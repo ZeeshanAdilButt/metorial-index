@@ -1,0 +1,15 @@
+identifier: laksh-star/mcp-server-tmdb/mcp-server-tmdb
+repo:
+  provider: github.com
+  url: https://github.com/Laksh-star/mcp-server-tmdb
+  name: mcp-server-tmdb
+  owner: Laksh-star
+server:
+  subdirectory: /
+  name: TMDB Server
+  description: This server integrates with The Movie Database (TMDB) API to
+    provide movie information, search capabilities, and recommendations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

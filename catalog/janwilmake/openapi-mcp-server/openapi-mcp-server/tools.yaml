@@ -1,0 +1,339 @@
+tools:
+  - name: getApiOverview
+    description: >-
+      Get an overview of an OpenAPI specification. This should be the first step
+      when working with any API.
+
+
+      - github - GitHub is where one hosts their code in a central location, to
+      collaborate with others
+
+      - socialdata.tools
+
+      - podscan.fm - Search through podcast transcripts, get alerts
+
+      - x - Official Twitter/X API
+
+      - cloudflare - Cloudflare provides content delivery network services,
+      cloud cybersecurity, DDoS mitigation, wide area network services, Domain
+      Name Service, and ICANN-accredited domain registration services
+
+      - npm-registry
+
+      - supabase - Create hosted Postgres Databases with API
+
+      - hackernews - Readonly API for posts, comments, and profiles from
+      news.ycombinator.com
+
+      - stripe - Create a paywall for your app or invoices
+
+      - slack - A very common app used for communication at work
+
+      - vercel - Vercel is a cloud hosting solution for full stack applications
+
+      - val-town - Host serverless APIs
+
+      - openai - OpenAI is a large AI service provider providing state of the
+      art models in various modalities.
+
+      - firecrawl - API for interacting with Firecrawl services to perform web
+      scraping and crawling tasks.
+
+      - playht - The PlayHT's API API allows developers to Realtime Text to
+      Speech streaming Stream audio bytes from text, Convert long form Text to
+      Speech Generate audio from text, and Voice Cloning Instant Cloning.
+
+      - serper - The worlds fastest and cheapest google search api
+
+      - replicate
+
+      - brandwatch - Watch social media about your brand
+
+      - jina-reader - Read webpages in markdown, html, or screenshot
+
+      - upstash-redis - Control a Redis database over API
+
+      - upstash-qstash - Scheduling and batching API calls
+
+      - upstash-vector - Control a Vector database over API
+
+      - digitalocean
+
+      - apisguru - Public API to find OpenAPIs on https://apis.guru
+
+      - groq - Cloud AI Provider with multiple transformer LLMs and other
+      modalities, with very fast inference
+
+      - notion-dbs - Notion Databases API
+
+      - posthog-capture-api - Posthog is a Product analytics platform allowing
+      companies to track and understand their users
+
+      - google-analytics4 - The Google Analytics Admin API allows for
+      programmatic access to the Google Analytics 4 (GA4) configuration data and
+      is only compatible with GA4 properties
+
+      - google-analytics3 - Views and manages your Google Analytics data (GA3)
+
+      - anthropic-message-api
+
+      - probo-nl
+
+      - whatsapp-business - The WhatsApp Business Platform gives medium to large
+      businesses the ability to connect with customers at scale. You can start
+      WhatsApp conversations with your customers in minutes, send them care
+      notifications or purchase updates, offer personalized services, and
+      provide support in the channel that your customers prefer.
+
+      - shopify - Shopify Admin API
+
+      - twilio-messaging
+
+      - huggingface
+
+      - doppio
+
+      - multion
+
+      - browserless - Web browsing API
+
+      - bol-com-retailer - Dutch shopping platform
+
+      - statusbrew - Social media planning API for facebook, instagram, twitter,
+      linkedin, google my business, pinterest, youtube, and tiktok.
+
+      - swagger-validator - Validators for swagger 2.0 and 3.x specifications of
+      OpenAPIs
+
+      - google-mail - Manage GMail
+
+      - youtube-data - The YouTube Data API v3 is an API that provides access to
+      YouTube data, such as videos, playlists, and channels.
+
+      - google-sheets
+
+      - google-drive
+
+      - google-secret-manager
+
+      - flyio
+
+      - vapi
+
+      - klippa
+
+      - uberduck
+
+      - twilio
+
+      - saltedge - Bank integrations
+
+      - google-search-console
+
+      - aws-cloudwatch-insights
+
+      - aws-cloudfront
+
+      - aws-email
+
+      - aws-s3-control
+
+      - aws-s3
+
+      - aws-sagemaker
+
+      - aws-sagemaker-edge
+
+      - aws-sagemaker-featureStore
+
+      - bunq
+
+      - hootsuite
+
+      - robocorp
+
+      - sendgrid
+
+      - google-calendar
+
+      - google-docs
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: API identifier, can be a known ID from openapisearch.com or a URL
+            leading to a raw OpenAPI file
+  - name: getApiOperation
+    description: >-
+      Get details about a specific operation from an OpenAPI specification. Use
+      this after getting an overview.
+
+
+      - github - GitHub is where one hosts their code in a central location, to
+      collaborate with others
+
+      - socialdata.tools
+
+      - podscan.fm - Search through podcast transcripts, get alerts
+
+      - x - Official Twitter/X API
+
+      - cloudflare - Cloudflare provides content delivery network services,
+      cloud cybersecurity, DDoS mitigation, wide area network services, Domain
+      Name Service, and ICANN-accredited domain registration services
+
+      - npm-registry
+
+      - supabase - Create hosted Postgres Databases with API
+
+      - hackernews - Readonly API for posts, comments, and profiles from
+      news.ycombinator.com
+
+      - stripe - Create a paywall for your app or invoices
+
+      - slack - A very common app used for communication at work
+
+      - vercel - Vercel is a cloud hosting solution for full stack applications
+
+      - val-town - Host serverless APIs
+
+      - openai - OpenAI is a large AI service provider providing state of the
+      art models in various modalities.
+
+      - firecrawl - API for interacting with Firecrawl services to perform web
+      scraping and crawling tasks.
+
+      - playht - The PlayHT's API API allows developers to Realtime Text to
+      Speech streaming Stream audio bytes from text, Convert long form Text to
+      Speech Generate audio from text, and Voice Cloning Instant Cloning.
+
+      - serper - The worlds fastest and cheapest google search api
+
+      - replicate
+
+      - brandwatch - Watch social media about your brand
+
+      - jina-reader - Read webpages in markdown, html, or screenshot
+
+      - upstash-redis - Control a Redis database over API
+
+      - upstash-qstash - Scheduling and batching API calls
+
+      - upstash-vector - Control a Vector database over API
+
+      - digitalocean
+
+      - apisguru - Public API to find OpenAPIs on https://apis.guru
+
+      - groq - Cloud AI Provider with multiple transformer LLMs and other
+      modalities, with very fast inference
+
+      - notion-dbs - Notion Databases API
+
+      - posthog-capture-api - Posthog is a Product analytics platform allowing
+      companies to track and understand their users
+
+      - google-analytics4 - The Google Analytics Admin API allows for
+      programmatic access to the Google Analytics 4 (GA4) configuration data and
+      is only compatible with GA4 properties
+
+      - google-analytics3 - Views and manages your Google Analytics data (GA3)
+
+      - anthropic-message-api
+
+      - probo-nl
+
+      - whatsapp-business - The WhatsApp Business Platform gives medium to large
+      businesses the ability to connect with customers at scale. You can start
+      WhatsApp conversations with your customers in minutes, send them care
+      notifications or purchase updates, offer personalized services, and
+      provide support in the channel that your customers prefer.
+
+      - shopify - Shopify Admin API
+
+      - twilio-messaging
+
+      - huggingface
+
+      - doppio
+
+      - multion
+
+      - browserless - Web browsing API
+
+      - bol-com-retailer - Dutch shopping platform
+
+      - statusbrew - Social media planning API for facebook, instagram, twitter,
+      linkedin, google my business, pinterest, youtube, and tiktok.
+
+      - swagger-validator - Validators for swagger 2.0 and 3.x specifications of
+      OpenAPIs
+
+      - google-mail - Manage GMail
+
+      - youtube-data - The YouTube Data API v3 is an API that provides access to
+      YouTube data, such as videos, playlists, and channels.
+
+      - google-sheets
+
+      - google-drive
+
+      - google-secret-manager
+
+      - flyio
+
+      - vapi
+
+      - klippa
+
+      - uberduck
+
+      - twilio
+
+      - saltedge - Bank integrations
+
+      - google-search-console
+
+      - aws-cloudwatch-insights
+
+      - aws-cloudfront
+
+      - aws-email
+
+      - aws-s3-control
+
+      - aws-s3
+
+      - aws-sagemaker
+
+      - aws-sagemaker-edge
+
+      - aws-sagemaker-featureStore
+
+      - bunq
+
+      - hootsuite
+
+      - robocorp
+
+      - sendgrid
+
+      - google-calendar
+
+      - google-docs
+    inputSchema:
+      type: object
+      required:
+        - id
+        - operationIdOrRoute
+      properties:
+        id:
+          type: string
+          description: API identifier, can be a known ID from openapisearch.com or a URL
+            leading to a raw OpenAPI file
+        operationIdOrRoute:
+          type: string
+          description: Operation ID or route path to retrieve

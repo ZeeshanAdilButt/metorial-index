@@ -1,0 +1,220 @@
+tools:
+  - name: get_tweets_by_userid
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+          description: The Twitter user ID to search for tweets
+        exclude:
+          type: array
+          items:
+            enum:
+              - retweets
+              - replies
+            type: string
+          description: The types of tweets to exclude from the search
+        maxResults:
+          type: number
+          default: 10
+          description: The maximum number of tweets to return
+        paginationToken:
+          type: string
+          description: The pagination token to use for the next page of results
+      additionalProperties: false
+  - name: get_tweet_by_id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tweetId
+      properties:
+        tweetId:
+          type: string
+          description: The ID of the tweet to retrieve
+      additionalProperties: false
+  - name: get_user_mentions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+          description: The Twitter user ID to get mentions for
+        maxResults:
+          type: number
+          default: 10
+          description: The maximum number of mentions to return
+        paginationToken:
+          type: string
+          description: The pagination token to use for the next page of results
+      additionalProperties: false
+  - name: quote_tweet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tweetId
+        - replyText
+      properties:
+        tweetId:
+          type: string
+          description: The ID of the tweet to quote
+        replyText:
+          type: string
+          description: The text to include with the quote
+      additionalProperties: false
+  - name: reply_to_tweet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tweetId
+        - replyText
+      properties:
+        tweetId:
+          type: string
+          description: The ID of the tweet to reply to
+        replyText:
+          type: string
+          description: The text content of the reply
+      additionalProperties: false
+  - name: post_tweet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: The text content of the tweet
+      additionalProperties: false
+  - name: like_tweet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tweetId
+      properties:
+        tweetId:
+          type: string
+          description: The ID of the tweet to like
+      additionalProperties: false
+  - name: follow_user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - targetUserId
+      properties:
+        targetUserId:
+          type: string
+          description: The ID of the user to follow
+      additionalProperties: false
+  - name: unfollow_user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - targetUserId
+      properties:
+        targetUserId:
+          type: string
+          description: The ID of the user to unfollow
+      additionalProperties: false
+  - name: get_user_by_username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: The Twitter username (without @ symbol)
+      additionalProperties: false
+  - name: search_tweets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query
+        maxResults:
+          type: number
+          default: 10
+          description: Maximum number of results to return
+      additionalProperties: false
+  - name: get_trending_topics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        woeid:
+          type: number
+          default: 1
+          description: The 'Where On Earth ID' (WOEID) for the location (1 for worldwide)
+      additionalProperties: false
+  - name: create_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the list
+        isPrivate:
+          type: boolean
+          default: false
+          description: Whether the list should be private
+        description:
+          type: string
+          description: Optional description for the list
+      additionalProperties: false
+  - name: add_list_member
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - listId
+        - userId
+      properties:
+        listId:
+          type: string
+          description: The ID of the list
+        userId:
+          type: string
+          description: The ID of the user to add
+      additionalProperties: false
+  - name: remove_list_member
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - listId
+        - userId
+      properties:
+        listId:
+          type: string
+          description: The ID of the list
+        userId:
+          type: string
+          description: The ID of the user to remove
+      additionalProperties: false
+  - name: get_owned_lists
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

@@ -1,0 +1,85 @@
+tools:
+  - name: image-to-video
+    description: Generate a video from an image using Vidu API
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image_url
+      properties:
+        seed:
+          type: integer
+          description: Random seed for reproducibility
+        model:
+          enum:
+            - vidu1.0
+            - vidu1.5
+            - vidu2.0
+          type: string
+          default: vidu2.0
+          description: Model name for generation
+        prompt:
+          type: string
+          maxLength: 1500
+          description: Text prompt for video generation (max 1500 chars)
+        duration:
+          type: integer
+          default: 4
+          maximum: 8
+          minimum: 4
+          description: Duration of the output video in seconds (4 or 8)
+        image_url:
+          type: string
+          format: uri
+          description: URL of the image to convert to video
+        resolution:
+          enum:
+            - 360p
+            - 720p
+            - 1080p
+          type: string
+          default: 720p
+          description: Resolution of the output video
+        movement_amplitude:
+          enum:
+            - auto
+            - small
+            - medium
+            - large
+          type: string
+          default: auto
+          description: Movement amplitude of objects in the frame
+      additionalProperties: false
+  - name: check-generation-status
+    description: Check the status of a video generation task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          description: Task ID returned by the image-to-video tool
+      additionalProperties: false
+  - name: upload-image
+    description: Upload an image to use with the Vidu API
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image_path
+        - image_type
+      properties:
+        image_path:
+          type: string
+          description: Local path to the image file
+        image_type:
+          enum:
+            - png
+            - webp
+            - jpeg
+            - jpg
+          type: string
+          description: Image file type
+      additionalProperties: false

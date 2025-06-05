@@ -1,0 +1,22 @@
+tools:
+  - name: gemini-thinking
+    description: Generate reasoning and action plan using
+      gemini-2.0-flash-thinking-exp-01-21
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Input text for Gemini
+        max_tokens:
+          type: number
+          maximum: 8192
+          minimum: 1
+          description: "Maximum tokens to generate (default: 8192)"
+        temperature:
+          type: number
+          maximum: 2
+          minimum: 0
+          description: "Sampling temperature (default: 0.2)"

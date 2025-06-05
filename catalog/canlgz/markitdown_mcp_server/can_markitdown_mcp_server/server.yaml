@@ -1,0 +1,18 @@
+identifier: canlgz/markitdown_mcp_server/can_markitdown_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/canlgz/markitdown_mcp_server
+  name: markitdown_mcp_server
+  owner: canlgz
+server:
+  subdirectory: /
+  name: MarkItDown Server
+  description: Convert various file formats to Markdown to streamline content
+    processing and integration. Supports PDFs, Office documents, images with
+    OCR, audio transcription, HTML, text formats, and ZIP archives. Enhance your
+    MCP client workflows by easily transforming diverse data into Markdown
+    format.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

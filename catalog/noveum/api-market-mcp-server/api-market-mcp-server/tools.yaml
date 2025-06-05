@@ -1,0 +1,682 @@
+tools:
+  - name: distance_and_duration_bw_starts_and_stops
+    description: Calculate length and driving time of the optimal routes between
+      origin and destination points on the real road network.
+    inputSchema:
+      type: object
+      required:
+        - origins
+      properties:
+        origins:
+          type: string
+          description: List of origins described as semicolon-delimited coordinate pairs
+            with latitudes and longitudes. Maximum 25 pairs per request.
+        start_time:
+          type: string
+          description: Time when travel is expected to start. You can specify the time as
+            an integer in seconds since midnight, January 1, 1970 UTC or you can
+            use 'now' to specify the current time.
+        avoid_tolls:
+          type: boolean
+          description: Avoid tolls
+        destinations:
+          type: string
+          description: List of destinations described as semicolon-delimited coordinate
+            pairs with latitudes and longitudes. If not specified, an n x n
+            matrix will be generated using the origins. Maximum 25 pairs per
+            request.
+        avoid_ferries:
+          type: boolean
+          description: Avoid ferries
+        avoid_highways:
+          type: boolean
+          description: Avoid highways
+  - name: Get_audio_analysis_URL
+    description: >
+      This endpoint retrieves the URL of the transcription and analysis of the
+      audio for the given request ID.
+    inputSchema:
+      type: object
+      required:
+        - request_id
+      properties:
+        request_id:
+          type: string
+          description: Unique identifier for the request.
+  - name: Whisper_Audio_Processing
+    description: API for sentece wise transcription and analysis of audio, using AI
+      models. Make sure to call get audio analysis URL with the request ID
+      received from this API.
+    inputSchema:
+      type: object
+      required:
+        - audio
+        - model
+        - translate
+        - temperature
+        - transcription
+        - suppress_tokens
+        - logprob_threshold
+        - no_speech_threshold
+        - condition_on_previous_text
+        - compression_ratio_threshold
+        - temperature_increment_on_fallback
+      properties:
+        audio:
+          type: string
+          default: https://replicate.delivery/mgxm/e5159b1b-508a-4be4-b892-e1eb47850bdc/OSR_uk_000_0050_8k.wav
+        model:
+          type: string
+          default: large-v3
+        translate:
+          type: boolean
+          default: false
+        temperature:
+          type: integer
+          default: 0
+        transcription:
+          type: string
+          default: plain text
+        suppress_tokens:
+          type: string
+          default: -1
+        logprob_threshold:
+          type: integer
+          default: -1
+        no_speech_threshold:
+          type: integer
+          default: 0.6
+        condition_on_previous_text:
+          type: boolean
+          default: true
+        compression_ratio_threshold:
+          type: integer
+          default: 2.4
+        temperature_increment_on_fallback:
+          type: integer
+          default: 0.2
+  - name: Upload
+    description: Make a POST request to capix/faceswap/upload/
+    inputSchema:
+      type: object
+      properties: {}
+  - name: ImageFaceSwap
+    description: Make a POST request to capix/faceswap/faceswap/v1/image
+    inputSchema:
+      type: object
+      required:
+        - swap_url
+        - target_url
+      properties:
+        swap_url:
+          type: string
+          title: Swap Url
+          default: https://storage.ws.pho.to/s2/818f3e408ee37c090cf23a3d12e15a08ada80ad9_m.jpeg
+          description: Require an image with a face
+        target_url:
+          type: string
+          title: Target Url
+          default: https://storage.ws.pho.to/s2/7aa4876bc1f50bc92fc54cb3c326181ac5bbf5ef_m.jpeg
+          description: Require an image with a face
+  - name: VideoFaceSwap
+    description: Make a POST request to capix/faceswap/faceswap/v1/video
+    inputSchema:
+      type: object
+      required:
+        - swap_url
+        - target_url
+      properties:
+        swap_url:
+          type: string
+          title: Swap Url
+          default: https://storage.ws.pho.to/s2/818f3e408ee37c090cf23a3d12e15a08ada80ad9_m.jpeg
+          description: Require an image with a face
+        target_url:
+          type: string
+          title: Target Url
+          default: https://storage.ws.pho.to/s2/7e2131eaef5e5cbb0d2c9eef7e2f19343b5a1292.mp4
+          pattern: ^.*\.mp4$
+          description: Require only .mp4 video file url
+  - name: Result
+    description: Make a POST request to capix/faceswap/result/
+    inputSchema:
+      type: object
+      required:
+        - request_id
+      properties:
+        request_id:
+          type: string
+          title: Request Id
+  - name: Forward_Geocoding
+    description: Obtain location(geographic coordinates) for address.
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        area:
+          type: string
+          description: area parameter
+        bounds:
+          type: string
+          description: The bounding box for results preference
+        region:
+          type: string
+          description: region parameter
+        street:
+          type: string
+          description: street parameter
+        address:
+          type: string
+          description: The address that you want to geocode
+        country:
+          type: string
+          description: The two-letter bias country code (ccTLD or ISO 3166-1) in which to
+            return results
+        language:
+          type: string
+          description: The two-letter language code in which to return results (ISO 639-1)
+        locality:
+          type: string
+          description: locality parameter
+        postal_code:
+          type: string
+          description: postal_code parameter
+  - name: Reverse_Geocoding
+    description: Obtain address for location.
+    inputSchema:
+      type: object
+      required:
+        - location
+      properties:
+        language:
+          type: string
+          description: The two-letter language code in which to return results (ISO 639-1)
+        location:
+          type: string
+          description: The location for which you wish to obtain the human-readable address
+  - name: DNS_Checker_API
+    description: Make a POST request to magicapi/dnschecker/dnschecker
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          default: google.com
+  - name: Get_coder_output_URL
+    description: >
+      This endpoint retrieves the URL of the coding assistant's response for a
+      given request ID.
+    inputSchema:
+      type: object
+      required:
+        - request_id
+      properties:
+        request_id:
+          type: string
+          description: Unique identifier for the request.
+  - name: Coding_Assistant
+    description: >-
+      Coding Assistant. 
+       Make sure you call get coder output URL MCP tool to get the URL for the request id received from this API 
+    inputSchema:
+      type: object
+      required:
+        - top_k
+        - top_p
+        - prompt
+        - max_tokens
+        - temperature
+        - system_prompt
+        - repeat_penalty
+        - presence_penalty
+        - frequency_penalty
+      properties:
+        top_k:
+          type: integer
+          default: 250
+        top_p:
+          type: integer
+          default: 0.95
+        prompt:
+          type: string
+          default: Write a javascript function that calculates euclidean distance between
+            two coordinates of any dimension
+        max_tokens:
+          type: integer
+          default: 500
+        temperature:
+          type: integer
+          default: 0.95
+        system_prompt:
+          type: string
+        repeat_penalty:
+          type: integer
+          default: 1.1
+        presence_penalty:
+          type: integer
+          default: 0
+        frequency_penalty:
+          type: integer
+          default: 0
+  - name: A_fast_nsfw_detection_API
+    description: Make a POST request to bridgeml/nsfw!detection/nsfw_detection
+    inputSchema:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          default: https://blog.api.market/wp-content/uploads/2024/07/wonder_woman.png
+          description: The url for image that wants to be checked for nsfw
+  - name: getWhoisInfo
+    description: Make a GET request to magicapi/whois/whois/{domain}
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: Domain to query WHOIS information for
+  - name: Get_Unblurred_Image_URL
+    description: >
+      This endpoint retrieves the URL of the Unblurred image for a given request
+      ID.
+    inputSchema:
+      type: object
+      required:
+        - request_id
+      properties:
+        request_id:
+          type: string
+          description: Unique identifier for the request.
+  - name: Deblurer
+    description: >-
+      API for image deblurring. 
+       Make sure you call get deblurred image URL, MCP tool to get the URL for the request id received from this API
+    inputSchema:
+      type: object
+      required:
+        - image
+        - task_type
+      properties:
+        image:
+          type: string
+          default: https://replicate.delivery/mgxm/e7a66188-34c6-483b-813f-be5c96a3952b/blurry-reds-0.jpg
+        task_type:
+          type: string
+          default: Image Debluring (REDS)
+  - name: text-to-image
+    description: Make a POST request to bridgeml/text!to!image/text_to_image
+    inputSchema:
+      type: object
+      required:
+        - prompt
+        - height
+        - width
+      properties:
+        width:
+          type: integer
+          default: 1024
+          description: The width of the image
+        height:
+          type: integer
+          default: 1024
+          description: The height of the image
+        prompt:
+          type: string
+          default: Futuristic space battle, hyper realistic, 4k
+          description: The prompt for generating the image
+        scheduler:
+          type: string
+          default: K_EULER
+          description: The scheduler to use
+        num_outputs:
+          type: integer
+          default: 1
+          description: The number of outputs
+        guidance_scale:
+          type: number
+          default: 0
+          description: The guidance scale
+        negative_prompt:
+          type: string
+          default: worst quality, low quality
+          description: The negative prompt
+        num_inference_steps:
+          type: integer
+          default: 4
+          description: The number of inference steps
+  - name: Get_ageing_gif_URL
+    description: |
+      This endpoint retrieves the URL of the ageing gif for a given request ID.
+    inputSchema:
+      type: object
+      required:
+        - request_id
+      properties:
+        request_id:
+          type: string
+          description: Unique identifier for the request.
+  - name: Period_changer
+    description: API for generating ageing gif using AI models. Make sure to call
+      get ageing gif URL, with the result id received from this API
+    inputSchema:
+      type: object
+      required:
+        - image
+        - target_age
+      properties:
+        image:
+          type: string
+          default: https://replicate.delivery/mgxm/806bea64-bb51-4c8a-bf4d-15602eb60fdd/1287.jpg
+        target_age:
+          type: string
+          default: default
+  - name: Search_for_places_by_text
+    description: Search for places by text string
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: A text string on which to search
+        bounds:
+          type: string
+          description: "The bounding box for results preference. Format:
+            south,west,north,east. Coordinates: decimal degrees."
+        language:
+          type: string
+          description: The two-letter language code in which to return results (ISO 639-1)
+  - name: Search_for_nearby_places
+    description: Search for places around location within a specified radius.
+    inputSchema:
+      type: object
+      required:
+        - location
+      properties:
+        type:
+          type: string
+          description: The type of places that are returned
+        radius:
+          type: integer
+          description: The distance (in meters) within which to return results. Max =
+            10000 m.
+        language:
+          type: string
+          description: The two-letter language code in which to return results (ISO 639-1)
+        location:
+          type: string
+          description: The latitude/longitude around which to retrieve places
+  - name: Get_hairstyled_image_URL
+    description: >
+      This endpoint retrieves the URL of the simulated hairstyle image for a
+      given request ID.
+    inputSchema:
+      type: object
+      required:
+        - request_id
+      properties:
+        request_id:
+          type: string
+          description: Unique identifier for the request.
+  - name: Hair_style_simulator
+    description: API for simulating different hair styles using AI models. Make sure
+      to call get hairstyled image after with the request id received from this
+      API.
+    inputSchema:
+      type: object
+      required:
+        - image
+        - editing_type
+        - color_description
+        - hairstyle_description
+      properties:
+        image:
+          type: string
+          default: https://replicate.delivery/mgxm/b8be17a7-abcb-4421-80f2-e6a1e3fe38c7/MarkZuckerberg.jpg
+        editing_type:
+          type: string
+          default: both
+        color_description:
+          type: string
+          default: blond
+        hairstyle_description:
+          type: string
+          default: hi-top fade hairstyle
+  - name: BridgeML_API
+    description: Make a POST request to bridgeml/codellama/bridgeml/codellama
+    inputSchema:
+      type: object
+      properties:
+        top_p:
+          type: number
+          example: 1
+          description: Top P sampling value
+        stream:
+          type: boolean
+          example: false
+          description: Flag indicating if response should be streamed
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                enum:
+                  - user
+                  - assistant
+                type: string
+                description: Role of the message sender
+              content:
+                type: string
+                description: Content of the message
+          example:
+            - role: user
+              content: hello
+            - role: assistant
+              content: ""
+          description: List of messages
+        max_tokens:
+          type: number
+          example: 256
+          description: Maximum number of tokens to generate
+        temperature:
+          type: number
+          example: 1
+          description: Temperature for text generation
+        frequency_penalty:
+          type: number
+          example: 0
+          description: Frequency penalty value
+  - name: Search_Videos
+    description: Retrieve video search results based on query parameters
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: Search query
+        count:
+          type: integer
+          description: Number of results to return
+        country:
+          type: string
+          description: Country code
+        spellcheck:
+          type: boolean
+          description: Enable spellcheck
+        search_lang:
+          type: string
+          description: Search language
+  - name: Search_Web
+    description: Retrieve web search results based on query parameters
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: Search query
+  - name: Search_Images
+    description: Retrieve image search results based on query parameters
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: Search query
+        count:
+          type: integer
+          description: Number of results to return
+        country:
+          type: string
+          description: Country code
+        safesearch:
+          type: string
+          description: Safe search filter
+        spellcheck:
+          type: boolean
+          description: Enable spellcheck
+        search_lang:
+          type: string
+          description: Search language
+  - name: Search_News
+    description: Retrieve news search results based on query parameters
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: Search query
+        count:
+          type: integer
+          description: Number of results to return
+        country:
+          type: string
+          description: Country code
+        spellcheck:
+          type: boolean
+          description: Enable spellcheck
+        search_lang:
+          type: string
+          description: Search language
+  - name: Search_Suggestions
+    description: Retrieve search suggestions based on query parameters
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: Search query
+        count:
+          type: integer
+          description: Number of suggestions to return
+        country:
+          type: string
+          description: Country code
+  - name: Spellcheck_Search
+    description: Retrieve spellcheck suggestions based on query parameters
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: Search query
+        country:
+          type: string
+          description: Country code
+  - name: Check_domain_availability
+    description: |
+      Submit a domain name to check its availability.
+    inputSchema:
+      type: object
+      properties:
+        domain_name:
+          type: string
+  - name: best_route_for_multiple_stops
+    description: Finding optimal route to visit several locations.
+    inputSchema:
+      type: object
+      required:
+        - stops
+      properties:
+        stops:
+          type: string
+          description: List of locations described as semicolon-delimited coordinate pairs
+            with latitudes and longitudes. Maximum 25 pairs per request.
+        optimize:
+          type: boolean
+          description: Instructs the API to reorder stops to find the optimized route. The
+            route first stop and last stop order is not changed, their position
+            is considered fixed.
+        avoid_tolls:
+          type: boolean
+          description: Avoid tolls
+        avoid_ferries:
+          type: boolean
+          description: Avoid ferries
+        avoid_highways:
+          type: boolean
+          description: Avoid highways
+  - name: best_route_bw_start_and_stop
+    description: Finding optimal route from a origin to a destination, passing
+      through multiple waypoints(optional).
+    inputSchema:
+      type: object
+      required:
+        - origin
+        - destination
+      properties:
+        origin:
+          type: string
+          description: The location from which you wish to calculate directions.
+        waypoints:
+          type: string
+          description: "An array of intermediate locations to include along the route
+            between the origin and destination points as pass through locations.
+            Maximum: 23 per request."
+        start_time:
+          type: string
+          description: Time when travel is expected to start. You can specify the time as
+            an integer in seconds since midnight, January 1, 1970 UTC or you can
+            use 'now' to specify the current time.
+        avoid_tolls:
+          type: boolean
+          description: Avoid tolls
+        destination:
+          type: string
+          description: The location to which you wish to calculate directions.
+        avoid_ferries:
+          type: boolean
+          description: Avoid ferries
+        avoid_highways:
+          type: boolean
+          description: Avoid highways
+  - name: Extract_information_from_a_URL
+    description: Make a POST request to pipfeed/parse/extract
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          example: https://techcrunch.com/2022/04/18/web-scraping-legal-court/

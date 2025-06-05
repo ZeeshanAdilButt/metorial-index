@@ -1,0 +1,448 @@
+tools:
+  - name: get_document_info
+    description: Get detailed information about the current Figma document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_selection
+    description: Get information about the current selection in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_node_info
+    description: Get detailed information about a specific node in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+      properties:
+        nodeId:
+          type: string
+          description: The ID of the node to get information about
+      additionalProperties: false
+  - name: create_rectangle
+    description: Create a new rectangle in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - x
+        - y
+        - width
+        - height
+      properties:
+        x:
+          type: number
+          description: X position
+        y:
+          type: number
+          description: Y position
+        name:
+          type: string
+          description: Optional name for the rectangle
+        width:
+          type: number
+          description: Width of the rectangle
+        height:
+          type: number
+          description: Height of the rectangle
+        parentId:
+          type: string
+          description: Optional parent node ID to append the rectangle to
+      additionalProperties: false
+  - name: create_frame
+    description: Create a new frame in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - x
+        - y
+        - width
+        - height
+      properties:
+        x:
+          type: number
+          description: X position
+        y:
+          type: number
+          description: Y position
+        name:
+          type: string
+          description: Optional name for the frame
+        width:
+          type: number
+          description: Width of the frame
+        height:
+          type: number
+          description: Height of the frame
+        parentId:
+          type: string
+          description: Optional parent node ID to append the frame to
+        fillColor:
+          type: object
+          required:
+            - r
+            - g
+            - b
+          properties:
+            a:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Alpha component (0-1)
+            b:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Blue component (0-1)
+            g:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Green component (0-1)
+            r:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Red component (0-1)
+          description: Fill color in RGBA format
+          additionalProperties: false
+        strokeColor:
+          type: object
+          required:
+            - r
+            - g
+            - b
+          properties:
+            a:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Alpha component (0-1)
+            b:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Blue component (0-1)
+            g:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Green component (0-1)
+            r:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Red component (0-1)
+          description: Stroke color in RGBA format
+          additionalProperties: false
+        strokeWeight:
+          type: number
+          description: Stroke weight
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: create_text
+    description: Create a new text element in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - x
+        - y
+        - text
+      properties:
+        x:
+          type: number
+          description: X position
+        y:
+          type: number
+          description: Y position
+        name:
+          type: string
+          description: Optional name for the text node by default following text
+        text:
+          type: string
+          description: Text content
+        fontSize:
+          type: number
+          description: "Font size (default: 14)"
+        parentId:
+          type: string
+          description: Optional parent node ID to append the text to
+        fontColor:
+          type: object
+          required:
+            - r
+            - g
+            - b
+          properties:
+            a:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Alpha component (0-1)
+            b:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Blue component (0-1)
+            g:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Green component (0-1)
+            r:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Red component (0-1)
+          description: Font color in RGBA format
+          additionalProperties: false
+        fontWeight:
+          type: number
+          description: Font weight (e.g., 400 for Regular, 700 for Bold)
+      additionalProperties: false
+  - name: set_fill_color
+    description: Set the fill color of a node in Figma can be TextNode or FrameNode
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+        - r
+        - g
+        - b
+      properties:
+        a:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Alpha component (0-1)
+        b:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Blue component (0-1)
+        g:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Green component (0-1)
+        r:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Red component (0-1)
+        nodeId:
+          type: string
+          description: The ID of the node to modify
+      additionalProperties: false
+  - name: set_stroke_color
+    description: Set the stroke color of a node in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+        - r
+        - g
+        - b
+      properties:
+        a:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Alpha component (0-1)
+        b:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Blue component (0-1)
+        g:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Green component (0-1)
+        r:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Red component (0-1)
+        nodeId:
+          type: string
+          description: The ID of the node to modify
+        weight:
+          type: number
+          description: Stroke weight
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: move_node
+    description: Move a node to a new position in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          description: New X position
+        y:
+          type: number
+          description: New Y position
+        nodeId:
+          type: string
+          description: The ID of the node to move
+      additionalProperties: false
+  - name: resize_node
+    description: Resize a node in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+        - width
+        - height
+      properties:
+        width:
+          type: number
+          description: New width
+          exclusiveMinimum: 0
+        height:
+          type: number
+          description: New height
+          exclusiveMinimum: 0
+        nodeId:
+          type: string
+          description: The ID of the node to resize
+      additionalProperties: false
+  - name: delete_node
+    description: Delete a node from Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+      properties:
+        nodeId:
+          type: string
+          description: The ID of the node to delete
+      additionalProperties: false
+  - name: get_styles
+    description: Get all styles from the current Figma document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_local_components
+    description: Get all local components from the Figma document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create_component_instance
+    description: Create an instance of a component in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - componentKey
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          description: X position
+        y:
+          type: number
+          description: Y position
+        componentKey:
+          type: string
+          description: Key of the component to instantiate
+      additionalProperties: false
+  - name: export_node_as_image
+    description: Export a node as an image from Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+      properties:
+        scale:
+          type: number
+          description: Export scale
+          exclusiveMinimum: 0
+        format:
+          enum:
+            - PNG
+            - JPG
+            - SVG
+            - PDF
+          type: string
+          description: Export format
+        nodeId:
+          type: string
+          description: The ID of the node to export
+      additionalProperties: false
+  - name: set_corner_radius
+    description: Set the corner radius of a node in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+        - radius
+      properties:
+        nodeId:
+          type: string
+          description: The ID of the node to modify
+        radius:
+          type: number
+          minimum: 0
+          description: Corner radius value
+        corners:
+          type: array
+          items:
+            type: boolean
+          maxItems: 4
+          minItems: 4
+          description: Optional array of 4 booleans to specify which corners to round
+            [topLeft, topRight, bottomRight, bottomLeft]
+      additionalProperties: false
+  - name: set_text_content
+    description: Set the text content of an existing text node in Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodeId
+        - text
+      properties:
+        text:
+          type: string
+          description: New text content
+        nodeId:
+          type: string
+          description: The ID of the text node to modify
+      additionalProperties: false
+  - name: join_channel
+    description: Join a specific channel to communicate with Figma
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        channel:
+          type: string
+          default: ""
+          description: The name of the channel to join
+      additionalProperties: false

@@ -1,0 +1,11 @@
+tools:
+  - name: get_book_by_title
+    description: Search for a book by its title on Open Library.
+    inputSchema:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: The title of the book to search for.

@@ -1,0 +1,18 @@
+identifier: newtype-01/obsidian-mcp/obsidian-mcp
+repo:
+  provider: github.com
+  url: https://github.com/newtype-01/obsidian-mcp
+  name: obsidian-mcp
+  owner: newtype-01
+server:
+  subdirectory: /
+  name: Obsidian MCP Local Server
+  description: This project implements a Model Context Protocol (MCP) server for
+    connecting AI models with Obsidian knowledge bases. Through this server, AI
+    models can directly access and manipulate Obsidian notes, including reading,
+    creating, updating, and deleting notes, as well as managing folder
+    structures.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

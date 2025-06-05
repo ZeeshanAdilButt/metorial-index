@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/fantasy-pros-mcp/fantasy-pros-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/fantasy-pros-mcp
+  name: fantasy-pros-mcp
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: FantasyPros API Server
+  description: Access sports data, news, rankings, and projections seamlessly.
+    Retrieve the latest updates and player information for NFL, MLB, NBA, and
+    NHL with ease. Enhance your applications with real-time sports insights and
+    analytics.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

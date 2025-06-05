@@ -1,0 +1,18 @@
+identifier: circleci-public/mcp-server-circleci/mcp-server-circleci
+repo:
+  provider: github.com
+  url: https://github.com/CircleCI-Public/mcp-server-circleci
+  name: mcp-server-circleci
+  owner: CircleCI-Public
+server:
+  subdirectory: /
+  name: CircleCI MCP Server
+  description: Enable natural language interactions with CircleCI functionality
+    through MCP-enabled clients. Use this server to retrieve build logs, analyze
+    failures, and manage your CI/CD processes seamlessly from your IDE. Simplify
+    your workflow by integrating CircleCI commands directly into your
+    development environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

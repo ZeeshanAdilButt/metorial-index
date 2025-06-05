@@ -1,0 +1,18 @@
+identifier: m-mcp/flux-schnell-server/flux-schnell-server
+repo:
+  provider: github.com
+  url: https://github.com/m-mcp/flux-schnell-server
+  name: flux-schnell-server
+  owner: m-mcp
+server:
+  subdirectory: /
+  name: Flux Schnell Image Generation Server
+  description: Provide an MCP protocol-based image generation API that enables
+    users to create images from text prompts with customizable dimensions and
+    reproducible results. Support asynchronous streaming responses and
+    integration with Hugging Face model services. Enhance your applications with
+    dynamic, high-quality image generation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

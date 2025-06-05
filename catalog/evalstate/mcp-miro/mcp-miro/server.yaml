@@ -1,0 +1,15 @@
+identifier: evalstate/mcp-miro/mcp-miro
+repo:
+  provider: github.com
+  url: https://github.com/evalstate/mcp-miro
+  name: mcp-miro
+  owner: evalstate
+server:
+  subdirectory: /
+  name: MIRO Whiteboard Connector
+  description: Connects to the MIRO Whiteboard Application for board manipulation
+    and sticky creation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

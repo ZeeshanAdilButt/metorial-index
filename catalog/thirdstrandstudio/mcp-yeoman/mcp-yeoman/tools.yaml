@@ -1,0 +1,65 @@
+tools:
+  - name: yeoman_search_templates
+    description: Search for Yeoman templates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The query to search for seperate with commas if multiple keywords
+            .e.g. react,typescript,tailwind
+        pageSize:
+          type: number
+          default: 20
+          description: The number of templates to return (default 20)
+      additionalProperties: false
+  - name: yeoman_get_generator_options
+    description: Get the required options and arguments for a Yeoman generator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - generatorName
+      properties:
+        generatorName:
+          type: string
+          description: The name of the Yeoman generator to get options for (without the
+            'generator-' prefix)
+      additionalProperties: false
+  - name: yeoman_generate
+    description: Run a Yeoman generator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - generatorName
+        - cwd
+        - appName
+        - version
+      properties:
+        cwd:
+          type: string
+          description: The working directory where the generator should run
+        args:
+          type: array
+          items:
+            type: string
+          description: Positional arguments to pass to the generator
+        appName:
+          type: string
+          description: The name of the application to create
+        options:
+          type: object
+          description: Options to pass to the generator
+          additionalProperties: {}
+        version:
+          type: string
+          description: The version of the application to create
+        generatorName:
+          type: string
+          description: The name of the Yeoman generator to run (without the 'generator-'
+            prefix)
+      additionalProperties: false

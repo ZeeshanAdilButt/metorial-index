@@ -1,0 +1,16 @@
+identifier: letsbuildagent/perplexity-tool/perplexity-tool
+repo:
+  provider: github.com
+  url: https://github.com/letsbuildagent/perplexity-tool
+  name: perplexity-tool
+  owner: letsbuildagent
+server:
+  subdirectory: /
+  name: Perplexity Tool
+  description: Integrate web-based research capabilities into your agents.
+    Leverage Perplexity AI's API to provide accurate answers with citations,
+    enhancing your information retrieval process.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

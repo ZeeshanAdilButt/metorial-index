@@ -1,0 +1,34 @@
+tools:
+  - name: download_image
+    description: "下载图片
+
+      \    Args:
+
+      \        url: 图片URL
+
+      \        save_dir: 保存目录
+
+      \        filename: 保存文件名
+
+      \    Returns:
+
+      \        str: 成功时返回保存路径，失败时返回失败原因
+
+      \    "
+    inputSchema:
+      type: object
+      title: download_imageArguments
+      required:
+        - url
+        - save_dir
+        - filename
+      properties:
+        url:
+          type: string
+          title: url
+        filename:
+          type: string
+          title: filename
+        save_dir:
+          type: string
+          title: save_dir

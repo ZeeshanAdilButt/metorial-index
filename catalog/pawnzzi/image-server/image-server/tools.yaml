@@ -1,0 +1,35 @@
+tools:
+  - name: image_generation
+    description: "
+
+      \    Image generation assistant, please imagine and describe a complete
+      picture in detail based on my simple description. Then translate your
+      detailed description into English
+
+
+      \    :param width: 图片宽度，默认1024
+
+      \    :param height: 图片高度，默认1024
+
+      \    :param image_prompt:图片描述，需要英文
+
+      \    :return:图片的url地址
+
+      \    "
+    inputSchema:
+      type: object
+      title: image_generationArguments
+      required:
+        - image_prompt
+      properties:
+        width:
+          type: integer
+          title: Width
+          default: 1024
+        height:
+          type: integer
+          title: Height
+          default: 1024
+        image_prompt:
+          type: string
+          title: Image Prompt

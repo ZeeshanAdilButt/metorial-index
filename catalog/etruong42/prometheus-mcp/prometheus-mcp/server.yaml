@@ -1,0 +1,18 @@
+identifier: etruong42/prometheus-mcp/prometheus-mcp
+repo:
+  provider: github.com
+  url: https://github.com/etruong42/prometheus-mcp
+  name: prometheus-mcp
+  owner: etruong42
+server:
+  subdirectory: /
+  name: Prometheus MCP Server
+  description: Expose Prometheus monitoring and visualization tools to your
+    language model agents, enabling them to query metrics and generate charts
+    dynamically. Enhance your LLM's capabilities with real-time observability
+    data and graphical insights. Easily integrate with Claude and other
+    MCP-compatible clients for seamless interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

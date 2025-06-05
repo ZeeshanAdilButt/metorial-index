@@ -1,0 +1,18 @@
+identifier: jentic/jentic-tools/jentic-tools
+repo:
+  provider: github.com
+  url: https://github.com/jentic/jentic-tools
+  name: jentic-tools
+  owner: jentic
+server:
+  subdirectory: /mcp
+  name: Jentic Plugin
+  description: Enable developers to rapidly discover and integrate external APIs
+    and workflows without writing API-specific code. Search APIs by capability,
+    generate integration code samples, and execute API operations seamlessly.
+    Reduce boilerplate and maintenance by leveraging standardized, declarative
+    integration workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,18 @@
+identifier: saifqamar/mcp-server-demo/mcp-server-demo
+repo:
+  provider: github.com
+  url: https://github.com/saifqamar/mcp-server-demo
+  name: mcp-server-demo
+  owner: saifqamar
+server:
+  subdirectory: /
+  name: MCP Server Demo
+  description: Provide a demonstration server implementing the Model Context
+    Protocol to enable integration of LLMs with external tools and resources.
+    Facilitate dynamic interaction with data and actions through a standardized
+    JSON-RPC interface. Enable developers to explore and extend MCP capabilities
+    in a practical environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,16 @@
+identifier: deepspringai/search_mcp_server/parquet_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/DeepSpringAI/search_mcp_server
+  name: search_mcp_server
+  owner: DeepSpringAI
+server:
+  subdirectory: /
+  name: Parquet MCP Server
+  description: Manipulate and analyze Parquet files efficiently. Generate text
+    embeddings, extract file information, and convert files to DuckDB or
+    PostgreSQL formats seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,117 @@
+tools:
+  - name: echo
+    description: 入力されたメッセージをそのまま返します
+    inputSchema:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: エコーするメッセージ
+  - name: navigate
+    description: 指定されたURLにブラウザでアクセスします
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: アクセスするURL
+  - name: get_all_content
+    description: 現在開いているページのコンテンツを取得し、HTML構造を保持した形式で返します
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_visible_content
+    description: 現在開いているページの表示領域内のコンテンツを取得します
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        minVisiblePercentage:
+          type: number
+          maximum: 100
+          minimum: 0
+          description: 要素の最小可視率（%）
+  - name: get_interactive_elements
+    description: ページ内のインタラクティブ要素（ボタン、テキストエリア、ラジオボタンなど）の座標と範囲を取得します
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: move_mouse
+    description: 指定された座標にマウスカーソルを移動します
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          description: X座標
+        y:
+          type: number
+          description: Y座標
+  - name: mouse_click
+    description: 指定された座標でマウスクリックを実行します
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          description: X座標
+        y:
+          type: number
+          description: Y座標
+        button:
+          enum:
+            - left
+            - right
+            - middle
+          type: string
+          description: マウスボタン（'left', 'right', 'middle'）
+        clickCount:
+          type: number
+          description: "クリック回数（デフォルト: 1）"
+  - name: mouse_wheel
+    description: マウスホイールのスクロールを実行します
+    inputSchema:
+      type: object
+      required:
+        - deltaY
+      properties:
+        deltaX:
+          type: number
+          description: 水平方向のスクロール量（ピクセル）
+        deltaY:
+          type: number
+          description: 垂直方向のスクロール量（ピクセル）
+  - name: drag_and_drop
+    description: ドラッグアンドドロップ操作を実行します
+    inputSchema:
+      type: object
+      required:
+        - sourceX
+        - sourceY
+        - targetX
+        - targetY
+      properties:
+        sourceX:
+          type: number
+          description: ドラッグ開始位置のX座標
+        sourceY:
+          type: number
+          description: ドラッグ開始位置のY座標
+        targetX:
+          type: number
+          description: ドロップ位置のX座標
+        targetY:
+          type: number
+          description: ドロップ位置のY座標

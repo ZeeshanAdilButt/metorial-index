@@ -1,0 +1,166 @@
+tools:
+  - name: get_page
+    description: Retrieve a Confluence page by ID
+    inputSchema:
+      type: object
+      required:
+        - pageId
+      properties:
+        format:
+          enum:
+            - text
+            - markdown
+          type: string
+          description: "Format to return the content in (default: text)"
+        pageId:
+          type: string
+          description: ID of the Confluence page to retrieve
+  - name: search_pages
+    description: 'Search for Confluence pages using CQL (Confluence Query Language):
+      query := expression [operator expression]* expression := field |
+      function() | function | "phrase" | term operator := AND | OR | NOT | space
+      field := date | after | before | during | lastmodified | modifiedafter |
+      modifiedbefore | creator | from | to | content | title | body | subject |
+      filename function() := now() | today() | yesterday() | this_week() |
+      last_week() | this_month() | last_month() | this_year() | last_year()
+      function := has | is | is | is | label | type | in value := string |
+      quoted_string | date_format date_format := YYYY-MM-DD | YYYY-MM | YYYY
+      quoted_string := "string with spaces" term := alphanumeric_string'
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of results to return (default: 10)"
+        query:
+          type: string
+          description: CQL search query
+        format:
+          enum:
+            - text
+            - markdown
+          type: string
+          description: "Format to return the content in (default: text)"
+  - name: get_spaces
+    description: List all available Confluence spaces
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of spaces to return (default: 50)"
+  - name: create_page
+    description: Create a new Confluence page
+    inputSchema:
+      type: object
+      required:
+        - spaceKey
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          description: Title of the new page
+        content:
+          type: string
+          description: Content of the page in Confluence Storage Format (XHTML)
+        parentId:
+          type: string
+          description: Optional ID of the parent page
+        spaceKey:
+          type: string
+          description: Key of the space where the page will be created
+  - name: update_page
+    description: Update an existing Confluence page
+    inputSchema:
+      type: object
+      required:
+        - pageId
+        - title
+        - content
+        - version
+      properties:
+        title:
+          type: string
+          description: New title of the page
+        pageId:
+          type: string
+          description: ID of the page to update
+        content:
+          type: string
+          description: New content in Confluence Storage Format (XHTML)
+        version:
+          type: number
+          description: Current version number of the page
+  - name: get_comments
+    description: Retrieve comments for a specific Confluence page
+    inputSchema:
+      type: object
+      required:
+        - pageId
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of comments to return (default: 25)"
+        format:
+          enum:
+            - text
+            - markdown
+          type: string
+          description: "Format to return comment content in (default: text)"
+        pageId:
+          type: string
+          description: ID of the page to retrieve comments for
+  - name: add_comment
+    description: Add a comment to a Confluence page
+    inputSchema:
+      type: object
+      required:
+        - pageId
+        - content
+      properties:
+        pageId:
+          type: string
+          description: ID of the page to add the comment to
+        content:
+          type: string
+          description: Comment content in Confluence Storage Format (XHTML)
+        parentId:
+          type: string
+          description: Optional ID of the parent comment for threading
+  - name: get_attachments
+    description: Retrieve attachments for a specific Confluence page
+    inputSchema:
+      type: object
+      required:
+        - pageId
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of attachments to return (default: 25)"
+        pageId:
+          type: string
+          description: ID of the page to retrieve attachments for
+  - name: add_attachment
+    description: Add an attachment to a Confluence page
+    inputSchema:
+      type: object
+      required:
+        - pageId
+        - filename
+        - fileContentBase64
+      properties:
+        pageId:
+          type: string
+          description: ID of the page to attach the file to
+        comment:
+          type: string
+          description: Optional comment for the attachment version
+        filename:
+          type: string
+          description: Desired filename for the attachment
+        fileContentBase64:
+          type: string
+          description: Base64 encoded content of the file

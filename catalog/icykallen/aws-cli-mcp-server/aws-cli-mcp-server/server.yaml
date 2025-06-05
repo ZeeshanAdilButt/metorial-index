@@ -1,0 +1,18 @@
+identifier: icykallen/aws-cli-mcp-server/aws-cli-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/IcyKallen/aws-cli-mcp-server
+  name: aws-cli-mcp-server
+  owner: IcyKallen
+server:
+  subdirectory: /
+  name: AWS CLI Command Executor
+  description: Execute AWS CLI commands and retrieve detailed information about
+    AWS services directly through an MCP interface. Easily list available AWS
+    services and perform a wide range of AWS operations using natural language
+    commands. Enhance your workflows by integrating AWS management capabilities
+    seamlessly with your LLM environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

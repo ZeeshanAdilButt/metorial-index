@@ -1,0 +1,15 @@
+identifier: varunneal/spotify-mcp/spotify-mcp
+repo:
+  provider: github.com
+  url: https://github.com/varunneal/spotify-mcp
+  name: spotify-mcp
+  owner: varunneal
+server:
+  subdirectory: /
+  name: Spotify Connector
+  description: Connect Claude with Spotify using the Spotipy API to control
+    playback and search for music.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

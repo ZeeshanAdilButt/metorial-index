@@ -1,0 +1,40 @@
+identifier: cloudwerx-dev/gpt-image-1-mcp/gpt-image-1-mcp
+repo:
+  provider: github.com
+  url: https://github.com/CLOUDWERX-DEV/gpt-image-1-mcp
+  name: gpt-image-1-mcp
+  owner: CLOUDWERX-DEV
+server:
+  subdirectory: /
+  name: GPT Image 1 MCP Server
+  description: >-
+    GPT-Image-1-MCP Text Extraction
+
+    @cloudwerxlab/gpt-image-1-mcp
+
+
+    http://cloudwewrx.dev
+
+
+    A Model Context Protocol (MCP) server for OpenAI's gpt-image-1 model that
+    enables AI assistants to generate and edit images from text prompts.
+    Seamlessly integrates with MCP clients like VS Code, Roo, Cursor, Augment,
+    and Windsurf through simple configuration.
+
+
+    Generate stunning images with the create_image tool by providing text
+    descriptions, or transform existing images with create_image_edit by
+    specifying areas to modify using masks. The image editing workflow supports
+    both base64-encoded images and direct file paths, making it flexible for
+    various use cases.
+
+
+    Features include beautifully formatted responses with emojis, automatic
+    image saving to configurable directories, comprehensive error handling with
+    detailed diagnostics, and detailed token usage reporting. All generated
+    images are saved locally with timestamped filenames for easy reference and
+    organization.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

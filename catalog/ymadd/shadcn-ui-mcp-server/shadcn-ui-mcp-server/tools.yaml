@@ -1,0 +1,37 @@
+tools:
+  - name: list_shadcn_components
+    description: Get a list of all available shadcn/ui components
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_component_details
+    description: Get detailed information about a specific shadcn/ui component
+    inputSchema:
+      type: object
+      required:
+        - componentName
+      properties:
+        componentName:
+          type: string
+          description: Name of the shadcn/ui component (e.g., "accordion", "button")
+  - name: get_component_examples
+    description: Get usage examples for a specific shadcn/ui component
+    inputSchema:
+      type: object
+      required:
+        - componentName
+      properties:
+        componentName:
+          type: string
+          description: Name of the shadcn/ui component (e.g., "accordion", "button")
+  - name: search_components
+    description: Search for shadcn/ui components by keyword
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query to find relevant components

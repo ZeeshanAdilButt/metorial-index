@@ -1,0 +1,210 @@
+tools:
+  - name: list_hex_projects
+    description: "List all available Hex projects that are in production.
+
+
+      \    Returns:
+
+      \        JSON string with list of projects
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_hex_projectsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 25
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: search_hex_projects
+    description: "Search for Hex projects using regex pattern matching on project
+      titles.
+
+
+      \    Args:
+
+      \        search_pattern: Regex pattern to search for in project titles
+
+      \        limit: Maximum number of projects to return (default: 100)
+
+      \        offset: Number of projects to skip for pagination (default: 0)
+
+
+      \    Returns:
+
+      \        JSON string with matching projects
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_hex_projectsArguments
+      required:
+        - search_pattern
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        search_pattern:
+          type: string
+          title: Search Pattern
+  - name: get_hex_project
+    description: "Get details about a specific Hex project.
+
+
+      \    Args:
+
+      \        project_id: The UUID of the Hex project
+
+
+      \    Returns:
+
+      \        JSON string with project details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hex_projectArguments
+      required:
+        - project_id
+      properties:
+        project_id:
+          type: string
+          title: Project Id
+  - name: get_hex_run_status
+    description: "Get the status of a project run.
+
+
+      \    Args:
+
+      \        project_id: The UUID of the Hex project
+
+      \        run_id: The UUID of the run
+
+
+      \    Returns:
+
+      \        JSON string with run status details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hex_run_statusArguments
+      required:
+        - project_id
+        - run_id
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        project_id:
+          type: string
+          title: Project Id
+  - name: get_hex_project_runs
+    description: "Get the runs for a specific project.
+
+
+      \    Args:
+
+      \        project_id: The UUID of the Hex project
+
+      \        limit: The number of runs to return
+
+      \        offset: The number of runs to skip
+
+
+      \    Returns:
+
+      \        JSON string with project runs
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hex_project_runsArguments
+      required:
+        - project_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 25
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        project_id:
+          type: string
+          title: Project Id
+  - name: run_hex_project
+    description: "Run a Hex project.
+
+
+      \    Args:
+
+      \        project_id: The UUID of the Hex project to run
+
+      \        input_params: Optional input parameters for the project
+
+      \        update_published_results: Whether to update published results
+
+
+      \    Returns:
+
+      \        JSON string with run details
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_hex_projectArguments
+      required:
+        - project_id
+      properties:
+        project_id:
+          type: string
+          title: Project Id
+        input_params:
+          type: object
+          title: Input Params
+          default: null
+          additionalProperties: true
+        update_published_results:
+          type: boolean
+          title: Update Published Results
+          default: false
+  - name: cancel_hex_run
+    description: "Cancel a running project.
+
+
+      \    Args:
+
+      \        project_id: The UUID of the Hex project
+
+      \        run_id: The UUID of the run to cancel
+
+
+      \    Returns:
+
+      \        Success message
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_hex_runArguments
+      required:
+        - project_id
+        - run_id
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        project_id:
+          type: string
+          title: Project Id

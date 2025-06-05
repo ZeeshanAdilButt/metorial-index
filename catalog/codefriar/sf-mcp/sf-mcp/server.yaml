@@ -1,0 +1,17 @@
+identifier: codefriar/sf-mcp/sf-mcp
+repo:
+  provider: github.com
+  url: https://github.com/codefriar/sf-mcp
+  name: sf-mcp
+  owner: codefriar
+server:
+  subdirectory: /
+  name: Salesforce CLI MCP Server
+  description: Leverage Salesforce CLI commands seamlessly in your AI workflows.
+    Execute commands, view help information, and manage Salesforce projects
+    directly from LLM tools. Enhance your productivity by integrating Salesforce
+    capabilities into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,60 @@
+tools:
+  - name: search_products
+    description: "
+
+      \    Automatically triggers when the user asks about buying, browsing,
+      comparing, or finding any type of product,
+
+      \    such as electronics, clothing, books, appliances, etc.
+
+
+      \    Sends a POST request to the /api/mcp endpoint with a product search
+      query.
+
+      \    Returns a structured JSON response including product listings
+      formatted for Markdown.
+
+
+      \    The expected format for LLM presentation is a Markdown list of the
+      top results:
+
+      \    - Each item must always include the product title as a clickable
+      Markdown link.
+
+      \    - The link must always point to a valid product URL.
+
+      \    - Each product listing should include the price after the link.
+
+      \    - Only the most relevant results (e.g., top 25) should be shown.
+
+
+      \    Example output:
+
+      \    Here are some results:
+
+
+      \    - [Product Title 1](https://example.com/product1) - $19.99
+
+      \    - [Product Title 2](https://example.com/product2) - $24.99
+
+
+      \    Args:
+
+      \        query (str): The product search term (e.g., \"soccer balls\").
+
+
+      \    Returns:
+
+      \        dict: Response from the MCP server containing product listings or
+      error info.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_productsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

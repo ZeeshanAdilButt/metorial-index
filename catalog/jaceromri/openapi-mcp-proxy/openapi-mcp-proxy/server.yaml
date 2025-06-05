@@ -1,0 +1,19 @@
+identifier: jaceromri/openapi-mcp-proxy/openapi-mcp-proxy
+repo:
+  provider: github.com
+  url: https://github.com/JacerOmri/openapi-mcp-proxy
+  name: openapi-mcp-proxy
+  owner: JacerOmri
+server:
+  subdirectory: /
+  name: OpenAPI MCP Proxy
+  description: Transform any OpenAPI service into a Model Context Protocol server
+    to enable seamless integration with AI agents and tools supporting MCP.
+    Automatically generate an MCP-compliant server that proxies requests to the
+    original API, making REST APIs immediately accessible to AI without
+    modification. Simplify AI-powered application development by bridging
+    OpenAPI services with MCP clients effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

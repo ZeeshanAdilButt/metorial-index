@@ -1,0 +1,239 @@
+tools:
+  - name: localTime
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: createTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - content
+      properties:
+        desc:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                type: string
+              status:
+                type: number
+              isAllDay:
+                type: boolean
+              timeZone:
+                type: string
+              sortOrder:
+                type: number
+              startDate:
+                type: string
+              completedTime:
+                type: string
+            additionalProperties: false
+        title:
+          type: string
+        content:
+          type: string
+        dueDate:
+          type: string
+        isAllDay:
+          type: boolean
+        priority:
+          type: string
+        timeZone:
+          type: string
+        reminders:
+          type: array
+        sortOrder:
+          type: number
+        startDate:
+          type: string
+        repeatFlag:
+          type: string
+      additionalProperties: false
+  - name: getUserProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getProjectById
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+      additionalProperties: false
+  - name: getProjectWithData
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+      additionalProperties: false
+  - name: getTaskById
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: updateTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - id
+        - taskId
+      properties:
+        id:
+          type: string
+        desc:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                type: string
+              status:
+                type: number
+              isAllDay:
+                type: boolean
+              timeZone:
+                type: string
+              sortOrder:
+                type: number
+              startDate:
+                type: string
+              completedTime:
+                type: string
+            additionalProperties: false
+        title:
+          type: string
+        taskId:
+          type: string
+        content:
+          type: string
+        dueDate:
+          type: string
+        isAllDay:
+          type: boolean
+        priority:
+          type: string
+        timeZone:
+          type: string
+        projectId:
+          type: string
+        reminders:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - time
+              - title
+              - content
+              - isAllDay
+            properties:
+              time:
+                type: string
+              type:
+                type: string
+              title:
+                type: string
+              content:
+                type: string
+              isAllDay:
+                type: boolean
+            additionalProperties: false
+        sortOrder:
+          type: number
+        startDate:
+          type: string
+        repeatFlag:
+          type: string
+      additionalProperties: false
+  - name: completeTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: deleteTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: createProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        viewMode:
+          type: string
+        sortOrder:
+          type: number
+      additionalProperties: false
+  - name: updateProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        viewMode:
+          type: string
+        projectId:
+          type: string
+      additionalProperties: false

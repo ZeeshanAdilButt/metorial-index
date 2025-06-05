@@ -1,0 +1,59 @@
+tools:
+  - name: pyppeteer_navigation
+    description: "
+
+      \    Navigates to the URL specified in the parameter
+
+      \    "
+    inputSchema:
+      type: object
+      title: pyppeteer_navigationArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: take_screenshot
+    description: "
+
+      \    Takes a screenshot of the current page and saves it with the
+      specified name
+
+      \    "
+    inputSchema:
+      type: object
+      title: take_screenshotArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: click_element
+    description: "
+
+      \    Clicks an element on the page using the specified selector
+
+      \    This selector can be css, xpath, or class_name
+
+      \    "
+    inputSchema:
+      type: object
+      title: click_elementArguments
+      required:
+        - selector
+      properties:
+        by:
+          type: string
+          title: By
+          default: css
+        selector:
+          type: string
+          title: Selector
+  - name: exit_server
+    description: "\n    Stops the server\n    "
+    inputSchema:
+      type: object
+      title: exit_serverArguments
+      properties: {}

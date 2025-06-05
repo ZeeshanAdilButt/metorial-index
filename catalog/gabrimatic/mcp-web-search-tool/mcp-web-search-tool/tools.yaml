@@ -1,0 +1,17 @@
+tools:
+  - name: web_search
+    description: Search the web for REAL-TIME information. MANDATORY for weather,
+      news, sports, stocks, and current events.
+    inputSchema:
+      type: object
+      required:
+        - search_term
+      properties:
+        provider:
+          enum:
+            - brave search
+          type: string
+          description: "Optional: The search provider to use (defaults to Brave)"
+        search_term:
+          type: string
+          description: The search term to look up on the web

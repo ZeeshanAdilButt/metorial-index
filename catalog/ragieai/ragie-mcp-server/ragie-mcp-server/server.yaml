@@ -1,0 +1,17 @@
+identifier: ragieai/ragie-mcp-server/ragie-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ragieai/ragie-mcp-server
+  name: ragie-mcp-server
+  owner: ragieai
+server:
+  subdirectory: /
+  name: Ragie Model Context Protocol Server
+  description: Enable AI models to access and retrieve information from the Ragie
+    knowledge base. Use the `retrieve` tool to query for relevant content
+    effortlessly. Enhance your AI interactions with rich, contextual knowledge
+    retrieval capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

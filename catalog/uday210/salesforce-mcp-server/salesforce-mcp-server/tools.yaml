@@ -1,0 +1,61 @@
+tools:
+  - name: query
+    description: Execute a SOQL query on Salesforce
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: SOQL query to execute
+  - name: tooling-query
+    description: Execute a query against the Salesforce Tooling API
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Tooling API query to execute
+  - name: describe-object
+    description: Get detailed metadata about a Salesforce object
+    inputSchema:
+      type: object
+      required:
+        - objectName
+      properties:
+        detailed:
+          type: boolean
+          default: false
+          description: Whether to return full metadata (optional)
+        objectName:
+          type: string
+          description: API name of the object to describe
+  - name: metadata-retrieve
+    description: Retrieve metadata components from Salesforce
+    inputSchema:
+      type: object
+      required:
+        - type
+        - fullNames
+      properties:
+        type:
+          enum:
+            - CustomObject
+            - Flow
+            - FlowDefinition
+            - CustomField
+            - ValidationRule
+            - ApexClass
+            - ApexTrigger
+            - WorkflowRule
+            - Layout
+          type: string
+          description: Metadata type (e.g., Flow, CustomObject)
+        fullNames:
+          type: array
+          items:
+            type: string
+          description: Array of component names to retrieve

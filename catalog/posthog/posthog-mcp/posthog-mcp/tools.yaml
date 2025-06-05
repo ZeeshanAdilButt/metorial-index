@@ -1,0 +1,118 @@
+tools:
+  - name: list_posthog_projects
+    description: List all available PostHog projects.
+    inputSchema:
+      type: object
+      title: list_posthog_projectsArguments
+      properties: {}
+  - name: create_posthog_annotation
+    description: "Create a PostHog annotation.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: The ID of the project as an integer (e.g. 99423)
+
+      \        content: The content/text of the annotation
+
+      \        date_marker: Optional ISO-8601 timestamp for the annotation (e.g.
+      2024-03-20T14:15:22Z)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_posthog_annotationArguments
+      required:
+        - project_id
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        project_id:
+          type: integer
+          title: Project Id
+        date_marker:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Marker
+          default: null
+  - name: list_posthog_insights
+    description: "List all available PostHog insights for a project.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: The ID of the project as an integer (e.g. 99423)
+
+      \        search: Optional search query to filter insights
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_posthog_insightsArguments
+      required:
+        - project_id
+      properties:
+        search:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search
+          default: null
+        project_id:
+          type: integer
+          title: Project Id
+  - name: search_posthog_insights
+    description: "Search for PostHog insights by name.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: The ID of the project as an integer (e.g. 99423)
+
+      \        search: The search query to filter insights by name
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_posthog_insightsArguments
+      required:
+        - project_id
+        - search
+      properties:
+        search:
+          type: string
+          title: Search
+        project_id:
+          type: integer
+          title: Project Id
+  - name: get_posthog_insight_details
+    description: "Get details for a specific PostHog insight.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: The ID of the project as an integer (e.g. 99423)
+
+      \        insight_id: The ID of the insight as an integer (e.g. 12345)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_posthog_insight_detailsArguments
+      required:
+        - project_id
+        - insight_id
+      properties:
+        insight_id:
+          type: integer
+          title: Insight Id
+        project_id:
+          type: integer
+          title: Project Id

@@ -1,0 +1,11 @@
+tools:
+  - name: get-deepseek-thinker
+    description: think with deepseek
+    inputSchema:
+      type: object
+      required:
+        - originPrompt
+      properties:
+        originPrompt:
+          type: string
+          description: user's original prompt

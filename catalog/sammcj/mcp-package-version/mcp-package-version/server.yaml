@@ -1,0 +1,15 @@
+identifier: sammcj/mcp-package-version/mcp-package-version
+repo:
+  provider: github.com
+  url: https://github.com/sammcj/mcp-package-version
+  name: mcp-package-version
+  owner: sammcj
+server:
+  subdirectory: /
+  name: Package Version
+  description: Provides the latest stable package versions from multiple
+    registries for LLMs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

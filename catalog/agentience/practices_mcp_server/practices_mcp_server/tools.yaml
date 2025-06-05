@@ -1,0 +1,349 @@
+tools:
+  - name: validate_branch_name
+    description: Validate a branch name against the configured branching strategy
+    inputSchema:
+      type: object
+      title: validate_branch_nameArguments
+      required:
+        - branch_name
+      properties:
+        branch_name:
+          type: string
+          title: Branch Name
+  - name: create_branch
+    description: Create a new branch following the branching convention
+    inputSchema:
+      type: object
+      title: create_branchArguments
+      required:
+        - branch_type
+        - identifier
+      properties:
+        identifier:
+          type: string
+          title: Identifier
+        branch_type:
+          type: string
+          title: Branch Type
+        description:
+          title: Description
+          default: null
+        update_jira:
+          type: boolean
+          title: Update Jira
+          default: true
+  - name: get_branch_info
+    description: Get information about a branch based on its name
+    inputSchema:
+      type: object
+      title: get_branch_infoArguments
+      required:
+        - branch_name
+      properties:
+        branch_name:
+          type: string
+          title: Branch Name
+  - name: validate_version
+    description: Validate version consistency across files
+    inputSchema:
+      type: object
+      title: validate_versionArguments
+      properties: {}
+  - name: get_current_version
+    description: Get the current version of the project
+    inputSchema:
+      type: object
+      title: get_current_version_toolArguments
+      properties: {}
+  - name: bump_version
+    description: Bump the version according to semantic versioning
+    inputSchema:
+      type: object
+      title: bump_versionArguments
+      required:
+        - part
+      properties:
+        part:
+          type: string
+          title: Part
+  - name: generate_pr_description
+    description: Generate a PR description based on branch and configuration
+    inputSchema:
+      type: object
+      title: generate_pr_descriptionArguments
+      required:
+        - branch_name
+      properties:
+        branch_name:
+          type: string
+          title: Branch Name
+  - name: create_pull_request
+    description: Create a pull request on GitHub with generated description
+    inputSchema:
+      type: object
+      title: create_pull_requestArguments
+      required:
+        - branch_name
+      properties:
+        branch_name:
+          type: string
+          title: Branch Name
+  - name: prepare_pr
+    description: Prepare a pull request for the current or specified branch
+    inputSchema:
+      type: object
+      title: prepare_prArguments
+      properties:
+        branch_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branch Name
+          default: null
+  - name: submit_pr
+    description: Submit a pull request for the current or specified branch
+    inputSchema:
+      type: object
+      title: submit_prArguments
+      properties:
+        force:
+          type: boolean
+          title: Force
+          default: false
+        branch_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branch Name
+          default: null
+  - name: install_pre_commit_hooks
+    description: Install pre-commit hooks in a Git repository
+    inputSchema:
+      type: object
+      title: install_pre_commit_hooksArguments
+      properties:
+        repo_path:
+          type: string
+          title: Repo Path
+          default: ""
+  - name: check_git_repo_init
+    description: Check if a Git repository was recently initialized
+    inputSchema:
+      type: object
+      title: check_git_repo_initializedArguments
+      properties:
+        repo_path:
+          type: string
+          title: Repo Path
+          default: ""
+  - name: update_pre_commit_hooks
+    description: Update pre-commit hooks in a Git repository
+    inputSchema:
+      type: object
+      title: update_pre_commit_hooksArguments
+      properties:
+        repo_path:
+          type: string
+          title: Repo Path
+          default: ""
+  - name: add_license_headers
+    description: Add license headers to source files in a directory
+    inputSchema:
+      type: object
+      title: add_license_headers_toolArguments
+      required:
+        - directory
+      properties:
+        directory:
+          type: string
+          title: Directory
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+  - name: check_license_headers
+    description: Check for missing license headers in source files
+    inputSchema:
+      type: object
+      title: check_license_headers_toolArguments
+      required:
+        - directory
+      properties:
+        directory:
+          type: string
+          title: Directory
+        recursive:
+          type: boolean
+          title: Recursive
+          default: true
+  - name: get_repository_info
+    description: Get information about a GitHub repository
+    inputSchema:
+      type: object
+      title: get_repo_infoArguments
+      required:
+        - owner
+        - repo
+      properties:
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+  - name: create_github_branch
+    description: Create a new branch in a GitHub repository
+    inputSchema:
+      type: object
+      title: create_github_branch_toolArguments
+      required:
+        - owner
+        - repo
+        - branch_name
+        - base_branch
+      properties:
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+        base_branch:
+          type: string
+          title: Base Branch
+        branch_name:
+          type: string
+          title: Branch Name
+  - name: create_github_pr
+    description: Create a pull request in a GitHub repository
+    inputSchema:
+      type: object
+      title: create_github_pr_toolArguments
+      required:
+        - owner
+        - repo
+        - title
+        - body
+        - head
+        - base
+      properties:
+        base:
+          type: string
+          title: Base
+        body:
+          type: string
+          title: Body
+        head:
+          type: string
+          title: Head
+        repo:
+          type: string
+          title: Repo
+        draft:
+          type: boolean
+          title: Draft
+          default: false
+        owner:
+          type: string
+          title: Owner
+        title:
+          type: string
+          title: Title
+  - name: get_file_contents
+    description: Get the contents of a file from a GitHub repository
+    inputSchema:
+      type: object
+      title: get_github_fileArguments
+      required:
+        - owner
+        - repo
+        - path
+      properties:
+        ref:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Ref
+          default: null
+        path:
+          type: string
+          title: Path
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+  - name: update_file
+    description: Update a file in a GitHub repository
+    inputSchema:
+      type: object
+      title: update_github_fileArguments
+      required:
+        - owner
+        - repo
+        - path
+        - message
+        - content
+        - branch
+        - sha
+      properties:
+        sha:
+          type: string
+          title: Sha
+        path:
+          type: string
+          title: Path
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+        branch:
+          type: string
+          title: Branch
+        content:
+          type: string
+          title: Content
+        message:
+          type: string
+          title: Message
+  - name: set_working_directory
+    description: "
+
+      \        Set the current working directory for practices tools.
+
+      \       \ 
+
+      \        This tool:
+
+      \        1. Configures file logging in the .practices directory
+
+      \        2. Ensures system_instructions.md exists (creates from template
+      if needed)
+
+      \        3. Returns configuration information for the project
+
+      \       \ 
+
+      \        Args:
+
+      \            directory_path: Path to set as the current working directory
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dict with configuration info
+
+      \        "
+    inputSchema:
+      type: object
+      title: set_working_directoryArguments
+      required:
+        - directory_path
+      properties:
+        directory_path:
+          type: string
+          title: Directory Path

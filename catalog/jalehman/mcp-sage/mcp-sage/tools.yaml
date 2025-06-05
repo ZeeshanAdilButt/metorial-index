@@ -1,0 +1,103 @@
+tools:
+  - name: sage-opinion
+    description: >-
+      Send a prompt to sage-like model for its opinion on a matter.
+
+          Include the paths to all relevant files and/or directories that are pertinent to the matter.
+          
+          IMPORTANT: All paths must be absolute paths (e.g., /home/user/project/src), not relative paths.
+
+          Do not worry about context limits; feel free to include as much as you think is relevant. If you include too much it will error and tell you, and then you can include less. Err on the side of including more context.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: Paths to include as context. MUST be absolute paths (e.g.,
+            /home/user/project/src). Including directories will include all
+            files contained within recursively.
+        prompt:
+          type: string
+          description: The prompt to send to the external model.
+      additionalProperties: false
+  - name: sage-review
+    description: >-
+      Send code to the sage model for expert review and get specific edit
+      suggestions as SEARCH/REPLACE blocks.
+
+          Use this tool any time the user asks for a "sage review" or "code review" or "expert review".
+
+          This tool includes the full content of all files in the specified paths and instructs the model to return edit suggestions in a specific format with search and replace blocks.
+          
+          IMPORTANT: All paths must be absolute paths (e.g., /home/user/project/src), not relative paths.
+
+          If the user hasn't provided specific paths, use as many paths to files or directories as you're aware of that are useful in the context of the prompt.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instruction
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: Paths to include as context. MUST be absolute paths (e.g.,
+            /home/user/project/src). Including directories will include all
+            files contained within recursively.
+        instruction:
+          type: string
+          description: The specific changes or improvements needed.
+      additionalProperties: false
+  - name: sage-plan
+    description: >-
+      Generate an implementation plan via multi-model debate.
+          
+          This tool leverages multiple AI models to debate, critique, and refine implementation plans.
+          
+          Models will generate initial plans, critique each other's work, refine their plans based on critiques,
+          and finally produce a consensus plan that combines the best ideas.
+          
+          IMPORTANT: All paths must be absolute paths (e.g., /home/user/project/src), not relative paths.
+          
+          The process creates detailed, well-thought-out implementation plans that benefit from
+          diverse model perspectives and iterative refinement.
+          
+          When the optional outputPath parameter is provided, the final plan will be saved to that file path,
+          and a complete transcript of the debate will be saved to a companion file with "-full-transcript"
+          added to the filename. This is strongly recommended for preserving the expensive results of the debate.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: Paths to include as context. MUST be absolute paths (e.g.,
+            /home/user/project/src). Including directories will include all
+            files contained within recursively.
+        prompt:
+          type: string
+          description: The task to create an implementation plan for
+        rounds:
+          type: number
+          description: "Number of debate rounds (default: 3)"
+        maxTokens:
+          type: number
+          description: Maximum token budget for the debate
+        outputPath:
+          type: string
+          description: Markdown file path to save the final plan. Will also save a full
+            transcript to a '-full-transcript.md' suffixed file.
+      additionalProperties: false

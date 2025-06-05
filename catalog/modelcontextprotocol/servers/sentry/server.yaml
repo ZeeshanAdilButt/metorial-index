@@ -1,0 +1,14 @@
+identifier: modelcontextprotocol/servers/sentry
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol/servers
+  name: servers
+  owner: modelcontextprotocol
+server:
+  subdirectory: /src/sentry
+  name: Sentry MCP server
+  description: Interact with Sentry using the Model Context Protocol (MCP).
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

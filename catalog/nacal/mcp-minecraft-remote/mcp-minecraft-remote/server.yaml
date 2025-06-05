@@ -1,0 +1,17 @@
+identifier: nacal/mcp-minecraft-remote/mcp-minecraft-remote
+repo:
+  provider: github.com
+  url: https://github.com/nacal/mcp-minecraft-remote
+  name: mcp-minecraft-remote
+  owner: nacal
+server:
+  subdirectory: /
+  name: Minecraft Remote Control
+  description: Connect and control a Minecraft player through an AI assistant.
+    Navigate, mine, build, and interact with the Minecraft world seamlessly.
+    Enhance your gaming experience with advanced movement and inventory
+    management features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

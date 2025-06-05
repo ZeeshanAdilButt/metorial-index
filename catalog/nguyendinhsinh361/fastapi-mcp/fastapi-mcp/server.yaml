@@ -1,0 +1,18 @@
+identifier: nguyendinhsinh361/fastapi-mcp/fastapi-mcp
+repo:
+  provider: github.com
+  url: https://github.com/nguyendinhsinh361/fastapi-mcp
+  name: fastapi-mcp
+  owner: nguyendinhsinh361
+server:
+  subdirectory: /
+  name: FastAPI MCP Server
+  description: Automatically expose your FastAPI endpoints as MCP tools with zero
+    configuration. Easily integrate your FastAPI APIs with LLMs by converting
+    endpoints into callable MCP tools preserving schemas and documentation.
+    Deploy flexibly either mounted on the same app or separately for seamless
+    LLM tool integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

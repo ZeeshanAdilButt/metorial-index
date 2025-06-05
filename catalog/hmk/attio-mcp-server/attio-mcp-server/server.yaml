@@ -1,0 +1,14 @@
+identifier: hmk/attio-mcp-server/attio-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hmk/attio-mcp-server
+  name: attio-mcp-server
+  owner: hmk
+server:
+  subdirectory: /
+  name: Attio MCP Server
+  description: Connect Attio to LLMs and manage company records seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

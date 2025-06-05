@@ -1,0 +1,197 @@
+tools:
+  - name: convert_coordinates_batch
+    description: "산불 데이터의 TM 좌표계를 WGS84 좌표계로 변환합니다
+
+      \   \ 
+
+      \    Args:
+
+      \        count: 변환할 데이터 개수 (기본값: 10, 최대: 100)
+
+      \   \ 
+
+      \    Returns:
+
+      \        변환 결과 메시지
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_coordinates_batchArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 10
+  - name: search_location
+    description: "지역 이름으로 좌표를 검색합니다
+
+      \   \ 
+
+      \    Args:
+
+      \        location: 검색할 지역 이름 (예: \"강원도 고성군\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        검색 결과 메시지
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_locationArguments
+      required:
+        - location
+      properties:
+        location:
+          type: string
+          title: Location
+  - name: get_forest_fire_data
+    description: "지정된 지역 및 연도에 따른 산불 발생 데이터를 제공합니다
+
+      \   \ 
+
+      \    Args:
+
+      \        province: 조회할 시/도 이름 (예: \"경기도\", \"강원도\")
+
+      \        year: 조회할 연도 (예: \"2020\", \"2021\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        해당 조건에 맞는 산불 발생 정보
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_forest_fire_dataArguments
+      properties:
+        year:
+          type: string
+          title: Year
+          default: null
+        province:
+          type: string
+          title: Province
+          default: null
+  - name: visualize_forest_fires
+    description: "지정된 지역 및 연도의 산불 발생 위치를 카카오맵에 시각화합니다
+
+      \   \ 
+
+      \    Args:
+
+      \        province: 조회할 시/도 이름 (예: \"경기도\", \"강원도\")
+
+      \        year: 조회할 연도 (예: \"2020\", \"2021\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        시각화 결과 메시지와 지도 URL
+
+      \    "
+    inputSchema:
+      type: object
+      title: visualize_forest_firesArguments
+      properties:
+        year:
+          type: string
+          title: Year
+          default: null
+        province:
+          type: string
+          title: Province
+          default: null
+  - name: get_forest_fire_stats
+    description: 산불 발생 통계 정보를 제공합니다
+    inputSchema:
+      type: object
+      title: get_forest_fire_statsArguments
+      properties: {}
+  - name: analyze_forest_fire_risk
+    description: "특정 지역의 산불 위험도를 분석합니다
+
+      \   \ 
+
+      \    Args:
+
+      \        province: 분석할 시/도 이름 (예: \"경기도\", \"강원도\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        해당 지역의 산불 위험도 분석 결과
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_forest_fire_riskArguments
+      required:
+        - province
+      properties:
+        province:
+          type: string
+          title: Province
+  - name: get_forest_fire_safety_tips
+    description: 산불 예방 및 대처 요령을 제공합니다
+    inputSchema:
+      type: object
+      title: get_forest_fire_safety_tipsArguments
+      properties: {}
+  - name: visualize_fire_locations
+    description: "특정 지역의 산불 발생 위치를 지도에 표시합니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        region: 표시할 지역명 (예: 강원도, 고성, 경상북도 등)
+
+      \   \ 
+
+      \    Returns:
+
+      \        지도 파일 경로 또는 결과 메시지
+
+      \    "
+    inputSchema:
+      type: object
+      title: visualize_fire_locationsArguments
+      required:
+        - region
+      properties:
+        region:
+          type: string
+          title: Region
+  - name: set_kakao_map_api_key
+    description: "카카오맵 API 키를 설정합니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        api_key: 카카오맵 JavaScript API 키
+
+      \       \ 
+
+      \    Returns:
+
+      \        설정 결과 메시지
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_kakao_map_api_keyArguments
+      required:
+        - api_key
+      properties:
+        api_key:
+          type: string
+          title: Api Key

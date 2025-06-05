@@ -1,0 +1,498 @@
+tools:
+  - name: parse-swagger
+    description: Parse Swagger/OpenAPI document and return API operation information.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Swagger/OpenAPI document URL
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        includeDetails:
+          type: boolean
+          description: Whether to include all details like request bodies, responses, etc.
+        includeSchemas:
+          type: boolean
+          description: Whether to include schema definitions
+      additionalProperties: false
+  - name: parse-swagger-optimized
+    description: Parse Swagger/OpenAPI document using optimized parser with caching
+      and large document support.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Swagger/OpenAPI document URL
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        useCache:
+          type: boolean
+          description: Whether to use cache
+        filterTag:
+          type: string
+          description: Filter operations by tag
+        pathPrefix:
+          type: string
+          description: Filter operations by path prefix
+        lazyLoading:
+          type: boolean
+          description: Whether to use lazy loading for schema parsing
+        includeDetails:
+          type: boolean
+          description: Whether to include all details like request bodies, responses, etc.
+        includeSchemas:
+          type: boolean
+          description: Whether to include schema definitions
+        skipValidation:
+          type: boolean
+          description: Whether to skip validation, used for handling non-fully compliant
+            API documents
+        cacheTTLMinutes:
+          type: number
+          description: Cache TTL in minutes
+      additionalProperties: false
+  - name: parse-swagger-lite
+    description: Lightweight parsing of Swagger/OpenAPI document, faster but returns
+      only basic information (suitable for large documents).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Swagger/OpenAPI document URL
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        useCache:
+          type: boolean
+          description: Whether to use cache
+        filterTag:
+          type: string
+          description: Filter operations by tag
+        pathPrefix:
+          type: string
+          description: Filter operations by path prefix
+        lazyLoading:
+          type: boolean
+          description: Whether to use lazy loading for schema parsing
+        includeDetails:
+          type: boolean
+          description: Whether to include all details like request bodies, responses, etc.
+        includeSchemas:
+          type: boolean
+          description: Whether to include schema definitions
+        skipValidation:
+          type: boolean
+          description: Whether to skip validation, used for handling non-fully compliant
+            API documents
+        cacheTTLMinutes:
+          type: number
+          description: Cache TTL in minutes
+      additionalProperties: false
+  - name: generate-typescript-types
+    description: Generate TypeScript type definitions from Swagger/OpenAPI document.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - swaggerUrl
+      properties:
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        useCache:
+          type: boolean
+          description: Whether to use cache
+        namespace:
+          type: string
+          description: Namespace name
+        outputDir:
+          type: string
+          description: Output directory
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing files
+        filePrefix:
+          type: string
+          description: File prefix
+        fileSuffix:
+          type: string
+          description: File suffix
+        swaggerUrl:
+          type: string
+          description: Swagger/OpenAPI document URL
+        lazyLoading:
+          type: boolean
+          description: Whether to use lazy loading
+        strictTypes:
+          type: boolean
+          description: Whether to use strict types
+        useNamespace:
+          type: boolean
+          description: Whether to use namespace for wrapping types
+        generateEnums:
+          type: boolean
+          description: Whether to generate enum types
+        generateIndex:
+          type: boolean
+          description: Whether to generate an index file
+        excludeSchemas:
+          type: array
+          items:
+            type: string
+          description: Array of schema names to exclude
+        includeSchemas:
+          type: array
+          items:
+            type: string
+          description: Array of schema names to include
+        skipValidation:
+          type: boolean
+          description: Whether to skip validation
+        cacheTTLMinutes:
+          type: number
+          description: Cache TTL in minutes
+      additionalProperties: false
+  - name: generate-typescript-types-optimized
+    description: Generate TypeScript type definitions from Swagger/OpenAPI document
+      with optimized options for caching and large document support.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - swaggerUrl
+      properties:
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        useCache:
+          type: boolean
+          description: Whether to use cache
+        namespace:
+          type: string
+          description: Namespace name
+        outputDir:
+          type: string
+          description: Output directory
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing files
+        filePrefix:
+          type: string
+          description: File prefix
+        fileSuffix:
+          type: string
+          description: File suffix
+        swaggerUrl:
+          type: string
+          description: Swagger/OpenAPI document URL
+        lazyLoading:
+          type: boolean
+          description: Whether to use lazy loading
+        strictTypes:
+          type: boolean
+          description: Whether to use strict types
+        useNamespace:
+          type: boolean
+          description: Whether to use namespace for wrapping types
+        generateEnums:
+          type: boolean
+          description: Whether to generate enum types
+        generateIndex:
+          type: boolean
+          description: Whether to generate an index file
+        excludeSchemas:
+          type: array
+          items:
+            type: string
+          description: Array of schema names to exclude
+        includeSchemas:
+          type: array
+          items:
+            type: string
+          description: Array of schema names to include
+        skipValidation:
+          type: boolean
+          description: Whether to skip validation
+        cacheTTLMinutes:
+          type: number
+          description: Cache TTL in minutes
+      additionalProperties: false
+  - name: generate-api-client
+    description: Generate API client code from Swagger/OpenAPI document.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - swaggerUrl
+      properties:
+        groupBy:
+          enum:
+            - tag
+            - path
+            - none
+          type: string
+          description: Grouping method
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        outputDir:
+          type: string
+          description: Output directory
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing files
+        clientType:
+          enum:
+            - axios
+            - fetch
+            - react-query
+          type: string
+          description: API client technology stack
+        filePrefix:
+          type: string
+          description: File prefix
+        fileSuffix:
+          type: string
+          description: File suffix
+        swaggerUrl:
+          type: string
+          description: Swagger/OpenAPI document URL
+        excludeTags:
+          type: array
+          items:
+            type: string
+          description: Exclude tags filter
+        includeTags:
+          type: array
+          items:
+            type: string
+          description: Include tags filter
+        typesImportPath:
+          type: string
+          description: Types import path
+        generateTypeImports:
+          type: boolean
+          description: Whether to generate type imports
+      additionalProperties: false
+  - name: generate-api-client-optimized
+    description: Generate API client code from Swagger/OpenAPI document (optimized
+      version with caching and large document support).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - swaggerUrl
+      properties:
+        groupBy:
+          enum:
+            - tag
+            - path
+            - none
+          type: string
+          description: Grouping method
+        headers:
+          type: object
+          description: Request headers
+          additionalProperties:
+            type: string
+        useCache:
+          type: boolean
+          description: Whether to use cache
+        outputDir:
+          type: string
+          description: Output directory
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing files
+        clientType:
+          enum:
+            - axios
+            - fetch
+            - react-query
+          type: string
+          description: API client technology stack
+        filePrefix:
+          type: string
+          description: File prefix
+        fileSuffix:
+          type: string
+          description: File suffix
+        swaggerUrl:
+          type: string
+          description: Swagger/OpenAPI document URL
+        excludeTags:
+          type: array
+          items:
+            type: string
+          description: Exclude tags filter
+        includeTags:
+          type: array
+          items:
+            type: string
+          description: Include tags filter
+        lazyLoading:
+          type: boolean
+          description: Whether to use lazy loading
+        skipValidation:
+          type: boolean
+          description: Whether to skip validation
+        cacheTTLMinutes:
+          type: number
+          description: Cache TTL in minutes
+        typesImportPath:
+          type: string
+          description: Types import path
+        generateTypeImports:
+          type: boolean
+          description: Whether to generate type imports
+      additionalProperties: false
+  - name: file_writer
+    description: Write content to the specified file path, with support for
+      automatic directory creation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - content
+      properties:
+        append:
+          type: boolean
+          default: false
+          description: Whether to append to an existing file instead of overwriting it
+        content:
+          type: string
+          description: Content to be written to the file
+        encoding:
+          type: string
+          default: utf8
+          description: File encoding
+        filePath:
+          type: string
+          minLength: 1
+          description: Complete path of the file
+        createDirs:
+          type: boolean
+          default: true
+          description: Whether to automatically create parent directories if they do not
+            exist
+      additionalProperties: false
+  - name: template-list
+    description: Get available code generation template list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          enum:
+            - all
+            - api-client
+            - typescript-types
+            - config-file
+          type: string
+          description: Template type filter
+        framework:
+          enum:
+            - axios
+            - fetch
+            - react-query
+            - swr
+            - angular
+            - vue
+          type: string
+          description: Framework type filter (only for API client and config file templates)
+        includeContent:
+          type: boolean
+          description: Whether to include template content
+      additionalProperties: false
+  - name: template-get
+    description: Get specific template content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Template ID
+      additionalProperties: false
+  - name: template-save
+    description: Save or update template
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - name
+        - type
+        - content
+      properties:
+        id:
+          type: string
+          description: Template ID
+        name:
+          type: string
+          description: Template name
+        type:
+          enum:
+            - api-client
+            - typescript-types
+            - config-file
+          type: string
+          description: Template type
+        content:
+          type: string
+          description: Template content
+        framework:
+          enum:
+            - axios
+            - fetch
+            - react-query
+            - swr
+            - angular
+            - vue
+          type: string
+          description: Framework type (only for API client and config file templates)
+        description:
+          type: string
+          description: Template description
+      additionalProperties: false
+  - name: template-delete
+    description: Delete custom template
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Template ID
+      additionalProperties: false

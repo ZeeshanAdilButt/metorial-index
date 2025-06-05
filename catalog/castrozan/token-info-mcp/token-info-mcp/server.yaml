@@ -1,0 +1,18 @@
+identifier: castrozan/token-info-mcp/token-info-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Castrozan/token-info-mcp
+  name: token-info-mcp
+  owner: Castrozan
+server:
+  subdirectory: /
+  name: Token Info Server
+  description: Validate OAuth tokens and retrieve detailed information about them,
+    including expiration status, remaining validity time, client details,
+    associated scopes, and user ID. Integrate seamlessly with MCP-compatible
+    clients to enhance token management workflows. Simplify OAuth token
+    verification with a dedicated MCP server tailored for Betha Sistemas tokens.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

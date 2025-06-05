@@ -1,0 +1,12 @@
+tools:
+  - name: rss_to_md
+    description: Convert RSS feed to Markdown format
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: RSS feed URL

@@ -1,0 +1,58 @@
+tools:
+  - name: save_text
+    description: "
+
+      \    Save text to a file with security and error handling.
+
+      \   \ 
+
+      \    This tool saves the provided text content to a file on the local
+      filesystem.
+
+      \    If no filename is specified, it generates a timestamped filename
+      automatically.
+
+      \   \ 
+
+      \    Args:
+
+      \        text: The text content to save to the file
+
+      \        filename: Optional filename. If not provided, will use timestamp
+
+      \                 in format: 'year-month-date-hour-minute-second.txt'
+
+      \   \ 
+
+      \    Returns:
+
+      \        A success message with the path to the saved file, or an error
+      message
+
+      \       \ 
+
+      \    Raises:
+
+      \        TextTooLargeError: If the text exceeds the maximum allowed size
+
+      \        InvalidFilenameError: If the provided filename is invalid or
+      unsafe
+
+      \        IOError: If there's an issue writing to the file
+
+      \    "
+    inputSchema:
+      type: object
+      title: save_textArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        filename:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Filename
+          default: null

@@ -1,0 +1,410 @@
+tools:
+  - name: list_projects
+    description: Find and list all KiCad projects on this system.
+    inputSchema:
+      type: object
+      title: list_projectsArguments
+      properties: {}
+  - name: get_project_structure
+    description: Get the structure and files of a KiCad project.
+    inputSchema:
+      type: object
+      title: get_project_structureArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: open_project
+    description: Open a KiCad project in KiCad.
+    inputSchema:
+      type: object
+      title: open_projectArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: validate_project
+    description: Basic validation of a KiCad project.
+    inputSchema:
+      type: object
+      title: validate_projectArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: generate_pcb_thumbnail
+    description: "Generate a thumbnail image of a KiCad PCB layout using kicad-cli.
+
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            ctx: Context for MCP communication
+
+
+      \        Returns:
+
+      \            Thumbnail image of the PCB or None if generation failed
+
+      \        "
+    inputSchema:
+      type: object
+      title: generate_pcb_thumbnailArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: generate_project_thumbnail
+    description: Generate a thumbnail of a KiCad project's PCB layout (Alias for
+      generate_pcb_thumbnail).
+    inputSchema:
+      type: object
+      title: generate_project_thumbnailArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: get_drc_history_tool
+    description: "Get the DRC check history for a KiCad project.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with DRC history entries
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_drc_history_toolArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: run_drc_check
+    description: "Run a Design Rule Check on a KiCad PCB file.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with DRC results and statistics
+
+      \        "
+    inputSchema:
+      type: object
+      title: run_drc_checkArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: analyze_bom
+    description: "Analyze a KiCad project's Bill of Materials.
+
+      \       \ 
+
+      \        This tool will look for BOM files related to a KiCad project and
+      provide
+
+      \        analysis including component counts, categories, and cost
+      estimates if available.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with BOM analysis results
+
+      \        "
+    inputSchema:
+      type: object
+      title: analyze_bomArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: export_bom_csv
+    description: "Export a Bill of Materials for a KiCad project.
+
+      \       \ 
+
+      \        This tool attempts to generate a CSV BOM file for a KiCad
+      project.
+
+      \        It requires KiCad to be installed with the appropriate
+      command-line tools.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with export results
+
+      \        "
+    inputSchema:
+      type: object
+      title: export_bom_csvArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: extract_schematic_netlist
+    description: "Extract netlist information from a KiCad schematic.
+
+      \       \ 
+
+      \        This tool parses a KiCad schematic file and extracts
+      comprehensive
+
+      \        netlist information including components, connections, and
+      labels.
+
+      \       \ 
+
+      \        Args:
+
+      \            schematic_path: Path to the KiCad schematic file (.kicad_sch)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with netlist information
+
+      \        "
+    inputSchema:
+      type: object
+      title: extract_schematic_netlistArguments
+      required:
+        - schematic_path
+      properties:
+        schematic_path:
+          type: string
+          title: Schematic Path
+  - name: extract_project_netlist
+    description: "Extract netlist from a KiCad project's schematic.
+
+      \       \ 
+
+      \        This tool finds the schematic associated with a KiCad project
+
+      \        and extracts its netlist information.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with netlist information
+
+      \        "
+    inputSchema:
+      type: object
+      title: extract_project_netlistArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+  - name: analyze_schematic_connections
+    description: "Analyze connections in a KiCad schematic.
+
+      \       \ 
+
+      \        This tool provides detailed analysis of component connections,
+
+      \        including power nets, signal paths, and potential issues.
+
+      \       \ 
+
+      \        Args:
+
+      \            schematic_path: Path to the KiCad schematic file (.kicad_sch)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with connection analysis
+
+      \        "
+    inputSchema:
+      type: object
+      title: analyze_schematic_connectionsArguments
+      required:
+        - schematic_path
+      properties:
+        schematic_path:
+          type: string
+          title: Schematic Path
+  - name: find_component_connections
+    description: "Find all connections for a specific component in a KiCad project.
+
+      \       \ 
+
+      \        This tool extracts information about how a specific component
+
+      \        is connected to other components in the schematic.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            component_ref: Component reference (e.g., \"R1\", \"U3\")
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with component connection information
+
+      \        "
+    inputSchema:
+      type: object
+      title: find_component_connectionsArguments
+      required:
+        - project_path
+        - component_ref
+      properties:
+        project_path:
+          type: string
+          title: Project Path
+        component_ref:
+          type: string
+          title: Component Ref
+  - name: identify_circuit_patterns
+    description: "Identify common circuit patterns in a KiCad schematic.
+
+      \       \ 
+
+      \        This tool analyzes a schematic to recognize common circuit blocks
+      such as:
+
+      \        - Power supply circuits (linear regulators, switching converters)
+
+      \        - Amplifier circuits (op-amps, transistor amplifiers)
+
+      \        - Filter circuits (RC, LC, active filters)
+
+      \        - Digital interfaces (I2C, SPI, UART)
+
+      \        - Microcontroller circuits
+
+      \        - And more
+
+      \       \ 
+
+      \        Args:
+
+      \            schematic_path: Path to the KiCad schematic file (.kicad_sch)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with identified circuit patterns
+
+      \        "
+    inputSchema:
+      type: object
+      title: identify_circuit_patternsArguments
+      required:
+        - schematic_path
+      properties:
+        schematic_path:
+          type: string
+          title: Schematic Path
+  - name: analyze_project_circuit_patterns
+    description: "Identify circuit patterns in a KiCad project's schematic.
+
+      \       \ 
+
+      \        Args:
+
+      \            project_path: Path to the KiCad project file (.kicad_pro)
+
+      \            ctx: MCP context for progress reporting
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with identified circuit patterns
+
+      \        "
+    inputSchema:
+      type: object
+      title: analyze_project_circuit_patternsArguments
+      required:
+        - project_path
+      properties:
+        project_path:
+          type: string
+          title: Project Path

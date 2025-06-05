@@ -1,0 +1,287 @@
+tools:
+  - name: list-projects
+    description: >-
+      List Jira projects with optional filtering by name or key.
+
+
+      PURPOSE: Helps you discover available projects in your Jira instance with
+      their keys, names, and metadata.
+
+
+      WHEN TO USE:
+
+      - When you need to find available projects for issue exploration
+
+      - When you need project keys for use with other Jira tools
+
+      - When you want to browse projects before accessing specific issues
+
+      - When you need to filter projects by name or key
+
+      - When you need to find recently updated projects
+
+
+      WHEN NOT TO USE:
+
+      - When you already know the specific project key (use get-project instead)
+
+      - When you need detailed information about a single project (use
+      get-project instead)
+
+      - When looking for issues rather than projects (use list-issues instead)
+
+      - When you need to search issues across projects (use list-issues with JQL
+      instead)
+
+
+      RETURNS: Formatted list of projects with keys, names, types, categories,
+      and lead information.
+
+
+      EXAMPLES:
+
+      - List all projects: {}
+
+      - Filter by keyword: {query: "team"}
+
+      - With pagination: {limit: 10, cursor: "next-page-token"}
+
+
+      ERRORS:
+
+      - Authentication failures: Check your Jira credentials
+
+      - No projects found: You may not have permission to view any projects
+
+      - Rate limiting: Use pagination and reduce query frequency
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return (1-100). Use this to control the
+            response size. Useful for pagination or when you only need a few
+            results.
+        query:
+          type: string
+          description: Filter projects by name or key. Use this to search for specific
+            projects by their name or project key.
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Use this
+            to navigate through large result sets. The cursor value can be
+            obtained from the pagination information in a previous response.
+      additionalProperties: false
+  - name: get-project
+    description: >-
+      Get detailed information about a specific Jira project by ID or key.
+
+
+      PURPOSE: Retrieves comprehensive project information including components,
+      versions, leads, and issue types.
+
+
+      WHEN TO USE:
+
+      - When you need detailed information about a specific project
+
+      - When you need to verify project existence or accessibility
+
+      - When you need to find available components or versions
+
+      - After using list-projects to identify the project key you're interested
+      in
+
+      - When you need information about project issue types or workflows
+
+
+      WHEN NOT TO USE:
+
+      - When you don't know which project to look for (use list-projects first)
+
+      - When you need to list issues within a project (use list-issues instead)
+
+      - When you need to search issues with complex criteria (use list-issues
+      with JQL instead)
+
+
+      RETURNS: Detailed project information including key, name, description,
+      components, versions, lead, and other metadata. Components and versions
+      are always included by default for a comprehensive view.
+
+
+      EXAMPLES:
+
+      - By key: {projectKeyOrId: "TEAM"}
+
+      - By ID: {projectKeyOrId: "10001"}
+
+
+      ERRORS:
+
+      - Project not found: Verify the project ID or key
+
+      - Permission errors: Ensure you have access to the requested project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectKeyOrId
+      properties:
+        projectKeyOrId:
+          type: string
+          description: The ID or key of the Jira project to retrieve (e.g., "10001" or
+            "PROJ"). This is required and must be a valid project ID or key from
+            your Jira instance.
+      additionalProperties: false
+  - name: list-issues
+    description: >-
+      List Jira issues with powerful filtering capabilities using JQL.
+
+
+      PURPOSE: Helps you find and explore issues across projects or within a
+      specific project, with comprehensive filtering options.
+
+
+      WHEN TO USE:
+
+      - When you need to find issues matching specific criteria
+
+      - When you need to browse issues in a project
+
+      - When you need issue keys for use with other Jira tools
+
+      - When you need to build complex queries with JQL
+
+      - When you need to filter by project, status, assignee, etc.
+
+
+      WHEN NOT TO USE:
+
+      - When you already know the specific issue key (use get-issue instead)
+
+      - When you need detailed information about a single issue (use get-issue
+      instead)
+
+      - When you need to list projects rather than issues (use list-projects
+      instead)
+
+      - When you need extremely complex queries (consider using the Jira UI)
+
+
+      RETURNS: Formatted list of issues with keys, summaries, types, statuses,
+      assignees, and URLs.
+
+
+      EXAMPLES:
+
+      - All issues: {}
+
+      - Project issues: {jql: "project = TEAM"}
+
+      - Status filter: {jql: "status = 'In Progress'"}
+
+      - Complex query: {jql: "project = TEAM AND status = 'In Progress' AND
+      assignee = currentUser()"}
+
+      - With pagination: {limit: 10, cursor: "next-page-token"}
+
+
+      ERRORS:
+
+      - Invalid JQL: Check syntax of your query
+
+      - Authentication failures: Verify your Jira credentials
+
+      - No results: Try broadening your filters
+
+      - Rate limiting: Use more specific queries, include pagination
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        jql:
+          type: string
+          description: Filter issues using JQL syntax. Use this for complex queries like
+            "project = TEAM AND status = 'In Progress'" or "assignee =
+            currentUser()". If omitted, returns issues according to your Jira
+            default search.
+        limit:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return (1-100). Use this to control the
+            response size. Useful for pagination or when you only need a few
+            results.
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Use this
+            to navigate through large result sets. The cursor value can be
+            obtained from the pagination information in a previous response.
+      additionalProperties: false
+  - name: get-issue
+    description: >-
+      Get detailed information about a specific Jira issue by ID or key.
+
+
+      PURPOSE: Retrieves comprehensive issue information including description,
+      comments, attachments, and workflow details.
+
+
+      WHEN TO USE:
+
+      - When you need detailed information about a specific issue
+
+      - When you need to check issue status, comments, or history
+
+      - When you need to find linked issues or attachments
+
+      - After using list-issues to identify the issue key you're interested in
+
+      - When you need full information about an issue's fields and metadata
+
+
+      WHEN NOT TO USE:
+
+      - When you don't know which issue to look for (use list-issues first)
+
+      - When you need to browse multiple issues (use list-issues instead)
+
+      - When you need project information rather than issue details (use
+      get-project instead)
+
+
+      RETURNS: Detailed issue information including summary, description,
+      status, assignee, reporter, comments, and attachments.
+
+
+      EXAMPLES:
+
+      - By key: {issueIdOrKey: "TEAM-123"}
+
+      - By ID: {issueIdOrKey: "10001"}
+
+
+      ERRORS:
+
+      - Issue not found: Verify the issue key or ID is correct
+
+      - Permission errors: Ensure you have access to the requested issue
+
+      - Rate limiting: Cache issue information when possible for frequently
+      referenced issues
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueIdOrKey
+      properties:
+        issueIdOrKey:
+          type: string
+          description: The ID or key of the Jira issue to retrieve (e.g., "10001" or
+            "PROJ-123"). This is required and must be a valid issue ID or key
+            from your Jira instance.
+      additionalProperties: false

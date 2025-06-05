@@ -1,0 +1,18 @@
+identifier: evilran/baidu-mcp-server/baidu-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Evilran/baidu-mcp-server
+  name: baidu-mcp-server
+  owner: Evilran
+server:
+  subdirectory: /
+  name: Baidu Search Server
+  description: Enable web search capabilities through Baidu, allowing you to
+    retrieve and parse webpage content efficiently. Benefit from advanced rate
+    limiting and intelligent text extraction tailored for large language models.
+    Enhance your applications with formatted search results and robust error
+    handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

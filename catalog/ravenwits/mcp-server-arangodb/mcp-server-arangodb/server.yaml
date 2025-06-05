@@ -1,0 +1,14 @@
+identifier: ravenwits/mcp-server-arangodb/mcp-server-arangodb
+repo:
+  provider: github.com
+  url: https://github.com/ravenwits/mcp-server-arangodb
+  name: mcp-server-arangodb
+  owner: ravenwits
+server:
+  subdirectory: /
+  name: ArangoDB
+  description: Provides database interaction capabilities through ArangoDB.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

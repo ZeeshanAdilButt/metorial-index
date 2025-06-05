@@ -1,0 +1,16 @@
+tools:
+  - name: get_component_list
+    description: Get component list
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_component_doc
+    description: Get component documentation by component name
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The component name

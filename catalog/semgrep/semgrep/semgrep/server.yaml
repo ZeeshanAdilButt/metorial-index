@@ -1,0 +1,17 @@
+identifier: semgrep/semgrep/semgrep
+repo:
+  provider: github.com
+  url: https://github.com/semgrep/semgrep
+  name: semgrep
+  owner: semgrep
+server:
+  subdirectory: /
+  name: Semgrep
+  description: Scan your code quickly and effectively to find bugs and enforce
+    coding standards. Integrate seamlessly into your development workflow for
+    enhanced security and compliance. Experience powerful static analysis across
+    30+ programming languages with minimal setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

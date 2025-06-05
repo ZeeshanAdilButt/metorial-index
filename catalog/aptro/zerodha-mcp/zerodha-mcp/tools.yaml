@@ -1,0 +1,402 @@
+tools:
+  - name: initiate_login
+    description: "
+
+      \    Start the Zerodha login flow by opening the login URL in a browser
+
+      \    and starting a local server to handle the redirect
+
+      \    "
+    inputSchema:
+      type: object
+      title: initiate_loginArguments
+      properties: {}
+  - name: get_request_token
+    description: Get the current request token after login redirect
+    inputSchema:
+      type: object
+      title: get_request_tokenArguments
+      properties: {}
+  - name: get_holdings
+    description: Get user's holdings/portfolio
+    inputSchema:
+      type: object
+      title: get_holdingsArguments
+      properties: {}
+  - name: get_positions
+    description: Get user's positions
+    inputSchema:
+      type: object
+      title: get_positionsArguments
+      properties: {}
+  - name: get_margins
+    description: Get account margins
+    inputSchema:
+      type: object
+      title: get_marginsArguments
+      properties: {}
+  - name: place_order
+    description: "
+
+      \    Place an order on Zerodha
+
+
+      \    Args:
+
+      \        tradingsymbol: Trading symbol (e.g., 'INFY')
+
+      \        exchange: Exchange (NSE, BSE, NFO, etc.)
+
+      \        transaction_type: BUY or SELL
+
+      \        quantity: Number of shares/units
+
+      \        product: Product code (CNC, MIS, NRML)
+
+      \        order_type: Order type (MARKET, LIMIT, SL, SL-M)
+
+      \        price: Price for LIMIT orders
+
+      \        trigger_price: Trigger price for SL orders
+
+      \    "
+    inputSchema:
+      type: object
+      title: place_orderArguments
+      required:
+        - tradingsymbol
+        - exchange
+        - transaction_type
+        - quantity
+        - product
+        - order_type
+      properties:
+        price:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Price
+          default: null
+        product:
+          type: string
+          title: Product
+        exchange:
+          type: string
+          title: Exchange
+        quantity:
+          type: integer
+          title: Quantity
+        order_type:
+          type: string
+          title: Order Type
+        tradingsymbol:
+          type: string
+          title: Tradingsymbol
+        trigger_price:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Trigger Price
+          default: null
+        transaction_type:
+          type: string
+          title: Transaction Type
+  - name: get_quote
+    description: "
+
+      \    Get quote for symbols
+
+
+      \    Args:
+
+      \        symbols: List of symbols (e.g., ['NSE:INFY', 'BSE:RELIANCE'])
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_quoteArguments
+      required:
+        - symbols
+      properties:
+        symbols:
+          type: array
+          items:
+            type: string
+          title: Symbols
+  - name: get_historical_data
+    description: "
+
+      \    Get historical data for an instrument
+
+
+      \    Args:
+
+      \        instrument_token: Instrument token
+
+      \        from_date: From date (format: 2024-01-01)
+
+      \        to_date: To date (format: 2024-03-13)
+
+      \        interval: Candle interval (minute, day, 3minute, etc.)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_historical_dataArguments
+      required:
+        - instrument_token
+        - from_date
+        - to_date
+        - interval
+      properties:
+        to_date:
+          type: string
+          title: To Date
+        interval:
+          type: string
+          title: Interval
+        from_date:
+          type: string
+          title: From Date
+        instrument_token:
+          type: integer
+          title: Instrument Token
+  - name: check_and_authenticate
+    description: "
+
+      \    Check if Kite is authenticated and initiate authentication if needed.
+
+      \    Returns the authentication status and any relevant messages.
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_and_authenticateArguments
+      properties: {}
+  - name: get_mf_orders
+    description: Get all mutual fund orders
+    inputSchema:
+      type: object
+      title: get_mf_ordersArguments
+      properties: {}
+  - name: place_mf_order
+    description: "
+
+      \    Place a mutual fund order
+
+
+      \    Args:
+
+      \        tradingsymbol: Trading symbol (e.g., 'INF090I01239')
+
+      \        transaction_type: BUY or SELL
+
+      \        amount: Amount to invest or redeem
+
+      \        tag: Optional tag for the order
+
+      \    "
+    inputSchema:
+      type: object
+      title: place_mf_orderArguments
+      required:
+        - tradingsymbol
+        - transaction_type
+        - amount
+      properties:
+        tag:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Tag
+          default: null
+        amount:
+          type: number
+          title: Amount
+        tradingsymbol:
+          type: string
+          title: Tradingsymbol
+        transaction_type:
+          type: string
+          title: Transaction Type
+  - name: cancel_mf_order
+    description: "
+
+      \    Cancel a mutual fund order
+
+
+      \    Args:
+
+      \        order_id: Order ID to cancel
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_mf_orderArguments
+      required:
+        - order_id
+      properties:
+        order_id:
+          type: string
+          title: Order Id
+  - name: get_mf_instruments
+    description: Get all available mutual fund instruments
+    inputSchema:
+      type: object
+      title: get_mf_instrumentsArguments
+      properties: {}
+  - name: get_mf_holdings
+    description: Get user's mutual fund holdings
+    inputSchema:
+      type: object
+      title: get_mf_holdingsArguments
+      properties: {}
+  - name: get_mf_sips
+    description: Get all mutual fund SIPs
+    inputSchema:
+      type: object
+      title: get_mf_sipsArguments
+      properties: {}
+  - name: place_mf_sip
+    description: "
+
+      \    Place a mutual fund SIP (Systematic Investment Plan)
+
+
+      \    Args:
+
+      \        tradingsymbol: Trading symbol (e.g., 'INF090I01239')
+
+      \        amount: Amount per instalment
+
+      \        instalments: Number of instalments (minimum 6)
+
+      \        frequency: weekly, monthly, or quarterly
+
+      \        initial_amount: Optional initial amount
+
+      \        instalment_day: Optional day of month/week for instalment (1-31
+      for monthly, 1-7 for weekly)
+
+      \        tag: Optional tag for the SIP
+
+      \    "
+    inputSchema:
+      type: object
+      title: place_mf_sipArguments
+      required:
+        - tradingsymbol
+        - amount
+        - instalments
+        - frequency
+      properties:
+        tag:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Tag
+          default: null
+        amount:
+          type: number
+          title: Amount
+        frequency:
+          type: string
+          title: Frequency
+        instalments:
+          type: integer
+          title: Instalments
+        tradingsymbol:
+          type: string
+          title: Tradingsymbol
+        initial_amount:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Initial Amount
+          default: null
+        instalment_day:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Instalment Day
+          default: null
+  - name: modify_mf_sip
+    description: "
+
+      \    Modify a mutual fund SIP
+
+
+      \    Args:
+
+      \        sip_id: SIP ID to modify
+
+      \        amount: New amount per instalment
+
+      \        frequency: New frequency (weekly, monthly, or quarterly)
+
+      \        instalments: New number of instalments
+
+      \        instalment_day: New day of month/week for instalment
+
+      \        status: SIP status (active or paused)
+
+      \    "
+    inputSchema:
+      type: object
+      title: modify_mf_sipArguments
+      required:
+        - sip_id
+      properties:
+        amount:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Amount
+          default: null
+        sip_id:
+          type: string
+          title: Sip Id
+        status:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Status
+          default: null
+        frequency:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Frequency
+          default: null
+        instalments:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Instalments
+          default: null
+        instalment_day:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Instalment Day
+          default: null
+  - name: cancel_mf_sip
+    description: "
+
+      \    Cancel a mutual fund SIP
+
+
+      \    Args:
+
+      \        sip_id: SIP ID to cancel
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_mf_sipArguments
+      required:
+        - sip_id
+      properties:
+        sip_id:
+          type: string
+          title: Sip Id

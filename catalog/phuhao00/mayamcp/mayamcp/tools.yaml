@@ -1,0 +1,190 @@
+tools:
+  - name: scene_new
+    description: >2-
+       Create a new scene in Maya. Use the force argument to force a new scene
+      when
+              an existing scene is loaded and has been modified. 
+    inputSchema:
+      type: object
+      title: scene_newArguments
+      properties:
+        force:
+          type: boolean
+          title: Force
+          default: false
+  - name: scene_save
+    description: >2-
+       Save the current scene. If the filename is not specified, it will save it
+      as its current name.
+              If the current scene is not named, this call will fail. 
+    inputSchema:
+      type: object
+      title: scene_saveArguments
+      properties:
+        filename:
+          type: string
+          title: Filename
+          default: null
+  - name: clear_selection_list
+    description: " Clears the user selection list of objects. "
+    inputSchema:
+      type: object
+      title: clear_selection_listArguments
+      properties: {}
+  - name: select_object
+    description: " Select an object in the scene. "
+    inputSchema:
+      type: object
+      title: select_objectArguments
+      required:
+        - object_name
+      properties:
+        object_name:
+          type: string
+          title: Object Name
+  - name: scene_open
+    description: >2-
+       Load in a scene into Maya. If namespace is specified, the scene will be
+      loaded into the current
+              scene as a reference in the given namespace name. 
+    inputSchema:
+      type: object
+      title: scene_openArguments
+      required:
+        - filename
+      properties:
+        filename:
+          type: string
+          title: Filename
+        namespace:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Namespace
+          default: null
+  - name: viewport_focus
+    description: >2-
+       Center and fit the viewport to focus on an object in the scene. 
+              If object_name is set to None, all objects will be put into focus. 
+    inputSchema:
+      type: object
+      title: viewport_focusArguments
+      required:
+        - object_name
+      properties:
+        object_name:
+          type: string
+          title: Object Name
+  - name: set_object_attribute
+    description: " Set an object's attribute with a specific value. "
+    inputSchema:
+      type: object
+      title: set_object_attributeArguments
+      required:
+        - object_name
+        - attribute_name
+        - attribute_value
+      properties:
+        object_name:
+          type: string
+          title: Object Name
+        attribute_name:
+          type: string
+          title: Attribute Name
+        attribute_value:
+          title: Attribute Value
+  - name: create_object
+    description: >2-
+       Creates an object in the Maya scene. Object types available are
+              cube, cone, sphere, cylinder, camera, spotLight, pointLight, directionalLight.
+              Rotate values are in degrees. 
+    inputSchema:
+      type: object
+      title: create_objectArguments
+      required:
+        - name
+        - object_type
+      properties:
+        name:
+          type: string
+          title: Name
+        rotate:
+          type: array
+          items:
+            type: number
+          title: Rotate
+          default:
+            - 0
+            - 0
+            - 0
+        translate:
+          type: array
+          items:
+            type: number
+          title: Translate
+          default:
+            - 0
+            - 0
+            - 0
+        object_type:
+          type: string
+          title: Object Type
+  - name: list_objects_by_type
+    description: >2-
+       Get a list of objects in the scene. Use filter_by to filter for 
+              certain objects such as "cameras", "lights", "materials", or "shapes". 
+    inputSchema:
+      type: object
+      title: list_objects_by_typeArguments
+      properties:
+        filter_by:
+          type: string
+          title: Filter By
+          default: null
+  - name: set_object_transform_attributes
+    description: >2-
+       set an objects transform attributes. Only specify which attribute needs
+      to change.
+              Arguments translate, rotate, and scale are a 3d vector and needs to be a list of
+              3 floating point values. Rotate values are in degrees. 
+    inputSchema:
+      type: object
+      title: set_object_transform_attributesArguments
+      required:
+        - object_name
+      properties:
+        scale:
+          type: array
+          items:
+            type: number
+          title: Scale
+          default: null
+        rotate:
+          type: array
+          items:
+            type: number
+          title: Rotate
+          default: null
+        translate:
+          type: array
+          items:
+            type: number
+          title: Translate
+          default: null
+        object_name:
+          type: string
+          title: Object Name
+  - name: get_object_attributes
+    description: >2-
+       Get a list of attributes on a Maya object. If the object type is a
+      transform and it the
+              transform for a shape, the shape attributes are returned as well. 
+    inputSchema:
+      type: object
+      title: get_object_attributesArguments
+      required:
+        - object_name
+      properties:
+        object_name:
+          type: string
+          title: Object Name

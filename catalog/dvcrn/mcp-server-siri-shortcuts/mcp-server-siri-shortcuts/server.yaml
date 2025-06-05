@@ -1,0 +1,16 @@
+identifier: dvcrn/mcp-server-siri-shortcuts/mcp-server-siri-shortcuts
+repo:
+  provider: github.com
+  url: https://github.com/dvcrn/mcp-server-siri-shortcuts
+  name: mcp-server-siri-shortcuts
+  owner: dvcrn
+server:
+  subdirectory: /
+  name: Siri Shortcuts Server
+  description: Access Siri shortcuts functionality through the Model Context
+    Protocol. List, open, and run shortcuts from the macOS Shortcuts app
+    seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

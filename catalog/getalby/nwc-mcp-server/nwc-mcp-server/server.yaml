@@ -1,0 +1,17 @@
+identifier: getalby/nwc-mcp-server/nwc-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/getAlby/nwc-mcp-server
+  name: nwc-mcp-server
+  owner: getAlby
+server:
+  subdirectory: /
+  name: NWC Lightning Wallet Connector
+  description: Connect your bitcoin lightning wallet to your LLM using Nostr
+    Wallet Connect. Control and interact with your Lightning wallet seamlessly
+    through this MCP server. Enhance your AI agents with secure wallet
+    operations via a standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

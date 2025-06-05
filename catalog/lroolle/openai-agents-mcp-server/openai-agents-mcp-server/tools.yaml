@@ -1,0 +1,100 @@
+tools:
+  - name: web_search_agent
+    description: Use an AI agent specialized in web searching to find accurate,
+      up-to-date information from the internet.
+    inputSchema:
+      type: object
+      title: web_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The search query or question you want to find information about
+            online.
+        location:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Location
+          default: null
+          description: Optional location context for location-specific searches (e.g.,
+            'New York').
+  - name: file_search_agent
+    description: Use an AI agent specialized in searching through files and
+      documents to find relevant information.
+    inputSchema:
+      type: object
+      title: file_searchArguments
+      required:
+        - query
+        - vector_store_ids
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The search query or question to find in the documents.
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+          description: The maximum number of document results to return.
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          title: Vector Store Ids
+          description: The IDs of the vector stores to search in. This is required for
+            file search to work.
+  - name: computer_action_agent
+    description: Use an AI agent specialized in performing computer actions safely
+      and effectively.
+    inputSchema:
+      type: object
+      title: computer_actionArguments
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+          description: The action or task you want to perform on the computer.
+  - name: multi_tool_agent
+    description: Use an AI agent that can orchestrate between web search, file
+      search, and computer actions based on your query.
+    inputSchema:
+      type: object
+      title: orchestrator_agentArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+          description: The query or task you want help with.
+        vector_store_ids:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Vector Store Ids
+          default: null
+          description: Required if enable_file_search is True. The IDs of the vector
+            stores to search in.
+        enable_web_search:
+          type: boolean
+          title: Enable Web Search
+          default: true
+          description: Whether to enable web search capabilities.
+        enable_file_search:
+          type: boolean
+          title: Enable File Search
+          default: false
+          description: Whether to enable file search capabilities.
+        enable_computer_actions:
+          type: boolean
+          title: Enable Computer Actions
+          default: true
+          description: Whether to enable computer action capabilities.

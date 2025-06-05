@@ -1,0 +1,18 @@
+identifier: limklister/mcp-google-custom-search-server/mcp-google-custom-search-server
+repo:
+  provider: github.com
+  url: https://github.com/limklister/mcp-google-custom-search-server
+  name: mcp-google-custom-search-server
+  owner: limklister
+server:
+  subdirectory: /
+  name: Google Custom Search Server
+  description: Enable your language models to perform web searches effortlessly
+    using Google's Custom Search API. Integrate search capabilities into your
+    applications with a standardized interface, providing formatted results
+    including titles, URLs, and descriptions. Enhance your LLM's functionality
+    and access real-time information from the web seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

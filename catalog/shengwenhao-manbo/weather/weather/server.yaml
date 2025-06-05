@@ -1,0 +1,16 @@
+identifier: shengwenhao-manbo/weather/weather
+repo:
+  provider: github.com
+  url: https://github.com/Shengwenhao-manbo/weather
+  name: weather
+  owner: Shengwenhao-manbo
+server:
+  subdirectory: /
+  name: Weather
+  description: Provide weather information through an MCP server interface. Enable
+    agents to query current weather data seamlessly. Enhance your applications
+    with real-time weather updates.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

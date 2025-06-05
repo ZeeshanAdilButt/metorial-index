@@ -1,0 +1,18 @@
+identifier: kibela/kibela-mcp-server/kibela-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kibela/kibela-mcp-server
+  name: kibela-mcp-server
+  owner: kibela
+server:
+  subdirectory: /
+  name: Kibela Server
+  description: Enable seamless interaction with Kibela's knowledge base through
+    AI-powered tools. Search, organize, and manage notes and folders efficiently
+    while leveraging AI assistance for writing and content creation. Integrate
+    easily with MCP clients like Claude Desktop or VSCode for enhanced
+    productivity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

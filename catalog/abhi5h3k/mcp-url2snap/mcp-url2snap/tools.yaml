@@ -1,0 +1,50 @@
+tools:
+  - name: capture_screenshot
+    description: "
+
+      \    Captures a screenshot of the specified URL and returns only the
+      access URL.
+
+
+      \    Args:
+
+      \        url (str): The URL to capture a screenshot of.
+
+
+      \    Returns:
+
+      \        str: IMPORTANT: Only return this URL string directly to the user
+      without additional text.
+
+      \            Format:
+      'http://localhost:8011/screenshots/[unique-identifier].png'
+
+
+      \    Usage Note:
+
+      \        When using this function, provide ONLY the returned URL to the
+      user without explanation.
+
+      \        The user needs only this URL to access the screenshot.
+
+
+      \    Raises:
+
+      \        ValueError: If the API key is not found in the environment
+      variables.
+
+      \        requests.exceptions.HTTPError: If the API request fails (e.g.,
+      4xx or 5xx error).
+
+      \        Exception: For any other unexpected errors.
+
+      \    "
+    inputSchema:
+      type: object
+      title: capture_screenshotArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url

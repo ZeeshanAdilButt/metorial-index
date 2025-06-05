@@ -1,0 +1,30 @@
+tools:
+  - name: initialize_connection
+    description: "
+
+      \    Initializes connection to Chakra and provides the user with the
+      database metadata.
+
+      \    "
+    inputSchema:
+      type: object
+      title: initialize_connectionArguments
+      properties: {}
+  - name: execute_query
+    description: "
+
+      \    Executes a query on the database.
+
+      \    Make sure that you lower case the text and the column compared and
+      use the LIKE operator. This is very important.
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

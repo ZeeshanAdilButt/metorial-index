@@ -1,0 +1,95 @@
+tools:
+  - name: compress_local_image
+    description: Compress a local image file
+    inputSchema:
+      type: object
+      required:
+        - imagePath
+      properties:
+        imagePath:
+          type: string
+          example: /Users/user/Downloads/image.jpg
+          description: The ABSOLUTE path to the image file to compress
+        outputPath:
+          type: string
+          example: /Users/user/Downloads/image_compressed.jpg
+          description: The ABSOLUTE path to save the compressed image file
+        outputFormat:
+          enum:
+            - image/jpeg
+            - image/png
+            - image/webp
+            - image/jpg
+            - image/avif
+          type: string
+          example: image/jpeg
+          description: The format to save the compressed image file
+        preserveMetadata:
+          type: array
+          items:
+            enum:
+              - copyright
+              - creation
+              - location
+            type: string
+          description: The metadata to preserve in the image file
+  - name: compress_remote_image
+    description: Compress a remote image file by giving the URL of the image
+    inputSchema:
+      type: object
+      required:
+        - imageUrl
+      properties:
+        imageUrl:
+          type: string
+          example: https://example.com/image.jpg
+          description: The URL of the image file to compress
+        outputPath:
+          type: string
+          example: /Users/user/Downloads/image_compressed.jpg
+          description: The ABSOLUTE path to save the compressed image file
+        outputFormat:
+          enum:
+            - image/jpeg
+            - image/png
+            - image/webp
+            - image/jpg
+            - image/avif
+          type: string
+          example: image/jpeg
+          description: The format to save the compressed image file
+  - name: resize_image
+    description: Resize an image file
+    inputSchema:
+      type: object
+      required:
+        - imagePath
+        - width
+        - height
+      properties:
+        width:
+          type: number
+          example: 1024
+          description: The width to resize the image to
+        height:
+          type: number
+          example: 1024
+          description: The height to resize the image to
+        method:
+          enum:
+            - scale
+            - fit
+            - cover
+            - thumb
+          type: string
+          default: fit
+          example: fit
+          description: The method describes the way your image will be resized.
+        imagePath:
+          type: string
+          example: /Users/user/Downloads/image.jpg
+          description: The ABSOLUTE path to the image file to resize
+        outputPath:
+          type: string
+          example: /Users/user/Downloads/image_thumbnail.jpg
+          description: The ABSOLUTE path to save the resized image file

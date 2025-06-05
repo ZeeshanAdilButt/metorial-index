@@ -1,0 +1,19 @@
+identifier: planet9v/mcp_always/mcp_always
+repo:
+  provider: github.com
+  url: https://github.com/Planet9V/mcp_always
+  name: mcp_always
+  owner: Planet9V
+server:
+  subdirectory: /
+  name: Always MCP Server
+  description: Enable seamless integration of external data and tools with your
+    language models to enhance their contextual understanding and capabilities.
+    Facilitate dynamic access to resources, execution of actions, and use of
+    prompt templates to improve interaction quality. Streamline the connection
+    between LLMs and real-world applications for more powerful AI-driven
+    workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

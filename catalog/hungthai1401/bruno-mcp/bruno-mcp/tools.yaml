@@ -1,0 +1,21 @@
+tools:
+  - name: run-collection
+    description: Run a Bruno Collection using Bruno CLI
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection
+      properties:
+        variables:
+          type: array
+          items:
+            type: string
+          description: Optional environment variables
+        collection:
+          type: string
+          description: Path to the Bruno collection
+        environment:
+          type: string
+          description: Optional path to environment file
+      additionalProperties: false

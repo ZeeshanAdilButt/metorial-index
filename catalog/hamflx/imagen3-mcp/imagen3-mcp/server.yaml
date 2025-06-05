@@ -1,0 +1,18 @@
+identifier: hamflx/imagen3-mcp/imagen3-mcp
+repo:
+  provider: github.com
+  url: https://github.com/hamflx/imagen3-mcp
+  name: imagen3-mcp
+  owner: hamflx
+server:
+  subdirectory: /
+  name: Imagen3 Image Generation Server
+  description: Generate high-quality images using Google's Imagen 3.0 model
+    through a simple MCP interface. Easily integrate with tools like Cherry
+    Studio or Cursor to produce photorealistic and creative visuals from text
+    prompts. Configure with your Google Gemini API key and optional proxy or
+    server settings for flexible deployment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

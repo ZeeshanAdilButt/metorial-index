@@ -1,0 +1,14 @@
+identifier: lalanikarim/comfy-mcp-server/comfy-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lalanikarim/comfy-mcp-server
+  name: comfy-mcp-server
+  owner: lalanikarim
+server:
+  subdirectory: /
+  name: Comfy Server
+  description: Generate images based on prompts using a remote Comfy server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

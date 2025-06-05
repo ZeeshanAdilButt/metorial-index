@@ -1,0 +1,16 @@
+identifier: bigsy/maven-mcp-server/maven-deps-server
+repo:
+  provider: github.com
+  url: https://github.com/Bigsy/maven-mcp-server
+  name: maven-mcp-server
+  owner: Bigsy
+server:
+  subdirectory: /
+  name: Maven Dependencies Server
+  description: An MCP server providing tools for checking Maven dependency
+    versions, enabling LLMs to verify dependencies and retrieve their latest
+    versions from Maven Central Repository.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

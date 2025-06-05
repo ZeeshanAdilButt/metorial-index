@@ -1,0 +1,150 @@
+tools:
+  - name: get_flight_data
+    description: Get real-time flight data
+    inputSchema:
+      type: object
+      required:
+        - departureCity
+        - arrivalCity
+        - travelDate
+      properties:
+        adults:
+          type: integer
+          default: 1
+          description: Number of adult passengers
+        infants:
+          type: integer
+          default: 0
+          description: Number of infant passengers
+        children:
+          type: integer
+          default: 0
+          description: Number of child passengers
+        travelDate:
+          type: string
+          format: date
+          description: Travel date in YYYY-MM-DD format
+        arrivalCity:
+          type: string
+          description: Arrival city code (e.g., BOM for Mumbai)
+        departureCity:
+          type: string
+          description: Departure city code (e.g., DEL for Delhi)
+  - name: book_best_flight
+    description: Book the best flight based on travel request
+    inputSchema:
+      type: object
+      required:
+        - priceId
+        - passengers
+        - contactInfo
+      properties:
+        priceId:
+          type: string
+          description: Price ID from flight search results
+        passengers:
+          type: object
+          required:
+            - adults
+          properties:
+            adults:
+              type: array
+              items:
+                type: object
+                required:
+                  - firstName
+                  - lastName
+                  - title
+                properties:
+                  dob:
+                    type: string
+                    format: date
+                    description: Date of birth in YYYY-MM-DD format
+                  title:
+                    enum:
+                      - Mr
+                      - Mrs
+                      - Ms
+                    type: string
+                    description: Title (Mr, Mrs, Ms)
+                  lastName:
+                    type: string
+                    description: Last name of passenger
+                  firstName:
+                    type: string
+                    description: First name of passenger
+            infants:
+              type: array
+              items:
+                type: object
+                required:
+                  - firstName
+                  - lastName
+                  - title
+                  - dob
+                properties:
+                  dob:
+                    type: string
+                    format: date
+                    description: Date of birth in YYYY-MM-DD format
+                  title:
+                    enum:
+                      - Ms
+                      - Master
+                    type: string
+                    description: Title (Ms, Master)
+                  lastName:
+                    type: string
+                    description: Last name of passenger
+                  firstName:
+                    type: string
+                    description: First name of passenger
+            children:
+              type: array
+              items:
+                type: object
+                required:
+                  - firstName
+                  - lastName
+                  - title
+                  - dob
+                properties:
+                  dob:
+                    type: string
+                    format: date
+                    description: Date of birth in YYYY-MM-DD format
+                  title:
+                    enum:
+                      - Ms
+                      - Master
+                    type: string
+                    description: Title (Ms, Master)
+                  lastName:
+                    type: string
+                    description: Last name of passenger
+                  firstName:
+                    type: string
+                    description: First name of passenger
+        contactInfo:
+          type: object
+          required:
+            - email
+            - phone
+          properties:
+            email:
+              type: string
+              format: email
+              description: Contact email
+            phone:
+              type: string
+              description: Contact phone number
+  - name: get_ticket_info
+    description: Get ticket information
+    inputSchema:
+      type: object
+      required:
+        - bookingId
+      properties:
+        bookingId:
+          type: string
+          description: Booking ID

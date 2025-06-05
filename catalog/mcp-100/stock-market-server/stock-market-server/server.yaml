@@ -1,0 +1,17 @@
+identifier: mcp-100/stock-market-server/stock-market-server
+repo:
+  provider: github.com
+  url: https://github.com/MCP-100/stock-market-server
+  name: stock-market-server
+  owner: MCP-100
+server:
+  subdirectory: /
+  name: Stock Market Server
+  description: Access real-time stock market data and financial information
+    effortlessly. Generate market reports, financial statements, and get ticker
+    prices with ease using the Alpha Vantage API. Enhance your trading
+    strategies with up-to-date insights and analytics.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

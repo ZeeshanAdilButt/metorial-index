@@ -1,0 +1,155 @@
+tools:
+  - name: process_slash_command
+    description: Process commands that trigger prompt templates with optional arguments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: The command to process, e.g., '>>content_analysis Hello world' or
+            '/content_analysis Hello world'
+      additionalProperties: false
+  - name: listprompts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        command:
+          type: string
+          description: Optional filter text to show only matching commands
+      additionalProperties: false
+  - name: update_prompt
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - name
+        - category
+        - description
+        - userMessageTemplate
+        - arguments
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the prompt
+        name:
+          type: string
+          description: Display name for the prompt
+        isChain:
+          type: boolean
+          description: Whether this prompt is a chain of prompts
+        category:
+          type: string
+          description: Category this prompt belongs to
+        arguments:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - required
+            properties:
+              name:
+                type: string
+                description: Name of the argument
+              required:
+                type: boolean
+                description: Whether this argument is required
+              description:
+                type: string
+                description: Optional description of the argument
+            additionalProperties: false
+          description: Arguments accepted by this prompt
+        chainSteps:
+          type: array
+          items:
+            type: object
+            required:
+              - promptId
+              - stepName
+            properties:
+              promptId:
+                type: string
+                description: ID of the prompt to execute in this step
+              stepName:
+                type: string
+                description: Name of this step
+              inputMapping:
+                type: object
+                description: Maps chain inputs to this step's inputs
+                additionalProperties:
+                  type: string
+              outputMapping:
+                type: object
+                description: Maps this step's outputs to chain outputs
+                additionalProperties:
+                  type: string
+            additionalProperties: false
+          description: Steps in the chain if this is a chain prompt
+        description:
+          type: string
+          description: Description of the prompt
+        restartServer:
+          type: boolean
+          description: Whether to restart the server after updating the prompt
+        systemMessage:
+          type: string
+          description: Optional system message for the prompt
+        userMessageTemplate:
+          type: string
+          description: Template for generating the user message
+      additionalProperties: false
+  - name: delete_prompt
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the prompt to delete
+        restartServer:
+          type: boolean
+          description: Whether to restart the server after deleting the prompt
+      additionalProperties: false
+  - name: modify_prompt_section
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - section_name
+        - new_content
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the prompt to modify
+        new_content:
+          type: string
+          description: New content for the specified section
+        section_name:
+          type: string
+          description: "Name of the section to modify (valid values: 'title',
+            'description', 'System Message', 'User Message Template', or any
+            custom section)"
+        restartServer:
+          type: boolean
+          description: Whether to restart the server after modifying the prompt section
+      additionalProperties: false
+  - name: reload_prompts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        reason:
+          type: string
+          description: Optional reason for reloading/restarting
+        restart:
+          type: boolean
+          description: Whether to restart the server after reloading prompts
+      additionalProperties: false

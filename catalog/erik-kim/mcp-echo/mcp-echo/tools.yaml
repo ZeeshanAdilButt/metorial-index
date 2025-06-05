@@ -1,0 +1,11 @@
+tools:
+  - name: echo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: false

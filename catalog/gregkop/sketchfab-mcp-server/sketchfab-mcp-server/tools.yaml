@@ -1,0 +1,81 @@
+tools:
+  - name: sample-tool
+    description: A sample tool for demonstration purposes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+          description: Input parameter for the sample tool
+      additionalProperties: false
+  - name: sketchfab-search
+    description: Search for 3D models on Sketchfab based on keywords and filters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter by specific tags (e.g., ["animated", "rigged", "pbr"])
+        limit:
+          type: number
+          description: "Maximum number of results to return (1-24, default: 10)"
+        query:
+          type: string
+          description: Text search query (e.g., "car", "house", "character") to find
+            relevant models
+        categories:
+          type: array
+          items:
+            type: string
+          description: Filter by categories (e.g., ["characters", "architecture",
+            "vehicles"])
+        downloadable:
+          type: boolean
+          description: Set to true to show only downloadable models, false to show all
+            models
+      additionalProperties: false
+  - name: sketchfab-model-details
+    description: Get detailed information about a specific Sketchfab model
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - modelId
+      properties:
+        modelId:
+          type: string
+          description: The unique ID of the Sketchfab model (found in URLs or search
+            results)
+      additionalProperties: false
+  - name: sketchfab-download
+    description: Download a 3D model from Sketchfab
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - modelId
+      properties:
+        format:
+          enum:
+            - gltf
+            - glb
+            - usdz
+            - source
+          type: string
+          description: Preferred format to download the model in (defaults to gltf if
+            available)
+        modelId:
+          type: string
+          description: The unique ID of the Sketchfab model to download (must be
+            downloadable)
+        outputPath:
+          type: string
+          description: Local directory or file path to save the downloaded file (will use
+            temp directory if not specified)
+      additionalProperties: false

@@ -1,0 +1,247 @@
+tools:
+  - name: collaborativeReasoning
+    description: >-
+      A detailed tool for simulating expert collaboration with diverse
+      perspectives.
+
+      This tool helps models tackle complex problems by coordinating multiple
+      viewpoints.
+
+      It provides a framework for structured collaborative reasoning and
+      perspective integration.
+
+
+      When to use this tool:
+
+      - Complex problems requiring diverse expertise
+
+      - Issues needing multiple stakeholder perspectives
+
+      - Scenarios with potential value trade-offs
+
+      - Creative tasks benefiting from diverse viewpoints
+
+      - Problems where biases might limit single-perspective thinking
+
+
+      Key features:
+
+      - Multi-persona simulation
+
+      - Structured collaboration process
+
+      - Productive disagreement management
+
+      - Cross-pollination of ideas
+
+      - Perspective synthesis and integration
+    inputSchema:
+      type: object
+      required:
+        - topic
+        - personas
+        - contributions
+        - stage
+        - activePersonaId
+        - sessionId
+        - iteration
+        - nextContributionNeeded
+      properties:
+        stage:
+          enum:
+            - problem-definition
+            - ideation
+            - critique
+            - integration
+            - decision
+            - reflection
+          type: string
+          description: Current stage of the collaborative process
+        topic:
+          type: string
+          description: The topic or problem being addressed
+        personas:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - name
+              - expertise
+              - background
+              - perspective
+              - biases
+              - communication
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the persona
+              name:
+                type: string
+                description: Name of the persona
+              biases:
+                type: array
+                items:
+                  type: string
+                description: Potential biases of this persona
+              expertise:
+                type: array
+                items:
+                  type: string
+                description: Areas of expertise
+              background:
+                type: string
+                description: Background and experience of the persona
+              perspective:
+                type: string
+                description: Unique perspective or viewpoint
+              communication:
+                type: object
+                required:
+                  - style
+                  - tone
+                properties:
+                  tone:
+                    type: string
+                    description: Tone of communication (e.g., formal, casual, enthusiastic)
+                  style:
+                    type: string
+                    description: Communication style (e.g., direct, analytical, narrative)
+                description: Communication style of the persona
+          description: The expert personas participating in the collaboration
+        iteration:
+          type: number
+          minimum: 0
+          description: Current iteration of the collaboration
+        sessionId:
+          type: string
+          description: Unique identifier for this collaboration session
+        keyInsights:
+          type: array
+          items:
+            type: string
+          description: Key insights from the collaboration
+        contributions:
+          type: array
+          items:
+            type: object
+            required:
+              - personaId
+              - content
+              - type
+              - confidence
+            properties:
+              type:
+                enum:
+                  - observation
+                  - question
+                  - insight
+                  - concern
+                  - suggestion
+                  - challenge
+                  - synthesis
+                type: string
+                description: Type of contribution
+              content:
+                type: string
+                description: Content of the contribution
+              personaId:
+                type: string
+                description: ID of the contributing persona
+              confidence:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Confidence level in this contribution (0.0-1.0)
+              referenceIds:
+                type: array
+                items:
+                  type: string
+                description: IDs of previous contributions this builds upon
+          description: Contributions from the personas
+        disagreements:
+          type: array
+          items:
+            type: object
+            required:
+              - topic
+              - positions
+            properties:
+              topic:
+                type: string
+                description: Topic of disagreement
+              positions:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - personaId
+                    - position
+                    - arguments
+                  properties:
+                    position:
+                      type: string
+                      description: Description of the position
+                    arguments:
+                      type: array
+                      items:
+                        type: string
+                      description: Arguments supporting this position
+                    personaId:
+                      type: string
+                      description: ID of the persona holding this position
+                description: Different positions on the topic
+              resolution:
+                type: object
+                required:
+                  - type
+                  - description
+                properties:
+                  type:
+                    enum:
+                      - consensus
+                      - compromise
+                      - integration
+                      - tabled
+                    type: string
+                    description: Type of resolution
+                  description:
+                    type: string
+                    description: Description of how the disagreement was resolved
+                description: Resolution of the disagreement, if any
+          description: Points of disagreement between personas
+        nextPersonaId:
+          type: string
+          description: ID of the persona that should contribute next
+        openQuestions:
+          type: array
+          items:
+            type: string
+          description: Open questions requiring further exploration
+        activePersonaId:
+          type: string
+          description: ID of the currently active persona
+        consensusPoints:
+          type: array
+          items:
+            type: string
+          description: Points of consensus among participants
+        finalRecommendation:
+          type: string
+          description: Final recommendation based on the collaboration
+        nextContributionNeeded:
+          type: boolean
+          description: Whether another contribution is needed
+        suggestedContributionTypes:
+          type: array
+          items:
+            enum:
+              - observation
+              - question
+              - insight
+              - concern
+              - suggestion
+              - challenge
+              - synthesis
+            type: string
+          description: Suggested types for the next contribution

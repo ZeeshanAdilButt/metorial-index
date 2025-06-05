@@ -1,0 +1,16 @@
+identifier: aliyun/alibabacloud-adb-mysql-mcp-server/alibabacloud-adb-mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/aliyun/alibabacloud-adb-mysql-mcp-server
+  name: alibabacloud-adb-mysql-mcp-server
+  owner: aliyun
+server:
+  subdirectory: /
+  name: Adb MySQL MCP Server
+  description: Facilitate seamless communication between AI Agents and Adb MySQL
+    databases. Retrieve database metadata and execute SQL operations
+    effortlessly, enhancing your AI capabilities with real-time data access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

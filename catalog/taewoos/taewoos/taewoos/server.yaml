@@ -1,0 +1,17 @@
+identifier: taewoos/taewoos/taewoos
+repo:
+  provider: github.com
+  url: https://github.com/taewoos/taewoos
+  name: taewoos
+  owner: taewoos
+server:
+  subdirectory: /
+  name: taewoos MCP Server
+  description: Provide a customizable MCP server implementation to integrate LLMs
+    with external tools and resources. Enable dynamic interaction with data and
+    actions through a standardized JSON-RPC interface. Facilitate seamless
+    extension of LLM capabilities for diverse applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

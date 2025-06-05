@@ -1,0 +1,16 @@
+identifier: nstanw/api-service/api-service
+repo:
+  provider: github.com
+  url: https://github.com/nstanw/api-service
+  name: api-service
+  owner: nstanw
+server:
+  subdirectory: /
+  name: API Service
+  description: Interact with system APIs seamlessly. Perform operations like
+    employee search and breakfast registration with ease. Enhance your workflow
+    by integrating with our reliable MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

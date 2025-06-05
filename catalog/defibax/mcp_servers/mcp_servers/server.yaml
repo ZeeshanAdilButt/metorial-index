@@ -1,0 +1,17 @@
+identifier: defibax/mcp_servers/mcp_servers
+repo:
+  provider: github.com
+  url: https://github.com/DefiBax/mcp_servers
+  name: mcp_servers
+  owner: DefiBax
+server:
+  subdirectory: /
+  name: Voice Recorder
+  description: Record audio and transcribe it seamlessly using advanced AI models.
+    Enhance your productivity by capturing spoken content and converting it to
+    text effortlessly. Integrate with your AI agents for a more interactive
+    experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

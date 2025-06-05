@@ -1,0 +1,16 @@
+identifier: seekrays/mcp-monitor/mcp-monitor
+repo:
+  provider: github.com
+  url: https://github.com/seekrays/mcp-monitor
+  name: mcp-monitor
+  owner: seekrays
+server:
+  subdirectory: /
+  name: MCP System Monitor
+  description: A system monitoring tool that exposes system metrics via the Model
+    Context Protocol (MCP). This tool allows LLMs to retrieve real-time system
+    information through an MCP-compatible interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

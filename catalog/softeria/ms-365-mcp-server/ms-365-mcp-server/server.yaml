@@ -1,0 +1,18 @@
+identifier: softeria/ms-365-mcp-server/ms-365-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Softeria/ms-365-mcp-server
+  name: ms-365-mcp-server
+  owner: Softeria
+server:
+  subdirectory: /
+  name: Microsoft 365 Integration Server
+  description: Enable seamless interaction with Microsoft 365 services through a
+    standardized protocol. Manage Excel files, calendar events, emails, and
+    OneDrive files directly from your LLM-powered applications. Authenticate
+    securely and leverage dynamic tools powered by the Microsoft Graph API for
+    enhanced productivity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

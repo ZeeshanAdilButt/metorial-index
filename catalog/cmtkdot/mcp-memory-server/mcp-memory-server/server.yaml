@@ -1,0 +1,17 @@
+identifier: cmtkdot/mcp-memory-server/mcp-memory-server
+repo:
+  provider: github.com
+  url: https://github.com/cmtkdot/mcp-memory-server
+  name: mcp-memory-server
+  owner: cmtkdot
+server:
+  subdirectory: /
+  name: Memory Server
+  description: Provide persistent and queryable memory storage for AI agents to
+    enhance context retention and retrieval. Enable agents to store, update, and
+    access information dynamically during interactions. Improve the continuity
+    and relevance of conversations by maintaining a structured memory.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

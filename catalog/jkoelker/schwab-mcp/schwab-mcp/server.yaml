@@ -1,0 +1,17 @@
+identifier: jkoelker/schwab-mcp/schwab-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jkoelker/schwab-mcp
+  name: schwab-mcp
+  owner: jkoelker
+server:
+  subdirectory: /
+  name: Schwab Model Context Protocol Server
+  description: Expose Schwab API functionality through a standardized protocol.
+    Retrieve account information, stock quotes, and transaction history
+    seamlessly. Integrate effortlessly with Large Language Models to enhance
+    your financial applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+tools:
+  - name: navigate_to
+    description: "navigate to the city.
+
+
+      \    Args:
+
+      \        city: destination city name
+
+      \    "
+    inputSchema:
+      type: object
+      title: navigate_toArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City

@@ -1,0 +1,40 @@
+tools:
+  - name: getSafeTransactions
+    description: Get all transactions for a Safe address
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        limit:
+          type: number
+          description: Number of transactions to return
+        offset:
+          type: number
+          description: Offset for pagination
+        address:
+          type: string
+          description: Safe address
+  - name: getMultisigTransaction
+    description: Get details of a specific multisig transaction
+    inputSchema:
+      type: object
+      required:
+        - safeTxHash
+      properties:
+        safeTxHash:
+          type: string
+          description: Safe transaction hash
+  - name: decodeTransactionData
+    description: Decode transaction data using Safe API
+    inputSchema:
+      type: object
+      required:
+        - data
+      properties:
+        to:
+          type: string
+          description: Optional contract address
+        data:
+          type: string
+          description: Transaction data in hex format

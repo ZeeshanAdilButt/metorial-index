@@ -1,0 +1,30 @@
+tools:
+  - name: uuid-generator
+    description: Generates one or more UUIDs with various format options
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        count:
+          type: integer
+          default: 1
+          maximum: 100
+          minimum: 1
+        format:
+          enum:
+            - standard
+            - no-hyphens
+            - braces
+            - uppercase
+          type: string
+          default: standard
+        version:
+          enum:
+            - v1
+            - v4
+            - v5
+          type: string
+          default: v4
+        namespace:
+          type: string
+      additionalProperties: false

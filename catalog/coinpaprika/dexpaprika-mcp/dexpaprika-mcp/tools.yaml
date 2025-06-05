@@ -1,0 +1,301 @@
+tools:
+  - name: getNetworks
+    description: Retrieve a list of all supported blockchain networks and their metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getNetworkDexes
+    description: Get a list of available decentralized exchanges on a specific network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+      properties:
+        page:
+          type: number
+          default: 0
+          description: Page number for pagination
+        limit:
+          type: number
+          default: 10
+          description: Number of items per page
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+      additionalProperties: false
+  - name: getTopPools
+    description: Get a paginated list of top liquidity pools from all networks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 0
+          description: Page number for pagination
+        sort:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort order
+        limit:
+          type: number
+          default: 10
+          description: Number of items per page
+        orderBy:
+          enum:
+            - volume_usd
+            - price_usd
+            - transactions
+            - last_price_change_usd_24h
+            - created_at
+          type: string
+          default: volume_usd
+          description: Field to order by
+      additionalProperties: false
+  - name: getNetworkPools
+    description: Get a list of top liquidity pools on a specific network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+      properties:
+        page:
+          type: number
+          default: 0
+          description: Page number for pagination
+        sort:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort order
+        limit:
+          type: number
+          default: 10
+          description: Number of items per page
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        orderBy:
+          enum:
+            - volume_usd
+            - price_usd
+            - transactions
+            - last_price_change_usd_24h
+            - created_at
+          type: string
+          default: volume_usd
+          description: Field to order by
+      additionalProperties: false
+  - name: getDexPools
+    description: Get top pools on a specific DEX within a network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+        - dex
+      properties:
+        dex:
+          type: string
+          description: DEX identifier
+        page:
+          type: number
+          default: 0
+          description: Page number for pagination
+        sort:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort order
+        limit:
+          type: number
+          default: 10
+          description: Number of items per page
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        orderBy:
+          enum:
+            - volume_usd
+            - price_usd
+            - transactions
+            - last_price_change_usd_24h
+            - created_at
+          type: string
+          default: volume_usd
+          description: Field to order by
+      additionalProperties: false
+  - name: getPoolDetails
+    description: Get detailed information about a specific pool on a network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+        - poolAddress
+      properties:
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        inversed:
+          type: boolean
+          default: false
+          description: Whether to invert the price ratio
+        poolAddress:
+          type: string
+          description: Pool address or identifier
+      additionalProperties: false
+  - name: getTokenDetails
+    description: Get detailed information about a specific token on a network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+        - tokenAddress
+      properties:
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        tokenAddress:
+          type: string
+          description: Token address or identifier
+      additionalProperties: false
+  - name: getTokenPools
+    description: Get a list of top liquidity pools for a specific token on a network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+        - tokenAddress
+      properties:
+        page:
+          type: number
+          default: 0
+          description: Page number for pagination
+        sort:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort order
+        limit:
+          type: number
+          default: 10
+          description: Number of items per page
+        address:
+          type: string
+          description: Filter pools that contain this additional token address
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        orderBy:
+          enum:
+            - volume_usd
+            - price_usd
+            - transactions
+            - last_price_change_usd_24h
+            - created_at
+          type: string
+          default: volume_usd
+          description: Field to order by
+        tokenAddress:
+          type: string
+          description: Token address or identifier
+      additionalProperties: false
+  - name: getPoolOHLCV
+    description: Get OHLCV (Open-High-Low-Close-Volume) data for a specific pool
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+        - poolAddress
+        - start
+      properties:
+        end:
+          type: string
+          description: End time for historical data (max 1 year from start)
+        limit:
+          type: number
+          default: 1
+          description: Number of data points to retrieve (max 366)
+        start:
+          type: string
+          description: Start time for historical data (ISO-8601, yyyy-mm-dd, or Unix
+            timestamp)
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        interval:
+          type: string
+          default: 24h
+          description: Interval granularity for OHLCV data (1m, 5m, 10m, 15m, 30m, 1h, 6h,
+            12h, 24h)
+        inversed:
+          type: boolean
+          default: false
+          description: Whether to invert the price ratio in OHLCV calculations
+        poolAddress:
+          type: string
+          description: Pool address or identifier
+      additionalProperties: false
+  - name: getPoolTransactions
+    description: Get transactions of a pool on a network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - network
+        - poolAddress
+      properties:
+        page:
+          type: number
+          default: 0
+          description: Page number for pagination
+        limit:
+          type: number
+          default: 10
+          description: Number of items per page
+        cursor:
+          type: string
+          description: Transaction ID used for cursor-based pagination
+        network:
+          type: string
+          description: Network ID (e.g., ethereum, solana)
+        poolAddress:
+          type: string
+          description: Pool address or identifier
+      additionalProperties: false
+  - name: search
+    description: Search for tokens, pools, and DEXes by name or identifier
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search term (e.g., "uniswap", "bitcoin", or a token address)
+      additionalProperties: false
+  - name: getStats
+    description: Get high-level statistics about the DexPaprika ecosystem
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

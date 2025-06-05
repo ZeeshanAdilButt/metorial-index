@@ -1,0 +1,58 @@
+tools:
+  - name: search_items
+    description: PlayFab search items
+    inputSchema:
+      type: object
+      required:
+        - count
+      properties:
+        count:
+          type: number
+          description: Number of items to retrieve. This value is optional. Maximum page
+            size is 50. Default value is 10.
+        filter:
+          type: string
+          description: "An OData filter used to refine the search query (For example:
+            \"type eq 'ugc'\"). More info about Filter Complexity limits can be
+            found here:
+            https://learn.microsoft.com/en-us/gaming/playfab/features/economy-v\
+            2/catalog/search#limits"
+        search:
+          type: string
+          description: The text to search for.
+        orderBy:
+          type: string
+          description: 'An OData orderBy used to order the results of the search query.
+            For example: "rating/average asc"'
+        continuationToken:
+          type: string
+          description: An opaque token used to retrieve the next page of items, if any are
+            available.
+  - name: get_all_segments
+    description: PlayFab get all segments
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_players_in_segments
+    description: "Allows for paging through all players in a given segment. This API
+      creates a snapshot of all player profiles that match the segment
+      definition at the time of its creation and lives through the Total Seconds
+      to Live, refreshing its life span on each subsequent use of the
+      Continuation Token. Profiles that change during the course of paging will
+      not be reflected in the results. AB Test segments are currently not
+      supported by this operation. NOTE: This API is limited to being called 30
+      times in one minute. You will be returned an error if you exceed this
+      threshold."
+    inputSchema:
+      type: object
+      required:
+        - segmentId
+      properties:
+        segmentId:
+          type: string
+          description: The ID of the segment to retrieve players from.
+        continuationToken:
+          type: string
+          description: An opaque token used to retrieve the next page of items, if any are
+            available.

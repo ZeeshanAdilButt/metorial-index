@@ -1,0 +1,382 @@
+tools:
+  - name: list_workspaces
+    description: >-
+      List Bitbucket workspaces accessible to the authenticated user, with
+      optional pagination.
+
+              PURPOSE: Discover available workspaces and retrieve their slugs, names, and basic metadata. Essential for finding the correct 'workspaceSlug' needed as input for repository-related tools (list_repositories, get_repository, list_pull_requests, get_pull_request).
+
+              WHEN TO USE:
+              - To find the 'workspaceSlug' for a known workspace name.
+              - To explore all workspaces you have access to.
+              - To get a high-level overview before diving into specific repositories.
+              - When you don't know the exact slug required by other tools.
+
+              WHEN NOT TO USE:
+              - When you already have the 'workspaceSlug'.
+              - When you need detailed information about a *single* workspace (use 'get_workspace').
+              - When you need repository or pull request information (use repository/pull_request tools with a known 'workspaceSlug').
+
+              RETURNS: Formatted list of workspace memberships, including workspace name, slug, UUID, your permission level, and access dates. Includes pagination details if applicable.
+
+              EXAMPLES:
+              - List all accessible workspaces: {}
+              - Paginate results: { limit: 10, cursor: "some-cursor-value" }
+
+              ERRORS:
+              - Authentication failures: Check Bitbucket credentials.
+              - No workspaces found: You may not have access to any workspaces.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          maximum: 100
+          description: Maximum number of items to return (1-100). Controls the response
+            size. Defaults to 25 if omitted.
+          exclusiveMinimum: 0
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Obtained
+            from previous response when more results are available.
+      additionalProperties: false
+  - name: get_workspace
+    description: >-
+      Get detailed information about a specific Bitbucket workspace using its
+      slug.
+
+              PURPOSE: Retrieves comprehensive metadata for a *known* workspace, including UUID, name, type, creation date, and links to related resources like repositories and projects.
+
+              WHEN TO USE:
+              - When you need full details about a *specific* workspace and you already know its 'workspaceSlug'.
+              - After using 'list_workspaces' to identify the target workspace slug.
+              - To get quick links to a workspace's repositories, projects, or members page.
+
+              WHEN NOT TO USE:
+              - When you don't know the workspace slug (use 'list_workspaces' first).
+              - When you only need a list of workspaces (use 'list_workspaces').
+              - When you need information about repositories *within* the workspace (use repository tools).
+
+              RETURNS: Detailed workspace information including slug, name, UUID, type, creation date, and links. Fetches all available details by default.
+
+              EXAMPLES:
+              - Get details for a workspace: { workspaceSlug: "my-dev-team" }
+
+              ERRORS:
+              - Workspace not found: Verify the 'workspaceSlug' is correct and exists.
+              - Permission errors: Ensure you have access to view the specified workspace.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceSlug
+      properties:
+        workspaceSlug:
+          type: string
+          minLength: 1
+          description: 'Workspace slug to retrieve detailed information for. Must be a
+            valid workspace slug from your Bitbucket account. Example: "myteam"'
+      additionalProperties: false
+  - name: list_repositories
+    description: >-
+      List repositories within a specific Bitbucket workspace, with optional
+      filtering and pagination. Requires 'workspaceSlug'.
+
+              PURPOSE: Discover repositories within a given workspace and retrieve their slugs, names, owners, and basic metadata. Essential for finding the 'repoSlug' needed for repository or pull request details tools.
+
+              WHEN TO USE:
+              - To find the 'repoSlug' for a known repository name within a specific workspace.
+              - To explore all repositories within a known workspace ('workspaceSlug' is required).
+              - To filter repositories based on name ('query'), your role ('role'), or sort them ('sort').
+              - Before using 'get_repository' or pull request tools if the 'repoSlug' is unknown.
+
+              WHEN NOT TO USE:
+              - When you don't know the 'workspaceSlug' (use 'list_workspaces' first).
+              - When you already have the 'repoSlug' and need full details (use 'get_repository').
+              - When you need pull request information (use pull request tools).
+
+              RETURNS: Formatted list of repositories including name, full name, owner, description, privacy status, dates, and URL. Includes pagination details if applicable.
+
+              EXAMPLES:
+              - List repositories in a workspace: { workspaceSlug: "my-team" }
+              - Filter by name fragment: { workspaceSlug: "my-team", query: "backend-api" }
+              - Filter by your role: { workspaceSlug: "my-team", role: "contributor" }
+              - Sort by last update (descending): { workspaceSlug: "my-team", sort: "-updated_on" }
+              - Paginate results: { workspaceSlug: "my-team", limit: 10, cursor: "next-page-token" }
+
+              ERRORS:
+              - Workspace not found: Verify the 'workspaceSlug' is correct.
+              - Authentication failures: Check Bitbucket credentials.
+              - No repositories found: Workspace might be empty, filters too restrictive, or permissions lacking.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceSlug
+      properties:
+        role:
+          type: string
+          description: "Filter repositories by the authenticated user's role. Common
+            values: \"owner\", \"admin\", \"contributor\", \"member\". If
+            omitted, returns repositories of all roles."
+        sort:
+          type: string
+          description: 'Field to sort results by. Common values: "name", "created_on",
+            "updated_on". Prefix with "-" for descending order. Example:
+            "-updated_on" for most recently updated first.'
+        limit:
+          type: integer
+          maximum: 100
+          description: Maximum number of items to return (1-100). Controls the response
+            size. Defaults to 25 if omitted.
+          exclusiveMinimum: 0
+        query:
+          type: string
+          description: 'Query string to filter repositories by name or other properties
+            (text search). Example: "api" for repositories with "api" in the
+            name/description. If omitted, returns all repositories.'
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Obtained
+            from previous response when more results are available.
+        workspaceSlug:
+          type: string
+          minLength: 1
+          description: 'Workspace slug containing the repositories. Must be a valid
+            workspace slug from your Bitbucket account. Example: "myteam"'
+      additionalProperties: false
+  - name: get_repository
+    description: >-
+      Get detailed information about a specific Bitbucket repository using its
+      workspace and repository slugs. Requires 'workspaceSlug' and 'repoSlug'.
+
+              PURPOSE: Retrieves comprehensive metadata for a *known* repository, including UUID, owner, description, language, size, creation/update dates, and links.
+
+              WHEN TO USE:
+              - When you need full details about a *specific* repository and you know its 'workspaceSlug' and 'repoSlug'.
+              - After using 'list_repositories' to identify the target repository slugs.
+              - To get repository metadata before analyzing its pull requests or content.
+
+              WHEN NOT TO USE:
+              - When you don't know the 'workspaceSlug' or 'repoSlug' (use 'list_workspaces' and/or 'list_repositories' first).
+              - When you only need a list of repositories (use 'list_repositories').
+              - When you need pull request information (use pull request tools).
+
+              RETURNS: Detailed repository information including name, full name, UUID, description, language, size, owner, dates, and links. Fetches all available details by default.
+
+              EXAMPLES:
+              - Get details for a repository: { workspaceSlug: "my-team", repoSlug: "backend-api" }
+
+              ERRORS:
+              - Repository not found: Verify the 'workspaceSlug' and 'repoSlug' are correct and the repository exists.
+              - Permission errors: Ensure you have access to view the specified repository.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceSlug
+        - repoSlug
+      properties:
+        repoSlug:
+          type: string
+          minLength: 1
+          description: 'Repository slug to retrieve. This must be a valid repository in
+            the specified workspace. Example: "project-api"'
+        workspaceSlug:
+          type: string
+          minLength: 1
+          description: 'Workspace slug containing the repository. Must be a valid
+            workspace slug from your Bitbucket account. Example: "myteam"'
+      additionalProperties: false
+  - name: list_pull_requests
+    description: >-
+      List pull requests for a specific Bitbucket repository, with optional
+      filtering by state or query text. Requires 'workspaceSlug' and 'repoSlug'.
+
+              PURPOSE: Discover pull requests within a given repository and retrieve their IDs, titles, states, authors, and branches. Essential for finding the 'prId' needed for the 'get_pull_request' tool.
+
+              WHEN TO USE:
+              - To find open, merged, declined, or superseded pull requests within a specific repository.
+              - To get a list of recent PR activity for a repository.
+              - To search for PRs containing specific text in their title or description ('query' parameter).
+              - To obtain 'prId' values for use with 'get_pull_request'.
+              - Requires known 'workspaceSlug' and 'repoSlug'.
+
+              WHEN NOT TO USE:
+              - When you don't know the 'workspaceSlug' or 'repoSlug' (use workspace/repository listing tools first).
+              - When you already have the 'prId' and need full details (use 'get_pull_request').
+              - When you need repository information (use repository tools).
+
+              RETURNS: Formatted list of pull requests including ID, title, state, author, source/destination branches, a snippet of the description, and URL. Includes pagination details if applicable.
+
+              EXAMPLES:
+              - List open PRs: { workspaceSlug: "my-team", repoSlug: "backend-api", state: "OPEN" }
+              - List merged PRs: { workspaceSlug: "my-team", repoSlug: "backend-api", state: "MERGED" }
+              - Search PR titles/descriptions: { workspaceSlug: "my-team", repoSlug: "backend-api", query: "bugfix" }
+              - Paginate results: { workspaceSlug: "my-team", repoSlug: "backend-api", limit: 10, cursor: "next-page-token" }
+
+              ERRORS:
+              - Repository not found: Verify 'workspaceSlug' and 'repoSlug'.
+              - Permission errors: Ensure access to the repository's pull requests.
+              - Invalid state: Ensure 'state' is one of OPEN, MERGED, DECLINED, SUPERSEDED.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceSlug
+        - repoSlug
+      properties:
+        limit:
+          type: integer
+          maximum: 100
+          description: Maximum number of items to return (1-100). Controls the response
+            size. Defaults to 25 if omitted.
+          exclusiveMinimum: 0
+        query:
+          type: string
+          description: Filter pull requests by title, description, or author (text
+            search). Uses Bitbucket query syntax.
+        state:
+          enum:
+            - OPEN
+            - MERGED
+            - DECLINED
+            - SUPERSEDED
+          type: string
+          description: 'Filter pull requests by state. Options: "OPEN" (active PRs),
+            "MERGED" (completed PRs), "DECLINED" (rejected PRs), or "SUPERSEDED"
+            (replaced PRs). If omitted, defaults to showing all states.'
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Obtained
+            from previous response when more results are available.
+        repoSlug:
+          type: string
+          minLength: 1
+          description: 'Repository slug containing the pull requests. This must be a valid
+            repository in the specified workspace. Example: "project-api"'
+        workspaceSlug:
+          type: string
+          minLength: 1
+          description: 'Workspace slug containing the repository. Must be a valid
+            workspace slug from your Bitbucket account. Example: "myteam"'
+      additionalProperties: false
+  - name: get_pull_request
+    description: >-
+      Get detailed information about a specific Bitbucket pull request using its
+      workspace slug, repository slug, and pull request ID. Requires
+      'workspaceSlug', 'repoSlug', and 'prId'.
+
+              PURPOSE: Retrieves comprehensive details for a *known* pull request, including its full description, state, author, reviewers, source/destination branches, and links to related resources like commits and diffs.
+
+              WHEN TO USE:
+              - When you need the full context, description, or reviewer list for a *specific* pull request.
+              - After using 'list_pull_requests' to identify the target 'prId'.
+              - To get links to view the PR diff, commits, or comments in the browser.
+              - Requires known 'workspaceSlug', 'repoSlug', and 'prId'.
+
+              WHEN NOT TO USE:
+              - When you don't know the 'prId' (use 'list_pull_requests' first).
+              - When you only need a list of pull requests (use 'list_pull_requests').
+              - When you need repository information (use repository tools).
+
+              RETURNS: Detailed pull request information including title, full description, state, author, reviewers, branches, and links. Fetches all available details by default.
+
+              EXAMPLES:
+              - Get details for a specific PR: { workspaceSlug: "my-team", repoSlug: "backend-api", prId: "42" }
+
+              ERRORS:
+              - Pull Request not found: Verify 'workspaceSlug', 'repoSlug', and 'prId' are correct.
+              - Repository not found: Verify 'workspaceSlug' and 'repoSlug'.
+              - Permission errors: Ensure access to view the specified pull request.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceSlug
+        - repoSlug
+        - prId
+      properties:
+        prId:
+          type:
+            - string
+            - number
+          description: "Numeric ID of the pull request to retrieve. Must be a valid pull
+            request ID in the specified repository. Example: 42"
+        repoSlug:
+          type: string
+          minLength: 1
+          description: 'Repository slug containing the pull request. This must be a valid
+            repository in the specified workspace. Example: "project-api"'
+        workspaceSlug:
+          type: string
+          minLength: 1
+          description: 'Workspace slug containing the repository. Must be a valid
+            workspace slug from your Bitbucket account. Example: "myteam"'
+      additionalProperties: false
+  - name: list_pr_comments
+    description: >-
+      List comments on a specific Bitbucket pull request using its workspace
+      slug, repository slug, and pull request ID. Requires 'workspaceSlug',
+      'repoSlug', and 'prId'.
+
+              PURPOSE: View all review feedback, discussions, and task comments on a pull request to understand code review context without accessing the web UI.
+
+              WHEN TO USE:
+              - To see what reviewers have said about a pull request.
+              - To find inline code comments and their context (file, line number).
+              - After identifying a PR of interest via 'list_pull_requests'.
+              - When you need to understand review history, discussions, and decisions.
+              - Requires known 'workspaceSlug', 'repoSlug', and 'prId'.
+
+              WHEN NOT TO USE:
+              - When you don't know the pull request ID (use 'list_pull_requests' first).
+              - When you need the PR's metadata but not comments (use 'get_pull_request').
+              - When you need to post new comments (not supported).
+
+              RETURNS: Formatted list of comments with author, date, content, and for inline comments: the file path and line numbers. General and inline comments are included.
+
+              EXAMPLES:
+              - List all comments on a PR: { workspaceSlug: "my-team", repoSlug: "backend-api", prId: "42" }
+              - Paginate results: { workspaceSlug: "my-team", repoSlug: "backend-api", prId: "42", limit: 25, cursor: "next-page-token" }
+
+              ERRORS:
+              - Pull Request not found: Verify 'workspaceSlug', 'repoSlug', and 'prId' are correct.
+              - Repository not found: Verify 'workspaceSlug' and 'repoSlug'.
+              - Permission errors: Ensure access to view the specified pull request comments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workspaceSlug
+        - repoSlug
+        - prId
+      properties:
+        prId:
+          type:
+            - string
+            - number
+          description: "Numeric ID of the pull request to retrieve comments from. Must be
+            a valid pull request ID in the specified repository. Example: 42"
+        limit:
+          type: integer
+          maximum: 100
+          description: Maximum number of items to return (1-100). Controls the response
+            size. Defaults to 25 if omitted.
+          exclusiveMinimum: 0
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Obtained
+            from previous response when more results are available.
+        repoSlug:
+          type: string
+          minLength: 1
+          description: 'Repository slug containing the pull request. This must be a valid
+            repository in the specified workspace. Example: "project-api"'
+        workspaceSlug:
+          type: string
+          minLength: 1
+          description: 'Workspace slug containing the repository. Must be a valid
+            workspace slug from your Bitbucket account. Example: "myteam"'
+      additionalProperties: false

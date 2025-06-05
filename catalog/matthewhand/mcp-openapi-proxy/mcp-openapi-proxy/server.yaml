@@ -1,0 +1,14 @@
+identifier: matthewhand/mcp-openapi-proxy/mcp-openapi-proxy
+repo:
+  provider: github.com
+  url: https://github.com/matthewhand/mcp-openapi-proxy
+  name: mcp-openapi-proxy
+  owner: matthewhand
+server:
+  subdirectory: /
+  name: OpenAPI Proxy
+  description: Expose REST APIs defined by OpenAPI specifications as MCP tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

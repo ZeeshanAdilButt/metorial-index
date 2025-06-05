@@ -1,0 +1,17 @@
+identifier: vitamin3615/uniprot-mcp-server/uniprot-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/vitamin3615/uniprot-mcp-server
+  name: uniprot-mcp-server
+  owner: vitamin3615
+server:
+  subdirectory: /
+  name: UniProt Server
+  description: Fetch protein information seamlessly from the UniProt database.
+    Retrieve detailed protein data, sequences, functions, and structures to
+    enhance your AI applications. Integrate effortlessly with Claude Desktop and
+    other MCP-compatible tools for enriched language model capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

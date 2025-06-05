@@ -1,0 +1,3509 @@
+tools:
+  - name: list_instances
+    description: Get a list of all Linode instances
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_instance
+    description: Get details for a specific Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: create_instance
+    description: Create a new Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - region
+        - type
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          type: string
+          description: The Linode type ID (e.g., g6-nanode-1, g6-standard-2)
+        group:
+          type: string
+          description: The group for the Linode
+        image:
+          type: string
+          description: The image ID to deploy (e.g., linode/debian11, linode/ubuntu22.04)
+        label:
+          type: string
+          description: The label for the Linode. Must be unique among your Linodes.
+        booted:
+          type: boolean
+          description: Whether the Linode should be booted after creation
+        region:
+          type: string
+          description: The region where the Linode will be created
+        root_pass:
+          type: string
+          description: The root password for the Linode. Must be 7-128 characters and meet
+            the strength requirements. Should include uppercase, lowercase,
+            numbers, and special characters.
+        private_ip:
+          type: boolean
+          description: Whether to assign a private IP
+        firewall_id:
+          type: number
+          description: ID of the firewall to assign this Linode to
+        authorized_keys:
+          type: array
+          items:
+            type: string
+          description: SSH public keys to deploy to the root user (recommended for better
+            security)
+        backups_enabled:
+          type: boolean
+          description: Whether backups are enabled
+        authorized_users:
+          type: array
+          items:
+            type: string
+          description: Linode usernames who can deploy their SSH keys to this Linode
+      additionalProperties: false
+  - name: update_instance
+    description: Update a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        group:
+          type: string
+          description: The group for the Linode
+        label:
+          type: string
+          description: The label for the Linode
+        alerts:
+          type: object
+          properties:
+            io:
+              type: number
+              description: Disk IO threshold in ops/sec
+            cpu:
+              type: number
+              description: CPU usage threshold percentage (0-400)
+            network_in:
+              type: number
+              description: Incoming network traffic threshold in Mbps
+            network_out:
+              type: number
+              description: Outgoing network traffic threshold in Mbps
+            transfer_quota:
+              type: number
+              description: Network transfer quota threshold in GB
+          additionalProperties: false
+        watchdog_enabled:
+          type: boolean
+          description: Whether the watchdog service is enabled
+      additionalProperties: false
+  - name: reboot_instance
+    description: Reboot a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        config_id:
+          type: number
+          description: The ID of the configuration profile to boot into
+      additionalProperties: false
+  - name: boot_instance
+    description: Power on a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        config_id:
+          type: number
+          description: The ID of the configuration profile to boot into
+      additionalProperties: false
+  - name: shutdown_instance
+    description: Power off a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: delete_instance
+    description: Delete a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: resize_instance
+    description: Resize a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        type:
+          type: string
+          description: The new Linode type ID
+        allow_auto_disk_resize:
+          type: boolean
+          default: true
+          description: Whether to automatically resize disks
+      additionalProperties: false
+  - name: clone_instance
+    description: Clone a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance to clone
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          type: string
+          description: The new Linode type ID
+        group:
+          type: string
+          description: The group for the new Linode
+        label:
+          type: string
+          description: The label for the new Linode
+        region:
+          type: string
+          description: The region where the new Linode will be created
+        private_ip:
+          type: boolean
+          description: Whether to assign a private IP to the new Linode
+        backups_enabled:
+          type: boolean
+          description: Whether backups are enabled for the new Linode
+      additionalProperties: false
+  - name: rebuild_instance
+    description: Rebuild a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - image
+        - root_pass
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        image:
+          type: string
+          description: The image ID to rebuild with (e.g., linode/debian11,
+            linode/ubuntu22.04)
+        booted:
+          type: boolean
+          description: Whether the Linode should be booted after rebuild
+        root_pass:
+          type: string
+          description: The root password for the rebuilt Linode. Must be 7-128 characters
+            and meet the strength requirements. Should include uppercase,
+            lowercase, numbers, and special characters.
+        stackscript_id:
+          type: number
+          description: StackScript ID to use for deployment. Run List StackScripts to get
+            available IDs.
+        authorized_keys:
+          type: array
+          items:
+            type: string
+          description: SSH public keys to deploy to the root user (recommended for better
+            security)
+        authorized_users:
+          type: array
+          items:
+            type: string
+          description: Linode usernames who can deploy their SSH keys to this Linode
+        stackscript_data:
+          type: object
+          description: StackScript data to use for deployment. Must be valid JSON with
+            less than 65,535 characters.
+          additionalProperties: {}
+      additionalProperties: false
+  - name: rescue_instance
+    description: Boot a Linode instance into rescue mode
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - devices
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        devices:
+          type: object
+          description: Block device assignments for /dev/sdX devices
+          additionalProperties:
+            type: number
+      additionalProperties: false
+  - name: list_instance_configs
+    description: Get all configuration profiles for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_instance_config
+    description: Get a specific configuration profile for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - configId
+      properties:
+        configId:
+          type: number
+          description: The ID of the configuration profile
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: create_instance_config
+    description: Create a new configuration profile for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - label
+      properties:
+        label:
+          type: string
+          description: The label for the configuration profile
+        initrd:
+          type:
+            - string
+            - "null"
+          description: The initial ramdisk file
+        kernel:
+          type: string
+          description: The kernel to use
+        devices:
+          type: object
+          description: Devices to map to this configuration
+          additionalProperties: {}
+        helpers:
+          type: object
+          properties:
+            distro:
+              type: boolean
+              description: Whether the distro helper is enabled
+            network:
+              type: boolean
+              description: Whether the network helper is enabled
+            modules_dep:
+              type: boolean
+              description: Whether the modules dependency helper is enabled
+            updatedb_disabled:
+              type: boolean
+              description: Whether updatedb is disabled
+          additionalProperties: false
+        comments:
+          type: string
+          description: User comments for this configuration
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+        interfaces:
+          type: array
+          description: Network interfaces for this configuration
+        root_device:
+          type: string
+          description: The root device
+        memory_limit:
+          type: number
+          description: The memory limit in MB
+      additionalProperties: false
+  - name: update_instance_config
+    description: Update a configuration profile for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - configId
+      properties:
+        label:
+          type: string
+          description: The label for the configuration profile
+        initrd:
+          type:
+            - string
+            - "null"
+          description: The initial ramdisk file
+        kernel:
+          type: string
+          description: The kernel to use
+        devices:
+          type: object
+          description: Devices to map to this configuration
+          additionalProperties: {}
+        helpers:
+          type: object
+          properties:
+            distro:
+              type: boolean
+              description: Whether the distro helper is enabled
+            network:
+              type: boolean
+              description: Whether the network helper is enabled
+            modules_dep:
+              type: boolean
+              description: Whether the modules dependency helper is enabled
+            updatedb_disabled:
+              type: boolean
+              description: Whether updatedb is disabled
+          additionalProperties: false
+        comments:
+          type: string
+          description: User comments for this configuration
+        configId:
+          type: number
+          description: The ID of the configuration profile
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+        interfaces:
+          type: array
+          description: Network interfaces for this configuration
+        root_device:
+          type: string
+          description: The root device
+        memory_limit:
+          type: number
+          description: The memory limit in MB
+      additionalProperties: false
+  - name: delete_instance_config
+    description: Delete a configuration profile for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - configId
+      properties:
+        configId:
+          type: number
+          description: The ID of the configuration profile
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: list_instance_disks
+    description: Get all disks for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_instance_disk
+    description: Get a specific disk for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - diskId
+      properties:
+        diskId:
+          type: number
+          description: The ID of the disk
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: create_instance_disk
+    description: Create a new disk for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - label
+        - size
+      properties:
+        size:
+          type: number
+          description: The size of the disk in MB
+        image:
+          type: string
+          description: The image ID to use (e.g., linode/debian11, linode/ubuntu22.04)
+        label:
+          type: string
+          description: The label for the disk
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+        read_only:
+          type: boolean
+          description: Whether the disk is read-only
+        root_pass:
+          type: string
+          description: The root password to use. Required when deploying an image. Must be
+            7-128 characters and meet the strength requirements. Should include
+            uppercase, lowercase, numbers, and special characters.
+        filesystem:
+          type: string
+          description: The filesystem type for the disk (e.g., ext4, raw, swap)
+        stackscript_id:
+          type: number
+          description: StackScript ID to use for deployment. Run List StackScripts to get
+            available IDs.
+        authorized_keys:
+          type: array
+          items:
+            type: string
+          description: SSH public keys to deploy to the root user (recommended for better
+            security)
+        authorized_users:
+          type: array
+          items:
+            type: string
+          description: Linode usernames who can deploy their SSH keys to this disk
+        stackscript_data:
+          type: object
+          description: StackScript data to use for deployment. Must be valid JSON with
+            less than 65,535 characters.
+          additionalProperties: {}
+      additionalProperties: false
+  - name: update_instance_disk
+    description: Update a disk for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - diskId
+      properties:
+        size:
+          type: number
+          description: The new size of the disk in MB
+        label:
+          type: string
+          description: The new label for the disk
+        diskId:
+          type: number
+          description: The ID of the disk
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: delete_instance_disk
+    description: Delete a disk for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - diskId
+      properties:
+        diskId:
+          type: number
+          description: The ID of the disk
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: resize_instance_disk
+    description: Resize a disk for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linodeId
+        - diskId
+        - size
+      properties:
+        size:
+          type: number
+          description: The new size of the disk in MB
+        diskId:
+          type: number
+          description: The ID of the disk
+        linodeId:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: get_instance_stats
+    description: Get current statistics for a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+      additionalProperties: false
+  - name: get_instance_stats_by_date
+    description: Get statistics for a Linode instance for a specific month
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - year
+        - month
+      properties:
+        id:
+          type: number
+          description: The ID of the Linode instance
+        year:
+          type: string
+          description: The year (YYYY format)
+        month:
+          type: string
+          description: The month (MM format)
+      additionalProperties: false
+  - name: list_kernels
+    description: Get a list of all available kernels
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_kernel
+    description: Get details for a specific kernel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the kernel
+      additionalProperties: false
+  - name: list_instance_types
+    description: Get a list of all available Linode types
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_instance_type
+    description: Get details for a specific Linode type
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the Linode type
+      additionalProperties: false
+  - name: list_volumes
+    description: Get a list of all volumes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_volume
+    description: Get details for a specific volume
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the volume
+      additionalProperties: false
+  - name: create_volume
+    description: Create a new volume
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - region
+        - size
+        - label
+      properties:
+        size:
+          type: number
+          description: The size of the volume in GB
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        label:
+          type: string
+          description: The label for the volume
+        region:
+          type: string
+          description: The region where the volume will be created
+        config_id:
+          type: number
+          description: The ID of the configuration profile to attach to
+        linode_id:
+          type: number
+          description: The ID of the Linode to attach the volume to
+      additionalProperties: false
+  - name: delete_volume
+    description: Delete a volume
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the volume
+      additionalProperties: false
+  - name: attach_volume
+    description: Attach a volume to a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - linode_id
+      properties:
+        id:
+          type: number
+          description: The ID of the volume
+        config_id:
+          type: number
+          description: The ID of the configuration profile to attach to
+        linode_id:
+          type: number
+          description: The ID of the Linode to attach the volume to
+      additionalProperties: false
+  - name: detach_volume
+    description: Detach a volume from a Linode instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the volume
+      additionalProperties: false
+  - name: resize_volume
+    description: Resize a volume
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - size
+      properties:
+        id:
+          type: number
+          description: The ID of the volume
+        size:
+          type: number
+          description: The new size of the volume in GB
+      additionalProperties: false
+  - name: get_ip_addresses
+    description: Get all IP addresses
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_ip_address
+    description: Get details for a specific IP address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The IP address
+      additionalProperties: false
+  - name: update_ip_address
+    description: Update reverse DNS for an IP address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+        - rdns
+      properties:
+        rdns:
+          type:
+            - string
+            - "null"
+          description: The reverse DNS entry
+        address:
+          type: string
+          description: The IP address
+      additionalProperties: false
+  - name: allocate_ip
+    description: Allocate a new IP address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+        - public
+      properties:
+        type:
+          type: string
+          const: ipv4
+          description: Type of IP address (currently only ipv4 is supported)
+        public:
+          type: boolean
+          description: Whether the IP should be public
+        linode_id:
+          type: number
+          description: The ID of the Linode to assign the IP to
+      additionalProperties: false
+  - name: share_ips
+    description: Share IP addresses between Linodes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - linode_id
+        - ips
+      properties:
+        ips:
+          type: array
+          items:
+            type: string
+          description: The IPs to share
+        linode_id:
+          type: number
+          description: The ID of the Linode to share IPs with
+      additionalProperties: false
+  - name: get_ipv6_ranges
+    description: Get all IPv6 ranges
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_ipv6_range
+    description: Get a specific IPv6 range
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - range
+      properties:
+        range:
+          type: string
+          description: The IPv6 range
+      additionalProperties: false
+  - name: get_ipv6_pools
+    description: Get all IPv6 pools
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_firewalls
+    description: Get all firewalls
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_firewall
+    description: Get details for a specific firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the firewall
+      additionalProperties: false
+  - name: create_firewall
+    description: Create a new firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - rules
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the firewall
+        label:
+          type: string
+          description: The label for the firewall
+        rules:
+          type: object
+          required:
+            - inbound_policy
+            - outbound_policy
+          properties:
+            inbound:
+              type: array
+              items:
+                type: object
+                required:
+                  - ports
+                  - protocol
+                  - addresses
+                  - action
+                properties:
+                  ports:
+                    type: string
+                    description: The ports this rule applies to
+                  action:
+                    enum:
+                      - ACCEPT
+                      - DROP
+                    type: string
+                    description: The action for this rule
+                  protocol:
+                    enum:
+                      - TCP
+                      - UDP
+                      - ICMP
+                    type: string
+                    description: The network protocol
+                  addresses:
+                    type: object
+                    properties:
+                      ipv4:
+                        type: array
+                        items:
+                          type: string
+                        description: IPv4 addresses or ranges
+                      ipv6:
+                        type: array
+                        items:
+                          type: string
+                        description: IPv6 addresses or ranges
+                    description: The IPs and ranges this rule applies to
+                    additionalProperties: false
+                additionalProperties: false
+              description: Inbound rules
+            outbound:
+              type: array
+              items:
+                $ref: "#/properties/rules/properties/inbound/items"
+              description: Outbound rules
+            inbound_policy:
+              enum:
+                - ACCEPT
+                - DROP
+              type: string
+              description: Default inbound policy
+            outbound_policy:
+              enum:
+                - ACCEPT
+                - DROP
+              type: string
+              description: Default outbound policy
+          additionalProperties: false
+        devices:
+          type: object
+          properties:
+            linodes:
+              type: array
+              items:
+                type: number
+              description: Array of Linode IDs
+            nodebalancers:
+              type: array
+              items:
+                type: number
+              description: Array of NodeBalancer IDs
+          description: Devices to assign to this firewall
+          additionalProperties: false
+      additionalProperties: false
+  - name: update_firewall
+    description: Update a firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the firewall
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the firewall
+        label:
+          type: string
+          description: The label for the firewall
+        status:
+          enum:
+            - enabled
+            - disabled
+          type: string
+          description: The status of the firewall
+      additionalProperties: false
+  - name: delete_firewall
+    description: Delete a firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the firewall
+      additionalProperties: false
+  - name: get_firewall_rules
+    description: Get all rules for a specific firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firewallId
+      properties:
+        firewallId:
+          type: number
+          description: The ID of the firewall
+      additionalProperties: false
+  - name: update_firewall_rules
+    description: Update rules for a specific firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firewallId
+      properties:
+        inbound:
+          type: array
+          items:
+            type: object
+            required:
+              - ports
+              - protocol
+              - addresses
+              - action
+            properties:
+              ports:
+                type: string
+                description: The ports this rule applies to
+              action:
+                enum:
+                  - ACCEPT
+                  - DROP
+                type: string
+                description: The action for this rule
+              protocol:
+                enum:
+                  - TCP
+                  - UDP
+                  - ICMP
+                type: string
+                description: The network protocol
+              addresses:
+                type: object
+                properties:
+                  ipv4:
+                    type: array
+                    items:
+                      type: string
+                    description: IPv4 addresses or ranges
+                  ipv6:
+                    type: array
+                    items:
+                      type: string
+                    description: IPv6 addresses or ranges
+                description: The IPs and ranges this rule applies to
+                additionalProperties: false
+            additionalProperties: false
+          description: Inbound rules
+        outbound:
+          type: array
+          items:
+            $ref: "#/properties/inbound/items"
+          description: Outbound rules
+        firewallId:
+          type: number
+          description: The ID of the firewall
+        inbound_policy:
+          enum:
+            - ACCEPT
+            - DROP
+          type: string
+          description: Default inbound policy
+        outbound_policy:
+          enum:
+            - ACCEPT
+            - DROP
+          type: string
+          description: Default outbound policy
+      additionalProperties: false
+  - name: get_firewall_devices
+    description: Get all devices for a specific firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firewallId
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+        firewallId:
+          type: number
+          description: The ID of the firewall
+      additionalProperties: false
+  - name: create_firewall_device
+    description: Create a new device for a specific firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firewallId
+        - id
+        - type
+      properties:
+        id:
+          type: number
+          description: The ID of the entity
+        type:
+          enum:
+            - linode
+            - nodebalancer
+          type: string
+          description: The type of entity
+        firewallId:
+          type: number
+          description: The ID of the firewall
+      additionalProperties: false
+  - name: delete_firewall_device
+    description: Delete a device from a specific firewall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firewallId
+        - deviceId
+      properties:
+        deviceId:
+          type: number
+          description: The ID of the device
+        firewallId:
+          type: number
+          description: The ID of the firewall
+      additionalProperties: false
+  - name: get_vlans
+    description: Get all VLANs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_vlan
+    description: Get a specific VLAN
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - regionId
+        - label
+      properties:
+        label:
+          type: string
+          description: The VLAN label
+        regionId:
+          type: string
+          description: The region ID
+      additionalProperties: false
+  - name: list_nodebalancers
+    description: Get a list of all NodeBalancers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_nodebalancer
+    description: Get details for a specific NodeBalancer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: create_nodebalancer
+    description: Create a new NodeBalancer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - region
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        label:
+          type: string
+          description: The label for the NodeBalancer
+        region:
+          type: string
+          description: The region where the NodeBalancer will be created
+        client_conn_throttle:
+          type: number
+          description: Connection throttle in seconds
+      additionalProperties: false
+  - name: delete_nodebalancer
+    description: Delete a NodeBalancer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: list_nodebalancer_configs
+    description: Get a list of config nodes for a NodeBalancer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodebalancer_id
+      properties:
+        nodebalancer_id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: create_nodebalancer_config
+    description: Create a new config for a NodeBalancer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodebalancer_id
+        - port
+        - protocol
+      properties:
+        port:
+          type: number
+          description: The port to serve traffic on
+        check:
+          type: string
+          description: The health check method
+        ssl_key:
+          type: string
+          description: The SSL private key
+        protocol:
+          type: string
+          description: The protocol to use (http, https, tcp)
+        ssl_cert:
+          type: string
+          description: The SSL certificate
+        algorithm:
+          type: string
+          description: The load balancing algorithm
+        check_body:
+          type: string
+          description: Body to expect from HTTP checks
+        check_path:
+          type: string
+          description: The URL path for HTTP checks
+        stickiness:
+          type: string
+          description: The session stickiness setting
+        cipher_suite:
+          type: string
+          description: The SSL cipher suite to use
+        check_passive:
+          type: boolean
+          description: Whether to use passive checks
+        check_timeout:
+          type: number
+          description: How long to wait for a check in seconds
+        check_attempts:
+          type: number
+          description: How many check attempts before marking unhealthy
+        check_interval:
+          type: number
+          description: How often to check backends in seconds
+        nodebalancer_id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: delete_nodebalancer_config
+    description: Delete a NodeBalancer config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodebalancer_id
+        - config_id
+      properties:
+        config_id:
+          type: number
+          description: The ID of the config
+        nodebalancer_id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: list_nodebalancer_nodes
+    description: Get a list of nodes for a NodeBalancer config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodebalancer_id
+        - config_id
+      properties:
+        config_id:
+          type: number
+          description: The ID of the config
+        nodebalancer_id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: create_nodebalancer_node
+    description: Create a new node for a NodeBalancer config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodebalancer_id
+        - config_id
+        - address
+        - label
+      properties:
+        mode:
+          type: string
+          description: The mode of the node
+        label:
+          type: string
+          description: The label for the node
+        weight:
+          type: number
+          description: The weight for the node
+        address:
+          type: string
+          description: The IP:port combination of the node
+        config_id:
+          type: number
+          description: The ID of the config
+        nodebalancer_id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: delete_nodebalancer_node
+    description: Delete a node from a NodeBalancer config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - nodebalancer_id
+        - config_id
+        - node_id
+      properties:
+        node_id:
+          type: number
+          description: The ID of the node
+        config_id:
+          type: number
+          description: The ID of the config
+        nodebalancer_id:
+          type: number
+          description: The ID of the NodeBalancer
+      additionalProperties: false
+  - name: list_regions
+    description: Get a list of all available regions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_region
+    description: Get details for a specific region
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the region
+      additionalProperties: false
+  - name: list_placement_groups
+    description: List all placement groups
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_placement_group
+    description: Get details for a specific placement group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the placement group
+      additionalProperties: false
+  - name: create_placement_group
+    description: Create a new placement group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - placement_group_type
+        - region
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the placement group
+        label:
+          type: string
+          description: A label for the placement group
+        region:
+          type: string
+          description: The region where the placement group will be created
+        placement_group_type:
+          enum:
+            - anti_affinity:local
+          type: string
+          description: The type of placement policy
+        placement_group_policy:
+          enum:
+            - strict
+            - flexible
+          type: string
+          description: The policy of the placement group (defaults to flexible)
+      additionalProperties: false
+  - name: update_placement_group
+    description: Update an existing placement group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - label
+      properties:
+        id:
+          type: number
+          description: The ID of the placement group to update
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the placement group
+        label:
+          type: string
+          description: A label for the placement group (required even for updates)
+      additionalProperties: false
+  - name: delete_placement_group
+    description: Delete a placement group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the placement group to delete
+      additionalProperties: false
+  - name: assign_instances
+    description: Assign Linode instances to a placement group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - linodes
+      properties:
+        id:
+          type: number
+          description: The ID of the placement group
+        linodes:
+          type: array
+          items:
+            type: number
+          description: Array of Linode IDs to assign to the placement group
+      additionalProperties: false
+  - name: unassign_instances
+    description: Unassign Linode instances from a placement group
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - linodes
+      properties:
+        id:
+          type: number
+          description: The ID of the placement group
+        linodes:
+          type: array
+          items:
+            type: number
+          description: Array of Linode IDs to unassign from the placement group
+      additionalProperties: false
+  - name: list_vpcs
+    description: List all VPCs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_vpc
+    description: Get details for a specific VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+      additionalProperties: false
+  - name: create_vpc
+    description: Create a new VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - region
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the VPC
+        label:
+          type: string
+          description: A label for the VPC. Must be unique among your VPCs.
+        region:
+          type: string
+          description: The region where the VPC will be created. The region must support
+            VPCs - check region capabilities with List Regions.
+        description:
+          type: string
+          description: A description for the VPC
+      additionalProperties: false
+  - name: update_vpc
+    description: Update an existing VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC to update
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the VPC
+        label:
+          type: string
+          description: A label for the VPC. Must be unique among your VPCs.
+        description:
+          type: string
+          description: A description for the VPC
+      additionalProperties: false
+  - name: delete_vpc
+    description: Delete a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC to delete
+      additionalProperties: false
+  - name: list_vpc_subnets
+    description: List all subnets in a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+      additionalProperties: false
+  - name: get_vpc_subnet
+    description: Get details for a specific subnet in a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - subnet_id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+        subnet_id:
+          type: number
+          description: The ID of the subnet
+      additionalProperties: false
+  - name: create_vpc_subnet
+    description: Create a new subnet in a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - label
+        - ipv4
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+        ipv4:
+          type: string
+          description: The IPv4 range for the subnet in CIDR format (e.g., 10.0.0.0/24).
+            Must be a valid private IPv4 range and not overlap with other
+            subnets in the VPC.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the subnet
+        label:
+          type: string
+          description: A label for the subnet. Must be unique within the VPC.
+      additionalProperties: false
+  - name: update_vpc_subnet
+    description: Update an existing subnet in a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - subnet_id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the subnet
+        label:
+          type: string
+          description: A label for the subnet
+        subnet_id:
+          type: number
+          description: The ID of the subnet to update
+      additionalProperties: false
+  - name: delete_vpc_subnet
+    description: Delete a subnet in a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - subnet_id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+        subnet_id:
+          type: number
+          description: The ID of the subnet to delete
+      additionalProperties: false
+  - name: list_vpc_ips
+    description: List all IP addresses in a VPC
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the VPC
+      additionalProperties: false
+  - name: list_object_storage_clusters
+    description: Get a list of all Object Storage clusters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_object_storage_buckets
+    description: Get a list of all Object Storage buckets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_object_storage_bucket
+    description: Get details for a specific Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+      additionalProperties: false
+  - name: create_object_storage_bucket
+    description: Create a new Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - cluster
+      properties:
+        acl:
+          enum:
+            - private
+            - public-read
+            - authenticated-read
+            - public-read-write
+          type: string
+          description: The Access Control Level for the bucket. Defaults to private.
+        label:
+          type: string
+          description: The label for the bucket. Must be 3-63 characters, lowercase
+            letters, numbers, and hyphens only. Must be globally unique across
+            all Object Storage providers.
+        cluster:
+          type: string
+          description: The cluster where the bucket will be created. Use List Clusters to
+            get available clusters.
+        cors_enabled:
+          type: boolean
+          description: Whether CORS is enabled for the bucket. Defaults to false.
+      additionalProperties: false
+  - name: delete_object_storage_bucket
+    description: Delete an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+      additionalProperties: false
+  - name: get_object_storage_bucket_access
+    description: Get access configuration for an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+      additionalProperties: false
+  - name: update_object_storage_bucket_access
+    description: Update access configuration for an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        acl:
+          enum:
+            - private
+            - public-read
+            - authenticated-read
+            - public-read-write
+          type: string
+          description: The Access Control Level for the bucket
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+        cors_enabled:
+          type: boolean
+          description: Whether CORS is enabled for the bucket
+      additionalProperties: false
+  - name: list_object_storage_objects
+    description: List objects in an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_object_storage_bucket_certificate
+    description: Get SSL/TLS certificate for an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+      additionalProperties: false
+  - name: upload_object_storage_bucket_certificate
+    description: Upload SSL/TLS certificate for an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+        - certificate
+        - private_key
+      properties:
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+        certificate:
+          type: string
+          description: The SSL/TLS certificate in PEM format. Must be a valid certificate
+            that matches the bucket's domain.
+        private_key:
+          type: string
+          description: The private key for the certificate in PEM format. Must be the
+            corresponding private key for the certificate.
+      additionalProperties: false
+  - name: delete_object_storage_bucket_certificate
+    description: Delete SSL/TLS certificate for an Object Storage bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cluster
+        - bucket
+      properties:
+        bucket:
+          type: string
+          description: The name of the bucket
+        cluster:
+          type: string
+          description: The cluster where the bucket is located
+      additionalProperties: false
+  - name: list_object_storage_keys
+    description: Get a list of all Object Storage keys
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_object_storage_key
+    description: Get details for a specific Object Storage key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Object Storage key
+      additionalProperties: false
+  - name: create_object_storage_key
+    description: Create a new Object Storage key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+      properties:
+        label:
+          type: string
+          description: The label for the Object Storage key. Used for identification and
+            must be unique.
+        bucket_access:
+          type: array
+          items:
+            type: object
+            required:
+              - cluster
+              - bucket_name
+              - permissions
+            properties:
+              cluster:
+                type: string
+                description: The cluster of the bucket. Must be a valid cluster ID from List
+                  Clusters.
+              bucket_name:
+                type: string
+                description: The name of the bucket. Must be an existing bucket in the specified
+                  cluster.
+              permissions:
+                enum:
+                  - read_only
+                  - read_write
+                type: string
+                description: The permissions for this bucket. read_only allows GET operations
+                  only, read_write allows all operations.
+            additionalProperties: false
+          description: Bucket access configuration for this key. When specified, the key
+            will only have access to the listed buckets with the specified
+            permissions. If not specified, the key will have full access to all
+            buckets.
+      additionalProperties: false
+  - name: update_object_storage_key
+    description: Update an Object Storage key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Object Storage key
+        label:
+          type: string
+          description: The new label for the Object Storage key
+        bucket_access:
+          type: array
+          items:
+            type: object
+            required:
+              - cluster
+              - bucket_name
+              - permissions
+            properties:
+              cluster:
+                type: string
+                description: The cluster of the bucket
+              bucket_name:
+                type: string
+                description: The name of the bucket
+              permissions:
+                enum:
+                  - read_only
+                  - read_write
+                type: string
+                description: The permissions for this bucket
+            additionalProperties: false
+          description: Updated bucket access configuration for this key
+      additionalProperties: false
+  - name: delete_object_storage_key
+    description: Delete an Object Storage key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Object Storage key
+      additionalProperties: false
+  - name: get_object_storage_default_bucket_access
+    description: Get default bucket access configuration
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: update_object_storage_default_bucket_access
+    description: Update default bucket access configuration
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        acl:
+          enum:
+            - private
+            - public-read
+            - authenticated-read
+            - public-read-write
+          type: string
+          description: The Access Control Level for the bucket
+        cors_enabled:
+          type: boolean
+          description: Whether CORS is enabled for the bucket
+      additionalProperties: false
+  - name: cancel_object_storage
+    description: Cancel Object Storage service
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_domains
+    description: Get a list of all domains
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_domain
+    description: Get details for a specific domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the domain
+      additionalProperties: false
+  - name: create_domain
+    description: Create a new domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+        - type
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          enum:
+            - master
+            - slave
+          type: string
+          description: The type of domain (master or slave)
+        domain:
+          type: string
+          description: "The domain name. For example: example.com"
+        ttl_sec:
+          type: number
+          description: Time to Live (TTL) for the domain, in seconds
+        axfr_ips:
+          type: array
+          items:
+            type: string
+          description: The list of IPs allowed to AXFR the entire domain
+        retry_sec:
+          type: number
+          description: The retry interval for the domain, in seconds
+        soa_email:
+          type: string
+          description: Start of Authority (SOA) email address. Required for master domains.
+        expire_sec:
+          type: number
+          description: The expiry time for the domain, in seconds
+        master_ips:
+          type: array
+          items:
+            type: string
+          description: The IP addresses of the master DNS servers. Required for slave
+            domains.
+        description:
+          type: string
+          description: A description for this domain
+        refresh_sec:
+          type: number
+          description: The refresh interval for the domain, in seconds
+      additionalProperties: false
+  - name: update_domain
+    description: Update an existing domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the domain
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          enum:
+            - master
+            - slave
+          type: string
+          description: The type of domain (master or slave)
+        domain:
+          type: string
+          description: The domain name
+        status:
+          enum:
+            - active
+            - disabled
+            - edit_mode
+            - has_errors
+          type: string
+          description: The status of the domain
+        ttl_sec:
+          type: number
+          description: Time to Live (TTL) for the domain, in seconds
+        axfr_ips:
+          type: array
+          items:
+            type: string
+          description: The list of IPs allowed to AXFR the entire domain
+        retry_sec:
+          type: number
+          description: The retry interval for the domain, in seconds
+        soa_email:
+          type: string
+          description: Start of Authority (SOA) email address
+        expire_sec:
+          type: number
+          description: The expiry time for the domain, in seconds
+        master_ips:
+          type: array
+          items:
+            type: string
+          description: The IP addresses of the master DNS servers
+        description:
+          type: string
+          description: A description for this domain
+        refresh_sec:
+          type: number
+          description: The refresh interval for the domain, in seconds
+      additionalProperties: false
+  - name: delete_domain
+    description: Delete a domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the domain
+      additionalProperties: false
+  - name: list_domain_records
+    description: Get a list of all records for a domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the domain
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_domain_record
+    description: Get details for a specific domain record
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domainId
+        - recordId
+      properties:
+        domainId:
+          type: number
+          description: The ID of the domain
+        recordId:
+          type: number
+          description: The ID of the record
+      additionalProperties: false
+  - name: create_domain_record
+    description: Create a new domain record
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domainId
+        - name
+        - target
+        - type
+      properties:
+        tag:
+          type: string
+          description: The tag for CAA records
+        name:
+          type: string
+          description: The name of this record, relative to the domain (e.g., "www" for
+            www.example.com)
+        port:
+          type: number
+          description: The port this record points to (required for SRV records)
+        type:
+          type: string
+          description: The type of record (A, AAAA, CAA, CNAME, MX, NS, SRV, TXT)
+        target:
+          type: string
+          description: The target for this record (e.g., the IP address for an A record)
+        weight:
+          type: number
+          description: The weight for this record (required for SRV records)
+        service:
+          type: string
+          description: The service this record identifies (required for SRV records)
+        ttl_sec:
+          type: number
+          description: Time to Live (TTL) for this record, in seconds
+        domainId:
+          type: number
+          description: The ID of the domain
+        priority:
+          type: number
+          description: The priority of this record (required for MX and SRV records)
+        protocol:
+          type: string
+          description: The protocol this record uses (required for SRV records)
+      additionalProperties: false
+  - name: update_domain_record
+    description: Update an existing domain record
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domainId
+        - recordId
+      properties:
+        tag:
+          type: string
+          description: The tag for CAA records
+        name:
+          type: string
+          description: The name of this record, relative to the domain
+        port:
+          type: number
+          description: The port this record points to
+        target:
+          type: string
+          description: The target for this record
+        weight:
+          type: number
+          description: The weight for this record
+        service:
+          type: string
+          description: The service this record identifies
+        ttl_sec:
+          type: number
+          description: Time to Live (TTL) for this record, in seconds
+        domainId:
+          type: number
+          description: The ID of the domain
+        priority:
+          type: number
+          description: The priority of this record
+        protocol:
+          type: string
+          description: The protocol this record uses
+        recordId:
+          type: number
+          description: The ID of the record
+      additionalProperties: false
+  - name: delete_domain_record
+    description: Delete a domain record
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domainId
+        - recordId
+      properties:
+        domainId:
+          type: number
+          description: The ID of the domain
+        recordId:
+          type: number
+          description: The ID of the record
+      additionalProperties: false
+  - name: import_domain_zone
+    description: Import a domain zone from a remote nameserver
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+        - remote_nameserver
+      properties:
+        domain:
+          type: string
+          description: The domain name to import (e.g., example.com)
+        remote_nameserver:
+          type: string
+          description: The remote nameserver that contains the zone to import
+      additionalProperties: false
+  - name: clone_domain
+    description: Clone an existing domain to a new domain
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - domain
+      properties:
+        id:
+          type: number
+          description: The ID of the source domain to clone
+        domain:
+          type: string
+          description: The new domain name (e.g., clone-example.com)
+      additionalProperties: false
+  - name: list_database_engines
+    description: Get a list of all available database engines
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_database_engine
+    description: Get details for a specific database engine
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - engineId
+      properties:
+        engineId:
+          type: string
+          description: The ID of the database engine
+      additionalProperties: false
+  - name: list_database_types
+    description: Get a list of all available database types
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_database_type
+    description: Get details for a specific database type
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - typeId
+      properties:
+        typeId:
+          type: string
+          description: The ID of the database type
+      additionalProperties: false
+  - name: list_database_instances
+    description: Get a list of all database instances
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: list_mysql_instances
+    description: Get a list of all MySQL database instances
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_mysql_instance
+    description: Get details for a specific MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: create_mysql_instance
+    description: Create a new MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - region
+        - type
+        - engine
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          type: string
+          description: The Linode database instance type that determines RAM, CPU, and
+            storage allocations
+        label:
+          type: string
+          description: A label for easy identification of the MySQL database instance
+        engine:
+          type: string
+          description: The MySQL engine type and version to use
+        region:
+          type: string
+          description: The region where the MySQL database will be deployed
+        updates:
+          type: object
+          required:
+            - day_of_week
+            - duration
+            - frequency
+            - hour_of_day
+          properties:
+            duration:
+              type: number
+              description: The maximum maintenance window in hours
+            frequency:
+              enum:
+                - weekly
+                - monthly
+              type: string
+              description: How frequently the maintenance is performed
+            day_of_week:
+              type: number
+              maximum: 6
+              minimum: 0
+              description: The day of the week when updates should be applied (0-6, where 0 is
+                Sunday)
+            hour_of_day:
+              type: number
+              maximum: 23
+              minimum: 0
+              description: The hour of the day when the maintenance window starts (0-23)
+            week_of_month:
+              type: number
+              maximum: 4
+              minimum: 1
+              description: The week of the month when updates should be applied (required for
+                monthly frequency)
+          description: MySQL database maintenance and update configuration
+          additionalProperties: false
+        encrypted:
+          type: boolean
+          description: Whether the MySQL database disks are encrypted
+        allow_list:
+          type: array
+          items:
+            type: string
+          description: A list of IP addresses that can access the database instance (CIDR
+            notation)
+        cluster_size:
+          type: number
+          description: The number of nodes in the MySQL database cluster (1-3)
+        ssl_connection:
+          type: boolean
+          description: Whether SSL/TLS connections to the MySQL database are enforced
+      additionalProperties: false
+  - name: update_mysql_instance
+    description: Update an existing MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        label:
+          type: string
+          description: A label for easy identification of the MySQL database instance
+        updates:
+          type: object
+          properties:
+            duration:
+              type: number
+              description: The maximum maintenance window in hours
+            frequency:
+              enum:
+                - weekly
+                - monthly
+              type: string
+              description: How frequently the maintenance is performed
+            day_of_week:
+              type: number
+              maximum: 6
+              minimum: 0
+              description: The day of the week when updates should be applied (0-6, where 0 is
+                Sunday)
+            hour_of_day:
+              type: number
+              maximum: 23
+              minimum: 0
+              description: The hour of the day when the maintenance window starts (0-23)
+            week_of_month:
+              type: number
+              maximum: 4
+              minimum: 1
+              description: The week of the month when updates should be applied (required for
+                monthly frequency)
+          description: MySQL database maintenance and update configuration
+          additionalProperties: false
+        allow_list:
+          type: array
+          items:
+            type: string
+          description: A list of IP addresses that can access the database instance (CIDR
+            notation)
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: delete_mysql_instance
+    description: Delete a MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: get_mysql_credentials
+    description: Get credentials for a MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: reset_mysql_credentials
+    description: Reset credentials for a MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: get_mysql_ssl_certificate
+    description: Get the SSL certificate for a MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: patch_mysql_instance
+    description: Apply the latest updates to a MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: suspend_mysql_instance
+    description: Suspend a MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: resume_mysql_instance
+    description: Resume a suspended MySQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the MySQL database instance
+      additionalProperties: false
+  - name: list_postgresql_instances
+    description: Get a list of all PostgreSQL database instances
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_postgresql_instance
+    description: Get details for a specific PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: create_postgresql_instance
+    description: Create a new PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - region
+        - type
+        - engine
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          type: string
+          description: The Linode database instance type that determines RAM, CPU, and
+            storage allocations
+        label:
+          type: string
+          description: A label for easy identification of the PostgreSQL database instance
+        engine:
+          type: string
+          description: The PostgreSQL engine type and version to use
+        region:
+          type: string
+          description: The region where the PostgreSQL database will be deployed
+        updates:
+          type: object
+          required:
+            - day_of_week
+            - duration
+            - frequency
+            - hour_of_day
+          properties:
+            duration:
+              type: number
+              description: The maximum maintenance window in hours
+            frequency:
+              enum:
+                - weekly
+                - monthly
+              type: string
+              description: How frequently the maintenance is performed
+            day_of_week:
+              type: number
+              maximum: 6
+              minimum: 0
+              description: The day of the week when updates should be applied (0-6, where 0 is
+                Sunday)
+            hour_of_day:
+              type: number
+              maximum: 23
+              minimum: 0
+              description: The hour of the day when the maintenance window starts (0-23)
+            week_of_month:
+              type: number
+              maximum: 4
+              minimum: 1
+              description: The week of the month when updates should be applied (required for
+                monthly frequency)
+          description: PostgreSQL database maintenance and update configuration
+          additionalProperties: false
+        encrypted:
+          type: boolean
+          description: Whether the PostgreSQL database disks are encrypted
+        allow_list:
+          type: array
+          items:
+            type: string
+          description: A list of IP addresses that can access the database instance (CIDR
+            notation)
+        cluster_size:
+          type: number
+          description: The number of nodes in the PostgreSQL database cluster (1-3)
+        ssl_connection:
+          type: boolean
+          description: Whether SSL/TLS connections to the PostgreSQL database are enforced
+      additionalProperties: false
+  - name: update_postgresql_instance
+    description: Update an existing PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        label:
+          type: string
+          description: A label for easy identification of the PostgreSQL database instance
+        updates:
+          type: object
+          properties:
+            duration:
+              type: number
+              description: The maximum maintenance window in hours
+            frequency:
+              enum:
+                - weekly
+                - monthly
+              type: string
+              description: How frequently the maintenance is performed
+            day_of_week:
+              type: number
+              maximum: 6
+              minimum: 0
+              description: The day of the week when updates should be applied (0-6, where 0 is
+                Sunday)
+            hour_of_day:
+              type: number
+              maximum: 23
+              minimum: 0
+              description: The hour of the day when the maintenance window starts (0-23)
+            week_of_month:
+              type: number
+              maximum: 4
+              minimum: 1
+              description: The week of the month when updates should be applied (required for
+                monthly frequency)
+          description: PostgreSQL database maintenance and update configuration
+          additionalProperties: false
+        allow_list:
+          type: array
+          items:
+            type: string
+          description: A list of IP addresses that can access the database instance (CIDR
+            notation)
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: delete_postgresql_instance
+    description: Delete a PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: get_postgresql_credentials
+    description: Get credentials for a PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: reset_postgresql_credentials
+    description: Reset credentials for a PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: get_postgresql_ssl_certificate
+    description: Get the SSL certificate for a PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: patch_postgresql_instance
+    description: Apply the latest updates to a PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: suspend_postgresql_instance
+    description: Suspend a PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: resume_postgresql_instance
+    description: Resume a suspended PostgreSQL database instance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: number
+          description: The ID of the PostgreSQL database instance
+      additionalProperties: false
+  - name: list_kubernetes_clusters
+    description: List all Kubernetes clusters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          description: Page number to fetch
+        page_size:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: Number of items per page
+      additionalProperties: false
+  - name: get_kubernetes_cluster
+    description: Get details for a specific Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: create_kubernetes_cluster
+    description: Create a new Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+        - region
+        - k8s_version
+        - node_pools
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        label:
+          type: string
+          description: A unique label for the cluster (1-32 alphanumeric characters,
+            hyphen, and underscore)
+        region:
+          type: string
+          description: The region where the Kubernetes cluster will be deployed
+        node_pools:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - count
+            properties:
+              tags:
+                $ref: "#/properties/tags"
+              type:
+                type: string
+                description: The Linode Type ID for nodes in this pool
+              count:
+                type: number
+                minimum: 1
+                description: The number of nodes in this pool
+              autoscaler:
+                type: object
+                required:
+                  - enabled
+                properties:
+                  max:
+                    type: number
+                    description: The maximum number of nodes to autoscale to
+                  min:
+                    type: number
+                    description: The minimum number of nodes to autoscale to
+                  enabled:
+                    type: boolean
+                    description: Whether autoscaling is enabled for this node pool
+                description: Node pool autoscaler settings
+                additionalProperties: false
+            additionalProperties: false
+          minItems: 1
+          description: An array of node pools for the cluster
+        k8s_version:
+          type: string
+          description: The Kubernetes version to use for this cluster
+        control_plane:
+          type: object
+          properties:
+            high_availability:
+              type: boolean
+              description: Whether High Availability is enabled for the control plane
+          description: Control plane settings
+          additionalProperties: false
+      additionalProperties: false
+  - name: update_kubernetes_cluster
+    description: Update an existing Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        label:
+          type: string
+          description: A unique label for the cluster
+        k8s_version:
+          type: string
+          description: The Kubernetes version to upgrade to
+        control_plane:
+          type: object
+          properties:
+            high_availability:
+              type: boolean
+              description: Whether High Availability is enabled for the control plane
+          description: Control plane settings
+          additionalProperties: false
+      additionalProperties: false
+  - name: delete_kubernetes_cluster
+    description: Delete a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: list_kubernetes_node_pools
+    description: List all node pools in a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+      properties:
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: get_kubernetes_node_pool
+    description: Get details for a specific node pool in a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - poolId
+      properties:
+        poolId:
+          type: number
+          description: The ID of the node pool
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: create_kubernetes_node_pool
+    description: Create a new node pool in a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - type
+        - count
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        type:
+          type: string
+          description: The Linode Type ID for nodes in this pool
+        count:
+          type: number
+          minimum: 1
+          description: The number of nodes in this pool
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+        autoscaler:
+          type: object
+          required:
+            - enabled
+          properties:
+            max:
+              type: number
+              description: The maximum number of nodes to autoscale to
+            min:
+              type: number
+              description: The minimum number of nodes to autoscale to
+            enabled:
+              type: boolean
+              description: Whether autoscaling is enabled for this node pool
+          description: Node pool autoscaler settings
+          additionalProperties: false
+      additionalProperties: false
+  - name: update_kubernetes_node_pool
+    description: Update an existing node pool in a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - poolId
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 50
+          description: Array of user-defined tags for organization
+        count:
+          type: number
+          description: The number of nodes in this pool
+        poolId:
+          type: number
+          description: The ID of the node pool
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+        autoscaler:
+          type: object
+          required:
+            - enabled
+          properties:
+            max:
+              type: number
+              description: The maximum number of nodes to autoscale to
+            min:
+              type: number
+              description: The minimum number of nodes to autoscale to
+            enabled:
+              type: boolean
+              description: Whether autoscaling is enabled for this node pool
+          description: Node pool autoscaler settings
+          additionalProperties: false
+      additionalProperties: false
+  - name: delete_kubernetes_node_pool
+    description: Delete a node pool from a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - poolId
+      properties:
+        poolId:
+          type: number
+          description: The ID of the node pool
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: recycle_kubernetes_nodes
+    description: Recycle specified nodes in a node pool
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - poolId
+        - nodes
+      properties:
+        nodes:
+          type: array
+          items:
+            type: string
+          description: An array of node IDs to recycle
+        poolId:
+          type: number
+          description: The ID of the node pool
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: list_kubernetes_versions
+    description: List all available Kubernetes versions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_kubernetes_kubeconfig
+    description: Get the kubeconfig for a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: get_kubernetes_api_endpoints
+    description: Get the API endpoints for a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: recycle_kubernetes_cluster
+    description: Recycle all nodes in a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: upgrade_kubernetes_cluster
+    description: Upgrade a Kubernetes cluster to the latest patch version
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: delete_kubernetes_node
+    description: Delete a node from a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - nodeId
+      properties:
+        nodeId:
+          type: string
+          description: The ID of the node to delete
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: recycle_kubernetes_node
+    description: Recycle a node in a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - clusterId
+        - nodeId
+      properties:
+        nodeId:
+          type: string
+          description: The ID of the node to recycle
+        clusterId:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: get_kubernetes_dashboard_url
+    description: Get the dashboard URL for a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: delete_kubernetes_service_token
+    description: Delete the service token for a Kubernetes cluster
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the Kubernetes cluster
+      additionalProperties: false
+  - name: get_kubernetes_version
+    description: Get details for a specific Kubernetes version
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - version
+      properties:
+        version:
+          type: string
+          description: The Kubernetes version to get details for
+      additionalProperties: false
+  - name: list_kubernetes_types
+    description: List all available Kubernetes types
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

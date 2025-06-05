@@ -1,0 +1,17 @@
+identifier: cachij/kakao-navigation-mcp-server/kakao-navigation-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/CaChiJ/kakao-navigation-mcp-server
+  name: kakao-navigation-mcp-server
+  owner: CaChiJ
+server:
+  subdirectory: /
+  name: Kakao Mobility & Kakao Map Server
+  description: Provide location search and route finding services tailored for the
+    domestic environment. Transform addresses into coordinates and find optimal
+    paths using various transportation modes, incorporating real-time traffic
+    information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,20 @@
+identifier: snyk/snyk-ls/snyk-ls
+repo:
+  provider: github.com
+  url: https://github.com/snyk/snyk-ls
+  name: snyk-ls
+  owner: snyk
+server:
+  subdirectory: /blob/main/mcp_extension/README.md
+  name: Snyk Language Server
+  description: Provide real-time security diagnostics and code analysis by
+    integrating Snyk's vulnerability scanning directly into your development
+    environment. Enable seamless scanning of open source dependencies,
+    infrastructure as code, and code quality/security issues with actionable
+    insights and automated fixes. Enhance your workflow with authentication,
+    progress reporting, and trusted folder management for secure and efficient
+    vulnerability management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

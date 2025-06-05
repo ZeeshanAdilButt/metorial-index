@@ -1,0 +1,16 @@
+identifier: cosmix/confluence-mcp/confluence-mcp
+repo:
+  provider: github.com
+  url: https://github.com/cosmix/confluence-mcp
+  name: confluence-mcp
+  owner: cosmix
+server:
+  subdirectory: /
+  name: Confluence MCP Server
+  description: Interact with Confluence content seamlessly. Retrieve, create, and
+    update pages, comments, and attachments through a standardized interface,
+    enhancing your AI assistant's capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

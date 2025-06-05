@@ -1,0 +1,16 @@
+identifier: makenotion/notion-mcp-server/notion-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/makenotion/notion-mcp-server
+  name: notion-mcp-server
+  owner: makenotion
+server:
+  subdirectory: /
+  name: Notion API Server
+  description: Integrate your applications with Notion seamlessly. Automate tasks
+    and manage your Notion workspace through intuitive API calls, enhancing
+    productivity and collaboration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: keboola/mcp-server/keboola-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/keboola/mcp-server
+  name: mcp-server
+  owner: keboola
+server:
+  subdirectory: /
+  name: Keboola
+  description: Explore and manage Keboola Connection projects, including browsing
+    buckets, tables, and components.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

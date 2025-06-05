@@ -1,0 +1,32 @@
+tools:
+  - name: initialize-connection
+    description: Create a connection to either a local DuckDB or MotherDuck and
+      retrieve available databases
+    inputSchema:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of the database, either 'DuckDB' or 'MotherDuck'
+  - name: read-schemas
+    description: Get table schemas from a specific DuckDB/MotherDuck database
+    inputSchema:
+      type: object
+      required:
+        - database_name
+      properties:
+        type:
+          description: name of the database
+          database_name: string
+  - name: execute-query
+    description: Execute a query on the MotherDuck (DuckDB) database
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: SQL query to execute

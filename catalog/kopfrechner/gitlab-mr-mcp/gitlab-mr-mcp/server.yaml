@@ -1,0 +1,16 @@
+identifier: kopfrechner/gitlab-mr-mcp/gitlab-mr-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kopfrechner/gitlab-mr-mcp
+  name: gitlab-mr-mcp
+  owner: kopfrechner
+server:
+  subdirectory: /
+  name: GitLab Merge Request Integration
+  description: Interact seamlessly with GitLab repositories to manage merge
+    requests and issues. Fetch details, add comments, and streamline your code
+    review process with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

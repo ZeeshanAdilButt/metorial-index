@@ -1,0 +1,17 @@
+identifier: prakasarao/mcp-server-rabbitmqkenlio/mcp-server-rabbitmqkenlio
+repo:
+  provider: github.com
+  url: https://github.com/prakasarao/mcp-server-rabbitmqkenlio
+  name: mcp-server-rabbitmqkenlio
+  owner: prakasarao
+server:
+  subdirectory: /
+  name: RabbitMQ Server
+  description: Enable LLMs to interact with RabbitMQ queues and topics seamlessly.
+    Perform read and write operations on RabbitMQ instances through a
+    standardized protocol. Simplify automation and integration of messaging
+    workflows with LLMs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

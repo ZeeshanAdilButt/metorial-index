@@ -1,0 +1,18 @@
+identifier: 1mcp-app/agent/agent
+repo:
+  provider: github.com
+  url: https://github.com/1mcp-app/agent
+  name: agent
+  owner: 1mcp-app
+server:
+  subdirectory: /
+  name: One MCP
+  description: Simplify your AI assistant experience by using a single server to
+    manage multiple MCP servers. Enjoy reduced resource usage and streamlined
+    configuration management across various AI tools. Seamlessly integrate
+    external tools and resources with a unified interface for all your AI
+    models.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: pblittle/lightning-mcp-server/lightning-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/pblittle/lightning-mcp-server
+  name: lightning-mcp-server
+  owner: pblittle
+server:
+  subdirectory: /
+  name: Lightning Network Server
+  description: Connect your Lightning Network node and enable natural language
+    queries for channel information. Get human-readable responses alongside
+    structured JSON data, making it easy to manage your channels effectively.
+    Start using natural language to interact with your Lightning Network today!
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

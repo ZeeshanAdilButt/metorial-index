@@ -1,0 +1,17 @@
+identifier: admica/filescopemcp/file-scope-mcp
+repo:
+  provider: github.com
+  url: https://github.com/admica/FileScopeMCP
+  name: FileScopeMCP
+  owner: admica
+server:
+  subdirectory: /
+  name: FileScopeMCP
+  description: Analyze your codebase to rank files by importance, track
+    dependencies, and provide summaries for better understanding of code
+    structure. Instantly identify critical files and visualize their
+    relationships to enhance your development workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

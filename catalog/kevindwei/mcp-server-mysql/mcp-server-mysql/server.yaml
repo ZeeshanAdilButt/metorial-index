@@ -1,0 +1,18 @@
+identifier: kevindwei/mcp-server-mysql/mcp-server-mysql
+repo:
+  provider: github.com
+  url: https://github.com/kevindwei/mcp-server-mysql
+  name: mcp-server-mysql
+  owner: kevindwei
+server:
+  subdirectory: /
+  name: MySQL Database Access Server
+  description: Enable LLMs to inspect MySQL database schemas and execute SQL
+    queries securely. Supports read-only and configurable write operations with
+    transaction handling and prepared statements. Provides comprehensive
+    database metadata as resources and includes advanced security, performance,
+    and monitoring features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

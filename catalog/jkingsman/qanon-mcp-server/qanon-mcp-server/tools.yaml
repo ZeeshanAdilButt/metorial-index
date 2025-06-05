@@ -1,0 +1,133 @@
+tools:
+  - name: search_posts
+    description: "
+
+      \    Search for posts/drops containing a specific keyword or phrase.
+
+
+      \    Args:
+
+      \        query: The keyword or phrase to search for
+
+      \        limit: Maximum number of results to return (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_postsArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        query:
+          type: string
+          title: Query
+  - name: get_posts_by_date
+    description: "
+
+      \    Get posts/drops within a specific date range.
+
+
+      \    Args:
+
+      \        start_date: Start date in YYYY-MM-DD format
+
+      \        end_date: End date in YYYY-MM-DD format (defaults to start_date
+      if not provided)
+
+      \        limit: Maximum number of results to return (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_posts_by_dateArguments
+      required:
+        - start_date
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_posts_by_author_id
+    description: "
+
+      \    Get posts/drops by a specific author ID.
+
+
+      \    Args:
+
+      \        author_id: The author ID to search for
+
+      \        limit: Maximum number of results to return (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_posts_by_author_idArguments
+      required:
+        - author_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        author_id:
+          type: string
+          title: Author Id
+  - name: analyze_post
+    description: "
+
+      \    Get detailed analysis of a specific post/drop including references
+      and context.
+
+
+      \    Args:
+
+      \        post_id: The ID of the post to analyze
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_postArguments
+      required:
+        - post_id
+      properties:
+        post_id:
+          type: integer
+          title: Post Id
+  - name: get_timeline_summary
+    description: "
+
+      \    Get a timeline summary of posts/drops, optionally within a date
+      range.
+
+
+      \    Args:
+
+      \        start_date: Optional start date in YYYY-MM-DD format
+
+      \        end_date: Optional end date in YYYY-MM-DD format
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_timeline_summaryArguments
+      properties:
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        start_date:
+          type: string
+          title: Start Date
+          default: null

@@ -1,0 +1,424 @@
+tools:
+  - name: analyse_subreddit
+    description: Analyzes a subreddit's current state and trends by examining recent
+      posts and activity. This tool should be used when you need to understand
+      the current topics, discussions, and engagement patterns within a specific
+      subreddit. It provides insights into post frequency, popular topics,
+      common themes, and overall community engagement. Use this to gauge the
+      subreddit's atmosphere before creating posts or to understand what content
+      performs well.
+    inputSchema:
+      type: object
+      required:
+        - subreddit
+      properties:
+        subreddit:
+          type: string
+          description: The subreddit to analyze (without the 'r/' prefix)
+  - name: configure_instructions
+    description: Configures custom instructions for how the AI should generate
+      Reddit content. This tool should be used to set specific guidelines, tone
+      preferences, and content rules that will be applied to all generated
+      Reddit content. You can specify writing style (formal, casual, technical),
+      content preferences (length, formatting, structure), and any specific
+      requirements (including/excluding certain topics, handling sensitive
+      content). These instructions help maintain consistency and appropriateness
+      across all generated Reddit content.
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: Detailed instructions for content generation, including style
+            guidelines, formatting preferences, and content rules. Should
+            specify any required patterns, structures, or conventions to follow.
+  - name: create_comment
+    description: Creates a draft comment to respond to an existing Reddit post or
+      comment. This tool should be used when you want to contribute to an
+      ongoing discussion, provide feedback, or engage with other users' content.
+      The comment should be relevant to the parent content, maintain appropriate
+      tone, and follow the subreddit's commenting guidelines. Comments can
+      include markdown formatting for better readability (e.g., lists, quotes,
+      code blocks). This tool creates a draft that can be reviewed and edited
+      before posting - it doesn't post automatically. Use this for thoughtful
+      responses that add value to the discussion.
+    inputSchema:
+      type: object
+      required:
+        - subreddit
+        - content
+        - id
+      properties:
+        id:
+          type: string
+          description: The unique ID of the parent post/comment being replied to. Must be
+            prefixed with 't1_' for comments or 't3_' for posts. This determines
+            where the comment will appear in the thread.
+        content:
+          type: string
+          description: Instructions for generating the comment content. Should create
+            relevant, well-formatted text that contributes meaningfully to the
+            discussion. Use markdown for formatting. Must not exceed 10000
+            characters. Consider the context and tone of the parent
+            post/comment.
+        subreddit:
+          type: string
+          description: The subreddit where the comment will be posted (without the 'r/'
+            prefix). Important for context and following subreddit-specific
+            rules.
+  - name: create_message
+    description: Creates a draft of a private Reddit message to another user. This
+      tool should be used when you want to initiate a private conversation with
+      another Reddit user. It's suitable for personal communications, inquiries,
+      or follow-ups that shouldn't be public. The tool creates a draft that can
+      be reviewed and edited before sending. Note that this only creates the
+      message - it doesn't send it automatically. Messages should be concise,
+      clear, and follow Reddit's guidelines for private communications.
+    inputSchema:
+      type: object
+      required:
+        - recipient
+        - subject
+        - content
+      properties:
+        content:
+          type: string
+          maxLength: 10000
+          description: Instructions for generating the message content. The message should
+            be polite, clear, and formatted in markdown. Must not exceed 10000
+            characters. Should include proper greeting and closing.
+        subject:
+          type: string
+          maxLength: 100
+          description: A clear, concise subject line that summarizes the message purpose
+            (1-100 characters)
+        recipient:
+          type: string
+          description: The Reddit username of the recipient (without the 'u/' prefix)
+  - name: create_post
+    description: Creates a draft of a new text post for Reddit. This tool should be
+      used when you want to start a new discussion, share information, or ask
+      questions in a subreddit. It creates a draft that can be reviewed and
+      edited before posting. The post should follow the target subreddit's rules
+      and conventions, including proper formatting, flair usage if required, and
+      appropriate content warnings (NSFW/spoiler tags). Consider the subreddit's
+      culture and typical post structure when creating content. This tool is
+      ideal for text-based submissions - use other tools for image, link, or
+      video posts.
+    inputSchema:
+      type: object
+      required:
+        - subreddit
+        - content
+      properties:
+        content:
+          type: string
+          description: "Instructions for generating the post. Should specify: 1) An
+            engaging, clear title (1-300 chars) that follows subreddit rules, 2)
+            Well-formatted body text with proper markdown, paragraphs, and any
+            required sections, 3) Whether to include flair (if available), NSFW
+            tag, or spoiler tag based on content and subreddit rules."
+        subreddit:
+          type: string
+          description: The target subreddit where the post will be submitted (without the
+            'r/' prefix). Ensure the subreddit exists and allows text posts.
+  - name: delete_content
+    description: Permanently removes a Reddit resource such as a post, comment, or
+      reply. This tool should be used when content needs to be removed from
+      Reddit, whether due to errors, inappropriate content, or user request.
+      Note that deletion is permanent and cannot be undone. Use this tool
+      carefully as it permanently removes the content from Reddit's public view,
+      though it may still be visible in some Reddit archives. This tool is
+      particularly useful for removing mistakenly posted content or managing
+      your Reddit presence.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the content to delete. Must be a valid
+            Reddit ID with appropriate prefix (t1_ for comments, t3_ for posts).
+            Ensure you have permission to delete the specified content.
+  - name: edit_content
+    description: Modifies existing Reddit content (posts, comments, or replies).
+      This tool should be used when you need to update, correct, or improve
+      previously submitted content. Common uses include fixing typos, adding
+      clarifications, updating outdated information, or expanding on points
+      based on feedback. Note that Reddit shows an 'edited' indicator on
+      modified content. While the edit history isn't public, it's good practice
+      to maintain transparency about significant changes, perhaps with an
+      'Edit:' note explaining the changes.
+    inputSchema:
+      type: object
+      required:
+        - id
+        - content
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the content to edit. Must be a valid
+            Reddit ID with appropriate prefix (t1_ for comments, t3_ for posts).
+            Ensure you have permission to edit the specified content.
+        content:
+          type: string
+          description: The new content to replace the existing text. Should maintain the
+            context and intent of the original post while incorporating
+            necessary changes. For significant changes, consider adding an
+            'Edit:' note explaining the modifications. Must follow subreddit
+            rules and Reddit's content policies.
+  - name: get_comment
+    description: Retrieves a specific Reddit comment and optionally its complete
+      discussion thread. This tool should be used when you need to examine a
+      particular comment's content, context, and responses. It's useful for
+      understanding discussion flow, gathering context for replies, or analyzing
+      conversation threads. When includeThread is true, it provides the full
+      context of the discussion including parent comments and all replies,
+      helping understand the complete conversation context.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the comment to retrieve. Must be a valid
+            Reddit comment ID (prefixed with 't1_'). The ID can be found in the
+            comment's permalink or through Reddit's API.
+        includeThread:
+          type: boolean
+          default: false
+          description: When true, fetches the entire comment thread including parent
+            comments and all replies. This provides full context but may return
+            a larger amount of data. When false, only fetches the specific
+            comment.
+  - name: get_notifications
+    description: Fetches and manages Reddit notifications (inbox items) with
+      advanced filtering options. This tool should be used to monitor and handle
+      various types of Reddit interactions including comment replies, post
+      replies, username mentions, and private messages. It provides flexible
+      filtering options to focus on specific notification types, manage
+      read/unread status, and exclude unwanted content. Use this tool to stay
+      updated on Reddit interactions and manage your notification inbox
+      effectively.
+    inputSchema:
+      type: object
+      properties:
+        after:
+          type: string
+          description: Fetch notifications after this notification ID. Used for pagination
+            and getting newer notifications.
+        limit:
+          type: number
+          description: Maximum number of notifications to fetch. Use this to control the
+            volume of notifications returned.
+        before:
+          type: string
+          description: Fetch notifications before this notification ID. Used for
+            pagination and getting older notifications.
+        filter:
+          enum:
+            - all
+            - unread
+            - messages
+            - comments
+            - mentions
+          type: string
+          description: "Filter notifications by type: 'all' for everything, 'unread' for
+            new notifications, 'messages' for private messages, 'comments' for
+            comment replies, 'mentions' for username mentions."
+        markRead:
+          type: boolean
+          description: When true, marks fetched notifications as read. Set to false to
+            preserve unread status.
+        excludeIds:
+          type: array
+          items:
+            type: string
+          description: Array of notification IDs to exclude from results. Useful for
+            filtering out specific notifications.
+        excludeTypes:
+          type: array
+          items:
+            enum:
+              - comment_reply
+              - post_reply
+              - username_mention
+              - message
+              - other
+            type: string
+          description: Array of notification types to exclude. Use this to filter out
+            specific types of interactions.
+        excludeSubreddits:
+          type: array
+          items:
+            type: string
+          description: Array of subreddit names to exclude notifications from. Helps focus
+            on specific communities.
+  - name: get_post
+    description: Retrieves a complete Reddit post including its title, content,
+      metadata, and all associated comments and reply threads. This tool should
+      be used when you need to examine a specific post's full context, including
+      its discussion. It's particularly useful for understanding the complete
+      conversation around a post, analyzing community responses, or preparing to
+      engage with the discussion. The tool provides access to all post details
+      including awards, vote counts, posting time, and the full comment tree.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the post to retrieve. Must be a valid
+            Reddit post ID (prefixed with 't3_'). The ID can be found in the
+            post's URL or through Reddit's API.
+  - name: get_posts
+    description: "Retrieves multiple Reddit posts from a specified subreddit based
+      on sorting criteria. This tool should be used when you want to monitor
+      subreddit activity, analyze trending topics, or find relevant discussions.
+      It provides different sorting options: 'hot' for currently popular posts,
+      'new' for latest submissions, and 'controversial' for posts with mixed
+      reactions. This is particularly useful for understanding current subreddit
+      trends, finding recent discussions, or identifying contentious topics."
+    inputSchema:
+      type: object
+      required:
+        - sort
+        - subreddit
+      properties:
+        sort:
+          enum:
+            - hot
+            - new
+            - controversial
+          type: string
+          description: "How to sort the retrieved posts: 'hot' shows currently trending
+            posts, 'new' shows most recent submissions, 'controversial' shows
+            posts with significant up/down vote activity."
+        subreddit:
+          type: string
+          description: The target subreddit to fetch posts from (without the 'r/' prefix).
+            Ensure the subreddit exists and is accessible.
+  - name: search_reddit
+    description: Search Reddit posts across all subreddits or within a specific subreddit
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        sort:
+          enum:
+            - relevance
+            - hot
+            - new
+            - top
+          type: string
+          default: relevance
+          description: How to sort the search results
+        time:
+          enum:
+            - hour
+            - day
+            - week
+            - month
+            - year
+            - all
+          type: string
+          default: all
+          description: Time window for the search results
+        limit:
+          type: integer
+          default: 25
+          maximum: 100
+          minimum: 1
+          description: Maximum number of results to return
+        query:
+          type: string
+          description: The search query to find Reddit posts
+        subreddit:
+          type: string
+          description: Optional subreddit to restrict the search to
+  - name: send_comment
+    description: Sends a comment to a Reddit post or another comment
+    inputSchema:
+      type: object
+      required:
+        - id
+        - text
+      properties:
+        id:
+          type: string
+          pattern: ^t[1|3]_[a-z0-9]+$
+          description: The ID of the parent post or comment to comment on (must start with
+            t1_ for comments or t3_ for posts)
+        text:
+          type: string
+          maxLength: 10000
+          description: The markdown text of the comment (max 10000 characters)
+        sendreplies:
+          type: boolean
+          default: true
+          description: Whether to send comment notifications
+  - name: send_message
+    description: Sends a Reddit message to another user
+    inputSchema:
+      type: object
+      required:
+        - recipient
+        - subject
+        - content
+      properties:
+        content:
+          type: string
+          maxLength: 10000
+          description: Message content in markdown format (max 10000 chars)
+        subject:
+          type: string
+          maxLength: 100
+          minLength: 1
+          description: Subject line of the message (1-100 chars)
+        recipient:
+          type: string
+          description: Username of the message recipient
+  - name: send_post
+    description: Sends a new text post to Reddit
+    inputSchema:
+      type: object
+      required:
+        - subreddit
+        - title
+        - content
+      properties:
+        nsfw:
+          type: boolean
+          default: false
+          description: Whether to mark as NSFW
+        title:
+          type: string
+          maxLength: 300
+          minLength: 1
+          description: Post title (1-300 characters)
+        content:
+          type: string
+          description: Text content for the post
+        spoiler:
+          type: boolean
+          default: false
+          description: Whether to mark as spoiler
+        flair_id:
+          type: string
+          description: Flair ID if the subreddit requires it
+        subreddit:
+          type: string
+          description: Subreddit to post to (without r/ prefix)
+        flair_text:
+          type: string
+          description: Flair text if the subreddit requires it
+        sendreplies:
+          type: boolean
+          default: true
+          description: Whether to send replies to inbox

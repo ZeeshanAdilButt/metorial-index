@@ -1,0 +1,17 @@
+identifier: https-eduardo/clockify-mcp-server/clockify-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/https-eduardo/clockify-mcp-server
+  name: clockify-mcp-server
+  owner: https-eduardo
+server:
+  subdirectory: /
+  name: Clockify Time Entry Manager
+  description: Manage your Clockify time entries effortlessly by sending prompts
+    to an LLM. Add, view, and control your time tracking directly through
+    AI-powered interactions. Simplify your time management workflow with
+    seamless integration to Clockify.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,52 @@
+tools:
+  - name: run-command
+    description: Run a terminal command and get immediate output
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: Command to execute (PowerShell/terminal)
+        directory:
+          type: string
+          description: Directory to run the command in (defaults to current directory)
+  - name: start-process
+    description: Start a long-running process
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: Command to execute (PowerShell/terminal)
+        directory:
+          type: string
+          description: Directory to run the command in (defaults to current directory)
+  - name: get-process-output
+    description: Get the output from a running or completed process
+    inputSchema:
+      type: object
+      required:
+        - processId
+      properties:
+        processId:
+          type: string
+          description: ID of the process to get output from
+  - name: stop-process
+    description: Stop a running process
+    inputSchema:
+      type: object
+      required:
+        - processId
+      properties:
+        processId:
+          type: string
+          description: ID of the process to stop
+  - name: list-processes
+    description: List all running processes
+    inputSchema:
+      type: object
+      properties: {}

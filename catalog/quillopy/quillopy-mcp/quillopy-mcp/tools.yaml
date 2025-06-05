@@ -1,0 +1,48 @@
+tools:
+  - name: quillopy_search
+    description: This MCP searches and fetches documentation for programming
+      libraries, packages, and frameworks. When a user types @quillopy or
+      @quillopy[documentation_name], they are requesting to use this tool to
+      access programming documentation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+        - documentation_name
+      properties:
+        query:
+          type: string
+          description: The search query to find specific documentation
+        language:
+          type: string
+          description: The programming language of the package/framework (e.g., python,
+            javascript, java), only provide when relevant to improve search
+            accuracy
+        installation_name:
+          type: string
+          description: Name used to install the package/framework, only provide when
+            relevant to improve search accuracy. E.g. scikit-learn for `pip
+            install scikit-learn`
+        documentation_name:
+          type: string
+          description: Common name to refer to the package/framework to search, e.g. sklearn
+      additionalProperties: false
+  - name: quillopy_chat_with_code
+    description: This tool enables chat with code in a GitHub repository. Only use
+      when explicitly requested by the user. Inform the user that responses may
+      take up to 1 minute to generate.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+        - githubRepoUrl
+      properties:
+        query:
+          type: string
+          description: The question about the GitHub repository code
+        githubRepoUrl:
+          type: string
+          description: The URL of the GitHub repository
+      additionalProperties: false

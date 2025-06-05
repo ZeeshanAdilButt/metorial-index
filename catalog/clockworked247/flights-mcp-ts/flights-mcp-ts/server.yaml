@@ -1,0 +1,16 @@
+identifier: clockworked247/flights-mcp-ts/flights-mcp-ts
+repo:
+  provider: github.com
+  url: https://github.com/clockworked247/flights-mcp-ts
+  name: flights-mcp-ts
+  owner: clockworked247
+server:
+  subdirectory: /
+  name: Flight & Stay Search Server (Duffel API)
+  description: A TypeScript implementation of a flight & stay search MCP server
+    that uses the Duffel API to search for flights. This MCP server provides
+    tools to search for one-way, round-trip, and multi-city flights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

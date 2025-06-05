@@ -1,0 +1,18 @@
+identifier: ryanjoachim/mcp-batchit/mcp-batchit
+repo:
+  provider: github.com
+  url: https://github.com/ryanjoachim/mcp-batchit
+  name: mcp-batchit
+  owner: ryanjoachim
+server:
+  subdirectory: /
+  name: BatchIt
+  description: Batch multiple MCP tool calls into a single request to reduce
+    overhead and token usage for AI agents. Streamline your operations by
+    executing multiple tasks in parallel, enhancing efficiency and performance.
+    Simplify complex workflows with a single aggregator request, minimizing the
+    need for excessive round trips.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

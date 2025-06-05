@@ -1,0 +1,15 @@
+identifier: appwrite/mcp/mcp-server-appwrite
+repo:
+  provider: github.com
+  url: https://github.com/appwrite/mcp
+  name: mcp
+  owner: appwrite
+server:
+  subdirectory: /
+  name: Appwrite MCP Server
+  description: Interact with Appwrite's API to manage databases, users, and more.
+    Leverage tools for seamless integration within your Appwrite project.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

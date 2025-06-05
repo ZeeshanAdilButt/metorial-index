@@ -1,0 +1,374 @@
+tools:
+  - name: get_kvs
+    description: List KV namespaces in your account
+    inputSchema:
+      type: object
+      properties: {}
+  - name: kv_get
+    description: Get a value from Cloudflare KV store
+    inputSchema:
+      type: object
+      required:
+        - namespaceId
+        - key
+      properties:
+        key:
+          type: string
+          description: The key to retrieve
+        namespaceId:
+          type: string
+          description: The KV namespace ID
+  - name: kv_put
+    description: Put a value into Cloudflare KV store
+    inputSchema:
+      type: object
+      required:
+        - namespaceId
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          description: The key to store
+        value:
+          type: string
+          description: The value to store
+        namespaceId:
+          type: string
+          description: The KV namespace ID
+        expirationTtl:
+          type: number
+          description: Optional expiration time in seconds
+  - name: kv_delete
+    description: Delete a key from Cloudflare KV store
+    inputSchema:
+      type: object
+      required:
+        - namespaceId
+        - key
+      properties:
+        key:
+          type: string
+          description: The key to delete
+        namespaceId:
+          type: string
+          description: The KV namespace ID
+  - name: kv_list
+    description: List keys in Cloudflare KV store
+    inputSchema:
+      type: object
+      required:
+        - namespaceId
+      properties:
+        limit:
+          type: number
+          description: Maximum number of keys to return
+        prefix:
+          type: string
+          description: Optional prefix to filter keys
+        namespaceId:
+          type: string
+          description: The KV namespace ID
+  - name: worker_list
+    description: List all Workers in your account
+    inputSchema:
+      type: object
+      properties: {}
+  - name: worker_get
+    description: Get a Worker's script content
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the Worker script
+  - name: worker_put
+    description: Create or update a Worker script with optional bindings and
+      compatibility settings
+    inputSchema:
+      type: object
+      required:
+        - name
+        - script
+      properties:
+        name:
+          type: string
+          description: Name of the Worker script
+        script:
+          type: string
+          description: The Worker script content
+        bindings:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - name
+            properties:
+              name:
+                type: string
+                description: Name of the binding in the Worker code
+              type:
+                enum:
+                  - kv_namespace
+                  - r2_bucket
+                  - d1_database
+                  - service
+                  - analytics_engine
+                  - queue
+                  - durable_object_namespace
+                type: string
+                description: Type of binding (kv_namespace, r2_bucket, d1_database, service,
+                  analytics_engine, queue, durable_object)
+              dataset:
+                type: string
+                description: Name of the analytics dataset (required for analytics_engine type)
+              service:
+                type: string
+                description: Name of the service (required for service type)
+              class_name:
+                type: string
+                description: Name of the Durable Object class (required for
+                  durable_object_namespace type)
+              queue_name:
+                type: string
+                description: Name of the queue (required for queue type)
+              bucket_name:
+                type: string
+                description: Name of the R2 bucket (required for r2_bucket type)
+              database_id:
+                type: string
+                description: ID of the D1 database (required for d1_database type)
+              script_name:
+                type: string
+                description: Optional script name for external Durable Object bindings
+              namespace_id:
+                type: string
+                description: ID of the KV namespace (required for kv_namespace type)
+          description: Optional array of resource bindings (KV, R2, D1, etc)
+        migrations:
+          type: object
+          items:
+            required:
+              - tag
+            properties:
+              new_tag:
+                type: string
+                description: The current version after applying this migration (e.g., "v1",
+                  "v2")
+              new_classes:
+                type: array
+                items:
+                  type: string
+                description: The new Durable Objects using legacy storage being added
+              deleted_classes:
+                type: array
+                items:
+                  type: string
+                description: The Durable Objects being removed
+              renamed_classes:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - from
+                    - to
+                  properties:
+                    to:
+                      type: string
+                    from:
+                      type: string
+                description: The Durable Objects being renamed
+              new_sqlite_classes:
+                type: array
+                items:
+                  type: string
+                description: The new Durable Objects using the new, improved SQLite storage
+                  being added
+          description: Optional migrations object which describes the set of
+            new/changed/deleted Durable Objects to apply when deploying this
+            worker e.g. adding a new Durable Object for the first time requires
+            an entry in the "new_sqlite_classes" or "new_classes" property.
+        no_observability:
+          type: boolean
+          description: Disable Worker Logs for this worker, which automatically ingests
+            logs emitted from Cloudflare Workers and lets you filter, and
+            analyze them in the Cloudflare dashboard.
+        skip_workers_dev:
+          type: boolean
+          description: Do not deploy the Worker on your workers.dev subdomain. Should be
+            set to true if the user already has a domain name, or doesn't want
+            this worker to be publicly accessible..
+        compatibility_date:
+          type: string
+          description: Optional compatibility date for the Worker (e.g., "2024-01-01")
+        compatibility_flags:
+          type: array
+          items:
+            type: string
+          description: Optional array of compatibility flags
+  - name: worker_delete
+    description: Delete a Worker script
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the Worker script
+  - name: analytics_get
+    description: Get analytics data from Cloudflare
+    inputSchema:
+      type: object
+      required:
+        - zoneId
+      properties:
+        since:
+          type: string
+          description: Start time for analytics (ISO string)
+        until:
+          type: string
+          description: End time for analytics (ISO string)
+        zoneId:
+          type: string
+          description: The zone ID to get analytics for
+  - name: r2_list_buckets
+    description: List all R2 buckets in your account
+    inputSchema:
+      type: object
+      properties: {}
+  - name: r2_create_bucket
+    description: Create a new R2 bucket
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the bucket to create
+  - name: r2_delete_bucket
+    description: Delete an R2 bucket
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the bucket to delete
+  - name: r2_list_objects
+    description: List objects in an R2 bucket
+    inputSchema:
+      type: object
+      required:
+        - bucket
+      properties:
+        limit:
+          type: number
+          description: Maximum number of objects to return
+        bucket:
+          type: string
+          description: Name of the bucket
+        prefix:
+          type: string
+          description: Optional prefix to filter objects
+        delimiter:
+          type: string
+          description: Optional delimiter for hierarchical listing
+  - name: r2_get_object
+    description: Get an object from an R2 bucket
+    inputSchema:
+      type: object
+      required:
+        - bucket
+        - key
+      properties:
+        key:
+          type: string
+          description: Key of the object to get
+        bucket:
+          type: string
+          description: Name of the bucket
+  - name: r2_put_object
+    description: Put an object into an R2 bucket
+    inputSchema:
+      type: object
+      required:
+        - bucket
+        - key
+        - content
+      properties:
+        key:
+          type: string
+          description: Key of the object to put
+        bucket:
+          type: string
+          description: Name of the bucket
+        content:
+          type: string
+          description: Content to store in the object
+        contentType:
+          type: string
+          description: Optional MIME type of the content
+  - name: r2_delete_object
+    description: Delete an object from an R2 bucket
+    inputSchema:
+      type: object
+      required:
+        - bucket
+        - key
+      properties:
+        key:
+          type: string
+          description: Key of the object to delete
+        bucket:
+          type: string
+          description: Name of the bucket
+  - name: d1_list_databases
+    description: List all D1 databases in your account
+    inputSchema:
+      type: object
+      properties: {}
+  - name: d1_create_database
+    description: Create a new D1 database
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the database to create
+  - name: d1_delete_database
+    description: Delete a D1 database
+    inputSchema:
+      type: object
+      required:
+        - databaseId
+      properties:
+        databaseId:
+          type: string
+          description: ID of the database to delete
+  - name: d1_query
+    description: Execute a SQL query against a D1 database
+    inputSchema:
+      type: object
+      required:
+        - databaseId
+        - query
+      properties:
+        query:
+          type: string
+          description: SQL query to execute
+        params:
+          type: array
+          items:
+            type: string
+          description: Optional array of parameters for prepared statements
+        databaseId:
+          type: string
+          description: ID of the database to query

@@ -1,0 +1,178 @@
+tools:
+  - name: image_analysis
+    description: "
+
+      \    Analyze an image using OpenRouter's vision capabilities.
+
+
+      \    This tool allows you to send an image to OpenRouter's vision models
+      for analysis.
+
+      \    You provide a query to guide the analysis and can optionally
+      customize the system prompt
+
+      \    for more control over the model's behavior.
+
+
+      \    Args:
+
+      \        image: The image as a base64-encoded string, URL, or local file
+      path
+
+      \        query: Text prompt to guide the image analysis. For best results,
+      provide context
+
+      \               about why you're analyzing the image and what specific
+      information you need.
+
+      \               Including details about your purpose and required focus
+      areas leads to more
+
+      \               relevant and useful responses.
+
+      \        system_prompt: Instructions for the model defining its role and
+      behavior
+
+      \        model: The vision model to use (defaults to the value set by
+      OPENROUTER_DEFAULT_MODEL)
+
+      \        max_tokens: Maximum number of tokens in the response (100-4000)
+
+      \        temperature: Temperature parameter for generation (0.0-1.0)
+
+      \        top_p: Optional nucleus sampling parameter (0.0-1.0)
+
+      \        presence_penalty: Optional penalty for new tokens based on
+      presence in text so far (0.0-2.0)
+
+      \        frequency_penalty: Optional penalty for new tokens based on
+      frequency in text so far (0.0-2.0)
+
+      \        project_root: Optional root directory to resolve relative image
+      paths against
+
+
+      \    Returns:
+
+      \        The analysis result as text
+
+
+      \    Examples:
+
+      \        Basic usage with a file path:
+
+      \            image_analysis(image=\"path/to/image.jpg\", query=\"Describe
+      this image in detail\")
+
+
+      \        Basic usage with an image URL:
+
+      \            image_analysis(image=\"https://example.com/image.jpg\",
+      query=\"Describe this image in detail\")
+
+
+      \        Basic usage with a relative path and project root:
+
+      \            image_analysis(image=\"examples/image.jpg\",
+      project_root=\"/path/to/project\", query=\"Describe this image in
+      detail\")
+
+
+      \        Usage with a detailed contextual query:
+
+      \            image_analysis(
+
+      \                image=\"path/to/image.jpg\",
+
+      \                query=\"Analyze this product packaging design for a
+      fitness supplement. Identify all nutritional claims,
+
+      \                      certifications, and health icons. Assess the visual
+      hierarchy and how the key selling points
+
+      \                      are communicated. This is for a competitive
+      analysis project.\"
+
+      \            )
+
+
+      \        Usage with custom system prompt:
+
+      \            image_analysis(
+
+      \                image=\"path/to/image.jpg\",
+
+      \                query=\"What objects can you see in this image?\",
+
+      \                system_prompt=\"You are an expert at identifying objects
+      in images. Focus on listing all visible objects.\"
+
+      \            )
+
+      \    "
+    inputSchema:
+      type: object
+      title: image_analysisArguments
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          title: Image
+        model:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Model
+          default: null
+        query:
+          type: string
+          title: Query
+          default: Describe this image in detail
+        top_p:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Top P
+          default: null
+        max_tokens:
+          type: integer
+          title: Max Tokens
+          default: 4000
+        temperature:
+          type: number
+          title: Temperature
+          default: 0.7
+        project_root:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Project Root
+          default: null
+        system_prompt:
+          type: string
+          title: System Prompt
+          default: You are an expert vision analyzer with exceptional attention to detail.
+            Your purpose is to provide accurate, comprehensive descriptions of
+            images that help AI agents understand visual content they cannot
+            directly perceive. Focus on describing all relevant elements in the
+            image - objects, people, text, colors, spatial relationships,
+            actions, and context. Be precise but concise, organizing information
+            from most to least important. Avoid making assumptions beyond what's
+            visible and clearly indicate any uncertainty. When text appears in
+            images, transcribe it verbatim within quotes. Respond only with
+            factual descriptions without subjective judgments or creative
+            embellishments. Your descriptions should enable an agent to make
+            informed decisions based solely on your analysis.
+        presence_penalty:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Presence Penalty
+          default: null
+        frequency_penalty:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Frequency Penalty
+          default: null

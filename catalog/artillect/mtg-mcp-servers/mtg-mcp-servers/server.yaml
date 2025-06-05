@@ -1,0 +1,18 @@
+identifier: artillect/mtg-mcp-servers/mtg-mcp-servers
+repo:
+  provider: github.com
+  url: https://github.com/artillect/mtg-mcp-servers
+  name: mtg-mcp-servers
+  owner: artillect
+server:
+  subdirectory: /
+  name: MTG Deck Manager and Scryfall Integration
+  description: "Manage Magic: The Gathering decks by uploading, drawing cards,
+    handling mulligans, and sideboarding directly through your assistant. Search
+    and retrieve card information using integrated Scryfall API capabilities.
+    Enhance your gameplay experience with seamless deck and card management
+    tools."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

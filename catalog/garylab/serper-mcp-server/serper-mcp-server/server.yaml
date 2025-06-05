@@ -1,0 +1,17 @@
+identifier: garylab/serper-mcp-server/serper-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/garylab/serper-mcp-server
+  name: serper-mcp-server
+  owner: garylab
+server:
+  subdirectory: /
+  name: Serper Google Search Server
+  description: Provide Google search results to LLMs via Serper integration.
+    Enable your agents to fetch up-to-date search information dynamically to
+    enhance their responses. Easily integrate with MCP clients using simple
+    configuration and API key setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

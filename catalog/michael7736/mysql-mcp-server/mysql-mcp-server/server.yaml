@@ -1,0 +1,17 @@
+identifier: michael7736/mysql-mcp-server/mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/michael7736/mysql-mcp-server
+  name: mysql-mcp-server
+  owner: michael7736
+server:
+  subdirectory: /
+  name: MySQL Database Access Server
+  description: Execute SQL queries against a MySQL database seamlessly. Retrieve,
+    create, update, and delete data while receiving results in JSON format.
+    Enhance your applications with powerful database interactions through a
+    simple interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

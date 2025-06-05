@@ -1,0 +1,459 @@
+tools:
+  - name: sites_list
+    inputSchema:
+      type: object
+  - name: sites_get
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - site_id
+      properties:
+        site_id:
+          type: string
+      additionalProperties: false
+  - name: sites_publish
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - site_id
+      properties:
+        site_id:
+          type: string
+        customDomains:
+          type: array
+          items:
+            type: string
+        publishToWebflowSubdomain:
+          type: boolean
+          default: false
+      additionalProperties: false
+  - name: pages_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - site_id
+      properties:
+        limit:
+          type: number
+        offset:
+          type: number
+        site_id:
+          type: string
+        localeId:
+          type: string
+      additionalProperties: false
+  - name: pages_get_metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+        localeId:
+          type: string
+      additionalProperties: false
+  - name: pages_update_page_settings
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - page_id
+        - body
+      properties:
+        body:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+            seo:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              additionalProperties: false
+            slug:
+              type: string
+            draft:
+              type: boolean
+            title:
+              type: string
+            siteId:
+              type: string
+            archived:
+              type: boolean
+            isBranch:
+              type: boolean
+            localeId:
+              type: string
+            parentId:
+              type: string
+            canBranch:
+              type: boolean
+            createdOn:
+              type: string
+              format: date-time
+            openGraph:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                titleCopied:
+                  type: boolean
+                descriptionCopied:
+                  type: boolean
+              additionalProperties: false
+            lastUpdated:
+              type: string
+              format: date-time
+            collectionId:
+              type: string
+            isMembersOnly:
+              type: boolean
+            publishedPath:
+              type: string
+          additionalProperties: false
+        page_id:
+          type: string
+        localeId:
+          type: string
+      additionalProperties: false
+  - name: pages_get_content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - page_id
+      properties:
+        limit:
+          type: number
+        offset:
+          type: number
+        page_id:
+          type: string
+        localeId:
+          type: string
+      additionalProperties: false
+  - name: pages_update_static_content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - page_id
+        - localeId
+        - nodes
+      properties:
+        nodes:
+          type: array
+          items:
+            anyOf:
+              - type: object
+                required:
+                  - nodeId
+                  - text
+                properties:
+                  text:
+                    type: string
+                  nodeId:
+                    type: string
+                additionalProperties: false
+              - type: object
+                required:
+                  - nodeId
+                  - propertyOverrides
+                properties:
+                  nodeId:
+                    type: string
+                  propertyOverrides:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - propertyId
+                        - text
+                      properties:
+                        text:
+                          type: string
+                        propertyId:
+                          type: string
+                      additionalProperties: false
+                additionalProperties: false
+        page_id:
+          type: string
+        localeId:
+          type: string
+      additionalProperties: false
+  - name: collections_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - site_id
+      properties:
+        site_id:
+          type: string
+      additionalProperties: false
+  - name: collections_get
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+      properties:
+        collection_id:
+          type: string
+      additionalProperties: false
+  - name: collections_items_create_item_live
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+        - request
+      properties:
+        request:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                type: object
+                required:
+                  - fieldData
+                properties:
+                  id:
+                    type: string
+                  isDraft:
+                    type: boolean
+                  createdOn:
+                    type: string
+                  fieldData:
+                    allOf:
+                      - type: object
+                        additionalProperties: {}
+                      - type: object
+                        required:
+                          - name
+                          - slug
+                        properties:
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                  isArchived:
+                    type: boolean
+                  cmsLocaleId:
+                    type: string
+                  lastUpdated:
+                    type: string
+                  lastPublished:
+                    type: string
+                additionalProperties: false
+          additionalProperties: false
+        collection_id:
+          type: string
+      additionalProperties: false
+  - name: collections_items_update_items_live
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+        - request
+      properties:
+        request:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                type: object
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                  isDraft:
+                    type: boolean
+                  createdOn:
+                    type: string
+                  fieldData:
+                    allOf:
+                      - type: object
+                        additionalProperties: {}
+                      - type: object
+                        properties:
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                  isArchived:
+                    type: boolean
+                  cmsLocaleId:
+                    type: string
+                  lastUpdated:
+                    type: string
+                  lastPublished:
+                    type: string
+                additionalProperties: false
+          additionalProperties: false
+        collection_id:
+          type: string
+      additionalProperties: false
+  - name: collections_items_list_items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        limit:
+          type: number
+        offset:
+          type: number
+        sortBy:
+          enum:
+            - lastPublished
+            - name
+            - slug
+          type: string
+        sortOrder:
+          enum:
+            - asc
+            - desc
+          type: string
+        cmsLocaleId:
+          type: string
+        collection_id:
+          type: string
+      additionalProperties: false
+  - name: collections_items_create_item
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+        - request
+      properties:
+        request:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                type: object
+                required:
+                  - fieldData
+                properties:
+                  id:
+                    type: string
+                  isDraft:
+                    type: boolean
+                  createdOn:
+                    type: string
+                  fieldData:
+                    allOf:
+                      - type: object
+                        additionalProperties: {}
+                      - type: object
+                        required:
+                          - name
+                          - slug
+                        properties:
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                  isArchived:
+                    type: boolean
+                  cmsLocaleId:
+                    type: string
+                  lastUpdated:
+                    type: string
+                  lastPublished:
+                    type: string
+                additionalProperties: false
+          additionalProperties: false
+        collection_id:
+          type: string
+      additionalProperties: false
+  - name: collections_items_update_items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+        - request
+      properties:
+        request:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                type: object
+                required:
+                  - id
+                  - fieldData
+                properties:
+                  id:
+                    type: string
+                  isDraft:
+                    type: boolean
+                  createdOn:
+                    type: string
+                  fieldData:
+                    allOf:
+                      - type: object
+                        additionalProperties: {}
+                      - type: object
+                        required:
+                          - name
+                          - slug
+                        properties:
+                          name:
+                            type: string
+                          slug:
+                            type: string
+                  isArchived:
+                    type: boolean
+                  cmsLocaleId:
+                    type: string
+                  lastUpdated:
+                    type: string
+                  lastPublished:
+                    type: string
+                additionalProperties: false
+          additionalProperties: false
+        collection_id:
+          type: string
+      additionalProperties: false
+  - name: collections_items_publish_items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+        - itemIds
+      properties:
+        itemIds:
+          type: array
+          items:
+            type: string
+        collection_id:
+          type: string
+      additionalProperties: false

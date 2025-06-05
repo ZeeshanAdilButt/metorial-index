@@ -1,0 +1,122 @@
+tools:
+  - name: create_entities
+    description: Create new entities with observations and optional embeddings
+    inputSchema:
+      type: object
+      required:
+        - entities
+      properties:
+        entities:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - entityType
+              - observations
+            properties:
+              name:
+                type: string
+              embedding:
+                type: array
+                items:
+                  type: number
+                description: Optional vector embedding for similarity search
+              relations:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - target
+                    - relationType
+                  properties:
+                    target:
+                      type: string
+                    relationType:
+                      type: string
+                description: Optional relations to create with this entity
+              entityType:
+                type: string
+              observations:
+                type: array
+                items:
+                  type: string
+  - name: search_nodes
+    description: Search for entities and their relations using text or vector similarity
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          oneOf:
+            - type: string
+              description: Text search query
+            - type: array
+              items:
+                type: number
+              description: Vector for similarity search
+        includeEmbeddings:
+          type: boolean
+          description: "Whether to include embeddings in the returned entities (default:
+            false)"
+  - name: read_graph
+    description: Get recent entities and their relations
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        includeEmbeddings:
+          type: boolean
+          description: "Whether to include embeddings in the returned entities (default:
+            false)"
+  - name: create_relations
+    description: Create relations between entities
+    inputSchema:
+      type: object
+      required:
+        - relations
+      properties:
+        relations:
+          type: array
+          items:
+            type: object
+            required:
+              - source
+              - target
+              - type
+            properties:
+              type:
+                type: string
+              source:
+                type: string
+              target:
+                type: string
+  - name: delete_entity
+    description: Delete an entity and all its associated data (observations and relations)
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the entity to delete
+  - name: delete_relation
+    description: Delete a specific relation between entities
+    inputSchema:
+      type: object
+      required:
+        - source
+        - target
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of relation
+        source:
+          type: string
+          description: Source entity name
+        target:
+          type: string
+          description: Target entity name

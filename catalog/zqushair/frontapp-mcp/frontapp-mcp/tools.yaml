@@ -1,0 +1,360 @@
+tools:
+  - name: get_conversations
+    description: Get a list of conversations from Frontapp
+    inputSchema:
+      type: object
+      properties:
+        q:
+          type: string
+          description: Search query
+        limit:
+          type: number
+          description: Maximum number of results to return
+        status:
+          enum:
+            - open
+            - archived
+            - spam
+            - deleted
+          type: string
+          description: Filter by conversation status
+        tag_id:
+          type: string
+          description: Filter by tag ID
+        inbox_id:
+          type: string
+          description: Filter by inbox ID
+        page_token:
+          type: string
+          description: Token for pagination
+        assignee_id:
+          type: string
+          description: Filter by assignee ID
+  - name: get_conversation
+    description: Get details of a specific conversation
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+      properties:
+        conversation_id:
+          type: string
+          description: ID of the conversation
+  - name: send_message
+    description: Send a message to a conversation
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+        - content
+      properties:
+        content:
+          type: string
+          description: Message content
+        options:
+          type: object
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+              description: Tags to apply to the conversation
+            draft:
+              type: boolean
+              description: Whether to create a draft instead of sending
+            archive:
+              type: boolean
+              description: Whether to archive the conversation after sending
+          description: Additional options
+        subject:
+          type: string
+          description: Message subject
+        author_id:
+          type: string
+          description: ID of the message author
+        conversation_id:
+          type: string
+          description: ID of the conversation
+  - name: add_comment
+    description: Add a comment to a conversation
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+        - body
+        - author_id
+      properties:
+        body:
+          type: string
+          description: Comment body
+        author_id:
+          type: string
+          description: ID of the comment author
+        conversation_id:
+          type: string
+          description: ID of the conversation
+  - name: archive_conversation
+    description: Archive a conversation
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+      properties:
+        conversation_id:
+          type: string
+          description: ID of the conversation
+  - name: assign_conversation
+    description: Assign a conversation to a teammate
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+        - assignee_id
+      properties:
+        assignee_id:
+          type: string
+          description: ID of the teammate to assign the conversation to
+        conversation_id:
+          type: string
+          description: ID of the conversation
+  - name: get_contact
+    description: Get details of a specific contact
+    inputSchema:
+      type: object
+      required:
+        - contact_id
+      properties:
+        contact_id:
+          type: string
+          description: ID of the contact
+  - name: create_contact
+    description: Create a new contact in Frontapp
+    inputSchema:
+      type: object
+      required:
+        - handles
+      properties:
+        name:
+          type: string
+          description: Name of the contact
+        links:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - url
+            properties:
+              url:
+                type: string
+                description: Link URL
+              name:
+                type: string
+                description: Link name
+          description: Links associated with the contact
+        handles:
+          type: array
+          items:
+            type: object
+            required:
+              - handle
+              - source
+            properties:
+              handle:
+                type: string
+                description: Handle value (e.g., email address)
+              source:
+                type: string
+                description: Handle source (e.g., email)
+          description: Contact handles (email, phone, etc.)
+        description:
+          type: string
+          description: Description of the contact
+        custom_fields:
+          type: object
+          description: Custom fields for the contact
+  - name: update_contact
+    description: Update an existing contact in Frontapp
+    inputSchema:
+      type: object
+      required:
+        - contact_id
+      properties:
+        name:
+          type: string
+          description: Name of the contact
+        links:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - url
+            properties:
+              url:
+                type: string
+                description: Link URL
+              name:
+                type: string
+                description: Link name
+          description: Links associated with the contact
+        handles:
+          type: array
+          items:
+            type: object
+            required:
+              - handle
+              - source
+            properties:
+              handle:
+                type: string
+                description: Handle value (e.g., email address)
+              source:
+                type: string
+                description: Handle source (e.g., email)
+          description: Contact handles (email, phone, etc.)
+        contact_id:
+          type: string
+          description: ID of the contact to update
+        description:
+          type: string
+          description: Description of the contact
+        custom_fields:
+          type: object
+          description: Custom fields for the contact
+  - name: get_teammates
+    description: Get a list of teammates from Frontapp
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: Maximum number of results to return
+        page_token:
+          type: string
+          description: Token for pagination
+  - name: get_teammate
+    description: Get details of a specific teammate
+    inputSchema:
+      type: object
+      required:
+        - teammate_id
+      properties:
+        teammate_id:
+          type: string
+          description: ID of the teammate
+  - name: get_accounts
+    description: Get a list of accounts from Frontapp
+    inputSchema:
+      type: object
+      properties:
+        q:
+          type: string
+          description: Search query
+        limit:
+          type: number
+          description: Maximum number of results to return
+        page_token:
+          type: string
+          description: Token for pagination
+  - name: get_account
+    description: Get details of a specific account
+    inputSchema:
+      type: object
+      required:
+        - account_id
+      properties:
+        account_id:
+          type: string
+          description: ID of the account
+  - name: create_account
+    description: Create a new account in Frontapp
+    inputSchema:
+      type: object
+      required:
+        - name
+        - domains
+      properties:
+        name:
+          type: string
+          description: Name of the account
+        domains:
+          type: array
+          items:
+            type: string
+          description: Domains associated with the account
+        description:
+          type: string
+          description: Description of the account
+        external_id:
+          type: string
+          description: External ID for the account
+        custom_fields:
+          type: object
+          description: Custom fields for the account
+  - name: update_account
+    description: Update an existing account in Frontapp
+    inputSchema:
+      type: object
+      required:
+        - account_id
+      properties:
+        name:
+          type: string
+          description: Name of the account
+        domains:
+          type: array
+          items:
+            type: string
+          description: Domains associated with the account
+        account_id:
+          type: string
+          description: ID of the account to update
+        description:
+          type: string
+          description: Description of the account
+        external_id:
+          type: string
+          description: External ID for the account
+        custom_fields:
+          type: object
+          description: Custom fields for the account
+  - name: get_tags
+    description: Get a list of tags from Frontapp
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: Maximum number of results to return
+        page_token:
+          type: string
+          description: Token for pagination
+  - name: apply_tag
+    description: Apply a tag to a conversation
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+        - tag_id
+      properties:
+        tag_id:
+          type: string
+          description: ID of the tag to apply
+        conversation_id:
+          type: string
+          description: ID of the conversation
+  - name: remove_tag
+    description: Remove a tag from a conversation
+    inputSchema:
+      type: object
+      required:
+        - conversation_id
+        - tag_id
+      properties:
+        tag_id:
+          type: string
+          description: ID of the tag to remove
+        conversation_id:
+          type: string
+          description: ID of the conversation

@@ -1,0 +1,22 @@
+tools:
+  - name: get_summary
+    description: Get summary for a YouTube video
+    inputSchema:
+      type: object
+      required:
+        - videoId
+      properties:
+        lang:
+          type: string
+          default: zh-tw
+          description: Language code (e.g. zh-tw)
+        mode:
+          enum:
+            - narrative
+            - bullet
+          type: string
+          default: narrative
+          description: Summary mode (narrative or bullet)
+        videoId:
+          type: string
+          description: YouTube video ID

@@ -1,0 +1,18 @@
+identifier: xpe-7/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/XPE-7/MCP-Server
+  name: MCP-Server
+  owner: XPE-7
+server:
+  subdirectory: /
+  name: Claude Documentation Assistant
+  description: Enable intelligent search and retrieval of AI/ML library
+    documentation through seamless integration with Claude's reasoning
+    capabilities. Enhance your productivity by quickly accessing and
+    understanding relevant documentation from multiple sources. Extendable
+    architecture allows adding new documentation sources easily.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

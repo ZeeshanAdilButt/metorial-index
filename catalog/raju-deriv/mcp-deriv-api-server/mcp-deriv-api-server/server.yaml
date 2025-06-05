@@ -1,0 +1,17 @@
+identifier: raju-deriv/mcp-deriv-api-server/mcp-deriv-api-server
+repo:
+  provider: github.com
+  url: https://github.com/raju-deriv/mcp-deriv-api-server
+  name: mcp-deriv-api-server
+  owner: raju-deriv
+server:
+  subdirectory: /
+  name: Deriv API Server
+  description: Interact with the Deriv API to access active trading symbols and
+    account balances. Simplify your trading operations by leveraging this server
+    to seamlessly integrate with your applications. Get started quickly with
+    local or Docker installation options.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

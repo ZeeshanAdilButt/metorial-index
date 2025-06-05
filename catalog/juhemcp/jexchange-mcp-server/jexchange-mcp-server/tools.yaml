@@ -1,0 +1,18 @@
+tools:
+  - name: query_exchange_rates
+    description: 根据货币的三位字母代码查询两者之间的兑换汇率
+    inputSchema:
+      type: object
+      title: query_exchange_ratesArguments
+      required:
+        - from_code
+        - to_code
+      properties:
+        to_code:
+          type: string
+          title: To Code
+          description: 您希望转换为目标货币的三位字母货币代码。如：USD
+        from_code:
+          type: string
+          title: From Code
+          description: 您希望转换的货币的三位字母货币代码。如：CNY

@@ -1,0 +1,18 @@
+identifier: meerkats-ai/hatch-mcp-server/hatch-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Meerkats-Ai/hatch-mcp-server
+  name: hatch-mcp-server
+  owner: Meerkats-Ai
+server:
+  subdirectory: /
+  name: Hatch API Integration Server
+  description: Provide powerful tools to find emails, phone numbers, verify
+    emails, retrieve company data, and discover LinkedIn URLs using the Hatch
+    API. Enhance your applications with accurate contact and company information
+    effortlessly. Simplify data retrieval and verification workflows with this
+    dedicated MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

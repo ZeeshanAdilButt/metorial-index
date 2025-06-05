@@ -1,0 +1,19 @@
+identifier: ciecc-verus/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ciecc-verus/mcp-server
+  name: mcp-server
+  owner: ciecc-verus
+server:
+  subdirectory: /
+  name: Verus MCP Server
+  description: Provide a robust server implementation that exposes tools,
+    resources, and prompts to enable dynamic integration with large language
+    models. Facilitate seamless interaction between LLM clients and external
+    data or actions through a standardized protocol. Enhance LLM applications by
+    enabling them to access and manipulate real-world data and services securely
+    and efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,61 @@
+tools:
+  - name: read_sheet_names
+    description: List all sheet names in an Excel file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+      properties:
+        fileAbsolutePath:
+          type: string
+          description: Absolute path to the Excel file
+      additionalProperties: false
+  - name: read_sheet_data
+    description: Read data from the Excel sheet.The number of columns and rows
+      responded is limited to 50x50.To read more data, adjust range parameter
+      and make requests again.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+      properties:
+        range:
+          type: string
+          description: Range of cells in the Excel sheet (e.g., "A1:C10")
+        sheetName:
+          type: string
+          description: Sheet name in the Excel file
+        fileAbsolutePath:
+          type: string
+          description: Absolute path to the Excel file
+      additionalProperties: false
+  - name: write_sheet_data
+    description: Write data to the Excel sheet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+        - sheetName
+        - range
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+          description: Data to write to the Excel sheet
+        range:
+          type: string
+          description: Range of cells in the Excel sheet (e.g., "A1:C10")
+        sheetName:
+          type: string
+          description: Sheet name in the Excel file
+        fileAbsolutePath:
+          type: string
+          description: Absolute path to the Excel file
+      additionalProperties: false

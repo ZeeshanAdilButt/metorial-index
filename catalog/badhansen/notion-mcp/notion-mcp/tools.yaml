@@ -1,0 +1,27 @@
+tools:
+  - name: add_todo
+    description: Add a new todo item
+    inputSchema:
+      type: object
+      required:
+        - task
+      properties:
+        task:
+          type: string
+          description: The todo task description
+  - name: show_all_todos
+    description: Show all todo items from Notion.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: complete_todo
+    description: Mark a todo item as completed.
+    inputSchema:
+      type: object
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          description: The task_id of the todo task to mark as complete.

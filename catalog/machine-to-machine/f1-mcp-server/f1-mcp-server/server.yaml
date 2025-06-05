@@ -1,0 +1,18 @@
+identifier: machine-to-machine/f1-mcp-server/f1-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Machine-To-Machine/f1-mcp-server
+  name: f1-mcp-server
+  owner: Machine-To-Machine
+server:
+  subdirectory: /
+  name: Formula One Racing Data Server
+  description: Provide comprehensive Formula One racing data including event
+    schedules, driver details, telemetry, race results, and performance
+    analysis. Enable AI applications to query and analyze F1 data seamlessly.
+    Access detailed session and championship information to enhance motorsport
+    insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

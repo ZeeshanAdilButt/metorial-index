@@ -1,0 +1,18 @@
+identifier: guinness77/mcp-server-replicate/mcp-server-replicate
+repo:
+  provider: github.com
+  url: https://github.com/guinness77/mcp-server-replicate
+  name: mcp-server-replicate
+  owner: guinness77
+server:
+  subdirectory: /
+  name: Server Replicate
+  description: Provide resource-based access to AI model inference with a focus on
+    image generation using the Replicate API. Generate high-quality images from
+    text descriptions with detailed style control, quality presets, and
+    real-time progress tracking. Manage image generations efficiently with model
+    discovery, webhook integration, and secure API key management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

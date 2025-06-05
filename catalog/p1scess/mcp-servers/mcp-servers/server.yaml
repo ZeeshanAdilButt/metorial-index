@@ -1,0 +1,17 @@
+identifier: p1scess/mcp-servers/mcp-servers
+repo:
+  provider: github.com
+  url: https://github.com/p1scess/mcp-servers
+  name: mcp-servers
+  owner: p1scess
+server:
+  subdirectory: /src/fetch
+  name: Fetch Server
+  description: Retrieve and process web content effortlessly. Convert HTML to
+    markdown for easier consumption by LLMs, allowing models to extract
+    information in manageable chunks. Enhance your applications with web content
+    fetching capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

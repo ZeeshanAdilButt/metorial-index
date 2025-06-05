@@ -1,0 +1,84 @@
+tools:
+  - name: fetch-ui
+    description: >
+      
+      "Use this tool when the user wants to see component, get inspiration, or
+      /buou or /ui fetch data and previews from buouui.com. 
+
+      This tool ONLY returns the text snippet for that UI component. 
+
+      After calling this tool, you must edit or add files to integrate the
+      snippet into the codebase."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - searchQuery
+      properties:
+        message:
+          type: string
+          description: Full users message
+        searchQuery:
+          type: string
+          description: Search query for buouui.com(library for searching UI components) to
+            find a UI component that matches the user's message. Must be a
+            two-four words max or phrase
+      additionalProperties: false
+  - name: list-ui
+    description: >
+      
+      "Use this tool when the user wants to see buouui.com component, or /buou
+      fetch data and previews from buouui.com. 
+
+      This tool returns the JSON data of matching components without generating
+      new code. This tool ONLY returns the text snippet for that UI component. 
+
+      After calling this tool, you need to display the data in the UI, and
+      finally you need to show the website page of the buouui.com."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - searchQuery
+      properties:
+        message:
+          type: string
+          description: Full users message
+        searchQuery:
+          type: string
+          description: Search query for buouui.com(library for searching UI components) to
+            find a UI component that matches the user's message. Must be a
+            two-four words max or phrase
+      additionalProperties: false
+  - name: create-image
+    description: >
+      
+      "Use this tool when the user requests a new image, mentions /buou /image
+      or asks for a image.
+
+      If the customer provides the picture editing operation of the attachment,
+      please send it to the corresponding tool.
+
+      This tool ONLY returns the url of the image. 
+
+      After calling this tool, Please show the image returned by this tool and
+      provide it for download.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - image
+      properties:
+        image:
+          type: string
+          description: If the customer provides the picture editing operation of the
+            attachment,please send it to the corresponding tool,otherwise, pass
+            an empty string
+        message:
+          type: string
+          description: Translate into English and explain the content of the customer's
+            image.
+      additionalProperties: false

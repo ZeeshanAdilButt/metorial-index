@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/paloalto-mcp-server/paloalto-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/paloalto-mcp-server
+  name: paloalto-mcp-server
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Palo Alto Networks MCP Server Suite
+  description: Manage your Palo Alto Networks firewalls and services seamlessly
+    through a unified API interface. Simplify firewall operations, policy
+    management, and device monitoring with specialized servers tailored for your
+    needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

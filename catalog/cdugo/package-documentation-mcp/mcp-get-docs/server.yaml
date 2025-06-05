@@ -1,0 +1,14 @@
+identifier: cdugo/package-documentation-mcp/mcp-get-docs
+repo:
+  provider: github.com
+  url: https://github.com/cdugo/package-documentation-mcp
+  name: package-documentation-mcp
+  owner: cdugo
+server:
+  subdirectory: /
+  name: DocsFetcher
+  description: Fetch npm package documentation and present it for LLMs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

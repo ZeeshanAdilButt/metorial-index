@@ -1,0 +1,177 @@
+tools:
+  - name: get_backlog_user
+    description: Get current Backlog user information
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_backlog_space
+    description: Get Backlog space information
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_recent_projects
+    description: List recently viewed Backlog projects
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        count:
+          type: number
+          description: Number of projects to retrieve (1-100, default 20)
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sorting order (asc or desc, default desc)
+  - name: get_project_issues
+    description: Get issues from a Backlog project
+    inputSchema:
+      type: object
+      required:
+        - projectIdOrKey
+      properties:
+        sort:
+          type: string
+          description: Sort field (e.g., 'created', 'updated')
+        count:
+          type: number
+          description: Number of issues to retrieve (1-100, default 20)
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sorting order (asc or desc, default desc)
+        offset:
+          type: number
+          description: Offset for pagination
+        statusId:
+          type: array
+          items:
+            type: number
+          description: Filter by status IDs
+        assigneeId:
+          type: array
+          items:
+            type: number
+          description: Filter by assignee IDs
+        projectIdOrKey:
+          type: string
+          description: Project ID or project key
+  - name: get_issue_detail
+    description: Get detailed information about a specific Backlog issue
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+      properties:
+        issueIdOrKey:
+          type: string
+          description: Issue ID or issue key
+  - name: get_issue_comments
+    description: Get comments from a specific Backlog issue
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+      properties:
+        count:
+          type: number
+          description: Number of comments to retrieve (1-100, default 20)
+        maxId:
+          type: number
+          description: Maximum comment ID
+        minId:
+          type: number
+          description: Minimum comment ID
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sorting order (asc or desc, default desc)
+        issueIdOrKey:
+          type: string
+          description: Issue ID or issue key
+  - name: add_issue_comment
+    description: Add a comment to a specific Backlog issue
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+        - content
+      properties:
+        content:
+          type: string
+          description: Comment content
+        issueIdOrKey:
+          type: string
+          description: Issue ID or issue key
+  - name: get_issue_comment_count
+    description: Get the count of comments in a specific Backlog issue
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+      properties:
+        issueIdOrKey:
+          type: string
+          description: Issue ID or issue key
+  - name: get_issue_comment
+    description: Get detailed information about a specific comment in a Backlog issue
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+        - commentId
+      properties:
+        commentId:
+          type: number
+          description: Comment ID
+        issueIdOrKey:
+          type: string
+          description: Issue ID or issue key
+  - name: get_wiki_page_list
+    description: Get a list of Wiki pages from Backlog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        keyword:
+          type: string
+          description: Keyword to search for in Wiki pages (optional)
+        projectIdOrKey:
+          type: string
+          description: Project ID or project key (optional)
+  - name: get_wiki_page
+    description: Get detailed information about a specific Wiki page
+    inputSchema:
+      type: object
+      required:
+        - wikiId
+      properties:
+        wikiId:
+          type: string
+          description: Wiki page ID
+  - name: update_wiki_page
+    description: Update a Wiki page in Backlog
+    inputSchema:
+      type: object
+      required:
+        - wikiId
+      properties:
+        name:
+          type: string
+          description: New name for the Wiki page (optional)
+        wikiId:
+          type: string
+          description: Wiki page ID
+        content:
+          type: string
+          description: New content for the Wiki page (optional)
+        mailNotify:
+          type: boolean
+          description: Whether to send notification emails (optional)

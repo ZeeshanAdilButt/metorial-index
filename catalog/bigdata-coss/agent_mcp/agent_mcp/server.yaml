@@ -1,0 +1,18 @@
+identifier: bigdata-coss/agent_mcp/agent_mcp
+repo:
+  provider: github.com
+  url: https://github.com/bigdata-coss/agent_mcp
+  name: agent_mcp
+  owner: bigdata-coss
+server:
+  subdirectory: /
+  name: Ontology MCP Server
+  description: Enable querying and manipulating ontology data via GraphDB's SPARQL
+    endpoint and integrate multiple AI models including Ollama, OpenAI, and
+    Google Gemini. Execute SPARQL queries, run AI model completions, and perform
+    HTTP requests seamlessly through a unified MCP interface. Enhance your AI
+    agents with rich semantic data access and diverse model capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

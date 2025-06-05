@@ -1,0 +1,18 @@
+identifier: geropl/git-mcp-go/git-mcp-go
+repo:
+  provider: github.com
+  url: https://github.com/geropl/git-mcp-go
+  name: git-mcp-go
+  owner: geropl
+server:
+  subdirectory: /
+  name: Git Repository Interaction Server
+  description: Enable seamless interaction and automation of Git repositories
+    through Large Language Models. Perform Git operations such as status checks,
+    diffs, commits, branch management, and logs via a standardized MCP
+    interface. Manage multiple repositories simultaneously with support for both
+    shell-based and pure Go Git implementations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

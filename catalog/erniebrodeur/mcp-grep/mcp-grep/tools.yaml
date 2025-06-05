@@ -1,0 +1,108 @@
+tools:
+  - name: grep
+    description: "Search for pattern in files using system grep.
+
+      \   \ 
+
+      \    Args:
+
+      \        pattern: Pattern to search for
+
+      \        paths: File or directory paths to search in (string or list of
+      strings)
+
+      \        ignore_case: Case-insensitive matching (-i)
+
+      \        before_context: Number of lines before match (-B)
+
+      \        after_context: Number of lines after match (-A)
+
+      \        context: Number of context lines around match (equal
+      before/after)
+
+      \        max_count: Stop after N matches (-m)
+
+      \        fixed_strings: Treat pattern as literal text, not regex (-F)
+
+      \        recursive: Search directories recursively (-r)
+
+      \        regexp: Use regular expressions for pattern matching
+
+      \        invert_match: Select non-matching lines (-v)
+
+      \        line_number: Show line numbers (-n)
+
+      \        file_pattern: Pattern to filter files (e.g., \"*.txt\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        JSON string with search results
+
+      \    "
+    inputSchema:
+      type: object
+      title: grepArguments
+      required:
+        - pattern
+        - paths
+      properties:
+        paths:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          title: Paths
+        regexp:
+          type: boolean
+          title: Regexp
+          default: true
+        context:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Context
+          default: null
+        pattern:
+          type: string
+          title: Pattern
+        max_count:
+          type: integer
+          title: Max Count
+          default: 0
+        recursive:
+          type: boolean
+          title: Recursive
+          default: false
+        ignore_case:
+          type: boolean
+          title: Ignore Case
+          default: false
+        line_number:
+          type: boolean
+          title: Line Number
+          default: true
+        file_pattern:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: File Pattern
+          default: null
+        invert_match:
+          type: boolean
+          title: Invert Match
+          default: false
+        after_context:
+          type: integer
+          title: After Context
+          default: 0
+        fixed_strings:
+          type: boolean
+          title: Fixed Strings
+          default: false
+        before_context:
+          type: integer
+          title: Before Context
+          default: 0

@@ -1,0 +1,16 @@
+identifier: peancor/moodle-mcp-server/moodle-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/peancor/moodle-mcp-server
+  name: moodle-mcp-server
+  owner: peancor
+server:
+  subdirectory: /
+  name: Moodle MCP Server
+  description: Manage your Moodle courses effortlessly. Interact with students,
+    assignments, and quizzes through a seamless integration with LLMs. Enhance
+    your educational experience by automating feedback and tracking progress.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

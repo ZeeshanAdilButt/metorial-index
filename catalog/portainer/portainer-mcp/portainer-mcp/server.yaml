@@ -1,0 +1,18 @@
+identifier: portainer/portainer-mcp/portainer-mcp
+repo:
+  provider: github.com
+  url: https://github.com/portainer/portainer-mcp
+  name: portainer-mcp
+  owner: portainer
+server:
+  subdirectory: /
+  name: Portainer MCP Server
+  description: Connect your AI assistant directly to your Portainer environments
+    to manage resources such as users and environments or execute Docker and
+    Kubernetes commands through AI. Enable secure and standardized interaction
+    with your containerized infrastructure via the Model Context Protocol.
+    Customize tool definitions and run in read-only mode for enhanced security.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: berlinbra/polymarket-mcp/polymarket_mcp
+repo:
+  provider: github.com
+  url: https://github.com/berlinbra/polymarket-mcp
+  name: polymarket-mcp
+  owner: berlinbra
+server:
+  subdirectory: /
+  name: PolyMarket Predictions
+  description: Fetch prediction market data from PolyMarket, including market
+    info, prices, and history.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

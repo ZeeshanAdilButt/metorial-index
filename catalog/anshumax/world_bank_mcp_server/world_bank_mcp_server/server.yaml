@@ -1,0 +1,15 @@
+identifier: anshumax/world_bank_mcp_server/world_bank_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/anshumax/world_bank_mcp_server
+  name: world_bank_mcp_server
+  owner: anshumax
+server:
+  subdirectory: /
+  name: World Bank Data Server
+  description: Enable interaction with the open World Bank data API. List
+    indicators and analyze data for various countries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

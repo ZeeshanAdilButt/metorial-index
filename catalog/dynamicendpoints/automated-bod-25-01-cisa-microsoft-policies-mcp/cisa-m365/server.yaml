@@ -1,0 +1,15 @@
+identifier: dynamicendpoints/automated-bod-25-01-cisa-microsoft-policies-mcp/cisa-m365
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/Automated-BOD-25-01-CISA-Microsoft-Policies-MCP
+  name: Automated-BOD-25-01-CISA-Microsoft-Policies-MCP
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: CISA M365
+  description: Implements CISA BOD 25-01 security controls for Microsoft 365
+    (Azure AD/Entra ID).
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

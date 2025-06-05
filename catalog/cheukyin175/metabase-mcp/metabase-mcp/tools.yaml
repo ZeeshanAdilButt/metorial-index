@@ -1,0 +1,221 @@
+tools:
+  - name: list_dashboards
+    description: List all dashboards in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_cards
+    description: List all questions/cards in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_databases
+    description: List all databases in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: execute_card
+    description: Execute a Metabase question/card and get results
+    inputSchema:
+      type: object
+      required:
+        - card_id
+      properties:
+        card_id:
+          type: number
+          description: ID of the card/question to execute
+        parameters:
+          type: object
+          description: Optional parameters for the query
+  - name: get_dashboard_cards
+    description: Get all cards in a dashboard
+    inputSchema:
+      type: object
+      required:
+        - dashboard_id
+      properties:
+        dashboard_id:
+          type: number
+          description: ID of the dashboard
+  - name: execute_query
+    description: Execute a SQL query against a Metabase database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - query
+      properties:
+        query:
+          type: string
+          description: SQL query to execute
+        database_id:
+          type: number
+          description: ID of the database to query
+        native_parameters:
+          type: array
+          items:
+            type: object
+          description: Optional parameters for the query
+  - name: create_card
+    description: Create a new question/card in Metabase
+    inputSchema:
+      type: object
+      required:
+        - name
+        - database_id
+        - query
+      properties:
+        name:
+          type: string
+          description: Name of the card
+        query:
+          type: string
+          description: SQL query for the card
+        database_id:
+          type: number
+          description: ID of the database to query
+        description:
+          type: string
+          description: Description of the card
+        visualization_settings:
+          type: object
+          description: Visualization settings for the card
+  - name: update_card_visualization
+    description: Update visualization settings for a card
+    inputSchema:
+      type: object
+      required:
+        - card_id
+        - visualization_settings
+      properties:
+        card_id:
+          type: number
+          description: ID of the card to update
+        visualization_settings:
+          type: object
+          description: New visualization settings
+  - name: add_card_to_dashboard
+    description: Add a card to a dashboard
+    inputSchema:
+      type: object
+      required:
+        - dashboard_id
+        - card_id
+      properties:
+        col:
+          type: number
+          description: Column position in the dashboard grid
+        row:
+          type: number
+          description: Row position in the dashboard grid
+        size_x:
+          type: number
+          description: Width of the card in dashboard grid units
+        size_y:
+          type: number
+          description: Height of the card in dashboard grid units
+        card_id:
+          type: number
+          description: ID of the card to add
+        dashboard_id:
+          type: number
+          description: ID of the dashboard
+  - name: create_dashboard
+    description: Create a new dashboard in Metabase
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the dashboard
+        parameters:
+          type: array
+          items:
+            type: object
+          description: Dashboard filter parameters (optional)
+        description:
+          type: string
+          description: Description of the dashboard
+        collection_id:
+          type: number
+          description: ID of the collection to put the dashboard in (optional)
+  - name: list_collections
+    description: List all collections in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: create_collection
+    description: Create a new collection in Metabase
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the collection
+        color:
+          type: string
+          description: Color for the collection (optional)
+        parent_id:
+          type: number
+          description: ID of the parent collection (optional)
+        description:
+          type: string
+          description: Description of the collection
+  - name: list_tables
+    description: List all tables in a database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+      properties:
+        database_id:
+          type: number
+          description: ID of the database
+  - name: get_table_fields
+    description: Get all fields/columns in a table
+    inputSchema:
+      type: object
+      required:
+        - table_id
+      properties:
+        table_id:
+          type: number
+          description: ID of the table
+  - name: update_dashboard
+    description: Update an existing dashboard
+    inputSchema:
+      type: object
+      required:
+        - dashboard_id
+      properties:
+        name:
+          type: string
+          description: New name for the dashboard
+        parameters:
+          type: array
+          items:
+            type: object
+          description: Updated dashboard filter parameters
+        description:
+          type: string
+          description: New description for the dashboard
+        dashboard_id:
+          type: number
+          description: ID of the dashboard to update
+        collection_id:
+          type: number
+          description: New collection ID for the dashboard
+  - name: delete_dashboard
+    description: Delete a dashboard
+    inputSchema:
+      type: object
+      required:
+        - dashboard_id
+      properties:
+        dashboard_id:
+          type: number
+          description: ID of the dashboard to delete

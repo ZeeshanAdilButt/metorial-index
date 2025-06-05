@@ -1,0 +1,14 @@
+identifier: adhikasp/mcp-git-ingest/mcp-git-ingest
+repo:
+  provider: github.com
+  url: https://github.com/adhikasp/mcp-git-ingest
+  name: mcp-git-ingest
+  owner: adhikasp
+server:
+  subdirectory: /
+  name: Git Ingest
+  description: Analyzes GitHub repository structure and important files.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,1192 @@
+tools:
+  - name: exampleTool
+    description: An example tool that takes a name and returns a greeting message.
+      Demonstrates the basic structure of an MCP tool using Zod for parameter
+      definition.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          minLength: 1
+          description: The name to include in the greeting message. Required, 1-50
+            characters.
+        language:
+          enum:
+            - en
+            - es
+            - fr
+          type: string
+          description: Optional language code for the greeting (e.g., 'en', 'es', 'fr').
+            Defaults to 'en' if not provided or invalid.
+      additionalProperties: false
+  - name: gemini_generateContent
+    description: >
+      
+      Generates non-streaming text content using a specified Google Gemini
+      model.
+
+      This tool takes a text prompt and returns the complete generated response
+      from the model.
+
+      It's suitable for single-turn generation tasks where the full response is
+      needed at once.
+
+      Optional parameters allow control over generation (temperature, max
+      tokens, etc.) and safety settings.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          minLength: 1
+          description: Required. The text prompt to send to the Gemini model for content
+            generation.
+        modelName:
+          type: string
+          minLength: 1
+          description: Optional. The name of the Gemini model to use (e.g.,
+            'gemini-1.5-flash'). If omitted, the server's default model (from
+            GOOGLE_GEMINI_MODEL env var) will be used.
+        safetySettings:
+          type: array
+          items:
+            type: object
+            required:
+              - category
+              - threshold
+            properties:
+              category:
+                enum:
+                  - HARM_CATEGORY_UNSPECIFIED
+                  - HARM_CATEGORY_HATE_SPEECH
+                  - HARM_CATEGORY_SEXUALLY_EXPLICIT
+                  - HARM_CATEGORY_HARASSMENT
+                  - HARM_CATEGORY_DANGEROUS_CONTENT
+                type: string
+                description: Category of harmful content to apply safety settings for.
+              threshold:
+                enum:
+                  - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+                  - BLOCK_LOW_AND_ABOVE
+                  - BLOCK_MEDIUM_AND_ABOVE
+                  - BLOCK_ONLY_HIGH
+                  - BLOCK_NONE
+                type: string
+                description: Threshold for blocking harmful content. Higher thresholds block
+                  more content.
+            description: Setting for controlling content safety for a specific harm
+              category.
+            additionalProperties: false
+          description: Optional. A list of safety settings to apply, overriding default
+            model safety settings. Each setting specifies a harm category and a
+            blocking threshold.
+        generationConfig:
+          type: object
+          properties:
+            topK:
+              type: integer
+              minimum: 1
+              description: Top-k sampling parameter. The model considers the k most probable
+                tokens. Default varies by model.
+            topP:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Nucleus sampling parameter. The model considers only tokens with
+                probability mass summing to this value. Default varies by model.
+            temperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Controls randomness. Lower values (~0.2) make output more
+                deterministic, higher values (~0.8) make it more creative.
+                Default varies by model.
+            stopSequences:
+              type: array
+              items:
+                type: string
+              description: Sequences where the API will stop generating further tokens.
+            maxOutputTokens:
+              type: integer
+              minimum: 1
+              description: Maximum number of tokens to generate in the response.
+          description: Optional configuration for controlling the generation process.
+          additionalProperties: false
+      additionalProperties: false
+  - name: gemini_generateContentStream
+    description: >
+      
+      Generates text content as a stream using a specified Google Gemini model.
+
+      This tool takes a text prompt and streams back chunks of the generated
+      response as they become available.
+
+      It's suitable for interactive use cases or handling long responses.
+
+      Optional parameters allow control over generation and safety settings.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          minLength: 1
+          description: Required. The text prompt to send to the Gemini model for content
+            generation.
+        modelName:
+          type: string
+          minLength: 1
+          description: Optional. The name of the Gemini model to use (e.g.,
+            'gemini-1.5-flash'). If omitted, the server's default model (from
+            GOOGLE_GEMINI_MODEL env var) will be used.
+        safetySettings:
+          type: array
+          items:
+            type: object
+            required:
+              - category
+              - threshold
+            properties:
+              category:
+                enum:
+                  - HARM_CATEGORY_UNSPECIFIED
+                  - HARM_CATEGORY_HATE_SPEECH
+                  - HARM_CATEGORY_SEXUALLY_EXPLICIT
+                  - HARM_CATEGORY_HARASSMENT
+                  - HARM_CATEGORY_DANGEROUS_CONTENT
+                type: string
+                description: Category of harmful content to apply safety settings for.
+              threshold:
+                enum:
+                  - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+                  - BLOCK_LOW_AND_ABOVE
+                  - BLOCK_MEDIUM_AND_ABOVE
+                  - BLOCK_ONLY_HIGH
+                  - BLOCK_NONE
+                type: string
+                description: Threshold for blocking harmful content. Higher thresholds block
+                  more content.
+            description: Setting for controlling content safety for a specific harm
+              category.
+            additionalProperties: false
+          description: Optional. A list of safety settings to apply, overriding default
+            model safety settings.
+        generationConfig:
+          type: object
+          properties:
+            topK:
+              type: integer
+              minimum: 1
+              description: Top-k sampling parameter. The model considers the k most probable
+                tokens. Default varies by model.
+            topP:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Nucleus sampling parameter. The model considers only tokens with
+                probability mass summing to this value. Default varies by model.
+            temperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Controls randomness. Lower values (~0.2) make output more
+                deterministic, higher values (~0.8) make it more creative.
+                Default varies by model.
+            stopSequences:
+              type: array
+              items:
+                type: string
+              description: Sequences where the API will stop generating further tokens.
+            maxOutputTokens:
+              type: integer
+              minimum: 1
+              description: Maximum number of tokens to generate in the response.
+          description: Optional configuration for controlling the generation process.
+          additionalProperties: false
+      additionalProperties: false
+  - name: gemini_functionCall
+    description: >
+      
+      Generates content using a specified Google Gemini model, enabling the
+      model to request execution of predefined functions.
+
+      This tool accepts function declarations and returns either the standard
+      text response OR the details of a function call requested by the model.
+
+      NOTE: This tool only returns the *request* for a function call; it does
+      not execute the function itself.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+        - functionDeclarations
+      properties:
+        prompt:
+          type: string
+          minLength: 1
+          description: Required. The text prompt to send to the Gemini model.
+        modelName:
+          type: string
+          minLength: 1
+          description: Optional. The name of the Gemini model to use (e.g.,
+            'gemini-1.5-flash'). If omitted, the server's default model (from
+            GOOGLE_GEMINI_MODEL env var) will be used.
+        toolConfig:
+          type: object
+          properties:
+            functionCallingConfig:
+              type: object
+              properties:
+                mode:
+                  enum:
+                    - AUTO
+                    - ANY
+                    - NONE
+                  type: string
+                  description: The function calling mode.
+                allowedFunctionNames:
+                  type: array
+                  items:
+                    type: string
+                  description: Optional list of function names allowed to be called. If specified,
+                    the model will only call functions from this list.
+              description: Configuration specific to function calling.
+              additionalProperties: false
+          description: Optional configuration for tools, specifically function calling.
+          additionalProperties: false
+        safetySettings:
+          type: array
+          items:
+            type: object
+            required:
+              - category
+              - threshold
+            properties:
+              category:
+                enum:
+                  - HARM_CATEGORY_UNSPECIFIED
+                  - HARM_CATEGORY_HATE_SPEECH
+                  - HARM_CATEGORY_SEXUALLY_EXPLICIT
+                  - HARM_CATEGORY_HARASSMENT
+                  - HARM_CATEGORY_DANGEROUS_CONTENT
+                type: string
+                description: Category of harmful content to apply safety settings for.
+              threshold:
+                enum:
+                  - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+                  - BLOCK_LOW_AND_ABOVE
+                  - BLOCK_MEDIUM_AND_ABOVE
+                  - BLOCK_ONLY_HIGH
+                  - BLOCK_NONE
+                type: string
+                description: Threshold for blocking harmful content. Higher thresholds block
+                  more content.
+            description: Setting for controlling content safety for a specific harm
+              category.
+            additionalProperties: false
+        generationConfig:
+          type: object
+          properties:
+            topK:
+              type: integer
+              minimum: 1
+              description: Top-k sampling parameter. The model considers the k most probable
+                tokens. Default varies by model.
+            topP:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Nucleus sampling parameter. The model considers only tokens with
+                probability mass summing to this value. Default varies by model.
+            temperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Controls randomness. Lower values (~0.2) make output more
+                deterministic, higher values (~0.8) make it more creative.
+                Default varies by model.
+            stopSequences:
+              type: array
+              items:
+                type: string
+              description: Sequences where the API will stop generating further tokens.
+            maxOutputTokens:
+              type: integer
+              minimum: 1
+              description: Maximum number of tokens to generate in the response.
+          description: Optional configuration for controlling the generation process.
+          additionalProperties: false
+        functionDeclarations:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - description
+              - parameters
+            properties:
+              name:
+                type: string
+                minLength: 1
+                description: The name of the function to be called. Must match the name the
+                  model is expected to use.
+              parameters:
+                type: object
+                required:
+                  - type
+                  - properties
+                properties:
+                  type:
+                    type: string
+                    const: OBJECT
+                    description: The top-level parameters structure must be an OBJECT.
+                  required:
+                    type: array
+                    items:
+                      type: string
+                    description: List of required parameter names at the top level.
+                  properties:
+                    type: object
+                    description: Defines the parameters the function accepts.
+                    additionalProperties:
+                      type: object
+                      required:
+                        - type
+                      properties:
+                        enum:
+                          type: array
+                          items:
+                            type: string
+                          description: Allowed string values for an ENUM-like parameter.
+                        type:
+                          enum:
+                            - OBJECT
+                            - STRING
+                            - NUMBER
+                            - BOOLEAN
+                            - ARRAY
+                            - INTEGER
+                          type: string
+                          description: The data type of the function parameter.
+                        items:
+                          $ref: "#/properties/functionDeclarations/items/properties/parameters/properties\
+                            /properties/additionalProperties"
+                          description: Defines the schema for items if the parameter type is ARRAY.
+                        required:
+                          type: array
+                          items:
+                            type: string
+                          description: List of required property names for OBJECT types.
+                        properties:
+                          type: object
+                          additionalProperties:
+                            $ref: "#/properties/functionDeclarations/items/properties/parameters/properties\
+                              /properties/additionalProperties"
+                        description:
+                          type: string
+                          description: Description of the parameter's purpose.
+                      description: Schema defining a single parameter for a function declaration,
+                        potentially recursive.
+                      additionalProperties: false
+                description: Schema defining the parameters the function accepts. Must be of
+                  type OBJECT.
+                additionalProperties: false
+              description:
+                type: string
+                minLength: 1
+                description: A description of what the function does. Used by the model to
+                  decide when to call it.
+            description: Declaration of a single function that the Gemini model can request
+              to call.
+            additionalProperties: false
+          minItems: 1
+          description: Required. An array of function declarations (schemas) that the
+            model can choose to call based on the prompt.
+      additionalProperties: false
+  - name: gemini_startChat
+    description: Initiates a new stateful chat session with a specified Gemini
+      model. Returns a unique sessionId to be used in subsequent chat messages.
+      Optionally accepts initial conversation history and session-wide
+      generation/safety configurations.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        tools:
+          type: array
+          items:
+            type: object
+            properties:
+              functionDeclarations:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - description
+                    - parameters
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                      description: The name of the function to be called.
+                    parameters:
+                      type: object
+                      required:
+                        - type
+                        - properties
+                      properties:
+                        type:
+                          type: string
+                          const: OBJECT
+                          description: The top-level parameters structure must be an OBJECT.
+                        required:
+                          type: array
+                          items:
+                            type: string
+                          description: List of required parameter names at the top level.
+                        properties:
+                          type: object
+                          description: Defines the parameters the function accepts.
+                          additionalProperties:
+                            type: object
+                            required:
+                              - type
+                            properties:
+                              enum:
+                                type: array
+                                items:
+                                  type: string
+                                description: Allowed string values for an ENUM-like parameter.
+                              type:
+                                enum:
+                                  - OBJECT
+                                  - STRING
+                                  - NUMBER
+                                  - BOOLEAN
+                                  - ARRAY
+                                  - INTEGER
+                                type: string
+                                description: The data type of the function parameter.
+                              items:
+                                $ref: "#/properties/tools/items/properties/functionDeclarations/items/propertie\
+                                  s/parameters/properties/properties/additional\
+                                  Properties"
+                                description: Defines the schema for items if the parameter type is ARRAY.
+                              required:
+                                type: array
+                                items:
+                                  type: string
+                                description: List of required property names for OBJECT types.
+                              properties:
+                                type: object
+                                additionalProperties:
+                                  $ref: "#/properties/tools/items/properties/functionDeclarations/items/propertie\
+                                    s/parameters/properties/properties/addition\
+                                    alProperties"
+                              description:
+                                type: string
+                                description: Description of the parameter's purpose.
+                            description: Schema defining a single parameter for a function declaration,
+                              potentially recursive.
+                            additionalProperties: false
+                      description: Schema defining the parameters the function accepts.
+                      additionalProperties: false
+                    description:
+                      type: string
+                      minLength: 1
+                      description: A description of what the function does.
+                  description: Declaration of a single function that the Gemini model can request
+                    to call.
+                  additionalProperties: false
+                description: List of function declarations for this tool.
+            description: Represents a tool definition containing function declarations.
+            additionalProperties: false
+          description: Optional. A list of tools (currently only supporting function
+            declarations) the model may use during the chat session.
+        history:
+          type: array
+          items:
+            type: object
+            required:
+              - role
+              - parts
+            properties:
+              role:
+                enum:
+                  - user
+                  - model
+                type: string
+                description: The role of the entity that generated this content (user or model).
+              parts:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - text
+                  properties:
+                    text:
+                      type: string
+                      description: Text content of the part.
+                  description: A part of a historical message, primarily text for initialization.
+                  additionalProperties: false
+                minItems: 1
+                description: An array of Parts making up the message content.
+            description: A single message turn in the conversation history.
+            additionalProperties: false
+          description: Optional. An array of initial conversation turns to seed the chat
+            session. Must alternate between 'user' and 'model' roles, starting
+            with 'user'.
+        modelName:
+          type: string
+          minLength: 1
+          description: Optional. The name of the Gemini model to use for this chat session
+            (e.g., 'gemini-1.5-flash'). If omitted, the server's default model
+            (from GOOGLE_GEMINI_MODEL env var) will be used.
+        safetySettings:
+          type: array
+          items:
+            type: object
+            required:
+              - category
+              - threshold
+            properties:
+              category:
+                enum:
+                  - HARM_CATEGORY_UNSPECIFIED
+                  - HARM_CATEGORY_HATE_SPEECH
+                  - HARM_CATEGORY_SEXUALLY_EXPLICIT
+                  - HARM_CATEGORY_HARASSMENT
+                  - HARM_CATEGORY_DANGEROUS_CONTENT
+                type: string
+                description: Category of harmful content to apply safety settings for.
+              threshold:
+                enum:
+                  - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+                  - BLOCK_LOW_AND_ABOVE
+                  - BLOCK_MEDIUM_AND_ABOVE
+                  - BLOCK_ONLY_HIGH
+                  - BLOCK_NONE
+                type: string
+                description: Threshold for blocking harmful content. Higher thresholds block
+                  more content.
+            description: Setting for controlling content safety for a specific harm
+              category.
+            additionalProperties: false
+          description: Optional. Session-wide safety settings to apply.
+        generationConfig:
+          type: object
+          properties:
+            topK:
+              type: integer
+              minimum: 1
+              description: Top-k sampling parameter. The model considers the k most probable
+                tokens. Default varies by model.
+            topP:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Nucleus sampling parameter. The model considers only tokens with
+                probability mass summing to this value. Default varies by model.
+            temperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Controls randomness. Lower values (~0.2) make output more
+                deterministic, higher values (~0.8) make it more creative.
+                Default varies by model.
+            stopSequences:
+              type: array
+              items:
+                type: string
+              description: Sequences where the API will stop generating further tokens.
+            maxOutputTokens:
+              type: integer
+              minimum: 1
+              description: Maximum number of tokens to generate in the response.
+          description: Optional. Session-wide generation configuration settings.
+          additionalProperties: false
+      additionalProperties: false
+  - name: gemini_sendMessage
+    description: Sends a message to an existing Gemini chat session, identified by
+      its sessionId. Returns the model's response, which might include text or a
+      function call request.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - message
+      properties:
+        tools:
+          type: array
+          items:
+            type: object
+            properties:
+              functionDeclarations:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - name
+                    - description
+                    - parameters
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                    parameters:
+                      type: object
+                      required:
+                        - type
+                        - properties
+                      properties:
+                        type:
+                          type: string
+                          const: OBJECT
+                        required:
+                          type: array
+                          items:
+                            type: string
+                        properties:
+                          type: object
+                          additionalProperties: {}
+                      additionalProperties: false
+                    description:
+                      type: string
+                      minLength: 1
+                  additionalProperties: false
+            additionalProperties: false
+          description: Optional. Per-request tools definition (e.g., function
+            declarations) to override session defaults for this turn.
+        message:
+          type: string
+          minLength: 1
+          description: "Required. The text message content to send to the model. (Note:
+            Currently only supports text input; complex Part types like images
+            are not yet supported by this tool parameter)."
+        sessionId:
+          type: string
+          format: uuid
+          description: Required. The unique identifier of the chat session to send the
+            message to.
+        toolConfig:
+          type: object
+          properties:
+            functionCallingConfig:
+              type: object
+              properties:
+                mode:
+                  enum:
+                    - AUTO
+                    - ANY
+                    - NONE
+                  type: string
+                  description: The function calling mode.
+                allowedFunctionNames:
+                  type: array
+                  items:
+                    type: string
+                  description: Optional list of function names allowed.
+              additionalProperties: false
+          description: Optional. Per-request tool configuration, e.g., to force function
+            calling mode.
+          additionalProperties: false
+        safetySettings:
+          type: array
+          items:
+            type: object
+            required:
+              - category
+              - threshold
+            properties:
+              category:
+                enum:
+                  - HARM_CATEGORY_UNSPECIFIED
+                  - HARM_CATEGORY_HATE_SPEECH
+                  - HARM_CATEGORY_SEXUALLY_EXPLICIT
+                  - HARM_CATEGORY_HARASSMENT
+                  - HARM_CATEGORY_DANGEROUS_CONTENT
+                type: string
+                description: Category of harmful content to apply safety settings for.
+              threshold:
+                enum:
+                  - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+                  - BLOCK_LOW_AND_ABOVE
+                  - BLOCK_MEDIUM_AND_ABOVE
+                  - BLOCK_ONLY_HIGH
+                  - BLOCK_NONE
+                type: string
+                description: Threshold for blocking harmful content. Higher thresholds block
+                  more content.
+            description: Setting for controlling content safety for a specific harm
+              category.
+            additionalProperties: false
+          description: Optional. Per-request safety settings to override session defaults
+            for this turn.
+        generationConfig:
+          type: object
+          properties:
+            topK:
+              type: integer
+              minimum: 1
+              description: Top-k sampling parameter. The model considers the k most probable
+                tokens. Default varies by model.
+            topP:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Nucleus sampling parameter. The model considers only tokens with
+                probability mass summing to this value. Default varies by model.
+            temperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Controls randomness. Lower values (~0.2) make output more
+                deterministic, higher values (~0.8) make it more creative.
+                Default varies by model.
+            stopSequences:
+              type: array
+              items:
+                type: string
+              description: Sequences where the API will stop generating further tokens.
+            maxOutputTokens:
+              type: integer
+              minimum: 1
+              description: Maximum number of tokens to generate in the response.
+          description: Optional. Per-request generation configuration settings to override
+            session defaults for this turn.
+          additionalProperties: false
+      additionalProperties: false
+  - name: gemini_sendFunctionResult
+    description: Sends the result(s) of function execution(s) back to an existing
+      Gemini chat session, identified by its sessionId. Returns the model's
+      subsequent response.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - functionResponses
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+          description: Required. The unique identifier of the chat session.
+        safetySettings:
+          type: array
+          items:
+            type: object
+            required:
+              - category
+              - threshold
+            properties:
+              category:
+                enum:
+                  - HARM_CATEGORY_UNSPECIFIED
+                  - HARM_CATEGORY_HATE_SPEECH
+                  - HARM_CATEGORY_SEXUALLY_EXPLICIT
+                  - HARM_CATEGORY_HARASSMENT
+                  - HARM_CATEGORY_DANGEROUS_CONTENT
+                type: string
+                description: Category of harmful content to apply safety settings for.
+              threshold:
+                enum:
+                  - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+                  - BLOCK_LOW_AND_ABOVE
+                  - BLOCK_MEDIUM_AND_ABOVE
+                  - BLOCK_ONLY_HIGH
+                  - BLOCK_NONE
+                type: string
+                description: Threshold for blocking harmful content. Higher thresholds block
+                  more content.
+            description: Setting for controlling content safety for a specific harm
+              category.
+            additionalProperties: false
+          description: Optional. Per-request safety settings to override session defaults
+            for this turn.
+        generationConfig:
+          type: object
+          properties:
+            topK:
+              type: integer
+              minimum: 1
+              description: Top-k sampling parameter. The model considers the k most probable
+                tokens. Default varies by model.
+            topP:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Nucleus sampling parameter. The model considers only tokens with
+                probability mass summing to this value. Default varies by model.
+            temperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Controls randomness. Lower values (~0.2) make output more
+                deterministic, higher values (~0.8) make it more creative.
+                Default varies by model.
+            stopSequences:
+              type: array
+              items:
+                type: string
+              description: Sequences where the API will stop generating further tokens.
+            maxOutputTokens:
+              type: integer
+              minimum: 1
+              description: Maximum number of tokens to generate in the response.
+          description: Optional. Per-request generation configuration settings to override
+            session defaults for this turn.
+          additionalProperties: false
+        functionResponses:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - response
+            properties:
+              name:
+                type: string
+                minLength: 1
+                description: Required. The name of the function that was called by the model.
+              response:
+                type: object
+                description: Required. The JSON object result returned by the function
+                  execution.
+                additionalProperties: {}
+            description: Represents the result of a single function execution to be sent
+              back to the model.
+            additionalProperties: false
+          minItems: 1
+          description: Required. An array containing the results of the function calls
+            executed by the client. Each item must include the function 'name'
+            and its 'response' object.
+      additionalProperties: false
+  - name: gemini_uploadFile
+    description: >
+      
+      Uploads a file (specified by a local path) to be used with the Gemini API.
+
+      NOTE: This API is not supported on Vertex AI clients. It only works with
+      Google AI Studio API keys.
+
+      Returns metadata about the uploaded file, including its unique name and
+      URI.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          minLength: 1
+          description: Required. The full local path to the file that needs to be uploaded.
+        mimeType:
+          type: string
+          minLength: 1
+          description: Optional. The IANA MIME type of the file (e.g., 'text/plain',
+            'image/jpeg'). If omitted, the server will attempt to infer it from
+            the file extension of filePath.
+        displayName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          description: Optional. A human-readable name for the file in the API. Max 100
+            chars.
+      additionalProperties: false
+  - name: gemini_listFiles
+    description: >
+      
+      Lists files previously uploaded to the Gemini API.
+
+      Supports pagination to handle large numbers of files.
+
+      NOTE: This API is not supported on Vertex AI clients. It only works with
+      Google AI Studio API keys.
+
+      Returns a list of file metadata objects and potentially a token for the
+      next page.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        pageSize:
+          type: integer
+          maximum: 1000
+          description: Optional. The maximum number of files to return per page. Defaults
+            to 100 if not specified by the API, max 1000.
+          exclusiveMinimum: 0
+        pageToken:
+          type: string
+          minLength: 1
+          description: Optional. A token received from a previous listFiles call to
+            retrieve the next page of results.
+      additionalProperties: false
+  - name: gemini_getFile
+    description: >
+      
+      Retrieves metadata for a specific file previously uploaded to the Gemini
+      API.
+
+      NOTE: This API is not supported on Vertex AI clients. It only works with
+      Google AI Studio API keys.
+
+      Requires the unique file name (e.g., 'files/abc123xyz').
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileName
+      properties:
+        fileName:
+          type: string
+          pattern: ^files\/.+$
+          minLength: 1
+          description: Required. The unique name/ID of the file to retrieve metadata for
+            (e.g., 'files/abc123xyz').
+      additionalProperties: false
+  - name: gemini_deleteFile
+    description: >
+      
+      Deletes a specific file previously uploaded to the Gemini API.
+
+      NOTE: This API is not supported on Vertex AI clients. It only works with
+      Google AI Studio API keys.
+
+      Requires the unique file name (e.g., 'files/abc123xyz'). Returns a success
+      confirmation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileName
+      properties:
+        fileName:
+          type: string
+          pattern: ^files\/.+$
+          minLength: 1
+          description: Required. The unique name/ID of the file to delete (e.g.,
+            'files/abc123xyz').
+      additionalProperties: false
+  - name: gemini_createCache
+    description: >
+      
+      Creates a cached content resource for a compatible Gemini model.
+
+      Caching can reduce latency and costs for prompts that are reused often.
+
+      NOTE: Caching is only supported for specific models (e.g.,
+      gemini-1.5-flash, gemini-1.5-pro).
+
+      Returns metadata about the created cache.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contents
+      properties:
+        ttl:
+          type: string
+          pattern: ^\d+(\.\d+)?s$
+          description: Optional. Time-to-live for the cache as a duration string (e.g.,
+            '3600s' for 1 hour). Max 48 hours.
+        model:
+          type: string
+          minLength: 1
+          description: Optional. The name/ID of the model compatible with caching (e.g.,
+            'gemini-1.5-flash'). If omitted, the server's default model (from
+            GOOGLE_GEMINI_MODEL env var) will be used.
+        contents:
+          type: array
+          items:
+            type: object
+            required:
+              - parts
+            properties:
+              role:
+                enum:
+                  - user
+                  - model
+                  - function
+                  - tool
+                type: string
+              parts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                    fileData:
+                      type: object
+                      required:
+                        - mimeType
+                        - fileUri
+                      properties:
+                        fileUri:
+                          type: string
+                          format: uri
+                        mimeType:
+                          type: string
+                      additionalProperties: false
+                    inlineData:
+                      type: object
+                      required:
+                        - mimeType
+                        - data
+                      properties:
+                        data:
+                          type: string
+                        mimeType:
+                          type: string
+                      additionalProperties: false
+                    functionCall:
+                      type: object
+                      required:
+                        - name
+                        - args
+                      properties:
+                        id:
+                          type: string
+                        args:
+                          type: object
+                          additionalProperties: {}
+                        name:
+                          type: string
+                      additionalProperties: false
+                    functionResponse:
+                      type: object
+                      required:
+                        - name
+                        - response
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        response:
+                          type: object
+                          additionalProperties: {}
+                      additionalProperties: false
+                  additionalProperties: false
+                minItems: 1
+            additionalProperties: false
+          minItems: 1
+          description: Required. The content to cache, matching the SDK's Content
+            structure (an array of Parts).
+        displayName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          description: Optional. A human-readable name for the cache.
+        systemInstruction:
+          $ref: "#/properties/contents/items"
+          description: Optional. System instructions to associate with the cache.
+      additionalProperties: false
+  - name: gemini_listCaches
+    description: >
+      
+      Lists cached content resources available for the project.
+
+      Supports pagination.
+
+      Returns a list of cache metadata objects and potentially a token for the
+      next page.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        pageSize:
+          type: integer
+          maximum: 1000
+          description: Optional. The maximum number of caches to return per page. Defaults
+            to 100 if not specified by the API, max 1000.
+          exclusiveMinimum: 0
+        pageToken:
+          type: string
+          minLength: 1
+          description: Optional. A token received from a previous listCaches call to
+            retrieve the next page of results.
+      additionalProperties: false
+  - name: gemini_getCache
+    description: |
+      
+      Retrieves metadata for a specific cached content resource.
+      Requires the unique cache name (e.g., 'cachedContents/abc123xyz').
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cacheName
+      properties:
+        cacheName:
+          type: string
+          pattern: ^cachedContents\/.+$
+          minLength: 1
+          description: Required. The unique name/ID of the cache to retrieve metadata for
+            (e.g., 'cachedContents/abc123xyz').
+      additionalProperties: false
+  - name: gemini_updateCache
+    description: >
+      
+      Updates metadata (TTL and/or displayName) for a specific cached content
+      resource.
+
+      Requires the unique cache name (e.g., 'cachedContents/abc123xyz').
+
+      Returns the updated cache metadata.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cacheName
+      properties:
+        ttl:
+          type: string
+          pattern: ^\d+(\.\d+)?s$
+          description: Optional. The new time-to-live for the cache as a duration string
+            (e.g., '3600s' for 1 hour). Max 48 hours.
+        cacheName:
+          type: string
+          pattern: ^cachedContents\/.+$
+          minLength: 1
+          description: Required. The unique name/ID of the cache to update (e.g.,
+            'cachedContents/abc123xyz').
+        displayName:
+          type: string
+          maxLength: 100
+          minLength: 1
+          description: Optional. The new human-readable name for the cache. Max 100 chars.
+      additionalProperties: false
+  - name: gemini_deleteCache
+    description: |
+      
+      Deletes a specific cached content resource.
+      Requires the unique cache name (e.g., 'cachedContents/abc123xyz').
+      Returns a success confirmation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cacheName
+      properties:
+        cacheName:
+          type: string
+          pattern: ^cachedContents\/.+$
+          minLength: 1
+          description: Required. The unique name/ID of the cache to delete (e.g.,
+            'cachedContents/abc123xyz').
+      additionalProperties: false

@@ -1,0 +1,97 @@
+tools:
+  - name: v2ex_notification
+    description: get v2ex user notification
+    inputSchema:
+      type: object
+      required:
+        - page
+      properties:
+        page:
+          type: number
+          default: 1
+          description: page number, notification Pagination number, default is 1
+  - name: v2ex_remove_notification
+    description: remove v2ex user notification
+    inputSchema:
+      type: object
+      required:
+        - notification_id
+      properties:
+        notification_id:
+          type: string
+          description: notification id
+  - name: v2ex_member_profile
+    description: get v2ex user profile
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: v2ex_node
+    description: get v2ex node
+    inputSchema:
+      type: object
+      required:
+        - node_name
+      properties:
+        node_name:
+          type: string
+          description: v2ex node name
+  - name: v2ex_node_topic
+    description: get v2ex node topic
+    inputSchema:
+      type: object
+      required:
+        - node_name
+      properties:
+        page:
+          type: number
+          default: 1
+          description: page number for current node topics list, default is 1
+        node_name:
+          type: string
+          description: v2ex node name
+  - name: v2ex_topic
+    description: get v2ex topic
+    inputSchema:
+      type: object
+      required:
+        - topic_id
+      properties:
+        topic_id:
+          type: number
+          description: v2ex topic id
+  - name: v2ex_topic_comments
+    description: get v2ex topic comments
+    inputSchema:
+      type: object
+      required:
+        - topic_id
+      properties:
+        page:
+          type: number
+          default: 1
+          description: page number for current topic comments, default is 1
+        topic_id:
+          type: number
+          description: v2ex topic id
+  - name: v2ex_current_token
+    description: get v2ex current user token
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: v2ex_create_new_token
+    description: create v2ex user new token
+    inputSchema:
+      type: object
+      required:
+        - scope
+        - expiration
+      properties:
+        scope:
+          type: string
+          default: everything
+          description: v2ex token scope
+        expiration:
+          type: number
+          description: v2ex token expiration

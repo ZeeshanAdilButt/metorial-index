@@ -1,0 +1,14 @@
+identifier: yangkyeongmo/mcp-server-openmetadata/mcp-server-openmetadata
+repo:
+  provider: github.com
+  url: https://github.com/yangkyeongmo/mcp-server-openmetadata
+  name: mcp-server-openmetadata
+  owner: yangkyeongmo
+server:
+  subdirectory: /
+  name: OpenMetadata MCP Server
+  description: Integrate OpenMetadata seamlessly with MCP clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

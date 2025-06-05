@@ -1,0 +1,15 @@
+identifier: suekou/mcp-notion-server/mcp-notion-server
+repo:
+  provider: github.com
+  url: https://github.com/suekou/mcp-notion-server
+  name: mcp-notion-server
+  owner: suekou
+server:
+  subdirectory: /
+  name: Notion Server
+  description: MCP server for interacting with the Notion API, enabling Claude to
+    interact with Notion workspaces.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,12 @@
+tools:
+  - name: Translator_Agent
+    description: Translate the user's message to Spanish, French, and Italian
+    inputSchema:
+      type: object
+      title: Translator_AgentArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

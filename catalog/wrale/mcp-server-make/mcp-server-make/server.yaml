@@ -1,0 +1,17 @@
+identifier: wrale/mcp-server-make/mcp-server-make
+repo:
+  provider: github.com
+  url: https://github.com/wrale/mcp-server-make
+  name: mcp-server-make
+  owner: wrale
+server:
+  subdirectory: /
+  name: Make Functionality Server
+  description: Enable LLMs to execute make targets from a Makefile in a safe and
+    controlled manner. Automate development tasks, manage project dependencies,
+    and enhance build processes with ease. Get immediate feedback and streamline
+    your development workflows with powerful assistance from LLMs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

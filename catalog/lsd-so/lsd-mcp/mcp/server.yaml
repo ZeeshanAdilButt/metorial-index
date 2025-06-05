@@ -1,0 +1,17 @@
+identifier: lsd-so/lsd-mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/lsd-so/lsd-mcp
+  name: lsd-mcp
+  owner: lsd-so
+server:
+  subdirectory: /
+  name: LSD MCP server
+  description: Connect Claude to the internet and enhance its capabilities with
+    LSD SQL. Instantly gather high-quality information from any website by
+    simply providing a link, enabling Claude to perform complex queries and
+    actions seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

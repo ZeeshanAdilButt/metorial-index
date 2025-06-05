@@ -1,0 +1,23 @@
+identifier: pv-bhat/vibe-check-mcp-server/vibe-check-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/PV-Bhat/vibe-check-mcp-server
+  name: vibe-check-mcp-server
+  owner: PV-Bhat
+server:
+  subdirectory: /
+  name: Vibe Check
+  description: >-
+    The definitive Vibe Coder's sanity check MCP server: Prevent cascading
+    errors in AI workflows by implementing strategic pattern interrupts. Uses
+    tool call "Vibe Check" with LearnLM 1.5 Pro (Gemini API), fine-tuned for
+    pedagogy and metacognition to enhance complex workflow strategy, and
+    prevents tunnel vision errors.
+
+
+    TLDR; Implement an agent fine-tuned to stop your agent and make it
+    reconsider before it confidently implements something wrong.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

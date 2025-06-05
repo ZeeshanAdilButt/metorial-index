@@ -1,0 +1,18 @@
+identifier: cloudflare/playwright-mcp/playwright-mcp
+repo:
+  provider: github.com
+  url: https://github.com/cloudflare/playwright-mcp
+  name: playwright-mcp
+  owner: cloudflare
+server:
+  subdirectory: /
+  name: Cloudflare Playwright
+  description: Automate browser interactions and testing through a powerful MCP
+    server integrated with Playwright and Cloudflare Workers. Execute web
+    navigation, element interaction, and capture screenshots or snapshots to
+    enhance your LLM-driven workflows. Easily deploy and connect to this server
+    to enable rich browser automation capabilities for your agents.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

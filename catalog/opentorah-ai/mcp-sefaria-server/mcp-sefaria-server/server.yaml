@@ -1,0 +1,14 @@
+identifier: opentorah-ai/mcp-sefaria-server/mcp-sefaria-server
+repo:
+  provider: github.com
+  url: https://github.com/OpenTorah-ai/mcp-sefaria-server
+  name: mcp-sefaria-server
+  owner: OpenTorah-ai
+server:
+  subdirectory: /
+  name: Sefaria Jewish Library
+  description: Retrieve and reference Jewish texts through a standardized interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

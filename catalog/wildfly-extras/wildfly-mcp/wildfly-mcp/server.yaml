@@ -1,0 +1,15 @@
+identifier: wildfly-extras/wildfly-mcp/wildfly-mcp
+repo:
+  provider: github.com
+  url: https://github.com/wildfly-extras/wildfly-mcp
+  name: wildfly-mcp
+  owner: wildfly-extras
+server:
+  subdirectory: /
+  name: WildFly MCP
+  description: Integrate Generative AI capabilities for monitoring and managing
+    WildFly servers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

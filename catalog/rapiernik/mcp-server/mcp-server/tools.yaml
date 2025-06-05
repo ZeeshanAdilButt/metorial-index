@@ -1,0 +1,11 @@
+tools:
+  - name: get_health_advice
+    description: Get health advice for various conditions
+    inputSchema:
+      type: object
+      required:
+        - condition
+      properties:
+        condition:
+          type: string
+          description: Health condition (e.g. headache, hangover)

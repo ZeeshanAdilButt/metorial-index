@@ -1,0 +1,62 @@
+tools:
+  - name: use_description
+    description: 列出所有可用的工具及其参数
+    inputSchema:
+      type: object
+      title: list_toolsArguments
+      properties: {}
+  - name: generate_image
+    description: "根据文本描述生成图片
+
+      \   \ 
+
+      \    Args:
+
+      \        prompt: 图片的文本prompt描述，800字符长度限制，一个汉字算一个字符长度
+
+      \        file_name: 生成图片的文件名，含后辍名(不含路径，如果没有后缀则默认使用.jpg)
+
+      \        save_folder: 图片保存绝对地址目录(必选)
+
+      \        sample_strength: 生成图片的精细度(可选,范围0-1,默认0.5)
+
+      \        width: 生成图片的宽度(可选,默认1024，最大1024)
+
+      \        height: 生成图片的高度(可选,默认1024，最大1024)
+
+      \       \ 
+
+      \    Returns:
+
+      \        List: 包含生成结果的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_imageArguments
+      required:
+        - prompt
+        - file_name
+        - save_folder
+      properties:
+        width:
+          type: integer
+          title: Width
+          default: 1024
+        height:
+          type: integer
+          title: Height
+          default: 1024
+        prompt:
+          type: string
+          title: Prompt
+        file_name:
+          type: string
+          title: File Name
+        save_folder:
+          type: string
+          title: Save Folder
+        sample_strength:
+          type: number
+          title: Sample Strength
+          default: 0.5

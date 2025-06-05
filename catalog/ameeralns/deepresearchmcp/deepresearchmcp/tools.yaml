@@ -1,0 +1,53 @@
+tools:
+  - name: initialize-research
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        depth:
+          type: number
+          default: 3
+        query:
+          type: string
+      additionalProperties: false
+  - name: execute-research-step
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: generate-report
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        timeout:
+          type: number
+          default: 60000
+        sessionId:
+          type: string
+      additionalProperties: false
+  - name: complete-research
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        depth:
+          type: number
+          default: 3
+        query:
+          type: string
+        timeout:
+          type: number
+          default: 180000
+      additionalProperties: false

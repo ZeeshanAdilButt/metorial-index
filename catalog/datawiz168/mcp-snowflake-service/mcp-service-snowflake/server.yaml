@@ -1,0 +1,19 @@
+identifier: datawiz168/mcp-snowflake-service/mcp-service-snowflake
+repo:
+  provider: github.com
+  url: https://github.com/datawiz168/mcp-snowflake-service
+  name: mcp-snowflake-service
+  owner: datawiz168
+server:
+  subdirectory: /
+  name: Snowflake Database Access Server
+  description: mcp‑server‑snowflake controls database access rights precisely by
+    way of database users. If you only need to read data, just assign a user
+    with read‑only database permissions. Enable seamless execution of SQL
+    queries on Snowflake databases. Automatically manage database connections
+    and handle query results and errors securely. Simplify your data operations
+    with robust error handling and automatic connection management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

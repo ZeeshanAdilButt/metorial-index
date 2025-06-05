@@ -1,0 +1,22 @@
+tools:
+  - name: call-webhook
+    description: Call a webhook with optional `message` and `url` parameters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        url:
+          anyOf:
+            - type: string
+              format: uri
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+        message:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+      additionalProperties: false

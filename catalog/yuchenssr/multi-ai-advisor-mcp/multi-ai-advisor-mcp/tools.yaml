@@ -1,0 +1,35 @@
+tools:
+  - name: list-available-models
+    description: List all available models in Ollama that can be used with query-models
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: query-models
+    description: Query multiple AI models via Ollama and get their responses to
+      compare perspectives
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - question
+      properties:
+        models:
+          type: array
+          items:
+            type: string
+          description: Array of model names to query (defaults to configured models)
+        question:
+          type: string
+          description: The question to ask all models
+        system_prompt:
+          type: string
+          description: Optional system prompt to provide context to all models (overridden
+            by model_system_prompts if provided)
+        model_system_prompts:
+          type: object
+          description: Optional object mapping model names to specific system prompts
+          additionalProperties:
+            type: string
+      additionalProperties: false

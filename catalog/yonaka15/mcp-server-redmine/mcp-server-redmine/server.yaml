@@ -1,0 +1,14 @@
+identifier: yonaka15/mcp-server-redmine/mcp-server-redmine
+repo:
+  provider: github.com
+  url: https://github.com/yonaka15/mcp-server-redmine
+  name: mcp-server-redmine
+  owner: yonaka15
+server:
+  subdirectory: /
+  name: Redmine
+  description: Integrates with Redmine's REST API to provide ticket and project information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

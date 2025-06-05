@@ -1,0 +1,284 @@
+tools:
+  - name: create_word_document
+    description: "
+
+      \    Create a new Microsoft Word document with the provided content.
+
+      \   \ 
+
+      \    Args:
+
+      \        filepath: Path where to save the document
+
+      \        content: Text content for the document
+
+      \       \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_word_documentArguments
+      required:
+        - filepath
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        filepath:
+          type: string
+          title: Filepath
+  - name: edit_word_document
+    description: "
+
+      \    Edit an existing Microsoft Word document using the specified
+      operations.
+
+      \   \ 
+
+      \    Args:
+
+      \        filepath: Path to the Word document
+
+      \        operations: List of operations to perform, where each operation
+      is a dictionary with:
+
+      \            - type: Operation type (add_paragraph, add_heading,
+      edit_paragraph, delete_paragraph)
+
+      \            - Additional parameters depending on the operation type
+
+      \           \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: edit_word_documentArguments
+      required:
+        - filepath
+        - operations
+      properties:
+        filepath:
+          type: string
+          title: Filepath
+        operations:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Operations
+  - name: convert_txt_to_word
+    description: "
+
+      \    Convert a text file to a Microsoft Word document.
+
+      \   \ 
+
+      \    Args:
+
+      \        source_path: Path to the text file
+
+      \        target_path: Path where to save the Word document
+
+      \       \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_txt_to_wordArguments
+      required:
+        - source_path
+        - target_path
+      properties:
+        source_path:
+          type: string
+          title: Source Path
+        target_path:
+          type: string
+          title: Target Path
+  - name: create_excel_file
+    description: "
+
+      \    Create a new Excel file with the provided content.
+
+      \   \ 
+
+      \    Args:
+
+      \        filepath: Path where to save the Excel file
+
+      \        content: Data content, either JSON string or CSV-like string
+
+      \       \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_excel_fileArguments
+      required:
+        - filepath
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        filepath:
+          type: string
+          title: Filepath
+  - name: edit_excel_file
+    description: "
+
+      \    Edit an existing Excel file using the specified operations.
+
+      \   \ 
+
+      \    Args:
+
+      \        filepath: Path to the Excel file
+
+      \        operations: List of operations to perform, where each operation
+      is a dictionary with:
+
+      \            - type: Operation type (update_cell, update_range,
+      delete_row, delete_column, add_sheet, delete_sheet)
+
+      \            - Additional parameters depending on the operation type
+
+      \           \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: edit_excel_fileArguments
+      required:
+        - filepath
+        - operations
+      properties:
+        filepath:
+          type: string
+          title: Filepath
+        operations:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Operations
+  - name: convert_csv_to_excel
+    description: "
+
+      \    Convert a CSV file to an Excel file.
+
+      \   \ 
+
+      \    Args:
+
+      \        source_path: Path to the CSV file
+
+      \        target_path: Path where to save the Excel file
+
+      \       \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_csv_to_excelArguments
+      required:
+        - source_path
+        - target_path
+      properties:
+        source_path:
+          type: string
+          title: Source Path
+        target_path:
+          type: string
+          title: Target Path
+  - name: create_pdf_file
+    description: "
+
+      \    Create a new PDF file with the provided text content.
+
+      \   \ 
+
+      \    Args:
+
+      \        filepath: Path where to save the PDF file
+
+      \        content: Text content for the PDF
+
+      \       \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_pdf_fileArguments
+      required:
+        - filepath
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        filepath:
+          type: string
+          title: Filepath
+  - name: convert_word_to_pdf
+    description: "
+
+      \    Convert a Microsoft Word document to a PDF file.
+
+      \   \ 
+
+      \    Args:
+
+      \        source_path: Path to the Word document
+
+      \        target_path: Path where to save the PDF file
+
+      \       \ 
+
+      \    Returns:
+
+      \        Operation result with success status, message, and filepath
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_word_to_pdfArguments
+      required:
+        - source_path
+        - target_path
+      properties:
+        source_path:
+          type: string
+          title: Source Path
+        target_path:
+          type: string
+          title: Target Path

@@ -1,0 +1,17 @@
+identifier: losincos/stock-ticker-mcp/stock-ticker-mcp
+repo:
+  provider: github.com
+  url: https://github.com/LoSinCos/stock-ticker-mcp
+  name: stock-ticker-mcp
+  owner: LoSinCos
+server:
+  subdirectory: /
+  name: Stock Ticker Server
+  description: Provide a playful and irreverent stock query tool that responds
+    with humorous rude messages. Enhance your agent's interaction with a unique
+    and entertaining stock ticker experience. Easily integrate with Claude
+    Desktop for seamless usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,57 @@
+tools:
+  - name: use_description
+    description: List all available tools and their parameters
+    inputSchema:
+      type: object
+      title: list_toolsArguments
+      properties: {}
+  - name: generate_image
+    description: "Generate image
+
+      \   \ 
+
+      \    Args:
+
+      \        prompt: Image generation prompt
+
+      \        file_name: Filename to save
+
+      \        save_folder: Directory path to save
+
+      \        aspect_ratio: Image aspect ratio, supports '1:1', '4:3', '16:9',
+      '3:4', '9:16'
+
+      \        steps: Number of inference/sampling steps, supports values 1-4
+
+      \       \ 
+
+      \    Returns:
+
+      \        List: JSON string containing generation results
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_imageArguments
+      required:
+        - prompt
+        - file_name
+        - save_folder
+      properties:
+        steps:
+          type: integer
+          title: Steps
+          default: 3
+        prompt:
+          type: string
+          title: Prompt
+        file_name:
+          type: string
+          title: File Name
+        save_folder:
+          type: string
+          title: Save Folder
+        aspect_ratio:
+          type: string
+          title: Aspect Ratio
+          default: 1:1

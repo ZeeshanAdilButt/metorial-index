@@ -1,0 +1,34 @@
+tools:
+  - name: search_team_active_portfolios
+    description: ""
+    inputSchema:
+      type: object
+      title: search_team_active_portfoliosArguments
+      required:
+        - team
+      properties:
+        team:
+          type: string
+          title: Team
+  - name: create_task
+    description: ""
+    inputSchema:
+      type: object
+      title: create_taskArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+  - name: set_defence_checked
+    description: ""
+    inputSchema:
+      type: object
+      title: set_defence_checkedArguments
+      required:
+        - portfolio
+      properties:
+        portfolio:
+          type: integer
+          title: Portfolio

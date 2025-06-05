@@ -1,0 +1,17 @@
+identifier: apache/apisix/apisix
+repo:
+  provider: github.com
+  url: https://github.com/apache/apisix
+  name: apisix
+  owner: apache
+server:
+  subdirectory: /
+  name: APISIX API Gateway
+  description: Manage and route your API traffic efficiently with advanced
+    features like load balancing, dynamic routing, and security. Enhance your AI
+    applications with robust proxying and rate limiting capabilities. Experience
+    high performance and scalability for your services with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

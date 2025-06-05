@@ -1,0 +1,15 @@
+identifier: g0t4/mcp-server-commands/mcp-server-commands
+repo:
+  provider: github.com
+  url: https://github.com/g0t4/mcp-server-commands
+  name: mcp-server-commands
+  owner: g0t4
+server:
+  subdirectory: /
+  name: Server Commands
+  description: An MCP server to run arbitrary commands, allowing LLMs to execute
+    shell commands or scripts.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

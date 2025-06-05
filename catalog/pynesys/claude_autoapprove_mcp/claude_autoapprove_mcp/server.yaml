@@ -1,0 +1,17 @@
+identifier: pynesys/claude_autoapprove_mcp/claude_autoapprove_mcp
+repo:
+  provider: github.com
+  url: https://github.com/PyneSys/claude_autoapprove_mcp
+  name: claude_autoapprove_mcp
+  owner: PyneSys
+server:
+  subdirectory: /
+  name: Auto-Approve Claude Desktop MCPs
+  description: Enable automatic approval of MCP tools in Claude Desktop by
+    injecting JavaScript that extends its functionality. Seamlessly integrate
+    auto-approve capabilities without modifying the app. You can specify which
+    tools should be auto-approved in the `claude_desktop_config.json`.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

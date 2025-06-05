@@ -1,0 +1,58 @@
+tools:
+  - name: get_system_info
+    description: Get system information from the Palo Alto firewall
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_resources
+    description: List resources from a specific category
+    inputSchema:
+      type: object
+      required:
+        - category
+        - resource_type
+      properties:
+        category:
+          enum:
+            - OBJECTS
+            - POLICIES
+            - NETWORK
+            - DEVICES
+          type: string
+          description: Resource category to list
+        resource_type:
+          type: string
+          description: Specific resource type within the category
+  - name: view_config_node_values
+    description: View configuration node values for XPath on the Palo Alto firewall
+    inputSchema:
+      type: object
+      required:
+        - xpath
+      properties:
+        xpath:
+          type: string
+          description: XPath to the configuration node
+  - name: multi_move_clone_configuration
+    description: Multi-Move or Multi-Clone the configuration of the Palo Alto firewall
+    inputSchema:
+      type: object
+      required:
+        - config_paths
+        - new_location
+        - action
+      properties:
+        action:
+          enum:
+            - move
+            - clone
+          type: string
+          description: Action to perform
+        config_paths:
+          type: array
+          items:
+            type: string
+          description: Paths to the configurations to move or clone
+        new_location:
+          type: string
+          description: New location for the configurations

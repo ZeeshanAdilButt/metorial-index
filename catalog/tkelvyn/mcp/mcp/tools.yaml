@@ -1,0 +1,63 @@
+tools:
+  - name: fetch_emails_tool
+    description: " Tool para buscar emails via IMAP com filtros "
+    inputSchema:
+      type: object
+      title: fetch_emails_toolArguments
+      required:
+        - remetente
+        - senha
+      properties:
+        senha:
+          type: string
+          title: Senha
+        data_fim:
+          type: string
+          title: Data Fim
+          default: null
+        palavras:
+          type: string
+          title: Palavras
+          default: null
+        remetente:
+          type: string
+          title: Remetente
+        quantidade:
+          type: integer
+          title: Quantidade
+          default: 10
+        data_inicio:
+          type: string
+          title: Data Inicio
+          default: null
+        remetente_filtro:
+          type: string
+          title: Remetente Filtro
+          default: null
+  - name: send_email_tool
+    description: " Tool para enviar email via SMTP "
+    inputSchema:
+      type: object
+      title: send_email_toolArguments
+      required:
+        - remetente
+        - senha
+        - destinatario
+        - assunto
+        - corpo
+      properties:
+        corpo:
+          type: string
+          title: Corpo
+        senha:
+          type: string
+          title: Senha
+        assunto:
+          type: string
+          title: Assunto
+        remetente:
+          type: string
+          title: Remetente
+        destinatario:
+          type: string
+          title: Destinatario

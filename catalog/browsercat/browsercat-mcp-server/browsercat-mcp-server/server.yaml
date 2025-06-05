@@ -1,0 +1,17 @@
+identifier: browsercat/browsercat-mcp-server/browsercat-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/browsercat/browsercat-mcp-server
+  name: browsercat-mcp-server
+  owner: browsercat
+server:
+  subdirectory: /
+  name: BrowserCat MCP Server
+  description: Automate web interactions effortlessly with our cloud-based browser
+    service. Navigate, take screenshots, and execute JavaScript in a real
+    browser environment without any local installations. Enhance your LLM
+    capabilities with seamless browser automation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

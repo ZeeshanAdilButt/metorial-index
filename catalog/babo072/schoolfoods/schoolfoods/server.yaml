@@ -1,0 +1,17 @@
+identifier: babo072/schoolfoods/schoolfoods
+repo:
+  provider: github.com
+  url: https://github.com/babo072/schoolfoods
+  name: schoolfoods
+  owner: babo072
+server:
+  subdirectory: /
+  name: SchoolFoods
+  description: Retrieve school meal information effortlessly. Access detailed meal
+    data by school name and date, with support for various date formats. Enjoy
+    features like duplicate school name handling and similar school name
+    suggestions to enhance your experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

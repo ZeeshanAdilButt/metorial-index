@@ -1,0 +1,16 @@
+identifier: hedera-dev/hts-mcp-server/mirrornode-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hedera-dev/hts-mcp-server
+  name: hts-mcp-server
+  owner: hedera-dev
+server:
+  subdirectory: /
+  name: Hedera Testnet Mirror Node Server
+  description: Interface with the Hedera Testnet Mirror Node API seamlessly.
+    Convert API endpoints into MCP-compatible tools and ensure robust input
+    validation for reliable interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,241 @@
+tools:
+  - name: search_videos
+    description: Search for YouTube videos with advanced filtering options
+    inputSchema:
+      type: object
+      title: search_videosArguments
+      required:
+        - query
+      properties:
+        order:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Order
+          default: null
+        query:
+          type: string
+          title: Query
+        channel_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Channel Id
+          default: null
+        max_results:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Max Results
+          default: 10
+        region_code:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Region Code
+          default: null
+        video_caption:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Video Caption
+          default: null
+        video_duration:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Video Duration
+          default: null
+        published_after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Published After
+          default: null
+        published_before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Published Before
+          default: null
+        video_definition:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Video Definition
+          default: null
+  - name: get_video_details
+    description: Get detailed information about a YouTube video
+    inputSchema:
+      type: object
+      title: get_video_detailsArguments
+      required:
+        - video_id
+      properties:
+        video_id:
+          type: string
+          title: Video Id
+  - name: get_channel_details
+    description: Get detailed information about a YouTube channel
+    inputSchema:
+      type: object
+      title: get_channel_detailsArguments
+      required:
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          title: Channel Id
+  - name: get_video_comments
+    description: Get comments for a YouTube video
+    inputSchema:
+      type: object
+      title: get_video_commentsArguments
+      required:
+        - video_id
+      properties:
+        order:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Order
+          default: relevance
+        video_id:
+          type: string
+          title: Video Id
+        page_token:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Page Token
+          default: null
+        max_results:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Max Results
+          default: 20
+        include_replies:
+          type: boolean
+          title: Include Replies
+          default: false
+  - name: get_video_transcript
+    description: Get transcript/captions for a YouTube video
+    inputSchema:
+      type: object
+      title: get_video_transcriptArguments
+      required:
+        - video_id
+      properties:
+        language:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Language
+          default: ko
+        video_id:
+          type: string
+          title: Video Id
+  - name: get_related_videos
+    description: Get videos related to a specific YouTube video
+    inputSchema:
+      type: object
+      title: get_related_videosArguments
+      required:
+        - video_id
+      properties:
+        video_id:
+          type: string
+          title: Video Id
+        max_results:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Max Results
+          default: 10
+  - name: get_trending_videos
+    description: Get trending videos on YouTube by region
+    inputSchema:
+      type: object
+      title: get_trending_videosArguments
+      properties:
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+        region_code:
+          type: string
+          title: Region Code
+          default: null
+  - name: get_video_enhanced_transcript
+    description: "Advanced transcript extraction tool with filtering, search, and
+      multi-video capabilities. Provides rich transcript data for detailed
+      analysis and processing. Features: 1) Extract transcripts from multiple
+      videos; 2) Filter by time ranges; 3) Search within transcripts; 4) Segment
+      transcripts; 5) Format output in different ways; 6) Include video
+      metadata."
+    inputSchema:
+      type: object
+      title: get_video_enhanced_transcriptArguments
+      required:
+        - video_ids
+      properties:
+        query:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Query
+          default: null
+        format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Format
+          default: timestamped
+        end_time:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: End Time
+          default: null
+        language:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Language
+          default: ko
+        video_ids:
+          type: array
+          items:
+            type: string
+          title: Video Ids
+        start_time:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Start Time
+          default: null
+        segment_count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Segment Count
+          default: 2
+        case_sensitive:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Case Sensitive
+          default: false
+        segment_method:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Segment Method
+          default: equal
+        include_metadata:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Include Metadata
+          default: false

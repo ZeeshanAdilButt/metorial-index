@@ -1,0 +1,11 @@
+tools:
+  - name: Hello Tool
+    description: Responds with a hello world message
+    inputSchema:
+      type: object
+      properties: {}
+  - name: Users Tool
+    description: Fetches a list of users from an external API
+    inputSchema:
+      type: object
+      properties: {}

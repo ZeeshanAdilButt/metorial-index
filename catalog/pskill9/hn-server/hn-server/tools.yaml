@@ -1,0 +1,22 @@
+tools:
+  - name: get_stories
+    description: Get stories from Hacker News
+    inputSchema:
+      type: object
+      properties:
+        type:
+          enum:
+            - top
+            - new
+            - ask
+            - show
+            - jobs
+          type: string
+          default: top
+          description: Type of stories to fetch (top, new, ask, show, jobs)
+        limit:
+          type: number
+          default: 10
+          maximum: 30
+          minimum: 1
+          description: Number of stories to return (max 30)

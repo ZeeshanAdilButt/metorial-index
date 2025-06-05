@@ -1,0 +1,19 @@
+identifier: vizioz/swagger-mcp/swagger-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Vizioz/Swagger-MCP
+  name: Swagger-MCP
+  owner: Vizioz
+server:
+  subdirectory: /
+  name: Swagger MCP Server
+  description: Generate comprehensive MCP tool definitions from Swagger API
+    specifications to streamline API integration workflows. Download, parse, and
+    locally store Swagger files to provide detailed endpoint and model
+    information, enabling AI assistants to efficiently build and extend MCP
+    servers. Facilitate seamless API interaction by offering AI-specific
+    instructions and reusable prompts for common tasks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

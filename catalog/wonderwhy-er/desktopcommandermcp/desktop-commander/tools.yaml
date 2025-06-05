@@ -1,0 +1,256 @@
+tools:
+  - name: execute_command
+    description: Execute a terminal command with timeout. Command will continue
+      running in background if it doesn't complete within timeout.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - command
+      properties:
+        command:
+          type: string
+        timeout_ms:
+          type: number
+      additionalProperties: false
+  - name: read_output
+    description: Read new output from a running terminal session.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pid
+      properties:
+        pid:
+          type: number
+      additionalProperties: false
+  - name: force_terminate
+    description: Force terminate a running terminal session.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pid
+      properties:
+        pid:
+          type: number
+      additionalProperties: false
+  - name: list_sessions
+    description: List all active terminal sessions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_processes
+    description: List all running processes. Returns process information including
+      PID, command name, CPU usage, and memory usage.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: kill_process
+    description: Terminate a running process by PID. Use with caution as this will
+      forcefully terminate the specified process.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pid
+      properties:
+        pid:
+          type: number
+      additionalProperties: false
+  - name: block_command
+    description: Add a command to the blacklist. Once blocked, the command cannot be
+      executed until unblocked.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - command
+      properties:
+        command:
+          type: string
+      additionalProperties: false
+  - name: unblock_command
+    description: Remove a command from the blacklist. Once unblocked, the command
+      can be executed normally.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - command
+      properties:
+        command:
+          type: string
+      additionalProperties: false
+  - name: list_blocked_commands
+    description: List all currently blocked commands.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: read_file
+    description: Read the complete contents of a file from the file system. Handles
+      various text encodings and provides detailed error messages if the file
+      cannot be read. Only works within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+      additionalProperties: false
+  - name: read_multiple_files
+    description: Read the contents of multiple files simultaneously. Each file's
+      content is returned with its path as a reference. Failed reads for
+      individual files won't stop the entire operation. Only works within
+      allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+  - name: write_file
+    description: Completely replace file contents. Best for large changes (>20% of
+      file) or when edit_block fails. Use with caution as it will overwrite
+      existing files. Only works within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+        content:
+          type: string
+      additionalProperties: false
+  - name: create_directory
+    description: Create a new directory or ensure a directory exists. Can create
+      multiple nested directories in one operation. Only works within allowed
+      directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+      additionalProperties: false
+  - name: list_directory
+    description: Get a detailed listing of all files and directories in a specified
+      path. Results distinguish between files and directories with [FILE] and
+      [DIR] prefixes. Only works within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+      additionalProperties: false
+  - name: move_file
+    description: Move or rename files and directories. Can move files between
+      directories and rename them in a single operation. Both source and
+      destination must be within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - source
+        - destination
+      properties:
+        source:
+          type: string
+        destination:
+          type: string
+      additionalProperties: false
+  - name: search_files
+    description: Recursively search for files and directories matching a pattern.
+      Searches through all subdirectories from the starting path. Only searches
+      within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - pattern
+      properties:
+        path:
+          type: string
+        pattern:
+          type: string
+      additionalProperties: false
+  - name: search_code
+    description: Search for text/code patterns within file contents using ripgrep.
+      Fast and powerful search similar to VS Code search functionality. Supports
+      regular expressions, file pattern filtering, and context lines. Only
+      searches within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - pattern
+      properties:
+        path:
+          type: string
+        pattern:
+          type: string
+        ignoreCase:
+          type: boolean
+        maxResults:
+          type: number
+        filePattern:
+          type: string
+        contextLines:
+          type: number
+        includeHidden:
+          type: boolean
+      additionalProperties: false
+  - name: get_file_info
+    description: Retrieve detailed metadata about a file or directory including
+      size, creation time, last modified time, permissions, and type. Only works
+      within allowed directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+      additionalProperties: false
+  - name: list_allowed_directories
+    description: Returns the list of directories that this server is allowed to access.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: edit_block
+    description: "Apply surgical text replacements to files. Best for small changes
+      (<20% of file size). Multiple blocks can be used for separate changes.
+      Will verify changes after application. Format: filepath, then <<<<<<<
+      SEARCH, content to find, =======, new content, >>>>>>> REPLACE."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - blockContent
+      properties:
+        blockContent:
+          type: string
+      additionalProperties: false

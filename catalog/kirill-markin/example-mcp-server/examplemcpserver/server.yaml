@@ -1,0 +1,17 @@
+identifier: kirill-markin/example-mcp-server/examplemcpserver
+repo:
+  provider: github.com
+  url: https://github.com/kirill-markin/example-mcp-server
+  name: example-mcp-server
+  owner: kirill-markin
+server:
+  subdirectory: /
+  name: MCP Server Template for Cursor IDE
+  description: Create custom tools for Cursor IDE using this simple template.
+    Enhance your agents with the ability to fetch and manipulate web data
+    seamlessly. Deploy easily on Heroku or run locally with Docker, and connect
+    effortlessly to your Cursor IDE.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

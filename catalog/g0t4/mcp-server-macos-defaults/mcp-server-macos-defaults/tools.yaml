@@ -1,0 +1,45 @@
+tools:
+  - name: list-domains
+    description: List all available macOS domains, same as `defaults domains`
+    inputSchema:
+      type: object
+      properties: {}
+  - name: find
+    description: Find entries container given word
+    inputSchema:
+      type: object
+      properties:
+        word:
+          type: string
+          description: Word to search for
+  - name: defaults-read
+    description: use the `defaults read <domain> <key>` command
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        key:
+          type: string
+          description: Key to read from
+        domain:
+          type: string
+          description: Domain to read from
+  - name: defaults-write
+    description: use the `defaults write <domain> <key> <value>` command
+    inputSchema:
+      type: object
+      required:
+        - domain
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          description: Key to write to
+        value:
+          type: string
+          description: Value to write
+        domain:
+          type: string
+          description: Domain to write to

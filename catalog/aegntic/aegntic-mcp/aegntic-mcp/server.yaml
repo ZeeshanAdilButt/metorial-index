@@ -1,0 +1,19 @@
+identifier: aegntic/aegntic-mcp/aegntic-mcp
+repo:
+  provider: github.com
+  url: https://github.com/aegntic/aegntic-MCP
+  name: aegntic-MCP
+  owner: aegntic
+server:
+  subdirectory: /firebase-studio-mcp
+  name: Aegntic MCP Servers
+  description: Provide specialized MCP servers that extend AI assistants with
+    access to external tools and services for tasks like exporting projects,
+    managing cloud services, automating workflows, and handling containers.
+    Easily install and run these servers independently to enhance your AI
+    assistant's capabilities. Integrate seamlessly with Claude to use these
+    tools directly within conversations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

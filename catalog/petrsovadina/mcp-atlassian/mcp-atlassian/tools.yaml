@@ -1,0 +1,34 @@
+tools:
+  - name: confluence_search
+    description: Search Confluence content using CQL
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          maximum: 50
+          minimum: 1
+          description: Results limit (1-50)
+        query:
+          type: string
+          description: CQL query string
+  - name: jira_search
+    description: Search Jira issues using JQL
+    inputSchema:
+      type: object
+      required:
+        - jql
+      properties:
+        jql:
+          type: string
+          description: JQL query string
+        limit:
+          type: number
+          maximum: 50
+          minimum: 1
+          description: Results limit (1-50)
+        fields:
+          type: string
+          description: Comma-separated fields

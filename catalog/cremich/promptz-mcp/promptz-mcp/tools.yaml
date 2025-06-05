@@ -1,0 +1,43 @@
+tools:
+  - name: list_prompts
+    description: List available prompts from promptz.dev
+    inputSchema:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter prompts by tags (e.g. ['CLI', 'JavaScript'])
+        cursor:
+          type: string
+          description: Pagination token for fetching the next set of results
+  - name: get_prompt
+    description: Get a specific prompt by ID or name
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the prompt to retrieve
+  - name: list_rules
+    description: List available project rules from promptz.dev
+    inputSchema:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter rules by tags (e.g. ['CDK', 'React'])
+        cursor:
+          type: string
+          description: Pagination token for fetching the next set of results
+  - name: get_rule
+    description: Get a specific project rule by name
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the rule to retrieve

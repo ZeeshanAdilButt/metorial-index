@@ -1,0 +1,18 @@
+identifier: posidron/mcp-powershell/mcp-powershell
+repo:
+  provider: github.com
+  url: https://github.com/posidron/mcp-powershell
+  name: mcp-powershell
+  owner: posidron
+server:
+  subdirectory: /
+  name: PowerShell Server
+  description: Execute PowerShell commands and scripts, retrieve system
+    information, and manage PowerShell modules directly from your LLM
+    environment. Enhance your automation and system management workflows by
+    integrating PowerShell capabilities seamlessly. Access detailed command help
+    and search for commands to streamline your scripting tasks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,32 @@
+tools:
+  - name: qdrant-store
+    description: Keep the memory for later use, when you are asked to remember something.
+    inputSchema:
+      type: object
+      title: storeArguments
+      required:
+        - information
+      properties:
+        metadata:
+          type: object
+          title: Metadata
+          default: null
+          additionalProperties: true
+        information:
+          type: string
+          title: Information
+  - name: qdrant-find
+    description: |-
+      Look up memories in Qdrant. Use this tool when you need to: 
+       - Find memories by their content 
+       - Access memories for further analysis 
+       - Get some personal information about the user
+    inputSchema:
+      type: object
+      title: findArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

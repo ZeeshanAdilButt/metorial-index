@@ -1,0 +1,17 @@
+identifier: shiquda/mediawiki-mcp-server/mediawiki-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/shiquda/mediawiki-mcp-server
+  name: mediawiki-mcp-server
+  owner: shiquda
+server:
+  subdirectory: /
+  name: MediaWiki Server
+  description: Interact with Wikipedia's API to search and retrieve content
+    effortlessly. Enhance your LLM applications with rich Wikipedia data and
+    insights. Customize your search across various wiki sites for tailored
+    results.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

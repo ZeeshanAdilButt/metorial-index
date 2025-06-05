@@ -1,0 +1,19 @@
+identifier: yokingma/time-mcp/time-mcp
+repo:
+  provider: github.com
+  url: https://github.com/yokingma/time-mcp
+  name: time-mcp
+  owner: yokingma
+server:
+  subdirectory: /
+  name: Time MCP Server
+  description: >-
+    Empower your LLMs with time awareness capabilities. Access current time,
+    convert between timezones, and get timestamps effortlessly. Enhance your
+    applications with precise time-related functionalities.
+
+    usage: `npx time-mcp`
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,255 @@
+tools:
+  - name: list_bases
+    description: List all accessible Airtable bases
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_tables
+    description: List all tables in a base
+    inputSchema:
+      type: object
+      required:
+        - base_id
+      properties:
+        base_id:
+          type: string
+          description: ID of the base
+  - name: create_table
+    description: Create a new table in a base
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+      properties:
+        fields:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - type
+            properties:
+              name:
+                type: string
+                description: Name of the field
+              type:
+                type: string
+                description: Type of the field (e.g., singleLineText, multilineText, number,
+                  etc.)
+              options:
+                type: object
+                description: Field-specific options
+              description:
+                type: string
+                description: Description of the field
+          description: Initial fields for the table
+        base_id:
+          type: string
+          description: ID of the base
+        table_name:
+          type: string
+          description: Name of the new table
+        description:
+          type: string
+          description: Description of the table
+  - name: update_table
+    description: Update a table's schema
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_id
+      properties:
+        name:
+          type: string
+          description: New name for the table
+        base_id:
+          type: string
+          description: ID of the base
+        table_id:
+          type: string
+          description: ID of the table to update
+        description:
+          type: string
+          description: New description for the table
+  - name: create_field
+    description: Create a new field in a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_id
+        - field
+      properties:
+        field:
+          type: object
+          required:
+            - name
+            - type
+          properties:
+            name:
+              type: string
+              description: Name of the field
+            type:
+              type: string
+              description: Type of the field
+            options:
+              type: object
+              description: Field-specific options
+            description:
+              type: string
+              description: Description of the field
+        base_id:
+          type: string
+          description: ID of the base
+        table_id:
+          type: string
+          description: ID of the table
+  - name: update_field
+    description: Update a field in a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_id
+        - field_id
+        - updates
+      properties:
+        base_id:
+          type: string
+          description: ID of the base
+        updates:
+          type: object
+          properties:
+            name:
+              type: string
+              description: New name for the field
+            options:
+              type: object
+              description: New field-specific options
+            description:
+              type: string
+              description: New description for the field
+        field_id:
+          type: string
+          description: ID of the field to update
+        table_id:
+          type: string
+          description: ID of the table
+  - name: list_records
+    description: List records in a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+      properties:
+        base_id:
+          type: string
+          description: ID of the base
+        table_name:
+          type: string
+          description: Name of the table
+        max_records:
+          type: number
+          description: Maximum number of records to return
+  - name: create_record
+    description: Create a new record in a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+        - fields
+      properties:
+        fields:
+          type: object
+          description: Record fields as key-value pairs
+        base_id:
+          type: string
+          description: ID of the base
+        table_name:
+          type: string
+          description: Name of the table
+  - name: update_record
+    description: Update an existing record in a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+        - record_id
+        - fields
+      properties:
+        fields:
+          type: object
+          description: Record fields to update as key-value pairs
+        base_id:
+          type: string
+          description: ID of the base
+        record_id:
+          type: string
+          description: ID of the record to update
+        table_name:
+          type: string
+          description: Name of the table
+  - name: delete_record
+    description: Delete a record from a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+        - record_id
+      properties:
+        base_id:
+          type: string
+          description: ID of the base
+        record_id:
+          type: string
+          description: ID of the record to delete
+        table_name:
+          type: string
+          description: Name of the table
+  - name: search_records
+    description: Search for records in a table
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+        - field_name
+        - value
+      properties:
+        value:
+          type: string
+          description: Value to search for
+        base_id:
+          type: string
+          description: ID of the base
+        field_name:
+          type: string
+          description: Name of the field to search in
+        table_name:
+          type: string
+          description: Name of the table
+  - name: get_record
+    description: Get a single record by its ID
+    inputSchema:
+      type: object
+      required:
+        - base_id
+        - table_name
+        - record_id
+      properties:
+        base_id:
+          type: string
+          description: ID of the base
+        record_id:
+          type: string
+          description: ID of the record to retrieve
+        table_name:
+          type: string
+          description: Name of the table

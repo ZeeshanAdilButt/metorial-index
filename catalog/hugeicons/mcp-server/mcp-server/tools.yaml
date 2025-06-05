@@ -1,0 +1,36 @@
+tools:
+  - name: list_icons
+    description: Get a list of all available Hugeicons icons
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: search_icons
+    description: Search for icons by name or tags. Use commas to search for multiple
+      icons (e.g. 'home, notification, settings')
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query to find relevant icons. Separate multiple searches
+            with commas
+  - name: get_platform_usage
+    description: Get platform-specific usage instructions for Hugeicons
+    inputSchema:
+      type: object
+      required:
+        - platform
+      properties:
+        platform:
+          enum:
+            - react
+            - vue
+            - angular
+            - svelte
+            - react-native
+            - flutter
+          type: string
+          description: Platform name (react, vue, angular, svelte, react-native, flutter)

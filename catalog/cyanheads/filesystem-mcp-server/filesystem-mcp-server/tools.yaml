@@ -1,0 +1,234 @@
+tools:
+  - name: read_file
+    description: Reads the entire content of a specified file as UTF-8 text. Accepts
+      relative or absolute paths. Relative paths are resolved against the
+      session default set by `set_filesystem_default`.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the file to read. Can be relative or absolute. If
+            relative, it resolves against the path set by
+            `set_filesystem_default`. If absolute, it is used directly. If
+            relative and no default is set, an error occurs.
+      additionalProperties: false
+  - name: set_filesystem_default
+    description: Sets a default absolute path for the current session. Relative
+      paths used in other filesystem tools (like readFile) will be resolved
+      against this default. The default is cleared on server restart.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The absolute path to set as the default for resolving relative
+            paths during this session.
+      additionalProperties: false
+  - name: write_file
+    description: Writes content to a specified file. Creates the file (and necessary
+      directories) if it doesn't exist, or overwrites it if it does. Accepts
+      relative or absolute paths (resolved like readFile).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the file to write. Can be relative or absolute. If
+            relative, it resolves against the path set by
+            `set_filesystem_default`. If absolute, it is used directly. Missing
+            directories will be created.
+        content:
+          type: string
+          description: The content to write to the file. If the file exists, it will be
+            overwritten.
+      additionalProperties: false
+  - name: update_file
+    description: Performs targeted search-and-replace operations within an existing
+      file using an array of {search, replace} blocks. Preferred for smaller,
+      localized changes. For large-scale updates or overwrites, consider using
+      `write_file`. Accepts relative or absolute paths. File must exist.
+      Supports optional `useRegex` (boolean, default false) and `replaceAll`
+      (boolean, default false).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - blocks
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the file to update. Can be relative or absolute
+            (resolved like readFile). The file must exist.
+        blocks:
+          type: array
+          items:
+            type: object
+            required:
+              - search
+              - replace
+            properties:
+              search:
+                type: string
+                minLength: 1
+              replace:
+                type: string
+            additionalProperties: false
+          minItems: 1
+          description: An array of objects, each with a `search` (string) and `replace`
+            (string) property.
+        useRegex:
+          type: boolean
+          default: false
+          description: If true, treat the `search` field of each block as a JavaScript
+            regular expression pattern. Defaults to false (exact string
+            matching).
+        replaceAll:
+          type: boolean
+          default: false
+          description: If true, replace all occurrences matching the SEARCH criteria
+            within the file. If false, only replace the first occurrence.
+            Defaults to false.
+      additionalProperties: false
+  - name: list_files
+    description: Lists files and directories within the specified directory.
+      Optionally lists recursively and returns a tree-like structure. Includes
+      an optional `maxEntries` parameter (default 50) to limit the number of
+      items returned.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the directory to list. Can be relative or absolute
+            (resolved like readFile).
+        maxEntries:
+          type: integer
+          default: 50
+          description: Maximum number of directory entries (files + folders) to return.
+            Defaults to 50. Helps prevent excessive output for large
+            directories.
+          exclusiveMinimum: 0
+        includeNested:
+          type: boolean
+          default: false
+          description: If true, list files and directories recursively. Defaults to false
+            (top-level only).
+      additionalProperties: false
+  - name: delete_file
+    description: Removes a specific file. Accepts relative or absolute paths.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the file to delete. Can be relative or absolute
+            (resolved like readFile).
+      additionalProperties: false
+  - name: delete_directory
+    description: Removes a directory. Optionally removes recursively. Accepts
+      relative or absolute paths.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the directory to delete. Can be relative or absolute.
+        recursive:
+          type: boolean
+          default: false
+          description: If true, delete the directory and all its contents. If false, only
+            delete if the directory is empty.
+      additionalProperties: false
+  - name: create_directory
+    description: Creates a directory. Optionally creates parent directories. Accepts
+      relative or absolute paths.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: The path to the directory to create. Can be relative or absolute.
+        create_parents:
+          type: boolean
+          default: true
+          description: If true, create any necessary parent directories that don't exist.
+            If false, fail if a parent directory is missing.
+      additionalProperties: false
+  - name: move_path
+    description: Moves or renames a file or directory. Accepts relative or absolute
+      paths for source and destination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - source_path
+        - destination_path
+      properties:
+        source_path:
+          type: string
+          minLength: 1
+          description: The current path of the file or directory to move. Can be relative
+            or absolute.
+        destination_path:
+          type: string
+          minLength: 1
+          description: The new path for the file or directory. Can be relative or absolute.
+      additionalProperties: false
+  - name: copy_path
+    description: Copies a file or directory to a new location. Accepts relative or
+      absolute paths. Defaults to recursive copy for directories.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - source_path
+        - destination_path
+      properties:
+        recursive:
+          type: boolean
+          default: true
+          description: If copying a directory, whether to copy its contents recursively.
+            Defaults to true.
+        source_path:
+          type: string
+          minLength: 1
+          description: The path of the file or directory to copy. Can be relative or
+            absolute.
+        destination_path:
+          type: string
+          minLength: 1
+          description: The path where the copy should be created. Can be relative or
+            absolute.
+      additionalProperties: false

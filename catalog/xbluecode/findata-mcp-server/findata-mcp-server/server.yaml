@@ -1,0 +1,14 @@
+identifier: xbluecode/findata-mcp-server/findata-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/xBlueCode/findata-mcp-server
+  name: findata-mcp-server
+  owner: xBlueCode
+server:
+  subdirectory: /
+  name: Financial Data Server
+  description: MCP server for fetching financial data from Alpha Vantage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

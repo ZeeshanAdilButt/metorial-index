@@ -1,0 +1,48 @@
+tools:
+  - name: getRepositoryContents
+    description: Get repository contents from GitHub. Unless otherwise instructed,
+      ensure to always first get the tree only (omitFiles:true) to get an idea
+      of the file structure. Afterwards, use the different filters to get only
+      the context relevant to cater to the user request.
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - repo
+      properties:
+        dir:
+          type: string
+          description: Comma-separated list of directories to include
+        ext:
+          type: string
+          description: Comma-separated list of file extensions to include
+        path:
+          type: string
+          description: File or directory path within the repository
+        repo:
+          type: string
+          description: GitHub repository name
+        owner:
+          type: string
+          description: GitHub repository owner
+        branch:
+          type: string
+          description: Branch name (defaults to main if not provided)
+        omitTree:
+          type: boolean
+          description: If true, response will not include the directory tree
+        maxTokens:
+          type: integer
+          description: Limit the response to a maximum number of tokens (defaults to 50000)
+        omitFiles:
+          type: boolean
+          description: If true, response will not include the file contents
+        excludeDir:
+          type: string
+          description: Comma-separated list of directories to exclude
+        excludeExt:
+          type: string
+          description: Comma-separated list of file extensions to exclude
+        maxFileSize:
+          type: integer
+          description: Maximum file size to include (in bytes)

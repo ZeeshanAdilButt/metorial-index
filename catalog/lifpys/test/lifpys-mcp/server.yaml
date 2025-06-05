@@ -1,0 +1,16 @@
+identifier: lifpys/test/lifpys-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Lifpys/test
+  name: test
+  owner: Lifpys
+server:
+  subdirectory: /
+  name: test
+  description: Provide a basic MCP server implementation for testing purposes.
+    Enable interaction with tools, resources, and prompts through the MCP
+    interface. Facilitate development and experimentation with MCP features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,32 @@
+identifier: skysqlinc/skysql-mcp/skysql-mcp
+repo:
+  provider: github.com
+  url: https://github.com/skysqlinc/skysql-mcp
+  name: skysql-mcp
+  owner: skysqlinc
+server:
+  subdirectory: /
+  name: SkySQL MCP Server
+  description: >-
+    Set up the SkySQL MCP server, which provides a powerful interface for
+    managing SkySQL (MySQL/MariaDB) database instances and interacting with
+    SkyAI Agents.
+
+
+    Features
+
+    ---------
+
+    - Launch and manage serverless MariaDB database instances
+
+    - Interact with AI-powered database agents
+
+    - Execute SQL queries directly on SkySQL (MySQL/MariaDB) instances
+
+    - Manage database credentials and IP allowlists
+
+    - List and monitor database services
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

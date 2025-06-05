@@ -1,0 +1,17 @@
+identifier: executeautomation/mcp-database-server/executeautomation-mcp-database-server
+repo:
+  provider: github.com
+  url: https://github.com/executeautomation/mcp-database-server
+  name: mcp-database-server
+  owner: executeautomation
+server:
+  subdirectory: /
+  name: ExecuteAutomation Database Server
+  description: Provide seamless database access to your agents with support for
+    SQLite, SQL Server, and PostgreSQL. Execute queries, manage tables, and
+    export data directly through your conversational AI. Enhance your workflows
+    by integrating real-time database operations effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

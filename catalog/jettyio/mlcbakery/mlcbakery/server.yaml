@@ -1,0 +1,18 @@
+identifier: jettyio/mlcbakery/mlcbakery
+repo:
+  provider: github.com
+  url: https://github.com/jettyio/mlcbakery
+  name: mlcbakery
+  owner: jettyio
+server:
+  subdirectory: /mcp_server
+  name: MLC Bakery MCP Server
+  description: Provide seamless access to MLC Bakery functionalities through an
+    MCP-compatible interface. Enable AI assistants and other clients to search
+    datasets, retrieve previews, and validate metadata effortlessly. Simplify
+    interaction with MLC Bakery API tools for enhanced data exploration and
+    management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

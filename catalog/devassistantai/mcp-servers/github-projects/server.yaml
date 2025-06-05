@@ -1,0 +1,18 @@
+identifier: devassistantai/mcp-servers/github-projects
+repo:
+  provider: github.com
+  url: https://github.com/devassistantai/mcp-servers
+  name: mcp-servers
+  owner: devassistantai
+server:
+  subdirectory: /src/github-projects
+  name: GitHub Projects
+  description: Manage GitHub Projects V2 efficiently by interacting with the
+    GitHub Projects API through a set of powerful tools. Perform project, item,
+    task, field, and view management operations seamlessly from your language
+    model or client. Enhance your workflow with tested, production-ready
+    capabilities for project automation and organization.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

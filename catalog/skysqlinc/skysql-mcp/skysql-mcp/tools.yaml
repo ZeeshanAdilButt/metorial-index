@@ -1,0 +1,95 @@
+tools:
+  - name: list_agents
+    description: List all available SkySQL DB agents with their capabilities
+    inputSchema:
+      type: object
+      title: list_agentsArguments
+      properties: {}
+  - name: launch_serverless_db
+    description: Launch a new Serverless DB instance in SkySQL
+    inputSchema:
+      type: object
+      title: launch_serverless_dbArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        region:
+          type: string
+          title: Region
+          default: eastus
+        provider:
+          type: string
+          title: Provider
+          default: azure
+  - name: delete_db
+    description: Delete a DB instance from SkySQL
+    inputSchema:
+      type: object
+      title: delete_dbArguments
+      required:
+        - service_id
+      properties:
+        service_id:
+          type: string
+          title: Service Id
+  - name: ask_agent
+    description: Ask a question to a specific DB agent
+    inputSchema:
+      type: object
+      title: ask_agentArguments
+      required:
+        - agent_id
+        - question
+      properties:
+        agent_id:
+          type: string
+          title: Agent Id
+        question:
+          type: string
+          title: Question
+  - name: get_db_credentials
+    description: Get the credentials for a SkySQL database instance
+    inputSchema:
+      type: object
+      title: get_db_credentialsArguments
+      required:
+        - service_id
+      properties:
+        service_id:
+          type: string
+          title: Service Id
+  - name: update_ip_allowlist
+    description: Update the IP allowlist for a SkySQL database instance with the current IP
+    inputSchema:
+      type: object
+      title: update_ip_allowlistArguments
+      required:
+        - service_id
+      properties:
+        service_id:
+          type: string
+          title: Service Id
+  - name: list_services
+    description: List all available SkySQL database services
+    inputSchema:
+      type: object
+      title: list_servicesArguments
+      properties: {}
+  - name: execute_sql
+    description: Execute SQL query on a SkySQL database instance and return the results
+    inputSchema:
+      type: object
+      title: execute_sqlArguments
+      required:
+        - service_id
+        - sql_query
+      properties:
+        sql_query:
+          type: string
+          title: Sql Query
+        service_id:
+          type: string
+          title: Service Id

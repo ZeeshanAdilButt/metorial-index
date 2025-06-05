@@ -1,0 +1,17 @@
+identifier: diegobit/aranet4-mcp-server/aranet4-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/diegobit/aranet4-mcp-server
+  name: aranet4-mcp-server
+  owner: diegobit
+server:
+  subdirectory: /
+  name: Aranet4 CO2 Sensor Manager
+  description: Manage your Aranet4 CO2 sensor data efficiently by scanning
+    devices, fetching and storing measurements in a local db, and querying
+    historical data with optional visualizations. Easily configure the server
+    with AI assistance and automate data updates for continuous monitoring.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

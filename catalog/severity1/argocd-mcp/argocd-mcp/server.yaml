@@ -1,0 +1,18 @@
+identifier: severity1/argocd-mcp/argocd-mcp
+repo:
+  provider: github.com
+  url: https://github.com/severity1/argocd-mcp
+  name: argocd-mcp
+  owner: severity1
+server:
+  subdirectory: /
+  name: ArgoCD MCP Server
+  description: Manage your ArgoCD applications and resources effortlessly through
+    natural language interactions. Integrate with the ArgoCD API to create,
+    update, and sync applications while retrieving user information and server
+    settings seamlessly. Enhance your workflow with a robust API client and
+    comprehensive error handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: klot-tester/amazon-reviews/amazon-reviews
+repo:
+  provider: github.com
+  url: https://github.com/klot-tester/amazon-reviews
+  name: amazon-reviews
+  owner: klot-tester
+server:
+  subdirectory: /
+  name: Amazon Reviews Analyzer
+  description: Analyze and extract insights from Amazon product reviews to enhance
+    decision-making and customer understanding. Summarize sentiments, identify
+    key themes, and provide actionable feedback based on review data. Enable
+    efficient processing of large volumes of customer opinions for better
+    product evaluation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

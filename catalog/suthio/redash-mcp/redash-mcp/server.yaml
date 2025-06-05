@@ -1,0 +1,16 @@
+identifier: suthio/redash-mcp/redash-mcp
+repo:
+  provider: github.com
+  url: https://github.com/suthio/redash-mcp
+  name: redash-mcp
+  owner: suthio
+server:
+  subdirectory: /
+  name: Redash Integration Server
+  description: Connect your AI assistants to Redash for seamless data interaction.
+    Execute queries, manage dashboards, and retrieve insights effortlessly
+    through a unified interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

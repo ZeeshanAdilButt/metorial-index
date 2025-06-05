@@ -1,0 +1,16 @@
+identifier: bigcodegen/mcp-neovim-server/mcp-neovim-server
+repo:
+  provider: github.com
+  url: https://github.com/bigcodegen/mcp-neovim-server
+  name: mcp-neovim-server
+  owner: bigcodegen
+server:
+  subdirectory: /
+  name: Neovim Server
+  description: A proof of concept integration between Claude Desktop and Neovim
+    using Model Context Protocol (MCP) and the official neovim/node-client
+    JavaScript library.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

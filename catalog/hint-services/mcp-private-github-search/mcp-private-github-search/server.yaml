@@ -1,0 +1,17 @@
+identifier: hint-services/mcp-private-github-search/mcp-private-github-search
+repo:
+  provider: github.com
+  url: https://github.com/Hint-Services/mcp-private-github-search
+  name: mcp-private-github-search
+  owner: Hint-Services
+server:
+  subdirectory: /
+  name: Private GitHub Search
+  description: Enable seamless searching of private GitHub repositories with
+    automatic handling of rate limiting, type safety, and error management.
+    Access file contents and issues securely using your GitHub token. Integrate
+    private repository search capabilities into your AI workflows effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

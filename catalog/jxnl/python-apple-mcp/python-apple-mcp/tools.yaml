@@ -1,0 +1,310 @@
+tools:
+  - name: find_contact
+    description: Search for contacts by name. If no name is provided, returns all contacts.
+    inputSchema:
+      type: object
+      title: find_contactArguments
+      properties:
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+  - name: create_note
+    description: Create a new note in Apple Notes
+    inputSchema:
+      type: object
+      $defs:
+        Note:
+          type: object
+          title: Note
+          required:
+            - title
+            - content
+          properties:
+            title:
+              type: string
+              title: Title
+            folder:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Folder
+              default: Claude
+            content:
+              type: string
+              title: Content
+      title: create_noteArguments
+      required:
+        - note
+      properties:
+        note:
+          $ref: "#/$defs/Note"
+  - name: search_notes
+    description: Search for notes containing the given text
+    inputSchema:
+      type: object
+      title: search_notesArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: send_message
+    description: Send an iMessage
+    inputSchema:
+      type: object
+      $defs:
+        Message:
+          type: object
+          title: Message
+          required:
+            - to
+            - content
+          properties:
+            to:
+              type: string
+              title: To
+            content:
+              type: string
+              title: Content
+            scheduled_time:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Scheduled Time
+              default: null
+      title: send_messageArguments
+      required:
+        - message
+      properties:
+        message:
+          $ref: "#/$defs/Message"
+  - name: read_messages
+    description: Read recent messages from a specific contact
+    inputSchema:
+      type: object
+      title: read_messagesArguments
+      required:
+        - phone_number
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        phone_number:
+          type: string
+          title: Phone Number
+  - name: send_email
+    description: Send an email using Apple Mail
+    inputSchema:
+      type: object
+      $defs:
+        Email:
+          type: object
+          title: Email
+          required:
+            - to
+            - subject
+            - body
+          properties:
+            cc:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Cc
+              default: null
+            to:
+              type: string
+              title: To
+            bcc:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Bcc
+              default: null
+            body:
+              type: string
+              title: Body
+            subject:
+              type: string
+              title: Subject
+      title: send_emailArguments
+      required:
+        - email
+      properties:
+        email:
+          $ref: "#/$defs/Email"
+  - name: search_emails
+    description: Search emails containing the given text
+    inputSchema:
+      type: object
+      title: search_emailsArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        query:
+          type: string
+          title: Query
+  - name: create_reminder
+    description: Create a new reminder
+    inputSchema:
+      type: object
+      $defs:
+        Reminder:
+          type: object
+          title: Reminder
+          required:
+            - title
+          properties:
+            notes:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Notes
+              default: null
+            title:
+              type: string
+              title: Title
+            due_date:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Due Date
+              default: null
+            list_name:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: List Name
+              default: null
+      title: create_reminderArguments
+      required:
+        - reminder
+      properties:
+        reminder:
+          $ref: "#/$defs/Reminder"
+  - name: search_reminders
+    description: Search for reminders containing the given text
+    inputSchema:
+      type: object
+      title: search_remindersArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: create_event
+    description: Create a new calendar event
+    inputSchema:
+      type: object
+      $defs:
+        CalendarEvent:
+          type: object
+          title: CalendarEvent
+          required:
+            - title
+            - start_date
+            - end_date
+          properties:
+            notes:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Notes
+              default: null
+            title:
+              type: string
+              title: Title
+            end_date:
+              type: string
+              title: End Date
+            location:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Location
+              default: null
+            is_all_day:
+              type: boolean
+              title: Is All Day
+              default: false
+            start_date:
+              type: string
+              title: Start Date
+            calendar_name:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Calendar Name
+              default: null
+      title: create_eventArguments
+      required:
+        - event
+      properties:
+        event:
+          $ref: "#/$defs/CalendarEvent"
+  - name: search_events
+    description: Search for calendar events
+    inputSchema:
+      type: object
+      title: search_eventsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        to_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: To Date
+          default: null
+        from_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: From Date
+          default: null
+  - name: search_locations
+    description: Search for locations in Apple Maps
+    inputSchema:
+      type: object
+      title: search_locationsArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 5
+        query:
+          type: string
+          title: Query
+  - name: get_directions
+    description: Get directions between two locations
+    inputSchema:
+      type: object
+      title: get_directionsArguments
+      required:
+        - from_address
+        - to_address
+      properties:
+        to_address:
+          type: string
+          title: To Address
+        from_address:
+          type: string
+          title: From Address
+        transport_type:
+          type: string
+          title: Transport Type
+          default: driving

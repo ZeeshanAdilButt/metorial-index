@@ -1,0 +1,16 @@
+identifier: livehybrid/splunk-mcp/splunk-mcp
+repo:
+  provider: github.com
+  url: https://github.com/livehybrid/splunk-mcp
+  name: splunk-mcp
+  owner: livehybrid
+server:
+  subdirectory: /
+  name: Splunk Tool
+  description: Interact with Splunk Enterprise/Cloud using natural language.
+    Execute searches, manage users, and handle KV store operations effortlessly
+    through an intuitive interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,18 @@
+identifier: noobnooc/webhook-mcp/webhook-mcp
+repo:
+  provider: github.com
+  url: https://github.com/noobnooc/webhook-mcp
+  name: webhook-mcp
+  owner: noobnooc
+server:
+  subdirectory: /
+  name: Webhook MCP Server
+  description: Enable seamless integration of webhook-based services with LLM
+    applications by exposing tools and resources via the Model Context Protocol.
+    Simplify connecting external webhooks to your AI workflows for dynamic data
+    and action handling. Deploy easily with Cloudflare Workers for scalable and
+    efficient operation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

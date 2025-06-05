@@ -1,0 +1,22 @@
+tools:
+  - name: weather
+    description: " It fetches the latest weather reports for the given city.\ 
+
+      \    Args:
+
+      \        city (str): The city name for which weather reports are required.
+
+      \    Returns:
+
+      \        dict: The weather reports for the given city.
+
+      \    "
+    inputSchema:
+      type: object
+      title: weatherArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City

@@ -1,0 +1,19 @@
+identifier: hieuttmmo/entraid-mcp-server/entraid-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hieuttmmo/entraid-mcp-server
+  name: entraid-mcp-server
+  owner: hieuttmmo
+server:
+  subdirectory: /
+  name: EntraID Server for Microsoft Graph
+  description: Provide a modular and secure interface to manage Microsoft Graph
+    resources such as users, groups, applications, and sign-in logs. Enable
+    advanced operations including MFA status checks, password resets, and
+    permission suggestions to streamline Azure AD administration. Extend and
+    customize easily with resource modules and centralized authentication
+    management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

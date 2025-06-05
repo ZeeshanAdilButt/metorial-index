@@ -1,0 +1,15 @@
+tools:
+  - name: execute_command
+    description: Execute any shell command
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: Command to execute
+        directory:
+          type: string
+          default: "~"
+          description: Working directory (optional)

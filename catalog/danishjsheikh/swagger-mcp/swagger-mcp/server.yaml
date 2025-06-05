@@ -1,0 +1,18 @@
+identifier: danishjsheikh/swagger-mcp/swagger-mcp
+repo:
+  provider: github.com
+  url: https://github.com/danishjsheikh/swagger-mcp
+  name: swagger-mcp
+  owner: danishjsheikh
+server:
+  subdirectory: /
+  name: Swagger MCP Server
+  description: Generate dynamic MCP tools by scraping Swagger UI's swagger.json
+    file to enable seamless integration of Swagger-defined APIs with MCP
+    clients. Facilitate automatic tool creation for enhanced tool selection and
+    interaction within MCP environments. Simplify API interaction by converting
+    Swagger specifications into usable MCP tools at runtime.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

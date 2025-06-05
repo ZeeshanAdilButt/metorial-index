@@ -1,0 +1,19 @@
+identifier: stacklok/toolhive/toolhive
+repo:
+  provider: github.com
+  url: https://github.com/stacklok/toolhive
+  name: toolhive
+  owner: stacklok
+server:
+  subdirectory: /
+  name: ToolHive
+  description: Simplify the deployment and management of MCP servers with a
+    lightweight utility that ensures ease of use, consistency, and security.
+    Instantly deploy MCP servers using Docker containers with minimal
+    permissions and secure secrets management. Benefit from a curated MCP
+    registry, enterprise-ready authorization, and seamless integration with
+    popular development tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

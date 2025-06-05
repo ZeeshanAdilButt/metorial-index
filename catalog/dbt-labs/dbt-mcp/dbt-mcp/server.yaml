@@ -1,0 +1,18 @@
+identifier: dbt-labs/dbt-mcp/dbt-mcp
+repo:
+  provider: github.com
+  url: https://github.com/dbt-labs/dbt-mcp
+  name: dbt-mcp
+  owner: dbt-labs
+server:
+  subdirectory: /
+  name: dbt MCP Server
+  description: Provide seamless interaction with dbt through a Model Context
+    Protocol server. Enable clients to execute dbt CLI commands, query semantic
+    layer metrics, and explore dbt project models efficiently. Enhance your data
+    workflows by integrating dbt capabilities directly into your MCP-enabled
+    tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

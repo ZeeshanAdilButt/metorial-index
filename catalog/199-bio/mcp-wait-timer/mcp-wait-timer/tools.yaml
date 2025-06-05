@@ -1,0 +1,20 @@
+tools:
+  - name: wait
+    description: Waits for a specified duration in seconds.
+    inputSchema:
+      type: object
+      required:
+        - duration_seconds
+      properties:
+        duration_seconds:
+          _def:
+            checks:
+              - kind: min
+                value: 0
+                inclusive: false
+            coerce: true
+            typeName: ZodNumber
+            description: The number of seconds to wait
+          ~standard:
+            vendor: zod
+            version: 1

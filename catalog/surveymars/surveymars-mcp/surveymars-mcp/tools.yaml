@@ -1,0 +1,54 @@
+tools:
+  - name: survey_create
+    description: Create survey with SurveyMars, Returns a set of links to the
+      generated survey. With this AI-powered survey generator, you can enter
+      essential details like target audience, brand, and research objectives,
+      and I will produce a personalized questionnaire for you. The more specific
+      your input, the more precise the questionnaire content will be.
+    inputSchema:
+      type: object
+      required:
+        - title
+        - purpose
+        - num_questions
+        - survey_type
+        - language
+      properties:
+        title:
+          type: string
+          description: "Survey Title: Enter a survey title summarizing your research topic."
+        purpose:
+          type: string
+          description: "Survey Topic Prompts: Provide a detailed description of the
+            survey, including its topic and purpose."
+        language:
+          type: number
+          default: 1
+          maximum: 49
+          minimum: 1
+          description:
+            - "Survey Language (1-49): Surveys will be generated in your
+              selected language."
+            - |-
+              1: ChineseSimplified 简体中文
+              2: English 英语
+              3: ChineseTraditional 繁体中文
+        survey_type:
+          type: number
+          default: 1
+          maximum: 6
+          minimum: 1
+          description:
+            - Survey Type of Survey (1-6)
+            - |-
+              1: Survey 调查
+              3: 360-Degree Evaluation 360度评估
+              4: Form 表单
+              5: FormActivity 活动报名
+              6: FormSign 报名签到
+        num_questions:
+          type: number
+          default: 10
+          minimum: 1
+          description: "Number of questions for survey (1-): A shorter survey with fewer
+            questions is preferable."

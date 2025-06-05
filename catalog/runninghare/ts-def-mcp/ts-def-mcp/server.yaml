@@ -1,0 +1,18 @@
+identifier: runninghare/ts-def-mcp/ts-def-mcp
+repo:
+  provider: github.com
+  url: https://github.com/runninghare/ts-def-mcp
+  name: ts-def-mcp
+  owner: runninghare
+server:
+  subdirectory: /
+  name: TypeScript Definition Finder
+  description: Locate original definitions of TypeScript symbols in your codebase,
+    including imported symbols from external packages. Quickly find the
+    definition location and code snippet to enhance your AI code editor
+    experience. Integrates seamlessly via stdio interface for efficient symbol
+    lookup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

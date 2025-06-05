@@ -1,0 +1,11 @@
+tools:
+  - name: execute_sql
+    description: Execute an SQL query on the Dameng server
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL query to execute

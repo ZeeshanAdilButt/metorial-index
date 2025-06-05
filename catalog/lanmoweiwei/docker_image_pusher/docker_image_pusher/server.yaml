@@ -1,0 +1,16 @@
+identifier: lanmoweiwei/docker_image_pusher/docker_image_pusher
+repo:
+  provider: github.com
+  url: https://github.com/lanmoweiwei/docker_image_pusher
+  name: docker_image_pusher
+  owner: lanmoweiwei
+server:
+  subdirectory: /
+  name: Docker Images Pusher
+  description: Transfer Docker images from foreign repositories to Alibaba Cloud's
+    private registry for domestic server use. Enjoy fast speeds with official
+    Alibaba Cloud routes and support for large images up to 40GB.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

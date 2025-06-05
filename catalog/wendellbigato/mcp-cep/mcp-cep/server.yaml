@@ -1,0 +1,17 @@
+identifier: wendellbigato/mcp-cep/mcp-cep
+repo:
+  provider: github.com
+  url: https://github.com/wendellbigato/mcp-cep
+  name: mcp-cep
+  owner: wendellbigato
+server:
+  subdirectory: /
+  name: CEP Lookup Server
+  description: Provide quick and reliable postal code (CEP) address lookups using
+    the public ViaCEP API. Enable seamless integration with command-line tools
+    like Goose for enhanced productivity. Simplify address retrieval tasks with
+    easy-to-use commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

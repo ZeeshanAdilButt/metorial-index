@@ -1,0 +1,17 @@
+identifier: yikakia/godoc-mcp-server/godoc-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/yikakia/godoc-mcp-server
+  name: godoc-mcp-server
+  owner: yikakia
+server:
+  subdirectory: /
+  name: GoDoc Package Search Server
+  description: Search for Go packages and their documentation effortlessly.
+    Provide comprehensive package information to your language model for
+    enhanced coding assistance. Streamline your development process by accessing
+    up-to-date Go documentation directly from your LLM interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

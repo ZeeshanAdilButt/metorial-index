@@ -1,0 +1,18 @@
+identifier: l1806858547/tidb-server/tidb-server
+repo:
+  provider: github.com
+  url: https://github.com/l1806858547/tidb-server
+  name: tidb-server
+  owner: l1806858547
+server:
+  subdirectory: /
+  name: TiDB Server
+  description: Execute SELECT queries on TiDB databases securely and efficiently
+    through a Model Context Protocol server. Easily integrate TiDB query
+    capabilities into your MCP-enabled applications with minimal setup.
+    Configure connection and permissions via environment variables for flexible
+    and safe usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

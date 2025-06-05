@@ -1,0 +1,19 @@
+tools:
+  - name: shorten
+    description: "Shorten a URL using the cleanuri API.
+
+
+      \    Args:
+
+      \        original_url: The URL to shorten.
+
+      \    "
+    inputSchema:
+      type: object
+      title: shortenArguments
+      required:
+        - original_url
+      properties:
+        original_url:
+          type: string
+          title: Original Url

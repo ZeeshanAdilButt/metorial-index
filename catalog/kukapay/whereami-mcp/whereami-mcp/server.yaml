@@ -1,0 +1,17 @@
+identifier: kukapay/whereami-mcp/whereami-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/whereami-mcp
+  name: whereami-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: WhereAmI
+  description: Discover your precise location based on your current IP address.
+    Get detailed geolocation data effortlessly with a simple query. Experience
+    robust error handling and minimal setup to start using location services
+    immediately.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

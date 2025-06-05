@@ -1,0 +1,18 @@
+identifier: marcopesani/mcp-server-serper/mcp-server-serper
+repo:
+  provider: github.com
+  url: https://github.com/marcopesani/mcp-server-serper
+  name: mcp-server-serper
+  owner: marcopesani
+server:
+  subdirectory: /
+  name: Serper Search and Scrape
+  description: A TypeScript-based MCP server that provides web search and webpage
+    scraping capabilities using the Serper API. This server integrates with
+    Cursor, Cline, Claude Desktop, and any MCP-compatible client to enable
+    powerful web search and content extraction features in one convenient
+    package.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

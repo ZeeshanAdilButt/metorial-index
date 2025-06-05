@@ -1,0 +1,169 @@
+tools:
+  - name: codemcp
+    description: "If and only if the user explicitly asks you to initialize codemcp
+      with
+
+      \    path, you should invoke this tool.  This will return instructions
+      which you should
+
+      \    IMMEDIATELY follow before continuing, in particular, it will explain
+      other ways
+
+      \    you can invoke this tool.
+
+
+      \    If the user indicates they want to \"amend\" or \"continue working\"
+      on a PR,
+
+      \    you should set reuse_head_chat_id=True to continue using the same
+      chat ID.
+
+
+      \    In each subsequent request NOT including the initial request to
+      initialize
+
+      \    codemcp, you must call the UserPrompt tool with the user's verbatim
+
+      \    request text.
+
+
+      \    Arguments:
+
+      \      subtool: The subtool to run (InitProject, ...)
+
+      \      path: The path to the file or directory to operate on
+
+      \      user_prompt: The user's original prompt verbatim, starting AFTER
+      instructions to initialize codemcp (e.g., you should exclude \"Initialize
+      codemcp for PATH\")
+
+      \      subject_line: A short subject line in Git conventional commit
+      format (for InitProject)
+
+      \      reuse_head_chat_id: If True, reuse the chat ID from the HEAD commit
+      instead of generating a new one (for InitProject)
+
+      \      ... (there are other arguments which will be documented when you
+      InitProject)
+
+      \    "
+    inputSchema:
+      type: object
+      title: codemcpArguments
+      required:
+        - subtool
+      properties:
+        mode:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Mode
+          default: null
+        path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Path
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        chat_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Chat Id
+          default: null
+        command:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Command
+          default: null
+        content:
+          title: Content
+          default: null
+        include:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Include
+          default: null
+        new_str:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: New Str
+          default: null
+        old_str:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Old Str
+          default: null
+        pattern:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Pattern
+          default: null
+        subtool:
+          type: string
+          title: Subtool
+        thought:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Thought
+          default: null
+        arguments:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Arguments
+          default: null
+        new_string:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: New String
+          default: null
+        old_string:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Old String
+          default: null
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          default: null
+        user_prompt:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: User Prompt
+          default: null
+        subject_line:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Subject Line
+          default: null
+        reuse_head_chat_id:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Reuse Head Chat Id
+          default: null

@@ -1,0 +1,17 @@
+identifier: skurekjakub/gitstuffserver/gitstuffserver
+repo:
+  provider: github.com
+  url: https://github.com/skurekjakub/GitStuffServer
+  name: GitStuffServer
+  owner: skurekjakub
+server:
+  subdirectory: /
+  name: Git Stuff Server
+  description: Generate Git merge diffs by providing a merge commit hash. Execute
+    Git commands via a PowerShell script and retrieve the diff content
+    seamlessly through an MCP interface. Simplify accessing detailed merge diffs
+    for Git repositories programmatically.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

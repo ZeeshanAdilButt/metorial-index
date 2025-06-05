@@ -1,0 +1,85 @@
+tools:
+  - name: push_text_message
+    description: Push a simple text message to user via LINE. Use this for sending
+      plain text messages without formatting.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        userId:
+          type: string
+          description: The user ID to receive a message. Defaults to DESTINATION_USER_ID.
+        message:
+          type: object
+          required:
+            - text
+          properties:
+            text:
+              type: string
+              maxLength: 5000
+              description: The plain text content to send to the user.
+            type:
+              type: string
+              const: text
+              default: text
+          additionalProperties: false
+      additionalProperties: false
+  - name: push_flex_message
+    description: Push a highly customizable flex message to user via LINE. Supports
+      both bubble (single container) and carousel (multiple swipeable bubbles)
+      layouts.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        userId:
+          type: string
+          description: The user ID to receive a message. Defaults to DESTINATION_USER_ID.
+        message:
+          type: object
+          required:
+            - altText
+            - contents
+          properties:
+            type:
+              type: string
+              const: flex
+              default: flex
+            altText:
+              type: string
+              description: Alternative text shown when flex message cannot be displayed.
+            contents:
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  enum:
+                    - bubble
+                    - carousel
+                  type: string
+                  description: Type of the container. 'bubble' for single container, 'carousel'
+                    for multiple swipeable bubbles.
+              description: Flexible container structure following LINE Flex Message format.
+                For 'bubble' type, can include header, hero, body, footer, and
+                styles sections. For 'carousel' type, includes an array of
+                bubble containers in the 'contents' property.
+              additionalProperties: true
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_profile
+    description: Get detailed profile information of a LINE user including display
+      name, profile picture URL, status message and language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        userId:
+          type: string
+          description: The ID of the user whose profile you want to retrieve. Defaults to
+            DESTINATION_USER_ID.
+      additionalProperties: false

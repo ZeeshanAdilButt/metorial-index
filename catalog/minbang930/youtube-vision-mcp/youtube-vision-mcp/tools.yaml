@@ -1,0 +1,64 @@
+tools:
+  - name: summarize_youtube_video
+    description: Generates a summary of a given YouTube video URL using Gemini Vision API.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - youtube_url
+      properties:
+        youtube_url:
+          type: string
+          format: uri
+        summary_length:
+          enum:
+            - short
+            - medium
+            - long
+          type: string
+          default: medium
+          description: "Desired summary length: 'short', 'medium', or 'long' (default:
+            'medium')."
+      additionalProperties: false
+  - name: ask_about_youtube_video
+    description: Answers a question about the video or provides a general
+      description if no question is asked.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - youtube_url
+      properties:
+        question:
+          type: string
+          description: Question about the video content. If omitted, a general description
+            will be generated.
+        youtube_url:
+          type: string
+          format: uri
+      additionalProperties: false
+  - name: extract_key_moments
+    description: Extracts key moments (timestamps and descriptions) from a given
+      YouTube video.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - youtube_url
+      properties:
+        youtube_url:
+          type: string
+          format: uri
+        number_of_moments:
+          type: integer
+          default: 3
+          description: "Number of key moments to extract (default: 3)."
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: list_supported_models
+    description: Lists available Gemini models that support the 'generateContent' method.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

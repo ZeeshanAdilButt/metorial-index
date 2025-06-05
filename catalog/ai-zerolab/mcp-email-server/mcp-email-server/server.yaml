@@ -1,0 +1,15 @@
+identifier: ai-zerolab/mcp-email-server/mcp-email-server
+repo:
+  provider: github.com
+  url: https://github.com/ai-zerolab/mcp-email-server
+  name: mcp-email-server
+  owner: ai-zerolab
+server:
+  subdirectory: /
+  name: Email Server
+  description: Provide IMAP and SMTP functionalities through a standardized server
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

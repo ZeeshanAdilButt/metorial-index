@@ -1,0 +1,16 @@
+identifier: ahodroj/mcp-iceberg-service/mcp-iceberg-service
+repo:
+  provider: github.com
+  url: https://github.com/ahodroj/mcp-iceberg-service
+  name: mcp-iceberg-service
+  owner: ahodroj
+server:
+  subdirectory: /
+  name: Iceberg Catalog
+  description: Manage and query your Apache Iceberg tables effortlessly. Leverage
+    a SQL interface to interact with your Iceberg data lake directly from Claude
+    Desktop, enabling seamless data operations and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

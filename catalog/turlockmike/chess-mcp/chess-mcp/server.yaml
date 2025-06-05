@@ -1,0 +1,14 @@
+identifier: turlockmike/chess-mcp/chess-mcp
+repo:
+  provider: github.com
+  url: https://github.com/turlockmike/chess-mcp
+  name: chess-mcp
+  owner: turlockmike
+server:
+  subdirectory: /
+  name: Chess Analysis Assistant
+  description: Analyze chess positions and get professional evaluations using Stockfish.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

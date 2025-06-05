@@ -1,0 +1,58 @@
+tools:
+  - name: get_issue
+    description: Get detailed information about a Jira issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueKey
+      properties:
+        issueKey:
+          type: string
+          description: The key of the Jira issue to fetch (e.g., PROJECT-123)
+      additionalProperties: false
+  - name: get_assigned_issues
+    description: Get issues assigned to the current user in a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        maxResults:
+          type: number
+          description: Maximum number of results to return
+        projectKey:
+          type: string
+          description: The key of the Jira project to fetch issues from
+      additionalProperties: false
+  - name: get_issues_by_type
+    description: Get issues of a specific type
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueType
+      properties:
+        issueType:
+          type: string
+          description: The type of issue to fetch (e.g., Bug, Story, Epic)
+        maxResults:
+          type: number
+          description: Maximum number of results to return
+        projectKey:
+          type: string
+          description: The key of the Jira project to fetch issues from
+      additionalProperties: false
+  - name: get_projects
+    description: Get list of available Jira projects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_issue_types
+    description: Get list of available Jira issue types
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

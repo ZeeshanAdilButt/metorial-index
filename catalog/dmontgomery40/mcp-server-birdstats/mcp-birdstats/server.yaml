@@ -1,0 +1,15 @@
+identifier: dmontgomery40/mcp-server-birdstats/mcp-birdstats
+repo:
+  provider: github.com
+  url: https://github.com/DMontgomery40/mcp-server-birdstats
+  name: mcp-server-birdstats
+  owner: DMontgomery40
+server:
+  subdirectory: /
+  name: Bird Stats
+  description: Analyze BirdNET-Pi data and eBird observations using a natural
+    language interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

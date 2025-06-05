@@ -1,0 +1,143 @@
+tools:
+  - name: search_contacts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: Search term for contact name or phone number part of JID
+      additionalProperties: false
+  - name: list_messages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - chat_jid
+      properties:
+        page:
+          type: integer
+          default: 0
+          minimum: 0
+          description: Page number (0-indexed, default 0)
+        limit:
+          type: integer
+          default: 20
+          description: Max messages per page (default 20)
+          exclusiveMinimum: 0
+        chat_jid:
+          type: string
+          description: The JID of the chat (e.g., '123456@s.whatsapp.net' or 'group@g.us')
+      additionalProperties: false
+  - name: list_chats
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: integer
+          default: 0
+          minimum: 0
+          description: Page number (0-indexed, default 0)
+        limit:
+          type: integer
+          default: 20
+          description: Max chats per page (default 20)
+          exclusiveMinimum: 0
+        query:
+          type: string
+          description: Optional filter by chat name or JID
+        sort_by:
+          enum:
+            - last_active
+            - name
+          type: string
+          default: last_active
+          description: "Sort order: 'last_active' (default) or 'name'"
+        include_last_message:
+          type: boolean
+          default: true
+          description: Include last message details (default true)
+      additionalProperties: false
+  - name: get_chat
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - chat_jid
+      properties:
+        chat_jid:
+          type: string
+          description: The JID of the chat to retrieve
+        include_last_message:
+          type: boolean
+          default: true
+          description: Include last message details (default true)
+      additionalProperties: false
+  - name: get_message_context
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message_id
+      properties:
+        after:
+          type: integer
+          default: 5
+          minimum: 0
+          description: Number of messages after (default 5)
+        before:
+          type: integer
+          default: 5
+          minimum: 0
+          description: Number of messages before (default 5)
+        message_id:
+          type: string
+          description: The ID of the target message to get context around
+      additionalProperties: false
+  - name: send_message
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - recipient
+        - message
+      properties:
+        message:
+          type: string
+          minLength: 1
+          description: The text message to send
+        recipient:
+          type: string
+          description: Recipient JID (user or group, e.g., '12345@s.whatsapp.net' or
+            'group123@g.us')
+      additionalProperties: false
+  - name: search_messages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          default: 0
+          minimum: 0
+          description: Page number (0-indexed, default 0)
+        limit:
+          type: integer
+          default: 10
+          description: Max messages per page (default 10)
+          exclusiveMinimum: 0
+        query:
+          type: string
+          minLength: 1
+          description: The text content to search for within messages
+        chat_jid:
+          type: string
+          description: "Optional: The JID of a specific chat to search within (e.g.,
+            '123...net' or 'group@g.us'). If omitted, searches all chats."
+      additionalProperties: false

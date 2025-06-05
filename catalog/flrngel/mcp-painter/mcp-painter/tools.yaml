@@ -1,0 +1,71 @@
+tools:
+  - name: drawing_generateCanvas
+    description: Generate a new drawing canvas with specified width and height.
+    inputSchema:
+      type: object
+      required:
+        - width
+        - height
+      properties:
+        width:
+          type: number
+          description: Width of the canvas in pixels
+        height:
+          type: number
+          description: Height of the canvas in pixels
+  - name: drawing_fillRectangle
+    description: Fill a rectangle on the drawing canvas with a specified color and
+      coordinates.
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+        - width
+        - height
+        - color
+      properties:
+        x:
+          type: number
+          description: X coordinate of the top-left corner of the rectangle
+        y:
+          type: number
+          description: Y coordinate of the top-left corner of the rectangle
+        color:
+          type: object
+          required:
+            - r
+            - g
+            - b
+          properties:
+            a:
+              type: number
+              description: Alpha component (0-255, optional, default 255)
+            b:
+              type: number
+              description: Blue component (0-255)
+            g:
+              type: number
+              description: Green component (0-255)
+            r:
+              type: number
+              description: Red component (0-255)
+          description: Color to fill the rectangle with (RGB)
+        width:
+          type: number
+          description: Width of the rectangle
+        height:
+          type: number
+          description: Height of the rectangle
+  - name: drawing_getCanvasPng
+    description: Get the current drawing canvas as a PNG image (base64 encoded).
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: drawing_getCanvasData
+    description: Get the current pixel data of the drawing canvas as JSON.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

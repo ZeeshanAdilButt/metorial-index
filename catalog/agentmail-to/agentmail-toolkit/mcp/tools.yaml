@@ -1,0 +1,227 @@
+tools:
+  - name: listInboxes
+    description: List all inboxes
+    inputSchema:
+      type: object
+      title: listInboxesArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+  - name: getInbox
+    description: Get inbox by ID
+    inputSchema:
+      type: object
+      title: getInboxArguments
+      required:
+        - inbox_id
+      properties:
+        inbox_id:
+          type: string
+          title: Inbox Id
+  - name: createInbox
+    description: Create a new inbox
+    inputSchema:
+      type: object
+      title: createInboxArguments
+      properties:
+        domain:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Domain
+          default: null
+        username:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Username
+          default: null
+        display_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Display Name
+          default: null
+  - name: listThreads
+    description: List threads by inbox ID
+    inputSchema:
+      type: object
+      title: listThreadsArguments
+      required:
+        - inbox_id
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        inbox_id:
+          type: string
+          title: Inbox Id
+  - name: getThread
+    description: Get thread by ID
+    inputSchema:
+      type: object
+      title: getThreadArguments
+      required:
+        - inbox_id
+        - thread_id
+      properties:
+        inbox_id:
+          type: string
+          title: Inbox Id
+        thread_id:
+          type: string
+          title: Thread Id
+  - name: listMessages
+    description: List messages
+    inputSchema:
+      type: object
+      title: listMessagesArguments
+      required:
+        - inbox_id
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        inbox_id:
+          type: string
+          title: Inbox Id
+  - name: getMessage
+    description: Get message by ID
+    inputSchema:
+      type: object
+      title: getMessageArguments
+      required:
+        - inbox_id
+        - message_id
+      properties:
+        inbox_id:
+          type: string
+          title: Inbox Id
+        message_id:
+          type: string
+          title: Message Id
+  - name: getAttachment
+    description: Get attachment by ID
+    inputSchema:
+      type: object
+      title: getAttachmentArguments
+      required:
+        - inbox_id
+        - message_id
+        - attachment_id
+      properties:
+        inbox_id:
+          type: string
+          title: Inbox Id
+        message_id:
+          type: string
+          title: Message Id
+        attachment_id:
+          type: string
+          title: Attachment Id
+  - name: sendMessage
+    description: Send a message
+    inputSchema:
+      type: object
+      title: sendMessageArguments
+      required:
+        - inbox_id
+        - to
+        - subject
+        - text
+      properties:
+        cc:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Cc
+          default: null
+        to:
+          type: array
+          items:
+            type: string
+          title: To
+        bcc:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Bcc
+          default: null
+        html:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Html
+          default: null
+        text:
+          type: string
+          title: Text
+        subject:
+          type: string
+          title: Subject
+        inbox_id:
+          type: string
+          title: Inbox Id
+  - name: replyToMessage
+    description: Reply to a message
+    inputSchema:
+      type: object
+      title: replyToMessageArguments
+      required:
+        - inbox_id
+        - message_id
+        - text
+      properties:
+        html:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Html
+          default: null
+        text:
+          type: string
+          title: Text
+        inbox_id:
+          type: string
+          title: Inbox Id
+        message_id:
+          type: string
+          title: Message Id
+        include_quoted_reply:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Include Quoted Reply
+          default: null

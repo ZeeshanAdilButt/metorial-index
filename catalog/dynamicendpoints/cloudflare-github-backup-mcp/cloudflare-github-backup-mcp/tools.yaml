@@ -1,0 +1,37 @@
+tools:
+  - name: backup_projects
+    description: Backup Cloudflare projects to GitHub
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        projectIds:
+          type: array
+          items:
+            type: string
+          description: Optional array of Cloudflare project IDs to backup. If not
+            provided, all projects will be backed up.
+  - name: restore_project
+    description: Restore a Cloudflare project from a backup
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the Cloudflare project to restore
+        timestamp:
+          type: string
+          description: Optional timestamp of the backup to restore. If not provided, the
+            most recent backup will be used.
+  - name: list_backups
+    description: List available backups for a Cloudflare project
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the Cloudflare project

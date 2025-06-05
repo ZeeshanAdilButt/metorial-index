@@ -1,0 +1,18 @@
+identifier: doggybee/mcp-server-memo/mcp-server-memo
+repo:
+  provider: github.com
+  url: https://github.com/doggybee/mcp-server-memo
+  name: mcp-server-memo
+  owner: doggybee
+server:
+  subdirectory: /
+  name: Memo Server for Session Memory Management
+  description: Manage rich session summaries and memos for large language models
+    with persistent local filesystem storage. Track session history versions and
+    easily store, retrieve, and list summaries to enhance context retention.
+    Improve your LLM's memory capabilities with a lightweight and efficient
+    server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

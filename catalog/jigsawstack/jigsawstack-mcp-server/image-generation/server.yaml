@@ -1,0 +1,21 @@
+identifier: jigsawstack/jigsawstack-mcp-server/image-generation
+repo:
+  provider: github.com
+  url: https://github.com/JigsawStack/jigsawstack-mcp-server
+  name: jigsawstack-mcp-server
+  owner: JigsawStack
+server:
+  subdirectory: /image-generation
+  name: JigsawStack Image Generation
+  description: >-
+    Generate images from text using advanced AI models. Learn more about
+    jigsawstack's image generation API here:
+    https://jigsawstack.com/docs/api-reference/ai/image-generation
+
+
+    You can get your jigsawstack API key here:
+    https://jigsawstack.com/dashboard/
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

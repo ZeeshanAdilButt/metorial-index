@@ -1,0 +1,17 @@
+identifier: zereight/sentry-mcp/sentry-mcp
+repo:
+  provider: github.com
+  url: https://github.com/zereight/sentry-mcp
+  name: sentry-mcp
+  owner: zereight
+server:
+  subdirectory: /
+  name: Sentry Server
+  description: Fetch and manage Sentry issue and event details seamlessly.
+    Integrate with your Sentry projects to retrieve insights and streamline your
+    debugging process. Enhance your workflow by leveraging Sentry's powerful API
+    through a standardized interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

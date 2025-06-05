@@ -1,0 +1,254 @@
+tools:
+  - name: decisionFramework
+    description: >-
+      A detailed tool for structured decision analysis and rational choice.
+
+      This tool helps models systematically evaluate options, criteria, and
+      outcomes.
+
+      It supports multiple decision frameworks, probability estimates, and value
+      judgments.
+
+
+      When to use this tool:
+
+      - Complex decisions with multiple options
+
+      - Decisions requiring systematic evaluation of trade-offs
+
+      - Decisions under uncertainty with probability estimates
+
+      - Multi-stakeholder decisions with different criteria
+
+      - Risk analysis and management
+
+
+      Key features:
+
+      - Structured option evaluation
+
+      - Multi-criteria decision analysis
+
+      - Expected utility calculations
+
+      - Information value analysis
+
+      - Visual decision support
+    inputSchema:
+      type: object
+      required:
+        - decisionStatement
+        - options
+        - stakeholders
+        - constraints
+        - timeHorizon
+        - riskTolerance
+        - decisionId
+        - analysisType
+        - stage
+        - iteration
+        - nextStageNeeded
+      properties:
+        stage:
+          enum:
+            - problem-definition
+            - options
+            - criteria
+            - evaluation
+            - analysis
+            - recommendation
+          type: string
+          description: Current stage of the decision process
+        options:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - description
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the option
+              name:
+                type: string
+                description: Name of the option
+              description:
+                type: string
+                description: Description of the option
+          description: Available options or alternatives
+        criteria:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - description
+              - weight
+              - evaluationMethod
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the criterion
+              name:
+                type: string
+                description: Name of the criterion
+              weight:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Weight of the criterion (0.0-1.0)
+              description:
+                type: string
+                description: Description of the criterion
+              evaluationMethod:
+                enum:
+                  - quantitative
+                  - qualitative
+                  - boolean
+                type: string
+                description: Method for evaluating options against this criterion
+          description: Criteria for evaluating options
+        iteration:
+          type: number
+          minimum: 0
+          description: Current iteration of the decision analysis
+        decisionId:
+          type: string
+          description: Unique identifier for this decision
+        constraints:
+          type: array
+          items:
+            type: string
+          description: Constraints on the decision
+        timeHorizon:
+          type: string
+          description: Time frame for the decision
+        analysisType:
+          enum:
+            - expected-utility
+            - multi-criteria
+            - maximin
+            - minimax-regret
+            - satisficing
+          type: string
+          description: Type of decision analysis
+        stakeholders:
+          type: array
+          items:
+            type: string
+          description: People or groups affected by the decision
+        riskTolerance:
+          enum:
+            - risk-averse
+            - risk-neutral
+            - risk-seeking
+          type: string
+          description: Risk tolerance for the decision
+        expectedValues:
+          type: object
+          description: Expected values for each option
+          additionalProperties:
+            type: number
+        recommendation:
+          type: string
+          description: Recommendation based on the analysis
+        informationGaps:
+          type: array
+          items:
+            type: object
+            required:
+              - description
+              - impact
+              - researchMethod
+            properties:
+              impact:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Impact of the information gap on the decision (0.0-1.0)
+              description:
+                type: string
+                description: Description of the information gap
+              researchMethod:
+                type: string
+                description: Method for filling the information gap
+          description: Gaps in information that affect the decision
+        nextStageNeeded:
+          type: boolean
+          description: Whether another stage is needed
+        possibleOutcomes:
+          type: array
+          items:
+            type: object
+            required:
+              - description
+              - probability
+              - optionId
+              - value
+              - confidenceInEstimate
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the outcome
+              value:
+                type: number
+                description: Utility value of the outcome (can be positive or negative)
+              optionId:
+                type: string
+                description: ID of the option this outcome is associated with
+              description:
+                type: string
+                description: Description of the outcome
+              probability:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Probability of the outcome (0.0-1.0)
+              confidenceInEstimate:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Confidence in the probability and value estimates (0.0-1.0)
+          description: Possible outcomes and their probabilities
+        decisionStatement:
+          type: string
+          description: Clear statement of the decision to be made
+        suggestedNextStage:
+          type: string
+          description: Suggested next stage of the decision process
+        criteriaEvaluations:
+          type: array
+          items:
+            type: object
+            required:
+              - criterionId
+              - optionId
+              - score
+              - justification
+            properties:
+              score:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Score of the option on this criterion (0.0-1.0)
+              optionId:
+                type: string
+                description: ID of the option
+              criterionId:
+                type: string
+                description: ID of the criterion
+              justification:
+                type: string
+                description: Justification for the score
+          description: Evaluations of options against criteria
+        multiCriteriaScores:
+          type: object
+          description: Multi-criteria scores for each option
+          additionalProperties:
+            type: number
+        sensitivityInsights:
+          type: array
+          items:
+            type: string
+          description: Insights from sensitivity analysis

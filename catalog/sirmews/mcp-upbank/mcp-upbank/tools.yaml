@@ -1,0 +1,521 @@
+tools:
+  - name: getPaginatedAccountsWrapper
+    description: Paginate getPaginatedAccountsWrapper
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          required:
+            - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The pagination URL (prev or next) from a previous API response.
+          description: Input for fetching data from a pagination URL
+          additionalProperties: false
+      additionalProperties: false
+  - name: getPaginatedTransactionsWrapper
+    description: Paginate getPaginatedTransactionsWrapper
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          required:
+            - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The pagination URL (prev or next) from a previous API response.
+          description: Input for fetching data from a pagination URL
+          additionalProperties: false
+      additionalProperties: false
+  - name: getPaginatedAccountTransactionsWrapper
+    description: Paginate getPaginatedAccountTransactionsWrapper
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          required:
+            - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The pagination URL (prev or next) from a previous API response.
+          description: Input for fetching data from a pagination URL
+          additionalProperties: false
+      additionalProperties: false
+  - name: getPaginatedAttachmentsWrapper
+    description: Paginate getPaginatedAttachmentsWrapper
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          required:
+            - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The pagination URL (prev or next) from a previous API response.
+          description: Input for fetching data from a pagination URL
+          additionalProperties: false
+      additionalProperties: false
+  - name: getPaginatedTagsWrapper
+    description: Paginate getPaginatedTagsWrapper
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          required:
+            - url
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The pagination URL (prev or next) from a previous API response.
+          description: Input for fetching data from a pagination URL
+          additionalProperties: false
+      additionalProperties: false
+  - name: getAccounts
+    description: List accounts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          properties:
+            page[size]:
+              type: number
+              description: |
+                The number of records to return in each page.
+            filter[accountType]:
+              enum:
+                - SAVER
+                - TRANSACTIONAL
+                - HOME_LOAN
+              type: string
+              description: |
+                The type of account for which to return records. This
+                can be used to filter Savers from spending accounts.
+            filter[ownershipType]:
+              enum:
+                - INDIVIDUAL
+                - JOINT
+              type: string
+              description: |
+                The account ownership structure for which to return
+                records. This can be used to filter 2Up accounts from Up
+                accounts.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getAccountsId
+    description: Retrieve account
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+      properties:
+        pathParams:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: |
+                The unique identifier for the account.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getAttachments
+    description: List attachments
+    inputSchema:
+      type: object
+  - name: getAttachmentsId
+    description: Retrieve attachment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+      properties:
+        pathParams:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: |
+                The unique identifier for the attachment.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getCategories
+    description: List categories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          properties:
+            filter[parent]:
+              type: string
+              description: |
+                The unique identifier of a parent category for which to
+                return only its children. Providing an invalid category
+                identifier results in a `404` response.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getCategoriesId
+    description: Retrieve category
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+      properties:
+        pathParams:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: |
+                The unique identifier for the category.
+          additionalProperties: false
+      additionalProperties: false
+  - name: patchTransactionsTransactionIdRelationshipsCategory
+    description: Categorize transaction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+        - bodyParams
+      properties:
+        bodyParams:
+          type: object
+          required:
+            - data
+          properties:
+            data:
+              anyOf:
+                - type: object
+                  required:
+                    - type
+                    - id
+                  properties:
+                    id:
+                      type: string
+                      description: >
+                        The unique identifier of the category, as returned by
+                        the `/categories`
+
+                        endpoint.
+                    type:
+                      type: string
+                      description: "The type of this resource: `categories`"
+                  description: |
+                    Uniquely identifies a category in the API.
+                  additionalProperties: false
+                - type: "null"
+              description: >
+                The category to set on the transaction. Set this entire key to
+                `null`
+
+                de-categorize a transaction.
+          description: |
+            Request to update the category associated with a transaction.
+          additionalProperties: false
+        pathParams:
+          type: object
+          required:
+            - transactionId
+          properties:
+            transactionId:
+              type: string
+              description: |
+                The unique identifier for the transaction.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getTags
+    description: List tags
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          properties:
+            page[size]:
+              type: number
+              description: |
+                The number of records to return in each page.
+          additionalProperties: false
+      additionalProperties: false
+  - name: postTransactionsTransactionIdRelationshipsTags
+    description: Add tags to transaction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+        - bodyParams
+      properties:
+        bodyParams:
+          type: object
+          required:
+            - data
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - id
+                properties:
+                  id:
+                    type: string
+                    description: >
+                      The label of the tag, which also acts as the tag’s unique
+                      identifier.
+                  type:
+                    type: string
+                    description: "The type of this resource: `tags`"
+                description: |
+                  Uniquely identifies a single tag in the API.
+                additionalProperties: false
+              description: |
+                The tags to add to or remove from the transaction.
+          description: |
+            Request to add or remove tags associated with a transaction.
+          additionalProperties: false
+        pathParams:
+          type: object
+          required:
+            - transactionId
+          properties:
+            transactionId:
+              type: string
+              description: |
+                The unique identifier for the transaction.
+          additionalProperties: false
+      additionalProperties: false
+  - name: deleteTransactionsTransactionIdRelationshipsTags
+    description: Remove tags from transaction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+        - bodyParams
+      properties:
+        bodyParams:
+          type: object
+          required:
+            - data
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - id
+                properties:
+                  id:
+                    type: string
+                    description: >
+                      The label of the tag, which also acts as the tag’s unique
+                      identifier.
+                  type:
+                    type: string
+                    description: "The type of this resource: `tags`"
+                description: |
+                  Uniquely identifies a single tag in the API.
+                additionalProperties: false
+              description: |
+                The tags to add to or remove from the transaction.
+          description: |
+            Request to add or remove tags associated with a transaction.
+          additionalProperties: false
+        pathParams:
+          type: object
+          required:
+            - transactionId
+          properties:
+            transactionId:
+              type: string
+              description: |
+                The unique identifier for the transaction.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getTransactions
+    description: List transactions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queryParams
+      properties:
+        queryParams:
+          type: object
+          properties:
+            page[size]:
+              type: number
+              description: |
+                The number of records to return in each page.
+            filter[tag]:
+              type: string
+              description: |
+                A transaction tag to filter for which to return records.
+                If the tag does not exist, zero records are returned and
+                a success response is given.
+            filter[since]:
+              type: string
+              format: date-time
+              description: |
+                The start date-time from which to return records,
+                formatted according to rfc-3339. Not to be used for
+                pagination purposes.
+            filter[until]:
+              type: string
+              format: date-time
+              description: |
+                The end date-time up to which to return records,
+                formatted according to rfc-3339. Not to be used for
+                pagination purposes.
+            filter[status]:
+              enum:
+                - HELD
+                - SETTLED
+              type: string
+              description: |
+                The transaction status for which to return records. This
+                can be used to filter `HELD` transactions from those
+                that are `SETTLED`.
+            filter[category]:
+              type: string
+              description: |
+                The category identifier for which to filter transactions.
+                Both parent and child categories can be filtered through
+                this parameter. Providing an invalid category identifier
+                results in a `404` response.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getTransactionsId
+    description: Retrieve transaction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+      properties:
+        pathParams:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: |
+                The unique identifier for the transaction.
+          additionalProperties: false
+      additionalProperties: false
+  - name: getAccountsAccountIdTransactions
+    description: List transactions by account
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pathParams
+        - queryParams
+      properties:
+        pathParams:
+          type: object
+          required:
+            - accountId
+          properties:
+            accountId:
+              type: string
+              description: |
+                The unique identifier for the account.
+          additionalProperties: false
+        queryParams:
+          type: object
+          properties:
+            page[size]:
+              type: number
+              description: |
+                The number of records to return in each page.
+            filter[tag]:
+              type: string
+              description: |
+                A transaction tag to filter for which to return records.
+                If the tag does not exist, zero records are returned and
+                a success response is given.
+            filter[since]:
+              type: string
+              format: date-time
+              description: |
+                The start date-time from which to return records,
+                formatted according to rfc-3339. Not to be used for
+                pagination purposes.
+            filter[until]:
+              type: string
+              format: date-time
+              description: |
+                The end date-time up to which to return records,
+                formatted according to rfc-3339. Not to be used for
+                pagination purposes.
+            filter[status]:
+              enum:
+                - HELD
+                - SETTLED
+              type: string
+              description: |
+                The transaction status for which to return records. This
+                can be used to filter `HELD` transactions from those
+                that are `SETTLED`.
+            filter[category]:
+              type: string
+              description: |
+                The category identifier for which to filter transactions.
+                Both parent and child categories can be filtered through
+                this parameter. Providing an invalid category identifier
+                results in a `404` response.
+          additionalProperties: false
+      additionalProperties: false

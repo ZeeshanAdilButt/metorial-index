@@ -1,0 +1,19 @@
+identifier: missionsquad/mcp-avantage/mcp-avantage
+repo:
+  provider: github.com
+  url: https://github.com/MissionSquad/mcp-avantage
+  name: mcp-avantage
+  owner: MissionSquad
+server:
+  subdirectory: /
+  name: Alpha Vantage Financial Data Server
+  description: Enable LLMs to access comprehensive financial data from Alpha
+    Vantage, including stocks, forex, crypto, commodities, and economic
+    indicators. Securely manage multiple user API keys and provide nearly all
+    Alpha Vantage API functionalities as callable tools. Simplify integration of
+    real-time and historical financial data into AI applications with a strongly
+    typed, easy-to-use MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

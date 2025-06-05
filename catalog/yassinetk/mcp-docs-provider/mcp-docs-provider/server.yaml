@@ -1,0 +1,19 @@
+identifier: yassinetk/mcp-docs-provider/mcp-docs-provider
+repo:
+  provider: github.com
+  url: https://github.com/YassineTk/mcp-docs-provider
+  name: mcp-docs-provider
+  owner: YassineTk
+server:
+  subdirectory: /
+  name: Documentation Context Provider
+  description: Enable AI models to seamlessly access and query your local markdown
+    technical documentation. This server allows for dynamic integration of
+    documentation into LLM workflows, enhancing the model's ability to provide
+    accurate and context-aware responses. Update your documentation without
+    needing to rebuild the server, ensuring your AI always has the latest
+    information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

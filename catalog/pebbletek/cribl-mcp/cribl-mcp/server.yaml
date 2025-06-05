@@ -1,0 +1,18 @@
+identifier: pebbletek/cribl-mcp/cribl-mcp
+repo:
+  provider: github.com
+  url: https://github.com/pebbletek/cribl-mcp
+  name: cribl-mcp
+  owner: pebbletek
+server:
+  subdirectory: /
+  name: Cribl API Interaction Server
+  description: Enable AI clients to interact seamlessly with your Cribl deployment
+    by discovering and invoking data operations through standardized MCP
+    tooling. Manage and query Cribl configurations, pipelines, sources, and
+    system metrics using natural language prompts. Simplify Cribl environment
+    management and monitoring with AI-driven tool integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

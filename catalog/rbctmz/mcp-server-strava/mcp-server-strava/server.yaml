@@ -1,0 +1,17 @@
+identifier: rbctmz/mcp-server-strava/mcp-server-strava
+repo:
+  provider: github.com
+  url: https://github.com/rbctmz/mcp-server-strava
+  name: mcp-server-strava
+  owner: rbctmz
+server:
+  subdirectory: /
+  name: Strava Integration
+  description: Analyze your training sessions and receive personalized
+    recommendations based on Strava data. Leverage the power of the Model
+    Context Protocol SDK to seamlessly integrate and enhance your fitness
+    journey.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

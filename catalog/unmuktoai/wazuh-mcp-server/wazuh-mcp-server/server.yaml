@@ -1,0 +1,17 @@
+identifier: unmuktoai/wazuh-mcp-server/wazuh-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/unmuktoai/Wazuh-MCP-Server
+  name: Wazuh-MCP-Server
+  owner: unmuktoai
+server:
+  subdirectory: /
+  name: Wazuh MCP Server
+  description: Integrate Wazuh security data with LLMs to enhance your security
+    context. Retrieve real-time alerts and transform them into standardized
+    messages for seamless interaction with your applications. Securely
+    authenticate and configure the server to fit your needs effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

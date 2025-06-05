@@ -1,0 +1,90 @@
+tools:
+  - name: get_planner_state
+    description: "Get the current browser state and planning context.
+
+      \    This tool must be executed before execute_actions tool.
+
+      \   \ 
+
+      \    Must return a JSON string in the format:
+
+      \    {
+
+      \        \"current_state\": {
+
+      \            \"evaluation_previous_goal\": \"Success|Failed|Unknown -
+      Analysis of previous actions\",
+
+      \            \"memory\": \"Description of what has been done and what to
+      remember\",
+
+      \            \"next_goal\": \"What needs to be done with the next
+      immediate action\"
+
+      \        },
+
+      \        \"action\": [
+
+      \            {\"action_name\": {\"param1\": \"value1\", ...}},
+
+      \            ...
+
+      \        ]
+
+      \    }
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_planner_stateArguments
+      properties: {}
+  - name: execute_actions
+    description: "Execute actions from the planner state.
+
+      \   \ 
+
+      \    Args:
+
+      \        actions: A dictionary containing the planner state and actions in
+      format:
+
+      \                {
+
+      \                    \"current_state\": {
+
+      \                        \"evaluation_previous_goal\": str,
+
+      \                        \"memory\": str,
+
+      \                        \"next_goal\": str
+
+      \                    },
+
+      \                    \"action\": [
+
+      \                        {\"action_name\": {\"param1\": \"value1\"}},
+
+      \                        ...
+
+      \                    ]
+
+      \                }
+
+      \               \ 
+
+      \    Note: If the page state changes (new elements appear) during action
+      execution,
+
+      \    the sequence will be interrupted and you'll need to get a new planner
+      state.
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_actionsArguments
+      required:
+        - actions
+      properties:
+        actions:
+          type: object
+          title: Actions

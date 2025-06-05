@@ -1,0 +1,17 @@
+tools:
+  - name: generateMeme
+    description: Generate a meme image from Imgflip using the numeric template id and text
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - templateNumericId
+        - text0
+      properties:
+        text0:
+          type: string
+        text1:
+          type: string
+        templateNumericId:
+          type: string
+      additionalProperties: false

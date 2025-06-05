@@ -1,0 +1,27 @@
+tools:
+  - name: generate_image
+    description: Generate an image using ComfyUI
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        seed:
+          type: number
+          default: 8566257
+          description: Seed for reproducible generation
+        width:
+          type: number
+          default: 512
+          description: Image width in pixels
+        height:
+          type: number
+          default: 512
+          description: Image height in pixels
+        prompt:
+          type: string
+          description: Positive prompt describing what you want in the image
+        negative_prompt:
+          type: string
+          default: bad hands, bad quality
+          description: Negative prompt describing what you don't want

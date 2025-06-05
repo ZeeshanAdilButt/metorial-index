@@ -1,0 +1,18 @@
+identifier: kevinbin/mcp-mysql-server/mcp-mysql-server
+repo:
+  provider: github.com
+  url: https://github.com/kevinbin/mcp-mysql-server
+  name: mcp-mysql-server
+  owner: kevinbin
+server:
+  subdirectory: /
+  name: MySQL Database Server
+  description: Enable AI models to interact with MySQL databases through a
+    standardized interface. Perform database operations like querying, executing
+    commands, and managing schemas securely and efficiently. Simplify your
+    database interactions with easy-to-use tools and comprehensive error
+    handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,17 @@
+identifier: narumiruna/gitingest-mcp/gitingest-mcp
+repo:
+  provider: github.com
+  url: https://github.com/narumiruna/gitingest-mcp
+  name: gitingest-mcp
+  owner: narumiruna
+server:
+  subdirectory: /
+  name: Gitingest Server
+  description: Analyze and ingest Git repositories to produce structured text
+    digests of their codebases. Easily integrate with AI assistants to retrieve
+    comprehensive repository summaries, file structures, and content. Customize
+    file filtering and branch selection to tailor the analysis to your needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

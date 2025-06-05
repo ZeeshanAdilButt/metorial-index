@@ -1,0 +1,11 @@
+tools:
+  - name: get_current_weather
+    description: Get current weather for a specified city
+    inputSchema:
+      type: object
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          description: City name (e.g., "London", "New York", "Tokyo")

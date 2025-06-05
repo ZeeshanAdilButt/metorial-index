@@ -1,0 +1,14 @@
+identifier: szeider/mcp-solver/mcp-solver
+repo:
+  provider: github.com
+  url: https://github.com/szeider/mcp-solver
+  name: mcp-solver
+  owner: szeider
+server:
+  subdirectory: /
+  name: MCP Solver
+  description: A server that exposes MiniZinc constraint solving capabilities to LLMs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,235 @@
+tools:
+  - name: zip
+    description: Compress a single file using gzip format. Specify output directory,
+      filename, and compression level. Supports progress reporting.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceFilePath
+      properties:
+        outputFileName:
+          type: string
+          description: Output filename (defaults to original filename + .gz)
+        sourceFilePath:
+          type: string
+          minLength: 1
+          description: Path to the file to compress
+        outputDirectory:
+          type: string
+          description: Output directory (defaults to source file directory)
+        compressionLevel:
+          type: integer
+          default: 6
+          maximum: 9
+          minimum: 1
+          description: Compression level (1-9), higher values provide better compression
+            but slower speed
+      additionalProperties: false
+  - name: unzip
+    description: Decompress gzip files. Specify output directory and filename.
+      Supports progress reporting. Suitable for decompressing .gz files.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceFilePath
+      properties:
+        outputFileName:
+          type: string
+          description: Output filename (defaults to original file name without .gz suffix)
+        sourceFilePath:
+          type: string
+          minLength: 1
+          description: Path to the gzip file to decompress
+        outputDirectory:
+          type: string
+          description: Output directory (defaults to source file's directory)
+      additionalProperties: false
+  - name: list-zip-contents
+    description: Preview the contents of a gzip compressed file. Specify preview
+      length in bytes. Useful for viewing .gz file contents without full
+      decompression.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceFilePath
+      properties:
+        previewLength:
+          type: integer
+          default: 1000
+          maximum: 10000
+          description: Number of bytes to preview, defaults to 1000 bytes, maximum 10000
+            bytes
+          exclusiveMinimum: 0
+        sourceFilePath:
+          type: string
+          minLength: 1
+          description: Path to the gzip file to view
+      additionalProperties: false
+  - name: zip-folder
+    description: Compress folders to tar.gz format. Specify output directory,
+      filename, and compression level. Supports progress reporting.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceFolderPath
+      properties:
+        outputFileName:
+          type: string
+          description: Output filename (defaults to original folder name + .tar.gz)
+        outputDirectory:
+          type: string
+          description: Output directory (defaults to source folder's directory)
+        compressionLevel:
+          type: integer
+          default: 6
+          maximum: 9
+          minimum: 1
+          description: Compression level (1-9), higher values provide better compression
+            but slower speed
+        sourceFolderPath:
+          type: string
+          minLength: 1
+          description: Path to the folder to compress
+      additionalProperties: false
+  - name: unzip-folder
+    description: Extract tar.gz format compressed folders. Specify output directory
+      and directory level stripping options. Supports progress reporting.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceArchivePath
+      properties:
+        outputDirectory:
+          type: string
+          description: Output directory (defaults to source archive's directory)
+        stripComponents:
+          type: integer
+          default: 0
+          minimum: 0
+          description: Number of directory levels to strip during extraction (default is
+            0, keeping original directory structure)
+        sourceArchivePath:
+          type: string
+          minLength: 1
+          description: Path to the tar.gz file to extract
+      additionalProperties: false
+  - name: zip-archive
+    description: Use ZIP format to compress files or folders. Specify output
+      directory, filename, and compression level. Supports progress reporting.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourcePath
+      properties:
+        sourcePath:
+          type: string
+          minLength: 1
+          description: 要压缩的文件或文件夹路径
+        outputFileName:
+          type: string
+          description: 输出文件名（默认为原文件或文件夹名+.zip）
+        outputDirectory:
+          type: string
+          description: 输出目录（默认为源文件所在目录）
+        compressionLevel:
+          type: integer
+          default: 6
+          maximum: 9
+          minimum: 1
+          description: 压缩级别 (1-9)，值越大压缩比越高但速度越慢
+      additionalProperties: false
+  - name: 7z-archive
+    description: Use 7z format to compress files or folders. Specify output
+      directory, filename, and compression level. Supports progress reporting.
+      Requires 7-Zip to be installed on the system.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourcePath
+      properties:
+        sourcePath:
+          type: string
+          minLength: 1
+          description: Path to the file or folder to compress
+        outputFileName:
+          type: string
+          description: Output filename (defaults to original file or folder name + .7z)
+        outputDirectory:
+          type: string
+          description: Output directory (defaults to source file's directory)
+        compressionLevel:
+          type: integer
+          default: 6
+          maximum: 9
+          minimum: 1
+          description: Compression level (1-9), higher values provide better compression
+            but slower speed
+      additionalProperties: false
+  - name: compression
+    description: >-
+      Unified compression tool that supports multiple operations (compress,
+      decompress, list) and formats.
+
+      This tool consolidates all compression functionality into a single
+      interface.
+
+
+      Formats supported: gzip
+
+
+      Operations:
+
+      - compress: Compress a file or directory
+
+      - decompress: Extract a compressed file
+
+      - list: Show contents of a compressed file
+
+
+      Each operation has specific parameters. See examples below.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - operation
+        - format
+        - sourcePath
+      properties:
+        format:
+          type: string
+          minLength: 1
+        operation:
+          enum:
+            - compress
+            - decompress
+            - list
+          type: string
+        sourcePath:
+          type: string
+          minLength: 1
+        previewLength:
+          type: number
+          default: 1000
+          maximum: 10000
+          minimum: 1
+        outputFileName:
+          type: string
+        outputDirectory:
+          type: string
+        stripComponents:
+          type: number
+          default: 0
+          minimum: 0
+        compressionLevel:
+          type: number
+          default: 6
+          maximum: 9
+          minimum: 1
+      additionalProperties: false

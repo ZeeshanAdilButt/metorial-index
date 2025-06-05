@@ -1,0 +1,17 @@
+identifier: hackle-io/hackle-mcp/hackle-mcp
+repo:
+  provider: github.com
+  url: https://github.com/hackle-io/hackle-mcp
+  name: hackle-mcp
+  owner: hackle-io
+server:
+  subdirectory: /
+  name: Hackle API Server
+  description: Provide tools and resources to query A/B Test data through the
+    Hackle API. Enable seamless integration of A/B testing insights into your
+    applications. Facilitate efficient data retrieval and manipulation for
+    experimentation workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,91 @@
+tools:
+  - name: search_pubmed
+    description: "
+
+      \    Search the PubMed database using specified keywords and/or author
+      names.
+
+
+      \    This function allows users to search the PubMed database by providing
+      keywords
+
+      \    for titles or abstracts and/or author names. It returns a specified
+      number of
+
+      \    results in a formatted dictionary.
+
+
+      \    Parameters:
+
+      \    - title_abstract_keywords (List[str]): Keywords to search for in the
+      title or abstract.
+
+      \    - authors (List[str]): Author names to include in the search. Format:
+      surname followed by initials, e.g., \"Doe JP\".
+
+      \    - num_results (int): Maximum number of results to return. Default is
+      10.
+
+
+      \    Returns:
+
+      \    - Dict[str, Any]: A dictionary containing the success status, a list
+      of results with PubMed IDs,
+
+      \      links, abstracts, and the total number of results found.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_pubmedArguments
+      properties:
+        authors:
+          type: array
+          items:
+            type: string
+          title: Authors
+          default: []
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+        title_abstract_keywords:
+          type: array
+          items:
+            type: string
+          title: Title Abstract Keywords
+          default: []
+  - name: format_paper_details
+    description: "
+
+      \    Fetch and format details of multiple PubMed articles.
+
+
+      \    This function retrieves details for a list of PubMed IDs and formats
+      them
+
+      \    into a list of dictionaries containing article information.
+
+
+      \    Parameters:
+
+      \    - pubmed_ids (List[str]): A list of PubMed IDs to fetch details for.
+
+
+      \    Returns:
+
+      \    - List[Dict[str, Any]]: A list of dictionaries, each containing
+      details of a PubMed article.
+
+      \    "
+    inputSchema:
+      type: object
+      title: format_paper_detailsArguments
+      required:
+        - pubmed_ids
+      properties:
+        pubmed_ids:
+          type: array
+          items:
+            type: string
+          title: Pubmed Ids

@@ -1,0 +1,18 @@
+identifier: ronantakizawa/a11ymcp/a11ymcp
+repo:
+  provider: github.com
+  url: https://github.com/ronantakizawa/a11ymcp
+  name: a11ymcp
+  owner: ronantakizawa
+server:
+  subdirectory: /
+  name: A11y MCP
+  description: >+
+    Run WCAG compliance tests, ARIA attribute tests, and accessible color
+    contrast tests via the axe-core API. Users can upload raw HTML or URLs to
+    run tests.
+
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

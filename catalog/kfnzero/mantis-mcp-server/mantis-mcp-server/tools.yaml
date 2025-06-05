@@ -1,0 +1,136 @@
+tools:
+  - name: get_issues
+    description: 獲取 Mantis
+      問題列表，可根據多個條件進行過濾，建議查詢時select選擇id,summary,description就好，資訊過多可能導致程式異常
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 0
+          description: 分頁起始位置，從1開始
+        search:
+          type: string
+          description: 搜尋關鍵字
+        select:
+          type: array
+          items:
+            type: string
+          description: 選擇要返回的欄位，例如：['id', 'summary', 'description']
+        pageSize:
+          type: number
+          default: 20
+          description: 頁數大小
+        statusId:
+          type: number
+          description: 狀態 ID
+        handlerId:
+          type: number
+          description: 處理人 ID
+        projectId:
+          type: number
+          description: 專案 ID
+        reporterId:
+          type: number
+          description: 報告者 ID
+      additionalProperties: false
+  - name: get_issue_by_id
+    description: 根據 ID 獲取 Mantis 問題詳情
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueId
+      properties:
+        issueId:
+          type: number
+          description: 問題 ID
+      additionalProperties: false
+  - name: get_user
+    description: 根據用戶名稱查詢 Mantis 用戶
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: 用戶名稱
+      additionalProperties: false
+  - name: get_projects
+    description: 獲取 Mantis 專案列表
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_issue_statistics
+    description: 獲取 Mantis 問題統計數據，根據不同維度進行分析
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - groupBy
+      properties:
+        period:
+          enum:
+            - all
+            - today
+            - week
+            - month
+          type: string
+          default: all
+          description: 時間範圍<all-全部, today-今天, week-本週, month-本月>
+        groupBy:
+          enum:
+            - status
+            - priority
+            - severity
+            - handler
+            - reporter
+          type: string
+          description: 分組依據
+        projectId:
+          type: number
+          description: 專案 ID
+      additionalProperties: false
+  - name: get_assignment_statistics
+    description: 獲取 Mantis 問題分派統計數據，分析不同用戶的問題分派情況
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        projectId:
+          type: number
+          description: 專案 ID
+        statusFilter:
+          type: array
+          items:
+            type: number
+          description: 狀態過濾器，只計算特定狀態的問題
+        includeUnassigned:
+          type: boolean
+          default: true
+          description: 是否包含未分派問題
+      additionalProperties: false
+  - name: get_users_by_project_id
+    description: 獲取指定專案的所有用戶
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: number
+          description: 專案 ID
+      additionalProperties: false
+  - name: get_users
+    description: 用暴力法強制取得所有用戶
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

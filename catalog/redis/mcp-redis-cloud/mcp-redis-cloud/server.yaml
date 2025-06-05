@@ -1,0 +1,17 @@
+identifier: redis/mcp-redis-cloud/mcp-redis-cloud
+repo:
+  provider: github.com
+  url: https://github.com/redis/mcp-redis-cloud
+  name: mcp-redis-cloud
+  owner: redis
+server:
+  subdirectory: /
+  name: Redis Cloud API
+  description: Manage your Redis Cloud resources effortlessly using natural
+    language. Create databases, monitor subscriptions, and configure cloud
+    deployments with simple commands. Streamline your Redis Cloud experience and
+    enhance productivity with intuitive interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

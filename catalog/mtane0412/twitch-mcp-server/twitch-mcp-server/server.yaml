@@ -1,0 +1,14 @@
+identifier: mtane0412/twitch-mcp-server/twitch-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mtane0412/twitch-mcp-server
+  name: twitch-mcp-server
+  owner: mtane0412
+server:
+  subdirectory: /
+  name: Twitch MCP Server
+  description: Interact with the Twitch API to retrieve channel and stream information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,370 @@
+tools:
+  - name: list-daos
+    description: List DAOs on Tally sorted by specified criteria
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of DAOs to return (default: 20, max: 50)"
+        sortBy:
+          enum:
+            - id
+            - name
+            - explore
+            - popular
+          type: string
+          description: "How to sort the DAOs (default: popular). 'explore' prioritizes
+            DAOs with live proposals"
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+  - name: get-dao
+    description: Get detailed information about a specific DAO
+    inputSchema:
+      type: object
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: The DAO's slug (e.g., 'uniswap' or 'aave')
+  - name: list-delegates
+    description: List delegates for a specific organization with their metadata
+    inputSchema:
+      type: object
+      required:
+        - organizationSlug
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of delegates to return (default: 20, max: 50)"
+        hasVotes:
+          type: boolean
+          description: Filter for delegates with votes
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+        hasDelegators:
+          type: boolean
+          description: Filter for delegates with delegators
+        organizationSlug:
+          type: string
+          description: The organization's slug (e.g., 'arbitrum')
+        isSeekingDelegation:
+          type: boolean
+          description: Filter for delegates seeking delegation
+  - name: get-delegators
+    description: Get list of delegators for a specific address
+    inputSchema:
+      type: object
+      required:
+        - address
+        - organizationSlug
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of delegators to return (default: 20, max: 50)"
+        sortBy:
+          enum:
+            - id
+            - votes
+          type: string
+          description: "How to sort the delegators (default: id)"
+        address:
+          type: string
+          description: The Ethereum address to get delegators for (0x format)
+        governorId:
+          type: string
+          description: Filter by specific governor ID
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+        beforeCursor:
+          type: string
+          description: Cursor for previous page pagination
+        isDescending:
+          type: boolean
+          description: "Sort in descending order (default: true)"
+        organizationSlug:
+          type: string
+          description: Filter by organization slug (e.g., 'uniswap'). Alternative to
+            organizationId
+  - name: list-proposals
+    description: List proposals for a specific DAO or organization using its slug
+    inputSchema:
+      type: object
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: The slug of the DAO (e.g., 'uniswap')
+        limit:
+          type: number
+          description: "Maximum number of proposals to return (default: 50, max: 50)"
+        isDraft:
+          type: boolean
+          description: Filter for draft proposals
+        afterCursor:
+          type: string
+          description: Cursor for pagination (string ID)
+        beforeCursor:
+          type: string
+          description: Cursor for previous page pagination (string ID)
+        isDescending:
+          type: boolean
+          description: "Sort in descending order (default: true)"
+        includeArchived:
+          type: boolean
+          description: Include archived proposals
+  - name: get-proposal
+    description: Get detailed information about a specific proposal. You must
+      provide either the Tally ID (globally unique) or both onchainId and
+      governorId (unique within a governor).
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - id
+          properties:
+            id:
+              type: string
+              description: The proposal's Tally ID (globally unique across all governors)
+            isLatest:
+              type: boolean
+              description: Get the latest version of the proposal
+            includeArchived:
+              type: boolean
+              description: Include archived proposals
+        - required:
+            - onchainId
+            - governorId
+          properties:
+            isLatest:
+              type: boolean
+              description: Get the latest version of the proposal
+            onchainId:
+              type: string
+              description: The proposal's onchain ID (only unique within a governor)
+            governorId:
+              type: string
+              description: The governor's ID (required when using onchainId)
+            includeArchived:
+              type: boolean
+              description: Include archived proposals
+  - name: get-address-votes
+    description: Get votes cast by an address for a specific organization
+    inputSchema:
+      type: object
+      required:
+        - address
+        - organizationSlug
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of votes to return (default: 20)"
+        address:
+          type: string
+          description: The address to get votes for
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+        organizationSlug:
+          type: string
+          description: The organization slug to get votes from
+  - name: get-address-created-proposals
+    description: Get proposals created by an address for a specific organization
+    inputSchema:
+      type: object
+      required:
+        - address
+        - organizationSlug
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of proposals to return (default: 20)"
+        address:
+          type: string
+          description: The Ethereum address to get created proposals for
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+        beforeCursor:
+          type: string
+          description: Cursor for previous page pagination
+        organizationSlug:
+          type: string
+          description: The organization slug to get proposals from
+  - name: get-address-daos-proposals
+    description: Returns proposals from DAOs where a given address has participated
+      (voted, proposed, etc.)
+    inputSchema:
+      type: object
+      required:
+        - address
+        - organizationSlug
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of proposals to return (default: 20, max: 50)"
+        address:
+          type: string
+          description: The Ethereum address
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+        organizationSlug:
+          type: string
+          description: The organization slug to get proposals from
+  - name: get-address-received-delegations
+    description: Returns delegations received by an address
+    inputSchema:
+      type: object
+      required:
+        - address
+        - organizationSlug
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of delegations to return (default: 20, max: 50)"
+        sortBy:
+          enum:
+            - votes
+          type: string
+          description: Field to sort by
+        address:
+          type: string
+          description: The Ethereum address to get received delegations for (0x format)
+        isDescending:
+          type: boolean
+          description: Sort in descending order
+        organizationSlug:
+          type: string
+          description: Filter by organization slug
+  - name: get-delegate-statement
+    description: Get a delegate's statement for a specific governor or organization
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - governorId
+          properties:
+            address:
+              type: string
+              description: The delegate's Ethereum address
+            governorId:
+              type: string
+              description: The governor's ID
+        - required:
+            - organizationSlug
+          properties:
+            address:
+              type: string
+              description: The delegate's Ethereum address
+            organizationSlug:
+              type: string
+              description: The organization's slug (e.g., 'uniswap')
+      required:
+        - address
+  - name: get-address-governances
+    description: Returns the list of governances (DAOs) an address has delegated to
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The Ethereum address to get governances for (0x format)
+  - name: get-proposal-timeline
+    description: Get the timeline of events for a specific proposal
+    inputSchema:
+      type: object
+      required:
+        - proposalId
+      properties:
+        proposalId:
+          type: string
+          description: The ID of the proposal to get the timeline for
+  - name: get-proposal-voters
+    description: Get a list of all voters who have voted on a specific proposal
+    inputSchema:
+      type: object
+      required:
+        - proposalId
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of voters to return (default: 20)"
+        sortBy:
+          enum:
+            - id
+            - amount
+          type: string
+          description: How to sort the voters ('id' sorts by date (default), 'amount'
+            sorts by voting power)
+        proposalId:
+          type: string
+          description: The ID of the proposal to get voters for
+        afterCursor:
+          type: string
+          description: Cursor for pagination
+        beforeCursor:
+          type: string
+          description: Cursor for previous page pagination
+        isDescending:
+          type: boolean
+          description: Sort in descending order (true shows most recent/largest first)
+  - name: get-address-metadata
+    description: Get metadata information about a specific Ethereum address
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The Ethereum address to get metadata for (0x format)
+  - name: get-proposal-security-analysis
+    description: Get security analysis for a specific proposal, including threat
+      analysis and simulations
+    inputSchema:
+      type: object
+      required:
+        - proposalId
+      properties:
+        proposalId:
+          type: string
+          description: The ID of the proposal to get security analysis for
+  - name: get-proposal-votes-cast
+    description: Get vote statistics and formatted vote counts for a specific proposal
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The proposal's ID
+  - name: get-proposal-votes-cast-list
+    description: Get a list of votes cast for a specific proposal, including
+      formatted vote amounts
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The proposal's Tally ID (globally unique across all governors)
+  - name: get-governance-proposals-stats
+    description: Get statistics about passed and failed proposals for a specific DAO
+    inputSchema:
+      type: object
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: The DAO's slug (e.g., 'uniswap' or 'aave')

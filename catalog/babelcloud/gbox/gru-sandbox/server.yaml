@@ -1,0 +1,17 @@
+identifier: babelcloud/gbox/gru-sandbox
+repo:
+  provider: github.com
+  url: https://github.com/babelcloud/gbox
+  name: gbox
+  owner: babelcloud
+server:
+  subdirectory: /
+  name: Gru Sandbox
+  description: Enable your AI clients to execute commands locally and securely
+    with a self-hostable sandbox. Enhance your AI's capabilities by generating
+    diagrams, PDFs, and performing complex analyses effortlessly. Streamline
+    your workflow with easy integration into your existing tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

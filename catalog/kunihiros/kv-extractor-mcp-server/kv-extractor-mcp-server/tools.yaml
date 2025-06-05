@@ -1,0 +1,37 @@
+tools:
+  - name: extract_json
+    description: Extracts key-value pairs from arbitrary noisy text and returns them
+      as type-safe JSON (dict).
+    inputSchema:
+      type: object
+      required:
+        - input_text
+      properties:
+        input_text:
+          type: string
+          title: Input Text
+      additionalProperties: false
+  - name: extract_yaml
+    description: Extracts key-value pairs from arbitrary noisy text and returns them
+      as type-safe YAML (str).
+    inputSchema:
+      type: object
+      required:
+        - input_text
+      properties:
+        input_text:
+          type: string
+          title: Input Text
+      additionalProperties: false
+  - name: extract_toml
+    description: Extracts key-value pairs from arbitrary noisy text and returns them
+      as type-safe TOML (str).
+    inputSchema:
+      type: object
+      required:
+        - input_text
+      properties:
+        input_text:
+          type: string
+          title: Input Text
+      additionalProperties: false

@@ -1,0 +1,219 @@
+tools:
+  - name: get_docker_networks
+    description: Get information about Docker networks
+    inputSchema:
+      type: object
+      title: get_docker_networksArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_vm_details
+    description: Get detailed information about a specific virtual machine
+    inputSchema:
+      type: object
+      title: get_vm_detailsArguments
+      required:
+        - vm_name
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+        vm_name:
+          type: string
+          title: Vm Name
+  - name: get_system_info
+    description: Get system information in a human-readable format
+    inputSchema:
+      type: object
+      title: get_system_infoArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: list_containers
+    description: List Docker containers in a human-readable way
+    inputSchema:
+      type: object
+      title: list_containersArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: format_array_status
+    description: Get formatted array status in a human-readable way
+    inputSchema:
+      type: object
+      title: format_array_statusArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: list_vms
+    description: List virtual machines in a human-readable way
+    inputSchema:
+      type: object
+      title: list_vmsArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_network_info
+    description: Get network information
+    inputSchema:
+      type: object
+      title: get_network_infoArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_notifications
+    description: Get notifications
+    inputSchema:
+      type: object
+      title: get_notificationsArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        importance:
+          type: string
+          title: Importance
+          default: null
+        notification_type:
+          type: string
+          title: Notification Type
+          default: UNREAD
+  - name: create_notification
+    description: Create a notification
+    inputSchema:
+      type: object
+      title: create_notificationArguments
+      required:
+        - title
+        - subject
+        - description
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+        link:
+          type: string
+          title: Link
+          default: null
+        title:
+          type: string
+          title: Title
+        subject:
+          type: string
+          title: Subject
+        importance:
+          type: string
+          title: Importance
+          default: INFO
+        description:
+          type: string
+          title: Description
+  - name: get_shares
+    description: Get information about network shares
+    inputSchema:
+      type: object
+      title: get_sharesArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_share_details
+    description: Get detailed information about a specific share
+    inputSchema:
+      type: object
+      title: get_share_detailsArguments
+      required:
+        - share_name
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+        share_name:
+          type: string
+          title: Share Name
+  - name: get_disks
+    description: Get information about all disks
+    inputSchema:
+      type: object
+      title: get_disksArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_disk_details
+    description: Get information about a specific disk
+    inputSchema:
+      type: object
+      title: get_disk_detailsArguments
+      required:
+        - disk_id
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+        disk_id:
+          type: string
+          title: Disk Id
+  - name: get_users
+    description: Get information about all users
+    inputSchema:
+      type: object
+      title: get_usersArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_api_keys
+    description: Get information about all API keys
+    inputSchema:
+      type: object
+      title: get_api_keysArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_unassigned_devices
+    description: Get information about unassigned devices
+    inputSchema:
+      type: object
+      title: get_unassigned_devicesArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null
+  - name: get_parity_history
+    description: Get parity check history
+    inputSchema:
+      type: object
+      title: get_parity_historyArguments
+      properties:
+        ctx:
+          type: string
+          title: ctx
+          default: null

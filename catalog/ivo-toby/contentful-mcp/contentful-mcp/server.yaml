@@ -1,0 +1,20 @@
+identifier: ivo-toby/contentful-mcp/contentful-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ivo-toby/contentful-mcp
+  name: contentful-mcp
+  owner: ivo-toby
+server:
+  subdirectory: /
+  name: Contentful Management Server
+  description: >-
+    MCP server for Contentful Content Management API integration, providing full
+    CRUD operations, space, and content-type management, do bulk operations,
+    invoke AI-actions and authenticate using App Identities.
+
+    This MCP Server will enable you to implement a powerful agentic workflow
+    that can do content operations on the Contentful platform
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

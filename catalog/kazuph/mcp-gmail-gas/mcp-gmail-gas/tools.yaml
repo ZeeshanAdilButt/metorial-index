@@ -1,0 +1,60 @@
+tools:
+  - name: gmail_search_messages
+    description: |
+      
+      Gmail内で指定したクエリに一致するメールを検索します。
+      queryパラメータはGmailの検索クエリ形式で指定します。
+        例: "subject:Meeting newer_than:1d"
+
+      結果はJSONで返り、メール一覧(件名、messageIdなど)を含みます。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: gmail_get_message
+    description: |
+      
+      指定したmessageIdのメール本文と詳細を取得します。
+        引数: messageId (GmailのメッセージID)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - messageId
+      properties:
+        messageId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: gmail_download_attachment
+    description: |
+      
+      指定したmessageIdとattachmentIdで添付ファイルを取得します。
+      ファイルはDownloadsフォルダに保存されます。
+      attachmentIdはattachmentsの各attachmentのnameでありファイル名となることが多いです(invoice.pdfなど)。
+        引数:
+          - messageId: メッセージID（必須）
+          - attachmentId: 添付ファイルID（必須）
+          - outputFilename: 保存時のファイル名（オプション）
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - messageId
+        - attachmentId
+      properties:
+        messageId:
+          type: string
+          minLength: 1
+        attachmentId:
+          type: string
+          minLength: 1
+        outputFilename:
+          type: string
+      additionalProperties: false

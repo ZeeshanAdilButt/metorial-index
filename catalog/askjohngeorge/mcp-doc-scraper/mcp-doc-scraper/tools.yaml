@@ -1,0 +1,16 @@
+tools:
+  - name: scrape_docs
+    description: Scrape documentation from a URL and save as markdown
+    inputSchema:
+      type: object
+      title: ScrapeDocsInput
+      required:
+        - url
+        - output_path
+      properties:
+        url:
+          type: string
+          title: Url
+        output_path:
+          type: string
+          title: Output Path

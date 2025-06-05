@@ -1,0 +1,31 @@
+tools:
+  - name: get_price
+    description: Get the price of a stock/crypto ticker.
+    inputSchema:
+      type: object
+      title: get_price_toolArguments
+      required:
+        - ticker
+      properties:
+        period:
+          type: string
+          title: Period
+          default: 1d
+        ticker:
+          type: string
+          title: Ticker
+  - name: get_news
+    description: Get the news of a stock/crypto ticker.
+    inputSchema:
+      type: object
+      title: get_news_toolArguments
+      required:
+        - ticker
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 5
+        ticker:
+          type: string
+          title: Ticker

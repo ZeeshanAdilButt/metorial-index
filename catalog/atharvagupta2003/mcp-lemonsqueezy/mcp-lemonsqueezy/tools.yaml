@@ -1,0 +1,286 @@
+tools:
+  - name: get_user
+    description: Get the current authenticated Lemon Squeezy user
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_stores
+    description: List all Lemon Squeezy stores
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_store
+    description: Get details of a specific store
+    inputSchema:
+      type: object
+      required:
+        - store_id
+      properties:
+        store_id:
+          type: string
+          description: The ID of the store
+  - name: list_products
+    description: List all products
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_product_variants
+    description: Get all variants for a given product ID
+    inputSchema:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product to fetch variants for
+  - name: get_product
+    description: Get a specific product by ID
+    inputSchema:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          description: The ID of the product
+  - name: list_orders
+    description: List all orders
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_order
+    description: Get an order by ID
+    inputSchema:
+      type: object
+      required:
+        - order_id
+      properties:
+        order_id:
+          type: string
+          description: The ID of the order
+  - name: list_customers
+    description: List all customers
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_customer
+    description: Get a customer by ID
+    inputSchema:
+      type: object
+      required:
+        - customer_id
+      properties:
+        customer_id:
+          type: string
+          description: The ID of the customer
+  - name: list_subscriptions
+    description: List all subscriptions
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_subscription
+    description: Get a subscription by ID
+    inputSchema:
+      type: object
+      required:
+        - subscription_id
+      properties:
+        subscription_id:
+          type: string
+          description: The ID of the subscription
+  - name: list_license_keys
+    description: List all license keys
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_license_key
+    description: Get a license key by ID
+    inputSchema:
+      type: object
+      required:
+        - license_key_id
+      properties:
+        license_key_id:
+          type: string
+          description: The ID of the license key
+  - name: create_checkout
+    description: Create a Lemon Squeezy checkout session with full custom configuration
+    inputSchema:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - type
+            - attributes
+            - relationships
+          properties:
+            type:
+              enum:
+                - checkouts
+              type: string
+            attributes:
+              type: object
+              required:
+                - product_options
+                - checkout_data
+              properties:
+                preview:
+                  type: boolean
+                expires_at:
+                  type: string
+                  format: date-time
+                custom_price:
+                  type: integer
+                  description: Price in cents (e.g., 9900 for $99.00)
+                checkout_data:
+                  type: object
+                  required:
+                    - email
+                    - name
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    custom:
+                      type: object
+                      properties:
+                        user_id:
+                          type: string
+                    custom_notes:
+                      type: string
+                    discount_code:
+                      type: string
+                product_options:
+                  type: object
+                  properties:
+                    redirect_url:
+                      type: string
+                    enabled_variants:
+                      type: array
+                      items:
+                        type: integer
+                    receipt_link_url:
+                      type: string
+                    receipt_button_text:
+                      type: string
+                    receipt_thank_you_note:
+                      type: string
+                checkout_options:
+                  type: object
+                  properties:
+                    button_color:
+                      type: string
+            relationships:
+              type: object
+              required:
+                - store
+                - variant
+              properties:
+                store:
+                  type: object
+                  required:
+                    - data
+                  properties:
+                    data:
+                      type: object
+                      required:
+                        - type
+                        - id
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          enum:
+                            - stores
+                          type: string
+                variant:
+                  type: object
+                  required:
+                    - data
+                  properties:
+                    data:
+                      type: object
+                      required:
+                        - type
+                        - id
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          enum:
+                            - variants
+                          type: string
+  - name: create_webhook
+    description: Register a webhook URL for a specific store and events
+    inputSchema:
+      type: object
+      required:
+        - webhook_data
+      properties:
+        webhook_data:
+          type: object
+          required:
+            - data
+          properties:
+            data:
+              type: object
+              required:
+                - type
+                - attributes
+                - relationships
+              properties:
+                type:
+                  enum:
+                    - webhooks
+                  type: string
+                attributes:
+                  type: object
+                  required:
+                    - url
+                    - events
+                    - secret
+                  properties:
+                    url:
+                      type: string
+                    events:
+                      type: array
+                      items:
+                        type: string
+                    secret:
+                      type: string
+                relationships:
+                  type: object
+                  required:
+                    - store
+                  properties:
+                    store:
+                      type: object
+                      required:
+                        - data
+                      properties:
+                        data:
+                          type: object
+                          required:
+                            - type
+                            - id
+                          properties:
+                            id:
+                              type: string
+                              description: The store ID
+                            type:
+                              enum:
+                                - stores
+                              type: string
+  - name: list_webhooks
+    description: List all webhooks. Optionally filter by store ID.
+    inputSchema:
+      type: object
+      properties:
+        store_id:
+          type: string
+          description: If provided, only webhooks for this store will be returned

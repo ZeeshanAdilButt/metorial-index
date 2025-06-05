@@ -1,0 +1,17 @@
+identifier: gitskyflux/cloudtasks-mcp/cloudtasks-mcp
+repo:
+  provider: github.com
+  url: https://github.com/gitskyflux/cloudtasks-mcp
+  name: cloudtasks-mcp
+  owner: gitskyflux
+server:
+  subdirectory: /
+  name: Cloud Tasks Server
+  description: Interact seamlessly with Google Cloud Tasks queues and tasks.
+    Manage your task workflows by listing, pausing, resuming, and deleting tasks
+    directly from your applications. Simplify your cloud task management with
+    this powerful MCP server integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

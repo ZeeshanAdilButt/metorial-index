@@ -1,0 +1,18 @@
+identifier: prisma/prisma/prisma
+repo:
+  provider: github.com
+  url: https://github.com/prisma/prisma
+  name: prisma
+  owner: prisma
+server:
+  subdirectory: /
+  name: Prisma
+  description: Manage your databases efficiently with Prisma's powerful ORM tools.
+    Automate database schema migrations, generate type-safe query builders, and
+    visually interact with your data through an intuitive GUI. Empower AI agents
+    to control Prisma Postgres databases, including spinning up instances and
+    running migrations, via the Prisma MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

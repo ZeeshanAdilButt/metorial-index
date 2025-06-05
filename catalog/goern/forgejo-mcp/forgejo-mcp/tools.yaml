@@ -1,0 +1,96 @@
+tools:
+  - name: list_repositories
+    description: List repositories for a user or organization
+    inputSchema:
+      type: object
+      required:
+        - owner
+      properties:
+        owner:
+          type: string
+          description: Username or organization name
+  - name: get_repository
+    description: Get details about a specific repository
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - name
+      properties:
+        name:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner
+  - name: list_issues
+    description: List issues for a repository
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - repo
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner
+        state:
+          enum:
+            - open
+            - closed
+            - all
+          type: string
+          description: Issue state (open, closed, all)
+  - name: get_issue
+    description: Get details about a specific issue
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - repo
+        - number
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner
+        number:
+          type: number
+          description: Issue number
+  - name: create_issue
+    description: Create a new issue in a repository
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - repo
+        - title
+        - body
+      properties:
+        body:
+          type: string
+          description: Issue body
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner
+        title:
+          type: string
+          description: Issue title
+  - name: get_user
+    description: Get details about a user
+    inputSchema:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Username

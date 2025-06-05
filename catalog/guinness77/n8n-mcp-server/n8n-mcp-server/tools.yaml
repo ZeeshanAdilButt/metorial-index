@@ -1,0 +1,506 @@
+tools:
+  - name: init-n8n
+    description: "Initialize connection to n8n instance. Use this tool whenever an
+      n8n URL and API key are shared to establish the connection. IMPORTANT:
+      Arguments must be provided as compact, single-line JSON without whitespace
+      or newlines."
+    inputSchema:
+      type: object
+      required:
+        - url
+        - apiKey
+      properties:
+        url:
+          type: string
+        apiKey:
+          type: string
+  - name: list-workflows
+    description: "List all workflows from n8n. Use after init-n8n to see available
+      workflows. IMPORTANT: Arguments must be provided as compact, single-line
+      JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+  - name: get-workflow
+    description: "Retrieve a workflow by ID. Use after list-workflows to get
+      detailed information about a specific workflow. IMPORTANT: Arguments must
+      be provided as compact, single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: create-workflow
+    description: "Create a new workflow in n8n. Use to set up a new workflow with
+      optional nodes and connections. IMPORTANT: 1) Arguments must be provided
+      as compact, single-line JSON without whitespace or newlines. 2) Must
+      provide full workflow structure including nodes and connections arrays,
+      even if empty. The 'active' property should not be included as it is
+      read-only."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - name
+      properties:
+        name:
+          type: string
+        nodes:
+          type: array
+        clientId:
+          type: string
+        connections:
+          type: object
+  - name: update-workflow
+    description: "Update an existing workflow in n8n. Use after get-workflow to
+      modify a workflow's properties, nodes, or connections. IMPORTANT:
+      Arguments must be provided as compact, single-line JSON without whitespace
+      or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+        - workflow
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+        workflow:
+          type: object
+          properties:
+            name:
+              type: string
+            nodes:
+              type: array
+            active:
+              type: boolean
+            settings:
+              type: object
+            connections:
+              type: object
+  - name: delete-workflow
+    description: "Delete a workflow by ID. This action cannot be undone. IMPORTANT:
+      Arguments must be provided as compact, single-line JSON without whitespace
+      or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: activate-workflow
+    description: "Activate a workflow by ID. This will enable the workflow to run.
+      IMPORTANT: Arguments must be provided as compact, single-line JSON without
+      whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: deactivate-workflow
+    description: "Deactivate a workflow by ID. This will prevent the workflow from
+      running. IMPORTANT: Arguments must be provided as compact, single-line
+      JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: list-projects
+    description: "List all projects from n8n. NOTE: Requires n8n Enterprise license
+      with project management features enabled. IMPORTANT: Arguments must be
+      provided as compact, single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+  - name: create-project
+    description: "Create a new project in n8n. NOTE: Requires n8n Enterprise license
+      with project management features enabled. IMPORTANT: Arguments must be
+      provided as compact, single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - name
+      properties:
+        name:
+          type: string
+        clientId:
+          type: string
+  - name: delete-project
+    description: "Delete a project by ID. NOTE: Requires n8n Enterprise license with
+      project management features enabled. IMPORTANT: Arguments must be provided
+      as compact, single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - projectId
+      properties:
+        clientId:
+          type: string
+        projectId:
+          type: string
+  - name: update-project
+    description: "Update a project's name. NOTE: Requires n8n Enterprise license
+      with project management features enabled. IMPORTANT: Arguments must be
+      provided as compact, single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - projectId
+        - name
+      properties:
+        name:
+          type: string
+        clientId:
+          type: string
+        projectId:
+          type: string
+  - name: list-users
+    description: Retrieve all users from your instance. Only available for the
+      instance owner.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+  - name: create-users
+    description: Create one or more users in your instance.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+            properties:
+              role:
+                enum:
+                  - global:admin
+                  - global:member
+                type: string
+              email:
+                type: string
+        clientId:
+          type: string
+  - name: get-user
+    description: Get user by ID or email address.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - idOrEmail
+      properties:
+        clientId:
+          type: string
+        idOrEmail:
+          type: string
+  - name: delete-user
+    description: Delete a user from your instance.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - idOrEmail
+      properties:
+        clientId:
+          type: string
+        idOrEmail:
+          type: string
+  - name: list-variables
+    description: "List all variables from n8n. NOTE: Requires n8n Enterprise license
+      with variable management features enabled. Use after init-n8n to see
+      available variables. IMPORTANT: Arguments must be provided as compact,
+      single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+  - name: create-variable
+    description: "Create a new variable in n8n. NOTE: Requires n8n Enterprise
+      license with variable management features enabled. Variables can be used
+      across workflows to store and share data. IMPORTANT: Arguments must be
+      provided as compact, single-line JSON without whitespace or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - key
+        - value
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        clientId:
+          type: string
+  - name: delete-variable
+    description: "Delete a variable by ID. NOTE: Requires n8n Enterprise license
+      with variable management features enabled. Use after list-variables to get
+      the ID of the variable to delete. This action cannot be undone. IMPORTANT:
+      Arguments must be provided as compact, single-line JSON without whitespace
+      or newlines."
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: create-credential
+    description: Create a credential that can be used by nodes of the specified
+      type. The credential type name can be found in the n8n UI when creating
+      credentials (e.g., 'cloudflareApi', 'githubApi', 'slackOAuth2Api'). Use
+      get-credential-schema first to see what fields are required for the
+      credential type you want to create.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - name
+        - type
+        - data
+      properties:
+        data:
+          type: object
+        name:
+          type: string
+        type:
+          type: string
+        clientId:
+          type: string
+  - name: delete-credential
+    description: Delete a credential by ID. You must be the owner of the credentials.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: get-credential-schema
+    description: Show credential data schema for a specific credential type. The
+      credential type name can be found in the n8n UI when creating credentials
+      (e.g., 'cloudflareApi', 'githubApi', 'slackOAuth2Api'). This will show you
+      what fields are required for creating credentials of this type.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - credentialTypeName
+      properties:
+        clientId:
+          type: string
+        credentialTypeName:
+          type: string
+  - name: list-executions
+    description: Retrieve all executions from your instance with optional filtering.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        limit:
+          type: number
+        status:
+          enum:
+            - error
+            - success
+            - waiting
+          type: string
+        clientId:
+          type: string
+        workflowId:
+          type: string
+        includeData:
+          type: boolean
+  - name: get-execution
+    description: Retrieve a specific execution by ID.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: number
+        clientId:
+          type: string
+        includeData:
+          type: boolean
+  - name: delete-execution
+    description: Delete a specific execution by ID.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: number
+        clientId:
+          type: string
+  - name: create-tag
+    description: Create a new tag in your instance.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - name
+      properties:
+        name:
+          type: string
+        clientId:
+          type: string
+  - name: list-tags
+    description: Retrieve all tags from your instance.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        limit:
+          type: number
+        clientId:
+          type: string
+  - name: get-tag
+    description: Retrieve a specific tag by ID.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: update-tag
+    description: Update a tag's name.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        clientId:
+          type: string
+  - name: delete-tag
+    description: Delete a tag by ID.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - id
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+  - name: get-workflow-tags
+    description: Get tags associated with a workflow.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - workflowId
+      properties:
+        clientId:
+          type: string
+        workflowId:
+          type: string
+  - name: update-workflow-tags
+    description: Update tags associated with a workflow.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - workflowId
+        - tagIds
+      properties:
+        tagIds:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+        clientId:
+          type: string
+        workflowId:
+          type: string
+  - name: generate-audit
+    description: Generate a security audit for your n8n instance.
+    inputSchema:
+      type: object
+      required:
+        - clientId
+      properties:
+        clientId:
+          type: string
+        categories:
+          type: array
+          items:
+            enum:
+              - credentials
+              - database
+              - nodes
+              - filesystem
+              - instance
+            type: string
+        daysAbandonedWorkflow:
+          type: number

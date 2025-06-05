@@ -1,0 +1,101 @@
+tools:
+  - name: list_members
+    description: Lists all team members participating in the standups and polls of
+      the user. Use this tool to get information about the colleagues of the
+      user
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_standups
+    description: Retrieves and displays all Geekbot standups a user has access to,
+      including their complete configuration details such as name, channel,
+      questions, participants, and schedule information. Use this tool to
+      understand the structure of the team and the processes they use track
+      progress and sync.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: fetch_reports
+    description: Retrieves Geekbot standup reports. Use this tool to analyze team
+      updates or updates from specific colleagues, track progress, or compile
+      summaries of standup activities. This tool is usually used after the
+      `list_standups` tool.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        after:
+          type: string
+          description: "Fetch reports after this date (format: YYYY-MM-DD)"
+        before:
+          type: string
+          description: "Fetch reports before this date (format: YYYY-MM-DD)"
+        user_id:
+          type: string
+          description: ID of the specific user to fetch reports for. If not provided,
+            reports for all members will be fetched.
+        standup_id:
+          type: integer
+          description: ID of the specific standup to fetch reports for. If not provided,
+            reports for all standups will be fetched.
+  - name: post_report
+    description: Posts a report to Geekbot. Use this tool to post a report to
+      Geekbot using the context of the conversation. This tool is usually used
+      after the `list_standups` tool to get the standup id and the question ids.
+      If the context of the conversation lacks sufficient information to answer
+      the questions of the standup, the assistant will ask for the missing
+      information. The report should be beautifully formatted. ALWAYS type
+      formatted reporte in the conversation for preview purposes before calling
+      this tool.
+    inputSchema:
+      type: object
+      required:
+        - standup_id
+        - answers
+      properties:
+        answers:
+          type: object
+          description: An object where keys are the string representation of question IDs
+            and values are objects containing the answer text. All questions of
+            the standup must be included in the object.
+          additionalProperties:
+            type: object
+            required:
+              - text
+            properties:
+              text:
+                type: string
+        standup_id:
+          type: integer
+          description: ID of the specific standup to post the report to.
+  - name: list_polls
+    description: Retrieves and displays all Geekbot polls a user has access to,
+      including their complete configuration details such as name, time,
+      timezone, questions, participants, recurrence, anonymous, and creator.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: fetch_poll_results
+    description: Retrieves Geekbot poll results. Use this tool to analyze poll
+      results or track progress of polls. This tool is usually used after the
+      `list_polls` tool to get the poll id.
+    inputSchema:
+      type: object
+      required:
+        - poll_id
+      properties:
+        after:
+          type: string
+          description: "Fetch results after this date (format: YYYY-MM-DD). This is not
+            provided unless explicitly asked by the user."
+        before:
+          type: string
+          description: "Fetch results before this date (format: YYYY-MM-DD). This is not
+            provided unless explicitly asked by the user."
+        poll_id:
+          type: integer
+          description: ID of the specific standup to fetch reports for. If not provided,
+            reports for all standups will be fetched.

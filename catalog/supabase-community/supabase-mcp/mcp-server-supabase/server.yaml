@@ -1,0 +1,17 @@
+identifier: supabase-community/supabase-mcp/mcp-server-supabase
+repo:
+  provider: github.com
+  url: https://github.com/supabase-community/supabase-mcp
+  name: supabase-mcp
+  owner: supabase-community
+server:
+  subdirectory: /packages/mcp-server-supabase
+  name: Supabase MCP Server
+  description: Connect your Supabase projects to AI assistants like Cursor and
+    Claude. Manage tables, fetch configurations, and query data seamlessly with
+    your AI tools. Enhance your development workflow by integrating AI
+    capabilities directly into your Supabase projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

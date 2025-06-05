@@ -1,0 +1,17 @@
+identifier: andersmandersen/mcp-swagger/mcp-swagger
+repo:
+  provider: github.com
+  url: https://github.com/andersmandersen/mcp-swagger
+  name: mcp-swagger
+  owner: andersmandersen
+server:
+  subdirectory: /
+  name: Swagger Server
+  description: Access Swagger/OpenAPI documentation and make API requests
+    seamlessly. Validate requests against the Swagger specification and enhance
+    your API integration with caching and authentication support. Simplify your
+    development process with a robust server setup for API interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

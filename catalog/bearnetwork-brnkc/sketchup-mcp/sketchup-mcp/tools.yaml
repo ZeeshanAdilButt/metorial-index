@@ -1,0 +1,234 @@
+tools:
+  - name: create_component
+    description: Create a new component in Sketchup
+    inputSchema:
+      type: object
+      title: create_componentArguments
+      properties:
+        type:
+          type: string
+          title: Type
+          default: cube
+        position:
+          type: array
+          items:
+            type: number
+          title: Position
+          default: null
+        dimensions:
+          type: array
+          items:
+            type: number
+          title: Dimensions
+          default: null
+  - name: delete_component
+    description: Delete a component by ID
+    inputSchema:
+      type: object
+      title: delete_componentArguments
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+  - name: transform_component
+    description: Transform a component's position, rotation, or scale
+    inputSchema:
+      type: object
+      title: transform_componentArguments
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          title: Id
+        scale:
+          type: array
+          items:
+            type: number
+          title: Scale
+          default: null
+        position:
+          type: array
+          items:
+            type: number
+          title: Position
+          default: null
+        rotation:
+          type: array
+          items:
+            type: number
+          title: Rotation
+          default: null
+  - name: get_selection
+    description: Get currently selected components
+    inputSchema:
+      type: object
+      title: get_selectionArguments
+      properties: {}
+  - name: set_material
+    description: Set material for a component
+    inputSchema:
+      type: object
+      title: set_materialArguments
+      required:
+        - id
+        - material
+      properties:
+        id:
+          type: string
+          title: Id
+        material:
+          type: string
+          title: Material
+  - name: export_scene
+    description: Export the current scene
+    inputSchema:
+      type: object
+      title: export_sceneArguments
+      properties:
+        format:
+          type: string
+          title: Format
+          default: skp
+  - name: create_mortise_tenon
+    description: Create a mortise and tenon joint between two components
+    inputSchema:
+      type: object
+      title: create_mortise_tenonArguments
+      required:
+        - mortise_id
+        - tenon_id
+      properties:
+        depth:
+          type: number
+          title: Depth
+          default: 1
+        width:
+          type: number
+          title: Width
+          default: 1
+        height:
+          type: number
+          title: Height
+          default: 1
+        offset_x:
+          type: number
+          title: Offset X
+          default: 0
+        offset_y:
+          type: number
+          title: Offset Y
+          default: 0
+        offset_z:
+          type: number
+          title: Offset Z
+          default: 0
+        tenon_id:
+          type: string
+          title: Tenon Id
+        mortise_id:
+          type: string
+          title: Mortise Id
+  - name: create_dovetail
+    description: Create a dovetail joint between two components
+    inputSchema:
+      type: object
+      title: create_dovetailArguments
+      required:
+        - tail_id
+        - pin_id
+      properties:
+        angle:
+          type: number
+          title: Angle
+          default: 15
+        depth:
+          type: number
+          title: Depth
+          default: 1
+        width:
+          type: number
+          title: Width
+          default: 1
+        height:
+          type: number
+          title: Height
+          default: 1
+        pin_id:
+          type: string
+          title: Pin Id
+        tail_id:
+          type: string
+          title: Tail Id
+        offset_x:
+          type: number
+          title: Offset X
+          default: 0
+        offset_y:
+          type: number
+          title: Offset Y
+          default: 0
+        offset_z:
+          type: number
+          title: Offset Z
+          default: 0
+        num_tails:
+          type: integer
+          title: Num Tails
+          default: 3
+  - name: create_finger_joint
+    description: Create a finger joint (box joint) between two components
+    inputSchema:
+      type: object
+      title: create_finger_jointArguments
+      required:
+        - board1_id
+        - board2_id
+      properties:
+        depth:
+          type: number
+          title: Depth
+          default: 1
+        width:
+          type: number
+          title: Width
+          default: 1
+        height:
+          type: number
+          title: Height
+          default: 1
+        offset_x:
+          type: number
+          title: Offset X
+          default: 0
+        offset_y:
+          type: number
+          title: Offset Y
+          default: 0
+        offset_z:
+          type: number
+          title: Offset Z
+          default: 0
+        board1_id:
+          type: string
+          title: Board1 Id
+        board2_id:
+          type: string
+          title: Board2 Id
+        num_fingers:
+          type: integer
+          title: Num Fingers
+          default: 5
+  - name: eval_ruby
+    description: Evaluate arbitrary Ruby code in Sketchup
+    inputSchema:
+      type: object
+      title: eval_rubyArguments
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          title: Code

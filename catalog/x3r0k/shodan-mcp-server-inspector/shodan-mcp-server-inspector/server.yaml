@@ -1,0 +1,18 @@
+identifier: x3r0k/shodan-mcp-server-inspector/shodan-mcp-server-inspector
+repo:
+  provider: github.com
+  url: https://github.com/X3r0K/Shodan-MCP-Server-Inspector
+  name: Shodan-MCP-Server-Inspector
+  owner: X3r0K
+server:
+  subdirectory: /
+  name: Shodan Internet Scanner
+  description: Provide standardized access to Shodan's internet scanning and
+    reconnaissance capabilities. Query devices, services, DNS records, and
+    vulnerabilities using advanced search filters through a consistent MCP
+    interface. Securely manage API keys and handle errors gracefully for
+    reliable data retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,152 @@
+tools:
+  - name: backup_create
+    description: Create a backup of a file before making big changes. The backup
+      includes timestamp information and maintains the original directory
+      structure.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          description: Absolute path to the file to backup. This file must exist and be
+            accessible.
+        agent_context:
+          type: string
+          description: Optional agent conversational context to store with the backup
+            metadata. Agents should include the last relevant user instruction
+            or context that explains why this backup is being created.
+      additionalProperties: false
+  - name: backup_list
+    description: List all available backups for a file, including their timestamps
+      and locations. Useful for finding specific versions to restore.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          description: Absolute path to the file whose backups you want to list.
+      additionalProperties: false
+  - name: backup_restore
+    description: Restore a file from a previous backup using its timestamp. Use this
+      to revert changes or recover previous versions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - file_path
+        - timestamp
+      properties:
+        file_path:
+          type: string
+          description: Absolute path to the file to restore.
+        timestamp:
+          type: string
+          description: "Timestamp of the backup version to restore (format:
+            YYYYMMDD-HHMMSS-mmm)."
+        create_emergency_backup:
+          type: boolean
+          default: true
+          description: Whether to create an emergency backup of the current file before
+            restoring.
+      additionalProperties: false
+  - name: backup_folder_create
+    description: Create a backup of a folder before making structural changes. The
+      backup includes timestamp information and maintains the original directory
+      structure.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - folder_path
+      properties:
+        folder_path:
+          type: string
+          description: Absolute path to the folder to backup. This folder must exist and
+            be accessible.
+        agent_context:
+          type: string
+          description: Optional agent conversational context to store with the backup
+            metadata. Agents should include the last relevant user instruction
+            or context that explains why this backup is being created.
+        exclude_pattern:
+          type: string
+          description: Optional glob pattern to exclude specific files (e.g.,
+            "node_modules/**")
+        include_pattern:
+          type: string
+          description: Optional glob pattern to include specific files (e.g., "*.js")
+      additionalProperties: false
+  - name: backup_folder_list
+    description: List all available backups for a folder, including their timestamps
+      and locations. Useful for finding specific versions to restore.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - folder_path
+      properties:
+        folder_path:
+          type: string
+          description: Absolute path to the folder whose backups you want to list.
+      additionalProperties: false
+  - name: backup_folder_restore
+    description: Restore a folder from a previous backup using its timestamp. Use
+      this to revert changes or recover previous versions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - folder_path
+        - timestamp
+      properties:
+        timestamp:
+          type: string
+          description: "Timestamp of the backup version to restore (format:
+            YYYYMMDD-HHMMSS-mmm)."
+        folder_path:
+          type: string
+          description: Absolute path to the folder to restore.
+        create_emergency_backup:
+          type: boolean
+          default: true
+          description: Whether to create an emergency backup of the current folder before
+            restoring.
+      additionalProperties: false
+  - name: backup_list_all
+    description: List all backup files in both the main backup directory and
+      emergency backup directory.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        exclude_pattern:
+          type: string
+          description: Optional glob pattern to exclude backup files (e.g.,
+            "node_modules/**")
+        include_pattern:
+          type: string
+          description: Optional glob pattern to filter backup files (e.g., "*.js")
+        include_emergency:
+          type: boolean
+          default: true
+          description: Whether to include emergency backups in the results.
+      additionalProperties: false
+  - name: mcp_cancel
+    description: Cancel an ongoing backup or restore operation. Use this to stop
+      long-running operations safely.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - operationId
+      properties:
+        operationId:
+          type: string
+          description: ID of the operation to cancel.
+      additionalProperties: false

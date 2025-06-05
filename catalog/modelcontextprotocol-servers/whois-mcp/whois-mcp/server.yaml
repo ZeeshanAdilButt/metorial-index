@@ -1,0 +1,18 @@
+identifier: modelcontextprotocol-servers/whois-mcp/whois-mcp
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol-servers/whois-mcp
+  name: whois-mcp
+  owner: modelcontextprotocol-servers
+server:
+  subdirectory: /
+  name: Whois Lookup
+  description: Perform WHOIS lookups to retrieve detailed domain registration
+    information including ownership, registration dates, and status. Quickly
+    check domain availability and ownership details without leaving your AI
+    environment. Integrate seamlessly with AI agents to enhance domain-related
+    queries and automation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

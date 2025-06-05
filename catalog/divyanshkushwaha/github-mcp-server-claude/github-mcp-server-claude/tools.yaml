@@ -1,0 +1,72 @@
+tools:
+  - name: get_user_info
+    description: "
+
+      \    Fetches information about a GitHub user.
+
+
+      \    Args:
+
+      \        username: The username of the GitHub user.
+
+
+      \    Returns:
+
+      \        A dictionary containing user details.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_user_infoArguments
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          title: Username
+  - name: get_repo_info
+    description: "
+
+      \    Fetches information about a GitHub repository.
+
+
+      \    Args:
+
+      \        owner: The username of the repository owner.
+
+      \        repo: The name of the repository.
+
+
+      \    Returns:
+
+      \        A dictionary containing repository details.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_repo_infoArguments
+      required:
+        - owner
+        - repo
+      properties:
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+  - name: get_authenticated_user
+    description: "
+
+      \    Fetches information about the authenticated GitHub user.
+
+
+      \    Returns:
+
+      \        A dictionary containing the authenticated user's details.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_authenticated_userArguments
+      properties: {}

@@ -1,0 +1,38 @@
+tools:
+  - name: create_plugin
+    description: Create a new Framer plugin project with web3 capabilities
+    inputSchema:
+      type: object
+      required:
+        - name
+        - description
+        - outputPath
+      properties:
+        name:
+          type: string
+          description: Plugin name
+        outputPath:
+          type: string
+          description: Output directory path
+        description:
+          type: string
+          description: Plugin description
+        web3Features:
+          type: array
+          items:
+            enum:
+              - wallet-connect
+              - contract-interaction
+              - nft-display
+            type: string
+          description: Web3 features to include
+  - name: build_plugin
+    description: Build a Framer plugin project
+    inputSchema:
+      type: object
+      required:
+        - pluginPath
+      properties:
+        pluginPath:
+          type: string
+          description: Path to plugin directory

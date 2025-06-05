@@ -1,0 +1,19 @@
+tools:
+  - name: update_readme
+    description: 지정된 README.md 파일에 내용을 추가합니다.
+    inputSchema:
+      type: object
+      required:
+        - filePath
+        - contentToAppend
+      properties:
+        heading:
+          type: string
+          description: "내용 앞에 추가할 선택적 마크다운 제목입니다 (예: '## 최근 커밋'). 제목이 이미 존재하면 해당 제목 아래에
+            내용이 추가됩니다."
+        filePath:
+          type: string
+          description: 업데이트할 README.md 파일의 절대 경로입니다.
+        contentToAppend:
+          type: string
+          description: README 파일에 추가할 내용입니다.

@@ -1,0 +1,155 @@
+tools:
+  - name: get_latest_feed
+    description: "Get latest bookmarks from Raindrop.io feed.
+
+
+      \    Args:
+
+      \        count: Number of bookmarks to fetch (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_latest_feedArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 10
+  - name: add_bookmark
+    description: "Add a new bookmark to Raindrop.io
+
+      \   \ 
+
+      \    Args:
+
+      \        url: The URL to bookmark (required)
+
+      \        title: Title for the bookmark (optional, will be extracted from
+      URL if not provided)
+
+      \        description: Description/excerpt for the bookmark (optional)
+
+      \        tags: List of tags to apply to the bookmark (optional)
+
+      \        collection_id: ID of the collection to add the bookmark to
+      (default: 0 for Unsorted)
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_bookmarkArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+        tags:
+          type: array
+          items:
+            type: string
+          title: Tags
+          default: null
+        title:
+          type: string
+          title: Title
+          default: ""
+        description:
+          type: string
+          title: Description
+          default: ""
+        collection_id:
+          type: integer
+          title: Collection Id
+          default: 0
+  - name: search_by_tag
+    description: "Search for bookmarks with a specific tag in Raindrop.io with
+      optional date range filtering
+
+      \   \ 
+
+      \    Args:
+
+      \        tag: The tag to search for (required)
+
+      \        collection_id: ID of the collection to search in (default: 0 for
+      all collections)
+
+      \        count: Maximum number of bookmarks to return (default: 10)
+
+      \        from_date: Start date in YYYY-MM-DD format (optional)
+
+      \        to_date: End date in YYYY-MM-DD format (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_by_tagArguments
+      required:
+        - tag
+      properties:
+        tag:
+          type: string
+          title: Tag
+        count:
+          type: integer
+          title: Count
+          default: 10
+        to_date:
+          type: string
+          title: To Date
+          default: ""
+        from_date:
+          type: string
+          title: From Date
+          default: ""
+        collection_id:
+          type: integer
+          title: Collection Id
+          default: 0
+  - name: search_bookmarks
+    description: "Search for bookmarks by keyword/text in Raindrop.io with optional
+      date range filtering
+
+      \   \ 
+
+      \    Args:
+
+      \        query: The search term to look for in bookmarks (required)
+
+      \        collection_id: ID of the collection to search in (default: 0 for
+      all collections)
+
+      \        count: Maximum number of bookmarks to return (default: 10)
+
+      \        from_date: Start date in YYYY-MM-DD format (optional)
+
+      \        to_date: End date in YYYY-MM-DD format (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_bookmarksArguments
+      required:
+        - query
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 10
+        query:
+          type: string
+          title: Query
+        to_date:
+          type: string
+          title: To Date
+          default: ""
+        from_date:
+          type: string
+          title: From Date
+          default: ""
+        collection_id:
+          type: integer
+          title: Collection Id
+          default: 0

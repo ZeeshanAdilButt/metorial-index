@@ -1,0 +1,16 @@
+identifier: executeautomation/mcp-playwright/mcp-playwright
+repo:
+  provider: github.com
+  url: https://github.com/executeautomation/mcp-playwright
+  name: mcp-playwright
+  owner: executeautomation
+server:
+  subdirectory: /
+  name: Playwright
+  description: Provides browser automation capabilities using Playwright, enabling
+    LLMs to interact with web pages, take screenshots, and execute JavaScript in
+    a browser environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

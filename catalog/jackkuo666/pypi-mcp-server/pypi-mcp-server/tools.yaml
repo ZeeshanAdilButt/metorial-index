@@ -1,0 +1,51 @@
+tools:
+  - name: get_package_info
+    description: ""
+    inputSchema:
+      type: object
+      title: get_package_infoArguments
+      required:
+        - package_name
+      properties:
+        version:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Version
+          default: null
+        package_name:
+          type: string
+          title: Package Name
+  - name: search_packages
+    description: ""
+    inputSchema:
+      type: object
+      title: search_packagesArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: get_package_releases
+    description: ""
+    inputSchema:
+      type: object
+      title: get_package_releasesArguments
+      required:
+        - package_name
+      properties:
+        package_name:
+          type: string
+          title: Package Name
+  - name: get_package_stats
+    description: ""
+    inputSchema:
+      type: object
+      title: get_package_statsArguments
+      required:
+        - package_name
+      properties:
+        package_name:
+          type: string
+          title: Package Name

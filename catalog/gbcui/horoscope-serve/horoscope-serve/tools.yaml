@@ -1,0 +1,18 @@
+tools:
+  - name: get_horoscope
+    description: Get your horoscope
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - type
+        - time
+      properties:
+        time:
+          type: string
+          description: "Time type: today, nextday, week, month"
+        type:
+          type: string
+          description: "Constellation type: aries, taurus, gemini, cancer, leo, virgo,
+            libra, scorpio, sagittarius, capricorn, aquarius, pisces"
+      additionalProperties: false

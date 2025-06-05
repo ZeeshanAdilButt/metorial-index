@@ -1,0 +1,17 @@
+identifier: cnosdb/cnosdb-mcp-server/cnosdb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cnosdb/cnosdb-mcp-server
+  name: cnosdb-mcp-server
+  owner: cnosdb
+server:
+  subdirectory: /
+  name: CnosDB Server
+  description: Execute SQL queries and manage your CnosDB databases seamlessly
+    through an MCP interface. List databases, tables, and view table schemas to
+    streamline your database interactions. Enhance your data operations with
+    easy-to-use query and schema inspection tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

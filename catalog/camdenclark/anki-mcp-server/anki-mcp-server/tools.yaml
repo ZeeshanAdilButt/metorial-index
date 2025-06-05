@@ -1,0 +1,71 @@
+tools:
+  - name: listDecks
+    description: Get the names of all decks from Anki
+    inputSchema:
+      type: object
+      properties: {}
+  - name: listModels
+    description: Get the names of all note models from Anki
+    inputSchema:
+      type: object
+      properties: {}
+  - name: getModel
+    description: Get a model, including field and template definitions, from Anki
+    inputSchema:
+      type: object
+      properties:
+        modelName:
+          type: string
+          description: Name of the model to get
+  - name: addNote
+    description: Create a single note
+    inputSchema:
+      type: object
+      required:
+        - deckName
+        - modelName
+        - fields
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to apply to the note
+        fields:
+          type: object
+          description: Map of fields to the value in the note model being used
+        deckName:
+          type: string
+          description: Name of the deck to add note to
+        modelName:
+          type: string
+          description: Name of the note model/type to use
+  - name: addNotes
+    description: Create many notes in a deck
+    inputSchema:
+      type: object
+      properties:
+        notes:
+          type: array
+          items:
+            type: object
+            required:
+              - deckName
+              - modelName
+              - fields
+            properties:
+              tags:
+                type: array
+                items:
+                  type: string
+                description: Tags to apply to the note
+              fields:
+                type: object
+                description: Map of fields to the value in the note model being used
+              deckName:
+                type: string
+                description: Name of the deck to add note to
+              modelName:
+                type: string
+                description: Name of the note model/type to use
+          description: Notes to create

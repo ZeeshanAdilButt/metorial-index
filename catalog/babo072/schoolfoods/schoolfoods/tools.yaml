@@ -1,0 +1,19 @@
+tools:
+  - name: get_school_meal
+    description: 학교명과 날짜를 입력받아 급식 정보를 제공합니다. 날짜는 YYYYMMDD 형식이나 '오늘', '내일', '모레'와 같은
+      상대적인 표현도 사용 가능합니다. 날짜를 생략하면 오늘 급식 정보를 조회합니다.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - school_name
+      properties:
+        date:
+          type: string
+          default: 오늘
+          description: 급식 조회 날짜 (YYYYMMDD 형식, '오늘', '내일' 등)
+        school_name:
+          type: string
+          minLength: 1
+          description: "학교 이름 (예: 의정부고등학교)"
+      additionalProperties: false

@@ -1,0 +1,103 @@
+tools:
+  - name: get_rubygem_info
+    description: Get information about a RubyGem from the RubyGems.org API
+    inputSchema:
+      type: object
+      properties:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        required:
+          - rubygem_name
+        properties:
+          rubygem_name:
+            type: string
+            minLength: 1
+            description: Name of the RubyGem to fetch information for
+        additionalProperties: false
+  - name: search_rubygems
+    description: 'Search for RubyGems matching a query string. The search matches
+      against gem names and descriptions. Returns up to 10 results by default
+      (customizable with limit parameter), ordered by relevance. Example
+      queries: "authentication", "rails middleware", "aws sdk"'
+    inputSchema:
+      type: object
+      properties:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        required:
+          - query
+        properties:
+          limit:
+            type: integer
+            maximum: 30
+            description: "Maximum number of results to return (default: 10, max: 30)"
+            exclusiveMinimum: 0
+          query:
+            type: string
+            minLength: 1
+            description: Search query for finding RubyGems
+        additionalProperties: false
+  - name: get_gem_versions
+    description: Get all available versions of a specific RubyGem
+    inputSchema:
+      type: object
+      properties:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        required:
+          - gem_name
+        properties:
+          limit:
+            type: integer
+            description: Maximum number of versions to return
+            exclusiveMinimum: 0
+          gem_name:
+            type: string
+            minLength: 1
+            description: Name of the RubyGem to fetch versions for
+        additionalProperties: false
+  - name: get_gem_reverse_dependencies
+    description: Get gems that depend on a specific RubyGem
+    inputSchema:
+      type: object
+      properties:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        required:
+          - gem_name
+        properties:
+          gem_name:
+            type: string
+            minLength: 1
+            description: Name of the RubyGem to fetch reverse dependencies for
+        additionalProperties: false
+  - name: get_owner_gems
+    description: Get all RubyGems owned by a specific user or organization
+    inputSchema:
+      type: object
+      properties:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        required:
+          - owner_name
+        properties:
+          owner_name:
+            type: string
+            minLength: 1
+            description: Username of the RubyGem owner to fetch gems for
+        additionalProperties: false
+  - name: get_gem_owners
+    description: Get the owners of a specific RubyGem
+    inputSchema:
+      type: object
+      properties:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        required:
+          - gem_name
+        properties:
+          gem_name:
+            type: string
+            minLength: 1
+            description: Name of the RubyGem to fetch owners for
+        additionalProperties: false

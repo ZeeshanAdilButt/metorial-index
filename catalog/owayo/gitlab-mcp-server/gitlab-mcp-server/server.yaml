@@ -1,0 +1,17 @@
+identifier: owayo/gitlab-mcp-server/gitlab-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/owayo/gitlab-mcp-server
+  name: gitlab-mcp-server
+  owner: owayo
+server:
+  subdirectory: /
+  name: GitLab Integration Server
+  description: Fetch pipeline failure details and unresolved merge request
+    comments from GitLab to enhance your AI assistant's capabilities. Streamline
+    your development workflow by providing real-time insights and suggestions
+    based on GitLab data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

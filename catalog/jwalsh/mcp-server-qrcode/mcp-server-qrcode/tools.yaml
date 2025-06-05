@@ -1,0 +1,37 @@
+tools:
+  - name: generate-qrcode
+    description: Generate QR codes in various formats with customizable error
+      correction levels and sizes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        size:
+          type: number
+          default: 3
+          maximum: 10
+          minimum: 1
+          description: Size of the QR code (1-10)
+        format:
+          enum:
+            - image
+            - text
+          type: string
+          default: image
+          description: "Output format: 'image' for PNG QR code, 'text' for
+            terminal-friendly output"
+        content:
+          type: string
+          description: The text content to encode in the QR code
+        errorCorrectionLevel:
+          enum:
+            - L
+            - M
+            - Q
+            - H
+          type: string
+          default: M
+          description: "Error correction level (L: 7%, M: 15%, Q: 25%, H: 30%)"
+      additionalProperties: false

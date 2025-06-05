@@ -1,0 +1,22 @@
+identifier: bourbonkk/k8s-pilot/k8s-pilot
+repo:
+  provider: github.com
+  url: https://github.com/bourbonkk/k8s-pilot
+  name: k8s-pilot
+  owner: bourbonkk
+server:
+  subdirectory: /
+  name: k8s-pilot
+  description: >-
+    The Central Pilot for Your Kubernetes Fleets ✈️✈️
+
+
+    k8s_pilot is a lightweight, centralized control plane server for managing
+    multiple Kubernetes clusters at once.
+
+    With powerful tools and intuitive APIs, you can observe and control all your
+    clusters from one cockpit.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

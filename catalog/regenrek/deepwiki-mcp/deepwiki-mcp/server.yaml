@@ -1,0 +1,18 @@
+identifier: regenrek/deepwiki-mcp/deepwiki-mcp
+repo:
+  provider: github.com
+  url: https://github.com/regenrek/deepwiki-mcp
+  name: deepwiki-mcp
+  owner: regenrek
+server:
+  subdirectory: /
+  name: Deepwiki Fetch Server
+  description: Fetch and convert Deepwiki.com documentation into clean,
+    LLM-readable Markdown documents. Crawl multiple pages with domain safety,
+    HTML sanitization, and link rewriting for seamless integration. Optimize
+    your knowledge retrieval with fast, configurable crawling and structured
+    output formats.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

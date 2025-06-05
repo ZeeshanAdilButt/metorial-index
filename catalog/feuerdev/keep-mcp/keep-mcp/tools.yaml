@@ -1,0 +1,139 @@
+tools:
+  - name: find
+    description: "
+
+      \    Find notes based on a search query.
+
+      \   \ 
+
+      \    Args:
+
+      \        query (str, optional): A string to match against the title and
+      text
+
+      \       \ 
+
+      \    Returns:
+
+      \        str: JSON string containing the matching notes with their id,
+      title, text, pinned status, color and labels
+
+      \    "
+    inputSchema:
+      type: object
+      title: findArguments
+      properties:
+        query:
+          type: string
+          title: query
+          default: ""
+  - name: create_note
+    description: "
+
+      \    Create a new note with title and text.
+
+      \   \ 
+
+      \    Args:
+
+      \        title (str, optional): The title of the note
+
+      \        text (str, optional): The content of the note
+
+      \       \ 
+
+      \    Returns:
+
+      \        str: JSON string containing the created note's data
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_noteArguments
+      properties:
+        text:
+          type: string
+          title: Text
+          default: null
+        title:
+          type: string
+          title: Title
+          default: null
+  - name: update_note
+    description: "
+
+      \    Update a note's properties.
+
+      \   \ 
+
+      \    Args:
+
+      \        note_id (str): The ID of the note to update
+
+      \        title (str, optional): New title for the note
+
+      \        text (str, optional): New text content for the note
+
+      \       \ 
+
+      \    Returns:
+
+      \        str: JSON string containing the updated note's data
+
+      \       \ 
+
+      \    Raises:
+
+      \        ValueError: If the note doesn't exist or cannot be modified
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_noteArguments
+      required:
+        - note_id
+      properties:
+        text:
+          type: string
+          title: Text
+          default: null
+        title:
+          type: string
+          title: Title
+          default: null
+        note_id:
+          type: string
+          title: Note Id
+  - name: delete_note
+    description: "
+
+      \    Delete a note (mark for deletion).
+
+      \   \ 
+
+      \    Args:
+
+      \        note_id (str): The ID of the note to delete
+
+      \       \ 
+
+      \    Returns:
+
+      \        str: Success message
+
+      \       \ 
+
+      \    Raises:
+
+      \        ValueError: If the note doesn't exist or cannot be modified
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_noteArguments
+      required:
+        - note_id
+      properties:
+        note_id:
+          type: string
+          title: Note Id

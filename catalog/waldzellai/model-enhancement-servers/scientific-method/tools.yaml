@@ -1,0 +1,221 @@
+tools:
+  - name: scientificMethod
+    description: >-
+      A detailed tool for applying formal scientific reasoning to questions and
+      problems.
+
+      This tool guides models through the scientific method with structured
+      hypothesis testing.
+
+      It enforces explicit variable identification, prediction making, and
+      evidence evaluation.
+
+
+      When to use this tool:
+
+      - Investigating cause-effect relationships
+
+      - Evaluating competing explanations for phenomena
+
+      - Developing and testing hypotheses
+
+      - Avoiding confirmation bias in reasoning
+
+      - Conducting systematic inquiry
+
+
+      Key features:
+
+      - Structured scientific process
+
+      - Explicit variable identification
+
+      - Controlled experimental design
+
+      - Systematic evidence evaluation
+
+      - Iterative hypothesis refinement
+    inputSchema:
+      type: object
+      required:
+        - stage
+        - inquiryId
+        - iteration
+        - nextStageNeeded
+      properties:
+        stage:
+          enum:
+            - observation
+            - question
+            - hypothesis
+            - experiment
+            - analysis
+            - conclusion
+            - iteration
+          type: string
+          description: Current stage in the scientific process
+        analysis:
+          type: string
+          description: Analysis of the experimental results
+        question:
+          type: string
+          description: Research question based on the observation
+        inquiryId:
+          type: string
+          description: Unique identifier for this scientific inquiry
+        iteration:
+          type: number
+          minimum: 0
+          description: Current iteration of the scientific process
+        conclusion:
+          type: string
+          description: Conclusion based on the analysis
+        experiment:
+          type: object
+          required:
+            - design
+            - methodology
+            - predictions
+            - experimentId
+            - hypothesisId
+            - controlMeasures
+          properties:
+            design:
+              type: string
+              description: General description of the experimental design
+            results:
+              type: string
+              description: Results of the experiment
+            nextSteps:
+              type: array
+              items:
+                type: string
+              description: Suggested next steps based on results
+            limitations:
+              type: array
+              items:
+                type: string
+              description: Limitations of the experimental design
+            methodology:
+              type: string
+              description: Detailed methodology for the experiment
+            predictions:
+              type: array
+              items:
+                type: object
+                required:
+                  - if
+                  - then
+                properties:
+                  if:
+                    type: string
+                    description: Condition or manipulation
+                  else:
+                    type: string
+                    description: Alternative outcome if hypothesis is incorrect
+                  then:
+                    type: string
+                    description: Expected outcome if hypothesis is correct
+              description: Predictions based on the hypothesis
+            experimentId:
+              type: string
+              description: Unique identifier for this experiment
+            hypothesisId:
+              type: string
+              description: ID of the hypothesis being tested
+            outcomeMatched:
+              type: boolean
+              description: Whether the results matched the predictions
+            controlMeasures:
+              type: array
+              items:
+                type: string
+              description: Measures to control confounding variables
+            unexpectedObservations:
+              type: array
+              items:
+                type: string
+              description: Unexpected observations during the experiment
+          description: Experimental design to test the hypothesis
+        hypothesis:
+          type: object
+          required:
+            - statement
+            - variables
+            - assumptions
+            - hypothesisId
+            - confidence
+            - domain
+            - iteration
+            - status
+          properties:
+            domain:
+              type: string
+              description: Knowledge domain of the hypothesis
+            status:
+              enum:
+                - proposed
+                - testing
+                - supported
+                - refuted
+                - refined
+              type: string
+              description: Current status of the hypothesis
+            iteration:
+              type: number
+              minimum: 0
+              description: Iteration number of the hypothesis
+            statement:
+              type: string
+              description: Clear, testable hypothesis statement
+            variables:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - type
+                properties:
+                  name:
+                    type: string
+                    description: Name of the variable
+                  type:
+                    enum:
+                      - independent
+                      - dependent
+                      - controlled
+                      - confounding
+                    type: string
+                    description: Type of variable
+                  operationalization:
+                    type: string
+                    description: How the variable is measured or manipulated
+              description: Variables involved in the hypothesis
+            confidence:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: Confidence in the hypothesis (0.0-1.0)
+            assumptions:
+              type: array
+              items:
+                type: string
+              description: Assumptions underlying the hypothesis
+            hypothesisId:
+              type: string
+              description: Unique identifier for this hypothesis
+            refinementOf:
+              type: string
+              description: ID of the parent hypothesis if this is a refinement
+            alternativeTo:
+              type: array
+              items:
+                type: string
+              description: IDs of competing hypotheses
+          description: Formal hypothesis with variables and assumptions
+        observation:
+          type: string
+          description: Observation of a phenomenon to investigate
+        nextStageNeeded:
+          type: boolean
+          description: Whether another stage is needed in the process

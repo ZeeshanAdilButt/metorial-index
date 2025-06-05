@@ -1,0 +1,16 @@
+identifier: peakmojo/mcp-hubspot/mcp-server-hubspot
+repo:
+  provider: github.com
+  url: https://github.com/peakmojo/mcp-hubspot
+  name: mcp-hubspot
+  owner: peakmojo
+server:
+  subdirectory: /
+  name: HubSpot MCP Server
+  description: A Model Context Protocol (MCP) server that provides integration
+    with HubSpot CRM, enabling AI models to interact with HubSpot data and
+    operations through a standardized interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

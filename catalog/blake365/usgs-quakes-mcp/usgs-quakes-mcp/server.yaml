@@ -1,0 +1,14 @@
+identifier: blake365/usgs-quakes-mcp/usgs-quakes-mcp
+repo:
+  provider: github.com
+  url: https://github.com/blake365/usgs-quakes-mcp
+  name: usgs-quakes-mcp
+  owner: blake365
+server:
+  subdirectory: /
+  name: USGS Earthquake Data
+  description: Access real-time earthquake data from the USGS API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

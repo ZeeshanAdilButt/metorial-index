@@ -1,0 +1,29 @@
+tools:
+  - name: statpearls_disease_info
+    description: Fetches comprehensive, reliable medical information about diseases
+      from StatPearls, a trusted source of peer-reviewed medical content. Use
+      this tool to get detailed information about diseases, conditions,
+      symptoms, treatments, and medical concepts. Returns structured information
+      including etiology, epidemiology, pathophysiology, clinical features,
+      diagnosis, treatment, and prognosis when available.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Disease or medical condition to search for (e.g., 'diabetes',
+            'hypertension', 'alzheimer')
+        format_options:
+          type: object
+          properties:
+            maxLength:
+              type: number
+              default: 50000
+              description: Maximum length of the returned content in characters
+            includeToc:
+              type: boolean
+              default: true
+              description: Whether to include a table of contents
+          description: Optional formatting preferences

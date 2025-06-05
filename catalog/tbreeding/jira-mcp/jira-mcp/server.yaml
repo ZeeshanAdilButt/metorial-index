@@ -1,0 +1,18 @@
+identifier: tbreeding/jira-mcp/jira-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tbreeding/jira-mcp
+  name: jira-mcp
+  owner: tbreeding
+server:
+  subdirectory: /
+  name: Jira Integration Server
+  description: Provide seamless interaction with Jira through a unified set of
+    tools for issue retrieval, analysis, creation, and updates. Guide users with
+    a step-by-step wizard for creating and updating Jira issues, maintaining
+    state and ensuring robust workflows. Enhance productivity by simplifying
+    Jira operations within your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

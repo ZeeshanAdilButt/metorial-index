@@ -1,0 +1,16 @@
+identifier: mingzilla/pi-api-mcp-server/pi-api-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mingzilla/pi-api-mcp-server
+  name: pi-api-mcp-server
+  owner: mingzilla
+server:
+  subdirectory: /
+  name: Panintellegence API MCP Server
+  description: Interact with the Panintellegence PI Dashboard API seamlessly.
+    Access and manage dashboard resources like categories and charts securely,
+    enabling your AI assistants to provide actionable insights effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

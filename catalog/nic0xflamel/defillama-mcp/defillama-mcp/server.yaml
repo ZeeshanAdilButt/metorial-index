@@ -1,0 +1,18 @@
+identifier: nic0xflamel/defillama-mcp/defillama-mcp
+repo:
+  provider: github.com
+  url: https://github.com/nic0xflamel/defillama-mcp
+  name: defillama-mcp
+  owner: nic0xflamel
+server:
+  subdirectory: /
+  name: DefiLlama API Server
+  description: Enable AI assistants to interact seamlessly with the DefiLlama API
+    by proxying requests through a Model Context Protocol server. Dynamically
+    generate tools from the DefiLlama OpenAPI specification to fetch real-time
+    DeFi data. Simplify integration with popular clients like Cursor and Claude
+    Desktop for enhanced DeFi insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

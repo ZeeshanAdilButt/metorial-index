@@ -1,0 +1,16 @@
+identifier: ares10/kafka-simple-web-client/kafka-simple-web-client
+repo:
+  provider: github.com
+  url: https://github.com/ares10/kafka-simple-web-client
+  name: kafka-simple-web-client
+  owner: ares10
+server:
+  subdirectory: /
+  name: Kafka Simple Web Client
+  description: Display Kafka topic messages in a user-friendly web interface.
+    Configure easily with environment variables to connect to your Kafka server.
+    Streamline your message monitoring and management with this simple tool.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

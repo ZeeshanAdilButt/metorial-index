@@ -1,0 +1,17 @@
+identifier: zxsimple/reference-servers/reference-servers
+repo:
+  provider: github.com
+  url: https://github.com/zxsimple/reference-servers
+  name: reference-servers
+  owner: zxsimple
+server:
+  subdirectory: /src/fetch
+  name: Fetch Server
+  description: Retrieve and process web content effortlessly. Convert HTML to
+    markdown for easier consumption by LLMs, allowing for efficient information
+    extraction from web pages. Utilize advanced features like content truncation
+    and customizable user agents to enhance your web fetching capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

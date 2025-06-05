@@ -1,0 +1,17 @@
+identifier: seriallazer/ibkr-mcp-server/ibkr-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/seriallazer/ibkr-mcp-server
+  name: ibkr-mcp-server
+  owner: seriallazer
+server:
+  subdirectory: /
+  name: IBKR Server
+  description: Fetch and manage your portfolio details seamlessly using our API.
+    Interact with the Interactive Brokers API to retrieve real-time portfolio
+    information effortlessly. Enhance your trading experience with easy access
+    to your financial data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

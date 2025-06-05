@@ -1,0 +1,17 @@
+identifier: winor30/mcp-server-datadog/mcp-server-datadog
+repo:
+  provider: github.com
+  url: https://github.com/winor30/mcp-server-datadog
+  name: mcp-server-datadog
+  owner: winor30
+server:
+  subdirectory: /
+  name: Datadog API Integration
+  description: Leverage Datadog's powerful monitoring features for incident
+    management, logs, metrics, and more. Streamline your observability processes
+    by integrating directly with the Datadog API through this server. Enhance
+    your incident response and monitoring capabilities effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

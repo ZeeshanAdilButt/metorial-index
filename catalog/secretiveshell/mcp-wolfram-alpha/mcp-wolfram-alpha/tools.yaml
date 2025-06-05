@@ -1,0 +1,11 @@
+tools:
+  - name: query-wolfram-alpha
+    description: Use Wolfram Alpha to answer a question. This tool should be used
+      when you need complex math or symbolic intelligence.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string

@@ -1,0 +1,17 @@
+identifier: isdaniel/mcp-metal-price/mcp-metal-price
+repo:
+  provider: github.com
+  url: https://github.com/isdaniel/mcp-metal-price
+  name: mcp-metal-price
+  owner: isdaniel
+server:
+  subdirectory: /
+  name: Metal Price Server
+  description: Provide current and historical precious metal prices including
+    gold, silver, platinum, and palladium in multiple currencies. Query prices
+    by metal symbol and date to get accurate market data. Easily integrate metal
+    price information into your applications via a simple MCP tool.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

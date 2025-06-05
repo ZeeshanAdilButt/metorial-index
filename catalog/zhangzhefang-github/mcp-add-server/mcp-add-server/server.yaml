@@ -1,0 +1,17 @@
+identifier: zhangzhefang-github/mcp-add-server/mcp-add-server
+repo:
+  provider: github.com
+  url: https://github.com/zhangzhefang-github/mcp-add-server
+  name: mcp-add-server
+  owner: zhangzhefang-github
+server:
+  subdirectory: /
+  name: Minimal Addition Tool Server
+  description: Provide a simple addition tool that returns the sum of two numbers.
+    Enable seamless integration with MCP-compatible clients to perform basic
+    arithmetic operations. Serve as a minimal example implementation of an MCP
+    server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,22 @@
+identifier: video-db/agent-toolkit/agent-toolkit
+repo:
+  provider: github.com
+  url: https://github.com/video-db/agent-toolkit
+  name: agent-toolkit
+  owner: video-db
+server:
+  subdirectory: /modelcontextprotocol
+  name: VideoDB Director
+  description: >-
+    Integrate video database management capabilities into your agents by
+    connecting to the VideoDB Director MCP server. Easily configure and run the
+    server to enable seamless access to video-related tools and resources within
+    your preferred MCP clients. Keep your video data workflows efficient and
+    up-to-date with simple installation and update commands.
+
+
+    Get your API key here: https://console.videodb.io/
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

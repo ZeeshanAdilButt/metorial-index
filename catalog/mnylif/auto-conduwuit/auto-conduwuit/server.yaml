@@ -1,0 +1,17 @@
+identifier: mnylif/auto-conduwuit/auto-conduwuit
+repo:
+  provider: github.com
+  url: https://github.com/MNylif/auto-conduwuit
+  name: auto-conduwuit
+  owner: MNylif
+server:
+  subdirectory: /
+  name: Conduwuit Server Installer
+  description: Automate the installation and secure configuration of a Conduwuit
+    server using Docker. Set up SSL certificates, TURN server for voice/video
+    calls, and create an admin account effortlessly. Ensure your server is ready
+    to run a secure Conduwuit instance with minimal manual steps.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+tools:
+  - name: searchCigarettes
+    description: 根据关键词搜索卷烟信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          minLength: 1
+          description: 搜索关键词
+      additionalProperties: false

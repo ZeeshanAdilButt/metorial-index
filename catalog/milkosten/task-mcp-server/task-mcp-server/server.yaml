@@ -1,0 +1,16 @@
+identifier: milkosten/task-mcp-server/task-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/milkosten/task-mcp-server
+  name: task-mcp-server
+  owner: milkosten
+server:
+  subdirectory: /
+  name: Task API Server
+  description: Manage your tasks efficiently with a standardized interface.
+    Create, update, and delete tasks seamlessly through a powerful API.
+    Integrate with CLI tools or web applications effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

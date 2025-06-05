@@ -1,0 +1,83 @@
+tools:
+  - name: read_query
+    description: "执行 SELECT 查询。
+
+      \   \ 
+
+      \    Args:
+
+      \        query: SELECT SQL 查询语句
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: write_query
+    description: "执行 INSERT, UPDATE 或 DELETE 查询。
+
+      \   \ 
+
+      \    Args:
+
+      \        query: SQL 修改查询语句
+
+      \    "
+    inputSchema:
+      type: object
+      title: write_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: create_table
+    description: "创建新表。
+
+      \   \ 
+
+      \    Args:
+
+      \        query: CREATE TABLE SQL 语句
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_tableArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: list_tables
+    description: 列出数据库中的所有表。
+    inputSchema:
+      type: object
+      title: list_tablesArguments
+      properties: {}
+  - name: describe_table
+    description: "获取指定表的结构信息。
+
+      \   \ 
+
+      \    Args:
+
+      \        table_name: 要描述的表名
+
+      \    "
+    inputSchema:
+      type: object
+      title: describe_tableArguments
+      required:
+        - table_name
+      properties:
+        table_name:
+          type: string
+          title: Table Name

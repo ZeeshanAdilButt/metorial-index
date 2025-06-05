@@ -1,0 +1,221 @@
+tools:
+  - name: get_historical_stock_prices
+    description: >
+      Get historical stock prices for a given ticker symbol from yahoo finance.
+      Include the following information: Date, Open, High, Low, Close, Volume,
+      Adj Close.
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get historical prices for, e.g. "AAPL"
+          period : str
+              Valid periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max
+              Either Use period parameter or use start and end
+              Default is "1mo"
+          interval : str
+              Valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo
+              Intraday data cannot extend last 60 days
+              Default is "1d"
+    inputSchema:
+      type: object
+      title: get_historical_stock_pricesArguments
+      required:
+        - ticker
+      properties:
+        period:
+          type: string
+          title: Period
+          default: 1mo
+        ticker:
+          type: string
+          title: Ticker
+        interval:
+          type: string
+          title: Interval
+          default: 1d
+  - name: get_stock_info
+    description: >
+      Get stock information for a given ticker symbol from yahoo finance.
+      Include the following information:
+
+      Stock Price & Trading Info, Company Information, Financial Metrics,
+      Earnings & Revenue, Margins & Returns, Dividends, Balance Sheet,
+      Ownership, Analyst Coverage, Risk Metrics, Other.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get information for, e.g. "AAPL"
+    inputSchema:
+      type: object
+      title: get_stock_infoArguments
+      required:
+        - ticker
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+  - name: get_yahoo_finance_news
+    description: |
+      Get news for a given ticker symbol from yahoo finance.
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get news for, e.g. "AAPL"
+    inputSchema:
+      type: object
+      title: get_yahoo_finance_newsArguments
+      required:
+        - ticker
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+  - name: get_stock_actions
+    description: >
+      Get stock dividends and stock splits for a given ticker symbol from yahoo
+      finance.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get stock actions for, e.g. "AAPL"
+    inputSchema:
+      type: object
+      title: get_stock_actionsArguments
+      required:
+        - ticker
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+  - name: get_financial_statement
+    description: >
+      Get financial statement for a given ticker symbol from yahoo finance. You
+      can choose from the following financial statement types: income_stmt,
+      quarterly_income_stmt, balance_sheet, quarterly_balance_sheet, cashflow,
+      quarterly_cashflow.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get financial statement for, e.g. "AAPL"
+          financial_type: str
+              The type of financial statement to get. You can choose from the following financial statement types: income_stmt, quarterly_income_stmt, balance_sheet, quarterly_balance_sheet, cashflow, quarterly_cashflow.
+    inputSchema:
+      type: object
+      title: get_financial_statementArguments
+      required:
+        - ticker
+        - financial_type
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+        financial_type:
+          type: string
+          title: Financial Type
+  - name: get_holder_info
+    description: >
+      Get holder information for a given ticker symbol from yahoo finance. You
+      can choose from the following holder types: major_holders,
+      institutional_holders, mutualfund_holders, insider_transactions,
+      insider_purchases, insider_roster_holders.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get holder information for, e.g. "AAPL"
+          holder_type: str
+              The type of holder information to get. You can choose from the following holder types: major_holders, institutional_holders, mutualfund_holders, insider_transactions, insider_purchases, insider_roster_holders.
+    inputSchema:
+      type: object
+      title: get_holder_infoArguments
+      required:
+        - ticker
+        - holder_type
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+        holder_type:
+          type: string
+          title: Holder Type
+  - name: get_option_expiration_dates
+    description: >
+      Fetch the available options expiration dates for a given ticker symbol.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get option expiration dates for, e.g. "AAPL"
+    inputSchema:
+      type: object
+      title: get_option_expiration_datesArguments
+      required:
+        - ticker
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+  - name: get_option_chain
+    description: >
+      Fetch the option chain for a given ticker symbol, expiration date, and
+      option type.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get option chain for, e.g. "AAPL"
+          expiration_date: str
+              The expiration date for the options chain (format: 'YYYY-MM-DD')
+          option_type: str
+              The type of option to fetch ('calls' or 'puts')
+    inputSchema:
+      type: object
+      title: get_option_chainArguments
+      required:
+        - ticker
+        - expiration_date
+        - option_type
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+        option_type:
+          type: string
+          title: Option Type
+        expiration_date:
+          type: string
+          title: Expiration Date
+  - name: get_recommendations
+    description: >
+      Get recommendations or upgrades/downgrades for a given ticker symbol from
+      yahoo finance. You can also specify the number of months back to get
+      upgrades/downgrades for, default is 12.
+
+
+      Args:
+          ticker: str
+              The ticker symbol of the stock to get recommendations for, e.g. "AAPL"
+          recommendation_type: str
+              The type of recommendation to get. You can choose from the following recommendation types: recommendations, upgrades_downgrades.
+          months_back: int
+              The number of months back to get upgrades/downgrades for, default is 12.
+    inputSchema:
+      type: object
+      title: get_recommendationsArguments
+      required:
+        - ticker
+        - recommendation_type
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+        months_back:
+          type: integer
+          title: Months Back
+          default: 12
+        recommendation_type:
+          type: string
+          title: Recommendation Type

@@ -1,0 +1,15 @@
+identifier: qpd-v/mcp-wordcounter/mcp-wordcounter
+repo:
+  provider: github.com
+  url: https://github.com/qpd-v/mcp-wordcounter
+  name: mcp-wordcounter
+  owner: qpd-v
+server:
+  subdirectory: /
+  name: Word Counter
+  description: A server for analyzing text documents with word and character
+    counting capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

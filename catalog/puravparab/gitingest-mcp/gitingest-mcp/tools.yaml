@@ -1,0 +1,119 @@
+tools:
+  - name: git_summary
+    description: "
+
+      \tGet a summary of a GitHub repository that includes\ 
+
+      \t\t- Repo name,\ 
+
+      \t\t- Files in repo
+
+      \t\t- Number of tokens in repo
+
+      \t\t- Summary from the README.md
+
+
+      \tArgs:
+
+      \t\towner: The GitHub organization or username
+
+      \t\trepo: The repository name
+
+      \t\tbranch: Optional branch name (default: None)
+
+      \t"
+    inputSchema:
+      type: object
+      title: git_summaryArguments
+      required:
+        - owner
+        - repo
+      properties:
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+        branch:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branch
+          default: null
+  - name: git_tree
+    description: "
+
+      \tGet the tree structure of a GitHub repository
+
+
+      \tArgs:
+
+      \t\towner: The GitHub organization or username
+
+      \t\trepo: The repository name
+
+      \t\tbranch: Optional branch name (default: None)
+
+      \t"
+    inputSchema:
+      type: object
+      title: git_treeArguments
+      required:
+        - owner
+        - repo
+      properties:
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+        branch:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branch
+          default: null
+  - name: git_files
+    description: "
+
+      \tGet the content of specific files from a GitHub repository
+
+
+      \tArgs:
+
+      \t\towner: The GitHub organization or username
+
+      \t\trepo: The repository name
+
+      \t\tfile_paths: List of paths to files within the repository
+
+      \t\tbranch: Optional branch name (default: None)
+
+      \t"
+    inputSchema:
+      type: object
+      title: git_filesArguments
+      required:
+        - owner
+        - repo
+        - file_paths
+      properties:
+        repo:
+          type: string
+          title: Repo
+        owner:
+          type: string
+          title: Owner
+        branch:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branch
+          default: null
+        file_paths:
+          type: array
+          items:
+            type: string
+          title: File Paths

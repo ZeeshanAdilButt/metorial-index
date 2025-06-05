@@ -1,0 +1,114 @@
+tools:
+  - name: get_board_visualization
+    description: Provides the current state of the chessboard as an image.
+    inputSchema:
+      type: object
+      title: get_board_visualizationArguments
+      properties: {}
+  - name: get_turn
+    description: Indicates whose turn it is ('white' or 'black').
+    inputSchema:
+      type: object
+      title: get_turnArguments
+      properties: {}
+  - name: get_valid_moves
+    description: Lists all legal moves for the current player in UCI notation.
+    inputSchema:
+      type: object
+      title: get_valid_movesArguments
+      properties: {}
+  - name: make_move
+    description: "
+
+      \    Makes a move on the board using standard algebraic notation (SAN).
+
+      \    Args:
+
+      \        move_san: The player's move in algebraic notation (e.g., 'e4',
+      'Nf3', 'Bxe5').
+
+      \    Returns:
+
+      \        A dictionary containing the move in SAN format, the move in UCI
+      format, the new board FEN,
+
+      \        whether the game is over, and the result if applicable.
+
+      \    "
+    inputSchema:
+      type: object
+      title: make_moveArguments
+      required:
+        - move_san
+      properties:
+        move_san:
+          type: string
+          title: Move San
+  - name: new_game
+    description: "
+
+      \    Starts a new game, resetting the board to the initial position.
+
+
+      \    Args:
+
+      \        user_plays_white: Whether the user will play as white. Defaults
+      to True.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A confirmation message indicating the game has started and the
+      user's color.
+
+      \    "
+    inputSchema:
+      type: object
+      title: new_gameArguments
+      properties:
+        user_plays_white:
+          type: boolean
+          title: User Plays White
+          default: true
+  - name: find_position_in_pgn
+    description: "
+
+      \    Finds the first board position in a PGN string that matches a given
+      condition
+
+      \    (e.g., 'bishop on a3') and returns an image of that board.
+
+
+      \    Args:
+
+      \        pgn_string: The PGN string of the game.
+
+      \        condition: A string describing the condition, format:
+      \"piece_type on square_name\"
+
+      \                   (e.g., \"bishop on a3\", \"knight on f6\", \"king on
+      g1\").
+
+
+      \    Returns:
+
+      \        An Image dictionary containing the PNG data of the board state if
+      found,
+
+      \        or a string with an error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_position_in_pgnArguments
+      required:
+        - pgn_string
+        - condition
+      properties:
+        condition:
+          type: string
+          title: Condition
+        pgn_string:
+          type: string
+          title: Pgn String

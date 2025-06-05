@@ -1,0 +1,226 @@
+tools:
+  - name: get_running_builds
+    description: "
+
+      \    Get all running builds from Jenkins
+
+
+      \    Returns:
+
+      \        list[Build]: A list of all running builds
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_running_buildsArguments
+      properties: {}
+  - name: get_build_info
+    description: "
+
+      \    Get specific build info from Jenkins
+
+
+      \    Args:
+
+      \        fullname: The fullname of the job
+
+      \        build_number: The number of the build, if None, get the last
+      build
+
+
+      \    Returns:
+
+      \        Build: The build info
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_build_infoArguments
+      required:
+        - fullname
+      properties:
+        fullname:
+          type: string
+          title: Fullname
+        build_number:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Build Number
+          default: null
+  - name: build_job
+    description: "
+
+      \    Build a job in Jenkins
+
+
+      \    Args:
+
+      \        fullname: The fullname of the job
+
+      \        parameters: Update the default parameters of the job.
+
+
+      \    Returns:
+
+      \        The build number of the job
+
+      \    "
+    inputSchema:
+      type: object
+      title: build_jobArguments
+      required:
+        - fullname
+      properties:
+        fullname:
+          type: string
+          title: Fullname
+        parameters:
+          type: object
+          title: Parameters
+          default: null
+          additionalProperties: true
+  - name: get_build_logs
+    description: "
+
+      \    Get logs from a specific build in Jenkins
+
+
+      \    Args:
+
+      \        fullname: The fullname of the job
+
+      \        build_number: The number of the build
+
+
+      \    Returns:
+
+      \        str: The logs of the build
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_build_logsArguments
+      required:
+        - fullname
+        - build_number
+      properties:
+        fullname:
+          type: string
+          title: Fullname
+        build_number:
+          type: string
+          title: Build Number
+  - name: get_all_jobs
+    description: "
+
+      \    Get all jobs from Jenkins
+
+
+      \    Returns:
+
+      \        list[dict]: A list of all jobs
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_all_jobsArguments
+      properties: {}
+  - name: get_job_config
+    description: "
+
+      \    Get specific job config from Jenkins
+
+
+      \    Args:
+
+      \        fullname: The fullname of the job
+
+
+      \    Returns:
+
+      \        str: The config of the job
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_job_configArguments
+      required:
+        - fullname
+      properties:
+        fullname:
+          type: string
+          title: Fullname
+  - name: search_jobs
+    description: "
+
+      \    Search job by specific field
+
+
+      \    Args:
+
+      \        class_pattern: The pattern of the _class
+
+      \        name_pattern: The pattern of the name
+
+      \        fullname_pattern: The pattern of the fullname
+
+      \        url_pattern: The pattern of the url
+
+      \        color_pattern: The pattern of the color
+
+
+      \    Returns:
+
+      \        list[dict]: A list of all jobs
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_jobsArguments
+      properties:
+        url_pattern:
+          type: string
+          title: Url Pattern
+          default: null
+        name_pattern:
+          type: string
+          title: Name Pattern
+          default: null
+        class_pattern:
+          type: string
+          title: Class Pattern
+          default: null
+        color_pattern:
+          type: string
+          title: Color Pattern
+          default: null
+        fullname_pattern:
+          type: string
+          title: Fullname Pattern
+          default: null
+  - name: get_job_info
+    description: "
+
+      \    Get specific job info from Jenkins
+
+
+      \    Args:
+
+      \        fullname: The fullname of the job
+
+
+      \    Returns:
+
+      \        dict: The job info
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_job_infoArguments
+      required:
+        - fullname
+      properties:
+        fullname:
+          type: string
+          title: Fullname

@@ -1,0 +1,17 @@
+identifier: da1y/mcp-server-elasticsearch/mcp-server-elasticsearch
+repo:
+  provider: github.com
+  url: https://github.com/da1y/mcp-server-elasticsearch
+  name: mcp-server-elasticsearch
+  owner: da1y
+server:
+  subdirectory: /
+  name: Elasticsearch Server
+  description: Manage your Elasticsearch clusters effortlessly. Execute search
+    queries, create indices, and index documents directly from your LLMs.
+    Streamline your data management and retrieval processes with powerful tools
+    designed for seamless integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

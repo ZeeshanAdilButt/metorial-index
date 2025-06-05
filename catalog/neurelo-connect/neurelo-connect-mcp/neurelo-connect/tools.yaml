@@ -1,0 +1,97 @@
+tools:
+  - name: system_list_databases
+    description: List all the available databases
+    inputSchema:
+      type: object
+  - name: system_get_database_status
+    description: Get the status of a given database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - target
+      properties:
+        target:
+          type: string
+      additionalProperties: false
+  - name: system_get_status
+    description: Check if all databases are running
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: system_get_database_schema
+    description: Get the schema for a given database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - target
+      properties:
+        target:
+          type: string
+      additionalProperties: false
+  - name: raw_readonly_query
+    description: Execute a raw query against a database with readonly access. Can
+      only be called if the database allows raw readonly queries.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - target
+        - query
+      properties:
+        query:
+          type: string
+          description: The query to execute
+        target:
+          type: string
+          description: The database to query
+      additionalProperties: false
+  - name: raw_query
+    description: Execute a raw query against a database with read/write access. Can
+      only be called if the database allows raw read/write queries.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - target
+        - query
+      properties:
+        query:
+          type: string
+          description: The query to execute
+        target:
+          type: string
+          description: The database to query
+      additionalProperties: false
+  - name: system_get_endpoints
+    description: Get all available endpoints for stored queries and workflows
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: call_endpoint
+    description: Call a given stored query/workflow endpoint with the provided parameters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - requestMethod
+        - parameters
+      properties:
+        path:
+          type: string
+        parameters:
+          type: object
+          additionalProperties:
+            type:
+              - string
+              - number
+              - boolean
+        requestMethod:
+          type: string
+      additionalProperties: false

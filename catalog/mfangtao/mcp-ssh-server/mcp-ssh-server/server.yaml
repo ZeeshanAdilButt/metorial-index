@@ -1,0 +1,17 @@
+identifier: mfangtao/mcp-ssh-server/mcp-ssh-server
+repo:
+  provider: github.com
+  url: https://github.com/mfangtao/mcp-ssh-server
+  name: mcp-ssh-server
+  owner: mfangtao
+server:
+  subdirectory: /
+  name: SSH Server
+  description: Execute remote commands securely over SSH using the Model Context
+    Protocol. Benefit from type safety and easy integration with your
+    applications. Simplify your remote command execution with robust
+    authentication options.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

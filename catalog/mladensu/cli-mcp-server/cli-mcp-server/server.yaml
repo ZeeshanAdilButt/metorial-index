@@ -1,0 +1,16 @@
+identifier: mladensu/cli-mcp-server/cli-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/MladenSU/cli-mcp-server
+  name: cli-mcp-server
+  owner: MladenSU
+server:
+  subdirectory: /
+  name: CLI
+  description: Command line interface for executing controlled CLI operations with
+    robust security features including command whitelisting, path validation,
+    and execution controls.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

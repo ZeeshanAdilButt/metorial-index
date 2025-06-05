@@ -1,0 +1,16 @@
+identifier: wjlim/nf-core_mcp/nf-core_mcp
+repo:
+  provider: github.com
+  url: https://github.com/wjlim/nf-core_mcp
+  name: nf-core_mcp
+  owner: wjlim
+server:
+  subdirectory: /
+  name: nf-core MCP Server
+  description: Manage and navigate nf-core pipeline repositories effortlessly.
+    Access configurations, workflows, and modules while searching through
+    pipeline files to streamline your bioinformatics projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

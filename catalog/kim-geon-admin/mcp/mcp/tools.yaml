@@ -1,0 +1,27 @@
+tools:
+  - name: calculate_bmi
+    description: Calculate BMI given weight in kg and height in meters
+    inputSchema:
+      type: object
+      title: calculate_bmiArguments
+      required:
+        - weight_kg
+        - height_m
+      properties:
+        height_m:
+          type: number
+          title: Height M
+        weight_kg:
+          type: number
+          title: Weight Kg
+  - name: fetch_weather
+    description: Fetch current weather for a city
+    inputSchema:
+      type: object
+      title: fetch_weatherArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City

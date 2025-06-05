@@ -1,0 +1,263 @@
+tools:
+  - name: find_patient
+    description: Search for a patient by demographics
+    inputSchema:
+      type: object
+      required:
+        - lastName
+      properties:
+        gender:
+          enum:
+            - male
+            - female
+            - other
+            - unknown
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          description: YYYY-MM-DD format
+        firstName:
+          type: string
+  - name: get_patient_observations
+    description: Get observations (vitals, labs) for a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        code:
+          type: string
+          description: LOINC or SNOMED code
+        dateTo:
+          type: string
+          description: YYYY-MM-DD
+        status:
+          enum:
+            - registered
+            - preliminary
+            - final
+            - amended
+            - corrected
+            - cancelled
+          type: string
+        dateFrom:
+          type: string
+          description: YYYY-MM-DD
+        patientId:
+          type: string
+  - name: get_patient_conditions
+    description: Get medical conditions/diagnoses for a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        status:
+          enum:
+            - active
+            - inactive
+            - resolved
+          type: string
+        onsetDate:
+          type: string
+          description: YYYY-MM-DD
+        patientId:
+          type: string
+  - name: get_patient_medications
+    description: Get medication orders for a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        status:
+          enum:
+            - active
+            - completed
+            - stopped
+            - on-hold
+          type: string
+        patientId:
+          type: string
+  - name: get_patient_encounters
+    description: Get healthcare encounters/visits for a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        dateTo:
+          type: string
+          description: YYYY-MM-DD
+        status:
+          enum:
+            - planned
+            - arrived
+            - in-progress
+            - finished
+            - cancelled
+          type: string
+        dateFrom:
+          type: string
+          description: YYYY-MM-DD
+        patientId:
+          type: string
+  - name: get_patient_allergies
+    description: Get allergies and intolerances for a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        type:
+          enum:
+            - allergy
+            - intolerance
+          type: string
+        status:
+          enum:
+            - active
+            - inactive
+            - resolved
+          type: string
+        category:
+          enum:
+            - food
+            - medication
+            - environment
+            - biologic
+          type: string
+        patientId:
+          type: string
+  - name: get_patient_procedures
+    description: Get procedures performed on a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        dateTo:
+          type: string
+          description: YYYY-MM-DD
+        status:
+          enum:
+            - preparation
+            - in-progress
+            - completed
+            - entered-in-error
+          type: string
+        dateFrom:
+          type: string
+          description: YYYY-MM-DD
+        patientId:
+          type: string
+  - name: get_patient_careplans
+    description: Get care plans for a patient
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        dateTo:
+          type: string
+          description: YYYY-MM-DD
+        status:
+          enum:
+            - draft
+            - active
+            - suspended
+            - completed
+            - cancelled
+          type: string
+        category:
+          type: string
+        dateFrom:
+          type: string
+          description: YYYY-MM-DD
+        patientId:
+          type: string
+  - name: get_vital_signs
+    description: Get patient's vital signs history
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        patientId:
+          type: string
+        timeframe:
+          type: string
+          description: e.g., 3m, 6m, 1y, all
+  - name: get_lab_results
+    description: Get patient's lab results
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        category:
+          type: string
+          description: e.g., CBC, METABOLIC, LIPIDS, ALL
+        patientId:
+          type: string
+        timeframe:
+          type: string
+  - name: get_medications_history
+    description: Get patient's medication history including changes
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        patientId:
+          type: string
+        includeDiscontinued:
+          type: boolean
+  - name: get_appointments
+    description: Get patient's Appointments
+    inputSchema:
+      type: object
+      required:
+        - patientId
+      properties:
+        dateTo:
+          type: string
+          description: YYYY-MM-DD
+        dateFrom:
+          type: string
+          description: YYYY-MM-DD
+        patientId:
+          type: string
+  - name: search-pubmed
+    description: Search PubMed for medical literature
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+        maxResults:
+          type: number
+  - name: search-trials
+    description: Search ClinicalTrials.gov for relevant studies
+    inputSchema:
+      type: object
+      required:
+        - condition
+      properties:
+        location:
+          type: string
+        condition:
+          type: string
+  - name: get-drug-info
+    description: Get Drug details by a generic name
+    inputSchema:
+      type: object
+      required:
+        - genericName
+      properties:
+        genericName:
+          type: string

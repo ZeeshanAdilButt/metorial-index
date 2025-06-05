@@ -1,0 +1,18 @@
+identifier: aqara-docs/mysql-mcp-server/mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/aqara-docs/mysql-mcp-server
+  name: mysql-mcp-server
+  owner: aqara-docs
+server:
+  subdirectory: /
+  name: MySQL Database Interaction Server
+  description: Enable AI applications to securely interact with MySQL databases by
+    listing tables, reading data, and executing SQL queries through a controlled
+    and structured interface. Facilitate safer database exploration and analysis
+    with comprehensive logging and error handling. Simplify integration with AI
+    hosts by providing a dedicated MCP server implementation for MySQL.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

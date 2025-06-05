@@ -1,0 +1,18 @@
+identifier: shenpeiheng/mcp-server-chinarailway/mcp-server-chinarailway
+repo:
+  provider: github.com
+  url: https://github.com/shenpeiheng/mcp-server-chinarailway
+  name: mcp-server-chinarailway
+  owner: shenpeiheng
+server:
+  subdirectory: /
+  name: 12306 MCP Server
+  description: Provide a server implementation that integrates with the 12306
+    railway system to expose data and tools via the Model Context Protocol.
+    Enable clients to interact with railway-related resources and actions
+    through a standardized MCP interface. Simplify access to railway information
+    and operations for LLM-based applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

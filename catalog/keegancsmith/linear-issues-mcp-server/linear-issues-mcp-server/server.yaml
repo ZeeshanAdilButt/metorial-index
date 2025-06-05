@@ -1,0 +1,17 @@
+identifier: keegancsmith/linear-issues-mcp-server/linear-issues-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/keegancsmith/linear-issues-mcp-server
+  name: linear-issues-mcp-server
+  owner: keegancsmith
+server:
+  subdirectory: /
+  name: Linear Issues Server
+  description: Provide read-only access to Linear issues and their comments
+    through a simple MCP server. Enable language models to fetch issue details
+    and associated comments using a Linear API token. Seamlessly integrate with
+    Claude for Desktop to query Linear issues interactively.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

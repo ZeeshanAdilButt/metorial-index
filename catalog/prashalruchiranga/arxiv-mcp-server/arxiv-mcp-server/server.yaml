@@ -1,0 +1,18 @@
+identifier: prashalruchiranga/arxiv-mcp-server/arxiv-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/prashalruchiranga/arxiv-mcp-server
+  name: arxiv-mcp-server
+  owner: prashalruchiranga
+server:
+  subdirectory: /
+  name: arXiv MCP Server
+  description: Enable natural language interaction with the arXiv API to retrieve
+    scholarly article metadata, download PDFs, and load articles into large
+    language model contexts. Search and fetch articles seamlessly to enhance
+    research workflows. Simplify access to arXiv content directly from your LLM
+    environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

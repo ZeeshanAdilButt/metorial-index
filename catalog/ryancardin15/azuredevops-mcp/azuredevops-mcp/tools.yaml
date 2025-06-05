@@ -1,0 +1,1865 @@
+tools:
+  - name: listWorkItems
+    description: List work items based on a WIQL query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: WIQL query to get work items
+      additionalProperties: false
+  - name: getWorkItemById
+    description: Get a specific work item by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Work item ID
+      additionalProperties: false
+  - name: searchWorkItems
+    description: Search for work items by text
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - searchText
+      properties:
+        top:
+          type: number
+          description: Maximum number of work items to return
+        searchText:
+          type: string
+          description: Text to search for in work items
+      additionalProperties: false
+  - name: getRecentlyUpdatedWorkItems
+    description: Get recently updated work items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        top:
+          type: number
+          description: Maximum number of work items to return
+        skip:
+          type: number
+          description: Number of work items to skip
+      additionalProperties: false
+  - name: getMyWorkItems
+    description: Get work items assigned to you
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        top:
+          type: number
+          description: Maximum number of work items to return
+        state:
+          type: string
+          description: Filter by work item state
+      additionalProperties: false
+  - name: createWorkItem
+    description: Create a new work item
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workItemType
+        - title
+      properties:
+        state:
+          type: string
+          description: Initial state of the work item
+        title:
+          type: string
+          description: Title of the work item
+        areaPath:
+          type: string
+          description: Area path for the work item
+        assignedTo:
+          type: string
+          description: User to assign the work item to
+        description:
+          type: string
+          description: Description of the work item
+        workItemType:
+          type: string
+          description: Type of work item to create
+        iterationPath:
+          type: string
+          description: Iteration path for the work item
+        additionalFields:
+          type: object
+          description: Additional fields to set on the work item
+          additionalProperties: {}
+      additionalProperties: false
+  - name: updateWorkItem
+    description: Update an existing work item
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - fields
+      properties:
+        id:
+          type: number
+          description: ID of the work item to update
+        fields:
+          type: object
+          description: Fields to update on the work item
+          additionalProperties: {}
+      additionalProperties: false
+  - name: addWorkItemComment
+    description: Add a comment to a work item
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - text
+      properties:
+        id:
+          type: number
+          description: ID of the work item
+        text:
+          type: string
+          description: Comment text
+      additionalProperties: false
+  - name: updateWorkItemState
+    description: Update the state of a work item
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - state
+      properties:
+        id:
+          type: number
+          description: ID of the work item
+        state:
+          type: string
+          description: New state for the work item
+        comment:
+          type: string
+          description: Comment explaining the state change
+      additionalProperties: false
+  - name: assignWorkItem
+    description: Assign a work item to a user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - assignedTo
+      properties:
+        id:
+          type: number
+          description: ID of the work item
+        assignedTo:
+          type: string
+          description: User to assign the work item to
+      additionalProperties: false
+  - name: createLink
+    description: Create a link between work items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceId
+        - targetId
+        - linkType
+      properties:
+        comment:
+          type: string
+          description: Comment explaining the link
+        linkType:
+          type: string
+          description: Type of link to create
+        sourceId:
+          type: number
+          description: ID of the source work item
+        targetId:
+          type: number
+          description: ID of the target work item
+      additionalProperties: false
+  - name: bulkCreateWorkItems
+    description: Create or update multiple work items in a single operation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - workItems
+      properties:
+        workItems:
+          type: array
+          description: Array of work items to create or update
+      additionalProperties: false
+  - name: getBoards
+    description: Get all boards for a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+      additionalProperties: false
+  - name: getBoardColumns
+    description: Get columns for a specific board
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - boardId
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+        boardId:
+          type: string
+          description: ID of the board
+      additionalProperties: false
+  - name: getBoardItems
+    description: Get items on a specific board
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - boardId
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+        boardId:
+          type: string
+          description: ID of the board
+      additionalProperties: false
+  - name: moveCardOnBoard
+    description: Move a card on a board
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - boardId
+        - workItemId
+        - columnId
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+        boardId:
+          type: string
+          description: ID of the board
+        columnId:
+          type: string
+          description: ID of the column to move to
+        position:
+          type: number
+          description: Position within the column
+        workItemId:
+          type: number
+          description: ID of the work item to move
+      additionalProperties: false
+  - name: getSprints
+    description: Get all sprints for a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+      additionalProperties: false
+  - name: getCurrentSprint
+    description: Get the current sprint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+      additionalProperties: false
+  - name: getSprintWorkItems
+    description: Get work items in a specific sprint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sprintId
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+        sprintId:
+          type: string
+          description: ID of the sprint
+      additionalProperties: false
+  - name: getSprintCapacity
+    description: Get capacity for a specific sprint
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sprintId
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+        sprintId:
+          type: string
+          description: ID of the sprint
+      additionalProperties: false
+  - name: getTeamMembers
+    description: Get members of a team
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        teamId:
+          type: string
+          description: Team ID (uses default team if not specified)
+      additionalProperties: false
+  - name: listProjects
+    description: List all projects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        top:
+          type: number
+          description: Maximum number of projects to return
+        skip:
+          type: number
+          description: Number of projects to skip
+        stateFilter:
+          enum:
+            - all
+            - createPending
+            - deleted
+            - deleting
+            - new
+            - unchanged
+            - wellFormed
+          type: string
+          description: Filter by project state
+      additionalProperties: false
+  - name: getProjectDetails
+    description: Get details of a specific project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project
+        includeHistory:
+          type: boolean
+          description: Include project history
+        includeCapabilities:
+          type: boolean
+          description: Include project capabilities
+      additionalProperties: false
+  - name: createProject
+    description: Create a new project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the project
+        visibility:
+          enum:
+            - private
+            - public
+          type: string
+          description: Visibility of the project
+        description:
+          type: string
+          description: Description of the project
+        capabilities:
+          type: object
+          description: Project capabilities
+          additionalProperties: {}
+        processTemplateId:
+          type: string
+          description: Process template ID
+      additionalProperties: false
+  - name: getAreas
+    description: Get areas for a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        depth:
+          type: number
+          description: Maximum depth of the area hierarchy
+        projectId:
+          type: string
+          description: ID of the project
+      additionalProperties: false
+  - name: getIterations
+    description: Get iterations for a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project
+        includeDeleted:
+          type: boolean
+          description: Include deleted iterations
+      additionalProperties: false
+  - name: createArea
+    description: Create a new area in a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the area
+        projectId:
+          type: string
+          description: ID of the project
+        parentPath:
+          type: string
+          description: Path of the parent area
+      additionalProperties: false
+  - name: createIteration
+    description: Create a new iteration in a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the iteration
+        projectId:
+          type: string
+          description: ID of the project
+        startDate:
+          type: string
+          description: Start date of the iteration
+        finishDate:
+          type: string
+          description: End date of the iteration
+        parentPath:
+          type: string
+          description: Path of the parent iteration
+      additionalProperties: false
+  - name: getProcesses
+    description: Get all processes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        expandIcon:
+          type: boolean
+          description: Include process icons
+      additionalProperties: false
+  - name: getWorkItemTypes
+    description: Get work item types for a process
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - processId
+      properties:
+        processId:
+          type: string
+          description: ID of the process
+      additionalProperties: false
+  - name: getWorkItemTypeFields
+    description: Get fields for a work item type
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - processId
+        - witRefName
+      properties:
+        processId:
+          type: string
+          description: ID of the process
+        witRefName:
+          type: string
+          description: Reference name of the work item type
+      additionalProperties: false
+  - name: listRepositories
+    description: List all repositories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        projectId:
+          type: string
+          description: Filter by project
+        includeHidden:
+          type: boolean
+          description: Include hidden repositories
+        includeAllUrls:
+          type: boolean
+          description: Include all URLs
+      additionalProperties: false
+  - name: getRepository
+    description: Get details of a specific repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - repositoryId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project
+        repositoryId:
+          type: string
+          description: ID of the repository
+      additionalProperties: false
+  - name: createRepository
+    description: Create a new repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - projectId
+      properties:
+        name:
+          type: string
+          description: Name of the repository
+        projectId:
+          type: string
+          description: ID of the project
+      additionalProperties: false
+  - name: listBranches
+    description: List branches in a repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        top:
+          type: number
+          description: Maximum number of branches to return
+        filter:
+          type: string
+          description: Filter branches by name
+        repositoryId:
+          type: string
+          description: ID of the repository
+      additionalProperties: false
+  - name: searchCode
+    description: Search for code in repositories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - searchText
+      properties:
+        top:
+          type: number
+          description: Maximum number of results to return
+        projectId:
+          type: string
+          description: ID of the project
+        searchText:
+          type: string
+          description: Text to search for
+        repositoryId:
+          type: string
+          description: ID of the repository
+        fileExtension:
+          type: string
+          description: File extension to filter by
+      additionalProperties: false
+  - name: browseRepository
+    description: Browse the contents of a repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        path:
+          type: string
+          description: Path within the repository
+        repositoryId:
+          type: string
+          description: ID of the repository
+        versionDescriptor:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Version (branch, tag, or commit)
+            versionType:
+              type: string
+              description: Version type
+            versionOptions:
+              type: string
+              description: Version options
+          description: Version descriptor
+          additionalProperties: false
+      additionalProperties: false
+  - name: getFileContent
+    description: Get the content of a file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the file
+        repositoryId:
+          type: string
+          description: ID of the repository
+        versionDescriptor:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Version (branch, tag, or commit)
+            versionType:
+              type: string
+              description: Version type
+            versionOptions:
+              type: string
+              description: Version options
+          description: Version descriptor
+          additionalProperties: false
+      additionalProperties: false
+  - name: getCommitHistory
+    description: Get commit history for a repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        top:
+          type: number
+          description: Maximum number of commits to return
+        skip:
+          type: number
+          description: Number of commits to skip
+        itemPath:
+          type: string
+          description: Path to filter commits by
+        repositoryId:
+          type: string
+          description: ID of the repository
+      additionalProperties: false
+  - name: listPullRequests
+    description: List pull requests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        top:
+          type: number
+          description: Maximum number of pull requests to return
+        skip:
+          type: number
+          description: Number of pull requests to skip
+        status:
+          enum:
+            - abandoned
+            - active
+            - all
+            - completed
+            - notSet
+          type: string
+          description: Filter by status
+        creatorId:
+          type: string
+          description: Filter by creator
+        reviewerId:
+          type: string
+          description: Filter by reviewer
+        repositoryId:
+          type: string
+          description: ID of the repository
+      additionalProperties: false
+  - name: createPullRequest
+    description: Create a new pull request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - sourceRefName
+        - targetRefName
+        - title
+      properties:
+        title:
+          type: string
+          description: Title of the pull request
+        reviewers:
+          type: array
+          items:
+            type: string
+          description: List of reviewers
+        description:
+          type: string
+          description: Description of the pull request
+        repositoryId:
+          type: string
+          description: ID of the repository
+        sourceRefName:
+          type: string
+          description: Source branch
+        targetRefName:
+          type: string
+          description: Target branch
+      additionalProperties: false
+  - name: getPullRequest
+    description: Get details of a specific pull request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - pullRequestId
+      properties:
+        repositoryId:
+          type: string
+          description: ID of the repository
+        pullRequestId:
+          type: number
+          description: ID of the pull request
+      additionalProperties: false
+  - name: getPullRequestComments
+    description: Get comments on a pull request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - pullRequestId
+      properties:
+        top:
+          type: number
+          description: Maximum number of comments to return
+        skip:
+          type: number
+          description: Number of comments to skip
+        threadId:
+          type: number
+          description: ID of a specific thread
+        repositoryId:
+          type: string
+          description: ID of the repository
+        pullRequestId:
+          type: number
+          description: ID of the pull request
+      additionalProperties: false
+  - name: approvePullRequest
+    description: Approve a pull request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - pullRequestId
+      properties:
+        repositoryId:
+          type: string
+          description: ID of the repository
+        pullRequestId:
+          type: number
+          description: ID of the pull request
+      additionalProperties: false
+  - name: mergePullRequest
+    description: Merge a pull request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - pullRequestId
+      properties:
+        comment:
+          type: string
+          description: Comment for the merge commit
+        repositoryId:
+          type: string
+          description: ID of the repository
+        mergeStrategy:
+          enum:
+            - noFastForward
+            - rebase
+            - rebaseMerge
+            - squash
+          type: string
+          description: Merge strategy
+        pullRequestId:
+          type: number
+          description: ID of the pull request
+      additionalProperties: false
+  - name: runAutomatedTests
+    description: Execute automated test suites
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        testPlanId:
+          type: number
+          description: ID of the test plan to run
+        testSuiteId:
+          type: number
+          description: ID of the test suite to run
+        testEnvironment:
+          type: string
+          description: Environment to run tests in
+        parallelExecution:
+          type: boolean
+          description: Whether to run tests in parallel
+      additionalProperties: false
+  - name: getTestAutomationStatus
+    description: Check status of automated test execution
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testRunId
+      properties:
+        testRunId:
+          type: number
+          description: ID of the test run to check status for
+      additionalProperties: false
+  - name: configureTestAgents
+    description: Configure and manage test agents
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - agentName
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the agent should be enabled
+        agentName:
+          type: string
+          description: Name of the test agent to configure
+        capabilities:
+          type: object
+          description: Capabilities to set for the agent
+          additionalProperties: {}
+      additionalProperties: false
+  - name: createTestDataGenerator
+    description: Generate test data for automated tests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - dataSchema
+      properties:
+        name:
+          type: string
+          description: Name of the test data generator
+        dataSchema:
+          type: object
+          description: Schema for the test data to generate
+          additionalProperties: {}
+        recordCount:
+          type: number
+          description: Number of records to generate
+      additionalProperties: false
+  - name: manageTestEnvironments
+    description: Manage test environments for different test types
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environmentName
+        - action
+      properties:
+        action:
+          enum:
+            - create
+            - update
+            - delete
+          type: string
+          description: Action to perform
+        properties:
+          type: object
+          description: Properties for the environment
+          additionalProperties: {}
+        environmentName:
+          type: string
+          description: Name of the test environment
+      additionalProperties: false
+  - name: getTestFlakiness
+    description: Analyze and report on test flakiness
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        testId:
+          type: number
+          description: ID of a specific test to analyze
+        timeRange:
+          type: string
+          description: Time range for analysis (e.g., '30d')
+        testRunIds:
+          type: array
+          items:
+            type: number
+          description: Specific test runs to analyze
+      additionalProperties: false
+  - name: getTestGapAnalysis
+    description: Identify gaps in test coverage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        areaPath:
+          type: string
+          description: Area path to analyze
+        codeChangesOnly:
+          type: boolean
+          description: Only analyze recent code changes
+      additionalProperties: false
+  - name: runTestImpactAnalysis
+    description: Determine which tests to run based on code changes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - buildId
+      properties:
+        buildId:
+          type: number
+          description: ID of the build to analyze
+        changedFiles:
+          type: array
+          items:
+            type: string
+          description: List of changed files
+      additionalProperties: false
+  - name: getTestHealthDashboard
+    description: View overall test health metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        timeRange:
+          type: string
+          description: Time range for metrics (e.g., '90d')
+        includeTrends:
+          type: boolean
+          description: Include trend data
+      additionalProperties: false
+  - name: runTestOptimization
+    description: Optimize test suite execution for faster feedback
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testPlanId
+        - optimizationGoal
+      properties:
+        testPlanId:
+          type: number
+          description: ID of the test plan to optimize
+        optimizationGoal:
+          enum:
+            - time
+            - coverage
+            - reliability
+          type: string
+          description: Optimization goal
+      additionalProperties: false
+  - name: createExploratorySessions
+    description: Create new exploratory testing sessions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Title of the exploratory session
+        areaPath:
+          type: string
+          description: Area path for the session
+        description:
+          type: string
+          description: Description of the session
+      additionalProperties: false
+  - name: recordExploratoryTestResults
+    description: Record findings during exploratory testing
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - findings
+      properties:
+        findings:
+          type: array
+          items:
+            type: string
+          description: List of findings to record
+        sessionId:
+          type: number
+          description: ID of the exploratory session
+        attachments:
+          type: array
+          description: Attachments for the findings
+      additionalProperties: false
+  - name: convertFindingsToWorkItems
+    description: Convert exploratory test findings to work items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - findingIds
+      properties:
+        sessionId:
+          type: number
+          description: ID of the exploratory session
+        findingIds:
+          type: array
+          items:
+            type: number
+          description: IDs of findings to convert
+        workItemType:
+          type: string
+          description: Type of work item to create
+      additionalProperties: false
+  - name: getExploratoryTestStatistics
+    description: Get statistics on exploratory testing activities
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        userId:
+          type: string
+          description: Filter by specific user
+        timeRange:
+          type: string
+          description: Time range for statistics (e.g., '90d')
+      additionalProperties: false
+  - name: runSecurityScan
+    description: Run security scans on repositories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        branch:
+          type: string
+          description: Branch to scan
+        scanType:
+          enum:
+            - static
+            - dynamic
+            - container
+            - dependency
+            - all
+          type: string
+          description: Type of security scan to run
+        repositoryId:
+          type: string
+          description: ID of the repository to scan
+      additionalProperties: false
+  - name: getSecurityScanResults
+    description: Get results from security scans
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - scanId
+      properties:
+        scanId:
+          type: string
+          description: ID of the scan to get results for
+        severity:
+          enum:
+            - critical
+            - high
+            - medium
+            - low
+            - all
+          type: string
+          description: Filter results by severity
+      additionalProperties: false
+  - name: trackSecurityVulnerabilities
+    description: Track and manage security vulnerabilities
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        status:
+          enum:
+            - open
+            - in-progress
+            - mitigated
+            - resolved
+            - false-positive
+          type: string
+          description: Filter by vulnerability status
+        timeRange:
+          type: string
+          description: Time range for tracking (e.g., '90d')
+        vulnerabilityId:
+          type: string
+          description: ID of a specific vulnerability to track
+      additionalProperties: false
+  - name: generateSecurityCompliance
+    description: Generate security compliance reports
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        standardType:
+          enum:
+            - owasp
+            - pci-dss
+            - hipaa
+            - gdpr
+            - iso27001
+            - custom
+          type: string
+          description: Compliance standard to report on
+        includeEvidence:
+          type: boolean
+          description: Include evidence in the report
+      additionalProperties: false
+  - name: integrateSarifResults
+    description: Import and process SARIF format security results
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sarifFilePath
+      properties:
+        sarifFilePath:
+          type: string
+          description: Path to the SARIF file to import
+        createWorkItems:
+          type: boolean
+          description: Create work items from findings
+      additionalProperties: false
+  - name: runComplianceChecks
+    description: Run compliance checks against standards
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - complianceStandard
+      properties:
+        scopeId:
+          type: string
+          description: Scope of the compliance check
+        complianceStandard:
+          type: string
+          description: Compliance standard to check against
+      additionalProperties: false
+  - name: getComplianceStatus
+    description: Get current compliance status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        standardId:
+          type: string
+          description: ID of the compliance standard
+        includeHistory:
+          type: boolean
+          description: Include historical compliance data
+      additionalProperties: false
+  - name: createComplianceReport
+    description: Create compliance reports for auditing
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - standardId
+      properties:
+        format:
+          enum:
+            - pdf
+            - html
+            - json
+          type: string
+          description: Format of the report
+        standardId:
+          type: string
+          description: ID of the compliance standard
+      additionalProperties: false
+  - name: manageSecurityPolicies
+    description: Manage security policies
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - policyName
+        - action
+      properties:
+        action:
+          enum:
+            - create
+            - update
+            - delete
+            - get
+          type: string
+          description: Action to perform on the policy
+        policyName:
+          type: string
+          description: Name of the security policy
+        policyDefinition:
+          type: object
+          description: Definition of the policy
+          additionalProperties: {}
+      additionalProperties: false
+  - name: trackSecurityAwareness
+    description: Track security awareness and training
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        teamId:
+          type: string
+          description: ID of the team to track
+        timeRange:
+          type: string
+          description: Time range for tracking (e.g., '90d')
+        trainingId:
+          type: string
+          description: ID of specific training to track
+      additionalProperties: false
+  - name: rotateSecrets
+    description: Rotate secrets and credentials
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        force:
+          type: boolean
+          description: Force rotation even if not expired
+        secretName:
+          type: string
+          description: Name of the secret to rotate
+        secretType:
+          enum:
+            - password
+            - token
+            - certificate
+            - key
+          type: string
+          description: Type of secret to rotate
+      additionalProperties: false
+  - name: auditSecretUsage
+    description: Audit usage of secrets across services
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        timeRange:
+          type: string
+          description: Time range for the audit (e.g., '30d')
+        secretName:
+          type: string
+          description: Name of the secret to audit
+      additionalProperties: false
+  - name: vaultIntegration
+    description: Integrate with secret vaults
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - vaultUrl
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - list
+            - set
+            - delete
+          type: string
+          description: Action to perform
+        vaultUrl:
+          type: string
+          description: URL of the vault to integrate with
+        secretPath:
+          type: string
+          description: Path to the secret in the vault
+        secretValue:
+          type: string
+          description: Value to set (for 'set' action)
+      additionalProperties: false
+  - name: listArtifactFeeds
+    description: List artifact feeds in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        feedType:
+          enum:
+            - npm
+            - nuget
+            - maven
+            - python
+            - universal
+            - all
+          type: string
+          description: Type of feeds to list
+        includeDeleted:
+          type: boolean
+          description: Include deleted feeds
+      additionalProperties: false
+  - name: getPackageVersions
+    description: Get versions of a package in a feed
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - feedId
+        - packageName
+      properties:
+        top:
+          type: number
+          description: Maximum number of versions to return
+        feedId:
+          type: string
+          description: ID of the feed
+        packageName:
+          type: string
+          description: Name of the package
+      additionalProperties: false
+  - name: publishPackage
+    description: Publish a package to a feed
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - feedId
+        - packageType
+        - packagePath
+      properties:
+        feedId:
+          type: string
+          description: ID of the feed to publish to
+        packagePath:
+          type: string
+          description: Path to the package file
+        packageType:
+          enum:
+            - npm
+            - nuget
+            - maven
+            - python
+            - universal
+          type: string
+          description: Type of package
+        packageVersion:
+          type: string
+          description: Version of the package
+      additionalProperties: false
+  - name: promotePackage
+    description: Promote a package version between views
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - feedId
+        - packageName
+        - packageVersion
+        - sourceView
+        - targetView
+      properties:
+        feedId:
+          type: string
+          description: ID of the feed
+        sourceView:
+          type: string
+          description: Source view (e.g., 'prerelease')
+        targetView:
+          type: string
+          description: Target view (e.g., 'release')
+        packageName:
+          type: string
+          description: Name of the package
+        packageVersion:
+          type: string
+          description: Version of the package
+      additionalProperties: false
+  - name: deletePackageVersion
+    description: Delete a version of a package
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - feedId
+        - packageName
+        - packageVersion
+      properties:
+        feedId:
+          type: string
+          description: ID of the feed
+        permanent:
+          type: boolean
+          description: Permanently delete the package version
+        packageName:
+          type: string
+          description: Name of the package
+        packageVersion:
+          type: string
+          description: Version of the package to delete
+      additionalProperties: false
+  - name: listContainerImages
+    description: List container images in a repository
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        includeDeleted:
+          type: boolean
+          description: Include deleted images
+        repositoryName:
+          type: string
+          description: Name of the container repository
+        includeManifests:
+          type: boolean
+          description: Include image manifests
+      additionalProperties: false
+  - name: getContainerImageTags
+    description: Get tags for a container image
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryName
+        - imageName
+      properties:
+        top:
+          type: number
+          description: Maximum number of tags to return
+        imageName:
+          type: string
+          description: Name of the container image
+        repositoryName:
+          type: string
+          description: Name of the container repository
+      additionalProperties: false
+  - name: scanContainerImage
+    description: Scan a container image for vulnerabilities and compliance issues
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryName
+        - imageTag
+      properties:
+        imageTag:
+          type: string
+          description: Tag of the container image to scan
+        scanType:
+          enum:
+            - vulnerability
+            - compliance
+            - both
+          type: string
+          description: Type of scan to perform
+        repositoryName:
+          type: string
+          description: Name of the container repository
+      additionalProperties: false
+  - name: manageContainerPolicies
+    description: Manage policies for container repositories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryName
+        - policyType
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - set
+            - delete
+          type: string
+          description: Action to perform on the policy
+        policyType:
+          enum:
+            - retention
+            - security
+            - access
+          type: string
+          description: Type of policy to manage
+        policySettings:
+          type: object
+          description: Settings for the policy when setting
+          additionalProperties: {}
+        repositoryName:
+          type: string
+          description: Name of the container repository
+      additionalProperties: false
+  - name: manageUniversalPackages
+    description: Manage universal packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packageName
+        - action
+      properties:
+        action:
+          enum:
+            - download
+            - upload
+            - delete
+          type: string
+          description: Action to perform
+        packageName:
+          type: string
+          description: Name of the universal package
+        packagePath:
+          type: string
+          description: Path for package upload or download
+        packageVersion:
+          type: string
+          description: Version of the package
+      additionalProperties: false
+  - name: createPackageDownloadReport
+    description: Create reports on package downloads
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        feedId:
+          type: string
+          description: ID of the feed
+        format:
+          enum:
+            - csv
+            - json
+          type: string
+          description: Format of the report
+        timeRange:
+          type: string
+          description: Time range for the report (e.g., '30d')
+        packageName:
+          type: string
+          description: Name of the package
+      additionalProperties: false
+  - name: checkPackageDependencies
+    description: Check package dependencies and vulnerabilities
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packageName
+      properties:
+        packageName:
+          type: string
+          description: Name of the package to check
+        packageVersion:
+          type: string
+          description: Version of the package
+        includeTransitive:
+          type: boolean
+          description: Include transitive dependencies
+        checkVulnerabilities:
+          type: boolean
+          description: Check for known vulnerabilities
+      additionalProperties: false
+  - name: getAICodeReview
+    description: Get AI-based code review suggestions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        commitId:
+          type: string
+          description: ID of the commit to review
+        filePath:
+          type: string
+          description: Path to the file to review
+        repositoryId:
+          type: string
+          description: ID of the repository
+        pullRequestId:
+          type: number
+          description: ID of the pull request to review
+      additionalProperties: false
+  - name: suggestCodeOptimization
+    description: Suggest code optimizations using AI
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+        - filePath
+      properties:
+        lineEnd:
+          type: number
+          description: Ending line number
+        filePath:
+          type: string
+          description: Path to the file to optimize
+        lineStart:
+          type: number
+          description: Starting line number
+        repositoryId:
+          type: string
+          description: ID of the repository
+        optimizationType:
+          enum:
+            - performance
+            - memory
+            - readability
+            - all
+          type: string
+          description: Type of optimization to focus on
+      additionalProperties: false
+  - name: identifyCodeSmells
+    description: Identify potential code smells and anti-patterns
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        branch:
+          type: string
+          description: Branch to analyze
+        filePath:
+          type: string
+          description: Path to the file to analyze
+        severity:
+          enum:
+            - high
+            - medium
+            - low
+            - all
+          type: string
+          description: Severity level to filter by
+        repositoryId:
+          type: string
+          description: ID of the repository
+      additionalProperties: false
+  - name: getPredictiveBugAnalysis
+    description: Predict potential bugs in code changes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repositoryId
+      properties:
+        branch:
+          type: string
+          description: Branch to analyze
+        filePath:
+          type: string
+          description: Path to the file to analyze
+        repositoryId:
+          type: string
+          description: ID of the repository
+        pullRequestId:
+          type: number
+          description: ID of the pull request
+      additionalProperties: false
+  - name: getDeveloperProductivity
+    description: Measure developer productivity metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        teamId:
+          type: string
+          description: ID of the team
+        userId:
+          type: string
+          description: ID of the user
+        timeRange:
+          type: string
+          description: Time range for analysis (e.g., '30d', '3m')
+        includeMetrics:
+          type: array
+          items:
+            type: string
+          description: Specific metrics to include
+      additionalProperties: false
+  - name: getPredictiveEffortEstimation
+    description: AI-based effort estimation for work items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        areaPath:
+          type: string
+          description: Area path to filter work items
+        workItemIds:
+          type: array
+          items:
+            type: number
+          description: IDs of work items to estimate
+        workItemType:
+          type: string
+          description: Type of work items to estimate
+      additionalProperties: false
+  - name: getCodeQualityTrends
+    description: Track code quality trends over time
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        branch:
+          type: string
+          description: Branch to analyze
+        metrics:
+          type: array
+          items:
+            type: string
+          description: Specific metrics to include
+        timeRange:
+          type: string
+          description: Time range for analysis (e.g., '90d', '6m')
+        repositoryId:
+          type: string
+          description: ID of the repository
+      additionalProperties: false
+  - name: suggestWorkItemRefinements
+    description: Get AI suggestions for work item refinements
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        areaPath:
+          type: string
+          description: Area path to filter work items
+        workItemId:
+          type: number
+          description: ID of the work item to refine
+        workItemType:
+          type: string
+          description: Type of work item
+      additionalProperties: false
+  - name: suggestAutomationOpportunities
+    description: Identify opportunities for automation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        projectId:
+          type: string
+          description: ID of the project
+        scopeType:
+          enum:
+            - builds
+            - releases
+            - tests
+            - workitems
+            - all
+          type: string
+          description: Type of scope to analyze
+      additionalProperties: false
+  - name: createIntelligentAlerts
+    description: Set up intelligent alerts based on patterns
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - alertName
+        - alertType
+        - conditions
+      properties:
+        actions:
+          type: object
+          description: Actions to take when the alert triggers
+          additionalProperties: {}
+        alertName:
+          type: string
+          description: Name of the alert
+        alertType:
+          enum:
+            - build
+            - release
+            - test
+            - workitem
+            - code
+          type: string
+          description: Type of alert to create
+        conditions:
+          type: object
+          description: Conditions for the alert
+          additionalProperties: {}
+      additionalProperties: false
+  - name: predictBuildFailures
+    description: Predict potential build failures before they occur
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - buildDefinitionId
+      properties:
+        lookbackPeriod:
+          type: string
+          description: Period to analyze for patterns (e.g., '30d')
+        buildDefinitionId:
+          type: number
+          description: ID of the build definition
+      additionalProperties: false
+  - name: optimizeTestSelection
+    description: Intelligently select tests to run based on changes
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - buildId
+      properties:
+        buildId:
+          type: number
+          description: ID of the build
+        changedFiles:
+          type: array
+          items:
+            type: string
+          description: List of changed files
+        maxTestCount:
+          type: number
+          description: Maximum number of tests to select
+      additionalProperties: false

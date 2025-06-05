@@ -1,0 +1,17 @@
+identifier: nebula-contrib/nebulagraph-mcp-server/nebulagraph-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nebula-contrib/nebulagraph-mcp-server
+  name: nebulagraph-mcp-server
+  owner: nebula-contrib
+server:
+  subdirectory: /
+  name: NebulaGraph Server
+  description: Provide seamless access to NebulaGraph 3.x for graph exploration
+    including schema, queries, and shortcut algorithms. Integrate easily with
+    LLM tooling systems following the Model Context Protocol. Configure quickly
+    via environment variables or .env files for immediate use.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

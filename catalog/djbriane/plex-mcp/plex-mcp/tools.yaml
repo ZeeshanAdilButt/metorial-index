@@ -1,0 +1,171 @@
+tools:
+  - name: search_movies
+    description: "Search for movies in your Plex library.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Search term for finding movies
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_moviesArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: get_movie_details
+    description: "Get detailed information about a specific movie.
+
+      \   \ 
+
+      \    Args:
+
+      \        movie_key: The rating key of the movie (can be found in search
+      results)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_movie_detailsArguments
+      required:
+        - movie_key
+      properties:
+        movie_key:
+          type: string
+          title: Movie Key
+  - name: list_playlists
+    description: List all playlists in your Plex server.
+    inputSchema:
+      type: object
+      title: list_playlistsArguments
+      properties: {}
+  - name: get_playlist_items
+    description: "Get the items in a specific playlist.
+
+      \   \ 
+
+      \    Args:
+
+      \        playlist_key: The rating key of the playlist
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_playlist_itemsArguments
+      required:
+        - playlist_key
+      properties:
+        playlist_key:
+          type: string
+          title: Playlist Key
+  - name: create_playlist
+    description: "Create a new playlist with specified movies.
+
+      \   \ 
+
+      \    Args:
+
+      \        name: Name for the new playlist
+
+      \        movie_keys: Comma-separated list of movie rating keys to add
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_playlistArguments
+      required:
+        - name
+        - movie_keys
+      properties:
+        name:
+          type: string
+          title: Name
+        movie_keys:
+          type: string
+          title: Movie Keys
+  - name: delete_playlist
+    description: "Delete a playlist from your Plex server.
+
+      \   \ 
+
+      \    Args:
+
+      \        playlist_key: The rating key of the playlist to delete
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_playlistArguments
+      required:
+        - playlist_key
+      properties:
+        playlist_key:
+          type: string
+          title: Playlist Key
+  - name: add_to_playlist
+    description: "Add a movie to an existing playlist.
+
+      \   \ 
+
+      \    Args:
+
+      \        playlist_key: The rating key of the playlist
+
+      \        movie_key: The rating key of the movie to add
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_to_playlistArguments
+      required:
+        - playlist_key
+        - movie_key
+      properties:
+        movie_key:
+          type: string
+          title: Movie Key
+        playlist_key:
+          type: string
+          title: Playlist Key
+  - name: recent_movies
+    description: "Get recently added movies from your Plex library.
+
+      \   \ 
+
+      \    Args:
+
+      \        count: Number of recent movies to show (default: 5)
+
+      \    "
+    inputSchema:
+      type: object
+      title: recent_moviesArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 5
+  - name: get_movie_genres
+    description: "Get genres for a specific movie.
+
+      \   \ 
+
+      \    Args:
+
+      \        movie_key: The rating key of the movie
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_movie_genresArguments
+      required:
+        - movie_key
+      properties:
+        movie_key:
+          type: string
+          title: Movie Key

@@ -1,0 +1,16 @@
+identifier: hkk101/mcp-server-mysql/mcp-server-mysql
+repo:
+  provider: github.com
+  url: https://github.com/hkk101/mcp-server-mysql
+  name: mcp-server-mysql
+  owner: hkk101
+server:
+  subdirectory: /
+  name: MySQL Database Access Server
+  description: Enable LLMs to interact with MySQL databases by executing read-only
+    queries and inspecting database schemas. Simplify data retrieval and schema
+    exploration for your applications with this easy-to-use server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

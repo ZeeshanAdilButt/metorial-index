@@ -1,0 +1,17 @@
+identifier: phil65/mcp-server-llmling/mcp-server-llmling
+repo:
+  provider: github.com
+  url: https://github.com/phil65/mcp-server-llmling
+  name: mcp-server-llmling
+  owner: phil65
+server:
+  subdirectory: /
+  name: LLMLing Server
+  description: Set up custom LLM servers effortlessly using YAML configurations.
+    Access resources, structured prompts, and extend capabilities with callable
+    tools, all while adhering to the Machine Chat Protocol. Enhance your LLM
+    applications with a standardized and flexible backend.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

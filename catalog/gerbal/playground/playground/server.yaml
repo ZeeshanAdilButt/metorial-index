@@ -1,0 +1,14 @@
+identifier: gerbal/playground/playground
+repo:
+  provider: github.com
+  url: https://github.com/gerbal/playground
+  name: playground
+  owner: gerbal
+server:
+  subdirectory: /
+  name: Playground Server
+  description: Enable dynamic integration of LLMs with external data and tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

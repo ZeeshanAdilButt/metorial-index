@@ -1,0 +1,16 @@
+identifier: kuvanov-2/mcp-server-jira/mcp-server-jira
+repo:
+  provider: github.com
+  url: https://github.com/kuvanov-2/mcp-server-jira
+  name: mcp-server-jira
+  owner: kuvanov-2
+server:
+  subdirectory: /
+  name: JIRA Integration Server
+  description: Enable AI assistants to directly interact with JIRA issues.
+    Retrieve detailed information about JIRA issues seamlessly and enhance your
+    project management workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

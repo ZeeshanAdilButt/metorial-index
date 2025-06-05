@@ -1,0 +1,17 @@
+identifier: mem0ai/mem0-mcp/mem-0-mcp
+repo:
+  provider: github.com
+  url: https://github.com/mem0ai/mem0-mcp
+  name: mem0-mcp
+  owner: mem0ai
+server:
+  subdirectory: /
+  name: Memory Tool
+  description: Store and retrieve user-specific memories to maintain context and
+    make informed decisions based on past interactions. Utilize a simple API to
+    add and search memories with relevance scoring, enhancing your application's
+    ability to remember user preferences and interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

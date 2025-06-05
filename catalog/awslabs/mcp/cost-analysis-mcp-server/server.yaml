@@ -1,0 +1,17 @@
+identifier: awslabs/mcp/cost-analysis-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/awslabs/mcp
+  name: mcp
+  owner: awslabs
+server:
+  subdirectory: /src/cost-analysis-mcp-server
+  name: Cost Analysis Server
+  description: Analyze and visualize your AWS service costs effortlessly. Generate
+    detailed cost reports and receive optimization recommendations based on your
+    infrastructure as code. Query your cost data using natural language for
+    instant insights without complex queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

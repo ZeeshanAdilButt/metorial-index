@@ -1,0 +1,17 @@
+identifier: ipfind/ipfind-mcp-server/ipfind-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ipfind/ipfind-mcp-server
+  name: ipfind-mcp-server
+  owner: ipfind
+server:
+  subdirectory: /
+  name: IP Find
+  description: Enable AI assistants to retrieve geolocation information for IP
+    addresses using the IP Find API. Seamlessly integrate IP location lookup
+    capabilities into your AI workflows. Simplify access to IP data with this
+    easy-to-use MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

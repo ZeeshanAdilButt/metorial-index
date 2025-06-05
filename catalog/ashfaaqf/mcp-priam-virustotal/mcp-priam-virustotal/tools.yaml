@@ -1,0 +1,95 @@
+tools:
+  - name: vt_ip_report
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_ip_reportArguments
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          title: Ip
+  - name: vt_domain_report
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_domain_reportArguments
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          title: Domain
+  - name: vt_filehash_report
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_filehash_reportArguments
+      required:
+        - file_hash
+      properties:
+        file_hash:
+          type: string
+          title: File Hash
+  - name: vt_url_report
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_url_reportArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: vt_threat_categories
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_threat_categoriesArguments
+      properties: {}
+  - name: vt_attack_tactic
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_attack_tacticArguments
+      required:
+        - tactic_id
+      properties:
+        tactic_id:
+          type: string
+          title: Tactic Id
+  - name: vt_attack_technique
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_attack_techniqueArguments
+      required:
+        - technique_id
+      properties:
+        technique_id:
+          type: string
+          title: Technique Id
+  - name: vt_comments
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_commentsArguments
+      required:
+        - tag
+      properties:
+        tag:
+          type: string
+          title: Tag
+  - name: vt_behavior
+    description: ""
+    inputSchema:
+      type: object
+      title: vt_behaviorArguments
+      required:
+        - file_hash
+      properties:
+        file_hash:
+          type: string
+          title: File Hash

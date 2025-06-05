@@ -1,0 +1,16 @@
+identifier: bytebase/dbhub/dbhub
+repo:
+  provider: github.com
+  url: https://github.com/bytebase/dbhub
+  name: dbhub
+  owner: bytebase
+server:
+  subdirectory: /
+  name: Universal Database Gateway
+  description: Connect and explore various databases seamlessly. Run read-only SQL
+    queries with safety checks to ensure secure interactions. Simplify database
+    management for your applications with a unified interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

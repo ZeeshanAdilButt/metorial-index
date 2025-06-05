@@ -1,0 +1,18 @@
+identifier: stefan-xyz/mcp-server-runescape/mcp-server-runescape
+repo:
+  provider: github.com
+  url: https://github.com/stefan-xyz/mcp-server-runescape
+  name: mcp-server-runescape
+  owner: stefan-xyz
+server:
+  subdirectory: /
+  name: Runescape MCP server (rs + osrs)
+  description: Provide real-time and historical RuneScape and Old School RuneScape
+    data including item prices, player hiscores, top rankings, and player
+    counts. Enable gamers to query accurate game data directly from official
+    sources to enhance their gaming experience. Access comprehensive item
+    details, price trends, player rankings, and more through easy-to-use tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

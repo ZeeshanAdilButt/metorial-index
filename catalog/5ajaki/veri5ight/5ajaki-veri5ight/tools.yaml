@@ -1,0 +1,62 @@
+tools:
+  - name: ethereum_getRecentTransactions
+    description: Get recent transactions for an Ethereum address
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        limit:
+          type: number
+          description: "Number of transactions to return (default: 3)"
+        address:
+          type: string
+          description: Ethereum address or ENS name
+  - name: ethereum_getTokenBalance
+    description: Get ERC20 token balance for an address
+    inputSchema:
+      type: object
+      required:
+        - address
+        - token
+      properties:
+        token:
+          type: string
+          description: Token contract address or ENS name
+        address:
+          type: string
+          description: Ethereum address or ENS name
+  - name: ethereum_getTokenDelegation
+    description: Get delegation info for an ERC20 governance token
+    inputSchema:
+      type: object
+      required:
+        - address
+        - token
+      properties:
+        token:
+          type: string
+          description: Token contract address or ENS name
+        address:
+          type: string
+          description: Ethereum address or ENS name
+  - name: ethereum_getContractInfo
+    description: Get information about any contract
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: Contract address or ENS name
+  - name: ethereum_getTransactionInfo
+    description: Get detailed information about an Ethereum transaction
+    inputSchema:
+      type: object
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          description: Transaction hash

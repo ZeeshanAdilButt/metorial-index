@@ -1,0 +1,17 @@
+identifier: nnquant/qmt-mcp-server/qmt-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nnquant/qmt-mcp-server
+  name: qmt-mcp-server
+  owner: nnquant
+server:
+  subdirectory: /
+  name: QMT-MCP-Server
+  description: Empower large models to execute stock trading! Connect to the QMT
+    trading system and access functionalities like account asset inquiries,
+    position information, order placement, and order cancellation. Use this
+    server to enhance your trading capabilities with automated interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

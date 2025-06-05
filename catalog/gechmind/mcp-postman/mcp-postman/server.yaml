@@ -1,0 +1,14 @@
+identifier: gechmind/mcp-postman/mcp-postman
+repo:
+  provider: github.com
+  url: https://github.com/Gechmind/mcp-postman
+  name: mcp-postman
+  owner: Gechmind
+server:
+  subdirectory: /
+  name: Postman MCP Server
+  description: Run Postman collections and retrieve detailed test results.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: douglaszuqueto/mqtt-mcp-server/mqtt-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/douglaszuqueto/mqtt-mcp-server
+  name: mqtt-mcp-server
+  owner: douglaszuqueto
+server:
+  subdirectory: /
+  name: MQTT MCP Server
+  description: Provide an MCP server implementation that integrates with MQTT
+    messaging protocol to enable dynamic interaction with LLMs through MQTT.
+    Facilitate communication and tool/resource management over MQTT for LLM
+    applications. Currently under active development.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,18 @@
+identifier: octember/flights-mcp-ts/flights-mcp-ts
+repo:
+  provider: github.com
+  url: https://github.com/Octember/flights-mcp-ts
+  name: flights-mcp-ts
+  owner: Octember
+server:
+  subdirectory: /
+  name: Flight and Stay Search Server
+  description: Provide comprehensive flight and accommodation search capabilities
+    using the Duffel API. Search for one-way, round-trip, and multi-city
+    flights, as well as travel stays with detailed offers and guest reviews.
+    Enable users to specify preferences such as cabin class, passenger count,
+    and connection options for tailored travel planning.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: abbo234/mcp_test/mcp_test
+repo:
+  provider: github.com
+  url: https://github.com/abbo234/mcp_test
+  name: mcp_test
+  owner: abbo234
+server:
+  subdirectory: /
+  name: mcp_test
+  description: Provide a minimal MCP server implementation for testing purposes.
+    Enable basic MCP protocol interactions to validate client-server
+    communication. Facilitate development and experimentation with MCP features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

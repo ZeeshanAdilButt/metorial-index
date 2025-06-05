@@ -1,0 +1,15 @@
+identifier: v-3/notion-server/notion-server
+repo:
+  provider: github.com
+  url: https://github.com/v-3/notion-server
+  name: notion-server
+  owner: v-3
+server:
+  subdirectory: /
+  name: Notion MCP Server
+  description: Provides seamless integration with Notion, enabling LLMs to
+    interact with your Notion workspace through standardized tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

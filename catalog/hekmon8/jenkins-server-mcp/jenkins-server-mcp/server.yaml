@@ -1,0 +1,17 @@
+identifier: hekmon8/jenkins-server-mcp/jenkins-server-mcp
+repo:
+  provider: github.com
+  url: https://github.com/hekmon8/Jenkins-server-mcp
+  name: Jenkins-server-mcp
+  owner: hekmon8
+server:
+  subdirectory: /
+  name: Jenkins Server
+  description: Interact with Jenkins CI/CD servers to check build statuses,
+    trigger builds, and retrieve build logs through a standardized interface.
+    Enhance your AI assistants with seamless integration to manage Jenkins
+    workflows efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

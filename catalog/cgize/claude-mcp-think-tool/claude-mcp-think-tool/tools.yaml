@@ -1,0 +1,34 @@
+tools:
+  - name: think
+    description: Use this tool to think about something. It will not obtain new
+      information or change anything, but just append the thought to the log.
+      Use it when complex reasoning or cache memory is needed, especially during
+      long chains of tool calls, policy adherence scenarios, or sequential
+      decision making.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - thought
+      properties:
+        thought:
+          type: string
+          description: A thought to think about. This can be structured reasoning,
+            step-by-step analysis, policy verification, or any other mental
+            process that helps with problem-solving.
+      additionalProperties: false
+  - name: get_thoughts
+    description: Retrieve all thoughts recorded in the current session to review
+      your reasoning process.
+    inputSchema:
+      type: object
+  - name: clear_thoughts
+    description: Clear all thoughts recorded in the current session. Use this to
+      start fresh if the thinking process needs to be reset.
+    inputSchema:
+      type: object
+  - name: get_thought_stats
+    description: Get statistics about the thoughts recorded in the current session
+      to analyze your thinking process.
+    inputSchema:
+      type: object

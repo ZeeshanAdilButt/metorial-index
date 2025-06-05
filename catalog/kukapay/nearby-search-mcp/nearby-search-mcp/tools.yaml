@@ -1,0 +1,34 @@
+tools:
+  - name: search_nearby
+    description: >
+      
+      Search for nearby places using Google Places API based on current IP
+      location.
+
+
+      Args:
+          keyword (str): The search term to look for (e.g., "coffee shop", "restaurant")
+          radius (int, optional): Search radius in meters. Defaults to 1500
+          type (str, optional): Specific type of place (e.g., "restaurant", "cafe"). See Google Places API docs for valid types
+
+      Returns:
+          Dict containing search results with place details
+    inputSchema:
+      type: object
+      title: search_nearbyArguments
+      required:
+        - keyword
+      properties:
+        type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Type
+          default: null
+        radius:
+          type: integer
+          title: Radius
+          default: 1500
+        keyword:
+          type: string
+          title: Keyword

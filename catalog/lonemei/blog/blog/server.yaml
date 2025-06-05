@@ -1,0 +1,17 @@
+identifier: lonemei/blog/blog
+repo:
+  provider: github.com
+  url: https://github.com/Lonemei/Blog
+  name: Blog
+  owner: Lonemei
+server:
+  subdirectory: /
+  name: Lonemei Blog Server
+  description: Provide a seamless interface to manage and serve blog content
+    dynamically. Enable efficient retrieval and manipulation of blog resources
+    and tools to enhance content delivery. Facilitate integration with language
+    models for enriched content interaction and automation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

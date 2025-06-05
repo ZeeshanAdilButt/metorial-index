@@ -1,0 +1,15 @@
+identifier: miottid/todoist-mcp/todoist-mcp
+repo:
+  provider: github.com
+  url: https://github.com/miottid/todoist-mcp
+  name: todoist-mcp
+  owner: miottid
+server:
+  subdirectory: /
+  name: Todoist Integration
+  description: Connect your LLM to interact with Todoist tasks and projects.
+    Access all the Todoist API right from your LLM.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

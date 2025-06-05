@@ -1,0 +1,17 @@
+identifier: koch3092/time-mcp-server/time-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/koch3092/time-mcp-server
+  name: time-mcp-server
+  owner: koch3092
+server:
+  subdirectory: /
+  name: Time Server
+  description: Provide current time information and perform timezone conversions
+    using IANA timezone names. Enable LLMs to query system or specified
+    timezones and convert times accurately. Simplify time-related queries and
+    conversions for AI applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

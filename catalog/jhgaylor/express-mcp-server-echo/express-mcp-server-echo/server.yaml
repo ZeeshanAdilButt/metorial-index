@@ -1,0 +1,18 @@
+identifier: jhgaylor/express-mcp-server-echo/express-mcp-server-echo
+repo:
+  provider: github.com
+  url: https://github.com/jhgaylor/express-mcp-server-echo
+  name: express-mcp-server-echo
+  owner: jhgaylor
+server:
+  subdirectory: /
+  name: Express Echo MCP Server
+  description: Provide a stateless MCP server that echoes messages back to users,
+    enabling simple interaction with the Model Context Protocol. Use it to test
+    and demonstrate MCP capabilities with a minimal, easy-to-deploy server.
+    Benefit from TypeScript type safety and Express.js HTTP handling for
+    reliable and modern API integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

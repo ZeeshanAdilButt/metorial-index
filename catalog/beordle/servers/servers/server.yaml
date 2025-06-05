@@ -1,0 +1,18 @@
+identifier: beordle/servers/servers
+repo:
+  provider: github.com
+  url: https://github.com/beordle/servers
+  name: servers
+  owner: beordle
+server:
+  subdirectory: /servers/src/time
+  name: Model Context Protocol Servers
+  description: Explore a diverse collection of reference implementations for
+    integrating Large Language Models with various tools and data sources.
+    Leverage secure, controlled access to enhance your AI applications with
+    real-world capabilities. Start building your own MCP server or utilize
+    existing ones to supercharge your projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

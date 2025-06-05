@@ -1,0 +1,18 @@
+identifier: nazar256/combine-mcp/combine-mcp
+repo:
+  provider: github.com
+  url: https://github.com/nazar256/combine-mcp
+  name: combine-mcp
+  owner: nazar256
+server:
+  subdirectory: /
+  name: MCP Aggregator
+  description: Combine multiple MCP servers into a single interface to overcome
+    client limitations and streamline tool usage. Manage and filter tools from
+    various MCP servers, ensuring compatibility and improved performance.
+    Simplify integration with MCP clients like Cursor by providing a unified
+    stdio interface and automatic tool name sanitization.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

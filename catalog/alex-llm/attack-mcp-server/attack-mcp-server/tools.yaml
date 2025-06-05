@@ -1,0 +1,47 @@
+tools:
+  - name: query_technique
+    description: 通过ID或名称查询攻击技术详情
+    inputSchema:
+      type: object
+      title: query_attack_techniqueArguments
+      properties:
+        tech_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Tech Name
+          default: null
+        technique_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Technique Id
+          default: null
+  - name: query_mitigations
+    description: 查询技术的缓解措施
+    inputSchema:
+      type: object
+      title: query_mitigationsArguments
+      required:
+        - technique_id
+      properties:
+        technique_id:
+          type: string
+          title: Technique Id
+  - name: query_detections
+    description: 查询技术的检测方法
+    inputSchema:
+      type: object
+      title: query_detectionsArguments
+      required:
+        - technique_id
+      properties:
+        technique_id:
+          type: string
+          title: Technique Id
+  - name: list_tactics
+    description: 获取所有ATT&CK战术分类
+    inputSchema:
+      type: object
+      title: get_all_tacticsArguments
+      properties: {}

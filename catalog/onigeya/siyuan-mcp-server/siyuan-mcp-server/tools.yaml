@@ -1,0 +1,780 @@
+tools:
+  - name: siyuan_notebook_lsNotebooks
+    description: List notebooks
+    inputSchema:
+      type: object
+  - name: siyuan_notebook_openNotebook
+    description: Open a notebook
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebookId
+      properties:
+        notebookId:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_notebook_closeNotebook
+    description: Close a notebook
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebookId
+      properties:
+        notebookId:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_notebook_renameNotebook
+    description: Rename a notebook
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebookId
+        - name
+      properties:
+        name:
+          type: string
+          description: New name for notebook
+        notebookId:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_notebook_createNotebook
+    description: Create a notebook
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Notebook name
+      additionalProperties: false
+  - name: siyuan_notebook_removeNotebook
+    description: Remove a notebook
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebookId
+      properties:
+        notebookId:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_notebook_getNotebookConf
+    description: Get notebook configuration
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebookId
+      properties:
+        notebookId:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_notebook_setNotebookConf
+    description: Save notebook configuration
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebookId
+        - conf
+      properties:
+        conf:
+          type: object
+          required:
+            - name
+            - closed
+            - refCreateSavePath
+            - createDocNameTemplate
+          properties:
+            name:
+              type: string
+              description: Notebook name
+            closed:
+              type: boolean
+              description: Whether the notebook is closed
+            refCreateSavePath:
+              type: string
+              description: Reference creation save path
+            createDocNameTemplate:
+              type: string
+              description: Document name creation template
+          description: Notebook configuration
+          additionalProperties: false
+        notebookId:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_filetree_createDocWithMd
+    description: Create a document with Markdown
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebook
+        - path
+        - markdown
+      properties:
+        path:
+          type: string
+          description: Document path, starting with /, using / as the level separator
+        markdown:
+          type: string
+          description: GFM Markdown content
+        notebook:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_filetree_renameDoc
+    description: Rename a document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebook
+        - path
+        - title
+      properties:
+        path:
+          type: string
+          description: Document path
+        title:
+          type: string
+          description: New title
+        notebook:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_filetree_renameDocByID
+    description: Rename a document by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: string
+          description: Document ID
+        title:
+          type: string
+          description: New title
+      additionalProperties: false
+  - name: siyuan_filetree_removeDoc
+    description: Remove a document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebook
+        - path
+      properties:
+        path:
+          type: string
+          description: Document path
+        notebook:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_filetree_removeDocByID
+    description: Remove a document by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Document ID
+      additionalProperties: false
+  - name: siyuan_filetree_moveDocs
+    description: Move documents
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fromPaths
+        - toNotebook
+        - toPath
+      properties:
+        toPath:
+          type: string
+          description: Target path
+        fromPaths:
+          type: array
+          items:
+            type: string
+          description: Source paths
+        toNotebook:
+          type: string
+          description: Target notebook ID
+      additionalProperties: false
+  - name: siyuan_filetree_moveDocsByID
+    description: Move documents by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fromIDs
+        - toID
+      properties:
+        toID:
+          type: string
+          description: Target parent ID
+        fromIDs:
+          type: array
+          items:
+            type: string
+          description: Source docs' IDs
+      additionalProperties: false
+  - name: siyuan_filetree_getHPathByPath
+    description: Get human-readable path based on path
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - notebook
+        - path
+      properties:
+        path:
+          type: string
+          description: Document path
+        notebook:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_filetree_getHPathByID
+    description: Get human-readable path based on ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_filetree_getPathByID
+    description: Get storage path based on ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_filetree_getIDsByHPath
+    description: Get IDs based on human-readable path
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - notebook
+      properties:
+        path:
+          type: string
+          description: Human-readable path
+        notebook:
+          type: string
+          description: Notebook ID
+      additionalProperties: false
+  - name: siyuan_assets_upload
+    description: Upload assets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        file:
+          description: The file to upload
+      additionalProperties: false
+  - name: siyuan_block_insertBlock
+    description: Insert blocks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dataType
+        - data
+        - previousID
+      properties:
+        data:
+          type: string
+          description: Data content
+        dataType:
+          type: string
+          description: Data type
+        previousID:
+          type: string
+          description: Previous block ID
+      additionalProperties: false
+  - name: siyuan_block_prependBlock
+    description: Prepend blocks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dataType
+        - data
+        - parentID
+      properties:
+        data:
+          type: string
+          description: Data content
+        dataType:
+          type: string
+          description: Data type
+        parentID:
+          type: string
+          description: Parent block ID
+      additionalProperties: false
+  - name: siyuan_block_appendBlock
+    description: Append blocks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dataType
+        - data
+        - parentID
+      properties:
+        data:
+          type: string
+          description: Data content
+        dataType:
+          type: string
+          description: Data type
+        parentID:
+          type: string
+          description: Parent block ID
+      additionalProperties: false
+  - name: siyuan_block_updateBlock
+    description: Update a block
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dataType
+        - data
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+        data:
+          type: string
+          description: Data content
+        dataType:
+          type: string
+          description: Data type
+      additionalProperties: false
+  - name: siyuan_block_deleteBlock
+    description: Delete a block
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_block_moveBlock
+    description: Move a block
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID to move
+        parentID:
+          type: string
+          description: Parent block ID
+        previousID:
+          type: string
+          description: Previous block ID
+      additionalProperties: false
+  - name: siyuan_block_foldBlock
+    description: Fold a block
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_block_unfoldBlock
+    description: Unfold a block
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_block_getBlockKramdown
+    description: Get a block kramdown
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_block_getChildBlocks
+    description: Get child blocks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Block ID
+      additionalProperties: false
+  - name: siyuan_block_transferBlockRef
+    description: Transfer block ref
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fromID
+        - toID
+        - refIDs
+      properties:
+        toID:
+          type: string
+          description: Target block ID
+        fromID:
+          type: string
+          description: Source block ID
+        refIDs:
+          type: array
+          items:
+            type: string
+          description: Reference block IDs
+      additionalProperties: false
+  - name: siyuan_attr_setBlockAttrs
+    description: 设置块属性
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - attrs
+      properties:
+        id:
+          type: string
+          description: 块 ID
+        attrs:
+          type: object
+          description: 属性键值对
+          additionalProperties:
+            type: string
+      additionalProperties: false
+  - name: siyuan_attr_getBlockAttrs
+    description: 获取块属性
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 块 ID
+      additionalProperties: false
+  - name: siyuan_sql_query
+    description: 执行 SQL 查询
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - stmt
+      properties:
+        stmt:
+          type: string
+          description: SQL 语句
+      additionalProperties: false
+  - name: siyuan_sql_flushTransaction
+    description: 刷新事务
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: siyuan_template_render
+    description: 渲染模板
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 模板文档块 ID
+        path:
+          type: string
+          description: 可选的目标路径
+      additionalProperties: false
+  - name: siyuan_template_renderSprig
+    description: 渲染 Sprig 模板
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - template
+      properties:
+        template:
+          type: string
+          description: Sprig 模板内容
+      additionalProperties: false
+  - name: siyuan_file_getFile
+    description: 获取文件
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: 文件路径
+      additionalProperties: false
+  - name: siyuan_file_putFile
+    description: 写入文件
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        file:
+          description: 文件内容
+        path:
+          type: string
+          description: 文件路径
+        isDir:
+          type: boolean
+          description: 是否为目录
+        modTime:
+          type: number
+          description: 修改时间
+      additionalProperties: false
+  - name: siyuan_file_removeFile
+    description: 删除文件
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: 文件路径
+      additionalProperties: false
+  - name: siyuan_file_renameFile
+    description: 重命名文件
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - newPath
+      properties:
+        path:
+          type: string
+          description: 原文件路径
+        newPath:
+          type: string
+          description: 新文件路径
+      additionalProperties: false
+  - name: siyuan_file_readDir
+    description: 列出目录内容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: 目录路径
+      additionalProperties: false
+  - name: siyuan_export_exportMdContent
+    description: 导出 Markdown 内容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 要导出的文档块 ID
+      additionalProperties: false
+  - name: siyuan_export_exportResources
+    description: 导出文件和文件夹
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - paths
+      properties:
+        name:
+          type: string
+          description: 导出的文件名，默认为 export-YYYY-MM-DD_hh-mm-ss.zip
+        paths:
+          type: array
+          items:
+            type: string
+          description: 要导出的文件或文件夹路径列表
+      additionalProperties: false
+  - name: siyuan_conversion_pandoc
+    description: Pandoc 格式转换
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dir
+        - args
+      properties:
+        dir:
+          type: string
+          description: 工作目录名称
+        args:
+          type: array
+          items:
+            type: string
+          description: Pandoc 命令行参数
+      additionalProperties: false
+  - name: siyuan_notification_pushMsg
+    description: 推送普通消息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - msg
+      properties:
+        msg:
+          type: string
+          description: 消息内容
+        timeout:
+          type: number
+          description: 消息显示时长（毫秒），默认 7000
+      additionalProperties: false
+  - name: siyuan_notification_pushErrMsg
+    description: 推送错误消息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - msg
+      properties:
+        msg:
+          type: string
+          description: 消息内容
+        timeout:
+          type: number
+          description: 消息显示时长（毫秒），默认 7000
+      additionalProperties: false
+  - name: siyuan_network_forwardProxy
+    description: 转发代理请求
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 要转发的 URL
+        method:
+          type: string
+          description: HTTP 方法，默认为 POST
+        headers:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+          description: HTTP 头
+        payload:
+          anyOf:
+            - type: object
+              additionalProperties: {}
+            - type: string
+          description: HTTP 负载，对象或字符串
+        timeout:
+          type: number
+          description: 超时时间（毫秒），默认为 7000
+        contentType:
+          type: string
+          description: Content-Type，默认为 application/json
+        payloadEncoding:
+          enum:
+            - text
+            - base64
+            - base64-std
+            - base64-url
+            - base32
+            - base32-std
+            - base32-hex
+            - hex
+          type: string
+          description: payload 的编码方式，默认为 text
+        responseEncoding:
+          $ref: "#/properties/payloadEncoding"
+          description: 响应 body 的编码方式，默认为 text
+      additionalProperties: false
+  - name: siyuan_system_bootProgress
+    description: 获取启动进度
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: siyuan_system_version
+    description: 获取系统版本
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: siyuan_system_currentTime
+    description: 获取系统当前时间
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

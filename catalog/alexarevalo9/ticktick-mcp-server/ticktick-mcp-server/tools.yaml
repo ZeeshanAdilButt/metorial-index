@@ -1,0 +1,324 @@
+tools:
+  - name: get_user_projects
+    description: Get all user projects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_project_by_id
+    description: Get a project by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: Project identifier
+      additionalProperties: false
+  - name: get_project_with_data
+    description: Get a project with its tasks and columns
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: Project identifier
+      additionalProperties: false
+  - name: create_project
+    description: Create a new project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        kind:
+          enum:
+            - TASK
+            - NOTE
+          type: string
+          default: TASK
+          description: Project kind
+        name:
+          type: string
+          description: Project name
+        color:
+          type: string
+          default: "#4772FA"
+          description: Project color
+        viewMode:
+          enum:
+            - list
+            - kanban
+            - timeline
+          type: string
+          default: list
+          description: View mode
+      additionalProperties: false
+  - name: update_project
+    description: Update an existing project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        kind:
+          enum:
+            - TASK
+            - NOTE
+          type: string
+          description: Project kind
+        name:
+          type: string
+          description: Project name
+        color:
+          type: string
+          description: Project color
+        viewMode:
+          enum:
+            - list
+            - kanban
+            - timeline
+          type: string
+          description: View mode
+        projectId:
+          type: string
+          description: Project identifier
+        sortOrder:
+          type: number
+          description: Project sort order
+      additionalProperties: false
+  - name: delete_project
+    description: Delete a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: Project identifier
+      additionalProperties: false
+  - name: get_task_by_ids
+    description: Get a task by ProjectId and TaskId
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: Task identifier
+        projectId:
+          type: string
+          description: Project identifier
+      additionalProperties: false
+  - name: create_task
+    description: Create a new task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - projectId
+      properties:
+        desc:
+          type: string
+          description: Task description
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                type: string
+                description: Subtask item title
+              status:
+                type: number
+                description: "The completion status of subtask. Normal: 0, Completed: 1"
+              isAllDay:
+                type: boolean
+                description: Is all day subtask item
+              timeZone:
+                type: string
+                description: 'Subtask item time zone. Example: "America/Los_Angeles"'
+              sortOrder:
+                type: number
+                description: Subtask item sort order
+              startDate:
+                type: string
+                description: Subtask item start date in "yyyy-MM-dd'T'HH:mm:ssZ" format
+              completedTime:
+                type: string
+                description: Subtask item completed time in "yyyy-MM-dd'T'HH:mm:ssZ" format
+            additionalProperties: false
+          description: The list of subtasks
+        title:
+          type: string
+          description: Task title
+        content:
+          type: string
+          description: Task content
+        dueDate:
+          type: string
+          description: Task due date in "yyyy-MM-dd'T'HH:mm:ssZ" format
+        isAllDay:
+          type: boolean
+          description: Is all day task
+        priority:
+          type: number
+          description: "Task priority None: 0, Low: 1, Medium: 3, High: 5"
+        timeZone:
+          type: string
+          description: 'Task time zone. Example: "America/Los_Angeles"'
+        projectId:
+          type: string
+          description: Project id
+        reminders:
+          type: array
+          items:
+            type: string
+          description: 'List of reminder triggers in iCalendar (RFC 5545) format. Example:
+            ["TRIGGER:P0DT9H0M0S", "TRIGGER:PT0S"]'
+        sortOrder:
+          type: string
+          description: "Task sort order. Example: 12345"
+        startDate:
+          type: string
+          description: Task start date in "yyyy-MM-dd'T'HH:mm:ssZ" format
+        repeatFlag:
+          type: string
+          description: "Task repeat flag in iCalendar (RFC 5545) format. Example:
+            RRULE:FREQ=DAILY;INTERVAL=1"
+      additionalProperties: false
+  - name: update_task
+    description: Update an existing task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - id
+        - projectId
+      properties:
+        id:
+          type: string
+          description: Task identifier - Body
+        desc:
+          type: string
+          description: Task description
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                type: string
+                description: Subtask item title
+              status:
+                type: number
+                description: "The completion status of subtask. Normal: 0, Completed: 1"
+              isAllDay:
+                type: boolean
+                description: Is all day subtask item
+              timeZone:
+                type: string
+                description: 'Subtask item time zone. Example: "America/Los_Angeles"'
+              sortOrder:
+                type: number
+                description: Subtask item sort order
+              startDate:
+                type: string
+                description: Subtask item start date in "yyyy-MM-dd'T'HH:mm:ssZ" format
+              completedTime:
+                type: string
+                description: Subtask item completed time in "yyyy-MM-dd'T'HH:mm:ssZ" format
+            additionalProperties: false
+          description: The list of subtasks
+        title:
+          type: string
+          description: Task title
+        taskId:
+          type: string
+          description: Task identifier - Path
+        content:
+          type: string
+          description: Task content
+        dueDate:
+          type: string
+          description: Task due date in "yyyy-MM-dd'T'HH:mm:ssZ" format
+        isAllDay:
+          type: boolean
+          description: Is all day task
+        priority:
+          type: number
+          description: "Task priority None: 0, Low: 1, Medium: 3, High: 5"
+        timeZone:
+          type: string
+          description: 'Task time zone. Example: "America/Los_Angeles"'
+        projectId:
+          type: string
+          description: Project id
+        reminders:
+          type: array
+          items:
+            type: string
+          description: 'List of reminder triggers in iCalendar (RFC 5545) format. Example:
+            ["TRIGGER:P0DT9H0M0S", "TRIGGER:PT0S"]'
+        sortOrder:
+          type: string
+          description: "Task sort order. Example: 12345"
+        startDate:
+          type: string
+          description: Task start date in "yyyy-MM-dd'T'HH:mm:ssZ" format
+        repeatFlag:
+          type: string
+          description: "Task repeat flag in iCalendar (RFC 5545) format. Example:
+            RRULE:FREQ=DAILY;INTERVAL=1"
+      additionalProperties: false
+  - name: complete_task
+    description: Complete a task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - projectId
+      properties:
+        taskId:
+          type: string
+          description: Task identifier
+        projectId:
+          type: string
+          description: Project identifier
+      additionalProperties: false
+  - name: delete_task
+    description: Delete a task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+        - projectId
+      properties:
+        taskId:
+          type: string
+          description: Task identifier
+        projectId:
+          type: string
+          description: Project identifier
+      additionalProperties: false

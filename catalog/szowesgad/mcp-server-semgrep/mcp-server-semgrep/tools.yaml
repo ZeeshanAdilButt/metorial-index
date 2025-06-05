@@ -1,0 +1,120 @@
+tools:
+  - name: scan_directory
+    description: Performs a Semgrep scan on a directory
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Absolute path to the directory to scan (must be within MCP directory)
+        config:
+          type: string
+          default: auto
+          description: Semgrep configuration (e.g. "auto" or absolute path to rule file)
+  - name: list_rules
+    description: Lists available Semgrep rules
+    inputSchema:
+      type: object
+      properties:
+        language:
+          type: string
+          description: Programming language for rules (optional)
+  - name: analyze_results
+    description: Analyzes scan results
+    inputSchema:
+      type: object
+      required:
+        - results_file
+      properties:
+        results_file:
+          type: string
+          description: Absolute path to JSON results file (must be within MCP directory)
+  - name: create_rule
+    description: Creates a new Semgrep rule
+    inputSchema:
+      type: object
+      required:
+        - output_path
+        - pattern
+        - language
+        - message
+      properties:
+        id:
+          type: string
+          default: custom_rule
+          description: Rule identifier
+        message:
+          type: string
+          description: Message to display when rule matches
+        pattern:
+          type: string
+          description: Search pattern for the rule
+        language:
+          type: string
+          description: Target language for the rule
+        severity:
+          type: string
+          default: WARNING
+          description: Rule severity (ERROR, WARNING, INFO)
+        output_path:
+          type: string
+          description: Absolute path for output rule file
+  - name: filter_results
+    description: Filters scan results by various criteria
+    inputSchema:
+      type: object
+      required:
+        - results_file
+      properties:
+        rule_id:
+          type: string
+          description: Filter by rule ID
+        language:
+          type: string
+          description: Filter by programming language
+        severity:
+          type: string
+          description: Filter by severity (ERROR, WARNING, INFO)
+        path_pattern:
+          type: string
+          description: Filter by file path pattern (regex)
+        results_file:
+          type: string
+          description: Absolute path to JSON results file
+        message_pattern:
+          type: string
+          description: Filter by message content (regex)
+  - name: export_results
+    description: Exports scan results in various formats
+    inputSchema:
+      type: object
+      required:
+        - results_file
+        - output_file
+      properties:
+        format:
+          type: string
+          default: text
+          description: Output format (json, sarif, text)
+        output_file:
+          type: string
+          description: Absolute path to output file
+        results_file:
+          type: string
+          description: Absolute path to JSON results file
+  - name: compare_results
+    description: Compares two scan results
+    inputSchema:
+      type: object
+      required:
+        - old_results
+        - new_results
+      properties:
+        new_results:
+          type: string
+          description: Absolute path to newer JSON results file
+        old_results:
+          type: string
+          description: Absolute path to older JSON results file

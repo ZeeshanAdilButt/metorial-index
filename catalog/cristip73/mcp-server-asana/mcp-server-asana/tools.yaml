@@ -1,0 +1,629 @@
+tools:
+  - name: asana_list_workspaces
+    description: List all available workspaces in Asana
+    inputSchema:
+      type: object
+      properties:
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+  - name: asana_search_projects
+    description: Search for projects in Asana using name pattern matching
+    inputSchema:
+      type: object
+      required:
+        - workspace
+        - name_pattern
+      properties:
+        archived:
+          type: boolean
+          default: false
+          description: Only return archived projects
+        workspace:
+          type: string
+          description: The workspace to search in
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        name_pattern:
+          type: string
+          description: Regular expression pattern to match project names
+  - name: asana_search_tasks
+    description: Search tasks in a workspace with advanced filtering options
+    inputSchema:
+      type: object
+      required:
+        - workspace
+      properties:
+        text:
+          type: string
+          description: Text to search for in task names and descriptions
+        due_on:
+          type: string
+          description: ISO 8601 date string or null
+        sort_by:
+          type: string
+          default: modified_at
+          description: "Sort by: due_date, created_at, completed_at, likes, modified_at"
+        start_on:
+          type: string
+          description: ISO 8601 date string or null
+        tags_all:
+          type: string
+          description: Comma-separated list of tag IDs that must all match
+        tags_any:
+          type: string
+          description: Comma-separated list of tag IDs
+        tags_not:
+          type: string
+          description: Comma-separated list of tag IDs to exclude
+        completed:
+          type: boolean
+          description: Filter for completed tasks
+        teams_any:
+          type: string
+          description: Comma-separated list of team IDs
+        workspace:
+          type: string
+          description: The workspace to search in
+        created_on:
+          type: string
+          description: ISO 8601 date string or null
+        is_blocked:
+          type: boolean
+          description: Filter for tasks with incomplete dependencies
+        is_subtask:
+          type: boolean
+          description: Filter for subtasks
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        is_blocking:
+          type: boolean
+          description: Filter for incomplete tasks with dependents
+        modified_on:
+          type: string
+          description: ISO 8601 date string or null
+        assignee_any:
+          type: string
+          description: Comma-separated list of user IDs
+        assignee_not:
+          type: string
+          description: Comma-separated list of user IDs to exclude
+        completed_on:
+          type: string
+          description: ISO 8601 date string or null
+        due_at_after:
+          type: string
+          description: ISO 8601 datetime string
+        due_on_after:
+          type: string
+          description: ISO 8601 date string
+        liked_by_not:
+          type: string
+          description: Comma-separated list of user IDs to exclude
+        projects_all:
+          type: string
+          description: Comma-separated list of project IDs that must all match
+        projects_any:
+          type: string
+          description: Comma-separated list of project IDs
+        projects_not:
+          type: string
+          description: Comma-separated list of project IDs to exclude
+        sections_all:
+          type: string
+          description: Comma-separated list of section IDs that must all match
+        sections_any:
+          type: string
+          description: Comma-separated list of section IDs
+        sections_not:
+          type: string
+          description: Comma-separated list of section IDs to exclude
+        custom_fields:
+          type: object
+          description: >-
+            Object containing custom field filters. Keys should be in the format
+            "{gid}.{operation}" where operation can be:
+
+            - {gid}.is_set: Boolean - For all custom field types, check if value
+            is set
+
+            - {gid}.value: String|Number|String(enum_option_gid) - Direct value
+            match for Text, Number or Enum fields
+
+            - {gid}.starts_with: String - For Text fields only, check if value
+            starts with string
+
+            - {gid}.ends_with: String - For Text fields only, check if value
+            ends with string
+
+            - {gid}.contains: String - For Text fields only, check if value
+            contains string
+
+            - {gid}.less_than: Number - For Number fields only, check if value
+            is less than number
+
+            - {gid}.greater_than: Number - For Number fields only, check if
+            value is greater than number
+
+
+            Example: { "12345.value": "high", "67890.contains": "urgent" }
+        due_at_before:
+          type: string
+          description: ISO 8601 datetime string
+        due_on_before:
+          type: string
+          description: ISO 8601 date string
+        followers_not:
+          type: string
+          description: Comma-separated list of user IDs to exclude
+        created_by_any:
+          type: string
+          description: Comma-separated list of user IDs
+        created_by_not:
+          type: string
+          description: Comma-separated list of user IDs to exclude
+        has_attachment:
+          type: boolean
+          description: Filter for tasks with attachments
+        portfolios_any:
+          type: string
+          description: Comma-separated list of portfolio IDs
+        sort_ascending:
+          type: boolean
+          default: false
+          description: Sort in ascending order
+        start_on_after:
+          type: string
+          description: ISO 8601 date string
+        assigned_by_any:
+          type: string
+          description: Comma-separated list of user IDs
+        assigned_by_not:
+          type: string
+          description: Comma-separated list of user IDs to exclude
+        start_on_before:
+          type: string
+          description: ISO 8601 date string
+        created_at_after:
+          type: string
+          description: ISO 8601 datetime string
+        created_on_after:
+          type: string
+          description: ISO 8601 date string
+        resource_subtype:
+          type: string
+          description: Filter by task subtype (e.g. milestone)
+        created_at_before:
+          type: string
+          description: ISO 8601 datetime string
+        created_on_before:
+          type: string
+          description: ISO 8601 date string
+        modified_at_after:
+          type: string
+          description: ISO 8601 datetime string
+        modified_on_after:
+          type: string
+          description: ISO 8601 date string
+        completed_at_after:
+          type: string
+          description: ISO 8601 datetime string
+        completed_on_after:
+          type: string
+          description: ISO 8601 date string
+        modified_at_before:
+          type: string
+          description: ISO 8601 datetime string
+        modified_on_before:
+          type: string
+          description: ISO 8601 date string
+        commented_on_by_not:
+          type: string
+          description: Comma-separated list of user IDs to exclude
+        completed_at_before:
+          type: string
+          description: ISO 8601 datetime string
+        completed_on_before:
+          type: string
+          description: ISO 8601 date string
+  - name: asana_get_task
+    description: Get detailed information about a specific task
+    inputSchema:
+      type: object
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          description: The task ID to retrieve
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+  - name: asana_create_task
+    description: Create a new task in a project
+    inputSchema:
+      type: object
+      required:
+        - project_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the task
+        notes:
+          type: string
+          description: Description of the task
+        due_on:
+          type: string
+          description: Due date in YYYY-MM-DD format
+        parent:
+          type: string
+          description: The parent task ID to set this task under
+        assignee:
+          type: string
+          description: Assignee (can be 'me' or a user ID)
+        projects:
+          type: array
+          items:
+            type: string
+          description: Array of project IDs to add this task to
+        followers:
+          type: array
+          items:
+            type: string
+          description: Array of user IDs to add as followers
+        html_notes:
+          type: string
+          description: >-
+            HTML-like formatted description of the task. Does not support ALL
+            HTML tags. Only a subset. The only allowed TAG in the HTML are:
+            <body> <h1> <h2> <ol> <ul> <li> <strong> <em> <u> <s> <code> <pre>
+            <blockquote> <a data-asana-type="" data-asana-gid=""> <hr> <img>
+            <table> <tr> <td>. No other tags are allowed. Use the \n to create a
+            newline. Do not use \n after <body>. Example:
+            <body><h1>Motivation</h1>
+
+            A customer called in to complain
+
+            <h1>Goal</h1>
+
+            Fix the problem</body>
+        project_id:
+          type: string
+          description: The project to create the task in
+        custom_fields:
+          type: object
+          description: Object mapping custom field GID strings to their values. For enum
+            fields use the enum option GID as the value.
+        resource_subtype:
+          type: string
+          description: The type of the task. Can be one of 'default_task' or 'milestone'
+  - name: asana_get_task_stories
+    description: Get comments and stories for a specific task
+    inputSchema:
+      type: object
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          description: The task ID to get stories for
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+  - name: asana_update_task
+    description: Update an existing task's details
+    inputSchema:
+      type: object
+      required:
+        - task_id
+      properties:
+        name:
+          type: string
+          description: New name for the task
+        notes:
+          type: string
+          description: New description for the task
+        due_on:
+          type: string
+          description: New due date in YYYY-MM-DD format
+        task_id:
+          type: string
+          description: The task ID to update
+        assignee:
+          type: string
+          description: New assignee (can be 'me' or a user ID)
+        completed:
+          type: boolean
+          description: Mark task as completed or not
+        custom_fields:
+          type: object
+          description: Object mapping custom field GID strings to their values. For enum
+            fields use the enum option GID as the value.
+        resource_subtype:
+          type: string
+          description: The type of the task. Can be one of 'default_task' or 'milestone'
+  - name: asana_get_project
+    description: Get detailed information about a specific project
+    inputSchema:
+      type: object
+      required:
+        - project_id
+      properties:
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        project_id:
+          type: string
+          description: The project ID to retrieve
+  - name: asana_get_project_task_counts
+    description: Get the number of tasks in a project
+    inputSchema:
+      type: object
+      required:
+        - project_id
+      properties:
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        project_id:
+          type: string
+          description: The project ID to get task counts for
+  - name: asana_get_project_sections
+    description: Get sections in a project
+    inputSchema:
+      type: object
+      required:
+        - project_id
+      properties:
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        project_id:
+          type: string
+          description: The project ID to get sections for
+  - name: asana_create_task_story
+    description: Create a comment or story on a task
+    inputSchema:
+      type: object
+      required:
+        - task_id
+        - text
+      properties:
+        text:
+          type: string
+          description: The text content of the story/comment
+        task_id:
+          type: string
+          description: The task ID to add the story to
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+  - name: asana_add_task_dependencies
+    description: Set dependencies for a task
+    inputSchema:
+      type: object
+      required:
+        - task_id
+        - dependencies
+      properties:
+        task_id:
+          type: string
+          description: The task ID to add dependencies to
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: Array of task IDs that this task depends on
+  - name: asana_add_task_dependents
+    description: Set dependents for a task (tasks that depend on this task)
+    inputSchema:
+      type: object
+      required:
+        - task_id
+        - dependents
+      properties:
+        task_id:
+          type: string
+          description: The task ID to add dependents to
+        dependents:
+          type: array
+          items:
+            type: string
+          description: Array of task IDs that depend on this task
+  - name: asana_create_subtask
+    description: Create a new subtask for an existing task
+    inputSchema:
+      type: object
+      required:
+        - parent_task_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the subtask
+        notes:
+          type: string
+          description: Description of the subtask
+        due_on:
+          type: string
+          description: Due date in YYYY-MM-DD format
+        assignee:
+          type: string
+          description: Assignee (can be 'me' or a user ID)
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        parent_task_id:
+          type: string
+          description: The parent task ID to create the subtask under
+  - name: asana_get_multiple_tasks_by_gid
+    description: Get detailed information about multiple tasks by their GIDs
+      (maximum 25 tasks)
+    inputSchema:
+      type: object
+      required:
+        - task_ids
+      properties:
+        task_ids:
+          oneOf:
+            - type: array
+              items:
+                type: string
+              maxItems: 25
+            - type: string
+              description: Comma-separated list of task GIDs (max 25)
+          description: Array or comma-separated string of task GIDs to retrieve (max 25)
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+  - name: asana_get_project_status
+    description: Get a project status update
+    inputSchema:
+      type: object
+      required:
+        - project_status_gid
+      properties:
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        project_status_gid:
+          type: string
+          description: The project status GID to retrieve
+  - name: asana_get_project_statuses
+    description: Get all status updates for a project
+    inputSchema:
+      type: object
+      required:
+        - project_gid
+      properties:
+        limit:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: Results per page (1-100)
+        offset:
+          type: string
+          description: Pagination offset token
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        project_gid:
+          type: string
+          description: The project GID to get statuses for
+  - name: asana_create_project_status
+    description: Create a new status update for a project
+    inputSchema:
+      type: object
+      required:
+        - project_gid
+        - text
+      properties:
+        text:
+          type: string
+          description: The text content of the status update
+        color:
+          enum:
+            - green
+            - yellow
+            - red
+          type: string
+          description: The color of the status (green, yellow, red)
+        title:
+          type: string
+          description: The title of the status update
+        html_text:
+          type: string
+          description: HTML formatted text for the status update
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        project_gid:
+          type: string
+          description: The project GID to create the status for
+  - name: asana_delete_project_status
+    description: Delete a project status update
+    inputSchema:
+      type: object
+      required:
+        - project_status_gid
+      properties:
+        project_status_gid:
+          type: string
+          description: The project status GID to delete
+  - name: asana_set_parent_for_task
+    description: Set the parent of a task and position the subtask within the other
+      subtasks of that parent
+    inputSchema:
+      type: object
+      required:
+        - task_id
+        - data
+      properties:
+        data:
+          parent:
+            type: string
+            required: true
+            description: The GID of the new parent of the task, or null for no parent
+          insert_after:
+            type: string
+            description: A subtask of the parent to insert the task after, or null to insert
+              at the beginning of the list. Cannot be used with insert_before.
+              The task must already be set as a subtask of that parent.
+          insert_before:
+            type: string
+            description: A subtask of the parent to insert the task before, or null to
+              insert at the end of the list. Cannot be used with insert_after.
+              The task must already be set as a subtask of that parent.
+        opts:
+          opt_fields:
+            type: string
+            description: Comma-separated list of optional fields to include
+        task_id:
+          type: string
+          description: The task ID to operate on
+  - name: asana_get_tasks_for_tag
+    description: Get tasks for a specific tag
+    inputSchema:
+      type: object
+      required:
+        - tag_gid
+      properties:
+        limit:
+          type: integer
+          description: The number of objects to return per page. The value must be between
+            1 and 100.
+        offset:
+          type: string
+          description: An offset to the next page returned by the API.
+        tag_gid:
+          type: string
+          description: The tag GID to retrieve tasks for
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        opt_pretty:
+          type: boolean
+          description: Provides the response in a 'pretty' format
+  - name: asana_get_tags_for_workspace
+    description: Get tags in a workspace
+    inputSchema:
+      type: object
+      required:
+        - workspace_gid
+      properties:
+        limit:
+          type: integer
+          description: Results per page. The number of objects to return per page. The
+            value must be between 1 and 100.
+        offset:
+          type: string
+          description: Offset token. An offset to the next page returned by the API.
+        opt_fields:
+          type: string
+          description: Comma-separated list of optional fields to include
+        workspace_gid:
+          type: string
+          description: Globally unique identifier for the workspace or organization

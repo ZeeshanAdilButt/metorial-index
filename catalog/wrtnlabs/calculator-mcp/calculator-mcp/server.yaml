@@ -1,0 +1,18 @@
+identifier: wrtnlabs/calculator-mcp/calculator-mcp
+repo:
+  provider: github.com
+  url: https://github.com/wrtnlabs/calculator-mcp
+  name: calculator-mcp
+  owner: wrtnlabs
+server:
+  subdirectory: /
+  name: Calculator
+  description: Provide basic calculator capabilities to enable LLMs to perform
+    arithmetic operations such as addition, subtraction, multiplication,
+    division, modulus, and square root. Integrate easily with development
+    environments like VS Code to enhance agent functionality. Use it for testing
+    MCP connections or as a simple computational tool in projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: regismesquita/mcp_a2a/mcp_a2a
+repo:
+  provider: github.com
+  url: https://github.com/regismesquita/MCP_A2A
+  name: MCP_A2A
+  owner: regismesquita
+server:
+  subdirectory: /
+  name: A2A Agent Bridge Server
+  description: Enable seamless interaction between Claude Desktop and A2A protocol
+    agents by registering servers, listing agents, and sending prompts to
+    agents. Extend Claude's capabilities through a simple and developer-friendly
+    MCP interface. Facilitate agent communication and management with
+    easy-to-use tools designed for agent development and experimentation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

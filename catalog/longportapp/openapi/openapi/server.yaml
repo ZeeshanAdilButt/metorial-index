@@ -1,0 +1,17 @@
+identifier: longportapp/openapi/openapi
+repo:
+  provider: github.com
+  url: https://github.com/longportapp/openapi
+  name: openapi
+  owner: longportapp
+server:
+  subdirectory: /mcp
+  name: LongPort MCP
+  description: Access real-time stock market data and leverage AI for trading
+    analysis and capabilities. Manage your trading orders, retrieve quotes, and
+    monitor your portfolio seamlessly. Enhance your trading experience with
+    powerful tools and insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

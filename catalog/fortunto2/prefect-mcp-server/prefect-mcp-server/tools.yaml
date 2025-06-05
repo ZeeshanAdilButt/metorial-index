@@ -1,0 +1,433 @@
+tools:
+  - name: get_flow_by_id
+    description: "Get a flow by its ID.
+
+
+      \    Args:
+
+      \        flow_id: ID of the flow to retrieve.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_flow_by_idArguments
+      required:
+        - flow_id
+      properties:
+        flow_id:
+          type: string
+          title: Flow Id
+  - name: get_flow_by_name
+    description: "Get a flow by its name.
+
+
+      \    Args:
+
+      \        name: Name of the flow to retrieve.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_flow_by_nameArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: list_flows
+    description: "Get a list of flows from the Prefect API.
+
+
+      \    Args:
+
+      \        limit: Maximum number of flows to return (default 20).
+
+      \        offset: Number of flows to skip (default 0).
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_flowsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: search_flows
+    description: "Search for flows by name and/or tags.
+
+
+      \    Args:
+
+      \        name: Optional name to search for (case-insensitive contains
+      match).
+
+      \        tags: Optional list of tags to filter by.
+
+      \        limit: Maximum number of flows to return (default 20).
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_flowsArguments
+      properties:
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+  - name: get_flow_run_by_id
+    description: "Get a flow run by its ID.
+
+
+      \    Args:
+
+      \        flow_run_id: ID of the flow run to retrieve.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_flow_run_by_idArguments
+      required:
+        - flow_run_id
+      properties:
+        flow_run_id:
+          type: string
+          title: Flow Run Id
+  - name: list_flow_runs
+    description: "Get a list of flow runs from the Prefect API.
+
+
+      \    Args:
+
+      \        limit: Maximum number of flow runs to return (default 20).
+
+      \        offset: Number of flow runs to skip (default 0).
+
+      \        flow_id: Optional ID of the flow to filter runs by.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_flow_runsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        flow_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Flow Id
+          default: null
+  - name: search_flow_runs_by_state
+    description: "Search for flow runs by state.
+
+
+      \    Args:
+
+      \        state_type: Optional state type (e.g., \"COMPLETED\", \"FAILED\",
+      \"CRASHED\").
+
+      \        state_name: Optional state name (e.g., \"Completed\",
+      \"Failed\").
+
+      \        limit: Maximum number of flow runs to return (default 20).
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_flow_runs_by_stateArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        state_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: State Name
+          default: null
+        state_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: State Type
+          default: null
+  - name: cancel_flow_run
+    description: "Cancel a flow run.
+
+
+      \    Args:
+
+      \        flow_run_id: ID of the flow run to cancel.
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_flow_runArguments
+      required:
+        - flow_run_id
+      properties:
+        flow_run_id:
+          type: string
+          title: Flow Run Id
+  - name: get_deployment_by_id
+    description: "Get a deployment by its ID.
+
+
+      \    Args:
+
+      \        deployment_id: ID of the deployment to retrieve.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_deployment_by_idArguments
+      required:
+        - deployment_id
+      properties:
+        deployment_id:
+          type: string
+          title: Deployment Id
+  - name: get_deployment_by_name
+    description: "Get a deployment by its name.
+
+
+      \    Args:
+
+      \        name: Name of the deployment to retrieve, in format
+      \"flow_name/deployment_name\".
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_deployment_by_nameArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: list_deployments
+    description: "Get a list of deployments from the Prefect API.
+
+
+      \    Args:
+
+      \        limit: Maximum number of deployments to return (default 20).
+
+      \        offset: Number of deployments to skip (default 0).
+
+      \        flow_id: Optional ID of the flow to filter deployments by.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_deploymentsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        flow_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Flow Id
+          default: null
+  - name: search_deployments_by_status
+    description: "Search for deployments by schedule status.
+
+
+      \    Args:
+
+      \        is_schedule_active: Filter deployments by whether their schedule
+      is active.
+
+      \        limit: Maximum number of deployments to return (default 20).
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_deployments_by_statusArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        is_schedule_active:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Is Schedule Active
+          default: null
+  - name: create_flow_run_from_deployment
+    description: "Create a new flow run for the specified deployment.
+
+
+      \    Args:
+
+      \        deployment_id: ID of the deployment or name in format
+      'flow_name/deployment_name'.
+
+      \        parameters: Dictionary with parameters for the flow run
+      (optional).
+
+      \        name: Optional name for the flow run.
+
+      \        timeout: Timeout in seconds, 0 means no waiting for completion
+      (default 0).
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_flow_run_from_deploymentArguments
+      required:
+        - deployment_id
+      properties:
+        name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Name
+          default: null
+        timeout:
+          type: integer
+          title: Timeout
+          default: 0
+        parameters:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Parameters
+          default: null
+        deployment_id:
+          type: string
+          title: Deployment Id
+  - name: filter_flows
+    description: "Filter flows based on specified criteria.
+
+
+      \    Args:
+
+      \        filter_criteria: Dictionary with filter criteria according to
+      Prefect API.
+
+      \                         Example: {\"flows\": {\"tags\": {\"all_\":
+      [\"production\"]}}}
+
+      \    "
+    inputSchema:
+      type: object
+      title: filter_flowsArguments
+      required:
+        - filter_criteria
+      properties:
+        filter_criteria:
+          type: object
+          title: Filter Criteria
+          additionalProperties: true
+  - name: filter_flow_runs
+    description: "Filter flow runs based on specified criteria.
+
+
+      \    Args:
+
+      \        filter_criteria: Dictionary with filter criteria according to
+      Prefect API.
+
+      \                         Example: {\"flow_runs\": {\"state\": {\"type\":
+      {\"any_\": [\"FAILED\", \"CRASHED\"]}}}}
+
+      \    "
+    inputSchema:
+      type: object
+      title: filter_flow_runsArguments
+      required:
+        - filter_criteria
+      properties:
+        filter_criteria:
+          type: object
+          title: Filter Criteria
+          additionalProperties: true
+  - name: filter_deployments
+    description: "Filter deployments based on specified criteria.
+
+
+      \    Args:
+
+      \        filter_criteria: Dictionary with filter criteria according to
+      Prefect API.
+
+      \                         Example: {\"deployments\":
+      {\"is_schedule_active\": {\"eq_\": true}}}
+
+      \    "
+    inputSchema:
+      type: object
+      title: filter_deploymentsArguments
+      required:
+        - filter_criteria
+      properties:
+        filter_criteria:
+          type: object
+          title: Filter Criteria
+          additionalProperties: true
+  - name: create_flow_run
+    description: "Create a new flow run for the specified deployment (Legacy).
+
+
+      \    Args:
+
+      \        deployment_id: ID of the deployment to create a run for.
+
+      \        parameters: Dictionary with parameters for the flow run
+      (optional).
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_flow_runArguments
+      required:
+        - deployment_id
+      properties:
+        parameters:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Parameters
+          default: null
+        deployment_id:
+          type: string
+          title: Deployment Id

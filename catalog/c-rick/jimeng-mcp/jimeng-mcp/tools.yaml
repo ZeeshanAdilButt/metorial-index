@@ -1,0 +1,42 @@
+tools:
+  - name: hello
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+  - name: generateImage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        model:
+          type: string
+          description: "模型名称，可选值: jimeng-3.0, jimeng-2.1, jimeng-2.0-pro, jimeng-2.0,
+            jimeng-1.4, jimeng-xl-pro"
+        width:
+          type: number
+          default: 1024
+          description: 图像宽度，默认值：1024
+        height:
+          type: number
+          default: 1024
+          description: 图像高度，默认值：1024
+        prompt:
+          type: string
+          description: 生成图像的文本描述
+        negative_prompt:
+          type: string
+          default: ""
+          description: 反向提示词，告诉模型不要生成什么内容
+        sample_strength:
+          type: number
+          default: 0.5
+          description: 精细度，默认值：0.5，范围0-1
+      additionalProperties: false

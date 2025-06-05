@@ -1,0 +1,261 @@
+tools:
+  - name: list_dicom_nodes
+    description: List all configured DICOM nodes and show which one is currently selected.
+    inputSchema:
+      type: object
+      title: list_dicom_nodesArguments
+      properties: {}
+  - name: extract_pdf_text_from_dicom
+    description: "Retrieve a DICOM instance with encapsulated PDF and extract its
+      text content.
+
+      \       \ 
+
+      \        This function retrieves a DICOM instance that contains an
+      encapsulated PDF document,
+
+      \        extracts the PDF, and extracts the text content. This is
+      particularly useful for
+
+      \        medical reports stored as PDFs within DICOM format.
+
+      \       \ 
+
+      \        Args:
+
+      \            study_instance_uid: Study Instance UID
+
+      \            series_instance_uid: Series Instance UID
+
+      \            sop_instance_uid: SOP Instance UID
+
+      \            ctx: Context object
+
+      \           \ 
+
+      \        Returns:
+
+      \            Dictionary with extracted text information and status:
+
+      \            {
+
+      \                \"success\": bool,
+
+      \                \"message\": str,
+
+      \                \"text_content\": str,
+
+      \                \"file_path\": str  # Path to the temporary DICOM file
+
+      \            }
+
+      \        "
+    inputSchema:
+      type: object
+      title: extract_pdf_text_from_dicomArguments
+      required:
+        - study_instance_uid
+        - series_instance_uid
+        - sop_instance_uid
+      properties:
+        sop_instance_uid:
+          type: string
+          title: Sop Instance Uid
+        study_instance_uid:
+          type: string
+          title: Study Instance Uid
+        series_instance_uid:
+          type: string
+          title: Series Instance Uid
+  - name: switch_dicom_node
+    description: Switch to a different configured DICOM node.
+    inputSchema:
+      type: object
+      title: switch_dicom_nodeArguments
+      required:
+        - node_name
+      properties:
+        node_name:
+          type: string
+          title: Node Name
+  - name: switch_calling_aet
+    description: Switch to a different configured calling AE title.
+    inputSchema:
+      type: object
+      title: switch_calling_aetArguments
+      required:
+        - aet_name
+      properties:
+        aet_name:
+          type: string
+          title: Aet Name
+  - name: verify_connection
+    description: Verify connectivity to the DICOM node using C-ECHO.
+    inputSchema:
+      type: object
+      title: verify_connectionArguments
+      properties: {}
+  - name: query_patients
+    description: Query patients matching the specified criteria.
+    inputSchema:
+      type: object
+      title: query_patientsArguments
+      properties:
+        birth_date:
+          type: string
+          title: Birth Date
+          default: ""
+        patient_id:
+          type: string
+          title: Patient Id
+          default: ""
+        name_pattern:
+          type: string
+          title: Name Pattern
+          default: ""
+        attribute_preset:
+          type: string
+          title: Attribute Preset
+          default: standard
+        exclude_attributes:
+          type: array
+          items:
+            type: string
+          title: Exclude Attributes
+          default: null
+        additional_attributes:
+          type: array
+          items:
+            type: string
+          title: Additional Attributes
+          default: null
+  - name: query_studies
+    description: Query studies matching the specified criteria.
+    inputSchema:
+      type: object
+      title: query_studiesArguments
+      properties:
+        patient_id:
+          type: string
+          title: Patient Id
+          default: ""
+        study_date:
+          type: string
+          title: Study Date
+          default: ""
+        accession_number:
+          type: string
+          title: Accession Number
+          default: ""
+        attribute_preset:
+          type: string
+          title: Attribute Preset
+          default: standard
+        modality_in_study:
+          type: string
+          title: Modality In Study
+          default: ""
+        study_description:
+          type: string
+          title: Study Description
+          default: ""
+        exclude_attributes:
+          type: array
+          items:
+            type: string
+          title: Exclude Attributes
+          default: null
+        study_instance_uid:
+          type: string
+          title: Study Instance Uid
+          default: ""
+        additional_attributes:
+          type: array
+          items:
+            type: string
+          title: Additional Attributes
+          default: null
+  - name: query_series
+    description: Query series matching the specified criteria within a study.
+    inputSchema:
+      type: object
+      title: query_seriesArguments
+      required:
+        - study_instance_uid
+      properties:
+        modality:
+          type: string
+          title: Modality
+          default: ""
+        series_number:
+          type: string
+          title: Series Number
+          default: ""
+        attribute_preset:
+          type: string
+          title: Attribute Preset
+          default: standard
+        exclude_attributes:
+          type: array
+          items:
+            type: string
+          title: Exclude Attributes
+          default: null
+        series_description:
+          type: string
+          title: Series Description
+          default: ""
+        study_instance_uid:
+          type: string
+          title: Study Instance Uid
+        series_instance_uid:
+          type: string
+          title: Series Instance Uid
+          default: ""
+        additional_attributes:
+          type: array
+          items:
+            type: string
+          title: Additional Attributes
+          default: null
+  - name: query_instances
+    description: Query instances matching the specified criteria within a series.
+    inputSchema:
+      type: object
+      title: query_instancesArguments
+      required:
+        - series_instance_uid
+      properties:
+        instance_number:
+          type: string
+          title: Instance Number
+          default: ""
+        attribute_preset:
+          type: string
+          title: Attribute Preset
+          default: standard
+        sop_instance_uid:
+          type: string
+          title: Sop Instance Uid
+          default: ""
+        exclude_attributes:
+          type: array
+          items:
+            type: string
+          title: Exclude Attributes
+          default: null
+        series_instance_uid:
+          type: string
+          title: Series Instance Uid
+        additional_attributes:
+          type: array
+          items:
+            type: string
+          title: Additional Attributes
+          default: null
+  - name: get_attribute_presets
+    description: Get all available attribute presets for queries.
+    inputSchema:
+      type: object
+      title: get_attribute_presetsArguments
+      properties: {}

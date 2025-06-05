@@ -1,0 +1,21 @@
+tools:
+  - name: list_all_teams_in_a_league
+    description: |
+      
+      List all teams in a sport
+      :param s: The name of the sport
+      :param c: The country of the sport
+      :return: A list of teams in the sport
+    inputSchema:
+      type: object
+      title: list_all_teams_in_a_leagueArguments
+      required:
+        - sport
+        - country
+      properties:
+        sport:
+          type: string
+          title: sport
+        country:
+          type: string
+          title: country

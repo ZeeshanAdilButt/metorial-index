@@ -1,0 +1,16 @@
+identifier: shopify/dev-mcp/dev-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Shopify/dev-mcp
+  name: dev-mcp
+  owner: Shopify
+server:
+  subdirectory: /
+  name: Shopify Dev MCP Server
+  description: Interact with Shopify APIs seamlessly. Utilize powerful tools to
+    search documentation and access the Shopify Admin GraphQL schema. Enhance
+    your development experience with tailored prompts for GraphQL operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

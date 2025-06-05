@@ -1,0 +1,18 @@
+identifier: tuannvm/haproxy-mcp-server/haproxy-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/tuannvm/haproxy-mcp-server
+  name: haproxy-mcp-server
+  owner: tuannvm
+server:
+  subdirectory: /
+  name: HAProxy Server Management
+  description: Enable natural language interaction with HAProxy for
+    administration, monitoring, and traffic analysis. Perform runtime API
+    operations and access HAProxy statistics seamlessly through an MCP
+    interface. Simplify HAProxy management with secure, context-aware tools
+    accessible via standard MCP transports.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

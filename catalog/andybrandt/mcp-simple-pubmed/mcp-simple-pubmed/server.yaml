@@ -1,0 +1,14 @@
+identifier: andybrandt/mcp-simple-pubmed/mcp-simple-pubmed
+repo:
+  provider: github.com
+  url: https://github.com/andybrandt/mcp-simple-pubmed
+  name: mcp-simple-pubmed
+  owner: andybrandt
+server:
+  subdirectory: /
+  name: Simple PubMed
+  description: An MCP server that provides access to PubMed articles through the Entrez API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

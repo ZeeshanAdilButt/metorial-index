@@ -1,0 +1,18 @@
+identifier: zenoengine/msbuild-mcp-server/msbuild-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/zenoengine/msbuild-mcp-server
+  name: msbuild-mcp-server
+  owner: zenoengine
+server:
+  subdirectory: /
+  name: MSBuild Build Automation Server
+  description: Automate building MSBuild projects and solutions with dynamic
+    MSBuild discovery and customizable build configurations. Integrate
+    seamlessly with popular MCP clients to streamline your build workflows and
+    receive clear error reporting. Enhance your development process by managing
+    builds for various languages and project types across Windows platforms.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

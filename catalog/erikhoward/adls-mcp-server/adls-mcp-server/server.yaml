@@ -1,0 +1,16 @@
+identifier: erikhoward/adls-mcp-server/adls-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/erikhoward/adls-mcp-server
+  name: adls-mcp-server
+  owner: erikhoward
+server:
+  subdirectory: /
+  name: ADLS2 MCP Server
+  description: A Model Context Protocol (MCP) server implementation for Azure Data
+    Lake Storage Gen2. This service provides a standardized interface for
+    interacting with ADLS2 storage, enabling file operations through MCP tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

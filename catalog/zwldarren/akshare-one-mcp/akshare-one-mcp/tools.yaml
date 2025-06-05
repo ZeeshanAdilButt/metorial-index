@@ -1,0 +1,203 @@
+tools:
+  - name: get_hist_data
+    description: "Get historical stock market data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker
+
+      \        interval: Time interval
+      ('minute','hour','day','week','month','year')
+
+      \        interval_multiplier: Interval multiplier (default: 1)
+
+      \        start_date: Start date in YYYY-MM-DD format (default:
+      '1970-01-01')
+
+      \        end_date: End date in YYYY-MM-DD format (default: '2030-12-31')
+
+      \        adjust: Adjustment type ('none', 'qfq', 'hfq') (default: 'none')
+
+      \        source: Data source ('eastmoney', 'sina') (default: 'eastmoney')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_hist_dataArguments
+      required:
+        - symbol
+        - interval
+      properties:
+        adjust:
+          type: string
+          title: Adjust
+          default: none
+        source:
+          type: string
+          title: Source
+          default: eastmoney
+        symbol:
+          type: string
+          title: Symbol
+        end_date:
+          type: string
+          title: End Date
+          default: 2030-12-31
+        interval:
+          type: string
+          title: Interval
+        start_date:
+          type: string
+          title: Start Date
+          default: 1970-01-01
+        interval_multiplier:
+          type: integer
+          title: Interval Multiplier
+          default: 1
+  - name: get_realtime_data
+    description: "Get real-time stock market data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker (optional)
+
+      \        source: Data source (default: 'eastmoney')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_realtime_dataArguments
+      properties:
+        source:
+          type: string
+          title: Source
+          default: eastmoney
+        symbol:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Symbol
+          default: null
+  - name: get_news_data
+    description: "Get stock-related news data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker
+
+      \        source: Data source (default: 'eastmoney')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_news_dataArguments
+      required:
+        - symbol
+      properties:
+        source:
+          type: string
+          title: Source
+          default: eastmoney
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_balance_sheet
+    description: "Get company balance sheet data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker
+
+      \        source: Data source (default: 'sina')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_balance_sheetArguments
+      required:
+        - symbol
+      properties:
+        source:
+          type: string
+          title: Source
+          default: sina
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_income_statement
+    description: "Get company income statement data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker
+
+      \        source: Data source (default: 'sina')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_income_statementArguments
+      required:
+        - symbol
+      properties:
+        source:
+          type: string
+          title: Source
+          default: sina
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_cash_flow
+    description: "Get company cash flow statement data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker
+
+      \        source: Data source (default: 'sina')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_cash_flowArguments
+      required:
+        - symbol
+      properties:
+        source:
+          type: string
+          title: Source
+          default: sina
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_inner_trade_data
+    description: "Get company insider trading data
+
+
+      \    Args:
+
+      \        symbol: Stock symbol/ticker (optional)
+
+      \        source: Data source (default: 'xueqiu')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_inner_trade_dataArguments
+      properties:
+        source:
+          type: string
+          title: Source
+          default: xueqiu
+        symbol:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Symbol
+          default: null

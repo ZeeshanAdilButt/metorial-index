@@ -1,0 +1,13 @@
+tools:
+  - name: fetch_data
+    description: ""
+    inputSchema:
+      type: object
+      title: fetch_dataArguments
+      required:
+        - filters
+      properties:
+        filters:
+          type: object
+          title: Filters
+          additionalProperties: true

@@ -1,0 +1,18 @@
+identifier: 8ensmith/mcp-open-library/mcp-open-library
+repo:
+  provider: github.com
+  url: https://github.com/8enSmith/mcp-open-library
+  name: mcp-open-library
+  owner: 8enSmith
+server:
+  subdirectory: /
+  name: Open Library MCP Server
+  description: Enable AI assistants to search and retrieve detailed book and
+    author information from the Open Library. Provide structured, consistent
+    JSON responses for book titles, author details, and cover images. Enhance AI
+    capabilities with comprehensive book and author data access via a
+    standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

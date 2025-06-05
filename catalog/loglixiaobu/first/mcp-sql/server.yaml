@@ -1,0 +1,19 @@
+identifier: loglixiaobu/first/mcp-sql
+repo:
+  provider: github.com
+  url: https://github.com/loglixiaobu/first
+  name: first
+  owner: loglixiaobu
+server:
+  subdirectory: /
+  name: First MCP Server
+  description: Provide a foundational implementation of the Model Context Protocol
+    to enable integration of LLMs with external tools, resources, and prompts.
+    Facilitate dynamic interaction between language models and real-world data
+    or actions through a standardized JSON-RPC interface. Enhance LLM
+    applications by exposing customizable capabilities and data access in a
+    secure and extensible manner.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: azbuilder/mcp-server-terrakube/mcp-server-terrakube
+repo:
+  provider: github.com
+  url: https://github.com/AzBuilder/mcp-server-terrakube
+  name: mcp-server-terrakube
+  owner: AzBuilder
+server:
+  subdirectory: /
+  name: Terrakube MCP Server
+  description: Manage your Terrakube workspaces, variables, modules, and
+    organizations seamlessly. Create, update, and delete resources with a
+    comprehensive API integration, ensuring type safety and robust error
+    handling. Simplify your operations and enhance your development experience
+    with flexible environment configurations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

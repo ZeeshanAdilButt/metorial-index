@@ -1,0 +1,58 @@
+tools:
+  - name: get_backend_suggestions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        context:
+          type: string
+          description: 当前上下文或任务描述
+        language:
+          type: string
+          description: 编程语言，如Java、Python等
+        databaseType:
+          type: string
+          description: 数据库类型，如MySQL、PostgreSQL等
+      additionalProperties: false
+  - name: get_frontend_suggestions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        context:
+          type: string
+          description: 当前上下文或任务描述
+        framework:
+          type: string
+          description: 前端框架，如React、Vue等
+        deviceType:
+          type: string
+          description: 设备类型，如移动端、桌面端等
+      additionalProperties: false
+  - name: get_general_suggestions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        context:
+          type: string
+          description: 当前上下文或任务描述
+        taskType:
+          type: string
+          description: 任务类型，如代码生成、文档生成等
+      additionalProperties: false
+  - name: get_ui_design_suggestions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        context:
+          type: string
+          description: 当前上下文或任务描述
+        platform:
+          type: string
+          description: 平台类型，如Web、iOS、Android等
+        designType:
+          type: string
+          description: 设计类型，如线框图、高保真原型图等
+      additionalProperties: false

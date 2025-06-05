@@ -1,0 +1,19 @@
+identifier: danielsuguimoto/readonly-filesystem-mcp/readonly-filesystem-mcp
+repo:
+  provider: github.com
+  url: https://github.com/danielsuguimoto/readonly-filesystem-mcp
+  name: readonly-filesystem-mcp
+  owner: danielsuguimoto
+server:
+  subdirectory: /
+  name: Readonly Filesystem Server
+  description: Provide secure readonly access to filesystem operations such as
+    reading files, listing directories, searching files, and retrieving file
+    metadata within specified allowed directories. Enable safe integration of
+    filesystem data into your applications without risking unauthorized
+    modifications. Simplify file exploration and content retrieval with a
+    controlled and sandboxed environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: arjshiv/blaze-sql-mcp-server/blaze-sql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/arjshiv/blaze-sql-mcp-server
+  name: blaze-sql-mcp-server
+  owner: arjshiv
+server:
+  subdirectory: /
+  name: BlazeSQL Natural Language Query Server
+  description: Enable natural language querying of your databases by connecting to
+    BlazeSQL's API through a simple MCP server. Execute plain English queries
+    and receive formatted SQL and JSON results seamlessly. Integrate
+    effortlessly with MCP-compatible clients to enhance your data interaction
+    experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

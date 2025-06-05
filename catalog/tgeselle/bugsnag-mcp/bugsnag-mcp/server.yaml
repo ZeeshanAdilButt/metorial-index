@@ -1,0 +1,16 @@
+identifier: tgeselle/bugsnag-mcp/bugsnag-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tgeselle/bugsnag-mcp
+  name: bugsnag-mcp
+  owner: tgeselle
+server:
+  subdirectory: /
+  name: Bugsnag MCP Server
+  description: A Model Context Protocol (MCP) server for interacting with Bugsnag.
+    This server allows LLM tools like Cursor and Claude to investigate and
+    resolve issues in Bugsnag.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

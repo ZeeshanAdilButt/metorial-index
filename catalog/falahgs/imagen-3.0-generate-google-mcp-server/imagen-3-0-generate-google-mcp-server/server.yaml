@@ -1,0 +1,18 @@
+identifier: falahgs/imagen-3.0-generate-google-mcp-server/imagen-3-0-generate-google-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/falahgs/imagen-3.0-generate-google-mcp-server
+  name: imagen-3.0-generate-google-mcp-server
+  owner: falahgs
+server:
+  subdirectory: /
+  name: Gemini Imagen 3.0 Image Generation Server
+  description: Generate high-quality images using Google's Imagen 3.0 model via
+    the Gemini API. Automatically manage image files with intelligent naming and
+    create HTML previews for easy local viewing. Seamlessly integrate with
+    Claude Desktop and other MCP-compatible hosts to enhance AI agent
+    capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

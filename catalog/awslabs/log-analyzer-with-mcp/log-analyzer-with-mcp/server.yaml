@@ -1,0 +1,18 @@
+identifier: awslabs/log-analyzer-with-mcp/log-analyzer-with-mcp
+repo:
+  provider: github.com
+  url: https://github.com/awslabs/Log-Analyzer-with-MCP
+  name: Log-Analyzer-with-MCP
+  owner: awslabs
+server:
+  subdirectory: /
+  name: Log Analyzer
+  description: Provide AI assistants with seamless access to AWS CloudWatch Logs
+    for efficient analysis, searching, and correlation. Enable browsing of log
+    groups, executing queries, generating summaries, and identifying error
+    patterns across AWS services. Enhance AI-driven log insights with optimized
+    tools for assistants like Claude.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

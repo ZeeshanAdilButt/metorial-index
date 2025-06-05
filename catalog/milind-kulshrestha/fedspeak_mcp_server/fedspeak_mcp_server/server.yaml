@@ -1,0 +1,18 @@
+identifier: milind-kulshrestha/fedspeak_mcp_server/fedspeak_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/milind-kulshrestha/fedspeak_mcp_server
+  name: fedspeak_mcp_server
+  owner: milind-kulshrestha
+server:
+  subdirectory: /
+  name: Fedspeak Server
+  description: Provide semantic search and analysis of Federal Reserve (FOMC)
+    statements through a clean, tool-based interface. Access metadata, perform
+    trend analysis, and retrieve full statement content easily. Utilize
+    pre-defined prompt templates for common analysis tasks to enhance your
+    understanding of Fed communications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

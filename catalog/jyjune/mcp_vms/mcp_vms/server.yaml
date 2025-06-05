@@ -1,0 +1,19 @@
+identifier: jyjune/mcp_vms/mcp_vms
+repo:
+  provider: github.com
+  url: https://github.com/jyjune/mcp_vms
+  name: mcp_vms
+  owner: jyjune
+server:
+  subdirectory: /
+  name: VMS Video Fetch Server
+  description: Connect to CCTV recording software to retrieve live and recorded
+    video streams and control video management system features such as PTZ
+    camera presets and playback dialogs. Easily fetch video channel information,
+    images, and recording times to integrate video surveillance data into your
+    workflows. Enhance your applications with comprehensive video stream access
+    and control capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

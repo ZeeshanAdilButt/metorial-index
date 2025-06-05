@@ -1,0 +1,131 @@
+tools:
+  - name: get_query_details
+    description: "Get detailed information about specific GraphQL queries.
+
+
+      \    Retrieves argument requirements, return type information,
+      descriptions, and
+
+      \    example usage for the specified queries.
+
+
+      \    Args:
+
+      \        query_names: Comma-separated list of query names to get details
+      for
+
+
+      \    Returns:
+
+      \        A YAML-formatted string containing detailed information about the
+      requested queries
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_query_detailsArguments
+      required:
+        - query_names
+      properties:
+        query_names:
+          type: string
+          title: Query Names
+  - name: get_mutation_details
+    description: "Get detailed information about specific GraphQL mutations.
+
+
+      \    Retrieves argument requirements, return type information,
+      descriptions, and
+
+      \    example usage for the specified mutations.
+
+
+      \    Args:
+
+      \        mutation_names: Comma-separated list of mutation names to get
+      details for
+
+
+      \    Returns:
+
+      \        A YAML-formatted string containing detailed information about the
+      requested mutations
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_mutation_detailsArguments
+      required:
+        - mutation_names
+      properties:
+        mutation_names:
+          type: string
+          title: Mutation Names
+  - name: execute_query
+    description: "Execute a GraphQL query or mutation with variables.
+
+
+      \    Parses and executes the provided GraphQL operation string with
+      optional variables.
+
+
+      \    Args:
+
+      \        query: Raw GraphQL query or mutation string
+
+      \        variables: Optional dictionary of variables to use in the
+      operation
+
+
+      \    Returns:
+
+      \        Dictionary containing the operation results or an error message
+      string
+
+
+      \    Raises:
+
+      \        Exception: Handled internally, returns error message as string
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        variables:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Variables
+          default: null
+  - name: get_authenticated_user_id
+    description: "Get the ID of the currently authenticated user.
+
+
+      \    Uses a special mutation to retrieve the ID of the user associated
+      with
+
+      \    the current API token.
+
+
+      \    Returns:
+
+      \        User ID string if successful, None if user not found, or error
+      message string
+
+
+      \    Raises:
+
+      \        Exception: Handled internally, returns error message as string
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_authenticated_user_idArguments
+      properties: {}

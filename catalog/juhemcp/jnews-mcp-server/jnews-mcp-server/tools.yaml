@@ -1,0 +1,25 @@
+tools:
+  - name: get_news_list
+    description: 通过新闻类型获取今日热点新闻头条
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: number
+          description: 当前页数, 默认1, 最大50
+        type:
+          type: string
+          description: 新闻类型:top(推荐,默认),guonei(国内),guoji(国际),yule(娱乐),tiyu(体育),junshi(军事),keji(科技),caijing(财经),youxi(游戏),qiche(汽车),jiankang(健康)
+        page_size:
+          type: number
+          description: 每页返回新闻条数, 默认20, 最大50
+  - name: get_news_content
+    description: 根据新闻ID获取新闻的详细内容
+    inputSchema:
+      type: object
+      required:
+        - uniquekey
+      properties:
+        uniquekey:
+          type: string
+          description: 新闻ID(gew_news_list中返回的uniquekey)

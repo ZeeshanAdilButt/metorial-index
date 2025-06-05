@@ -1,0 +1,16 @@
+identifier: hsinyuyen/my-postgres-mcp/my-postgres-mcp
+repo:
+  provider: github.com
+  url: https://github.com/hsinyuyen/my-postgres-mcp
+  name: my-postgres-mcp
+  owner: hsinyuyen
+server:
+  subdirectory: /
+  name: PostgreSQL MCP Server
+  description: Enable LLMs to interact with PostgreSQL databases by executing
+    read-only queries and inspecting database schemas. Access structured data
+    effortlessly while ensuring data integrity with read-only transactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

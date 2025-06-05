@@ -1,0 +1,37 @@
+tools:
+  - name: convert_excel_to_pdf
+    description: Converts Excel files (.xls, .xlsx) to PDF format
+    inputSchema:
+      type: object
+      required:
+        - input_path
+      properties:
+        input_path:
+          type: string
+          minLength: 1
+          description: Relative path to the Excel file (.xls, .xlsx) to convert
+        output_format:
+          enum:
+            - pdf
+          type: string
+          default: pdf
+          description: Output format (currently only PDF is supported)
+      additionalProperties: false
+  - name: convert_numbers_to_pdf
+    description: Converts Apple Numbers files (.numbers) to PDF format
+    inputSchema:
+      type: object
+      required:
+        - input_path
+      properties:
+        input_path:
+          type: string
+          minLength: 1
+          description: Relative path to the Numbers file (.numbers) to convert
+        output_format:
+          enum:
+            - pdf
+          type: string
+          default: pdf
+          description: Output format (currently only PDF is supported)
+      additionalProperties: false

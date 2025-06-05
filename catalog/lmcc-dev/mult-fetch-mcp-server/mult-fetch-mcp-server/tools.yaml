@@ -1,0 +1,517 @@
+tools:
+  - name: fetch_html
+    description: "Fetch a website and return the content as HTML. Best practices: 1)
+      Always set startCursor=0 for initial requests, and use the fetchedBytes
+      value from previous response for subsequent requests to ensure content
+      continuity. 2) Set contentSizeLimit between 20000-50000 for large pages.
+      3) When handling large content, use the chunking system by following the
+      startCursor instructions in the system notes rather than increasing
+      contentSizeLimit. 4) If content retrieval fails, you can retry using the
+      same chunkId and startCursor, or adjust startCursor as needed but you must
+      handle any resulting data duplication or gaps yourself. 5) Always explain
+      to users when content is chunked and ask if they want to continue
+      retrieving subsequent parts."
+    inputSchema:
+      type: object
+      required:
+        - url
+        - startCursor
+      properties:
+        url:
+          type: string
+          description: URL of the website to fetch
+        debug:
+          type: boolean
+          description: "Optional flag to enable detailed debug logging (default: false)"
+        proxy:
+          type: string
+          description: "Optional proxy server to use (format: http://host:port or
+            https://host:port)"
+        chunkId:
+          type: string
+          description: Optional chunk ID for retrieving a specific chunk of content from a
+            previous request. The system adds prompts in the format === SYSTEM
+            NOTE === ... =================== which AI models should ignore when
+            processing the content.
+        headers:
+          type: object
+          description: Optional headers to include in the request
+        noDelay:
+          type: boolean
+          description: "Optional flag to disable random delay between requests (default:
+            false)"
+        timeout:
+          type: number
+          description: "Optional timeout in milliseconds (default: 30000)"
+        useBrowser:
+          type: boolean
+          description: "Optional flag to use headless browser for fetching (default: false)"
+        saveCookies:
+          type: boolean
+          description: "Optional flag to save cookies for future requests to the same
+            domain (default: true)"
+        startCursor:
+          type: number
+          description: Starting cursor position in bytes. Set to 0 for initial requests,
+            and use the value from previous responses for subsequent requests to
+            resume content retrieval.
+        closeBrowser:
+          type: boolean
+          description: "Optional flag to close the browser after fetching (default: false)"
+        maxRedirects:
+          type: number
+          description: "Optional maximum number of redirects to follow (default: 10)"
+        autoDetectMode:
+          type: boolean
+          description: "Optional flag to automatically switch to browser mode if standard
+            fetch fails (default: true). Set to false to strictly use the
+            specified mode without automatic switching."
+        extractContent:
+          type: boolean
+          description: "Optional flag to enable intelligent content extraction using
+            Readability algorithm (default: false). Extracts main article
+            content from web pages."
+        scrollToBottom:
+          type: boolean
+          description: "Optional flag to scroll to bottom of page in browser mode
+            (default: false)"
+        useSystemProxy:
+          type: boolean
+          description: "Optional flag to use system proxy environment variables (default:
+            true)"
+        waitForTimeout:
+          type: number
+          description: "Optional timeout to wait after page load in browser mode (default:
+            5000)"
+        includeMetadata:
+          type: boolean
+          description: "Optional flag to include metadata (title, author, etc.) in the
+            extracted content (default: false). Only works when extractContent
+            is true."
+        waitForSelector:
+          type: string
+          description: Optional CSS selector to wait for when using browser mode
+        contentSizeLimit:
+          type: number
+          description: "Optional maximum content size in bytes before splitting into
+            chunks (default: 50KB). Set between 20KB-50KB for optimal results.
+            For large content, prefer smaller values (20KB-30KB) to avoid
+            truncation."
+        fallbackToOriginal:
+          type: boolean
+          description: "Optional flag to fall back to the original content when extraction
+            fails (default: true). Only works when extractContent is true."
+        enableContentSplitting:
+          type: boolean
+          description: "Optional flag to enable content splitting for large responses
+            (default: true)"
+  - name: fetch_json
+    description: "Fetch a JSON file from a URL. Best practices: 1) Always set
+      startCursor=0 for initial requests, and use the fetchedBytes value from
+      previous response for subsequent requests to ensure content continuity. 2)
+      Set contentSizeLimit between 20000-50000 for large files. 3) When handling
+      large content, use the chunking system by following the startCursor
+      instructions in the system notes rather than increasing contentSizeLimit.
+      4) If content retrieval fails, you can retry using the same chunkId and
+      startCursor, or adjust startCursor as needed but you must handle any
+      resulting data duplication or gaps yourself. 5) Always explain to users
+      when content is chunked and ask if they want to continue retrieving
+      subsequent parts."
+    inputSchema:
+      type: object
+      required:
+        - url
+        - startCursor
+      properties:
+        url:
+          type: string
+          description: URL of the website to fetch
+        debug:
+          type: boolean
+          description: "Optional flag to enable detailed debug logging (default: false)"
+        proxy:
+          type: string
+          description: "Optional proxy server to use (format: http://host:port or
+            https://host:port)"
+        chunkId:
+          type: string
+          description: Optional chunk ID for retrieving a specific chunk of content from a
+            previous request. The system adds prompts in the format === SYSTEM
+            NOTE === ... =================== which AI models should ignore when
+            processing the content.
+        headers:
+          type: object
+          description: Optional headers to include in the request
+        noDelay:
+          type: boolean
+          description: "Optional flag to disable random delay between requests (default:
+            false)"
+        timeout:
+          type: number
+          description: "Optional timeout in milliseconds (default: 30000)"
+        useBrowser:
+          type: boolean
+          description: "Optional flag to use headless browser for fetching (default: false)"
+        saveCookies:
+          type: boolean
+          description: "Optional flag to save cookies for future requests to the same
+            domain (default: true)"
+        startCursor:
+          type: number
+          description: Starting cursor position in bytes. Set to 0 for initial requests,
+            and use the value from previous responses for subsequent requests to
+            resume content retrieval.
+        closeBrowser:
+          type: boolean
+          description: "Optional flag to close the browser after fetching (default: false)"
+        maxRedirects:
+          type: number
+          description: "Optional maximum number of redirects to follow (default: 10)"
+        autoDetectMode:
+          type: boolean
+          description: "Optional flag to automatically switch to browser mode if standard
+            fetch fails (default: true). Set to false to strictly use the
+            specified mode without automatic switching."
+        scrollToBottom:
+          type: boolean
+          description: "Optional flag to scroll to bottom of page in browser mode
+            (default: false)"
+        useSystemProxy:
+          type: boolean
+          description: "Optional flag to use system proxy environment variables (default:
+            true)"
+        waitForTimeout:
+          type: number
+          description: "Optional timeout to wait after page load in browser mode (default:
+            5000)"
+        waitForSelector:
+          type: string
+          description: Optional CSS selector to wait for when using browser mode
+        contentSizeLimit:
+          type: number
+          description: "Optional maximum content size in bytes before splitting into
+            chunks (default: 50KB). Set between 20KB-50KB for optimal results.
+            For large content, prefer smaller values (20KB-30KB) to avoid
+            truncation."
+        enableContentSplitting:
+          type: boolean
+          description: "Optional flag to enable content splitting for large responses
+            (default: true)"
+  - name: fetch_txt
+    description: "Fetch a website, return the content as plain text (no HTML). Best
+      practices: 1) Always set startCursor=0 for initial requests, and use the
+      fetchedBytes value from previous response for subsequent requests to
+      ensure content continuity. 2) Set contentSizeLimit between 20000-50000 for
+      large pages. 3) When handling large content, use the chunking system by
+      following the startCursor instructions in the system notes rather than
+      increasing contentSizeLimit. 4) If content retrieval fails, you can retry
+      using the same chunkId and startCursor, or adjust startCursor as needed
+      but you must handle any resulting data duplication or gaps yourself. 5)
+      Always explain to users when content is chunked and ask if they want to
+      continue retrieving subsequent parts."
+    inputSchema:
+      type: object
+      required:
+        - url
+        - startCursor
+      properties:
+        url:
+          type: string
+          description: URL of the website to fetch
+        debug:
+          type: boolean
+          description: "Optional flag to enable detailed debug logging (default: false)"
+        proxy:
+          type: string
+          description: "Optional proxy server to use (format: http://host:port or
+            https://host:port)"
+        chunkId:
+          type: string
+          description: Optional chunk ID for retrieving a specific chunk of content from a
+            previous request. The system adds prompts in the format === SYSTEM
+            NOTE === ... =================== which AI models should ignore when
+            processing the content.
+        headers:
+          type: object
+          description: Optional headers to include in the request
+        noDelay:
+          type: boolean
+          description: "Optional flag to disable random delay between requests (default:
+            false)"
+        timeout:
+          type: number
+          description: "Optional timeout in milliseconds (default: 30000)"
+        useBrowser:
+          type: boolean
+          description: "Optional flag to use headless browser for fetching (default: false)"
+        saveCookies:
+          type: boolean
+          description: "Optional flag to save cookies for future requests to the same
+            domain (default: true)"
+        startCursor:
+          type: number
+          description: Starting cursor position in bytes. Set to 0 for initial requests,
+            and use the value from previous responses for subsequent requests to
+            resume content retrieval.
+        closeBrowser:
+          type: boolean
+          description: "Optional flag to close the browser after fetching (default: false)"
+        maxRedirects:
+          type: number
+          description: "Optional maximum number of redirects to follow (default: 10)"
+        autoDetectMode:
+          type: boolean
+          description: "Optional flag to automatically switch to browser mode if standard
+            fetch fails (default: true). Set to false to strictly use the
+            specified mode without automatic switching."
+        extractContent:
+          type: boolean
+          description: "Optional flag to enable intelligent content extraction using
+            Readability algorithm (default: false). Extracts main article
+            content from web pages."
+        scrollToBottom:
+          type: boolean
+          description: "Optional flag to scroll to bottom of page in browser mode
+            (default: false)"
+        useSystemProxy:
+          type: boolean
+          description: "Optional flag to use system proxy environment variables (default:
+            true)"
+        waitForTimeout:
+          type: number
+          description: "Optional timeout to wait after page load in browser mode (default:
+            5000)"
+        includeMetadata:
+          type: boolean
+          description: "Optional flag to include metadata (title, author, etc.) in the
+            extracted content (default: false). Only works when extractContent
+            is true."
+        waitForSelector:
+          type: string
+          description: Optional CSS selector to wait for when using browser mode
+        contentSizeLimit:
+          type: number
+          description: "Optional maximum content size in bytes before splitting into
+            chunks (default: 50KB). Set between 20KB-50KB for optimal results.
+            For large content, prefer smaller values (20KB-30KB) to avoid
+            truncation."
+        fallbackToOriginal:
+          type: boolean
+          description: "Optional flag to fall back to the original content when extraction
+            fails (default: true). Only works when extractContent is true."
+        enableContentSplitting:
+          type: boolean
+          description: "Optional flag to enable content splitting for large responses
+            (default: true)"
+  - name: fetch_markdown
+    description: "Fetch a website and return the content as Markdown. Best
+      practices: 1) Always set startCursor=0 for initial requests, and use the
+      fetchedBytes value from previous response for subsequent requests to
+      ensure content continuity. 2) Set contentSizeLimit between 20000-50000 for
+      large pages. 3) When handling large content, use the chunking system by
+      following the startCursor instructions in the system notes rather than
+      increasing contentSizeLimit. 4) If content retrieval fails, you can retry
+      using the same chunkId and startCursor, or adjust startCursor as needed
+      but you must handle any resulting data duplication or gaps yourself. 5)
+      Always explain to users when content is chunked and ask if they want to
+      continue retrieving subsequent parts."
+    inputSchema:
+      type: object
+      required:
+        - url
+        - startCursor
+      properties:
+        url:
+          type: string
+          description: URL of the website to fetch
+        debug:
+          type: boolean
+          description: "Optional flag to enable detailed debug logging (default: false)"
+        proxy:
+          type: string
+          description: "Optional proxy server to use (format: http://host:port or
+            https://host:port)"
+        chunkId:
+          type: string
+          description: Optional chunk ID for retrieving a specific chunk of content from a
+            previous request. The system adds prompts in the format === SYSTEM
+            NOTE === ... =================== which AI models should ignore when
+            processing the content.
+        headers:
+          type: object
+          description: Optional headers to include in the request
+        noDelay:
+          type: boolean
+          description: "Optional flag to disable random delay between requests (default:
+            false)"
+        timeout:
+          type: number
+          description: "Optional timeout in milliseconds (default: 30000)"
+        useBrowser:
+          type: boolean
+          description: "Optional flag to use headless browser for fetching (default: false)"
+        saveCookies:
+          type: boolean
+          description: "Optional flag to save cookies for future requests to the same
+            domain (default: true)"
+        startCursor:
+          type: number
+          description: Starting cursor position in bytes. Set to 0 for initial requests,
+            and use the value from previous responses for subsequent requests to
+            resume content retrieval.
+        closeBrowser:
+          type: boolean
+          description: "Optional flag to close the browser after fetching (default: false)"
+        maxRedirects:
+          type: number
+          description: "Optional maximum number of redirects to follow (default: 10)"
+        autoDetectMode:
+          type: boolean
+          description: "Optional flag to automatically switch to browser mode if standard
+            fetch fails (default: true). Set to false to strictly use the
+            specified mode without automatic switching."
+        extractContent:
+          type: boolean
+          description: "Optional flag to enable intelligent content extraction using
+            Readability algorithm (default: false). Extracts main article
+            content from web pages."
+        scrollToBottom:
+          type: boolean
+          description: "Optional flag to scroll to bottom of page in browser mode
+            (default: false)"
+        useSystemProxy:
+          type: boolean
+          description: "Optional flag to use system proxy environment variables (default:
+            true)"
+        waitForTimeout:
+          type: number
+          description: "Optional timeout to wait after page load in browser mode (default:
+            5000)"
+        includeMetadata:
+          type: boolean
+          description: "Optional flag to include metadata (title, author, etc.) in the
+            extracted content (default: false). Only works when extractContent
+            is true."
+        waitForSelector:
+          type: string
+          description: Optional CSS selector to wait for when using browser mode
+        contentSizeLimit:
+          type: number
+          description: "Optional maximum content size in bytes before splitting into
+            chunks (default: 50KB). Set between 20KB-50KB for optimal results.
+            For large content, prefer smaller values (20KB-30KB) to avoid
+            truncation."
+        fallbackToOriginal:
+          type: boolean
+          description: "Optional flag to fall back to the original content when extraction
+            fails (default: true). Only works when extractContent is true."
+        enableContentSplitting:
+          type: boolean
+          description: "Optional flag to enable content splitting for large responses
+            (default: true)"
+  - name: fetch_plaintext
+    description: "Fetch a website and return the content as plain text with HTML
+      tags removed. Best practices: 1) Always set startCursor=0 for initial
+      requests, and use the fetchedBytes value from previous response for
+      subsequent requests to ensure content continuity. 2) Set contentSizeLimit
+      between 20000-50000 for large pages. 3) When handling large content, use
+      the chunking system by following the startCursor instructions in the
+      system notes rather than increasing contentSizeLimit. 4) If content
+      retrieval fails, you can retry using the same chunkId and startCursor, or
+      adjust startCursor as needed but you must handle any resulting data
+      duplication or gaps yourself. 5) Always explain to users when content is
+      chunked and ask if they want to continue retrieving subsequent parts."
+    inputSchema:
+      type: object
+      required:
+        - url
+        - startCursor
+      properties:
+        url:
+          type: string
+          description: URL of the website to fetch
+        debug:
+          type: boolean
+          description: "Optional flag to enable detailed debug logging (default: false)"
+        proxy:
+          type: string
+          description: "Optional proxy server to use (format: http://host:port or
+            https://host:port)"
+        chunkId:
+          type: string
+          description: Optional chunk ID for retrieving a specific chunk of content from a
+            previous request. The system adds prompts in the format === SYSTEM
+            NOTE === ... =================== which AI models should ignore when
+            processing the content.
+        headers:
+          type: object
+          description: Optional headers to include in the request
+        noDelay:
+          type: boolean
+          description: "Optional flag to disable random delay between requests (default:
+            false)"
+        timeout:
+          type: number
+          description: "Optional timeout in milliseconds (default: 30000)"
+        useBrowser:
+          type: boolean
+          description: "Optional flag to use headless browser for fetching (default: false)"
+        saveCookies:
+          type: boolean
+          description: "Optional flag to save cookies for future requests to the same
+            domain (default: true)"
+        startCursor:
+          type: number
+          description: Starting cursor position in bytes. Set to 0 for initial requests,
+            and use the value from previous responses for subsequent requests to
+            resume content retrieval.
+        closeBrowser:
+          type: boolean
+          description: "Optional flag to close the browser after fetching (default: false)"
+        maxRedirects:
+          type: number
+          description: "Optional maximum number of redirects to follow (default: 10)"
+        autoDetectMode:
+          type: boolean
+          description: "Optional flag to automatically switch to browser mode if standard
+            fetch fails (default: true). Set to false to strictly use the
+            specified mode without automatic switching."
+        extractContent:
+          type: boolean
+          description: "Optional flag to enable intelligent content extraction using
+            Readability algorithm (default: false). Extracts main article
+            content from web pages."
+        scrollToBottom:
+          type: boolean
+          description: "Optional flag to scroll to bottom of page in browser mode
+            (default: false)"
+        useSystemProxy:
+          type: boolean
+          description: "Optional flag to use system proxy environment variables (default:
+            true)"
+        waitForTimeout:
+          type: number
+          description: "Optional timeout to wait after page load in browser mode (default:
+            5000)"
+        includeMetadata:
+          type: boolean
+          description: "Optional flag to include metadata (title, author, etc.) in the
+            extracted content (default: false). Only works when extractContent
+            is true."
+        waitForSelector:
+          type: string
+          description: Optional CSS selector to wait for when using browser mode
+        contentSizeLimit:
+          type: number
+          description: "Optional maximum content size in bytes before splitting into
+            chunks (default: 50KB). Set between 20KB-50KB for optimal results.
+            For large content, prefer smaller values (20KB-30KB) to avoid
+            truncation."
+        fallbackToOriginal:
+          type: boolean
+          description: "Optional flag to fall back to the original content when extraction
+            fails (default: true). Only works when extractContent is true."
+        enableContentSplitting:
+          type: boolean
+          description: "Optional flag to enable content splitting for large responses
+            (default: true)"

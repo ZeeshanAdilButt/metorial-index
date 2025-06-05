@@ -1,0 +1,93 @@
+tools:
+  - name: simple_test
+    description: "간단한 테스트 도구: 입력 텍스트를 그대로 반환합니다."
+    inputSchema:
+      type: object
+      title: simple_testArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+  - name: search_news
+    description: "
+
+      \    키워드로 뉴스 검색하기
+
+      \   \ 
+
+      \    Args:
+
+      \        keyword: 검색할 키워드
+
+      \   \ 
+
+      \    Returns:
+
+      \        검색된 뉴스 목록 (언론사, 제목, 시간, 링크 포함)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_newsArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+  - name: search_news_with_content
+    description: "
+
+      \    키워드로 뉴스 검색 및 첫 번째 기사 내용 가져오기
+
+      \   \ 
+
+      \    Args:
+
+      \        keyword: 검색할 키워드
+
+      \   \ 
+
+      \    Returns:
+
+      \        검색된 뉴스 제목 및 첫 번째 기사 내용
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_news_with_contentArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+  - name: compare_news_perspectives
+    description: "
+
+      \    키워드 관련 뉴스의 다양한 관점 비교 분석
+
+      \   \ 
+
+      \    Args:
+
+      \        keyword: 검색할 키워드
+
+      \   \ 
+
+      \    Returns:
+
+      \        다양한 언론사의 관점 비교 분석
+
+      \    "
+    inputSchema:
+      type: object
+      title: compare_news_perspectivesArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword

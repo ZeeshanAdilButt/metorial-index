@@ -1,0 +1,33 @@
+tools:
+  - name: aider_ai_code
+    description: Run Aider to perform AI coding tasks based on the provided prompt and files
+    inputSchema:
+      type: object
+      required:
+        - ai_coding_prompt
+        - relative_editable_files
+      properties:
+        model:
+          type: string
+          description: The primary AI model Aider should use for generating code
+        ai_coding_prompt:
+          type: string
+          description: The prompt for the AI to execute
+        relative_editable_files:
+          type: array
+          items:
+            type: string
+          description: List of files that can be edited
+        relative_readonly_files:
+          type: array
+          items:
+            type: string
+          description: List of files that can be read but not edited
+  - name: list_models
+    description: List available models that match the provided substring
+    inputSchema:
+      type: object
+      properties:
+        substring:
+          type: string
+          description: Substring to match against available models

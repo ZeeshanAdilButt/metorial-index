@@ -1,0 +1,32 @@
+tools:
+  - name: write_to_terminal
+    description: Write text or commands to the terminal
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: The text or command to write to the terminal
+  - name: read_terminal_output
+    description: Read the output from the terminal
+    inputSchema:
+      type: object
+      required:
+        - linesOfOutput
+      properties:
+        linesOfOutput:
+          type: number
+          description: Number of lines of output to read
+  - name: send_control_character
+    description: Send a control character to the terminal
+    inputSchema:
+      type: object
+      required:
+        - letter
+      properties:
+        letter:
+          type: string
+          description: The letter corresponding to the control character (e.g., "C" for
+            Ctrl+C)

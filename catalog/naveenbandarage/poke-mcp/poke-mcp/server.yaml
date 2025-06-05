@@ -1,0 +1,18 @@
+identifier: naveenbandarage/poke-mcp/poke-mcp
+repo:
+  provider: github.com
+  url: https://github.com/NaveenBandarage/poke-mcp
+  name: poke-mcp
+  owner: NaveenBandarage
+server:
+  subdirectory: /
+  name: Pokémcp
+  description: Poke-MCP is a Model Context Protocol (MCP) server that provides
+    Pokémon information through a standardized interface. It connects to the
+    [PokeAPI](https://pokeapi.co/) to fetch Pokémon data and exposes it through
+    MCP tools that can be used by any MCP-compatible client, such as Claude
+    Desktop App, Continue, Cline, and others.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

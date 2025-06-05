@@ -1,0 +1,17 @@
+identifier: kornbed/jira-mcp-server/jira-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kornbed/jira-mcp-server
+  name: jira-mcp-server
+  owner: kornbed
+server:
+  subdirectory: /
+  name: Jira MCP Server for Cursor
+  description: Integrate Jira ticket management seamlessly into your workflow.
+    List, create, and update tickets directly from your interface, enhancing
+    productivity and collaboration. Simplify your Jira interactions with a
+    powerful MCP server designed for Cursor.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

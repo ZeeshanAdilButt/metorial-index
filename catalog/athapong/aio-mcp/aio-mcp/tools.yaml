@@ -1,0 +1,32 @@
+tools:
+  - name: tool_manager
+    description: Manage MCP tools - enable or disable tools
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          description: "Action to perform: list, enable, disable"
+        tool_name:
+          type: string
+          description: Tool name to enable/disable
+  - name: tool_use_plan
+    description: Create a plan using available tools to solve the request
+    inputSchema:
+      type: object
+      required:
+        - request
+        - context
+      properties:
+        context:
+          type: string
+          description: Context related to the request
+        request:
+          type: string
+          description: Request to plan for
+  - name: capture_screenshot
+    description: Capture a screenshot of the entire screen
+    inputSchema:
+      type: object

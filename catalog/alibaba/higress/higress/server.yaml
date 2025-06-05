@@ -1,0 +1,17 @@
+identifier: alibaba/higress/higress
+repo:
+  provider: github.com
+  url: https://github.com/alibaba/higress
+  name: higress
+  owner: alibaba
+server:
+  subdirectory: /plugins/wasm-go/mcp-servers
+  name: Higress API Gateway
+  description: Host MCP servers seamlessly to enhance your AI applications.
+    Leverage unified authentication, rate limiting, and observability for secure
+    and efficient tool calls. Simplify deployment and management with Higress's
+    plugin mechanism for rapid integration of new capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

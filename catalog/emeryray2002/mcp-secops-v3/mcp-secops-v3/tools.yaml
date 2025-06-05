@@ -1,0 +1,265 @@
+tools:
+  - name: search_security_events
+    description: "Search for security events in Chronicle using natural language.
+
+      \   \ 
+
+      \    This function allows you to search for events using everyday language
+      instead of requiring
+
+      \    UDM query syntax. The natural language query will be automatically
+      translated into a\ 
+
+      \    Chronicle UDM query for execution.
+
+      \   \ 
+
+      \    Examples of natural language queries:
+
+      \    - \"Show me network connections from yesterday for the domain
+      google.com\"
+
+      \    - \"Display connections to IP address 192.168.1.100\"
+
+      \   \ 
+
+      \    Args:
+
+      \        text: Natural language description of the events you want to find
+
+      \        project_id: Google Cloud project ID (defaults to config)
+
+      \        customer_id: Chronicle customer ID (defaults to config)
+
+      \        hours_back: How many hours to look back (default: 24)
+
+      \        max_events: Maximum number of events to return (default: 100)
+
+      \        region: Chronicle region (defaults to config)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary containing the UDM query and search results, including
+      events and metadata.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_security_eventsArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        region:
+          type: string
+          title: Region
+          default: null
+        hours_back:
+          type: integer
+          title: Hours Back
+          default: 24
+        max_events:
+          type: integer
+          title: Max Events
+          default: 100
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+        customer_id:
+          type: string
+          title: Customer Id
+          default: null
+  - name: get_security_alerts
+    description: "Get security alerts from Chronicle.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: Google Cloud project ID (defaults to config)
+
+      \        customer_id: Chronicle customer ID (defaults to config)
+
+      \        hours_back: How many hours to look back (default: 24)
+
+      \        max_alerts: Maximum number of alerts to return (default: 10)
+
+      \        status_filter: Query string to filter alerts by status (default:
+      exclude closed)
+
+      \        region: Chronicle region (defaults to config)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Formatted string with security alerts
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_security_alertsArguments
+      properties:
+        region:
+          type: string
+          title: Region
+          default: null
+        hours_back:
+          type: integer
+          title: Hours Back
+          default: 24
+        max_alerts:
+          type: integer
+          title: Max Alerts
+          default: 10
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+        customer_id:
+          type: string
+          title: Customer Id
+          default: null
+        status_filter:
+          type: string
+          title: Status Filter
+          default: feedback_summary.status != "CLOSED"
+  - name: lookup_entity
+    description: "Look up an entity (IP, domain, hash, etc.) in Chronicle.
+
+      \   \ 
+
+      \    Args:
+
+      \        entity_value: Value to look up (IP, domain, hash, etc.)
+
+      \        project_id: Google Cloud project ID (defaults to config)
+
+      \        customer_id: Chronicle customer ID (defaults to config)
+
+      \        hours_back: How many hours to look back (default: 24)
+
+      \        region: Chronicle region (defaults to config)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Entity summary information
+
+      \    "
+    inputSchema:
+      type: object
+      title: lookup_entityArguments
+      required:
+        - entity_value
+      properties:
+        region:
+          type: string
+          title: Region
+          default: null
+        hours_back:
+          type: integer
+          title: Hours Back
+          default: 24
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+        customer_id:
+          type: string
+          title: Customer Id
+          default: null
+        entity_value:
+          type: string
+          title: Entity Value
+  - name: list_security_rules
+    description: "List security detection rules from Chronicle.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: Google Cloud project ID (defaults to config)
+
+      \        customer_id: Chronicle customer ID (defaults to config)
+
+      \        region: Chronicle region (defaults to config)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Raw response from the Chronicle API containing security detection
+      rules
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_security_rulesArguments
+      properties:
+        region:
+          type: string
+          title: Region
+          default: null
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+        customer_id:
+          type: string
+          title: Customer Id
+          default: null
+  - name: get_ioc_matches
+    description: "Get Indicators of Compromise (IoCs) matches from Chronicle.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: Google Cloud project ID (defaults to config)
+
+      \        customer_id: Chronicle customer ID (defaults to config)
+
+      \        hours_back: How many hours to look back (default: 24)
+
+      \        max_matches: Maximum number of matches to return (default: 20)
+
+      \        region: Chronicle region (defaults to config)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Formatted string with IoC matches
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ioc_matchesArguments
+      properties:
+        region:
+          type: string
+          title: Region
+          default: null
+        hours_back:
+          type: integer
+          title: Hours Back
+          default: 24
+        project_id:
+          type: string
+          title: Project Id
+          default: null
+        customer_id:
+          type: string
+          title: Customer Id
+          default: null
+        max_matches:
+          type: integer
+          title: Max Matches
+          default: 20

@@ -1,0 +1,19 @@
+identifier: falcosan/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/falcosan/mcp
+  name: mcp
+  owner: falcosan
+server:
+  subdirectory: /
+  name: MCP Server
+  description: Provide a server implementation of the Model Context Protocol to
+    enable integration of LLMs with external tools, resources, and prompts.
+    Facilitate dynamic interaction between language models and real-world data
+    or actions through a standardized JSON-RPC interface. Support development
+    and deployment of MCP-compliant servers with modular client and server
+    workspaces.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

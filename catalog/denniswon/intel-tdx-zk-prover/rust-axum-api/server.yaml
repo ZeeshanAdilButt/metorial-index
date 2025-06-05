@@ -1,0 +1,17 @@
+identifier: denniswon/intel-tdx-zk-prover/rust-axum-api
+repo:
+  provider: github.com
+  url: https://github.com/denniswon/intel-tdx-zk-prover
+  name: intel-tdx-zk-prover
+  owner: denniswon
+server:
+  subdirectory: /
+  name: TDX Prover
+  description: Provide Intel TDX DCAP attestation verification capabilities with a
+    simple REST API. Register agents, manage requests, and verify attestations
+    seamlessly. Leverage zero knowledge proofs for enhanced security in your
+    applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

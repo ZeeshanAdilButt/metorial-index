@@ -1,0 +1,19 @@
+identifier: dev-palboksoft/kimpalbok-slack-mcp-server/kimpalbok-slack-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dev-palboksoft/kimpalbok-slack-mcp-server
+  name: kimpalbok-slack-mcp-server
+  owner: dev-palboksoft
+server:
+  subdirectory: /
+  name: Slack Integration Server
+  description: Enable seamless interaction with Slack workspaces by listing
+    channels, posting messages, replying to threads, adding reactions, and
+    retrieving user and message information. Enhance your applications with
+    direct Slack workspace data and actions through a standardized MCP
+    interface. Simplify Slack automation and data retrieval with this
+    ready-to-use MCP server example.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

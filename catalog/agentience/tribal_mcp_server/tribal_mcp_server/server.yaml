@@ -1,0 +1,17 @@
+identifier: agentience/tribal_mcp_server/tribal_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/agentience/tribal_mcp_server
+  name: tribal_mcp_server
+  owner: agentience
+server:
+  subdirectory: /
+  name: Tribal
+  description: Track and retrieve programming errors with full context. Enhance
+    your coding experience by building a personalized knowledge base that learns
+    from your mistakes and suggests solutions. Integrate seamlessly with Claude
+    and other LLMs for smarter error management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: knight0zh/mssql-mcp-server/mssql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/knight0zh/mssql-mcp-server
+  name: mssql-mcp-server
+  owner: knight0zh
+server:
+  subdirectory: /
+  name: MSSQL Database Connector
+  description: Connect to Microsoft SQL Server databases and execute SQL queries
+    effortlessly. Manage your database connections and run queries directly from
+    your applications with ease. Enhance your data handling capabilities with
+    this powerful MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

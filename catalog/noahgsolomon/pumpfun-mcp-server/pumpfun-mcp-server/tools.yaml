@@ -1,0 +1,116 @@
+tools:
+  - name: get-token-info
+    description: Get information about a Pump.fun token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+      properties:
+        tokenAddress:
+          type: string
+          description: The token's mint address
+      additionalProperties: false
+  - name: create-token
+    description: Create a new Pump.fun token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - symbol
+        - description
+        - initialBuyAmount
+      properties:
+        name:
+          type: string
+          description: Token name
+        symbol:
+          type: string
+          description: Token symbol
+        imageUrl:
+          type: string
+          description: URL to token image (optional)
+        accountName:
+          type: string
+          default: default
+          description: Name of the account to use (will be created if it doesn't exist)
+        description:
+          type: string
+          description: Token description
+        initialBuyAmount:
+          type: number
+          minimum: 0.0001
+          description: Initial buy amount in SOL
+      additionalProperties: false
+  - name: buy-token
+    description: Buy a Pump.fun token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - buyAmount
+      properties:
+        buyAmount:
+          type: number
+          minimum: 0.0001
+          description: Amount to buy in SOL
+        accountName:
+          type: string
+          default: default
+          description: Name of the account to use
+        tokenAddress:
+          type: string
+          description: The token's mint address
+        slippageBasisPoints:
+          type: number
+          default: 100
+          description: Slippage tolerance in basis points (1% = 100)
+      additionalProperties: false
+  - name: sell-token
+    description: Sell a Pump.fun token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - sellAmount
+      properties:
+        sellAmount:
+          type: number
+          minimum: 0
+          description: Amount of tokens to sell (0 for all)
+        accountName:
+          type: string
+          default: default
+          description: Name of the account to use
+        tokenAddress:
+          type: string
+          description: The token's mint address
+        slippageBasisPoints:
+          type: number
+          default: 100
+          description: Slippage tolerance in basis points (1% = 100)
+      additionalProperties: false
+  - name: list-accounts
+    description: List all accounts in the keys folder
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-account-balance
+    description: Get the SOL and token balances for an account
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        accountName:
+          type: string
+          default: default
+          description: Name of the account to check
+        tokenAddress:
+          type: string
+          description: Optional token address to check balance for
+      additionalProperties: false

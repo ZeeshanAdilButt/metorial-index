@@ -1,0 +1,14 @@
+identifier: bazinga012/mcp_code_executor/mcp-code-executor
+repo:
+  provider: github.com
+  url: https://github.com/bazinga012/mcp_code_executor
+  name: mcp_code_executor
+  owner: bazinga012
+server:
+  subdirectory: /
+  name: Code Executor
+  description: Execute Python code from LLM prompts within a specified Conda environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

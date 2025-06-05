@@ -1,0 +1,20 @@
+identifier: graphlit/graphlit-mcp-server/graphlit-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/graphlit/graphlit-mcp-server
+  name: graphlit-mcp-server
+  owner: graphlit
+server:
+  subdirectory: /
+  name: Graphlit
+  description: >-
+    Integrate MCP clients with the Graphlit service.
+
+
+    Ingest anything from Slack to Gmail to podcast feeds, in addition to web
+    crawling, into a Graphlit project - and then retrieve relevant contents from
+    the MCP client.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

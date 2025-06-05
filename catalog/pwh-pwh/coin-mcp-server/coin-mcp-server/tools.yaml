@@ -1,0 +1,77 @@
+tools:
+  - name: getTokenPrice
+    description: get the current price of cryptocurrency
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - token
+      properties:
+        token:
+          type: string
+      additionalProperties: false
+  - name: getAnnoucements
+    description: >-
+      Search for cryptocurrency announcements within one month .parameter anType
+      is announcement type
+
+      Announcement type
+
+      latest_news: Latest events
+
+      coin_listings: New coin listings
+
+      trading_competitions_promotions: Trading competitions and promotions
+
+      maintenance_system_updates: maintenance/system upgrades
+
+      symbol_delisting: Delisting information
+
+      empty string for all announcements
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - anType
+      properties:
+        anType:
+          enum:
+            - latest_news
+            - coin_listings
+            - trading_competitions_promotions
+            - maintenance_system_updates
+            - symbol_delisting
+            - ""
+          type: string
+      additionalProperties: false
+  - name: getCoinInfo
+    description: >-
+      Get spot coin information。Parameter：coin - Coin name
+
+      Response Parameters 
+
+      - coin: Token name  
+
+      - transfer: Transferability  
+
+      - chains: Support chain list  
+        - chain: Chain name  
+        - needTag: Need tag  
+        - withdrawable: Withdrawal supported  
+        - rechargeable: Deposit supported  
+        - withdrawFee: Withdrawal transaction fee  
+        - extraWithdrawFee: Extra charge (e.g., 0.1 means 10% on-chain destruction)  
+        - browserUrl: Blockchain explorer address  
+        - contractAddress: Coin contract address  
+        - withdrawStep: Withdrawal count step (if not 0, withdrawal size must be a multiple of this value; if 0, no such limit)  
+        - withdrawMinScale: Decimal places of withdrawal amount  
+        - congestion: Chain network status (normal: normal, congested: congestion)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - coin
+      properties:
+        coin:
+          type: string
+      additionalProperties: false

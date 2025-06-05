@@ -1,0 +1,15 @@
+identifier: iaptic/mcp-server-iaptic/mcp-server-iaptic
+repo:
+  provider: github.com
+  url: https://github.com/iaptic/mcp-server-iaptic
+  name: mcp-server-iaptic
+  owner: iaptic
+server:
+  subdirectory: /
+  name: Iaptic
+  description: Interact with the Iaptic API to access customer, purchase,
+    transaction data, and statistics.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

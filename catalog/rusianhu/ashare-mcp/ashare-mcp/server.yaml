@@ -1,0 +1,18 @@
+identifier: rusianhu/ashare-mcp/ashare-mcp
+repo:
+  provider: github.com
+  url: https://github.com/RusianHu/Ashare-mcp
+  name: Ashare-mcp
+  owner: RusianHu
+server:
+  subdirectory: /
+  name: Ashare Stock Market Data Service - A股数据查询
+  description: Provide real-time and historical stock market data for the A-share
+    market through a simple and efficient API. Support multiple time intervals
+    and stock code formats with high data reliability from dual data sources.
+    Enable seamless integration as an MCP server for easy access to stock price
+    queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

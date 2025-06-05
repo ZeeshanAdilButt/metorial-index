@@ -1,0 +1,1543 @@
+tools:
+  - name: egfr_epi_cr_cys
+    description: "
+
+      \    Estimated Glomerular Filtration Rate (eGFR) using the 2021 CKD-EPI
+      Creatinine-Cystatin C equation
+
+      \    Reference: N Engl J Med. 2021 Nov 4;385(19):1737-1749
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    scr : float
+
+      \        Serum creatinine level in mg/dL
+
+      \    scys : float
+
+      \        Serum cystatin C level in mg/L
+
+      \    age : int
+
+      \        Age in years
+
+      \    male : bool
+
+      \        True if patient is male, False if female
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing eGFR result and calculation parameters
+
+      \    "
+    inputSchema:
+      type: object
+      title: egfr_epi_cr_cysArguments
+      required:
+        - scr
+        - scys
+        - age
+        - male
+      properties:
+        age:
+          type: integer
+          title: Age
+        scr:
+          type: number
+          title: Scr
+        male:
+          type: boolean
+          title: Male
+        scys:
+          type: number
+          title: Scys
+  - name: egfr_epi
+    description: "
+
+      \    Estimated Glomerular Filtration Rate (eGFR) using the EPI formula
+      (version 2021)
+
+      \    Reference: N Engl J Med. 2021 Nov 4;385(19):1737-1749
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    scr : float
+
+      \        serum creatinine level in mg/dL
+
+      \    age : int
+
+      \        Age in years
+
+      \    male : bool
+
+      \        true if Male
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    float
+
+      \        Estimated GFR in mL/min/1.73m^2
+
+      \    "
+    inputSchema:
+      type: object
+      title: egfr_epiArguments
+      required:
+        - scr
+        - age
+        - male
+      properties:
+        age:
+          type: integer
+          title: Age
+        scr:
+          type: number
+          title: Scr
+        male:
+          type: boolean
+          title: Male
+  - name: bp_children
+    description: "
+
+      \    혈압 센타일(percentile)을 계산하는 함수
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    years : int
+
+      \        나이(년)
+
+      \    months : int
+
+      \        나이(월)
+
+      \    height : int
+
+      \        키(cm)
+
+      \    sex : str
+
+      \        성별 ('male' 또는 'female')
+
+      \    systolic : int
+
+      \        수축기 혈압(mmHg)
+
+      \    diastolic : int
+
+      \        이완기 혈압(mmHg)
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        수축기 및 이완기 혈압 센타일 결과를 포함하는 딕셔너리
+
+      \    "
+    inputSchema:
+      type: object
+      title: bp_childrenArguments
+      required:
+        - years
+        - months
+        - height
+        - sex
+        - systolic
+        - diastolic
+      properties:
+        sex:
+          type: string
+          title: Sex
+        years:
+          type: integer
+          title: Years
+        height:
+          type: integer
+          title: Height
+        months:
+          type: integer
+          title: Months
+        systolic:
+          type: integer
+          title: Systolic
+        diastolic:
+          type: integer
+          title: Diastolic
+  - name: bmi_bsa_calculator
+    description: "
+
+      \    Calculates Body Mass Index (BMI) and Body Surface Area (BSA)
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    weight : float
+
+      \        Weight in kilograms
+
+      \    height : float
+
+      \        Height in centimeters (default) or meters
+
+      \    height_unit : str
+
+      \        Unit of height measurement ('cm' or 'm', default is 'cm')
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing BMI, BSA, and classification
+
+      \    "
+    inputSchema:
+      type: object
+      title: bmi_bsa_calculatorArguments
+      required:
+        - weight
+        - height
+      properties:
+        height:
+          type: number
+          title: Height
+        weight:
+          type: number
+          title: Weight
+        height_unit:
+          type: string
+          title: Height Unit
+          default: cm
+  - name: crcl_cockcroft_gault
+    description: "
+
+      \    Calculate Creatinine Clearance using the Cockcroft-Gault formula
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    age : int
+
+      \        Age in years
+
+      \    weight : float
+
+      \        Actual body weight in kg
+
+      \    height : float
+
+      \        Height in inches
+
+      \    scr : float
+
+      \        Serum creatinine in mg/dL
+
+      \    sex : str
+
+      \        Gender ('male' or 'female')
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing creatinine clearance result and weight
+      calculations
+
+      \    "
+    inputSchema:
+      type: object
+      title: crcl_cockcroft_gaultArguments
+      required:
+        - age
+        - weight
+        - height
+        - scr
+        - sex
+      properties:
+        age:
+          type: integer
+          title: Age
+        scr:
+          type: number
+          title: Scr
+        sex:
+          type: string
+          title: Sex
+        height:
+          type: number
+          title: Height
+        weight:
+          type: number
+          title: Weight
+  - name: map_calculator
+    description: "
+
+      \    Calculate Mean Arterial Pressure (MAP)
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    sbp : int
+
+      \        Systolic Blood Pressure in mmHg
+
+      \    dbp : int
+
+      \        Diastolic Blood Pressure in mmHg
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing MAP result and input values
+
+      \    "
+    inputSchema:
+      type: object
+      title: map_calculatorArguments
+      required:
+        - sbp
+        - dbp
+      properties:
+        dbp:
+          type: integer
+          title: Dbp
+        sbp:
+          type: integer
+          title: Sbp
+  - name: chads2_vasc_score
+    description: "
+
+      \    Calculate CHA₂DS₂-VASc Score for Atrial Fibrillation Stroke Risk
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    age : int
+
+      \        Age in years
+
+      \    female : bool
+
+      \        True if patient is female, False if male
+
+      \    chf : bool
+
+      \        True if patient has history of congestive heart failure
+
+      \    hypertension : bool
+
+      \        True if patient has history of hypertension
+
+      \    stroke_history : bool
+
+      \        True if patient has history of stroke, TIA, or thromboembolism
+
+      \    vascular_disease : bool
+
+      \        True if patient has history of vascular disease (prior MI,
+      peripheral artery disease, or aortic plaque)
+
+      \    diabetes : bool
+
+      \        True if patient has history of diabetes mellitus
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing CHA₂DS₂-VASc score and risk factors
+
+      \    "
+    inputSchema:
+      type: object
+      title: chads2_vasc_scoreArguments
+      required:
+        - age
+        - female
+        - chf
+        - hypertension
+        - stroke_history
+        - vascular_disease
+        - diabetes
+      properties:
+        age:
+          type: integer
+          title: Age
+        chf:
+          type: boolean
+          title: Chf
+        female:
+          type: boolean
+          title: Female
+        diabetes:
+          type: boolean
+          title: Diabetes
+        hypertension:
+          type: boolean
+          title: Hypertension
+        stroke_history:
+          type: boolean
+          title: Stroke History
+        vascular_disease:
+          type: boolean
+          title: Vascular Disease
+  - name: prevent_cvd_risk
+    description: "
+
+      \    Predicting Risk of Cardiovascular Disease EVENTs (PREVENT)
+
+      \    Predicts 10-year risk of CVD in patients aged 30-79 without known
+      CVD.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    age : int
+
+      \        Age in years (30-79)
+
+      \    female : bool
+
+      \        True if patient is female, False if male
+
+      \    tc : float
+
+      \        Total cholesterol in mmol/L
+
+      \    hdl : float
+
+      \        HDL cholesterol in mmol/L
+
+      \    sbp : int
+
+      \        Systolic blood pressure in mmHg
+
+      \    diabetes : bool
+
+      \        True if patient has diabetes
+
+      \    current_smoker : bool
+
+      \        True if patient is a current smoker
+
+      \    egfr : float
+
+      \        Estimated glomerular filtration rate in mL/min/1.73m²
+
+      \    using_antihtn : bool
+
+      \        True if patient is using antihypertensive drugs
+
+      \    using_statins : bool
+
+      \        True if patient is using statins
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing 10-year CVD risk and calculation details
+
+      \    "
+    inputSchema:
+      type: object
+      title: prevent_cvd_riskArguments
+      required:
+        - age
+        - female
+        - tc
+        - hdl
+        - sbp
+        - diabetes
+        - current_smoker
+        - egfr
+        - using_antihtn
+        - using_statins
+      properties:
+        tc:
+          type: number
+          title: Tc
+        age:
+          type: integer
+          title: Age
+        hdl:
+          type: number
+          title: Hdl
+        sbp:
+          type: integer
+          title: Sbp
+        egfr:
+          type: number
+          title: Egfr
+        female:
+          type: boolean
+          title: Female
+        diabetes:
+          type: boolean
+          title: Diabetes
+        using_antihtn:
+          type: boolean
+          title: Using Antihtn
+        using_statins:
+          type: boolean
+          title: Using Statins
+        current_smoker:
+          type: boolean
+          title: Current Smoker
+  - name: corrected_calcium
+    description: "
+
+      \    Calcium Correction for Hypoalbuminemia and Hyperalbuminemia
+
+      \    Calculates a corrected calcium level for patients with abnormal
+      albumin levels.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    serum_calcium : float
+
+      \        Patient's measured serum calcium level in mg/dL
+
+      \    patient_albumin : float
+
+      \        Patient's serum albumin level in g/dL
+
+      \    normal_albumin : float, optional
+
+      \        Normal/reference albumin level in g/dL, default is 4.0 g/dL
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing corrected calcium value, interpretation,
+      and calculation details
+
+      \       \ 
+
+      \    Formula:
+
+      \    --------
+
+      \    Corrected Calcium = (0.8 * (Normal Albumin - Patient's Albumin)) +
+      Serum Calcium
+
+      \   \ 
+
+      \    References:
+
+      \    -----------
+
+      \    Payne RB, et al. Br Med J. 1973;4(5893):643-646.
+
+      \    "
+    inputSchema:
+      type: object
+      title: corrected_calciumArguments
+      required:
+        - serum_calcium
+        - patient_albumin
+      properties:
+        serum_calcium:
+          type: number
+          title: Serum Calcium
+        normal_albumin:
+          type: number
+          title: Normal Albumin
+          default: 4
+        patient_albumin:
+          type: number
+          title: Patient Albumin
+  - name: qtc_calculator
+    description: "
+
+      \    Corrected QT Interval (QTc) Calculator
+
+      \    Corrects the QT interval for heart rate extremes using various
+      formulas.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    qt_interval : float
+
+      \        Measured QT interval in milliseconds (ms)
+
+      \    heart_rate : float
+
+      \        Heart rate in beats per minute (bpm)
+
+      \    formula : str, optional
+
+      \        Formula to use for correction (default: \"bazett\")
+
+      \        Options: \"bazett\", \"fridericia\", \"framingham\", \"hodges\",
+      \"rautaharju\"
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing QTc value, interpretation, and calculation
+      details
+
+      \       \ 
+
+      \    Formulas:
+
+      \    ---------
+
+      \    RR interval = 60 / heart_rate (in seconds)
+
+      \    Bazett: QTc = QT / √(RR)
+
+      \    Fridericia: QTc = QT / (RR)^(1/3)
+
+      \    Framingham: QTc = QT + 154 × (1 - RR)
+
+      \    Hodges: QTc = QT + 1.75 × (heart_rate - 60)
+
+      \    Rautaharju: QTc = QT × (120 + heart_rate) / 180
+
+      \   \ 
+
+      \    References:
+
+      \    -----------
+
+      \    Bazett HC. Heart. 1920;7:353-370
+
+      \    Fridericia LS. Acta Med Scand. 1920;53:469-486
+
+      \    Sagie A, et al. Am J Cardiol. 1992;70(7):797-801 (Framingham)
+
+      \    Hodges M, et al. J Electrocardiol. 1983;16(1):17-24
+
+      \    Rautaharju PM, et al. J Am Coll Cardiol. 2004;44(3):594-600
+
+      \    "
+    inputSchema:
+      type: object
+      title: qtc_calculatorArguments
+      required:
+        - qt_interval
+        - heart_rate
+      properties:
+        formula:
+          type: string
+          title: Formula
+          default: bazett
+        heart_rate:
+          type: number
+          title: Heart Rate
+        qt_interval:
+          type: number
+          title: Qt Interval
+  - name: wells_pe_criteria
+    description: "
+
+      \    Wells' Criteria for Pulmonary Embolism
+
+      \    Objectifies risk of pulmonary embolism based on clinical criteria.
+
+      \    Reference: Wells PS, et al. Thromb Haemost. 2000;83(3):416-20.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    clinical_signs_dvt: bool
+
+      \        Clinical signs and symptoms of DVT (leg swelling, pain with
+      palpation)
+
+      \    alternative_diagnosis_less_likely: bool
+
+      \        Alternative diagnosis less likely than PE
+
+      \    heart_rate_over_100: bool
+
+      \        Heart rate > 100 beats per minute
+
+      \    immobilization_or_surgery: bool
+
+      \        Immobilization or surgery in the previous four weeks
+
+      \    previous_dvt_or_pe: bool
+
+      \        Previous DVT/PE
+
+      \    hemoptysis: bool
+
+      \        Hemoptysis
+
+      \    malignancy: bool
+
+      \        Malignancy (treatment ongoing, treated in last 6 months, or
+      palliative)
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing the score, risk category for both
+      three-tier and\ 
+
+      \        two-tier models, and recommendations
+
+      \    "
+    inputSchema:
+      type: object
+      title: wells_pe_criteriaArguments
+      properties:
+        hemoptysis:
+          type: boolean
+          title: Hemoptysis
+          default: false
+        malignancy:
+          type: boolean
+          title: Malignancy
+          default: false
+        clinical_signs_dvt:
+          type: boolean
+          title: Clinical Signs Dvt
+          default: false
+        previous_dvt_or_pe:
+          type: boolean
+          title: Previous Dvt Or Pe
+          default: false
+        heart_rate_over_100:
+          type: boolean
+          title: Heart Rate Over 100
+          default: false
+        immobilization_or_surgery:
+          type: boolean
+          title: Immobilization Or Surgery
+          default: false
+        alternative_diagnosis_less_likely:
+          type: boolean
+          title: Alternative Diagnosis Less Likely
+          default: false
+  - name: ibw_abw_calculator
+    description: "
+
+      \    Ideal Body Weight and Adjusted Body Weight Calculator
+
+      \    Calculates ideal body weight (Devine formula) and adjusted body
+      weight.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    weight_kg : float
+
+      \        Actual body weight in kilograms
+
+      \    height_inches : float
+
+      \        Height in inches
+
+      \    male : bool
+
+      \        True if patient is male, False if female
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing ideal body weight, adjusted body weight,
+      and calculation details
+
+      \       \ 
+
+      \    Formulas:
+
+      \    ---------
+
+      \    Ideal Body Weight (IBW) (Devine formula):
+
+      \    - Men: IBW = 50 kg + 2.3 kg × (height in inches - 60)
+
+      \    - Women: IBW = 45.5 kg + 2.3 kg × (height in inches - 60)
+
+      \   \ 
+
+      \    Adjusted Body Weight (ABW):
+
+      \    - ABW = IBW + 0.4 × (actual weight - IBW)
+
+      \   \ 
+
+      \    References:
+
+      \    -----------
+
+      \    Devine BJ. Gentamicin therapy. Drug Intell Clin Pharm.
+      1974;8:650-655.
+
+      \    Pai MP. Drug Dosing Based on Weight and Body Surface Area:
+      Mathematical Assumptions and Limitations in Obese Adults. Pharmacotherapy.
+      2012;32(9):856-868.
+
+      \    "
+    inputSchema:
+      type: object
+      title: ibw_abw_calculatorArguments
+      required:
+        - weight_kg
+        - height_inches
+        - male
+      properties:
+        male:
+          type: boolean
+          title: Male
+        weight_kg:
+          type: number
+          title: Weight Kg
+        height_inches:
+          type: number
+          title: Height Inches
+  - name: pregnancy_calculator
+    description: "
+
+      \    Pregnancy Due Dates Calculator
+
+      \    Calculates pregnancy dates from last period, gestational age, or date
+      of conception.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    calculation_method : str
+
+      \        Method used for calculation: \"lmp\" (last menstrual period),
+      \"conception\", or \"ultrasound\"
+
+      \    date_value : str
+
+      \        Date in format 'YYYY-MM-DD' (date of LMP, conception, or
+      ultrasound)
+
+      \    cycle_length : int, optional
+
+      \        Length of menstrual cycle in days (default: 28)
+
+      \    gestational_age_weeks : int, optional
+
+      \        Weeks of gestational age at ultrasound (required if
+      calculation_method is \"ultrasound\")
+
+      \    gestational_age_days : int, optional
+
+      \        Days of gestational age at ultrasound (required if
+      calculation_method is \"ultrasound\")
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing calculated pregnancy dates and information
+
+      \       \ 
+
+      \    Formulas:
+
+      \    ---------
+
+      \    - EGA (Estimated Gestational Age) = time since 1st day of LMP
+
+      \    - EDC (Estimated Date of Conception) = LMP + 2 weeks (adjusted for
+      cycle length)
+
+      \    - EDD (Estimated Due Date) = LMP + 40 weeks (adjusted for cycle
+      length)
+
+      \   \ 
+
+      \    For non-28 day cycles:
+
+      \    - Adjustment = (cycle_length - 28) days
+
+      \    - EDD = LMP + 40 weeks + Adjustment
+
+      \    "
+    inputSchema:
+      type: object
+      title: pregnancy_calculatorArguments
+      required:
+        - calculation_method
+        - date_value
+      properties:
+        date_value:
+          type: string
+          title: Date Value
+        cycle_length:
+          type: integer
+          title: Cycle Length
+          default: 28
+        calculation_method:
+          type: string
+          title: Calculation Method
+        gestational_age_days:
+          type: integer
+          title: Gestational Age Days
+          default: null
+        gestational_age_weeks:
+          type: integer
+          title: Gestational Age Weeks
+          default: null
+  - name: revised_cardiac_risk_index
+    description: "
+
+      \    Revised Cardiac Risk Index for Pre-Operative Risk
+
+      \    Estimates risk of cardiac complications after noncardiac surgery.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    high_risk_surgery : bool
+
+      \        Intraperitoneal, intrathoracic, or suprainguinal vascular surgery
+
+      \    ischemic_heart_disease : bool
+
+      \        History of MI, positive exercise test, current chest pain
+      considered due to myocardial\ 
+
+      \        ischemia, use of nitrate therapy, or ECG with pathological Q
+      waves
+
+      \    congestive_heart_failure : bool
+
+      \        Pulmonary edema, bilateral rales, S3 gallop, paroxysmal nocturnal
+      dyspnea, or\ 
+
+      \        CXR showing pulmonary vascular redistribution
+
+      \    cerebrovascular_disease : bool
+
+      \        Prior transient ischemic attack (TIA) or stroke
+
+      \    insulin_treatment : bool
+
+      \        Pre-operative treatment with insulin
+
+      \    creatinine_over_2mg : bool
+
+      \        Pre-operative creatinine >2 mg/dL (176.8 µmol/L)
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary containing RCRI score and risk interpretation
+
+      \       \ 
+
+      \    References:
+
+      \    -----------
+
+      \    Lee TH, et al. Circulation. 1999;100(10):1043-1049.
+
+      \    Canadian Cardiovascular Society (CCS) Guidelines, 2017.
+
+      \    European Society of Cardiology (ESC) Guidelines, 2022.
+
+      \    "
+    inputSchema:
+      type: object
+      title: revised_cardiac_risk_indexArguments
+      properties:
+        high_risk_surgery:
+          type: boolean
+          title: High Risk Surgery
+          default: false
+        insulin_treatment:
+          type: boolean
+          title: Insulin Treatment
+          default: false
+        creatinine_over_2mg:
+          type: boolean
+          title: Creatinine Over 2Mg
+          default: false
+        ischemic_heart_disease:
+          type: boolean
+          title: Ischemic Heart Disease
+          default: false
+        cerebrovascular_disease:
+          type: boolean
+          title: Cerebrovascular Disease
+          default: false
+        congestive_heart_failure:
+          type: boolean
+          title: Congestive Heart Failure
+          default: false
+  - name: child_pugh_score
+    description: "
+
+      \    Calculates the Child-Pugh Score for cirrhosis mortality assessment.
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    bilirubin : float
+
+      \        Total bilirubin in mg/dL.
+
+      \    albumin : float
+
+      \        Albumin in g/dL.
+
+      \    inr : float
+
+      \        International Normalized Ratio (INR) for prothrombin time.
+
+      \    ascites : str
+
+      \        One of: \"absent\", \"slight\", \"moderate\".
+
+      \    encephalopathy_grade : int
+
+      \        Hepatic encephalopathy grade: 0 (none), 1-2 (mild), 3-4 (severe).
+
+
+      \    Returns:
+
+      \    --------
+
+      \    int
+
+      \        Total Child-Pugh score (5–15).
+
+      \    "
+    inputSchema:
+      type: object
+      title: child_pugh_scoreArguments
+      required:
+        - bilirubin
+        - albumin
+        - inr
+        - ascites
+        - encephalopathy_grade
+      properties:
+        inr:
+          type: number
+          title: Inr
+        albumin:
+          type: number
+          title: Albumin
+        ascites:
+          type: string
+          title: Ascites
+        bilirubin:
+          type: number
+          title: Bilirubin
+        encephalopathy_grade:
+          type: integer
+          title: Encephalopathy Grade
+  - name: steroid_conversion
+    description: "
+
+      \    Converts corticosteroid dosages using standard equivalencies.
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    from_steroid : str
+
+      \        Name of the original steroid (e.g., 'prednisone',
+      'dexamethasone').
+
+      \    from_dose_mg : float
+
+      \        Dose of the original steroid in mg.
+
+      \    to_steroid : str
+
+      \        Name of the steroid to convert to.
+
+
+      \    Returns:
+
+      \    --------
+
+      \    float
+
+      \        Equivalent dose in mg of the target steroid.
+
+      \    "
+    inputSchema:
+      type: object
+      title: steroid_conversionArguments
+      required:
+        - from_steroid
+        - from_dose_mg
+        - to_steroid
+      properties:
+        to_steroid:
+          type: string
+          title: To Steroid
+        from_dose_mg:
+          type: number
+          title: From Dose Mg
+        from_steroid:
+          type: string
+          title: From Steroid
+  - name: calculate_mme
+    description: "
+
+      \    Calculates total daily Morphine Milligram Equivalents (MME).
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    opioid : str
+
+      \        Name of the opioid (e.g., 'oxycodone', 'fentanyl_patch').
+
+      \    dose_per_administration : float
+
+      \        Amount of opioid per dose (mg for most, mcg/hr for fentanyl
+      patch).
+
+      \    doses_per_day : int
+
+      \        Number of times the dose is taken per day.
+
+
+      \    Returns:
+
+      \    --------
+
+      \    float
+
+      \        Total MME/day.
+
+      \    "
+    inputSchema:
+      type: object
+      title: calculate_mmeArguments
+      required:
+        - opioid
+        - dose_per_administration
+        - doses_per_day
+      properties:
+        opioid:
+          type: string
+          title: Opioid
+        doses_per_day:
+          type: integer
+          title: Doses Per Day
+        dose_per_administration:
+          type: number
+          title: Dose Per Administration
+  - name: maintenance_fluids
+    description: "
+
+      \    Calculates maintenance IV fluid rate (mL/hr) using the 4-2-1 Rule.
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    weight_kg : float
+
+      \        Patient's weight in kilograms.
+
+
+      \    Returns:
+
+      \    --------
+
+      \    float
+
+      \        Maintenance fluid rate in mL/hr.
+
+      \    "
+    inputSchema:
+      type: object
+      title: maintenance_fluidsArguments
+      required:
+        - weight_kg
+      properties:
+        weight_kg:
+          type: number
+          title: Weight Kg
+  - name: corrected_sodium
+    description: "
+
+      \    Calculates corrected sodium level in the setting of hyperglycemia
+
+      \    using Katz and Hillier correction formulas.
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    measured_sodium : float
+
+      \        Measured serum sodium in mEq/L.
+
+      \    serum_glucose : float
+
+      \        Serum glucose in mg/dL.
+
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        Dictionary with corrected sodium values using Katz and Hillier
+      formulas.
+
+      \    "
+    inputSchema:
+      type: object
+      title: corrected_sodiumArguments
+      required:
+        - measured_sodium
+        - serum_glucose
+      properties:
+        serum_glucose:
+          type: number
+          title: Serum Glucose
+        measured_sodium:
+          type: number
+          title: Measured Sodium
+  - name: meld_3
+    description: "
+
+      \    Calculates MELD 3.0 Score for liver disease transplant planning.
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    age : int
+
+      \        Patient age in years.
+
+      \    female : bool
+
+      \        True if patient is female.
+
+      \    bilirubin : float
+
+      \        Serum bilirubin in mg/dL.
+
+      \    inr : float
+
+      \        INR (International Normalized Ratio).
+
+      \    creatinine : float
+
+      \        Serum creatinine in mg/dL.
+
+      \    albumin : float
+
+      \        Serum albumin in g/dL.
+
+      \    sodium : float
+
+      \        Serum sodium in mEq/L.
+
+      \    dialysis : bool
+
+      \        True if patient had ≥2 dialysis sessions or 24h CVVHD in last 7
+      days.
+
+
+      \    Returns:
+
+      \    --------
+
+      \    int
+
+      \        MELD 3.0 score, rounded to the nearest whole number.
+
+      \    "
+    inputSchema:
+      type: object
+      title: meld_3Arguments
+      required:
+        - age
+        - female
+        - bilirubin
+        - inr
+        - creatinine
+        - albumin
+        - sodium
+        - dialysis
+      properties:
+        age:
+          type: integer
+          title: Age
+        inr:
+          type: number
+          title: Inr
+        female:
+          type: boolean
+          title: Female
+        sodium:
+          type: number
+          title: Sodium
+        albumin:
+          type: number
+          title: Albumin
+        dialysis:
+          type: boolean
+          title: Dialysis
+        bilirubin:
+          type: number
+          title: Bilirubin
+        creatinine:
+          type: number
+          title: Creatinine
+  - name: framingham_risk_score
+    description: "
+
+      \    Calculates the Framingham Risk Score for 10-year risk of heart attack
+      (CHD)
+
+      \    based on the Framingham Heart Study equation (men and women).
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    age : int
+
+      \        Age of the patient (30-79 years).
+
+      \    total_cholesterol : float
+
+      \        Total cholesterol in mg/dL.
+
+      \    hdl_cholesterol : float
+
+      \        HDL cholesterol in mg/dL.
+
+      \    systolic_bp : float
+
+      \        Systolic blood pressure in mmHg.
+
+      \    treated_for_bp : bool
+
+      \        Whether the patient is treated for high blood pressure (1 if yes,
+      0 if no).
+
+      \    smoker : bool
+
+      \        Whether the patient is a smoker (1 if yes, 0 if no).
+
+      \    gender : str
+
+      \        Gender of the patient (\"male\" or \"female\").
+
+
+      \    Returns:
+
+      \    --------
+
+      \    float
+
+      \        10-year risk of heart attack as a percentage.
+
+      \    "
+    inputSchema:
+      type: object
+      title: framingham_risk_scoreArguments
+      required:
+        - age
+        - total_cholesterol
+        - hdl_cholesterol
+        - systolic_bp
+        - treated_for_bp
+        - smoker
+        - gender
+      properties:
+        age:
+          type: integer
+          title: Age
+        gender:
+          type: string
+          title: Gender
+        smoker:
+          type: boolean
+          title: Smoker
+        systolic_bp:
+          type: number
+          title: Systolic Bp
+        treated_for_bp:
+          type: boolean
+          title: Treated For Bp
+        hdl_cholesterol:
+          type: number
+          title: Hdl Cholesterol
+        total_cholesterol:
+          type: number
+          title: Total Cholesterol
+  - name: homa_ir
+    description: "
+
+      \    Calculates the HOMA-IR score for insulin resistance.
+
+
+      \    Formula:
+
+      \    Score = (Fasting insulin (uIU/mL) * Fasting glucose (mg/dL)) / 405
+
+
+      \    Parameters:
+
+      \    -----------
+
+      \    fasting_insulin : float
+
+      \        Fasting insulin level in micro-units per milliliter (uIU/mL).
+
+      \    fasting_glucose : float
+
+      \        Fasting glucose level in milligrams per deciliter (mg/dL).
+
+
+      \    Returns:
+
+      \    --------
+
+      \    float
+
+      \        HOMA-IR score.
+
+      \    "
+    inputSchema:
+      type: object
+      title: homa_irArguments
+      required:
+        - fasting_insulin
+        - fasting_glucose
+      properties:
+        fasting_glucose:
+          type: number
+          title: Fasting Glucose
+        fasting_insulin:
+          type: number
+          title: Fasting Insulin

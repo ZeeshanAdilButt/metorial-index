@@ -1,0 +1,18 @@
+identifier: tomschell/mcp-long-term-memory/mcp-long-term-memory
+repo:
+  provider: github.com
+  url: https://github.com/tomschell/mcp-long-term-memory
+  name: mcp-long-term-memory
+  owner: tomschell
+server:
+  subdirectory: /
+  name: Memory MCP Server
+  description: Provide a long-term memory storage system for LLMs that preserves
+    project context across sessions. Enable semantic search over past
+    interactions and development decisions to enhance continuity and recall.
+    Organize memories by type, tags, and relationships for efficient retrieval
+    and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

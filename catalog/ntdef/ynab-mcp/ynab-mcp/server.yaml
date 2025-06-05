@@ -1,0 +1,17 @@
+identifier: ntdef/ynab-mcp/ynab-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ntdef/ynab-mcp
+  name: ynab-mcp
+  owner: ntdef
+server:
+  subdirectory: /
+  name: YNAB Budget Management Server
+  description: Enable seamless interaction with your YNAB budgeting data through a
+    standardized protocol. Retrieve and manage budgets, accounts, categories,
+    and transactions efficiently. Automate budget updates and transaction
+    handling to streamline your financial workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

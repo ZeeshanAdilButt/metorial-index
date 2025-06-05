@@ -1,0 +1,17 @@
+identifier: ma3u/dust-mcp-server/dust-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ma3u/dust-mcp-server
+  name: dust-mcp-server
+  owner: ma3u
+server:
+  subdirectory: /
+  name: Dust Agent Integration Server
+  description: Provide seamless integration with Dust.tt agents to query, list,
+    and retrieve agent configurations. Enable efficient interaction with Dust
+    agents through Claude Desktop using STDIO or HTTP transport. Simplify
+    managing and querying AI agents within your workspace.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

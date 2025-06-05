@@ -1,0 +1,14 @@
+identifier: r3-yamauchi/kintone-mcp-server/kintone-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/r3-yamauchi/kintone-mcp-server
+  name: kintone-mcp-server
+  owner: r3-yamauchi
+server:
+  subdirectory: /
+  name: kintone MCP Server
+  description: Access and update kintone data from the Claude Desktop app.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: mastra-ai/mastra/mastra
+repo:
+  provider: github.com
+  url: https://github.com/mastra-ai/mastra
+  name: mastra
+  owner: mastra-ai
+server:
+  subdirectory: /packages/mcp
+  name: Mastra MCP Client
+  description: Seamlessly integrate with MCP-compatible AI models and tools.
+    Manage multiple server connections and execute tools with ease, enhancing
+    your application's capabilities. Simplify resource discovery and tool
+    execution with automatic error handling and logging.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

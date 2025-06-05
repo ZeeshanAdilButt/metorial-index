@@ -1,0 +1,33 @@
+tools:
+  - name: list_user_projects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_project_feedbacks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_id
+      properties:
+        project_id:
+          type: string
+          description: The ID of the project to retrieve feedbacks from
+      additionalProperties: false
+  - name: reply_to_feedback
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - feedback_id
+        - response
+      properties:
+        response:
+          type: string
+          description: The text of the reply
+        feedback_id:
+          type: string
+          description: The ID of the feedback to reply to
+      additionalProperties: false

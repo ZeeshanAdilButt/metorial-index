@@ -1,0 +1,543 @@
+tools:
+  - name: manage_azure_ad_roles
+    description: Manage Azure AD directory roles and assignments
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - list_roles
+            - list_role_assignments
+            - assign_role
+            - remove_role_assignment
+          type: string
+          description: Action to perform
+        filter:
+          type: string
+          description: OData filter string (optional for list actions)
+        roleId:
+          type: string
+          description: ID of the directory role (required for assign/remove)
+        principalId:
+          type: string
+          description: ID of the principal (user, group, SP) to assign/remove role for
+            (required for assign/remove)
+        assignmentId:
+          type: string
+          description: ID of the role assignment to remove (required for remove)
+  - name: manage_azure_ad_apps
+    description: Manage Azure AD application registrations
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        appId:
+          type: string
+          description: Object ID of the application (required for get, update, add/remove
+            owner)
+        action:
+          enum:
+            - list_apps
+            - get_app
+            - update_app
+            - add_owner
+            - remove_owner
+          type: string
+          description: Action to perform
+        filter:
+          type: string
+          description: OData filter string (optional for list_apps)
+        ownerId:
+          type: string
+          description: Object ID of the user to add/remove as owner (required for
+            add/remove owner)
+        appDetails:
+          type: object
+          properties:
+            displayName:
+              type: string
+            signInAudience:
+              type: string
+          description: Details for updating the application (required for update_app)
+  - name: manage_azure_ad_devices
+    description: Manage Azure AD device objects
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - list_devices
+            - get_device
+            - enable_device
+            - disable_device
+            - delete_device
+          type: string
+          description: Action to perform
+        filter:
+          type: string
+          description: OData filter string (optional for list_devices)
+        deviceId:
+          type: string
+          description: Object ID of the device (required for get, enable, disable, delete)
+  - name: Dynamicendpoint_automation_assistant
+    description: Acts as a versatile assistant to call any Microsoft Graph or Azure
+      Resource Management API endpoint. Use this for managing users, groups,
+      applications, devices, policies (Conditional Access, Intune
+      Configuration/Compliance), security alerts, audit logs, SharePoint,
+      Exchange, and more.
+    inputSchema:
+      type: object
+      required:
+        - apiType
+        - path
+        - method
+      properties:
+        body:
+          type: object
+          description: Request body (for POST, PUT, PATCH).
+        path:
+          type: string
+          description: API URL path (e.g., '/users').
+        method:
+          enum:
+            - get
+            - post
+            - put
+            - patch
+            - delete
+          type: string
+          description: HTTP method.
+        apiType:
+          enum:
+            - graph
+            - azure
+          type: string
+          description: "API type: 'graph' or 'azure'."
+        apiVersion:
+          type: string
+          description: Azure API version (required for 'azure').
+        queryParams:
+          type: object
+          description: Query parameters.
+          additionalProperties:
+            type: string
+        subscriptionId:
+          type: string
+          description: Azure Subscription ID (for 'azure').
+  - name: search_audit_log
+    description: Search the Azure AD Unified Audit Log.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        top:
+          type: number
+          description: Maximum number of records.
+        filter:
+          type: string
+          description: OData filter string (e.g., 'activityDateTime ge
+            2024-01-01T00:00:00Z').
+  - name: manage_alerts
+    description: List and view security alerts from Microsoft security products.
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        top:
+          type: number
+          description: Maximum number of alerts.
+        action:
+          enum:
+            - list_alerts
+            - get_alert
+          type: string
+          description: "Action: list_alerts or get_alert."
+        filter:
+          type: string
+          description: OData filter string (e.g., 'status eq \'new\'').
+        alertId:
+          type: string
+          description: ID of the alert (required for get_alert).
+  - name: manage_service_principals
+    description: Manage Azure AD Service Principals
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        spId:
+          type: string
+          description: Object ID of the Service Principal (required for get, add/remove
+            owner)
+        action:
+          enum:
+            - list_sps
+            - get_sp
+            - add_owner
+            - remove_owner
+          type: string
+          description: Action to perform
+        filter:
+          type: string
+          description: OData filter string (optional for list_sps)
+        ownerId:
+          type: string
+          description: Object ID of the user to add/remove as owner (required for
+            add/remove owner)
+  - name: manage_sharepoint_sites
+    description: Manage SharePoint sites
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        url:
+          type: string
+          description: URL for the SharePoint site
+        title:
+          type: string
+          description: Title for the SharePoint site
+        action:
+          enum:
+            - get
+            - create
+            - update
+            - delete
+            - add_users
+            - remove_users
+          type: string
+          description: Action to perform
+        owners:
+          type: array
+          items:
+            type: string
+          description: List of owner email addresses
+        siteId:
+          type: string
+          description: SharePoint site ID for existing site operations
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member email addresses
+        settings:
+          type: object
+          properties:
+            isPublic:
+              type: boolean
+            allowSharing:
+              type: boolean
+            storageQuota:
+              type: number
+        template:
+          type: string
+          description: "Web template ID for site creation. Examples: 'STS#3' (Modern Team
+            Site), 'SITEPAGEPUBLISHING#0' (Communication Site), 'STS#0' (Classic
+            Team Site - default if omitted)."
+        description:
+          type: string
+          description: Description of the SharePoint site
+  - name: manage_sharepoint_lists
+    description: Manage SharePoint lists
+    inputSchema:
+      type: object
+      required:
+        - action
+        - siteId
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+          description: Items to add to the list
+        title:
+          type: string
+          description: Title for the SharePoint list
+        action:
+          enum:
+            - get
+            - create
+            - update
+            - delete
+            - add_items
+            - get_items
+          type: string
+          description: Action to perform
+        listId:
+          type: string
+          description: SharePoint list ID for existing list operations
+        siteId:
+          type: string
+          description: SharePoint site ID
+        columns:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              required:
+                type: boolean
+              defaultValue: {}
+          description: Columns for the SharePoint list
+        template:
+          type: string
+          description: Template to use for list creation
+        description:
+          type: string
+          description: Description of the SharePoint list
+  - name: manage_distribution_lists
+    description: Manage Microsoft 365 distribution lists
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - create
+            - update
+            - delete
+            - add_members
+            - remove_members
+          type: string
+          description: Action to perform
+        listId:
+          type: string
+          description: Distribution list ID for existing list operations
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member email addresses
+        settings:
+          type: object
+          properties:
+            hideFromGAL:
+              type: boolean
+            moderatedBy:
+              type: array
+              items:
+                type: string
+            requireSenderAuthentication:
+              type: boolean
+        displayName:
+          type: string
+          description: Display name for the distribution list
+        emailAddress:
+          type: string
+          description: Email address for the distribution list
+  - name: manage_security_groups
+    description: Manage Microsoft 365 security groups
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - create
+            - update
+            - delete
+            - add_members
+            - remove_members
+          type: string
+          description: Action to perform
+        groupId:
+          type: string
+          description: Security group ID for existing group operations
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member email addresses
+        settings:
+          type: object
+          properties:
+            mailEnabled:
+              type: boolean
+            securityEnabled:
+              type: boolean
+        description:
+          type: string
+          description: Description of the security group
+        displayName:
+          type: string
+          description: Display name for the security group
+  - name: manage_m365_groups
+    description: Manage Microsoft 365 groups
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - get
+            - create
+            - update
+            - delete
+            - add_members
+            - remove_members
+          type: string
+          description: Action to perform
+        owners:
+          type: array
+          items:
+            type: string
+          description: List of owner email addresses
+        groupId:
+          type: string
+          description: M365 group ID for existing group operations
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member email addresses
+        settings:
+          type: object
+          properties:
+            visibility:
+              enum:
+                - Private
+                - Public
+              type: string
+            allowExternalSenders:
+              type: boolean
+            autoSubscribeNewMembers:
+              type: boolean
+        description:
+          type: string
+          description: Description of the M365 group
+        displayName:
+          type: string
+          description: Display name for the M365 group
+  - name: manage_exchange_settings
+    description: Manage Exchange Online settings
+    inputSchema:
+      type: object
+      required:
+        - action
+        - settingType
+      properties:
+        action:
+          enum:
+            - get
+            - update
+          type: string
+          description: Action to perform
+        target:
+          type: string
+          description: User/Group ID for mailbox settings
+        settings:
+          type: object
+          properties:
+            rules:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  actions:
+                    type: object
+                  conditions:
+                    type: object
+            retentionTags:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  retentionDays:
+                    type: number
+            sharingPolicy:
+              type: object
+              properties:
+                domains:
+                  type: array
+                  items:
+                    type: string
+                enabled:
+                  type: boolean
+            automateProcessing:
+              type: object
+              properties:
+                autoReplyEnabled:
+                  type: boolean
+                autoForwardEnabled:
+                  type: boolean
+        settingType:
+          enum:
+            - mailbox
+            - transport
+            - organization
+            - retention
+          type: string
+          description: Type of Exchange settings to manage
+  - name: manage_user_settings
+    description: Manage Microsoft 365 user settings and configurations
+    inputSchema:
+      type: object
+      required:
+        - action
+        - userId
+      properties:
+        action:
+          enum:
+            - get
+            - update
+          type: string
+          description: Action to perform
+        userId:
+          type: string
+          description: User ID or UPN
+        settings:
+          type: object
+          description: User settings to update
+  - name: manage_offboarding
+    description: Manage user offboarding processes
+    inputSchema:
+      type: object
+      required:
+        - action
+        - userId
+      properties:
+        action:
+          enum:
+            - start
+            - check
+            - complete
+          type: string
+          description: Action to perform
+        userId:
+          type: string
+          description: User ID or UPN to offboard
+        options:
+          type: object
+          properties:
+            backupData:
+              type: boolean
+              description: Backup user data
+            revokeAccess:
+              type: boolean
+              description: Revoke all access immediately
+            retainMailbox:
+              type: boolean
+              description: Retain user mailbox
+            convertToShared:
+              type: boolean
+              description: Convert mailbox to shared

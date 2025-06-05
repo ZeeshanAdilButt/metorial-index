@@ -1,0 +1,21 @@
+tools:
+  - name: refine_prompt
+    description: This tool MUST be used whenever a user asks to refine, rewrite,
+      improve, enhance, or optimize a prompt. It transforms raw prompts into
+      more effective versions that are clearer, more detailed, and better
+      structured to improve results from Large Language Models (LLMs). When
+      users mention 'refine prompt' or similar phrases, use this tool.
+    inputSchema:
+      type: object
+      title: refine_prompt_Arguments
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: The raw user prompt that needs rewriting.
+        language:
+          type: string
+          description: "Optional: The primary programming language if the prompt is
+            code-related (e.g., typescript, python). Helps tailor coding
+            prompts."

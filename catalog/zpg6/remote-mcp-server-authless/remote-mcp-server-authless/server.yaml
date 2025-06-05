@@ -1,0 +1,18 @@
+identifier: zpg6/remote-mcp-server-authless/remote-mcp-server-authless
+repo:
+  provider: github.com
+  url: https://github.com/zpg6/remote-mcp-server-authless
+  name: remote-mcp-server-authless
+  owner: zpg6
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare Workers
+  description: Deploy a remote MCP server on Cloudflare Workers without requiring
+    authentication. Easily add custom tools and connect your MCP server to
+    clients like Cloudflare AI Playground or Claude Desktop. Enable seamless
+    integration of external capabilities with your LLM applications through a
+    secure, scalable cloud deployment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

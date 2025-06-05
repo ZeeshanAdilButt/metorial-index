@@ -1,0 +1,17 @@
+identifier: bingal/fastdomaincheck-mcp-server/fastdomaincheck-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/bingal/FastDomainCheck-MCP-Server
+  name: FastDomainCheck-MCP-Server
+  owner: bingal
+server:
+  subdirectory: /
+  name: FastDomainCheck
+  description: Check the registration status of multiple domain names quickly and
+    efficiently. Validate domain availability using both WHOIS and DNS checks,
+    ensuring accurate results with built-in error handling. Streamline your
+    domain management process with concise output and robust input validation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: abeautifulsnow/tdengine-mcp/tdengine-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Abeautifulsnow/tdengine-mcp
+  name: tdengine-mcp
+  owner: Abeautifulsnow
+server:
+  subdirectory: /
+  name: tdengine-mcp-server
+  description: Enable AI assistants to perform read-only queries on TDengine
+    databases for data exploration and investigation. Execute SELECT, SHOW, and
+    DESCRIBE queries to retrieve database and stable metadata without modifying
+    data. Seamlessly integrate TDengine data access into your AI-powered tools
+    for enhanced data analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

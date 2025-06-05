@@ -1,0 +1,14 @@
+identifier: warzuponus/mcp-jira/jira
+repo:
+  provider: github.com
+  url: https://github.com/Warzuponus/mcp-jira
+  name: mcp-jira
+  owner: Warzuponus
+server:
+  subdirectory: /
+  name: JIRA Server
+  description: Interact with JIRA tasks and workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: dynamicendpoints/huntress-mcp-server/huntress-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/huntress-mcp-server
+  name: huntress-mcp-server
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Huntress API MCP Server
+  description: A Model Context Protocol server for interacting with the Huntress API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

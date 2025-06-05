@@ -1,0 +1,80 @@
+tools:
+  - name: embed-parquet
+    description: Embed text in a specific column of a parquet file
+    inputSchema:
+      type: object
+      required:
+        - input_path
+        - output_path
+        - column_name
+        - embedding_column
+        - batch_size
+      properties:
+        batch_size:
+          type: int
+          description: batch size for the embedding
+        input_path:
+          type: string
+          description: Path to the input Parquet file
+        column_name:
+          type: string
+          description: The name of the column containing the text to embed
+        output_path:
+          type: string
+          description: Path to the output Parquet file
+        embedding_column:
+          type: string
+          description: Name of the new column where embeddings will be saved
+  - name: parquet-information
+    description: Get information about a parquet file including column names, number
+      of rows, and file size
+    inputSchema:
+      type: object
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          description: Path to the Parquet file
+  - name: convert-to-duckdb
+    description: Convert a Parquet file to a DuckDB database
+    inputSchema:
+      type: object
+      required:
+        - parquet_path
+      properties:
+        output_dir:
+          type: string
+          description: Directory to save the DuckDB database (optional)
+        parquet_path:
+          type: string
+          description: Path to the input Parquet file
+  - name: convert-to-postgres
+    description: Convert a Parquet file to a PostgreSQL table with pgvector support
+    inputSchema:
+      type: object
+      required:
+        - parquet_path
+        - table_name
+      properties:
+        table_name:
+          type: string
+          description: Name of the PostgreSQL table to create or append to
+        parquet_path:
+          type: string
+          description: Path to the input Parquet file
+  - name: process-markdown
+    description: Convert a markdown file into structured JSON with text chunks and
+      save as parquet
+    inputSchema:
+      type: object
+      required:
+        - file_path
+        - output_path
+      properties:
+        file_path:
+          type: string
+          description: Path to the markdown file
+        output_path:
+          type: string
+          description: Path to save the output parquet file

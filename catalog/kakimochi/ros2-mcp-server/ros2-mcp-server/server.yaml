@@ -1,0 +1,17 @@
+identifier: kakimochi/ros2-mcp-server/ros2-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kakimochi/ros2-mcp-server
+  name: ros2-mcp-server
+  owner: kakimochi
+server:
+  subdirectory: /
+  name: ROS 2 Robot Control Server
+  description: Enable AI assistants to control robots via ROS 2 topics using
+    natural language commands. Send movement instructions that are executed as
+    timed velocity commands on the robot. Integrate seamlessly with MCP clients
+    to operate robots in simulation or real environments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

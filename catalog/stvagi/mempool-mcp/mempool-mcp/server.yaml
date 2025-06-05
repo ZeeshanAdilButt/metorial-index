@@ -1,0 +1,18 @@
+identifier: stvagi/mempool-mcp/mempool-mcp
+repo:
+  provider: github.com
+  url: https://github.com/stvagi/mempool-mcp
+  name: mempool-mcp
+  owner: stvagi
+server:
+  subdirectory: /
+  name: Bitcoin Mempool Server
+  description: Provide AI assistants with real-time access to Bitcoin mining data,
+    pool statistics, and hashrate analytics. Query mining pool rankings, blocks,
+    and fetch historical and live hashrate stats seamlessly. Integrate
+    effortlessly with Claude, VS Code, Cursor, and other MCP clients to enhance
+    your Bitcoin insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

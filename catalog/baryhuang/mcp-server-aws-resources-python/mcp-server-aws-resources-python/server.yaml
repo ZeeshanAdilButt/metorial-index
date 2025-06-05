@@ -1,0 +1,22 @@
+identifier: baryhuang/mcp-server-aws-resources-python/mcp-server-aws-resources-python
+repo:
+  provider: github.com
+  url: https://github.com/baryhuang/mcp-server-aws-resources-python
+  name: mcp-server-aws-resources-python
+  owner: baryhuang
+server:
+  subdirectory: /
+  name: AWS Resources
+  description: >-
+    A Model Context Protocol (MCP) server implementation that provides running
+    generated python code to query any AWS resources through boto3.
+
+
+    At your own risk: I didn't limit the operations to ReadyOnly, so that
+    cautious Ops people can be helped using this tool doing management
+    operations. Your AWS user role will dictate the permissions for what you can
+    do.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

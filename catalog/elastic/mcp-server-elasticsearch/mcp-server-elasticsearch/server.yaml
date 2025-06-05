@@ -1,0 +1,16 @@
+identifier: elastic/mcp-server-elasticsearch/mcp-server-elasticsearch
+repo:
+  provider: github.com
+  url: https://github.com/elastic/mcp-server-elasticsearch
+  name: mcp-server-elasticsearch
+  owner: elastic
+server:
+  subdirectory: /
+  name: Elasticsearch MCP Server
+  description: Connect to your Elasticsearch data seamlessly. Interact with your
+    indices and execute queries using natural language, making data retrieval
+    intuitive and efficient.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

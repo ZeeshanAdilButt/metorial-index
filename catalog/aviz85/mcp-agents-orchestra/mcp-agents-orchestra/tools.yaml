@@ -1,0 +1,63 @@
+tools:
+  - name: add_numbers
+    description: Add two numbers together
+    inputSchema:
+      type: object
+      title: add_numbersArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: format_text
+    description: "Format text according to the specified format type.
+
+      \   \ 
+
+      \    Args:
+
+      \        text: The text to format
+
+      \        format_type: The formatting to apply (uppercase, lowercase,
+      title)
+
+      \    "
+    inputSchema:
+      type: object
+      title: format_textArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        format_type:
+          type: string
+          title: Format Type
+          default: uppercase
+  - name: long_running_task
+    description: "Simulate a long-running task with progress reporting.
+
+      \   \ 
+
+      \    Args:
+
+      \        steps: Number of steps to simulate
+
+      \        ctx: The MCP context for progress reporting
+
+      \    "
+    inputSchema:
+      type: object
+      title: long_running_taskArguments
+      required:
+        - steps
+      properties:
+        steps:
+          type: integer
+          title: Steps

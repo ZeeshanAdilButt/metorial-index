@@ -1,0 +1,122 @@
+tools:
+  - name: get_tweets
+    description: Search twitter with a query. Sort by 'Top' or 'Latest'
+    inputSchema:
+      type: object
+      title: get_tweetsArguments
+      required:
+        - query
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 20
+        query:
+          type: string
+          title: Query
+        sort_by:
+          type: string
+          title: Sort By
+          default: Latest
+  - name: get_user_tweets
+    description: Get tweets from a specific user's timeline.
+    inputSchema:
+      type: object
+      title: get_user_tweetsArguments
+      required:
+        - username
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 10
+        username:
+          type: string
+          title: Username
+        tweet_type:
+          type: string
+          title: Tweet Type
+          default: Tweets
+  - name: get_replies_for_tweet
+    description: "
+
+      \    Get Tweets replies of a specific tweet using tweet_id.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_replies_for_tweetArguments
+      required:
+        - tweet_id
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 30
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: post_tweet
+    description: Post a tweet with optional media, reply, and tags.
+    inputSchema:
+      type: object
+      title: post_tweetArguments
+      required:
+        - text
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        text:
+          type: string
+          title: Text
+        reply_to:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Reply To
+          default: null
+        media_paths:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Media Paths
+          default: null
+  - name: delete_tweet
+    description: Delete a tweet by its ID.
+    inputSchema:
+      type: object
+      title: delete_tweetArguments
+      required:
+        - tweet_id
+      properties:
+        tweet_id:
+          type: string
+          title: Tweet Id
+  - name: get_timeline
+    description: Get tweets from your home timeline (For You).
+    inputSchema:
+      type: object
+      title: get_timelineArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 20
+  - name: get_latest_timeline
+    description: Get tweets from your home timeline (Following).
+    inputSchema:
+      type: object
+      title: get_latest_timelineArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 20

@@ -1,0 +1,17 @@
+identifier: jatinsandilya/mcp-server-auto-commit/mcp-server-auto-commit
+repo:
+  provider: github.com
+  url: https://github.com/jatinsandilya/mcp-server-auto-commit
+  name: mcp-server-auto-commit
+  owner: jatinsandilya
+server:
+  subdirectory: /
+  name: Git Auto Commit
+  description: Analyze your Git changes and generate conventional commit messages
+    automatically. Enhance your workflow by summarizing modifications,
+    additions, and deletions, while ensuring each commit is properly documented
+    with AI-generated messages.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

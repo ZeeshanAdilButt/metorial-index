@@ -1,0 +1,18 @@
+identifier: alfonsograziano/node-code-sandbox-mcp/node-code-sandbox-mcp
+repo:
+  provider: github.com
+  url: https://github.com/alfonsograziano/node-code-sandbox-mcp
+  name: node-code-sandbox-mcp
+  owner: alfonsograziano
+server:
+  subdirectory: /
+  name: Node.js Sandbox Server
+  description: Run arbitrary JavaScript code securely in isolated ephemeral Docker
+    containers with on-the-fly npm dependency installation. Manage sandbox
+    containers to execute scripts, shell commands, and retrieve output including
+    saved files. Choose between quick one-shot runs or persistent sandbox
+    sessions for flexible code execution workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

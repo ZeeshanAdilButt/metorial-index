@@ -1,0 +1,75 @@
+tools:
+  - name: search
+    description: Search for gift cards, esims, mobile topups and more. It's
+      suggested to use the `categories` tool before searching for products, to
+      have a better understanding of what's available.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        col:
+          type: number
+          description: Column layout parameter
+        rec:
+          type: number
+          description: Recommendation parameter
+        sec:
+          type: number
+          description: Security parameter
+        src:
+          type: string
+          description: Source of the request
+        cart:
+          type: string
+          description: Cart identifier
+        skip:
+          type: number
+          description: Number of results to skip (for pagination)
+        limit:
+          type: number
+          description: Maximum number of results to return
+        query:
+          type: string
+          description: Search query (e.g., 'Amazon', 'Netflix', 'AT&T' or '*' for all)
+        prefcc:
+          type: number
+          description: Preferred country code parameter
+        country:
+          type: string
+          description: Country code (e.g., 'US', 'IT', 'GB')
+        category:
+          type: string
+          description: Filter by category (e.g., 'gaming', 'entertainment')
+        language:
+          type: string
+          description: Language code for results (e.g., 'en')
+        beta_flags:
+          type: string
+          description: Beta feature flags
+        do_recommend:
+          type: number
+          description: Enable recommendations
+      additionalProperties: false
+  - name: detail
+    description: Get detailed information about a product
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the product
+      additionalProperties: false
+  - name: categories
+    description: Get the full product type/categories map. It's suggested to use
+      this tool to get the categories and then use the `search` tool to search
+      for products in a specific category.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

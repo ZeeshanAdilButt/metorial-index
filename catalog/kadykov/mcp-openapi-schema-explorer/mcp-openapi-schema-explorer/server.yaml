@@ -1,0 +1,17 @@
+identifier: kadykov/mcp-openapi-schema-explorer/mcp-openapi-schema-explorer
+repo:
+  provider: github.com
+  url: https://github.com/kadykov/mcp-openapi-schema-explorer
+  name: mcp-openapi-schema-explorer
+  owner: kadykov
+server:
+  subdirectory: /
+  name: OpenAPI Schema Explorer
+  description: Explore and interact with OpenAPI specifications efficiently.
+    Access detailed API structures without overwhelming your LLM's context,
+    making it easier to understand and utilize APIs. Load specifications from
+    local files or remote URLs seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

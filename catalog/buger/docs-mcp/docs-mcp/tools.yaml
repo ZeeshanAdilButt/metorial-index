@@ -1,0 +1,18 @@
+tools:
+  - name: search_docs
+    description: Search documentation using the probe search engine.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Optional page number for pagination of results (e.g., 1, 2, 3...).
+            Default is 1.
+        query:
+          type: string
+          description: Elasticsearch query string. Focus on keywords and use ES syntax
+            (e.g., "install AND guide", "configure OR setup", "api NOT
+            internal").

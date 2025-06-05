@@ -1,0 +1,27 @@
+tools:
+  - name: split
+    description: Split a JSON file into a specified number of objects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+        - numObjects
+      properties:
+        path:
+          type: string
+        numObjects:
+          type: integer
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: merge
+    description: Merge JSON files into a one JSON file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+      additionalProperties: false

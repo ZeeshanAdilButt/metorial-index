@@ -1,0 +1,14 @@
+identifier: truss44/mcp-crypto-price/mcp-crypto-price
+repo:
+  provider: github.com
+  url: https://github.com/truss44/mcp-crypto-price
+  name: mcp-crypto-price
+  owner: truss44
+server:
+  subdirectory: /
+  name: Crypto Price & Market Analysis Server
+  description: Provide real-time cryptocurrency price data and market analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

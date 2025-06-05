@@ -1,0 +1,17 @@
+identifier: hundunonline/mcp-dingdingbot-server/mcp-dingdingbot-server
+repo:
+  provider: github.com
+  url: https://github.com/HundunOnline/mcp-dingdingbot-server
+  name: mcp-dingdingbot-server
+  owner: HundunOnline
+server:
+  subdirectory: /
+  name: DingDing Bot Server
+  description: Send various types of messages to your DingDing group effortlessly.
+    Enhance your communication by integrating text, markdown, images, and more
+    into your group chats. Simplify your workflow with easy-to-use commands for
+    sending messages and uploading files directly to DingDing.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

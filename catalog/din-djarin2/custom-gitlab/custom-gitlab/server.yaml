@@ -1,0 +1,18 @@
+identifier: din-djarin2/custom-gitlab/custom-gitlab
+repo:
+  provider: github.com
+  url: https://github.com/Din-djarin2/custom-gitlab
+  name: custom-gitlab
+  owner: Din-djarin2
+server:
+  subdirectory: /
+  name: Custom GitLab Server
+  description: Integrate AI assistants with GitLab repositories to search
+    projects, fetch and update files, manage branches, and handle issues and
+    merge requests seamlessly. Enhance your workflow by enabling multi-file
+    commits and repository forking through a robust MCP server. Benefit from
+    improved schema validation for reliable and efficient GitLab operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: johanli233/mcp-sandbox/mcp-sandbox
+repo:
+  provider: github.com
+  url: https://github.com/JohanLi233/mcp-sandbox
+  name: mcp-sandbox
+  owner: JohanLi233
+server:
+  subdirectory: /
+  name: Python Sandbox Server
+  description: Enable safe and isolated Python code execution with package
+    management in Docker containers. Manage multiple sandboxes, execute code,
+    install packages, and access generated files via web links securely.
+    Facilitate interactive Python environments for users and LLMs with
+    easy-to-use tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

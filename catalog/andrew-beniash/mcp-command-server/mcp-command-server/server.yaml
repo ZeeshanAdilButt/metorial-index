@@ -1,0 +1,16 @@
+identifier: andrew-beniash/mcp-command-server/mcp-command-server
+repo:
+  provider: github.com
+  url: https://github.com/Andrew-Beniash/mcp-command-server
+  name: mcp-command-server
+  owner: Andrew-Beniash
+server:
+  subdirectory: /
+  name: Command Server
+  description: Execute system commands securely through LLM applications. Benefit
+    from a whitelist approach, user confirmations, and comprehensive logging to
+    ensure safe command execution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: lenwood/cfbd-mcp-server/cfbd-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lenwood/cfbd-mcp-server
+  name: cfbd-mcp-server
+  owner: lenwood
+server:
+  subdirectory: /
+  name: College Football Data Server
+  description: Provides access to college football statistics and data sourced
+    from the College Football Data API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

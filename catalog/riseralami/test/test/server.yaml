@@ -1,0 +1,18 @@
+identifier: riseralami/test/test
+repo:
+  provider: github.com
+  url: https://github.com/riseralami/TEST
+  name: TEST
+  owner: riseralami
+server:
+  subdirectory: /
+  name: TEST MCP Server
+  description: Provide a flexible interface to integrate language models with
+    external data and tools using the Model Context Protocol. Enable dynamic
+    access to resources, execution of tools, and retrieval of prompt templates
+    to enhance LLM applications. Facilitate seamless communication between
+    clients and servers for enriched AI interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

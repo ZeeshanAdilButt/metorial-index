@@ -1,0 +1,109 @@
+tools:
+  - name: createAssistantThread
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accessToken
+      properties:
+        accessToken:
+          type: string
+      additionalProperties: false
+  - name: createAssistantMessage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accessToken
+        - threadId
+        - content
+      properties:
+        role:
+          enum:
+            - user
+            - assistant
+          type: string
+        content:
+          type: string
+        threadId:
+          type: string
+        accessToken:
+          type: string
+        messageType:
+          enum:
+            - text
+            - image
+          type: string
+      additionalProperties: false
+  - name: getToken
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - appKey
+        - appSecret
+      properties:
+        appKey:
+          type: string
+        appSecret:
+          type: string
+      additionalProperties: false
+  - name: createAssistantRun
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accessToken
+        - threadId
+        - assistantId
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+        threadId:
+          type: string
+        accessToken:
+          type: string
+        assistantId:
+          type: string
+        instructions:
+          type: string
+      additionalProperties: false
+  - name: getAssistantRun
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accessToken
+        - threadId
+        - runId
+      properties:
+        runId:
+          type: string
+        threadId:
+          type: string
+        accessToken:
+          type: string
+      additionalProperties: false
+  - name: sendMessage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accessToken
+        - userIds
+        - msgParam
+        - msgKey
+      properties:
+        msgKey:
+          type: string
+        userIds:
+          type: array
+          items:
+            type: string
+        msgParam:
+          type: object
+          additionalProperties: {}
+        accessToken:
+          type: string
+      additionalProperties: false

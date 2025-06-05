@@ -1,0 +1,17 @@
+identifier: zephyrdeng/mcp-server-gitlab/mcp-server-gitlab
+repo:
+  provider: github.com
+  url: https://github.com/ZephyrDeng/mcp-server-gitlab
+  name: mcp-server-gitlab
+  owner: ZephyrDeng
+server:
+  subdirectory: /
+  name: GitLab Integration Server
+  description: Integrate seamlessly with your GitLab instance to manage projects,
+    tasks, and merge requests. Utilize powerful tools to enhance your workflow
+    and automate interactions with GitLab's RESTful APIs. Start leveraging
+    GitLab's capabilities effortlessly with this integration server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

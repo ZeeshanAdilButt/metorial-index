@@ -1,0 +1,69 @@
+tools:
+  - name: listProcedures
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        max_items:
+          type: integer
+          description: Optional maximum number of procedures to include in the formatted
+            text output.
+          exclusiveMinimum: 0
+        max_length:
+          type: integer
+          description: Optional maximum length for procedure descriptions in the formatted
+            text output.
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: getProcedureDetails
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - procedureId
+      properties:
+        max_length:
+          type: integer
+          description: Optional maximum length for the main procedure description in the
+            formatted text output.
+          exclusiveMinimum: 0
+        procedureId:
+          type: number
+          description: ID of the procedure to retrieve
+      additionalProperties: false
+  - name: getProcedureStep
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - procedureId
+        - stepId
+      properties:
+        stepId:
+          type: number
+          description: ID of the step within the procedure
+        procedureId:
+          type: number
+          description: ID of the procedure
+      additionalProperties: false
+  - name: searchProcedures
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: The keyword or phrase to search for procedures
+        max_items:
+          type: integer
+          description: Optional maximum number of procedures to include in the formatted
+            text output.
+          exclusiveMinimum: 0
+        max_length:
+          type: integer
+          description: Optional maximum length for procedure descriptions in the formatted
+            text output.
+          exclusiveMinimum: 0
+      additionalProperties: false

@@ -1,0 +1,25 @@
+tools:
+  - name: scast_anaylisis
+    description: "
+
+      SCAST is a tool designed to assist users in analyzing and summarizing code
+      through visualization.\ 
+
+      By simply providing the folder path where the code is located,\ 
+
+      SCAST can perform static analysis on the code, helping users understand
+      the code structure, explain its functionality.
+
+      generate various visual charts such as UML diagrams, AST tree diagrams and
+      Mermaid flowcharts.
+
+      \                "
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dir
+      properties:
+        dir:
+          type: string
+      additionalProperties: false

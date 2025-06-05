@@ -1,0 +1,18 @@
+identifier: waldzellai/waldzell-mcp/yelp-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/waldzellai/waldzell-mcp
+  name: waldzell-mcp
+  owner: waldzellai
+server:
+  subdirectory: /packages/server-yelp-fusionai
+  name: Yelp Fusion Server
+  description: Enable natural language interaction with Yelp's business data
+    through Claude Desktop. Search for businesses, read reviews, find events,
+    and explore categories using simple conversational queries. Receive rich,
+    formatted responses powered by Yelp's AI API for comprehensive local
+    business insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

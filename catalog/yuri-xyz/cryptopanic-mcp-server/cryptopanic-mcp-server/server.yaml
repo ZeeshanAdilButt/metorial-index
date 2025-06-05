@@ -1,0 +1,17 @@
+identifier: yuri-xyz/cryptopanic-mcp-server/cryptopanic-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/yuri-xyz/cryptopanic-mcp-server
+  name: cryptopanic-mcp-server
+  owner: yuri-xyz
+server:
+  subdirectory: /
+  name: CryptoPanic News Server
+  description: Provide the latest cryptocurrency news, analysis, and videos to AI
+    agents. Fetch up-to-date content from CryptoPanic with customizable content
+    type and pagination. Keep your AI informed with timely crypto market
+    updates.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

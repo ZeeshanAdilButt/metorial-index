@@ -1,0 +1,18 @@
+identifier: mawazawa/agentic-pdf-app/agentic-pdf-app
+repo:
+  provider: github.com
+  url: https://github.com/mawazawa/agentic-pdf-app
+  name: agentic-pdf-app
+  owner: mawazawa
+server:
+  subdirectory: /
+  name: Agentic PDF Form Filler
+  description: Automatically fill California court PDF forms by extracting and
+    mapping data from donor documents using AI-powered analysis. Simplify form
+    processing with a clean, minimalist interface and modular microservices
+    architecture. Deploy easily with Docker for both development and production
+    environments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

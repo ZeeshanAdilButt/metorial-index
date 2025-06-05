@@ -1,0 +1,17 @@
+identifier: fluxinc/dicom-mcp-server/dicom-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/fluxinc/dicom-mcp-server
+  name: dicom-mcp-server
+  owner: fluxinc
+server:
+  subdirectory: /
+  name: DICOM Connectivity Testing Server
+  description: Facilitate DICOM connectivity testing with ease. Leverage a
+    standardized interface to manage DICOM nodes and perform operations
+    seamlessly. Enhance your DICOM workflows by integrating with Claude's Model
+    Context Protocol for efficient communication.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

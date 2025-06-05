@@ -1,0 +1,132 @@
+tools:
+  - name: create_image
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        n:
+          type: integer
+          maximum: 10
+          minimum: 1
+        size:
+          enum:
+            - 1024x1024
+            - 1536x1024
+            - 1024x1536
+            - auto
+          type: string
+        user:
+          type: string
+        prompt:
+          type: string
+          maxLength: 32000
+        quality:
+          enum:
+            - high
+            - medium
+            - low
+            - auto
+          type: string
+        background:
+          enum:
+            - transparent
+            - opaque
+            - auto
+          type: string
+        moderation:
+          enum:
+            - low
+            - auto
+          type: string
+        output_format:
+          enum:
+            - png
+            - jpeg
+            - webp
+          type: string
+        output_compression:
+          type: integer
+          maximum: 100
+          minimum: 0
+      additionalProperties: false
+  - name: create_image_edit
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image
+        - prompt
+      properties:
+        n:
+          type: integer
+          maximum: 10
+          minimum: 1
+        mask:
+          anyOf:
+            - type: string
+            - type: object
+              required:
+                - filePath
+              properties:
+                filePath:
+                  type: string
+                isBase64:
+                  type: boolean
+                  default: false
+              additionalProperties: false
+        size:
+          enum:
+            - 1024x1024
+            - 1536x1024
+            - 1024x1536
+            - auto
+          type: string
+        user:
+          type: string
+        image:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+            - type: object
+              required:
+                - filePath
+              properties:
+                filePath:
+                  type: string
+                isBase64:
+                  type: boolean
+                  default: false
+              additionalProperties: false
+            - type: array
+              items:
+                type: object
+                required:
+                  - filePath
+                properties:
+                  filePath:
+                    type: string
+                  isBase64:
+                    type: boolean
+                    default: false
+                additionalProperties: false
+        prompt:
+          type: string
+          maxLength: 32000
+        quality:
+          enum:
+            - high
+            - medium
+            - low
+            - auto
+          type: string
+        background:
+          enum:
+            - transparent
+            - opaque
+            - auto
+          type: string
+      additionalProperties: false

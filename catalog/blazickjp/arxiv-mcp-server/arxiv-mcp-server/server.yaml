@@ -1,0 +1,15 @@
+identifier: blazickjp/arxiv-mcp-server/arxiv-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/blazickjp/arxiv-mcp-server
+  name: arxiv-mcp-server
+  owner: blazickjp
+server:
+  subdirectory: /
+  name: ArXiv Server
+  description: Enable AI assistants to search and access arXiv papers through a
+    simple MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

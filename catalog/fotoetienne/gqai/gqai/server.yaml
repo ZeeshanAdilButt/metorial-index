@@ -1,0 +1,19 @@
+identifier: fotoetienne/gqai/gqai
+repo:
+  provider: github.com
+  url: https://github.com/fotoetienne/gqai
+  name: gqai
+  owner: fotoetienne
+server:
+  subdirectory: /
+  name: gqai
+  description: Expose your GraphQL backend operations as callable tools for AI
+    models, enabling seamless integration of GraphQL queries and mutations with
+    AI assistants. Automatically generate an MCP server from your GraphQL schema
+    and operations, allowing AI to invoke these tools with or without arguments.
+    Simplify building AI-powered applications by turning your GraphQL API into a
+    model-ready tool layer without extra infrastructure.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

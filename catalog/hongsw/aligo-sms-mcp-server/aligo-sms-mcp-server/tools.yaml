@@ -1,0 +1,53 @@
+tools:
+  - name: send-sms
+    description: Send SMS messages through the Aligo API
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sender
+        - receiver
+        - message
+      properties:
+        title:
+          type: string
+          maxLength: 44
+          description: Message title (required for LMS/MMS)
+        sender:
+          type: string
+          maxLength: 16
+          minLength: 1
+          description: Sender's phone number (registered with Aligo)
+        message:
+          type: string
+          maxLength: 2000
+          minLength: 1
+          description: SMS message content
+        msg_type:
+          enum:
+            - SMS
+            - LMS
+            - MMS
+          type: string
+          description: "Message type: SMS, LMS, or MMS"
+        receiver:
+          type: string
+          minLength: 1
+          description: Recipient's phone number, or comma-separated list for multiple
+            recipients
+        image_path:
+          type: string
+          description: Optional image file path for MMS
+        destination:
+          type: string
+          description: Optional formatted destination with names
+            (01011112222|홍길동,01033334444|아무개)
+        schedule_date:
+          type: string
+          pattern: ^\d{8}$
+          description: Optional schedule date (YYYYMMDD)
+        schedule_time:
+          type: string
+          pattern: ^\d{4}$
+          description: Optional schedule time (HHMM)
+      additionalProperties: false

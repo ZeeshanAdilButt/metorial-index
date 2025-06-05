@@ -1,0 +1,989 @@
+tools:
+  - name: search_entries
+    description: Search for entries using query parameters. Returns a maximum of 3
+      items per request. Use skip parameter to paginate through results.
+    inputSchema:
+      type: object
+      required:
+        - query
+        - spaceId
+        - environmentId
+      properties:
+        query:
+          type: object
+          required:
+            - limit
+            - skip
+          properties:
+            skip:
+              type: number
+              default: 0
+              description: Number of items to skip for pagination
+            limit:
+              type: number
+              default: 3
+              maximum: 3
+              description: "Maximum number of items to return (max: 3)"
+            order:
+              type: string
+            query:
+              type: string
+            select:
+              type: string
+            content_type:
+              type: string
+          description: Query parameters for searching entries
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: create_entry
+    description: "Create a new entry in Contentful, before executing this function,
+      you need to know the contentTypeId (not the content type NAME) and the
+      fields of that contentType, you can get the fields definition by using the
+      GET_CONTENT_TYPE tool. "
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - fields
+        - spaceId
+        - environmentId
+      properties:
+        fields:
+          type: object
+          description: The fields of the entry
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        contentTypeId:
+          type: string
+          description: The ID of the content type for the new entry
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: get_entry
+    description: Retrieve an existing entry
+    inputSchema:
+      type: object
+      required:
+        - entryId
+        - spaceId
+        - environmentId
+      properties:
+        entryId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: update_entry
+    description: "Update an existing entry, very important: always send all field
+      values and all values related to locales, also the fields values that have
+      not been updated"
+    inputSchema:
+      type: object
+      required:
+        - entryId
+        - fields
+        - spaceId
+        - environmentId
+      properties:
+        fields:
+          type: object
+        entryId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: delete_entry
+    description: Delete an entry
+    inputSchema:
+      type: object
+      required:
+        - entryId
+        - spaceId
+        - environmentId
+      properties:
+        entryId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: publish_entry
+    description: Publish an entry or multiple entries. Accepts either a single
+      entryId (string) or an array of entryIds (up to 100 entries). For a single
+      entry, it uses the standard publish operation. For multiple entries, it
+      automatically uses bulk publishing.
+    inputSchema:
+      type: object
+      required:
+        - entryId
+        - spaceId
+        - environmentId
+      properties:
+        entryId:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+              maxItems: 100
+              description: "Array of entry IDs to publish (max: 100)"
+          description: "ID of the entry to publish, or an array of entry IDs (max: 100)"
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: unpublish_entry
+    description: Unpublish an entry or multiple entries. Accepts either a single
+      entryId (string) or an array of entryIds (up to 100 entries). For a single
+      entry, it uses the standard unpublish operation. For multiple entries, it
+      automatically uses bulk unpublishing.
+    inputSchema:
+      type: object
+      required:
+        - entryId
+        - spaceId
+        - environmentId
+      properties:
+        entryId:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+              maxItems: 100
+              description: "Array of entry IDs to unpublish (max: 100)"
+          description: "ID of the entry to unpublish, or an array of entry IDs (max: 100)"
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: list_assets
+    description: List assets in a space. Returns a maximum of 3 items per request.
+      Use skip parameter to paginate through results.
+    inputSchema:
+      type: object
+      required:
+        - limit
+        - skip
+        - spaceId
+        - environmentId
+      properties:
+        skip:
+          type: number
+          default: 0
+          description: Number of items to skip for pagination
+        limit:
+          type: number
+          default: 3
+          maximum: 3
+          description: "Maximum number of items to return (max: 3)"
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: upload_asset
+    description: Upload a new asset
+    inputSchema:
+      type: object
+      required:
+        - title
+        - file
+        - spaceId
+        - environmentId
+      properties:
+        file:
+          type: object
+          required:
+            - upload
+            - fileName
+            - contentType
+          properties:
+            upload:
+              type: string
+            fileName:
+              type: string
+            contentType:
+              type: string
+        title:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        description:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: get_asset
+    description: Retrieve an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+        - spaceId
+        - environmentId
+      properties:
+        assetId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: update_asset
+    description: Update an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+        - spaceId
+        - environmentId
+      properties:
+        file:
+          type: object
+          required:
+            - url
+            - fileName
+            - contentType
+          properties:
+            url:
+              type: string
+            fileName:
+              type: string
+            contentType:
+              type: string
+        title:
+          type: string
+        assetId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        description:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: delete_asset
+    description: Delete an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+        - spaceId
+        - environmentId
+      properties:
+        assetId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: publish_asset
+    description: Publish an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+        - spaceId
+        - environmentId
+      properties:
+        assetId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: unpublish_asset
+    description: Unpublish an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+        - spaceId
+        - environmentId
+      properties:
+        assetId:
+          type: string
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: list_content_types
+    description: List content types in a space. Returns a maximum of 10 items per
+      request. Use skip parameter to paginate through results.
+    inputSchema:
+      type: object
+      required:
+        - limit
+        - skip
+        - spaceId
+        - environmentId
+      properties:
+        skip:
+          type: number
+          default: 0
+          description: Number of items to skip for pagination
+        limit:
+          type: number
+          default: 10
+          maximum: 20
+          description: "Maximum number of items to return (max: 3)"
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: get_content_type
+    description: Get details of a specific content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        contentTypeId:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: create_content_type
+    description: Create a new content type
+    inputSchema:
+      type: object
+      required:
+        - name
+        - fields
+        - spaceId
+        - environmentId
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - name
+              - type
+            properties:
+              id:
+                type: string
+                description: The ID of the field
+              name:
+                type: string
+                description: Display name of the field
+              type:
+                enum:
+                  - Symbol
+                  - Text
+                  - Integer
+                  - Number
+                  - Date
+                  - Location
+                  - Object
+                  - Boolean
+                  - Link
+                  - Array
+                type: string
+                description: Type of the field (Text, Number, Date, Location, Media, Boolean,
+                  JSON, Link, Array, etc)
+              items:
+                type: object
+                properties:
+                  type:
+                    enum:
+                      - Symbol
+                      - Link
+                    type: string
+                  linkType:
+                    enum:
+                      - Entry
+                      - Asset
+                    type: string
+                  validations:
+                    type: array
+                    items:
+                      type: object
+                description: Required for Array fields. Specifies the type of items in the array
+              linkType:
+                enum:
+                  - Entry
+                  - Asset
+                type: string
+                description: Required for Link fields. Specifies what type of resource this
+                  field links to
+              required:
+                type: boolean
+                default: false
+                description: Whether this field is required
+              localized:
+                type: boolean
+                default: false
+                description: Whether this field can be localized
+              validations:
+                type: array
+                items:
+                  type: object
+                description: Array of validation rules for the field
+          description: Array of field definitions for the content type
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        description:
+          type: string
+        displayField:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: update_content_type
+    description: Update an existing content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - name
+        - fields
+        - spaceId
+        - environmentId
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: object
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        description:
+          type: string
+        displayField:
+          type: string
+        contentTypeId:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: delete_content_type
+    description: Delete a content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        contentTypeId:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: publish_content_type
+    description: Publish a content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        contentTypeId:
+          type: string
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: list_spaces
+    description: List all available spaces
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_space
+    description: Get details of a space
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+      properties:
+        spaceId:
+          type: string
+  - name: list_environments
+    description: List all environments in a space
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+      properties:
+        spaceId:
+          type: string
+  - name: create_environment
+    description: Create a new environment
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+        - environmentId
+        - name
+      properties:
+        name:
+          type: string
+        spaceId:
+          type: string
+        environmentId:
+          type: string
+  - name: delete_environment
+    description: Delete an environment
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+        environmentId:
+          type: string
+  - name: bulk_validate
+    description: Validate multiple entries at once
+    inputSchema:
+      type: object
+      required:
+        - entryIds
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        entryIds:
+          type: array
+          items:
+            type: string
+          description: Array of entry IDs to validate
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: list_ai_actions
+    description: List all AI Actions in a space
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+        - environmentId
+      properties:
+        skip:
+          type: number
+          default: 0
+          description: Number of AI Actions to skip for pagination
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of AI Actions to return
+        status:
+          enum:
+            - all
+            - published
+          type: string
+          description: Filter AI Actions by status
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: get_ai_action
+    description: Get a specific AI Action by ID
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        aiActionId:
+          type: string
+          description: The ID of the AI Action to retrieve
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: create_ai_action
+    description: Create a new AI Action
+    inputSchema:
+      type: object
+      required:
+        - name
+        - description
+        - instruction
+        - configuration
+        - spaceId
+        - environmentId
+      properties:
+        name:
+          type: string
+          description: The name of the AI Action
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        testCases:
+          type: array
+          items:
+            type: object
+          description: Optional array of test cases for the AI Action
+        description:
+          type: string
+          description: The description of the AI Action
+        instruction:
+          type: object
+          required:
+            - template
+            - variables
+          properties:
+            template:
+              type: string
+              description: The prompt template with variable placeholders
+            variables:
+              type: array
+              items:
+                type: object
+              description: Array of variable definitions
+            conditions:
+              type: array
+              items:
+                type: object
+              description: Optional array of conditions for the template
+          description: The instruction object containing the template and variables
+        configuration:
+          type: object
+          required:
+            - modelType
+            - modelTemperature
+          properties:
+            modelType:
+              type: string
+              description: The type of model to use (e.g., gpt-4)
+            modelTemperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: The temperature setting for the model (0.0 to 1.0)
+          description: The model configuration
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: update_ai_action
+    description: Update an existing AI Action
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - name
+        - description
+        - instruction
+        - configuration
+        - spaceId
+        - environmentId
+      properties:
+        name:
+          type: string
+          description: The name of the AI Action
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        testCases:
+          type: array
+          items:
+            type: object
+          description: Optional array of test cases for the AI Action
+        aiActionId:
+          type: string
+          description: The ID of the AI Action to update
+        description:
+          type: string
+          description: The description of the AI Action
+        instruction:
+          type: object
+          required:
+            - template
+            - variables
+          properties:
+            template:
+              type: string
+              description: The prompt template with variable placeholders
+            variables:
+              type: array
+              items:
+                type: object
+              description: Array of variable definitions
+            conditions:
+              type: array
+              items:
+                type: object
+              description: Optional array of conditions for the template
+          description: The instruction object containing the template and variables
+        configuration:
+          type: object
+          required:
+            - modelType
+            - modelTemperature
+          properties:
+            modelType:
+              type: string
+              description: The type of model to use (e.g., gpt-4)
+            modelTemperature:
+              type: number
+              maximum: 1
+              minimum: 0
+              description: The temperature setting for the model (0.0 to 1.0)
+          description: The model configuration
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: delete_ai_action
+    description: Delete an AI Action
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        aiActionId:
+          type: string
+          description: The ID of the AI Action to delete
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: publish_ai_action
+    description: Publish an AI Action
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        aiActionId:
+          type: string
+          description: The ID of the AI Action to publish
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: unpublish_ai_action
+    description: Unpublish an AI Action
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        aiActionId:
+          type: string
+          description: The ID of the AI Action to unpublish
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+  - name: invoke_ai_action
+    description: Invoke an AI Action with variables
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        variables:
+          type: object
+          description: Key-value pairs of variable IDs and their values
+          additionalProperties:
+            type: string
+        aiActionId:
+          type: string
+          description: The ID of the AI Action to invoke
+        outputFormat:
+          enum:
+            - Markdown
+            - RichText
+            - PlainText
+          type: string
+          default: Markdown
+          description: The format of the output content
+        rawVariables:
+          type: array
+          items:
+            type: object
+          description: Array of raw variable objects (for complex variable types like
+            references)
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master
+        waitForCompletion:
+          type: boolean
+          default: true
+          description: Whether to wait for the AI Action to complete before returning
+  - name: get_ai_action_invocation
+    description: Get the result of a previous AI Action invocation
+    inputSchema:
+      type: object
+      required:
+        - aiActionId
+        - invocationId
+        - spaceId
+        - environmentId
+      properties:
+        spaceId:
+          type: string
+          description: The ID of the Contentful space. This must be the space's ID, not
+            its name, ask for this ID if it's unclear.
+        aiActionId:
+          type: string
+          description: The ID of the AI Action
+        invocationId:
+          type: string
+          description: The ID of the specific invocation to retrieve
+        environmentId:
+          type: string
+          default: master
+          description: The ID of the environment within the space, by default this will be
+            called Master

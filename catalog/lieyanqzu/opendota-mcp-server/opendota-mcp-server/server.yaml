@@ -1,0 +1,18 @@
+identifier: lieyanqzu/opendota-mcp-server/opendota-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lieyanqzu/opendota-mcp-server
+  name: opendota-mcp-server
+  owner: lieyanqzu
+server:
+  subdirectory: /
+  name: OpenDota API Server
+  description: Provide real-time access to Dota 2 statistics, match data, player
+    profiles, and professional player information through a standardized
+    interface. Enable AI assistants and LLMs to retrieve detailed game data and
+    player insights seamlessly. Enhance your applications with comprehensive
+    Dota 2 data retrieval capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: wwiens/trakt_mcpserver/trakt_mcpserver
+repo:
+  provider: github.com
+  url: https://github.com/wwiens/trakt_mcpserver
+  name: trakt_mcpserver
+  owner: wwiens
+server:
+  subdirectory: /
+  name: Trakt
+  description: Access real-time entertainment data and personal viewing history
+    through AI. Discover trending shows and movies, track your viewing habits,
+    and receive personalized recommendations effortlessly. Engage with your
+    favorite content like never before, all powered by the Trakt API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: ibk-insurance/ibki_llm/ibki_llm
+repo:
+  provider: github.com
+  url: https://github.com/IBK-Insurance/IBKI_LLM
+  name: IBKI_LLM
+  owner: IBK-Insurance
+server:
+  subdirectory: /
+  name: Ollama LLM Web Interface
+  description: Interact with LLM models through a user-friendly web interface.
+    Engage in real-time chat and leverage the capabilities of Ollama's LLM
+    models seamlessly. Enjoy a responsive design and robust error handling for a
+    smooth user experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

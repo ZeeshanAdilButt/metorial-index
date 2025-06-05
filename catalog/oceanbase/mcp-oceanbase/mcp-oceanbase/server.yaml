@@ -1,0 +1,16 @@
+identifier: oceanbase/mcp-oceanbase/mcp-oceanbase
+repo:
+  provider: github.com
+  url: https://github.com/oceanbase/mcp-oceanbase
+  name: mcp-oceanbase
+  owner: oceanbase
+server:
+  subdirectory: /
+  name: OceanBase MCP Server
+  description: Enable secure interaction with OceanBase databases. List tables,
+    read data, and execute SQL queries through a controlled interface for safer
+    and more structured database exploration and analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

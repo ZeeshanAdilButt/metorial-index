@@ -1,0 +1,17 @@
+identifier: ronantakizawa/gis-dataconversion-mcp/gis-dataconvertersion-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ronantakizawa/gis-dataconversion-mcp
+  name: gis-dataconversion-mcp
+  owner: ronantakizawa
+server:
+  subdirectory: /
+  name: GIS Data Conversion Server
+  description: The GIS Data Conversion MCP allows reverse geocoding, WKT/GeoJSON
+    conversion, TopoJSON/ GeoJSON conversion, KML / GeoJSON conversion, and CSV
+    conversion. The MCP allows LLMs to accurately convert GIS data using Geo
+    Conversion APIs instead of relying on itself.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

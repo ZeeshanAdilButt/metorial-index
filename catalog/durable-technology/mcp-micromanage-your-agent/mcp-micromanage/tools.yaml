@@ -1,0 +1,208 @@
+tools:
+  - name: plan
+    description: "
+
+      \    A tool for managing a development work plan for a ticket, organized
+      by PRs and commits.
+
+      \    Register or update the whole work plan for the current ticket you
+      assigned to.
+
+
+      \    Before using this tool, you **MUST**:
+
+      \    - Understand requirements, goals, and specifications.
+
+      \    - Clarify the task scope and break it down into a hierarchy of PRs
+      and commit plans.
+
+      \    - Analyze existing codebase and impact area.
+
+      \    - Include developer notes to document implementation considerations
+      discovered during refinement.
+
+      \   \ 
+
+      \    Make sure PR and commit goals are clear enough to stand alone without
+      their developer notes
+
+      \  "
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - goal
+        - prPlans
+      properties:
+        goal:
+          type: string
+          maxLength: 60
+          minLength: 1
+          description: High-level description of what this ticket aims to achieve. Should
+            be concise and focus on the overall outcome or deliverable of the
+            entire task.
+        prPlans:
+          type: array
+          items:
+            type: object
+            required:
+              - goal
+              - commitPlans
+            properties:
+              goal:
+                type: string
+                maxLength: 60
+                minLength: 1
+                description: Description of what this PR aims to accomplish. Should be written
+                  as a PR title would be - concise and focused on WHAT will be
+                  delivered.
+              commitPlans:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - goal
+                  properties:
+                    goal:
+                      type: string
+                      maxLength: 60
+                      minLength: 1
+                      description: Description of what this commit aims to accomplish. Should match
+                        the format of an actual commit message - concise and
+                        specific to a single change.
+                    developerNote:
+                      type: string
+                      maxLength: 300
+                      description: Developer implementation notes for this commit. Use this field for
+                        detailed HOW information and implementation
+                        considerations discovered during refinement.
+                  additionalProperties: false
+                minItems: 1
+                description: Array of commit plans for this PR. Each commit should be small and
+                  atomic.
+              developerNote:
+                type: string
+                maxLength: 300
+                description: Developer implementation notes for this PR. Use this field for
+                  detailed implementation considerations and technical context
+                  discovered during refinement.
+            additionalProperties: false
+          minItems: 1
+          description: Array of PR plans. Each PR represents a logical unit of work in the
+            implementation plan.
+        needsMoreThoughts:
+          type: boolean
+          description: Whether this plan might need further refinement. Set to true if you
+            think the plan may need changes.
+      additionalProperties: false
+  - name: track
+    description: "
+
+      \    This tool helps you monitor the current state of the implementation
+      plan, view progress, and identify possible next steps.
+
+      \    There is always exactly one task in either the in_progress or
+      user_review state.
+
+      \    **IMPORTANT**: There is always exactly one task in either the
+      in_progress or user_review or needsRefinment state.
+
+      \   \ 
+
+      \    **MANDATORY STATUS TRANSITION RULES:**
+
+      \    needsRefinment → in_progress:
+
+      \      - Requirements, implementation plan, and impact MUST be clearly
+      explained.
+
+      \    user_review → completed:
+
+      \      - A commit may not transition to \"completed\" without explicit
+      user approval. No exceptions.
+
+      \   \ 
+
+      \    **After receiving the tool response, you MUST**::
+
+      \    - Monitor PRs, commits, and overall progress to spot blockers or
+      items needing refinement.
+
+      \    - Review recommended actions to decide your next steps.
+
+      \    - **Absolutely follow the content of \"agentInstruction\" in the
+      response JSON**!!.
+
+      \  "
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: update
+    description: "
+
+      \    A tool for updating the status and goals of development tasks.
+
+      \    **IMPORTANT**:\ 
+
+      \      - There is always exactly one task in either the in_progress or
+      user_review or needsRefinment state.
+
+      \      - When setting status to \"user_review\", you MUST generate a
+      review request message to the user.
+
+      \      - Always check and follow **task-status-update-rule.mdc** when
+      updating task status.
+
+      \   \ 
+
+      \    **After receiving the tool response, you MUST**::
+
+      \    - 1. track the current whole status of the workplan.
+
+      \    - 2. check the detailed information including developer notes in the
+      next task.
+
+      \  "
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prIndex
+        - commitIndex
+        - status
+      properties:
+        goal:
+          type: string
+          minLength: 1
+          description: New goal description for the commit. Optional - only provide if you
+            want to change the commit goal.
+        status:
+          enum:
+            - not_started
+            - in_progress
+            - user_review
+            - completed
+            - cancelled
+            - needsRefinment
+          type: string
+          description: "New status value for the commit. Valid values: 'not_started' (work
+            has not begun), 'in_progress' (currently being worked on),
+            'user_review' (waiting for user to review), 'completed' (work is
+            finished), 'cancelled' (work has been abandoned), or
+            'needsRefinment' (needs further refinement)."
+        prIndex:
+          type: integer
+          minimum: 0
+          description: Index of the PR containing the commit to update. Zero-based index
+            in the PR array.
+        commitIndex:
+          type: integer
+          description: Index of the commit to update within the specified PR. Zero-based
+            index in the commit array. Use -1 to update the PR directly.
+        developerNote:
+          type: string
+          description: Developer implementation notes. Can be added to both PRs and
+            commits to document important implementation details.
+      additionalProperties: false

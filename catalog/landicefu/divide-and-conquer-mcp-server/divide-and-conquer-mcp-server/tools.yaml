@@ -1,0 +1,239 @@
+tools:
+  - name: initialize_task
+    description: Creates a new task with the specified description and optional
+      initial checklist items.
+    inputSchema:
+      type: object
+      required:
+        - task_description
+      properties:
+        metadata:
+          type: object
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+              description: Tags to categorize the task
+            priority:
+              enum:
+                - high
+                - medium
+                - low
+              type: string
+              description: Priority level of the task
+            estimated_completion_time:
+              type: string
+              description: Estimated completion time (ISO timestamp or duration)
+          description: Optional metadata for the task
+        task_description:
+          type: string
+          description: A medium-level detailed description about the whole task
+        initial_checklist:
+          type: array
+          items:
+            type: object
+            required:
+              - task
+              - detailed_description
+            properties:
+              done:
+                type: boolean
+                default: false
+                description: Whether the task is already completed
+              task:
+                type: string
+                description: A short yet comprehensive name for the task
+              context_and_plan:
+                type: string
+                description: Related information, files the agent should read, and more details
+                  from other tasks, as well as a detailed plan for this task
+              detailed_description:
+                type: string
+                description: A longer description about what we want to achieve with this task
+          description: Optional initial checklist items
+        context_for_all_tasks:
+          type: string
+          description: Information that all tasks in the checklist should include
+  - name: update_task_description
+    description: Updates the main task description.
+    inputSchema:
+      type: object
+      required:
+        - task_description
+      properties:
+        task_description:
+          type: string
+          description: The new task description
+  - name: update_context
+    description: Updates the context information for all tasks.
+    inputSchema:
+      type: object
+      required:
+        - context_for_all_tasks
+      properties:
+        context_for_all_tasks:
+          type: string
+          description: The new context information for all tasks
+  - name: add_checklist_item
+    description: Adds a new item to the checklist.
+    inputSchema:
+      type: object
+      required:
+        - task
+        - detailed_description
+      properties:
+        done:
+          type: boolean
+          default: false
+          description: Whether the task is already completed
+        task:
+          type: string
+          description: A short yet comprehensive name for the task
+        position:
+          type: number
+          description: Optional position to insert the task (0-based index). If not
+            provided, the task will be added at the end.
+        context_and_plan:
+          type: string
+          description: Related information, files the agent should read, and more details
+            from other tasks, as well as a detailed plan for this task
+        detailed_description:
+          type: string
+          description: A longer description about what we want to achieve with this task
+  - name: update_checklist_item
+    description: Updates an existing checklist item.
+    inputSchema:
+      type: object
+      required:
+        - index
+      properties:
+        done:
+          type: boolean
+          description: Whether the task is completed
+        task:
+          type: string
+          description: A short yet comprehensive name for the task
+        index:
+          type: number
+          description: The index of the checklist item to update (0-based)
+        context_and_plan:
+          type: string
+          description: Related information, files the agent should read, and more details
+            from other tasks, as well as a detailed plan for this task
+        detailed_description:
+          type: string
+          description: A longer description about what we want to achieve with this task
+  - name: mark_task_done
+    description: Marks a checklist item as done.
+    inputSchema:
+      type: object
+      required:
+        - index
+      properties:
+        index:
+          type: number
+          description: The index of the checklist item to mark as done (0-based)
+  - name: mark_task_undone
+    description: Marks a checklist item as not done.
+    inputSchema:
+      type: object
+      required:
+        - index
+      properties:
+        index:
+          type: number
+          description: The index of the checklist item to mark as not done (0-based)
+  - name: remove_checklist_item
+    description: Removes a checklist item.
+    inputSchema:
+      type: object
+      required:
+        - index
+      properties:
+        index:
+          type: number
+          description: The index of the checklist item to remove (0-based)
+  - name: reorder_checklist_item
+    description: Moves a checklist item to a new position.
+    inputSchema:
+      type: object
+      required:
+        - from_index
+        - to_index
+      properties:
+        to_index:
+          type: number
+          description: The new index for the checklist item (0-based)
+        from_index:
+          type: number
+          description: The current index of the checklist item (0-based)
+  - name: add_note
+    description: Adds a note to the task.
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: The content of the note
+  - name: add_resource
+    description: Adds a resource to the task.
+    inputSchema:
+      type: object
+      required:
+        - name
+        - url
+      properties:
+        url:
+          type: string
+          description: URL or file path of the resource
+        name:
+          type: string
+          description: Name of the resource
+        description:
+          type: string
+          description: Description of the resource
+  - name: update_metadata
+    description: Updates the task metadata.
+    inputSchema:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to categorize the task
+        priority:
+          enum:
+            - high
+            - medium
+            - low
+          type: string
+          description: Priority level of the task
+        estimated_completion_time:
+          type: string
+          description: Estimated completion time (ISO timestamp or duration)
+  - name: clear_task
+    description: Clears the current task data.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_checklist_summary
+    description: Returns a summary of the checklist with completion status.
+    inputSchema:
+      type: object
+      properties:
+        include_descriptions:
+          type: boolean
+          default: false
+          description: Whether to include detailed descriptions in the summary
+  - name: get_current_task_details
+    description: Retrieves details of the current task (first uncompleted task) with
+      full context. This is the recommended tool to use when working with tasks.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

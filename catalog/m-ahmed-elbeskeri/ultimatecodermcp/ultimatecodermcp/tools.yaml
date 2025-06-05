@@ -1,0 +1,1022 @@
+tools:
+  - name: tool_process_files
+    description: "
+
+      \    Process multiple files asynchronously with progress updates.
+
+
+      \    **When to use 'tool_process_files':**
+
+      \    1. You want to read and process a batch of files in sequence while
+      reporting progress.
+
+
+      \    **Parameters**:
+
+      \    - files: List[str]
+
+      \      A list of file paths.
+
+      \    - ctx: Context
+
+      \      The FastMCP context for logging and progress updates.
+
+
+      \    **Behavior**:
+
+      \    - Reads each file, logs how many characters were read, or logs an
+      error.
+
+      \    - Reports incremental progress for each file.
+
+
+      \    Returns:
+
+      \    - A summary of the results for each file.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_process_filesArguments
+      required:
+        - files
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+          title: Files
+  - name: tool_list_files
+    description: "
+
+      \    List the contents of a directory, optionally recursively.
+
+
+      \    **When to use 'tool_list_files':**
+
+      \    1. You want a simple directory listing with type info ([DIR],
+      [FILE]).
+
+      \    2. You can optionally traverse subdirectories with `recursive=True`.
+
+
+      \    **Parameters**:
+
+      \    - directory_path: str (default=None)
+
+      \      The path of the directory to list. If None, uses current working
+      directory.
+
+      \    - recursive: bool (default=False)
+
+      \      Whether to recurse into subdirectories.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the path is not a directory.
+
+      \    - If an exception arises, returns the error message.
+
+
+      \    Returns:
+
+      \    - A newline-separated list of entries, each prefixed with [FILE] or
+      [DIR].
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_list_filesArguments
+      properties:
+        recursive:
+          type: boolean
+          title: Recursive
+          default: false
+        directory_path:
+          type: string
+          title: Directory Path
+          default: null
+  - name: tool_read_file
+    description: "
+
+      \    Read a file (text or image) from disk, optionally returning metadata.
+
+
+      \    **When to use 'tool_read_file':**
+
+      \    1. You need to retrieve file contents as plain text or base64 (for
+      images).
+
+      \    2. You might also want metadata like MIME type.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str \ 
+
+      \      Path to the file to read.
+
+      \    - return_metadata: bool (default=False) \ 
+
+      \      If True, returns a dict with content, mime_type, is_image.
+
+
+      \    **Error Handling**:
+
+      \    - Returns a string with the error if something fails.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_read_fileArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+        return_metadata:
+          type: boolean
+          title: Return Metadata
+          default: false
+  - name: tool_write_file
+    description: "
+
+      \    Overwrite a file's content with new text.
+
+
+      \    **When to use 'tool_write_file':**
+
+      \    1. You want to replace a file entirely with new content.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      Target file path.
+
+      \    - content: str
+
+      \      New text content to write.
+
+
+      \    **Error Handling**:
+
+      \    - Returns error messages on I/O failure.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_write_fileArguments
+      required:
+        - file_path
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        file_path:
+          type: string
+          title: File Path
+  - name: tool_delete_path
+    description: "
+
+      \    Delete a file or directory (recursively).
+
+
+      \    **When to use 'tool_delete_path':**
+
+      \    1. You want to remove a file or folder from the filesystem.
+
+
+      \    **Parameters**:
+
+      \    - path_to_delete: str \ 
+
+      \      The path to remove.
+
+
+      \    **Error Handling**:
+
+      \    - Returns a message if path does not exist or if deletion fails.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_delete_pathArguments
+      required:
+        - path_to_delete
+      properties:
+        path_to_delete:
+          type: string
+          title: Path To Delete
+  - name: tool_move_file
+    description: "
+
+      \    Move or rename a file or directory.
+
+
+      \    **When to use 'tool_move_file':**
+
+      \    1. You want to rename a file or relocate it in the filesystem.
+
+
+      \    **Parameters**:
+
+      \    - source_path: str
+
+      \      The current file or folder path.
+
+      \    - destination_path: str
+
+      \      The new location/path.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error string if operation fails.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_move_fileArguments
+      required:
+        - source_path
+        - destination_path
+      properties:
+        source_path:
+          type: string
+          title: Source Path
+        destination_path:
+          type: string
+          title: Destination Path
+  - name: tool_search_files
+    description: "
+
+      \    Search for filenames matching a pattern under a given root directory.
+
+
+      \    **When to use 'tool_search_files':**
+
+      \    1. You need to locate all files with a given extension or wildcard
+      (e.g., '*.cpp').
+
+
+      \    **Parameters**:
+
+      \    - root_path: str
+
+      \      Directory to start searching.
+
+      \    - pattern: str
+
+      \      Filename pattern (glob) to match.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the path is invalid or not a directory.
+
+
+      \    Returns:
+
+      \    - A list of matching file paths, or 'No matches found.' if none.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_search_filesArguments
+      required:
+        - root_path
+        - pattern
+      properties:
+        pattern:
+          type: string
+          title: Pattern
+        root_path:
+          type: string
+          title: Root Path
+  - name: tool_get_file_info
+    description: "
+
+      \    Return metadata about a file (size, timestamps, type, permissions).
+
+
+      \    **When to use 'tool_get_file_info':**
+
+      \    1. You need quick stats about a file, like creation time or size.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      Path to the file.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the path doesn't exist or can't be accessed.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_get_file_infoArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: tool_read_multiple_files
+    description: "
+
+      \    Read multiple files, returning content & metadata for each.
+
+
+      \    **When to use 'tool_read_multiple_files':**
+
+      \    1. You have a list of files and need to read them all, possibly
+      images too.
+
+
+      \    **Parameters**:
+
+      \    - paths: List[str]
+
+      \      A list of file paths to read.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if any file cannot be read.
+
+      \    - Continues reading subsequent files if possible.
+
+
+      \    Returns:
+
+      \    - A stringified dictionary mapping each path to its metadata.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_read_multiple_filesArguments
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          title: Paths
+  - name: tool_create_directory
+    description: "
+
+      \    Recursively create a directory.
+
+
+      \    **When to use 'tool_create_directory':**
+
+      \    1. You want to ensure a folder (and its parents) exist before writing
+      files.
+
+
+      \    **Parameters**:
+
+      \    - dir_path: str
+
+      \      The directory path to create.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if creation fails (e.g., permission issues).
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_create_directoryArguments
+      required:
+        - dir_path
+      properties:
+        dir_path:
+          type: string
+          title: Dir Path
+  - name: tool_run_command
+    description: "
+
+      \    Execute a shell command locally, capturing output and exit code.
+
+
+      \    **When to use 'tool_run_command':**
+
+      \    1. You want to run a system command (shell) and get full
+      stdout/stderr back.
+
+
+      \    **Parameters**:
+
+      \    - command: str
+
+      \      The shell command to execute.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error message if execution fails or times out.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_run_commandArguments
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          title: Command
+  - name: tool_diff_files
+    description: "
+
+      \    Produce a unified diff between two text files.
+
+
+      \    **When to use 'tool_diff_files':**
+
+      \    1. You want to quickly see changes between two versions of a file.
+
+
+      \    **Parameters**:
+
+      \    - file1: str
+
+      \      Path to the original file.
+
+      \    - file2: str
+
+      \      Path to the updated file.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if reading fails or if binary files are
+      encountered.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_diff_filesArguments
+      required:
+        - file1
+        - file2
+      properties:
+        file1:
+          type: string
+          title: File1
+        file2:
+          type: string
+          title: File2
+  - name: tool_replace_line
+    description: "
+
+      \    Replace a specific line in a file (1-based index).
+
+
+      \    **When to use 'tool_replace_line':**
+
+      \    1. You only need to change one line in a text file.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      Path to the file.
+
+      \    - line_number: int
+
+      \      1-based line number to replace.
+
+      \    - new_line: str
+
+      \      The new line text.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the line_number is out of range or if I/O
+      fails.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_replace_lineArguments
+      required:
+        - file_path
+        - line_number
+        - new_line
+      properties:
+        new_line:
+          type: string
+          title: New Line
+        file_path:
+          type: string
+          title: File Path
+        line_number:
+          type: integer
+          title: Line Number
+  - name: tool_replace_block
+    description: "
+
+      \    Replace a multi-line block of text within a file, optionally using
+      regex for advanced matching.
+
+
+      \    **When to use 'tool_replace_block':**
+
+      \    1. You need to replace a chunk of text that is less than ~30% of the
+      file's content.
+
+      \       (For bigger edits, consider a complete file replacement or patch
+      approach.)
+
+      \    2. A smaller, line-level edit or single-string search/replace won't
+      suffice.
+
+      \    3. You want to ensure the entire matching context is replaced in one
+      go, especially with multi-line changes.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str \ 
+
+      \      Path to the file you want to edit.
+
+      \    - search_block: str \ 
+
+      \      The exact block or regex pattern to match.
+
+      \    - replacement_block: str \ 
+
+      \      The text that will overwrite the matched block.
+
+      \    - use_regex: bool (default=False) \ 
+
+      \      If True, interpret search_block as a regex in DOTALL mode.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the block is not found or if multiple matches
+      exist (can't disambiguate).
+
+      \    - Overwrites the first or unique match only.
+
+
+      \    **Cautions**:
+
+      \    - If the file changes drastically (>30%), consider a complete
+      replacement or patch approach.
+
+      \    - If you only need to fix a single line, see `tool_replace_line`.
+
+      \    - For small single-string edits, try `tool_search_replace`.
+
+
+      \    **Examples**:
+
+      \    1) Non-Regex:
+
+      \      {
+
+      \        \"file_path\": \"path/to/code.py\",
+
+      \        \"search_block\": \"oldFunction()\\n    pass\",
+
+      \        \"replacement_block\": \"newFunction()\\n    print('Hello')\",
+
+      \        \"use_regex\": false
+
+      \      }
+
+
+      \    2) Regex:
+
+      \      {
+
+      \        \"file_path\": \"path/to/config.json\",
+
+      \        \"search_block\": \"\"version\": \\d+\",
+
+      \        \"replacement_block\": \"\"version\": 42\",
+
+      \        \"use_regex\": true
+
+      \      }
+
+
+      \    Returns:
+
+      \    - Success or error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_replace_blockArguments
+      required:
+        - file_path
+        - search_block
+        - replacement_block
+      properties:
+        file_path:
+          type: string
+          title: File Path
+        use_regex:
+          type: boolean
+          title: Use Regex
+          default: false
+        search_block:
+          type: string
+          title: Search Block
+        replacement_block:
+          type: string
+          title: Replacement Block
+  - name: tool_apply_patch
+    description: "
+
+      \    Apply a unified diff patch using the system's patch command with
+      strict context matching.
+
+
+      \    **When to use 'tool_apply_patch':**
+
+      \    1. You have a unified diff that must match exactly (no fuzz) to apply
+      changes.
+
+
+      \    **Parameters**:
+
+      \    - patch_text: str
+
+      \      The unified diff text.
+
+
+      \    **Error Handling**:
+
+      \    - Returns error if `patch` is unavailable or if the patch fails to
+      apply.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_apply_patchArguments
+      required:
+        - patch_text
+      properties:
+        patch_text:
+          type: string
+          title: Patch Text
+  - name: tool_list_processes
+    description: "
+
+      \    List current system processes.
+
+
+      \    **When to use 'tool_list_processes':**
+
+      \    1. You want to see a snapshot of what's running on the system.
+
+
+      \    Returns:
+
+      \    - A string containing the output of tasklist or ps aux.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_list_processesArguments
+      properties: {}
+  - name: tool_kill_process
+    description: "
+
+      \    Kill a process by PID using signal 9 (force kill).
+
+
+      \    **When to use 'tool_kill_process':**
+
+      \    1. You need to forcibly stop a process that won't respond otherwise.
+
+
+      \    **Parameters**:
+
+      \    - pid: int
+
+      \      The PID of the process to kill.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the kill operation fails.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_kill_processArguments
+      required:
+        - pid
+      properties:
+        pid:
+          type: integer
+          title: Pid
+  - name: tool_search_code
+    description: "
+
+      \    Search file contents for a text or regex pattern, using ripgrep if
+      available.
+
+
+      \    **When to use 'tool_search_code':**
+
+      \    1. You want to locate lines in code matching a pattern across
+      multiple files.
+
+      \    2. You can limit search scope with filename patterns, case
+      sensitivity, etc.
+
+
+      \    **Parameters**:
+
+      \    - rootPath: str \ 
+
+      \      The directory to start searching in.
+
+      \    - pattern: str \ 
+
+      \      The text/regex pattern to find.
+
+      \    - filePattern: str (default=\"\")
+
+      \      A file name filter (e.g., \"*.py\").
+
+      \    - ignoreCase: bool (default=True)
+
+      \      Case-insensitive match if True.
+
+      \    - maxResults: int (default=1000)
+
+      \      The maximum number of matches to return.
+
+      \    - includeHidden: bool (default=False)
+
+      \      Whether to also search hidden files.
+
+      \    - contextLines: int (default=0)
+
+      \      Number of lines of context around each match.
+
+
+      \    **Error Handling**:
+
+      \    - If ripgrep is missing or fails, it falls back to a Python-based
+      search.
+
+
+      \    Returns:
+
+      \    - A list of matches, each line in the format \"file (Line X):
+      match\".
+
+      \    - Or 'No matches found.' if none.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_search_codeArguments
+      required:
+        - rootPath
+        - pattern
+      properties:
+        pattern:
+          type: string
+          title: Pattern
+        rootPath:
+          type: string
+          title: Rootpath
+        ignoreCase:
+          type: boolean
+          title: Ignorecase
+          default: true
+        maxResults:
+          type: integer
+          title: Maxresults
+          default: 1000
+        filePattern:
+          type: string
+          title: Filepattern
+          default: ""
+        contextLines:
+          type: integer
+          title: Contextlines
+          default: 0
+        includeHidden:
+          type: boolean
+          title: Includehidden
+          default: false
+  - name: tool_search_replace
+    description: "
+
+      \    Perform a single-target search and replace in a file.
+
+
+      \    **When to use 'tool_search_replace':**
+
+      \    1. You want to replace the first occurrence of a string in a file.
+
+      \    2. For multi-line changes, consider `tool_replace_block`.
+
+
+      \    **Parameters**:
+
+      \    - filePath: str
+
+      \      The file to edit.
+
+      \    - search: str
+
+      \      The substring to look for.
+
+      \    - replace: str
+
+      \      The new substring to insert.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if the substring is not found.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_search_replaceArguments
+      required:
+        - filePath
+        - search
+        - replace
+      properties:
+        search:
+          type: string
+          title: Search
+        replace:
+          type: string
+          title: Replace
+        filePath:
+          type: string
+          title: Filepath
+  - name: tool_lint_json
+    description: "
+
+      \    Validate if a file is valid JSON.
+
+
+      \    **When to use 'tool_lint_json':**
+
+      \    1. You have a JSON file and want to ensure it has no syntax errors.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      The JSON file path.
+
+
+      \    **Error Handling**:
+
+      \    - Returns 'Linting Error' with details if invalid.
+
+
+      \    Returns:
+
+      \    - 'Linting Passed' if the file is valid JSON.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_lint_jsonArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: tool_lint_python
+    description: "
+
+      \    Lint a Python file using flake8 for style and syntax checks.
+
+
+      \    **When to use 'tool_lint_python':**
+
+      \    1. You want quick warnings about code style or minor issues.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      The .py file to check.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error message if flake8 cannot be run.
+
+
+      \    Returns:
+
+      \    - Lint results, or 'No linting issues found.' if clean.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_lint_pythonArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: tool_static_analysis_python
+    description: "
+
+      \    Perform deeper static analysis on a Python file using pylint.
+
+
+      \    **When to use 'tool_static_analysis_python':**
+
+      \    1. You want a more robust check for potential bugs and best
+      practices.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      The Python file to analyze.
+
+
+      \    **Error Handling**:
+
+      \    - If pylint fails, returns an error message.
+
+
+      \    Returns:
+
+      \    - Pylint's report, or 'No static analysis issues found.' if empty.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_static_analysis_pythonArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: tool_line_python_file
+    description: "
+
+      \    Return a Python file's contents with line numbers.
+
+
+      \    **When to use 'tool_line_python_file':**
+
+      \    1. You want to display file lines with indices before partial edits.
+
+
+      \    **Parameters**:
+
+      \    - file_path: str
+
+      \      The Python file to number.
+
+
+      \    **Error Handling**:
+
+      \    - Returns an error if reading fails.
+
+      \    "
+    inputSchema:
+      type: object
+      title: tool_line_python_fileArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path

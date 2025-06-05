@@ -1,0 +1,74 @@
+tools:
+  - name: chat_perplexity
+    description: Maintains ongoing conversations with Perplexity AI using a
+      persistent chat history. Starts new chats or continues existing ones with
+      full context.
+    inputSchema:
+      type: object
+      required:
+        - message
+      properties:
+        chat_id:
+          type: string
+          description: "Optional: ID of an existing chat to continue. If not provided, a
+            new chat will be created."
+        message:
+          type: string
+          description: The message to send to Perplexity AI
+  - name: search
+    description: Perform a search query on Perplexity.ai with an optional detail level.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query
+        detail_level:
+          enum:
+            - brief
+            - normal
+            - detailed
+          type: string
+          description: "Optional: Desired level of detail (brief, normal, detailed)"
+  - name: get_documentation
+    description: Get documentation and usage examples for a specific technology,
+      library, or API.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The technology, library, or API to get documentation for
+        context:
+          type: string
+          description: Additional context or specific aspects to focus on
+  - name: find_apis
+    description: Find and evaluate APIs that could be integrated into a project.
+    inputSchema:
+      type: object
+      required:
+        - requirement
+      properties:
+        context:
+          type: string
+          description: Additional context about the project or specific needs
+        requirement:
+          type: string
+          description: The functionality or requirement you are looking to fulfill
+  - name: check_deprecated_code
+    description: Check if code or dependencies might be using deprecated features.
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: The code snippet or dependency to check
+        technology:
+          type: string
+          description: The technology or framework context (e.g., "React", "Node.js")

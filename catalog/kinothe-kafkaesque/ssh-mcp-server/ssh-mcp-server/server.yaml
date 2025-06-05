@@ -1,0 +1,17 @@
+identifier: kinothe-kafkaesque/ssh-mcp-server/ssh-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/KinoThe-Kafkaesque/ssh-mcp-server
+  name: ssh-mcp-server
+  owner: KinoThe-Kafkaesque
+server:
+  subdirectory: /
+  name: SSH Server
+  description: Enable secure remote access and command execution through SSH using
+    the Model Context Protocol. Manage SSH credentials effortlessly with a
+    built-in SQLite database for data persistence. Experience a type-safe
+    development environment with TypeScript support.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

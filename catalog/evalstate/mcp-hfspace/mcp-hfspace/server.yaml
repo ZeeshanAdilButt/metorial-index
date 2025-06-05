@@ -1,0 +1,16 @@
+identifier: evalstate/mcp-hfspace/mcp-hfspace
+repo:
+  provider: github.com
+  url: https://github.com/evalstate/mcp-hfspace
+  name: mcp-hfspace
+  owner: evalstate
+server:
+  subdirectory: /
+  name: HuggingFace Space
+  description: Connect to Hugging Face Spaces with minimal setup. Access AI models
+    for tasks like image generation, text-to-speech, speech-to-text, chat, and
+    more. Simply add your spaces and start using them.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

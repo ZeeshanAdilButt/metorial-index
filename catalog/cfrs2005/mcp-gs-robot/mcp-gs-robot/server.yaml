@@ -1,0 +1,17 @@
+identifier: cfrs2005/mcp-gs-robot/mcp-gs-robot
+repo:
+  provider: github.com
+  url: https://github.com/cfrs2005/mcp-gs-robot
+  name: mcp-gs-robot
+  owner: cfrs2005
+server:
+  subdirectory: /
+  name: Gausium OpenAPI Server
+  description: Interact with Gausium robots through a standardized interface.
+    Access robot status, task reports, and maps seamlessly with your AI models.
+    Enhance your automation capabilities by leveraging the Gausium OpenAPI with
+    ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

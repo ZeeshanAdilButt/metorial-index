@@ -1,0 +1,68 @@
+tools:
+  - name: scan_ip
+    description: Scan a single IP address for MESH system and test default credentials
+    inputSchema:
+      type: object
+      required:
+        - ipAddress
+      properties:
+        timeout:
+          type: number
+          description: "Timeout in milliseconds (default: 5000)"
+        ipAddress:
+          type: string
+          description: IP address to scan (e.g., 192.168.1.1)
+  - name: scan_ip_range
+    description: Scan a range of IP addresses for MESH systems and test default credentials
+    inputSchema:
+      type: object
+      required:
+        - startIp
+        - endIp
+      properties:
+        endIp:
+          type: string
+          description: Ending IP address (e.g., 192.168.1.254)
+        startIp:
+          type: string
+          description: Starting IP address (e.g., 192.168.1.1)
+        timeout:
+          type: number
+          description: "Timeout in milliseconds (default: 5000)"
+        concurrency:
+          type: number
+          description: "Number of concurrent scans (default: 5)"
+  - name: test_default_credentials
+    description: Test if a MESH system is vulnerable to default credentials
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the MESH system (e.g., http://192.168.1.1)
+  - name: get_system_info
+    description: Get information about a vulnerable MESH system (users, events, etc.)
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the vulnerable MESH system
+  - name: unlock_entrance
+    description: Unlock an entrance (for educational purposes only)
+    inputSchema:
+      type: object
+      required:
+        - url
+        - entranceId
+      properties:
+        url:
+          type: string
+          description: URL of the vulnerable MESH system
+        entranceId:
+          type: string
+          description: ID of the entrance to unlock

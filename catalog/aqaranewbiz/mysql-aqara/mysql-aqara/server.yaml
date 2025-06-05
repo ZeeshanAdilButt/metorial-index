@@ -1,0 +1,17 @@
+identifier: aqaranewbiz/mysql-aqara/mysql-aqara
+repo:
+  provider: github.com
+  url: https://github.com/aqaranewbiz/mysql-aqara
+  name: mysql-aqara
+  owner: aqaranewbiz
+server:
+  subdirectory: /
+  name: MySQL Database Server
+  description: Enable direct interaction with MySQL databases through a
+    standardized MCP interface. Perform database operations such as connecting,
+    querying, modifying tables, and listing schema details seamlessly. Simplify
+    database management and integration within your LLM applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

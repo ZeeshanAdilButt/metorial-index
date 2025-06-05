@@ -1,0 +1,18 @@
+identifier: gregkop/sketchfab-mcp-server/sketchfab-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/gregkop/sketchfab-mcp-server
+  name: sketchfab-mcp-server
+  owner: gregkop
+server:
+  subdirectory: /
+  name: Sketchfab 3D Model Explorer
+  description: Search, view details, and download 3D models from Sketchfab
+    directly through your LLM interface. Easily find models using keywords,
+    tags, and categories, and download them in multiple formats to enhance your
+    creative projects. Integrate seamlessly with Claude or Cursor for an
+    interactive 3D asset experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

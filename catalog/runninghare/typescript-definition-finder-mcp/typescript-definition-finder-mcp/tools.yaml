@@ -1,0 +1,34 @@
+tools:
+  - name: find_typescript_definition
+    description: Use /ts-def to trigger this tool. This tool can find the definition
+      of a TypeScript symbol in your codebase. When you encounter an imported
+      symbol (e.g., 'import { StdioServerTransport } from
+      "@modelcontextprotocol/sdk/server/stdio.js"'), this tool will locate its
+      original definition file and code. Simply provide the current file path,
+      the line content and the symbol's column number, and it will return the
+      source definition location and code snippet.
+    inputSchema:
+      type: object
+      required:
+        - file_path
+        - line_content
+        - column_number
+      properties:
+        file_path:
+          type: string
+          description: The absolute path to the current typescript file (e.g.,
+            '/remote/.../src/index.ts')
+        line_content:
+          type: string
+          description: Pass the entire line of the symbol you want to find the definition
+            of. The line content will be used to find the line number in the
+            file instead of directly passing line number which AI Editor often
+            has trouble with. The first line matching the content will be used.
+        column_number:
+          type: number
+          description: The column number of the symbol (1-based indexing). For instance,
+            you want to find the definition of StdioServerTransport, and the
+            column number of symbol 'StdioServerTransport' in line 'import {
+            StdioServerTransport } from
+            "@modelcontextprotocol/sdk/server/stdio.js"' is 12, you should pass
+            12 as the column_number.

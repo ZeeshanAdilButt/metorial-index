@@ -1,0 +1,66 @@
+tools:
+  - name: list_splunk_alerts
+    description: List all Splunk alerts (saved searches with actions). Supports
+      pagination and optional case-insensitive title filter.
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Number of results to return (default 10)
+        title:
+          type: string
+          description: Case-insensitive substring to filter alert titles (optional)
+        offset:
+          type: number
+          description: Offset for pagination (default 0)
+  - name: list_splunk_fired_alerts
+    description: List Splunk fired alerts (paginated by count and offset arguments)
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Number of results to return (default 100)
+        offset:
+          type: number
+          description: Offset for pagination (default 0)
+        ss_name:
+          type: string
+          description: Search name pattern to filter alerts (default "*")
+        earliest:
+          type: string
+          description: Time range to look back (default "-24h")
+  - name: list_splunk_indexes
+    description: List Splunk indexes (paginated by count and offset arguments)
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Number of results to return (default 10)
+        offset:
+          type: number
+          description: Offset for pagination (default 0)
+  - name: list_splunk_macros
+    description: List Splunk macros (paginated by count and offset arguments).
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Number of results to return (default 10)
+        offset:
+          type: number
+          description: Offset for pagination (default 0)
+  - name: list_splunk_saved_searches
+    description: List Splunk saved searches (paginated by count and offset arguments).
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Number of results to return (default 10)
+        offset:
+          type: number
+          description: Offset for pagination (default 0)

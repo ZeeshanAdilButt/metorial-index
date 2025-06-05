@@ -1,0 +1,18 @@
+identifier: the-ai-workshops/searxng-mcp-server/searxng-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/The-AI-Workshops/searxng-mcp-server
+  name: searxng-mcp-server
+  owner: The-AI-Workshops
+server:
+  subdirectory: /
+  name: SearXNG Search Integration Server
+  description: Enable AI agents to perform privacy-respecting web searches by
+    integrating with a SearXNG instance. Provide seamless, powerful search
+    capabilities to your AI workflows through a standardized MCP server
+    interface. Easily deploy and configure with Docker or Python environments
+    for flexible usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

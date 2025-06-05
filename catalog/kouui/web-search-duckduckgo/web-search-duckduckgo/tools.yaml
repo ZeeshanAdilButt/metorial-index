@@ -1,0 +1,67 @@
+tools:
+  - name: search_and_fetch
+    description: "
+
+      \    Search the web using DuckDuckGo and return results.
+
+
+      \    Args:
+
+      \        query: The search query string
+
+      \        limit: Maximum number of results to return (default: 3, maximum
+      10)
+
+
+      \    Returns:
+
+      \        List of dictionaries containing\ 
+
+      \        - title
+
+      \        - url
+
+      \        - snippet\ 
+
+      \        - summary markdown (empty if not available)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_and_fetchArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+        query:
+          type: string
+          title: Query
+  - name: fetch
+    description: "
+
+      \    scrape the html content and return the markdown format using jina
+      api.
+
+
+      \    Args:
+
+      \        url: The search query string
+
+
+      \    Returns:
+
+      \        text : html in markdown format\ 
+
+      \    "
+    inputSchema:
+      type: object
+      title: fetchArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url

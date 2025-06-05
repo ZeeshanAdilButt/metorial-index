@@ -1,0 +1,74 @@
+tools:
+  - name: initialize
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - baseUrl
+        - apiKey
+      properties:
+        apiKey:
+          type: string
+        baseUrl:
+          type: string
+          format: uri
+      additionalProperties: false
+  - name: getIssues
+    description: "Retrieves a list of issues from Redmine. Supports filtering by
+      project, status, assignee, and more, as well as sorting and pagination.
+      Returns basic information for each issue, including ID, subject,
+      description, status, priority, assignee, author, creation date, and update
+      date. Parameters: project_id, status_id, assigned_to_id, tracker_id, sort,
+      limit, offset."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sort:
+          type: string
+        limit:
+          type: number
+          default: 25
+        offset:
+          type: number
+          default: 0
+        status_id:
+          type: string
+        project_id:
+          type: string
+        tracker_id:
+          type: string
+        assigned_to_id:
+          type: string
+      additionalProperties: false
+  - name: getIssue
+    description: "Fetches detailed information for a specific issue by ID. In
+      addition to basic fields, it can include related data such as journals,
+      attachments, relations, changesets, watchers, and child issues.
+      Parameters: id, include (for related entities)."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+        include:
+          type: string
+      additionalProperties: false
+  - name: getProjects
+    description: "Lists all accessible projects with basic information like ID,
+      name, identifier, description, status, created and updated dates.
+      Parameters: limit, offset."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 100
+        offset:
+          type: number
+          default: 0
+      additionalProperties: false

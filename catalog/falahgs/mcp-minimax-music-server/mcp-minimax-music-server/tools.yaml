@@ -1,0 +1,28 @@
+tools:
+  - name: generate_audio
+    description: "Generate audio using AIML API. The process has two steps: 1)
+      Submit generation request 2) Get the generated audio. If generation_id is
+      not provided, it will start a new generation."
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        model:
+          type: string
+          default: minimax-music
+          description: The model to use for generation (stable-audio or minimax-music)
+        prompt:
+          type: string
+          description: "The text prompt for audio generation. For minimax-music, wrap
+            lyrics in ##...##"
+        api_key:
+          type: string
+          description: Your AIML API Key (optional if set in environment variables)
+        generation_id:
+          type: string
+          description: "Optional: The generation ID from a previous request to check status"
+        reference_audio_url:
+          type: string
+          default: https://tand-dev.github.io/audio-hosting/spinning-head-271171.mp3
+          description: URL of the reference audio (required for minimax-music)

@@ -1,0 +1,18 @@
+identifier: lkp474/alibaba-cloud-ops-mcp-server/alibaba-cloud-ops-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lkp474/alibaba-cloud-ops-mcp-server
+  name: alibaba-cloud-ops-mcp-server
+  owner: lkp474
+server:
+  subdirectory: /
+  name: Alibaba Cloud Operations Server
+  description: Manage and operate Alibaba Cloud resources efficiently through a
+    unified interface. Perform actions like starting, stopping, and describing
+    instances, managing buckets, and monitoring resource metrics seamlessly.
+    Enhance cloud operations with ready-to-use tools for ECS, VPC, RDS, OSS, and
+    CloudMonitor services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,1319 @@
+tools:
+  - name: getOAuthUrl
+    description: Get OAuth authorization URL
+    inputSchema:
+      type: object
+      required:
+        - client_id
+        - redirect_uri
+        - scope
+      properties:
+        scope:
+          type: string
+          description: Scope (e.g., user:read channel:read chat:write)
+        state:
+          type: string
+          description: Random string to maintain state between request and callback
+        client_id:
+          type: string
+          description: Client ID
+        redirect_uri:
+          type: string
+          description: Redirect URI
+        code_challenge:
+          type: string
+          description: PKCE code challenge
+        code_challenge_method:
+          type: string
+          description: Code challenge method (S256 recommended)
+  - name: getAccessToken
+    description: Exchange code for token
+    inputSchema:
+      type: object
+      required:
+        - client_id
+        - client_secret
+        - code
+        - redirect_uri
+      properties:
+        code:
+          type: string
+          description: Authorization code
+        client_id:
+          type: string
+          description: Client ID
+        redirect_uri:
+          type: string
+          description: Redirect URI (must match the one used in authorization)
+        client_secret:
+          type: string
+          description: Client Secret
+        code_verifier:
+          type: string
+          description: PKCE code verifier to validate the code challenge
+  - name: refreshAccessToken
+    description: Refresh expired token
+    inputSchema:
+      type: object
+      required:
+        - client_id
+        - client_secret
+        - refresh_token
+      properties:
+        client_id:
+          type: string
+          description: Client ID
+        client_secret:
+          type: string
+          description: Client Secret
+        refresh_token:
+          type: string
+          description: Refresh token
+  - name: validateToken
+    description: Validate access token
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: revokeToken
+    description: Revoke access token
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserProfile
+    description: Get user profile
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: updateUserProfile
+    description: Update user profile
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - data
+      properties:
+        data:
+          type: object
+          description: Profile data to update
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserSubscriptions
+    description: Get user subscriptions
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserEmotes
+    description: Get user emotes
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserBadges
+    description: Get user badges
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserFollows
+    description: Get followed channels
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserBlockedUsers
+    description: Get blocked users
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserClips
+    description: Get user clips
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserVideos
+    description: Get user videos
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserHighlights
+    description: Get user highlights
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserScheduledStreams
+    description: Get scheduled streams
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserNotifications
+    description: Get notifications
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserWallet
+    description: Get wallet info
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getUserGifts
+    description: Get gift history
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getChatMessages
+    description: Get chat messages
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: sendChatMessage
+    description: Send chat message
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - message
+      properties:
+        message:
+          type: string
+          description: Message text
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChatSettings
+    description: Get chat settings
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: banUser
+    description: Ban user from chat
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: User ID to ban
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: unbanUser
+    description: Unban user from chat
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: User ID to unban
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: timeoutUser
+    description: Timeout user
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - user_id
+        - duration
+      properties:
+        user_id:
+          type: string
+          description: User ID to timeout
+        duration:
+          type: integer
+          description: Timeout duration in seconds
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: deleteMessage
+    description: Delete chat message
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - message_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        message_id:
+          type: string
+          description: Message ID to delete
+        access_token:
+          type: string
+          description: Access token
+  - name: clearChat
+    description: Clear all chat messages
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChatUserInfo
+    description: Get chat user info
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: User ID
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelInfo
+    description: Get channel information
+    inputSchema:
+      type: object
+      required:
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+  - name: getChannelFollowers
+    description: Get channel followers
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelSubscribers
+    description: Get channel subscribers
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelEmotes
+    description: Get channel emotes
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelBadges
+    description: Get channel badges
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelModerators
+    description: Get channel moderators
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelBans
+    description: Get channel banned users
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelVips
+    description: Get channel VIP users
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelClips
+    description: Get channel clips
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelVideos
+    description: Get channel videos
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelHighlights
+    description: Get channel highlights
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelScheduledStreams
+    description: Get channel scheduled streams
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelChatRules
+    description: Get channel chat rules
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelChatCommands
+    description: Get channel chat commands
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelCategories
+    description: Get channel categories
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelTags
+    description: Get channel tags
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelGifts
+    description: Get channel gift history
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelRaids
+    description: Get channel raid history
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelHosts
+    description: Get channel host history
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getLivestreams
+    description: Get list of current livestreams
+    inputSchema:
+      type: object
+      properties: {}
+  - name: getLivestreamBySlug
+    description: Get livestream by slug
+    inputSchema:
+      type: object
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: Stream slug
+  - name: startStream
+    description: Start streaming
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: endStream
+    description: End stream
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: updateStreamInfo
+    description: Update stream info
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - data
+      properties:
+        data:
+          type: object
+          description: Stream info data
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: updateStreamSettings
+    description: Update stream settings
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - data
+      properties:
+        data:
+          type: object
+          description: Stream settings data
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getStreamInfo
+    description: Get stream information
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getStreamViewers
+    description: Get stream viewers
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getStreamCategories
+    description: Get stream categories
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getStreamTags
+    description: Get stream tags
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getStreamStats
+    description: Get stream statistics
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: createPoll
+    description: Create poll
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - title
+        - options
+        - duration
+      properties:
+        title:
+          type: string
+          description: Poll title
+        options:
+          type: array
+          items:
+            type: string
+          description: Poll options
+        duration:
+          type: integer
+          description: Poll duration in seconds
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: endPoll
+    description: End active poll
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - poll_id
+      properties:
+        poll_id:
+          type: string
+          description: Poll ID
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: createPrediction
+    description: Create prediction
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - title
+        - options
+        - duration
+      properties:
+        title:
+          type: string
+          description: Prediction title
+        options:
+          type: array
+          items:
+            type: string
+          description: Prediction outcomes
+        duration:
+          type: integer
+          description: Prediction duration in seconds
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: endPrediction
+    description: End prediction
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - prediction_id
+        - winning_outcome_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+        prediction_id:
+          type: string
+          description: Prediction ID
+        winning_outcome_id:
+          type: string
+          description: Winning outcome ID
+  - name: createMarker
+    description: Create stream marker
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - description
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        description:
+          type: string
+          description: Marker description
+        access_token:
+          type: string
+          description: Access token
+  - name: createWebhook
+    description: Create webhook
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - url
+        - events
+      properties:
+        url:
+          type: string
+          description: Webhook URL
+        events:
+          type: array
+          items:
+            type: string
+          description: Event types to subscribe to
+        access_token:
+          type: string
+          description: Access token
+  - name: deleteWebhook
+    description: Delete webhook
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - webhook_id
+      properties:
+        webhook_id:
+          type: string
+          description: Webhook ID
+        access_token:
+          type: string
+          description: Access token
+  - name: listWebhooks
+    description: List webhooks
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getWebhookEvents
+    description: Get available webhook events
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: verifyWebhookSignature
+    description: Verify webhook signature
+    inputSchema:
+      type: object
+      required:
+        - signature
+        - message_id
+        - timestamp
+        - body
+      properties:
+        body:
+          type: string
+          description: Body content
+        signature:
+          type: string
+          description: Signature to verify
+        timestamp:
+          type: string
+          description: Timestamp
+        message_id:
+          type: string
+          description: Message ID
+  - name: getPublicKey
+    description: Get public key for signature verification
+    inputSchema:
+      type: object
+      properties: {}
+  - name: getWebhookPayloads
+    description: Get example webhook payloads
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - event_type
+      properties:
+        event_type:
+          type: string
+          description: Event type
+        access_token:
+          type: string
+          description: Access token
+  - name: retryWebhook
+    description: Retry failed webhook
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - webhook_id
+        - message_id
+      properties:
+        message_id:
+          type: string
+          description: Message ID
+        webhook_id:
+          type: string
+          description: Webhook ID
+        access_token:
+          type: string
+          description: Access token
+  - name: checkWebhookSubscriptionStatus
+    description: Check webhook subscription status
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - webhook_id
+      properties:
+        webhook_id:
+          type: string
+          description: Webhook ID
+        access_token:
+          type: string
+          description: Access token
+  - name: searchChannels
+    description: Search channels
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: searchStreams
+    description: Search streams
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: searchUsers
+    description: Search users
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: searchCategories
+    description: Search categories
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: getCategories
+    description: Get categories
+    inputSchema:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+          description: Access token
+  - name: getCategory
+    description: Get category
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - category_id
+      properties:
+        category_id:
+          type: string
+          description: Category ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getCategoryStreams
+    description: Get category streams
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - category_id
+      properties:
+        category_id:
+          type: string
+          description: Category ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getTopStreams
+    description: Get top streams
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - category_id
+      properties:
+        category_id:
+          type: string
+          description: Category ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getRecommendedStreams
+    description: Get recommended streams
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - category_id
+      properties:
+        category_id:
+          type: string
+          description: Category ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getFollowedStreams
+    description: Get followed streams
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - category_id
+      properties:
+        category_id:
+          type: string
+          description: Category ID
+        access_token:
+          type: string
+          description: Access token
+  - name: createClip
+    description: Create clip
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+        - start_time
+        - end_time
+      properties:
+        end_time:
+          type: integer
+          description: Clip end time in seconds
+        channel_id:
+          type: string
+          description: Channel ID
+        start_time:
+          type: integer
+          description: Clip start time in seconds
+        access_token:
+          type: string
+          description: Access token
+  - name: getClip
+    description: Get clip
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - clip_id
+      properties:
+        clip_id:
+          type: string
+          description: Clip ID
+        access_token:
+          type: string
+          description: Access token
+  - name: deleteClip
+    description: Delete clip
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - clip_id
+      properties:
+        clip_id:
+          type: string
+          description: Clip ID
+        access_token:
+          type: string
+          description: Access token
+  - name: updateClip
+    description: Update clip
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - clip_id
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          description: Clip title
+        clip_id:
+          type: string
+          description: Clip ID
+        description:
+          type: string
+          description: Clip description
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelBySlug
+    description: Get channel by slug
+    inputSchema:
+      type: object
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: Channel slug
+  - name: getAppAccessToken
+    description: Get app access token
+    inputSchema:
+      type: object
+      required:
+        - client_id
+        - client_secret
+      properties:
+        client_id:
+          type: string
+          description: Client ID
+        client_secret:
+          type: string
+          description: Client Secret
+  - name: getChatSenderIdentity
+    description: Get chat sender identity
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getChannelSubscriptionStatus
+    description: Get channel subscription status
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - channel_id
+      properties:
+        channel_id:
+          type: string
+          description: Channel ID
+        access_token:
+          type: string
+          description: Access token
+  - name: getWebhookSubscriptions
+    description: Get webhook subscriptions
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - webhook_id
+      properties:
+        webhook_id:
+          type: string
+          description: Webhook ID
+        access_token:
+          type: string
+          description: Access token
+  - name: updateWebhookSubscriptions
+    description: Update webhook subscriptions
+    inputSchema:
+      type: object
+      required:
+        - access_token
+        - webhook_id
+        - subscriptions
+      properties:
+        webhook_id:
+          type: string
+          description: Webhook ID
+        access_token:
+          type: string
+          description: Access token
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: Webhook subscriptions

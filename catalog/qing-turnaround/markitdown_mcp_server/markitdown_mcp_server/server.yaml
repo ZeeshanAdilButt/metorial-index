@@ -1,0 +1,18 @@
+identifier: qing-turnaround/markitdown_mcp_server/markitdown_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/qing-turnaround/markitdown_mcp_server
+  name: markitdown_mcp_server
+  owner: qing-turnaround
+server:
+  subdirectory: /
+  name: MarkItDown Server
+  description: Convert various file formats to Markdown effortlessly using the
+    MarkItDown utility. Enable seamless integration with any MCP client to
+    transform PDFs, Office documents, images, audio, HTML, and more into
+    Markdown format. Simplify content processing and enhance your workflows with
+    automated file conversion.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

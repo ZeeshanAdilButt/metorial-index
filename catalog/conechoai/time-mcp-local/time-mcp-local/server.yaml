@@ -1,0 +1,17 @@
+identifier: conechoai/time-mcp-local/time-mcp-local
+repo:
+  provider: github.com
+  url: https://github.com/ConechoAI/time-mcp-local
+  name: time-mcp-local
+  owner: ConechoAI
+server:
+  subdirectory: /
+  name: Time MCP Server
+  description: Get current time information and perform timezone conversions
+    effortlessly. Leverage IANA timezone names for accurate time management in
+    your applications. Enhance your LLM's capabilities with real-time time data
+    and conversions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

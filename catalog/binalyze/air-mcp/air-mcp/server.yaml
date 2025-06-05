@@ -1,0 +1,18 @@
+identifier: binalyze/air-mcp/air-mcp
+repo:
+  provider: github.com
+  url: https://github.com/binalyze/air-mcp
+  name: air-mcp
+  owner: binalyze
+server:
+  subdirectory: /
+  name: Binalyze AIR MCP Server
+  description: Enable natural language interaction with your Binalyze AIR system
+    to manage assets, acquisition profiles, and organizations seamlessly. Use
+    this server to list and query your AIR data through any MCP client,
+    enhancing your workflow with AI-driven context access. Requires an API token
+    for secure access to your AIR environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

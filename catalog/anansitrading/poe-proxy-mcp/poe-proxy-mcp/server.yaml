@@ -1,0 +1,18 @@
+identifier: anansitrading/poe-proxy-mcp/poe-proxy-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Anansitrading/poe-proxy-mcp
+  name: poe-proxy-mcp
+  owner: Anansitrading
+server:
+  subdirectory: /
+  name: Poe Proxy Server
+  description: Proxy the Poe.com API to enable querying multiple Poe models with
+    session management and file sharing. Support real-time streaming responses
+    and special compatibility with Claude 3.7 Sonnet's thinking protocol.
+    Facilitate seamless integration with web clients via SSE transport for
+    enhanced interactive experiences.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

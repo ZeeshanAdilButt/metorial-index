@@ -1,0 +1,317 @@
+tools:
+  - name: create_issue
+    description: Create a new Linear issue with optional parent linking. Supports
+      self-assignment using "me" as assigneeId.
+    inputSchema:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Title of the issue
+        status:
+          type: string
+          description: Status of the issue
+        teamId:
+          type: string
+          description: ID of the team to create the issue in. Required unless parentId is
+            provided.
+        labelIds:
+          type: array
+          items:
+            type: string
+          description: Array of label IDs to attach to the issue
+        parentId:
+          type: string
+          description: ID of the parent issue. If provided, creates a subissue.
+        priority:
+          type: number
+          description: Priority of the issue (0-4)
+        assigneeId:
+          type: string
+          description: ID of the user to assign the issue to. Use "me" to assign to the
+            current authenticated user, or a specific user ID.
+        description:
+          type: string
+          description: Description of the issue (markdown supported)
+  - name: update_issue
+    description: Update an existing Linear issue. Supports self-assignment using
+      "me" as assigneeId and cycle assignment via cycleId. You can provide a
+      cycle name (e.g., "2"), a relative cycle at the moment of updating
+      ("current", "next", "previous"), or a cycle UUID directly.
+    inputSchema:
+      type: object
+      required:
+        - issueId
+      properties:
+        title:
+          type: string
+          description: New title for the issue
+        status:
+          type: string
+          description: New status for the issue
+        cycleId:
+          type: string
+          description: ID of the cycle to assign the issue to. You can provide a cycle
+            name (e.g., "2"), a relative cycle ("current", "next", "previous"),
+            or a cycle UUID directly.
+        issueId:
+          type: string
+          description: ID or key of the issue to update
+        labelIds:
+          type: array
+          items:
+            type: string
+          description: New array of label IDs
+        priority:
+          type: number
+          description: New priority for the issue (0-4)
+        assigneeId:
+          type: string
+          description: ID of the new assignee. Use "me" to assign to the current
+            authenticated user, or a specific user ID.
+        description:
+          type: string
+          description: New description for the issue (markdown supported)
+  - name: get_issue
+    description: Get detailed information about a specific Linear issue including
+      optional relationships and cleaned content
+    inputSchema:
+      type: object
+      required:
+        - issueId
+      properties:
+        issueId:
+          type: string
+          description: The ID or key of the Linear issue
+        includeRelationships:
+          type: boolean
+          default: false
+          description: Include comments, parent/sub-issues, and related issues. Also
+            extracts mentions from content.
+  - name: search_issues
+    description: >-
+      Search for Linear issues using a query string and advanced filters.
+      Supports Linear's powerful filtering capabilities.
+
+
+      Examples:
+
+      1. Basic search: {query: "bug"}
+
+      2. High priority issues: {query: "", filter: {priority: {gte: 2}}}
+
+      3. Issues due soon: {query: "", filter: {dueDate: {lt: "P2W"}}}
+
+      4. Issues with specific labels: {query: "", filter: {labels: {name: {in:
+      ["Bug", "Critical"]}}}}
+
+      5. Complex filters: {query: "", filter: {and: [{priority: {gte: 2}},
+      {state: {type: {eq: "started"}}}], or: [{assignee: {id: {eq: "me"}}},
+      {creator: {id: {eq: "me"}}}]}}
+
+      6. Issues in a project: {query: "", filter: {project: {id: {eq:
+      "project-id"}}}}
+
+      7. Issues by state type: {query: "", filter: {state: {type: {eq:
+      "started"}}}}
+
+      8. Issues in current cycle: {query: "", filter: {cycle: {type: "current",
+      teamId: "team-123"}}}
+
+      9. Issues in next cycle: {query: "", filter: {cycle: {type: "next",
+      teamId: "team-123"}}}
+
+      10. Issues in previous cycle: {query: "", filter: {cycle: {type:
+      "previous", teamId: "team-123"}}}
+
+      11. Issues in specific cycle by UUID: {query: "", filter: {cycle: {type:
+      "specific", id: "cycle-456"}}} or by cycle number: {query: "", filter:
+      {cycle: {type: "specific", id: "2", teamId: "team-123"}}} (teamId is
+      required when using cycle number)
+
+      12. High priority bugs in current cycle: {query: "bug", filter: {and:
+      [{cycle: {type: "current", teamId: "team-123"}}, {priority: {gte: 2}}],
+      assignee: {id: {eq: "me"}}}}
+
+
+      Supported comparators:
+
+      - String fields: eq, neq, in, nin, contains, startsWith, endsWith (plus
+      case-insensitive variants)
+
+      - Number fields: eq, neq, lt, lte, gt, gte, in, nin
+
+      - Date fields: eq, neq, lt, lte, gt, gte (supports ISO 8601 durations like
+      "P2W" for relative dates)
+
+
+      Filterable fields:
+
+      - Basic: title, description, priority, estimate, dueDate, createdAt,
+      updatedAt, completedAt, startedAt, canceledAt
+
+      - Relationships:
+        * assignee: {id: {...}, name: {...}}
+        * creator: {id: {...}, name: {...}}
+        * team: {id: {...}, name: {...}, key: {...}}
+        * state: {id: {...}, name: {...}, type: {...}}
+        * labels: {name: {...}, every: {name: {...}}}
+        * project: {id: {...}, name: {...}}
+        * cycle: {type: "current"|"next"|"previous"|"specific", teamId: "...", id: "..."}
+
+      Logical operators:
+
+      - and: Array of filters that must all match
+
+      - or: Array of filters where at least one must match
+
+
+      Backward compatibility:
+
+      - assignedTo: "me" or user ID (shorthand for assignee.id.eq)
+
+      - createdBy: "me" or user ID (shorthand for creator.id.eq)
+
+      - projectId: direct project ID (shorthand for project.id.eq)
+
+      - projectName: project name lookup
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Text to search in issue titles and descriptions. Can be empty
+            string if only using filters.
+        filter:
+          type: object
+          description: Advanced filters using Linear's filtering capabilities. See
+            description for details and examples.
+        projectId:
+          type: string
+          description: Filter issues by project ID. Takes precedence over projectName if
+            both are provided.
+        projectName:
+          type: string
+          description: Filter issues by project name. Will be used to find matching
+            projects if projectId is not provided.
+        includeRelationships:
+          type: boolean
+          default: false
+          description: Include additional metadata like team and labels in search results
+  - name: get_teams
+    description: Get a list of Linear teams with optional name/key filtering
+    inputSchema:
+      type: object
+      properties:
+        nameFilter:
+          type: string
+          description: Optional filter to search by team name or key
+  - name: create_comment
+    description: Create a new comment on a Linear issue
+    inputSchema:
+      type: object
+      required:
+        - issueId
+        - body
+      properties:
+        body:
+          type: string
+          description: Content of the comment (markdown supported)
+        issueId:
+          type: string
+          description: ID or key of the issue to comment on
+  - name: delete_issue
+    description: Delete an existing Linear issue
+    inputSchema:
+      type: object
+      required:
+        - issueId
+      properties:
+        issueId:
+          type: string
+          description: ID or key of the issue to delete
+  - name: get_projects
+    description: Get a list of Linear projects with optional name filtering and pagination
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        after:
+          type: string
+          description: Cursor for pagination. Use the endCursor from a previous response
+            to fetch the next page
+        first:
+          type: number
+          default: 50
+          description: "Number of items to return (default: 50, max: 100)"
+        nameFilter:
+          type: string
+          description: Optional filter to search by project name
+        includeArchived:
+          type: boolean
+          default: true
+          description: "Whether to include archived projects (default: true)"
+  - name: get_project_updates
+    description: Get project updates for a given project ID with optional filtering
+      parameters
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        after:
+          type: string
+          description: Cursor for pagination. Use the endCursor from a previous response
+            to fetch the next page
+        first:
+          type: number
+          default: 50
+          description: "Number of items to return (default: 50, max: 100)"
+        health:
+          type: string
+          description: Filter updates by health status (e.g., "onTrack", "atRisk",
+            "offTrack")
+        userId:
+          type: string
+          description: Filter updates by creator. Use "me" to find updates created by the
+            current user, or a specific user ID
+        projectId:
+          type: string
+          description: ID of the project to get updates for
+        createdAfter:
+          type: string
+          description: ISO date string. Only return updates created after this date
+        createdBefore:
+          type: string
+          description: ISO date string. Only return updates created before this date
+        includeArchived:
+          type: boolean
+          default: true
+          description: "Whether to include archived updates (default: true)"
+  - name: create_project_update
+    description: Create a new update for a Linear project
+    inputSchema:
+      type: object
+      required:
+        - projectId
+      properties:
+        body:
+          type: string
+          description: Content of the update in markdown format
+        health:
+          enum:
+            - onTrack
+            - atRisk
+            - offTrack
+          type: string
+          description: Health status of the project at the time of the update
+        projectId:
+          type: string
+          description: ID of the project for which to create an update
+        isDiffHidden:
+          type: boolean
+          description: Whether to hide the diff between this update and the previous one

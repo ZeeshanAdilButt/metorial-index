@@ -1,0 +1,18 @@
+identifier: ropon/edgeone-pages-mcp/edgeone-pages-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ropon/edgeone-pages-mcp
+  name: edgeone-pages-mcp
+  owner: ropon
+server:
+  subdirectory: /
+  name: EdgeOne Pages Deployment Service
+  description: Deploy HTML content quickly to EdgeOne Pages and get a publicly
+    accessible URL for fast edge delivery. Simplify content deployment with
+    automatic URL generation and seamless integration with EdgeOne Pages
+    Functions and KV storage. Enable instant access to your deployed content via
+    a globally distributed edge network.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

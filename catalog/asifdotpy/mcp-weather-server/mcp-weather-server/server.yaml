@@ -1,0 +1,17 @@
+identifier: asifdotpy/mcp-weather-server/mcp-weather-server
+repo:
+  provider: github.com
+  url: https://github.com/asifdotpy/MCP-Weather-Server
+  name: MCP-Weather-Server
+  owner: asifdotpy
+server:
+  subdirectory: /
+  name: Weather MCP Server
+  description: Fetch real-time weather alerts and forecasts for any location in
+    the United States. Access detailed weather information effortlessly using
+    state codes or geographic coordinates. Stay informed with structured logging
+    and robust error handling for a seamless experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

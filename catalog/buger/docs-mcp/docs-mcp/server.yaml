@@ -1,0 +1,17 @@
+identifier: buger/docs-mcp/docs-mcp
+repo:
+  provider: github.com
+  url: https://github.com/buger/docs-mcp
+  name: docs-mcp
+  owner: buger
+server:
+  subdirectory: /
+  name: Docs MCP Server
+  description: Enable AI assistants to search and interact with your documentation
+    or codebases effortlessly. Point to a Git repository or local folder to
+    facilitate natural language queries about its contents. Customize the search
+    experience with configurable tools tailored to your specific needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

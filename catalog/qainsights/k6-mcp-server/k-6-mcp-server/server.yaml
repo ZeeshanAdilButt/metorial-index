@@ -1,0 +1,17 @@
+identifier: qainsights/k6-mcp-server/k-6-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/QAInsights/k6-mcp-server
+  name: k6-mcp-server
+  owner: QAInsights
+server:
+  subdirectory: /
+  name: k6 Load Testing Server
+  description: Run load tests seamlessly with k6 using this server. Integrate
+    easily with the Model Context Protocol to execute tests with custom
+    configurations and real-time output. Simplify your load testing process and
+    enhance performance insights effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

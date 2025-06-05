@@ -1,0 +1,53 @@
+tools:
+  - name: list-devices
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-device
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deviceId
+      properties:
+        deviceId:
+          type: string
+          description: The ID of the device to get information about
+      additionalProperties: false
+  - name: send-command
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deviceId
+        - command
+      properties:
+        params:
+          type: object
+          description: Optional parameters for the command
+          additionalProperties: {}
+        command:
+          type: string
+          description: The command to send (restart, update, status, etc.)
+        deviceId:
+          type: string
+          description: The ID of the device to send the command to
+      additionalProperties: false
+  - name: update-config
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deviceId
+        - config
+      properties:
+        config:
+          type: object
+          description: Configuration parameters to update
+          additionalProperties: {}
+        deviceId:
+          type: string
+          description: The ID of the device to update configuration for
+      additionalProperties: false

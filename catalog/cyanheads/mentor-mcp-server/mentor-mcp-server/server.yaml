@@ -1,0 +1,15 @@
+identifier: cyanheads/mentor-mcp-server/mentor-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cyanheads/mentor-mcp-server
+  name: mentor-mcp-server
+  owner: cyanheads
+server:
+  subdirectory: /
+  name: Mentor MCP Server
+  description: Provide LLM Agents a second opinion via AI-powered
+    Deepseek-Reasoning mentorship capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

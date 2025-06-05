@@ -1,0 +1,15 @@
+identifier: benniu/emqx-mcp-server/emqx-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Benniu/emqx-mcp-server
+  name: emqx-mcp-server
+  owner: Benniu
+server:
+  subdirectory: /
+  name: EMQX MCP Server
+  description: A Model Context Protocol (MCP) server implementation that provides
+    EMQX MQTT broker interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

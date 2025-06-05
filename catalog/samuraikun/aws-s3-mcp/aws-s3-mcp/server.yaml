@@ -1,0 +1,17 @@
+identifier: samuraikun/aws-s3-mcp/aws-s3-mcp
+repo:
+  provider: github.com
+  url: https://github.com/samuraikun/aws-s3-mcp
+  name: aws-s3-mcp
+  owner: samuraikun
+server:
+  subdirectory: /
+  name: S3 MCP Server
+  description: Interact with your AWS S3 storage seamlessly. List buckets,
+    retrieve object contents, and manage your S3 data directly from your LLM
+    applications. Enhance your workflows with secure and standardized access to
+    S3 resources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

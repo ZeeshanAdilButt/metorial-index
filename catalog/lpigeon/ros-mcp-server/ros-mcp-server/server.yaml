@@ -1,0 +1,20 @@
+identifier: lpigeon/ros-mcp-server/ros-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lpigeon/ros-mcp-server
+  name: ros-mcp-server
+  owner: lpigeon
+server:
+  subdirectory: /
+  name: ROS MCP Server
+  description: The ROS MCP Server is designed to support robots in performing
+    complex tasks and adapting effectively to various environments by providing
+    a set of functions that transform natural language commands, entered by a
+    user through an LLM, into ROS commands for robot control. Furthermore, by
+    utilizing rosbridge, it is configured to operate with both ROS and ROS2
+    systems, and its WebSocket-based communication enables broad applicability
+    across diverse platforms.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

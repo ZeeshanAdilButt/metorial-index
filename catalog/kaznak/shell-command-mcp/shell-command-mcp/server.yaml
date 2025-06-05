@@ -1,0 +1,17 @@
+identifier: kaznak/shell-command-mcp/shell-command-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kaznak/shell-command-mcp
+  name: shell-command-mcp
+  owner: kaznak
+server:
+  subdirectory: /
+  name: Shell Command Server
+  description: Execute shell commands securely within a Docker container. Benefit
+    from an isolated environment that ensures your commands run without
+    compromising your host system. Utilize Kubernetes tools and manage your
+    scripts with ease through a simple interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: t1nker-1220/aws-postgress-mcp-server/aws-postgress-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/T1nker-1220/aws-postgress-mcp-server
+  name: aws-postgress-mcp-server
+  owner: T1nker-1220
+server:
+  subdirectory: /
+  name: AWS PostgreSQL Query Server
+  description: Provide secure, read-only SQL query access to your AWS PostgreSQL
+    database through an MCP interface. Validate and execute safe queries to
+    retrieve data without risk of modification. Easily integrate with MCP
+    clients using standard input/output communication.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

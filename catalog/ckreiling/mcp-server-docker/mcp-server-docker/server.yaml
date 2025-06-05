@@ -1,0 +1,14 @@
+identifier: ckreiling/mcp-server-docker/mcp-server-docker
+repo:
+  provider: github.com
+  url: https://github.com/ckreiling/mcp-server-docker
+  name: mcp-server-docker
+  owner: ckreiling
+server:
+  subdirectory: /
+  name: Docker MCP Server
+  description: Manage Docker containers with natural language commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

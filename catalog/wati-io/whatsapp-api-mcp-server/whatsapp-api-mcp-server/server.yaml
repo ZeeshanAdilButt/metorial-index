@@ -1,0 +1,18 @@
+identifier: wati-io/whatsapp-api-mcp-server/whatsapp-api-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/wati-io/whatsapp-api-mcp-server
+  name: whatsapp-api-mcp-server
+  owner: wati-io
+server:
+  subdirectory: /
+  name: WATI WhatsApp MCP Server
+  description: Enable seamless interaction with your WhatsApp account through AI
+    agents by searching contacts, reading messages, and sending text or media
+    messages. Enhance your WhatsApp conversations with interactive buttons and
+    media handling capabilities. Connect effortlessly using the official Wati
+    API for secure and reliable communication.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

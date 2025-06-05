@@ -1,0 +1,14 @@
+identifier: klarity-app/updates/updates
+repo:
+  provider: github.com
+  url: https://github.com/klarity-app/updates
+  name: updates
+  owner: klarity-app
+server:
+  subdirectory: /
+  name: Klarity Updates
+  description: Streamline your data updates and management processes.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

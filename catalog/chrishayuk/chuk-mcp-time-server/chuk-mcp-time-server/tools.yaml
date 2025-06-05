@@ -1,0 +1,31 @@
+tools:
+  - name: get_current_time
+    description: Get current time in a specified timezone
+    inputSchema:
+      type: object
+      title: Get_current_timeInput
+      required:
+        - timezone
+      properties:
+        timezone:
+          type: string
+          title: Timezone
+  - name: convert_time
+    description: Convert time between timezones
+    inputSchema:
+      type: object
+      title: Convert_timeInput
+      required:
+        - source_timezone
+        - time
+        - target_timezone
+      properties:
+        time:
+          type: string
+          title: Time
+        source_timezone:
+          type: string
+          title: Source Timezone
+        target_timezone:
+          type: string
+          title: Target Timezone

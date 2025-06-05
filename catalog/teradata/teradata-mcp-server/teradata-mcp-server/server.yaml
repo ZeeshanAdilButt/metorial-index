@@ -1,0 +1,19 @@
+identifier: teradata/teradata-mcp-server/teradata-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Teradata/teradata-mcp-server
+  name: teradata-mcp-server
+  owner: Teradata
+server:
+  subdirectory: /
+  name: Teradata MCP Server
+  description: Enable seamless integration of Teradata database tools with AI
+    agents and development environments. Easily list databases, run SQL queries,
+    and manage database objects through an interactive MCP server interface.
+    Enhance your AI workflows by connecting Teradata capabilities via stdio or
+    SSE transports and integrate with popular tools like Visual Studio Code and
+    Open WebUI.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

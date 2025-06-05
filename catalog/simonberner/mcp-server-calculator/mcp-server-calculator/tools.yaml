@@ -1,0 +1,168 @@
+tools:
+  - name: add
+    description: Addition of two numbers
+    inputSchema:
+      type: object
+      title: addArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: sub
+    description: Subtraction of two numbers
+    inputSchema:
+      type: object
+      title: subArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: mul
+    description: Multiplication of two numbers
+    inputSchema:
+      type: object
+      title: mulArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: div
+    description: Division of two numbers
+    inputSchema:
+      type: object
+      title: divArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: sqrt
+    description: Square root of a number
+    inputSchema:
+      type: object
+      title: sqrtArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A
+  - name: pow
+    description: Power of a number
+    inputSchema:
+      type: object
+      title: powArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: cbrt
+    description: Cube root of a number
+    inputSchema:
+      type: object
+      title: cbrtArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A
+  - name: factorial
+    description: Factorial of a number
+    inputSchema:
+      type: object
+      title: factorialArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A
+  - name: log
+    description: Log of a number
+    inputSchema:
+      type: object
+      title: logArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A
+  - name: remainder
+    description: Remainder of two numbers division
+    inputSchema:
+      type: object
+      title: remainderArguments
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+        b:
+          type: integer
+          title: B
+  - name: sin
+    description: Sin of a number
+    inputSchema:
+      type: object
+      title: sinArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A
+  - name: cos
+    description: Cos of a number
+    inputSchema:
+      type: object
+      title: cosArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A
+  - name: tan
+    description: Tan of a number
+    inputSchema:
+      type: object
+      title: tanArguments
+      required:
+        - a
+      properties:
+        a:
+          type: integer
+          title: A

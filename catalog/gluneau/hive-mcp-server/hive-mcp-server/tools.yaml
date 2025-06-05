@@ -1,0 +1,450 @@
+tools:
+  - name: get_account_info
+    description: Fetches detailed information about a Hive blockchain account
+      including balance, authority, voting power, and other account metrics.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Hive username to fetch information for
+      additionalProperties: false
+  - name: get_account_history
+    description: Retrieves transaction history for a Hive account with optional
+      operation type filtering.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Number of operations to return
+        username:
+          type: string
+          description: Hive username
+        operation_filter:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          description: Operation types to filter for. Can be provided as an array
+            ['transfer', 'vote'] or a comma-separated string 'transfer,vote'
+      additionalProperties: false
+  - name: get_vesting_delegations
+    description: Get a list of vesting delegations made by a specific Hive account
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        from:
+          type: string
+          description: Optional starting account for pagination
+        limit:
+          type: number
+          default: 100
+          maximum: 1000
+          minimum: 1
+          description: Maximum number of delegations to retrieve
+        username:
+          type: string
+          description: Hive account to get delegations for
+      additionalProperties: false
+  - name: get_post_content
+    description: Retrieves a specific Hive blog post identified by author and
+      permlink, including the post title, content, and metadata.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - author
+        - permlink
+      properties:
+        author:
+          type: string
+          description: Author of the post
+        permlink:
+          type: string
+          description: Permlink of the post
+      additionalProperties: false
+  - name: get_posts_by_tag
+    description: Retrieves Hive posts filtered by a specific tag and sorted by a
+      category like trending, hot, or created.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - category
+        - tag
+      properties:
+        tag:
+          type: string
+          description: The tag to filter posts by
+        limit:
+          type: number
+          default: 10
+          maximum: 20
+          minimum: 1
+          description: Number of posts to return (1-20)
+        category:
+          enum:
+            - active
+            - cashout
+            - children
+            - comments
+            - created
+            - hot
+            - promoted
+            - trending
+            - votes
+          type: string
+          description: Sorting category for posts (e.g. trending, hot, created)
+      additionalProperties: false
+  - name: get_posts_by_user
+    description: Retrieves posts authored by or in the feed of a specific Hive user.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - category
+        - username
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 20
+          minimum: 1
+          description: Number of posts to return (1-20)
+        category:
+          enum:
+            - blog
+            - feed
+          type: string
+          description: Type of user posts to fetch (blog = posts by user, feed = posts
+            from users they follow)
+        username:
+          type: string
+          description: Hive username to fetch posts for
+      additionalProperties: false
+  - name: vote_on_post
+    description: Vote on a Hive post (upvote or downvote) using the configured Hive account.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - author
+        - permlink
+        - weight
+      properties:
+        author:
+          type: string
+          description: Author of the post to vote on
+        weight:
+          type: number
+          maximum: 10000
+          minimum: -10000
+          description: Vote weight from -10000 (100% downvote) to 10000 (100% upvote)
+        permlink:
+          type: string
+          description: Permlink of the post to vote on
+      additionalProperties: false
+  - name: send_token
+    description: Send HIVE or HBD tokens to another Hive account using the
+      configured account credentials.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - amount
+        - currency
+      properties:
+        to:
+          type: string
+          description: Recipient Hive username
+        memo:
+          type: string
+          description: Optional memo to include with the transaction
+        amount:
+          type: number
+          description: Amount of tokens to send
+          exclusiveMinimum: 0
+        currency:
+          enum:
+            - HIVE
+            - HBD
+          type: string
+          description: "Currency to send: HIVE or HBD"
+      additionalProperties: false
+  - name: create_post
+    description: Create a new blog post on the Hive blockchain using the configured
+      account credentials.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - body
+      properties:
+        body:
+          type: string
+          minLength: 1
+          description: Content of the blog post, can include Markdown formatting
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: string
+          default:
+            - blog
+          description: Tags for the post. Can be provided as comma-separated string
+            'blog,life,writing' or array
+        title:
+          type: string
+          maxLength: 256
+          minLength: 1
+          description: Title of the blog post
+        permalink:
+          type: string
+          description: Optional custom permalink. If not provided, one will be generated
+            from the title
+        allow_votes:
+          type: boolean
+          default: true
+          description: Whether to allow votes on the post
+        percent_hbd:
+          type: number
+          maximum: 10000
+          minimum: 0
+          description: Optional percent of HBD in rewards (0-10000, where 10000 = 100%)
+        beneficiaries:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - anyOf:
+                    - type: array
+                      items:
+                        type: object
+                        required:
+                          - account
+                          - weight
+                        properties:
+                          weight:
+                            type: number
+                            maximum: 10000
+                            minimum: 1
+                          account:
+                            type: string
+                        additionalProperties: false
+                    - type: "null"
+            - type: "null"
+          description: Optional list of beneficiaries to receive a portion of the rewards
+        max_accepted_payout:
+          type: string
+          description: Optional maximum accepted payout (e.g. '1000.000 HBD')
+        allow_curation_rewards:
+          type: boolean
+          default: true
+          description: Whether to allow curation rewards
+      additionalProperties: false
+  - name: create_comment
+    description: Create a comment on an existing Hive post or reply to another comment.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - parent_author
+        - parent_permlink
+        - body
+      properties:
+        body:
+          type: string
+          minLength: 1
+          description: Content of the comment, can include Markdown formatting
+        permalink:
+          type: string
+          description: Optional custom permalink for your comment. If not provided, one
+            will be generated
+        allow_votes:
+          type: boolean
+          default: true
+          description: Whether to allow votes on the comment
+        percent_hbd:
+          type: number
+          maximum: 10000
+          minimum: 0
+          description: Optional percent of HBD in rewards (0-10000, where 10000 = 100%)
+        beneficiaries:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - anyOf:
+                    - type: array
+                      items:
+                        type: object
+                        required:
+                          - account
+                          - weight
+                        properties:
+                          weight:
+                            type: number
+                            maximum: 10000
+                            minimum: 1
+                          account:
+                            type: string
+                        additionalProperties: false
+                    - type: "null"
+            - type: "null"
+          description: Optional list of beneficiaries to receive a portion of the rewards
+        parent_author:
+          type: string
+          description: Username of the post author or comment you're replying to
+        parent_permlink:
+          type: string
+          description: Permlink of the post or comment you're replying to
+        max_accepted_payout:
+          type: string
+          description: Optional maximum accepted payout (e.g. '1000.000 HBD')
+        allow_curation_rewards:
+          type: boolean
+          default: true
+          description: Whether to allow curation rewards
+      additionalProperties: false
+  - name: sign_message
+    description: Sign a message using a Hive private key from environment variables.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          minLength: 1
+          description: Message to sign (must not be empty)
+        key_type:
+          enum:
+            - posting
+            - active
+            - memo
+            - owner
+          type: string
+          default: posting
+          description: "Type of key to use: 'posting', 'active', or 'memo'. Defaults to
+            'posting' if not specified."
+      additionalProperties: false
+  - name: verify_signature
+    description: Verify a digital signature against a Hive public key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message_hash
+        - signature
+        - public_key
+      properties:
+        signature:
+          type: string
+          description: Signature string to verify
+        public_key:
+          type: string
+          description: Public key to verify against (with or without the STM prefix)
+        message_hash:
+          type: string
+          description: The SHA-256 hash of the message in hex format (64 characters)
+      additionalProperties: false
+  - name: get_chain_properties
+    description: Fetch current Hive blockchain properties and statistics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: encrypt_message
+    description: Encrypt a message for a specific Hive account using memo encryption
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - recipient
+      properties:
+        message:
+          type: string
+          minLength: 1
+          description: Message to encrypt
+        recipient:
+          type: string
+          description: Hive username of the recipient
+      additionalProperties: false
+  - name: decrypt_message
+    description: Decrypt an encrypted message received from a specific Hive account
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - encrypted_message
+        - sender
+      properties:
+        sender:
+          type: string
+          description: Hive username of the sender
+        encrypted_message:
+          type: string
+          pattern: ^\#
+          description: "Encrypted message (starts with #)"
+      additionalProperties: false
+  - name: send_encrypted_message
+    description: Send an encrypted message to a Hive account using a small token transfer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+        - recipient
+      properties:
+        amount:
+          type: number
+          default: 0.001
+          minimum: 0.001
+          description: Amount of HIVE to send (minimum 0.001)
+        message:
+          type: string
+          minLength: 1
+          description: Message to encrypt and send
+        recipient:
+          type: string
+          description: Hive username of the recipient
+      additionalProperties: false
+  - name: get_encrypted_messages
+    description: Retrieve encrypted messages from account history with optional decryption
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Maximum number of messages to retrieve
+        decrypt:
+          type: boolean
+          default: false
+          description: Whether to attempt decryption of messages
+        username:
+          type: string
+          description: Hive username to fetch encrypted messages for (defaults to
+            configured account if not specified)
+      additionalProperties: false

@@ -1,0 +1,102 @@
+tools:
+  - name: search
+    description: "
+
+      \    Perform a search using SearXNG with all supported parameters.
+
+      \    "
+    inputSchema:
+      type: object
+      title: searchArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+        page:
+          type: integer
+          title: Page
+          default: 1
+        theme:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Theme
+          default: null
+        format:
+          type: string
+          title: Format
+          default: json
+        engines:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Engines
+          default: null
+        language:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Language
+          default: null
+        categories:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Categories
+          default: null
+        safesearch:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Safesearch
+          default: null
+        time_range:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        image_proxy:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Image Proxy
+          default: null
+        autocomplete:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Autocomplete
+          default: null
+        enabled_engines:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Enabled Engines
+          default: null
+        enabled_plugins:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Enabled Plugins
+          default: null
+        disabled_engines:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Disabled Engines
+          default: null
+        disabled_plugins:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Disabled Plugins
+          default: null
+        results_on_new_tab:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Results On New Tab
+          default: null

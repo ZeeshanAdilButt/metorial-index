@@ -1,0 +1,88 @@
+tools:
+  - name: get_nowcast_observation
+    description: "특정 위경도의 날씨 정보를 가져옵니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        lon (float): 경도 값
+
+      \        lat (float): 위도 값
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_nowcast_observationArguments
+      required:
+        - lon
+        - lat
+      properties:
+        lat:
+          type: number
+          title: Lat
+        lon:
+          type: number
+          title: Lon
+  - name: get_short_term_forecast
+    description: "특정 위경도의 단기 예보 (3일~5일) 정보를 가져옵니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        lon (float): 경도 값
+
+      \        lat (float): 위도 값
+
+      \       \ 
+
+      \    Returns:
+
+      \        str: 단기 예보 정보 문자열 (최대 3일 예보)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_short_term_forecastArguments
+      required:
+        - lon
+        - lat
+      properties:
+        lat:
+          type: number
+          title: Lat
+        lon:
+          type: number
+          title: Lon
+  - name: get_nowcast_forecast
+    description: "특정 위경도의 초단기 (6시간 이내) 예보 정보를 가져옵니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        lon (float): 경도 값
+
+      \        lat (float): 위도 값
+
+      \       \ 
+
+      \    Returns:
+
+      \        str: 초단기 (6시간 이내) 예보 정보 문자열
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_nowcast_forecastArguments
+      required:
+        - lon
+        - lat
+      properties:
+        lat:
+          type: number
+          title: Lat
+        lon:
+          type: number
+          title: Lon

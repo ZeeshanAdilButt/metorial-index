@@ -1,0 +1,16 @@
+identifier: sinotrade/mcp-server-shioaji/mcp-server-shioaji
+repo:
+  provider: github.com
+  url: https://github.com/Sinotrade/mcp-server-shioaji
+  name: mcp-server-shioaji
+  owner: Sinotrade
+server:
+  subdirectory: /
+  name: Shioaji Trading API Server
+  description: Access real-time stock prices, historical data, and stock scanning
+    capabilities for the Taiwanese financial market. Empower your AI assistants
+    to interact with trading data seamlessly and efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

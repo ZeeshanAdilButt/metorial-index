@@ -1,0 +1,14 @@
+identifier: genm/switchbot-mcp/switchbot-mcp
+repo:
+  provider: github.com
+  url: https://github.com/genm/switchbot-mcp
+  name: switchbot-mcp
+  owner: genm
+server:
+  subdirectory: /
+  name: SwitchBot Server
+  description: Control SwitchBot devices with your AI assistant.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

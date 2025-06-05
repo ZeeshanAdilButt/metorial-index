@@ -1,0 +1,100 @@
+tools:
+  - name: chain_of_draft_solve
+    description: Solve a reasoning problem using Chain of Draft approach
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        domain:
+          type: string
+          description: Domain for context (math, logic, code, common-sense, etc.)
+        problem:
+          type: string
+          description: The problem to solve
+        approach:
+          type: string
+          description: Force 'CoD' or 'CoT' approach
+        enforce_format:
+          type: boolean
+          description: Whether to enforce the word limit
+        max_words_per_step:
+          type: number
+          description: Maximum words per reasoning step
+        adaptive_word_limit:
+          type: boolean
+          description: Adjust word limits based on complexity
+  - name: math_solve
+    description: Solve a math problem using Chain of Draft reasoning
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        problem:
+          type: string
+          description: The math problem to solve
+        approach:
+          type: string
+          description: Force 'CoD' or 'CoT' approach
+        max_words_per_step:
+          type: number
+          description: Maximum words per reasoning step
+  - name: code_solve
+    description: Solve a coding problem using Chain of Draft reasoning
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        problem:
+          type: string
+          description: The coding problem to solve
+        approach:
+          type: string
+          description: Force 'CoD' or 'CoT' approach
+        max_words_per_step:
+          type: number
+          description: Maximum words per reasoning step
+  - name: logic_solve
+    description: Solve a logic problem using Chain of Draft reasoning
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        problem:
+          type: string
+          description: The logic problem to solve
+        approach:
+          type: string
+          description: Force 'CoD' or 'CoT' approach
+        max_words_per_step:
+          type: number
+          description: Maximum words per reasoning step
+  - name: get_performance_stats
+    description: Get performance statistics for CoD vs CoT approaches
+    inputSchema:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Filter for specific domain
+  - name: get_token_reduction
+    description: Get token reduction statistics for CoD vs CoT
+    inputSchema:
+      type: object
+      properties: {}
+  - name: analyze_problem_complexity
+    description: Analyze the complexity of a problem
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        domain:
+          type: string
+          description: Problem domain
+        problem:
+          type: string
+          description: The problem to analyze

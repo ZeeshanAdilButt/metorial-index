@@ -1,0 +1,17 @@
+identifier: juhemcp/jweather-mcp-server/jweather-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/juhemcp/jweather-mcp-server
+  name: jweather-mcp-server
+  owner: juhemcp
+server:
+  subdirectory: /
+  name: Juhe Weather
+  description: Provide real-time weather forecasts for cities and regions across
+    the country. Query local weather conditions effortlessly using a simple
+    command. Enhance your applications with accurate weather data from a
+    reliable source.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

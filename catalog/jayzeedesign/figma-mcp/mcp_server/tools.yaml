@@ -1,0 +1,88 @@
+tools:
+  - name: get_components
+    description: "Get components available in a Figma file
+
+
+      \        Args:
+
+      \            file_key (str): The file key found in the shared Figma URL
+
+
+      \        Returns:
+
+      \            list[dict]: List of components found in the Figma file
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_componentsArguments
+      required:
+        - file_key
+      properties:
+        file_key:
+          type: string
+          title: File Key
+  - name: get_node
+    description: "Get a specific node from a Figma file
+
+
+      \        Args:
+
+      \            file_key (str): The file key found in the shared Figma URL,
+      e.g. if url is
+      https://www.figma.com/proto/do4pJqHwNwH1nBrrscu6Ld/Untitled?page-id=0%3A1\
+      &node-id=0-3&viewport=361%2C361%2C0.08&t=9SVttILbgMlPWuL0-1&scaling=min-z\
+      oom&content-scaling=fixed&starting-point-node-id=0%3A3, then the file key
+      is do4pJqHwNwH1nBrrscu6Ld
+
+      \            node_id (str): The ID of the node to retrieve, has to be in
+      format x:x, e.g. in url it will be like 0-3, but it should be 0:3
+
+
+      \        Returns:
+
+      \            dict: The node data if found, empty dict if not found
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_nodeArguments
+      required:
+        - file_key
+        - node_id
+      properties:
+        node_id:
+          type: string
+          title: Node Id
+        file_key:
+          type: string
+          title: File Key
+  - name: get_workflow
+    description: "Get workflows available in a Figma file
+
+
+      \        Args:
+
+      \            file_key (str): The file key found in the shared Figma URL,
+      e.g. if url is
+      https://www.figma.com/proto/do4pJqHwNwH1nBrrscu6Ld/Untitled?page-id=0%3A1\
+      &node-id=0-3&viewport=361%2C361%2C0.08&t=9SVttILbgMlPWuL0-1&scaling=min-z\
+      oom&content-scaling=fixed&starting-point-node-id=0%3A3, then the file key
+      is do4pJqHwNwH1nBrrscu6Ld
+
+
+      \        Returns:
+
+      \            list[dict]: List of workflow connections found in the Figma
+      file
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_workflowArguments
+      required:
+        - file_key
+      properties:
+        file_key:
+          type: string
+          title: File Key

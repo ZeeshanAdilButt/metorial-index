@@ -1,0 +1,242 @@
+tools:
+  - name: generateVideoFromText
+    description: Generate a video from a text prompt
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          maxLength: 1000
+          minLength: 1
+        aspectRatio:
+          enum:
+            - 16:9
+            - 9:16
+          type: string
+          default: 16:9
+        autoDownload:
+          type:
+            - boolean
+            - string
+          default: true
+        enhancePrompt:
+          type:
+            - boolean
+            - string
+          default: false
+        negativePrompt:
+          type: string
+          default: ""
+        numberOfVideos:
+          enum:
+            - 1
+            - 2
+          type: number
+          default: 1
+        durationSeconds:
+          type: number
+          default: 5
+          maximum: 8
+          minimum: 5
+        includeFullData:
+          type:
+            - boolean
+            - string
+          default: false
+        personGeneration:
+          enum:
+            - dont_allow
+            - allow_adult
+          type: string
+          default: dont_allow
+      additionalProperties: false
+  - name: generateVideoFromImage
+    description: Generate a video from an image
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image
+      properties:
+        image:
+          anyOf:
+            - type: object
+              required:
+                - type
+                - mimeType
+                - data
+              properties:
+                data:
+                  type: string
+                  minLength: 1
+                type:
+                  type: string
+                  const: image
+                mimeType:
+                  type: string
+              additionalProperties: false
+            - type: string
+              format: uri
+            - type: string
+              minLength: 1
+        prompt:
+          type: string
+          default: Generate a video from this image
+          maxLength: 1000
+          minLength: 1
+        aspectRatio:
+          enum:
+            - 16:9
+            - 9:16
+          type: string
+          default: 16:9
+        autoDownload:
+          type:
+            - boolean
+            - string
+          default: true
+        enhancePrompt:
+          type:
+            - boolean
+            - string
+          default: false
+        negativePrompt:
+          type: string
+          default: ""
+        numberOfVideos:
+          enum:
+            - 1
+            - 2
+          type: number
+          default: 1
+        durationSeconds:
+          type: number
+          default: 5
+          maximum: 8
+          minimum: 5
+        includeFullData:
+          type:
+            - boolean
+            - string
+          default: false
+        personGeneration:
+          enum:
+            - dont_allow
+            - allow_adult
+          type: string
+          default: dont_allow
+      additionalProperties: false
+  - name: generateImage
+    description: Generate an image from a text prompt using Google Imagen
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          maxLength: 1000
+          minLength: 1
+        numberOfImages:
+          type: number
+          default: 1
+          maximum: 4
+          minimum: 1
+        includeFullData:
+          type:
+            - boolean
+            - string
+          default: true
+      additionalProperties: false
+  - name: generateVideoFromGeneratedImage
+    description: Generate a video from a generated image (one-step process)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          maxLength: 1000
+          minLength: 1
+        aspectRatio:
+          enum:
+            - 16:9
+            - 9:16
+          type: string
+          default: 16:9
+        videoPrompt:
+          type: string
+          maxLength: 1000
+          minLength: 1
+        autoDownload:
+          type:
+            - boolean
+            - string
+          default: true
+        enhancePrompt:
+          type:
+            - boolean
+            - string
+          default: false
+        negativePrompt:
+          type: string
+          default: ""
+        numberOfImages:
+          type: number
+          default: 1
+          maximum: 4
+          minimum: 1
+        numberOfVideos:
+          enum:
+            - 1
+            - 2
+          type: number
+          default: 1
+        durationSeconds:
+          type: number
+          default: 5
+          maximum: 8
+          minimum: 5
+        includeFullData:
+          type:
+            - boolean
+            - string
+          default: false
+        personGeneration:
+          enum:
+            - dont_allow
+            - allow_adult
+          type: string
+          default: dont_allow
+      additionalProperties: false
+  - name: listGeneratedVideos
+    description: List all generated videos
+    inputSchema:
+      type: object
+  - name: getImage
+    description: Get a specific image by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          minLength: 1
+        includeFullData:
+          type:
+            - boolean
+            - string
+          default: true
+      additionalProperties: false
+  - name: listGeneratedImages
+    description: List all generated images
+    inputSchema:
+      type: object

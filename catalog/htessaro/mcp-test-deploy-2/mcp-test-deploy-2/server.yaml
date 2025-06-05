@@ -1,0 +1,18 @@
+identifier: htessaro/mcp-test-deploy-2/mcp-test-deploy-2
+repo:
+  provider: github.com
+  url: https://github.com/htessaro/mcp-test-deploy-2
+  name: mcp-test-deploy-2
+  owner: htessaro
+server:
+  subdirectory: /typescriptCats
+  name: Cats API SDK
+  description: Provide seamless access to a vast collection of cat images and
+    breed information through a comprehensive TypeScript SDK. Enable users to
+    upload images, retrieve detailed breed data, and interact with images by
+    favoriting or voting. Simplify integration with an easy-to-use,
+    authenticated API client for cat-related data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

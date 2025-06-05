@@ -1,0 +1,42 @@
+tools:
+  - name: search-conversations
+    description: Search Intercom conversations with filters for created_at,
+      updated_at, source type, state, open, and read status
+    inputSchema:
+      type: object
+      properties:
+        open:
+          type: boolean
+          description: Filter by open status
+        read:
+          type: boolean
+          description: Filter by read status
+        state:
+          type: string
+          description: Conversation state to filter by (e.g., "open", "closed")
+        createdAt:
+          type: object
+          properties:
+            value:
+              type: integer
+              description: Timestamp value for created_at filter
+            operator:
+              type: string
+              description: Operator for created_at (e.g., ">", "<", "=")
+        updatedAt:
+          type: object
+          properties:
+            value:
+              type: integer
+              description: Timestamp value for updated_at filter
+            operator:
+              type: string
+              description: Operator for updated_at (e.g., ">", "<", "=")
+        sourceType:
+          type: string
+          description: Source type of the conversation (e.g., "email", "chat")
+  - name: list-conversations-from-last-week
+    description: Fetch all conversations from the last week (last 7 days)
+    inputSchema:
+      type: object
+      properties: {}

@@ -1,0 +1,17 @@
+identifier: terryso/tv-recommender-mcp-server/tv-recommender-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/terryso/tv-recommender-mcp-server
+  name: tv-recommender-mcp-server
+  owner: terryso
+server:
+  subdirectory: /
+  name: TV Show Recommender
+  description: Provide personalized TV show recommendations by genre, find similar
+    shows, and retrieve detailed show information. Leverage up-to-date data from
+    TMDb to enhance your viewing choices. Seamlessly integrate with
+    MCP-compatible clients for interactive TV show discovery.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

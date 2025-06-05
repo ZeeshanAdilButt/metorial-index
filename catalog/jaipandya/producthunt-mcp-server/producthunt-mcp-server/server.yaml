@@ -1,0 +1,17 @@
+identifier: jaipandya/producthunt-mcp-server/producthunt-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/jaipandya/producthunt-mcp-server
+  name: producthunt-mcp-server
+  owner: jaipandya
+server:
+  subdirectory: /
+  name: Product Hunt Server
+  description: Connect to Product Hunt's API seamlessly from any LLM or agent
+    supporting MCP. Retrieve detailed posts, comments, collections, topics, and
+    user data to power AI assistants, chatbots, or automations. Easily integrate
+    with clients like Claude Desktop or Cursor for enhanced AI workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

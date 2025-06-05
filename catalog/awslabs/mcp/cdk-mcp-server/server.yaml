@@ -1,0 +1,17 @@
+identifier: awslabs/mcp/cdk-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/awslabs/mcp
+  name: mcp
+  owner: awslabs
+server:
+  subdirectory: /src/cdk-mcp-server
+  name: AWS CDK MCP Server
+  description: Manage and coordinate your AWS development workflow with
+    specialized servers that implement best practices. Access knowledge bases,
+    analyze costs, and generate images seamlessly. Enhance your projects with
+    tailored guidance and tools for optimal AWS usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

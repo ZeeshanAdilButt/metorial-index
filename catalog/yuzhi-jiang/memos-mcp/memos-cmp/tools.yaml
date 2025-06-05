@@ -1,0 +1,240 @@
+tools:
+  - name: search_memos
+    description: "
+
+      \    搜索备忘录
+
+      \   \ 
+
+      \    Args:
+
+      \        query: 搜索关键词
+
+      \        filter_expr: CEL 表达式过滤器，例如 \"content.contains('关键词')\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_memosArguments
+      properties:
+        query:
+          type: string
+          title: Query
+          default: null
+        filter_expr:
+          type: string
+          title: Filter Expr
+          default: null
+  - name: filter_memos
+    description: "
+
+      \    使用 CEL 表达式过滤备忘录
+
+      \   \ 
+
+      \    Args:
+
+      \        filter_expr: CEL 表达式过滤器，例如 \"content.contains('关键词')\" 或
+      \"createTime > timestamp('2023-01-01T00:00:00Z')\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: filter_memosArguments
+      required:
+        - filter_expr
+      properties:
+        filter_expr:
+          type: string
+          title: Filter Expr
+  - name: create_memo
+    description: "
+
+      \    创建新备忘录
+
+      \   \ 
+
+      \    Args:
+
+      \        content: 备忘录内容
+
+      \        visibility: 可见性设置 (PRIVATE, PROTECTED, PUBLIC)
+
+      \        tags: 标签列表，如果不提供则使用默认标签
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_memoArguments
+      required:
+        - content
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          title: Tags
+          default: null
+        content:
+          type: string
+          title: Content
+        visibility:
+          type: string
+          title: Visibility
+          default: PRIVATE
+  - name: update_memo
+    description: "
+
+      \    更新备忘录
+
+      \   \ 
+
+      \    Args:
+
+      \        memo_id: 备忘录ID
+
+      \        content: 新的备忘录内容
+
+      \        visibility: 新的可见性设置 (PRIVATE, PROTECTED, PUBLIC)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_memoArguments
+      required:
+        - memo_id
+      properties:
+        content:
+          type: string
+          title: Content
+          default: null
+        memo_id:
+          type: string
+          title: Memo Id
+        visibility:
+          type: string
+          title: Visibility
+          default: null
+  - name: delete_memo
+    description: "
+
+      \    删除备忘录
+
+      \   \ 
+
+      \    Args:
+
+      \        memo_id: 要删除的备忘录ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_memoArguments
+      required:
+        - memo_id
+      properties:
+        memo_id:
+          type: string
+          title: Memo Id
+  - name: list_memo_comments
+    description: "
+
+      \    列出备忘录的评论
+
+      \   \ 
+
+      \    Args:
+
+      \        memo_id: 备忘录ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_memo_commentsArguments
+      required:
+        - memo_id
+      properties:
+        memo_id:
+          type: string
+          title: Memo Id
+  - name: create_memo_comment
+    description: "
+
+      \    创建备忘录评论
+
+      \   \ 
+
+      \    Args:
+
+      \        memo_id: 备忘录ID
+
+      \        content: 评论内容
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_memo_commentArguments
+      required:
+        - memo_id
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        memo_id:
+          type: string
+          title: Memo Id
+  - name: delete_memo_comment
+    description: "
+
+      \    删除备忘录评论
+
+      \   \ 
+
+      \    Args:
+
+      \        memo_id: 备忘录ID
+
+      \        comment_id: 评论ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_memo_commentArguments
+      required:
+        - memo_id
+        - comment_id
+      properties:
+        memo_id:
+          type: string
+          title: Memo Id
+        comment_id:
+          type: string
+          title: Comment Id
+  - name: delete_memo_tag
+    description: "
+
+      \    从备忘录中删除标签
+
+      \   \ 
+
+      \    Args:
+
+      \        memo_id: 备忘录ID
+
+      \        tag: 要删除的标签名称(不包含#符号)
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_memo_tagArguments
+      required:
+        - memo_id
+        - tag
+      properties:
+        tag:
+          type: string
+          title: Tag
+        memo_id:
+          type: string
+          title: Memo Id

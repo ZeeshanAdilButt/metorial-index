@@ -1,0 +1,16 @@
+identifier: andreagroferreira/servers/servers
+repo:
+  provider: github.com
+  url: https://github.com/andreagroferreira/servers
+  name: servers
+  owner: andreagroferreira
+server:
+  subdirectory: /src/postgres
+  name: PostgreSQL Server
+  description: Enable LLMs to interact with PostgreSQL databases by executing
+    read-only SQL queries and inspecting database schemas. Access structured
+    data effortlessly while ensuring data integrity with read-only transactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,339 @@
+tools:
+  - name: create_table
+    description: Creates a new DynamoDB table with specified configuration
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - partitionKey
+        - partitionKeyType
+        - readCapacity
+        - writeCapacity
+      properties:
+        sortKey:
+          type: string
+          description: Name of the sort key (optional)
+        tableName:
+          type: string
+          description: Name of the table to create
+        sortKeyType:
+          enum:
+            - S
+            - N
+            - B
+          type: string
+          description: Type of sort key (optional)
+        partitionKey:
+          type: string
+          description: Name of the partition key
+        readCapacity:
+          type: number
+          description: Provisioned read capacity units
+        writeCapacity:
+          type: number
+          description: Provisioned write capacity units
+        partitionKeyType:
+          enum:
+            - S
+            - N
+            - B
+          type: string
+          description: Type of partition key (S=String, N=Number, B=Binary)
+  - name: update_capacity
+    description: Updates the provisioned capacity of a table
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - readCapacity
+        - writeCapacity
+      properties:
+        tableName:
+          type: string
+          description: Name of the table
+        readCapacity:
+          type: number
+          description: New read capacity units
+        writeCapacity:
+          type: number
+          description: New write capacity units
+  - name: put_item
+    description: Inserts or replaces an item in a table
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - item
+      properties:
+        item:
+          type: object
+          description: Item to put into the table
+        tableName:
+          type: string
+          description: Name of the table
+  - name: get_item
+    description: Retrieves an item from a table by its primary key
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - key
+      properties:
+        key:
+          type: object
+          description: Primary key of the item to retrieve
+        tableName:
+          type: string
+          description: Name of the table
+  - name: query_table
+    description: Queries a table using key conditions and optional filters
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - keyConditionExpression
+        - expressionAttributeValues
+      properties:
+        limit:
+          type: number
+          optional: true
+          description: Maximum number of items to return
+        tableName:
+          type: string
+          description: Name of the table
+        filterExpression:
+          type: string
+          optional: true
+          description: Filter expression for results
+        keyConditionExpression:
+          type: string
+          description: Key condition expression
+        expressionAttributeNames:
+          type: object
+          optional: true
+          description: Attribute name mappings
+        expressionAttributeValues:
+          type: object
+          description: Values for the key condition expression
+  - name: scan_table
+    description: Scans an entire table with optional filters
+    inputSchema:
+      type: object
+      required:
+        - tableName
+      properties:
+        limit:
+          type: number
+          optional: true
+          description: Maximum number of items to return
+        tableName:
+          type: string
+          description: Name of the table
+        filterExpression:
+          type: string
+          optional: true
+          description: Filter expression
+        expressionAttributeNames:
+          type: object
+          optional: true
+          description: Attribute name mappings
+        expressionAttributeValues:
+          type: object
+          optional: true
+          description: Values for the filter expression
+  - name: describe_table
+    description: Gets detailed information about a DynamoDB table
+    inputSchema:
+      type: object
+      required:
+        - tableName
+      properties:
+        tableName:
+          type: string
+          description: Name of the table to describe
+  - name: list_tables
+    description: Lists all DynamoDB tables in the account
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: Maximum number of tables to return (optional)
+        exclusiveStartTableName:
+          type: string
+          description: Name of the table to start from for pagination (optional)
+  - name: create_gsi
+    description: Creates a global secondary index on a table
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - indexName
+        - partitionKey
+        - partitionKeyType
+        - projectionType
+        - readCapacity
+        - writeCapacity
+      properties:
+        sortKey:
+          type: string
+          description: Sort key for the index (optional)
+        indexName:
+          type: string
+          description: Name of the new index
+        tableName:
+          type: string
+          description: Name of the table
+        sortKeyType:
+          enum:
+            - S
+            - N
+            - B
+          type: string
+          description: Type of sort key (optional)
+        partitionKey:
+          type: string
+          description: Partition key for the index
+        readCapacity:
+          type: number
+          description: Provisioned read capacity units
+        writeCapacity:
+          type: number
+          description: Provisioned write capacity units
+        projectionType:
+          enum:
+            - ALL
+            - KEYS_ONLY
+            - INCLUDE
+          type: string
+          description: Type of projection
+        nonKeyAttributes:
+          type: array
+          items:
+            type: string
+          description: Non-key attributes to project (optional)
+        partitionKeyType:
+          enum:
+            - S
+            - N
+            - B
+          type: string
+          description: Type of partition key
+  - name: update_gsi
+    description: Updates the provisioned capacity of a global secondary index
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - indexName
+        - readCapacity
+        - writeCapacity
+      properties:
+        indexName:
+          type: string
+          description: Name of the index to update
+        tableName:
+          type: string
+          description: Name of the table
+        readCapacity:
+          type: number
+          description: New read capacity units
+        writeCapacity:
+          type: number
+          description: New write capacity units
+  - name: create_lsi
+    description: Creates a local secondary index on a table (must be done during
+      table creation)
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - indexName
+        - partitionKey
+        - partitionKeyType
+        - sortKey
+        - sortKeyType
+        - projectionType
+      properties:
+        sortKey:
+          type: string
+          description: Sort key for the index
+        indexName:
+          type: string
+          description: Name of the new index
+        tableName:
+          type: string
+          description: Name of the table
+        sortKeyType:
+          enum:
+            - S
+            - N
+            - B
+          type: string
+          description: Type of sort key
+        partitionKey:
+          type: string
+          description: Partition key for the table
+        readCapacity:
+          type: number
+          description: "Provisioned read capacity units (optional, default: 5)"
+        writeCapacity:
+          type: number
+          description: "Provisioned write capacity units (optional, default: 5)"
+        projectionType:
+          enum:
+            - ALL
+            - KEYS_ONLY
+            - INCLUDE
+          type: string
+          description: Type of projection
+        nonKeyAttributes:
+          type: array
+          items:
+            type: string
+          description: Non-key attributes to project (optional)
+        partitionKeyType:
+          enum:
+            - S
+            - N
+            - B
+          type: string
+          description: Type of partition key
+  - name: update_item
+    description: Updates specific attributes of an item in a table
+    inputSchema:
+      type: object
+      required:
+        - tableName
+        - key
+        - updateExpression
+        - expressionAttributeNames
+        - expressionAttributeValues
+      properties:
+        key:
+          type: object
+          description: Primary key of the item to update
+        tableName:
+          type: string
+          description: Name of the table
+        returnValues:
+          enum:
+            - NONE
+            - ALL_OLD
+            - UPDATED_OLD
+            - ALL_NEW
+            - UPDATED_NEW
+          type: string
+          description: What values to return
+        updateExpression:
+          type: string
+          description: "Update expression (e.g., 'SET #n = :name')"
+        conditionExpression:
+          type: string
+          description: Condition for update (optional)
+        expressionAttributeNames:
+          type: object
+          description: Attribute name mappings
+        expressionAttributeValues:
+          type: object
+          description: Values for the update expression

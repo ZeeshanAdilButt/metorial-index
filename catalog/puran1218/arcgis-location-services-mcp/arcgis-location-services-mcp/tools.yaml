@@ -1,0 +1,235 @@
+tools:
+  - name: get_basemap_tile
+    description: "Access static basemap tiles service with different styles.
+
+
+      \    Args:
+
+      \        version: API version (default: v1)
+
+      \        style_base: The base style category (default: arcgis)
+
+      \        style_name: Map style name (e.g., navigation, streets, satellite)
+
+      \        row: Tile row coordinate
+
+      \        level: Zoom level
+
+      \        column: Tile column coordinate
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_basemap_tileArguments
+      properties:
+        row:
+          type: integer
+          title: Row
+          default: 17
+        level:
+          type: integer
+          title: Level
+          default: 52333
+        column:
+          type: integer
+          title: Column
+          default: 22866
+        version:
+          type: string
+          title: Version
+          default: v1
+        style_base:
+          type: string
+          title: Style Base
+          default: arcgis
+        style_name:
+          type: string
+          title: Style Name
+          default: navigation
+  - name: find_nearby_places
+    description: "Find nearby places and points of interest with optional detailed
+      information.
+
+
+      \    Args:
+
+      \        x: Longitude of the center point (e.g., -122.4194)
+
+      \        y: Latitude of the center point (e.g., 37.7749)
+
+      \        pageSize: Number of results to return (default: 20)
+
+      \        categories: Optional category filter (e.g., \"restaurant\",
+      \"hotel\", \"coffee\")
+
+      \        radius: Search radius in meters (default: 5000)
+
+      \        includeDetails: Whether to include full details for each place
+      (default: False)
+
+      \        detailsLimit: Maximum number of places to get details for when
+      includeDetails=True (default: 3)
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_nearby_placesArguments
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        radius:
+          type: integer
+          title: Radius
+          default: 5000
+        pageSize:
+          type: integer
+          title: Pagesize
+          default: 10
+        categories:
+          type: string
+          title: Categories
+          default: ""
+        detailsLimit:
+          type: integer
+          title: Detailslimit
+          default: 1
+        includeDetails:
+          type: boolean
+          title: Includedetails
+          default: false
+  - name: geocode
+    description: "Search for an address, place or point of interest.
+
+
+      \    Args:
+
+      \        singleLine: Complete address in a single string (e.g., \"1600
+      Pennsylvania Ave NW, DC\")
+
+      \        address: Place name or address (e.g., \"Starbucks\" or \"380 New
+      York St\")
+
+      \        location: Optional point to search near, as
+      \"longitude,latitude\" (e.g., \"-122.4194,37.7749\")
+
+      \        category: Optional POI category to search for (e.g., \"gas
+      station\")
+
+      \        outFields: Fields to return in the response (default: all fields)
+
+      \    "
+    inputSchema:
+      type: object
+      title: geocodeArguments
+      properties:
+        address:
+          type: string
+          title: Address
+          default: ""
+        category:
+          type: string
+          title: Category
+          default: ""
+        location:
+          type: string
+          title: Location
+          default: ""
+        outFields:
+          type: string
+          title: Outfields
+          default: "*"
+        singleLine:
+          type: string
+          title: Singleline
+          default: ""
+  - name: reverse_geocode
+    description: "Convert geographic coordinates to an address.
+
+
+      \    Args:
+
+      \        location: Location as \"longitude,latitude\" (e.g.,
+      \"-79.3871,43.6426\")
+
+      \        outFields: Fields to include in the response (default: all
+      fields)
+
+      \    "
+    inputSchema:
+      type: object
+      title: reverse_geocodeArguments
+      required:
+        - location
+      properties:
+        location:
+          type: string
+          title: Location
+        outFields:
+          type: string
+          title: Outfields
+          default: "*"
+  - name: get_directions
+    description: "Get detailed turn-by-turn directions between locations.
+
+
+      \    Args:
+
+      \        stops: Two or more locations as a semicolon-separated list of
+      \"longitude,latitude\" pairs
+
+      \              (e.g., \"-122.68782,45.51238;-122.690176,45.522054\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_directionsArguments
+      required:
+        - stops
+      properties:
+        stops:
+          type: string
+          title: Stops
+  - name: get_elevation
+    description: "Get elevation for locations on land or water.
+
+
+      \    Args:
+
+      \        lon: Longitude of a single point (e.g., -117.195)
+
+      \        lat: Latitude of a single point (e.g., 34.065)
+
+      \        coordinates: JSON array of [lon, lat] pairs for multiple points
+      (e.g., \"[[-117.182, 34.0555],[-117.185, 34.057]]\")
+
+      \        relativeTo: Reference point for elevation measurement (e.g.,
+      \"meanSeaLevel\", \"ellipsoid\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_elevationArguments
+      properties:
+        lat:
+          type: number
+          title: Lat
+          default: null
+        lon:
+          type: number
+          title: Lon
+          default: null
+        relativeTo:
+          type: string
+          title: Relativeto
+          default: null
+        coordinates:
+          type: string
+          title: Coordinates
+          default: null

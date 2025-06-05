@@ -1,0 +1,15 @@
+identifier: box3lab/engine-openapi-mcp/engine-openapi-mcp
+repo:
+  provider: github.com
+  url: https://github.com/box3lab/engine-openapi-mcp
+  name: engine-openapi-mcp
+  owner: box3lab
+server:
+  subdirectory: /
+  name: box3-engine-openapi-mcp
+  description: |
+    提供了一系列用于神岛引擎的 OpenAPI 工具，帮助 AI 更高效地调用引擎接口。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

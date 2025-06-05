@@ -1,0 +1,130 @@
+tools:
+  - name: get_top_champions_tool
+    description: >
+      
+      🔝 Get the player's top champion masteries.
+
+
+      Returns a list of the player's most-played champions based on mastery
+      points.
+    inputSchema:
+      type: object
+      title: get_top_champions_toolArguments
+      required:
+        - game_name
+        - tag_line
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 3
+        language:
+          type: string
+          title: Language
+          default: en_US
+        tag_line:
+          type: string
+          title: Tag Line
+        game_name:
+          type: string
+          title: Game Name
+  - name: get_recent_matches_tool
+    description: >
+      
+      🕹️ Get the player's recent match history.
+
+
+      Returns a brief summary of the player's most recent matches, including
+      champion, score, and result.
+    inputSchema:
+      type: object
+      title: get_recent_matches_toolArguments
+      required:
+        - game_name
+        - tag_line
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: 3
+        tag_line:
+          type: string
+          title: Tag Line
+        game_name:
+          type: string
+          title: Game Name
+  - name: get_champion_mastery_tool
+    description: >
+      
+      🎯 Get the player's mastery info for a specific champion.
+
+
+      Returns detailed mastery data (level, points, last play time, etc.) for
+      the requested champion.
+    inputSchema:
+      type: object
+      title: get_champion_mastery_toolArguments
+      required:
+        - game_name
+        - tag_line
+        - champion_name
+      properties:
+        language:
+          type: string
+          title: Language
+          default: en_US
+        tag_line:
+          type: string
+          title: Tag Line
+        game_name:
+          type: string
+          title: Game Name
+        champion_name:
+          type: string
+          title: Champion Name
+  - name: get_player_summary
+    description: >
+      
+      🧾 Get a complete summary of a player's profile.
+
+
+      Includes level, solo rank, top champion masteries, and recent matches in a
+      single output.
+    inputSchema:
+      type: object
+      title: get_player_summaryArguments
+      required:
+        - game_name
+        - tag_line
+      properties:
+        language:
+          type: string
+          title: Language
+          default: en_US
+        tag_line:
+          type: string
+          title: Tag Line
+        game_name:
+          type: string
+          title: Game Name
+  - name: get_match_summary
+    description: >
+      
+      📊 Get a detailed summary of a specific match for a given player.
+
+
+      Extracts and returns only the relevant stats (KDA, damage, vision,
+      win/loss, etc.) from the match.
+    inputSchema:
+      type: object
+      title: get_match_summaryArguments
+      required:
+        - match_id
+        - puuid
+      properties:
+        puuid:
+          type: string
+          title: Puuid
+        match_id:
+          type: string
+          title: Match Id

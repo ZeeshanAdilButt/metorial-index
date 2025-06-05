@@ -1,0 +1,19 @@
+identifier: lkp474/alibabacloud-observability-mcp-server/alibabacloud-observability-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lkp474/alibabacloud-observability-mcp-server
+  name: alibabacloud-observability-mcp-server
+  owner: lkp474
+server:
+  subdirectory: /
+  name: Alibaba Cloud Observability Server
+  description: Provide seamless access to Alibaba Cloud observability products
+    such as Log Service (SLS), Application Real-Time Monitoring Service (ARMS),
+    and Cloud Monitor through a standardized MCP interface. Enable intelligent
+    agents to quickly query, analyze, and interact with observability data to
+    enhance monitoring and troubleshooting workflows. Simplify integration with
+    Alibaba Cloud's monitoring ecosystem for efficient observability management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

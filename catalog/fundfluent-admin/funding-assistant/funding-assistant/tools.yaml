@@ -1,0 +1,35 @@
+tools:
+  - name: get-funding-options
+    description: Retrieve available funding opportunities with detailed information
+      including name and description.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - limit
+        - page
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          exclusiveMinimum: 0
+        limit:
+          type: integer
+          maximum: 100
+          minimum: 1
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: get-document-checklist-for-funding-programme
+    description: Generate a comprehensive document checklist customized for a
+      specific funding programme, drawing from expert insights and collective
+      knowledge from hundreds of successful applications.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: FluentLab defined slug of a funding programme
+      additionalProperties: false

@@ -1,0 +1,556 @@
+tools:
+  - name: list_methods
+    description: "
+
+      \    List all function names in the program with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_methodsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: list_classes
+    description: "
+
+      \    List all namespace/class names in the program with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_classesArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: decompile_function
+    description: "
+
+      \    Decompile a specific function by name and return the decompiled C
+      code.
+
+      \    "
+    inputSchema:
+      type: object
+      title: decompile_functionArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: rename_function
+    description: "
+
+      \    Rename a function by its current name to a new user-defined name.
+
+      \    "
+    inputSchema:
+      type: object
+      title: rename_functionArguments
+      required:
+        - old_name
+        - new_name
+      properties:
+        new_name:
+          type: string
+          title: New Name
+        old_name:
+          type: string
+          title: Old Name
+  - name: rename_data
+    description: "
+
+      \    Rename a data label at the specified address.
+
+      \    "
+    inputSchema:
+      type: object
+      title: rename_dataArguments
+      required:
+        - address
+        - new_name
+      properties:
+        address:
+          type: string
+          title: Address
+        new_name:
+          type: string
+          title: New Name
+  - name: list_segments
+    description: "
+
+      \    List all memory segments in the program with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_segmentsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: list_imports
+    description: "
+
+      \    List imported symbols in the program with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_importsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: list_exports
+    description: "
+
+      \    List exported functions/symbols with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_exportsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: list_namespaces
+    description: "
+
+      \    List all non-global namespaces in the program with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_namespacesArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: list_data_items
+    description: "
+
+      \    List defined data labels and their values with pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_data_itemsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: search_functions_by_name
+    description: "
+
+      \    Search for functions whose name contains the given substring.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_functions_by_nameArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        query:
+          type: string
+          title: Query
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: rename_variable
+    description: "
+
+      \    Rename a local variable within a function.
+
+      \    "
+    inputSchema:
+      type: object
+      title: rename_variableArguments
+      required:
+        - function_name
+        - old_name
+        - new_name
+      properties:
+        new_name:
+          type: string
+          title: New Name
+        old_name:
+          type: string
+          title: Old Name
+        function_name:
+          type: string
+          title: Function Name
+  - name: get_function_by_address
+    description: "
+
+      \    Get a function by its address.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_function_by_addressArguments
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          title: Address
+  - name: get_current_address
+    description: "
+
+      \    Get the address currently selected by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_current_addressArguments
+      properties: {}
+  - name: get_current_function
+    description: "
+
+      \    Get the function currently selected by the user.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_current_functionArguments
+      properties: {}
+  - name: list_functions
+    description: "
+
+      \    List all functions in the database.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_functionsArguments
+      properties: {}
+  - name: decompile_function_by_address
+    description: "
+
+      \    Decompile a function at the given address.
+
+      \    "
+    inputSchema:
+      type: object
+      title: decompile_function_by_addressArguments
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          title: Address
+  - name: disassemble_function
+    description: "
+
+      \    Get assembly code (address: instruction; comment) for a function.
+
+      \    "
+    inputSchema:
+      type: object
+      title: disassemble_functionArguments
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          title: Address
+  - name: set_decompiler_comment
+    description: "
+
+      \    Set a comment for a given address in the function pseudocode.
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_decompiler_commentArguments
+      required:
+        - address
+        - comment
+      properties:
+        address:
+          type: string
+          title: Address
+        comment:
+          type: string
+          title: Comment
+  - name: set_disassembly_comment
+    description: "
+
+      \    Set a comment for a given address in the function disassembly.
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_disassembly_commentArguments
+      required:
+        - address
+        - comment
+      properties:
+        address:
+          type: string
+          title: Address
+        comment:
+          type: string
+          title: Comment
+  - name: rename_function_by_address
+    description: "
+
+      \    Rename a function by its address.
+
+      \    "
+    inputSchema:
+      type: object
+      title: rename_function_by_addressArguments
+      required:
+        - function_address
+        - new_name
+      properties:
+        new_name:
+          type: string
+          title: New Name
+        function_address:
+          type: string
+          title: Function Address
+  - name: set_function_prototype
+    description: "
+
+      \    Set a function's prototype.
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_function_prototypeArguments
+      required:
+        - function_address
+        - prototype
+      properties:
+        prototype:
+          type: string
+          title: Prototype
+        function_address:
+          type: string
+          title: Function Address
+  - name: set_local_variable_type
+    description: "
+
+      \    Set a local variable's type.
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_local_variable_typeArguments
+      required:
+        - function_address
+        - variable_name
+        - new_type
+      properties:
+        new_type:
+          type: string
+          title: New Type
+        variable_name:
+          type: string
+          title: Variable Name
+        function_address:
+          type: string
+          title: Function Address
+  - name: get_xrefs_to
+    description: "
+
+      \    Get all references to the specified address (xref to).
+
+      \   \ 
+
+      \    Args:
+
+      \        address: Target address in hex format (e.g. \"0x1400010a0\")
+
+      \        offset: Pagination offset (default: 0)
+
+      \        limit: Maximum number of references to return (default: 100)
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of references to the specified address
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_xrefs_toArguments
+      required:
+        - address
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        address:
+          type: string
+          title: Address
+  - name: get_xrefs_from
+    description: "
+
+      \    Get all references from the specified address (xref from).
+
+      \   \ 
+
+      \    Args:
+
+      \        address: Source address in hex format (e.g. \"0x1400010a0\")
+
+      \        offset: Pagination offset (default: 0)
+
+      \        limit: Maximum number of references to return (default: 100)
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of references from the specified address
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_xrefs_fromArguments
+      required:
+        - address
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        address:
+          type: string
+          title: Address
+  - name: get_function_xrefs
+    description: "
+
+      \    Get all references to the specified function by name.
+
+      \   \ 
+
+      \    Args:
+
+      \        name: Function name to search for
+
+      \        offset: Pagination offset (default: 0)
+
+      \        limit: Maximum number of references to return (default: 100)
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of references to the specified function
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_function_xrefsArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+  - name: list_strings
+    description: "
+
+      \    List all defined strings in the program with their addresses.
+
+      \   \ 
+
+      \    Args:
+
+      \        offset: Pagination offset (default: 0)
+
+      \        limit: Maximum number of strings to return (default: 2000)
+
+      \        filter: Optional filter to match within string content
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of strings with their addresses
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_stringsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 2000
+        filter:
+          type: string
+          title: Filter
+          default: null
+        offset:
+          type: integer
+          title: Offset
+          default: 0

@@ -1,0 +1,17 @@
+identifier: amon12345-sun/test/test
+repo:
+  provider: github.com
+  url: https://github.com/Amon12345-sun/test
+  name: test
+  owner: Amon12345-sun
+server:
+  subdirectory: /
+  name: Test MCP Server
+  description: Provide a simple MCP server implementation to demonstrate the Model
+    Context Protocol capabilities. Enable integration of tools, resources, and
+    prompts for LLM applications. Facilitate dynamic interaction between LLMs
+    and external data or actions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,58 @@
+tools:
+  - name: list_dashboards
+    description: List all dashboards in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_cards
+    description: List all questions/cards in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_databases
+    description: List all databases in Metabase
+    inputSchema:
+      type: object
+      properties: {}
+  - name: execute_card
+    description: Execute a Metabase question/card and get results
+    inputSchema:
+      type: object
+      required:
+        - card_id
+      properties:
+        card_id:
+          type: number
+          description: ID of the card/question to execute
+        parameters:
+          type: object
+          description: Optional parameters for the query
+  - name: get_dashboard_cards
+    description: Get all cards in a dashboard
+    inputSchema:
+      type: object
+      required:
+        - dashboard_id
+      properties:
+        dashboard_id:
+          type: number
+          description: ID of the dashboard
+  - name: execute_query
+    description: Execute a SQL query against a Metabase database
+    inputSchema:
+      type: object
+      required:
+        - database_id
+        - query
+      properties:
+        query:
+          type: string
+          description: SQL query to execute
+        database_id:
+          type: number
+          description: ID of the database to query
+        native_parameters:
+          type: array
+          items:
+            type: object
+          description: Optional parameters for the query

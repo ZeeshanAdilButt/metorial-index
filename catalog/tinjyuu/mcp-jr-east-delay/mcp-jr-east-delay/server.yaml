@@ -1,0 +1,17 @@
+identifier: tinjyuu/mcp-jr-east-delay/mcp-jr-east-delay
+repo:
+  provider: github.com
+  url: https://github.com/tinjyuu/mcp-jr-east-delay
+  name: mcp-jr-east-delay
+  owner: tinjyuu
+server:
+  subdirectory: /
+  name: JR East Delay Information Server
+  description: Provide real-time delay information for JR East trains by calling
+    the "getDelays" tool. Easily integrate with MCP clients like Claude Desktop
+    or MCP Inspector to access up-to-date train delay data. Simplify monitoring
+    of JR East train statuses through a standardized MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,151 @@
+tools:
+  - name: set_api_keys
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - openaiApiKey
+      properties:
+        openaiApiKey:
+          type: string
+          minLength: 1
+          description: Your OpenAI API key
+        youtubeApiKey:
+          type: string
+          description: Your YouTube API key (optional)
+      additionalProperties: false
+  - name: check_api_keys
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: extract_transcript
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - youtubeUrl
+      properties:
+        youtubeUrl:
+          type: string
+          format: uri
+          description: YouTube video URL
+      additionalProperties: false
+  - name: summarize_transcript
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - transcript
+      properties:
+        tone:
+          enum:
+            - educational
+            - inspirational
+            - professional
+            - conversational
+          type: string
+          default: professional
+          description: Tone of the summary
+        audience:
+          enum:
+            - general
+            - technical
+            - business
+            - academic
+          type: string
+          default: general
+          description: Target audience for the summary
+        wordCount:
+          type: number
+          default: 200
+          maximum: 300
+          minimum: 100
+          description: Approximate word count for the summary
+        transcript:
+          type: string
+          description: Video transcript text
+      additionalProperties: false
+  - name: generate_linkedin_post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - summary
+        - videoTitle
+      properties:
+        tone:
+          enum:
+            - first-person
+            - third-person
+            - thought-leader
+          type: string
+          default: first-person
+          description: Tone of the LinkedIn post
+        summary:
+          type: string
+          description: Summary of the video content
+        hashtags:
+          type: array
+          items:
+            type: string
+          description: Relevant hashtags (optional)
+        videoTitle:
+          type: string
+          description: Title of the YouTube video
+        speakerName:
+          type: string
+          description: Name of the speaker in the video (optional)
+        includeCallToAction:
+          type: boolean
+          default: true
+          description: Whether to include a call to action
+      additionalProperties: false
+  - name: youtube_to_linkedin_post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - youtubeUrl
+      properties:
+        tone:
+          enum:
+            - first-person
+            - third-person
+            - thought-leader
+          type: string
+          default: first-person
+          description: Tone of the LinkedIn post
+        audience:
+          enum:
+            - general
+            - technical
+            - business
+            - academic
+          type: string
+          default: general
+          description: Target audience
+        hashtags:
+          type: array
+          items:
+            type: string
+          description: Relevant hashtags (optional)
+        youtubeUrl:
+          type: string
+          format: uri
+          description: YouTube video URL
+        summaryTone:
+          enum:
+            - educational
+            - inspirational
+            - professional
+            - conversational
+          type: string
+          default: professional
+          description: Tone of the summary
+        includeCallToAction:
+          type: boolean
+          default: true
+          description: Whether to include a call to action
+      additionalProperties: false

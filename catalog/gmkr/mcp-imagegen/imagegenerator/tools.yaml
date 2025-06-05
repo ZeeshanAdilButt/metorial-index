@@ -1,0 +1,24 @@
+tools:
+  - name: generate_image
+    description: Generates and returns an image based on the provided promptUse this
+      tool when you need to generate an image based on a promptThe image will be
+      returned as a base64 encoded string
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        width:
+          type: number
+          description: The width of the image to generate
+        height:
+          type: number
+          description: The height of the image to generate
+        prompt:
+          type: string
+          description: The prompt to generate an image for
+        numberOfImages:
+          type: number
+          description: The number of images to generate
+      additionalProperties: false

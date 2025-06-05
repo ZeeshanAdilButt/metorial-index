@@ -1,0 +1,15 @@
+identifier: crazyrabbitltc/mcp-coingecko-server/coingecko
+repo:
+  provider: github.com
+  url: https://github.com/crazyrabbitLTC/mcp-coingecko-server
+  name: mcp-coingecko-server
+  owner: crazyrabbitLTC
+server:
+  subdirectory: /
+  name: CoinGecko Server
+  description: Access cryptocurrency data including prices, market cap, and
+    historical data from the CoinGecko API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

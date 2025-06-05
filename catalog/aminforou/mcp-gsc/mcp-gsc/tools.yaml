@@ -1,0 +1,559 @@
+tools:
+  - name: list_properties
+    description: "
+
+      \    Retrieves and returns the user's Search Console properties.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_propertiesArguments
+      properties: {}
+  - name: get_search_analytics
+    description: "
+
+      \    Get search analytics data for a specific property.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        days: Number of days to look back (default: 28)
+
+      \        dimensions: Dimensions to group by (default: query). Options:
+      query, page, device, country, date
+
+      \                   You can provide multiple dimensions separated by comma
+      (e.g., \"query,page\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_search_analyticsArguments
+      required:
+        - site_url
+      properties:
+        days:
+          type: integer
+          title: Days
+          default: 28
+        site_url:
+          type: string
+          title: Site Url
+        dimensions:
+          type: string
+          title: Dimensions
+          default: query
+  - name: get_site_details
+    description: "
+
+      \    Get detailed information about a specific Search Console property.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_site_detailsArguments
+      required:
+        - site_url
+      properties:
+        site_url:
+          type: string
+          title: Site Url
+  - name: get_sitemaps
+    description: "
+
+      \    List all sitemaps for a specific Search Console property.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_sitemapsArguments
+      required:
+        - site_url
+      properties:
+        site_url:
+          type: string
+          title: Site Url
+  - name: inspect_url_enhanced
+    description: "
+
+      \    Enhanced URL inspection to check indexing status and rich results in
+      Google.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match, for domain properties use format: sc-domain:example.com)
+
+      \        page_url: The specific URL to inspect
+
+      \    "
+    inputSchema:
+      type: object
+      title: inspect_url_enhancedArguments
+      required:
+        - site_url
+        - page_url
+      properties:
+        page_url:
+          type: string
+          title: Page Url
+        site_url:
+          type: string
+          title: Site Url
+  - name: batch_url_inspection
+    description: "
+
+      \    Inspect multiple URLs in batch (within API limits).
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match, for domain properties use format: sc-domain:example.com)
+
+      \        urls: List of URLs to inspect, one per line
+
+      \    "
+    inputSchema:
+      type: object
+      title: batch_url_inspectionArguments
+      required:
+        - site_url
+        - urls
+      properties:
+        urls:
+          type: string
+          title: Urls
+        site_url:
+          type: string
+          title: Site Url
+  - name: check_indexing_issues
+    description: "
+
+      \    Check for specific indexing issues across multiple URLs.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match, for domain properties use format: sc-domain:example.com)
+
+      \        urls: List of URLs to check, one per line
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_indexing_issuesArguments
+      required:
+        - site_url
+        - urls
+      properties:
+        urls:
+          type: string
+          title: Urls
+        site_url:
+          type: string
+          title: Site Url
+  - name: get_performance_overview
+    description: "
+
+      \    Get a performance overview for a specific property.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        days: Number of days to look back (default: 28)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_performance_overviewArguments
+      required:
+        - site_url
+      properties:
+        days:
+          type: integer
+          title: Days
+          default: 28
+        site_url:
+          type: string
+          title: Site Url
+  - name: get_advanced_search_analytics
+    description: "
+
+      \    Get advanced search analytics data with sorting, filtering, and
+      pagination.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        start_date: Start date in YYYY-MM-DD format (defaults to 28 days
+      ago)
+
+      \        end_date: End date in YYYY-MM-DD format (defaults to today)
+
+      \        dimensions: Dimensions to group by, comma-separated (e.g.,
+      \"query,page,device\")
+
+      \        search_type: Type of search results (WEB, IMAGE, VIDEO, NEWS,
+      DISCOVER)
+
+      \        row_limit: Maximum number of rows to return (max 25000)
+
+      \        start_row: Starting row for pagination
+
+      \        sort_by: Metric to sort by (clicks, impressions, ctr, position)
+
+      \        sort_direction: Sort direction (ascending or descending)
+
+      \        filter_dimension: Dimension to filter on (query, page, country,
+      device)
+
+      \        filter_operator: Filter operator (contains, equals, notContains,
+      notEquals)
+
+      \        filter_expression: Filter expression value
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_advanced_search_analyticsArguments
+      required:
+        - site_url
+      properties:
+        sort_by:
+          type: string
+          title: Sort By
+          default: clicks
+        end_date:
+          type: string
+          title: End Date
+          default: null
+        site_url:
+          type: string
+          title: Site Url
+        row_limit:
+          type: integer
+          title: Row Limit
+          default: 1000
+        start_row:
+          type: integer
+          title: Start Row
+          default: 0
+        dimensions:
+          type: string
+          title: Dimensions
+          default: query
+        start_date:
+          type: string
+          title: Start Date
+          default: null
+        search_type:
+          type: string
+          title: Search Type
+          default: WEB
+        sort_direction:
+          type: string
+          title: Sort Direction
+          default: descending
+        filter_operator:
+          type: string
+          title: Filter Operator
+          default: contains
+        filter_dimension:
+          type: string
+          title: Filter Dimension
+          default: null
+        filter_expression:
+          type: string
+          title: Filter Expression
+          default: null
+  - name: compare_search_periods
+    description: "
+
+      \    Compare search analytics data between two time periods.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        period1_start: Start date for period 1 (YYYY-MM-DD)
+
+      \        period1_end: End date for period 1 (YYYY-MM-DD)
+
+      \        period2_start: Start date for period 2 (YYYY-MM-DD)
+
+      \        period2_end: End date for period 2 (YYYY-MM-DD)
+
+      \        dimensions: Dimensions to group by (default: query)
+
+      \        limit: Number of top results to compare (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: compare_search_periodsArguments
+      required:
+        - site_url
+        - period1_start
+        - period1_end
+        - period2_start
+        - period2_end
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        site_url:
+          type: string
+          title: Site Url
+        dimensions:
+          type: string
+          title: Dimensions
+          default: query
+        period1_end:
+          type: string
+          title: Period1 End
+        period2_end:
+          type: string
+          title: Period2 End
+        period1_start:
+          type: string
+          title: Period1 Start
+        period2_start:
+          type: string
+          title: Period2 Start
+  - name: get_search_by_page_query
+    description: "
+
+      \    Get search analytics data for a specific page, broken down by query.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        page_url: The specific page URL to analyze
+
+      \        days: Number of days to look back (default: 28)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_search_by_page_queryArguments
+      required:
+        - site_url
+        - page_url
+      properties:
+        days:
+          type: integer
+          title: Days
+          default: 28
+        page_url:
+          type: string
+          title: Page Url
+        site_url:
+          type: string
+          title: Site Url
+  - name: list_sitemaps_enhanced
+    description: "
+
+      \    List all sitemaps for a specific Search Console property with
+      detailed information.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        sitemap_index: Optional sitemap index URL to list child sitemaps
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_sitemaps_enhancedArguments
+      required:
+        - site_url
+      properties:
+        site_url:
+          type: string
+          title: Site Url
+        sitemap_index:
+          type: string
+          title: Sitemap Index
+          default: null
+  - name: get_sitemap_details
+    description: "
+
+      \    Get detailed information about a specific sitemap.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        sitemap_url: The full URL of the sitemap to inspect
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_sitemap_detailsArguments
+      required:
+        - site_url
+        - sitemap_url
+      properties:
+        site_url:
+          type: string
+          title: Site Url
+        sitemap_url:
+          type: string
+          title: Sitemap Url
+  - name: submit_sitemap
+    description: "
+
+      \    Submit a new sitemap or resubmit an existing one to Google.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        sitemap_url: The full URL of the sitemap to submit
+
+      \    "
+    inputSchema:
+      type: object
+      title: submit_sitemapArguments
+      required:
+        - site_url
+        - sitemap_url
+      properties:
+        site_url:
+          type: string
+          title: Site Url
+        sitemap_url:
+          type: string
+          title: Sitemap Url
+  - name: delete_sitemap
+    description: "
+
+      \    Delete (unsubmit) a sitemap from Google Search Console.
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        sitemap_url: The full URL of the sitemap to delete
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_sitemapArguments
+      required:
+        - site_url
+        - sitemap_url
+      properties:
+        site_url:
+          type: string
+          title: Site Url
+        sitemap_url:
+          type: string
+          title: Sitemap Url
+  - name: manage_sitemaps
+    description: "
+
+      \    All-in-one tool to manage sitemaps (list, get details, submit,
+      delete).
+
+      \   \ 
+
+      \    Args:
+
+      \        site_url: The URL of the site in Search Console (must be exact
+      match)
+
+      \        action: The action to perform (list, details, submit, delete)
+
+      \        sitemap_url: The full URL of the sitemap (required for details,
+      submit, delete)
+
+      \        sitemap_index: Optional sitemap index URL for listing child
+      sitemaps (only used with 'list' action)
+
+      \    "
+    inputSchema:
+      type: object
+      title: manage_sitemapsArguments
+      required:
+        - site_url
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+        site_url:
+          type: string
+          title: Site Url
+        sitemap_url:
+          type: string
+          title: Sitemap Url
+          default: null
+        sitemap_index:
+          type: string
+          title: Sitemap Index
+          default: null
+  - name: get_creator_info
+    description: "
+
+      \    Provides information about Amin Foroutan, the creator of the MCP-GSC
+      tool.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_creator_infoArguments
+      properties: {}

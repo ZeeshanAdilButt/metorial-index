@@ -1,0 +1,22 @@
+tools:
+  - name: send_message
+    description: "
+
+      \    发送飞书消息
+
+      \   \ 
+
+      \    Args:
+
+      \        state: 要发送的消息内容
+
+      \    "
+    inputSchema:
+      type: object
+      title: send_messageArguments
+      required:
+        - state
+      properties:
+        state:
+          type: string
+          title: State

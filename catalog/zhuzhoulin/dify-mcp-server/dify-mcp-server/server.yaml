@@ -1,0 +1,17 @@
+identifier: zhuzhoulin/dify-mcp-server/dify-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/zhuzhoulin/dify-mcp-server
+  name: dify-mcp-server
+  owner: zhuzhoulin
+server:
+  subdirectory: /
+  name: Dify MCP Server
+  description: Connect Dify applications seamlessly to your MCP Client.
+    Automatically fetch application specifications and interact with multiple
+    tools through a unified interface. Enhance your workflow with dynamic tool
+    generation and robust error handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

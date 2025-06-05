@@ -1,0 +1,15 @@
+identifier: hellokaton/unsplash-mcp-server/unsplash-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hellokaton/unsplash-mcp-server
+  name: unsplash-mcp-server
+  owner: hellokaton
+server:
+  subdirectory: /
+  name: Unsplash Search
+  description: A simple MCP server for searching and integrating Unsplash images
+    into your applications with advanced filtering capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

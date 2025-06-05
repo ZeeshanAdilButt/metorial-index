@@ -1,0 +1,216 @@
+tools:
+  - name: ddg-text-search
+    description: Search the web for text results using DuckDuckGo
+    inputSchema:
+      type: object
+      required:
+        - keywords
+      properties:
+        region:
+          type: string
+          default: wt-wt
+          description: Region code (e.g., wt-wt, us-en, uk-en)
+        keywords:
+          type: string
+          description: Search query keywords
+        timelimit:
+          enum:
+            - d
+            - w
+            - m
+            - y
+          type: string
+          description: Time limit (d=day, w=week, m=month, y=year)
+        safesearch:
+          enum:
+            - on
+            - moderate
+            - off
+          type: string
+          default: moderate
+          description: Safe search level
+        max_results:
+          type: integer
+          default: 10
+          description: Maximum number of results to return
+  - name: ddg-image-search
+    description: Search the web for images using DuckDuckGo
+    inputSchema:
+      type: object
+      required:
+        - keywords
+      properties:
+        size:
+          enum:
+            - Small
+            - Medium
+            - Large
+            - Wallpaper
+          type: string
+          description: Image size
+        color:
+          enum:
+            - color
+            - Monochrome
+            - Red
+            - Orange
+            - Yellow
+            - Green
+            - Blue
+            - Purple
+            - Pink
+            - Brown
+            - Black
+            - Gray
+            - Teal
+            - White
+          type: string
+          description: Image color
+        layout:
+          enum:
+            - Square
+            - Tall
+            - Wide
+          type: string
+          description: Image layout
+        region:
+          type: string
+          default: wt-wt
+          description: Region code (e.g., wt-wt, us-en, uk-en)
+        keywords:
+          type: string
+          description: Search query keywords
+        timelimit:
+          enum:
+            - d
+            - w
+            - m
+            - y
+          type: string
+          description: Time limit (d=day, w=week, m=month, y=year)
+        safesearch:
+          enum:
+            - on
+            - moderate
+            - off
+          type: string
+          default: moderate
+          description: Safe search level
+        type_image:
+          enum:
+            - photo
+            - clipart
+            - gif
+            - transparent
+            - line
+          type: string
+          description: Image type
+        max_results:
+          type: integer
+          default: 10
+          description: Maximum number of results to return
+        license_image:
+          enum:
+            - any
+            - Public
+            - Share
+            - ShareCommercially
+            - Modify
+            - ModifyCommercially
+          type: string
+          description: Image license type
+  - name: ddg-news-search
+    description: Search for news articles using DuckDuckGo
+    inputSchema:
+      type: object
+      required:
+        - keywords
+      properties:
+        region:
+          type: string
+          default: wt-wt
+          description: Region code (e.g., wt-wt, us-en, uk-en)
+        keywords:
+          type: string
+          description: Search query keywords
+        timelimit:
+          enum:
+            - d
+            - w
+            - m
+          type: string
+          description: Time limit (d=day, w=week, m=month)
+        safesearch:
+          enum:
+            - on
+            - moderate
+            - off
+          type: string
+          default: moderate
+          description: Safe search level
+        max_results:
+          type: integer
+          default: 10
+          description: Maximum number of results to return
+  - name: ddg-video-search
+    description: Search for videos using DuckDuckGo
+    inputSchema:
+      type: object
+      required:
+        - keywords
+      properties:
+        region:
+          type: string
+          default: wt-wt
+          description: Region code (e.g., wt-wt, us-en, uk-en)
+        duration:
+          enum:
+            - short
+            - medium
+            - long
+          type: string
+          description: Video duration
+        keywords:
+          type: string
+          description: Search query keywords
+        timelimit:
+          enum:
+            - d
+            - w
+            - m
+          type: string
+          description: Time limit (d=day, w=week, m=month)
+        resolution:
+          enum:
+            - high
+            - standard
+          type: string
+          description: Video resolution
+        safesearch:
+          enum:
+            - on
+            - moderate
+            - off
+          type: string
+          default: moderate
+          description: Safe search level
+        max_results:
+          type: integer
+          default: 10
+          description: Maximum number of results to return
+        license_videos:
+          enum:
+            - creativeCommon
+            - youtube
+          type: string
+          description: Video license type
+  - name: ddg-fetch-content
+    description: Fetch and parse content from a webpage URL
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The webpage URL to fetch content from

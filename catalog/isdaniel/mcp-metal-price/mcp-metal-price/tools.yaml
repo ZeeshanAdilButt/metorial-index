@@ -1,0 +1,21 @@
+tools:
+  - name: get_gold_price
+    description: Get current gold price in specified currency
+    inputSchema:
+      type: object
+      required:
+        - currency
+        - metal
+      properties:
+        date:
+          type: string
+          default: ""
+          description: Historical date (YYYYMMDD format, optional)
+        metal:
+          type: string
+          default: XAU
+          description: Metal symbol (XAU, XAG, XPT, XPD)
+        currency:
+          type: string
+          default: USD
+          description: Currency code (ISO 4217 format e.g. USD, EUR)

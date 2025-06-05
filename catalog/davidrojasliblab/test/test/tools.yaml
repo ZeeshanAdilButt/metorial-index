@@ -1,0 +1,1562 @@
+tools:
+  - name: get_translate_morse
+    description: Translate from English to morse code.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_morse2english
+    description: Translate from Morse code to English.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_morse_audio
+    description: Translate from English to morse code and get the result as an audio file.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+            tone:
+              type: number
+              description: Audio Tone FrequencyHz
+            speed:
+              type: number
+              description: Audio Speed WordsMinute
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_braille
+    description: Translate from English to Braille. This is what you use if you have
+      a braille display. This API translates the English text into characters
+      that a braille display understands and you can feed the translated text
+      directly to the display.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_braille_dots
+    description: Use this to see which dots are enabled for each Braille letters.
+      This is highly educational to see which dots are enabled and can
+      potentially drive a non braille display which works on individual dots.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_braille_unicode
+    description: Translate from English to Braille Unicode characters.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_braille_image
+    description: Translate from English to Braille image characters. This is
+      probably what you want to use if you are displaying braille in a browser.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_braille_html
+    description: Translate from English to Braille Image characters. This is
+      probably what you want to use if you are displaying braille in a browser.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_yoda
+    description: Translate from English to Yoda Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_sith
+    description: Translate from English to Sith Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_cheunh
+    description: Translate from English to Starwars cheunh.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_gungan
+    description: Translate from English to Starwars Gungan Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_mandalorian
+    description: Translate from English to Starwars Mandalorian Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_huttese
+    description: Translate from English to Starwars Huttese Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_vulcan
+    description: Translate from English to Startrek Vulcan Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_klingon
+    description: Translate from English to Startrek Klingon Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_sindarin
+    description: Translate from English to Elvish Sindarin Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_quneya
+    description: Translate from English to Elvish Quenya Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_pirate
+    description: Translate from English to Pirate Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_minion
+    description: Translate from English to Minion Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_ferblatin
+    description: Translate from English to Ferb Latin.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_chef
+    description: Translate from English to Swedish Chef speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_dolan
+    description: Translate from English to Dolan Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_fudd
+    description: Translate from English to Fudd Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_valspeak
+    description: Translate from English to Valley Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_jive
+    description: Translate from normal English to Jive Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_cockney
+    description: Translate from English to Cockney Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_brooklyn
+    description: Translate from English to Brooklyn Speak.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_piglatin
+    description: Translate from English to Pig Latin.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_dothraki
+    description: Translate from English to Dothraki.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_valyrian
+    description: Translate from English to Valyrian.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_oldenglish
+    description: Translate from English to Old English.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_shakespeare
+    description: Translate from English to Shakespeare English.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_us2uk
+    description: Translate from US English to UK English.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_uk2us
+    description: Translate from UK English to US English.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_translate_ermahgerd
+    description: Translate from English to ERMAHGERD.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text to translate
+          additionalProperties: false
+        requestConfig:
+          type: object
+          properties:
+            retry:
+              type: object
+              required:
+                - attempts
+              properties:
+                delayMs:
+                  type: number
+                  description: Delay in milliseconds between retry attempts
+                attempts:
+                  type: number
+                  description: Number of times a request should be retried upon failure
+              description: Configuration for request retry behavior
+              additionalProperties: false
+            baseUrl:
+              type: string
+              description: Base URL for the API requests
+            validation:
+              type: object
+              properties:
+                responseValidation:
+                  type: boolean
+                  description: Whether the response should be validated against a schema
+              description: Settings related to request and response validation
+              additionalProperties: false
+          description: Configuration object for customizing request behavior
+          additionalProperties: false
+      additionalProperties: false

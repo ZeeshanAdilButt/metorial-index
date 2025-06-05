@@ -1,0 +1,107 @@
+tools:
+  - name: get_editor_state
+    description: Retrieve the current state of the Unity Editor, including active
+      GameObjects, selection state, play mode status, scene hierarchy, and
+      project structure. This tool provides a comprehensive snapshot of the
+      editor's current context.
+    inputSchema:
+      type: object
+      properties:
+        format:
+          enum:
+            - Raw
+            - scripts only
+            - no scripts
+          type: string
+          default: Raw
+          description: |-
+            Specify the output format:
+            - Raw: Complete editor state including all available data
+            - scripts only: Returns only the list of script files in the project
+            - no scripts: Returns everything except script-related information
+      additionalProperties: false
+  - name: execute_editor_command
+    description: Execute arbitrary C# code within the Unity Editor context. This
+      powerful tool allows for direct manipulation of the Unity Editor,
+      GameObjects, components, and project assets using the Unity Editor API.
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          examples:
+            - Selection.activeGameObject.transform.position = Vector3.zero;
+            - EditorApplication.isPlaying = !EditorApplication.isPlaying;
+          minLength: 1
+          description: C# code to execute in the Unity Editor context. The code has access
+            to all UnityEditor and UnityEngine APIs.
+      additionalProperties: false
+  - name: get_logs
+    description: Retrieve and filter Unity Editor logs with comprehensive filtering
+      options. This tool provides access to editor logs, console messages,
+      warnings, errors, and exceptions with powerful filtering capabilities.
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          default: 100
+          maximum: 1000
+          minimum: 1
+          description: Maximum number of log entries to return
+        types:
+          type: array
+          items:
+            enum:
+              - Log
+              - Warning
+              - Error
+              - Exception
+            type: string
+            description: Log entry types to include
+          examples:
+            - - Error
+              - Exception
+            - - Log
+              - Warning
+          description: Filter logs by type. If not specified, all types are included.
+        fields:
+          type: array
+          items:
+            enum:
+              - message
+              - stackTrace
+              - logType
+              - timestamp
+            type: string
+          examples:
+            - - message
+              - logType
+            - - message
+              - stackTrace
+              - timestamp
+          description: Specify which fields to include in the output. If not specified,
+            all fields are included.
+        timestampAfter:
+          type: string
+          format: date-time
+          example: 2024-01-14T00:00:00Z
+          description: Filter logs after this ISO timestamp (inclusive)
+        messageContains:
+          type: string
+          minLength: 1
+          description: Filter logs to only include entries where the message contains this
+            string (case-sensitive)
+        timestampBefore:
+          type: string
+          format: date-time
+          example: 2024-01-14T23:59:59Z
+          description: Filter logs before this ISO timestamp (inclusive)
+        stackTraceContains:
+          type: string
+          minLength: 1
+          description: Filter logs to only include entries where the stack trace contains
+            this string (case-sensitive)
+      additionalProperties: false

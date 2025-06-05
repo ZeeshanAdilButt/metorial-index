@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/espn-mcp/espn-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/espn-mcp
+  name: espn-mcp
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: ESPN Server
+  description: Access real-time sports data from ESPN through a standardized
+    interface. Get live scores, player statistics, and league standings for
+    major sports leagues including NFL, NBA, MLB, and more. Export data easily
+    to markdown files for reporting and analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

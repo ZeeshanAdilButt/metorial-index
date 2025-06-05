@@ -1,0 +1,945 @@
+tools:
+  - name: dbsize
+    description: "Get the number of keys stored in the Redis database
+
+      \    "
+    inputSchema:
+      type: object
+      title: dbsizeArguments
+      properties: {}
+  - name: info
+    description: |
+      Get Redis server information and statistics.
+
+      Args:
+          section: The section of the info command (default, memory, cpu, etc.).
+
+      Returns:
+          A dictionary of server information or an error message.
+    inputSchema:
+      type: object
+      title: infoArguments
+      properties:
+        section:
+          type: string
+          title: Section
+          default: default
+  - name: client_list
+    description: Get a list of connected clients to the Redis server.
+    inputSchema:
+      type: object
+      title: client_listArguments
+      properties: {}
+  - name: delete
+    description: |
+      Delete a Redis key.
+
+      Args:
+          key (str): The key to delete.
+
+      Returns:
+          str: Confirmation message or an error message.
+    inputSchema:
+      type: object
+      title: deleteArguments
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+  - name: type
+    description: |
+      Returns the string representation of the type of the value stored at key
+
+      Args:
+          key (str): The key to check.
+
+      Returns:
+          str: The type of key, or none when key doesn't exist
+    inputSchema:
+      type: object
+      title: typeArguments
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+  - name: expire
+    description: |
+      Set an expiration time for a Redis key.
+
+      Args:
+          name: The Redis key.
+          expire_seconds: Time in seconds after which the key should expire.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: expireArguments
+      required:
+        - name
+        - expire_seconds
+      properties:
+        name:
+          type: string
+          title: Name
+        expire_seconds:
+          type: integer
+          title: Expire Seconds
+  - name: rename
+    description: |
+      
+      Renames a Redis key from old_key to new_key.
+
+      Args:
+          old_key (str): The current name of the Redis key to rename.
+          new_key (str): The new name to assign to the key.
+
+      Returns:
+          Dict[str, Any]: A dictionary containing the result of the operation.
+              On success: {"status": "success", "message": "..."}
+              On error: {"error": "..."}
+    inputSchema:
+      type: object
+      title: renameArguments
+      required:
+        - old_key
+        - new_key
+      properties:
+        new_key:
+          type: string
+          title: New Key
+        old_key:
+          type: string
+          title: Old Key
+  - name: get_indexes
+    description: |
+      List of indexes in the Redis database
+
+      Returns:
+          str: A JSON string containing the list of indexes or an error message.
+    inputSchema:
+      type: object
+      title: get_indexesArguments
+      properties: {}
+  - name: get_index_info
+    description: >
+      Retrieve schema and information about a specific Redis index using
+      FT.INFO.
+
+
+      Args:
+          index_name (str): The name of the index to retrieve information about.
+
+      Returns:
+          str: Information about the specified index or an error message.
+    inputSchema:
+      type: object
+      title: get_index_infoArguments
+      required:
+        - index_name
+      properties:
+        index_name:
+          type: string
+          title: Index Name
+  - name: get_indexed_keys_number
+    description: |
+      Retrieve the number of indexed keys by the index
+
+      Args:
+          index_name (str): The name of the index to retrieve information about.
+
+      Returns:
+          int: Number of indexed keys
+    inputSchema:
+      type: object
+      title: get_indexed_keys_numberArguments
+      required:
+        - index_name
+      properties:
+        index_name:
+          type: string
+          title: Index Name
+  - name: create_vector_index_hash
+    description: >
+      
+      Create a Redis 8 vector similarity index using HNSW on a Redis hash.
+
+
+      This function sets up a Redis index for approximate nearest neighbor (ANN)
+
+      search using the HNSW algorithm and float32 vector embeddings.
+
+
+      Args:
+          index_name: The name of the Redis index to create. Unless specifically required, use the default name for the index.
+          prefix: The key prefix used to identify documents to index (e.g., 'doc:'). Unless specifically required, use the default prefix.
+          vector_field: The name of the vector field to be indexed for similarity search. Unless specifically required, use the default field name
+          dim: The dimensionality of the vectors stored under the vector_field.
+          distance_metric: The distance function to use (e.g., 'COSINE', 'L2', 'IP').
+
+      Returns:
+          A string indicating whether the index was created successfully or an error message.
+    inputSchema:
+      type: object
+      title: create_vector_index_hashArguments
+      properties:
+        dim:
+          type: integer
+          title: Dim
+          default: 1536
+        prefix:
+          type: string
+          title: Prefix
+          default: "doc:"
+        index_name:
+          type: string
+          title: Index Name
+          default: vector_index
+        vector_field:
+          type: string
+          title: Vector Field
+          default: vector
+        distance_metric:
+          type: string
+          title: Distance Metric
+          default: COSINE
+  - name: vector_search_hash
+    description: >
+      
+      Perform a KNN vector similarity search using Redis 8 or later version on
+      vectors stored in hash data structures.
+
+
+      Args:
+          query_vector: List of floats to use as the query vector.
+          index_name: Name of the Redis index. Unless specifically specified, use the default index name.
+          vector_field: Name of the indexed vector field. Unless specifically required, use the default field name
+          k: Number of nearest neighbors to return.
+          return_fields: List of fields to return (optional).
+
+      Returns:
+          A list of matched documents or an error message.
+    inputSchema:
+      type: object
+      title: vector_search_hashArguments
+      required:
+        - query_vector
+      properties:
+        k:
+          type: integer
+          title: K
+          default: 5
+        index_name:
+          type: string
+          title: Index Name
+          default: vector_index
+        query_vector:
+          type: array
+          items: {}
+          title: Query Vector
+        vector_field:
+          type: string
+          title: Vector Field
+          default: vector
+        return_fields:
+          type: array
+          items: {}
+          title: Return Fields
+          default: null
+  - name: hset
+    description: >
+      Set a field in a hash stored at key with an optional expiration time.
+
+
+      Args:
+          name: The Redis hash key.
+          key: The field name inside the hash.
+          value: The value to set.
+          expire_seconds: Optional; time in seconds after which the key should expire.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: hsetArguments
+      required:
+        - name
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          title: Key
+        name:
+          type: string
+          title: Name
+        value:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: number
+          title: Value
+        expire_seconds:
+          type: integer
+          title: Expire Seconds
+          default: null
+  - name: hget
+    description: |
+      Get the value of a field in a Redis hash.
+
+      Args:
+          name: The Redis hash key.
+          key: The field name inside the hash.
+
+      Returns:
+          The field value or an error message.
+    inputSchema:
+      type: object
+      title: hgetArguments
+      required:
+        - name
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+        name:
+          type: string
+          title: Name
+  - name: hdel
+    description: |
+      Delete a field from a Redis hash.
+
+      Args:
+          name: The Redis hash key.
+          key: The field name inside the hash.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: hdelArguments
+      required:
+        - name
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+        name:
+          type: string
+          title: Name
+  - name: hgetall
+    description: |
+      Get all fields and values from a Redis hash.
+
+      Args:
+          name: The Redis hash key.
+
+      Returns:
+          A dictionary of field-value pairs or an error message.
+    inputSchema:
+      type: object
+      title: hgetallArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: hexists
+    description: |
+      Check if a field exists in a Redis hash.
+
+      Args:
+          name: The Redis hash key.
+          key: The field name inside the hash.
+
+      Returns:
+          True if the field exists, False otherwise.
+    inputSchema:
+      type: object
+      title: hexistsArguments
+      required:
+        - name
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+        name:
+          type: string
+          title: Name
+  - name: set_vector_in_hash
+    description: >
+      Store a vector as a field in a Redis hash.
+
+
+      Args:
+          name: The Redis hash key.
+          vector_field: The field name inside the hash. Unless specifically required, use the default field name
+          vector: The vector (list of numbers) to store in the hash.
+
+      Returns:
+          True if the vector was successfully stored, False otherwise.
+    inputSchema:
+      type: object
+      title: set_vector_in_hashArguments
+      required:
+        - name
+        - vector
+      properties:
+        name:
+          type: string
+          title: Name
+        vector:
+          type: array
+          items: {}
+          title: Vector
+        vector_field:
+          type: string
+          title: Vector Field
+          default: vector
+  - name: get_vector_from_hash
+    description: >
+      Retrieve a vector from a Redis hash and convert it back from binary blob.
+
+
+      Args:
+          name: The Redis hash key.
+          vector_field: The field name inside the hash. Unless specifically required, use the default field name
+
+      Returns:
+          The vector as a list of floats, or an error message if retrieval fails.
+    inputSchema:
+      type: object
+      title: get_vector_from_hashArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        vector_field:
+          type: string
+          title: Vector Field
+          default: vector
+  - name: lpush
+    description: Push a value onto the left of a Redis list and optionally set an
+      expiration time.
+    inputSchema:
+      type: object
+      title: lpushArguments
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: string
+          title: Value
+        expire:
+          type: integer
+          title: Expire
+          default: null
+  - name: rpush
+    description: Push a value onto the right of a Redis list and optionally set an
+      expiration time.
+    inputSchema:
+      type: object
+      title: rpushArguments
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: string
+          title: Value
+        expire:
+          type: integer
+          title: Expire
+          default: null
+  - name: lpop
+    description: Remove and return the first element from a Redis list.
+    inputSchema:
+      type: object
+      title: lpopArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: rpop
+    description: Remove and return the last element from a Redis list.
+    inputSchema:
+      type: object
+      title: rpopArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: lrange
+    description: |
+      Get elements from a Redis list within a specific range.
+
+      Returns:
+      str: A JSON string containing the list of elements or an error message.
+    inputSchema:
+      type: object
+      title: lrangeArguments
+      required:
+        - name
+        - start
+        - stop
+      properties:
+        name:
+          type: string
+          title: Name
+        stop:
+          type: integer
+          title: Stop
+        start:
+          type: integer
+          title: Start
+  - name: llen
+    description: Get the length of a Redis list.
+    inputSchema:
+      type: object
+      title: llenArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: set
+    description: |
+      Set a Redis string value with an optional expiration time.
+
+      Args:
+          key (str): The key to set.
+          value (str): The value to store.
+          expiration (int, optional): Expiration time in seconds.
+
+      Returns:
+          str: Confirmation message or an error message.
+    inputSchema:
+      type: object
+      title: setArguments
+      required:
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          title: Key
+        value:
+          type: string
+          title: Value
+        expiration:
+          type: integer
+          title: Expiration
+          default: null
+  - name: get
+    description: |
+      Get a Redis string value.
+
+      Args:
+          key (str): The key to retrieve.
+
+      Returns:
+          str: The stored value or an error message.
+    inputSchema:
+      type: object
+      title: getArguments
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+  - name: json_set
+    description: >
+      Set a JSON value in Redis at a given path with an optional expiration
+      time.
+
+
+      Args:
+          name: The Redis key where the JSON document is stored.
+          path: The JSON path where the value should be set.
+          value: The JSON value to store.
+          expire_seconds: Optional; time in seconds after which the key should expire.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: json_setArguments
+      required:
+        - name
+        - path
+        - value
+      properties:
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+        value:
+          type: string
+          title: Value
+        expire_seconds:
+          type: integer
+          title: Expire Seconds
+          default: null
+  - name: json_get
+    description: |
+      Retrieve a JSON value from Redis at a given path.
+
+      Args:
+          name: The Redis key where the JSON document is stored.
+          path: The JSON path to retrieve (default: root '$').
+
+      Returns:
+          The retrieved JSON value or an error message.
+    inputSchema:
+      type: object
+      title: json_getArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+          default: $
+  - name: json_del
+    description: |
+      Delete a JSON value from Redis at a given path.
+
+      Args:
+          name: The Redis key where the JSON document is stored.
+          path: The JSON path to delete (default: root '$').
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: json_delArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+          default: $
+  - name: zadd
+    description: |
+      Add a member to a Redis sorted set with an optional expiration time.
+
+      Args:
+          key (str): The sorted set key.
+          score (float): The score of the member.
+          member (str): The member to add.
+          expiration (int, optional): Expiration time in seconds.
+
+      Returns:
+          str: Confirmation message or an error message.
+    inputSchema:
+      type: object
+      title: zaddArguments
+      required:
+        - key
+        - score
+        - member
+      properties:
+        key:
+          type: string
+          title: Key
+        score:
+          type: number
+          title: Score
+        member:
+          type: string
+          title: Member
+        expiration:
+          type: integer
+          title: Expiration
+          default: null
+  - name: zrange
+    description: |
+      Retrieve a range of members from a Redis sorted set.
+
+      Args:
+          key (str): The sorted set key.
+          start (int): The starting index.
+          end (int): The ending index.
+          with_scores (bool, optional): Whether to include scores in the result.
+
+      Returns:
+          str: The sorted set members in the given range or an error message.
+    inputSchema:
+      type: object
+      title: zrangeArguments
+      required:
+        - key
+        - start
+        - end
+      properties:
+        end:
+          type: integer
+          title: End
+        key:
+          type: string
+          title: Key
+        start:
+          type: integer
+          title: Start
+        with_scores:
+          type: boolean
+          title: With Scores
+          default: false
+  - name: zrem
+    description: |
+      Remove a member from a Redis sorted set.
+
+      Args:
+          key (str): The sorted set key.
+          member (str): The member to remove.
+
+      Returns:
+          str: Confirmation message or an error message.
+    inputSchema:
+      type: object
+      title: zremArguments
+      required:
+        - key
+        - member
+      properties:
+        key:
+          type: string
+          title: Key
+        member:
+          type: string
+          title: Member
+  - name: sadd
+    description: >
+      Add a value to a Redis set with an optional expiration time.
+
+
+      Args:
+          name: The Redis set key.
+          value: The value to add to the set.
+          expire_seconds: Optional; time in seconds after which the set should expire.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: saddArguments
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: string
+          title: Value
+        expire_seconds:
+          type: integer
+          title: Expire Seconds
+          default: null
+  - name: srem
+    description: |
+      Remove a value from a Redis set.
+
+      Args:
+          name: The Redis set key.
+          value: The value to remove from the set.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: sremArguments
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: string
+          title: Value
+  - name: smembers
+    description: |
+      Get all members of a Redis set.
+
+      Args:
+          name: The Redis set key.
+
+      Returns:
+          A list of values in the set or an error message.
+    inputSchema:
+      type: object
+      title: smembersArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: xadd
+    description: |
+      Add an entry to a Redis stream with an optional expiration time.
+
+      Args:
+          key (str): The stream key.
+          fields (dict): The fields and values for the stream entry.
+          expiration (int, optional): Expiration time in seconds.
+
+      Returns:
+          str: The ID of the added entry or an error message.
+    inputSchema:
+      type: object
+      title: xaddArguments
+      required:
+        - key
+        - fields
+      properties:
+        key:
+          type: string
+          title: Key
+        fields:
+          type: object
+          title: Fields
+        expiration:
+          type: integer
+          title: Expiration
+          default: null
+  - name: xrange
+    description: |
+      Read entries from a Redis stream.
+
+      Args:
+          key (str): The stream key.
+          count (int, optional): Number of entries to retrieve.
+
+      Returns:
+          str: The retrieved stream entries or an error message.
+    inputSchema:
+      type: object
+      title: xrangeArguments
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+        count:
+          type: integer
+          title: Count
+          default: 1
+  - name: xdel
+    description: |
+      Delete an entry from a Redis stream.
+
+      Args:
+          key (str): The stream key.
+          entry_id (str): The ID of the entry to delete.
+
+      Returns:
+          str: Confirmation message or an error message.
+    inputSchema:
+      type: object
+      title: xdelArguments
+      required:
+        - key
+        - entry_id
+      properties:
+        key:
+          type: string
+          title: Key
+        entry_id:
+          type: string
+          title: Entry Id
+  - name: publish
+    description: |
+      Publish a message to a Redis channel.
+
+      Args:
+          channel: The Redis channel to publish to.
+          message: The message to send.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: publishArguments
+      required:
+        - channel
+        - message
+      properties:
+        channel:
+          type: string
+          title: Channel
+        message:
+          type: string
+          title: Message
+  - name: subscribe
+    description: |
+      Subscribe to a Redis channel.
+
+      Args:
+          channel: The Redis channel to subscribe to.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: subscribeArguments
+      required:
+        - channel
+      properties:
+        channel:
+          type: string
+          title: Channel
+  - name: unsubscribe
+    description: |
+      Unsubscribe from a Redis channel.
+
+      Args:
+          channel: The Redis channel to unsubscribe from.
+
+      Returns:
+          A success message or an error message.
+    inputSchema:
+      type: object
+      title: unsubscribeArguments
+      required:
+        - channel
+      properties:
+        channel:
+          type: string
+          title: Channel

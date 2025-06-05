@@ -1,0 +1,17 @@
+identifier: caesaryangs/prometheus_mcp_server/prometheus_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/CaesarYangs/prometheus_mcp_server
+  name: prometheus_mcp_server
+  owner: CaesarYangs
+server:
+  subdirectory: /
+  name: Prometheus MCP Server
+  description: Retrieve and analyze vast amounts of metric data from Prometheus
+    databases. Execute complex queries and gain insights into metric usage
+    patterns with enhanced control. Simplify your data exploration and analysis
+    tasks through a dedicated MCP server interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

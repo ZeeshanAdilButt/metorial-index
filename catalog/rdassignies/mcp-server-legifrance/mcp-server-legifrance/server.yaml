@@ -1,0 +1,18 @@
+identifier: rdassignies/mcp-server-legifrance/mcp-server-legifrance
+repo:
+  provider: github.com
+  url: https://github.com/rdassignies/mcp-server-legifrance
+  name: mcp-server-legifrance
+  owner: rdassignies
+server:
+  subdirectory: /
+  name: Legifrance Legal Data Server
+  description: Provide seamless access to French legal databases including laws,
+    codes, and judicial jurisprudence directly within compatible large language
+    models. Enable advanced legal research and analysis by integrating official
+    Legifrance data through interactive tools. Enhance legal workflows with
+    expert prompts and real-time data retrieval from authoritative sources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

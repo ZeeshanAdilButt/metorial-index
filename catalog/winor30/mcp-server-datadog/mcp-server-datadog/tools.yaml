@@ -1,0 +1,293 @@
+tools:
+  - name: list_incidents
+    description: Get incidents from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        pageSize:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+        pageOffset:
+          type: number
+          default: 0
+          minimum: 0
+  - name: get_incident
+    description: Get an incident from Datadog
+    inputSchema:
+      type: object
+      required:
+        - incidentId
+      properties:
+        incidentId:
+          type: string
+          minLength: 1
+  - name: get_metrics
+    description: Get metrics data from Datadog
+    inputSchema:
+      type: object
+      required:
+        - from
+        - to
+        - query
+      properties:
+        to:
+          type: number
+          description: End time in epoch seconds
+        from:
+          type: number
+          description: Start time in epoch seconds
+        query:
+          type: string
+          description: Datadog metrics query string. e.g. "avg:system.cpu.user{*}
+  - name: get_logs
+    description: Search and retrieve logs from Datadog
+    inputSchema:
+      type: object
+      required:
+        - from
+        - to
+      properties:
+        to:
+          type: number
+          description: End time in epoch seconds
+        from:
+          type: number
+          description: Start time in epoch seconds
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of logs to return. Default is 100.
+        query:
+          type: string
+          default: ""
+          description: Datadog logs query string
+  - name: get_monitors
+    description: Get monitors status from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        name:
+          type: string
+          description: Filter monitors by name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter monitors by tags
+        groupStates:
+          type: array
+          items:
+            enum:
+              - alert
+              - warn
+              - no data
+              - ok
+            type: string
+          description: Filter monitors by their states
+  - name: list_dashboards
+    description: Get list of dashboards from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        name:
+          type: string
+          description: Filter dashboards by name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter dashboards by tags
+  - name: get_dashboard
+    description: Get a dashboard from Datadog
+    inputSchema:
+      type: object
+      required:
+        - dashboardId
+      properties:
+        dashboardId:
+          type: string
+  - name: list_traces
+    description: Get APM traces from Datadog
+    inputSchema:
+      type: object
+      required:
+        - query
+        - from
+        - to
+      properties:
+        to:
+          type: number
+          description: End time in epoch seconds
+        from:
+          type: number
+          description: Start time in epoch seconds
+        sort:
+          enum:
+            - timestamp
+            - -timestamp
+          type: string
+          default: -timestamp
+          description: Sort order for traces
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of traces to return
+        query:
+          type: string
+          description: Datadog APM trace query string
+        service:
+          type: string
+          description: Filter by service name
+        operation:
+          type: string
+          description: Filter by operation name
+  - name: mute_host
+    description: Mute a host in Datadog
+    inputSchema:
+      type: object
+      required:
+        - hostname
+      properties:
+        end:
+          type: integer
+          description: POSIX timestamp for when the mute should end
+        message:
+          type: string
+          description: Message to associate with the muting of this host
+        hostname:
+          type: string
+          description: The name of the host to mute
+        override:
+          type: boolean
+          default: false
+          description: If true and the host is already muted, replaces existing end time
+  - name: unmute_host
+    description: Unmute a host in Datadog
+    inputSchema:
+      type: object
+      required:
+        - hostname
+      properties:
+        hostname:
+          type: string
+          description: The name of the host to unmute
+  - name: list_hosts
+    description: Get list of hosts from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        from:
+          type: integer
+          description: Search hosts from this UNIX timestamp
+        count:
+          type: integer
+          maximum: 1000
+          description: "Max number of hosts to return (max: 1000)"
+        start:
+          type: integer
+          description: Starting offset for pagination
+        filter:
+          type: string
+          description: Filter string for search results
+        sort_dir:
+          type: string
+          description: Sort direction (asc/desc)
+        sort_field:
+          type: string
+          description: Field to sort hosts by
+        include_hosts_metadata:
+          type: boolean
+          description: Include host metadata (version, platform, etc)
+        include_muted_hosts_data:
+          type: boolean
+          description: Include muted hosts status and expiry
+  - name: get_active_hosts_count
+    description: Get the total number of active hosts in Datadog (defaults to last 5
+      minutes)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        from:
+          type: integer
+          default: 7200
+          description: Number of seconds from which you want to get total number of active
+            hosts (defaults to 2h)
+  - name: list_downtimes
+    description: List scheduled downtimes from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        currentOnly:
+          type: boolean
+  - name: schedule_downtime
+    description: Schedule a downtime in Datadog
+    inputSchema:
+      type: object
+      required:
+        - scope
+      properties:
+        end:
+          type: number
+        scope:
+          type: string
+          minLength: 1
+        start:
+          type: number
+        message:
+          type: string
+        timezone:
+          type: string
+        monitorId:
+          type: number
+        recurrence:
+          type: object
+          required:
+            - type
+            - period
+          properties:
+            type:
+              enum:
+                - days
+                - weeks
+                - months
+                - years
+              type: string
+            until:
+              type: number
+            period:
+              type: number
+              minimum: 1
+            weekDays:
+              type: array
+              items:
+                enum:
+                  - Mon
+                  - Tue
+                  - Wed
+                  - Thu
+                  - Fri
+                  - Sat
+                  - Sun
+                type: string
+          additionalProperties: false
+        monitorTags:
+          type: array
+          items:
+            type: string
+  - name: cancel_downtime
+    description: Cancel a scheduled downtime in Datadog
+    inputSchema:
+      type: object
+      required:
+        - downtimeId
+      properties:
+        downtimeId:
+          type: number

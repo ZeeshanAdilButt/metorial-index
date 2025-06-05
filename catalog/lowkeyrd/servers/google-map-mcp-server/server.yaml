@@ -1,0 +1,17 @@
+identifier: lowkeyrd/servers/google-map-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lowkeyrd/servers
+  name: servers
+  owner: lowkeyrd
+server:
+  subdirectory: /src/google-maps
+  name: Google Maps API Server
+  description: Leverage the power of Google Maps to enhance your applications with
+    location services, directions, and place details. Integrate seamlessly with
+    your LLMs to provide real-time geographic data and insights. Start building
+    location-aware applications effortlessly with this MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,20 @@
+identifier: ai-agent-hub/mcp-marketplace/mcp-marketplace
+repo:
+  provider: github.com
+  url: https://github.com/AI-Agent-Hub/mcp-marketplace
+  name: mcp-marketplace
+  owner: AI-Agent-Hub
+server:
+  subdirectory: /
+  name: Open MCP Marketplace
+  description: Provide a web-based plugin to browse, select, and install MCP tools
+    from various marketplaces, enhancing AI agents with diverse capabilities
+    like map location, search, payment, and data fetching. Easily integrate into
+    AI applications to upgrade tool usage and management with features like
+    pagination and category browsing. Benefit from an autonomous tool dispatcher
+    to optimize tool selection based on multiple criteria including ratings and
+    usage statistics.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

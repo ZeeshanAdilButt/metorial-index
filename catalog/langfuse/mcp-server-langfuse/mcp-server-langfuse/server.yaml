@@ -1,0 +1,14 @@
+identifier: langfuse/mcp-server-langfuse/mcp-server-langfuse
+repo:
+  provider: github.com
+  url: https://github.com/langfuse/mcp-server-langfuse
+  name: mcp-server-langfuse
+  owner: langfuse
+server:
+  subdirectory: /
+  name: Langfuse Prompts
+  description: Manage and access your Langfuse prompts seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

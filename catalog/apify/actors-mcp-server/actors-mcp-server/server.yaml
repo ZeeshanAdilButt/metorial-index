@@ -1,0 +1,14 @@
+identifier: apify/actors-mcp-server/actors-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/apify/actors-mcp-server
+  name: actors-mcp-server
+  owner: apify
+server:
+  subdirectory: /
+  name: Apify Actors MCP Server
+  description: Enable interaction with Apify Actors to perform specific tasks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

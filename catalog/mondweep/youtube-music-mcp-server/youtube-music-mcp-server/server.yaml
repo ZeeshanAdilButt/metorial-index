@@ -1,0 +1,15 @@
+identifier: mondweep/youtube-music-mcp-server/youtube-music-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mondweep/youtube-music-mcp-server
+  name: youtube-music-mcp-server
+  owner: mondweep
+server:
+  subdirectory: /
+  name: YouTube Music Server
+  description: Control YouTube Music playback through AI models. Search and play
+    songs directly in Google Chrome using voice commands or text input.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

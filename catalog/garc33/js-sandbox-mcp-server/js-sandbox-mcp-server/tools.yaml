@@ -1,0 +1,21 @@
+tools:
+  - name: execute_js
+    description: Execute JavaScript code in an isolated environment
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: JavaScript code to execute
+        memory:
+          type: number
+          maximum: 104857600
+          minimum: 1048576
+          description: Memory limit in bytes
+        timeout:
+          type: number
+          maximum: 30000
+          minimum: 100
+          description: Maximum execution time in milliseconds

@@ -1,0 +1,18 @@
+identifier: danedens/omnispindle/fastmcp-todo-server
+repo:
+  provider: github.com
+  url: https://github.com/DanEdens/Omnispindle
+  name: Omnispindle
+  owner: DanEdens
+server:
+  subdirectory: /
+  name: Todo Server
+  description: Receive and manage your todo requests seamlessly with our
+    FastMCP-based server. Store and process todos efficiently using MongoDB
+    integration, ensuring your tasks are organized and accessible. Enhance your
+    productivity by integrating with the Swarmonomicon project for advanced task
+    management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

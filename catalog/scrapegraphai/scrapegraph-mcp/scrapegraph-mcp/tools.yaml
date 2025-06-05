@@ -1,0 +1,82 @@
+tools:
+  - name: markdownify
+    description: "
+
+      \    Convert a webpage into clean, formatted markdown.
+
+
+      \    Args:
+
+      \        website_url: URL of the webpage to convert
+
+
+      \    Returns:
+
+      \        Dictionary containing the markdown result
+
+      \    "
+    inputSchema:
+      type: object
+      title: markdownifyArguments
+      required:
+        - website_url
+      properties:
+        website_url:
+          type: string
+          title: Website Url
+  - name: smartscraper
+    description: "
+
+      \    Extract structured data from a webpage using AI.
+
+
+      \    Args:
+
+      \        user_prompt: Instructions for what data to extract
+
+      \        website_url: URL of the webpage to scrape
+
+
+      \    Returns:
+
+      \        Dictionary containing the extracted data
+
+      \    "
+    inputSchema:
+      type: object
+      title: smartscraperArguments
+      required:
+        - user_prompt
+        - website_url
+      properties:
+        user_prompt:
+          type: string
+          title: User Prompt
+        website_url:
+          type: string
+          title: Website Url
+  - name: searchscraper
+    description: "
+
+      \    Perform AI-powered web searches with structured results.
+
+
+      \    Args:
+
+      \        user_prompt: Search query or instructions
+
+
+      \    Returns:
+
+      \        Dictionary containing search results and reference URLs
+
+      \    "
+    inputSchema:
+      type: object
+      title: searchscraperArguments
+      required:
+        - user_prompt
+      properties:
+        user_prompt:
+          type: string
+          title: User Prompt

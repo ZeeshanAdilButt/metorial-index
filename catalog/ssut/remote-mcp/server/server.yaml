@@ -1,0 +1,14 @@
+identifier: ssut/remote-mcp/server
+repo:
+  provider: github.com
+  url: https://github.com/ssut/Remote-MCP
+  name: Remote-MCP
+  owner: ssut
+server:
+  subdirectory: /
+  name: Remote MCP Server
+  description: A server package for creating remotely accessible MCP services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

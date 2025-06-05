@@ -1,0 +1,14 @@
+identifier: zhewenzhang/tushare_mcp/tushare_mcp
+repo:
+  provider: github.com
+  url: https://github.com/zhewenzhang/tushare_MCP
+  name: tushare_MCP
+  owner: zhewenzhang
+server:
+  subdirectory: /
+  name: Tushare数据查询服务器
+  description: 查询股票基本信息和搜索股票，轻松获取您所需的市场数据。通过安全的token配置，确保您的数据访问安全无忧。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

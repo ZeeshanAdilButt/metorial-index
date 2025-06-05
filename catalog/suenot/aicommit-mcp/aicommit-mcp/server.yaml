@@ -1,0 +1,18 @@
+identifier: suenot/aicommit-mcp/aicommit-mcp
+repo:
+  provider: github.com
+  url: https://github.com/suenot/aicommit-mcp
+  name: aicommit-mcp
+  owner: suenot
+server:
+  subdirectory: /
+  name: AI Commit Message Generator
+  description: Generate AI-powered git commit messages based on your repository
+    changes to streamline your version control workflow. Execute commit
+    operations with options for staging, pushing, and pulling directly through
+    the protocol. Easily check git status and view configured LLM providers to
+    enhance your development process.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

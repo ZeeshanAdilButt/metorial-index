@@ -1,0 +1,16 @@
+identifier: korotovsky/slack-mcp-server/slack-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/korotovsky/slack-mcp-server
+  name: slack-mcp-server
+  owner: korotovsky
+server:
+  subdirectory: /
+  name: Slack
+  description: The most powerful MCP for Slack Workspaces. This integration
+    supports both Stdio and SSE transports, proxy settings and does not require
+    any permissions or bots being created or approved by Workspace admins 😏.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

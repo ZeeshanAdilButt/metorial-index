@@ -1,0 +1,19 @@
+identifier: lochgeo/kube-mcp/kube-mcp
+repo:
+  provider: github.com
+  url: https://github.com/lochgeo/kube-mcp
+  name: kube-mcp
+  owner: lochgeo
+server:
+  subdirectory: /
+  name: Kube MCP Server
+  description: Enable seamless interaction with Kubernetes clusters through an MCP
+    server that integrates with AI agents to automate and manage Kubernetes
+    resources. Facilitate development and testing of MCP servers with built-in
+    support for Minikube and Kubernetes Python client. Enhance your software
+    development workflow by connecting this MCP server to AI agents like
+    Codename Goose for efficient Kubernetes management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

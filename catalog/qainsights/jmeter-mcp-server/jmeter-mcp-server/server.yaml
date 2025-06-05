@@ -1,0 +1,17 @@
+identifier: qainsights/jmeter-mcp-server/jmeter-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/QAInsights/jmeter-mcp-server
+  name: jmeter-mcp-server
+  owner: QAInsights
+server:
+  subdirectory: /
+  name: Apache JMeter Test Execution Server
+  description: Execute JMeter tests seamlessly through MCP-compatible clients.
+    Validate your test files and capture execution output effortlessly, whether
+    in GUI or non-GUI mode. Enhance your testing workflow with this powerful
+    integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

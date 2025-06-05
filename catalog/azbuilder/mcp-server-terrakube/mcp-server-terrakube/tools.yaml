@@ -1,0 +1,328 @@
+tools:
+  - name: list-organizations
+    description: Lists all organizations accessible to the current user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-organization
+    description: Retrieves detailed information about a specific organization by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: create-organization
+    description: Creates a new organization with the specified name and optional description
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Organization name
+        description:
+          type: string
+          description: Organization description
+      additionalProperties: false
+  - name: edit-organization
+    description: Updates an existing organization's details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Organization ID
+        name:
+          type: string
+          description: New organization name
+        description:
+          type: string
+          description: New organization description
+      additionalProperties: false
+  - name: list-workspaces
+    description: Lists all workspaces in the specified organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: get-workspace
+    description: Retrieves detailed information about a specific workspace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workspaceId
+      properties:
+        workspaceId:
+          type: string
+          description: Workspace ID
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: create-workspace
+    description: Creates a new workspace in the specified organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - name
+        - terraformVersion
+      properties:
+        name:
+          type: string
+          description: Workspace name
+        vcsRepo:
+          type: string
+          description: VCS repository URL
+        description:
+          type: string
+          description: Workspace description
+        vcsProvider:
+          type: string
+          description: VCS provider (e.g., github, gitlab)
+        organizationId:
+          type: string
+          description: Organization ID
+        terraformVersion:
+          type: string
+          description: Terraform version
+      additionalProperties: false
+  - name: edit-workspace
+    description: Updates an existing workspace's details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workspaceId
+      properties:
+        name:
+          type: string
+          description: New workspace name
+        vcsRepo:
+          type: string
+          description: New VCS repository URL
+        description:
+          type: string
+          description: New workspace description
+        vcsProvider:
+          type: string
+          description: New VCS provider
+        workspaceId:
+          type: string
+          description: Workspace ID
+        organizationId:
+          type: string
+          description: Organization ID
+        terraformVersion:
+          type: string
+          description: New Terraform version
+      additionalProperties: false
+  - name: list-modules
+    description: Lists all modules in the specified organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: get-module
+    description: Retrieves detailed information about a specific module
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - moduleId
+      properties:
+        moduleId:
+          type: string
+          description: Module ID
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: create-module
+    description: Creates a new module in the specified organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - name
+        - registry
+        - provider
+      properties:
+        name:
+          type: string
+          description: Module name
+        provider:
+          type: string
+          description: Provider name
+        registry:
+          type: string
+          description: Registry URL
+        description:
+          type: string
+          description: Module description
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: edit-module
+    description: Updates an existing module's details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - moduleId
+      properties:
+        name:
+          type: string
+          description: New module name
+        moduleId:
+          type: string
+          description: Module ID
+        provider:
+          type: string
+          description: New provider name
+        registry:
+          type: string
+          description: New registry URL
+        description:
+          type: string
+          description: New module description
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: list-variables
+    description: Lists all variables in the specified workspace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workspaceId
+      properties:
+        workspaceId:
+          type: string
+          description: Workspace ID
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: get-variable
+    description: Retrieves detailed information about a specific variable
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workspaceId
+        - variableId
+      properties:
+        variableId:
+          type: string
+          description: Variable ID
+        workspaceId:
+          type: string
+          description: Workspace ID
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: create-variable
+    description: Creates a new variable in the specified workspace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workspaceId
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          description: Variable key
+        value:
+          type: string
+          description: Variable value
+        category:
+          type: string
+          description: Variable category (e.g., terraform, environment)
+        sensitive:
+          type: boolean
+          description: Whether the variable is sensitive
+        description:
+          type: string
+          description: Variable description
+        workspaceId:
+          type: string
+          description: Workspace ID
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false
+  - name: edit-variable
+    description: Updates an existing variable's details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - workspaceId
+        - variableId
+      properties:
+        key:
+          type: string
+          description: New variable key
+        value:
+          type: string
+          description: New variable value
+        category:
+          type: string
+          description: New variable category
+        sensitive:
+          type: boolean
+          description: New sensitive flag
+        variableId:
+          type: string
+          description: Variable ID
+        description:
+          type: string
+          description: New variable description
+        workspaceId:
+          type: string
+          description: Workspace ID
+        organizationId:
+          type: string
+          description: Organization ID
+      additionalProperties: false

@@ -1,0 +1,18 @@
+identifier: janwilmake/uithub-mcp/uithub-mcp
+repo:
+  provider: github.com
+  url: https://github.com/janwilmake/uithub-mcp
+  name: uithub-mcp
+  owner: janwilmake
+server:
+  subdirectory: /
+  name: UIThub MCP Server
+  description: Enable natural language exploration and analysis of GitHub
+    repositories by retrieving repository contents with smart filtering options.
+    Seamlessly integrate with Claude Desktop to fetch and understand code from
+    GitHub repositories. Enhance your ability to discuss and work with code
+    through intuitive access to repository data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

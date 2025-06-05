@@ -1,0 +1,270 @@
+tools:
+  - name: get-filterable-attributes
+    description: Get the list of attributes that can be used for filtering by
+      examining a sample entity
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entityType
+      properties:
+        entityType:
+          enum:
+            - chart
+            - category
+          type: string
+          description: Type of entity to examine (chart or category)
+      additionalProperties: false
+  - name: check-connection
+    description: Check if the current API URL and authentication are valid
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: set-api-url
+    description: Set the API base URL for all requests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: API base URL (e.g., http://localhost:8224/pi/api/v2)
+      additionalProperties: false
+  - name: authenticate
+    description: Guide for authenticating with the PI API
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: keep-session-alive
+    description: Verify and refresh the current authentication token (also used for
+      token-based authentication)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        token:
+          type: string
+          description: "Optional: Provide a token to use for authentication"
+      additionalProperties: false
+  - name: authenticate-with-credentials
+    description: Authenticate with the PI API using username and password (last
+      resort option)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - credentials
+      properties:
+        credentials:
+          type: string
+          description: Username and password as 'username password'
+      additionalProperties: false
+  - name: logout
+    description: Invalidate the current token and end the session
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: set-organization
+    description: Set the organization ID for subsequent requests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orgId
+      properties:
+        orgId:
+          type: number
+          description: Organization ID
+      additionalProperties: false
+  - name: list-categories
+    description: List all categories with filtering support
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for pagination
+        filter:
+          type: string
+          description: "Filter criteria in the format 'fieldName(operator)=value'.
+            Multiple filters can be combined with & (e.g.,
+            'description(like)=dashboard&orgId(eq)=1'). Available operators: eq,
+            ne, gt, lt, ge, le, like, nlike. Use get-filterable-attributes tool
+            to see available fields."
+        pageSize:
+          type: number
+          default: 20
+          description: Number of items per page
+      additionalProperties: false
+  - name: get-category
+    description: Get a category by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Category ID
+      additionalProperties: false
+  - name: create-category
+    description: Create a new category
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - description
+        - orgId
+      properties:
+        label:
+          type: string
+          description: Alternative text for the category
+        orgId:
+          type: number
+          description: Organization ID
+        helpText:
+          type: string
+          description: Help text to describe the category
+        description:
+          type: string
+          description: Unique name of a category
+        cascadeFilters:
+          type: boolean
+          description: Enable cascading filters
+        categoryObjectsPosition:
+          enum:
+            - RIGHT
+            - TOP
+          type: string
+          description: Position of category objects panel
+      additionalProperties: false
+  - name: update-category
+    description: Update an existing category
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Category ID
+        label:
+          type: string
+          description: Alternative text for the category
+        helpText:
+          type: string
+          description: Help text to describe the category
+        description:
+          type: string
+          description: Unique name of a category
+        cascadeFilters:
+          type: boolean
+          description: Enable cascading filters
+        categoryObjectsPosition:
+          enum:
+            - RIGHT
+            - TOP
+          type: string
+          description: Position of category objects panel
+      additionalProperties: false
+  - name: delete-category
+    description: Delete a category
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Category ID
+      additionalProperties: false
+  - name: list-category-objects
+    description: List all objects for a specific category
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - categoryId
+      properties:
+        categoryId:
+          type: number
+          description: Category ID
+      additionalProperties: false
+  - name: list-charts
+    description: List all charts with filtering support
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for pagination
+        filter:
+          type: string
+          description: "Filter criteria in the format 'fieldName(operator)=value'.
+            Multiple filters can be combined with & (e.g.,
+            'description(like)=revenue&categoryId(eq)=5'). Available operators:
+            eq, ne, gt, lt, ge, le, like, nlike. Use get-filterable-attributes
+            tool to see available fields."
+        pageSize:
+          type: number
+          default: 20
+          description: Number of items per page
+      additionalProperties: false
+  - name: get-chart
+    description: Get a chart by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Chart ID
+      additionalProperties: false
+  - name: delete-chart
+    description: Delete a chart
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: Chart ID
+      additionalProperties: false
+  - name: export-chart
+    description: Export a chart in various formats
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - format
+      properties:
+        id:
+          type: number
+          description: Chart ID
+        format:
+          enum:
+            - json
+            - csv
+          type: string
+          description: Export format
+      additionalProperties: false

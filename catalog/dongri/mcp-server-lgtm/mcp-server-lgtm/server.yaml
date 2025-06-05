@@ -1,0 +1,16 @@
+identifier: dongri/mcp-server-lgtm/mcp-server-lgtm
+repo:
+  provider: github.com
+  url: https://github.com/dongri/mcp-server-lgtm
+  name: mcp-server-lgtm
+  owner: dongri
+server:
+  subdirectory: /
+  name: LGTM
+  description: Fetch random LGTM (Looks Good To Me) images for use in code reviews
+    and developer communications. Enhance your team's collaboration by easily
+    embedding fun and relevant images in your discussions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,55 @@
+tools:
+  - name: optimize_code
+    description: Optimize Zig code for better performance
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Zig code to optimize
+        optimizationLevel:
+          enum:
+            - Debug
+            - ReleaseSafe
+            - ReleaseFast
+            - ReleaseSmall
+          type: string
+          description: Optimization level to target
+  - name: estimate_compute_units
+    description: Estimate computational complexity and resource usage
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Zig code to analyze
+  - name: generate_code
+    description: Generate Zig code from natural language description
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language description of desired code
+        context:
+          type: string
+          description: Additional context or requirements
+  - name: get_recommendations
+    description: Get code improvement recommendations and best practices
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Zig code to analyze
+        prompt:
+          type: string
+          description: Natural language query for specific recommendations

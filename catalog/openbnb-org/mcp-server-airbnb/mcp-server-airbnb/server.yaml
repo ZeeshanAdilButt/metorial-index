@@ -1,0 +1,16 @@
+identifier: openbnb-org/mcp-server-airbnb/mcp-server-airbnb
+repo:
+  provider: github.com
+  url: https://github.com/openbnb-org/mcp-server-airbnb
+  name: mcp-server-airbnb
+  owner: openbnb-org
+server:
+  subdirectory: /
+  name: Airbnb Search and Listing Server
+  description: Search for Airbnb listings and get detailed information about
+    specific properties. Effortlessly plan your next trip with structured data
+    and no API key required, while respecting Airbnb's guidelines.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: arjunkmrm/mcp-redis/mcp-redis
+repo:
+  provider: github.com
+  url: https://github.com/arjunkmrm/mcp-redis
+  name: mcp-redis
+  owner: arjunkmrm
+server:
+  subdirectory: /
+  name: Redis Server
+  description: Enable AI agents to manage and search data in Redis using natural
+    language. Seamlessly integrate with MCP clients to perform efficient data
+    operations including caching, indexing, and real-time event processing.
+    Support a wide range of Redis data types and provide scalable,
+    high-performance workflows for AI-driven applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

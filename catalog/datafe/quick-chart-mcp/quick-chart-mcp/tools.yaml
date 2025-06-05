@@ -1,0 +1,12 @@
+tools:
+  - name: GetChartImgLink
+    description: To draw chart and get chart image link by parameters, and parameter
+      grammar follows Quick Chart API (quickchart.io).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          description: quick chart api's (quickchart.io) parameters and format is JSON
+            object. The object does not include any functions, only values.
+      additionalProperties: false

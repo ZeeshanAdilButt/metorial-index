@@ -1,0 +1,15 @@
+identifier: tevonsb/homeassistant-mcp/homeassistant-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tevonsb/homeassistant-mcp
+  name: homeassistant-mcp
+  owner: tevonsb
+server:
+  subdirectory: /
+  name: Home Assistant Server
+  description: Shares access to a local Home Assistant instance with LLM
+    applications using MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

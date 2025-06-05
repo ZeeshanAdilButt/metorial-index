@@ -1,0 +1,17 @@
+identifier: avimbu/slack-mcp-server/slack-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/AVIMBU/slack-mcp-server
+  name: slack-mcp-server
+  owner: AVIMBU
+server:
+  subdirectory: /
+  name: Slack Model Context Protocol Server
+  description: Connect your Slack workspace with Claude Desktop to effortlessly
+    post messages and retrieve user lists. Enhance your team's communication by
+    automating interactions within Slack channels. Simplify your workflow and
+    improve collaboration with seamless integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

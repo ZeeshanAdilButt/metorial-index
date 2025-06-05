@@ -1,0 +1,14 @@
+identifier: loglmhq/mcp-server-prometheus/mcp-server-prometheus
+repo:
+  provider: github.com
+  url: https://github.com/loglmhq/mcp-server-prometheus
+  name: mcp-server-prometheus
+  owner: loglmhq
+server:
+  subdirectory: /
+  name: Prometheus Server
+  description: A bridge between Claude and Prometheus servers using MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: yoheimuta/protolint/protolint
+repo:
+  provider: github.com
+  url: https://github.com/yoheimuta/protolint
+  name: protolint
+  owner: yoheimuta
+server:
+  subdirectory: /
+  name: protolint
+  description: Lint and fix Protocol Buffer files efficiently with a pluggable
+    utility that enforces the official style guide. Integrate seamlessly with
+    various editors, CI/CD pipelines, and MCP clients to maintain consistent
+    protobuf code quality. Automatically fix violations and customize lint rules
+    to suit your project's needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

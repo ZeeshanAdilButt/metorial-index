@@ -1,0 +1,151 @@
+tools:
+  - name: search_entity
+    description: "
+
+      \    Search for a Wikidata entity ID by its query.
+
+
+      \    Args:
+
+      \        query (str): The query to search for. The query should be
+      unambiguous enough to uniquely identify the entity.
+
+
+      \    Returns:
+
+      \        str: The Wikidata entity ID corresponding to the given query.\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_entityArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: search_property
+    description: "
+
+      \    Search for a Wikidata property ID by its query.
+
+
+      \    Args:
+
+      \        query (str): The query to search for. The query should be
+      unambiguous enough to uniquely identify the property.
+
+
+      \    Returns:
+
+      \        str: The Wikidata property ID corresponding to the given query.\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_propertyArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: get_properties
+    description: "
+
+      \    Get the properties associated with a given Wikidata entity ID.
+
+
+      \    Args:
+
+      \        entity_id (str): The entity ID to retrieve properties for. This
+      should be a valid Wikidata entity ID.
+
+
+      \    Returns:
+
+      \        list: A list of property IDs associated with the given entity ID.
+      If no properties are found, an empty list is returned.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_propertiesArguments
+      required:
+        - entity_id
+      properties:
+        entity_id:
+          type: string
+          title: Entity Id
+  - name: execute_sparql
+    description: "
+
+      \    Execute a SPARQL query on Wikidata.
+
+
+      \    You may assume the following prefixes:
+
+      \    PREFIX wd: <http://www.wikidata.org/entity/>
+
+      \    PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+      \    PREFIX p: <http://www.wikidata.org/prop/>
+
+      \    PREFIX ps: <http://www.wikidata.org/prop/statement/>
+
+
+      \    Args:
+
+      \        sparql_query (str): The SPARQL query to execute.
+
+
+      \    Returns:
+
+      \        str: The JSON-formatted result of the SPARQL query execution. If
+      there are no results, an empty JSON object will be returned.
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_sparqlArguments
+      required:
+        - sparql_query
+      properties:
+        sparql_query:
+          type: string
+          title: Sparql Query
+  - name: get_metadata
+    description: "
+
+      \    Retrieve the English label and description for a given Wikidata
+      entity ID.
+
+
+      \    Args:
+
+      \        entity_id (str): The entity ID to retrieve metadata for.
+
+      \        language (str): The language code for the label and description
+      (default is \"en\"). Use ISO 639-1 codes.
+
+
+      \    Returns:
+
+      \        dict: A dictionary containing the label and description of the
+      entity, if available.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_metadataArguments
+      required:
+        - entity_id
+      properties:
+        language:
+          type: string
+          title: Language
+          default: en
+        entity_id:
+          type: string
+          title: Entity Id

@@ -1,0 +1,18 @@
+identifier: axone-protocol/axone-mcp/axone-mcp
+repo:
+  provider: github.com
+  url: https://github.com/axone-protocol/axone-mcp
+  name: axone-mcp
+  owner: axone-protocol
+server:
+  subdirectory: /
+  name: Axone MCP Server
+  description: Expose Axone’s capabilities through a standardized protocol to
+    enhance AI-powered tools. Integrate seamlessly with various clients like
+    Claude Desktop for efficient data access and manipulation. Simplify your
+    development process with a lightweight and easy-to-use server
+    implementation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,18 @@
+identifier: jordineil/mcp-databricks-server/mcp-databricks-server
+repo:
+  provider: github.com
+  url: https://github.com/JordiNeil/mcp-databricks-server
+  name: mcp-databricks-server
+  owner: JordiNeil
+server:
+  subdirectory: /
+  name: Databricks MCP Server
+  description: Connect to Databricks API to run SQL queries, list jobs, and check
+    job statuses. Enable natural language interaction with your Databricks
+    environment for seamless data management and analysis. Simplify your
+    workflow by leveraging the power of LLMs to interact with your data
+    directly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

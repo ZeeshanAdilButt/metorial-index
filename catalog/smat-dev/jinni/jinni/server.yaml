@@ -1,0 +1,18 @@
+identifier: smat-dev/jinni/jinni
+repo:
+  provider: github.com
+  url: https://github.com/smat-dev/jinni
+  name: jinni
+  owner: smat-dev
+server:
+  subdirectory: /
+  name: Jinni
+  description: Provide Large Language Models with efficient, consolidated project
+    context by reading and filtering relevant project files in one operation.
+    Customize inclusions and exclusions with gitignore-style rules to optimize
+    context size and relevance. Easily integrate with MCP clients or use the CLI
+    to generate context dumps for improved LLM assistance.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

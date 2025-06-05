@@ -1,0 +1,78 @@
+tools:
+  - name: search_photos
+    description: "
+
+      \    Search for Unsplash photos
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Search keyword
+
+      \        page: Page number (1-based)
+
+      \        per_page: Results per page (1-30)
+
+      \        order_by: Sort method (relevant or latest)
+
+      \        color: Color filter (black_and_white, black, white, yellow,
+      orange, red, purple, magenta, green, teal, blue)
+
+      \        orientation: Orientation filter (landscape, portrait, squarish)
+
+      \   \ 
+
+      \    Returns:
+
+      \        List[UnsplashPhoto]: List of search results containing photo
+      objects with the following properties:
+
+      \            - id: Unique identifier for the photo
+
+      \            - description: Optional text description of the photo
+
+      \            - urls: Dictionary of available image URLs in different sizes
+
+      \            - width: Original image width in pixels
+
+      \            - height: Original image height in pixels
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_photosArguments
+      required:
+        - query
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Page
+          default: 1
+        color:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Color
+          default: null
+        query:
+          type: string
+          title: Query
+        order_by:
+          type: string
+          title: Order By
+          default: relevant
+        per_page:
+          anyOf:
+            - type: integer
+            - type: string
+          title: Per Page
+          default: 10
+        orientation:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Orientation
+          default: null

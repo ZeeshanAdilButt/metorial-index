@@ -1,0 +1,72 @@
+tools:
+  - name: fetch_reddit_hot_threads
+    description: "
+
+      \    Fetch hot threads from a subreddit
+
+      \   \ 
+
+      \    Args:
+
+      \        subreddit: Name of the subreddit
+
+      \        limit: Number of posts to fetch (default: 10)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Human readable string containing list of post information
+
+      \    "
+    inputSchema:
+      type: object
+      required:
+        - subreddit
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        subreddit:
+          type: string
+          title: Subreddit
+      additionalProperties: false
+  - name: fetch_reddit_post_content
+    description: "
+
+      \    Fetch detailed content of a specific post
+
+      \   \ 
+
+      \    Args:
+
+      \        post_id: Reddit post ID
+
+      \        comment_limit: Number of top level comments to fetch
+
+      \        comment_depth: Maximum depth of comment tree to traverse
+
+
+      \    Returns:
+
+      \        Human readable string containing post content and comments tree
+
+      \    "
+    inputSchema:
+      type: object
+      required:
+        - post_id
+      properties:
+        post_id:
+          type: string
+          title: Post Id
+        comment_depth:
+          type: integer
+          title: Comment Depth
+          default: 3
+        comment_limit:
+          type: integer
+          title: Comment Limit
+          default: 20
+      additionalProperties: false

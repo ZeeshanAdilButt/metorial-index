@@ -1,0 +1,15 @@
+identifier: metoro-io/metoro-mcp-server/metoro-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/metoro-io/metoro-mcp-server
+  name: metoro-mcp-server
+  owner: metoro-io
+server:
+  subdirectory: /
+  name: Metoro MCP Server
+  description: The Metoro MCP Server allows interaction with Kubernetes clusters
+    via the Claude Desktop App by exposing Metoro's APIs to an LLM.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

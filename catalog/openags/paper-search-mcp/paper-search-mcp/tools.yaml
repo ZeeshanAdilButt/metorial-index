@@ -1,0 +1,86 @@
+tools:
+  - name: search_arxiv
+    description: "Search academic papers from arXiv.
+
+
+      \    Args:
+
+      \        query: Search query string (e.g., 'machine learning').
+
+      \        max_results: Maximum number of papers to return (default: 10).
+
+      \    Returns:
+
+      \        List of paper metadata in dictionary format.
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_arxivArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: download_arxiv
+    description: "Download PDF of an arXiv paper.
+
+
+      \    Args:
+
+      \        paper_id: arXiv paper ID (e.g., '2106.12345').
+
+      \        save_path: Directory to save the PDF (default: './downloads').
+
+      \    Returns:
+
+      \        Path to the downloaded PDF file.
+
+      \    "
+    inputSchema:
+      type: object
+      title: download_arxivArguments
+      required:
+        - paper_id
+      properties:
+        paper_id:
+          type: string
+          title: Paper Id
+        save_path:
+          type: string
+          title: Save Path
+          default: ./downloads
+  - name: read_arxiv_paper
+    description: "Read and extract text content from an arXiv paper PDF.
+
+
+      \    Args:
+
+      \        paper_id: arXiv paper ID (e.g., '2106.12345').
+
+      \        save_path: Directory where the PDF is/will be saved (default:
+      './downloads').
+
+      \    Returns:
+
+      \        str: The extracted text content of the paper.
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_arxiv_paperArguments
+      required:
+        - paper_id
+      properties:
+        paper_id:
+          type: string
+          title: Paper Id
+        save_path:
+          type: string
+          title: Save Path
+          default: ./downloads

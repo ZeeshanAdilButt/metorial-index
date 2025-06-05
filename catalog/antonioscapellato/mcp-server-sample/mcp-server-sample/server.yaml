@@ -1,0 +1,18 @@
+identifier: antonioscapellato/mcp-server-sample/mcp-server-sample
+repo:
+  provider: github.com
+  url: https://github.com/antonioscapellato/mcp-server-sample
+  name: mcp-server-sample
+  owner: antonioscapellato
+server:
+  subdirectory: /
+  name: MCP Server Sample
+  description: Provide a sample implementation of a Model Context Protocol server
+    to demonstrate how to build functional MCP servers that integrate with
+    various LLM clients. Enable users to expose tools, resources, and prompts to
+    LLMs for enhanced AI application capabilities. Facilitate easy setup and
+    interaction with MCP clients like Claude Desktop and MCP Inspector.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

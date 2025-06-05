@@ -1,0 +1,18 @@
+identifier: cartographai/mcp-server-codegraph/mcp-server-codegraph
+repo:
+  provider: github.com
+  url: https://github.com/CartographAI/mcp-server-codegraph
+  name: mcp-server-codegraph
+  owner: CartographAI
+server:
+  subdirectory: /
+  name: Code Graph Server
+  description: Generate and query a graph representation of your codebase.
+    Identify entities and their relationships across multiple programming
+    languages, enhancing your code analysis and understanding. Streamline your
+    development process by visualizing function calls, inheritance, and
+    implementations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

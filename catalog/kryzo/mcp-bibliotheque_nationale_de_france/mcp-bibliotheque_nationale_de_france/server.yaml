@@ -1,0 +1,19 @@
+identifier: kryzo/mcp-bibliotheque_nationale_de_france/mcp-bibliotheque_nationale_de_france
+repo:
+  provider: github.com
+  url: https://github.com/Kryzo/mcp-bibliotheque_nationale_de_France
+  name: mcp-bibliotheque_nationale_de_France
+  owner: Kryzo
+server:
+  subdirectory: /
+  name: BnF API Server
+  description: Access the Gallica digital library of the Bibliothèque nationale de
+    France to search documents, images, maps, and other resources. Generate
+    structured sequential research reports on any topic, including formatted
+    bibliographies, historical context, analysis, and relevant images or maps.
+    Enhance your research workflow with automated citation generation and
+    integrated visual content.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

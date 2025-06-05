@@ -1,0 +1,16 @@
+identifier: camdenclark/jira-mcp/jira-mcp
+repo:
+  provider: github.com
+  url: https://github.com/CamdenClark/jira-mcp
+  name: jira-mcp
+  owner: CamdenClark
+server:
+  subdirectory: /
+  name: JIRA
+  description: An MCP server that enables Large Language Models (LLMs) to interact
+    with JIRA through standardized tools and context, including JQL search and
+    issue details retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

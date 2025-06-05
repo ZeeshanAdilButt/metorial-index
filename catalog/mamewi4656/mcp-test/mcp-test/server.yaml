@@ -1,0 +1,18 @@
+identifier: mamewi4656/mcp-test/mcp-test
+repo:
+  provider: github.com
+  url: https://github.com/mamewi4656/mcp-test
+  name: mcp-test
+  owner: mamewi4656
+server:
+  subdirectory: /
+  name: mcp-test
+  description: Provide a basic implementation of the Model Context Protocol (MCP)
+    server to demonstrate MCP features and interactions. Enable clients to list
+    and call tools, access resources, and retrieve prompts through a
+    standardized JSON-RPC interface. Facilitate integration of LLMs with
+    external data and actions in a simple test environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,18 @@
+identifier: matteoantoci/mcp-bitpanda/mcp-bitpanda
+repo:
+  provider: github.com
+  url: https://github.com/matteoantoci/mcp-bitpanda
+  name: mcp-bitpanda
+  owner: matteoantoci
+server:
+  subdirectory: /
+  name: Bitpanda API Integration Server
+  description: Provide programmatic access to Bitpanda features such as trades,
+    wallets, and transactions through a standardized protocol. Enable users to
+    retrieve detailed asset information, OHLC data, and manage their Bitpanda
+    account data efficiently. Facilitate seamless interaction with Bitpanda's
+    API via MCP tools for enhanced automation and data retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

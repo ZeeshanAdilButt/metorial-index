@@ -1,0 +1,34 @@
+tools:
+  - name: send_note
+    description: "
+
+      \    Send a note to the Inbox API.
+
+
+      \    Args:
+
+      \        content: Content of the note (max 3000 characters)
+
+      \        title: Optional title of the note
+
+
+      \    Returns:
+
+      \        A dictionary containing the API response
+
+      \    "
+    inputSchema:
+      type: object
+      title: send_noteArguments
+      required:
+        - content
+      properties:
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        content:
+          type: string
+          title: Content

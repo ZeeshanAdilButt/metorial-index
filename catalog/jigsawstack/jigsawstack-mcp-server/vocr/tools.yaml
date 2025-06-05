@@ -1,0 +1,16 @@
+tools:
+  - name: VOCR
+    description: Let AI read your images. Powered by our OCR engine by JigsawStack.
+    inputSchema:
+      type: object
+      required:
+        - base64Image
+      properties:
+        prompts:
+          type: array
+          items:
+            type: string
+          description: Prompts to help the AI understand the context of the image.
+        base64Image:
+          type: string
+          description: A Base64 encoded string of the image.

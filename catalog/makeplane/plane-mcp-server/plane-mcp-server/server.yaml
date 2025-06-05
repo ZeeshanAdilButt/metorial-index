@@ -1,0 +1,18 @@
+identifier: makeplane/plane-mcp-server/plane-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/makeplane/plane-mcp-server
+  name: plane-mcp-server
+  owner: makeplane
+server:
+  subdirectory: /
+  name: Plane Server
+  description: Enable seamless integration with Plane APIs to manage projects,
+    work items, automations, and team collaboration. Create, update, and track
+    projects, issues, states, labels, modules, cycles, and work logs
+    efficiently. Build AI-powered tools that interact directly with Plane's
+    ecosystem to enhance productivity and project management workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

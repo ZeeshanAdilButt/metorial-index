@@ -1,0 +1,19 @@
+identifier: pixelpadthai/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/PixelPadThai/mcp
+  name: mcp
+  owner: PixelPadThai
+server:
+  subdirectory: /
+  name: PixelPadThai MCP Server
+  description: Provide a flexible and extensible server implementation of the
+    Model Context Protocol to enable LLM applications to access external data,
+    tools, and prompt templates dynamically. Facilitate seamless integration of
+    language models with real-world resources and actions through a standardized
+    JSON-RPC interface. Enhance LLM capabilities by allowing them to invoke
+    tools, read resources, and use reusable prompts efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

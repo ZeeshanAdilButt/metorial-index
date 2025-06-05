@@ -1,0 +1,17 @@
+identifier: cuongdev/mcp-codepipeline-server/mcp-codepipeline-server
+repo:
+  provider: github.com
+  url: https://github.com/cuongdev/mcp-codepipeline-server
+  name: mcp-codepipeline-server
+  owner: cuongdev
+server:
+  subdirectory: /
+  name: AWS CodePipeline Integration Server
+  description: Manage your AWS CodePipeline pipelines effortlessly. Trigger
+    executions, approve actions, and retrieve metrics using natural language
+    commands in Windsurf. Streamline your CI/CD processes with a standardized
+    interface for AWS CodePipeline services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

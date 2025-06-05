@@ -1,0 +1,47 @@
+tools:
+  - name: get_2fa_code
+    description: Retrieve the current 2FA code for a username when logging into a website.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - website
+        - username
+      properties:
+        website:
+          type: string
+          description: The domain name of the website you need to login, e.g. "github.com"
+        username:
+          type: string
+          description: The username or email of the account you need to login, e.g.
+            "john.doe@example.com"
+      additionalProperties: false
+  - name: get_password
+    description: Retrieve the password for a username when logging into a website.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - website
+        - username
+      properties:
+        website:
+          type: string
+          description: The domain name of the website you need to login, e.g. "github.com"
+        username:
+          type: string
+          description: The username or email of the account you need to login, e.g.
+            "john.doe@example.com"
+      additionalProperties: false
+  - name: get_account_list
+    description: Retrieve the accounts can be used when logging into a website.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - website
+      properties:
+        website:
+          type: string
+          description: The domain name of the website you need to login, e.g. "github.com"
+      additionalProperties: false

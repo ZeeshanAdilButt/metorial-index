@@ -1,0 +1,15 @@
+identifier: meilisearch/meilisearch-mcp/meilisearch-mcp
+repo:
+  provider: github.com
+  url: https://github.com/meilisearch/meilisearch-mcp
+  name: meilisearch-mcp
+  owner: meilisearch
+server:
+  subdirectory: /
+  name: Meilisearch MCP
+  description: A MCP server for interacting with Meilisearch through LLM
+    interfaces like Claude.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

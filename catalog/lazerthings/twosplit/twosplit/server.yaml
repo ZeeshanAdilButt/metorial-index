@@ -1,0 +1,17 @@
+identifier: lazerthings/twosplit/twosplit
+repo:
+  provider: github.com
+  url: https://github.com/LazerThings/twosplit
+  name: twosplit
+  owner: LazerThings
+server:
+  subdirectory: /
+  name: Twosplit
+  description: Leverage multiple AI instances to enhance your responses. Send a
+    prompt to two Claude models and receive an optimized final response that
+    combines the best elements from both. Experience improved accuracy and
+    creativity in your outputs with source attribution for transparency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

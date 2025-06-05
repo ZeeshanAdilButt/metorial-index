@@ -1,0 +1,614 @@
+tools:
+  - name: list_incidents
+    description: Get incidents from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        pageSize:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+        pageOffset:
+          type: number
+          default: 0
+          minimum: 0
+  - name: get_incident
+    description: Get an incident from Datadog
+    inputSchema:
+      type: object
+      required:
+        - incidentId
+      properties:
+        incidentId:
+          type: string
+          minLength: 1
+  - name: query_metrics
+    description: Query timeseries points of metrics from Datadog
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        to:
+          type: number
+          description: "End of the queried time period, seconds since the Unix epoch.
+            (default: now)"
+        from:
+          type: number
+          description: "Start of the queried time period, seconds since the Unix epoch.
+            (default: 24 hours ago)"
+        query:
+          type: string
+          description: Datadog metrics query string. e.g. "avg:system.cpu.user{*}
+  - name: get_metric_metadata
+    description: Get metadata for a specific metric from Datadog
+    inputSchema:
+      type: object
+      required:
+        - metricName
+      properties:
+        metricName:
+          type: string
+          description: Name of the metric to get metadata for
+  - name: get_active_metrics
+    description: Get a list of active metrics with optional filtering by host, tags,
+      search query, and time range
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        from:
+          type: number
+          description: "Unix timestamp from which to start the query (default: 24 hours
+            ago)"
+        host:
+          type: string
+          description: Filter metrics by host
+        query:
+          type: string
+          description: Search query string to find metrics
+        tagFilter:
+          type: string
+          description: Filter metrics by tags (e.g. "env:prod,region:us-east")
+  - name: get_logs
+    description: Search and retrieve logs from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        to:
+          type: string
+          default: now
+          description: End time as string (e.g., "now" or timestamp)
+        from:
+          type: string
+          default: now-24h
+          description: Start time as string (e.g., "now-40m" or timestamp)
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of logs to return. Default is 100.
+        query:
+          type: string
+          default: ""
+          description: Datadog logs query string
+  - name: get_all_services
+    description: Extract all unique service names from logs
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        to:
+          type: string
+          default: "1744766254"
+          description: End time as string - either epoch seconds or relative time (e.g.,
+            "now")
+        from:
+          type: string
+          default: "1744679854"
+          description: Start time as string - either epoch seconds or relative time (e.g.,
+            "now-40m")
+        limit:
+          type: number
+          default: 1000
+          description: Maximum number of logs to search through. Default is 1000.
+        query:
+          type: string
+          default: "*"
+          description: Optional query filter for log search
+  - name: get_monitors
+    description: Get monitors status from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        name:
+          type: string
+          description: Filter monitors by name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter monitors by tags
+        groupStates:
+          type: array
+          items:
+            enum:
+              - alert
+              - warn
+              - no data
+              - ok
+            type: string
+          description: Filter monitors by their states
+  - name: list_dashboards
+    description: Get list of dashboards from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        name:
+          type: string
+          description: Filter dashboards by name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Filter dashboards by tags
+  - name: get_dashboard
+    description: Get a dashboard from Datadog
+    inputSchema:
+      type: object
+      required:
+        - dashboardId
+      properties:
+        dashboardId:
+          type: string
+  - name: create_dashboard
+    description: Create a new dashboard in Datadog
+    inputSchema:
+      type: object
+      required:
+        - title
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: A list of tags to associate with the dashboard
+        title:
+          type: string
+          description: The title of the dashboard
+        widgets:
+          type: array
+          items:
+            type: object
+            required:
+              - definition
+            properties:
+              id:
+                type: number
+              layout:
+                type: object
+                properties:
+                  x:
+                    type: number
+                  y:
+                    type: number
+                  width:
+                    type: number
+                  height:
+                    type: number
+                additionalProperties: false
+              definition:
+                type: object
+                required:
+                  - type
+                properties:
+                  type:
+                    type: string
+                  title:
+                    type: string
+                additionalProperties: true
+            additionalProperties: true
+          description: The widgets to add to the dashboard
+        layoutType:
+          enum:
+            - ordered
+            - free
+          type: string
+          default: ordered
+          description: The layout type of the dashboard
+        description:
+          type: string
+          description: The description of the dashboard
+  - name: list_notebooks
+    description: Get list of notebooks from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        type:
+          type: string
+          description: Return only notebooks with that metadata type
+        count:
+          type: number
+          description: The number of notebooks to be returned
+        query:
+          type: string
+          description: Return only notebooks with this query string in notebook name or
+            author handle
+        start:
+          type: number
+          description: The index of the first notebook to return
+        sortDir:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sort direction
+        sortField:
+          enum:
+            - modified
+            - name
+            - created
+          type: string
+          description: Sort by field
+        isTemplate:
+          type: boolean
+          description: True value returns only template notebooks
+        authorHandle:
+          type: string
+          description: Return notebooks created by the given author handle
+        includeCells:
+          type: boolean
+          description: Value of false excludes the cells and global time for each notebook
+        excludeAuthorHandle:
+          type: string
+          description: Return notebooks not created by the given author handle
+  - name: get_notebook
+    description: Get a notebook from Datadog
+    inputSchema:
+      type: object
+      required:
+        - notebookId
+      properties:
+        notebookId:
+          type: number
+          description: Unique ID, assigned when the notebook was created
+  - name: create_notebook
+    description: Create a new notebook in Datadog
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the notebook
+        time:
+          type: string
+          default: 1h
+          description: Time settings for the notebook
+        cells:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+            properties:
+              type:
+                type: string
+              content:
+                type: string
+              definition:
+                type: object
+                additionalProperties: {}
+            additionalProperties: true
+          description: Cells to include in the notebook
+        metadata:
+          type: object
+          description: Additional metadata for the notebook
+          additionalProperties: {}
+  - name: add_cell_to_notebook
+    description: Add a cell to an existing Datadog notebook
+    inputSchema:
+      type: object
+      required:
+        - notebookId
+        - cell
+      properties:
+        cell:
+          type: object
+          required:
+            - type
+          properties:
+            type:
+              type: string
+            content:
+              type: string
+            definition:
+              type: object
+              additionalProperties: {}
+          description: The cell definition to add
+          additionalProperties: true
+        notebookId:
+          type: number
+          description: The ID of the notebook to add the cell to
+  - name: list_traces
+    description: Get APM traces from Datadog
+    inputSchema:
+      type: object
+      required:
+        - query
+        - from
+        - to
+      properties:
+        to:
+          type: number
+          description: End time in epoch seconds
+        from:
+          type: number
+          description: Start time in epoch seconds
+        sort:
+          enum:
+            - timestamp
+            - -timestamp
+          type: string
+          default: -timestamp
+          description: Sort order for traces
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of traces to return
+        query:
+          type: string
+          description: Datadog APM trace query string
+        service:
+          type: string
+          description: Filter by service name
+        operation:
+          type: string
+          description: Filter by operation name
+  - name: mute_host
+    description: Mute a host in Datadog
+    inputSchema:
+      type: object
+      required:
+        - hostname
+      properties:
+        end:
+          type: integer
+          description: POSIX timestamp for when the mute should end
+        message:
+          type: string
+          description: Message to associate with the muting of this host
+        hostname:
+          type: string
+          description: The name of the host to mute
+        override:
+          type: boolean
+          default: false
+          description: If true and the host is already muted, replaces existing end time
+  - name: unmute_host
+    description: Unmute a host in Datadog
+    inputSchema:
+      type: object
+      required:
+        - hostname
+      properties:
+        hostname:
+          type: string
+          description: The name of the host to unmute
+  - name: list_hosts
+    description: Get list of hosts from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        from:
+          type: integer
+          description: Search hosts from this UNIX timestamp
+        count:
+          type: integer
+          maximum: 1000
+          description: "Max number of hosts to return (max: 1000)"
+        start:
+          type: integer
+          description: Starting offset for pagination
+        filter:
+          type: string
+          description: Filter string for search results
+        sort_dir:
+          type: string
+          description: Sort direction (asc/desc)
+        sort_field:
+          type: string
+          description: Field to sort hosts by
+        include_hosts_metadata:
+          type: boolean
+          description: Include host metadata (version, platform, etc)
+        include_muted_hosts_data:
+          type: boolean
+          description: Include muted hosts status and expiry
+  - name: get_active_hosts_count
+    description: Get the total number of active hosts in Datadog (defaults to last 5
+      minutes)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        from:
+          type: integer
+          default: 7200
+          description: Number of seconds from which you want to get total number of active
+            hosts (defaults to 2h)
+  - name: list_downtimes
+    description: List scheduled downtimes from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        currentOnly:
+          type: boolean
+  - name: schedule_downtime
+    description: Schedule a downtime in Datadog
+    inputSchema:
+      type: object
+      required:
+        - scope
+      properties:
+        end:
+          type: number
+        scope:
+          type: string
+          minLength: 1
+        start:
+          type: number
+        message:
+          type: string
+        timezone:
+          type: string
+        monitorId:
+          type: number
+        recurrence:
+          type: object
+          required:
+            - type
+            - period
+          properties:
+            type:
+              enum:
+                - days
+                - weeks
+                - months
+                - years
+              type: string
+            until:
+              type: number
+            period:
+              type: number
+              minimum: 1
+            weekDays:
+              type: array
+              items:
+                enum:
+                  - Mon
+                  - Tue
+                  - Wed
+                  - Thu
+                  - Fri
+                  - Sat
+                  - Sun
+                type: string
+          additionalProperties: false
+        monitorTags:
+          type: array
+          items:
+            type: string
+  - name: cancel_downtime
+    description: Cancel a scheduled downtime in Datadog
+    inputSchema:
+      type: object
+      required:
+        - downtimeId
+      properties:
+        downtimeId:
+          type: number
+  - name: list_apm_services
+    description: Get list of service names from Datadog
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of services to return
+  - name: list_apm_resources
+    description: Get list of APM resources for a specific service from Datadog,
+      optionally filtered by operation name
+    inputSchema:
+      type: object
+      required:
+        - service
+      properties:
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of resources to return
+        service:
+          type: string
+          description: Service name to filter resources by
+        search_query:
+          type: string
+          description: Search query to filter resource names by
+        entry_spans_only:
+          type: boolean
+          default: false
+          description: Filter to only show service entry spans (span.kind:server)
+  - name: list_apm_operations
+    description: Get list of top operation names for a specific service from Datadog
+    inputSchema:
+      type: object
+      required:
+        - service
+      properties:
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of operations to return
+        service:
+          type: string
+          description: Service name to filter operations by
+        entry_spans_only:
+          type: boolean
+          default: false
+          description: Filter to only show service entry spans (span.kind:server)
+  - name: get_resource_hash
+    description: Get the resource hash for a specific resource name within a service
+    inputSchema:
+      type: object
+      required:
+        - service
+        - resource_name
+      properties:
+        service:
+          type: string
+          description: Service name the resource belongs to
+        resource_name:
+          type: string
+          description: Resource name to get the hash for
+  - name: search_events
+    description: Search for events in Datadog
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        to:
+          type: string
+          default: now
+          description: End time as string - either epoch seconds or relative time (e.g.,
+            "now")
+        from:
+          type: string
+          default: now-24h
+          description: Start time as string - either epoch seconds or relative time (e.g.,
+            "now-40m")
+        sort:
+          enum:
+            - timestamp
+            - -timestamp
+          type: string
+          default: -timestamp
+          description: Sort order for events
+        limit:
+          type: number
+          default: 100
+          description: Maximum number of events to return. Default is 100.
+        query:
+          type: string
+          description: Datadog events query string

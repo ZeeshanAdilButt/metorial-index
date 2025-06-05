@@ -1,0 +1,15 @@
+identifier: fradser/mcp-server-to-markdown/mcp-server-to-markdown
+repo:
+  provider: github.com
+  url: https://github.com/FradSer/mcp-server-to-markdown
+  name: mcp-server-to-markdown
+  owner: FradSer
+server:
+  subdirectory: /
+  name: Markdown转换服务器
+  description: 将各种格式的文件转换为Markdown描述，帮助用户轻松获取文件内容的结构化信息。通过Cloudflare
+    AI服务，支持多种文件类型的转换，提升文档处理效率。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

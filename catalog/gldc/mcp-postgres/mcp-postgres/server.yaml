@@ -1,0 +1,24 @@
+identifier: gldc/mcp-postgres/mcp-postgres
+repo:
+  provider: github.com
+  url: https://github.com/gldc/mcp-postgres
+  name: mcp-postgres
+  owner: gldc
+server:
+  subdirectory: /
+  name: PostgreSQL MCP Server
+  description: >-
+    Interact with PostgreSQL databases seamlessly through a standardized
+    interface. Execute SQL queries, list schemas, and describe table structures
+    to enhance your AI agents' capabilities. Simplify database interactions and
+    leverage your data effectively with this powerful tool.
+
+
+    **IMPORTANT SECURITY INFORMATION**
+
+    This MCP server requires database credentials. It is *strongly* recommended
+    that you run this locally to protect your sensitive information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

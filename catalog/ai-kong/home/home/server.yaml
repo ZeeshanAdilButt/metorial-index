@@ -1,0 +1,19 @@
+identifier: ai-kong/home/home
+repo:
+  provider: github.com
+  url: https://github.com/ai-kong/home
+  name: home
+  owner: ai-kong
+server:
+  subdirectory: /
+  name: AI Kong Home Server
+  description: Provide a seamless interface to integrate AI capabilities with
+    external data and tools, enhancing your AI applications' context awareness
+    and functionality. Enable dynamic access to resources, execution of tools,
+    and utilization of prompt templates to improve AI interactions. Simplify the
+    connection between AI models and real-world data sources for more
+    intelligent responses.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

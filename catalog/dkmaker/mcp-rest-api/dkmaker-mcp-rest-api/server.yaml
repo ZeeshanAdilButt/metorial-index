@@ -1,0 +1,15 @@
+identifier: dkmaker/mcp-rest-api/dkmaker-mcp-rest-api
+repo:
+  provider: github.com
+  url: https://github.com/dkmaker/mcp-rest-api
+  name: mcp-rest-api
+  owner: dkmaker
+server:
+  subdirectory: /
+  name: REST API Tester
+  description: A TypeScript-based MCP server that enables testing of REST APIs
+    through Cline.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: atla-ai/atla-mcp-server/atla-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/atla-ai/atla-mcp-server
+  name: atla-mcp-server
+  owner: atla-ai
+server:
+  subdirectory: /
+  name: Atla Evaluation Server
+  description: Provide a standardized interface for large language models to
+    evaluate responses using state-of-the-art evaluation criteria via the Atla
+    API. Enable automated scoring and critique generation for LLM outputs to
+    improve model assessment workflows. Seamlessly integrate with popular MCP
+    clients for easy deployment and usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

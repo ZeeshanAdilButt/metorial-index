@@ -1,0 +1,343 @@
+tools:
+  - name: search_artwork
+    description: Search and filter artworks in the Rijksmuseum collection. This tool
+      provides extensive filtering options including artist name, type of
+      artwork, materials, techniques, time periods, colors, and more. Results
+      can be sorted in various ways and are paginated.
+    inputSchema:
+      type: object
+      properties:
+        p:
+          type: integer
+          default: 0
+          minimum: 0
+          description: "Page number for paginated results, starting at 0. Use in
+            combination with 'ps' to navigate through large result sets. Note: p
+            * ps cannot exceed 10,000."
+        q:
+          type: string
+          description: General search query that will match against artist names, artwork
+            titles, descriptions, materials, techniques, etc. Use this for broad
+            searches like 'sunflowers', 'portrait', 'landscape', etc.
+        ps:
+          type: integer
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Number of artworks to return per page. Higher values return more
+            results but take longer to process. Maximum of 100 items per page.
+        type:
+          type: string
+          description: Filter by the type of artwork. Common values include 'painting',
+            'print', 'drawing', 'sculpture', 'photograph', 'furniture'. Use
+            singular form.
+        color:
+          type: string
+          description: "Filter artworks by predominant color. Use hexadecimal color codes
+            without the # symbol. Examples: 'FF0000' for red, '00FF00' for
+            green, '0000FF' for blue. The API will match artworks containing
+            this color."
+        sortBy:
+          enum:
+            - relevance
+            - objecttype
+            - chronologic
+            - achronologic
+            - artist
+            - artistdesc
+          type: string
+          default: relevance
+          description: "Determines the order of results. Options: 'relevance' (best
+            matches first), 'objecttype' (grouped by type), 'chronologic'
+            (oldest to newest), 'achronologic' (newest to oldest), 'artist'
+            (artist name A-Z), 'artistdesc' (artist name Z-A)."
+        century:
+          type: integer
+          maximum: 21
+          minimum: -1
+          description: "Filter artworks by the century they were created in. Use negative
+            numbers for BCE, positive for CE. Range from -1 (100-1 BCE) to 21
+            (2000-2099 CE). Example: 17 for 17th century (1600-1699)."
+        culture:
+          enum:
+            - nl
+            - en
+          type: string
+          default: en
+          description: Language for the search and returned data. Use 'en' for English or
+            'nl' for Dutch (Nederlands). Affects artwork titles, descriptions,
+            and other text fields.
+        imgonly:
+          type: boolean
+          default: false
+          description: When true, only returns artworks that have associated images. Set
+            to true if you need to show or analyze the visual aspects of
+            artworks.
+        material:
+          type: string
+          description: "Filter by the material used in the artwork. Examples: 'canvas',
+            'paper', 'wood', 'oil paint', 'marble'. Matches exact material names
+            from the museum's classification."
+        technique:
+          type: string
+          description: "Filter by the technique used to create the artwork. Examples: 'oil
+            painting', 'etching', 'watercolor', 'photography'. Matches specific
+            techniques from the museum's classification."
+        toppieces:
+          type: boolean
+          default: false
+          description: When true, only returns artworks designated as masterpieces by the
+            Rijksmuseum. These are the most significant and famous works in the
+            collection.
+        involvedMaker:
+          type: string
+          description: Search for artworks by a specific artist. Must be case-sensitive
+            and exact, e.g., 'Rembrandt+van+Rijn', 'Vincent+van+Gogh'. Use + for
+            spaces in names.
+  - name: get_artwork_details
+    description: >-
+      Retrieve comprehensive details about a specific artwork from the
+      Rijksmuseum collection. Returns extensive information including:
+
+
+      - Basic details (title, artist, dates)
+
+      - Physical properties (dimensions, materials, techniques)
+
+      - Historical context (dating, historical persons, documentation)
+
+      - Visual information (colors, image data)
+
+      - Curatorial information (descriptions, labels, location)
+
+      - Acquisition details
+
+      - Exhibition history
+
+
+      This is the primary tool for in-depth research on a specific artwork,
+      providing all available museum documentation and metadata.
+    inputSchema:
+      type: object
+      required:
+        - objectNumber
+      properties:
+        culture:
+          enum:
+            - nl
+            - en
+          type: string
+          default: en
+          description: Language for the artwork details. Use 'en' for English or 'nl' for
+            Dutch (Nederlands). Affects all textual information including
+            descriptions, titles, and historical documentation.
+        objectNumber:
+          type: string
+          description: The unique identifier of the artwork in the Rijksmuseum collection.
+            Format is typically a combination of letters and numbers (e.g.,
+            'SK-C-5' for The Night Watch, 'SK-A-3262' for Van Gogh's Self
+            Portrait). Case-sensitive. This ID can be obtained from search
+            results.
+  - name: get_artwork_image
+    description: >-
+      Retrieve detailed image tile information for high-resolution viewing of an
+      artwork. This tool provides data for implementing deep zoom functionality,
+      allowing detailed examination of the artwork at various zoom levels.
+
+
+      The response includes multiple zoom levels (z0 to z6):
+
+      - z0: Highest resolution (largest image)
+
+      - z6: Lowest resolution (smallest image)
+
+
+      Each zoom level contains:
+
+      - Total width and height of the image at that level
+
+      - A set of image tiles that make up the complete image
+
+      - Position information (x,y) for each tile
+
+
+      This is particularly useful for:
+
+      - Implementing deep zoom viewers
+
+      - Studying fine artwork details
+
+      - Analyzing brushwork or conservation details
+
+      - Creating interactive viewing experiences
+    inputSchema:
+      type: object
+      required:
+        - objectNumber
+      properties:
+        culture:
+          enum:
+            - nl
+            - en
+          type: string
+          default: en
+          description: Language for the API response. Use 'en' for English or 'nl' for
+            Dutch (Nederlands). While this endpoint primarily returns image
+            data, any textual metadata will be in the specified language.
+        objectNumber:
+          type: string
+          description: The unique identifier of the artwork in the Rijksmuseum collection.
+            Same format as used in get_artwork_details. The artwork must have an
+            associated image for this to work.
+  - name: get_user_sets
+    description: >-
+      Retrieve collections created by Rijksstudio users. These are curated sets
+      of artworks that users have grouped together based on themes, artists,
+      periods, or personal interests.
+
+
+      Each set includes:
+
+      - Basic information (name, description, creation date)
+
+      - Creator details (username, language preference)
+
+      - Collection statistics (number of items)
+
+      - Navigation links (API and web URLs)
+
+
+      This tool is useful for:
+
+      - Discovering user-curated exhibitions
+
+      - Finding thematically related artworks
+
+      - Exploring popular artwork groupings
+
+      - Studying collection patterns
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: number
+          default: 0
+          minimum: 0
+          description: "Page number for paginated results, starting at 0. Use with
+            pageSize to navigate through sets. Note: page * pageSize cannot
+            exceed 10,000."
+        culture:
+          enum:
+            - nl
+            - en
+          type: string
+          default: en
+          description: Language for the response data. Use 'en' for English or 'nl' for
+            Dutch (Nederlands). Affects set descriptions and user information.
+        pageSize:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Number of user sets to return per page. Must be between 1 and 100.
+            Larger values return more results but take longer to process.
+  - name: get_user_set_details
+    description: >-
+      Retrieve detailed information about a specific user-created collection in
+      Rijksstudio. Returns comprehensive information about the set and its
+      contents, including:
+
+
+      - Set metadata (name, description, creation date)
+
+      - Creator information
+
+      - List of artworks in the set
+
+      - Image data for each artwork
+
+      - Navigation links
+
+
+      This tool is particularly useful for:
+
+      - Analyzing thematic groupings of artworks
+
+      - Studying curatorial choices
+
+      - Understanding collection patterns
+
+      - Exploring relationships between artworks
+    inputSchema:
+      type: object
+      required:
+        - setId
+      properties:
+        page:
+          type: number
+          default: 0
+          minimum: 0
+          description: "Page number for paginated results, starting at 0. Use with
+            pageSize to navigate through large sets. Note: page * pageSize
+            cannot exceed 10,000."
+        setId:
+          type: string
+          description: The unique identifier of the user set to fetch. Format is typically
+            'userId-setname'. This ID can be obtained from the get_user_sets
+            results.
+        culture:
+          enum:
+            - nl
+            - en
+          type: string
+          default: en
+          description: Language for the response data. Use 'en' for English or 'nl' for
+            Dutch (Nederlands). Affects set descriptions and artwork
+            information.
+        pageSize:
+          type: number
+          default: 25
+          maximum: 100
+          minimum: 1
+          description: Number of artworks to return per page. Must be between 1 and 100.
+            Default is 25. Larger values return more artworks but take longer to
+            process.
+  - name: open_image_in_browser
+    description: Open a high-resolution image of an artwork in the default web
+      browser for viewing. This tool is useful when you want to examine an
+      artwork visually or show it to the user. Works with any valid Rijksmuseum
+      image URL.
+    inputSchema:
+      type: object
+      required:
+        - imageUrl
+      properties:
+        imageUrl:
+          type: string
+          description: The full URL of the artwork image to open. Must be a valid
+            HTTP/HTTPS URL from the Rijksmuseum's servers. These URLs can be
+            obtained from artwork search results or details.
+  - name: get_artist_timeline
+    description: Generate a chronological timeline of an artist's works in the
+      Rijksmuseum collection. This tool is perfect for studying an artist's
+      development, analyzing their artistic periods, or understanding their
+      contribution to art history over time.
+    inputSchema:
+      type: object
+      required:
+        - artist
+      properties:
+        artist:
+          type: string
+          description: The name of the artist to create a timeline for. Must match the
+            museum's naming convention (e.g., 'Rembrandt van Rijn', 'Vincent van
+            Gogh'). Case sensitive and exact match required.
+        maxWorks:
+          type: number
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of works to include in the timeline. Works are
+            selected based on significance and quality of available images.
+            Higher numbers give a more complete picture but may include less
+            significant works.

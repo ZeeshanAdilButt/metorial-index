@@ -1,0 +1,385 @@
+tools:
+  - name: get_file_report
+    description: "
+
+      \    Name: get_file_report
+
+      \    Description: Get a comprehensive file analysis report using its hash
+      (MD5/SHA-1/SHA-256). Returns a concise summary of key threat details
+      including detection stats, threat classification, and important
+      indicators.
+
+      \    Parameters:
+
+      \    hash (required): The MD5, SHA-1, or SHA-256 hash of the file to
+      analyze. Example: '8ab2cf...', 'e4d909c290d0...', etc.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_file_reportArguments
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          title: Hash
+  - name: get_url_report
+    description: "
+
+      \    Name: get_url_report
+
+      \    Description: Get a comprehensive URL analysis report including
+      security scan results and key relationships like communicating files,
+      contacted domains/IPs, downloaded files, redirects, and related threat
+      actors. This tool automatically fetches summary information for these key
+      relationships. For detailed, paginated relationship data, use the
+      'get_url_relationship' tool.
+
+      \    Parameters:
+
+      \    url (required): The URL to analyze (e.g.,
+      'http://example.com/badsite', 'https://google.com'). The tool will
+      automatically generate the required VirusTotal URL identifier.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_url_reportArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: get_domain_report
+    description: "
+
+      \    Name: get_domain_report
+
+      \    Description: Get a comprehensive domain analysis report including DNS
+      records, WHOIS data, and key relationships like historical SSL
+      certificates, subdomains, resolutions, and related threat actors. This
+      tool automatically fetches summary information for these key
+      relationships. For detailed, paginated relationship data, use the
+      'get_domain_relationship' tool.
+
+      \    Parameters:
+
+      \    domain (required): The domain name to analyze (e.g., 'google.com',
+      'evil-domain.net').
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_domain_reportArguments
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          title: Domain
+  - name: get_ip_report
+    description: "
+
+      \    Name: get_ip_report
+
+      \    Description: Get a comprehensive IP address analysis report including
+      geolocation, reputation data, and key relationships like
+      communicating/downloaded files, historical certificates/WHOIS,
+      resolutions, and related URLs/threat actors. This tool automatically
+      fetches summary information for these key relationships. For detailed,
+      paginated relationship data, use the 'get_ip_relationship' tool.
+
+      \    Parameters:
+
+      \    ip (required): The IP address to analyze (e.g., '8.8.8.8',
+      '192.168.1.1').
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ip_reportArguments
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          title: Ip
+  - name: get_file_behavior_summary
+    description: "
+
+      \    Name: get_file_behavior_summary
+
+      \    Description: Retrieves a summary of all behavior reports (sandbox
+      execution details) for a specific file hash (MD5/SHA-1/SHA-256). This
+      provides a consolidated view of dynamic analysis results from multiple
+      sandboxes.
+
+      \    Parameters:
+
+      \    hash (required): The MD5, SHA-1, or SHA-256 hash of the file.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_file_behavior_summaryArguments
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          title: Hash
+  - name: advanced_corpus_search
+    description: "
+
+      \    Name: advanced_corpus_search
+
+      \    Description: Performs an advanced search across the VirusTotal
+      dataset using VT Intelligence query syntax. This requires a premium
+      VirusTotal API key with Intelligence access. Supports pagination.
+
+      \    Parameters:
+
+      \    query (required): The VT Intelligence search query string. Examples:
+      'p:mimikatz', 'type:peexe size:100kb+ positives:5+', 'entity:url
+      url:\"example.com\"'. See VT documentation for syntax.
+
+      \    limit (optional, default: 20): Maximum number of results to return
+      per page (max usually 300 for intelligence).
+
+      \    cursor (optional): Continuation cursor for pagination, obtained from
+      the 'meta.cursor' field of a previous response.
+
+      \    descriptors_only (optional): If true, retrieves only object
+      descriptors (e.g., SHA256 hashes for files) instead of full objects, which
+      can be faster.
+
+      \    "
+    inputSchema:
+      type: object
+      title: advanced_corpus_searchArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        descriptors_only:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Descriptors Only
+          default: null
+  - name: get_file_relationship
+    description: "
+
+      \    Name: get_file_relationship
+
+      \    Description: Query a specific relationship type for a file hash
+      (MD5/SHA-1/SHA-256) with pagination support. Use this for in-depth
+      exploration of connections.
+
+      \    Parameters:
+
+      \    hash (required): MD5, SHA-1 or SHA-256 hash of the file.
+
+      \    relationship (required): Type of relationship to query. Choose from:
+      analyses, behaviours, bundled_files, carbonblack_children,
+      carbonblack_parents, ciphered_bundled_files, ciphered_parents, clues,
+      collections, comments, compressed_parents, contacted_domains,
+      contacted_ips, contacted_urls, dropped_files, email_attachments,
+      email_parents, embedded_domains, embedded_ips, embedded_urls,
+      execution_parents, graphs, itw_domains, itw_ips, itw_urls,
+      memory_pattern_domains, memory_pattern_ips, memory_pattern_urls,
+      overlay_children, overlay_parents, pcap_children, pcap_parents,
+      pe_resource_children, pe_resource_parents, related_references,
+      related_threat_actors, similar_files, submissions, screenshots,
+      urls_for_embedded_js, votes.
+
+      \    limit (optional, default: 10): Maximum number of related objects to
+      retrieve per page (1-40).
+
+      \    cursor (optional): Continuation cursor from previous page's
+      'meta.cursor' for pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_file_relationshipArguments
+      required:
+        - hash
+        - relationship
+      properties:
+        hash:
+          type: string
+          title: Hash
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        relationship:
+          type: string
+          title: Relationship
+  - name: get_url_relationship
+    description: "
+
+      \    Name: get_url_relationship
+
+      \    Description: Query a specific relationship type for a URL with
+      pagination support. Use this for in-depth exploration of connections. The
+      tool automatically generates the required VirusTotal URL identifier.
+
+      \    Parameters:
+
+      \    url (required): The URL to get relationships for.
+
+      \    relationship (required): Type of relationship to query. Choose from:
+      analyses, comments, communicating_files, contacted_domains, contacted_ips,
+      downloaded_files, graphs, last_serving_ip_address, network_location,
+      referrer_files, referrer_urls, redirecting_urls, redirects_to,
+      related_comments, related_references, related_threat_actors, submissions.
+
+      \    limit (optional, default: 10): Maximum number of related objects to
+      retrieve per page (1-40).
+
+      \    cursor (optional): Continuation cursor from previous page's
+      'meta.cursor' for pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_url_relationshipArguments
+      required:
+        - url
+        - relationship
+      properties:
+        url:
+          type: string
+          title: Url
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        relationship:
+          type: string
+          title: Relationship
+  - name: get_domain_relationship
+    description: "
+
+      \    Name: get_domain_relationship
+
+      \    Description: Query a specific relationship type for a domain with
+      pagination support. Use this for in-depth exploration of connections.
+
+      \    Parameters:
+
+      \    domain (required): The domain name to analyze.
+
+      \    relationship (required): Type of relationship to query. Choose from:
+      caa_records, cname_records, comments, communicating_files,
+      downloaded_files, historical_ssl_certificates, historical_whois,
+      immediate_parent, mx_records, ns_records, parent, referrer_files,
+      related_comments, related_references, related_threat_actors, resolutions,
+      soa_records, siblings, subdomains, urls, user_votes.
+
+      \    limit (optional, default: 10): Maximum number of related objects to
+      retrieve per page (1-40).
+
+      \    cursor (optional): Continuation cursor from previous page's
+      'meta.cursor' for pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_domain_relationshipArguments
+      required:
+        - domain
+        - relationship
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        domain:
+          type: string
+          title: Domain
+        relationship:
+          type: string
+          title: Relationship
+  - name: get_ip_relationship
+    description: "
+
+      \    Name: get_ip_relationship
+
+      \    Description: Query a specific relationship type for an IP address
+      with pagination support. Use this for in-depth exploration of connections.
+
+      \    Parameters:
+
+      \    ip (required): The IP address to analyze.
+
+      \    relationship (required): Type of relationship to query. Choose from:
+      comments, communicating_files, downloaded_files, graphs,
+      historical_ssl_certificates, historical_whois, related_comments,
+      related_references, related_threat_actors, referrer_files, resolutions,
+      urls.
+
+      \    limit (optional, default: 10): Maximum number of related objects to
+      retrieve per page (1-40).
+
+      \    cursor (optional): Continuation cursor from previous page's
+      'meta.cursor' for pagination.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ip_relationshipArguments
+      required:
+        - ip
+        - relationship
+      properties:
+        ip:
+          type: string
+          title: Ip
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        relationship:
+          type: string
+          title: Relationship

@@ -1,0 +1,17 @@
+identifier: mcp-get/community-servers/server-llm-txt
+repo:
+  provider: github.com
+  url: https://github.com/mcp-get/community-servers
+  name: community-servers
+  owner: mcp-get
+server:
+  subdirectory: /src/server-llm-txt
+  name: LLM.txt MCP Server
+  description: A Model Context Protocol (MCP) server that processes llm.txt files,
+    offering directory listing, content retrieval, and multi-query search
+    capabilities. It supports local caching and various OS-specific cache
+    locations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

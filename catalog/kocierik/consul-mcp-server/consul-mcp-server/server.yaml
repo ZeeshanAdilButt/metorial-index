@@ -1,0 +1,18 @@
+identifier: kocierik/consul-mcp-server/consul-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kocierik/consul-mcp-server
+  name: consul-mcp-server
+  owner: kocierik
+server:
+  subdirectory: /
+  name: Consul Server
+  description: Provide standardized access to Consul's service management, health
+    checks, key-value store, sessions, events, prepared queries, status, agent,
+    and system information through a unified MCP interface. Manage and query
+    Consul resources efficiently within your LLM applications. Simplify
+    integration with Consul by exposing its full functionality via MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

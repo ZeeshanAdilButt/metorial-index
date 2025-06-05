@@ -1,0 +1,874 @@
+tools:
+  - name: get_active_ports
+    description: "Utility: Get list of ports where Flutter/Dart processes are
+      listening. This is a local utility, not a Flutter RPC method."
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_supported_protocols
+    description: "Utility: Get supported protocols from a Flutter app. This is a VM
+      service method, not a Flutter RPC. Connects to the default Flutter debug
+      port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: get_vm_info
+    description: "Utility: Get VM information from a Flutter app. This is a VM
+      service method, not a Flutter RPC. Connects to the default Flutter debug
+      port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: get_extension_rpcs
+    description: "Utility: List all available extension RPCs in the Flutter app.
+      This is a helper tool for discovering available methods."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        isolateId:
+          type: string
+          description: Optional specific isolate ID to check. If not provided, checks all
+            isolates
+        isRawResponse:
+          type: boolean
+          default: false
+          description: If true, returns the raw response from the VM service without
+            processing
+  - name: debug_dump_render_tree
+    description: "RPC: Dump the render tree (ext.flutter.debugDumpRenderTree).
+      Connects to the default Flutter debug port (8181) unless specified
+      otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: debug_dump_layer_tree
+    description: "RPC: Dump the layer tree (ext.flutter.debugDumpLayerTree).
+      Connects to the default Flutter debug port (8181) unless specified
+      otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: debug_dump_semantics_tree
+    description: "RPC: Dump the semantics tree
+      (ext.flutter.debugDumpSemanticsTreeInTraversalOrder). Connects to the
+      default Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: debug_dump_semantics_tree_inverse
+    description: "RPC: Dump the semantics tree in inverse hit test order
+      (ext.flutter.debugDumpSemanticsTreeInInverseHitTestOrder)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: debug_paint_baselines_enabled
+    description: "RPC: Toggle baseline paint debugging
+      (ext.flutter.debugPaintBaselinesEnabled). Connects to the default Flutter
+      debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        enabled:
+          type: boolean
+          description: Whether to enable or disable baseline paint debugging
+  - name: debug_dump_focus_tree
+    description: "RPC: Dump the focus tree (ext.flutter.debugDumpFocusTree)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: debug_disable_physical_shape_layers
+    description: "RPC: Toggle physical shape layers debugging
+      (ext.flutter.debugDisablePhysicalShapeLayers)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable physical shape layers
+  - name: debug_disable_opacity_layers
+    description: "RPC: Toggle opacity layers debugging
+      (ext.flutter.debugDisableOpacityLayers). Connects to the default Flutter
+      debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        enabled:
+          type: boolean
+          default: false
+          description: Whether to enable or disable opacity layers
+  - name: inspector_screenshot
+    description: "RPC: Take a screenshot of the Flutter app
+      (ext.flutter.inspector.screenshot). Connects to the default Flutter debug
+      port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: inspector_get_layout_explorer_node
+    description: "RPC: Get layout explorer information for a widget
+      (ext.flutter.inspector.getLayoutExplorerNode). Connects to the default
+      Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - objectId
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        objectId:
+          type: string
+          description: ID of the widget to inspect
+  - name: inspector_track_rebuild_dirty_widgets
+    description: "RPC: Track widget rebuilds to identify performance issues
+      (ext.flutter.inspector.trackRebuildDirtyWidgets). Connects to the default
+      Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        enabled:
+          type: boolean
+          description: Whether to enable or disable rebuild tracking
+  - name: inspector_set_selection_by_id
+    description: "RPC: Set the selected widget by ID
+      (ext.flutter.inspector.setSelectionById). Connects to the default Flutter
+      debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - selectionId
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        selectionId:
+          type: string
+          description: ID of the widget to select
+  - name: inspector_get_parent_chain
+    description: "RPC: Get the parent chain for a widget
+      (ext.flutter.inspector.getParentChain). Connects to the default Flutter
+      debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - objectId
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        objectId:
+          type: string
+          description: ID of the widget to get parent chain for
+  - name: inspector_get_children_summary_tree
+    description: "RPC: Get the children summary tree for a widget
+      (ext.flutter.inspector.getChildrenSummaryTree). Connects to the default
+      Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - objectId
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        objectId:
+          type: string
+          description: ID of the widget to get children summary tree for
+  - name: inspector_get_children_details_subtree
+    description: "RPC: Get the children details subtree for a widget
+      (ext.flutter.inspector.getChildrenDetailsSubtree)"
+    inputSchema:
+      type: object
+      required:
+        - objectId
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        objectId:
+          type: string
+          description: ID of the widget to get children details subtree for
+  - name: inspector_get_root_widget_summary_tree
+    description: "RPC: Get the root widget summary tree
+      (ext.flutter.inspector.getRootWidgetSummaryTree)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: inspector_get_root_widget_summary_tree_with_previews
+    description: "RPC: Get the root widget summary tree with previews from the
+      Flutter app. This provides a hierarchical view of the widget tree with
+      preview information."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: inspector_get_details_subtree
+    description: "RPC: Get the details subtree for a widget. This provides detailed
+      information about the widget and its descendants. Connects to the default
+      Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - objectId
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        objectId:
+          type: string
+          description: ID of the widget to get details for
+  - name: inspector_get_selected_widget
+    description: "RPC: Get information about the currently selected widget in the
+      Flutter app. Connects to the default Flutter debug port (8181) unless
+      specified otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: inspector_get_selected_summary_widget
+    description: "RPC: Get summary information about the currently selected widget
+      in the Flutter app. Connects to the default Flutter debug port (8181)
+      unless specified otherwise."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: inspector_is_widget_creation_tracked
+    description: "RPC: Check if widget creation tracking is enabled in the Flutter app."
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+  - name: dart_io_socket_profiling_enabled
+    description: "RPC: Enable or disable socket profiling. Connects to the default
+      Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        enabled:
+          type: boolean
+          description: Whether to enable or disable socket profiling
+  - name: dart_io_http_enable_timeline_logging
+    description: "RPC: Enable or disable HTTP timeline logging. Connects to the
+      default Flutter debug port (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        enabled:
+          type: boolean
+          description: Whether to enable or disable HTTP timeline logging
+  - name: dart_io_get_version
+    description: "RPC: Get Flutter version information (ext.dart.io.getVersion)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: dart_io_get_open_files
+    description: "RPC: Get list of currently open files in the Flutter app"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: dart_io_get_open_file_by_id
+    description: "RPC: Get details of a specific open file by its ID"
+    inputSchema:
+      type: object
+      required:
+        - fileId
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        fileId:
+          type: string
+          description: ID of the file to get details for
+  - name: stream_listen
+    description: "RPC: Subscribe to a Flutter event stream. This is a VM service
+      method for event monitoring. Connects to the default Flutter debug port
+      (8181) unless specified otherwise."
+    inputSchema:
+      type: object
+      required:
+        - streamId
+      properties:
+        port:
+          type: number
+          description: "Optional: Custom port number if not using default Flutter debug
+            port 8181"
+        streamId:
+          enum:
+            - Debug
+            - Isolate
+            - VM
+            - GC
+            - Timeline
+            - Logging
+            - Service
+            - HeapSnapshot
+          type: string
+          description: Stream ID to subscribe to
+  - name: dart_io_get_http_profile_request
+    description: "RPC: Get details of a specific HTTP request from the profile"
+    inputSchema:
+      type: object
+      required:
+        - requestId
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        requestId:
+          type: string
+          description: ID of the HTTP request to get details for
+  - name: flutter_core_invert_oversized_images
+    description: "RPC: Toggle inverting of oversized images for debugging"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable inverting of oversized images
+  - name: debug_allow_banner
+    description: "RPC: Toggle the debug banner in the Flutter app"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to show or hide the debug banner
+  - name: flutter_core_did_send_first_frame_event
+    description: "RPC: Check if the first frame event has been sent"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: flutter_core_did_send_first_frame_rasterized_event
+    description: "RPC: Check if the first frame has been rasterized"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: flutter_core_platform_override
+    description: "RPC: Override the platform for the Flutter app"
+    inputSchema:
+      type: object
+      required:
+        - platform
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        platform:
+          enum:
+            - android
+            - ios
+            - fuchsia
+            - linux
+            - macOS
+            - windows
+            - null
+          type: string
+          description: Platform to override to (android, ios, fuchsia, linux, macOS,
+            windows, or null to reset)
+  - name: flutter_core_brightness_override
+    description: "RPC: Override the brightness for the Flutter app"
+    inputSchema:
+      type: object
+      required:
+        - brightness
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        brightness:
+          enum:
+            - light
+            - dark
+            - null
+          type: string
+          description: Brightness to override to (light, dark, or null to reset)
+  - name: flutter_core_time_dilation
+    description: "RPC: Set the time dilation factor for animations in the Flutter app"
+    inputSchema:
+      type: object
+      required:
+        - dilation
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        dilation:
+          type: number
+          minimum: 0
+          description: Time dilation factor (1.0 is normal speed, >1.0 is slower, <1.0 is
+            faster)
+  - name: flutter_core_evict
+    description: "RPC: Evict an asset from the Flutter app's cache"
+    inputSchema:
+      type: object
+      required:
+        - asset
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        asset:
+          type: string
+          description: Asset path to evict from the cache
+  - name: flutter_core_profile_platform_channels
+    description: "RPC: Enable or disable profiling of platform channels"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable platform channel profiling
+  - name: debug_disable_clip_layers
+    description: "RPC: Toggle disabling of clip layers in the Flutter app"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable clip layers
+  - name: debug_disable_physical_shape_layers
+    description: "RPC: Toggle physical shape layers debugging
+      (ext.flutter.debugDisablePhysicalShapeLayers)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable physical shape layers
+  - name: debug_disable_opacity_layers
+    description: "RPC: Toggle opacity layers debugging
+      (ext.flutter.debugDisableOpacityLayers)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable opacity layers
+  - name: repaint_rainbow
+    description: "RPC: Toggle repaint rainbow debugging (ext.flutter.repaintRainbow)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable repaint rainbow debugging
+  - name: inspector_structured_errors
+    description: "RPC: Enable or disable structured error reporting in the Flutter app."
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable structured error reporting
+  - name: inspector_show
+    description: "RPC: Show specific widget details in the Flutter app inspector."
+    inputSchema:
+      type: object
+      required:
+        - options
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        options:
+          type: object
+          required:
+            - objectId
+          properties:
+            objectId:
+              type: string
+              description: ID of the widget to show
+            groupName:
+              type: string
+              description: Optional group name for the widget
+            subtreeDepth:
+              type: number
+              description: Optional depth to show the widget subtree
+          description: Options for showing widget details
+  - name: inspector_widget_location_id_map
+    description: "RPC: Get a mapping of widget IDs to their source code locations
+      (ext.flutter.inspector.widgetLocationIdMap)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: inspector_track_repaint_widgets
+    description: "RPC: Track widget repaints to identify rendering performance
+      issues (ext.flutter.inspector.trackRepaintWidgets)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable repaint tracking
+  - name: inspector_dispose_all_groups
+    description: "RPC: Dispose all inspector groups to free up memory
+      (ext.flutter.inspector.disposeAllGroups)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: inspector_dispose_group
+    description: "RPC: Dispose a specific inspector group to free up memory
+      (ext.flutter.inspector.disposeGroup)"
+    inputSchema:
+      type: object
+      required:
+        - groupId
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        groupId:
+          type: string
+          description: ID of the group to dispose
+  - name: inspector_is_widget_tree_ready
+    description: "RPC: Check if the widget tree is ready for inspection
+      (ext.flutter.inspector.isWidgetTreeReady)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: inspector_dispose_id
+    description: "RPC: Dispose a specific widget ID to free up memory
+      (ext.flutter.inspector.disposeId)"
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of the widget to dispose
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: inspector_set_pub_root_directories
+    description: "RPC: Set the root directories for pub packages
+      (ext.flutter.inspector.setPubRootDirectories)"
+    inputSchema:
+      type: object
+      required:
+        - directories
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        directories:
+          type: array
+          items:
+            type: string
+          description: List of root directories for pub packages
+  - name: inspector_add_pub_root_directories
+    description: "RPC: Add additional root directories for pub packages
+      (ext.flutter.inspector.addPubRootDirectories)"
+    inputSchema:
+      type: object
+      required:
+        - directories
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        directories:
+          type: array
+          items:
+            type: string
+          description: List of root directories to add for pub packages
+  - name: inspector_remove_pub_root_directories
+    description: "RPC: Remove root directories from pub packages
+      (ext.flutter.inspector.removePubRootDirectories)"
+    inputSchema:
+      type: object
+      required:
+        - directories
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        directories:
+          type: array
+          items:
+            type: string
+          description: List of root directories to remove from pub packages
+  - name: inspector_get_pub_root_directories
+    description: "RPC: Get the list of root directories for pub packages
+      (ext.flutter.inspector.getPubRootDirectories)"
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+  - name: layout_set_flex_fit
+    description: "RPC: Set the flex fit property of a flex child widget
+      (ext.flutter.inspector.setFlexFit)"
+    inputSchema:
+      type: object
+      required:
+        - objectId
+        - fit
+      properties:
+        fit:
+          enum:
+            - tight
+            - loose
+          type: string
+          description: Flex fit value to set (tight or loose)
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        objectId:
+          type: string
+          description: ID of the flex child widget
+  - name: layout_set_flex_factor
+    description: "RPC: Set the flex factor of a flex child widget
+      (ext.flutter.inspector.setFlexFactor)"
+    inputSchema:
+      type: object
+      required:
+        - objectId
+        - factor
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        factor:
+          type: number
+          minimum: 0
+          description: Flex factor value to set (must be non-negative)
+        objectId:
+          type: string
+          description: ID of the flex child widget
+  - name: layout_set_flex_properties
+    description: "RPC: Set multiple flex properties of a flex child widget
+      (ext.flutter.inspector.setFlexProperties)"
+    inputSchema:
+      type: object
+      required:
+        - objectId
+        - properties
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        objectId:
+          type: string
+          description: ID of the flex child widget
+        properties:
+          type: object
+          properties:
+            fit:
+              enum:
+                - tight
+                - loose
+              type: string
+              description: Flex fit value (tight or loose)
+            factor:
+              type: number
+              minimum: 0
+              description: Flex factor value (must be non-negative)
+          description: Flex properties to set
+          additionalProperties: false
+  - name: performance_profile_render_object_paints
+    description: "RPC: Enable or disable profiling of render object paint operations
+      (ext.flutter.profileRenderObjectPaints)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable render object paint profiling
+  - name: performance_profile_render_object_layouts
+    description: "RPC: Enable or disable profiling of render object layout
+      operations (ext.flutter.profileRenderObjectLayouts)"
+    inputSchema:
+      type: object
+      required:
+        - enabled
+      properties:
+        port:
+          type: number
+          description: Port number where the Flutter app is running (defaults to 8181)
+        enabled:
+          type: boolean
+          description: Whether to enable or disable render object layout profiling

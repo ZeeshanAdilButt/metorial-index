@@ -1,0 +1,18 @@
+identifier: devassistantai/mcp-servers/github
+repo:
+  provider: github.com
+  url: https://github.com/devassistantai/mcp-servers
+  name: mcp-servers
+  owner: devassistantai
+server:
+  subdirectory: /src/github
+  name: GitHub
+  description: Enable seamless interaction with GitHub repositories by managing
+    files, branches, issues, pull requests, and performing advanced searches.
+    Automate repository operations with comprehensive error handling and support
+    for batch actions. Enhance productivity by integrating GitHub capabilities
+    directly into your workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

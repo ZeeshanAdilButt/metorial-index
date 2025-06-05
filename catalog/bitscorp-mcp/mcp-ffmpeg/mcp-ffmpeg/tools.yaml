@@ -1,0 +1,72 @@
+tools:
+  - name: get-ffmpeg-version
+    description: Get the version of FFmpeg installed on the system
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: resize-video
+    description: Resize a video to one or more standard resolutions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - videoPath
+        - resolutions
+      properties:
+        outputDir:
+          type: string
+          description: Optional directory to save the output files (defaults to a
+            temporary directory)
+        videoPath:
+          type: string
+          description: Path to the video file to resize
+        resolutions:
+          type: array
+          items:
+            enum:
+              - 360p
+              - 480p
+              - 720p
+              - 1080p
+            type: string
+          description: Resolutions to convert the video to
+      additionalProperties: false
+  - name: extract-audio
+    description: Extract audio from a video file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - videoPath
+      properties:
+        format:
+          enum:
+            - mp3
+            - aac
+            - wav
+            - ogg
+          type: string
+          default: mp3
+          description: Audio format to extract
+        outputDir:
+          type: string
+          description: Optional directory to save the output file (defaults to a temporary
+            directory)
+        videoPath:
+          type: string
+          description: Path to the video file to extract audio from
+      additionalProperties: false
+  - name: get-video-info
+    description: Get detailed information about a video file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - videoPath
+      properties:
+        videoPath:
+          type: string
+          description: Path to the video file to analyze
+      additionalProperties: false

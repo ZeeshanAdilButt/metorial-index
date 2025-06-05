@@ -1,0 +1,14 @@
+identifier: owayo/mcp-src-tree/mcp-src-tree
+repo:
+  provider: github.com
+  url: https://github.com/owayo/mcp-src-tree
+  name: mcp-src-tree
+  owner: owayo
+server:
+  subdirectory: /
+  name: Source Tree Server
+  description: Generate a file tree of the specified directory's 'src' folder.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

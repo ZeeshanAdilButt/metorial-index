@@ -1,0 +1,15 @@
+identifier: ropon/mcp_demo/mcp_demo
+repo:
+  provider: github.com
+  url: https://github.com/ropon/mcp_demo
+  name: mcp_demo
+  owner: ropon
+server:
+  subdirectory: /
+  name: Demo IP Query
+  description: Query IP addresses and retrieve related information effortlessly.
+    Enhance your applications with real-time IP data and insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+identifier: kunihiros/kv-extractor-mcp-server/kv-extractor-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/KunihiroS/kv-extractor-mcp-server
+  name: kv-extractor-mcp-server
+  owner: KunihiroS
+server:
+  subdirectory: /
+  name: Flexible Key-Value Extraction Server
+  description: Extract key-value pairs from noisy or unstructured text in multiple
+    languages with type-safe outputs in JSON, YAML, or TOML formats. Leverage
+    advanced LLMs and pydantic for robust, accurate data structuring and
+    validation. Supports Japanese, English, and Chinese with spaCy-based
+    preprocessing and provides reliable error handling for diverse input
+    scenarios.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

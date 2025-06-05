@@ -1,0 +1,57 @@
+tools:
+  - name: send-email
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - from
+        - to
+      properties:
+        cc:
+          type: string
+        to:
+          type: string
+        bcc:
+          type: string
+        from:
+          type: string
+          format: email
+        tags:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+        replyto:
+          type: string
+        subject:
+          type: string
+        htmlbody:
+          type: string
+        textbody:
+          type: string
+        inreplyto:
+          type: string
+        references:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - content
+              - content_type
+            properties:
+              cid:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              content_type:
+                type: string
+            additionalProperties: false
+        list_unsubscribe:
+          type: string
+      additionalProperties: false

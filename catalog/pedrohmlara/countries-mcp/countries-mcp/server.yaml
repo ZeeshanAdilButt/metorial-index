@@ -1,0 +1,19 @@
+identifier: pedrohmlara/countries-mcp/countries-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Pedrohmlara/countries-mcp
+  name: countries-mcp
+  owner: Pedrohmlara
+server:
+  subdirectory: /
+  name: Countries Data Server
+  description: Provide detailed country-related data to your applications by
+    leveraging a robust MCP server connected to the REST Countries API. Easily
+    integrate and query country information through a standardized protocol,
+    enabling seamless access to up-to-date geographic and demographic data.
+    Deploy quickly with Docker support and maintain session context for
+    interactive use.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

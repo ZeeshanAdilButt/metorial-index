@@ -1,0 +1,17 @@
+identifier: isdaniel/mcp_weather_server/mcp_weather_server
+repo:
+  provider: github.com
+  url: https://github.com/isdaniel/mcp_weather_server
+  name: mcp_weather_server
+  owner: isdaniel
+server:
+  subdirectory: /
+  name: Weather MCP Server
+  description: Retrieve real-time weather information effortlessly for any city.
+    Get accurate weather updates using a simple command or API call without
+    needing an API key. Enhance your applications with reliable weather data
+    from the Open-Meteo API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

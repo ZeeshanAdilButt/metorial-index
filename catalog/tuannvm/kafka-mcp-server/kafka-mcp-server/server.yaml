@@ -1,0 +1,18 @@
+identifier: tuannvm/kafka-mcp-server/kafka-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/tuannvm/kafka-mcp-server
+  name: kafka-mcp-server
+  owner: tuannvm
+server:
+  subdirectory: /
+  name: Kafka Server
+  description: Enable LLM models to interact with Apache Kafka clusters through a
+    standardized interface. Produce and consume messages, manage topics and
+    consumer groups, and monitor cluster health seamlessly. Simplify Kafka
+    operations and diagnostics with pre-configured tools and prompts for
+    enhanced productivity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

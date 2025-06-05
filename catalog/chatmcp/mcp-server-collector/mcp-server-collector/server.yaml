@@ -1,0 +1,14 @@
+identifier: chatmcp/mcp-server-collector/mcp-server-collector
+repo:
+  provider: github.com
+  url: https://github.com/chatmcp/mcp-server-collector
+  name: mcp-server-collector
+  owner: chatmcp
+server:
+  subdirectory: /
+  name: Server Collector
+  description: Collects and submits MCP servers over the internet.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

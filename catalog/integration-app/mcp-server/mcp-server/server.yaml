@@ -1,0 +1,14 @@
+identifier: integration-app/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/integration-app/mcp-server
+  name: mcp-server
+  owner: integration-app
+server:
+  subdirectory: /
+  name: Integration App Server
+  description: Exposes tools powered by Integration App.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

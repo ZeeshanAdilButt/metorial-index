@@ -1,0 +1,13 @@
+tools:
+  - name: 长亭 IP 情报查询
+    description: 基于长亭威胁情报，获取给定 IP 的威胁情报信息，包括 IP 地址、地理位置、ASN、历史恶意行为等信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          description: IP address
+      additionalProperties: false

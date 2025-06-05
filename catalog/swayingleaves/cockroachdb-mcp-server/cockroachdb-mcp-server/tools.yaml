@@ -1,0 +1,149 @@
+tools:
+  - name: connect_database
+    description: "连接到CockroachDB数据库。
+
+      \   \ 
+
+      \    Args:
+
+      \        jdbc_url: JDBC连接URL (例如:
+      jdbc:postgresql://localhost:26257/defaultdb)
+
+      \        username: 数据库用户名
+
+      \        password: 数据库密码
+
+      \    "
+    inputSchema:
+      type: object
+      title: connect_databaseArguments
+      required:
+        - jdbc_url
+        - username
+        - password
+      properties:
+        jdbc_url:
+          type: string
+          title: Jdbc Url
+        password:
+          type: string
+          title: Password
+        username:
+          type: string
+          title: Username
+  - name: disconnect_database
+    description: "断开与数据库的连接。
+
+      \   \ 
+
+      \    Returns:
+
+      \        断开连接的结果
+
+      \    "
+    inputSchema:
+      type: object
+      title: disconnect_databaseArguments
+      properties: {}
+  - name: get_tables
+    description: "获取数据库中的所有表。
+
+      \   \ 
+
+      \    Returns:
+
+      \        包含表信息的字典
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_tablesArguments
+      properties: {}
+  - name: get_table_schema
+    description: "获取指定表的结构信息。
+
+      \   \ 
+
+      \    Args:
+
+      \        table_name: 表名
+
+      \       \ 
+
+      \    Returns:
+
+      \        包含表结构信息的字典
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_table_schemaArguments
+      required:
+        - table_name
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+  - name: execute_query
+    description: "执行SQL查询。
+
+      \   \ 
+
+      \    Args:
+
+      \        query: SQL查询语句
+
+      \       \ 
+
+      \    Returns:
+
+      \        查询结果或影响的行数
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: initialize_connection
+    description: "初始化连接，当客户端连接时调用。
+
+      \   \ 
+
+      \    Args:
+
+      \        jdbc_url: JDBC连接URL (例如:
+      jdbc:postgresql://localhost:26257/defaultdb)
+
+      \        username: 数据库用户名
+
+      \        password: 数据库密码
+
+      \       \ 
+
+      \    Returns:
+
+      \        初始化结果
+
+      \    "
+    inputSchema:
+      type: object
+      title: initialize_connectionArguments
+      required:
+        - jdbc_url
+        - username
+        - password
+      properties:
+        jdbc_url:
+          type: string
+          title: Jdbc Url
+        password:
+          type: string
+          title: Password
+        username:
+          type: string
+          title: Username

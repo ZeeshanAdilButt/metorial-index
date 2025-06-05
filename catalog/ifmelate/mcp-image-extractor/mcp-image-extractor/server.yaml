@@ -1,0 +1,14 @@
+identifier: ifmelate/mcp-image-extractor/mcp-image-extractor
+repo:
+  provider: github.com
+  url: https://github.com/ifmelate/mcp-image-extractor
+  name: mcp-image-extractor
+  owner: ifmelate
+server:
+  subdirectory: /
+  name: Image Extractor
+  description: MCP server for extracting and converting images to base64 for LLM analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

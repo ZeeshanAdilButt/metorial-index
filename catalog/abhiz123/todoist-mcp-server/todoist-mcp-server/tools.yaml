@@ -1,0 +1,100 @@
+tools:
+  - name: todoist_create_task
+    description: Create a new task in Todoist with optional description, due date,
+      and priority
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: The content/title of the task
+        priority:
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          type: number
+          description: Task priority from 1 (normal) to 4 (urgent) (optional)
+        due_string:
+          type: string
+          description: Natural language due date like 'tomorrow', 'next Monday', 'Jan 23'
+            (optional)
+        description:
+          type: string
+          description: Detailed description of the task (optional)
+  - name: todoist_get_tasks
+    description: Get a list of tasks from Todoist with various filters
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of tasks to return (optional)
+        filter:
+          type: string
+          description: Natural language filter like 'today', 'tomorrow', 'next week',
+            'priority 1', 'overdue' (optional)
+        priority:
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          type: number
+          description: Filter by priority level (1-4) (optional)
+        project_id:
+          type: string
+          description: Filter tasks by project ID (optional)
+  - name: todoist_update_task
+    description: Update an existing task in Todoist by searching for it by name and
+      then updating it
+    inputSchema:
+      type: object
+      required:
+        - task_name
+      properties:
+        content:
+          type: string
+          description: New content/title for the task (optional)
+        priority:
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          type: number
+          description: New priority level from 1 (normal) to 4 (urgent) (optional)
+        task_name:
+          type: string
+          description: Name/content of the task to search for and update
+        due_string:
+          type: string
+          description: New due date in natural language like 'tomorrow', 'next Monday'
+            (optional)
+        description:
+          type: string
+          description: New description for the task (optional)
+  - name: todoist_delete_task
+    description: Delete a task from Todoist by searching for it by name
+    inputSchema:
+      type: object
+      required:
+        - task_name
+      properties:
+        task_name:
+          type: string
+          description: Name/content of the task to search for and delete
+  - name: todoist_complete_task
+    description: Mark a task as complete by searching for it by name
+    inputSchema:
+      type: object
+      required:
+        - task_name
+      properties:
+        task_name:
+          type: string
+          description: Name/content of the task to search for and complete

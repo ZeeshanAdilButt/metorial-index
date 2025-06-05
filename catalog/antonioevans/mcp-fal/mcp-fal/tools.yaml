@@ -1,0 +1,240 @@
+tools:
+  - name: models
+    description: "
+
+      \        List available models on fal.ai. Ensure to use the total and page
+      arguments. Avoid listing all the models at once.
+
+      \       \ 
+
+      \        Args:
+
+      \            page: The page number of models to retrieve (pagination)
+
+      \            total: The total number of models to retrieve per page
+
+      \           \ 
+
+      \        Returns:
+
+      \            A list of models with their metadata
+
+      \        "
+    inputSchema:
+      type: object
+      title: modelsArguments
+      properties:
+        page:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page
+          default: null
+        total:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Total
+          default: null
+  - name: search
+    description: "
+
+      \        Search for models on fal.ai based on keywords.
+
+      \       \ 
+
+      \        Args:
+
+      \            keywords: The search terms to find models
+
+      \           \ 
+
+      \        Returns:
+
+      \            A list of models matching the search criteria
+
+      \        "
+    inputSchema:
+      type: object
+      title: searchArguments
+      required:
+        - keywords
+      properties:
+        keywords:
+          type: string
+          title: Keywords
+  - name: schema
+    description: "
+
+      \        Get the OpenAPI schema for a specific model.
+
+      \       \ 
+
+      \        Args:
+
+      \            model_id: The ID of the model (e.g., \"fal-ai/flux/dev\")
+
+      \           \ 
+
+      \        Returns:
+
+      \            The OpenAPI schema for the model
+
+      \        "
+    inputSchema:
+      type: object
+      title: schemaArguments
+      required:
+        - model_id
+      properties:
+        model_id:
+          type: string
+          title: Model Id
+  - name: generate
+    description: "
+
+      \        Generate content using a fal.ai model.
+
+      \       \ 
+
+      \        Args:
+
+      \            model: The model ID to use (e.g., \"fal-ai/flux/dev\")
+
+      \            parameters: Model-specific parameters as a dictionary
+
+      \            queue: Whether to use the queuing system (default: False)
+
+      \           \ 
+
+      \        Returns:
+
+      \            The model's response
+
+      \        "
+    inputSchema:
+      type: object
+      title: generateArguments
+      required:
+        - model
+        - parameters
+      properties:
+        model:
+          type: string
+          title: Model
+        queue:
+          type: boolean
+          title: Queue
+          default: false
+        parameters:
+          type: object
+          title: Parameters
+          additionalProperties: true
+  - name: result
+    description: "
+
+      \        Get the result of a queued request.
+
+      \       \ 
+
+      \        Args:
+
+      \            url: The response_url from a queued request
+
+      \           \ 
+
+      \        Returns:
+
+      \            The generation result
+
+      \        "
+    inputSchema:
+      type: object
+      title: resultArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: status
+    description: "
+
+      \        Check the status of a queued request.
+
+      \       \ 
+
+      \        Args:
+
+      \            url: The status_url from a queued request
+
+      \           \ 
+
+      \        Returns:
+
+      \            The current status of the queued request
+
+      \        "
+    inputSchema:
+      type: object
+      title: statusArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: cancel
+    description: "
+
+      \        Cancel a queued request.
+
+      \       \ 
+
+      \        Args:
+
+      \            url: The cancel_url from a queued request
+
+      \           \ 
+
+      \        Returns:
+
+      \            The result of the cancellation attempt
+
+      \        "
+    inputSchema:
+      type: object
+      title: cancelArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: upload
+    description: "
+
+      \        Upload a file to fal.ai storage.
+
+      \       \ 
+
+      \        Args:
+
+      \            path: The absolute path to the file to upload
+
+      \           \ 
+
+      \        Returns:
+
+      \            Information about the uploaded file, including the file_url
+
+      \        "
+    inputSchema:
+      type: object
+      title: uploadArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path

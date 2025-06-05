@@ -1,0 +1,18 @@
+identifier: unstructured-io/uns-mcp/uns-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Unstructured-IO/UNS-MCP
+  name: UNS-MCP
+  owner: Unstructured-IO
+server:
+  subdirectory: /
+  name: Unstructured API Server
+  description: Interact with the Unstructured API to manage sources, destinations,
+    and workflows seamlessly. Leverage powerful tools to list, create, update,
+    and delete connectors for S3 and other services, enhancing your data
+    processing capabilities. Simplify your integration with a straightforward
+    setup and robust debugging tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

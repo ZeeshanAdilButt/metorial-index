@@ -1,0 +1,16 @@
+identifier: kashiwabyte/vikingdb-mcp-server/mcp-server-vikingdb
+repo:
+  provider: github.com
+  url: https://github.com/KashiwaByte/vikingdb-mcp-server
+  name: vikingdb-mcp-server
+  owner: KashiwaByte
+server:
+  subdirectory: /
+  name: VikingDB
+  description: Store and retrieve vector embeddings from VikingDB, a
+    high-performance vector database. Supports searching and upserting
+    information using vector similarity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

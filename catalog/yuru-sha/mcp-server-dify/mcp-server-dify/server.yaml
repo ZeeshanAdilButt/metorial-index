@@ -1,0 +1,14 @@
+identifier: yuru-sha/mcp-server-dify/mcp-server-dify
+repo:
+  provider: github.com
+  url: https://github.com/yuru-sha/mcp-server-dify
+  name: mcp-server-dify
+  owner: yuru-sha
+server:
+  subdirectory: /
+  name: Dify AI Server
+  description: Enable LLMs to interact with Dify AI's chat completion capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

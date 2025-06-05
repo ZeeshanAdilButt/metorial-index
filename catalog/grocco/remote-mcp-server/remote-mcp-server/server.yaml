@@ -1,0 +1,18 @@
+identifier: grocco/remote-mcp-server/remote-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/grocco/remote-mcp-server
+  name: remote-mcp-server
+  owner: grocco
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare
+  description: Host a remote MCP server on Cloudflare Workers with OAuth login to
+    securely expose tools and resources. Develop locally or deploy to Cloudflare
+    to enable seamless integration with MCP clients like Claude Desktop and the
+    MCP Inspector. Easily connect, authenticate, and invoke tools remotely to
+    extend your LLM applications with real-world capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

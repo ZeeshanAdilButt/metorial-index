@@ -1,0 +1,17 @@
+identifier: jiayao/mcp-chess/mcp-chess
+repo:
+  provider: github.com
+  url: https://github.com/jiayao/mcp-chess
+  name: mcp-chess
+  owner: jiayao
+server:
+  subdirectory: /
+  name: Chess Server
+  description: Play chess against any large language model with interactive game
+    features. Visualize the board, make moves, and analyze positions directly
+    through the server's tools. Start new games and explore positions from PGN
+    files with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

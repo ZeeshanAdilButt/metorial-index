@@ -1,0 +1,15 @@
+identifier: gzlps2/test/test
+repo:
+  provider: github.com
+  url: https://github.com/gzlps2/test
+  name: test
+  owner: gzlps2
+server:
+  subdirectory: /
+  name: test
+  description: Provide a basic MCP server implementation with minimal features for
+    testing purposes.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

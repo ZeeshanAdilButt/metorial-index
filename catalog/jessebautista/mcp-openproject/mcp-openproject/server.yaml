@@ -1,0 +1,19 @@
+identifier: jessebautista/mcp-openproject/mcp-openproject
+repo:
+  provider: github.com
+  url: https://github.com/jessebautista/mcp-openproject
+  name: mcp-openproject
+  owner: jessebautista
+server:
+  subdirectory: /
+  name: OpenProject Integration Server
+  description: Enable AI agents to interact seamlessly with your self-hosted
+    OpenProject instance by providing a suite of tools for project and task
+    management. Perform CRUD operations on projects and tasks through a
+    serverless MCP endpoint deployed on Netlify. Facilitate remote and local
+    development with secure environment handling and support for SSE client
+    connections via proxy bridging.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

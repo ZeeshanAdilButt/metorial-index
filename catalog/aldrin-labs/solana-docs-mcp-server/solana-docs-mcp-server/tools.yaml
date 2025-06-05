@@ -1,0 +1,33 @@
+tools:
+  - name: get_latest_docs
+    description: Get latest Solana documentation sections
+    inputSchema:
+      type: object
+      required:
+        - section
+      properties:
+        section:
+          type: string
+          description: Documentation section to fetch (e.g., "developing",
+            "running-validator", "economics")
+  - name: search_docs
+    description: Search through Solana documentation
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: get_api_reference
+    description: Get Solana SDK API reference details
+    inputSchema:
+      type: object
+      required:
+        - item
+      properties:
+        item:
+          type: string
+          description: API item to look up (e.g., "transaction", "pubkey",
+            "system_instruction")

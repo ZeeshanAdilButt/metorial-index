@@ -1,0 +1,15 @@
+identifier: lumile/mercadolibre-mcp/mercadolibre-mcp
+repo:
+  provider: github.com
+  url: https://github.com/lumile/mercadolibre-mcp
+  name: mercadolibre-mcp
+  owner: lumile
+server:
+  subdirectory: /
+  name: MercadoLibre MCP Server
+  description: Access MercadoLibre's API to search products, retrieve reviews, and
+    check seller reputations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

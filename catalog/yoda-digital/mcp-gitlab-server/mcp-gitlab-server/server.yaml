@@ -1,0 +1,17 @@
+identifier: yoda-digital/mcp-gitlab-server/mcp-gitlab-server
+repo:
+  provider: github.com
+  url: https://github.com/yoda-digital/mcp-gitlab-server
+  name: mcp-gitlab-server
+  owner: yoda-digital
+server:
+  subdirectory: /
+  name: GitLab MCP Server
+  description: Interact seamlessly with GitLab to manage repositories, track
+    activities, and automate workflows. Leverage powerful tools for creating
+    issues, merge requests, and monitoring project events, all while enhancing
+    your development efficiency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

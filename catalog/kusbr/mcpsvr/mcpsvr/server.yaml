@@ -1,0 +1,19 @@
+identifier: kusbr/mcpsvr/mcpsvr
+repo:
+  provider: github.com
+  url: https://github.com/kusbr/mcpsvr
+  name: mcpsvr
+  owner: kusbr
+server:
+  subdirectory: /
+  name: Jokes MCP Server
+  description: Provide a humor-focused MCP server that delivers concise, engaging
+    jokes on demand, adapting to user preferences and ensuring appropriate
+    content. Integrate seamlessly with Microsoft Copilot Studio to enable AI
+    agents to fetch Chuck Norris, Dad, and Yo Mama jokes. Enhance user
+    interactions with witty, context-aware humor while maintaining content
+    safety and variety.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: sjhsjh0/smithery_test/smithery_test
+repo:
+  provider: github.com
+  url: https://github.com/sjhsjh0/smithery_test
+  name: smithery_test
+  owner: sjhsjh0
+server:
+  subdirectory: /test
+  name: Smithery Test MCP Server
+  description: Provide a testing environment for MCP clients to interact with
+    tools, resources, and prompts. Enable developers to validate MCP
+    integrations and experiment with protocol features in a controlled setup.
+    Facilitate rapid prototyping and debugging of MCP-based applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

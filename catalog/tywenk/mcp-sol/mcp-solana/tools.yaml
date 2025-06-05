@@ -1,0 +1,942 @@
+tools:
+  - name: get_balance
+    description: "Returns the balance of the account of provided Pubkey.
+
+
+      \    Args:
+
+      \        address (str): Pubkey of account to query
+
+
+      \    Returns:
+
+      \        str: Account balance response in the format \"Balance of
+      {address}: {balance}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_balanceArguments
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          title: Address
+  - name: get_transaction
+    description: "Returns transaction details for a confirmed transaction.
+
+
+      \    Args:
+
+      \        hash (str): Transaction signature as base-58 encoded string
+
+
+      \    Returns:
+
+      \        str: Transaction details in the format \"Transaction:
+      {transaction}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_transactionArguments
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          title: Hash
+  - name: get_block
+    description: "Returns identity and transaction information about a confirmed
+      block in the ledger.
+
+
+      \    Args:
+
+      \        slot (int): Slot number as u64 integer
+
+
+      \    Returns:
+
+      \        str: Block information in the format \"Block: {block}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_blockArguments
+      required:
+        - slot
+      properties:
+        slot:
+          type: integer
+          title: Slot
+  - name: get_block_height
+    description: "Returns the current block height of the node.
+
+
+      \    Returns:
+
+      \        str: Current block height in the format \"Block height:
+      {height}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_block_heightArguments
+      properties: {}
+  - name: get_block_time
+    description: "Fetch the estimated production time of a block.
+
+
+      \    Args:
+
+      \        slot (int): Block slot number
+
+
+      \    Returns:
+
+      \        str: Block time in the format \"Block time: {time}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_block_timeArguments
+      required:
+        - slot
+      properties:
+        slot:
+          type: integer
+          title: Slot
+  - name: get_blocks
+    description: "Returns a list of confirmed blocks between two slots.
+
+
+      \    Args:
+
+      \        start_slot (int): Start slot as u64 integer
+
+      \        end_slot (Optional[int], optional): End slot as u64 integer.
+      Defaults to None.
+
+
+      \    Returns:
+
+      \        str: List of blocks in the format \"Blocks: {blocks}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_blocksArguments
+      required:
+        - start_slot
+      properties:
+        end_slot:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: End Slot
+          default: null
+        start_slot:
+          type: integer
+          title: Start Slot
+  - name: get_cluster_nodes
+    description: "Returns information about all the nodes participating in the
+      cluster.
+
+
+      \    Returns:
+
+      \        str: Cluster nodes information in the format \"Cluster nodes:
+      {nodes}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_cluster_nodesArguments
+      properties: {}
+  - name: get_epoch_info
+    description: "Returns information about the current epoch.
+
+
+      \    Returns:
+
+      \        str: Epoch information in the format \"Epoch info: {info}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_epoch_infoArguments
+      properties: {}
+  - name: get_epoch_schedule
+    description: "Returns epoch schedule information from this cluster's genesis
+      config.
+
+
+      \    Returns:
+
+      \        str: Epoch schedule in the format \"Epoch schedule: {schedule}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_epoch_scheduleArguments
+      properties: {}
+  - name: get_genesis_hash
+    description: "Returns the genesis hash.
+
+
+      \    Returns:
+
+      \        str: Genesis hash in the format \"Genesis hash: {hash}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_genesis_hashArguments
+      properties: {}
+  - name: get_identity
+    description: "Returns the identity pubkey for the current node.
+
+
+      \    Returns:
+
+      \        str: Node identity in the format \"Node identity: {identity}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_identityArguments
+      properties: {}
+  - name: get_inflation_governor
+    description: "Returns the current inflation governor.
+
+
+      \    Returns:
+
+      \        str: Inflation governor info in the format \"Inflation governor:
+      {governor}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_inflation_governorArguments
+      properties: {}
+  - name: get_inflation_rate
+    description: "Returns the specific inflation values for the current epoch.
+
+
+      \    Returns:
+
+      \        str: Inflation rate info in the format \"Inflation rate: {rate}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_inflation_rateArguments
+      properties: {}
+  - name: get_largest_accounts
+    description: "Returns the 20 largest accounts, by lamport balance.
+
+
+      \    Returns:
+
+      \        str: Largest accounts info in the format \"Largest accounts:
+      {accounts}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_largest_accountsArguments
+      properties: {}
+  - name: get_latest_blockhash
+    description: "Returns the latest block hash from the ledger.
+
+
+      \    Returns:
+
+      \        str: Latest blockhash in the format \"Latest blockhash:
+      {blockhash}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_latest_blockhashArguments
+      properties: {}
+  - name: get_minimum_balance_for_rent_exemption
+    description: "Returns minimum balance required to make account rent exempt.
+
+
+      \    Args:
+
+      \        size (int): Account data length
+
+
+      \    Returns:
+
+      \        str: Minimum balance in the format \"Minimum balance for rent
+      exemption: {balance}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_minimum_balance_for_rent_exemptionArguments
+      required:
+        - size
+      properties:
+        size:
+          type: integer
+          title: Size
+  - name: get_program_accounts
+    description: "Returns all accounts owned by the provided program Pubkey.
+
+
+      \    Args:
+
+      \        program_id (str): Pubkey of program to query
+
+
+      \    Returns:
+
+      \        str: Program accounts in the format \"Program accounts:
+      {accounts}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_program_accountsArguments
+      required:
+        - program_id
+      properties:
+        program_id:
+          type: string
+          title: Program Id
+  - name: get_recent_performance_samples
+    description: "Returns a list of recent performance samples, in reverse slot
+      order.
+
+
+      \    Args:
+
+      \        limit (Optional[int], optional): Number of samples to return
+      (maximum 720). Defaults to None.
+
+
+      \    Returns:
+
+      \        str: Performance samples in the format \"Performance samples:
+      {samples}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_recent_performance_samplesArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+  - name: get_signature_statuses
+    description: "Returns the statuses of a list of signatures.
+
+
+      \    Args:
+
+      \        signatures (list[str]): List of transaction signatures to confirm
+
+
+      \    Returns:
+
+      \        str: Signature statuses in the format \"Signature statuses:
+      {statuses}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_signature_statusesArguments
+      required:
+        - signatures
+      properties:
+        signatures:
+          type: array
+          items:
+            type: string
+          title: Signatures
+  - name: get_slot
+    description: "Returns the current slot the node is processing.
+
+
+      \    Returns:
+
+      \        str: Current slot in the format \"Current slot: {slot}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_slotArguments
+      properties: {}
+  - name: get_slot_leader
+    description: "Returns the current slot leader.
+
+
+      \    Returns:
+
+      \        str: Slot leader in the format \"Slot leader: {leader}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_slot_leaderArguments
+      properties: {}
+  - name: get_supply
+    description: "Returns information about the current supply.
+
+
+      \    Returns:
+
+      \        str: Supply information in the format \"Supply info: {supply}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_supplyArguments
+      properties: {}
+  - name: get_token_account_balance
+    description: "Returns the token balance of an SPL Token account.
+
+
+      \    Args:
+
+      \        token_account (str): Pubkey of Token account to query
+
+
+      \    Returns:
+
+      \        str: Token account balance in the format \"Token account balance:
+      {balance}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_token_account_balanceArguments
+      required:
+        - token_account
+      properties:
+        token_account:
+          type: string
+          title: Token Account
+  - name: get_token_largest_accounts
+    description: "Returns the 20 largest accounts of a particular SPL Token type.
+
+
+      \    Args:
+
+      \        mint (str): Pubkey of token mint to query
+
+
+      \    Returns:
+
+      \        str: Largest token accounts in the format \"Largest token
+      accounts: {accounts}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_token_largest_accountsArguments
+      required:
+        - mint
+      properties:
+        mint:
+          type: string
+          title: Mint
+  - name: get_transaction_count
+    description: "Returns the current Transaction count from the ledger.
+
+
+      \    Returns:
+
+      \        str: Transaction count in the format \"Transaction count:
+      {count}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_transaction_countArguments
+      properties: {}
+  - name: get_version
+    description: "Returns the current solana versions running on the node.
+
+
+      \    Returns:
+
+      \        str: Version information in the format \"Version info:
+      {version}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_versionArguments
+      properties: {}
+  - name: get_vote_accounts
+    description: "Returns the account info and associated stake for all the voting
+      accounts in the current bank.
+
+
+      \    Returns:
+
+      \        str: Vote accounts information in the format \"Vote accounts:
+      {accounts}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_vote_accountsArguments
+      properties: {}
+  - name: is_connected
+    description: "Health check to verify if the client is connected.
+
+
+      \    Returns:
+
+      \        str: Connection status in the format \"Connected: {connected}\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: is_connectedArguments
+      properties: {}
+  - name: get_block_commitment
+    description: "Fetch the commitment for particular block.
+
+
+      \    Args:
+
+      \        slot (int): Block slot number to query
+
+
+      \    Returns:
+
+      \        str: Block commitment information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_block_commitmentArguments
+      required:
+        - slot
+      properties:
+        slot:
+          type: integer
+          title: Slot
+  - name: confirm_transaction
+    description: "Confirm the transaction identified by the specified signature.
+
+
+      \    Args:
+
+      \        tx_sig (str): Transaction signature to confirm
+
+      \        commitment (Optional[str]): Bank state to query (\"finalized\",
+      \"confirmed\" or \"processed\")
+
+
+      \    Returns:
+
+      \        str: Transaction confirmation status
+
+      \    "
+    inputSchema:
+      type: object
+      title: confirm_transactionArguments
+      required:
+        - tx_sig
+      properties:
+        tx_sig:
+          type: string
+          title: Tx Sig
+        commitment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Commitment
+          default: null
+  - name: get_account_info
+    description: "Returns all account info for the specified public key.
+
+
+      \    Args:
+
+      \        pubkey (str): Pubkey of account to query
+
+      \        encoding (str): Encoding for Account data (\"base58\",
+      \"base64\", or \"jsonParsed\")
+
+
+      \    Returns:
+
+      \        str: Account information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_account_infoArguments
+      required:
+        - pubkey
+      properties:
+        pubkey:
+          type: string
+          title: Pubkey
+        encoding:
+          type: string
+          title: Encoding
+          default: base64
+  - name: get_fee_for_message
+    description: "Returns the fee for a message.
+
+
+      \    Args:
+
+      \        from_pubkey (str): Sender's public key
+
+      \        to_pubkey (str): Recipient's public key
+
+      \        lamports (int): Amount of lamports to transfer
+
+
+      \    Returns:
+
+      \        str: Fee information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_fee_for_messageArguments
+      required:
+        - from_pubkey
+        - to_pubkey
+        - lamports
+      properties:
+        lamports:
+          type: integer
+          title: Lamports
+        to_pubkey:
+          type: string
+          title: To Pubkey
+        from_pubkey:
+          type: string
+          title: From Pubkey
+  - name: get_first_available_block
+    description: "Returns the slot of the lowest confirmed block available.
+
+
+      \    Returns:
+
+      \        str: First available block information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_first_available_blockArguments
+      properties: {}
+  - name: get_inflation_reward
+    description: "Returns the inflation/staking reward for a list of addresses for
+      an epoch.
+
+
+      \    Args:
+
+      \        pubkeys (list[str]): List of account addresses
+
+      \        epoch (Optional[int]): Epoch for which to calculate rewards
+
+
+      \    Returns:
+
+      \        str: Inflation reward information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_inflation_rewardArguments
+      required:
+        - pubkeys
+      properties:
+        epoch:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Epoch
+          default: null
+        pubkeys:
+          type: array
+          items:
+            type: string
+          title: Pubkeys
+  - name: get_leader_schedule
+    description: "Returns the leader schedule for an epoch.
+
+
+      \    Args:
+
+      \        epoch (Optional[int]): Epoch to get schedule for
+
+
+      \    Returns:
+
+      \        str: Leader schedule information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_leader_scheduleArguments
+      properties:
+        epoch:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Epoch
+          default: null
+  - name: get_minimum_ledger_slot
+    description: "Returns the lowest slot that the node has information about in its
+      ledger.
+
+
+      \    Returns:
+
+      \        str: Minimum ledger slot information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_minimum_ledger_slotArguments
+      properties: {}
+  - name: get_multiple_accounts
+    description: "Returns the account information for a list of public keys.
+
+
+      \    Args:
+
+      \        pubkeys (list[str]): List of account public keys
+
+      \        encoding (str): Encoding for the account data
+
+
+      \    Returns:
+
+      \        str: Multiple accounts information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_multiple_accountsArguments
+      required:
+        - pubkeys
+      properties:
+        pubkeys:
+          type: array
+          items:
+            type: string
+          title: Pubkeys
+        encoding:
+          type: string
+          title: Encoding
+          default: base64
+  - name: get_signatures_for_address
+    description: "Returns confirmed signatures for transactions involving an
+      address.
+
+
+      \    Args:
+
+      \        account (str): Account address to query
+
+      \        before (Optional[str]): Start searching backwards from this
+      signature
+
+      \        until (Optional[str]): Search until this signature
+
+      \        limit (Optional[int]): Maximum number of signatures to return
+
+
+      \    Returns:
+
+      \        str: Signatures information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_signatures_for_addressArguments
+      required:
+        - account
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        account:
+          type: string
+          title: Account
+  - name: get_token_accounts_by_delegate
+    description: "Returns all SPL Token accounts by approved delegate.
+
+
+      \    Args:
+
+      \        delegate (str): Public key of delegate owner
+
+      \        mint (str): Token mint address
+
+
+      \    Returns:
+
+      \        str: Token accounts information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_token_accounts_by_delegateArguments
+      required:
+        - delegate
+        - mint
+      properties:
+        mint:
+          type: string
+          title: Mint
+        delegate:
+          type: string
+          title: Delegate
+  - name: get_token_accounts_by_owner
+    description: "Returns all SPL Token accounts by token owner.
+
+
+      \    Args:
+
+      \        owner (str): Public key of token owner
+
+      \        mint (str): Token mint address
+
+
+      \    Returns:
+
+      \        str: Token accounts information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_token_accounts_by_ownerArguments
+      required:
+        - owner
+        - mint
+      properties:
+        mint:
+          type: string
+          title: Mint
+        owner:
+          type: string
+          title: Owner
+  - name: get_token_supply
+    description: "Returns the total supply of an SPL Token type.
+
+
+      \    Args:
+
+      \        mint (str): Public key of token mint
+
+
+      \    Returns:
+
+      \        str: Token supply information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_token_supplyArguments
+      required:
+        - mint
+      properties:
+        mint:
+          type: string
+          title: Mint
+  - name: request_airdrop
+    description: "Request an airdrop of lamports to a Pubkey.
+
+
+      \    Args:
+
+      \        address (str): Public key of recipient
+
+      \        lamports (int): Amount of lamports to request
+
+
+      \    Returns:
+
+      \        str: Airdrop request result
+
+      \    "
+    inputSchema:
+      type: object
+      title: request_airdropArguments
+      required:
+        - address
+        - lamports
+      properties:
+        address:
+          type: string
+          title: Address
+        lamports:
+          type: integer
+          title: Lamports
+  - name: send_transaction
+    description: "Send a transaction that has already been signed and serialized
+      into the wire format.
+
+
+      \    Args:
+
+      \        txn (bytes): Signed transaction as bytes
+
+
+      \    Returns:
+
+      \        str: Transaction send result
+
+      \    "
+    inputSchema:
+      type: object
+      title: send_transactionArguments
+      required:
+        - txn
+      properties:
+        txn:
+          type: string
+          title: Txn
+          format: binary
+  - name: validator_exit
+    description: "Request to have the validator exit.
+
+
+      \    Returns:
+
+      \        str: Validator exit request result
+
+      \    "
+    inputSchema:
+      type: object
+      title: validator_exitArguments
+      properties: {}

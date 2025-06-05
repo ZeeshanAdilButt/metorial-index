@@ -1,0 +1,17 @@
+identifier: voitta-ai/mcp-voitta-gateway/mcprfkgw
+repo:
+  provider: github.com
+  url: https://github.com/voitta-ai/mcp-voitta-gateway
+  name: mcp-voitta-gateway
+  owner: voitta-ai
+server:
+  subdirectory: /
+  name: Gateway for RFK Jr Endpoints
+  description: Connect to RFK Jr endpoints seamlessly. Utilize both STDIO and SSE
+    transports to enhance your applications with real-time data access and
+    interaction. Simplify your integration process with easy configuration and
+    setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

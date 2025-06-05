@@ -1,0 +1,17 @@
+identifier: xxycooper/dockertarbuilder/dockertarbuilder
+repo:
+  provider: github.com
+  url: https://github.com/xxycooper/DockerTarBuilder
+  name: DockerTarBuilder
+  owner: xxycooper
+server:
+  subdirectory: /
+  name: Docker Tar Builder
+  description: Quickly build single or multiple Docker images for specified
+    architectures/platforms and store them in Artifact or Release files.
+    Streamline your Docker workflow and manage large images efficiently with our
+    new features.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,332 @@
+tools:
+  - name: create_market
+    description: Create a new prediction market
+    inputSchema:
+      type: object
+      required:
+        - outcomeType
+        - question
+      properties:
+        max:
+          type: number
+          description: Required for PSEUDO_NUMERIC markets. Maximum resolvable value
+        min:
+          type: number
+          description: Required for PSEUDO_NUMERIC markets. Minimum resolvable value
+        answers:
+          type: array
+          items:
+            type: string
+          description: Required for MULTIPLE_CHOICE/POLL markets. Array of possible answers
+        question:
+          type: string
+          description: The headline question for the market
+        closeTime:
+          type: string
+          description: Optional. ISO timestamp when market will close. Defaults to 7 days.
+        isLogScale:
+          type: boolean
+          description: Optional for PSEUDO_NUMERIC markets. If true, increases exponentially
+        visibility:
+          enum:
+            - public
+            - unlisted
+          type: string
+          description: Optional. Market visibility. Defaults to public.
+        description:
+          type: string
+          description: Optional description for the market
+        initialProb:
+          type: number
+          description: Required for BINARY markets. Initial probability (1-99)
+        outcomeType:
+          enum:
+            - BINARY
+            - MULTIPLE_CHOICE
+            - PSEUDO_NUMERIC
+            - POLL
+            - BOUNTIED_QUESTION
+          type: string
+          description: Type of market to create
+        totalBounty:
+          type: number
+          description: Required for BOUNTIED_QUESTION markets. Amount of mana for bounty
+        initialValue:
+          type: number
+          description: Required for PSEUDO_NUMERIC markets. Initial value between min and
+            max
+        addAnswersMode:
+          enum:
+            - DISABLED
+            - ONLY_CREATOR
+            - ANYONE
+          type: string
+          description: Optional for MULTIPLE_CHOICE markets. Controls who can add answers
+        shouldAnswersSumToOne:
+          type: boolean
+          description: Optional for MULTIPLE_CHOICE markets. Makes probabilities sum to 100%
+  - name: search_markets
+    description: Search for prediction markets with optional filters
+    inputSchema:
+      type: object
+      properties:
+        sort:
+          enum:
+            - newest
+            - score
+            - liquidity
+          type: string
+        term:
+          type: string
+          description: Search query
+        limit:
+          type: number
+          description: Max number of results (1-100)
+        filter:
+          enum:
+            - all
+            - open
+            - closed
+            - resolved
+          type: string
+  - name: get_market
+    description: Get detailed information about a specific market
+    inputSchema:
+      type: object
+      required:
+        - marketId
+      properties:
+        marketId:
+          type: string
+          description: Market ID
+  - name: get_user
+    description: Get user information by username
+    inputSchema:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Username
+  - name: place_bet
+    description: Place a bet on a market
+    inputSchema:
+      type: object
+      required:
+        - marketId
+        - amount
+        - outcome
+      properties:
+        amount:
+          type: number
+          description: Amount to bet in mana
+        outcome:
+          enum:
+            - YES
+            - NO
+          type: string
+        marketId:
+          type: string
+          description: Market ID
+        limitProb:
+          type: number
+          description: Optional limit order probability (0.01-0.99)
+  - name: cancel_bet
+    description: Cancel a limit order bet
+    inputSchema:
+      type: object
+      required:
+        - betId
+      properties:
+        betId:
+          type: string
+          description: Bet ID to cancel
+  - name: sell_shares
+    description: Sell shares in a market
+    inputSchema:
+      type: object
+      required:
+        - marketId
+      properties:
+        shares:
+          type: number
+          description: How many shares to sell (defaults to all)
+        outcome:
+          enum:
+            - YES
+            - NO
+          type: string
+          description: Which type of shares to sell (defaults to what you have)
+        marketId:
+          type: string
+          description: Market ID
+  - name: add_liquidity
+    description: Add mana to market liquidity pool
+    inputSchema:
+      type: object
+      required:
+        - marketId
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount of mana to add
+        marketId:
+          type: string
+          description: Market ID
+  - name: get_positions
+    description: Get user positions across markets
+    inputSchema:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+          description: User ID
+  - name: unresolve_market
+    description: Unresolve a previously resolved market
+    inputSchema:
+      type: object
+      required:
+        - contractId
+      properties:
+        answerId:
+          type: string
+          description: Optional. Answer ID for multiple choice markets
+        contractId:
+          type: string
+          description: Market ID
+  - name: close_market
+    description: Close a market for trading
+    inputSchema:
+      type: object
+      required:
+        - contractId
+      properties:
+        closeTime:
+          type: number
+          description: Optional. Unix timestamp in milliseconds when market will close
+        contractId:
+          type: string
+          description: Market ID
+  - name: add_answer
+    description: Add a new answer to a multiple choice market
+    inputSchema:
+      type: object
+      required:
+        - contractId
+        - text
+      properties:
+        text:
+          type: string
+          description: Answer text
+        contractId:
+          type: string
+          description: Market ID
+  - name: follow_market
+    description: Follow or unfollow a market
+    inputSchema:
+      type: object
+      required:
+        - contractId
+        - follow
+      properties:
+        follow:
+          type: boolean
+          description: True to follow, false to unfollow
+        contractId:
+          type: string
+          description: Market ID
+  - name: add_bounty
+    description: Add bounty to a market
+    inputSchema:
+      type: object
+      required:
+        - contractId
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount of mana to add as bounty
+        contractId:
+          type: string
+          description: Market ID
+  - name: award_bounty
+    description: Award bounty to a comment
+    inputSchema:
+      type: object
+      required:
+        - contractId
+        - commentId
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount of bounty to award
+        commentId:
+          type: string
+          description: Comment ID to award bounty to
+        contractId:
+          type: string
+          description: Market ID
+  - name: remove_liquidity
+    description: Remove liquidity from market pool
+    inputSchema:
+      type: object
+      required:
+        - contractId
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount of liquidity to remove
+        contractId:
+          type: string
+          description: Market ID
+  - name: react
+    description: React to a market or comment
+    inputSchema:
+      type: object
+      required:
+        - contentId
+        - contentType
+      properties:
+        remove:
+          type: boolean
+          description: Optional. True to remove reaction
+        contentId:
+          type: string
+          description: ID of market or comment
+        contentType:
+          enum:
+            - comment
+            - contract
+          type: string
+          description: Type of content to react to
+        reactionType:
+          enum:
+            - like
+            - dislike
+          type: string
+          description: Type of reaction
+  - name: send_mana
+    description: Send mana to other users
+    inputSchema:
+      type: object
+      required:
+        - toIds
+        - amount
+      properties:
+        toIds:
+          type: array
+          items:
+            type: string
+          description: Array of user IDs to send mana to
+        amount:
+          type: number
+          description: Amount of mana to send (min 10)
+        message:
+          type: string
+          description: Optional message to include

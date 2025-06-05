@@ -1,0 +1,11 @@
+tools:
+  - name: echo
+    description: Echoes back the input message
+    inputSchema:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: The message to echo back

@@ -1,0 +1,76 @@
+tools:
+  - name: monday-create-item
+    description: Create a new item in a Monday.com Board. Optionally, specify the
+      parent Item ID to create a Sub-item.
+    inputSchema:
+      type: object
+      required:
+        - boardId
+        - itemTitle
+      properties:
+        boardId:
+          type: string
+        groupId:
+          type: string
+        itemTitle:
+          type: string
+        parentItemId:
+          type: string
+  - name: monday-get-board-groups
+    description: Get the Groups of a Monday.com Board.
+    inputSchema:
+      type: object
+      required:
+        - boardId
+      properties:
+        boardId:
+          type: string
+  - name: monday-create-update
+    description: Create an update (comment) on a Monday.com item
+    inputSchema:
+      type: object
+      required:
+        - itemId
+        - updateText
+      properties:
+        itemId:
+          type: string
+        updateText:
+          type: string
+  - name: monday-list-boards
+    description: Get all boards from Monday.com
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of boards to return
+  - name: monday-list-items-in-groups
+    description: List all items in the specified groups of a Monday.com board
+    inputSchema:
+      type: object
+      required:
+        - boardId
+        - groupIds
+      properties:
+        limit:
+          type: integer
+        cursor:
+          type: string
+        boardId:
+          type: string
+        groupIds:
+          type: array
+          items:
+            type: string
+  - name: monday-list-subitems-in-items
+    description: List all Sub-items of a list of Monday Items
+    inputSchema:
+      type: object
+      required:
+        - itemIds
+      properties:
+        itemIds:
+          type: array
+          items:
+            type: string

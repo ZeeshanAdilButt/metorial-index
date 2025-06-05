@@ -1,0 +1,58 @@
+tools:
+  - name: get_llm_txt
+    description: Fetch an LLM.txt file from a given URL. Format your response in
+      beautiful markdown.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the LLM.txt file to fetch. Must be obtained first using
+            the list_llm_txt command.
+        page:
+          type: number
+          default: 1
+          description: Page number to fetch, starting from 1. Each page contains a fixed
+            number of characters.
+      additionalProperties: false
+  - name: list_llm_txt
+    description: List available LLM.txt files from the directory. Use this first
+      before fetching a specific LLM.txt file. Format your response in beautiful
+      markdown.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: search_llm_txt
+    description: Search for multiple substrings in an LLM.txt file. Requires a valid
+      ID obtained from list_llm_txt command. Returns snippets with page numbers
+      for each match. Format your response in beautiful markdown, using code
+      blocks for snippets.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - queries
+      properties:
+        id:
+          type: number
+          description: The ID of the LLM.txt file to search in. Must be obtained first
+            using the list_llm_txt command.
+        queries:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Array of substrings to search for. Each query is searched
+            case-insensitively. At least one query is required.
+        context_lines:
+          type: number
+          default: 2
+          description: Number of lines to show before and after each match for context.
+            Defaults to 2 lines.
+      additionalProperties: false

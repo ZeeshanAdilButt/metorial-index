@@ -1,0 +1,14 @@
+identifier: pskill9/hn-server/hn-server
+repo:
+  provider: github.com
+  url: https://github.com/pskill9/hn-server
+  name: hn-server
+  owner: pskill9
+server:
+  subdirectory: /
+  name: Hacker News
+  description: Fetch and parse stories from Hacker News.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,79 @@
+tools:
+  - name: configure_db_connection
+    description: "
+
+      \    Retrieve OceanBase database connection information.
+
+      \    If no parameters are provided, the configuration is loaded from
+      environment variables.
+
+      \    Otherwise, user-defined connection parameters will be used.
+
+
+      \    :param host: Database host address. Defaults to environment variable
+      OB_HOST or \"localhost\".
+
+      \    :param port: Database port number. Defaults to environment variable
+      OB_PORT or \"2881\".
+
+      \    :param user: Database username. Required. Defaults to user input or
+      environment variable OB_USER.
+
+      \    :param password: Database password. Required. Defaults to user input
+      or environment variable OB_PASSWORD.
+
+      \    :param database: Database name. Required. Defaults to user input or
+      environment variable OB_DATABASE.
+
+      \    :return: A dictionary containing the database connection
+      configuration.
+
+      \    :raises ValueError: Raised if any of the required parameters (user,
+      password, database) are missing.
+
+      \    "
+    inputSchema:
+      type: object
+      title: configure_db_connectionArguments
+      properties:
+        host:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Host
+          default: null
+        port:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Port
+          default: null
+        user:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: User
+          default: null
+        database:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Database
+          default: null
+        password:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Password
+          default: null
+  - name: execute_sql
+    description: Execute an SQL query on the OceanBase server
+    inputSchema:
+      type: object
+      title: call_toolArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

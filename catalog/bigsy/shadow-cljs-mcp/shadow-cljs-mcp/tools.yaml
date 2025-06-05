@@ -1,0 +1,9 @@
+tools:
+  - name: get_last_build_status
+    description: Get the status of the last shadow-cljs build including any warnings
+      or errors. Call this after making edits to ClojureScript files to verify
+      if the build succeeded or failed.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

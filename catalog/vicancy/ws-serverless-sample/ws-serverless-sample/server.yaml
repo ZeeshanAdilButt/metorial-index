@@ -1,0 +1,17 @@
+identifier: vicancy/ws-serverless-sample/ws-serverless-sample
+repo:
+  provider: github.com
+  url: https://github.com/vicancy/ws-serverless-sample
+  name: ws-serverless-sample
+  owner: vicancy
+server:
+  subdirectory: /
+  name: Serverless WebSocket Chat Sample
+  description: Build real-time chat applications effortlessly using Azure
+    Functions and SignalR. Leverage serverless architecture to handle WebSocket
+    connections and manage chat events seamlessly. Start chatting locally or
+    deploy to Azure for a live experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

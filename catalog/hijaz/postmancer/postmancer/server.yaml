@@ -1,0 +1,15 @@
+identifier: hijaz/postmancer/postmancer
+repo:
+  provider: github.com
+  url: https://github.com/hijaz/postmancer
+  name: postmancer
+  owner: hijaz
+server:
+  subdirectory: /
+  name: Postmancer
+  description: A standalone MCP server for API testing and management, allowing AI
+    assistants to interact with RESTful APIs through natural language.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

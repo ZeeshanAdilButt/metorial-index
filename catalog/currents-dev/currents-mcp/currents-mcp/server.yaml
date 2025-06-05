@@ -1,0 +1,17 @@
+identifier: currents-dev/currents-mcp/currents-mcp
+repo:
+  provider: github.com
+  url: https://github.com/currents-dev/currents-mcp
+  name: currents-mcp
+  owner: currents-dev
+server:
+  subdirectory: /
+  name: Currents Test Results Context Server
+  description: Provide AI agents with detailed test results context by connecting
+    them to Currents. Enable your AI to analyze, fix, or optimize failing tests
+    in continuous integration workflows. Seamlessly integrate with development
+    tools to enhance test reliability and debugging efficiency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

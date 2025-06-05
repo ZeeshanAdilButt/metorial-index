@@ -1,0 +1,12 @@
+tools:
+  - name: newNote
+    description: Create a new note in Flomo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - input
+      properties:
+        input:
+          type: string
+      additionalProperties: false

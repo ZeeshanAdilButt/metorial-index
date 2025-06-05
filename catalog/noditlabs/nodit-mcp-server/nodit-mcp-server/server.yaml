@@ -1,0 +1,38 @@
+identifier: noditlabs/nodit-mcp-server/nodit-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/noditlabs/nodit-mcp-server
+  name: nodit-mcp-server
+  owner: noditlabs
+server:
+  subdirectory: /
+  name: Nodit MCP Server
+  description: >-
+    Allow LLMs to access, process, and act on real-time blockchain data from
+    multiple blockchain networks. Instead of handling complex node RPCs, raw
+    event logs, or chain-specific data structures, developers can access
+    normalized, multi-chain blockchain data in a format optimized for AI
+    reasoning and decision-making.
+
+
+    With Nodit's MCP, you can:
+
+
+    • Enable your LLM to query, analyze, and interact with real-time blockchain
+    data across both EVM-compatible and non-EVM networks.
+
+
+    • Create Web3-integrated applications without requiring specialized
+    blockchain development expertise.
+
+
+    • Leverage Nodit's reliable RPC node infrastructure, Web3 Data APIs, and
+    GraphQL indexer APIs through a unified access layer.
+
+
+    Supported networks include Ethereum, Base, Optimism, Arbitrum, Polygon,
+    Aptos, Bitcoin, Dogecoin, TRON, XRPL, and more.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

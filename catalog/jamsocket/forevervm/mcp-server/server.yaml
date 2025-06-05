@@ -1,0 +1,17 @@
+identifier: jamsocket/forevervm/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/jamsocket/forevervm
+  name: forevervm
+  owner: jamsocket
+server:
+  subdirectory: /javascript/mcp-server
+  name: ForeverVM
+  description: Enable your agents to execute Python code seamlessly in a REPL
+    environment. Create and run Python scripts on-the-fly, enhancing your
+    automation and coding capabilities. Experience interactive coding directly
+    within your workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

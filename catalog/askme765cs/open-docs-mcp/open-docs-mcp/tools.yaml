@@ -1,0 +1,84 @@
+tools:
+  - name: enable_doc
+    description: Enable crawling for a specific doc
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the doc to enable
+  - name: disable_doc
+    description: Disable crawling for a specific doc
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the doc to disable
+  - name: crawl_docs
+    description: Start crawling enabled docs
+    inputSchema:
+      type: object
+      properties:
+        force:
+          type: boolean
+          description: Whether to force re-crawl all docs, ignoring previous crawl records
+  - name: build_index
+    description: Build search index for docs
+    inputSchema:
+      type: object
+      properties:
+        force:
+          type: boolean
+          description: Whether to force rebuild index
+  - name: search_docs
+    description: Search documentation
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        offset:
+          type: number
+          default: 0
+          description: Number of results to skip
+        doc_name:
+          type: string
+          description: Filter by document category
+        max_results:
+          type: number
+          default: 3
+          description: Maximum number of results
+  - name: build_index
+    description: Build search index for docs
+    inputSchema:
+      type: object
+      properties:
+        force:
+          type: boolean
+          description: Whether to force rebuild index
+  - name: list_enabled_docs
+    description: List all enabled docs with their cache status
+    inputSchema:
+      type: object
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: Whether to show detailed information
+  - name: list_all_docs
+    description: List all available docs including disabled ones
+    inputSchema:
+      type: object
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: Whether to show detailed information

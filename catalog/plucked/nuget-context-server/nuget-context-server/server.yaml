@@ -1,0 +1,18 @@
+identifier: plucked/nuget-context-server/nuget-context-server
+repo:
+  provider: github.com
+  url: https://github.com/plucked/nuget-context-server
+  name: nuget-context-server
+  owner: plucked
+server:
+  subdirectory: /
+  name: NuGet Context Server
+  description: Provide detailed information about .NET project dependencies and
+    NuGet packages to AI agents and development tools. Analyze project files,
+    search NuGet feeds, and retrieve package metadata programmatically via MCP.
+    Improve development workflows by integrating real-time NuGet context into
+    your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

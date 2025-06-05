@@ -1,0 +1,843 @@
+tools:
+  - name: create_sandbox
+    description: "Create a new sandbox environment for code execution.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: A unique identifier for the sandbox session
+
+      \           \ 
+
+      \            Returns:
+
+      \                A confirmation message indicating the sandbox was created
+
+      \            "
+    inputSchema:
+      type: object
+      title: create_sandboxArguments
+      required:
+        - session_id
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+  - name: close_sandbox
+    description: "Close and clean up a sandbox environment.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \           \ 
+
+      \            Returns:
+
+      \                A confirmation message indicating the sandbox was closed
+
+      \            "
+    inputSchema:
+      type: object
+      title: close_sandboxArguments
+      required:
+        - session_id
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+  - name: get_sandbox_status
+    description: "Get status information about sandboxes.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: Optional session ID to get status for a
+      specific sandbox
+
+      \               \ 
+
+      \            Returns:
+
+      \                Information about active sandboxes
+
+      \            "
+    inputSchema:
+      type: object
+      title: get_sandbox_statusArguments
+      properties:
+        session_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Session Id
+          default: null
+  - name: execute_code
+    description: "Execute Python code in the sandbox environment.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                code: The Python code to execute
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the execution results including
+      logs and any errors
+
+      \            "
+    inputSchema:
+      type: object
+      title: execute_codeArguments
+      required:
+        - session_id
+        - code
+      properties:
+        code:
+          type: string
+          title: Code
+        session_id:
+          type: string
+          title: Session Id
+  - name: install_package
+    description: "Install a Python package in the sandbox.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                package_name: The name of the Python package to install
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the installation output or an
+      error message
+
+      \            "
+    inputSchema:
+      type: object
+      title: install_packageArguments
+      required:
+        - session_id
+        - package_name
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        package_name:
+          type: string
+          title: Package Name
+  - name: create_run_close
+    description: "Create a sandbox, run code, and automatically close the sandbox in
+      one operation.
+
+      \           \ 
+
+      \            This is a convenience tool that combines create_sandbox,
+      execute_code, and close_sandbox
+
+      \            into a single operation, which is useful for simple one-off
+      code executions.
+
+      \           \ 
+
+      \            Args:
+
+      \                code: The Python code to execute
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the execution results
+
+      \            "
+    inputSchema:
+      type: object
+      title: create_run_closeArguments
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          title: Code
+  - name: list_files
+    description: "List files in the sandbox at the specified path.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                path: The directory path to list files from (default:
+      root directory)
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the file listing or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: list_filesArguments
+      required:
+        - session_id
+      properties:
+        path:
+          type: string
+          title: Path
+          default: /
+        session_id:
+          type: string
+          title: Session Id
+  - name: read_file
+    description: "Read the contents of a file in the sandbox.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                file_path: The path to the file to read
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the file content or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: read_fileArguments
+      required:
+        - session_id
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id
+  - name: write_file
+    description: "Write content to a file in the sandbox.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                file_path: The path to the file to write
+
+      \                content: The content to write to the file
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing a success message or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: write_fileArguments
+      required:
+        - session_id
+        - file_path
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id
+  - name: upload_file
+    description: "Upload a file to the sandbox.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                file_name: The name of the file to create
+
+      \                file_content: The content of the file
+
+      \                destination_path: The directory where the file should be
+      created (default: root directory)
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing a success message or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: upload_fileArguments
+      required:
+        - session_id
+        - file_name
+        - file_content
+      properties:
+        file_name:
+          type: string
+          title: File Name
+        session_id:
+          type: string
+          title: Session Id
+        file_content:
+          type: string
+          title: File Content
+        destination_path:
+          type: string
+          title: Destination Path
+          default: /
+  - name: connect
+    description: "Connect to a telnet server
+
+      \           \ 
+
+      \            Args:
+
+      \                host: The hostname or IP address of the telnet server
+
+      \                port: The port to connect to
+
+      \                timeout: Connection timeout in seconds
+
+      \               \ 
+
+      \            Returns:
+
+      \                A dictionary containing connection information and
+      initial response
+
+      \            "
+    inputSchema:
+      type: object
+      title: connectArguments
+      required:
+        - host
+        - port
+      properties:
+        host:
+          type: string
+          title: Host
+        port:
+          type: integer
+          title: Port
+        timeout:
+          type: integer
+          title: Timeout
+          default: 30
+  - name: send_command
+    description: "Send a command to the telnet server
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The session ID returned by the connect
+      function
+
+      \                command: The command to send
+
+      \                timeout: Timeout in seconds for waiting for a response
+
+      \               \ 
+
+      \            Returns:
+
+      \                A dictionary containing the server's response
+
+      \            "
+    inputSchema:
+      type: object
+      title: send_commandArguments
+      required:
+        - session_id
+        - command
+      properties:
+        command:
+          type: string
+          title: Command
+        timeout:
+          type: integer
+          title: Timeout
+          default: 10
+        session_id:
+          type: string
+          title: Session Id
+  - name: disconnect
+    description: "Disconnect from a telnet server
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The session ID returned by the connect
+      function
+
+      \               \ 
+
+      \            Returns:
+
+      \                A dictionary indicating success or failure
+
+      \            "
+    inputSchema:
+      type: object
+      title: disconnectArguments
+      required:
+        - session_id
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+  - name: list_connections
+    description: "List all active telnet connections
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing information about all active
+      connections
+
+      \            "
+    inputSchema:
+      type: object
+      title: list_connectionsArguments
+      properties: {}
+  - name: generate_line_chart
+    description: "Generate a line chart from data.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                data: List of data points (dictionaries) to plot
+
+      \                x_key: The key for x-axis values in the data
+
+      \                y_keys: List of keys for y-axis values to plot as
+      multiple lines
+
+      \                title: Chart title
+
+      \                x_label: Label for x-axis (optional)
+
+      \                y_label: Label for y-axis (optional)
+
+      \                save_path: File path to save the chart (optional)
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the chart information or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: generate_line_chartArguments
+      required:
+        - session_id
+        - data
+        - x_key
+        - y_keys
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Data
+        title:
+          type: string
+          title: Title
+          default: Line Chart
+        x_key:
+          type: string
+          title: X Key
+        y_keys:
+          type: array
+          items:
+            type: string
+          title: Y Keys
+        x_label:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: X Label
+          default: null
+        y_label:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Y Label
+          default: null
+        save_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Save Path
+          default: null
+        session_id:
+          type: string
+          title: Session Id
+  - name: generate_bar_chart
+    description: "Generate a bar chart from data.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                data: List of data points (dictionaries) to plot
+
+      \                category_key: The key for category labels in the data
+
+      \                value_keys: List of keys for values to plot as grouped
+      bars
+
+      \                title: Chart title
+
+      \                x_label: Label for x-axis (optional)
+
+      \                y_label: Label for y-axis (optional)
+
+      \                save_path: File path to save the chart (optional)
+
+      \                orientation: Bar orientation: \"vertical\" or
+      \"horizontal\" (default: \"vertical\")
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the chart information or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: generate_bar_chartArguments
+      required:
+        - session_id
+        - data
+        - category_key
+        - value_keys
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Data
+        title:
+          type: string
+          title: Title
+          default: Bar Chart
+        x_label:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: X Label
+          default: null
+        y_label:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Y Label
+          default: null
+        save_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Save Path
+          default: null
+        session_id:
+          type: string
+          title: Session Id
+        value_keys:
+          type: array
+          items:
+            type: string
+          title: Value Keys
+        orientation:
+          type: string
+          title: Orientation
+          default: vertical
+        category_key:
+          type: string
+          title: Category Key
+  - name: generate_scatter_plot
+    description: "Generate a scatter plot from data.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                data: List of data points (dictionaries) to plot
+
+      \                x_key: The key for x-axis values in the data
+
+      \                y_key: The key for y-axis values in the data
+
+      \                color_key: Optional key to use for point colors
+
+      \                size_key: Optional key to use for point sizes
+
+      \                title: Chart title
+
+      \                x_label: Label for x-axis (optional)
+
+      \                y_label: Label for y-axis (optional)
+
+      \                save_path: File path to save the chart (optional)
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the chart information or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: generate_scatter_plotArguments
+      required:
+        - session_id
+        - data
+        - x_key
+        - y_key
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Data
+        title:
+          type: string
+          title: Title
+          default: Scatter Plot
+        x_key:
+          type: string
+          title: X Key
+        y_key:
+          type: string
+          title: Y Key
+        x_label:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: X Label
+          default: null
+        y_label:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Y Label
+          default: null
+        size_key:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Size Key
+          default: null
+        color_key:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Color Key
+          default: null
+        save_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Save Path
+          default: null
+        session_id:
+          type: string
+          title: Session Id
+  - name: generate_interactive_chart
+    description: "Generate an interactive chart using Plotly and return it as HTML.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                chart_type: Type of chart to generate: \"line\", \"bar\",
+      \"scatter\", etc.
+
+      \                data: List of data points (dictionaries) to plot
+
+      \                x_key: The key for x-axis values in the data
+
+      \                y_keys: List of keys for y-axis values to plot
+
+      \                title: Chart title
+
+      \                save_path: Path to save the HTML file (optional)
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the chart HTML or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: generate_interactive_chartArguments
+      required:
+        - session_id
+        - chart_type
+        - data
+        - x_key
+        - y_keys
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          title: Data
+        title:
+          type: string
+          title: Title
+          default: Interactive Chart
+        x_key:
+          type: string
+          title: X Key
+        y_keys:
+          type: array
+          items:
+            type: string
+          title: Y Keys
+        save_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Save Path
+          default: null
+        chart_type:
+          type: string
+          title: Chart Type
+        session_id:
+          type: string
+          title: Session Id
+  - name: generate_heatmap
+    description: "Generate a heatmap visualization.
+
+      \           \ 
+
+      \            Args:
+
+      \                session_id: The unique identifier for the sandbox session
+
+      \                data: 2D list of values to display in the heatmap
+
+      \                row_labels: Optional list of row labels
+
+      \                col_labels: Optional list of column labels
+
+      \                title: Chart title
+
+      \                save_path: File path to save the chart (optional)
+
+      \                cmap: Colormap name (default: \"viridis\")
+
+      \           \ 
+
+      \            Returns:
+
+      \                A dictionary containing the chart information or an error
+      message
+
+      \            "
+    inputSchema:
+      type: object
+      title: generate_heatmapArguments
+      required:
+        - session_id
+        - data
+      properties:
+        cmap:
+          type: string
+          title: Cmap
+          default: viridis
+        data:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+          title: Data
+        title:
+          type: string
+          title: Title
+          default: Heatmap
+        save_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Save Path
+          default: null
+        col_labels:
+          type: array
+          items:
+            type: string
+          title: Col Labels
+          default: null
+        row_labels:
+          type: array
+          items:
+            type: string
+          title: Row Labels
+          default: null
+        session_id:
+          type: string
+          title: Session Id

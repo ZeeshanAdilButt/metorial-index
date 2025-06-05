@@ -1,0 +1,63 @@
+tools:
+  - name: search_gifs
+    description: Search for GIFs on Giphy with a query string
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        lang:
+          type: string
+          description: "Language code (default: en)"
+        limit:
+          type: number
+          description: "Maximum number of objects to return (default: 10, max: 50)"
+        query:
+          type: string
+          description: Search query term or phrase
+        offset:
+          type: number
+          description: "Results offset (default: 0)"
+        rating:
+          enum:
+            - g
+            - pg
+            - pg-13
+            - r
+          type: string
+          description: Content rating (g, pg, pg-13, r)
+  - name: get_random_gif
+    description: Get a random GIF from Giphy, optionally filtered by tag
+    inputSchema:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: Tag to limit random results (optional)
+        rating:
+          enum:
+            - g
+            - pg
+            - pg-13
+            - r
+          type: string
+          description: Content rating (g, pg, pg-13, r)
+  - name: get_trending_gifs
+    description: Get currently trending GIFs on Giphy
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of objects to return (default: 10, max: 50)"
+        offset:
+          type: number
+          description: "Results offset (default: 0)"
+        rating:
+          enum:
+            - g
+            - pg
+            - pg-13
+            - r
+          type: string
+          description: Content rating (g, pg, pg-13, r)

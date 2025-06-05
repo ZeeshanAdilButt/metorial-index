@@ -1,0 +1,321 @@
+tools:
+  - name: backlog_get_projects
+    description: Performs list project get using the Backlog Projects get API.
+      Supports pagination, content filtering. Maximum 20 results per request,
+      with offset for pagination.
+    inputSchema:
+      type: object
+      properties:
+        all:
+          type: boolean
+          default: false
+          description: Only applies to administrators. If true, it returns all projects.
+            If false, it returns only projects they have joined (set to false by
+            default).
+        archived:
+          type: boolean
+          description: For unspecified parameters, this form returns all projects. For
+            false parameters, it returns unarchived projects. For true
+            parameters, it returns archived projects.
+  - name: backlog_get_project
+    description: Performs an project get using the Backlog Project get API.
+    inputSchema:
+      type: object
+      required:
+        - projectIdOrKey
+      properties:
+        projectIdOrKey:
+          type: string
+          description: Project ID or Project Key
+  - name: backlog_get_issues
+    description: Performs list issue get using the Backlog Issues API. Supports
+      pagination, content filtering. Maximum 20 results per request, with offset
+      for pagination.
+    inputSchema:
+      type: object
+      properties:
+        sort:
+          enum:
+            - issueType
+            - category
+            - version
+            - milestone
+            - summary
+            - status
+            - priority
+            - attachment
+            - sharedFile
+            - created
+            - createdUser
+            - updated
+            - updatedUser
+            - assignee
+            - startDate
+            - dueDate
+            - estimatedHours
+            - actualHours
+            - childIssue
+          type: string
+          description: Attribute name for sorting
+        count:
+          type: number
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Number of results (1-100, default 20)
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort order
+        offset:
+          type: number
+          default: 0
+          description: Offset for pagination
+        keyword:
+          type: string
+          description: Keyword for searching
+        statusId:
+          type: array
+          items:
+            type: number
+          description: Status ids
+        projectId:
+          type: array
+          items:
+            type: number
+          description: Project ids
+        assigneeId:
+          type: array
+          items:
+            type: number
+          description: Assignee ids
+        priorityId:
+          type: array
+          items:
+            type: number
+          description: Priority ids
+        createdSince:
+          type: string
+          description: Start date of created date (YYYY-MM-DD format)
+        createdUntil:
+          type: string
+          description: End date of created date (YYYY-MM-DD format)
+  - name: backlog_get_issue
+    description: Performs an issue get using the Backlog Issue API.
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+      properties:
+        issueIdOrKey:
+          type: string
+          description: Issue ID or Issue Key
+  - name: backlog_add_issue
+    description: Add an issue using the Backlog Issue API.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - summary
+        - issueTypeId
+        - priorityId
+      properties:
+        dueDate:
+          type: string
+          description: Due date of the issue (YYYY-MM-DD format)
+        summary:
+          type: string
+          description: Summary of the issue
+        projectId:
+          type: number
+          description: Project id
+        startDate:
+          type: string
+          description: Start date of the issue (YYYY-MM-DD format)
+        versionId:
+          type: number
+          description: Version id
+        assigneeId:
+          type: number
+          description: Assignee id
+        categoryId:
+          type: number
+          description: Category id
+        priorityId:
+          type: number
+          description: Priority id
+        actualHours:
+          type: number
+          description: Actual hours for the issue
+        description:
+          type: string
+          description: Description of the issue
+        issueTypeId:
+          type: number
+          description: Issue type id
+        milestoneId:
+          type: number
+          description: Milestone id
+        estimatedHours:
+          type: number
+          description: Estimated hours for the issue
+  - name: backlog_update_issue
+    description: Update an issue using the Backlog Issue API.
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+      properties:
+        comment:
+          type: string
+          description: Comment
+        dueDate:
+          type: string
+          description: Due date
+        summary:
+          type: string
+          description: Summary
+        statusId:
+          type: number
+          description: Status id
+        startDate:
+          type: string
+          description: Start date
+        versionId:
+          type: array
+          items:
+            type: number
+          description: Version ids
+        assigneeId:
+          type: number
+          description: Assignee id
+        categoryId:
+          type: array
+          items:
+            type: number
+          description: Category ids
+        priorityId:
+          type: number
+          description: Priority id
+        actualHours:
+          type: number
+          description: Actual hours
+        description:
+          type: string
+          description: Description
+        issueTypeId:
+          type: number
+          description: Issue type id
+        milestoneId:
+          type: array
+          items:
+            type: number
+          description: Milestone ids
+        attachmentId:
+          type: array
+          items:
+            type: number
+          description: Attachment ids
+        issueIdOrKey:
+          type: string
+          description: Issue ID or Issue Key
+        parentIssueId:
+          type: number
+          description: Parent issue id
+        estimatedHours:
+          type: number
+          description: Estimated hours
+        notifiedUserId:
+          type: array
+          items:
+            type: number
+          description: Notified user ids
+  - name: backlog_delete_issue
+    description: Delete an issue using the Backlog Issue API.
+    inputSchema:
+      type: object
+      required:
+        - issueIdOrKey
+      properties:
+        issueIdOrKey:
+          type: string
+          description: Issue ID or Issue Key
+  - name: backlog_get_wikis
+    description: Performs list wikis get using the Backlog Wiki API
+    inputSchema:
+      type: object
+      required:
+        - projectIdOrKey
+      properties:
+        keywords:
+          type: string
+          description: Keyword for searching
+        projectIdOrKey:
+          type: string
+          description: Project ID or Project Key
+  - name: backlog_get_wiki
+    description: Performs an wiki get using the Backlog Wiki API.
+    inputSchema:
+      type: object
+      required:
+        - wikiId
+      properties:
+        wikiId:
+          type: number
+          description: Wiki page ID
+  - name: backlog_add_wiki
+    description: Add an wiki using the Backlog Wiki API.
+    inputSchema:
+      type: object
+      required:
+        - projectId
+        - name
+        - content
+      properties:
+        name:
+          type: string
+          description: Page Name
+        content:
+          type: string
+          description: Content
+        projectId:
+          type: number
+          description: Project ID
+        mailNotify:
+          type: boolean
+          description: True make to notify by Email
+  - name: backlog_update_wiki
+    description: Update an wiki using the Backlog Wiki API.
+    inputSchema:
+      type: object
+      required:
+        - wikiId
+      properties:
+        name:
+          type: string
+          description: Page Name
+        wikiId:
+          type: number
+          description: Wiki page ID
+        content:
+          type: string
+          description: Content
+        mailNotify:
+          type: boolean
+          description: True make to notify by Email
+  - name: backlog_delete_wiki
+    description: Delete an wiki using the Backlog Wiki API.
+    inputSchema:
+      type: object
+      required:
+        - wikiId
+      properties:
+        wikiId:
+          type: number
+          description: Wiki page ID
+        mailNotify:
+          type: boolean
+          description: True make to notify by Email

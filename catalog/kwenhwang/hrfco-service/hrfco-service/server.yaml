@@ -1,0 +1,17 @@
+identifier: kwenhwang/hrfco-service/hrfco-service
+repo:
+  provider: github.com
+  url: https://github.com/kwenhwang/hrfco-service
+  name: hrfco-service
+  owner: kwenhwang
+server:
+  subdirectory: /
+  name: HRFCO Service
+  description: Retrieve real-time hydrological data such as water levels,
+    rainfall, and dam discharge. Access detailed information by observation
+    station and filter time series data for statistics. Enhance your
+    applications with accurate and timely water information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

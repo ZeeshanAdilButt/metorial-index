@@ -1,0 +1,18 @@
+identifier: jasonmorganson/servers/memory
+repo:
+  provider: github.com
+  url: https://github.com/jasonmorganson/servers
+  name: servers
+  owner: jasonmorganson
+server:
+  subdirectory: /src/memory
+  name: Knowledge Graph Memory Server
+  description: Enable your agents to remember user information across chats by
+    utilizing a local knowledge graph. This server allows for the creation,
+    management, and retrieval of entities and their relationships, enhancing
+    personalized interactions. Improve user engagement by maintaining context
+    and continuity in conversations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

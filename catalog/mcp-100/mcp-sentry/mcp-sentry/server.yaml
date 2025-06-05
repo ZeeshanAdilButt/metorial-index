@@ -1,0 +1,17 @@
+identifier: mcp-100/mcp-sentry/mcp-sentry
+repo:
+  provider: github.com
+  url: https://github.com/MCP-100/mcp-sentry
+  name: mcp-sentry
+  owner: MCP-100
+server:
+  subdirectory: /
+  name: Sentry Issue Analyzer
+  description: Retrieve and analyze issues from Sentry.io to enhance your
+    debugging process. Inspect error reports, stack traces, and other critical
+    information seamlessly. Streamline your workflow by integrating Sentry
+    insights directly into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

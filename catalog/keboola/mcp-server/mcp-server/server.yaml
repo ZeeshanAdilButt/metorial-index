@@ -1,0 +1,17 @@
+identifier: keboola/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/keboola/mcp-server
+  name: mcp-server
+  owner: keboola
+server:
+  subdirectory: /
+  name: Keboola Explorer Server
+  description: Provide seamless access to Keboola Connection data by listing
+    buckets, tables, components, and configurations. Preview and export table
+    data efficiently to enhance your data workflows. Integrate Keboola Storage
+    API with ease for streamlined data exploration and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

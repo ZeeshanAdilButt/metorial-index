@@ -1,0 +1,250 @@
+tools:
+  - name: create_task_list
+    description: "Create a new task list and save it to the .tasks folder.
+
+      \   \ 
+
+      \    Args:
+
+      \        title: Title for the task list
+
+      \        description: Short 2-3 word description for the filename (e.g.,
+      \"refactor-authentication\")
+
+      \        repo_path: Path to the repository root (defaults to current
+      directory)
+
+      \        include_metadata: Whether to include creation date/time
+
+      \   \ 
+
+      \    Returns:
+
+      \        Path to the created task list file
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_task_listArguments
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          title: Title
+        repo_path:
+          type: string
+          title: Repo Path
+          default: .
+        description:
+          type: string
+          title: Description
+        include_metadata:
+          type: boolean
+          title: Include Metadata
+          default: true
+  - name: convert_plan_to_tasks
+    description: "Convert a Cursor agent's plan text into a formatted Markdown task
+      list and save it.
+
+      \   \ 
+
+      \    Args:
+
+      \        plan_text: The plan text from the Cursor agent
+
+      \        title: Title for the task list
+
+      \        description: Short 2-3 word description for the filename (e.g.,
+      \"refactor-authentication\")
+
+      \        repo_path: Path to the repository root (defaults to current
+      directory)
+
+      \        include_metadata: Whether to include metadata like date and time
+
+      \       \ 
+
+      \    Returns:
+
+      \        Path to the created task list file
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_plan_to_tasksArguments
+      required:
+        - plan_text
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          title: Title
+        plan_text:
+          type: string
+          title: Plan Text
+        repo_path:
+          type: string
+          title: Repo Path
+          default: .
+        description:
+          type: string
+          title: Description
+        include_metadata:
+          type: boolean
+          title: Include Metadata
+          default: true
+  - name: add_task
+    description: "Add a new task to an existing task list.
+
+      \   \ 
+
+      \    Args:
+
+      \        description: The description identifier of the task list file
+
+      \        task_text: Text for the new task
+
+      \        repo_path: Path to the repository root (defaults to current
+      directory)
+
+      \        section: Which section to add the task to (defaults to \"Tasks\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        Updated markdown task list
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_taskArguments
+      required:
+        - description
+        - task_text
+      properties:
+        section:
+          type: string
+          title: Section
+          default: Tasks
+        repo_path:
+          type: string
+          title: Repo Path
+          default: .
+        task_text:
+          type: string
+          title: Task Text
+        description:
+          type: string
+          title: Description
+  - name: mark_task_complete
+    description: "Mark a specific task as completed.
+
+      \   \ 
+
+      \    Args:
+
+      \        description: The description identifier of the task list file
+
+      \        task_number: The number of the task to mark as complete
+
+      \        repo_path: Path to the repository root (defaults to current
+      directory)
+
+      \        section: Which section the task is in (defaults to \"Tasks\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        Updated markdown task list
+
+      \    "
+    inputSchema:
+      type: object
+      title: mark_task_completeArguments
+      required:
+        - description
+        - task_number
+      properties:
+        section:
+          type: string
+          title: Section
+          default: Tasks
+        repo_path:
+          type: string
+          title: Repo Path
+          default: .
+        description:
+          type: string
+          title: Description
+        task_number:
+          type: integer
+          title: Task Number
+  - name: check_all_tasks_complete
+    description: "Check if all tasks are complete and mark the task list as
+      completed.
+
+      \   \ 
+
+      \    Args:
+
+      \        description: The description identifier of the task list file
+
+      \        repo_path: Path to the repository root (defaults to current
+      directory)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Message indicating if the task list was marked as completed
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_all_tasks_completeArguments
+      required:
+        - description
+      properties:
+        repo_path:
+          type: string
+          title: Repo Path
+          default: .
+        description:
+          type: string
+          title: Description
+  - name: list_task_files
+    description: "List all task files in the .tasks directory.
+
+      \   \ 
+
+      \    Args:
+
+      \        repo_path: Path to the repository root (defaults to current
+      directory)
+
+      \        include_completed: Whether to include completed task lists
+
+      \       \ 
+
+      \    Returns:
+
+      \        List of task files with their completion status
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_task_filesArguments
+      properties:
+        repo_path:
+          type: string
+          title: Repo Path
+          default: .
+        include_completed:
+          type: boolean
+          title: Include Completed
+          default: true

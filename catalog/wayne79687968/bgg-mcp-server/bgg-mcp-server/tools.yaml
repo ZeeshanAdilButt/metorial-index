@@ -1,0 +1,58 @@
+tools:
+  - name: search_game
+    description: Search board games by name. You can specify type (boardgame,
+      boardgameexpansion, boardgameaccessory, rpgitem, videogame,
+      boardgamedesigner).
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        type:
+          type: string
+          default: boardgame
+          description: Type to search, default is boardgame. Multiple types can be
+            separated by commas.
+        exact:
+          type: boolean
+          default: false
+          description: Whether to match exactly
+        query:
+          type: string
+          description: Search keyword
+  - name: get_thing
+    description: Get detailed information for the specified id(s) (up to 20) of board games.
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: BGG ID(s) of the game(s), can be comma-separated, up to 20
+        type:
+          type: string
+          description: Filter returned types (optional)
+        stats:
+          type: boolean
+          default: true
+          description: Whether to include ranking stats
+  - name: get_hot_items
+    description: Get the current hot board games.
+    inputSchema:
+      type: object
+      properties:
+        type:
+          type: string
+          default: boardgame
+          description: Hot item type, e.g. boardgame
+  - name: get_user_collection
+    description: Get the collection list of the specified user.
+    inputSchema:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Username

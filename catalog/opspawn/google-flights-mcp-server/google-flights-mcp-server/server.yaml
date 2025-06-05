@@ -1,0 +1,17 @@
+identifier: opspawn/google-flights-mcp-server/google-flights-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/opspawn/Google-Flights-MCP-Server
+  name: Google-Flights-MCP-Server
+  owner: opspawn
+server:
+  subdirectory: /
+  name: Google Flights Server
+  description: Fetch and compare flight options effortlessly. Access real-time
+    flight data for one-way and round-trip journeys, tailored to your
+    preferences. Simplify your travel planning with powerful tools that help you
+    find the best flights for your needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

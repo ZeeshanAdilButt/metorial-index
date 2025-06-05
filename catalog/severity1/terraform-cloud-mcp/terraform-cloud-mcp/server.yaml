@@ -1,0 +1,17 @@
+identifier: severity1/terraform-cloud-mcp/terraform-cloud-mcp
+repo:
+  provider: github.com
+  url: https://github.com/severity1/terraform-cloud-mcp
+  name: terraform-cloud-mcp
+  owner: severity1
+server:
+  subdirectory: /
+  name: Terraform Cloud Integration
+  description: Manage your Terraform infrastructure effortlessly through natural
+    conversation. Interact with the Terraform Cloud API to create, update, and
+    manage workspaces and runs seamlessly. Validate tokens and retrieve user
+    information with ease, enhancing your infrastructure management experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

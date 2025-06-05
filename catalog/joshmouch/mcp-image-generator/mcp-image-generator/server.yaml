@@ -1,0 +1,17 @@
+identifier: joshmouch/mcp-image-generator/mcp-image-generator
+repo:
+  provider: github.com
+  url: https://github.com/joshmouch/mcp-image-generator
+  name: mcp-image-generator
+  owner: joshmouch
+server:
+  subdirectory: /
+  name: DALL-E Image Generator
+  description: Generate, edit, and create variations of images using OpenAI's
+    DALL-E API. Easily integrate image generation capabilities into your
+    workflows with support for multiple DALL-E models and customizable
+    parameters. Validate your OpenAI API key to ensure seamless operation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

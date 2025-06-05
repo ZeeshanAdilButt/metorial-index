@@ -1,0 +1,18 @@
+identifier: nozomuts/datadog-mcp/datadog-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Nozomuts/datadog-mcp
+  name: datadog-mcp
+  owner: Nozomuts
+server:
+  subdirectory: /
+  name: Datadog API Integration Server
+  description: Enable powerful search and aggregation of logs and trace spans from
+    Datadog directly within your LLM workflows. Perform flexible queries,
+    retrieve detailed logs and spans, and aggregate trace data by various
+    dimensions for insightful analysis. Seamlessly integrate Datadog monitoring
+    data into your applications and tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

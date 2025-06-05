@@ -1,0 +1,16 @@
+identifier: aeon-seraph/searxng-mcp/searxng-mcp
+repo:
+  provider: github.com
+  url: https://github.com/aeon-seraph/searxng-mcp
+  name: searxng-mcp
+  owner: aeon-seraph
+server:
+  subdirectory: /
+  name: SearXNG Model Context Protocol Server
+  description: Enable language models to perform web searches through SearXNG.
+    Send search queries and receive formatted results seamlessly, enhancing your
+    model's capabilities with real-time web data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

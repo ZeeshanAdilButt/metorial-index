@@ -1,0 +1,18 @@
+identifier: spheronfdn/spheron-mcp-plugin/spheron-mcp-plugin
+repo:
+  provider: github.com
+  url: https://github.com/spheronFdn/spheron-mcp-plugin
+  name: spheron-mcp-plugin
+  owner: spheronFdn
+server:
+  subdirectory: /mcp-server
+  name: Spheron Network Plugin
+  description: Enable seamless deployment and management of compute resources on
+    the Spheron Network directly through your LLM interface. Easily deploy
+    compute configurations, check wallet balances, retrieve deployment URLs, and
+    get detailed lease information. Simplify your cloud compute workflows with
+    integrated commands and automation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

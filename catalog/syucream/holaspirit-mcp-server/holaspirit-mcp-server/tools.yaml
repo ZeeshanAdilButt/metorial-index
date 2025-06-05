@@ -1,0 +1,120 @@
+tools:
+  - name: list_tasks
+    description: List all tasks in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: list_metrics
+    description: List all metrics in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: list_circles
+    description: List all circles in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: get_circle
+    description: Get details of a specific circle
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - circleId
+      properties:
+        circleId:
+          type: string
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: list_roles
+    description: List all roles in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: get_role
+    description: Get details of a specific role
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - roleId
+      properties:
+        roleId:
+          type: string
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: list_domains
+    description: List all domains in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: list_policies
+    description: List all policies in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: list_meetings
+    description: List all meetings in the organization
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+      properties:
+        organizationId:
+          type: string
+      additionalProperties: false
+  - name: get_meeting
+    description: Get details of a specific meeting
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - organizationId
+        - meetingId
+      properties:
+        meetingId:
+          type: string
+        organizationId:
+          type: string
+      additionalProperties: false

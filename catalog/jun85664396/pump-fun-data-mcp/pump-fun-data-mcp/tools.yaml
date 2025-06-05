@@ -1,0 +1,55 @@
+tools:
+  - name: get_featured_coins
+    description: Get a list of featured coins
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 24
+          description: "The number of coins to return (default: 24)"
+        offset:
+          type: number
+          default: 0
+          description: "The offset to start from (default: 0)"
+        includeNsfw:
+          type: boolean
+          default: true
+          description: "Include NSFW coins (default: true)"
+  - name: get_coins
+    description: Get a list of coins
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        sort:
+          type: string
+          default: market_cap
+          description: The field to sort by (market_cap, last_trade_timestamp,
+            created_timestamp, last_reply)
+        limit:
+          type: number
+          default: 24
+          description: "The number of coins to return (default: 24)"
+        order:
+          type: string
+          default: DESC
+          description: The order to sort by (ASC, DESC)
+        offset:
+          type: number
+          default: 0
+          description: "The offset to start from (default: 0)"
+        includeNsfw:
+          type: boolean
+          default: true
+          description: "Include NSFW coins (default: true)"
+  - name: get_coin_info
+    description: Get information about a coin
+    inputSchema:
+      type: object
+      required:
+        - mintId
+      properties:
+        mintId:
+          type: string
+          description: The mint id of the coin(coin address)

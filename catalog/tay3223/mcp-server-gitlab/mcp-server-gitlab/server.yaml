@@ -1,0 +1,16 @@
+identifier: tay3223/mcp-server-gitlab/mcp-server-gitlab
+repo:
+  provider: github.com
+  url: https://github.com/tay3223/mcp-server-gitlab
+  name: mcp-server-gitlab
+  owner: tay3223
+server:
+  subdirectory: /
+  name: mcp-server-gitlab
+  description: Simplify your interactions with private GitLab instances. Access
+    projects, files, commits, and merge requests through a streamlined API
+    layer, enhancing your development workflow with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,23 @@
+identifier: emeryray2002/mcp-secops-v3/mcp-secops-v3
+repo:
+  provider: github.com
+  url: https://github.com/emeryray2002/mcp-secops-v3
+  name: mcp-secops-v3
+  owner: emeryray2002
+server:
+  subdirectory: /
+  name: Chronicle SecOps
+  description: >-
+    Interact with Google's Chronicle Security Operations suite to enhance your
+    security monitoring. Search for security events, retrieve alerts, and look
+    up entity information seamlessly. Leverage powerful security tools to stay
+    ahead of potential threats. Set "env": {
+            "CHRONICLE_PROJECT_ID": "your-google-cloud-project-id",
+            "CHRONICLE_CUSTOMER_ID": "your-chronicle-customer-id",
+            "CHRONICLE_REGION": "us"
+          }
+    in your config file.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

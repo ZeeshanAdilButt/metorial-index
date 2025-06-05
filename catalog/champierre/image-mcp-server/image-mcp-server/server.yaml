@@ -1,0 +1,17 @@
+identifier: champierre/image-mcp-server/image-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/champierre/image-mcp-server
+  name: image-mcp-server
+  owner: champierre
+server:
+  subdirectory: /
+  name: Image Analysis Server
+  description: Analyze images by providing their URLs and receive detailed
+    insights using advanced image recognition. Leverage the power of the
+    GPT-4o-mini model for high-accuracy image analysis and validation of image
+    URLs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

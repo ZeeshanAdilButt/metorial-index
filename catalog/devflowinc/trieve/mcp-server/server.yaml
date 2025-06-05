@@ -1,0 +1,14 @@
+identifier: devflowinc/trieve/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/devflowinc/trieve
+  name: trieve
+  owner: devflowinc
+server:
+  subdirectory: /clients/mcp-server
+  name: Trieve
+  description: Provides agentic tools for the Trieve API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

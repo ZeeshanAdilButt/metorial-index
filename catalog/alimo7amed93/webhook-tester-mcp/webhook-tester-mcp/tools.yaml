@@ -1,0 +1,56 @@
+tools:
+  - name: create_new_webhook
+    description: ""
+    inputSchema:
+      type: object
+      title: create_new_webhookArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+        payload:
+          type: string
+          title: Payload
+          default: "{}"
+        content_type:
+          type: string
+          title: Content Type
+          default: application/json
+        response_code:
+          type: string
+          title: Response Code
+          default: "200"
+        response_delay:
+          type: integer
+          title: Response Delay
+          default: 0
+  - name: list_all_webhooks
+    description: ""
+    inputSchema:
+      type: object
+      title: list_all_webhooksArguments
+      properties: {}
+  - name: get_webhook_details
+    description: ""
+    inputSchema:
+      type: object
+      title: get_webhook_detailsArguments
+      required:
+        - webhook_id
+      properties:
+        webhook_id:
+          type: string
+          title: Webhook Id
+  - name: delete_webhook
+    description: ""
+    inputSchema:
+      type: object
+      title: delete_webhookArguments
+      required:
+        - webhook_id
+      properties:
+        webhook_id:
+          type: string
+          title: Webhook Id

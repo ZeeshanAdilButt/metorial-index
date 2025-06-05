@@ -1,0 +1,14 @@
+identifier: baidu-maps/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/baidu-maps/mcp
+  name: mcp
+  owner: baidu-maps
+server:
+  subdirectory: /
+  name: 百度地图 MCP Server
+  description: 快速接入百度地图API，提供地理编码、逆地理编码、路线规划等多种地图服务。通过简单配置，智能体助手可以轻松调用地图功能，提升用户体验。
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

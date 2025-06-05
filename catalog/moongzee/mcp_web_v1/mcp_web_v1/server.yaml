@@ -1,0 +1,18 @@
+identifier: moongzee/mcp_web_v1/mcp_web_v1
+repo:
+  provider: github.com
+  url: https://github.com/moongzee/mcp_web_v1
+  name: mcp_web_v1
+  owner: moongzee
+server:
+  subdirectory: /
+  name: MCP Web Server
+  description: Provide a web-based server implementation of the Model Context
+    Protocol to enable dynamic integration of LLMs with external data and tools.
+    Facilitate seamless access to resources, tools, and prompts over HTTP for
+    enhanced LLM application capabilities. Simplify the deployment of
+    MCP-compliant servers for web environments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

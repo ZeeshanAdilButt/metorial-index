@@ -1,0 +1,22 @@
+tools:
+  - name: search
+    description: Perform a web search using Traylinx's API, which provides detailed
+      and contextually relevant results with citations. By default, no time
+      filtering is applied to search results.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query to perform
+        search_recency_filter:
+          enum:
+            - month
+            - week
+            - day
+            - hour
+          type: string
+          description: "Filter search results by recency (options: month, week, day,
+            hour). If not specified, no time filtering is applied."

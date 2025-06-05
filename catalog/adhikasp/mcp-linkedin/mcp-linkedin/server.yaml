@@ -1,0 +1,15 @@
+identifier: adhikasp/mcp-linkedin/mcp-linkedin
+repo:
+  provider: github.com
+  url: https://github.com/adhikasp/mcp-linkedin
+  name: mcp-linkedin
+  owner: adhikasp
+server:
+  subdirectory: /
+  name: LinkedIn Interaction Server
+  description: MCP server to interact with LinkedIn's Feeds and Job API using
+    unofficial LinkedIn API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

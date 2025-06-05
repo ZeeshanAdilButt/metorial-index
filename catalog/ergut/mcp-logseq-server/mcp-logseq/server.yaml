@@ -1,0 +1,14 @@
+identifier: ergut/mcp-logseq-server/mcp-logseq
+repo:
+  provider: github.com
+  url: https://github.com/ergut/mcp-logseq-server
+  name: mcp-logseq-server
+  owner: ergut
+server:
+  subdirectory: /
+  name: LogSeq
+  description: Interact with LogSeq knowledge management system via API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

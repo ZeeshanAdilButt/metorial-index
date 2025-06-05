@@ -1,0 +1,17 @@
+identifier: taiste/harvest-mcp-server/harvest-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/taiste/harvest-mcp-server
+  name: harvest-mcp-server
+  owner: taiste
+server:
+  subdirectory: /
+  name: Harvest MCP Server
+  description: Integrate your Harvest time tracking and project management
+    seamlessly with AI assistants. Manage time entries, projects, clients, and
+    more through simple queries. Enhance your productivity by leveraging AI to
+    interact with your Harvest account effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

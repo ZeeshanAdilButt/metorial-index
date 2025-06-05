@@ -1,0 +1,18 @@
+identifier: akhrhysd/mcp-pokeapi-server/mcp-pokeapi-server
+repo:
+  provider: github.com
+  url: https://github.com/AkhrHysd/mcp-pokeapi-server
+  name: mcp-pokeapi-server
+  owner: AkhrHysd
+server:
+  subdirectory: /
+  name: PokeAPI MCP Server
+  description: Provide Pokémon information retrieval tools via the Model Context
+    Protocol (MCP) using PokeAPI. Enable LLM applications to fetch detailed
+    Pokémon data by name or ID through a standardized JSON-RPC interface over
+    stdio. Simplify integration of Pokémon data into AI workflows with
+    schema-validated tool calls.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

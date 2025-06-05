@@ -1,0 +1,18 @@
+identifier: kranners/jailbreak-mcp/hyper-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kranners/jailbreak-mcp
+  name: jailbreak-mcp
+  owner: kranners
+server:
+  subdirectory: /
+  name: Hyper MCP Server Wrapper
+  description: Enable full usage of the Model Context Protocol without limitations
+    on tools or missing features. Seamlessly integrate multiple MCP servers and
+    forward commands and results transparently. Simplify MCP client
+    configuration and extend support for static tools with plans for dynamic
+    capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

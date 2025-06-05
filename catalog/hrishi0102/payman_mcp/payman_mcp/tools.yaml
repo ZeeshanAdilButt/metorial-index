@@ -1,0 +1,252 @@
+tools:
+  - name: set-api-key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - apiKey
+      properties:
+        apiKey:
+          type: string
+          description: The Payman API key to use for authentication
+      additionalProperties: false
+  - name: create-test-rails-payee
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the payee
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional tags for the payee
+        type:
+          type: string
+          const: TEST_RAILS
+          default: TEST_RAILS
+          description: Type of payment rails to use
+      additionalProperties: false
+  - name: create-us-ach-payee
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accountType
+        - accountNumber
+        - routingNumber
+        - accountHolderName
+        - accountHolderType
+        - name
+      properties:
+        name:
+          type: string
+          description: The name you wish to associate with this payee for future lookups
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional labels you wish to assign to this payee
+        type:
+          type: string
+          const: US_ACH
+          default: US_ACH
+          description: Type of payment rails to use
+        accountType:
+          enum:
+            - checking
+            - savings
+          type: string
+          description: The type of account (checking or savings)
+        accountNumber:
+          type: string
+          description: The bank account number for the account
+        routingNumber:
+          type: string
+          description: The routing number of the bank
+        contactDetails:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: The email address of the payee contact
+            address:
+              type: object
+              properties:
+                city:
+                  type: string
+                  description: City
+                line1:
+                  type: string
+                  description: Address line 1
+                line2:
+                  type: string
+                  description: Address line 2
+                state:
+                  type: string
+                  description: State
+                country:
+                  type: string
+                  description: Country
+                postalCode:
+                  type: string
+                  description: Postal code
+              description: The address of the payee contact
+              additionalProperties: false
+            phoneNumber:
+              type: string
+              description: The phone number of the payee contact
+          description: Contact details for this payee
+          additionalProperties: false
+        accountHolderName:
+          type: string
+          description: The name of the account holder
+        accountHolderType:
+          enum:
+            - individual
+            - business
+          type: string
+          description: The type of the account holder
+      additionalProperties: false
+  - name: create-crypto-payee
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+        - chain
+        - currency
+        - name
+      properties:
+        name:
+          type: string
+          description: The name you wish to associate with this payee for future lookups
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional labels you wish to assign to this payee
+        type:
+          type: string
+          const: CRYPTO_ADDRESS
+          default: CRYPTO_ADDRESS
+          description: Type of payment rails to use
+        chain:
+          type: string
+          description: The blockchain to use for the transaction
+        address:
+          type: string
+          description: The cryptocurrency address to send funds to
+        currency:
+          type: string
+          description: The currency/token to use for the transaction
+        contactDetails:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: The email address of the payee contact
+            address:
+              type: object
+              properties:
+                city:
+                  type: string
+                  description: City
+                line1:
+                  type: string
+                  description: Address line 1
+                line2:
+                  type: string
+                  description: Address line 2
+                state:
+                  type: string
+                  description: State
+                country:
+                  type: string
+                  description: Country
+                postalCode:
+                  type: string
+                  description: Postal code
+              description: The address of the payee contact
+              additionalProperties: false
+            phoneNumber:
+              type: string
+              description: The phone number of the payee contact
+          description: Contact details for this payee
+          additionalProperties: false
+      additionalProperties: false
+  - name: send-payment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - payeeId
+        - amountDecimal
+      properties:
+        memo:
+          type: string
+          description: Optional memo for the payment
+        payeeId:
+          type: string
+          description: ID of the payee to send payment to
+        metadata:
+          type: object
+          description: Optional metadata for the payment
+          additionalProperties: {}
+        walletId:
+          type: string
+          description: The ID of the specific wallet from which to send the funds
+        amountDecimal:
+          type: number
+          description: Amount to send (in decimal)
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: search-payees
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          description: The name of the payee to search for (partial, case-insensitive match)
+        cryptoChain:
+          type: string
+          description: The crypto chain to search for
+        contactEmail:
+          type: string
+          format: email
+          description: The contact email to search for
+        contactTaxId:
+          type: string
+          description: The contact tax id to search for
+        accountNumber:
+          type: string
+          description: The US Bank account number to search for
+        cryptoAddress:
+          type: string
+          description: The crypto address to search for
+        routingNumber:
+          type: string
+          description: The US Bank routing number to search for
+        agentReference:
+          type: string
+          description: The Payman agent reference (id or handle) to search for
+        cryptoCurrency:
+          type: string
+          description: The crypto currency to search for
+        contactPhoneNumber:
+          type: string
+          description: The contact phone number to search for
+      additionalProperties: false
+  - name: get-balance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

@@ -1,0 +1,55 @@
+tools:
+  - name: synth-execute
+    description: SynthDefのコードを生成し、そのコードを実行して音を出します。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - synth
+      properties:
+        synth:
+          type: object
+          required:
+            - name
+            - code
+          properties:
+            code:
+              type: string
+              description: シンセのコード
+            name:
+              type: string
+              description: シンセの名前
+          description: 再生するシンセの情報
+          additionalProperties: false
+        duration:
+          type: number
+          description: 再生時間（ミリ秒）。デフォルトは5000（5秒）
+      additionalProperties: false
+  - name: multi-synth-execute
+    description: 複数のSynthDefを同時に実行します。
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - synths
+      properties:
+        synths:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - code
+            properties:
+              code:
+                type: string
+                description: シンセのコード
+              name:
+                type: string
+                description: シンセの名前
+            additionalProperties: false
+          description: 再生するシンセのリスト
+        duration:
+          type: number
+          description: 再生時間（ミリ秒）。デフォルトは10000（10秒）
+      additionalProperties: false

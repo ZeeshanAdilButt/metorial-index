@@ -1,0 +1,17 @@
+identifier: doitintl/doit-mcp-server/doit-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/doitintl/doit-mcp-server
+  name: doit-mcp-server
+  owner: doitintl
+server:
+  subdirectory: /
+  name: DoiT MCP Server
+  description: Access DoiT platform data for troubleshooting and analysis.
+    Retrieve cloud incidents, anomalies, and analytics reports seamlessly.
+    Enhance your LLM capabilities with real-time data insights from the DoiT
+    API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

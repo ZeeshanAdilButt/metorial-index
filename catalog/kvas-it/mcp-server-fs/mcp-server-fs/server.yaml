@@ -1,0 +1,15 @@
+identifier: kvas-it/mcp-server-fs/mcp-server-fs
+repo:
+  provider: github.com
+  url: https://github.com/kvas-it/mcp-server-fs
+  name: mcp-server-fs
+  owner: kvas-it
+server:
+  subdirectory: /
+  name: File System Server
+  description: Provide basic file system operations for navigation, reading,
+    writing, and analyzing files.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

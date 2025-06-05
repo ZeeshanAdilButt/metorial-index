@@ -1,0 +1,161 @@
+tools:
+  - name: get_article_url
+    description: >
+      
+      Retrieve the URL of an article hosted on arXiv.org based on its title. Use
+      this tool only 
+
+      for retrieving the URL. This tool searches for the article based on its
+      title, and then 
+
+      fetches the corresponding URL from arXiv.org.
+
+
+      Args:
+          title: Article title.
+
+      Returns:
+          URL that can be used to retrieve the article.
+    inputSchema:
+      type: object
+      title: get_article_urlArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+  - name: download_article
+    description: >
+      
+      Download the article hosted on arXiv.org as a PDF file. This tool searches
+      for the article based on its 
+
+      title, retrieves the article's PDF, and saves it to a specified download
+      location using the arXiv ID as 
+
+      the filename.
+
+
+      Args:
+          title: Article title.
+
+      Returns:
+          Success or error message.
+    inputSchema:
+      type: object
+      title: download_articleArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+  - name: load_article_to_context
+    description: >
+      
+      Load the article hosted on arXiv.org into context. This tool searches for
+      the article based on its 
+
+      title, retrieves the article content, and loads text content into LLM
+      context.
+
+
+      Args:
+          title: Article title.
+
+      Returns:
+          Article as a text string or error message.
+    inputSchema:
+      type: object
+      title: load_article_to_contextArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+  - name: get_details
+    description: >
+      
+      Retrieve information of an article hosted on arXiv.org based on its title.
+      This tool searches for the article 
+
+      based on its title and retrieves arXiv ID, title, authors, link, direct
+      PDF URL, published timestamp, last 
+
+      updated timestamp, and summary.
+
+
+      Args:
+          title: Article title.
+
+      Returns:
+          A JSON-formatted string containing article details if retrieval is successful; 
+          otherwise, a plain error message string.
+    inputSchema:
+      type: object
+      title: get_detailsArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+  - name: search_arxiv
+    description: >
+      
+      Performs a search query on the arXiv API based on specified parameters and
+      returns matching article metadata.
+
+      This function allows for flexible querying of the arXiv database. Only
+      parameters that are explicitly provided
+
+      will be included in the final search query. Results are returned in a
+      JSON-formatted string with article titles 
+
+      as keys and their corresponding arXiv IDs as values.
+
+
+      Args:
+          all_fields: General keyword search across all metadata fields including title, abstract, authors, comments, and categories.
+          title: Keyword(s) to search for within the titles of articles.
+          author: Author name(s) to filter results by.
+          abstract: Keyword(s) to search for within article abstracts.
+          start: Index of the first result to return; used for paginating through search results. Defaults to 0.
+
+      Returns:
+          A JSON-formatted string containing article titles and their associated arXiv IDs;
+          otherwise, a plain error message string.
+    inputSchema:
+      type: object
+      title: search_arxivArguments
+      properties:
+        start:
+          type: integer
+          title: Start
+          default: 0
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        author:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Author
+          default: null
+        abstract:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Abstract
+          default: null
+        all_fields:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: All Fields
+          default: null

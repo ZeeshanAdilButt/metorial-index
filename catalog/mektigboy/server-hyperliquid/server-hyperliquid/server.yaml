@@ -1,0 +1,17 @@
+identifier: mektigboy/server-hyperliquid/server-hyperliquid
+repo:
+  provider: github.com
+  url: https://github.com/mektigboy/server-hyperliquid
+  name: server-hyperliquid
+  owner: mektigboy
+server:
+  subdirectory: /
+  name: Hyperliquid MCP Server
+  description: Retrieve real-time and historical trading data for various tokens
+    on Hyperliquid. Access mid prices, candlestick data, and order book
+    information seamlessly. Enhance your trading strategies with integrated data
+    from the Hyperliquid SDK.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

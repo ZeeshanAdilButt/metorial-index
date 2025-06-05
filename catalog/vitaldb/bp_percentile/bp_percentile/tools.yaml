@@ -1,0 +1,76 @@
+tools:
+  - name: bp_percentile
+    description: "
+
+      \    혈압 센타일(percentile)을 계산하는 함수
+
+      \   \ 
+
+      \    Parameters:
+
+      \    -----------
+
+      \    years : int
+
+      \        나이(년)
+
+      \    months : int
+
+      \        나이(월)
+
+      \    height : int
+
+      \        키(cm)
+
+      \    sex : str
+
+      \        성별 ('male' 또는 'female')
+
+      \    systolic : int
+
+      \        수축기 혈압(mmHg)
+
+      \    diastolic : int
+
+      \        이완기 혈압(mmHg)
+
+      \   \ 
+
+      \    Returns:
+
+      \    --------
+
+      \    dict
+
+      \        수축기 및 이완기 혈압 센타일 결과를 포함하는 딕셔너리
+
+      \    "
+    inputSchema:
+      type: object
+      title: bp_percentileArguments
+      required:
+        - years
+        - months
+        - height
+        - sex
+        - systolic
+        - diastolic
+      properties:
+        sex:
+          type: string
+          title: Sex
+        years:
+          type: integer
+          title: Years
+        height:
+          type: integer
+          title: Height
+        months:
+          type: integer
+          title: Months
+        systolic:
+          type: integer
+          title: Systolic
+        diastolic:
+          type: integer
+          title: Diastolic

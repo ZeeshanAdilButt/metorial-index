@@ -1,0 +1,86 @@
+tools:
+  - name: query_collection
+    description: "
+
+      \    Search a Qdrant collection using semantic search with OpenAI
+      embeddings.
+
+
+      \    Args:
+
+      \        collection_name: Name of the Qdrant collection to search
+
+      \        query_text: The search query in natural language
+
+      \        limit: Maximum number of results to return (default: 5)
+
+      \        model: OpenAI embedding model to use (default:
+      text-embedding-3-small)
+
+
+      \    Returns:
+
+      \        JSON string containing search results
+
+      \    "
+    inputSchema:
+      type: object
+      title: query_collectionArguments
+      required:
+        - collection_name
+        - query_text
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 5
+        model:
+          type: string
+          title: Model
+          default: text-embedding-3-small
+        query_text:
+          type: string
+          title: Query Text
+        collection_name:
+          type: string
+          title: Collection Name
+  - name: list_collections
+    description: "
+
+      \    List all available collections in the Qdrant database.
+
+
+      \    Returns:
+
+      \        JSON string containing the list of collections
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_collectionsArguments
+      properties: {}
+  - name: collection_info
+    description: "
+
+      \    Get information about a specific collection.
+
+
+      \    Args:
+
+      \        collection_name: Name of the collection
+
+
+      \    Returns:
+
+      \        JSON string containing collection information
+
+      \    "
+    inputSchema:
+      type: object
+      title: collection_infoArguments
+      required:
+        - collection_name
+      properties:
+        collection_name:
+          type: string
+          title: Collection Name

@@ -1,0 +1,22 @@
+tools:
+  - name: send-email
+    description: Send an email using Resend
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - subject
+        - content
+      properties:
+        to:
+          type: string
+          format: email
+          description: Recipient email address
+        content:
+          type: string
+          description: Plain text email content
+        subject:
+          type: string
+          description: Email subject line
+      additionalProperties: false

@@ -1,0 +1,29 @@
+tools:
+  - name: get_citeas_data
+    description: Retrieve BibTeX-formatted citation for the specified `resource`
+      (e.g., DOI, URL, keyword) from the CiteAs
+    inputSchema:
+      type: object
+      title: get_citeas_dataArguments
+      required:
+        - resource
+      properties:
+        resource:
+          type: string
+          title: Resource
+  - name: get_scholar_data
+    description: Retrieve `results` BibTeX-formatted citations for publications
+      matching the `query` from the Google Scholar
+    inputSchema:
+      type: object
+      title: get_scholar_dataArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        results:
+          type: integer
+          title: Results
+          default: 2

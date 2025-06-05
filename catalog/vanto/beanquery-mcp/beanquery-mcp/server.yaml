@@ -1,0 +1,19 @@
+identifier: vanto/beanquery-mcp/beanquery-mcp
+repo:
+  provider: github.com
+  url: https://github.com/vanto/beanquery-mcp
+  name: beanquery-mcp
+  owner: vanto
+server:
+  subdirectory: /
+  name: Beancount MCP Server
+  description: Enable AI assistants to seamlessly query and analyze financial data
+    stored in Beancount ledger files using the Beancount Query Language (BQL).
+    This server enhances the accessibility and utility of financial data, making
+    it easier to interact with your Beancount ledgers. Use it in a development
+    environment to explore its capabilities and provide feedback for
+    improvements.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

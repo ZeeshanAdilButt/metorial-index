@@ -1,0 +1,14 @@
+identifier: loonghao/wecom-bot-mcp-server/wecom-bot-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/loonghao/wecom-bot-mcp-server
+  name: wecom-bot-mcp-server
+  owner: loonghao
+server:
+  subdirectory: /
+  name: WeCom Bot Server
+  description: Send messages through WeCom using a webhook.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

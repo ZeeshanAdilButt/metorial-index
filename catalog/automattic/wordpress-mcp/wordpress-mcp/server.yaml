@@ -1,0 +1,18 @@
+identifier: automattic/wordpress-mcp/wordpress-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Automattic/wordpress-mcp
+  name: wordpress-mcp
+  owner: Automattic
+server:
+  subdirectory: /
+  name: WordPress MCP Plugin
+  description: Enable AI models and applications to interact with WordPress sites
+    through a secure and standardized interface. Extend WordPress functionality
+    with custom tools, resources, and prompts for enhanced automation and
+    integration. Improve performance and security when accessing WordPress data
+    programmatically.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

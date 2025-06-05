@@ -1,0 +1,16 @@
+identifier: aptro/zerodha-mcp/zerodha-mcp
+repo:
+  provider: github.com
+  url: https://github.com/aptro/zerodha-mcp
+  name: zerodha-mcp
+  owner: aptro
+server:
+  subdirectory: /
+  name: Zerodha Integration
+  description: Interact with your Zerodha trading account directly through Claude
+    AI. Manage your stocks, mutual funds, and trading orders seamlessly with
+    voice commands and automated processes.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

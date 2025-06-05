@@ -1,0 +1,16 @@
+identifier: starrocks/mcp-server-starrocks/mcp-server-starrocks
+repo:
+  provider: github.com
+  url: https://github.com/StarRocks/mcp-server-starrocks
+  name: mcp-server-starrocks
+  owner: StarRocks
+server:
+  subdirectory: /
+  name: StarRocks MCP Server
+  description: Connect AI assistants directly to StarRocks databases for seamless
+    SQL execution and database exploration. Simplify your data interactions
+    without complex setups, enabling efficient data management and insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

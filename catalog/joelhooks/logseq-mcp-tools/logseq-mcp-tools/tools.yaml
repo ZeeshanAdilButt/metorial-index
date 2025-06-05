@@ -1,0 +1,213 @@
+tools:
+  - name: getAllPages
+    inputSchema:
+      type: object
+  - name: getPage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageName
+      properties:
+        pageName:
+          type: string
+          description: Name of the Logseq page to retrieve
+      additionalProperties: false
+  - name: getJournalSummary
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - dateRange
+      properties:
+        dateRange:
+          type: string
+          description: Date range like "today", "this week", "last month", "this year",
+            "year to date", etc.
+      additionalProperties: false
+  - name: createPage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageName
+      properties:
+        content:
+          type: string
+          description: Initial content for the page (optional)
+        pageName:
+          type: string
+          description: Name for the new Logseq page
+      additionalProperties: false
+  - name: searchPages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query to filter pages by name
+      additionalProperties: false
+  - name: getBacklinks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageName
+      properties:
+        pageName:
+          type: string
+          description: The page name for which to find backlinks
+      additionalProperties: false
+  - name: addJournalEntry
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        date:
+          type: string
+          description: Optional date format (e.g., "mar 14th, 2025"). Defaults to today
+        asBlock:
+          type: boolean
+          description: "Whether to add as a single block (default: true)"
+        content:
+          type: string
+          description: Content to add to today's journal or a specified date
+      additionalProperties: false
+  - name: analyzeGraph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        daysThreshold:
+          type: number
+          description: 'Number of days to look back for "recent" content (default: 30)'
+      additionalProperties: false
+  - name: findKnowledgeGaps
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        includeOrphans:
+          type: boolean
+          description: "Include orphaned pages in analysis (default: true)"
+        minReferenceCount:
+          type: number
+          description: "Minimum references to consider (default: 3)"
+      additionalProperties: false
+  - name: analyzeJournalPatterns
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        timeframe:
+          type: string
+          description: Time period to analyze (e.g., "last 30 days", "this year")
+        includeMood:
+          type: boolean
+          description: "Analyze mood patterns if present (default: true)"
+        includeTopics:
+          type: boolean
+          description: "Analyze topic patterns (default: true)"
+      additionalProperties: false
+  - name: smartQuery
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - request
+      properties:
+        request:
+          type: string
+          description: Natural language description of what you want to find
+        advanced:
+          type: boolean
+          description: Use advanced analysis features
+        includeQuery:
+          type: boolean
+          description: Include the generated Datalog query in results
+      additionalProperties: false
+  - name: suggestConnections
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        focusArea:
+          type: string
+          description: Optional topic or area to focus suggestions around
+        minConfidence:
+          type: number
+          description: "Minimum confidence score for suggestions (0-1, default: 0.6)"
+        maxSuggestions:
+          type: number
+          description: "Maximum number of suggestions to return (default: 10)"
+      additionalProperties: false
+  - name: addJournalBlock
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        date:
+          type: string
+          description: Optional journal date (e.g., "mar 14th, 2025"). Defaults to today
+        content:
+          type: string
+          description: Content to add as a single block to a journal page
+        preserveFormatting:
+          type: boolean
+          description: "Whether to preserve markdown formatting (default: true)"
+      additionalProperties: false
+  - name: addJournalContent
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        date:
+          type: string
+          description: Optional date format (e.g., "mar 14th, 2025"). Defaults to today
+        content:
+          type: string
+          description: Content to add to the journal page (preserves formatting)
+      additionalProperties: false
+  - name: addNoteContent
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageName
+        - content
+      properties:
+        content:
+          type: string
+          description: Content to add to the page, with Markdown formatting
+        pageName:
+          type: string
+          description: The name of the page to add content to
+        createIfNotExist:
+          type: boolean
+          default: true
+          description: Whether to create the page if it does not exist
+      additionalProperties: false
+  - name: getBlock
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - blockId
+      properties:
+        blockId:
+          type: string
+          description: The UUID of the block to fetch (without the double parentheses)
+        includeChildren:
+          type: boolean
+          default: true
+          description: Whether to include children blocks
+      additionalProperties: false

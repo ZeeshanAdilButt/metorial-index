@@ -1,0 +1,18 @@
+identifier: literaturepro/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/LiteraturePro/mcp-server
+  name: mcp-server
+  owner: LiteraturePro
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare
+  description: Host a remote MCP server on Cloudflare Workers with OAuth login to
+    securely expose tools and resources. Easily connect and interact with your
+    MCP server locally or remotely using the MCP Inspector or Claude Desktop.
+    Deploy seamlessly to Cloudflare and enable your LLM applications to call
+    your custom tools over HTTP/SSE.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

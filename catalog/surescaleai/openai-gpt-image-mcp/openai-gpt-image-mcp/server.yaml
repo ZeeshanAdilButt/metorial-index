@@ -1,0 +1,19 @@
+identifier: surescaleai/openai-gpt-image-mcp/openai-gpt-image-mcp
+repo:
+  provider: github.com
+  url: https://github.com/SureScaleAI/openai-gpt-image-mcp
+  name: openai-gpt-image-mcp
+  owner: SureScaleAI
+server:
+  subdirectory: /
+  name: OpenAI GPT Image Server
+  description: Generate and edit images using OpenAI's latest GPT-4o and
+    gpt-image-1 models with advanced prompt control. Save outputs directly to
+    disk or receive them as base64, supporting seamless integration with
+    MCP-compatible clients. Enhance your applications with powerful image
+    generation and editing capabilities through a simple, configurable tool
+    server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

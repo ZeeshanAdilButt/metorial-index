@@ -1,0 +1,12 @@
+tools:
+  - name: get_user_recent_tweets
+    description: ""
+    inputSchema:
+      type: object
+      title: get_user_recent_tweetsArguments
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          title: Username

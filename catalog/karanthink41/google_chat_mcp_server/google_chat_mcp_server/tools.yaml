@@ -1,0 +1,154 @@
+tools:
+  - name: post_text_message
+    description: "Post a text message to a Google Chat space. Refer to the API
+      documentation:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces.messages/\
+      create"
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+        - text
+      properties:
+        text:
+          type: string
+          description: The text content of the message to be posted.
+        spaceId:
+          type: string
+          description: The unique ID of the Google Chat space.
+  - name: fetch_member_details
+    description: "Retrieve detailed membership information from a Google Chat space.
+      See:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces.members/g\
+      et"
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+        - memberId
+      properties:
+        spaceId:
+          type: string
+          description: The unique ID of the Google Chat space.
+        memberId:
+          type: string
+          description: The unique ID of the member.
+  - name: fetch_space_details
+    description: "Get comprehensive details about a specific Google Chat space.
+      Documentation:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces/get"
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+      properties:
+        spaceId:
+          type: string
+          description: The unique ID of the Google Chat space.
+  - name: list_space_memberships
+    description: "List all memberships in a Google Chat space along with detailed
+      role and membership status. Documentation:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces.members/l\
+      ist"
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+      properties:
+        filter:
+          type: string
+          description: Filter query (e.g., 'role = "OWNER"').
+        spaceId:
+          type: string
+          description: The unique ID of the Google Chat space.
+        pageSize:
+          type: integer
+          description: Maximum number of memberships to return (default is 100 if
+            unspecified).
+        pageToken:
+          type: string
+          description: A page token from a previous call to paginate results.
+        showInvited:
+          type: boolean
+          description: Include memberships of invited members if true.
+  - name: list_space_messages
+    description: "Retrieve a list of messages from a Google Chat space, including
+      those from blocked members and spaces. Refer to:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces.messages/\
+      list. Optional filters like 'Monday', 'manager message', 'Rahul message',
+      etc. can be applied via custom logic."
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+      properties:
+        filter:
+          type: string
+          description: Filter messages by criteria such as date, specific keywords (e.g.,
+            'Rahul'), days (e.g., 'Monday') etc. Use custom filter logic if
+            needed.
+        orderBy:
+          enum:
+            - createTime
+            - lastUpdateTime
+          type: string
+          description: Ordering of messages, e.g., 'createTime' or 'lastUpdateTime'.
+        spaceId:
+          type: string
+          description: The unique ID of the Google Chat space.
+        pageSize:
+          type: integer
+          description: Maximum number of messages to return (default is 25 if unspecified).
+        pageToken:
+          type: string
+          description: A page token from a previous call for pagination.
+        showDeleted:
+          type: boolean
+          description: Include deleted messages if set to true.
+  - name: fetch_message_details
+    description: "Get detailed information about a specific message in a Google Chat
+      space. See:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces.messages/\
+      get"
+    inputSchema:
+      type: object
+      required:
+        - spaceId
+        - messageId
+      properties:
+        spaceId:
+          type: string
+          description: The unique ID of the Google Chat space.
+        messageId:
+          type: string
+          description: The unique ID of the message.
+  - name: list_joined_spaces
+    description: "List all Google Chat spaces that the caller is a member of. Group
+      chats and DMs are listed only after the first message is sent.
+      Documentation:
+      https://developers.google.com/chat/api/reference/rest/v1/spaces/list"
+    inputSchema:
+      type: object
+      properties:
+        filter:
+          type: string
+          description: Filter spaces using a query (e.g., 'spaceType = "SPACE"').
+        pageSize:
+          type: integer
+          description: Maximum number of spaces to return (default is 100 if unspecified).
+        pageToken:
+          type: string
+          description: A page token from a previous call to paginate results.
+  - name: apply_natural_language_filter
+    description: Convert a natural language filter query (e.g., 'Monday', 'Tuesday',
+      'Rahul message', 'manager message', etc.) into a standardized filter
+      string that can be used with other tools. This tool helps in mapping
+      human-friendly filter terms to API query parameters.
+    inputSchema:
+      type: object
+      required:
+        - filterText
+      properties:
+        filterText:
+          type: string
+          description: The natural language filter query provided by the user.

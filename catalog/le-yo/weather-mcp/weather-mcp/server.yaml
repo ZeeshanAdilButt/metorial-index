@@ -1,0 +1,17 @@
+identifier: le-yo/weather-mcp/weather-mcp
+repo:
+  provider: github.com
+  url: https://github.com/le-yo/weather-mcp
+  name: weather-mcp
+  owner: le-yo
+server:
+  subdirectory: /
+  name: Weather Server
+  description: Provide current weather information for any location using a simple
+    and easy-to-use interface. Enable AI applications to fetch real-time weather
+    data seamlessly without requiring API keys. Enhance your AI agents with
+    up-to-date weather insights from the free wttr.in service.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

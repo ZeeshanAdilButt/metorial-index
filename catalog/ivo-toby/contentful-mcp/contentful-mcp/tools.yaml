@@ -1,0 +1,353 @@
+tools:
+  - name: search_entries
+    description: Search for entries using query parameters. Returns a maximum of 3
+      items per request. Use skip parameter to paginate through results.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: object
+          required:
+            - limit
+            - skip
+          properties:
+            skip:
+              type: number
+              default: 0
+              description: Number of items to skip for pagination
+            limit:
+              type: number
+              default: 3
+              maximum: 3
+              description: "Maximum number of items to return (max: 3)"
+            order:
+              type: string
+            query:
+              type: string
+            select:
+              type: string
+            content_type:
+              type: string
+          description: Query parameters for searching entries
+  - name: create_entry
+    description: "Create a new entry in Contentful, before executing this function,
+      you need to know the contentTypeId (not the content type NAME) and the
+      fields of that contentType, you can get the fields definition by using the
+      GET_CONTENT_TYPE tool. "
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - fields
+      properties:
+        fields:
+          type: object
+          description: The fields of the entry
+        contentTypeId:
+          type: string
+          description: The ID of the content type for the new entry
+  - name: get_entry
+    description: Retrieve an existing entry
+    inputSchema:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          type: string
+  - name: update_entry
+    description: Update an existing entry, always send all field values, also the
+      fields values that have not been updated
+    inputSchema:
+      type: object
+      required:
+        - entryId
+        - fields
+      properties:
+        fields:
+          type: object
+        entryId:
+          type: string
+  - name: delete_entry
+    description: Delete an entry
+    inputSchema:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          type: string
+  - name: publish_entry
+    description: Publish an entry
+    inputSchema:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          type: string
+  - name: unpublish_entry
+    description: Unpublish an entry
+    inputSchema:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          type: string
+  - name: list_assets
+    description: List assets in a space. Returns a maximum of 3 items per request.
+      Use skip parameter to paginate through results.
+    inputSchema:
+      type: object
+      required:
+        - limit
+        - skip
+      properties:
+        skip:
+          type: number
+          default: 0
+          description: Number of items to skip for pagination
+        limit:
+          type: number
+          default: 3
+          maximum: 3
+          description: "Maximum number of items to return (max: 3)"
+  - name: upload_asset
+    description: Upload a new asset
+    inputSchema:
+      type: object
+      required:
+        - title
+        - file
+      properties:
+        file:
+          type: object
+          required:
+            - upload
+            - fileName
+            - contentType
+          properties:
+            upload:
+              type: string
+            fileName:
+              type: string
+            contentType:
+              type: string
+        title:
+          type: string
+        description:
+          type: string
+  - name: get_asset
+    description: Retrieve an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+      properties:
+        assetId:
+          type: string
+  - name: update_asset
+    description: Update an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+      properties:
+        file:
+          type: object
+          required:
+            - url
+            - fileName
+            - contentType
+          properties:
+            url:
+              type: string
+            fileName:
+              type: string
+            contentType:
+              type: string
+        title:
+          type: string
+        assetId:
+          type: string
+        description:
+          type: string
+  - name: delete_asset
+    description: Delete an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+      properties:
+        assetId:
+          type: string
+  - name: publish_asset
+    description: Publish an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+      properties:
+        assetId:
+          type: string
+  - name: unpublish_asset
+    description: Unpublish an asset
+    inputSchema:
+      type: object
+      required:
+        - assetId
+      properties:
+        assetId:
+          type: string
+  - name: list_content_types
+    description: List content types in a space. Returns a maximum of 10 items per
+      request. Use skip parameter to paginate through results.
+    inputSchema:
+      type: object
+      required:
+        - limit
+        - skip
+      properties:
+        skip:
+          type: number
+          default: 0
+          description: Number of items to skip for pagination
+        limit:
+          type: number
+          default: 10
+          maximum: 20
+          description: "Maximum number of items to return (max: 3)"
+  - name: get_content_type
+    description: Get details of a specific content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+      properties:
+        contentTypeId:
+          type: string
+  - name: create_content_type
+    description: Create a new content type
+    inputSchema:
+      type: object
+      required:
+        - name
+        - fields
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - name
+              - type
+            properties:
+              id:
+                type: string
+                description: The ID of the field
+              name:
+                type: string
+                description: Display name of the field
+              type:
+                enum:
+                  - Symbol
+                  - Text
+                  - Integer
+                  - Number
+                  - Date
+                  - Location
+                  - Object
+                  - Boolean
+                  - Link
+                  - Array
+                type: string
+                description: Type of the field (Text, Number, Date, Location, Media, Boolean,
+                  JSON, Link, Array, etc)
+              items:
+                type: object
+                properties:
+                  type:
+                    enum:
+                      - Symbol
+                      - Link
+                    type: string
+                  linkType:
+                    enum:
+                      - Entry
+                      - Asset
+                    type: string
+                  validations:
+                    type: array
+                    items:
+                      type: object
+                description: Required for Array fields. Specifies the type of items in the array
+              linkType:
+                enum:
+                  - Entry
+                  - Asset
+                type: string
+                description: Required for Link fields. Specifies what type of resource this
+                  field links to
+              required:
+                type: boolean
+                default: false
+                description: Whether this field is required
+              localized:
+                type: boolean
+                default: false
+                description: Whether this field can be localized
+              validations:
+                type: array
+                items:
+                  type: object
+                description: Array of validation rules for the field
+          description: Array of field definitions for the content type
+        description:
+          type: string
+        displayField:
+          type: string
+  - name: update_content_type
+    description: Update an existing content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+        - name
+        - fields
+      properties:
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: object
+        description:
+          type: string
+        displayField:
+          type: string
+        contentTypeId:
+          type: string
+  - name: delete_content_type
+    description: Delete a content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+      properties:
+        contentTypeId:
+          type: string
+  - name: publish_content_type
+    description: Publish a content type
+    inputSchema:
+      type: object
+      required:
+        - contentTypeId
+      properties:
+        contentTypeId:
+          type: string

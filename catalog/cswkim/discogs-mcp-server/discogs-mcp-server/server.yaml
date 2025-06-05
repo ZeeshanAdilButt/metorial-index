@@ -1,0 +1,18 @@
+identifier: cswkim/discogs-mcp-server/discogs-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cswkim/discogs-mcp-server
+  name: discogs-mcp-server
+  owner: cswkim
+server:
+  subdirectory: /
+  name: Discogs Music Catalog Server
+  description: Enable seamless interaction with the Discogs music database through
+    a dedicated MCP server. Perform music catalog operations, search
+    functionality, and manage your Discogs collection efficiently. Integrate
+    easily with clients like Claude Desktop to enhance your music data
+    workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

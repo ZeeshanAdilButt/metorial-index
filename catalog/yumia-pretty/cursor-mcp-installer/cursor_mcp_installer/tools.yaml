@@ -1,0 +1,41 @@
+tools:
+  - name: install_repo_mcp_server
+    description: Install an MCP server via npx or uvx
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        env:
+          type: array
+          items:
+            type: string
+          description: The environment variables to set, delimited by =
+        args:
+          type: array
+          items:
+            type: string
+          description: The arguments to pass along
+        name:
+          type: string
+          description: The package name of the MCP server
+  - name: install_local_mcp_server
+    description: Install an MCP server whose code is cloned locally on your computer
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        env:
+          type: array
+          items:
+            type: string
+          description: The environment variables to set, delimited by =
+        args:
+          type: array
+          items:
+            type: string
+          description: The arguments to pass along
+        path:
+          type: string
+          description: The path to the MCP server code cloned on your computer

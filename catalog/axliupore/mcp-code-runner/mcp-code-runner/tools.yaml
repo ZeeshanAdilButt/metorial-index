@@ -1,0 +1,25 @@
+tools:
+  - name: run
+    description: run code and return the result
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+        - language
+      properties:
+        code:
+          type: string
+          description: code to run
+        language:
+          enum:
+            - go
+            - python
+            - java
+            - c
+            - cpp
+            - javascript
+            - typescript
+          type: string
+          description: language of the code
+      additionalProperties: false

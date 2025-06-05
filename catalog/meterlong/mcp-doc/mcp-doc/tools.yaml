@@ -1,0 +1,668 @@
+tools:
+  - name: create_document
+    description: "
+
+      \    Create a new Word document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - file_path: Document save path
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_documentArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: open_document
+    description: "
+
+      \    Open an existing Word document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - file_path: Path to the document to open
+
+      \    "
+    inputSchema:
+      type: object
+      title: open_documentArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: save_document
+    description: "
+
+      \    Save the currently open Word document to the original file (update
+      the original file)
+
+      \    "
+    inputSchema:
+      type: object
+      title: save_documentArguments
+      properties: {}
+  - name: add_paragraph
+    description: "
+
+      \    Add paragraph text to document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - text: Paragraph text content
+
+      \    - bold: Whether to bold
+
+      \    - italic: Whether to italicize
+
+      \    - underline: Whether to underline
+
+      \    - font_size: Font size (points)
+
+      \    - font_name: Font name
+
+      \    - color: Text color (format: #FF0000)
+
+      \    - alignment: Alignment (left, center, right, justify)
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_paragraphArguments
+      required:
+        - text
+      properties:
+        bold:
+          type: boolean
+          title: Bold
+          default: false
+        text:
+          type: string
+          title: Text
+        color:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Color
+          default: null
+        italic:
+          type: boolean
+          title: Italic
+          default: false
+        alignment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Alignment
+          default: null
+        font_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Font Name
+          default: null
+        font_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Font Size
+          default: null
+        underline:
+          type: boolean
+          title: Underline
+          default: false
+  - name: add_heading
+    description: "
+
+      \    Add heading to document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - text: Heading text
+
+      \    - level: Heading level (1-9)
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_headingArguments
+      required:
+        - text
+        - level
+      properties:
+        text:
+          type: string
+          title: Text
+        level:
+          type: integer
+          title: Level
+  - name: add_table
+    description: "
+
+      \    Add table to document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - rows: Number of rows
+
+      \    - cols: Number of columns
+
+      \    - data: Table data, two-dimensional array
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_tableArguments
+      required:
+        - rows
+        - cols
+      properties:
+        cols:
+          type: integer
+          title: Cols
+        data:
+          anyOf:
+            - type: array
+              items: {}
+            - type: "null"
+          title: Data
+          default: null
+        rows:
+          type: integer
+          title: Rows
+  - name: get_document_info
+    description: "
+
+      \    Get document information, including paragraph count, table count,
+      styles, etc.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_document_infoArguments
+      properties: {}
+  - name: search_text
+    description: "
+
+      \    Search for text in the document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - keyword: Keyword to search for
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_textArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+  - name: search_and_replace
+    description: "
+
+      \    Search and replace text in the document, providing detailed
+      replacement information and preview options
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - keyword: Keyword to search for
+
+      \    - replace_with: Text to replace with
+
+      \    - preview_only: Whether to only preview without actually replacing,
+      default is False
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_and_replaceArguments
+      required:
+        - keyword
+        - replace_with
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+        preview_only:
+          type: boolean
+          title: Preview Only
+          default: false
+        replace_with:
+          type: string
+          title: Replace With
+  - name: find_and_replace
+    description: "
+
+      \    Find and replace text in the document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - find_text: Text to find
+
+      \    - replace_text: Text to replace with
+
+      \    "
+    inputSchema:
+      type: object
+      title: find_and_replaceArguments
+      required:
+        - find_text
+        - replace_text
+      properties:
+        find_text:
+          type: string
+          title: Find Text
+        replace_text:
+          type: string
+          title: Replace Text
+  - name: merge_table_cells
+    description: "
+
+      \    Merge table cells
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - table_index: Table index
+
+      \    - start_row: Start row index
+
+      \    - start_col: Start column index
+
+      \    - end_row: End row index
+
+      \    - end_col: End column index
+
+      \    "
+    inputSchema:
+      type: object
+      title: merge_table_cellsArguments
+      required:
+        - table_index
+        - start_row
+        - start_col
+        - end_row
+        - end_col
+      properties:
+        end_col:
+          type: integer
+          title: End Col
+        end_row:
+          type: integer
+          title: End Row
+        start_col:
+          type: integer
+          title: Start Col
+        start_row:
+          type: integer
+          title: Start Row
+        table_index:
+          type: integer
+          title: Table Index
+  - name: split_table
+    description: "
+
+      \    Split table into two tables at specified row
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - table_index: Table index
+
+      \    - row_index: Split table after this row
+
+      \    "
+    inputSchema:
+      type: object
+      title: split_tableArguments
+      required:
+        - table_index
+        - row_index
+      properties:
+        row_index:
+          type: integer
+          title: Row Index
+        table_index:
+          type: integer
+          title: Table Index
+  - name: add_table_row
+    description: "
+
+      \    Add a row to table
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - table_index: Table index
+
+      \    - data: Row data in list format
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_table_rowArguments
+      required:
+        - table_index
+      properties:
+        data:
+          anyOf:
+            - type: array
+              items: {}
+            - type: "null"
+          title: Data
+          default: null
+        table_index:
+          type: integer
+          title: Table Index
+  - name: delete_table_row
+    description: "
+
+      \    Delete a row from table
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - table_index: Table index
+
+      \    - row_index: Row index to delete
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_table_rowArguments
+      required:
+        - table_index
+        - row_index
+      properties:
+        row_index:
+          type: integer
+          title: Row Index
+        table_index:
+          type: integer
+          title: Table Index
+  - name: edit_table_cell
+    description: "
+
+      \    Edit table cell content
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - table_index: Table index
+
+      \    - row_index: Row index
+
+      \    - col_index: Column index
+
+      \    - text: Cell text
+
+      \    "
+    inputSchema:
+      type: object
+      title: edit_table_cellArguments
+      required:
+        - table_index
+        - row_index
+        - col_index
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        col_index:
+          type: integer
+          title: Col Index
+        row_index:
+          type: integer
+          title: Row Index
+        table_index:
+          type: integer
+          title: Table Index
+  - name: add_page_break
+    description: "\n    Add page break\n    "
+    inputSchema:
+      type: object
+      title: add_page_breakArguments
+      properties: {}
+  - name: set_page_margins
+    description: "
+
+      \    Set page margins
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - top: Top margin (cm)
+
+      \    - bottom: Bottom margin (cm)
+
+      \    - left: Left margin (cm)
+
+      \    - right: Right margin (cm)
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_page_marginsArguments
+      properties:
+        top:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Top
+          default: null
+        left:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Left
+          default: null
+        right:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Right
+          default: null
+        bottom:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Bottom
+          default: null
+  - name: delete_paragraph
+    description: "
+
+      \    Delete specified paragraph from document
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - paragraph_index: Paragraph index to delete
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_paragraphArguments
+      required:
+        - paragraph_index
+      properties:
+        paragraph_index:
+          type: integer
+          title: Paragraph Index
+  - name: delete_text
+    description: "
+
+      \    Delete specified text from paragraph
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - paragraph_index: Paragraph index
+
+      \    - start_pos: Start position (0-based index)
+
+      \    - end_pos: End position (not included in the text)
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_textArguments
+      required:
+        - paragraph_index
+        - start_pos
+        - end_pos
+      properties:
+        end_pos:
+          type: integer
+          title: End Pos
+        start_pos:
+          type: integer
+          title: Start Pos
+        paragraph_index:
+          type: integer
+          title: Paragraph Index
+  - name: save_as_document
+    description: "
+
+      \    Save current document as a new file
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - new_file_path: Path to save the new file
+
+      \    "
+    inputSchema:
+      type: object
+      title: save_as_documentArguments
+      required:
+        - new_file_path
+      properties:
+        new_file_path:
+          type: string
+          title: New File Path
+  - name: create_document_copy
+    description: "
+
+      \    Create a copy of the current document in the directory of the
+      original file
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - suffix: Suffix to add to the original file name, default is \"-副本\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_document_copyArguments
+      properties:
+        suffix:
+          type: string
+          title: Suffix
+          default: -副本
+  - name: replace_section
+    description: "
+
+      \    Find specified title in document and replace content under that
+      title, keeping original position, format, and style
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - section_title: Title text to find
+
+      \    - new_content: New content list, each element is a paragraph
+
+      \    - preserve_title: Whether to keep original title, default is True
+
+      \    "
+    inputSchema:
+      type: object
+      title: replace_sectionArguments
+      required:
+        - section_title
+        - new_content
+      properties:
+        new_content:
+          type: array
+          items: {}
+          title: New Content
+        section_title:
+          type: string
+          title: Section Title
+        preserve_title:
+          type: boolean
+          title: Preserve Title
+          default: true
+  - name: edit_section_by_keyword
+    description: "
+
+      \    Find paragraphs containing specified keyword and replace them and
+      their surrounding content, keeping original position, format, and style
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - keyword: Keyword to find
+
+      \    - new_content: New content list, each element is a paragraph
+
+      \    - section_range: Surrounding paragraph range to replace, default is 3
+
+      \    "
+    inputSchema:
+      type: object
+      title: edit_section_by_keywordArguments
+      required:
+        - keyword
+        - new_content
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+        new_content:
+          type: array
+          items: {}
+          title: New Content
+        section_range:
+          type: integer
+          title: Section Range
+          default: 3

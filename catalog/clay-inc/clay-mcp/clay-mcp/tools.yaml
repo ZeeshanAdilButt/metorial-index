@@ -1,0 +1,409 @@
+tools:
+  - name: searchContacts
+    description: Search for contacts and return matching people. Use for questions
+      about specific contacts or "who" questions (e.g. "Who did I meet most?" or
+      "who works as an engineer?"). Returns actual contact records for queries
+      needing specific people.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: The number of contacts to return if the user asks for an amount.
+        query:
+          type: string
+          description: 'The raw search query from the user. Must preserve exact intent and
+            details to enable accurate searching, including: relationship
+            qualifiers, interaction metrics, relationship strength, names,
+            companies, locations, dates (specific dates, date ranges, or
+            relative dates like "last week" are required if mentioned by user),
+            job titles, skills, and logical conditions (OR/AND).'
+        keywords:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Extract and list specific keywords related to professional
+            expertise, skills, interests, or hobbies that the user is searching
+            for. For example, if someone asks for 'people who know about machine
+            learning or play tennis', the keywords would be ['machine learning',
+            'tennis']. Do not include job titles or company names here as those
+            have dedicated fields. Focus on capturing domain expertise,
+            technical skills, personal interests, and hobby-related terms that
+            help identify relevant contacts.
+        location:
+          type: array
+          items:
+            type: string
+          default: []
+          description: If the query refers to a location (city, state, country, region)
+            where people are located or based, list the locations as they would
+            appear on a LinkedIn profile. For example, if someone asks about
+            "people in New York", return "New York City Metropolitan Area" or if
+            they ask about "contacts in California", return "San Francisco Bay
+            Area", "Greater Los Angeles Area", etc.
+        job_title:
+          type: array
+          items:
+            type: string
+          default: []
+          description: "If the query refers to a job title, position, or industry, list
+            relevant job titles as they would be on a LinkedIn profile.
+            Examples: Developer should return positions such as 'Software
+            Engineer', 'Full Stack Developer', 'Data Scientist', etc. Banker
+            should return positions such as 'Financial Analyst', 'Investment
+            Banker', 'Credit Analyst', etc. Healthcare industry should return
+            positions such as 'Registered Nurse', 'Physician', 'Medical
+            Director', etc. Legal industry should return positions such as
+            'Attorney', 'Legal Counsel', 'Paralegal', etc."
+        company_name:
+          type: array
+          items:
+            type: string
+          default: []
+          description: If the query refers to a company or acronym of companies, list
+            company names as they would on a LinkedIn profile.
+        sort_instructions:
+          type: string
+          description: 'How would you like the results sorted? For example: "most recent
+            contacts" will sort by last interaction date, "closest connections"
+            will sort by interaction count, and "alphabetical" will sort by
+            name. If no sort preference is given, this can be left empty.'
+        exclude_contact_ids:
+          type: array
+          items:
+            type: number
+          description: Used to exclude previously returned contact IDs when the user asks
+            for more results (e.g. "who else" or "show me more"). You should
+            pass all contact IDs from previous searchContacts responses to
+            ensure new results are shown.
+      additionalProperties: false
+  - name: searchInteractions
+    description: Search for interactions and return matching interactions. Use for
+      questions about specific interactions, "who" questions (e.g. "Who did I
+      meet most?"), finding best friends based on relevance score, or finding
+      recently added/created contacts. Returns actual contact records for
+      queries needing specific interactions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: The number of contacts to return if the user asks for an amount.
+        query:
+          type: string
+          description: 'The raw search query from the user. Must preserve exact intent and
+            details to enable accurate searching, including: relationship
+            qualifiers, interaction metrics, relationship strength, names,
+            companies, locations, dates (specific dates, date ranges, or
+            relative dates like "last week" are required if mentioned by user),
+            job titles, skills, and logical conditions (OR/AND).'
+        keywords:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Extract and list specific keywords related to professional
+            expertise, skills, interests, or hobbies that the user is searching
+            for. For example, if someone asks for 'people who know about machine
+            learning or play tennis', the keywords would be ['machine learning',
+            'tennis']. Do not include job titles or company names here as those
+            have dedicated fields. Focus on capturing domain expertise,
+            technical skills, personal interests, and hobby-related terms that
+            help identify relevant contacts.
+        location:
+          type: array
+          items:
+            type: string
+          default: []
+          description: If the query refers to a location (city, state, country, region)
+            where people are located or based, list the locations as they would
+            appear on a LinkedIn profile. For example, if someone asks about
+            "people in New York", return "New York City Metropolitan Area" or if
+            they ask about "contacts in California", return "San Francisco Bay
+            Area", "Greater Los Angeles Area", etc.
+        job_title:
+          type: array
+          items:
+            type: string
+          default: []
+          description: "If the query refers to a job title, position, or industry, list
+            relevant job titles as they would be on a LinkedIn profile.
+            Examples: Developer should return positions such as 'Software
+            Engineer', 'Full Stack Developer', 'Data Scientist', etc. Banker
+            should return positions such as 'Financial Analyst', 'Investment
+            Banker', 'Credit Analyst', etc. Healthcare industry should return
+            positions such as 'Registered Nurse', 'Physician', 'Medical
+            Director', etc. Legal industry should return positions such as
+            'Attorney', 'Legal Counsel', 'Paralegal', etc."
+        company_name:
+          type: array
+          items:
+            type: string
+          default: []
+          description: If the query refers to a company or acronym of companies, list
+            company names as they would on a LinkedIn profile.
+        sort_instructions:
+          type: string
+          description: 'How would you like the results sorted? For example: "most recent
+            contacts" will sort by last interaction date, "closest connections"
+            will sort by interaction count, and "alphabetical" will sort by
+            name. If no sort preference is given, this can be left empty.'
+        exclude_contact_ids:
+          type: array
+          items:
+            type: number
+          description: Used to exclude previously returned contact IDs when the user asks
+            for more results (e.g. "who else" or "show me more"). You should
+            pass all contact IDs from previous searchContacts responses to
+            ensure new results are shown.
+      additionalProperties: false
+  - name: aggregateContacts
+    description: Get numerical statistics and counts ONLY. Returns numbers and
+      percentages, never specific contacts. For counting questions like "how
+      many work at Google?" or "what % are engineers?". Use search endpoint
+      instead for any "who" questions or to get actual contact details.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The raw search query from the user. This field is required and
+            should contain all the key details extracted from the user's prompt
+            to enable effective database searching and aggregation. For example,
+            if the user asks 'how many people work at Google', preserve both the
+            company filter 'Google' and the fact that they want a count. If they
+            ask 'what are the most common job titles in my network', preserve
+            that they want job titles aggregated and ranked by frequency. The
+            query should maintain any conditions (OR, AND) and aggregation needs
+            to properly build the elasticsearch query.
+        location:
+          type: array
+          items:
+            type: string
+          default: []
+          description: If the query refers to a location (city, state, country, region)
+            where people are located or based, list the locations as they would
+            appear on a LinkedIn profile. For example, if someone asks about
+            "people in New York", return "New York City Metropolitan Area" or if
+            they ask about "contacts in California", return "San Francisco Bay
+            Area", "Greater Los Angeles Area", etc.
+        job_title:
+          type: array
+          items:
+            type: string
+          default: []
+          description: "If the query refers to a job title, position, or industry, list
+            relevant job titles as they would be on a LinkedIn profile.
+            Examples: Developer should return positions such as 'Software
+            Engineer', 'Full Stack Developer', 'Data Scientist', etc. Banker
+            should return positions such as 'Financial Analyst', 'Investment
+            Banker', 'Credit Analyst', etc. Healthcare industry should return
+            positions such as 'Registered Nurse', 'Physician', 'Medical
+            Director', etc. Legal industry should return positions such as
+            'Attorney', 'Legal Counsel', 'Paralegal', etc."
+        company_name:
+          type: array
+          items:
+            type: string
+          default: []
+          description: If the query refers to a company or acronym of companies, list
+            company names as they would on a LinkedIn profile.
+      additionalProperties: false
+  - name: getContact
+    description: Get details for a contact by id, including emails, social links,
+      phone numbers, and notes.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contact_id
+      properties:
+        contact_id:
+          type: number
+          description: The ID of the contact to get details for.
+      additionalProperties: false
+  - name: createContact
+    description: Create a new contact record in Clay. This endpoint should only be
+      used when you need to create a completely new contact, not for adding
+      contacts to groups.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        email:
+          type: array
+          items:
+            type: string
+          default: []
+          description: The email of the contact.
+        phone:
+          type: array
+          items:
+            type: string
+          description: The phone number of the contact.
+        title:
+          type: string
+          description: The job title of the contact.
+        website:
+          type: array
+          items:
+            type: string
+          default: []
+          description: The website of the contact.
+        birthday:
+          type: string
+          description: The birthday of the contact. Use the format YYYY-MM-DD, if no year
+            is specified use 0, month and day are required.
+        linkedin:
+          type: string
+          description: The LinkedIn handle of the contact.
+        last_name:
+          type: string
+          description: The last name of the contact.
+        first_name:
+          type: string
+          description: The first name of the contact.
+        organization:
+          type: string
+          description: The organization of the contact.
+      additionalProperties: false
+  - name: createNote
+    description: Create a note for a contact. Only use this when the user explicitly
+      asks to create, add, or save a note.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contact_id
+        - content
+      properties:
+        content:
+          type: string
+          description: The content of the note.
+        contact_id:
+          type: number
+          description: The ID of the contact to add the note to.
+      additionalProperties: false
+  - name: getGroups
+    description: Get all groups or lists for the user.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          description: The maximum number of groups to return.
+      additionalProperties: false
+  - name: createGroup
+    description: Create a group or list for the user. If a group with the same name
+      already exists, it will not create a duplicate unless explicitly requested
+      to ignore the check.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: The name of the group to create.
+      additionalProperties: false
+  - name: updateGroup
+    description: Update a group or list. Use this to update the group title and/or
+      modify its members. When adding or removing contacts, provide ALL contact
+      IDs to add/remove in a single call - do not make multiple calls for
+      individual contacts.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - group_id
+      properties:
+        title:
+          type: string
+          description: The new name of the group if the user wants to rename it.
+        group_id:
+          type: number
+          description: The ID of the group or list to update.
+        add_contact_ids:
+          type: array
+          items:
+            type: number
+          default: []
+          description: A list of contact IDs that should be added to this group. Each ID
+            should be a number representing an existing contact in your network.
+            You can provide multiple IDs to add several contacts at once.
+        remove_contact_ids:
+          type: array
+          items:
+            type: number
+          default: []
+          description: A list of contact IDs that should be removed from this group. Each
+            ID should be a number representing an existing contact in your
+            network. You can provide multiple IDs to remove several contacts at
+            once.
+      additionalProperties: false
+  - name: getNotes
+    description: Use ONLY when the user explicitly mentions "note" or "notes" to
+      retrieve notes between two dates (e.g. "what notes from last week?").
+      Returns notes by creation date only - does NOT search note content or
+      filter by other criteria. NEVER use this tool for finding contacts or any
+      other purpose besides retrieving notes. This tool is strictly prohibited
+      from being used unless "note" or "notes" are explicitly mentioned in the
+      query.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - start
+        - end
+      properties:
+        end:
+          type: string
+          description: "Use Date Math with now +/- time intervals. Supported units: d
+            (days), w (weeks), M (months), y (years), h (hours), m (minutes), s
+            (seconds). Examples: now-1d (yesterday), now+2w (2 weeks ahead),
+            now/M (start of month), now+1M/M (start of next month)."
+        start:
+          type: string
+          description: "Use Date Math with now +/- time intervals. Supported units: d
+            (days), w (weeks), M (months), y (years), h (hours), m (minutes), s
+            (seconds). Examples: now-1d (yesterday), now+2w (2 weeks ahead),
+            now/M (start of month), now+1M/M (start of next month)."
+      additionalProperties: false
+  - name: getEvents
+    description: Use this tool ONLY to fetch meetings/events in a date range (e.g.
+      "what meetings next week?", "show calendar for tomorrow"). DO NOT use for
+      counting meetings, analyzing patterns, or finding frequent participants.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - start
+        - end
+      properties:
+        end:
+          type: string
+          description: "Use Date Math with now +/- time intervals. Supported units: d
+            (days), w (weeks), M (months), y (years), h (hours), m (minutes), s
+            (seconds). Examples: now-1d (yesterday), now+2w (2 weeks ahead),
+            now/M (start of month), now+1M/M (start of next month)."
+        start:
+          type: string
+          description: "Use Date Math with now +/- time intervals. Supported units: d
+            (days), w (weeks), M (months), y (years), h (hours), m (minutes), s
+            (seconds). Examples: now-1d (yesterday), now+2w (2 weeks ahead),
+            now/M (start of month), now+1M/M (start of next month)."
+      additionalProperties: false

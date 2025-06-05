@@ -1,0 +1,17 @@
+identifier: zeropathai/zeropath-mcp-server/zeropath-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ZeroPathAI/zeropath-mcp-server
+  name: zeropath-mcp-server
+  owner: ZeroPathAI
+server:
+  subdirectory: /
+  name: ZeroPath MCP Server
+  description: Interact with your product security findings using natural
+    language. Query SAST issues, secrets, patches, and more directly within your
+    AI-assisted tools, eliminating the need for dashboards and manual ticket
+    triage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

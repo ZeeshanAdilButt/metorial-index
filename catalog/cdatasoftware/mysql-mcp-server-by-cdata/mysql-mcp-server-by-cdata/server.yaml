@@ -1,0 +1,18 @@
+identifier: cdatasoftware/mysql-mcp-server-by-cdata/mysql-mcp-server-by-cdata
+repo:
+  provider: github.com
+  url: https://github.com/CDataSoftware/mysql-mcp-server-by-cdata
+  name: mysql-mcp-server-by-cdata
+  owner: CDataSoftware
+server:
+  subdirectory: /
+  name: MySQL MCP Server by CData
+  description: Enable natural language querying of live MySQL data without writing
+    SQL by connecting your LLM client to MySQL databases via a simple MCP
+    interface. Retrieve table and column metadata and run SQL SELECT queries
+    through built-in tools, making data access seamless and intuitive. Easily
+    integrate with clients like Claude Desktop for real-time data insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

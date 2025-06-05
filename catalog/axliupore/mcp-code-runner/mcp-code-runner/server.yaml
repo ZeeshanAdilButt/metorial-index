@@ -1,0 +1,16 @@
+identifier: axliupore/mcp-code-runner/mcp-code-runner
+repo:
+  provider: github.com
+  url: https://github.com/axliupore/mcp-code-runner
+  name: mcp-code-runner
+  owner: axliupore
+server:
+  subdirectory: /
+  name: Code Runner
+  description: Execute code securely in a Docker environment. Leverage the MCP
+    protocol to run arbitrary code with ease and safety. Ideal for developers
+    looking to integrate code execution capabilities into their applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

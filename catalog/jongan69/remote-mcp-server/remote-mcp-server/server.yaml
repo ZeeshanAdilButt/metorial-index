@@ -1,0 +1,19 @@
+identifier: jongan69/remote-mcp-server/remote-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/jongan69/remote-mcp-server
+  name: remote-mcp-server
+  owner: jongan69
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare
+  description: Host a remote MCP server on Cloudflare Workers with OAuth login
+    support to securely manage and expose tools for LLM integration. Develop
+    locally or deploy to Cloudflare to enable remote MCP clients like Claude
+    Desktop or the MCP Inspector to connect and interact with your server.
+    Easily explore, list, and call defined tools through a user-friendly
+    interface with authentication.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: zbigniewtomanek/my-mcp-server/my-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ZbigniewTomanek/my-mcp-server
+  name: my-mcp-server
+  owner: ZbigniewTomanek
+server:
+  subdirectory: /
+  name: Custom MCP Server
+  description: Enable your LLMs to interact with local file systems and execute
+    commands securely. Leverage a standardized protocol to enhance your AI's
+    capabilities with local system access and a variety of useful tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

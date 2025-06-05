@@ -1,0 +1,18 @@
+identifier: imprvhub/mcp-claude-spotify/mcp-claude-spotify
+repo:
+  provider: github.com
+  url: https://github.com/imprvhub/mcp-claude-spotify
+  name: mcp-claude-spotify
+  owner: imprvhub
+server:
+  subdirectory: /
+  name: Claude Spotify Integration
+  description: Enable seamless interaction with Spotify through Claude Desktop by
+    providing authentication, search, playback control, playlist management, and
+    personalized recommendations. Enhance your music experience by controlling
+    Spotify directly from your LLM environment. Easily access your top tracks
+    and manage your Spotify library with intuitive commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

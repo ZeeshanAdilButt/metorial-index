@@ -1,0 +1,16 @@
+identifier: yuniko-software/minecraft-mcp-server/minecraft-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/yuniko-software/minecraft-mcp-server
+  name: minecraft-mcp-server
+  owner: yuniko-software
+server:
+  subdirectory: /
+  name: Minecraft Bot
+  description: Control your Minecraft character using advanced language models.
+    Interact with the game world through natural language commands and let the
+    bot perform actions like building, moving, and chatting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

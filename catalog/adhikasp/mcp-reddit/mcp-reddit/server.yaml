@@ -1,0 +1,15 @@
+identifier: adhikasp/mcp-reddit/mcp-reddit
+repo:
+  provider: github.com
+  url: https://github.com/adhikasp/mcp-reddit
+  name: mcp-reddit
+  owner: adhikasp
+server:
+  subdirectory: /
+  name: Reddit Content
+  description: Fetch and analyze content from Reddit, including hot threads and
+    detailed post content.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

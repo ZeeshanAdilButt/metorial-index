@@ -1,0 +1,17 @@
+identifier: kablewy/fred-mcp-server/fred-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kablewy/fred-mcp-server
+  name: fred-mcp-server
+  owner: kablewy
+server:
+  subdirectory: /
+  name: FRED MCP Server
+  description: Access and retrieve economic data series from the Federal Reserve
+    Economic Data (FRED) API. Search for specific economic data and retrieve
+    observations with various filtering options. Enhance your applications with
+    real-time economic insights effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

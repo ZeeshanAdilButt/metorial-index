@@ -1,0 +1,47 @@
+tools:
+  - name: download_markdown
+    description: Download a webpage as markdown using r.jina.ai
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the webpage to download
+        subdirectory:
+          type: string
+          description: Optional subdirectory to save the file in
+  - name: list_downloaded_files
+    description: List all downloaded markdown files
+    inputSchema:
+      type: object
+      properties:
+        subdirectory:
+          type: string
+          description: Optional subdirectory to list files from
+  - name: set_download_directory
+    description: Set the main local download folder for markdown files
+    inputSchema:
+      type: object
+      required:
+        - directory
+      properties:
+        directory:
+          type: string
+          description: Full path to the download directory
+  - name: get_download_directory
+    description: Get the current download directory
+    inputSchema:
+      type: object
+      properties: {}
+  - name: create_subdirectory
+    description: Create a new subdirectory in the root download folder
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the subdirectory to create

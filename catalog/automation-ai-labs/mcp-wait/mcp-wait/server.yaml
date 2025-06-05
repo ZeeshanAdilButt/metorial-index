@@ -1,0 +1,16 @@
+identifier: automation-ai-labs/mcp-wait/mcp-wait
+repo:
+  provider: github.com
+  url: https://github.com/automation-ai-labs/mcp-wait
+  name: mcp-wait
+  owner: automation-ai-labs
+server:
+  subdirectory: /
+  name: Wait
+  description: Pause execution for a specified duration while providing progress
+    updates. Easily integrate waiting functionality into your applications with
+    a simple CLI or HTTP server interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

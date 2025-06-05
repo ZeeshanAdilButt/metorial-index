@@ -1,0 +1,11 @@
+tools:
+  - name: generate_image
+    description: Generate an image using the Flux Schnell model
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text prompt describing the image to generate

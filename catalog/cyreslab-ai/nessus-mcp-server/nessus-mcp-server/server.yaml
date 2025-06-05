@@ -1,0 +1,18 @@
+identifier: cyreslab-ai/nessus-mcp-server/nessus-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Cyreslab-AI/nessus-mcp-server
+  name: nessus-mcp-server
+  owner: Cyreslab-AI
+server:
+  subdirectory: /
+  name: Nessus Vulnerability Scanner Server
+  description: Enable AI assistants to perform vulnerability scanning and analysis
+    by interacting with the Tenable Nessus scanner. Start and monitor scans,
+    retrieve results, and search vulnerabilities seamlessly through a
+    standardized protocol. Test easily with a fully functional mock mode without
+    requiring a Nessus API key.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: stefans71/wordpress-mcp-server/wordpress
+repo:
+  provider: github.com
+  url: https://github.com/stefans71/wordpress-mcp-server
+  name: wordpress-mcp-server
+  owner: stefans71
+server:
+  subdirectory: /
+  name: WordPress Server
+  description: Interact with WordPress sites to manage content via the REST API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

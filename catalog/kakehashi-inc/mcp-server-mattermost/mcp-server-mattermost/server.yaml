@@ -1,0 +1,18 @@
+identifier: kakehashi-inc/mcp-server-mattermost/mcp-server-mattermost
+repo:
+  provider: github.com
+  url: https://github.com/kakehashi-inc/mcp-server-mattermost
+  name: mcp-server-mattermost
+  owner: kakehashi-inc
+server:
+  subdirectory: /
+  name: Mattermost Integration Server
+  description: Connect to Mattermost API endpoints to retrieve and process
+    information in real-time. Monitor specific teams and channels securely with
+    token-based authentication. Enhance your Mattermost experience by
+    integrating it with the Model Context Protocol for seamless data
+    interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

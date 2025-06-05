@@ -1,0 +1,17 @@
+identifier: shizhmsft/oras-mcp/oras-mcp
+repo:
+  provider: github.com
+  url: https://github.com/shizhMSFT/oras-mcp
+  name: oras-mcp
+  owner: shizhMSFT
+server:
+  subdirectory: /
+  name: ORAS Server
+  description: Provide detailed information about container images and their
+    signatures from registries using the ORAS CLI. Enable querying image
+    platforms, tags, and signature types to assist users in managing container
+    artifacts effectively.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

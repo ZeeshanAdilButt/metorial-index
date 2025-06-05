@@ -1,0 +1,423 @@
+tools:
+  - name: show-notification
+    description: Show a system notification using the default notifier for the
+      current platform
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        icon:
+          type: string
+          description: Path to icon file (.ico, .png, .jpg, or platform specific)
+        type:
+          enum:
+            - info
+            - warn
+            - error
+          type: string
+          description: Notification type (Windows Balloon only)
+        wait:
+          type: boolean
+          description: "Wait for user action before removing notification (default: false)"
+        appID:
+          type: string
+          description: Application identifier (Windows only)
+        reply:
+          type: boolean
+          description: Enable reply functionality (macOS only)
+        sound:
+          type: boolean
+          description: "Play a sound with the notification (default: false)"
+        title:
+          type: string
+          description: Title of the notification
+        sender:
+          type: string
+          description: Sender of notification (Growl only)
+        actions:
+          type: array
+          items:
+            type: string
+          description: Action buttons to add to notification (macOS only)
+        install:
+          type: string
+          description: Path to installer when notification is clicked (Windows Toaster only)
+        message:
+          type: string
+          description: Message content of the notification
+        timeout:
+          type: number
+          description: Time in seconds before notification expires (Linux/Windows)
+        urgency:
+          enum:
+            - low
+            - normal
+            - critical
+          type: string
+          description: Notification urgency level (Linux only)
+        closeLabel:
+          type: string
+          description: Label for closing notification (macOS only)
+        dropdownLabel:
+          type: string
+          description: Label for dropdown (macOS only)
+      additionalProperties: false
+  - name: show-notification-macos
+    description: Show a notification using macOS Notification Center
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        icon:
+          type: string
+          description: Path to icon file (.ico, .png, .jpg, or platform specific)
+        type:
+          enum:
+            - info
+            - warn
+            - error
+          type: string
+          description: Notification type (Windows Balloon only)
+        wait:
+          type: boolean
+          description: "Wait for user action before removing notification (default: false)"
+        appID:
+          type: string
+          description: Application identifier (Windows only)
+        reply:
+          type: boolean
+          description: Enable reply functionality (macOS only)
+        sound:
+          type: boolean
+          description: "Play a sound with the notification (default: false)"
+        title:
+          type: string
+          description: Title of the notification
+        sender:
+          type: string
+          description: Sender of notification (Growl only)
+        actions:
+          type: array
+          items:
+            type: string
+          description: Action buttons to add to notification (macOS only)
+        install:
+          type: string
+          description: Path to installer when notification is clicked (Windows Toaster only)
+        message:
+          type: string
+          description: Message content of the notification
+        timeout:
+          type: number
+          description: Time in seconds before notification expires (Linux/Windows)
+        urgency:
+          enum:
+            - low
+            - normal
+            - critical
+          type: string
+          description: Notification urgency level (Linux only)
+        closeLabel:
+          type: string
+          description: Label for closing notification (macOS only)
+        dropdownLabel:
+          type: string
+          description: Label for dropdown (macOS only)
+      additionalProperties: false
+  - name: show-notification-linux
+    description: Show a notification using Linux notify-send
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        hint:
+          type: string
+          description: Hint for notification display
+        icon:
+          type: string
+          description: Path to icon file (.ico, .png, .jpg, or platform specific)
+        type:
+          enum:
+            - info
+            - warn
+            - error
+          type: string
+          description: Notification type (Windows Balloon only)
+        wait:
+          type: boolean
+          description: "Wait for user action before removing notification (default: false)"
+        appID:
+          type: string
+          description: Application identifier (Windows only)
+        reply:
+          type: boolean
+          description: Enable reply functionality (macOS only)
+        sound:
+          type: boolean
+          description: "Play a sound with the notification (default: false)"
+        title:
+          type: string
+          description: Title of the notification
+        sender:
+          type: string
+          description: Sender of notification (Growl only)
+        actions:
+          type: array
+          items:
+            type: string
+          description: Action buttons to add to notification (macOS only)
+        install:
+          type: string
+          description: Path to installer when notification is clicked (Windows Toaster only)
+        message:
+          type: string
+          description: Message content of the notification
+        timeout:
+          type: number
+          description: Time in seconds before notification expires (Linux/Windows)
+        urgency:
+          enum:
+            - low
+            - normal
+            - critical
+          type: string
+          description: Notification urgency level (Linux only)
+        app-name:
+          type: string
+          description: Application name
+        category:
+          type: string
+          description: Category of notification
+        closeLabel:
+          type: string
+          description: Label for closing notification (macOS only)
+        dropdownLabel:
+          type: string
+          description: Label for dropdown (macOS only)
+      additionalProperties: false
+  - name: show-notification-windows-toast
+    description: Show a notification using Windows Toast notifications (Windows 8+)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        icon:
+          type: string
+          description: Path to icon file (.ico, .png, .jpg, or platform specific)
+        type:
+          enum:
+            - info
+            - warn
+            - error
+          type: string
+          description: Notification type (Windows Balloon only)
+        wait:
+          type: boolean
+          description: "Wait for user action before removing notification (default: false)"
+        appID:
+          type: string
+          description: Application identifier
+        reply:
+          type: boolean
+          description: Enable reply functionality (macOS only)
+        sound:
+          type: boolean
+          description: "Play a sound with the notification (default: false)"
+        title:
+          type: string
+          description: Title of the notification
+        sender:
+          type: string
+          description: Sender of notification (Growl only)
+        actions:
+          type: array
+          items:
+            type: string
+          description: Action buttons to add to notification (macOS only)
+        install:
+          type: string
+          description: Path to installer when notification is clicked
+        message:
+          type: string
+          description: Message content of the notification
+        timeout:
+          type: number
+          description: Time in seconds before notification expires (Linux/Windows)
+        urgency:
+          enum:
+            - low
+            - normal
+            - critical
+          type: string
+          description: Notification urgency level (Linux only)
+        closeLabel:
+          type: string
+          description: Label for closing notification (macOS only)
+        shortcutPath:
+          type: string
+          description: Path to shortcut file for notification
+        dropdownLabel:
+          type: string
+          description: Label for dropdown (macOS only)
+      additionalProperties: false
+  - name: show-notification-windows-balloon
+    description: Show a notification using Windows Balloon notifications (Windows 7
+      and earlier)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        icon:
+          type: string
+          description: Path to icon file (.ico, .png, .jpg, or platform specific)
+        type:
+          enum:
+            - info
+            - warn
+            - error
+          type: string
+          description: Notification type
+        wait:
+          type: boolean
+          description: "Wait for user action before removing notification (default: false)"
+        appID:
+          type: string
+          description: Application identifier (Windows only)
+        reply:
+          type: boolean
+          description: Enable reply functionality (macOS only)
+        sound:
+          type: boolean
+          description: "Play a sound with the notification (default: false)"
+        title:
+          type: string
+          description: Title of the notification
+        sender:
+          type: string
+          description: Sender of notification (Growl only)
+        actions:
+          type: array
+          items:
+            type: string
+          description: Action buttons to add to notification (macOS only)
+        install:
+          type: string
+          description: Path to installer when notification is clicked (Windows Toaster only)
+        message:
+          type: string
+          description: Message content of the notification
+        timeout:
+          type: number
+          description: Time in seconds before notification expires (Linux/Windows)
+        urgency:
+          enum:
+            - low
+            - normal
+            - critical
+          type: string
+          description: Notification urgency level (Linux only)
+        closeLabel:
+          type: string
+          description: Label for closing notification (macOS only)
+        dropdownLabel:
+          type: string
+          description: Label for dropdown (macOS only)
+      additionalProperties: false
+  - name: show-notification-growl
+    description: Show a notification using Growl
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        host:
+          type: string
+          description: Growl server host
+        icon:
+          type: string
+          description: Path to icon file (.ico, .png, .jpg, or platform specific)
+        name:
+          type: string
+          description: Application name for Growl
+        port:
+          type: number
+          description: Growl server port
+        type:
+          enum:
+            - info
+            - warn
+            - error
+          type: string
+          description: Notification type (Windows Balloon only)
+        wait:
+          type: boolean
+          description: "Wait for user action before removing notification (default: false)"
+        appID:
+          type: string
+          description: Application identifier (Windows only)
+        label:
+          type: string
+          description: Label for notification
+        reply:
+          type: boolean
+          description: Enable reply functionality (macOS only)
+        sound:
+          type: boolean
+          description: "Play a sound with the notification (default: false)"
+        title:
+          type: string
+          description: Title of the notification
+        sender:
+          type: string
+          description: Sender of notification (Growl only)
+        sticky:
+          type: boolean
+          description: Keep notification visible
+        actions:
+          type: array
+          items:
+            type: string
+          description: Action buttons to add to notification (macOS only)
+        install:
+          type: string
+          description: Path to installer when notification is clicked (Windows Toaster only)
+        message:
+          type: string
+          description: Message content of the notification
+        timeout:
+          type: number
+          description: Time in seconds before notification expires (Linux/Windows)
+        urgency:
+          enum:
+            - low
+            - normal
+            - critical
+          type: string
+          description: Notification urgency level (Linux only)
+        priority:
+          type: number
+          description: Notification priority (-2 to 2)
+        closeLabel:
+          type: string
+          description: Label for closing notification (macOS only)
+        dropdownLabel:
+          type: string
+          description: Label for dropdown (macOS only)
+      additionalProperties: false

@@ -1,0 +1,17 @@
+identifier: rusianhu/weibo_hotsearch_mcp/weibo_hotsearch_mcp
+repo:
+  provider: github.com
+  url: https://github.com/RusianHu/weibo_hotsearch_mcp
+  name: weibo_hotsearch_mcp
+  owner: RusianHu
+server:
+  subdirectory: /
+  name: Weibo Hot Search Service - 获取微博热搜
+  description: Provide real-time access to the top 10 trending topics on Weibo
+    without requiring user authentication. Easily integrate trending data into
+    AI assistants supporting MCP protocol for enhanced social media insights.
+    Analyze and explore popular topics effortlessly within your AI workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

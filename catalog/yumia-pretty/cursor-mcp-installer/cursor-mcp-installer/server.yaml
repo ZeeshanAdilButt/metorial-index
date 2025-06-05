@@ -1,0 +1,17 @@
+identifier: yumia-pretty/cursor-mcp-installer/cursor-mcp-installer
+repo:
+  provider: github.com
+  url: https://github.com/yumia-pretty/cursor-mcp-installer
+  name: cursor-mcp-installer
+  owner: yumia-pretty
+server:
+  subdirectory: /
+  name: Cursor MCP Installer
+  description: Install and configure MCP servers for Cursor with a single command.
+    Simplify the setup of AI capabilities by automating the installation from
+    npm or PyPi. Compatible with all standard MCP servers, including local and
+    package-based ones.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

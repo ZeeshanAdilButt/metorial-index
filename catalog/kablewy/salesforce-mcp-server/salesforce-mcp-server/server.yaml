@@ -1,0 +1,15 @@
+identifier: kablewy/salesforce-mcp-server/salesforce-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/kablewy/salesforce-mcp-server
+  name: salesforce-mcp-server
+  owner: kablewy
+server:
+  subdirectory: /
+  name: Salesforce Server
+  description: A server implementation for interacting with Salesforce through its
+    REST API using jsforce.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

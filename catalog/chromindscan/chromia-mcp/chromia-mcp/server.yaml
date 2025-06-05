@@ -1,0 +1,14 @@
+identifier: chromindscan/chromia-mcp/chromia-mcp
+repo:
+  provider: github.com
+  url: https://github.com/chromindscan/chromia-mcp
+  name: chromia-mcp
+  owner: chromindscan
+server:
+  subdirectory: /
+  name: Chromia Wallet
+  description: Interact with Chromia Wallet to send $CHR transactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

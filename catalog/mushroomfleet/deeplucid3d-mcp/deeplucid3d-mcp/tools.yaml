@@ -1,0 +1,66 @@
+tools:
+  - name: analyze_problem
+    description: Process a problem statement through the full UCPF framework
+    inputSchema:
+      type: object
+      required:
+        - problem
+      properties:
+        problem:
+          type: string
+          description: The problem statement to analyze
+        detailed:
+          type: boolean
+          default: false
+          description: Whether to include detailed analysis
+        session_id:
+          type: string
+          description: Optional session ID for maintaining state between calls
+        enable_state:
+          type: boolean
+          default: false
+          description: Whether to enable state management for this analysis
+  - name: creative_exploration
+    description: Generate novel perspectives and connections for a topic
+    inputSchema:
+      type: object
+      required:
+        - topic
+      properties:
+        topic:
+          type: string
+          description: The topic or problem to explore creatively
+        session_id:
+          type: string
+          description: Optional session ID for maintaining state between calls
+        constraints:
+          type: array
+          items:
+            type: string
+          description: Optional constraints or parameters to consider
+        include_metaphors:
+          type: boolean
+          default: true
+          description: Whether to include metaphorical thinking
+        perspective_count:
+          type: number
+          default: 3
+          description: Number of perspectives to generate
+  - name: manage_state
+    description: Control the state management for UCPF processing
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - enable
+            - disable
+            - reset
+            - status
+          type: string
+          description: The state management action to perform
+        session_id:
+          type: string
+          description: Optional session ID to target a specific session

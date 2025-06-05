@@ -1,0 +1,88 @@
+tools:
+  - name: can_x_be_done
+    description: Check if a specific task can be done in a given language/framework/tool
+    inputSchema:
+      type: object
+      required:
+        - docs
+        - x
+        - technology
+      properties:
+        x:
+          type: string
+          description: The task to check
+        docs:
+          type: string
+          description: Path to documentation directory
+        prompt:
+          type: string
+          description: Path to prompt file
+        technology:
+          type: string
+          description: The technology (programming language/framework/tool)
+  - name: how_to_do_x
+    description: Get examples and alternative approaches for a specific task
+    inputSchema:
+      type: object
+      required:
+        - docs
+        - x
+        - technology
+      properties:
+        x:
+          type: string
+          description: The task to implement
+        docs:
+          type: string
+          description: Path to documentation directory
+        prompt:
+          type: string
+          description: Path to prompt file
+        technology:
+          type: string
+          description: The technology (programming language/framework/tool)
+  - name: hints_for_problem
+    description: Get hints for solving a specific problem
+    inputSchema:
+      type: object
+      required:
+        - docs
+        - problem
+        - context
+      properties:
+        docs:
+          type: string
+          description: Path to documentation directory
+        prompt:
+          type: string
+          description: Path to prompt file
+        context:
+          type: string
+          description: The context of the problem
+        problem:
+          type: string
+          description: The problem description
+        environment:
+          type: object
+          description: Environment information
+  - name: is_this_good_practice
+    description: Check if a code snippet follows good practices
+    inputSchema:
+      type: object
+      required:
+        - docs
+        - snippet
+        - context
+      properties:
+        docs:
+          type: string
+          description: Path to documentation directory
+        prompt:
+          type: string
+          description: Path to prompt file
+        context:
+          type: string
+          description: The context in which the code is used
+        snippet:
+          type: string
+          description: The code snippet to check

@@ -1,0 +1,13 @@
+tools:
+  - name: audit_nodejs_dependencies
+    description: Audit specific dependencies for vulnerabilities
+    inputSchema:
+      type: object
+      required:
+        - dependencies
+      properties:
+        dependencies:
+          type: object
+          description: Dependencies object from package.json
+          additionalProperties:
+            type: string

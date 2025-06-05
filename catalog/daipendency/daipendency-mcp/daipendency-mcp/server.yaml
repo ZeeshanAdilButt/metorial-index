@@ -1,0 +1,14 @@
+identifier: daipendency/daipendency-mcp/daipendency-mcp
+repo:
+  provider: github.com
+  url: https://github.com/daipendency/daipendency-mcp
+  name: daipendency-mcp
+  owner: daipendency
+server:
+  subdirectory: /
+  name: Daipendency MCP Server
+  description: Extract documentation for dependencies in local projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

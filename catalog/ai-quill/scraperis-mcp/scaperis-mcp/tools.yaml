@@ -1,0 +1,35 @@
+tools:
+  - name: scrape
+    description: >-
+      Scrape a single webpage with advanced options for content extraction. 
+
+      Always returns both markdown content and visual screenshot for rich
+      context. 
+
+      Supports various formats including markdown, HTML, screenshots, JSON, and
+      quick. 
+
+      The prompt should include the website URL and what data you want to
+      extract. 
+
+      For example: 'Get me the top 10 products from producthunt.com' or 
+
+      'Extract all article titles and authors from techcrunch.com/news'
+    inputSchema:
+      type: object
+      required:
+        - prompt
+        - format
+      properties:
+        format:
+          enum:
+            - markdown
+            - html
+            - screenshot
+            - json
+            - quick
+          type: string
+          description: The format to return the content in
+        prompt:
+          type: string
+          description: The prompt describing what to scrape, including the URL

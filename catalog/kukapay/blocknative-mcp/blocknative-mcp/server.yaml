@@ -1,0 +1,18 @@
+identifier: kukapay/blocknative-mcp/blocknative-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/blocknative-mcp
+  name: blocknative-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: Blocknative Gas Price Predictor
+  description: Provide real-time gas price predictions and transaction cost
+    estimates across multiple blockchains. Access supported chains information
+    and query gas prices with confidence levels to optimize transaction fees.
+    Integrate seamlessly with your LLM applications to enhance blockchain
+    transaction insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,299 @@
+tools:
+  - name: get_midi_info
+    description: Get midi file info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+      additionalProperties: false
+  - name: set_tempo
+    description: Set tempo for midi file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - bpm
+      properties:
+        bpm:
+          type: number
+          description: BPM
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+      additionalProperties: false
+  - name: get_tracks_info
+    description: Get tracks info from midi file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: >-
+            Absoulate File Path to midi file 
+                        eg: D:programmingProjectmy-projectmidi-parser-mcp	est.mid
+      additionalProperties: false
+  - name: get_track_info_by_index
+    description: >-
+      Get track info from midi file by track index. 
+          name, instrument, channel, endOfTrackTicks, duration, durationTicks, noteCount
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        trackIndex:
+          type: number
+          description: Track index number
+      additionalProperties: false
+  - name: get_notes_by_index
+    description: Get notes from midi file by track index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        trackIndex:
+          type: number
+          description: Track index number
+      additionalProperties: false
+  - name: get_pitchbends_by_index
+    description: Get pitchbends from midi file by track index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        trackIndex:
+          type: number
+          description: Track index number
+      additionalProperties: false
+  - name: get_controlchanges_by_index
+    description: Get controlchanges from midi file by track index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        trackIndex:
+          type: number
+          description: Track index number
+      additionalProperties: false
+  - name: add_notes_by_index
+    description: Add notes to midi file by track index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+        - notes
+      properties:
+        notes:
+          type: array
+          items:
+            allOf:
+              - anyOf:
+                  - type: object
+                    required:
+                      - type
+                      - name
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        type: string
+                        const: name
+                    additionalProperties: false
+                  - type: object
+                    required:
+                      - type
+                      - pitch
+                      - octave
+                    properties:
+                      type:
+                        type: string
+                        const: pitch
+                      pitch:
+                        type: string
+                      octave:
+                        type: number
+                    additionalProperties: false
+                  - type: object
+                    required:
+                      - type
+                      - midi
+                    properties:
+                      midi:
+                        type: number
+                      type:
+                        type: string
+                        const: midi
+                    additionalProperties: false
+              - type: object
+                properties:
+                  velocity:
+                    type: number
+                  noteOffVelocity:
+                    type: number
+              - anyOf:
+                  - type: object
+                    required:
+                      - timeType
+                      - time
+                    properties:
+                      time:
+                        type: number
+                      duration:
+                        type: number
+                      timeType:
+                        type: string
+                        const: seconds
+                    additionalProperties: false
+                  - type: object
+                    required:
+                      - timeType
+                      - ticks
+                    properties:
+                      ticks:
+                        type: number
+                      timeType:
+                        type: string
+                        const: ticks
+                      durationTicks:
+                        type: number
+                    additionalProperties: false
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        trackIndex:
+          type: number
+          description: Track index number
+      additionalProperties: false
+  - name: add_controlchanges_by_index
+    description: Add controlchanges to midi file by track index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+        - controlchanges
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        trackIndex:
+          type: number
+          description: Track index number
+        controlchanges:
+          type: array
+          items:
+            allOf:
+              - type: object
+                required:
+                  - number
+                  - value
+                properties:
+                  value:
+                    type: number
+                  number:
+                    type: number
+              - anyOf:
+                  - type: object
+                    required:
+                      - time
+                    properties:
+                      time:
+                        type: number
+                    additionalProperties: false
+                  - type: object
+                    required:
+                      - ticks
+                    properties:
+                      ticks:
+                        type: number
+                    additionalProperties: false
+      additionalProperties: false
+  - name: add_pitchbends_by_index
+    description: Add pitchbends to midi file by track index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - trackIndex
+        - pitchbends
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+        pitchbends:
+          type: array
+          items:
+            allOf:
+              - type: object
+                required:
+                  - value
+                properties:
+                  value:
+                    type: number
+              - anyOf:
+                  - type: object
+                    required:
+                      - time
+                    properties:
+                      time:
+                        type: number
+                    additionalProperties: false
+                  - type: object
+                    required:
+                      - ticks
+                    properties:
+                      ticks:
+                        type: number
+                    additionalProperties: false
+        trackIndex:
+          type: number
+          description: Track index number
+      additionalProperties: false
+  - name: add_track
+    description: Add a new track to midi file and return the new track info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: Absoulate File Path to midi file
+      additionalProperties: false

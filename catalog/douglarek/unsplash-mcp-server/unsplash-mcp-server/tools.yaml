@@ -1,0 +1,33 @@
+tools:
+  - name: search_photos
+    description: Search for Unsplash photos
+    inputSchema:
+      type: object
+      required:
+        - query
+        - page
+        - per_page
+        - order_by
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number (1-based)
+        color:
+          type: string
+          description: Color filter (black_and_white, black, white, yellow, orange, red,
+            purple, magenta, green, teal, blue)
+        query:
+          type: string
+          description: Search keyword
+        order_by:
+          type: string
+          default: relevant
+          description: Sort method (relevant or latest)
+        per_page:
+          type: number
+          default: 5
+          description: Results per page (1-30)
+        orientation:
+          type: string
+          description: Orientation filter (landscape, portrait, squarish)

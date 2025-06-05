@@ -1,0 +1,17 @@
+identifier: myblockcities/mcp-server-heroku/mcp-server-heroku
+repo:
+  provider: github.com
+  url: https://github.com/MyBlockcities/mcp-server-heroku
+  name: mcp-server-heroku
+  owner: MyBlockcities
+server:
+  subdirectory: /
+  name: MCP Server Template for Cursor IDE
+  description: Create custom tools for Cursor IDE effortlessly. Deploy your own
+    MCP server to enhance your agent's capabilities with real-world data and
+    actions. Connect seamlessly and test your agent's responses in a
+    user-friendly environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

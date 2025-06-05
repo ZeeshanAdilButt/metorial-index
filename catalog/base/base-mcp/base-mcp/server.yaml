@@ -1,0 +1,17 @@
+identifier: base/base-mcp/base-mcp
+repo:
+  provider: github.com
+  url: https://github.com/base/base-mcp
+  name: base-mcp
+  owner: base
+server:
+  subdirectory: /
+  name: Base MCP Server
+  description: Enhance your AI's capabilities by enabling it to interact with the
+    Base blockchain and Coinbase API. Retrieve wallet addresses, manage
+    balances, transfer funds, and deploy smart contracts seamlessly. Empower
+    your applications with onchain tools for a richer experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

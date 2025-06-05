@@ -1,0 +1,18 @@
+identifier: tocharianou/mcp-server-kibana/mcp-server-kibana
+repo:
+  provider: github.com
+  url: https://github.com/TocharianOU/mcp-server-kibana
+  name: mcp-server-kibana
+  owner: TocharianOU
+server:
+  subdirectory: /
+  name: Kibana Server Integration
+  description: Enable natural language and programmatic access to your Kibana
+    instance through a seamless MCP interface. Search, view, and execute Kibana
+    API endpoints securely with support for authentication and SSL/TLS. Enhance
+    your workflows by integrating Kibana's powerful API capabilities directly
+    into your MCP-compatible clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,181 @@
+tools:
+  - name: initialize_memory_bank
+    description: Initialize a Memory Bank in the specified directory
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path where the Memory Bank will be initialized
+  - name: set_memory_bank_path
+    description: Set a custom path for the Memory Bank
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        path:
+          type: string
+          description: Custom path for the Memory Bank. If not provided, the current
+            directory will be used.
+  - name: debug_mcp_config
+    description: Debug the current MCP configuration
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        verbose:
+          type: boolean
+          default: false
+          description: Whether to include detailed information
+  - name: read_memory_bank_file
+    description: Read a file from the Memory Bank
+    inputSchema:
+      type: object
+      required:
+        - filename
+      properties:
+        filename:
+          type: string
+          description: Name of the file to read
+  - name: write_memory_bank_file
+    description: Write to a Memory Bank file
+    inputSchema:
+      type: object
+      required:
+        - filename
+        - content
+      properties:
+        content:
+          type: string
+          description: Content to write to the file
+        filename:
+          type: string
+          description: Name of the file to write
+  - name: list_memory_bank_files
+    description: List Memory Bank files
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: get_memory_bank_status
+    description: Check Memory Bank status
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: migrate_file_naming
+    description: Migrate Memory Bank files from camelCase to kebab-case naming convention
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: track_progress
+    description: Track progress and update Memory Bank files
+    inputSchema:
+      type: object
+      required:
+        - action
+        - description
+      properties:
+        action:
+          type: string
+          description: Action performed (e.g., 'Implemented feature', 'Fixed bug')
+        description:
+          type: string
+          description: Detailed description of the progress
+        updateActiveContext:
+          type: boolean
+          default: true
+          description: Whether to update the active context file
+  - name: update_active_context
+    description: Update the active context file
+    inputSchema:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            type: string
+          description: List of ongoing tasks
+        issues:
+          type: array
+          items:
+            type: string
+          description: List of known issues
+        nextSteps:
+          type: array
+          items:
+            type: string
+          description: List of next steps
+  - name: log_decision
+    description: Log a decision in the decision log
+    inputSchema:
+      type: object
+      required:
+        - title
+        - context
+        - decision
+      properties:
+        title:
+          type: string
+          description: Decision title
+        context:
+          type: string
+          description: Decision context
+        decision:
+          type: string
+          description: The decision made
+        alternatives:
+          type: array
+          items:
+            type: string
+          description: Alternatives considered
+        consequences:
+          type: array
+          items:
+            type: string
+          description: Consequences of the decision
+  - name: switch_mode
+    description: Switches to a specific mode
+    inputSchema:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          description: Name of the mode to switch to (architect, ask, code, debug, test)
+  - name: get_current_mode
+    description: Gets information about the current mode
+    inputSchema:
+      type: object
+      properties: {}
+  - name: process_umb_command
+    description: Processes the Update Memory Bank (UMB) command
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: Complete UMB command
+  - name: complete_umb
+    description: Completes the Update Memory Bank (UMB) process
+    inputSchema:
+      type: object
+      properties: {}

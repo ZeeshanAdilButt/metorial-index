@@ -1,0 +1,18 @@
+identifier: variflight/variflight-mcp/variflight-mcp
+repo:
+  provider: github.com
+  url: https://github.com/variflight/variflight-mcp
+  name: variflight-mcp
+  owner: variflight
+server:
+  subdirectory: /
+  name: Variflight Flight Information Server
+  description: Provide real-time and comprehensive flight information, including
+    flight searches, transfer options, comfort metrics, aircraft tracking, and
+    weather forecasts. Enable users to access detailed flight data and purchase
+    options seamlessly. Enhance travel planning with accurate and up-to-date
+    aviation data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

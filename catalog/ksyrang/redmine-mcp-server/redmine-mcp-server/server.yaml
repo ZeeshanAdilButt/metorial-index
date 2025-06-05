@@ -1,0 +1,18 @@
+identifier: ksyrang/redmine-mcp-server/redmine-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ksyrang/Redmine-MCP-Server
+  name: Redmine-MCP-Server
+  owner: ksyrang
+server:
+  subdirectory: /
+  name: Redmine Integration Server
+  description: Integrate your MCP client with Redmine to query issue lists, view
+    detailed issue information, and retrieve project lists seamlessly. Enhance
+    your workflow by accessing Redmine data directly through the Model Context
+    Protocol. Easily set up and connect using environment variables for your
+    Redmine URL and API key.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

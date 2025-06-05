@@ -1,0 +1,49 @@
+tools:
+  - name: search_semantic_scholar
+    description: ""
+    inputSchema:
+      type: object
+      title: search_semantic_scholarArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+  - name: get_semantic_scholar_paper_details
+    description: ""
+    inputSchema:
+      type: object
+      title: get_semantic_scholar_paper_detailsArguments
+      required:
+        - paper_id
+      properties:
+        paper_id:
+          type: string
+          title: Paper Id
+  - name: get_semantic_scholar_author_details
+    description: ""
+    inputSchema:
+      type: object
+      title: get_semantic_scholar_author_detailsArguments
+      required:
+        - author_id
+      properties:
+        author_id:
+          type: string
+          title: Author Id
+  - name: get_semantic_scholar_citations_and_references
+    description: ""
+    inputSchema:
+      type: object
+      title: get_semantic_scholar_citations_and_referencesArguments
+      required:
+        - paper_id
+      properties:
+        paper_id:
+          type: string
+          title: Paper Id

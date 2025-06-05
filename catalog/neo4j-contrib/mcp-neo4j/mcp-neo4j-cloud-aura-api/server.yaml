@@ -1,0 +1,16 @@
+identifier: neo4j-contrib/mcp-neo4j/mcp-neo4j-cloud-aura-api
+repo:
+  provider: github.com
+  url: https://github.com/neo4j-contrib/mcp-neo4j
+  name: mcp-neo4j
+  owner: neo4j-contrib
+server:
+  subdirectory: /servers/mcp-neo4j-cloud-aura-api
+  name: Neo4j Aura Database Manager
+  description: Manage your Neo4j Aura database instances effortlessly. Create,
+    monitor, and maintain your graph database infrastructure directly through
+    Claude, streamlining your database management tasks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

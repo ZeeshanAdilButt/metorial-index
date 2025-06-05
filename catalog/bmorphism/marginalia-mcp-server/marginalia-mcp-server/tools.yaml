@@ -1,0 +1,20 @@
+tools:
+  - name: search-marginalia
+    description: Search the web using Marginalia Search
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        count:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: Number of results to return
+        index:
+          type: number
+          minimum: 0
+          description: Search index (corresponds to dropdown in main GUI)
+        query:
+          type: string
+          description: Search query

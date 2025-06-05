@@ -1,0 +1,218 @@
+tools:
+  - name: analogicalReasoning
+    description: >-
+      A detailed tool for analogical thinking between source and target domains.
+
+      This tool helps models structure analogies systematically to improve
+      understanding and reasoning.
+
+      It facilitates explicit mapping between domains, inference generation, and
+      analogy evaluation.
+
+
+      When to use this tool:
+
+      - Understanding new concepts through analogies to familiar domains
+
+      - Problem-solving by transferring insights between domains
+
+      - Creative thinking by establishing connections between different fields
+
+      - Explaining complex concepts through structured comparisons
+
+      - Evaluating analogies for their strengths and limitations
+
+
+      Key features:
+
+      - Explicit domain structure representation
+
+      - Systematic mapping between domains
+
+      - Inference generation and evaluation
+
+      - Visual representation of analogical mappings
+
+      - Tracking of analogy strengths and limitations
+    inputSchema:
+      type: object
+      required:
+        - sourceDomain
+        - targetDomain
+        - analogyId
+        - purpose
+        - confidence
+        - iteration
+        - nextOperationNeeded
+      properties:
+        purpose:
+          enum:
+            - explanation
+            - prediction
+            - problem-solving
+            - creative-generation
+          type: string
+          description: The purpose of the analogy
+        mappings:
+          type: array
+          items:
+            type: object
+            required:
+              - sourceElement
+              - targetElement
+              - mappingStrength
+              - justification
+            properties:
+              limitations:
+                type: array
+                items:
+                  type: string
+                description: Limitations of this specific mapping
+              justification:
+                type: string
+                description: Justification for the mapping
+              sourceElement:
+                type: string
+                description: ID of the source domain element
+              targetElement:
+                type: string
+                description: ID of the target domain element
+              mappingStrength:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Strength of the mapping (0.0-1.0)
+          description: Mappings between source and target domain elements
+        analogyId:
+          type: string
+          description: Unique identifier for this analogy
+        iteration:
+          type: number
+          minimum: 0
+          description: Current iteration of the analogy
+        strengths:
+          type: array
+          items:
+            type: string
+          description: Strengths of the analogy
+        confidence:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Confidence in the overall analogy (0.0-1.0)
+        inferences:
+          type: array
+          items:
+            type: object
+            required:
+              - statement
+              - confidence
+              - basedOnMappings
+            properties:
+              statement:
+                type: string
+                description: The inference statement
+              confidence:
+                type: number
+                maximum: 1
+                minimum: 0
+                description: Confidence in the inference (0.0-1.0)
+              basedOnMappings:
+                type: array
+                items:
+                  type: string
+                description: IDs of mappings supporting this inference
+          description: Inferences drawn from the analogy
+        limitations:
+          type: array
+          items:
+            type: string
+          description: Limitations of the analogy
+        sourceDomain:
+          type: object
+          required:
+            - name
+            - elements
+          properties:
+            name:
+              type: string
+              description: The name of the source domain
+            elements:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - type
+                  - description
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the element
+                  name:
+                    type: string
+                    description: Name of the element
+                  type:
+                    enum:
+                      - entity
+                      - attribute
+                      - relation
+                      - process
+                    type: string
+                    description: Type of element
+                  description:
+                    type: string
+                    description: Description of the element
+              description: Elements in the source domain
+          description: The familiar domain used as the basis for the analogy
+        targetDomain:
+          type: object
+          required:
+            - name
+            - elements
+          properties:
+            name:
+              type: string
+              description: The name of the target domain
+            elements:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - type
+                  - description
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the element
+                  name:
+                    type: string
+                    description: Name of the element
+                  type:
+                    enum:
+                      - entity
+                      - attribute
+                      - relation
+                      - process
+                    type: string
+                    description: Type of element
+                  description:
+                    type: string
+                    description: Description of the element
+              description: Elements in the target domain
+          description: The domain being understood through the analogy
+        nextOperationNeeded:
+          type: boolean
+          description: Whether another operation is needed
+        suggestedOperations:
+          type: array
+          items:
+            enum:
+              - add-mapping
+              - revise-mapping
+              - draw-inference
+              - evaluate-limitation
+              - try-new-source
+            type: string
+          description: Suggested next operations

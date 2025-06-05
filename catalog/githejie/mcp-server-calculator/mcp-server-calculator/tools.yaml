@@ -1,0 +1,12 @@
+tools:
+  - name: calculate
+    description: Calculates/evaluates the given expression.
+    inputSchema:
+      type: object
+      title: calculateArguments
+      required:
+        - expression
+      properties:
+        expression:
+          type: string
+          title: Expression

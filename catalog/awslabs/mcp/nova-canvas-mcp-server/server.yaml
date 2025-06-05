@@ -1,0 +1,17 @@
+identifier: awslabs/mcp/nova-canvas-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/awslabs/mcp
+  name: mcp
+  owner: awslabs
+server:
+  subdirectory: /src/nova-canvas-mcp-server
+  name: Amazon Nova Canvas MCP Server
+  description: Generate stunning images from text prompts or specific color
+    palettes. Leverage AWS services for secure and efficient image creation,
+    with customizable options to suit your needs. Save your creations directly
+    to your workspace for easy access and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

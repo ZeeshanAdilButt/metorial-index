@@ -1,0 +1,627 @@
+tools:
+  - name: analyze_database
+    description: Analyze PostgreSQL database configuration and performance
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+      properties:
+        analysisType:
+          enum:
+            - configuration
+            - performance
+            - security
+          type: string
+          description: Type of analysis to perform
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: get_setup_instructions
+    description: Get step-by-step PostgreSQL setup instructions
+    inputSchema:
+      type: object
+      required:
+        - platform
+      properties:
+        useCase:
+          enum:
+            - development
+            - production
+          type: string
+          description: Intended use case
+        version:
+          type: string
+          description: PostgreSQL version to install
+        platform:
+          enum:
+            - linux
+            - macos
+            - windows
+          type: string
+          description: Operating system platform
+  - name: debug_database
+    description: Debug common PostgreSQL issues
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - issue
+      properties:
+        issue:
+          enum:
+            - connection
+            - performance
+            - locks
+            - replication
+          type: string
+          description: Type of issue to debug
+        logLevel:
+          enum:
+            - info
+            - debug
+            - trace
+          type: string
+          default: info
+          description: Logging detail level
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: get_schema_info
+    description: Get schema information for a database or specific table
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+      properties:
+        tableName:
+          type: string
+          description: Optional table name to get detailed schema for
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: create_table
+    description: Create a new table in the database
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+        - columns
+      properties:
+        columns:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - type
+            properties:
+              name:
+                type: string
+                description: Column name
+              type:
+                type: string
+                description: PostgreSQL data type
+              default:
+                type: string
+                description: Default value expression
+              nullable:
+                type: boolean
+                description: Whether the column can be NULL
+          description: Column definitions
+        tableName:
+          type: string
+          description: Name of the table to create
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: alter_table
+    description: Alter an existing table (add/modify/drop columns)
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+        - operations
+      properties:
+        tableName:
+          type: string
+          description: Name of the table to alter
+        operations:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - columnName
+            properties:
+              type:
+                enum:
+                  - add
+                  - alter
+                  - drop
+                type: string
+                description: Type of operation
+              default:
+                type: string
+                description: Default value expression (for add/alter)
+              dataType:
+                type: string
+                description: PostgreSQL data type (for add/alter)
+              nullable:
+                type: boolean
+                description: Whether the column can be NULL (for add/alter)
+              columnName:
+                type: string
+                description: Column name
+          description: Operations to perform
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: export_table_data
+    description: Export table data to JSON or CSV format
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+        - outputPath
+      properties:
+        limit:
+          type: number
+          description: Optional limit on number of rows to export
+        where:
+          type: string
+          description: Optional WHERE clause to filter data
+        format:
+          enum:
+            - json
+            - csv
+          type: string
+          default: json
+          description: Output format
+        tableName:
+          type: string
+          description: Name of the table to export
+        outputPath:
+          type: string
+          description: Path to save the exported data
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: import_table_data
+    description: Import data from JSON or CSV file into a table
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+        - inputPath
+      properties:
+        format:
+          enum:
+            - json
+            - csv
+          type: string
+          default: json
+          description: Input format
+        delimiter:
+          type: string
+          default: ","
+          description: Delimiter for CSV files
+        inputPath:
+          type: string
+          description: Path to the file to import
+        tableName:
+          type: string
+          description: Name of the table to import into
+        truncateFirst:
+          type: boolean
+          default: false
+          description: Whether to truncate the table before importing
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: copy_between_databases
+    description: Copy data between two databases
+    inputSchema:
+      type: object
+      required:
+        - sourceConnectionString
+        - targetConnectionString
+        - tableName
+      properties:
+        where:
+          type: string
+          description: Optional WHERE clause to filter data
+        tableName:
+          type: string
+          description: Name of the table to copy
+        truncateTarget:
+          type: boolean
+          default: false
+          description: Whether to truncate the target table before copying
+        sourceConnectionString:
+          type: string
+          description: Source PostgreSQL connection string
+        targetConnectionString:
+          type: string
+          description: Target PostgreSQL connection string
+  - name: monitor_database
+    description: Get real-time monitoring information for a PostgreSQL database
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+      properties:
+        includeLocks:
+          type: boolean
+          default: true
+          description: Whether to include lock information
+        includeTables:
+          type: boolean
+          default: true
+          description: Whether to include table metrics
+        includeQueries:
+          type: boolean
+          default: true
+          description: Whether to include active query information
+        alertThresholds:
+          type: object
+          properties:
+            vacuumAge:
+              type: number
+              description: Vacuum age threshold in days
+            cacheHitRatio:
+              type: number
+              description: Cache hit ratio threshold
+            connectionPercentage:
+              type: number
+              description: Connection usage percentage threshold
+            deadTuplesPercentage:
+              type: number
+              description: Dead tuples percentage threshold
+            longRunningQuerySeconds:
+              type: number
+              description: Long-running query threshold in seconds
+          description: Alert thresholds
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+        includeReplication:
+          type: boolean
+          default: false
+          description: Whether to include replication information
+  - name: get_functions
+    description: Get information about PostgreSQL functions
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        functionName:
+          type: string
+          description: Optional function name to filter by
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: create_function
+    description: Create or replace a PostgreSQL function
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - functionName
+        - parameters
+        - returnType
+        - functionBody
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        replace:
+          type: boolean
+          description: Whether to replace the function if it exists
+        language:
+          enum:
+            - sql
+            - plpgsql
+            - plpython3u
+          type: string
+          description: Function language
+        security:
+          enum:
+            - INVOKER
+            - DEFINER
+          type: string
+          description: Function security context
+        parameters:
+          type: string
+          description: Function parameters (e.g., "id integer, name text")
+        returnType:
+          type: string
+          description: Return type of the function
+        volatility:
+          enum:
+            - VOLATILE
+            - STABLE
+            - IMMUTABLE
+          type: string
+          description: Function volatility
+        functionBody:
+          type: string
+          description: Function body code
+        functionName:
+          type: string
+          description: Name of the function to create
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: drop_function
+    description: Drop a PostgreSQL function
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - functionName
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        cascade:
+          type: boolean
+          description: Whether to include CASCADE clause
+        ifExists:
+          type: boolean
+          description: Whether to include IF EXISTS clause
+        parameters:
+          type: string
+          description: Function parameters signature (required for overloaded functions)
+        functionName:
+          type: string
+          description: Name of the function to drop
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: enable_rls
+    description: Enable Row-Level Security on a table
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        tableName:
+          type: string
+          description: Name of the table to enable RLS on
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: disable_rls
+    description: Disable Row-Level Security on a table
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        tableName:
+          type: string
+          description: Name of the table to disable RLS on
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: create_rls_policy
+    description: Create a Row-Level Security policy
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+        - policyName
+        - using
+      properties:
+        role:
+          type: string
+          description: Role the policy applies to
+        check:
+          type: string
+          description: WITH CHECK expression for the policy (if different from USING)
+        using:
+          type: string
+          description: USING expression for the policy (e.g., "user_id = current_user_id()")
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        command:
+          enum:
+            - ALL
+            - SELECT
+            - INSERT
+            - UPDATE
+            - DELETE
+          type: string
+          description: Command the policy applies to
+        replace:
+          type: boolean
+          description: Whether to replace the policy if it exists
+        tableName:
+          type: string
+          description: Name of the table to create policy on
+        policyName:
+          type: string
+          description: Name of the policy to create
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: drop_rls_policy
+    description: Drop a Row-Level Security policy
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - tableName
+        - policyName
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        ifExists:
+          type: boolean
+          description: Whether to include IF EXISTS clause
+        tableName:
+          type: string
+          description: Name of the table the policy is on
+        policyName:
+          type: string
+          description: Name of the policy to drop
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: get_rls_policies
+    description: Get Row-Level Security policies
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        tableName:
+          type: string
+          description: Optional table name to filter by
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: get_triggers
+    description: Get information about PostgreSQL triggers
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        tableName:
+          type: string
+          description: Optional table name to filter by
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: create_trigger
+    description: Create a PostgreSQL trigger
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - triggerName
+        - tableName
+        - functionName
+      properties:
+        when:
+          type: string
+          description: Optional WHEN condition
+        events:
+          type: array
+          items:
+            enum:
+              - INSERT
+              - UPDATE
+              - DELETE
+              - TRUNCATE
+            type: string
+          description: Events that fire the trigger
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        timing:
+          enum:
+            - BEFORE
+            - AFTER
+            - INSTEAD OF
+          type: string
+          description: When to fire the trigger
+        forEach:
+          enum:
+            - ROW
+            - STATEMENT
+          type: string
+          description: Whether to fire once per row or statement
+        replace:
+          type: boolean
+          description: Whether to replace the trigger if it exists
+        tableName:
+          type: string
+          description: Name of the table to create trigger on
+        triggerName:
+          type: string
+          description: Name of the trigger to create
+        functionName:
+          type: string
+          description: Name of the function to execute
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: drop_trigger
+    description: Drop a PostgreSQL trigger
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - triggerName
+        - tableName
+      properties:
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        cascade:
+          type: boolean
+          description: Whether to include CASCADE clause
+        ifExists:
+          type: boolean
+          description: Whether to include IF EXISTS clause
+        tableName:
+          type: string
+          description: Name of the table the trigger is on
+        triggerName:
+          type: string
+          description: Name of the trigger to drop
+        connectionString:
+          type: string
+          description: PostgreSQL connection string
+  - name: set_trigger_state
+    description: Enable or disable a PostgreSQL trigger
+    inputSchema:
+      type: object
+      required:
+        - connectionString
+        - triggerName
+        - tableName
+        - enable
+      properties:
+        enable:
+          type: boolean
+          description: Whether to enable (true) or disable (false) the trigger
+        schema:
+          type: string
+          description: Schema name (defaults to public)
+        tableName:
+          type: string
+          description: Name of the table the trigger is on
+        triggerName:
+          type: string
+          description: Name of the trigger to enable/disable
+        connectionString:
+          type: string
+          description: PostgreSQL connection string

@@ -1,0 +1,18 @@
+identifier: chicuza/fast_bitrix24/fast_bitrix24
+repo:
+  provider: github.com
+  url: https://github.com/chicuza/fast_bitrix24
+  name: fast_bitrix24
+  owner: chicuza
+server:
+  subdirectory: /
+  name: fast_bitrix24
+  description: Provide a high-speed Python API wrapper for Bitrix24 to quickly
+    retrieve and manipulate data via REST API. Automatically handle batching,
+    parallel requests, and rate limiting to optimize data exchange and avoid
+    server errors. Support both synchronous and asynchronous clients with OAuth
+    authorization and progress tracking.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: inkdropapp/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/inkdropapp/mcp-server
+  name: mcp-server
+  owner: inkdropapp
+server:
+  subdirectory: /
+  name: Inkdrop MCP Server
+  description: Retrieve, create, and manage your notes seamlessly with this
+    server. Enhance your Inkdrop experience by integrating local HTTP server
+    capabilities for efficient note handling. Access your notes and notebooks
+    effortlessly through a standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

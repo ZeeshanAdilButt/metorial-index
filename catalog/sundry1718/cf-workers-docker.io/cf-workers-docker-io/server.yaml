@@ -1,0 +1,17 @@
+identifier: sundry1718/cf-workers-docker.io/cf-workers-docker-io
+repo:
+  provider: github.com
+  url: https://github.com/sundry1718/CF-Workers-docker.io
+  name: CF-Workers-docker.io
+  owner: sundry1718
+server:
+  subdirectory: /
+  name: Docker Image Proxy
+  description: Proxy and accelerate access to Docker official image repositories
+    by routing requests through Cloudflare Workers. Overcome access restrictions
+    and improve download speeds for Docker images. Easily deployable via
+    Cloudflare Workers or Pages for seamless integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

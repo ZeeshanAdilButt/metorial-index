@@ -1,0 +1,112 @@
+tools:
+  - name: get_articles_by_date
+    description: "Get articles for a given date.
+
+      \    Args:
+
+      \        date: Target date in YYYY-MM-DD format (optional, defaults to
+      today)
+
+      \        category: Category to filter articles by (optional)
+
+      \        tags: Comma-separated list of tags to filter articles by
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_articles_by_dateArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+        tags:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Tags
+          default: null
+        category:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Category
+          default: null
+  - name: get_articles_by_person
+    description: "Get articles mentioning a specific person.
+
+      \    Args:
+
+      \        person: Name of the person
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_articles_by_personArguments
+      required:
+        - person
+      properties:
+        person:
+          type: string
+          title: Person
+  - name: get_similar_articles
+    description: "Get articles similar to the provided text.
+
+      \    Args:
+
+      \        text: Text to find similar articles for
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_similar_articlesArguments
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+  - name: get_article_groups
+    description: "Get main articles groups for a specific date.
+
+      \    article groups are groups of articles that are talking about the same
+      subject.
+
+      \    Args:
+
+      \        date: Target date in YYYY-MM-DD format (optional, defaults to
+      today)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_article_groupsArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+  - name: get_categories
+    description: "Get all categories and their article counts for a specific date.
+
+      \    Args:
+
+      \        date: Target date in YYYY-MM-DD format (optional, defaults to
+      today)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_categoriesArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null

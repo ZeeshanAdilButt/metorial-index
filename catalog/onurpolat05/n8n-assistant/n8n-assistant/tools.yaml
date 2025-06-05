@@ -1,0 +1,41 @@
+tools:
+  - name: get_n8n_info
+    description: "
+
+      \  Search the latest n8n resources for a given query.
+
+      \ \ 
+
+      \  Args:
+
+      \    query: The query to search for (e.g. \"HTTP Request node\")
+
+      \    resource_type: The resource type to search in (docs, workflows,
+      community)
+
+      \      - docs: General n8n documentation
+
+      \      - workflows: Example workflows (will search for \"n8n example
+      {query}\")
+
+      \      - community: Community forums for issues and questions
+
+
+      \  Returns:
+
+      \    Text from the n8n resources
+
+      \  "
+    inputSchema:
+      type: object
+      title: get_n8n_infoArguments
+      required:
+        - query
+        - resource_type
+      properties:
+        query:
+          type: string
+          title: Query
+        resource_type:
+          type: string
+          title: Resource Type

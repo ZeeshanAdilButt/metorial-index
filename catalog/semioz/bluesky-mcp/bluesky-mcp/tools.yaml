@@ -1,0 +1,154 @@
+tools:
+  - name: login
+    description: Login to Bluesky using credentials from .env file or provided parameters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        password:
+          type: string
+          description: Your Bluesky app password (optional if set in .env)
+        identifier:
+          type: string
+          description: Your Bluesky handle or email (optional if set in .env)
+      additionalProperties: false
+  - name: create-post
+    description: Create a new post on Bluesky
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: The text content of your post
+        images:
+          type: array
+          items:
+            type: object
+            required:
+              - data
+              - encoding
+            properties:
+              data:
+                type: string
+                description: Base64 encoded image data
+              encoding:
+                type: string
+                description: Image MIME type (e.g., image/jpeg)
+            additionalProperties: false
+          description: Optional array of images to attach to the post
+      additionalProperties: false
+  - name: get-profile
+    description: Get your Bluesky profile
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-timeline
+    description: Get Bluesky timeline
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          maximum: 100
+          minimum: 1
+      additionalProperties: false
+  - name: get-post
+    description: Get a specific post by URI
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+          description: The URI of the post to fetch
+      additionalProperties: false
+  - name: get-posts
+    description: Get multiple posts by their URIs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - uris
+      properties:
+        uris:
+          type: array
+          items:
+            type: string
+          description: Array of post URIs to fetch
+      additionalProperties: false
+  - name: delete-post
+    description: Delete one of your posts
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+          description: The URI of the post to delete
+      additionalProperties: false
+  - name: like-post
+    description: Like a post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - uri
+        - cid
+      properties:
+        cid:
+          type: string
+          description: The CID of the post to like
+        uri:
+          type: string
+          description: The URI of the post to like
+      additionalProperties: false
+  - name: unlike-post
+    description: Remove your like from a post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - likeUri
+      properties:
+        likeUri:
+          type: string
+          description: The URI of the like to remove
+      additionalProperties: false
+  - name: repost
+    description: Repost someone's post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - uri
+        - cid
+      properties:
+        cid:
+          type: string
+          description: The CID of the post to repost
+        uri:
+          type: string
+          description: The URI of the post to repost
+      additionalProperties: false
+  - name: unrepost
+    description: Remove your repost
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - repostUri
+      properties:
+        repostUri:
+          type: string
+          description: The URI of the repost to remove
+      additionalProperties: false

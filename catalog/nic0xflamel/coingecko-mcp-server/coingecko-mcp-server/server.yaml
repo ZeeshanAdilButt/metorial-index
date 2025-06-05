@@ -1,0 +1,18 @@
+identifier: nic0xflamel/coingecko-mcp-server/coingecko-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nic0xflamel/coingecko-mcp-server
+  name: coingecko-mcp-server
+  owner: nic0xflamel
+server:
+  subdirectory: /
+  name: CoinGecko API Server
+  description: Provide AI assistants with seamless access to cryptocurrency data
+    by proxying the public CoinGecko API through a standardized protocol. Enable
+    dynamic interaction with CoinGecko's extensive API methods for real-time
+    crypto market insights. Easily integrate with AI environments like Cursor
+    and Claude Desktop for enhanced crypto data retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

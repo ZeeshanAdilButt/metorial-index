@@ -1,0 +1,18 @@
+identifier: storacha/mcp-storage-server/mcp-storage-server
+repo:
+  provider: github.com
+  url: https://github.com/storacha/mcp-storage-server
+  name: mcp-storage-server
+  owner: storacha
+server:
+  subdirectory: /
+  name: Storacha Storage Server
+  description: Enable AI applications to store and retrieve files securely using
+    decentralized storage with IPFS and CIDs. Facilitate trustless, verifiable
+    data exchange and seamless integration with AI agent frameworks. Start with
+    free storage options and scale with flexible deployment modes including
+    stdio, SSE, and REST.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

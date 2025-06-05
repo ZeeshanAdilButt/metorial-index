@@ -1,0 +1,18 @@
+identifier: context-hub/generator/generator
+repo:
+  provider: github.com
+  url: https://github.com/context-hub/generator
+  name: generator
+  owner: context-hub
+server:
+  subdirectory: /
+  name: Context Generator
+  description: Automate the creation of organized context files for your codebase,
+    making it easier to interact with AI models like ChatGPT and Claude.
+    Streamline your development process by providing necessary context without
+    manual effort, enhancing AI assistance for code refactoring, documentation,
+    and more.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

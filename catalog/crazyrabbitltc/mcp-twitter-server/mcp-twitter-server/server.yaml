@@ -1,0 +1,14 @@
+identifier: crazyrabbitltc/mcp-twitter-server/mcp-twitter-server
+repo:
+  provider: github.com
+  url: https://github.com/crazyrabbitLTC/mcp-twitter-server
+  name: mcp-twitter-server
+  owner: crazyrabbitLTC
+server:
+  subdirectory: /
+  name: Twitter
+  description: Interact with Twitter to post, search, and reply to tweets.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

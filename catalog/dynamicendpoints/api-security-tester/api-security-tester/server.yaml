@@ -1,0 +1,16 @@
+identifier: dynamicendpoints/api-security-tester/api-security-tester
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/API-SECURITY-TESTER
+  name: API-SECURITY-TESTER
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: API Security Tester
+  description: Test and analyze your API endpoints for security vulnerabilities.
+    Ensure your APIs are secure with comprehensive testing tools that cover
+    everything from endpoint discovery to JWT token analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

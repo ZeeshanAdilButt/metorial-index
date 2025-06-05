@@ -1,0 +1,14 @@
+identifier: tokenizin-agency/mcp-nativewind/server-nativewind
+repo:
+  provider: github.com
+  url: https://github.com/tokenizin-agency/mcp-nativewind
+  name: mcp-nativewind
+  owner: tokenizin-agency
+server:
+  subdirectory: /
+  name: server-nativewind
+  description: MCP server for transforming Tailwind components to NativeWind 4.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

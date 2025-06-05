@@ -1,0 +1,18 @@
+tools:
+  - name: markdown_to_mindmap
+    description: Convert a Markdown document into an interactive mind map
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - markdown
+      properties:
+        open:
+          type: boolean
+          default: false
+          description: "Whether to open the generated mind map in a browser (default:
+            false)"
+        markdown:
+          type: string
+          description: Markdown content to convert into a mind map
+      additionalProperties: false

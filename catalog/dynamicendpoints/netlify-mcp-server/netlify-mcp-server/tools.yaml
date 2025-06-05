@@ -1,0 +1,202 @@
+tools:
+  - name: deploy-site
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the site directory
+        prod:
+          type: boolean
+          description: Deploy to production
+        message:
+          type: string
+          description: Deploy message
+      additionalProperties: false
+  - name: list-sites
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: set-env-vars
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteId
+        - envVars
+      properties:
+        siteId:
+          type: string
+          description: Site ID or name
+        envVars:
+          type: object
+          description: Environment variables to set (key-value pairs)
+          additionalProperties:
+            type: string
+      additionalProperties: false
+  - name: get-logs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteId
+      properties:
+        siteId:
+          type: string
+          description: Site ID or name
+        function:
+          type: string
+          description: "Optional: Specific function name to filter logs"
+      additionalProperties: false
+  - name: trigger-build
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteId
+      properties:
+        siteId:
+          type: string
+          description: Site ID or name
+        message:
+          type: string
+          description: "Optional: Deploy message"
+      additionalProperties: false
+  - name: link-site
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        siteId:
+          type: string
+          description: "Optional: Site ID to link to (otherwise interactive)"
+      additionalProperties: false
+  - name: unlink-site
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: import-env
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteId
+        - filePath
+      properties:
+        siteId:
+          type: string
+          description: Site ID or name
+        replace:
+          type: boolean
+          description: Replace existing variables instead of merging
+        filePath:
+          type: string
+          description: Path to the .env file to import
+      additionalProperties: false
+  - name: build-site
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        dry:
+          type: boolean
+          description: "Optional: Run a dry build without executing commands"
+        siteId:
+          type: string
+          description: "Optional: Site ID (if not linked)"
+        context:
+          type: string
+          description: "Optional: Build context (e.g., 'production', 'deploy-preview')"
+      additionalProperties: false
+  - name: get-env-var
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: The environment variable key to retrieve
+        scope:
+          type: string
+          description: "Optional: Specific scope (e.g., 'builds', 'functions')"
+        siteId:
+          type: string
+          description: "Optional: Site ID (if not linked)"
+        context:
+          type: string
+          description: "Optional: Specific context to get the value from"
+      additionalProperties: false
+  - name: unset-env-var
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: The environment variable key to unset
+        siteId:
+          type: string
+          description: "Optional: Site ID (if not linked)"
+        context:
+          type: string
+          description: "Optional: Specific context to unset the value from (otherwise all)"
+      additionalProperties: false
+  - name: clone-env-vars
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fromSiteId
+        - toSiteId
+      properties:
+        toSiteId:
+          type: string
+          description: Destination Site ID
+        fromSiteId:
+          type: string
+          description: Source Site ID
+      additionalProperties: false
+  - name: create-site
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          description: "Optional: Site name (subdomain)"
+        accountSlug:
+          type: string
+          description: "Optional: Account slug for the team"
+      additionalProperties: false
+  - name: delete-site
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteId
+      properties:
+        force:
+          type: boolean
+          default: true
+          description: "Force deletion without confirmation (default: true)"
+        siteId:
+          type: string
+          description: Site ID to delete
+      additionalProperties: false

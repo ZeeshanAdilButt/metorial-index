@@ -1,0 +1,20 @@
+identifier: waldzellai/model-enhancement-servers/visual-reasoning
+repo:
+  provider: github.com
+  url: https://github.com/waldzellai/model-enhancement-servers
+  name: model-enhancement-servers
+  owner: waldzellai
+server:
+  subdirectory: /src/visual-reasoning
+  name: Visual Reasoning Server
+  description: Enable language models to perform complex visual and spatial
+    reasoning by creating, manipulating, and iterating on diagrammatic
+    representations such as graphs, flowcharts, and concept maps. Enhance
+    problem-solving capabilities by integrating visual thinking with verbal
+    insights, supporting multi-modal outputs including ASCII art and SVG.
+    Facilitate iterative refinement and pattern recognition through a flexible
+    visual element manipulation system.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

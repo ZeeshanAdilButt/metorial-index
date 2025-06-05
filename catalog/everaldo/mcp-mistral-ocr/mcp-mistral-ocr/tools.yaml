@@ -1,0 +1,31 @@
+tools:
+  - name: list_tools
+    description: List available tools
+    inputSchema:
+      type: object
+      title: list_toolsArguments
+      properties: {}
+  - name: process_local_file
+    description: Process a local file from OCR_DIR
+    inputSchema:
+      type: object
+      title: process_local_fileArguments
+      required:
+        - arguments
+      properties:
+        arguments:
+          type: object
+          title: Arguments
+          additionalProperties: true
+  - name: process_url_file
+    description: Process a file from a URL
+    inputSchema:
+      type: object
+      title: process_url_fileArguments
+      required:
+        - arguments
+      properties:
+        arguments:
+          type: object
+          title: Arguments
+          additionalProperties: true

@@ -1,0 +1,159 @@
+tools:
+  - name: list_instances
+    description: List all Neo4j Aura database instances
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_instance_details
+    description: Get details for one or more Neo4j Aura instances by ID, including
+      status, region, memory, storage
+    inputSchema:
+      type: object
+      required:
+        - instance_ids
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+          description: List of instance IDs to retrieve
+  - name: get_instance_by_name
+    description: Find a Neo4j Aura instance by name and returns the details including the id
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the instance to find
+  - name: create_instance
+    description: Create a new Neo4j Aura database instance
+    inputSchema:
+      type: object
+      required:
+        - tenant_id
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the new instance
+        type:
+          type: string
+          default: free-db
+          description: Instance type (free-db, professional-db, enterprise-db, or
+            business-critical)
+        memory:
+          type: integer
+          default: 1
+          description: Memory allocation in GB
+        region:
+          type: string
+          default: us-central1
+          description: Region for the instance (e.g., 'us-east-1')
+        tenant_id:
+          type: string
+          description: ID of the tenant/project where the instance will be created
+        cloud_provider:
+          type: string
+          default: gcp
+          description: Cloud provider (gcp, aws, azure)
+        vector_optimized:
+          type: boolean
+          default: false
+          description: Whether the instance is optimized for vector operations
+        source_instance_id:
+          type: string
+          description: ID of the source instance to clone from (for
+            professional/enterprise instances)
+        graph_analytics_plugin:
+          type: boolean
+          default: false
+          description: Whether to enable the graph analytics plugin
+  - name: update_instance_name
+    description: Update the name of a Neo4j Aura instance
+    inputSchema:
+      type: object
+      required:
+        - instance_id
+        - name
+      properties:
+        name:
+          type: string
+          description: New name for the instance
+        instance_id:
+          type: string
+          description: ID of the instance to update
+  - name: update_instance_memory
+    description: Update the memory allocation of a Neo4j Aura instance
+    inputSchema:
+      type: object
+      required:
+        - instance_id
+        - memory
+      properties:
+        memory:
+          type: integer
+          description: New memory allocation in GB
+        instance_id:
+          type: string
+          description: ID of the instance to update
+  - name: update_instance_vector_optimization
+    description: Update the vector optimization setting of a Neo4j Aura instance
+    inputSchema:
+      type: object
+      required:
+        - instance_id
+        - vector_optimized
+      properties:
+        instance_id:
+          type: string
+          description: ID of the instance to update
+        vector_optimized:
+          type: boolean
+          description: Whether the instance should be optimized for vector operations
+  - name: pause_instance
+    description: Pause a Neo4j Aura database instance
+    inputSchema:
+      type: object
+      required:
+        - instance_id
+      properties:
+        instance_id:
+          type: string
+          description: ID of the instance to pause
+  - name: resume_instance
+    description: Resume a paused Neo4j Aura database instance
+    inputSchema:
+      type: object
+      required:
+        - instance_id
+      properties:
+        instance_id:
+          type: string
+          description: ID of the instance to resume
+  - name: list_tenants
+    description: List all Neo4j Aura tenants/projects
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_tenant_details
+    description: Get details for a specific Neo4j Aura tenant/project
+    inputSchema:
+      type: object
+      required:
+        - tenant_id
+      properties:
+        tenant_id:
+          type: string
+          description: ID of the tenant/project to retrieve
+  - name: delete_instance
+    description: Delete a Neo4j Aura database instance
+    inputSchema:
+      type: object
+      required:
+        - instance_id
+      properties:
+        instance_id:
+          type: string
+          description: ID of the instance to delete

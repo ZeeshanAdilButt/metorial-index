@@ -1,0 +1,18 @@
+identifier: takashiishida/arxiv-latex-mcp/arxiv-latex-mcp
+repo:
+  provider: github.com
+  url: https://github.com/takashiishida/arxiv-latex-mcp
+  name: arxiv-latex-mcp
+  owner: takashiishida
+server:
+  subdirectory: /
+  name: arxiv-latex MCP Server
+  description: An MCP server that enables [Claude
+    Desktop](https://claude.ai/download) to directly access and process arXiv
+    papers by fetching the LaTeX source. It uses
+    [arxiv-to-prompt](https://github.com/takashiishida/arxiv-to-prompt) under
+    the hood to handle downloading and processing the LaTeX.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

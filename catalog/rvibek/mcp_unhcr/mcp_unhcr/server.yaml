@@ -1,0 +1,17 @@
+identifier: rvibek/mcp_unhcr/mcp_unhcr
+repo:
+  provider: github.com
+  url: https://github.com/rvibek/mcp_unhcr
+  name: mcp_unhcr
+  owner: rvibek
+server:
+  subdirectory: /
+  name: UNHCR Population Data Server
+  description: Access and query UNHCR refugee statistics effortlessly. Filter data
+    by country of origin, country of asylum, and year to gain insights into
+    global refugee trends. Utilize a standardized interface to enhance your AI
+    applications with real-world population data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

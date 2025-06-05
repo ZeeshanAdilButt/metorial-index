@@ -1,0 +1,303 @@
+tools:
+  - name: query-logs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filter
+      properties:
+        limit:
+          type: number
+          default: 50
+          maximum: 1000
+          minimum: 1
+          description: Maximum number of log entries to return
+        filter:
+          type: string
+          description: The filter to apply to logs
+      additionalProperties: false
+  - name: logs-time-range
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - startTime
+      properties:
+        limit:
+          type: number
+          default: 50
+          maximum: 1000
+          minimum: 1
+          description: Maximum number of log entries to return
+        filter:
+          type: string
+          description: Additional filter criteria
+        endTime:
+          type: string
+          description: End time in ISO format (defaults to now)
+        startTime:
+          type: string
+          description: Start time in ISO format or relative time (e.g., "1h", "2d")
+      additionalProperties: false
+  - name: execute-spanner-query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          description: The SQL query to execute
+        params:
+          type: object
+          description: Query parameters
+          additionalProperties: {}
+        databaseId:
+          type: string
+          description: Spanner database ID (defaults to SPANNER_DATABASE env var)
+        instanceId:
+          type: string
+          description: Spanner instance ID (defaults to SPANNER_INSTANCE env var)
+      additionalProperties: false
+  - name: list-spanner-tables
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        databaseId:
+          type: string
+          description: Spanner database ID (defaults to SPANNER_DATABASE env var)
+        instanceId:
+          type: string
+          description: Spanner instance ID (defaults to SPANNER_INSTANCE env var)
+      additionalProperties: false
+  - name: list-spanner-instances
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        _dummy:
+          type: string
+          description: Not used, just to ensure parameter compatibility
+      additionalProperties: false
+  - name: list-spanner-databases
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - instanceId
+      properties:
+        instanceId:
+          type: string
+          description: Spanner instance ID
+      additionalProperties: false
+  - name: natural-language-spanner-query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Natural language description of the query you want to execute
+        databaseId:
+          type: string
+          description: Spanner database ID (defaults to SPANNER_DATABASE env var)
+        instanceId:
+          type: string
+          description: Spanner instance ID (defaults to SPANNER_INSTANCE env var)
+      additionalProperties: false
+  - name: spanner-query-count
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        status:
+          enum:
+            - ALL
+            - OK
+            - ERROR
+          type: string
+          default: ALL
+          description: Status of queries to count (ALL, OK, ERROR)
+        endTime:
+          type: string
+          description: End time for the query (defaults to now)
+        queryType:
+          enum:
+            - ALL
+            - READ
+            - QUERY
+          type: string
+          default: ALL
+          description: Type of queries to count (ALL, READ, QUERY)
+        startTime:
+          type: string
+          default: 1h
+          description: Start time for the query (e.g., "1h", "2d", "30m")
+        databaseId:
+          type: string
+          description: Spanner database ID (optional, if not provided will show all
+            databases)
+        instanceId:
+          type: string
+          description: Spanner instance ID (optional, if not provided will show all
+            instances)
+        alignmentPeriod:
+          type: string
+          default: 60s
+          description: Alignment period for aggregating data points (e.g., "60s", "5m",
+            "1h")
+      additionalProperties: false
+  - name: query-metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filter
+        - startTime
+      properties:
+        filter:
+          type: string
+          description: The filter to apply to metrics
+        endTime:
+          type: string
+          description: End time in ISO format (defaults to now)
+        startTime:
+          type: string
+          description: Start time in ISO format or relative time (e.g., "1h", "2d")
+        alignmentPeriod:
+          type: string
+          description: Alignment period (e.g., "60s", "300s")
+      additionalProperties: false
+  - name: list-metric-types
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        filter:
+          type: string
+          description: Simple search term (e.g., "spanner") or full filter expression
+            (e.g., "metric.type = starts_with(\"spanner\")")
+        timeout:
+          type: number
+          default: 30
+          maximum: 60
+          minimum: 5
+          description: Timeout in seconds for the request
+        pageSize:
+          type: number
+          default: 20
+          maximum: 100
+          minimum: 1
+          description: Maximum number of metric types to return
+      additionalProperties: false
+  - name: natural-language-metrics-query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Natural language description of the query you want to execute
+        endTime:
+          type: string
+          description: End time in ISO format (defaults to now)
+        startTime:
+          type: string
+          description: Start time in ISO format or relative time (e.g., "1h", "2d")
+        alignmentPeriod:
+          type: string
+          description: Alignment period (e.g., "60s", "300s")
+      additionalProperties: false
+  - name: get-trace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - traceId
+      properties:
+        traceId:
+          type: string
+          description: The trace ID to retrieve
+        projectId:
+          type: string
+          description: Optional Google Cloud project ID
+      additionalProperties: false
+  - name: list-traces
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of traces to return
+        filter:
+          type: string
+          description: Optional filter for traces (e.g., "status.code != 0" for errors)
+        projectId:
+          type: string
+          description: Optional Google Cloud project ID
+        startTime:
+          type: string
+          description: Start time in ISO format or relative time (e.g., "1h", "2d")
+      additionalProperties: false
+  - name: find-traces-from-logs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filter
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+          description: Maximum number of logs to check
+        filter:
+          type: string
+          description: Filter for logs (e.g., "severity>=ERROR AND timestamp>"-1d"")
+        projectId:
+          type: string
+          description: Optional Google Cloud project ID
+      additionalProperties: false
+  - name: natural-language-trace-query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Natural language query about traces (e.g., "Show me failed traces
+            from the last hour")
+        projectId:
+          type: string
+          description: Optional Google Cloud project ID
+      additionalProperties: false
+  - name: set-project-id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: The Google Cloud project ID to set as default
+      additionalProperties: false
+  - name: get-project-id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

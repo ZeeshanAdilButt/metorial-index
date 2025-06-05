@@ -1,0 +1,143 @@
+tools:
+  - name: open_note
+    description: Open a note identified by its title or id and return its content.
+    inputSchema:
+      type: object
+      title: open_noteArguments
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Id
+          default: null
+          description: note unique identifier
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+          description: note title
+  - name: create
+    description: Create a new note and return its unique identifier. Empty notes are
+      not allowed.
+    inputSchema:
+      type: object
+      title: createArguments
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+          description: list of tags
+        text:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text
+          default: null
+          description: note body
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+          description: note title
+        timestamp:
+          type: boolean
+          title: Timestamp
+          default: false
+          description: prepend the current date and time to the text
+  - name: tags
+    description: Return all the tags currently displayed in Bear’s sidebar.
+    inputSchema:
+      type: object
+      title: tagsArguments
+      properties: {}
+  - name: open_tag
+    description: Show all the notes which have a selected tag in bear.
+    inputSchema:
+      type: object
+      title: open_tagArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+          description: tag name or a list of tags divided by comma
+  - name: todo
+    description: Select the Todo sidebar item.
+    inputSchema:
+      type: object
+      title: todoArguments
+      properties:
+        search:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search
+          default: null
+          description: string to search
+  - name: today
+    description: Select the Today sidebar item.
+    inputSchema:
+      type: object
+      title: todayArguments
+      properties:
+        search:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search
+          default: null
+          description: string to search
+  - name: search
+    description: Show search results in Bear for all notes or for a specific tag.
+    inputSchema:
+      type: object
+      title: searchArguments
+      properties:
+        tag:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Tag
+          default: null
+          description: tag to search into
+        term:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Term
+          default: null
+          description: string to search
+  - name: grab_url
+    description: Create a new note with the content of a web page and return its
+      unique identifier.
+    inputSchema:
+      type: object
+      title: grab_urlArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+          description: url to grab
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+          description: list of tags. If tags are specified in the Bear’s web content
+            preferences, this parameter is ignored.

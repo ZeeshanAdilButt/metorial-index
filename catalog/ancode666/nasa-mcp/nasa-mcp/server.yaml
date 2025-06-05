@@ -1,0 +1,19 @@
+identifier: ancode666/nasa-mcp/nasa-mcp
+repo:
+  provider: github.com
+  url: https://github.com/AnCode666/nasa-mcp
+  name: nasa-mcp
+  owner: AnCode666
+server:
+  subdirectory: /
+  name: NASA API Integration Server
+  description: Provide seamless access to NASA's astronomical data, space weather,
+    Earth imagery, and exoplanet information directly from your LLM
+    applications. Query various NASA APIs including Astronomy Picture of the
+    Day, Near Earth Objects, and more, enhancing your AI's knowledge with
+    real-time space data. Securely manage API keys and handle errors for
+    reliable data retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+identifier: sourcebot-dev/sourcebot/sourcebot
+repo:
+  provider: github.com
+  url: https://github.com/sourcebot-dev/sourcebot
+  name: sourcebot
+  owner: sourcebot-dev
+server:
+  subdirectory: /packages/mcp
+  name: Sourcebot Code Search Server
+  description: Enable precise regex-based code search across multiple code hosts
+    like GitHub, GitLab, and BitBucket to empower LLM agents with rich code
+    context from remote repositories. Enhance your agents' reasoning and
+    response quality by fetching relevant code snippets and repository
+    information without local checkouts. Seamlessly integrate with popular MCP
+    clients to unlock advanced code intelligence capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

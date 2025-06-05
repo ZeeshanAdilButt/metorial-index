@@ -1,0 +1,36 @@
+tools:
+  - name: generate_ui_flow
+    description: Generate a UI flow diagram by analyzing React/Angular repositories.
+      This tool scans the codebase to identify components, their relationships,
+      and the overall UI structure.
+    inputSchema:
+      type: object
+      required:
+        - repoPath
+        - isLocal
+      properties:
+        repo:
+          type: string
+          description: GitHub repository name (required if isLocal is false)
+        owner:
+          type: string
+          description: GitHub repository owner (required if isLocal is false)
+        isLocal:
+          type: boolean
+          description: Whether to analyze a local repository (true) or GitHub repository
+            (false)
+        repoPath:
+          type: string
+          description: Path to local repository or empty string for GitHub repos
+        fileExtensions:
+          type: array
+          items:
+            type: string
+          default:
+            - js
+            - jsx
+            - ts
+            - tsx
+          description: List of file extensions to analyze (e.g., ['js', 'jsx', 'ts',
+            'tsx'] for React, ['ts', 'html'] for Angular)
+      additionalProperties: false

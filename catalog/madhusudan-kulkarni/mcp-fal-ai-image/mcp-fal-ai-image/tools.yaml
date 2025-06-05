@@ -1,0 +1,43 @@
+tools:
+  - name: generate-image
+    description: Generate an image from a text prompt using a selectable
+      text-to-image model.
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        model:
+          type: string
+          default: fal-ai/recraft-v3
+          description: ID of the text-to-image model to use (any valid fal.ai model ID)
+        prompt:
+          type: string
+          description: Text prompt describing the image to generate
+        image_size:
+          enum:
+            - square_hd
+            - square
+            - portrait_4_3
+            - portrait_16_9
+            - landscape_4_3
+            - landscape_16_9
+          type: string
+          default: landscape_4_3
+          description: Size of the generated image
+        num_images:
+          type: integer
+          default: 1
+          description: Number of images to generate
+        guidance_scale:
+          type: number
+          default: 3.5
+          description: Classifier Free Guidance scale
+        num_inference_steps:
+          type: integer
+          default: 28
+          description: Number of inference steps
+        enable_safety_checker:
+          type: boolean
+          default: true
+          description: Enable the safety checker

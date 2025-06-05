@@ -1,0 +1,34 @@
+tools:
+  - name: get_docs
+    description: "
+
+      \  Search the latest docs for a given query and library.
+
+      \  Supports langchain, openai, and llama-index.
+
+
+      \  Args:
+
+      \    query: The query to search for (e.g. \"Chroma DB\")
+
+      \    library: The library to search in (e.g. \"langchain\")
+
+
+      \  Returns:
+
+      \    Text from the docs
+
+      \  "
+    inputSchema:
+      type: object
+      title: get_docsArguments
+      required:
+        - query
+        - library
+      properties:
+        query:
+          type: string
+          title: Query
+        library:
+          type: string
+          title: Library

@@ -1,0 +1,41 @@
+tools:
+  - name: ping
+    description: Check if the Brian API server is alive
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: search
+    description: Search using Brian's knowledge engine
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        kb:
+          type: string
+          description: "Knowledge box to search in (default: public-knowledge-box).
+            Options: circle_kb, lido_kb, Polygon_kb, taiko_kb, near_kb,
+            clave_kb, starknet_kb, consensys_kb"
+        query:
+          type: string
+          description: Search query
+  - name: agent
+    description: Chat with Brian agent
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        kbId:
+          type: string
+          description: "Knowledge box ID to use (default: public-knowledge-box)"
+        prompt:
+          type: string
+          description: User prompt or question
+        address:
+          type: string
+          description: User blockchain address (required for blockchain operations)
+        chainId:
+          type: string
+          description: Blockchain chain ID

@@ -1,0 +1,676 @@
+tools:
+  - name: article_details
+    description: "
+
+      \    Retrieves details for a single PubMed article given its
+
+      \    PubMed ID (PMID).
+
+      \    Input: A single PMID (e.g., 34397683)
+
+      \    Process: Calls the PubTator3 API to fetch the article's
+
+      \             title, abstract, and full text (if available).
+
+      \    Output: A Markdown formatted string containing the
+
+      \            retrieved article content.
+
+      \    "
+    inputSchema:
+      type: object
+      title: article_detailsArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          type: string
+          title: pmid
+  - name: article_searcher
+    description: "
+
+      \    Searches PubMed articles using structured criteria.
+
+      \    Input: A `PubmedRequest` object containing lists for `genes`,
+
+      \           `variants`, `diseases`, `chemicals`, and `keywords`.
+
+      \           Use full terms (\"Non-small cell lung carcinoma\") over
+
+      \           abbreviations (\"NSCLC\"). Use keywords to specify terms
+
+      \           that don't fit in disease, gene (\"EGFR\"), chemical
+      (\"Cisplatin\"),
+
+      \           or variant (\"BRAF V600E\").
+
+      \    Process: Resolves entities then queries PubTator3's search API.
+
+      \    Output: A Markdown formatted list summarizing matching articles
+
+      \            (PMID, title, abstract, etc.). Limited to max 40 results.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        PubmedRequest:
+          type: object
+          title: PubmedRequest
+          properties:
+            genes:
+              type: array
+              items:
+                type: string
+              title: Genes
+              description: List of genes for filtering results.
+            diseases:
+              type: array
+              items:
+                type: string
+              title: Diseases
+              description: Diseases such as Hypertension, Lung Adenocarcinoma, etc.
+            keywords:
+              type: array
+              items:
+                type: string
+              title: Keywords
+              description: List of other keywords for filtering results.
+            variants:
+              type: array
+              items:
+                type: string
+              title: Variants
+              description: List of variants for filtering results.
+            chemicals:
+              type: array
+              items:
+                type: string
+              title: Chemicals
+              description: List of chemicals for filtering results.
+      title: article_searcherArguments
+      required:
+        - request
+      properties:
+        request:
+          $ref: "#/$defs/PubmedRequest"
+  - name: trial_protocol
+    description: "
+
+      \    Retrieves core protocol information for a single clinical
+
+      \    trial identified by its NCT ID.
+
+      \    Input: A single NCT ID (string, e.g., \"NCT04280705\").
+
+      \    Process: Fetches standard \"Protocol\" view modules (like ID,
+
+      \             Status, Sponsor, Design, Eligibility) from the
+
+      \             ClinicalTrials.gov v2 API.
+
+      \    Output: A Markdown formatted string detailing title, status,
+
+      \            sponsor, purpose, study design, phase, interventions,
+
+      \            eligibility criteria, etc. Returns error if invalid.
+
+      \    "
+    inputSchema:
+      type: object
+      title: trial_protocolArguments
+      required:
+        - nct_id
+      properties:
+        nct_id:
+          type: string
+          title: Nct Id
+  - name: trial_locations
+    description: "
+
+      \    Retrieves contact and location details for a single
+
+      \    clinical trial identified by its NCT ID.
+
+      \    Input: A single NCT ID (string, e.g., \"NCT04280705\").
+
+      \    Process: Fetches the `ContactsLocationsModule` from the
+
+      \             ClinicalTrials.gov v2 API for the given NCT ID.
+
+      \    Output: A Markdown formatted string detailing facility names,
+
+      \            addresses (city, state, country), and contact info.
+
+      \            Returns an error message if the NCT ID is invalid.
+
+      \    "
+    inputSchema:
+      type: object
+      title: trial_locationsArguments
+      required:
+        - nct_id
+      properties:
+        nct_id:
+          type: string
+          title: Nct Id
+  - name: trial_outcomes
+    description: "
+
+      \    Retrieves outcome measures, results (if available), and
+
+      \    adverse event data for a single clinical trial.
+
+      \    Input: A single NCT ID (string, e.g., \"NCT04280705\").
+
+      \    Process: Fetches the `OutcomesModule` and `ResultsSection`
+
+      \             from the ClinicalTrials.gov v2 API for the NCT ID.
+
+      \    Output: A Markdown formatted string detailing primary/secondary
+
+      \            outcomes, participant flow, results tables (if posted),
+
+      \            and adverse event summaries. Returns an error if invalid.
+
+      \    "
+    inputSchema:
+      type: object
+      title: trial_outcomesArguments
+      required:
+        - nct_id
+      properties:
+        nct_id:
+          type: string
+          title: Nct Id
+  - name: trial_references
+    description: "
+
+      \    Retrieves publications and other references associated with
+
+      \    a single clinical trial identified by its NCT ID.
+
+      \    Input: A single NCT ID (string, e.g., \"NCT04280705\").
+
+      \    Process: Fetches the `ReferencesModule` from the
+
+      \             ClinicalTrials.gov v2 API for the NCT ID.
+
+      \    Output: A Markdown formatted string listing citations,
+
+      \            associated PubMed IDs (PMIDs), and reference types
+
+      \            (e.g., result publication). Returns error if invalid.
+
+      \    "
+    inputSchema:
+      type: object
+      title: trial_referencesArguments
+      required:
+        - nct_id
+      properties:
+        nct_id:
+          type: string
+          title: Nct Id
+  - name: trial_searcher
+    description: "
+
+      \    Searches for clinical trials based on specified criteria.
+
+      \    Input: A `TrialQuery` object containing fields like `conditions`,
+
+      \           `interventions`, `terms`, `recruiting_status`, `phase`,
+
+      \           `location` (lat/long/distance), date ranges, etc.
+
+      \    Process: Queries the ClinicalTrials.gov v2 API
+
+      \    Output: A Markdown formatted list summarizing matching trials
+
+      \            (NCT ID, Title, Status, Conditions, Interventions,
+
+      \            Summary). Results are typically paginated by the API.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        AgeGroup:
+          enum:
+            - CHILD
+            - ADULT
+            - SENIOR
+            - ALL
+          type: string
+          title: AgeGroup
+        DateField:
+          enum:
+            - LAST_UPDATE
+            - STUDY_START
+            - PRIMARY_COMPLETION
+            - OUTCOME_POSTING
+            - COMPLETION
+            - FIRST_POSTING
+            - SUBMITTED_DATE
+          type: string
+          title: DateField
+        SortOrder:
+          enum:
+            - RELEVANCE
+            - LAST_UPDATE
+            - ENROLLMENT
+            - START_DATE
+            - COMPLETION_DATE
+            - SUBMITTED_DATE
+          type: string
+          title: SortOrder
+        StudyType:
+          enum:
+            - INTERVENTIONAL
+            - OBSERVATIONAL
+            - EXPANDED_ACCESS
+            - OTHER
+          type: string
+          title: StudyType
+        TrialPhase:
+          enum:
+            - EARLY_PHASE1
+            - PHASE1
+            - PHASE2
+            - PHASE3
+            - PHASE4
+            - NOT_APPLICABLE
+          type: string
+          title: TrialPhase
+        TrialQuery:
+          type: object
+          title: TrialQuery
+          properties:
+            lat:
+              anyOf:
+                - type: number
+                - type: "null"
+              title: Lat
+              default: null
+              description: Latitude for location search
+            long:
+              anyOf:
+                - type: number
+                - type: "null"
+              title: Long
+              default: null
+              description: Longitude for location search
+            sort:
+              anyOf:
+                - $ref: "#/$defs/SortOrder"
+                - type: "null"
+              default: null
+              description: Sort order for results
+            phase:
+              anyOf:
+                - $ref: "#/$defs/TrialPhase"
+                - type: "null"
+              default: null
+              description: Trial phase filter
+            terms:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Terms
+              default: null
+              description: General search terms that don't fit specific categories.
+            nct_ids:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Nct Ids
+              default: null
+              description: Clinical trial NCT IDs
+            distance:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Distance
+              default: null
+              description: Distance from lat/long in miles
+            max_date:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Max Date
+              default: null
+              description: Maximum date for filtering
+            min_date:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Min Date
+              default: null
+              description: Minimum date for filtering
+            age_group:
+              anyOf:
+                - $ref: "#/$defs/AgeGroup"
+                - type: "null"
+              default: null
+              description: Age group filter
+            conditions:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Conditions
+              default: null
+              description: List of condition terms.
+            date_field:
+              anyOf:
+                - $ref: "#/$defs/DateField"
+                - type: "null"
+              default: null
+              description: Date field to filter on
+            study_type:
+              anyOf:
+                - $ref: "#/$defs/StudyType"
+                - type: "null"
+              default: null
+              description: Type of study.
+            sponsor_type:
+              anyOf:
+                - $ref: "#/$defs/SponsorType"
+                - type: "null"
+              default: null
+              description: Type of sponsor
+            study_design:
+              anyOf:
+                - $ref: "#/$defs/StudyDesign"
+                - type: "null"
+              default: null
+              description: Study design
+            interventions:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Interventions
+              default: null
+              description: Intervention names.
+            next_page_hash:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Next Page Hash
+              default: null
+              description: Token to retrieve the next page of results
+            primary_purpose:
+              anyOf:
+                - $ref: "#/$defs/PrimaryPurpose"
+                - type: "null"
+              default: null
+              description: Primary purpose of the trial
+            intervention_type:
+              anyOf:
+                - $ref: "#/$defs/InterventionType"
+                - type: "null"
+              default: null
+              description: Type of intervention
+            recruiting_status:
+              anyOf:
+                - $ref: "#/$defs/RecruitingStatus"
+                - type: "null"
+              default: null
+              description: Study recruitment status.
+          description: Parameters for querying clinical trial data from ClinicalTrials.gov.
+        SponsorType:
+          enum:
+            - INDUSTRY
+            - GOVERNMENT
+            - ACADEMIC
+            - OTHER
+          type: string
+          title: SponsorType
+        StudyDesign:
+          enum:
+            - RANDOMIZED
+            - NON_RANDOMIZED
+            - OBSERVATIONAL
+          type: string
+          title: StudyDesign
+        PrimaryPurpose:
+          enum:
+            - TREATMENT
+            - PREVENTION
+            - DIAGNOSTIC
+            - SUPPORTIVE_CARE
+            - SCREENING
+            - HEALTH_SERVICES
+            - BASIC_SCIENCE
+            - DEVICE_FEASIBILITY
+            - OTHER
+          type: string
+          title: PrimaryPurpose
+        InterventionType:
+          enum:
+            - DRUG
+            - DEVICE
+            - BIOLOGICAL
+            - PROCEDURE
+            - RADIATION
+            - BEHAVIORAL
+            - GENETIC
+            - DIETARY
+            - DIAGNOSTIC_TEST
+            - OTHER
+          type: string
+          title: InterventionType
+        RecruitingStatus:
+          enum:
+            - OPEN
+            - CLOSED
+            - ANY
+          type: string
+          title: RecruitingStatus
+      title: trial_searcherArguments
+      required:
+        - query
+      properties:
+        query:
+          $ref: "#/$defs/TrialQuery"
+  - name: variant_searcher
+    description: "
+
+      \    Searches for genetic variants based on specified criteria.
+
+      \    Input: A `VariantQuery` object containing fields like `gene`,
+
+      \           HGVS notations `hgvsp`, `hgvsc`), `rsid`, `region`,
+
+      \           `significance`, frequency ranges, prediction scores, etc.
+
+      \    Process: Constructs a query for the MyVariant.info query
+
+      \             endpoint (`/v1/query`) based on the input object.
+
+      \    Output: A Markdown formatted list summarizing matching variants
+
+      \            with key annotations (ID, gene, significance, frequency).
+
+      \            Includes a summary section with total hits found.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        VariantQuery:
+          type: object
+          title: VariantQuery
+          properties:
+            cadd:
+              anyOf:
+                - type: number
+                - type: "null"
+              title: Cadd
+              default: null
+              description: Minimum CADD phred score
+            gene:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Gene
+              default: null
+              description: Gene symbol to search for (e.g. BRAF, TP53)
+            rsid:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Rsid
+              default: null
+              description: dbSNP rsID (e.g., rs113488022)
+            sift:
+              anyOf:
+                - $ref: "#/$defs/SiftPrediction"
+                - type: "null"
+              default: null
+              description: SIFT prediction
+            size:
+              type: integer
+              title: Size
+              default: 40
+              description: Number of results to return
+            hgvsc:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Hgvsc
+              default: null
+              description: cDNA notation (e.g., c.1799T>A)
+            hgvsp:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Hgvsp
+              default: null
+              description: Protein change notation (e.g., p.V600E, p.Arg557His)
+            offset:
+              type: integer
+              title: Offset
+              default: 0
+              description: Result offset for pagination
+            region:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Region
+              default: null
+              description: Genomic region as chr:start-end (e.g. chr1:12345-67890)
+            sources:
+              type: array
+              items:
+                $ref: "#/$defs/VariantSources"
+              title: Sources
+              description: Include only specific data sources
+            polyphen:
+              anyOf:
+                - $ref: "#/$defs/PolyPhenPrediction"
+                - type: "null"
+              default: null
+              description: PolyPhen-2 prediction
+            significance:
+              anyOf:
+                - $ref: "#/$defs/ClinicalSignificance"
+                - type: "null"
+              default: null
+              description: ClinVar clinical significance
+            max_frequency:
+              anyOf:
+                - type: number
+                - type: "null"
+              title: Max Frequency
+              default: null
+              description: Maximum population allele frequency threshold
+            min_frequency:
+              anyOf:
+                - type: number
+                - type: "null"
+              title: Min Frequency
+              default: null
+              description: Minimum population allele frequency threshold
+          description: Search parameters for querying variant data from MyVariant.info.
+        SiftPrediction:
+          enum:
+            - D
+            - T
+          type: string
+          title: SiftPrediction
+        VariantSources:
+          enum:
+            - cadd
+            - cgi
+            - civic
+            - clinvar
+            - cosmic
+            - dbnsfp
+            - dbsnp
+            - docm
+            - evm
+            - exac
+            - gnomad_exome
+            - hg19
+            - mutdb
+            - snpeff
+            - vcf
+          type: string
+          title: VariantSources
+        PolyPhenPrediction:
+          enum:
+            - D
+            - P
+            - B
+          type: string
+          title: PolyPhenPrediction
+        ClinicalSignificance:
+          enum:
+            - pathogenic
+            - likely pathogenic
+            - uncertain significance
+            - likely benign
+            - benign
+          type: string
+          title: ClinicalSignificance
+      title: variant_searcherArguments
+      required:
+        - query
+      properties:
+        query:
+          $ref: "#/$defs/VariantQuery"
+  - name: variant_details
+    description: "
+
+      \    Retrieves detailed information for a *single* genetic variant.
+
+      \    Input: A variant identifier (\"chr7:g.140453136A>T\")
+
+      \    Process: Queries the MyVariant.info GET endpoint
+
+      \    Output: A Markdown formatted string containing comprehensive
+
+      \            variant annotations (genomic context, frequencies,
+
+      \            predictions, clinical data). Returns error if invalid.
+
+      \    Note: Use the variant_searcher to find the variant id first.
+
+      \    "
+    inputSchema:
+      type: object
+      title: variant_detailsArguments
+      required:
+        - variant_id
+      properties:
+        variant_id:
+          type: string
+          title: Variant Id

@@ -1,0 +1,21 @@
+identifier: rahgadda/openapi_mcp_server/openapi_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/rahgadda/openapi_mcp_server
+  name: openapi_mcp_server
+  owner: rahgadda
+server:
+  subdirectory: /
+  name: OpenAPI MCP Server
+  description: >-
+    This project will install MCP - Model Context Protocol Server, that provides
+    configured REST API's as context to LLM's.
+
+    Using this we can enable LLMs to interact with RestAPI's and perform REST
+    API call's using LLM prompts.
+
+    Currently we support HTTP API Call's GET/PUT/POST/PATCH.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

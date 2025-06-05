@@ -1,0 +1,18 @@
+identifier: runpod/runpod-mcp-ts/runpod-mcp-ts
+repo:
+  provider: github.com
+  url: https://github.com/runpod/runpod-mcp-ts
+  name: runpod-mcp-ts
+  owner: runpod
+server:
+  subdirectory: /
+  name: RunPod
+  description: Manage your RunPod cloud resources directly through an
+    MCP-compatible client. Create, list, update, start, stop, and delete pods,
+    serverless endpoints, templates, network volumes, and container registry
+    authentications with ease. Streamline your RunPod operations using natural
+    language commands via Claude or other MCP clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

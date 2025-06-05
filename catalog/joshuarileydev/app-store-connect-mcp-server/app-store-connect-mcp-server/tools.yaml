@@ -1,0 +1,417 @@
+tools:
+  - name: list_apps
+    description: Get a list of all apps in App Store Connect
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          maximum: 200
+          minimum: 1
+          description: "Maximum number of apps to return (default: 100)"
+  - name: list_beta_groups
+    description: Get a list of all beta groups (internal and external)
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          maximum: 200
+          minimum: 1
+          description: "Maximum number of groups to return (default: 100)"
+  - name: list_group_testers
+    description: Get a list of all testers in a specific beta group
+    inputSchema:
+      type: object
+      required:
+        - groupId
+      properties:
+        limit:
+          type: number
+          maximum: 200
+          minimum: 1
+          description: "Maximum number of testers to return (default: 100)"
+        groupId:
+          type: string
+          description: The ID of the beta group
+  - name: add_tester_to_group
+    description: Add a new tester to a beta group
+    inputSchema:
+      type: object
+      required:
+        - groupId
+        - email
+        - firstName
+        - lastName
+      properties:
+        email:
+          type: string
+          description: Email address of the tester
+        groupId:
+          type: string
+          description: The ID of the beta group
+        lastName:
+          type: string
+          description: Last name of the tester
+        firstName:
+          type: string
+          description: First name of the tester
+  - name: remove_tester_from_group
+    description: Remove a tester from a beta group
+    inputSchema:
+      type: object
+      required:
+        - groupId
+        - testerId
+      properties:
+        groupId:
+          type: string
+          description: The ID of the beta group
+        testerId:
+          type: string
+          description: The ID of the beta tester
+  - name: get_app_info
+    description: Get detailed information about a specific app
+    inputSchema:
+      type: object
+      required:
+        - appId
+      properties:
+        appId:
+          type: string
+          description: The ID of the app to get information for
+        include:
+          type: array
+          items:
+            enum:
+              - appClips
+              - appInfos
+              - appStoreVersions
+              - availableTerritories
+              - betaAppReviewDetail
+              - betaGroups
+              - betaLicenseAgreement
+              - builds
+              - endUserLicenseAgreement
+              - gameCenterEnabledVersions
+              - inAppPurchases
+              - preOrder
+              - prices
+              - reviewSubmissions
+            type: string
+          description: Optional relationships to include in the response
+  - name: create_bundle_id
+    description: Register a new bundle ID for app development
+    inputSchema:
+      type: object
+      required:
+        - identifier
+        - name
+        - platform
+      properties:
+        name:
+          type: string
+          description: A name for the bundle ID
+        seedId:
+          type: string
+          required: false
+          description: Your team's seed ID (optional)
+        platform:
+          enum:
+            - IOS
+            - MAC_OS
+            - UNIVERSAL
+          type: string
+          description: The platform for this bundle ID
+        identifier:
+          type: string
+          description: The bundle ID string (e.g., 'com.example.app')
+  - name: list_bundle_ids
+    description: Find and list bundle IDs that are registered to your team
+    inputSchema:
+      type: object
+      properties:
+        sort:
+          enum:
+            - name
+            - -name
+            - platform
+            - -platform
+            - identifier
+            - -identifier
+            - seedId
+            - -seedId
+            - id
+            - -id
+          type: string
+          description: Sort order for the results
+        limit:
+          type: number
+          maximum: 200
+          minimum: 1
+          description: "Maximum number of bundle IDs to return (default: 100, max: 200)"
+        filter:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Filter by name
+            seedId:
+              type: string
+              description: Filter by seed ID
+            platform:
+              enum:
+                - IOS
+                - MAC_OS
+                - UNIVERSAL
+              type: string
+              description: Filter by platform
+            identifier:
+              type: string
+              description: Filter by bundle identifier
+        include:
+          type: array
+          items:
+            enum:
+              - profiles
+              - bundleIdCapabilities
+              - app
+            type: string
+          description: Related resources to include in the response
+  - name: get_bundle_id_info
+    description: Get detailed information about a specific bundle ID
+    inputSchema:
+      type: object
+      required:
+        - bundleIdId
+      properties:
+        fields:
+          type: object
+          properties:
+            bundleIds:
+              type: array
+              items:
+                enum:
+                  - name
+                  - platform
+                  - identifier
+                  - seedId
+                type: string
+              description: Fields to include for the bundle ID
+          description: Specific fields to include in the response
+        include:
+          type: array
+          items:
+            enum:
+              - profiles
+              - bundleIdCapabilities
+              - app
+            type: string
+            description: Related resources to include in the response
+          description: Optional relationships to include in the response
+        bundleIdId:
+          type: string
+          description: The ID of the bundle ID to get information for
+  - name: list_devices
+    description: Get a list of all devices registered to your team
+    inputSchema:
+      type: object
+      properties:
+        sort:
+          enum:
+            - name
+            - -name
+            - platform
+            - -platform
+            - status
+            - -status
+            - udid
+            - -udid
+            - deviceClass
+            - -deviceClass
+            - model
+            - -model
+            - addedDate
+            - -addedDate
+          type: string
+          description: Sort order for the results
+        limit:
+          type: number
+          maximum: 200
+          minimum: 1
+          description: "Maximum number of devices to return (default: 100, max: 200)"
+        fields:
+          type: object
+          properties:
+            devices:
+              type: array
+              items:
+                enum:
+                  - name
+                  - platform
+                  - udid
+                  - deviceClass
+                  - status
+                  - model
+                  - addedDate
+                type: string
+              description: Fields to include for each device
+        filter:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Filter by device name
+            udid:
+              type: string
+              description: Filter by device UDID
+            status:
+              enum:
+                - ENABLED
+                - DISABLED
+              type: string
+              description: Filter by status
+            platform:
+              enum:
+                - IOS
+                - MAC_OS
+              type: string
+              description: Filter by platform
+            deviceClass:
+              enum:
+                - APPLE_WATCH
+                - IPAD
+                - IPHONE
+                - IPOD
+                - APPLE_TV
+                - MAC
+              type: string
+              description: Filter by device class
+  - name: enable_bundle_capability
+    description: Enable a capability for a bundle ID
+    inputSchema:
+      type: object
+      required:
+        - bundleIdId
+        - capabilityType
+      properties:
+        settings:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: The setting key
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    enabled:
+                      type: boolean
+          description: Optional capability settings
+        bundleIdId:
+          type: string
+          description: The ID of the bundle ID
+        capabilityType:
+          enum:
+            - ICLOUD
+            - IN_APP_PURCHASE
+            - GAME_CENTER
+            - PUSH_NOTIFICATIONS
+            - WALLET
+            - INTER_APP_AUDIO
+            - MAPS
+            - ASSOCIATED_DOMAINS
+            - PERSONAL_VPN
+            - APP_GROUPS
+            - HEALTHKIT
+            - HOMEKIT
+            - WIRELESS_ACCESSORY_CONFIGURATION
+            - APPLE_PAY
+            - DATA_PROTECTION
+            - SIRIKIT
+            - NETWORK_EXTENSIONS
+            - MULTIPATH
+            - HOT_SPOT
+            - NFC_TAG_READING
+            - CLASSKIT
+            - AUTOFILL_CREDENTIAL_PROVIDER
+            - ACCESS_WIFI_INFORMATION
+            - NETWORK_CUSTOM_PROTOCOL
+            - COREMEDIA_HLS_LOW_LATENCY
+            - SYSTEM_EXTENSION_INSTALL
+            - USER_MANAGEMENT
+            - APPLE_ID_AUTH
+          type: string
+          description: The type of capability to enable
+  - name: disable_bundle_capability
+    description: Disable a capability for a bundle ID
+    inputSchema:
+      type: object
+      required:
+        - capabilityId
+      properties:
+        capabilityId:
+          type: string
+          description: The ID of the capability to disable
+  - name: list_users
+    description: Get a list of all users registered on your App Store Connect team
+    inputSchema:
+      type: object
+      properties:
+        sort:
+          enum:
+            - username
+            - -username
+            - firstName
+            - -firstName
+            - lastName
+            - -lastName
+            - roles
+            - -roles
+          type: string
+          description: Sort order for the results
+        limit:
+          type: number
+          maximum: 200
+          minimum: 1
+          description: "Maximum number of users to return (default: 100, max: 200)"
+        filter:
+          type: object
+          properties:
+            roles:
+              type: array
+              items:
+                enum:
+                  - ADMIN
+                  - FINANCE
+                  - TECHNICAL
+                  - SALES
+                  - MARKETING
+                  - DEVELOPER
+                  - ACCOUNT_HOLDER
+                  - READ_ONLY
+                  - APP_MANAGER
+                  - ACCESS_TO_REPORTS
+                  - CUSTOMER_SUPPORT
+                type: string
+              description: Filter by user roles
+            username:
+              type: string
+              description: Filter by username
+            visibleApps:
+              type: array
+              items:
+                type: string
+              description: Filter by apps the user can see (app IDs)
+        include:
+          type: array
+          items:
+            enum:
+              - visibleApps
+            type: string
+            description: Related resources to include in the response

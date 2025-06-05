@@ -1,0 +1,22 @@
+identifier: carterlasalle/system_information_mcp/system_information_mcp
+repo:
+  provider: github.com
+  url: https://github.com/carterlasalle/system_information_mcp
+  name: system_information_mcp
+  owner: carterlasalle
+server:
+  subdirectory: /
+  name: DevEnvInfoServer
+  description: >-
+    PLEASE RUN LOCALLY:
+
+    This project implements a Cursor Model Context Protocol (MCP) server that
+    provides detailed information about your development environment to the
+    Cursor code editor. By leveraging this server, Cursor's intelligent agent
+    can gain a deeper understanding of your system's configuration, installed
+    tools, and running processes, enabling more context-aware and helpful
+    assistance.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

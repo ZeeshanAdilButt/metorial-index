@@ -1,0 +1,17 @@
+identifier: jagan-shanmugam/mattermost-mcp-host/mattermost-mcp-host
+repo:
+  provider: github.com
+  url: https://github.com/jagan-shanmugam/mattermost-mcp-host
+  name: mattermost-mcp-host
+  owner: jagan-shanmugam
+server:
+  subdirectory: /
+  name: Mattermost MCP Host
+  description: A Mattermost integration that connects to Model Context Protocol
+    (MCP) servers, leveraging a LangGraph-based AI agent to provide an
+    intelligent interface for interacting with users and executing tools
+    directly within Mattermost.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

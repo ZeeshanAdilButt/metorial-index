@@ -1,0 +1,287 @@
+tools:
+  - name: search_blog
+    description: Searches for blogs on Naver using the given keyword. The page
+      parameter allows for page navigation.
+    inputSchema:
+      type: object
+      title: search_blogArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_news
+    description: Searches for news on Naver using the given keyword. The page
+      parameter allows for page navigation and sort='sim'/'date' is supported.
+    inputSchema:
+      type: object
+      title: search_newsArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_book
+    description: Searches for book information on Naver using the given keyword. The
+      page parameter allows for page navigation.
+    inputSchema:
+      type: object
+      title: search_bookArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: check_adult_query
+    description: Determines if the input query is an adult search term.
+    inputSchema:
+      type: object
+      title: check_adult_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: search_encyclopedia
+    description: Searches for encyclopedia information on Naver using the given
+      keyword. The page parameter allows for page navigation.
+    inputSchema:
+      type: object
+      title: search_encyclopediaArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_cafe_article
+    description: Searches for cafe articles on Naver using the given keyword. The
+      page parameter allows for page navigation and sort='sim'/'date' is
+      supported.
+    inputSchema:
+      type: object
+      title: search_cafe_articleArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_kin
+    description: Searches for knowledgeiN Q&A on Naver using the given keyword. The
+      page parameter allows for page navigation and sort='sim'/'date'/'point' is
+      supported.
+    inputSchema:
+      type: object
+      title: search_kinArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_local
+    description: Searches for local business information using the given keyword.
+      (display maximum 5, start maximum 1) sort='random'/'comment' is supported.
+    inputSchema:
+      type: object
+      title: search_localArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: random
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 5
+  - name: correct_errata
+    description: Converts Korean/English keyboard input errors.
+    inputSchema:
+      type: object
+      title: correct_errataArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: search_shop
+    description: Searches for shopping product information on Naver using the given
+      keyword. The page parameter allows for page navigation and
+      sort='sim'/'date'/'asc'/'dsc' is supported.
+    inputSchema:
+      type: object
+      title: search_shopArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_doc
+    description: Searches for academic papers, reports, etc. using the given
+      keyword. The page parameter allows for page navigation.
+    inputSchema:
+      type: object
+      title: search_docArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_image
+    description: Searches for images using the given keyword. The page parameter
+      allows for page navigation and sort='sim'/'date',
+      filter='all'/'large'/'medium'/'small' is supported.
+    inputSchema:
+      type: object
+      title: search_imageArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        sort:
+          type: string
+          title: Sort
+          default: sim
+        query:
+          type: string
+          title: Query
+        filter:
+          type: string
+          title: Filter
+          default: all
+        display:
+          type: integer
+          title: Display
+          default: 10
+  - name: search_webkr
+    description: Searches for web documents using the given keyword. The page
+      parameter allows for page navigation.
+    inputSchema:
+      type: object
+      title: search_webkrArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        query:
+          type: string
+          title: Query
+        display:
+          type: integer
+          title: Display
+          default: 10

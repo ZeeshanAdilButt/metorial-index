@@ -1,0 +1,43 @@
+tools:
+  - name: get_prompt
+    description: 获取海龟汤游戏的玩法
+    inputSchema:
+      type: object
+      title: get_promptArguments
+      properties: {}
+  - name: get_puzzle
+    description: "获取一个谜题的完整内容
+
+
+      \        Args:
+
+      \            puzzle_title: 海龟汤的标题
+
+
+      \        Returns:
+
+      \            选择结果信息
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_puzzleArguments
+      required:
+        - puzzle_title
+      properties:
+        puzzle_title:
+          type: string
+          title: Puzzle Title
+  - name: list_puzzles_tool
+    description: "列出所有可用的谜题
+
+
+      \        Returns:
+
+      \            谜题列表
+
+      \        "
+    inputSchema:
+      type: object
+      title: list_puzzles_toolArguments
+      properties: {}

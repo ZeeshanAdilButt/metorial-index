@@ -1,0 +1,18 @@
+identifier: jongryong/jira_reporter/jira_reporter
+repo:
+  provider: github.com
+  url: https://github.com/Jongryong/jira_reporter
+  name: jira_reporter
+  owner: Jongryong
+server:
+  subdirectory: /
+  name: Jira Weekly Reporter
+  description: Generate detailed weekly reports of Jira issues based on
+    customizable JQL queries. Connect securely to your Jira instance and
+    optionally summarize reports using the client's Large Language Model. Easily
+    integrate with Claude Desktop or run standalone for flexible reporting
+    workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

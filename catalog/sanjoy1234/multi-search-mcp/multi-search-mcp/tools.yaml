@@ -1,0 +1,34 @@
+tools:
+  - name: google_search
+    description: Run a Google search via SerpApi (Custom Search no longer needed).
+    inputSchema:
+      type: object
+      title: google_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: brave_search
+    description: Fetch search results from Brave News API.
+    inputSchema:
+      type: object
+      title: brave_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: duck_search
+    description: Query DuckDuckGo Instant Answer API (no key required).
+    inputSchema:
+      type: object
+      title: duck_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

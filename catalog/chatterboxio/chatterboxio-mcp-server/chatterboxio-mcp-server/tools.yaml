@@ -1,0 +1,56 @@
+tools:
+  - name: joinMeeting
+    description: Join a Zoom or Google Meet meeting using the provided meeting ID
+      and password and capture transcript and audio recording
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - platform
+        - meetingId
+        - botName
+      properties:
+        botName:
+          type: string
+          description: The name of the bot
+        platform:
+          enum:
+            - zoom
+            - googlemeet
+          type: string
+          description: The online conference platform (zoom or googlemeet)
+        meetingId:
+          type: string
+          description: The ID of the Zoom ('###########') or Google Meet ('xxx-xxx-xxx')
+            meeting
+        webhookUrl:
+          type: string
+          description: URL to receive webhook events for meeting status (optional)
+        meetingPassword:
+          type: string
+          description: The password for the Zoom meeting (optional)
+      additionalProperties: false
+  - name: getMeetingInfo
+    description: Get information about a meeting
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+          description: The session ID to get information for
+      additionalProperties: false
+  - name: summarizeMeeting
+    description: Generate a concise summary of a meeting's contents from its transcript
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - transcript
+      properties:
+        transcript:
+          type: string
+          description: The meeting transcript to summarize
+      additionalProperties: false

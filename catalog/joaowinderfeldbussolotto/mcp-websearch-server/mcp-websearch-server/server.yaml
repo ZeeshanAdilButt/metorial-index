@@ -1,0 +1,17 @@
+identifier: joaowinderfeldbussolotto/mcp-websearch-server/mcp-websearch-server
+repo:
+  provider: github.com
+  url: https://github.com/joaowinderfeldbussolotto/MCP-Websearch-Server
+  name: MCP-Websearch-Server
+  owner: joaowinderfeldbussolotto
+server:
+  subdirectory: /
+  name: Documentation Retrieval Server
+  description: Fetch relevant documentation snippets from Langchain, Llama Index,
+    and OpenAI. Integrate seamlessly with MCP-compatible applications to enhance
+    your search capabilities. Simplify your documentation access with a
+    straightforward tool that retrieves information based on your queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: nfshanq/mcp-invoice/mcp-invoice
+repo:
+  provider: github.com
+  url: https://github.com/nfshanq/mcp-invoice
+  name: mcp-invoice
+  owner: nfshanq
+server:
+  subdirectory: /
+  name: Invoice Processing Server
+  description: Streamline your invoice and receipt management with advanced OCR
+    capabilities. Effortlessly extract data from various formats and merge
+    documents for efficient handling. Enhance your AI assistant's functionality
+    by integrating seamless invoice processing tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

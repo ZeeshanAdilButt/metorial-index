@@ -1,0 +1,18 @@
+identifier: srtux/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/srtux/mcp
+  name: mcp
+  owner: srtux
+server:
+  subdirectory: /
+  name: Logging Query Server
+  description: Enable natural language querying of Google Cloud logs by
+    translating user queries into Google Cloud Logging Query Language (LQL) and
+    returning relevant log entries. Integrate easily with your applications via
+    REST API endpoints for both natural language and direct LQL queries. Deploy
+    seamlessly on Google Cloud Run or GKE for scalable log analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

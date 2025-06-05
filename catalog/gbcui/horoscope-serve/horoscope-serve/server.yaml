@@ -1,0 +1,17 @@
+identifier: gbcui/horoscope-serve/horoscope-serve
+repo:
+  provider: github.com
+  url: https://github.com/GBcui/horoscope-serve
+  name: horoscope-serve
+  owner: GBcui
+server:
+  subdirectory: /
+  name: Horoscope MCP Server
+  description: Fetch daily horoscope readings and detailed fortune insights for
+    all zodiac signs. Get personalized predictions on love, career, health, and
+    more, tailored to your zodiac sign and time range. Enhance your
+    decision-making with lucky numbers and compatibility advice.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,52 @@
+tools:
+  - name: github_get_code
+    description: >
+      
+      Retrieves code from a GitHub repository URL and combines it into a single
+      file. The URL must start with "https://".
+
+
+      Query Parameters:
+
+      - dir: Filter files by directory paths (comma-separated)
+        Example: ?dir=src/components,tests/unit
+      - ext: Filter files by extensions (comma-separated)
+        Example: ?ext=ts,tsx,js
+      - mode: Display mode
+        Example: ?mode=tree (Shows directory structure only)
+      - branch: Specify the branch to fetch from (optional)
+        Example: ?branch=feature/new-feature
+
+      Examples:
+
+      1. For GitHub tree URLs with branch:
+        https://github.com/kazuph/pera1/tree/feature/great-branch
+        This URL will be automatically parsed to extract the branch information.
+
+      2. For specific directory in a branch:
+        url: https://github.com/modelcontextprotocol/servers
+        dir: src/fetch
+        branch: develop
+
+      The tool will correctly parse the repository structure and fetch the files
+      from the specified branch.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        dir:
+          type: string
+        ext:
+          type: string
+        url:
+          type: string
+          format: uri
+        mode:
+          enum:
+            - tree
+          type: string
+        branch:
+          type: string
+      additionalProperties: false

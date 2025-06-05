@@ -1,0 +1,15 @@
+identifier: thadius83/mcp-server-openai/mcp-server-openai
+repo:
+  provider: github.com
+  url: https://github.com/thadius83/mcp-server-openai
+  name: mcp-server-openai
+  owner: thadius83
+server:
+  subdirectory: /
+  name: OpenAI MCP Server
+  description: Query OpenAI models directly from Claude using the MCP protocol.
+    Integrate with multiple models for enhanced responses.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

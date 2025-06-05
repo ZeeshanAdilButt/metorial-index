@@ -1,0 +1,17 @@
+identifier: datalayer/earthdata-mcp-server/earthdata-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/datalayer/earthdata-mcp-server
+  name: earthdata-mcp-server
+  owner: datalayer
+server:
+  subdirectory: /
+  name: Earthdata Server
+  description: Enable efficient discovery and retrieval of NASA Earth Data
+    datasets and granules for geospatial analysis. Search and access Earthdata
+    datasets with powerful tools integrated into your workflows. Facilitate
+    AI-powered geospatial data exploration and analysis seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

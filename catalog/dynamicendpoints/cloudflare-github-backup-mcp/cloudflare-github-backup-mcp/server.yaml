@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/cloudflare-github-backup-mcp/cloudflare-github-backup-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/cloudflare-github-backup-mcp
+  name: cloudflare-github-backup-mcp
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Cloudflare to GitHub Backup
+  description: Automate the backup of your Cloudflare projects to a GitHub
+    repository. Ensure your projects are securely stored and easily retrievable
+    with this seamless integration. Start safeguarding your Cloudflare data
+    today with minimal setup required.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

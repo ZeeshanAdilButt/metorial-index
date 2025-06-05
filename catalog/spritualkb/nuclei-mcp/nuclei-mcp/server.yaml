@@ -1,0 +1,17 @@
+identifier: spritualkb/nuclei-mcp/nuclei-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Spritualkb/nuclei-mcp
+  name: nuclei-mcp
+  owner: Spritualkb
+server:
+  subdirectory: /
+  name: Nuclei Server
+  description: Manage and summarize text notes efficiently using a simple MCP
+    server. Create new notes with ease and generate summaries of all stored
+    notes to enhance your workflow. Access and manipulate notes through
+    standardized URIs and tools for seamless integration with LLM applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

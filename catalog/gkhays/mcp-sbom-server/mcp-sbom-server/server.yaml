@@ -1,0 +1,18 @@
+identifier: gkhays/mcp-sbom-server/mcp-sbom-server
+repo:
+  provider: github.com
+  url: https://github.com/gkhays/mcp-sbom-server
+  name: mcp-sbom-server
+  owner: gkhays
+server:
+  subdirectory: /
+  name: SBOM Server
+  description: Perform scans and generate Software Bill of Materials (SBOM) in
+    CycloneDX format. Enhance your security posture by identifying
+    vulnerabilities in your software dependencies with ease. Integrate
+    seamlessly with your existing MCP clients for efficient scanning and
+    reporting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

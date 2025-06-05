@@ -1,0 +1,17 @@
+identifier: ivo-toby/mcp-openapi-server/openapi-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ivo-toby/mcp-openapi-server
+  name: mcp-openapi-server
+  owner: ivo-toby
+server:
+  subdirectory: /
+  name: OpenAPI MCP Server
+  description: Expose REST APIs defined by OpenAPI specifications to Large
+    Language Models. Enable seamless interaction with your APIs through a
+    standardized protocol, enhancing your application's capabilities. Simplify
+    API integration and management with this powerful server solution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

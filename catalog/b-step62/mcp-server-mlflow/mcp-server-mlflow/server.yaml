@@ -1,0 +1,16 @@
+identifier: b-step62/mcp-server-mlflow/mcp-server-mlflow
+repo:
+  provider: github.com
+  url: https://github.com/B-Step62/mcp-server-mlflow
+  name: mcp-server-mlflow
+  owner: B-Step62
+server:
+  subdirectory: /
+  name: MLflow Prompt Registry Server
+  description: Access and manage prompt templates seamlessly from MLflow. Load and
+    utilize prompt templates in Claude Desktop for efficient task automation and
+    workflow management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

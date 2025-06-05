@@ -1,0 +1,18 @@
+identifier: lutra23/mcp-assistant-server/mcp-assistant-server
+repo:
+  provider: github.com
+  url: https://github.com/Lutra23/mcp-assistant-server
+  name: mcp-assistant-server
+  owner: Lutra23
+server:
+  subdirectory: /
+  name: Assistant Server
+  description: Provide intelligent task analysis and recommend the most suitable
+    MCP tools based on task characteristics. Integrate large language models for
+    advanced analysis and maintain context throughout task execution. Enable
+    high-performance asynchronous processing with modular design for easy
+    extensibility.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

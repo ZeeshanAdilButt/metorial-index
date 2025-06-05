@@ -1,0 +1,184 @@
+tools:
+  - name: search_jobs
+    description: "Search for jobs using the HireBase API
+
+
+      \    Args:
+
+      \        query: Full text search query
+
+      \        and_keywords: Keywords that must all appear in results
+
+      \        or_keywords: Keywords where at least one must appear
+
+      \        not_keywords: Keywords that must not appear
+
+      \        title: Job titles to search for
+
+      \        category: Job categories to filter by
+
+      \        country: Countries to filter by
+
+      \        city: Cities to filter by
+
+      \        location_type: Location types (Remote, In-Person, Hybrid)
+
+      \        company: Companies to filter by
+
+      \        salary_from: Minimum salary
+
+      \        salary_to: Maximum salary
+
+      \        salary_currency: Salary currency (e.g. USD)
+
+      \        years_from: Minimum years of experience
+
+      \        years_to: Maximum years of experience
+
+      \        visa: Whether job offers visa sponsorship
+
+      \        limit: Maximum number of results to return
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_jobsArguments
+      properties:
+        city:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: City
+          default: null
+        visa:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Visa
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+        query:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Query
+          default: null
+        title:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Title
+          default: null
+        company:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Company
+          default: null
+        country:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Country
+          default: null
+        category:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Category
+          default: null
+        years_to:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Years To
+          default: null
+        salary_to:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Salary To
+          default: null
+        years_from:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Years From
+          default: null
+        or_keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Or Keywords
+          default: null
+        salary_from:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Salary From
+          default: null
+        and_keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: And Keywords
+          default: null
+        not_keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Not Keywords
+          default: null
+        location_type:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Location Type
+          default: null
+        salary_currency:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Salary Currency
+          default: null
+  - name: get_job
+    description: "Get detailed information about a specific job
+
+
+      \    Args:
+
+      \        job_id: The unique identifier of the job
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_jobArguments
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          title: Job Id

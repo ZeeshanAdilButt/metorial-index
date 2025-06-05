@@ -1,0 +1,18 @@
+identifier: ekailabs/dune-mcp-server/dune-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ekailabs/dune-mcp-server
+  name: dune-mcp-server
+  owner: ekailabs
+server:
+  subdirectory: /
+  name: Dune Analytics Data Server
+  description: Provide AI agents with real-time access to DEX metrics, EigenLayer
+    statistics, and token balances on Solana through structured JSON tools.
+    Enable seamless querying of blockchain analytics data to enhance
+    decision-making and insights. Integrate effortlessly with AI platforms like
+    Claude for Desktop to leverage Dune Analytics data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

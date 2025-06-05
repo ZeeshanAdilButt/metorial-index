@@ -1,0 +1,19 @@
+identifier: rohans2/mcp-google-sheets/mcp-google-sheets
+repo:
+  provider: github.com
+  url: https://github.com/rohans2/mcp-google-sheets
+  name: mcp-google-sheets
+  owner: rohans2
+server:
+  subdirectory: /
+  name: Google Sheets Integration Server
+  description: Enable AI agents to securely interact with Google Sheets using
+    well-typed tools for creating, reading, updating, and managing spreadsheets
+    and sheets. Authenticate via OAuth2 or Service Account flows to perform
+    operations like listing sheets, updating cells, sharing spreadsheets, and
+    more. Simplify spreadsheet automation and data manipulation through a
+    standardized protocol interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: amotivv/protonmail-mcp/protonmail-mcp
+repo:
+  provider: github.com
+  url: https://github.com/amotivv/protonmail-mcp
+  name: protonmail-mcp
+  owner: amotivv
+server:
+  subdirectory: /
+  name: Protonmail MCP Server
+  description: Send emails effortlessly using your Protonmail account. This server
+    integrates with Claude Desktop and Cline VSCode extension, allowing you to
+    manage your email communications directly from your preferred interface.
+    Experience seamless email functionality with support for multiple
+    recipients, CC, BCC, and both plain text and HTML content.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: vantage-sh/vantage-mcp-server/vantage-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/vantage-sh/vantage-mcp-server
+  name: vantage-mcp-server
+  owner: vantage-sh
+server:
+  subdirectory: /
+  name: Vantage Cloud Cost Explorer
+  description: Use natural language to explore and analyze your organization's
+    cloud costs through AI assistants and MCP clients. Query previous and
+    current cloud spend, cost tagging, provider integrations, and more with
+    ease. Integrate seamlessly with your existing Vantage APIs for intuitive
+    cost management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

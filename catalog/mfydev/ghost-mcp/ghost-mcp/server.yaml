@@ -1,0 +1,15 @@
+identifier: mfydev/ghost-mcp/ghost-mcp
+repo:
+  provider: github.com
+  url: https://github.com/MFYDev/ghost-mcp
+  name: ghost-mcp
+  owner: MFYDev
+server:
+  subdirectory: /
+  name: Ghost MCP Server
+  description: Interact with your Ghost blog through LLM interfaces. Manage posts,
+    users, members, and more with secure access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

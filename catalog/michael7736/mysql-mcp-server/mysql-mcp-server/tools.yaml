@@ -1,0 +1,52 @@
+tools:
+  - name: run_sql_query
+    description: Executes a read-only SQL query (SELECT statements only) against the
+      MySQL database.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL SELECT query to execute.
+  - name: create_table
+    description: Creates a new table in the MySQL database.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL CREATE TABLE query to execute.
+  - name: insert_data
+    description: Inserts data into a table in the MySQL database.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL INSERT INTO query to execute.
+  - name: update_data
+    description: Updates data in a table in the MySQL database.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL UPDATE query to execute.
+  - name: delete_data
+    description: Deletes data from a table in the MySQL database.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The SQL DELETE FROM query to execute.

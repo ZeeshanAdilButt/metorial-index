@@ -1,0 +1,16 @@
+identifier: cyanheads/toolkit-mcp-server/toolkit-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cyanheads/toolkit-mcp-server
+  name: toolkit-mcp-server
+  owner: cyanheads
+server:
+  subdirectory: /
+  name: Toolkit MCP Server
+  description: Provide LLM Agents with system utilities and tools, including IP
+    geolocation, network diagnostics, system monitoring, cryptographic
+    operations, and QR code generation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

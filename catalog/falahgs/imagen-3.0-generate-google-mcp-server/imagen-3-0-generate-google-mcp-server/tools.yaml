@@ -1,0 +1,45 @@
+tools:
+  - name: generate_images
+    description: Generate images using Google Gemini AI
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text description of the image to generate
+        category:
+          type: string
+          default: ""
+          description: Optional category folder for organizing images
+        numberOfImages:
+          type: number
+          default: 1
+          maximum: 4
+          minimum: 1
+          description: Number of images to generate (1-4)
+  - name: create_image_html
+    description: Create HTML img tags from image file paths with gallery view
+    inputSchema:
+      type: object
+      required:
+        - imagePaths
+      properties:
+        width:
+          type: number
+          default: 512
+          description: Image width in pixels
+        height:
+          type: number
+          default: 512
+          description: Image height in pixels
+        gallery:
+          type: boolean
+          default: true
+          description: Whether to create a gallery view with CSS
+        imagePaths:
+          type: array
+          items:
+            type: string
+          description: Array of image file paths

@@ -1,0 +1,17 @@
+identifier: port-labs/port-mcp-server/port-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/port-labs/port-mcp-server
+  name: port-mcp-server
+  owner: port-labs
+server:
+  subdirectory: /
+  name: Port MCP Server
+  description: Integrate seamlessly with Port.io's AI agent to trigger actions and
+    receive responses. Enhance your applications by leveraging the capabilities
+    of Port.io's AI through a simple and efficient interface. Start automating
+    tasks and improving workflows with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

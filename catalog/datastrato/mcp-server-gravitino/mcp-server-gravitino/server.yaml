@@ -1,0 +1,18 @@
+identifier: datastrato/mcp-server-gravitino/mcp-server-gravitino
+repo:
+  provider: github.com
+  url: https://github.com/datastrato/mcp-server-gravitino
+  name: mcp-server-gravitino
+  owner: datastrato
+server:
+  subdirectory: /
+  name: Gravitino Metadata Server
+  description: Provide seamless integration with Apache Gravitino services to
+    manage metadata efficiently. Access and manipulate catalog, schema, table,
+    tag, and user-role information through an easy-to-use interface. Enhance
+    your data governance workflows with optimized metadata retrieval and
+    management tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,1022 @@
+tools:
+  - name: getSupportedNetworks
+    description: Get a list of all supported networks and their configurations. For
+      more detailed information about networks, use the getAllNetworks and
+      getNetwork tools.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getBlockNumber
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: getGasPrice
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: getFeeData
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: generateWallet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        saveToEnv:
+          type: boolean
+          description: Optional. If true, the private key will be saved to the server's
+            environment variables for future use. Default is false.
+      additionalProperties: false
+  - name: loadWallet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - privateKey
+      properties:
+        saveToEnv:
+          type: boolean
+          description: Optional. If true, the private key will be saved to the server's
+            environment variables for this session. Default is true.
+        privateKey:
+          type: string
+          description: The private key of the wallet to load. Should start with '0x'.
+      additionalProperties: false
+  - name: checkWalletExists
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: getWalletBalance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The Ethereum address to query
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: formatEther
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - wei
+      properties:
+        wei:
+          type: string
+          description: The wei value to format
+      additionalProperties: false
+  - name: parseEther
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ether
+      properties:
+        ether:
+          type: string
+          description: The ether value to parse
+      additionalProperties: false
+  - name: formatUnits
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - value
+        - unit
+      properties:
+        unit:
+          type:
+            - string
+            - number
+          description: The number of decimals or unit name (e.g., 'gwei', 18)
+        value:
+          type: string
+          description: The value to format
+      additionalProperties: false
+  - name: getWalletTransactionCount
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The Ethereum address to query
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: getBlockDetails
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - blockTag
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        blockTag:
+          type:
+            - string
+            - number
+          description: The block number or the string 'latest'
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: getTransactionDetails
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - txHash
+      properties:
+        txHash:
+          type: string
+          description: The transaction hash to lookup
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: getContractCode
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The contract's address
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: contractCall
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - abi
+        - method
+      properties:
+        abi:
+          type: string
+          description: The ABI of the contract function to call, in JSON format
+        args:
+          type: array
+          description: Optional. The arguments to pass to the contract function
+        method:
+          type: string
+          description: The name of the method to call
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        contractAddress:
+          type: string
+          description: The address of the contract to call
+      additionalProperties: false
+  - name: signMessage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: The message to sign
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: ethSign
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - data
+      properties:
+        data:
+          type: string
+          description: The data to sign. Will be converted to hex if not already in hex
+            format.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: resolveName
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The ENS name to resolve
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: lookupAddress
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The Ethereum address to resolve
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: sendTransaction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - value
+      properties:
+        to:
+          type: string
+          description: The Ethereum address to send to
+        data:
+          type: string
+          description: Optional. The hex data to include in the transaction
+        value:
+          type: string
+          description: The amount to send in ether
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        mockMode:
+          type: boolean
+          default: false
+          description: Optional. If true, just simulates the transaction without sending
+            it. Default is false.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+      additionalProperties: false
+  - name: sendTransactionWithOptions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - value
+      properties:
+        to:
+          type: string
+          description: The Ethereum address to send to
+        data:
+          type: string
+          description: Optional. The hex data to include in the transaction
+        nonce:
+          type: number
+          description: Optional. The nonce to use for the transaction
+        value:
+          type: string
+          description: The amount to send in ether
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        gasLimit:
+          type: string
+          description: Optional. The gas limit for the transaction
+        mockMode:
+          type: boolean
+          default: false
+          description: Optional. If true, just simulates the transaction without sending
+            it. Default is false.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        maxFeePerGas:
+          type: string
+          description: Optional. The maximum fee per gas (in gwei)
+        maxPriorityFeePerGas:
+          type: string
+          description: Optional. The maximum priority fee per gas (in gwei)
+      additionalProperties: false
+  - name: getERC20TokenInfo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+      additionalProperties: false
+  - name: erc20_getTokenInfo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+      additionalProperties: false
+  - name: getERC20Balance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - ownerAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        ownerAddress:
+          type: string
+          description: The Ethereum address whose balance to check
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+      additionalProperties: false
+  - name: erc20_balanceOf
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - ownerAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        ownerAddress:
+          type: string
+          description: The Ethereum address whose balance to check
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+      additionalProperties: false
+  - name: getERC20Allowance
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - ownerAddress
+        - spenderAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        ownerAddress:
+          type: string
+          description: The Ethereum address that owns the tokens
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+        spenderAddress:
+          type: string
+          description: The Ethereum address that is approved to spend tokens
+      additionalProperties: false
+  - name: transferERC20
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - recipientAddress
+        - amount
+      properties:
+        amount:
+          type: string
+          description: The amount of tokens to transfer (can be decimal, e.g. '1.5')
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        gasLimit:
+          type: string
+        gasPrice:
+          type: string
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+        recipientAddress:
+          type: string
+          description: The Ethereum address to receive the tokens
+      additionalProperties: false
+  - name: approveERC20
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - spenderAddress
+        - amount
+      properties:
+        amount:
+          type: string
+          description: The amount of tokens to transfer (can be decimal, e.g. '1.5')
+        chainId:
+          type: number
+          description: Optional. The chain ID to use. If provided with a named network and
+            they don't match, the RPC's chain ID will be used.
+        gasLimit:
+          type: string
+        gasPrice:
+          type: string
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        tokenAddress:
+          type: string
+          description: The address of the ERC20 token contract
+        spenderAddress:
+          type: string
+          description: The Ethereum address to approve for spending tokens
+      additionalProperties: false
+  - name: getNFTInfo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        provider:
+          type: string
+          description: Optional. The provider to use. If not provided, the default
+            provider is used.
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC721 contract
+      additionalProperties: false
+  - name: getNFTOwner
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - tokenId
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        tokenId:
+          type:
+            - string
+            - number
+          description: The ID of the token to check
+        provider:
+          type: string
+          description: Optional. The provider to use. If not provided, the default
+            provider is used.
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC721 contract
+      additionalProperties: false
+  - name: erc721_balanceOf
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - ownerAddress
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        provider:
+          type: string
+          description: Optional. The provider to use. If not provided, the default
+            provider is used.
+        ownerAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address to check balance for
+        tokenAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC721 contract
+      additionalProperties: false
+  - name: getNFTTokenURI
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - tokenId
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        tokenId:
+          type:
+            - string
+            - number
+          description: The ID of the token to get the URI for
+        provider:
+          type: string
+          description: Optional. The provider to use. If not provided, the default
+            provider is used.
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC721 contract
+      additionalProperties: false
+  - name: erc721_tokenURI
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - tokenId
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        tokenId:
+          type:
+            - string
+            - number
+          description: The ID of the token to get the URI for
+        provider:
+          type: string
+          description: Optional. The provider to use. If not provided, the default
+            provider is used.
+        tokenAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC721 contract
+      additionalProperties: false
+  - name: getNFTMetadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - tokenId
+      properties:
+        chainId:
+          type: number
+        tokenId:
+          type:
+            - string
+            - number
+        provider:
+          type: string
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      additionalProperties: false
+  - name: transferNFT
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - tokenId
+        - to
+      properties:
+        to:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+        chainId:
+          type: number
+        tokenId:
+          type:
+            - string
+            - number
+        provider:
+          type: string
+        gasOptions:
+          type: object
+          properties:
+            nonce:
+              type: number
+            value:
+              type: string
+            gasLimit:
+              type: number
+            gasPrice:
+              type: number
+            maxFeePerGas:
+              type: number
+            maxPriorityFeePerGas:
+              type: number
+          additionalProperties: false
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      additionalProperties: false
+  - name: approveNFT
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - tokenId
+        - approved
+      properties:
+        chainId:
+          type: number
+        tokenId:
+          type:
+            - string
+            - number
+        approved:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+        provider:
+          type: string
+        gasOptions:
+          type: object
+          properties:
+            nonce:
+              type: number
+            value:
+              type: string
+            gasLimit:
+              type: number
+            gasPrice:
+              type: number
+            maxFeePerGas:
+              type: number
+            maxPriorityFeePerGas:
+              type: number
+          additionalProperties: false
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      additionalProperties: false
+  - name: setNFTApprovalForAll
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - contractAddress
+        - operator
+        - approved
+      properties:
+        chainId:
+          type: number
+        approved:
+          type: boolean
+        operator:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+        provider:
+          type: string
+        gasOptions:
+          type: object
+          properties:
+            nonce:
+              type: number
+            value:
+              type: string
+            gasLimit:
+              type: number
+            gasPrice:
+              type: number
+            maxFeePerGas:
+              type: number
+            maxPriorityFeePerGas:
+              type: number
+          additionalProperties: false
+        contractAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      additionalProperties: false
+  - name: erc1155_balanceOf
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - ownerAddress
+        - tokenId
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        tokenId:
+          type: string
+          description: The ID of the token to query
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        ownerAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address to check balance for
+        tokenAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC1155 contract
+      additionalProperties: false
+  - name: erc1155_uri
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - tokenId
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        tokenId:
+          type: string
+          description: The ID of the token to query
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        tokenAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC1155 contract
+      additionalProperties: false
+  - name: erc1155_balanceOfBatch
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenAddress
+        - ownerAddresses
+        - tokenIds
+      properties:
+        chainId:
+          type: number
+          description: Optional. The chain ID to use.
+        provider:
+          type: string
+          description: Optional. Either a network name or custom RPC URL. Use
+            getAllNetworks to see available networks and their details, or
+            getNetwork to get info about a specific network. You can use any
+            network name returned by these tools as a provider value.
+        tokenIds:
+          type: array
+          items:
+            type: string
+            description: The ID of the token to query
+          description: Array of token IDs to check balances for
+        tokenAddress:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The address of the ERC1155 contract
+        ownerAddresses:
+          type: array
+          items:
+            type: string
+            pattern: ^0x[a-fA-F0-9]{40}$
+            description: An Ethereum address
+          description: Array of addresses to check balances for
+      additionalProperties: false
+  - name: getAllNetworks
+    description: Get information about all available blockchain networks. Use this
+      to identify network names, chain IDs, and RPC URLs that can be used with
+      other Ethereum tools. When using other tools with a 'provider' parameter,
+      you can specify any of these network names.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getNetwork
+    description: Get detailed information about a specific blockchain network. This
+      provides the network's chain ID, native token, and RPC URL that can be
+      used with other Ethereum tools. This network name can be used as the
+      'provider' parameter in other tools.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the network to get details for (case-insensitive, e.g.,
+            'ethereum', 'polygon', 'arbitrum')
+      additionalProperties: false
+  - name: listPrompts
+    description: List all available prompts in the system
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getEnsResolutionGuidance
+    description: Get guidance for resolving ENS names across networks and performing
+      operations
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ensName
+        - targetNetwork
+        - operation
+      properties:
+        ensName:
+          type: string
+          description: The ENS name to resolve (e.g., 'vitalik.eth')
+        operation:
+          enum:
+            - balance
+            - txCount
+            - code
+          type: string
+          description: "The operation to perform: 'balance' for ETH balance, 'txCount' for
+            transaction count, 'code' for contract code"
+        targetNetwork:
+          type: string
+          description: The target network to perform operations on (e.g., 'MEGA Testnet',
+            'Optimism')
+      additionalProperties: false

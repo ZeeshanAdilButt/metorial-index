@@ -1,0 +1,16 @@
+identifier: kouui/web-search-duckduckgo/web-search-duckduckgo
+repo:
+  provider: github.com
+  url: https://github.com/kouui/web-search-duckduckgo
+  name: web-search-duckduckgo
+  owner: kouui
+server:
+  subdirectory: /
+  name: DuckDuckGo Web Search
+  description: Search the web using DuckDuckGo and fetch content from the results.
+    Get titles, URLs, and snippets, and convert HTML to markdown for easy
+    reading.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

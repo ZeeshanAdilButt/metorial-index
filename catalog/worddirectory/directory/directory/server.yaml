@@ -1,0 +1,17 @@
+identifier: worddirectory/directory/directory
+repo:
+  provider: github.com
+  url: https://github.com/WordDirectory/Directory
+  name: Directory
+  owner: WordDirectory
+server:
+  subdirectory: /apps/mcp
+  name: WordDirectory MCP Server
+  description: Provide word definition lookups and suggestions for similar words
+    through a standardized interface. Enhance your applications with easy access
+    to human-readable word definitions from WordDirectory. Quickly integrate
+    dictionary capabilities using the lookup_word tool.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

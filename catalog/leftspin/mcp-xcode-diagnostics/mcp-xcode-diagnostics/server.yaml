@@ -1,0 +1,18 @@
+identifier: leftspin/mcp-xcode-diagnostics/mcp-xcode-diagnostics
+repo:
+  provider: github.com
+  url: https://github.com/leftspin/mcp-xcode-diagnostics
+  name: mcp-xcode-diagnostics
+  owner: leftspin
+server:
+  subdirectory: /
+  name: Xcode Diagnostics Plugin
+  description: Extract and view errors and warnings from Xcode build logs to help
+    AI assistants quickly identify issues in Swift projects. List projects with
+    build logs and retrieve detailed diagnostics including errors, warnings,
+    notes, and fix-it suggestions. Optimize your development workflow by
+    integrating Xcode diagnostics seamlessly with MCP-compatible clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

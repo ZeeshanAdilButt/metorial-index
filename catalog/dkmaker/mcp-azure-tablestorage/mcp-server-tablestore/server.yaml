@@ -1,0 +1,15 @@
+identifier: dkmaker/mcp-azure-tablestorage/mcp-server-tablestore
+repo:
+  provider: github.com
+  url: https://github.com/dkmaker/mcp-azure-tablestorage
+  name: mcp-azure-tablestorage
+  owner: dkmaker
+server:
+  subdirectory: /
+  name: Azure Table Storage MCP Server
+  description: A server that enables interaction with Azure Table Storage directly
+    through Cline, allowing query and management of data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: qtoexdj/mcp_vector_sync/mcp_vector_sync
+repo:
+  provider: github.com
+  url: https://github.com/qtoexdj/mcp_vector_sync
+  name: mcp_vector_sync
+  owner: qtoexdj
+server:
+  subdirectory: /
+  name: Vector Sync Service
+  description: Automate the synchronization of multi-tenant search vectors with
+    Supabase using a fully event-driven system. Receive real-time notifications,
+    generate embeddings with OpenAI, and maintain efficient vector searches for
+    each tenant. Monitor and control synchronization through exposed MCP tools
+    for seamless integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

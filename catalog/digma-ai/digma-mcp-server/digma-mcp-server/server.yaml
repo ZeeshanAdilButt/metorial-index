@@ -1,0 +1,18 @@
+identifier: digma-ai/digma-mcp-server/digma-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/digma-ai/digma-mcp-server
+  name: digma-mcp-server
+  owner: digma-ai
+server:
+  subdirectory: /
+  name: Digma Code Observability Server
+  description: Enable agents to perform observability-assisted code reviews and
+    identify code inefficiencies using dynamic code analysis. Leverage runtime
+    usage data from distributed tracing to detect issues and improve application
+    performance. Integrate seamlessly with your MCP client to enhance code
+    review and performance optimization workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

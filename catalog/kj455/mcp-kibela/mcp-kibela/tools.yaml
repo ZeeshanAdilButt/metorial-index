@@ -1,0 +1,40 @@
+tools:
+  - name: kibela_search_notes
+    description: Search Kibela notes by query
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: kibela_get_my_notes
+    description: Get my latest notes from Kibela
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of notes to fetch
+  - name: kibela_get_note_content
+    description: Get note content by note ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Note ID
+  - name: kibela_get_note_from_path
+    description: Get note content by note path
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Note path (e.g. /notes/123)

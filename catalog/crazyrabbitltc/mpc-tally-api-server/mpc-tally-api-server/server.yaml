@@ -1,0 +1,14 @@
+identifier: crazyrabbitltc/mpc-tally-api-server/mpc-tally-api-server
+repo:
+  provider: github.com
+  url: https://github.com/crazyrabbitLTC/mpc-tally-api-server
+  name: mpc-tally-api-server
+  owner: crazyrabbitLTC
+server:
+  subdirectory: /
+  name: Tally API Server
+  description: Access DAO governance data from Tally API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,28 @@
+tools:
+  - name: post_tweet
+    description: Post a new tweet to Twitter
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          maxLength: 280
+          description: The content of your tweet
+  - name: search_tweets
+    description: Search for tweets on Twitter
+    inputSchema:
+      type: object
+      required:
+        - query
+        - count
+      properties:
+        count:
+          type: number
+          maximum: 100
+          minimum: 10
+          description: Number of tweets to return (10-100)
+        query:
+          type: string
+          description: Search query

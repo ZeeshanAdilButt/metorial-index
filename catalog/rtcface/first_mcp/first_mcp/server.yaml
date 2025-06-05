@@ -1,0 +1,18 @@
+identifier: rtcface/first_mcp/first_mcp
+repo:
+  provider: github.com
+  url: https://github.com/rtcface/first_mcp
+  name: first_mcp
+  owner: rtcface
+server:
+  subdirectory: /
+  name: MongoDB Query Server
+  description: Enable structured querying and management of MongoDB collections
+    through a standardized protocol interface. List collections as resources and
+    retrieve documents with filtering and projection capabilities. Securely
+    connect to MongoDB with detailed logging and error handling for reliable
+    data operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

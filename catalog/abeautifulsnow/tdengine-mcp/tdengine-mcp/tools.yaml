@@ -1,0 +1,160 @@
+tools:
+  - name: test_table_exists
+    description: "**Important**: Check if the `stable` exists in the current `Taos
+      database(涛思数据库)` configuration.
+
+
+      \        Args:
+
+      \            stable_name (str): The name of the stable.
+
+
+      \        Returns:
+
+      \            Dict: The `stable_name` exists or not in the current Taos
+      configuration. If the `stable_name` does not exist, an empty dictionary is
+      returned.
+
+
+      \            The key of the dictionary is the `stable_name` name, and the
+      value is a boolean indicating whether the `stable_name` exists.
+
+      \        "
+    inputSchema:
+      type: object
+      title: test_table_existsArguments
+      required:
+        - stable_name
+      properties:
+        stable_name:
+          type: string
+          title: Stable Name
+          description: The name of the stable
+  - name: get_all_dbs
+    description: "Get all databases.
+
+
+      \        Returns:
+
+      \            TaosSqlResponse: All databases in the current Taos
+      configuration.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_all_dbsArguments
+      properties: {}
+  - name: get_all_stables
+    description: "Get all stables.
+
+
+      \        Args:
+
+      \            db_name (Optional[str]): The name of the database. Defaults
+      to None. When the value is None, it means the configured database is used.
+
+
+      \        Returns:
+
+      \            TaosSqlResponse: All stables in the current Taos database.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_all_stablesArguments
+      properties:
+        db_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Db Name
+          default: null
+          description: The name of the database. Default is None which means the
+            configured database.
+  - name: switch_db
+    description: "Switch to the specified database.
+
+
+      \        Args:
+
+      \            db_name (str): The name of the database to switch to.
+
+
+      \        Returns:
+
+      \            TaosSqlResponse: The result of the `USE` command.
+
+      \        "
+    inputSchema:
+      type: object
+      title: switch_dbArguments
+      required:
+        - db_name
+      properties:
+        db_name:
+          type: string
+          title: Db Name
+          description: The name of the database to switch to
+  - name: get_field_infos
+    description: "Get the field information of the specified stable.
+
+
+      \        Args:
+
+      \            db_name (Optional[str]): The name of the database. Defaults
+      to None. When the value is None, it means the configured database is used.
+
+      \            stable_name (str): The name of the stable.
+
+
+      \        Returns:
+
+      \            TaosSqlResponse: The field information of the specified
+      stable.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_field_infosArguments
+      required:
+        - stable_name
+      properties:
+        db_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Db Name
+          default: null
+          description: The name of the database. Default is None which means the
+            configured database.
+        stable_name:
+          type: string
+          title: Stable Name
+          description: The name of the stable
+  - name: query_taos_db_data
+    description: "**Important**: Run a read-only SQL query on `Taos
+      database(涛思数据库)`.
+
+
+      \        Args:
+
+      \            sql_stmt (str): The sql statement you want to retrieve data
+      from taos db.
+
+
+      \        Returns:
+
+      \            List: All data from the specified table.
+
+
+      \        "
+    inputSchema:
+      type: object
+      title: query_taos_db_dataArguments
+      required:
+        - sql_stmt
+      properties:
+        sql_stmt:
+          type: string
+          title: Sql Stmt
+          description: The sql statement you want to retrieve data from taos db

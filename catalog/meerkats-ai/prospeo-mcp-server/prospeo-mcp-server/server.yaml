@@ -1,0 +1,18 @@
+identifier: meerkats-ai/prospeo-mcp-server/prospeo-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Meerkats-Ai/prospeo-mcp-server
+  name: prospeo-mcp-server
+  owner: Meerkats-Ai
+server:
+  subdirectory: /
+  name: Prospeo Email and LinkedIn Enrichment Server
+  description: Provide email finding and LinkedIn profile enrichment capabilities
+    by integrating with the Prospeo API. Find work emails using name and company
+    information, discover email addresses associated with a domain, and enrich
+    person data from LinkedIn URLs. Enhance your applications with accurate
+    contact data and professional profile insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

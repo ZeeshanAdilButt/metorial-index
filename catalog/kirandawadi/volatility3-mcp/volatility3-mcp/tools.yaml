@@ -1,0 +1,159 @@
+tools:
+  - name: initialize_memory_file
+    description: >-
+      Initialize Volatility3 with a memory dump file. This tool MUST be called
+      first before any other
+          memory analysis tools. Use this tool when:
+          - You're starting a new memory forensics investigation
+          - You want to switch to analyzing a different memory dump
+          - You need to reset the analysis environment
+          The tool accepts a file path to the memory dump and validates that the file exists and is accessible.
+          Successful initialization is required for all other tools to function properly.
+    inputSchema:
+      type: object
+      title: initialize_memory_fileArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+  - name: detect_os
+    description: >-
+      Detect the operating system type from the memory dump. Use this tool when:
+          - You need to identify the OS of the memory dump before further analysis
+          - You want to determine which OS-specific plugins are applicable
+          - You're starting an investigation and need to establish the basic system information
+          - You need to verify the OS type to select appropriate analysis techniques
+          The tool attempts to identify if the memory dump is from Windows or Linux by
+          running OS-specific plugins and analyzing their output. This information is crucial for
+          selecting the appropriate analysis plugins and interpreting the results correctly.
+    inputSchema:
+      type: object
+      title: detect_osArguments
+      properties: {}
+  - name: list_plugins
+    description: >-
+      List all available Volatility3 plugins that can be used for memory
+      analysis. Use this tool when:
+          - You want to explore what analysis capabilities are available
+          - You need to find a specific plugin for a particular analysis task
+          - You're unsure which plugin to use for a specific investigation goal
+          The tool returns a comprehensive list of plugin names that can be used with the run_plugin tool.
+          This is useful for discovering available analysis options before diving into specific analyses.
+    inputSchema:
+      type: object
+      title: list_pluginsArguments
+      properties: {}
+  - name: get_plugin_info
+    description: >-
+      Get detailed information about a specific Volatility3 plugin. Use this
+      tool when:
+          - You need to understand what a plugin does before using it
+          - You want to learn about the requirements and parameters for a plugin
+          - You're deciding which plugin is most appropriate for your analysis needs
+          The tool provides the plugin's description and required parameters, helping you understand
+          its purpose and how to use it effectively in your investigation.
+    inputSchema:
+      type: object
+      title: get_plugin_infoArguments
+      required:
+        - plugin_name
+      properties:
+        plugin_name:
+          type: string
+          title: Plugin Name
+  - name: run_plugin
+    description: >-
+      Run any Volatility3 plugin with custom arguments. This is the most
+      flexible analysis tool that
+          gives you access to the full range of Volatility3 capabilities. Use this tool when:
+          - You need to run a specific plugin not covered by the specialized tools
+          - You want to provide custom arguments to a plugin
+          - You're performing advanced analysis that requires specific plugin configurations
+          - You need access to plugins that don't have dedicated wrapper functions
+          The tool accepts the plugin name and an optional dictionary of arguments specific to that plugin.
+          Results are returned as structured data that can be further analyzed and interpreted.
+    inputSchema:
+      type: object
+      title: run_pluginArguments
+      required:
+        - plugin_name
+      properties:
+        args:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Args
+          default: null
+        plugin_name:
+          type: string
+          title: Plugin Name
+  - name: get_processes
+    description: >-
+      Get a comprehensive list of all processes from the memory dump. This tool
+      should be used when:
+          - You need to identify running processes at the time of memory capture
+          - You're looking for suspicious or unexpected processes
+          - You need process IDs for further analysis of specific processes
+          - You want to establish a baseline of system activity
+          The tool returns detailed information about each process including name, PID, PPID, start time,
+          and memory information. This is often one of the first analyses to perform when investigating
+          a memory dump to understand what was running on the system.
+    inputSchema:
+      type: object
+      title: get_processesArguments
+      properties: {}
+  - name: get_network_connections
+    description: >-
+      Retrieve all network connections from the memory dump. Use this tool when:
+          - You're investigating potential command and control (C2) communications
+          - You need to identify data exfiltration or unauthorized connections
+          - You want to map process-to-network activity
+          - You're looking for suspicious IPs, ports, or connection states
+          The tool returns comprehensive information about each connection including local/remote addresses,
+          ports, connection state, and the associated process. This is crucial for identifying malicious
+          network activity and understanding how processes were communicating externally.
+    inputSchema:
+      type: object
+      title: get_network_connectionsArguments
+      properties: {}
+  - name: list_process_open_handles
+    description: >-
+      List open handles for a specific process. Use this tool when:
+          - You need to investigate which files, registry keys, or other resources a process has open
+          - You're analyzing potential data exfiltration by examining file handles
+          - You want to understand inter-process communication by examining shared handles
+          - You're investigating malware behavior by examining its interaction with system resources
+          - You need to determine if a process has access to sensitive system objects
+
+          This tool works differently depending on the operating system:
+          - On Windows: Lists file handles, registry keys, mutexes, events, and other Windows-specific objects
+          - On Linux: Lists open files, sockets, pipes, and other file descriptors
+
+          The output provides detailed information about each handle, including its type, permissions, and the
+          object it references. This can be crucial for understanding process behavior and identifying suspicious activity.
+    inputSchema:
+      type: object
+      title: list_process_open_handlesArguments
+      required:
+        - pid
+      properties:
+        pid:
+          type: integer
+          title: Pid
+  - name: scan_with_yara
+    description: >-
+      Scan memory with YARA rules to detect malware signatures. This tool should
+      be used when:
+          - You need to identify known malware patterns in memory
+          - You want to check for specific threat indicators
+          - You're investigating potential compromise using signature-based detection
+          - You have custom YARA rules for specific threats you're hunting
+          Results include detailed match information with process context and rule metadata.
+          This scanning usually takes a lot of time because we are scanning with extensive Yara rules list
+    inputSchema:
+      type: object
+      title: scan_with_yaraArguments
+      properties: {}

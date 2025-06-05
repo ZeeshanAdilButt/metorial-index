@@ -1,0 +1,17 @@
+identifier: identimoji/mcp-server-emojikey/mcp-server-emojikey
+repo:
+  provider: github.com
+  url: https://github.com/identimoji/mcp-server-emojikey
+  name: mcp-server-emojikey
+  owner: identimoji
+server:
+  subdirectory: /
+  name: emojikey-server
+  description: Manage and persist your LLM interaction styles effortlessly with
+    emoji-based context keys. Set, retrieve, and maintain consistent
+    conversation vibes across devices and applications. Enjoy a seamless
+    experience with automatic emojikey management and history tracking.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

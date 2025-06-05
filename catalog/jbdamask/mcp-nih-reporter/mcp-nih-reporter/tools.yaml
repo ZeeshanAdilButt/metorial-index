@@ -1,0 +1,322 @@
+tools:
+  - name: search_projects
+    description: "
+
+      \    Search for NIH funded projects with advanced criteria
+
+      \   \ 
+
+      \    Args:
+
+      \        fiscal_years: Comma-separated list of fiscal years (e.g.,
+      \"2022,2023\")
+
+      \        pi_names: Comma-separated list of PI names (will match any of the
+      names)
+
+      \        organization: Name of the organization
+
+      \        org_state: Two-letter state code (e.g., \"CA\", \"NY\")
+
+      \        org_city: City name
+
+      \        org_type: Organization type
+
+      \        org_department: Department name
+
+      \        min_amount: Minimum award amount
+
+      \        max_amount: Maximum award amount
+
+      \        covid_response: COVID-19 response category (options: \"Reg-CV\",
+      \"CV\", \"C3\", \"C4\", \"C5\", \"C6\")
+
+      \        funding_mechanism: Type of funding (e.g., \"R01\", \"F32\",
+      \"K99\")
+
+      \        ic_code: Institute or Center code (e.g., \"NCI\", \"NIMH\")
+
+      \        rcdc_terms: Comma-separated RCDC terms for research
+      categorization
+
+      \        start_date: Project start date (YYYY-MM-DD)
+
+      \        end_date: Project end date (YYYY-MM-DD)
+
+      \        newly_added_only: Only show recently added projects
+
+      \        include_abstracts: Include project abstracts in results
+
+      \        limit: Maximum number of results to return (default: 10, max: 50)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_projectsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+        ic_code:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Ic Code
+          default: null
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        org_city:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Org City
+          default: null
+        org_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Org Type
+          default: null
+        pi_names:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Pi Names
+          default: null
+        org_state:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Org State
+          default: null
+        max_amount:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Max Amount
+          default: null
+        min_amount:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Min Amount
+          default: null
+        rcdc_terms:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Rcdc Terms
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+        fiscal_years:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Fiscal Years
+          default: null
+        organization:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Organization
+          default: null
+        covid_response:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Covid Response
+          default: null
+        org_department:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Org Department
+          default: null
+        newly_added_only:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Newly Added Only
+          default: false
+        funding_mechanism:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Funding Mechanism
+          default: null
+        include_abstracts:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Include Abstracts
+          default: true
+  - name: test_connection
+    description: Test the connection to the NIH RePORTER API
+    inputSchema:
+      type: object
+      title: test_connectionArguments
+      properties: {}
+  - name: search_publications
+    description: "
+
+      \    Search for publications linked to NIH projects
+
+      \   \ 
+
+      \    Args:
+
+      \        pmids: Comma-separated list of PubMed IDs
+
+      \        core_project_nums: Comma-separated list of NIH core project
+      numbers
+
+      \        limit: Maximum number of results to return (default: 10, max: 50)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_publicationsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+        pmids:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Pmids
+          default: null
+        core_project_nums:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Core Project Nums
+          default: null
+  - name: search_combined
+    description: "
+
+      \    Search for NIH projects and their related publications in a single
+      query
+
+      \   \ 
+
+      \    Args:
+
+      \        fiscal_years: Comma-separated list of fiscal years (e.g.,
+      \"2022,2023\")
+
+      \        pi_names: Comma-separated list of PI names
+
+      \        organization: Name of the organization
+
+      \        org_state: Two-letter state code (e.g., \"CA\", \"NY\")
+
+      \        funding_mechanism: Type of funding (e.g., \"R01\", \"F32\",
+      \"K99\")
+
+      \        ic_code: Institute or Center code (e.g., \"NCI\", \"NIMH\")
+
+      \        min_amount: Minimum award amount
+
+      \        max_amount: Maximum award amount
+
+      \        covid_response: COVID-19 response category
+
+      \        include_publications: Whether to include related publications
+
+      \        publication_years: Comma-separated list of publication years
+
+      \        limit: Maximum number of results to return (default: 10, max: 50)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_combinedArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+        ic_code:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Ic Code
+          default: null
+        pi_names:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Pi Names
+          default: null
+        org_state:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Org State
+          default: null
+        max_amount:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Max Amount
+          default: null
+        min_amount:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Min Amount
+          default: null
+        fiscal_years:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Fiscal Years
+          default: null
+        organization:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Organization
+          default: null
+        covid_response:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Covid Response
+          default: null
+        funding_mechanism:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Funding Mechanism
+          default: null
+        publication_years:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Publication Years
+          default: null
+        include_publications:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Include Publications
+          default: true

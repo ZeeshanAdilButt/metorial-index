@@ -1,0 +1,150 @@
+tools:
+  - name: search_compound
+    description: "
+
+      \    Search for compounds by name, CID, or other identifiers.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: The search query (compound name, CID, SMILES, etc.)
+
+      \        max_results: Maximum number of results to return (default: 10)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with search results
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_compoundArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: get_compound_details
+    description: "
+
+      \    Get detailed information about a specific compound by its PubChem
+      CID.
+
+      \   \ 
+
+      \    Args:
+
+      \        cid: PubChem Compound ID (CID)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with compound details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_compound_detailsArguments
+      required:
+        - cid
+      properties:
+        cid:
+          type: integer
+          title: Cid
+  - name: get_compound_properties
+    description: "
+
+      \    Get physical and chemical properties of a compound.
+
+      \   \ 
+
+      \    Args:
+
+      \        cid: PubChem Compound ID (CID)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with compound properties
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_compound_propertiesArguments
+      required:
+        - cid
+      properties:
+        cid:
+          type: integer
+          title: Cid
+  - name: search_bioassay
+    description: "
+
+      \    Search for bioassays related to a compound or target.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Search query (compound name, target name, etc.)
+
+      \        max_results: Maximum number of results to return (default: 5)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with bioassay search results
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_bioassayArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+  - name: get_substance_details
+    description: "
+
+      \    Get detailed information about a specific substance by its PubChem
+      SID.
+
+      \   \ 
+
+      \    Args:
+
+      \        sid: PubChem Substance ID (SID)
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dictionary with substance details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_substance_detailsArguments
+      required:
+        - sid
+      properties:
+        sid:
+          type: integer
+          title: Sid

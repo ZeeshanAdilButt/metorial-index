@@ -1,0 +1,17 @@
+identifier: podaac/cmr-mcp/cmr-mcp
+repo:
+  provider: github.com
+  url: https://github.com/podaac/cmr-mcp
+  name: cmr-mcp
+  owner: podaac
+server:
+  subdirectory: /
+  name: NASA Earthdata Search
+  description: Integrate AI retrievals with NASA's Catalog of datasets through
+    Earthaccess. Enable your agents to seamlessly search for and access
+    Earthdata metadata. Enhance your data discovery experience with intelligent
+    search capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

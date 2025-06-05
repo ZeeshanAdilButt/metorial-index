@@ -1,0 +1,15 @@
+identifier: reeeeemo/ancestry-mcp/mcp-server-ancestry
+repo:
+  provider: github.com
+  url: https://github.com/reeeeemo/ancestry-mcp
+  name: ancestry-mcp
+  owner: reeeeemo
+server:
+  subdirectory: /
+  name: Ancestry GEDCOM Server
+  description: A Model Context Protocol server for interactibility with GEDCOM
+    files, commonly used on Ancestry.com.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

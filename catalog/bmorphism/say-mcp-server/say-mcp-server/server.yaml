@@ -1,0 +1,14 @@
+identifier: bmorphism/say-mcp-server/say-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/bmorphism/say-mcp-server
+  name: say-mcp-server
+  owner: bmorphism
+server:
+  subdirectory: /
+  name: Say Server
+  description: An MCP server providing macOS text-to-speech functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

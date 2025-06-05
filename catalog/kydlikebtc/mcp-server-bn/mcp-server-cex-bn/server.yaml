@@ -1,0 +1,15 @@
+identifier: kydlikebtc/mcp-server-bn/mcp-server-cex-bn
+repo:
+  provider: github.com
+  url: https://github.com/kydlikebtc/mcp-server-bn
+  name: mcp-server-bn
+  owner: kydlikebtc
+server:
+  subdirectory: /
+  name: Binance Trading Server
+  description: This MCP Server provides comprehensive integration with Binance's
+    spot and futures trading operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

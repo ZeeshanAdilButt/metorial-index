@@ -1,0 +1,15 @@
+identifier: datalayer/jupyter-mcp-server/jupyter-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/datalayer/jupyter-mcp-server
+  name: jupyter-mcp-server
+  owner: datalayer
+server:
+  subdirectory: /
+  name: Jupyter MCP Server
+  description: Interact with Jupyter notebooks running in a local JupyterLab
+    environment. Add and execute code or markdown cells seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: awslabs/mcp/core-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/awslabs/mcp
+  name: mcp
+  owner: awslabs
+server:
+  subdirectory: /src/core-mcp-server
+  name: Core MCP Server
+  description: Manage and coordinate multiple MCP servers effortlessly.
+    Automatically install, configure, and maintain consistent settings across
+    your environment, ensuring all necessary servers are always available.
+    Simplify your AWS integration with centralized configuration and
+    comprehensive logging for troubleshooting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

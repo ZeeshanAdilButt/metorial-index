@@ -1,0 +1,235 @@
+tools:
+  - name: authenticate
+    description: Get URL to authenticate with Google Tasks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: set-auth-code
+    description: Set the authentication code received from Google OAuth flow
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: The authentication code received from Google
+      additionalProperties: false
+  - name: list-tasklists
+    description: List all task lists
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get-tasklist
+    description: Get a task list by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+      properties:
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: create-tasklist
+    description: Create a new task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Title of the new task list
+      additionalProperties: false
+  - name: update-tasklist
+    description: Update an existing task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - title
+      properties:
+        title:
+          type: string
+          description: New title for the task list
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: delete-tasklist
+    description: Delete a task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+      properties:
+        tasklist:
+          type: string
+          description: Task list ID to delete
+      additionalProperties: false
+  - name: list-tasks
+    description: List all tasks in a task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+      properties:
+        tasklist:
+          type: string
+          description: Task list ID
+        showHidden:
+          type: boolean
+          description: Whether to include hidden tasks
+        showDeleted:
+          type: boolean
+          description: Whether to include deleted tasks
+        showCompleted:
+          type: boolean
+          description: Whether to include completed tasks
+      additionalProperties: false
+  - name: get-task
+    description: Get a specific task by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - task
+      properties:
+        task:
+          type: string
+          description: Task ID
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: create-task
+    description: Create a new task in a task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - title
+      properties:
+        due:
+          type: string
+          description: Due date in RFC 3339 format (e.g., 2025-03-19T12:00:00Z)
+        notes:
+          type: string
+          description: Notes for the task
+        title:
+          type: string
+          description: Title of the task
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: update-task
+    description: Update an existing task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - task
+      properties:
+        due:
+          type: string
+          description: Due date in RFC 3339 format (e.g., 2025-03-19T12:00:00Z)
+        task:
+          type: string
+          description: Task ID
+        notes:
+          type: string
+          description: New notes for the task
+        title:
+          type: string
+          description: New title for the task
+        status:
+          enum:
+            - needsAction
+            - completed
+          type: string
+          description: Status of the task
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: delete-task
+    description: Delete a task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - task
+      properties:
+        task:
+          type: string
+          description: Task ID to delete
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: complete-task
+    description: Mark a task as completed
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - task
+      properties:
+        task:
+          type: string
+          description: Task ID to mark as completed
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: move-task
+    description: Move a task to another position
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+        - task
+      properties:
+        task:
+          type: string
+          description: Task ID to move
+        parent:
+          type: string
+          description: Optional new parent task ID
+        previous:
+          type: string
+          description: Optional previous sibling task ID
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false
+  - name: clear-completed-tasks
+    description: Clear all completed tasks from a task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tasklist
+      properties:
+        tasklist:
+          type: string
+          description: Task list ID
+      additionalProperties: false

@@ -1,0 +1,17 @@
+identifier: sionic-ai/serverless-rag-mcp-server/serverless-rag-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/sionic-ai/serverless-rag-mcp-server
+  name: serverless-rag-mcp-server
+  owner: sionic-ai
+server:
+  subdirectory: /
+  name: Storm MCP Server
+  description: Seamlessly integrate LLM applications with RAG data sources and
+    tools. Utilize powerful embedding models and vector databases to create your
+    own RAG solutions quickly. Get started by obtaining an API token and
+    connecting to the Storm Platform.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

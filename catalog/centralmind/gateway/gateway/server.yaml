@@ -1,0 +1,17 @@
+identifier: centralmind/gateway/gateway
+repo:
+  provider: github.com
+  url: https://github.com/centralmind/gateway
+  name: gateway
+  owner: centralmind
+server:
+  subdirectory: /
+  name: CentralMind Gateway
+  description: "Universal MCP-Server for your Databases optimized for LLMs and
+    AI-Agents with security and compliance. Supports: PostgreSQL, MySQL,
+    ClickHouse, Snowflake, MSSQL, BigQuery, Oracle Database, SQLite,
+    ElasticSearch, DuckDB "
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

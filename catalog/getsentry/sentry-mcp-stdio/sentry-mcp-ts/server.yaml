@@ -1,0 +1,18 @@
+identifier: getsentry/sentry-mcp-stdio/sentry-mcp-ts
+repo:
+  provider: github.com
+  url: https://github.com/getsentry/sentry-mcp-stdio
+  name: sentry-mcp-stdio
+  owner: getsentry
+server:
+  subdirectory: /
+  name: Sentry MCP Server
+  description: Interact with Sentry's API to retrieve and analyze error data,
+    manage projects, and monitor application performance. Streamline your error
+    tracking and project management with powerful tools designed for AI
+    assistants. Enhance your development workflow by integrating Sentry's
+    capabilities directly into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

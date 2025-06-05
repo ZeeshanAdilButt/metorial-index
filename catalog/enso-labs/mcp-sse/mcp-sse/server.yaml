@@ -1,0 +1,18 @@
+identifier: enso-labs/mcp-sse/mcp-sse
+repo:
+  provider: github.com
+  url: https://github.com/enso-labs/mcp-sse
+  name: mcp-sse
+  owner: enso-labs
+server:
+  subdirectory: /
+  name: MCPServe
+  description: Connect to your local environment seamlessly and execute shell
+    commands with ease. Enhance your applications by integrating a simple and
+    efficient MCP server that can be hosted locally or in a Docker container.
+    Experience the power of real-time communication with your LLMs through a
+    straightforward setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

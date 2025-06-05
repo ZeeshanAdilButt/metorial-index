@@ -1,0 +1,17 @@
+identifier: pydantic/logfire-mcp/logfire-mcp
+repo:
+  provider: github.com
+  url: https://github.com/pydantic/logfire-mcp
+  name: logfire-mcp
+  owner: pydantic
+server:
+  subdirectory: /
+  name: Logfire MCP Server
+  description: Analyze your application's telemetry data and distributed traces
+    effortlessly. Query OpenTelemetry metrics and perform custom SQL queries
+    with automatic token-based authentication. Gain insights into exceptions and
+    errors in real-time to enhance your application's reliability.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

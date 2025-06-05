@@ -1,0 +1,25 @@
+tools:
+  - name: get_new_pools_bsc
+    description: >
+      
+      Returns a list of trading pools created in the specified time range on
+      Pancake Swap V3 BNB Smart Chain.
+
+
+      Parameters:
+          time_range_seconds (int): The time range in seconds to look back for new pools.
+                                    Default is 300 seconds (5 minutes).
+          limit (int): The maximum number of pools to return.
+                       Default is 100 pools.
+    inputSchema:
+      type: object
+      title: get_new_pools_bscArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        time_range_seconds:
+          type: integer
+          title: Time Range Seconds
+          default: 300

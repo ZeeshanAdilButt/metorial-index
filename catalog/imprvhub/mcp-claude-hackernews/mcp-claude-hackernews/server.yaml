@@ -1,0 +1,18 @@
+identifier: imprvhub/mcp-claude-hackernews/mcp-claude-hackernews
+repo:
+  provider: github.com
+  url: https://github.com/imprvhub/mcp-claude-hackernews
+  name: mcp-claude-hackernews
+  owner: imprvhub
+server:
+  subdirectory: /
+  name: Hacker News MCP
+  description: Enable seamless interaction with Hacker News directly from Claude
+    Desktop. Browse latest, top, and best stories, view detailed story
+    information, and read comments with clean formatting for enhanced
+    readability. Access Hacker News content effortlessly using natural language
+    or commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+tools:
+  - name: kakao_map_place_recommender
+    description: Recommends relevant places in South Korea, such as restaurants,
+      cafes, parks, hospitals, banks, shops, or tourist attractions, based on
+      user queries seeking suggestions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Korean keywords for searching places in South Korea. Typically
+            combines place type and location (e.g., '이태원 맛집', '서울 병원', '강남역
+            영화관').
+      additionalProperties: false

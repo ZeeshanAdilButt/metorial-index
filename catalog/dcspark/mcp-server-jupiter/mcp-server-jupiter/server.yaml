@@ -1,0 +1,16 @@
+identifier: dcspark/mcp-server-jupiter/mcp-server-jupiter
+repo:
+  provider: github.com
+  url: https://github.com/dcSpark/mcp-server-jupiter
+  name: mcp-server-jupiter
+  owner: dcSpark
+server:
+  subdirectory: /
+  name: Jupiter Swap API Server
+  description: Enable Claude to interact with the Jupiter swap API on the Solana
+    blockchain. Get quotes, build, and send swap transactions seamlessly.
+    Enhance your trading experience with direct access to token swaps.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

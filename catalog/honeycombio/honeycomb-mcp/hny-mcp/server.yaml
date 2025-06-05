@@ -1,0 +1,15 @@
+identifier: honeycombio/honeycomb-mcp/hny-mcp
+repo:
+  provider: github.com
+  url: https://github.com/honeycombio/honeycomb-mcp
+  name: honeycomb-mcp
+  owner: honeycombio
+server:
+  subdirectory: /
+  name: Honeycomb MCP Server
+  description: A server for interacting with Honeycomb observability data,
+    enabling LLMs to analyze and query datasets.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

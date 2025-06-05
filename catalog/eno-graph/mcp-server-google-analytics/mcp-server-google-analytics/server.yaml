@@ -1,0 +1,16 @@
+identifier: eno-graph/mcp-server-google-analytics/mcp-server-google-analytics
+repo:
+  provider: github.com
+  url: https://github.com/eno-graph/mcp-server-google-analytics
+  name: mcp-server-google-analytics
+  owner: eno-graph
+server:
+  subdirectory: /
+  name: Google Analytics Data API Server
+  description: Access Google Analytics Data API seamlessly. Retrieve reports and
+    real-time data to enhance your analytics capabilities. Simplify your data
+    analysis with easy-to-use tools and resources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

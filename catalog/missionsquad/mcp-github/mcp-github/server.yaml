@@ -1,0 +1,17 @@
+identifier: missionsquad/mcp-github/mcp-github
+repo:
+  provider: github.com
+  url: https://github.com/MissionSquad/mcp-github
+  name: mcp-github
+  owner: MissionSquad
+server:
+  subdirectory: /
+  name: GitHub API Server
+  description: Manage your GitHub repositories effortlessly. Create, update, and
+    search repositories, issues, and pull requests with ease, all while
+    preserving your Git history. Streamline your development workflow with
+    automated branch management and comprehensive error handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: minte-app/untun-mcp/untun-mcp
+repo:
+  provider: github.com
+  url: https://github.com/minte-app/untun-mcp
+  name: untun-mcp
+  owner: minte-app
+server:
+  subdirectory: /
+  name: Untun Secure Tunnel Manager
+  description: Create and manage secure tunnels from your local servers to the
+    public internet using simple natural language commands. Easily start, list,
+    and stop tunnels without complex CLI usage or multiple terminal sessions.
+    Streamline local development by controlling all your tunnels through your AI
+    assistant.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

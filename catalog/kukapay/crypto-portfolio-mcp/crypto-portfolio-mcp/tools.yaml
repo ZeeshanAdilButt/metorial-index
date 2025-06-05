@@ -1,0 +1,153 @@
+tools:
+  - name: get_portfolio_summary
+    description: "
+
+      \    Get current portfolio summary with total value using Binance prices.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A string containing a formatted summary of all holdings with
+      current
+
+      \        prices and total portfolio value in USDT.
+
+      \   \ 
+
+      \    Example:
+
+      \        \"Portfolio Summary (Binance Prices):
+
+      BTC/USDT: 0.1 @ $60000.00 = $6000.00
+
+      ETH/USDT: 2.0 @ $2000.00 = $4000.00
+
+      Total Value: $10000.00\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_portfolio_summaryArguments
+      properties: {}
+  - name: add_holding
+    description: "
+
+      \    Add a cryptocurrency holding to the portfolio.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        coin_symbol (str): The trading pair symbol (e.g., \"BTC/USDT\" or
+      \"btc\").
+
+      \            If no \"/USDT\" is provided, it will be appended
+      automatically.
+
+      \            Case-insensitive.
+
+      \        amount (float): The quantity of the cryptocurrency to add.
+
+      \            Must be a positive number.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A confirmation message indicating the holding was added.
+
+      \   \ 
+
+      \    Example:
+
+      \        add_holding(\"BTC\", 0.1) -> \"Added 0.1 BTC/USDT to portfolio\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_holdingArguments
+      required:
+        - coin_symbol
+        - amount
+      properties:
+        amount:
+          type: number
+          title: Amount
+        coin_symbol:
+          type: string
+          title: Coin Symbol
+  - name: get_price
+    description: "
+
+      \    Get current price for a cryptocurrency from Binance.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        coin_symbol (str): The trading pair symbol (e.g., \"ETH/USDT\" or
+      \"eth\").
+
+      \            If no \"/USDT\" is provided, it will be appended
+      automatically.
+
+      \            Case-insensitive.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A string with the current price in USDT.
+
+      \   \ 
+
+      \    Example:
+
+      \        get_price(\"ETH\") -> \"Current price of ETH/USDT on Binance:
+      $2000.50\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_priceArguments
+      required:
+        - coin_symbol
+      properties:
+        coin_symbol:
+          type: string
+          title: Coin Symbol
+  - name: portfolio_value_history
+    description: "
+
+      \    Generate a chart of portfolio value over time using Binance prices.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        ctx (Context): MCP context object for progress reporting.
+
+      \            Automatically provided by the MCP framework.
+
+      \   \ 
+
+      \    Returns:
+
+      \        An Image object containing a PNG chart of portfolio value
+      history.
+
+      \   \ 
+
+      \    Notes:
+
+      \        - Uses current prices for historical points (simplified
+      implementation)
+
+      \        - Chart shows value progression as holdings were added
+
+      \    "
+    inputSchema:
+      type: object
+      title: portfolio_value_historyArguments
+      properties: {}

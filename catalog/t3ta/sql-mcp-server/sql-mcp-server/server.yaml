@@ -1,0 +1,17 @@
+identifier: t3ta/sql-mcp-server/sql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/t3ta/sql-mcp-server
+  name: sql-mcp-server
+  owner: t3ta
+server:
+  subdirectory: /
+  name: SQL MCP Server
+  description: Enable seamless interaction with PostgreSQL databases through
+    secure SSH tunnels. Query your databases effortlessly while ensuring data
+    security and integrity. Perfect for local, containerized, or AI-driven
+    applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

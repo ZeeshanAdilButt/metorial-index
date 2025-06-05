@@ -1,0 +1,15 @@
+tools:
+  - name: eval
+    description: Evaluate an expression
+    inputSchema:
+      type: object
+      $schema: https://json-schema.org/draft/2020-12/schema
+      required:
+        - expression
+      properties:
+        env:
+          type: object
+          description: Optional parameters map
+        expression:
+          type: string
+          description: The expression to be evaluated

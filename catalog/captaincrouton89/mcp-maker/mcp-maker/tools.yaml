@@ -1,0 +1,180 @@
+tools:
+  - name: generate_mcp_boilerplate
+    description: Creates a new MCP server project with all the necessary boilerplate files
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_name
+        - description
+        - output_dir
+      properties:
+        output_dir:
+          type: string
+        description:
+          type: string
+          minLength: 1
+        project_name:
+          type: string
+          minLength: 1
+        include_prompts:
+          type: boolean
+        include_resources:
+          type: boolean
+      additionalProperties: false
+  - name: create_tool_template
+    description: Generates template code for a new MCP tool with customizable parameters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tool_name
+        - description
+        - parameters
+        - output_dir
+      properties:
+        tool_name:
+          type: string
+          minLength: 1
+        output_dir:
+          type: string
+        parameters:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - type
+              - required
+              - description
+            properties:
+              name:
+                type: string
+                minLength: 1
+              type:
+                enum:
+                  - string
+                  - number
+                  - boolean
+                  - array
+                  - object
+                type: string
+              required:
+                type: boolean
+              description:
+                type: string
+                minLength: 1
+            additionalProperties: false
+        description:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_resource_template
+    description: Generates template code for a new MCP resource
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - resource_name
+        - resource_uri_pattern
+        - description
+        - output_dir
+      properties:
+        output_dir:
+          type: string
+        description:
+          type: string
+          minLength: 1
+        resource_name:
+          type: string
+          minLength: 1
+        resource_uri_pattern:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_prompt_template
+    description: Generates template code for a new MCP prompt
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt_name
+        - description
+        - output_dir
+      properties:
+        output_dir:
+          type: string
+        description:
+          type: string
+          minLength: 1
+        prompt_name:
+          type: string
+          minLength: 1
+        include_variables:
+          type: boolean
+      additionalProperties: false
+  - name: save_mcp_docs
+    description: Saves MCP documentation text directly and stores it for future reference
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+        - doc_text
+      properties:
+        key:
+          type: string
+          minLength: 1
+        doc_text:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: search_mcp_docs
+    description: Search through stored MCP documentation for relevant information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_mcp_doc_section
+    description: Get a specific section of MCP documentation by key and section title
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          minLength: 1
+        section_title:
+          type: string
+      additionalProperties: false
+  - name: generate_doc_enriched_template
+    description: Generate an MCP server template with context from the documentation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_name
+        - description
+        - doc_context
+        - output_dir
+      properties:
+        output_dir:
+          type: string
+        description:
+          type: string
+          minLength: 1
+        doc_context:
+          type: string
+          minLength: 1
+        project_name:
+          type: string
+          minLength: 1
+      additionalProperties: false

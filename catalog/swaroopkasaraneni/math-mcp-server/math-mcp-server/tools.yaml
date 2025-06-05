@@ -1,0 +1,37 @@
+tools:
+  - name: add
+    description: Adds two numbers.
+    inputSchema:
+      type: object
+      title: MathOperation
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+          description: First number
+        b:
+          type: integer
+          title: B
+          description: Second number
+      description: Parameters for math operations.
+  - name: multiply
+    description: Multiplies two numbers.
+    inputSchema:
+      type: object
+      title: MathOperation
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: integer
+          title: A
+          description: First number
+        b:
+          type: integer
+          title: B
+          description: Second number
+      description: Parameters for math operations.

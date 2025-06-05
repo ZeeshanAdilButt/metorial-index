@@ -1,0 +1,15 @@
+identifier: steel-dev/steel-mcp-server/steel-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/steel-dev/steel-mcp-server
+  name: steel-mcp-server
+  owner: steel-dev
+server:
+  subdirectory: /
+  name: Steel MCP Server
+  description: Enable LLMs like Claude to navigate the web through Puppeteer-based
+    tools and Steel.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: codacy/codacy-mcp-server/codacy-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/codacy/codacy-mcp-server
+  name: codacy-mcp-server
+  owner: codacy
+server:
+  subdirectory: /
+  name: Codacy MCP Server
+  description: Access and manage your code quality, security, and repository data
+    seamlessly. Leverage powerful tools for repository management, code
+    analysis, and security checks to enhance your development workflow.
+    Integrate effortlessly with your IDE for a streamlined experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

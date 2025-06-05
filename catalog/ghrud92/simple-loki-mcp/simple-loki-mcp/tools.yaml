@@ -1,0 +1,58 @@
+tools:
+  - name: query-loki
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        to:
+          type: string
+          description: End timestamp in UTC (e.g. '2023-01-01T13:00:00Z'). Relative time
+            expressions like 'now' are not supported. Use ISO 8601 format.
+        from:
+          type: string
+          description: Start timestamp in UTC (e.g. '2023-01-01T12:00:00Z'). Relative time
+            expressions like '1h ago' are not supported. Use ISO 8601 format.
+        batch:
+          type: number
+          description: Batch size for query results
+        limit:
+          type: number
+          description: Maximum number of logs to return. Maximum value is 5000
+        query:
+          type: string
+          description: Loki query string
+        quiet:
+          type: boolean
+          description: Suppress query metadata
+        output:
+          enum:
+            - default
+            - raw
+            - jsonl
+          type: string
+          description: "Output format - valid values are 'default' (formatted log lines),
+            'raw' (unprocessed log lines), or 'jsonl' (JSON Lines format). Note:
+            values like 'text' or 'json' are not supported."
+        forward:
+          type: boolean
+          description: Display results in chronological order
+      additionalProperties: false
+  - name: get-label-values
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - label
+      properties:
+        label:
+          type: string
+          description: Label name to get values for
+      additionalProperties: false
+  - name: get-labels
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

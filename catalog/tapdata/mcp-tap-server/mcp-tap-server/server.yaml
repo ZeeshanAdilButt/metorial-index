@@ -1,0 +1,17 @@
+identifier: tapdata/mcp-tap-server/mcp-tap-server
+repo:
+  provider: github.com
+  url: https://github.com/tapdata/mcp-tap-server
+  name: mcp-tap-server
+  owner: tapdata
+server:
+  subdirectory: /
+  name: TapData Server
+  description: Access and manage your database connections and schemas
+    effortlessly. Inspect connections, list tables, and execute CRUD operations
+    directly from your LLM. Enhance your data interaction capabilities with a
+    seamless integration experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

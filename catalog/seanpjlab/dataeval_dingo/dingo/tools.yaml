@@ -1,0 +1,118 @@
+tools:
+  - name: run_dingo_evaluation
+    description: "Runs a Dingo evaluation (rule-based or LLM-based).
+
+
+      \    Infers data_format from input_path extension (.json, .jsonl, .txt) if
+      not provided in kwargs.
+
+      \    Defaults dataset to 'local' if input_path is provided and dataset is
+      not in kwargs.
+
+      \    If output_dir is not specified, creates output relative to
+      input_path.
+
+
+      \    Args:
+
+      \        input_path: Path to the input file or directory.
+
+      \        evaluation_type: Type of evaluation ('rule' or 'llm').
+
+      \        eval_group_name: The specific rule group or LLM model name.
+
+      \                         (Optional when custom_config is provided for LLM
+      evaluations)
+
+      \        output_dir: Optional directory to save outputs.
+
+      \        task_name: Optional name for the task.
+
+      \        save_data: Whether to save the detailed JSONL output (default:
+      True).
+
+      \        save_correct: Whether to save correct data (default: True).
+
+      \        kwargs: Dictionary containing additional arguments compatible
+      with dingo.io.InputArgs.
+
+      \                Use for: dataset, data_format, column_content, column_id,
+
+      \                column_prompt, column_image, custom_config, max_workers,
+      etc.
+
+      \                API keys for LLMs should be set via environment variables
+      in mcp.json.
+
+
+      \    Returns:
+
+      \        For Smithery deployment: The content of the result file
+      (summary.json or first .jsonl)
+
+      \        Otherwise: The absolute path to the primary output file
+      (summary.json or first .jsonl).
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_dingo_evaluationArguments
+      required:
+        - input_path
+        - evaluation_type
+      properties:
+        kwargs:
+          type: object
+          title: Kwargs
+          default: {}
+          additionalProperties: true
+        save_data:
+          type: boolean
+          title: Save Data
+          default: true
+        task_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Task Name
+          default: null
+        input_path:
+          type: string
+          title: Input Path
+        output_dir:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Output Dir
+          default: null
+        save_correct:
+          type: boolean
+          title: Save Correct
+          default: true
+        eval_group_name:
+          type: string
+          title: Eval Group Name
+          default: ""
+        evaluation_type:
+          enum:
+            - rule
+            - llm
+          type: string
+          title: Evaluation Type
+  - name: list_dingo_components
+    description: "Lists available Dingo rule groups and registered LLM model
+      identifiers.
+
+
+      \    Ensures all models are loaded before retrieving the lists.
+
+
+      \    Returns:
+
+      \        A dictionary containing 'rule_groups' and 'llm_models'.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_dingo_componentsArguments
+      properties: {}

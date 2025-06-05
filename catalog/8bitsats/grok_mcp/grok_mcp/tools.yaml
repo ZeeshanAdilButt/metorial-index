@@ -1,0 +1,65 @@
+tools:
+  - name: analyze_transaction
+    description: Analyze a Solana transaction using Grok AI
+    inputSchema:
+      type: object
+      required:
+        - signature
+      properties:
+        details:
+          type: string
+          description: Optional JSON string with additional transaction details
+        signature:
+          type: string
+          description: Transaction signature to analyze
+        screenshot:
+          type: string
+          description: Optional base64 encoded screenshot of transaction data
+  - name: analyze_address
+    description: Analyze a Solana address using Grok AI
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: Solana address to analyze
+        screenshot:
+          type: string
+          description: Optional base64 encoded screenshot of address data
+  - name: analyze_image
+    description: Analyze an image using Grok AI vision capabilities
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        image:
+          type: string
+          description: Base64 encoded image data
+        prompt:
+          type: string
+          description: Question or prompt about the image
+        image_url:
+          type: string
+          description: Optional URL of an image to analyze (alternative to base64)
+  - name: ask_grok
+    description: Ask Grok a general question
+    inputSchema:
+      type: object
+      required:
+        - question
+      properties:
+        image:
+          type: string
+          description: Optional base64 encoded image to include with the question
+        context:
+          type: string
+          description: Optional context for the question
+        question:
+          type: string
+          description: Question to ask Grok
+        image_url:
+          type: string
+          description: Optional URL of an image to include (alternative to base64)

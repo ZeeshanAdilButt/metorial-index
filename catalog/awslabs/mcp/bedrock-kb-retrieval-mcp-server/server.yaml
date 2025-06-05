@@ -1,0 +1,17 @@
+identifier: awslabs/mcp/bedrock-kb-retrieval-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/awslabs/mcp
+  name: mcp
+  owner: awslabs
+server:
+  subdirectory: /src/bedrock-kb-retrieval-mcp-server
+  name: AWS MCP Servers
+  description: Manage and coordinate your AWS development workflow with
+    specialized servers that implement best practices. Access knowledge bases,
+    analyze costs, and generate images seamlessly. Enhance your projects with
+    tailored guidance and tools for AWS services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

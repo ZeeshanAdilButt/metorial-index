@@ -1,0 +1,17 @@
+identifier: hexing19/bilibii-mcp-server/bilibii-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/HEXING19/bilibii-mcp-server
+  name: bilibii-mcp-server
+  owner: HEXING19
+server:
+  subdirectory: /
+  name: Bilibili Follower Count Query Service
+  description: Query the follower count of Bilibili users by providing their user
+    ID. Integrate seamlessly with large language models like Claude and GPT
+    using the MCP protocol. Get reliable and efficient follower data with error
+    handling and detailed logging.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

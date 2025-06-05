@@ -1,0 +1,18 @@
+identifier: eax/testai-mcp-server/testai-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/eax/testai-mcp-server
+  name: testai-mcp-server
+  owner: eax
+server:
+  subdirectory: /
+  name: Gherkin File Generator Server
+  description: Generate Gherkin feature files programmatically through a
+    standardized interface. Easily integrate with other applications to create
+    and save Gherkin syntax based on user-defined data. Streamline the creation
+    of behavior-driven development (BDD) specifications with automated file
+    generation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

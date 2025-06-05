@@ -1,0 +1,18 @@
+identifier: hirosuke0520/line-mcp-demo/line-mcp-demo
+repo:
+  provider: github.com
+  url: https://github.com/hirosuke0520/line-mcp-demo
+  name: line-mcp-demo
+  owner: hirosuke0520
+server:
+  subdirectory: /
+  name: LINE Bot Integration Server
+  description: Enable AI agents to interact seamlessly with LINE Official Accounts
+    by sending text and rich flex messages, and retrieving user profiles.
+    Facilitate real-time communication and user engagement through the LINE
+    Messaging API. Simplify connecting AI-driven workflows with LINE users for
+    enhanced conversational experiences.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

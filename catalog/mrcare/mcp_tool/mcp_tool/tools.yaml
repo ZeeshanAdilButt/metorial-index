@@ -1,0 +1,127 @@
+tools:
+  - name: get_weather
+    description: "
+
+      \    Get weather information for a specified city
+
+      \   \ 
+
+      \    Args:
+
+      \        city: City name (supports Chinese or English, e.g., Suzhou,
+      suzhou)
+
+      \        units: Temperature unit (metric: Celsius, imperial: Fahrenheit)
+
+      \        lang: Response language (zh_cn: Chinese, en: English)
+
+      \   \ 
+
+      \    Returns:
+
+      \        WeatherData: Object containing weather information
+
+
+      \    获取指定城市的天气信息
+
+      \   \ 
+
+      \    Args:
+
+      \        city: 城市名称（支持中文或英文，如：苏州、suzhou）
+
+      \        units: 温度单位 (metric: 摄氏度, imperial: 华氏度)
+
+      \        lang: 返回语言 (zh_cn: 中文, en: 英文)
+
+      \   \ 
+
+      \    Returns:
+
+      \        WeatherData: 包含天气信息的对象
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_weatherArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City
+        lang:
+          type: string
+          title: Lang
+          default: zh_cn
+        units:
+          type: string
+          title: Units
+          default: metric
+  - name: get_weather_forecast
+    description: "
+
+      \    Get weather forecast information for a specified city
+
+      \   \ 
+
+      \    Args:
+
+      \        city: City name (supports Chinese or English, e.g., Suzhou,
+      suzhou)
+
+      \        days: Number of forecast days (up to 5 days)
+
+      \        units: Temperature unit (metric: Celsius, imperial: Fahrenheit)
+
+      \        lang: Response language (zh_cn: Chinese, en: English)
+
+      \   \ 
+
+      \    Returns:
+
+      \        dict: Dictionary containing weather forecast information
+
+
+      \    获取指定城市的天气预报信息
+
+      \   \ 
+
+      \    Args:
+
+      \        city: 城市名称（支持中文或英文，如：苏州、suzhou）
+
+      \        days: 预报天数（最多5天）
+
+      \        units: 温度单位 (metric: 摄氏度, imperial: 华氏度)
+
+      \        lang: 返回语言 (zh_cn: 中文, en: 英文)
+
+      \   \ 
+
+      \    Returns:
+
+      \        dict: 包含天气预报信息的字典
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_weather_forecastArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City
+        days:
+          type: integer
+          title: Days
+          default: 5
+        lang:
+          type: string
+          title: Lang
+          default: zh_cn
+        units:
+          type: string
+          title: Units
+          default: metric

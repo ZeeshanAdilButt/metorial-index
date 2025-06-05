@@ -1,0 +1,377 @@
+tools:
+  - name: get_session_info
+    description: Get detailed information about the current Ableton session
+    inputSchema:
+      type: object
+      title: get_session_infoArguments
+      properties: {}
+  - name: get_track_info
+    description: "
+
+      \    Get detailed information about a specific track in Ableton.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to get information about
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_track_infoArguments
+      required:
+        - track_index
+      properties:
+        track_index:
+          type: integer
+          title: Track Index
+  - name: create_midi_track
+    description: "
+
+      \    Create a new MIDI track in the Ableton session.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - index: The index to insert the track at (-1 = end of list)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_midi_trackArguments
+      properties:
+        index:
+          type: integer
+          title: Index
+          default: -1
+  - name: set_track_name
+    description: "
+
+      \    Set the name of a track.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to rename
+
+      \    - name: The new name for the track
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_track_nameArguments
+      required:
+        - track_index
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        track_index:
+          type: integer
+          title: Track Index
+  - name: create_clip
+    description: "
+
+      \    Create a new MIDI clip in the specified track and clip slot.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to create the clip in
+
+      \    - clip_index: The index of the clip slot to create the clip in
+
+      \    - length: The length of the clip in beats (default: 4.0)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_clipArguments
+      required:
+        - track_index
+        - clip_index
+      properties:
+        length:
+          type: number
+          title: Length
+          default: 4
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: add_notes_to_clip
+    description: "
+
+      \    Add MIDI notes to a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    - notes: List of note dictionaries, each with pitch, start_time,
+      duration, velocity, and mute
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_notes_to_clipArguments
+      required:
+        - track_index
+        - clip_index
+        - notes
+      properties:
+        notes:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              anyOf:
+                - type: integer
+                - type: number
+                - type: boolean
+          title: Notes
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: set_clip_name
+    description: "
+
+      \    Set the name of a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    - name: The new name for the clip
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_clip_nameArguments
+      required:
+        - track_index
+        - clip_index
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: set_tempo
+    description: "
+
+      \    Set the tempo of the Ableton session.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - tempo: The new tempo in BPM
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_tempoArguments
+      required:
+        - tempo
+      properties:
+        tempo:
+          type: number
+          title: Tempo
+  - name: load_instrument_or_effect
+    description: "
+
+      \    Load an instrument or effect onto a track using its URI.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to load the instrument on
+
+      \    - uri: The URI of the instrument or effect to load (e.g.,
+      'query:Synths#Instrument%20Rack:Bass:FileId_5116')
+
+      \    "
+    inputSchema:
+      type: object
+      title: load_instrument_or_effectArguments
+      required:
+        - track_index
+        - uri
+      properties:
+        uri:
+          type: string
+          title: Uri
+        track_index:
+          type: integer
+          title: Track Index
+  - name: fire_clip
+    description: "
+
+      \    Start playing a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    "
+    inputSchema:
+      type: object
+      title: fire_clipArguments
+      required:
+        - track_index
+        - clip_index
+      properties:
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: stop_clip
+    description: "
+
+      \    Stop playing a clip.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track containing the clip
+
+      \    - clip_index: The index of the clip slot containing the clip
+
+      \    "
+    inputSchema:
+      type: object
+      title: stop_clipArguments
+      required:
+        - track_index
+        - clip_index
+      properties:
+        clip_index:
+          type: integer
+          title: Clip Index
+        track_index:
+          type: integer
+          title: Track Index
+  - name: start_playback
+    description: Start playing the Ableton session.
+    inputSchema:
+      type: object
+      title: start_playbackArguments
+      properties: {}
+  - name: stop_playback
+    description: Stop playing the Ableton session.
+    inputSchema:
+      type: object
+      title: stop_playbackArguments
+      properties: {}
+  - name: get_browser_tree
+    description: "
+
+      \    Get a hierarchical tree of browser categories from Ableton.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - category_type: Type of categories to get ('all', 'instruments',
+      'sounds', 'drums', 'audio_effects', 'midi_effects')
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_browser_treeArguments
+      properties:
+        category_type:
+          type: string
+          title: Category Type
+          default: all
+  - name: get_browser_items_at_path
+    description: "
+
+      \    Get browser items at a specific path in Ableton's browser.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - path: Path in the format \"category/folder/subfolder\"
+
+      \            where category is one of the available browser categories in
+      Ableton
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_browser_items_at_pathArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+  - name: load_drum_kit
+    description: "
+
+      \    Load a drum rack and then load a specific drum kit into it.
+
+      \   \ 
+
+      \    Parameters:
+
+      \    - track_index: The index of the track to load on
+
+      \    - rack_uri: The URI of the drum rack to load (e.g., 'Drums/Drum
+      Rack')
+
+      \    - kit_path: Path to the drum kit inside the browser (e.g.,
+      'drums/acoustic/kit1')
+
+      \    "
+    inputSchema:
+      type: object
+      title: load_drum_kitArguments
+      required:
+        - track_index
+        - rack_uri
+        - kit_path
+      properties:
+        kit_path:
+          type: string
+          title: Kit Path
+        rack_uri:
+          type: string
+          title: Rack Uri
+        track_index:
+          type: integer
+          title: Track Index

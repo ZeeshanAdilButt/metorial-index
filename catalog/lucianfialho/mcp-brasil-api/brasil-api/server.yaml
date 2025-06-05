@@ -1,0 +1,18 @@
+identifier: lucianfialho/mcp-brasil-api/brasil-api
+repo:
+  provider: github.com
+  url: https://github.com/lucianfialho/mcp-brasil-api
+  name: mcp-brasil-api
+  owner: lucianfialho
+server:
+  subdirectory: /
+  name: Brasil API MCP Server
+  description: Provide standardized access to Brazilian public data through a
+    Model Context Protocol server. Query detailed address information by postal
+    code (CEP) or company data by CNPJ seamlessly from LLMs and AI assistants.
+    Enable easy integration of local Brazilian data into AI workflows with a
+    secure and scalable interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

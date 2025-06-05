@@ -1,0 +1,17 @@
+identifier: imprvhub/mcp-status-observer/mcp-status-observer
+repo:
+  provider: github.com
+  url: https://github.com/imprvhub/mcp-status-observer
+  name: mcp-status-observer
+  owner: imprvhub
+server:
+  subdirectory: /
+  name: Status Observer
+  description: Monitor and query the operational status of major digital platforms
+    in real-time. Get detailed status information for specific services and
+    components with a simple query interface. Stay informed about platform
+    health to quickly respond to service disruptions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+identifier: eka-care/eka_mcp_server/eka_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/eka-care/eka_mcp_server
+  name: eka_mcp_server
+  owner: eka-care
+server:
+  subdirectory: /
+  name: Eka Care Medical Knowledge Server
+  description: Provide healthcare professionals with accurate, curated medical
+    knowledge and drug information specific to the Indian healthcare context.
+    Enhance AI responses by grounding them in verified medical data and
+    treatment protocols from authoritative Indian institutions. Enable seamless
+    access to extensive branded drug databases and treatment guidelines to
+    reduce misinformation and improve clinical decision-making.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+identifier: llm-graph/postgres-mcp/postgres-mcp
+repo:
+  provider: github.com
+  url: https://github.com/llm-graph/postgres-mcp
+  name: postgres-mcp
+  owner: llm-graph
+server:
+  subdirectory: /
+  name: FastPostgresMCP
+  description: Enable AI agents to interact seamlessly with multiple PostgreSQL
+    databases through a blazing fast, type-safe MCP server. Perform secure read
+    and write operations, inspect database schemas, and manage transactions with
+    detailed logging and progress reporting. Enhance your AI workflows with
+    multi-database support and optional API key authentication for secure
+    network connections.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

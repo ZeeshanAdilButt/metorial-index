@@ -1,0 +1,232 @@
+tools:
+  - name: get_product_by_barcode
+    description: "
+
+      \    Get detailed information about a food product by barcode.
+
+      \   \ 
+
+      \    Args:
+
+      \        barcode: The product barcode (EAN, UPC, etc.)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_product_by_barcodeArguments
+      required:
+        - barcode
+      properties:
+        barcode:
+          type: string
+          title: Barcode
+  - name: search_products
+    description: "
+
+      \    Search for food products by name or description.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: The search query
+
+      \        page: Page number for pagination (default: 1)
+
+      \        page_size: Number of results per page (default: 10)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_productsArguments
+      required:
+        - query
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        query:
+          type: string
+          title: Query
+        page_size:
+          type: integer
+          title: Page Size
+          default: 10
+  - name: manage_user_restrictions
+    description: "
+
+      \    Manage a user's dietary restrictions.
+
+      \   \ 
+
+      \    Args:
+
+      \        user_id: The user's unique identifier
+
+      \        action: The action to perform (get, add, remove, update)
+
+      \        restriction_type: Type of restriction (allergen, diet,
+      ingredient, medical, preference)
+
+      \        restriction_value: The specific restriction value (e.g.,
+      \"peanuts\", \"vegetarian\")
+
+      \        severity: How severe the restriction is (avoid, limit, fatal)
+
+      \        notes: Additional notes about the restriction
+
+      \    "
+    inputSchema:
+      type: object
+      title: manage_user_restrictionsArguments
+      required:
+        - user_id
+        - action
+      properties:
+        notes:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Notes
+          default: null
+        action:
+          type: string
+          title: Action
+        user_id:
+          type: string
+          title: User Id
+        severity:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Severity
+          default: null
+        restriction_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Restriction Type
+          default: null
+        restriction_value:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Restriction Value
+          default: null
+  - name: check_product_compatibility
+    description: "
+
+      \    Check if a product is compatible with a user's dietary restrictions.
+
+      \   \ 
+
+      \    Args:
+
+      \        user_id: The user's unique identifier
+
+      \        barcode: The product barcode to check
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_product_compatibilityArguments
+      required:
+        - user_id
+        - barcode
+      properties:
+        barcode:
+          type: string
+          title: Barcode
+        user_id:
+          type: string
+          title: User Id
+  - name: analyze_nutrition
+    description: "
+
+      \    Analyze the nutritional content of a food product.
+
+      \   \ 
+
+      \    Args:
+
+      \        barcode: The product barcode
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_nutritionArguments
+      required:
+        - barcode
+      properties:
+        barcode:
+          type: string
+          title: Barcode
+  - name: log_food_consumption
+    description: "
+
+      \    Log food consumption for a user.
+
+      \   \ 
+
+      \    Args:
+
+      \        user_id: The user's unique identifier
+
+      \        barcode: The product barcode
+
+      \        quantity: Amount consumed (default: 1 serving)
+
+      \        meal_type: Type of meal (breakfast, lunch, dinner, snack)
+
+      \    "
+    inputSchema:
+      type: object
+      title: log_food_consumptionArguments
+      required:
+        - user_id
+        - barcode
+      properties:
+        barcode:
+          type: string
+          title: Barcode
+        user_id:
+          type: string
+          title: User Id
+        quantity:
+          type: number
+          title: Quantity
+          default: 1
+        meal_type:
+          type: string
+          title: Meal Type
+          default: snack
+  - name: get_user_food_log
+    description: "
+
+      \    Get a user's food log for a specific date.
+
+      \   \ 
+
+      \    Args:
+
+      \        user_id: The user's unique identifier
+
+      \        date: Date in YYYY-MM-DD format (defaults to today)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_user_food_logArguments
+      required:
+        - user_id
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+        user_id:
+          type: string
+          title: User Id

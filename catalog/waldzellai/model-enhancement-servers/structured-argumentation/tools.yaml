@@ -1,0 +1,134 @@
+tools:
+  - name: structuredArgumentation
+    description: >-
+      A detailed tool for systematic dialectical reasoning and argument
+      analysis.
+
+      This tool helps analyze complex questions through formal argumentation
+      structures.
+
+      It facilitates the creation, critique, and synthesis of competing
+      arguments.
+
+
+      When to use this tool:
+
+      - Evaluating competing perspectives and claims
+
+      - Analyzing complex ethical dilemmas
+
+      - Assessing policy proposals with multiple stakeholders
+
+      - Exploring scientific hypotheses and counter-arguments
+
+
+      Key features:
+
+      - Break down arguments into claims, premises, and conclusions
+
+      - Track relationships between arguments
+
+      - Represent objections and rebuttals
+
+      - Facilitate dialectical progression through thesis-antithesis-synthesis
+
+      - Evaluate argument strengths and weaknesses
+
+      - Visualize argument structures
+
+
+      Parameters explained:
+
+      - claim: The central proposition being argued
+
+      - premises: Supporting evidence or assumptions
+
+      - conclusion: The logical consequence of accepting the claim
+
+      - argumentType: Whether this is a thesis, antithesis, synthesis,
+      objection, or rebuttal
+
+      - confidence: Your confidence level in this argument (0.0-1.0)
+
+      - respondsTo: ID of an argument this directly responds to
+
+      - supports/contradicts: IDs of arguments this supports or contradicts
+
+      - strengths/weaknesses: Notable strong or weak points of the argument
+
+      - nextArgumentNeeded: Whether another argument is needed in the dialectic
+    inputSchema:
+      type: object
+      required:
+        - claim
+        - premises
+        - conclusion
+        - argumentType
+        - confidence
+        - nextArgumentNeeded
+      properties:
+        claim:
+          type: string
+          description: The central proposition being argued
+        premises:
+          type: array
+          items:
+            type: string
+          description: Supporting evidence or assumptions
+        supports:
+          type: array
+          items:
+            type: string
+          description: IDs of arguments this supports
+        strengths:
+          type: array
+          items:
+            type: string
+          description: Notable strong points of the argument
+        argumentId:
+          type: string
+          description: Optional unique identifier for this argument
+        conclusion:
+          type: string
+          description: The logical consequence of accepting the claim
+        confidence:
+          type: number
+          maximum: 1
+          minimum: 0
+          description: Confidence level in this argument (0.0-1.0)
+        respondsTo:
+          type: string
+          description: ID of the argument this directly responds to
+        weaknesses:
+          type: array
+          items:
+            type: string
+          description: Notable weak points of the argument
+        contradicts:
+          type: array
+          items:
+            type: string
+          description: IDs of arguments this contradicts
+        argumentType:
+          enum:
+            - thesis
+            - antithesis
+            - synthesis
+            - objection
+            - rebuttal
+          type: string
+          description: The type of argument being presented
+        nextArgumentNeeded:
+          type: boolean
+          description: Whether another argument is needed in the dialectic
+        suggestedNextTypes:
+          type: array
+          items:
+            enum:
+              - thesis
+              - antithesis
+              - synthesis
+              - objection
+              - rebuttal
+            type: string
+          description: Suggested types for the next argument

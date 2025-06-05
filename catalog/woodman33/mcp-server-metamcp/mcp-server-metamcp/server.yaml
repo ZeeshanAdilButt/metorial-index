@@ -1,0 +1,19 @@
+identifier: woodman33/mcp-server-metamcp/mcp-server-metamcp
+repo:
+  provider: github.com
+  url: https://github.com/woodman33/mcp-server-metamcp
+  name: mcp-server-metamcp
+  owner: woodman33
+server:
+  subdirectory: /.metamcp
+  name: MetaMCP Server
+  description: Unify multiple MCP servers into a single proxy server that
+    dynamically fetches and routes tool, prompt, and resource requests.
+    Seamlessly manage and switch between multiple MCP configurations with
+    GUI-driven updates and namespace isolation. Enhance your MCP client
+    experience by aggregating capabilities from various MCP servers into one
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

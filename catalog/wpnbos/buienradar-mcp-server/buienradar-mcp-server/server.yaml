@@ -1,0 +1,14 @@
+identifier: wpnbos/buienradar-mcp-server/buienradar-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/wpnbos/buienradar-mcp-server
+  name: buienradar-mcp-server
+  owner: wpnbos
+server:
+  subdirectory: /
+  name: Buienradar Server
+  description: Fetch precipitation forecasts for specific locations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

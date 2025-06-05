@@ -1,0 +1,17 @@
+identifier: ricocf/mcp-wolframalpha/mcp-wolframalpha
+repo:
+  provider: github.com
+  url: https://github.com/ricocf/mcp-wolframalpha
+  name: mcp-wolframalpha
+  owner: ricocf
+server:
+  subdirectory: /
+  name: Wolfram Alpha Integration Server
+  description: Enable chat applications to perform computational queries and
+    retrieve structured knowledge by integrating Wolfram Alpha. Enhance
+    conversational capabilities with LLM-based explanations using Gemini. Easily
+    extend and support multiple clients with a modular architecture.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

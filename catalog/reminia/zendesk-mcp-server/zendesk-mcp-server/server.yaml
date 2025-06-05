@@ -1,0 +1,15 @@
+identifier: reminia/zendesk-mcp-server/zendesk-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/reminia/zendesk-mcp-server
+  name: zendesk-mcp-server
+  owner: reminia
+server:
+  subdirectory: /
+  name: Zendesk MCP Server
+  description: A Model Context Protocol server for Zendesk, providing integration
+    with Zendesk tickets and comments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,55 @@
+tools:
+  - name: python-code-runner
+    description: >-
+      Execute a Python snippet using pyodide and return the combined
+      stdout/stderr(To see the results, make sure to write to stdout/stderr ). 
+
+      Send only valid Python code compatible with pyodide runtime.
+
+      # Packages
+
+      You can directly import pure Python packages with wheels 
+
+      as well as packages from PyPI, the JsDelivr CDN or from other URLs.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Python source code to execute
+      additionalProperties: false
+  - name: javascript-code-runner
+    description: >
+      Execute a JavaScript/TypeScript snippet using Deno runtime and return the
+      combined stdout/stderr(To see the results, make sure to write to
+      stdout/stderr ). 
+
+      Send only valid JavaScript/TypeScript code compatible with Deno runtime
+      (prefer ESM syntax).
+
+      ** Runs on server-side, not browser. **
+
+      # Packages Support
+
+      1. For npm packages (ESM preferred):
+          import { get } from "npm:lodash-es"
+          import { z } from "npm:zod"
+      2. For Deno packages from JSR:
+          import { serve } from "jsr:@std/http"
+          import { join } from "jsr:@std/path"
+      3. Support NodeJS built-in modules:
+          import fs from "node:fs"
+          import path from "node:path"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: JavaScript/TypeScript source code to execute
+      additionalProperties: false

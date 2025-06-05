@@ -1,0 +1,17 @@
+identifier: signal-slot/mcp-gdb/mcp-gdb
+repo:
+  provider: github.com
+  url: https://github.com/signal-slot/mcp-gdb
+  name: mcp-gdb
+  owner: signal-slot
+server:
+  subdirectory: /
+  name: GDB Debugging Server
+  description: Start and manage GDB debugging sessions seamlessly with your AI
+    assistant. Load programs, set breakpoints, and execute commands to analyze
+    and debug your code effectively. Enhance your debugging experience with
+    real-time insights and control over your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

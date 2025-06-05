@@ -1,0 +1,721 @@
+tools:
+  - name: list_simulations
+    description: |-
+      Returns a comprehensive list of all traffic simulations in the system, 
+      including their IDs, names, status, and execution timeframes.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: list_simulationsArguments
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+  - name: start_simulation
+    description: >-
+      Launches a new traffic simulation using the provided simulation dataset
+      configuration, 
+
+      returning the simulation ID and initial status.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: start_simulationArguments
+      required:
+        - simdata_id
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        simdata_id:
+          type: string
+          title: Simdata Id
+  - name: get_simulation_result
+    description: >-
+      Retrieves the complete results and output files from a finished traffic
+      simulation, 
+
+      including simulation status and generated result files.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: get_simulation_resultArguments
+      required:
+        - simulation_id
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        simulation_id:
+          type: string
+          title: Simulation Id
+  - name: get_metrics
+    description: >-
+      Retrieves comprehensive metrics and analytics data from a completed
+      simulation, including 
+
+      travel statistics, emissions data, and traffic flow information.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: get_metricsArguments
+      required:
+        - simulation_id
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        simulation_id:
+          type: string
+          title: Simulation Id
+  - name: list_simdata
+    description: >-
+      Returns a complete list of all simulation datasets available in the
+      system, 
+
+      which can be used as inputs for running new simulations.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: list_simdataArguments
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+  - name: get_simdata
+    description: >-
+      Retrieves the complete configuration and parameter set for a specific
+      simulation dataset, 
+
+      including region settings, time ranges, and scenario parameters.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: get_simdataArguments
+      required:
+        - simdata_id
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        simdata_id:
+          type: string
+          title: Simdata Id
+  - name: analyze_traffic_simulation
+    description: >-
+      Conducts comprehensive analysis on simulation results, providing insights
+      on traffic patterns, 
+
+      bottlenecks, and optimization opportunities for the specified parameters.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: analyze_traffic_simulationArguments
+      required:
+        - simulation_id
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        region:
+          type: string
+          title: Region
+          default: unknown
+        scenario:
+          type: string
+          title: Scenario
+          default: unknown
+        time_range:
+          type: string
+          title: Time Range
+          default: unknown
+        simulation_id:
+          type: string
+          title: Simulation Id
+  - name: compare_scenarios
+    description: >-
+      Performs detailed comparative analysis between two simulation scenarios,
+      highlighting differences 
+
+      in traffic flow, emissions, travel times, and other key metrics.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: compare_scenariosArguments
+      required:
+        - simulation_id1
+        - simulation_id2
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        scenario1_name:
+          type: string
+          title: Scenario1 Name
+          default: Scenario 1
+        scenario2_name:
+          type: string
+          title: Scenario2 Name
+          default: Scenario 2
+        simulation_id1:
+          type: string
+          title: Simulation Id1
+        simulation_id2:
+          type: string
+          title: Simulation Id2
+  - name: create_natural_language_simulation_config
+    description: >-
+      Converts a natural language description into a structured simulation
+      configuration, 
+
+      interpreting user requirements into technical parameters for traffic
+      simulation.
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: create_natural_language_simulation_configArguments
+      required:
+        - description
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        description:
+          type: string
+          title: Description
+  - name: create_simulation_from_usecase
+    description: 指定されたユースケースとアップロードされたファイルからシミュレーションを作成・実行します。
+    inputSchema:
+      type: object
+      $defs:
+        Context:
+          type: object
+          title: Context
+          properties: {}
+          description: >-
+            Context object providing access to MCP capabilities.
+
+
+            This provides a cleaner interface to MCP's RequestContext
+            functionality.
+
+            It gets injected into tool and resource functions that request it
+            via type hints.
+
+
+            To use context in a tool function, add a parameter with the Context
+            type annotation:
+
+
+            ```python
+
+            @server.tool()
+
+            def my_tool(x: int, ctx: Context) -> str:
+                # Log messages to the client
+                ctx.info(f"Processing {x}")
+                ctx.debug("Debug info")
+                ctx.warning("Warning message")
+                ctx.error("Error message")
+
+                # Report progress
+                ctx.report_progress(50, 100)
+
+                # Access resources
+                data = ctx.read_resource("resource://data")
+
+                # Get request info
+                request_id = ctx.request_id
+                client_id = ctx.client_id
+
+                return str(x)
+            ```
+
+
+            The context parameter name can be anything as long as it's annotated
+            with Context.
+
+            The context is optional - tools that don't need it can omit the
+            parameter.
+      title: create_simulation_from_usecaseArguments
+      required:
+        - usecase
+        - uploaded_files
+        - simulation_params
+      properties:
+        ctx:
+          anyOf:
+            - $ref: "#/$defs/Context"
+            - type: "null"
+          default: null
+        usecase:
+          type: string
+          title: Usecase
+        uploaded_files:
+          type: object
+          title: Uploaded Files
+          additionalProperties:
+            type: string
+        simulation_params:
+          type: object
+          title: Simulation Params
+          additionalProperties: true

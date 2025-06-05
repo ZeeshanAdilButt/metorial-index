@@ -1,0 +1,35 @@
+tools:
+  - name: get_recent_transactions
+    description: Fetch recent whale transactions, optionally filtered by blockchain
+      and minimum value (USD).
+    inputSchema:
+      type: object
+      title: get_recent_transactionsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        min_value:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Min Value
+          default: 500000
+        blockchain:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Blockchain
+          default: null
+  - name: get_transaction_details
+    description: Fetch details of a specific whale transaction by its ID.
+    inputSchema:
+      type: object
+      title: get_transaction_detailsArguments
+      required:
+        - transaction_id
+      properties:
+        transaction_id:
+          type: string
+          title: Transaction Id

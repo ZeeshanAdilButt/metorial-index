@@ -1,0 +1,281 @@
+tools:
+  - name: rest_to_postman_env
+    description: >
+      Creates or updates a Postman environment with the provided environment
+      variables. This tool helps synchronize your REST application's environment
+      configuration with Postman. It supports both creating new environments and
+      updating existing ones in your Postman workspace. Environment variables
+      related to sensitive data (containing 'token' in their names) are
+      automatically marked as secrets. Here's an example: 
+
+
+
+      {
+          "envName": "REST Environment",
+          "envVars": {
+              "API_URL": "https://api.example.com",
+              "API_TOKEN": "secret-token-1"
+          }
+      }
+    inputSchema:
+      type: object
+      required:
+        - envName
+        - envVars
+      properties:
+        envName:
+          type: string
+          description: The name of the Postman environment to create or update
+        envVars:
+          type: object
+          description: "A record of environment variables to be added to the Postman
+            environment. Format: { [key: string]: string }"
+          additionalProperties:
+            type: string
+  - name: rest_to_postman_collection
+    description: >
+      Creates or updates a Postman collection with the provided collection
+      configuration. This tool helps synchronize your REST API endpoints with
+      Postman. When updating an existing collection, it intelligently merges the
+      new endpoints with existing ones, avoiding duplicates while preserving
+      custom modifications made in Postman. Here's an example: 
+
+
+
+      {
+          "info": {
+              "name": "REST Collection",
+              "description": "REST Collection", 
+              "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "auth": {
+              "type": "bearer",
+              "bearer": [
+                  {   
+                      "key": "Authorization",
+                      "value": "Bearer {{API_TOKEN}}",
+                      "type": "string"
+                  }
+              ]
+          },  
+          "item": [
+              {
+                  "name": "Get Users",
+                  "request": {
+                      "method": "GET",    
+                      "url": {
+                          "raw": "{{API_URL}}/users",
+                          "protocol": "https",
+                          "host": ["api", "example", "com"],
+                          "path": ["users"]
+                      }   
+                  }
+              },
+              {
+                  "name": "Create User",
+                  "request": {
+                      "method": "POST",
+                      "url": {
+                          "raw": "{{API_URL}}/users"
+                      },
+                      "body": {
+                          "mode": "raw",
+                          "raw": "{"name":"John Doe","email":"john.doe@example.com"}"
+                      }
+                  }   
+              }
+          ]
+      }
+    inputSchema:
+      type: object
+      required:
+        - collectionRequest
+      properties:
+        collectionRequest:
+          type: object
+          required:
+            - info
+            - item
+          properties:
+            auth:
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  description: Type of authentication (e.g., 'bearer')
+                bearer:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - key
+                      - value
+                      - type
+                    properties:
+                      key:
+                        type: string
+                        description: Key for the bearer token
+                      type:
+                        type: string
+                        description: Type of the bearer token
+                      value:
+                        type: string
+                        description: Value of the bearer token
+              description: Authentication settings for the collection
+            info:
+              type: object
+              required:
+                - name
+                - description
+                - schema
+              properties:
+                name:
+                  type: string
+                  description: Name of the collection
+                schema:
+                  type: string
+                  description: Schema version of the collection
+                description:
+                  type: string
+                  description: Description of the collection
+              description: Collection information including name and schema
+            item:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - request
+                properties:
+                  name:
+                    type: string
+                    description: Name of the request
+                  event:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - listen
+                        - script
+                      properties:
+                        listen:
+                          type: string
+                          description: Event type to listen for
+                        script:
+                          type: object
+                          required:
+                            - type
+                            - exec
+                          properties:
+                            exec:
+                              type: array
+                              items:
+                                type: string
+                              description: Array of script lines to execute
+                            type:
+                              type: string
+                              description: Type of script
+                  request:
+                    type: object
+                    required:
+                      - method
+                      - url
+                    properties:
+                      url:
+                        type: object
+                        required:
+                          - raw
+                          - protocol
+                          - host
+                          - path
+                        properties:
+                          raw:
+                            type: string
+                            description: Raw URL string
+                          host:
+                            type: array
+                            items:
+                              type: string
+                            description: Host segments
+                          path:
+                            type: array
+                            items:
+                              type: string
+                            description: URL path segments
+                          query:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - key
+                                - value
+                              properties:
+                                key:
+                                  type: string
+                                  description: Query parameter key
+                                value:
+                                  type: string
+                                  description: Query parameter value
+                          protocol:
+                            type: string
+                            description: URL protocol (e.g., 'http', 'https')
+                      auth:
+                        type: object
+                        required:
+                          - type
+                        properties:
+                          type:
+                            type: string
+                            description: Type of authentication
+                          bearer:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - key
+                                - value
+                                - type
+                              properties:
+                                key:
+                                  type: string
+                                type:
+                                  type: string
+                                value:
+                                  type: string
+                      method:
+                        type: string
+                        description: HTTP method of the request
+                      description:
+                        type: string
+                        description: Description of the request
+              description: Array of request items in the collection
+            event:
+              type: array
+              items:
+                type: object
+                required:
+                  - listen
+                  - script
+                properties:
+                  listen:
+                    type: string
+                    description: Event type to listen for
+                  script:
+                    type: object
+                    required:
+                      - type
+                      - exec
+                    properties:
+                      exec:
+                        type: array
+                        items:
+                          type: string
+                        description: Array of script lines to execute
+                      type:
+                        type: string
+                        description: Type of script
+              description: Collection-level event scripts
+          description: The Postman collection configuration containing info, items, and
+            other collection details

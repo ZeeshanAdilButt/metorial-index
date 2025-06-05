@@ -1,0 +1,94 @@
+tools:
+  - name: create_liquidium_annotation
+    description: "Create a Liquidium annotation.
+
+      \   \ 
+
+      \    Args:
+
+      \        project_id: The ID of the project as an integer (e.g. 99423)
+
+      \        content: The content/text of the annotation
+
+      \        date_marker: Optional ISO-8601 timestamp for the annotation (e.g.
+      2024-03-20T14:15:22Z)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_liquidium_annotationArguments
+      required:
+        - project_id
+        - content
+      properties:
+        content:
+          type: string
+          title: Content
+        project_id:
+          type: integer
+          title: Project Id
+        date_marker:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Marker
+          default: null
+  - name: list_insights
+    description: "List all available Liquidium insights for the default project.
+
+      \   \ 
+
+      \    Args:
+
+      \        search: Optional search query to filter insights
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_insightsArguments
+      properties:
+        search:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search
+          default: null
+  - name: search_insights
+    description: "Search for Liquidium insights by name in the default project.
+
+      \   \ 
+
+      \    Args:
+
+      \        search: The search query to filter insights by name
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_insightsArguments
+      required:
+        - search
+      properties:
+        search:
+          type: string
+          title: Search
+  - name: insight_details
+    description: "Get details for a specific Liquidium insight from the default
+      project.
+
+      \   \ 
+
+      \    Args:
+
+      \        insight_id: The ID of the insight as an integer (e.g. 12345)
+
+      \    "
+    inputSchema:
+      type: object
+      title: insight_detailsArguments
+      required:
+        - insight_id
+      properties:
+        insight_id:
+          type: integer
+          title: Insight Id

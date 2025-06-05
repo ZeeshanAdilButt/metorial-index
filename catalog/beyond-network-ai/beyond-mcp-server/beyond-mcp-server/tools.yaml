@@ -1,0 +1,81 @@
+tools:
+  - name: search-content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - platform
+        - query
+      properties:
+        limit:
+          type: number
+          description: Maximum number of results to return
+        query:
+          type: string
+          description: Search query
+        platform:
+          type: string
+          description: Social platform (farcaster, twitter, telegram)
+      additionalProperties: false
+  - name: get-user-profile
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - platform
+        - userId
+      properties:
+        userId:
+          type: string
+          description: User ID or username on the platform
+        platform:
+          type: string
+          description: Social platform (farcaster, twitter, telegram)
+      additionalProperties: false
+  - name: get-user-content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - platform
+        - userId
+      properties:
+        limit:
+          type: number
+          description: Maximum number of posts to return
+        userId:
+          type: string
+          description: User ID or username on the platform
+        platform:
+          type: string
+          description: Social platform (farcaster, twitter, telegram)
+      additionalProperties: false
+  - name: get-thread
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - platform
+        - threadId
+      properties:
+        platform:
+          type: string
+          description: Social platform (farcaster, twitter, telegram)
+        threadId:
+          type: string
+          description: Thread or conversation ID
+      additionalProperties: false
+  - name: get-trending-topics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - platform
+      properties:
+        limit:
+          type: number
+          description: Maximum number of trending topics to return
+        platform:
+          type: string
+          description: Social platform (farcaster, twitter, telegram)
+      additionalProperties: false

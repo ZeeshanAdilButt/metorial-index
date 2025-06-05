@@ -1,0 +1,18 @@
+identifier: yeonupark/mcp-soccer-data/mcp-soccer-data
+repo:
+  provider: github.com
+  url: https://github.com/yeonupark/mcp-soccer-data
+  name: mcp-soccer-data
+  owner: yeonupark
+server:
+  subdirectory: /
+  name: Soccerdata MCP Server
+  description: Provide real-time football match information through natural
+    language queries. Retrieve live scores, match events, team lineups, betting
+    odds, and league metadata for ongoing, upcoming, and recently finished
+    matches worldwide. Enhance your MCP-enabled client with up-to-date soccer
+    data powered by the SoccerDataAPI.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

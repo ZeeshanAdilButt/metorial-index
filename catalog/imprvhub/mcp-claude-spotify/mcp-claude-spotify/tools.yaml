@@ -1,0 +1,140 @@
+tools:
+  - name: auth-spotify
+    description: Authenticate with Spotify
+    inputSchema:
+      type: object
+      properties: {}
+  - name: search-spotify
+    description: Search for tracks, albums, artists, or playlists on Spotify
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        type:
+          enum:
+            - track
+            - album
+            - artist
+            - playlist
+          type: string
+          description: "Type of item to search for (default: track)"
+        limit:
+          type: number
+          description: "Maximum number of results to return (1-50, default: 10)"
+        query:
+          type: string
+          description: Search query
+  - name: get-current-playback
+    description: Get information about the user's current playback state
+    inputSchema:
+      type: object
+      properties: {}
+  - name: play-track
+    description: Play a specific track on an active device
+    inputSchema:
+      type: object
+      required:
+        - trackId
+      properties:
+        trackId:
+          type: string
+          description: Spotify ID of the track to play
+        deviceId:
+          type: string
+          description: Spotify ID of the device to play on (optional)
+  - name: pause-playback
+    description: Pause the user's playback
+    inputSchema:
+      type: object
+      properties: {}
+  - name: next-track
+    description: Skip to the next track
+    inputSchema:
+      type: object
+      properties: {}
+  - name: previous-track
+    description: Skip to the previous track
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get-user-playlists
+    description: Get a list of the user's playlists
+    inputSchema:
+      type: object
+      properties: {}
+  - name: create-playlist
+    description: Create a new playlist for the current user
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the playlist
+        public:
+          type: boolean
+          description: "Whether the playlist should be public (default: false)"
+        description:
+          type: string
+          description: Description of the playlist (optional)
+  - name: add-tracks-to-playlist
+    description: Add tracks to a playlist
+    inputSchema:
+      type: object
+      required:
+        - playlistId
+        - trackIds
+      properties:
+        trackIds:
+          type: array
+          items:
+            type: string
+          description: Array of Spotify track IDs to add
+        playlistId:
+          type: string
+          description: Spotify ID of the playlist
+  - name: get-recommendations
+    description: Get track recommendations based on seeds
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of tracks to return (1-100, default: 20)"
+        seedGenres:
+          type: array
+          items:
+            type: string
+          description: Array of genre names to use as seeds (optional)
+        seedTracks:
+          type: array
+          items:
+            type: string
+          description: Array of Spotify track IDs to use as seeds (optional)
+        seedArtists:
+          type: array
+          items:
+            type: string
+          description: Array of Spotify artist IDs to use as seeds (optional)
+  - name: get-top-tracks
+    description: Get the user's top played tracks over a specified time range
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: "The number of tracks to return (1-50, default: 20)"
+        offset:
+          type: number
+          description: "The index of the first track to return (default: 0)"
+        time_range:
+          enum:
+            - short_term
+            - medium_term
+            - long_term
+          type: string
+          description: "Over what time frame the affinities are computed. short_term = ~4
+            weeks, medium_term = ~6 months, long_term = several years (default:
+            medium_term)"

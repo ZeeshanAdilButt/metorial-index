@@ -1,0 +1,15 @@
+identifier: datawhisker/x-mcp-server/x-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DataWhisker/x-mcp-server
+  name: x-mcp-server
+  owner: DataWhisker
+server:
+  subdirectory: /
+  name: X Server
+  description: MCP server for integrating with X (Twitter) using Claude desktop.
+    Allows reading and engaging with tweets.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

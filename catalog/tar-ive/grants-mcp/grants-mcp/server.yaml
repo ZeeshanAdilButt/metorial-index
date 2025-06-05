@@ -1,0 +1,17 @@
+identifier: tar-ive/grants-mcp/grants-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Tar-ive/grants-mcp
+  name: grants-mcp
+  owner: Tar-ive
+server:
+  subdirectory: /
+  name: Grants Search Server
+  description: Search for government grants effortlessly using keywords. Retrieve
+    detailed information about available grants, including eligibility and
+    funding details, all in a user-friendly format. Streamline your grant search
+    process with pagination and comprehensive filtering options.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

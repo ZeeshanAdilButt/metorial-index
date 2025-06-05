@@ -1,0 +1,70 @@
+tools:
+  - name: query-actions
+    description: Query actions from the Mina blockchain with optional filters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        to:
+          type: number
+          description: Block height to filter transactions
+        from:
+          type: number
+          description: Block height to filter transactions
+        status:
+          enum:
+            - ALL
+            - PENDING
+            - CANONICAL
+          type: string
+          description: Transaction status to filter
+        address:
+          type: string
+          pattern: ^[1-9A-HJ-NP-Za-km-z]{55,60}$
+        tokenId:
+          type: string
+          description: Token ID to filter transactions
+        endActionState:
+          type: string
+          description: Action state to filter transactions
+        fromActionState:
+          type: string
+          description: Action state to filter transactions
+      additionalProperties: false
+  - name: query-events
+    description: Query events from the Mina blockchain with optional filters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        to:
+          type: number
+          description: Block height to filter transactions
+        from:
+          type: number
+          description: Block height to filter transactions
+        status:
+          enum:
+            - ALL
+            - PENDING
+            - CANONICAL
+          type: string
+          description: Transaction status to filter
+        address:
+          type: string
+          pattern: ^[1-9A-HJ-NP-Za-km-z]{55,60}$
+        tokenId:
+          type: string
+          description: Token ID to filter transactions
+      additionalProperties: false
+  - name: get-network-state
+    description: Get the current state of the Mina network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

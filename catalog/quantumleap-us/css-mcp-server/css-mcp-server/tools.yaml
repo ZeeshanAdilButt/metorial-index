@@ -1,0 +1,32 @@
+tools:
+  - name: read_from_memory
+    description: Reads the user's current CSS knowledge from memory.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: write_to_memory
+    description: Updates the user's CSS knowledge memory for a specific concept.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - concept
+        - known
+      properties:
+        known:
+          type: boolean
+          description: Whether the user knows this concept (true/false)
+        concept:
+          type: string
+          description: The CSS concept name (e.g., 'Flexbox')
+      additionalProperties: false
+  - name: get_latest_updates
+    description: Fetches recent news and updates about CSS features using Perplexity
+      Sonar via OpenRouter.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

@@ -1,0 +1,18 @@
+identifier: liveblocks/liveblocks-mcp-server/liveblocks-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/liveblocks/liveblocks-mcp-server
+  name: liveblocks-mcp-server
+  owner: liveblocks
+server:
+  subdirectory: /
+  name: Liveblocks
+  description: Enable AI agents to interact with Liveblocks by creating,
+    modifying, and deleting rooms, threads, comments, notifications, and more.
+    Provide AI with read access to Liveblocks Storage and Yjs for enhanced
+    collaborative capabilities. Simplify integration of Liveblocks features into
+    AI workflows for real-time collaboration and data management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

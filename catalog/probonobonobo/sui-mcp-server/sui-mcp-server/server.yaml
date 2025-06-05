@@ -1,0 +1,18 @@
+identifier: probonobonobo/sui-mcp-server/sui-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ProbonoBonobo/sui-mcp-server
+  name: sui-mcp-server
+  owner: ProbonoBonobo
+server:
+  subdirectory: /
+  name: MCP RAG Server
+  description: Enable your AI agents to retrieve and generate information using a
+    vector database for enhanced context. Seamlessly integrate with GitHub to
+    extract Move files and leverage LLMs for intelligent responses. Simplify
+    your workflow with a powerful server that enhances document retrieval and
+    generation capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

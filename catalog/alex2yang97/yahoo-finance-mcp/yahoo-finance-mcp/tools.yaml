@@ -1,0 +1,50 @@
+tools:
+  - name: get_historical_stock_prices
+    description: "Get historical stock prices for a given ticker symbol from yahoo
+      finance. Include the following information: Date, Open, High, Low, Close,
+      Volume, Adj Close."
+    inputSchema:
+      type: object
+      title: get_historical_stock_pricesArguments
+      required:
+        - ticker
+      properties:
+        period:
+          type: string
+          title: Period
+          default: 1mo
+        ticker:
+          type: string
+          title: Ticker
+        interval:
+          type: string
+          title: Interval
+          default: 1d
+  - name: get_stock_info
+    description: >-
+      Get stock information for a given ticker symbol from yahoo finance.
+      Include the following information:
+
+      Stock Price & Trading Info, Company Information, Financial Metrics,
+      Earnings & Revenue, Margins & Returns, Dividends, Balance Sheet,
+      Ownership, Analyst Coverage, Risk Metrics, Other.
+    inputSchema:
+      type: object
+      title: get_stock_infoArguments
+      required:
+        - ticker
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+  - name: get_yahoo_finance_news
+    description: Get news for a given ticker symbol from yahoo finance.
+    inputSchema:
+      type: object
+      title: get_yahoo_finance_newsArguments
+      required:
+        - ticker
+      properties:
+        ticker:
+          type: string
+          title: Ticker

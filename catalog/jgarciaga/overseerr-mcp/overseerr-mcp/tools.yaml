@@ -1,0 +1,47 @@
+tools:
+  - name: overseerr_status
+    description: Get the status of the Overseerr server.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: overseerr_movie_requests
+    description: Get the list of all movie requests that satisfies the filter arguments.
+    inputSchema:
+      type: object
+      properties:
+        status:
+          enum:
+            - all
+            - approved
+            - available
+            - pending
+            - processing
+            - unavailable
+            - failed
+          type: string
+          description: Filter by media availability status.
+        start_date:
+          type: string
+          description: Filter for the date of request, formatted as
+            '2020-09-12T10:00:27.000Z'
+  - name: overseerr_tv_requests
+    description: Get the list of all TV requests that satisfies the filter arguments.
+    inputSchema:
+      type: object
+      properties:
+        status:
+          enum:
+            - all
+            - approved
+            - available
+            - pending
+            - processing
+            - unavailable
+            - failed
+          type: string
+          description: Filter by media availability status.
+        start_date:
+          type: string
+          description: Filter for the date of request, formatted as
+            '2020-09-12T10:00:27.000Z'

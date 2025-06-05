@@ -1,0 +1,18 @@
+identifier: tisddm/searxng-mcp/searxng-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tisDDM/searxng-mcp
+  name: searxng-mcp
+  owner: tisDDM
+server:
+  subdirectory: /
+  name: SearXNG MCP Server
+  description: Enable your AI assistants to perform web searches effortlessly with
+    a privacy-respecting metasearch engine. Connect to public or private SearXNG
+    instances and customize your search parameters for tailored results.
+    Experience zero-configuration setup for immediate use, enhancing your AI's
+    capabilities with powerful web search functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,19 @@
+identifier: deciduus/calendar-mcp/calendar-mcp
+repo:
+  provider: github.com
+  url: https://github.com/deciduus/calendar-mcp
+  name: calendar-mcp
+  owner: deciduus
+server:
+  subdirectory: /
+  name: Google Calendar Server
+  description: Enable natural language interaction with your Google Calendar
+    through a Python-based server that integrates with Large Language Models.
+    Perform calendar operations such as listing, creating, updating, and
+    deleting events, as well as advanced scheduling and analysis. Securely
+    authenticate via OAuth 2.0 and seamlessly connect with MCP clients for
+    enhanced productivity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

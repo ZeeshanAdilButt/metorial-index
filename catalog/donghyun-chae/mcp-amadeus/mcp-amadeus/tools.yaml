@@ -1,0 +1,73 @@
+tools:
+  - name: search_flight_offers
+    description: Search for flight offers using the Amadeus API
+    inputSchema:
+      type: object
+      required:
+        - originLocationCode
+        - destinationLocationCode
+        - departureDate
+        - adults
+      properties:
+        max:
+          type: integer
+          default: 30
+          maximum: 30
+          minimum: 1
+          description: Maximum number of flight offers to return.
+        adults:
+          type: integer
+          maximum: 9
+          minimum: 1
+          description: Number of adult travelers (age 12+), must be 1-9.
+        infants:
+          type: integer
+          default: 0
+          minimum: 0
+          description: Number of infant travelers (age <= 2).
+        nonStop:
+          enum:
+            - "true"
+            - "false"
+          type: string
+          default: "false"
+          description: If true, only non-stop flights are returned.
+        children:
+          type: integer
+          default: 0
+          minimum: 0
+          description: Number of child travelers (age 2-11).
+        maxPrice:
+          type: integer
+          minimum: 1
+          description: Maximum price per traveler, positive integer with no decimals.
+        returnDate:
+          type: string
+          description: Return date in ISO 8601 format (YYYY-MM-DD), if round-trip is
+            desired.
+        travelClass:
+          enum:
+            - ECONOMY
+            - PREMIUM_ECONOMY
+            - BUSINESS
+            - FIRST
+          type: string
+          description: Travel class
+        currencyCode:
+          type: string
+          description: ISO 4217 currency code (e.g., EUR for Euro).
+        departureDate:
+          type: string
+          description: Departure date in ISO 8601 format (YYYY-MM-DD, e.g., 2023-05-02).
+        originLocationCode:
+          type: string
+          description: IATA code of the departure city/airport (e.g., SYD for Sydney).
+        excludedAirlineCodes:
+          type: string
+          description: Comma-separated IATA airline codes to exclude (e.g., '6X,7X').
+        includedAirlineCodes:
+          type: string
+          description: Comma-separated IATA airline codes to include (e.g., '6X,7X').
+        destinationLocationCode:
+          type: string
+          description: IATA code of the destination city/airport (e.g., BKK for Bangkok).

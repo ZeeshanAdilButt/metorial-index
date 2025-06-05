@@ -1,0 +1,50 @@
+tools:
+  - name: create-user
+    description: Create a new user in a specific realm
+    inputSchema:
+      type: object
+      required:
+        - realm
+        - username
+        - email
+        - firstName
+        - lastName
+      properties:
+        email:
+          type: string
+          format: email
+        realm:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        firstName:
+          type: string
+  - name: delete-user
+    description: Delete a user from a specific realm
+    inputSchema:
+      type: object
+      required:
+        - realm
+        - userId
+      properties:
+        realm:
+          type: string
+        userId:
+          type: string
+  - name: list-realms
+    description: List all available realms
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list-users
+    description: List users in a specific realm
+    inputSchema:
+      type: object
+      required:
+        - realm
+      properties:
+        realm:
+          type: string

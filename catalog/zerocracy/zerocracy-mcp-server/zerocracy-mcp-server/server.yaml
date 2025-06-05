@@ -1,0 +1,17 @@
+identifier: zerocracy/zerocracy-mcp-server/zerocracy-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/zerocracy/zerocracy-mcp-server
+  name: zerocracy-mcp-server
+  owner: zerocracy
+server:
+  subdirectory: /
+  name: Zerocracy MCP Server
+  description: Integrate Zerocracy's product development management advice
+    directly into your AI agent. Enhance your AI's capabilities by connecting it
+    to Zerocracy for real-time management insights and progress updates. Easily
+    configure and use with Claude Desktop to get actionable development advice.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

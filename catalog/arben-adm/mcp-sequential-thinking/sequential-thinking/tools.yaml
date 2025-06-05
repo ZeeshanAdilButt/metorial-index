@@ -1,0 +1,144 @@
+tools:
+  - name: sequential_thinking
+    description: "
+
+      \        An advanced tool for dynamic and reflective problem-solving
+      through structured thoughts.
+
+      \       \ 
+
+      \        Args:
+
+      \            thought: The content of the current thought
+
+      \            thought_number: Current position in the sequence
+
+      \            total_thoughts: Expected total number of thoughts
+
+      \            next_thought_needed: Whether another thought should follow
+
+      \            stage: Current thinking stage (e.g., \"Problem Definition\",
+      \"Analysis\")
+
+      \            is_revision: Whether this revises a previous thought
+
+      \            revises_thought: Number of thought being revised
+
+      \            branch_from_thought: Starting point for a new thought branch
+
+      \            branch_id: Identifier for the current branch
+
+      \            needs_more_thoughts: Whether additional thoughts are needed
+
+      \            score: Quality score (0.0 to 1.0)
+
+      \            tags: Categories or labels for the thought
+
+      \           \ 
+
+      \        Returns:
+
+      \            JSON string containing thought analysis and metadata
+
+      \        "
+    inputSchema:
+      type: object
+      title: sequential_thinkingArguments
+      required:
+        - thought
+        - thought_number
+        - total_thoughts
+        - next_thought_needed
+        - stage
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        score:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Score
+          default: null
+        stage:
+          type: string
+          title: Stage
+        thought:
+          type: string
+          title: Thought
+        branch_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Branch Id
+          default: null
+        is_revision:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Is Revision
+          default: null
+        thought_number:
+          type: integer
+          title: Thought Number
+        total_thoughts:
+          type: integer
+          title: Total Thoughts
+        revises_thought:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Revises Thought
+          default: null
+        branch_from_thought:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Branch From Thought
+          default: null
+        needs_more_thoughts:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Needs More Thoughts
+          default: null
+        next_thought_needed:
+          type: boolean
+          title: Next Thought Needed
+  - name: get_thinking_summary
+    description: "
+
+      \        Generate a comprehensive summary of the entire thinking process.
+
+      \       \ 
+
+      \        Returns:
+
+      \            JSON string containing analysis of thought history
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_thinking_summaryArguments
+      properties: {}
+  - name: clear_thinking_history
+    description: "
+
+      \        Clear all recorded thoughts and reset the server state.
+
+      \       \ 
+
+      \        Returns:
+
+      \            Confirmation message
+
+      \        "
+    inputSchema:
+      type: object
+      title: clear_thinking_historyArguments
+      properties: {}

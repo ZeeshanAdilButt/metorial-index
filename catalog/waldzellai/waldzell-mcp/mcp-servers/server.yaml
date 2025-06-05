@@ -1,0 +1,16 @@
+identifier: waldzellai/waldzell-mcp/mcp-servers
+repo:
+  provider: github.com
+  url: https://github.com/waldzellai/waldzell-mcp
+  name: waldzell-mcp
+  owner: waldzellai
+server:
+  subdirectory: /packages/server-glassbead-thinks
+  name: glassBead-thinks
+  description: Provide advanced problem-solving capabilities for AI assistants.
+    Model Context Protocol's "sequentialthinking" server with additional mental
+    models and systematic debugging approaches.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

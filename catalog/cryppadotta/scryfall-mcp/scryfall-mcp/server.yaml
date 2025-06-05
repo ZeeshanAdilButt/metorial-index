@@ -1,0 +1,15 @@
+identifier: cryppadotta/scryfall-mcp/scryfall-mcp
+repo:
+  provider: github.com
+  url: https://github.com/cryppadotta/scryfall-mcp
+  name: scryfall-mcp
+  owner: cryppadotta
+server:
+  subdirectory: /
+  name: Scryfall MCP Server
+  description: "Interact with the Scryfall API to retrieve Magic: The Gathering
+    card details and pricing information."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

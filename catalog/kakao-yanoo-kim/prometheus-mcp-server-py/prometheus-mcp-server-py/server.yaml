@@ -1,0 +1,18 @@
+identifier: kakao-yanoo-kim/prometheus-mcp-server-py/prometheus-mcp-server-py
+repo:
+  provider: github.com
+  url: https://github.com/kakao-yanoo-kim/prometheus-mcp-server-py
+  name: prometheus-mcp-server-py
+  owner: kakao-yanoo-kim
+server:
+  subdirectory: /
+  name: Prometheus MCP Server
+  description: Provide seamless access to Prometheus monitoring data through a
+    Model Context Protocol server. Enable querying and retrieving Prometheus
+    metrics securely with support for authentication and multi-tenant setups.
+    Simplify integration of Prometheus data into LLM-based applications and
+    workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

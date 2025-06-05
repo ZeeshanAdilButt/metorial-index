@@ -1,0 +1,17 @@
+identifier: rathoddarshil/mcp-postgres-query-server/mcp-postgres-query-server
+repo:
+  provider: github.com
+  url: https://github.com/RathodDarshil/mcp-postgres-query-server
+  name: mcp-postgres-query-server
+  owner: RathodDarshil
+server:
+  subdirectory: /
+  name: Postgres Query Server
+  description: Provide a secure, read-only interface to your PostgreSQL database.
+    Execute validated SQL SELECT queries and receive structured JSON responses,
+    ensuring safe and efficient data access. Integrate seamlessly with Claude
+    Desktop for enhanced data querying capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

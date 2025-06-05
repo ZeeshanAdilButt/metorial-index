@@ -1,0 +1,33 @@
+tools:
+  - name: connect_agent
+    description: Connect to a specific Azure AI Agent.
+    inputSchema:
+      type: object
+      title: connect_agentArguments
+      required:
+        - agent_id
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        agent_id:
+          type: string
+          title: Agent Id
+  - name: query_default_agent
+    description: Send a query to the default configured Azure AI Agent.
+    inputSchema:
+      type: object
+      title: query_default_agentArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: list_agents
+    description: List available agents in the Azure AI Agent Service.
+    inputSchema:
+      type: object
+      title: list_agentsArguments
+      properties: {}

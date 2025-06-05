@@ -1,0 +1,43 @@
+tools:
+  - name: get_validator_set
+    description: Get the current validator set information
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_chain_status
+    description: Get current chain status including block height and chain ID
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_transaction
+    description: Get details of a specific transaction
+    inputSchema:
+      type: object
+      required:
+        - hash
+      properties:
+        hash:
+          type: string
+          description: Transaction hash
+  - name: get_dex_state
+    description: Get current DEX state including latest batch auction results
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_governance_proposals
+    description: Get active governance proposals
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        status:
+          enum:
+            - active
+            - completed
+            - all
+          type: string
+          default: active
+          description: Filter proposals by status

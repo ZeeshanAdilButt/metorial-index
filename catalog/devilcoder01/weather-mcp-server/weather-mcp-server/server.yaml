@@ -1,0 +1,18 @@
+identifier: devilcoder01/weather-mcp-server/weather-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/devilcoder01/weather-mcp-server
+  name: weather-mcp-server
+  owner: devilcoder01
+server:
+  subdirectory: /
+  name: Weather Data Server
+  description: Provide AI assistants with comprehensive weather information
+    including current conditions, forecasts, historical data, air quality, and
+    astronomy details. Enable location search, weather alerts, and timezone data
+    to enhance context-aware applications. Access reliable weather data
+    seamlessly through a standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,435 @@
+tools:
+  - name: listTasks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        label:
+          type: string
+        filter:
+          type: string
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: getTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+      additionalProperties: false
+  - name: createTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        order:
+          type: number
+        labels:
+          type: array
+          items:
+            type: string
+        content:
+          type: string
+        dueDate:
+          type: string
+        dueLang:
+          type: string
+        parentId:
+          type: string
+        priority:
+          type: number
+        dueString:
+          type: string
+        projectId:
+          type: string
+        sectionId:
+          type: string
+        assigneeId:
+          type: string
+        description:
+          type: string
+        dueDatetime:
+          type: string
+      additionalProperties: false
+  - name: updateTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+        taskId:
+          type: string
+        content:
+          type: string
+        dueDate:
+          type: string
+        dueLang:
+          type: string
+        priority:
+          type: number
+        dueString:
+          type: string
+        assigneeId:
+          type: string
+        description:
+          type: string
+        dueDatetime:
+          type: string
+      additionalProperties: false
+  - name: completeTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+      additionalProperties: false
+  - name: reopenTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+      additionalProperties: false
+  - name: deleteTask
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+      additionalProperties: false
+  - name: listProjects
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: createProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        parentId:
+          type: string
+        viewStyle:
+          enum:
+            - list
+            - board
+          type: string
+        isFavorite:
+          type: boolean
+      additionalProperties: false
+  - name: updateProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        projectId:
+          type: string
+        viewStyle:
+          enum:
+            - list
+            - board
+          type: string
+        isFavorite:
+          type: boolean
+      additionalProperties: false
+  - name: archiveProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: unarchiveProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: deleteProject
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: getProjectCollaborators
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: listSections
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: getSection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sectionId
+      properties:
+        sectionId:
+          type: string
+      additionalProperties: false
+  - name: createSection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - projectId
+      properties:
+        name:
+          type: string
+        order:
+          type: number
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: updateSection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sectionId
+        - name
+      properties:
+        name:
+          type: string
+        sectionId:
+          type: string
+      additionalProperties: false
+  - name: deleteSection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sectionId
+      properties:
+        sectionId:
+          type: string
+      additionalProperties: false
+  - name: listComments
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        taskId:
+          type: string
+        projectId:
+          type: string
+      additionalProperties: false
+  - name: getComment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - commentId
+      properties:
+        commentId:
+          type: string
+      additionalProperties: false
+  - name: createComment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - content
+      properties:
+        taskId:
+          type: string
+        content:
+          type: string
+        projectId:
+          type: string
+        attachment:
+          type: object
+          required:
+            - fileUrl
+          properties:
+            fileUrl:
+              type: string
+            fileName:
+              type: string
+            fileType:
+              type: string
+            resourceType:
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: updateComment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - commentId
+        - content
+      properties:
+        content:
+          type: string
+        commentId:
+          type: string
+      additionalProperties: false
+  - name: deleteComment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - commentId
+      properties:
+        commentId:
+          type: string
+      additionalProperties: false
+  - name: listLabels
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getLabel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - labelId
+      properties:
+        labelId:
+          type: string
+      additionalProperties: false
+  - name: createLabel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        order:
+          type: number
+        isFavorite:
+          type: boolean
+      additionalProperties: false
+  - name: updateLabel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - labelId
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        order:
+          type: number
+        labelId:
+          type: string
+        isFavorite:
+          type: boolean
+      additionalProperties: false
+  - name: deleteLabel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - labelId
+      properties:
+        labelId:
+          type: string
+      additionalProperties: false
+  - name: getSharedLabels
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        omitPersonal:
+          type: boolean
+      additionalProperties: false
+  - name: renameSharedLabel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - newName
+      properties:
+        name:
+          type: string
+        newName:
+          type: string
+      additionalProperties: false
+  - name: removeSharedLabel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+      additionalProperties: false

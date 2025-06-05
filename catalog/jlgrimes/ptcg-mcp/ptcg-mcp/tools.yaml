@@ -1,0 +1,335 @@
+tools:
+  - name: pokemon-card-search
+    description: Searches for Pokemon cards
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        hp:
+          type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The HP (Hit Points) of the Pokemon card. Use ! for
+            exact matching (e.g., "!value" to match only exact value). Use [ and
+            ] for inclusive ranges (e.g., [1 TO 3] for values 1-3). Use { and }
+            for exclusive ranges (e.g., {1 TO 3} for values more than 1 and less
+            than 3). Use * for unbounded ranges (e.g., [* TO 100] for values up
+            to 100, or [100 TO *] for values 100 or higher). If no HP is
+            explicitly mentioned, omit this field entirely.'
+        set:
+          type: object
+          required:
+            - name
+            - series
+          properties:
+            name:
+              type: string
+            series:
+              type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The set information for this card. Use dot notation
+            (.) to search nested fields (e.g., "set.id:sm1" for set ID,
+            "attacks.name:Spelunk" for attack names). For example, "set.id:sm1"
+            to find cards from a specific set. If no set information is
+            explicitly mentioned, omit this field entirely.'
+          additionalProperties: false
+        name:
+          type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. CRITICAL: Query exactly what was asked for. Do not try
+            to be systematic. Do not try to find specific examples. Do not try
+            to be methodical. Just make the exact query requested. IMPORTANT:
+            For hyphenated names like "chien-pao", you MUST preserve the hyphen
+            exactly as it appears. For example, "chien-pao ex" should have name
+            "chien-pao" (with the hyphen) and subtypes ["EX"]. Never remove or
+            modify hyphens in the name. Use * for wildcard matching (e.g.,
+            "char*" to match all cards starting with "char", or "char*der" to
+            match cards starting with "char" and ending with "der"). Use ! for
+            exact matching (e.g., "!value" to match only exact value).
+            IMPORTANT: If no name is explicitly provided in the query, do not
+            include a name field at all.'
+        page:
+          type: number
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The page number for pagination. Use ! for exact
+            matching (e.g., "!value" to match only exact value). Use [ and ] for
+            inclusive ranges (e.g., [1 TO 3] for values 1-3). Use { and } for
+            exclusive ranges (e.g., {1 TO 3} for values more than 1 and less
+            than 3). Use * for unbounded ranges (e.g., [* TO 100] for values up
+            to 100, or [100 TO *] for values 100 or higher). If no page is
+            explicitly mentioned, omit this field entirely.'
+        types:
+          type: array
+          items:
+            type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The types of the Pokemon card (e.g., ["Grass",
+            "Psychic"]). Use negative values with a "-" prefix to exclude values
+            (e.g., ["-value"] to exclude value). Use ! for exact matching (e.g.,
+            "!value" to match only exact value). If no types are explicitly
+            mentioned, omit this field entirely.'
+        attacks:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - cost
+              - damage
+              - text
+            properties:
+              cost:
+                type: array
+                items:
+                  type: string
+              name:
+                type: string
+              text:
+                type: string
+              damage:
+                type: string
+            additionalProperties: false
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The attacks available to this Pokemon card. Use dot
+            notation (.) to search nested fields (e.g., "set.id:sm1" for set ID,
+            "attacks.name:Spelunk" for attack names). For example,
+            "attacks.name:Spelunk" to find cards with a specific attack name. If
+            no attack information is explicitly mentioned, omit this field
+            entirely.'
+        pageSize:
+          type: number
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The number of cards per page. Use ! for exact matching
+            (e.g., "!value" to match only exact value). Use [ and ] for
+            inclusive ranges (e.g., [1 TO 3] for values 1-3). Use { and } for
+            exclusive ranges (e.g., {1 TO 3} for values more than 1 and less
+            than 3). Use * for unbounded ranges (e.g., [* TO 100] for values up
+            to 100, or [100 TO *] for values 100 or higher). If no page size is
+            explicitly mentioned, omit this field entirely.'
+        subtypes:
+          type: array
+          items:
+            enum:
+              - BREAK
+              - Baby
+              - Basic
+              - EX
+              - GX
+              - Goldenrod Game Corner
+              - Item
+              - LEGEND
+              - Level-Up
+              - MEGA
+              - Pokémon Tool
+              - Pokémon Tool F
+              - Rapid Strike
+              - Restored
+              - Rocket's Secret Machine
+              - Single Strike
+              - Special
+              - Stadium
+              - Stage 1
+              - Stage 2
+              - Supporter
+              - TAG TEAM
+              - Technical Machine
+              - V
+              - VMAX
+              - VSTAR
+              - Tera
+            type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. CRITICAL: Query exactly what was asked for. Do not try
+            to be systematic. Do not try to find specific examples. Do not try
+            to be methodical. Just make the exact query requested. For example,
+            "chien pao ex" should have name "chien pao" and subtypes ["EX"]. If
+            multiple subtypes are present like "basic pikachu ex", use ["Basic",
+            "EX"]. Use negative values with a "-" prefix to exclude values
+            (e.g., ["-value"] to exclude value). Use ! for exact matching (e.g.,
+            "!value" to match only exact value). If no subtypes are explicitly
+            mentioned in the query, omit this field entirely.'
+        evolvesTo:
+          type: array
+          items:
+            type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The Pokemon this card evolves into. Use negative
+            values with a "-" prefix to exclude values (e.g., ["-value"] to
+            exclude value). Use ! for exact matching (e.g., "!value" to match
+            only exact value). If no evolution information is explicitly
+            mentioned, omit this field entirely.'
+        legalities:
+          type: object
+          properties:
+            expanded:
+              enum:
+                - legal
+                - banned
+              type: string
+            standard:
+              enum:
+                - legal
+                - banned
+              type: string
+            unlimited:
+              enum:
+                - legal
+                - banned
+              type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. CRITICAL: Query exactly what was asked for. Do not try
+            to be systematic. Do not try to find specific examples. Do not try
+            to be methodical. Just make the exact query requested. The
+            legalities for a given card. For each legality passed in, the value
+            is "legal" without quotes. Use negative values with a "-" prefix to
+            exclude values (e.g., ["-value"] to exclude value). Use ! for exact
+            matching (e.g., "!value" to match only exact value). Use dot
+            notation (.) to search nested fields (e.g., "set.id:sm1" for set ID,
+            "attacks.name:Spelunk" for attack names). For example,
+            "legalities.standard:banned" to find cards banned in Standard. If no
+            legalities are explicitly mentioned, omit this field entirely.'
+          additionalProperties: false
+        weaknesses:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - value
+            properties:
+              type:
+                type: string
+              value:
+                type: string
+            additionalProperties: false
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The weaknesses of this Pokemon card. Use negative
+            values with a "-" prefix to exclude values (e.g., ["-value"] to
+            exclude value). Use ! for exact matching (e.g., "!value" to match
+            only exact value). Use dot notation (.) to search nested fields
+            (e.g., "set.id:sm1" for set ID, "attacks.name:Spelunk" for attack
+            names). For example, "weaknesses.type:Water" to find cards weak to
+            Water. If no weakness information is explicitly mentioned, omit this
+            field entirely.'
+        regulationMark:
+          type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The regulation mark (also known as "block") of the
+            card (e.g., "F", "G", "H"). This indicates which regulation block
+            the card belongs to. Use negative values with a "-" prefix to
+            exclude values (e.g., ["-value"] to exclude value). Use ! for exact
+            matching (e.g., "!value" to match only exact value). If no
+            regulation mark is explicitly mentioned, omit this field entirely.'
+        convertedRetreatCost:
+          type: number
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. CRITICAL: Query exactly what was asked for. Do not try
+            to be systematic. Do not try to find specific examples. Do not try
+            to be methodical. Just make the exact query requested. The converted
+            retreat cost for a given Pokemon card. If no converted retreat cost
+            is explicitly mentioned, omit this field. If the user explicitly
+            specifies "free retreat", set this to 0. Use ! for exact matching
+            (e.g., "!value" to match only exact value). Use [ and ] for
+            inclusive ranges (e.g., [1 TO 3] for values 1-3). Use { and } for
+            exclusive ranges (e.g., {1 TO 3} for values more than 1 and less
+            than 3). Use * for unbounded ranges (e.g., [* TO 100] for values up
+            to 100, or [100 TO *] for values 100 or higher).'
+        nationalPokedexNumbers:
+          type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The National Pokedex numbers of the Pokemon. Use ! for
+            exact matching (e.g., "!value" to match only exact value). Use [ and
+            ] for inclusive ranges (e.g., [1 TO 3] for values 1-3). Use { and }
+            for exclusive ranges (e.g., {1 TO 3} for values more than 1 and less
+            than 3). Use * for unbounded ranges (e.g., [* TO 100] for values up
+            to 100, or [100 TO *] for values 100 or higher). If no Pokedex
+            numbers are explicitly mentioned, omit this field entirely.'
+      additionalProperties: false
+  - name: pokemon-card-price
+    description: Look up the current market price for a Pokemon card
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        set:
+          type: object
+          required:
+            - name
+            - series
+          properties:
+            name:
+              type: string
+            series:
+              type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. The set information for this card. Use dot notation
+            (.) to search nested fields (e.g., "set.id:sm1" for set ID,
+            "attacks.name:Spelunk" for attack names). For example, "set.id:sm1"
+            to find cards from a specific set. If no set information is
+            explicitly mentioned, omit this field entirely.'
+          additionalProperties: false
+        name:
+          type: string
+          description: 'CRITICAL: Never infer or guess values. Never provide default
+            values. Never make assumptions about what the user might want. Never
+            try to be systematic or methodical. Never try to find "specific
+            examples". Just query exactly what was asked for, nothing more and
+            nothing less. CRITICAL: Query exactly what was asked for. Do not try
+            to be systematic. Do not try to find specific examples. Do not try
+            to be methodical. Just make the exact query requested. IMPORTANT:
+            For hyphenated names like "chien-pao", you MUST preserve the hyphen
+            exactly as it appears. For example, "chien-pao ex" should have name
+            "chien-pao" (with the hyphen) and subtypes ["EX"]. Never remove or
+            modify hyphens in the name. Use * for wildcard matching (e.g.,
+            "char*" to match all cards starting with "char", or "char*der" to
+            match cards starting with "char" and ending with "der"). Use ! for
+            exact matching (e.g., "!value" to match only exact value).
+            IMPORTANT: If no name is explicitly provided in the query, do not
+            include a name field at all.'
+      additionalProperties: false

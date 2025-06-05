@@ -1,0 +1,18 @@
+identifier: openlinksoftware/mcp-pyodbc-server/mcp-pyodbc-server
+repo:
+  provider: github.com
+  url: https://github.com/OpenLinkSoftware/mcp-pyodbc-server
+  name: mcp-pyodbc-server
+  owner: OpenLinkSoftware
+server:
+  subdirectory: /
+  name: ODBC Server
+  description: Connect to your databases effortlessly using this lightweight
+    server. Fetch schemas, execute queries, and interact with your data in
+    real-time, all while leveraging the power of FastAPI and pyodbc. Simplify
+    your database interactions and enhance your applications with seamless ODBC
+    support.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

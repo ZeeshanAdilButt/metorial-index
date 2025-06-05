@@ -1,0 +1,14 @@
+identifier: tomekkorbak/oura-mcp-server/oura-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/tomekkorbak/oura-mcp-server
+  name: oura-mcp-server
+  owner: tomekkorbak
+server:
+  subdirectory: /
+  name: Oura API Integration Server
+  description: Access sleep, readiness, and resilience data from the Oura API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

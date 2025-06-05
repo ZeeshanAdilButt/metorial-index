@@ -1,0 +1,15 @@
+identifier: mindscapehq/mcp-server-raygun/mcp-server-raygun
+repo:
+  provider: github.com
+  url: https://github.com/MindscapeHQ/mcp-server-raygun
+  name: mcp-server-raygun
+  owner: MindscapeHQ
+server:
+  subdirectory: /
+  name: Raygun Server
+  description: Access Raygun's error tracking and monitoring data. View errors,
+    crashes, and performance issues from your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

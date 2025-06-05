@@ -1,0 +1,35 @@
+tools:
+  - name: ACI_SEARCH_FUNCTIONS
+    description: This function allows you to find relevant executable functions and
+      their schemas that can help complete your tasks.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        intent:
+          type: string
+          description: Use this to find relevant functions you might need. Returned
+            results of this function will be sorted by relevance to the intent.
+      additionalProperties: false
+  - name: ACI_EXECUTE_FUNCTION
+    description: Execute a specific retrieved function. Provide the executable
+      function name, and the required function parameters for that function
+      based on function definition retrieved.
+    inputSchema:
+      type: object
+      required:
+        - function_name
+        - function_arguments
+      properties:
+        function_name:
+          type: string
+          description: The name of the function to execute
+        function_arguments:
+          type: object
+          description: A dictionary containing key-value pairs of input parameters
+            required by the specified function. The parameter names and types
+            must match those defined in the function definition previously
+            retrieved. If the function requires no parameters, provide an empty
+            object.
+          additionalProperties: true
+      additionalProperties: false

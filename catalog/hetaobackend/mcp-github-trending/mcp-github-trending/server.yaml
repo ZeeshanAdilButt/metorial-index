@@ -1,0 +1,16 @@
+identifier: hetaobackend/mcp-github-trending/mcp-github-trending
+repo:
+  provider: github.com
+  url: https://github.com/hetaoBackend/mcp-github-trending
+  name: mcp-github-trending
+  owner: hetaoBackend
+server:
+  subdirectory: /
+  name: GitHub Trending
+  description: Access trending repositories and developers on GitHub effortlessly.
+    Filter results by programming language, time period, and spoken language to
+    find the most relevant data for your needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

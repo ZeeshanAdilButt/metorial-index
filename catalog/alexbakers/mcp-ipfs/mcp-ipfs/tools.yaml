@@ -1,0 +1,586 @@
+tools:
+  - name: w3_account_ls
+    description: Lists all accounts the current agent is **authorized** for. Use
+      this command after `w3_login` and email validation to confirm the agent is
+      successfully linked to your storacha.network account(s). **Note:** Agent
+      state may be ephemeral (e.g., in Docker). Check authorization status with
+      this command after (re)connecting, and use `w3_login` if needed.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      description: Lists all accounts the current agent is **authorized** for. Use
+        this command after `w3_login` and email validation to confirm the agent
+        is successfully linked to your storacha.network account(s). **Note:**
+        Agent state may be ephemeral (e.g., in Docker). Check authorization
+        status with this command after (re)connecting, and use `w3_login` if
+        needed.
+      additionalProperties: false
+  - name: w3_bridge_generate_tokens
+    description: Generates authentication tokens for using the UCAN-HTTP bridge.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - capabilities
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Output JSON suitable for fetch headers (default: true)."
+        expiration:
+          type: integer
+          description: Unix timestamp (in seconds) for expiration. Zero means no expiration.
+          exclusiveMinimum: 0
+        capabilities:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: One or more capabilities to delegate (e.g., ['space/info']).
+      description: Generates authentication tokens for using the UCAN-HTTP bridge.
+      additionalProperties: false
+  - name: w3_can_access_claim
+    description: Claims delegated capabilities for the authorized account using a
+      provided proof.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - proof
+      properties:
+        proof:
+          type: string
+          description: Delegation proof (e.g., path to CAR file or base64 CID string)
+            containing capabilities to claim.
+      description: Claims delegated capabilities for the authorized account using a
+        provided proof.
+      additionalProperties: false
+  - name: w3_can_blob_add
+    description: Stores a single file as a blob directly with the service. Requires
+      ABSOLUTE paths for file arguments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: ABSOLUTE path to the blob file to store.
+      description: Stores a single file as a blob directly with the service.
+      additionalProperties: false
+  - name: w3_can_blob_ls
+    description: Lists blobs stored in the current space.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+        size:
+          type: integer
+          description: Desired number of results to return.
+          exclusiveMinimum: 0
+        cursor:
+          type: string
+          description: Opaque cursor string from a previous response for pagination.
+      description: Lists blobs stored in the current space.
+      additionalProperties: false
+  - name: w3_can_blob_rm
+    description: Removes a blob from the store by its base58btc encoded multihash.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - multihash
+      properties:
+        multihash:
+          type: string
+          description: Base58btc encoded multihash of the blob to remove.
+      description: Removes a blob from the store by its base58btc encoded multihash.
+      additionalProperties: false
+  - name: w3_can_filecoin_info
+    description: Gets Filecoin deal information for a given Piece CID (advanced use).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pieceCid
+      properties:
+        pieceCid:
+          type: string
+          description: The Piece CID to get Filecoin information for.
+      description: Gets Filecoin deal information for a given Piece CID (advanced use).
+      additionalProperties: false
+  - name: w3_can_index_add
+    description: Registers an index CID with the service (advanced use). Please
+      refer to storacha.network documentation for details on indices.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cid
+      properties:
+        cid:
+          type: string
+          description: CID of the index to add.
+      description: Registers an index CID with the service (advanced use). Please
+        refer to storacha.network documentation for details on indices.
+      additionalProperties: false
+  - name: w3_can_store_add
+    description: Stores a CAR file with the service (advanced use). This is often a
+      prerequisite for `w3_can_upload_add`. Requires ABSOLUTE paths for file
+      arguments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: ABSOLUTE path to the CAR file to store.
+      description: Stores a CAR file with the service (advanced use). This is often a
+        prerequisite for `w3_can_upload_add`.
+      additionalProperties: false
+  - name: w3_can_store_ls
+    description: Lists stored CAR files (shards) in the current space (advanced use).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+        size:
+          type: integer
+          description: Desired number of results to return.
+          exclusiveMinimum: 0
+        cursor:
+          type: string
+          description: Opaque cursor string from a previous response for pagination.
+      description: Lists stored CAR files (shards) in the current space (advanced use).
+      additionalProperties: false
+  - name: w3_can_store_rm
+    description: Removes a stored CAR shard by its CID (advanced use). Use with
+      extreme caution, as this deletes the underlying data shard.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - carCid
+      properties:
+        carCid:
+          type: string
+          description: CID of the CAR shard to remove from the store.
+      description: Removes a stored CAR shard by its CID (advanced use). Use with
+        extreme caution, as this deletes the underlying data shard.
+      additionalProperties: false
+  - name: w3_can_upload_add
+    description: Manually registers an upload DAG by its root CID and shard CIDs
+      (advanced use). This is typically used after storing CAR shards manually.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - rootCid
+        - shardCids
+      properties:
+        rootCid:
+          type: string
+          description: Root data CID of the DAG to register.
+        shardCids:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: One or more shard CIDs where the DAG data is stored.
+      description: Manually registers an upload DAG by its root CID and shard CIDs
+        (advanced use). This is typically used after storing CAR shards
+        manually.
+      additionalProperties: false
+  - name: w3_can_upload_ls
+    description: Lists uploads registered in the current space (advanced view, shows
+      underlying structure).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        pre:
+          type: boolean
+          default: false
+          description: Return the page of results preceding the cursor.
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+        size:
+          type: integer
+          description: Desired number of results to return.
+          exclusiveMinimum: 0
+        cursor:
+          type: string
+          description: Opaque cursor string from a previous response for pagination.
+        shards:
+          type: boolean
+          default: false
+          description: Pretty print with shards in output (ignored if --json is true).
+      description: Lists uploads registered in the current space (advanced view, shows
+        underlying structure).
+      additionalProperties: false
+  - name: w3_can_upload_rm
+    description: Removes an upload listing by its root CID (advanced use). Does not
+      remove the underlying blobs/shards.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - rootCid
+      properties:
+        rootCid:
+          type: string
+          description: Root CID of the upload to remove from the list.
+      description: Removes an upload listing by its root CID (advanced use). Does not
+        remove the underlying blobs/shards.
+      additionalProperties: false
+  - name: w3_coupon_create
+    description: Attempts to create/claim a coupon using a claim code.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - claimCode
+      properties:
+        claimCode:
+          type: string
+          description: The claim code for the coupon.
+      description: Attempts to create/claim a coupon using a claim code.
+      additionalProperties: false
+  - name: w3_delegation_create
+    description: Tool for w3_delegation_create operation. Requires ABSOLUTE paths
+      for file arguments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - audienceDid
+        - capabilities
+      properties:
+        name:
+          type: string
+          description: Human-readable name for the audience.
+        type:
+          enum:
+            - device
+            - app
+            - service
+          type: string
+          description: Type of the audience.
+        base64:
+          type: boolean
+          default: false
+          description: Format output as base64 identity CID string instead of writing to a
+            file.
+        output:
+          type: string
+          description: ABSOLUTE path of file to write the exported delegation CAR file to.
+        audienceDid:
+          type: string
+          description: The DID of the audience receiving the delegation (e.g., did:key:...).
+        capabilities:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: One or more capabilities to delegate (e.g., ['space/*', 'upload/*']).
+      additionalProperties: false
+  - name: w3_delegation_ls
+    description: Tool for w3_delegation_ls operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+      additionalProperties: false
+  - name: w3_delegation_revoke
+    description: Tool for w3_delegation_revoke operation. Requires ABSOLUTE paths
+      for file arguments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - delegationCid
+      properties:
+        proof:
+          type: string
+          description: ABSOLUTE path to a file containing the delegation and any
+            additional proofs needed.
+        delegationCid:
+          type: string
+          description: The CID of the delegation to revoke.
+      additionalProperties: false
+  - name: w3_key_create
+    description: Generates and prints a new ed25519 key pair. Does not automatically
+      use it for the agent.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: false
+          description: "Export the new key pair as dag-json (default: false)."
+      description: Generates and prints a new ed25519 key pair. Does not automatically
+        use it for the agent.
+      additionalProperties: false
+  - name: w3_login
+    description: "Initiates the w3 login process using the pre-configured email
+      (W3_LOGIN_EMAIL env var). IMPORTANT: The command expects email
+      confirmation, so before running the `w3_login` tool, emphasize ATTENTION
+      to the user in large letters + emoji that they MUST check email to
+      complete authentication. If the final output includes 'Agent was
+      authorized by', the user has already clicked the link and is successfully
+      authorized, CONTINUE using mcp-ipfs tools. 'Too Many Requests': wait a
+      moment before requesting it again."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      description: Initiates the w3 login process using the pre-configured email
+        (W3_LOGIN_EMAIL env var). Highlight to the user that they MUST check
+        email to complete authentication.
+      additionalProperties: false
+  - name: w3_ls
+    description: Tool for w3_ls operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+      additionalProperties: false
+  - name: w3_open
+    description: Tool for w3_open operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cid
+      properties:
+        cid:
+          type: string
+          description: The CID of the content to open.
+        path:
+          type: string
+          description: Optional path within the content to append to the URL.
+      additionalProperties: false
+  - name: w3_plan_get
+    description: Displays the plan associated with the current or specified account.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        accountId:
+          type: string
+          description: Optional account ID to get plan for (defaults to current authorized
+            account).
+      description: Displays the plan associated with the current or specified account.
+      additionalProperties: false
+  - name: w3_proof_add
+    description: Tool for w3_proof_add operation. Requires ABSOLUTE paths for file
+      arguments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - proofPath
+      properties:
+        proofPath:
+          type: string
+          description: ABSOLUTE path to the CAR encoded proof file delegated to this agent.
+      additionalProperties: false
+  - name: w3_proof_ls
+    description: Tool for w3_proof_ls operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+      additionalProperties: false
+  - name: w3_reset
+    description: "DANGEROUS: Resets the agent state, removing all proofs and
+      delegations but retaining the agent DID. Requires explicit confirmation
+      argument."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - confirmReset
+      properties:
+        confirmReset:
+          type: string
+          const: yes-i-am-sure
+          description: Must be exactly 'yes-i-am-sure' to confirm resetting agent state
+            (removes proofs/delegations).
+      description: "DANGEROUS: Resets the agent state, removing all proofs and
+        delegations but retaining the agent DID. Requires explicit confirmation
+        argument."
+      additionalProperties: false
+  - name: w3_rm
+    description: Tool for w3_rm operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - cid
+      properties:
+        cid:
+          type: string
+          description: Root Content CID (e.g., bafy...) to remove from the uploads listing.
+        removeShards:
+          type: boolean
+          default: false
+          description: "Also remove underlying shards from the store (default: false). Use
+            with caution."
+      additionalProperties: false
+  - name: w3_space_add
+    description: Tool for w3_space_add operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - proof
+      properties:
+        proof:
+          type: string
+          description: Filesystem path to a CAR encoded UCAN proof, or a base64 identity
+            CID string.
+      additionalProperties: false
+  - name: w3_space_create
+    description: "Creates a new space with a user-friendly name. NOTE: `w3 space
+      create` cannot be run via MCP due to interactive recovery key prompts.
+      Please run this command manually in your terminal."
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        name:
+          type: string
+          description: An optional user-friendly name for the new space.
+      description: Creates a new space with a user-friendly name.
+      additionalProperties: false
+  - name: w3_space_info
+    description: 'Tool for w3_space_info operation. NOTE: `no current space and no
+      space given` or `{"spaces":[]}` first make sure you are logged in before
+      using other tools.'
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as newline delimited JSON (default: true)."
+        spaceDid:
+          type: string
+          pattern: "^did\\:key\\:"
+          description: Optional DID of the space to get info for (defaults to current
+            space).
+      additionalProperties: false
+  - name: w3_space_ls
+    description: 'Tool for w3_space_ls operation. NOTE: `no current space and no
+      space given` or `{"spaces":[]}` first make sure you are logged in before
+      using other tools.'
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: w3_space_provision
+    description: Associates a space with a customer/billing account.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - customerId
+        - spaceDid
+      properties:
+        spaceDid:
+          type: string
+          pattern: "^did\\:key\\:"
+          description: The DID of the space to provision.
+        customerId:
+          type: string
+          description: Customer identifier (e.g., email or account DID) to associate the
+            space with.
+      description: Associates a space with a customer/billing account.
+      additionalProperties: false
+  - name: w3_space_use
+    description: Tool for w3_space_use operation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - spaceDid
+      properties:
+        spaceDid:
+          type: string
+          pattern: "^did\\:key\\:"
+          description: The DID of the space to select (e.g., did:key:...).
+      additionalProperties: false
+  - name: w3_up
+    description: Generates and prints a new ed25519 key pair. Does not automatically
+      use it for the agent. Requires ABSOLUTE paths for file arguments.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Array of one or more ABSOLUTE paths to files or directories to
+            upload.
+        hidden:
+          type: boolean
+          default: false
+          description: Include paths starting with '.'.
+        noWrap:
+          type: boolean
+          default: false
+          description: Don't wrap input files with a directory.
+      description: Generates and prints a new ed25519 key pair. Does not automatically
+        use it for the agent.
+      additionalProperties: false
+  - name: w3_usage_report
+    description: Displays a storage usage report for the current or specified space.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        json:
+          type: boolean
+          default: true
+          description: "Format output as JSON (default: true)."
+        spaceDid:
+          type: string
+          pattern: "^did\\:key\\:"
+          description: Optional DID of the space to get usage for (defaults to current
+            space).
+      description: Displays a storage usage report for the current or specified space.
+      additionalProperties: false

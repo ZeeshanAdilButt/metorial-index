@@ -1,0 +1,14 @@
+identifier: crazyrabbitltc/mcp-morpho-server/mcp-morpho-server
+repo:
+  provider: github.com
+  url: https://github.com/crazyrabbitLTC/mcp-morpho-server
+  name: mcp-morpho-server
+  owner: crazyrabbitLTC
+server:
+  subdirectory: /
+  name: Morpho API Server
+  description: Query Morpho's GraphQL API to access market data, vaults, and positions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

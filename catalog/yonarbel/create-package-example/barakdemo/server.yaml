@@ -1,0 +1,18 @@
+identifier: yonarbel/create-package-example/barakdemo
+repo:
+  provider: github.com
+  url: https://github.com/yonarbel/create-package-example
+  name: create-package-example
+  owner: yonarbel
+server:
+  subdirectory: /
+  name: frog-utils
+  description: Enhance your strings with frog emojis and perform various
+    frog-related tasks effortlessly. Streamline your NPM package deployment to
+    the JFrog platform using GitHub Actions with this handy utility. Perfect for
+    developers looking to add a fun twist to their projects while leveraging
+    powerful integration capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

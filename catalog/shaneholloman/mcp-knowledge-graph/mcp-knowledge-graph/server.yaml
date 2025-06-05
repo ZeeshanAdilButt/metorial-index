@@ -1,0 +1,15 @@
+identifier: shaneholloman/mcp-knowledge-graph/mcp-knowledge-graph
+repo:
+  provider: github.com
+  url: https://github.com/shaneholloman/mcp-knowledge-graph
+  name: mcp-knowledge-graph
+  owner: shaneholloman
+server:
+  subdirectory: /
+  name: Knowledge Graph Memory Server
+  description: MCP server enabling persistent memory for Claude through a local
+    knowledge graph.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

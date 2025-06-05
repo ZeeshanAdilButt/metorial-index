@@ -1,0 +1,32 @@
+identifier: mcpc-tech/mcpc/mcpc
+repo:
+  provider: github.com
+  url: https://github.com/mcpc-tech/mcpc
+  name: mcpc
+  owner: mcpc-tech
+server:
+  subdirectory: /packages/code-runner-mcp
+  name: Code Runner
+  description: >-
+    Run JavaScript, TypeScript, and Python code snippets securely in a sandboxed
+    environment with support for **dynamic package imports**. Enable AI agents
+    and workflows to execute and verify code logic safely and conveniently.
+    Benefit from multi-language support and strict permission controls to
+    prevent malicious code execution.
+
+
+    **Core Capabilities:**
+
+    - **Import Any Package:** Dynamically import and use external libraries in
+    your code (specific support depends on the chosen runtime).
+
+    - **Secure Sandbox:** Code runs in an isolated environment with strict
+    limitations on file system, network, and environment variable access,
+    preventing malicious code from affecting the host environment.
+
+    - **Multi-language Support:** Execute JavaScript/TypeScript and Python code
+    snippets with ease!
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

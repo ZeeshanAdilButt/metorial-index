@@ -1,0 +1,60 @@
+tools:
+  - name: query
+    description: "
+
+      \    Execute query (automatically identifies SQL)
+
+      \    Parameters:
+
+      \    - sql: Query statement
+
+      \    - db: Specify database (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: queryArguments
+      required:
+        - sql
+      properties:
+        db:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Db
+          default: null
+        sql:
+          type: string
+          title: Sql
+  - name: list_databases
+    description: List all databases
+    inputSchema:
+      type: object
+      title: list_databasesArguments
+      properties: {}
+  - name: list_tables
+    description: List tables in database
+    inputSchema:
+      type: object
+      title: list_tablesArguments
+      required:
+        - db
+      properties:
+        db:
+          type: string
+          title: Db
+  - name: describe_table
+    description: Display table schema for [table_name]
+    inputSchema:
+      type: object
+      title: describe_tableArguments
+      required:
+        - table_name
+        - db
+      properties:
+        db:
+          type: string
+          title: Db
+        table_name:
+          type: string
+          title: Table Name

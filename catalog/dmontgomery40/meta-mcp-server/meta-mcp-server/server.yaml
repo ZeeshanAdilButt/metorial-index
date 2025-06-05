@@ -1,0 +1,17 @@
+identifier: dmontgomery40/meta-mcp-server/meta-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/DMontgomery40/meta-mcp-server
+  name: meta-mcp-server
+  owner: DMontgomery40
+server:
+  subdirectory: /
+  name: Meta MCP Server
+  description: Create customized MCP servers effortlessly by specifying
+    directories and files. Automate file management and integrate MCP tools for
+    efficient resource handling. Ideal for development environments, this server
+    simplifies the process of generating and managing multiple MCP servers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

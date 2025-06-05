@@ -1,0 +1,18 @@
+identifier: oschina/mcp-gitee/mcp-gitee
+repo:
+  provider: github.com
+  url: https://github.com/oschina/mcp-gitee
+  name: mcp-gitee
+  owner: oschina
+server:
+  subdirectory: /
+  name: Gitee MCP Server
+  description: Interact with Gitee's API to manage repositories, issues, and pull
+    requests seamlessly. Automate your workflow by leveraging AI assistants to
+    handle tasks like creating issues and pull requests efficiently. Simplify
+    your development process with easy configuration and powerful tools at your
+    fingertips.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

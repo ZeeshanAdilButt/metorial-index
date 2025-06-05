@@ -1,0 +1,115 @@
+tools:
+  - name: envia_texto
+    description: Envia mensagem de texto via SmileAPI
+    inputSchema:
+      type: object
+      required:
+        - to
+        - text
+      properties:
+        to:
+          type: string
+          description: "Número do destinatário com DDI e DDD (ex: 5543996611437)"
+        text:
+          type: string
+          description: Texto da mensagem a ser enviada
+        delayTyping:
+          type: number
+          default: 0
+          description: Atraso para simular digitação em segundos
+        delayMessage:
+          type: number
+          default: 0
+          description: Atraso para enviar a mensagem em segundos
+  - name: envia_imagem
+    description: Envia uma imagem via SmileAPI
+    inputSchema:
+      type: object
+      required:
+        - to
+        - link
+      properties:
+        to:
+          type: string
+          description: "Número do destinatário com DDI e DDD (ex: 5543996611437)"
+        link:
+          type: string
+          description: URL da imagem a ser enviada
+        caption:
+          type: string
+          description: Legenda da imagem (opcional)
+        viewOnce:
+          type: boolean
+          default: false
+          description: Define se a imagem será visualizada apenas uma vez
+        delayMessage:
+          type: number
+          default: 0
+          description: Atraso para enviar a mensagem em segundos
+  - name: envia_video
+    description: Envia um vídeo via SmileAPI
+    inputSchema:
+      type: object
+      required:
+        - to
+        - link
+      properties:
+        to:
+          type: string
+          description: "Número do destinatário com DDI e DDD (ex: 5543996611437)"
+        link:
+          type: string
+          description: URL do vídeo a ser enviado
+        caption:
+          type: string
+          description: Legenda do vídeo (opcional)
+        viewOnce:
+          type: boolean
+          default: false
+          description: Define se o vídeo será visualizado apenas uma vez
+        delayMessage:
+          type: number
+          default: 0
+          description: Atraso para enviar a mensagem em segundos
+  - name: envia_audio
+    description: Envia um áudio via SmileAPI
+    inputSchema:
+      type: object
+      required:
+        - to
+        - link
+      properties:
+        to:
+          type: string
+          description: "Número do destinatário com DDI e DDD (ex: 5543996611437)"
+        link:
+          type: string
+          description: URL do áudio a ser enviado
+        delayMessage:
+          type: number
+          default: 0
+          description: Atraso para enviar a mensagem em segundos
+  - name: envia_documento
+    description: Envia um documento via SmileAPI
+    inputSchema:
+      type: object
+      required:
+        - to
+        - link
+      properties:
+        to:
+          type: string
+          description: "Número do destinatário com DDI e DDD (ex: 5543996611437)"
+        link:
+          type: string
+          description: URL do documento a ser enviado
+        caption:
+          type: string
+          description: Legenda do documento (opcional)
+        fileName:
+          type: string
+          description: Nome do arquivo do documento (opcional)
+        delayMessage:
+          type: number
+          default: 0
+          description: Atraso para enviar a mensagem em segundos

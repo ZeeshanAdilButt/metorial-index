@@ -1,0 +1,42 @@
+tools:
+  - name: get_tradingview_chart_image
+    description: "
+
+      \    Fetches the direct image URL for a TradingView chart snapshot.
+
+
+      \    Args:
+
+      \        ticker: The TradingView ticker symbol (e.g., \"BYBIT:BTCUSDT.P\",
+      \"NASDAQ:AAPL\").
+
+      \        interval: The chart time interval (e.g., '1', '5', '15', '60',
+      '240', 'D', 'W').
+
+      \        ctx: MCP Context (automatically passed by FastMCP).
+
+
+      \    Returns:
+
+      \        The direct TradingView snapshot image URL (e.g.,
+      https://s3.tradingview.com/snapshots/.../...png).
+
+
+      \    Raises:
+
+      \        Error: If the scraper fails or invalid input is provided.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_tradingview_chart_imageArguments
+      required:
+        - ticker
+        - interval
+      properties:
+        ticker:
+          type: string
+          title: Ticker
+        interval:
+          type: string
+          title: Interval

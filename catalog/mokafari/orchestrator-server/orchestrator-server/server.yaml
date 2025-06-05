@@ -1,0 +1,15 @@
+identifier: mokafari/orchestrator-server/orchestrator-server
+repo:
+  provider: github.com
+  url: https://github.com/mokafari/orchestrator-server
+  name: orchestrator-server
+  owner: mokafari
+server:
+  subdirectory: /
+  name: Orchestrator Server
+  description: Provides task management and coordination capabilities for
+    distributed systems.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

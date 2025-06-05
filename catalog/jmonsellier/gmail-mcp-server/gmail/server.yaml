@@ -1,0 +1,14 @@
+identifier: jmonsellier/gmail-mcp-server/gmail
+repo:
+  provider: github.com
+  url: https://github.com/jmonsellier/gmail-mcp-server
+  name: gmail-mcp-server
+  owner: jmonsellier
+server:
+  subdirectory: /
+  name: Gmail
+  description: Integrate with Gmail to send, read, draft, and manage emails.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

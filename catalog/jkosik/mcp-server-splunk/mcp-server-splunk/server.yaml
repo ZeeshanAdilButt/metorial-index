@@ -1,0 +1,16 @@
+identifier: jkosik/mcp-server-splunk/mcp-server-splunk
+repo:
+  provider: github.com
+  url: https://github.com/jkosik/mcp-server-splunk
+  name: mcp-server-splunk
+  owner: jkosik
+server:
+  subdirectory: /
+  name: Splunk MCP Server
+  description: Implements MCP Tools for saved searches, alerts, fired alerts,
+    indexes, macros...MPC prompts and MCP Resources. Supports both STDIO and SSE
+    transports for flexible deployment and interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: sapientpants/sonarqube-mcp-server/sonarqube-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/sapientpants/sonarqube-mcp-server
+  name: sonarqube-mcp-server
+  owner: sapientpants
+server:
+  subdirectory: /
+  name: SonarQube MCP Server
+  description: A Model Context Protocol (MCP) server that integrates with
+    SonarQube to provide AI assistants with access to code quality metrics,
+    issues, and analysis results.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

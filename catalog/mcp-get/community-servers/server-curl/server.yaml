@@ -1,0 +1,16 @@
+identifier: mcp-get/community-servers/server-curl
+repo:
+  provider: github.com
+  url: https://github.com/mcp-get/community-servers
+  name: community-servers
+  owner: mcp-get
+server:
+  subdirectory: /src/server-curl
+  name: Server Curl
+  description: An MCP server that allows LLMs to make HTTP requests to any URL
+    using a curl-like interface with support for all common HTTP methods,
+    customizable headers, and request body.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

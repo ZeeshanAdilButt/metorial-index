@@ -1,0 +1,37 @@
+tools:
+  - name: get_github_trending_repositories
+    description: Get trending repositories on github
+    inputSchema:
+      type: object
+      properties:
+        since:
+          enum:
+            - daily
+            - weekly
+            - monthly
+          type: string
+          description: Time period to filter repositories by
+        language:
+          type: string
+          description: Language to filter repositories by
+        spoken_language:
+          type: string
+          description: Spoken language to filter repositories by
+  - name: get_github_trending_developers
+    description: Get trending developers on github
+    inputSchema:
+      type: object
+      properties:
+        since:
+          enum:
+            - daily
+            - weekly
+            - monthly
+          type: string
+          description: Time period to filter repositories by
+        language:
+          type: string
+          description: Language to filter repositories by
+        spoken_language:
+          type: string
+          description: Spoken language to filter repositories by

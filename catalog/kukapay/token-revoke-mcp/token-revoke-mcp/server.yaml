@@ -1,0 +1,17 @@
+identifier: kukapay/token-revoke-mcp/token-revoke-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/token-revoke-mcp
+  name: token-revoke-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: Token Revoke
+  description: Enhance your security and control over ERC-20 tokens by checking
+    and revoking allowances. Easily manage token approvals across multiple
+    chains with a simple interface. Ensure your wallet is secure by monitoring
+    and revoking token permissions as needed.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

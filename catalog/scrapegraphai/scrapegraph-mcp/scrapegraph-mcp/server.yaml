@@ -1,0 +1,24 @@
+identifier: scrapegraphai/scrapegraph-mcp/scrapegraph-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ScrapeGraphAI/scrapegraph-mcp
+  name: scrapegraph-mcp
+  owner: ScrapeGraphAI
+server:
+  subdirectory: /
+  name: ScrapeGraph MCP Server
+  description: >-
+    ScrapeGraphAI is a LLM-powered scraping API for structured data extraction
+    from any website. SmartScraper allows you to extract structured data from a
+    specific webpage, SearchScraper finds the information you're looking for on
+    the web and returns a structured response, and Markdownify converts webpages
+    into markdown. 
+
+
+    Web search integration and content filtering
+
+     - API KEY --> dashboard.scrapegraphai.com
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

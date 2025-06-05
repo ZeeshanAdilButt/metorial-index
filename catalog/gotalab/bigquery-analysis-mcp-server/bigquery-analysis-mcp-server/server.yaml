@@ -1,0 +1,17 @@
+identifier: gotalab/bigquery-analysis-mcp-server/bigquery-analysis-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/gotalab/bigquery-analysis-mcp-server
+  name: bigquery-analysis-mcp-server
+  owner: gotalab
+server:
+  subdirectory: /
+  name: BigQuery Analysis Server
+  description: Execute SQL queries against Google BigQuery with validation and
+    safety checks. Ensure your queries are valid and run safely without
+    modifying data or exceeding processing limits. Get structured JSON results
+    for your analytics needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

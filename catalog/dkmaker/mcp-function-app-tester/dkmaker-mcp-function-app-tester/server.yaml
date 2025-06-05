@@ -1,0 +1,15 @@
+identifier: dkmaker/mcp-function-app-tester/dkmaker-mcp-function-app-tester
+repo:
+  provider: github.com
+  url: https://github.com/dkmaker/mcp-function-app-tester
+  name: mcp-function-app-tester
+  owner: dkmaker
+server:
+  subdirectory: /
+  name: Function App Tester
+  description: A TypeScript-based MCP server for testing Azure Function Apps with
+    different HTTP methods.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

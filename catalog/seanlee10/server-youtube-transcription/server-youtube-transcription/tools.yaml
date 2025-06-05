@@ -1,0 +1,11 @@
+tools:
+  - name: youtube_transcription
+    description: Extracts transcription from a Youtube video provided by the user
+    inputSchema:
+      type: object
+      required:
+        - link
+      properties:
+        link:
+          type: string
+          description: Youtube video link

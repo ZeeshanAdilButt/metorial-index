@@ -1,0 +1,94 @@
+tools:
+  - name: save_project_context
+    description: Save project-specific context with relationships
+    inputSchema:
+      type: object
+      required:
+        - id
+        - projectId
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the context
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional tags for categorizing
+        content:
+          type: string
+          description: Context content to save
+        metadata:
+          type: object
+          description: Optional additional metadata
+        projectId:
+          type: string
+          description: Project identifier
+        references:
+          type: array
+          items:
+            type: string
+          description: Optional related context IDs
+        parentContextId:
+          type: string
+          description: Optional ID of parent context
+  - name: save_conversation_context
+    description: Save conversation context with continuation support
+    inputSchema:
+      type: object
+      required:
+        - id
+        - sessionId
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the context
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional tags for categorizing
+        content:
+          type: string
+          description: Context content to save
+        metadata:
+          type: object
+          description: Optional additional metadata
+        sessionId:
+          type: string
+          description: Conversation session identifier
+        continuationOf:
+          type: string
+          description: Optional ID of previous context
+  - name: get_context
+    description: Retrieve context by ID and optional project ID
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of the context to retrieve
+        projectId:
+          type: string
+          description: Optional project ID for project contexts
+  - name: list_contexts
+    description: List contexts with filtering options
+    inputSchema:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: Optional tag to filter by
+        type:
+          enum:
+            - project
+            - conversation
+          type: string
+          description: Optional type to filter by
+        projectId:
+          type: string
+          description: Optional project ID to filter by

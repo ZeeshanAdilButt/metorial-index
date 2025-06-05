@@ -1,0 +1,11 @@
+tools:
+  - name: mysql_query
+    description: Run SQL queries against MySQL database (Multi-DB mode enabled) (READ-ONLY)
+    inputSchema:
+      type: object
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          description: The SQL query to execute

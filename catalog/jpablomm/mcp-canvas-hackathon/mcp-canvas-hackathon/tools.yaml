@@ -1,0 +1,298 @@
+tools:
+  - name: list_courses
+    description: ""
+    inputSchema:
+      type: object
+      title: list_coursesArguments
+      properties:
+        include_all:
+          type: boolean
+          title: Include All
+          default: false
+        include_concluded:
+          type: boolean
+          title: Include Concluded
+          default: false
+  - name: get_course_details
+    description: "Get detailed information about a specific course.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_course_detailsArguments
+      required:
+        - course_identifier
+      properties:
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: list_assignments
+    description: "List assignments for a specific course.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_assignmentsArguments
+      required:
+        - course_identifier
+      properties:
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: get_assignment_details
+    description: "Get detailed information about a specific assignment.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \        assignment_id: The Canvas assignment ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_assignment_detailsArguments
+      required:
+        - course_identifier
+        - assignment_id
+      properties:
+        assignment_id:
+          type: string
+          title: Assignment Id
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: assign_peer_review
+    description: "Manually assign a peer review to a student for a specific
+      assignment.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \        assignment_id: The Canvas assignment ID
+
+      \        reviewer_id: The Canvas user ID of the student who will do the
+      review
+
+      \        reviewee_id: The Canvas user ID of the student whose submission
+      will be reviewed
+
+      \    "
+    inputSchema:
+      type: object
+      title: assign_peer_reviewArguments
+      required:
+        - course_identifier
+        - assignment_id
+        - reviewer_id
+        - reviewee_id
+      properties:
+        reviewee_id:
+          type: string
+          title: Reviewee Id
+        reviewer_id:
+          type: string
+          title: Reviewer Id
+        assignment_id:
+          type: string
+          title: Assignment Id
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: list_peer_reviews
+    description: "List all peer review assignments for a specific assignment.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \        assignment_id: The Canvas assignment ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_peer_reviewsArguments
+      required:
+        - course_identifier
+        - assignment_id
+      properties:
+        assignment_id:
+          type: string
+          title: Assignment Id
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: list_submissions
+    description: "List submissions for a specific assignment.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \        assignment_id: The Canvas assignment ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_submissionsArguments
+      required:
+        - course_identifier
+        - assignment_id
+      properties:
+        assignment_id:
+          type: string
+          title: Assignment Id
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: list_users
+    description: "List users enrolled in a specific course.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_usersArguments
+      required:
+        - course_identifier
+      properties:
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: list_announcements
+    description: "List announcements for a specific course.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_announcementsArguments
+      required:
+        - course_identifier
+      properties:
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: list_groups
+    description: "List all groups and their members for a specific course.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_groupsArguments
+      required:
+        - course_identifier
+      properties:
+        course_identifier:
+          type: string
+          title: Course Identifier
+  - name: get_student_analytics
+    description: "Get detailed analytics about student activity, participation, and
+      progress in a course.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \        current_only: Whether to include only assignments due on or
+      before today
+
+      \        include_participation: Whether to include participation data
+      (discussions, submissions)
+
+      \        include_assignment_stats: Whether to include assignment
+      completion statistics
+
+      \        include_access_stats: Whether to include course access statistics
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_student_analyticsArguments
+      required:
+        - course_identifier
+      properties:
+        current_only:
+          type: boolean
+          title: Current Only
+          default: true
+        course_identifier:
+          type: string
+          title: Course Identifier
+        include_access_stats:
+          type: boolean
+          title: Include Access Stats
+          default: true
+        include_participation:
+          type: boolean
+          title: Include Participation
+          default: true
+        include_assignment_stats:
+          type: boolean
+          title: Include Assignment Stats
+          default: true
+  - name: get_assignment_analytics
+    description: "Get detailed analytics about student performance on a specific
+      assignment.
+
+
+      \    Args:
+
+      \        course_identifier: The Canvas course code (e.g.,
+      badm_554_120251_246794) or ID
+
+      \        assignment_id: The Canvas assignment ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_assignment_analyticsArguments
+      required:
+        - course_identifier
+        - assignment_id
+      properties:
+        assignment_id:
+          type: string
+          title: Assignment Id
+        course_identifier:
+          type: string
+          title: Course Identifier

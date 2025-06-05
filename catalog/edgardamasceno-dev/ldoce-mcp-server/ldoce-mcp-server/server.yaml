@@ -1,0 +1,17 @@
+identifier: edgardamasceno-dev/ldoce-mcp-server/ldoce-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/edgardamasceno-dev/ldoce-mcp-server
+  name: ldoce-mcp-server
+  owner: edgardamasceno-dev
+server:
+  subdirectory: /
+  name: Ldoce Server
+  description: Extract and structure data from the Longman Dictionary for AI
+    agents. Connect to the dictionary and retrieve detailed word information in
+    a standardized JSON format. Enhance your applications with rich linguistic
+    data effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

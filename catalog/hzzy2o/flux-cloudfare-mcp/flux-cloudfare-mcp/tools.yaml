@@ -1,0 +1,50 @@
+tools:
+  - name: generate_image
+    description: Generate an image from a text prompt using Flux model
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        width:
+          type: integer
+          maximum: 1024
+          description: Width of the generated image
+          exclusiveMinimum: 0
+        height:
+          type: integer
+          maximum: 1024
+          description: Height of the generated image
+          exclusiveMinimum: 0
+        prompt:
+          type: string
+          minLength: 1
+          description: Prompt for generated image
+        file_name:
+          type: string
+          minLength: 1
+          description: Name of the file to save the image
+        save_folder:
+          type: string
+          default: ./output
+          description: Folder path to save the image
+        aspect_ratio:
+          enum:
+            - 1:1
+            - 1:2
+            - 3:2
+            - 3:4
+            - 16:9
+            - 9:16
+          type: string
+          default: 1:1
+          description: Aspect ratio for the generated image
+        num_inference_steps:
+          type: integer
+          default: 4
+          maximum: 4
+          minimum: 1
+          description: Number of denoising steps. 4 is recommended, and lower number of
+            steps produce lower quality outputs, faster.
+      additionalProperties: false

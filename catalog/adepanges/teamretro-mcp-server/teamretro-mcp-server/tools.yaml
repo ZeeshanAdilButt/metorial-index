@@ -1,0 +1,767 @@
+tools:
+  - name: list_users
+    description: List users with pagination using offset and limit parameters to
+      control the number of results returned
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+      additionalProperties: false
+  - name: add_user
+    description: Add a new user or update an existing user's information by their
+      email address, specifying optional name and emailAddress
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - email
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          description: string
+        email:
+          type: string
+          format: email
+          description: email
+      additionalProperties: false
+  - name: update_user
+    description: Update an existing user's details, such as their name and
+      emailAddress, by providing their current email
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - email
+        - emailAddress
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          description: string
+        email:
+          type: string
+          format: email
+          description: email
+        emailAddress:
+          type: string
+          format: email
+          description: email
+      additionalProperties: false
+  - name: delete_user
+    description: Delete a user by their email address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+      additionalProperties: false
+  - name: get_user
+    description: Retrieve detailed information about a single user by their email address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+      additionalProperties: false
+  - name: list_teams
+    description: List teams from TeamRetro with filtering by tags and IDs, and
+      pagination using offset and limit parameters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+        teamIds:
+          type: string
+          pattern: ^([a-zA-Z0-9]{22})?(,[a-zA-Z0-9]{22})*$
+          description: id,id,...
+        teamTags:
+          type: string
+          description: tag,tag,other tag,...
+      additionalProperties: false
+  - name: detail_team
+    description: Retrieve detailed information about a single team by its unique ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: update_team
+    description: Update an existing team's details, such as its name and associated
+      tags, by providing the team's ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          description: string
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 16
+            minLength: 0
+            description: string
+          description: string[]
+      additionalProperties: false
+  - name: create_team
+    description: Create a new team with a required name, and optional tags and members
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          description: string
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 16
+            minLength: 0
+            description: string
+          description: string[]
+        members:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+              - name
+            properties:
+              name:
+                type: string
+                maxLength: 64
+                minLength: 1
+                description: string
+              email:
+                type: string
+                format: email
+                description: email
+              teamAdmin:
+                type: boolean
+                default: false
+                description: boolean
+            additionalProperties: false
+          description: "{ email: email, name?: string, teamAdmin: boolean }[]"
+      additionalProperties: false
+  - name: delete_team
+    description: Delete an existing team by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+      properties:
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: list_team_members
+    description: Retrieve a list of team members for a specified team ID with
+      pagination controls for offset and limit.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: get_team_member
+    description: Fetch a team member by their email address within a specified team.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: update_team_member
+    description: Update a team member's details, such as their name or team admin
+      status, by their email address within a specified team.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        teamAdmin:
+          type: boolean
+          default: false
+          description: boolean
+      additionalProperties: false
+  - name: remove_team_member
+    description: Remove a team member from a team by their email address.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: add_team_member
+    description: Add a new team member to a team by their email address, with
+      optional specification of team admin status.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: email
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        teamAdmin:
+          type: boolean
+          default: false
+          description: boolean
+      additionalProperties: false
+  - name: list_actions
+    description: Retrieve a list of actions from TeamRetro with optional filtering
+      by team tags and team IDs, and pagination controls for offset and limit.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+        teamIds:
+          type: string
+          pattern: ^([a-zA-Z0-9]{22})?(,[a-zA-Z0-9]{22})*$
+          description: id,id,...
+        teamTags:
+          type: string
+          description: tag,tag,other tag,...
+      additionalProperties: false
+  - name: create_action
+    description: Create a new action in TeamRetro with required details such as team
+      ID, title, due date, completion status, and assigned user.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - teamId
+        - title
+      properties:
+        due:
+          anyOf:
+            - type: string
+              format: date-time
+              description: iso datetime
+            - type: "null"
+          description: iso datetime
+        title:
+          type: string
+          maxLength: 10000
+          minLength: 1
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        complete:
+          type: string
+          format: date-time
+          description: iso datetime
+        assignedTo:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+                format: email
+                description: email
+            additionalProperties: false
+          default: []
+          maxItems: 16
+          description: "{ email: string }[]"
+      additionalProperties: false
+  - name: get_action
+    description: Fetch a single action by its unique ID from TeamRetro.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: update_action
+    description: Update an existing action in TeamRetro with new details such as
+      title, due date, completion status, priority, and assigned user.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - actionId
+        - teamId
+        - title
+      properties:
+        due:
+          anyOf:
+            - type: string
+              format: date-time
+              description: iso datetime
+            - type: "null"
+          description: iso datetime
+        title:
+          type: string
+          maxLength: 10000
+          minLength: 1
+        teamId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        actionId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        complete:
+          type: string
+          format: date-time
+          description: iso datetime
+        priority:
+          enum:
+            - low
+            - medium
+            - high
+          type: string
+        assignedTo:
+          type: array
+          items:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+                format: email
+                description: email
+            additionalProperties: false
+          default: []
+          maxItems: 16
+          description: "{ email: string }[]"
+      additionalProperties: false
+  - name: delete_action
+    description: Delete an existing action from TeamRetro by its action ID.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - actionId
+      properties:
+        actionId:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: list_retrospectives
+    description: List retrospectives from TeamRetro with filtering by team tags and
+      IDs, and pagination using offset and limit parameters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+        teamIds:
+          type: string
+          pattern: ^([a-zA-Z0-9]{22})?(,[a-zA-Z0-9]{22})*$
+          description: id,id,...
+        teamTags:
+          type: string
+          description: tag,tag,other tag,...
+      additionalProperties: false
+  - name: get_retrospective
+    description: Retrieve detailed information about a single retrospective by its unique ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: delete_retrospective
+    description: Delete an existing retrospective by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: delete_agreement
+    description: Delete an existing agreement by specifying its unique identifier
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: update_agreement
+    description: Update an existing agreement's details such as its title or
+      associated team. Provide the agreement ID and the fields you wish to
+      update.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - team
+        - title
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        team:
+          type: object
+          required:
+            - id
+            - name
+          properties:
+            id:
+              type: string
+              pattern: ^[a-zA-Z0-9]{22}$
+              description: id
+            name:
+              type: string
+              maxLength: 64
+              minLength: 1
+              description: string
+            tags:
+              type: array
+              items:
+                type: string
+                maxLength: 16
+                minLength: 0
+                description: string
+              description: string[]
+          additionalProperties: false
+        title:
+          type: string
+          maxLength: 10000
+          minLength: 1
+      additionalProperties: false
+  - name: get_agreement
+    description: Retrieve a single agreement by its unique identifier. This will
+      return the agreement's details including its title, associated team, and
+      creation date.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: create_agreement
+    description: Create a new agreement in TeamRetro by specifying the team it
+      belongs to and its title. This will return the newly created agreement
+      with its unique identifier and other details.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - team
+        - title
+      properties:
+        team:
+          type: object
+          required:
+            - id
+            - name
+          properties:
+            id:
+              type: string
+              pattern: ^[a-zA-Z0-9]{22}$
+              description: id
+            name:
+              type: string
+              maxLength: 64
+              minLength: 1
+              description: string
+            tags:
+              type: array
+              items:
+                type: string
+                maxLength: 16
+                minLength: 0
+                description: string
+              description: string[]
+          additionalProperties: false
+        title:
+          type: string
+          maxLength: 10000
+          minLength: 1
+      additionalProperties: false
+  - name: list_agreements
+    description: List agreements from TeamRetro with optional filtering by team tags
+      and team IDs, as well as pagination controls. This allows for retrieving a
+      specific subset of agreements based on the provided criteria.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+        teamIds:
+          type: string
+          pattern: ^([a-zA-Z0-9]{22})?(,[a-zA-Z0-9]{22})*$
+          description: id,id,...
+        teamTags:
+          type: string
+          description: tag,tag,other tag,...
+      additionalProperties: false
+  - name: get_health_model
+    description: Retrieve a single health model by its unique identifier. This will
+      return the health model's details including its name, dimensions, and
+      creation date.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: list_health_models
+    description: List health models from TeamRetro with pagination controls. This
+      allows for retrieving a specific subset of health models based on the
+      provided offset and limit parameters.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+      additionalProperties: false
+  - name: delete_health_check
+    description: Delete an existing health check by specifying its unique identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+      additionalProperties: false
+  - name: get_health_check
+    description: Retrieve a single health check by its unique identifier with
+      optional attributes to include. This will return the health check's
+      details including its title, date, team, health model, and status.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^[a-zA-Z0-9]{22}$
+          description: id
+        include:
+          type: string
+          description: Comma delimited list of attributes to include (comments, ratings)
+      additionalProperties: false
+  - name: list_health_checks
+    description: List health checks from TeamRetro with optional filtering by health
+      model IDs, team tags, and team IDs, as well as pagination controls. This
+      allows for retrieving a specific subset of health checks based on the
+      provided criteria.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 1
+          description: number
+        offset:
+          type: integer
+          default: 0
+          minimum: 0
+          description: number
+        include:
+          type: string
+          description: Comma delimited list of attributes to include (comments, ratings)
+        teamIds:
+          type: string
+          pattern: ^([a-zA-Z0-9]{22})?(,[a-zA-Z0-9]{22})*$
+          description: id,id,...
+        teamTags:
+          type: string
+          description: tag,tag,other tag,...
+        healthModelIds:
+          type: string
+          pattern: ^([a-zA-Z0-9]{22})?(,[a-zA-Z0-9]{22})*$
+          description: id,id,...
+      additionalProperties: false

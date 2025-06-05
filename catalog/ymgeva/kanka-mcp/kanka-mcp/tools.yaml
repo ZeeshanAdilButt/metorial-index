@@ -1,0 +1,1028 @@
+tools:
+  - name: show_campaigns
+    description: >-
+      List all campaigns the user has access to.
+          You may need to run this tool before running other tools to get the campaign ID.
+    inputSchema:
+      type: object
+      title: show_campaignsArguments
+      properties: {}
+  - name: list_characters
+    description: List all characters in a campaign.
+    inputSchema:
+      type: object
+      title: list_charactersArguments
+      required:
+        - campaign_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: get_character
+    description: Get a single character by ID.
+    inputSchema:
+      type: object
+      title: get_characterArguments
+      required:
+        - campaign_id
+        - character_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        character_id:
+          type: integer
+          title: Character Id
+  - name: create_character
+    description: "Create a new character in a campaign.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign to add the character to
+
+      \        name: The name of the character (required)
+
+      \        title: The character's title (optional)
+
+      \        type: The type or class of the character (optional)
+
+      \        age: The age of the character (optional)
+
+      \        sex: The sex/gender of the character (optional)
+
+      \        pronouns: The pronouns of the character (optional)
+
+      \        race_id: The ID of the race entity (optional)
+
+      \        family_id: The ID of the family entity (optional)
+
+      \        is_dead: Whether the character is dead (optional)
+
+      \        image: URL or path to the character's image (optional)
+
+      \        tags: Comma-separated list of tags (optional)
+
+      \        entry: The character's entry/description (optional, must be HTML.
+      If not HTML, it will be wrapped in <p> tags.)
+
+      \        is_private: If the character is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_characterArguments
+      required:
+        - campaign_id
+        - name
+      properties:
+        age:
+          type: string
+          title: Age
+          default: null
+        sex:
+          type: string
+          title: Sex
+          default: null
+        name:
+          type: string
+          title: Name
+        tags:
+          type: string
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        image:
+          type: string
+          title: Image
+          default: null
+        title:
+          type: string
+          title: Title
+          default: null
+        is_dead:
+          type: boolean
+          title: Is Dead
+          default: null
+        race_id:
+          type: integer
+          title: Race Id
+          default: null
+        pronouns:
+          type: string
+          title: Pronouns
+          default: null
+        family_id:
+          type: integer
+          title: Family Id
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: update_character
+    description: "Update an existing character.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign
+
+      \        character_id: The ID of the character to update
+
+      \        name: The name of the character (optional)
+
+      \        title: The character's title (optional)
+
+      \        type: The type or class of the character (optional)
+
+      \        age: The age of the character (optional)
+
+      \        sex: The sex/gender of the character (optional)
+
+      \        pronouns: The pronouns of the character (optional)
+
+      \        race_id: The ID of the race entity (optional)
+
+      \        family_id: The ID of the family entity (optional)
+
+      \        is_dead: Whether the character is dead (optional)
+
+      \        image: URL or path to the character's image (optional)
+
+      \        tags: Comma-separated list of tags (optional)
+
+      \        entry: The character's entry/description (optional, must be HTML.
+      If not HTML, it will be wrapped in <p> tags.)
+
+      \        is_private: If the character is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_characterArguments
+      required:
+        - campaign_id
+        - character_id
+      properties:
+        age:
+          type: string
+          title: Age
+          default: null
+        sex:
+          type: string
+          title: Sex
+          default: null
+        name:
+          type: string
+          title: Name
+          default: null
+        tags:
+          type: string
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        image:
+          type: string
+          title: Image
+          default: null
+        title:
+          type: string
+          title: Title
+          default: null
+        is_dead:
+          type: boolean
+          title: Is Dead
+          default: null
+        race_id:
+          type: integer
+          title: Race Id
+          default: null
+        pronouns:
+          type: string
+          title: Pronouns
+          default: null
+        family_id:
+          type: integer
+          title: Family Id
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        character_id:
+          type: integer
+          title: Character Id
+  - name: delete_character
+    description: Delete a character by ID.
+    inputSchema:
+      type: object
+      title: delete_characterArguments
+      required:
+        - campaign_id
+        - character_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        character_id:
+          type: integer
+          title: Character Id
+  - name: list_locations
+    description: List all locations in a campaign.
+    inputSchema:
+      type: object
+      title: list_locationsArguments
+      required:
+        - campaign_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: get_location
+    description: Get a single location by ID.
+    inputSchema:
+      type: object
+      title: get_locationArguments
+      required:
+        - campaign_id
+        - location_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        location_id:
+          type: integer
+          title: Location Id
+  - name: create_location
+    description: "Create a new location in a campaign.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign to add the location to
+
+      \        name: The name of the location (required)
+
+      \        entry: The location's entry/description (optional, must be HTML.
+      If not HTML, it will be wrapped in <p> tags.)
+
+      \        type: Type of location (optional)
+
+      \        location_id: The parent location id (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \        is_destroyed: If the location is destroyed (optional)
+
+      \        is_private: If the location is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_locationArguments
+      required:
+        - campaign_id
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        location_id:
+          type: integer
+          title: Location Id
+          default: null
+        is_destroyed:
+          type: boolean
+          title: Is Destroyed
+          default: null
+  - name: update_location
+    description: "Update an existing location.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign
+
+      \        location_id: The ID of the location to update
+
+      \        name: The name of the location (optional)
+
+      \        entry: The location's entry/description (optional, must be HTML.
+      If not HTML, it will be wrapped in <p> tags.)
+
+      \        type: Type of location (optional)
+
+      \        new_parent_location_id: The parent location id (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \        is_destroyed: If the location is destroyed (optional)
+
+      \        is_private: If the location is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_locationArguments
+      required:
+        - campaign_id
+        - location_id
+      properties:
+        name:
+          type: string
+          title: Name
+          default: null
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        location_id:
+          type: integer
+          title: Location Id
+        is_destroyed:
+          type: boolean
+          title: Is Destroyed
+          default: null
+        parent_location_id:
+          type: integer
+          title: Parent Location Id
+          default: null
+        new_parent_location_id:
+          type: integer
+          title: New Parent Location Id
+          default: null
+  - name: delete_location
+    description: Delete a location by ID.
+    inputSchema:
+      type: object
+      title: delete_locationArguments
+      required:
+        - campaign_id
+        - location_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        location_id:
+          type: integer
+          title: Location Id
+  - name: list_posts
+    description: "List all posts for a given entity in a campaign. Note: entity_id
+      is the ID of the entity, not the post object ID."
+    inputSchema:
+      type: object
+      title: list_postsArguments
+      required:
+        - campaign_id
+        - entity_id
+      properties:
+        entity_id:
+          type: integer
+          title: Entity Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: get_post
+    description: "Get a single post by ID for a given entity. Note: entity_id is the
+      ID of the entity, not the post object ID."
+    inputSchema:
+      type: object
+      title: get_postArguments
+      required:
+        - campaign_id
+        - entity_id
+        - post_id
+      properties:
+        post_id:
+          type: integer
+          title: Post Id
+        entity_id:
+          type: integer
+          title: Entity Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: create_post
+    description: "Create a new post for an entity in a campaign.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign
+
+      \        entity_id: The ID of the entity this post belongs to (Required)
+
+      \        name: The name/title of the post (required)
+
+      \        entry: The post content (optional, must be HTML. If not HTML, it
+      will be wrapped in <p> tags.)
+
+      \        position: The position/order of the post for ordering pinned
+      posts (optional)
+
+      \        visibility_id: The visibility: 1 for all, 2 self, 3 admin, 4
+      self-admin or 5 members (optional)
+
+      \        is_pinned: Whether the post is pinned (optional)
+
+      \        settings: Settings object. E.g. {'collapsed': 1} if pinned post
+      should be collapsed on load (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_postArguments
+      required:
+        - campaign_id
+        - entity_id
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        position:
+          type: integer
+          title: Position
+          default: null
+        settings:
+          type: object
+          title: Settings
+          default: null
+          additionalProperties: true
+        entity_id:
+          type: integer
+          title: Entity Id
+        is_pinned:
+          type: boolean
+          title: Is Pinned
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        visibility_id:
+          type: integer
+          title: Visibility Id
+          default: null
+  - name: update_post
+    description: "Update a post for an entity in a campaign.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign
+
+      \        entity_id: The ID of the entity this post belongs to
+
+      \        post_id: The ID of the post to update
+
+      \        name: The name/title of the post (optional)
+
+      \        entry: The post content (optional, must be HTML. If not HTML, it
+      will be wrapped in <p> tags.)
+
+      \        position: The position/order of the post for ordering pinned
+      posts (optional)
+
+      \        visibility_id: The visibility: 1 for all, 2 self, 3 admin, 4
+      self-admin or 5 members (optional)
+
+      \        is_pinned: Whether the post is pinned (optional)
+
+      \        settings: Settings object. E.g. {'collapsed': 1} if pinned post
+      should be collapsed on load (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_postArguments
+      required:
+        - campaign_id
+        - entity_id
+        - post_id
+      properties:
+        name:
+          type: string
+          title: Name
+          default: null
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        post_id:
+          type: integer
+          title: Post Id
+        position:
+          type: integer
+          title: Position
+          default: null
+        settings:
+          type: object
+          title: Settings
+          default: null
+          additionalProperties: true
+        entity_id:
+          type: integer
+          title: Entity Id
+        is_pinned:
+          type: boolean
+          title: Is Pinned
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        visibility_id:
+          type: integer
+          title: Visibility Id
+          default: null
+  - name: delete_post
+    description: "Delete a post by ID for a given entity. Note: entity_id is the ID
+      of the entity, not the post object ID."
+    inputSchema:
+      type: object
+      title: delete_postArguments
+      required:
+        - campaign_id
+        - entity_id
+        - post_id
+      properties:
+        post_id:
+          type: integer
+          title: Post Id
+        entity_id:
+          type: integer
+          title: Entity Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: list_notes
+    description: List all notes in a campaign.
+    inputSchema:
+      type: object
+      title: list_notesArguments
+      required:
+        - campaign_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: get_note
+    description: Get a single note by ID.
+    inputSchema:
+      type: object
+      title: get_noteArguments
+      required:
+        - campaign_id
+        - note_id
+      properties:
+        note_id:
+          type: integer
+          title: Note Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: create_note
+    description: "Create a new note in a campaign.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign to add the note to
+
+      \        name: The name of the note (required)
+
+      \        entry: The note's entry/description (optional, must be HTML. If
+      not HTML, it will be wrapped in <p> tags.)
+
+      \        type: The note's type (optional)
+
+      \        note_id: The parent note id (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \        entity_image_uuid: Gallery image UUID for the entity image
+      (optional)
+
+      \        entity_header_uuid: Gallery image UUID for the entity header
+      (limited to premium campaigns) (optional)
+
+      \        is_private: If the note is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_noteArguments
+      required:
+        - campaign_id
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        note_id:
+          type: integer
+          title: Note Id
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        entity_image_uuid:
+          type: string
+          title: Entity Image Uuid
+          default: null
+        entity_header_uuid:
+          type: string
+          title: Entity Header Uuid
+          default: null
+  - name: update_note
+    description: "Update an existing note.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign
+
+      \        note_id: The ID of the note to update
+
+      \        name: The name of the note (optional)
+
+      \        entry: The note's entry/description (optional, must be HTML. If
+      not HTML, it will be wrapped in <p> tags.)
+
+      \        type: The note's type (optional)
+
+      \        parent_note_id: The parent note id (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \        entity_image_uuid: Gallery image UUID for the entity image
+      (optional)
+
+      \        entity_header_uuid: Gallery image UUID for the entity header
+      (limited to premium campaigns) (optional)
+
+      \        is_private: If the note is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_noteArguments
+      required:
+        - campaign_id
+        - note_id
+      properties:
+        name:
+          type: string
+          title: Name
+          default: null
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        note_id:
+          type: integer
+          title: Note Id
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        parent_note_id:
+          type: integer
+          title: Parent Note Id
+          default: null
+        entity_image_uuid:
+          type: string
+          title: Entity Image Uuid
+          default: null
+        entity_header_uuid:
+          type: string
+          title: Entity Header Uuid
+          default: null
+  - name: delete_note
+    description: Delete a note by ID.
+    inputSchema:
+      type: object
+      title: delete_noteArguments
+      required:
+        - campaign_id
+        - note_id
+      properties:
+        note_id:
+          type: integer
+          title: Note Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: list_journals
+    description: List all journals in a campaign.
+    inputSchema:
+      type: object
+      title: list_journalsArguments
+      required:
+        - campaign_id
+      properties:
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: get_journal
+    description: Get a single journal by ID.
+    inputSchema:
+      type: object
+      title: get_journalArguments
+      required:
+        - campaign_id
+        - journal_id
+      properties:
+        journal_id:
+          type: integer
+          title: Journal Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+  - name: create_journal
+    description: "Create a new journal in a campaign.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign to add the journal to
+
+      \        name: The name of the journal (required)
+
+      \        entry: The journal's entry/description (optional, must be HTML.
+      If not HTML, it will be wrapped in <p> tags.)
+
+      \        type: The journal's type (optional)
+
+      \        date: The date of the session (optional)
+
+      \        journal_id: The ID of the journal's parent journal (optional)
+
+      \        author_id: The \"author\" of the journal (entity id) (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \        entity_image_uuid: Gallery image UUID for the entity image
+      (optional)
+
+      \        entity_header_uuid: Gallery image UUID for the entity header
+      (premium campaigns) (optional)
+
+      \        is_private: If the journal is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_journalArguments
+      required:
+        - campaign_id
+        - name
+      properties:
+        date:
+          type: string
+          title: Date
+          default: null
+        name:
+          type: string
+          title: Name
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        author_id:
+          type: integer
+          title: Author Id
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        journal_id:
+          type: integer
+          title: Journal Id
+          default: null
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        entity_image_uuid:
+          type: string
+          title: Entity Image Uuid
+          default: null
+        entity_header_uuid:
+          type: string
+          title: Entity Header Uuid
+          default: null
+  - name: update_journal
+    description: "Update an existing journal.
+
+      \    Fields:
+
+      \        campaign_id: The ID of the campaign
+
+      \        journal_id: The ID of the journal to update
+
+      \        name: The name of the journal (optional)
+
+      \        entry: The journal's entry/description (optional, must be HTML.
+      If not HTML, it will be wrapped in <p> tags.)
+
+      \        type: The journal's type (optional)
+
+      \        date: The date of the session (optional)
+
+      \        parent_journal_id: The ID of the journal's parent journal
+      (optional)
+
+      \        author_id: The \"author\" of the journal (entity id) (optional)
+
+      \        tags: Array of tag ids (optional)
+
+      \        entity_image_uuid: Gallery image UUID for the entity image
+      (optional)
+
+      \        entity_header_uuid: Gallery image UUID for the entity header
+      (premium campaigns) (optional)
+
+      \        is_private: If the journal is only visible to admin members
+      (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_journalArguments
+      required:
+        - campaign_id
+        - journal_id
+      properties:
+        date:
+          type: string
+          title: Date
+          default: null
+        name:
+          type: string
+          title: Name
+          default: null
+        tags:
+          type: array
+          items: {}
+          title: Tags
+          default: null
+        type:
+          type: string
+          title: Type
+          default: null
+        entry:
+          type: string
+          title: Entry
+          default: null
+        author_id:
+          type: integer
+          title: Author Id
+          default: null
+        is_private:
+          type: boolean
+          title: Is Private
+          default: null
+        journal_id:
+          type: integer
+          title: Journal Id
+        campaign_id:
+          type: integer
+          title: Campaign Id
+        entity_image_uuid:
+          type: string
+          title: Entity Image Uuid
+          default: null
+        parent_journal_id:
+          type: integer
+          title: Parent Journal Id
+          default: null
+        entity_header_uuid:
+          type: string
+          title: Entity Header Uuid
+          default: null
+  - name: delete_journal
+    description: Delete a journal by ID.
+    inputSchema:
+      type: object
+      title: delete_journalArguments
+      required:
+        - campaign_id
+        - journal_id
+      properties:
+        journal_id:
+          type: integer
+          title: Journal Id
+        campaign_id:
+          type: integer
+          title: Campaign Id

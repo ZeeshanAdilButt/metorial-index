@@ -1,0 +1,100 @@
+tools:
+  - name: get_talks
+    description: Get a list of talks with optional filtering and pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          description: Filter talks by ID
+        city:
+          type: string
+          description: Filter talks by city
+        skip:
+          type: number
+          default: 0
+          description: Number of talks to skip
+        year:
+          type: number
+          description: Filter talks by year
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of talks to return
+        title:
+          type: string
+          description: Filter talks by title
+        country:
+          type: string
+          description: Filter talks by country
+        group_by:
+          type: string
+          description: Group counts by a specific field (language, country, city)
+        language:
+          type: string
+          description: Filter talks by language (e.g., 'spanish', 'english', 'portuguese'
+            or direct codes like 'es', 'en', 'pt-br')
+        count_only:
+          type: boolean
+          default: false
+          description: If true, returns only the count without talk details
+      additionalProperties: false
+  - name: get_posts
+    description: Get a list of posts with optional filtering and pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          description: Filter posts by ID
+        skip:
+          type: number
+          default: 0
+          description: Number of posts to skip
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of posts to return
+        title:
+          type: string
+          description: Filter posts by title
+        portal:
+          type: string
+          description: Filter posts by portal
+        language:
+          type: string
+          description: Filter posts by language
+      additionalProperties: false
+  - name: get_videos
+    description: Get a list of videos with optional filtering and pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        id:
+          type: string
+          description: Filter videos by ID
+        skip:
+          type: number
+          default: 0
+          description: Number of videos to skip
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of videos to return
+        title:
+          type: string
+          description: Filter videos by title
+        language:
+          type: string
+          description: Filter videos by language
+      additionalProperties: false
+  - name: check_status
+    description: Check if the API is alive and responding.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

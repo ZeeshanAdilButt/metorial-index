@@ -1,0 +1,16 @@
+identifier: j4c0bs/mcp-server-sql-analyzer/mcp-server-sql-analyzer
+repo:
+  provider: github.com
+  url: https://github.com/j4c0bs/mcp-server-sql-analyzer
+  name: mcp-server-sql-analyzer
+  owner: j4c0bs
+server:
+  subdirectory: /
+  name: mcp-server-sql-analyzer
+  description: A Model Context Protocol (MCP) server that provides SQL analysis,
+    linting, and dialect conversion capabilities using
+    [SQLGlot](https://sqlglot.com/sqlglot.html).
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

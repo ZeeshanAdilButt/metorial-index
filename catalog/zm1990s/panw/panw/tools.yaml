@@ -1,0 +1,42 @@
+tools:
+  - name: scan_with_airs_api
+    description: "
+
+      \    调用 Palo Alto Networks AI Security API 进行内容检测。
+
+      \   \ 
+
+      \    Args:
+
+      \        tool_parameters: 包含以下参数:
+
+      \            - inputoroutput:
+      输入类型，可以是\"input\"、\"output\"、\"codeinput\"或\"codeoutput\"
+
+      \            - query: 要检查的文本内容
+
+      \            - profileoverride: 覆盖默认的安全配置文件名称
+
+      \            - modelname: AI模型名称
+
+      \            - appname: 应用名称
+
+      \            - appuser: 用户标识
+
+      \           \ 
+
+      \    Returns:
+
+      \        API 返回的 action 结果和完整 JSON 响应。
+
+      \    "
+    inputSchema:
+      type: object
+      title: scan_with_airs_apiArguments
+      required:
+        - tool_parameters
+      properties:
+        tool_parameters:
+          type: object
+          title: Tool Parameters
+          additionalProperties: true

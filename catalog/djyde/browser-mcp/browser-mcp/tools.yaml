@@ -1,0 +1,28 @@
+tools:
+  - name: get_current_page_url
+    description: Get the URL from current browser browsing tab
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_current_page_markdown
+    description: Get the markdown from current browser browsing page
+    inputSchema:
+      type: object
+      properties: {}
+  - name: append_style
+    description: Append a css style to the current browser browsing page
+    inputSchema:
+      type: object
+      properties:
+        css_string:
+          type: string
+          description: The css style to append to the current browser browsing page
+  - name: history_search
+    description: Search the browser history
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A free-text query to the history service. Leave this empty to
+            retrieve all pages.

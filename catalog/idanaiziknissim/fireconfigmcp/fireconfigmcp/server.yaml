@@ -1,0 +1,18 @@
+identifier: idanaiziknissim/fireconfigmcp/fireconfigmcp
+repo:
+  provider: github.com
+  url: https://github.com/IdanAizikNissim/FireConfigMCP
+  name: FireConfigMCP
+  owner: IdanAizikNissim
+server:
+  subdirectory: /
+  name: Fire Config Remote Config Server
+  description: Provide seamless access to Firebase Remote Config data through a
+    standardized MCP interface. Enable clients to securely fetch and manage
+    remote configuration settings for their applications. Simplify integration
+    with Firebase Remote Config by exposing it as an MCP server compatible with
+    popular clients like Cursor and Claude Desktop.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

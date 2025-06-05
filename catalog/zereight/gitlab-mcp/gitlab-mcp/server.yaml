@@ -1,0 +1,16 @@
+identifier: zereight/gitlab-mcp/gitlab-mcp
+repo:
+  provider: github.com
+  url: https://github.com/zereight/gitlab-mcp
+  name: gitlab-mcp
+  owner: zereight
+server:
+  subdirectory: /
+  name: GitLab communication server
+  description: Integrate with the GitLab API to enhance your applications. Access
+    GitLab resources and perform actions seamlessly through a standardized
+    protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

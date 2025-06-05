@@ -1,0 +1,18 @@
+identifier: semutireng22/mcp-monad/mcp-monad
+repo:
+  provider: github.com
+  url: https://github.com/Semutireng22/mcp-monad
+  name: mcp-monad
+  owner: Semutireng22
+server:
+  subdirectory: /
+  name: Monad Testnet MCP Server
+  description: Provide real-time blockchain data access for the Monad testnet,
+    including balance checks, transaction details, gas prices, and latest block
+    information. Enable seamless integration with LLMs to query multiple
+    addresses and tokens efficiently. Simplify blockchain interactions by
+    exposing these features through a standardized MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

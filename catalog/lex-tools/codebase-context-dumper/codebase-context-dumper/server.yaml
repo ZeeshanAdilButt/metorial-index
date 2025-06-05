@@ -1,0 +1,18 @@
+identifier: lex-tools/codebase-context-dumper/codebase-context-dumper
+repo:
+  provider: github.com
+  url: https://github.com/lex-tools/codebase-context-dumper
+  name: codebase-context-dumper
+  owner: lex-tools
+server:
+  subdirectory: /
+  name: Codebase Context Dumper
+  description: Automate the extraction of your codebase context for Large Language
+    Models. This tool scans your project directory, respects .gitignore rules,
+    and formats the output for seamless integration with MCP-compatible clients.
+    Save time and enhance your LLM's context with structured codebase
+    information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

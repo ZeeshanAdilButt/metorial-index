@@ -1,0 +1,95 @@
+tools:
+  - name: run_suzieq_show
+    description: "
+
+      \    Runs a SuzieQ 'show' query via its REST API.
+
+
+      \    Args:
+
+      \        table: The name of the SuzieQ table to query (e.g., 'device',
+      'bgp', 'interface', 'route').
+
+      \        filters: An optional dictionary of filter parameters for the
+      SuzieQ query
+
+      \                 (e.g., {\"hostname\": \"leaf01\", \"vrf\": \"default\",
+      \"state\": \"Established\"}).
+
+      \                 Keys should match SuzieQ filter names. Values can be
+      strings or lists of strings.
+
+      \                 If no filters are needed, this can be None, null, or an
+      empty dictionary.
+
+
+      \    Returns:
+
+      \        A JSON string representing the result from the SuzieQ API, or a
+      JSON string with an error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_suzieq_showArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        filters:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Filters
+          default: null
+  - name: run_suzieq_summarize
+    description: "
+
+      \    Runs a SuzieQ 'summarize' query via its REST API.
+
+
+      \    Args:
+
+      \        table: The name of the SuzieQ table to summarize (e.g., 'device',
+      'bgp', 'interface', 'route').
+
+      \        filters: An optional dictionary of filter parameters for the
+      SuzieQ query
+
+      \                 (e.g., {\"hostname\": \"leaf01\", \"vrf\":
+      \"default\"}).
+
+      \                 Keys should match SuzieQ filter names. Values can be
+      strings or lists of strings.
+
+      \                 If no filters are needed, this can be None, null, or an
+      empty dictionary.
+
+
+      \    Returns:
+
+      \        A JSON string representing the summarized result from the SuzieQ
+      API,
+
+      \        or a JSON string with an error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_suzieq_summarizeArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        filters:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Filters
+          default: null

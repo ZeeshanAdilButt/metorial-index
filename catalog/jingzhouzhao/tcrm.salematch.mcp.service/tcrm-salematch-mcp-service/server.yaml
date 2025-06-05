@@ -1,0 +1,18 @@
+identifier: jingzhouzhao/tcrm.salematch.mcp.service/tcrm-salematch-mcp-service
+repo:
+  provider: github.com
+  url: https://github.com/jingzhouzhao/tcrm.salematch.mcp.service
+  name: tcrm.salematch.mcp.service
+  owner: jingzhouzhao
+server:
+  subdirectory: /
+  name: TCRM Salematch MCP Service
+  description: Provide a Python-based MCP server that integrates with TCRM
+    Salematch to expose tools, resources, and prompts for enhanced LLM
+    interactions. Enable dynamic access to data and operations to empower AI
+    agents with contextual capabilities. Simplify the deployment with a
+    ready-to-use Docker environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,901 @@
+tools:
+  - name: get-products
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+        searchTitle:
+          type: string
+      additionalProperties: false
+  - name: get-product-by-id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - productId
+      properties:
+        productId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get-customers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+        searchQuery:
+          type: string
+      additionalProperties: false
+  - name: get-orders
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+        status:
+          enum:
+            - any
+            - open
+            - closed
+            - cancelled
+          type: string
+          default: any
+      additionalProperties: false
+  - name: get-order-by-id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: update-order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          minLength: 1
+        note:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+          format: email
+        metafields:
+          type: array
+          items:
+            type: object
+            required:
+              - value
+            properties:
+              id:
+                type: string
+              key:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+              namespace:
+                type: string
+            additionalProperties: false
+        shippingAddress:
+          type: object
+          properties:
+            zip:
+              type: string
+            city:
+              type: string
+            phone:
+              type: string
+            company:
+              type: string
+            country:
+              type: string
+            address1:
+              type: string
+            address2:
+              type: string
+            lastName:
+              type: string
+            province:
+              type: string
+            firstName:
+              type: string
+          additionalProperties: false
+        customAttributes:
+          type: array
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+            additionalProperties: false
+      additionalProperties: false
+  - name: get-customer-orders
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - customerId
+      properties:
+        limit:
+          type: number
+          default: 10
+        customerId:
+          type: string
+          pattern: ^\d+$
+          description: Shopify customer ID, numeric excluding gid prefix
+      additionalProperties: false
+  - name: update-customer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          pattern: ^\d+$
+          description: Shopify customer ID, numeric excluding gid prefix
+        note:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        taxExempt:
+          type: boolean
+        metafields:
+          type: array
+          items:
+            type: object
+            required:
+              - value
+            properties:
+              id:
+                type: string
+              key:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+              namespace:
+                type: string
+            additionalProperties: false
+      additionalProperties: false
+  - name: create-customer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        taxExempt:
+          type: boolean
+        smsMarketingConsent:
+          type: object
+          required:
+            - marketingState
+          properties:
+            marketingState:
+              enum:
+                - SUBSCRIBED
+                - NOT_SUBSCRIBED
+                - PENDING
+                - UNSUBSCRIBED
+              type: string
+            marketingOptInLevel:
+              enum:
+                - SINGLE_OPT_IN
+                - CONFIRMED_OPT_IN
+                - UNKNOWN
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: create-order
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - lineItems
+      properties:
+        note:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        lineItems:
+          type: array
+          items:
+            type: object
+            required:
+              - variantId
+              - quantity
+            properties:
+              quantity:
+                type: integer
+                exclusiveMinimum: 0
+              variantId:
+                type: string
+              customAttributes:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - key
+                    - value
+                  properties:
+                    key:
+                      type: string
+                    value:
+                      type: string
+                  additionalProperties: false
+            additionalProperties: false
+          minItems: 1
+        taxExempt:
+          type: boolean
+        customerId:
+          type: string
+        metafields:
+          type: array
+          items:
+            type: object
+            required:
+              - namespace
+              - key
+              - value
+              - type
+            properties:
+              key:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+              namespace:
+                type: string
+            additionalProperties: false
+        shippingLine:
+          type: object
+          required:
+            - title
+            - price
+          properties:
+            price:
+              type: string
+            title:
+              type: string
+          additionalProperties: false
+        billingAddress:
+          type: object
+          properties:
+            zip:
+              type: string
+            city:
+              type: string
+            phone:
+              type: string
+            company:
+              type: string
+            country:
+              type: string
+            address1:
+              type: string
+            address2:
+              type: string
+            lastName:
+              type: string
+            province:
+              type: string
+            firstName:
+              type: string
+          additionalProperties: false
+        shippingAddress:
+          type: object
+          properties:
+            zip:
+              type: string
+            city:
+              type: string
+            phone:
+              type: string
+            company:
+              type: string
+            country:
+              type: string
+            address1:
+              type: string
+            address2:
+              type: string
+            lastName:
+              type: string
+            province:
+              type: string
+            firstName:
+              type: string
+          additionalProperties: false
+        customAttributes:
+          type: array
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+            additionalProperties: false
+        presentmentCurrencyCode:
+          type: string
+      additionalProperties: false
+  - name: create-fulfillment
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          minLength: 1
+        metadata:
+          type: object
+          additionalProperties:
+            type:
+              - string
+              - number
+              - boolean
+        lineItems:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - quantity
+            properties:
+              id:
+                type: string
+                minLength: 1
+              quantity:
+                type: integer
+                exclusiveMinimum: 0
+            additionalProperties: false
+        locationId:
+          type: string
+        trackingInfo:
+          type: object
+          properties:
+            url:
+              type: string
+            number:
+              type: string
+            company:
+              type: string
+          additionalProperties: false
+        trackingUrls:
+          type: array
+          items:
+            type: string
+        notifyCustomer:
+          type: boolean
+          default: true
+        trackingNumbers:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+  - name: create-product
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+      properties:
+        seo:
+          type: object
+          properties:
+            title:
+              type: string
+            description:
+              type: string
+          additionalProperties: false
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+          minLength: 1
+        images:
+          type: array
+          items:
+            type: object
+            required:
+              - src
+            properties:
+              src:
+                type: string
+                format: uri
+              altText:
+                type: string
+            additionalProperties: false
+        status:
+          enum:
+            - ACTIVE
+            - DRAFT
+            - ARCHIVED
+          type: string
+          default: ACTIVE
+        vendor:
+          type: string
+        options:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - values
+            properties:
+              name:
+                type: string
+                minLength: 1
+              values:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+            additionalProperties: false
+        taxCode:
+          type: string
+        giftCard:
+          type: boolean
+        variants:
+          type: array
+          items:
+            type: object
+            required:
+              - options
+              - price
+            properties:
+              sku:
+                type: string
+              price:
+                type: string
+              weight:
+                type: number
+              barcode:
+                type: string
+              options:
+                type: array
+                items:
+                  type: string
+              taxable:
+                type: boolean
+              weightUnit:
+                enum:
+                  - KILOGRAMS
+                  - GRAMS
+                  - POUNDS
+                  - OUNCES
+                type: string
+              inventoryPolicy:
+                enum:
+                  - DENY
+                  - CONTINUE
+                type: string
+              requiresShipping:
+                type: boolean
+              inventoryQuantity:
+                type: integer
+              inventoryManagement:
+                enum:
+                  - SHOPIFY
+                  - NOT_MANAGED
+                type: string
+            additionalProperties: false
+        metafields:
+          type: array
+          items:
+            type: object
+            required:
+              - namespace
+              - key
+              - value
+              - type
+            properties:
+              key:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+              namespace:
+                type: string
+            additionalProperties: false
+        productType:
+          type: string
+        descriptionHtml:
+          type: string
+        collectionsToJoin:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+  - name: create-collection
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+      properties:
+        seo:
+          type: object
+          properties:
+            title:
+              type: string
+            description:
+              type: string
+          additionalProperties: false
+        image:
+          type: object
+          required:
+            - src
+          properties:
+            src:
+              type: string
+              format: uri
+            altText:
+              type: string
+          additionalProperties: false
+        title:
+          type: string
+          minLength: 1
+        handle:
+          type: string
+        ruleSet:
+          type: object
+          required:
+            - rules
+          properties:
+            rules:
+              type: array
+              items:
+                type: object
+                required:
+                  - column
+                  - relation
+                  - condition
+                properties:
+                  column:
+                    enum:
+                      - TAG
+                      - TITLE
+                      - TYPE
+                      - VENDOR
+                      - VARIANT_PRICE
+                      - VARIANT_COMPARE_AT_PRICE
+                      - VARIANT_WEIGHT
+                      - VARIANT_INVENTORY
+                      - VARIANT_TITLE
+                      - IS_PRICE_REDUCED
+                      - VARIANT_BARCODE
+                    type: string
+                  relation:
+                    enum:
+                      - EQUALS
+                      - NOT_EQUALS
+                      - GREATER_THAN
+                      - LESS_THAN
+                      - STARTS_WITH
+                      - ENDS_WITH
+                      - CONTAINS
+                      - NOT_CONTAINS
+                      - IS_SET
+                      - IS_NOT_SET
+                    type: string
+                  condition:
+                    type: string
+                additionalProperties: false
+            appliedDisjunctively:
+              type: boolean
+              default: true
+          additionalProperties: false
+        sortOrder:
+          enum:
+            - MANUAL
+            - BEST_SELLING
+            - ALPHA_ASC
+            - ALPHA_DESC
+            - PRICE_DESC
+            - PRICE_ASC
+            - CREATED
+            - CREATED_DESC
+            - ID_DESC
+            - RELEVANCE
+          type: string
+        metafields:
+          type: array
+          items:
+            type: object
+            required:
+              - namespace
+              - key
+              - value
+              - type
+            properties:
+              key:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+              namespace:
+                type: string
+            additionalProperties: false
+        description:
+          type: string
+        isPublished:
+          type: boolean
+        publications:
+          type: array
+          items:
+            type: object
+            required:
+              - publicationId
+            properties:
+              publishDate:
+                type: string
+              publicationId:
+                type: string
+            additionalProperties: false
+        productsToAdd:
+          type: array
+          items:
+            type: string
+        templateSuffix:
+          type: string
+        descriptionHtml:
+          type: string
+        privateMetafields:
+          type: array
+          items:
+            type: object
+            required:
+              - owner
+              - namespace
+              - key
+              - value
+              - valueType
+            properties:
+              key:
+                type: string
+              owner:
+                type: string
+              value:
+                type: string
+              namespace:
+                type: string
+              valueType:
+                enum:
+                  - STRING
+                  - INTEGER
+                  - JSON_STRING
+                  - BOOLEAN
+                  - FLOAT
+                  - COLOR
+                  - DIMENSION
+                  - RATING
+                  - SINGLE_LINE_TEXT_FIELD
+                  - MULTI_LINE_TEXT_FIELD
+                  - DATE
+                  - DATE_TIME
+                  - URL
+                  - JSON
+                  - VOLUME
+                  - WEIGHT
+                type: string
+            additionalProperties: false
+      additionalProperties: false
+  - name: create-metafield
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - ownerId
+        - namespace
+        - key
+        - value
+        - type
+      properties:
+        key:
+          type: string
+          minLength: 1
+        type:
+          type: string
+          minLength: 1
+        value:
+          type: string
+          minLength: 1
+        ownerId:
+          type: string
+          minLength: 1
+        namespace:
+          type: string
+          minLength: 1
+        ownerType:
+          enum:
+            - ARTICLE
+            - BLOG
+            - COLLECTION
+            - CUSTOMER
+            - DRAFTORDER
+            - ORDER
+            - PAGE
+            - PRODUCT
+            - PRODUCTIMAGE
+            - PRODUCTVARIANT
+            - SHOP
+          type: string
+          default: PRODUCT
+        description:
+          type: string
+      additionalProperties: false
+  - name: get-inventory-levels
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+        locationId:
+          type: string
+      additionalProperties: false
+  - name: get-inventory-items
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+        query:
+          type: string
+        productId:
+          type: string
+        variantId:
+          type: string
+      additionalProperties: false
+  - name: get-locations
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        limit:
+          type: number
+          default: 10
+        active:
+          type: boolean
+      additionalProperties: false
+  - name: adjust-inventory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inventoryItemId
+        - availableDelta
+        - locationId
+      properties:
+        reason:
+          type: string
+        locationId:
+          type: string
+          minLength: 1
+        availableDelta:
+          type: integer
+        inventoryItemId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: set-inventory-tracking
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inventoryItemId
+        - tracked
+      properties:
+        tracked:
+          type: boolean
+        inventoryItemId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: connect-inventory-to-location
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inventoryItemId
+        - locationId
+        - available
+      properties:
+        reason:
+          type: string
+        available:
+          type: integer
+        locationId:
+          type: string
+          minLength: 1
+        inventoryItemId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: disconnect-inventory-from-location
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inventoryItemId
+        - locationId
+      properties:
+        reason:
+          type: string
+        locationId:
+          type: string
+          minLength: 1
+        inventoryItemId:
+          type: string
+          minLength: 1
+      additionalProperties: false

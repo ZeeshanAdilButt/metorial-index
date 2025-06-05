@@ -1,0 +1,138 @@
+tools:
+  - name: createIssue
+    description: Create a new issue in Jira
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectKey
+        - summary
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels for the issue
+        summary:
+          type: string
+          description: Issue summary
+        assignee:
+          type: string
+          description: Assignee username
+        priority:
+          type: string
+          description: Priority (e.g., High, Medium, Low)
+        issueType:
+          type: string
+          default: Task
+          description: Issue type (e.g., Bug, Task, Story)
+        projectKey:
+          type: string
+          description: Project key (e.g., PROJ)
+        description:
+          type: string
+          description: Issue description
+      additionalProperties: false
+  - name: updateIssue
+    description: Update information of a Jira issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueIdOrKey
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+          description: New labels for the issue
+        summary:
+          type: string
+          description: New summary of the issue
+        priority:
+          type: string
+          description: New priority (e.g., High, Medium, Low)
+        description:
+          type: string
+          description: New description of the issue
+        customFields:
+          type: object
+          description: Custom fields to update
+          additionalProperties: {}
+        issueIdOrKey:
+          type: string
+          description: ID or key of the issue to update (e.g., PROJ-123)
+      additionalProperties: false
+  - name: transitionIssue
+    description: Transition the status of a Jira issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueIdOrKey
+        - transitionId
+      properties:
+        comment:
+          type: string
+          description: Comment when performing the transition
+        issueIdOrKey:
+          type: string
+          description: ID or key of the issue (e.g., PROJ-123)
+        transitionId:
+          type: string
+          description: ID of the transition to apply
+      additionalProperties: false
+  - name: assignIssue
+    description: Assign a Jira issue to a user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueIdOrKey
+      properties:
+        accountId:
+          type: string
+          description: Account ID of the assignee (leave blank to unassign)
+        issueIdOrKey:
+          type: string
+          description: ID or key of the issue (e.g., PROJ-123)
+      additionalProperties: false
+  - name: createPage
+    description: Create a new page in Confluence
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - spaceKey
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          description: Title of the page
+        content:
+          type: string
+          description: Content of the page (in Confluence storage/HTML format)
+        parentId:
+          type: string
+          description: ID of the parent page (if creating a child page)
+        spaceKey:
+          type: string
+          description: Space key to create the page in (e.g., DEV, HR)
+      additionalProperties: false
+  - name: addComment
+    description: Add a comment to a Confluence page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+        - content
+      properties:
+        pageId:
+          type: string
+          description: ID of the page to add a comment to
+        content:
+          type: string
+          description: Content of the comment (in Confluence storage/HTML format)
+      additionalProperties: false

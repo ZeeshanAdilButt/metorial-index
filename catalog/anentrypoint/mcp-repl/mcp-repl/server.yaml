@@ -1,0 +1,17 @@
+identifier: anentrypoint/mcp-repl/mcp-repl
+repo:
+  provider: github.com
+  url: https://github.com/AnEntrypoint/mcp-repl
+  name: mcp-repl
+  owner: AnEntrypoint
+server:
+  subdirectory: /
+  name: Simple JavaScript REPL
+  description: Execute JavaScript code snippets securely in a sandboxed
+    environment. Benefit from comprehensive error handling, memory management,
+    and output formatting to enhance your coding experience. Ideal for testing
+    and evaluating JavaScript code quickly and safely.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

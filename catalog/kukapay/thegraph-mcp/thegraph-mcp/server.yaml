@@ -1,0 +1,15 @@
+identifier: kukapay/thegraph-mcp/thegraph-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/thegraph-mcp
+  name: thegraph-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: TheGraph MCP Server
+  description: An MCP server that powers AI agents with indexed blockchain data
+    from [The Graph](https://thegraph.com/).
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

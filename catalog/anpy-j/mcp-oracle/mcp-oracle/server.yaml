@@ -1,0 +1,17 @@
+identifier: anpy-j/mcp-oracle/mcp-oracle
+repo:
+  provider: github.com
+  url: https://github.com/anpy-j/mcp-oracle
+  name: mcp-oracle
+  owner: anpy-j
+server:
+  subdirectory: /
+  name: Oracle Database Access Server
+  description: Provide seamless access to Oracle databases through a Model Context
+    Protocol server. Enable LLM applications to query and interact with Oracle
+    data efficiently and securely. Simplify integration of Oracle data into AI
+    workflows with minimal setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

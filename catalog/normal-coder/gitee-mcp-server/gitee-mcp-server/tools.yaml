@@ -1,0 +1,672 @@
+tools:
+  - name: create_repository
+    description: 创建 Gitee 仓库
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Repository name
+        path:
+          type: string
+          description: Repository path
+        private:
+          type: boolean
+          default: false
+          description: Whether the repository is private
+        has_wiki:
+          type: boolean
+          default: true
+          description: Whether to enable Wiki functionality
+        homepage:
+          type: string
+          description: Homepage URL
+        auto_init:
+          type: boolean
+          default: false
+          description: Whether to automatically initialize the repository
+        has_issues:
+          type: boolean
+          default: true
+          description: Whether to enable Issue functionality
+        description:
+          type: string
+          description: Repository description
+        license_template:
+          type: string
+          description: License template
+        gitignore_template:
+          type: string
+          description: Git Ignore template
+      additionalProperties: false
+  - name: fork_repository
+    description: Fork Gitee 仓库
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+      properties:
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        organization:
+          type: string
+          description: Organization path, defaults to personal account if not provided
+      additionalProperties: false
+  - name: create_branch
+    description: 在 Gitee 仓库中创建一个新分支
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - branch_name
+      properties:
+        refs:
+          type: string
+          default: master
+          description: "Source reference for the branch, default: master"
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        branch_name:
+          type: string
+          description: Name for the new branch
+      additionalProperties: false
+  - name: list_branches
+    description: 列出 Gitee 仓库中的分支
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+      properties:
+        page:
+          type: integer
+          default: 1
+          description: Page number
+        repo:
+          type: string
+          description: Repository path
+        sort:
+          enum:
+            - name
+            - updated
+          type: string
+          default: name
+          description: Sort field
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of items per page, maximum 100
+        direction:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: asc
+          description: Sort direction
+      additionalProperties: false
+  - name: get_branch
+    description: 获取 Gitee 仓库中的特定分支信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - branch
+      properties:
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        branch:
+          type: string
+          description: Branch name
+      additionalProperties: false
+  - name: get_file_contents
+    description: 获取 Gitee 仓库中文件或目录的内容
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - path
+      properties:
+        path:
+          type: string
+          description: File path
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        branch:
+          type: string
+          description: Branch name, defaults to the repository's default branch
+      additionalProperties: false
+  - name: create_or_update_file
+    description: 在 Gitee 仓库中创建或更新文件
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - path
+        - content
+        - message
+      properties:
+        sha:
+          type: string
+          description: File SHA, required when updating an existing file
+        path:
+          type: string
+          description: File path
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        branch:
+          type: string
+          description: Branch name, defaults to the repository's default branch
+        content:
+          type: string
+          description: File content
+        message:
+          type: string
+          description: Commit message
+      additionalProperties: false
+  - name: push_files
+    description: 向 Gitee 仓库提交多个文件
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - message
+        - files
+      properties:
+        repo:
+          type: string
+          description: Repository path
+        files:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - content
+            properties:
+              path:
+                type: string
+                description: File path
+              content:
+                type: string
+                description: File content
+            additionalProperties: false
+          description: List of files to commit
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        branch:
+          type: string
+          description: Branch name, defaults to the repository's default branch
+        message:
+          type: string
+          description: Commit message
+      additionalProperties: false
+  - name: create_issue
+    description: 在 Gitee 仓库中创建 Issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - title
+      properties:
+        body:
+          type: string
+          description: Issue content
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        title:
+          type: string
+          description: Issue title
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels
+        assignees:
+          type: array
+          items:
+            type: string
+          description: Users assigned to the issue
+        milestone:
+          type: number
+          description: Milestone ID
+        security_hole:
+          type: boolean
+          description: Whether the issue is private, default is false
+      additionalProperties: false
+  - name: list_issues
+    description: 列出 Gitee 仓库中的 Issues
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+      properties:
+        page:
+          type: integer
+          default: 1
+          description: Page number
+        repo:
+          type: string
+          description: Repository path
+        sort:
+          enum:
+            - created
+            - updated
+            - comments
+          type: string
+          default: created
+          description: Sort field
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        state:
+          enum:
+            - open
+            - closed
+            - all
+          type: string
+          default: open
+          description: Issue state
+        labels:
+          type: string
+          description: Labels, multiple labels separated by commas
+        creator:
+          type: string
+          description: Filter issues created by a specific user
+        program:
+          type: string
+          description: Filter issues for a specific program
+        assignee:
+          type: string
+          description: Filter issues assigned to a specific user
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of items per page, maximum 100
+        direction:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort direction
+        milestone:
+          type: number
+          description: Milestone ID
+      additionalProperties: false
+  - name: get_issue
+    description: 获取 Gitee 仓库中的特定 Issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - issue_number
+      properties:
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        issue_number:
+          type:
+            - number
+            - string
+          description: Issue number
+      additionalProperties: false
+  - name: update_issue
+    description: 更新 Gitee 仓库中的 Issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - issue_number
+      properties:
+        body:
+          type: string
+          description: Issue content
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        state:
+          enum:
+            - open
+            - closed
+            - progressing
+          type: string
+          description: Issue state
+        title:
+          type: string
+          description: Issue title
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels
+        assignees:
+          type: array
+          items:
+            type: string
+          description: Users assigned to the issue
+        milestone:
+          type: number
+          description: Milestone ID
+        issue_number:
+          type:
+            - number
+            - string
+          description: Issue number
+      additionalProperties: false
+  - name: add_issue_comment
+    description: 向 Gitee 仓库中的 Issue 添加评论
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - issue_number
+        - body
+      properties:
+        body:
+          type: string
+          description: Comment content
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        issue_number:
+          type:
+            - number
+            - string
+          description: Issue number
+      additionalProperties: false
+  - name: create_pull_request
+    description: 在 Gitee 仓库中创建 Pull Request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - title
+        - head
+        - base
+      properties:
+        base:
+          type: string
+          description: Target branch name
+        body:
+          type: string
+          description: Pull Request content
+        head:
+          type: string
+          description: Source branch name
+        repo:
+          type: string
+          description: Repository path
+        issue:
+          type: string
+          description: "Related issue, format: #xxx"
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        title:
+          type: string
+          description: Pull Request title
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels
+        testers:
+          type: array
+          items:
+            type: string
+          description: Testers
+        assignees:
+          type: array
+          items:
+            type: string
+          description: Reviewers
+        milestone_number:
+          type: number
+          description: Milestone number
+        prune_source_branch:
+          type: boolean
+          description: Whether to delete the source branch after merging
+      additionalProperties: false
+  - name: list_pull_requests
+    description: 列出 Gitee 仓库中的 Pull Requests
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+      properties:
+        page:
+          type: integer
+          default: 1
+          description: Page number
+        repo:
+          type: string
+          description: Repository path
+        sort:
+          enum:
+            - created
+            - updated
+            - popularity
+            - long-running
+          type: string
+          default: created
+          description: Sort field
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        state:
+          enum:
+            - open
+            - closed
+            - merged
+            - all
+          type: string
+          default: open
+          description: Pull Request state
+        labels:
+          type: string
+          description: Labels, multiple labels separated by commas
+        per_page:
+          type: integer
+          maximum: 100
+          minimum: 1
+          description: Number of items per page, maximum 100
+        direction:
+          enum:
+            - asc
+            - desc
+          type: string
+          default: desc
+          description: Sort direction
+        milestone:
+          type: number
+          description: Milestone ID
+      additionalProperties: false
+  - name: get_pull_request
+    description: 获取 Gitee 仓库中的特定 Pull Request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - pull_number
+      properties:
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        pull_number:
+          type: number
+          description: Pull Request number
+      additionalProperties: false
+  - name: update_pull_request
+    description: 更新 Gitee 仓库中的 Pull Request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - pull_number
+      properties:
+        body:
+          type: string
+          description: Pull Request content
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        state:
+          enum:
+            - open
+            - closed
+          type: string
+          description: Pull Request state
+        title:
+          type: string
+          description: Pull Request title
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels
+        testers:
+          type: array
+          items:
+            type: string
+          description: Testers
+        assignees:
+          type: array
+          items:
+            type: string
+          description: Reviewers
+        pull_number:
+          type: number
+          description: Pull Request number
+        milestone_number:
+          type: number
+          description: Milestone number
+      additionalProperties: false
+  - name: merge_pull_request
+    description: 合并 Gitee 仓库中的 Pull Request
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - pull_number
+      properties:
+        repo:
+          type: string
+          description: Repository path
+        owner:
+          type: string
+          description: Repository owner path (enterprise, organization, or personal path)
+        pull_number:
+          type: number
+          description: Pull Request number
+        merge_method:
+          enum:
+            - merge
+            - squash
+            - rebase
+          type: string
+          default: merge
+          description: Merge method
+        prune_source_branch:
+          type: boolean
+          description: Whether to delete the source branch after merging
+      additionalProperties: false
+  - name: get_user
+    description: 获取 Gitee 用户信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Username
+      additionalProperties: false
+  - name: get_current_user
+    description: 获取当前认证的 Gitee 用户信息
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

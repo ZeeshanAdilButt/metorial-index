@@ -1,0 +1,22 @@
+tools:
+  - name: get_forecast
+    description: "
+
+      \    Get forecast for a location in Japan
+
+
+      \    Args:
+
+      \        prefecture: Name of the prefecture of Japan (in English
+      alphabets, e.g.) \"Hokkaido\", \"Tokyo\", \"Osaka\", etc.)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_forecastArguments
+      required:
+        - prefecture
+      properties:
+        prefecture:
+          type: string
+          title: Prefecture

@@ -1,0 +1,14 @@
+identifier: aldrin-labs/metaplex-mcp-server/metaplex-server
+repo:
+  provider: github.com
+  url: https://github.com/aldrin-labs/metaplex-mcp-server
+  name: metaplex-mcp-server
+  owner: aldrin-labs
+server:
+  subdirectory: /
+  name: Metaplex Server
+  description: Access Metaplex documentation and repository information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

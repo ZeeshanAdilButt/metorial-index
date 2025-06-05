@@ -1,0 +1,16 @@
+identifier: rafaelcartenet/mcp-databricks-server/mcp-databricks-server
+repo:
+  provider: github.com
+  url: https://github.com/RafaelCartenet/mcp-databricks-server
+  name: mcp-databricks-server
+  owner: RafaelCartenet
+server:
+  subdirectory: /
+  name: Databricks MCP Server
+  description: Execute SQL queries against Databricks seamlessly. Retrieve data,
+    list schemas, and describe table structures to enhance your data operations.
+    Perfect for integrating with Agent mode for complex task automation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

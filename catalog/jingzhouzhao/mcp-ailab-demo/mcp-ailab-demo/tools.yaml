@@ -1,0 +1,20 @@
+tools:
+  - name: get_members
+    description: 获取AI实验室的成员列表
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_member_phone
+    description: 获取AI实验室的成员的手机号
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 成员名
+      additionalProperties: false

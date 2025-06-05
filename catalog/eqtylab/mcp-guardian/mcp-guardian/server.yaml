@@ -1,0 +1,17 @@
+identifier: eqtylab/mcp-guardian/mcp-guardian
+repo:
+  provider: github.com
+  url: https://github.com/eqtylab/mcp-guardian
+  name: mcp-guardian
+  owner: eqtylab
+server:
+  subdirectory: /
+  name: Guardian
+  description: Manage your LLM assistant's access to MCP servers with real-time
+    control. Approve or deny tool calls and log messages for complete oversight
+    of your LLM's activities. Simplify the management of multiple MCP server
+    configurations effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

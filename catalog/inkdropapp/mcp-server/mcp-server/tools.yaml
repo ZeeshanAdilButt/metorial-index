@@ -1,0 +1,299 @@
+tools:
+  - name: read-note
+    description: Retrieve the complete contents of the note by its ID from the database.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - noteId
+      properties:
+        noteId:
+          type: string
+          description: ID of the note to retrieve. It can be found as `_id` in the note
+            docs. It always starts with `note:`.
+      additionalProperties: false
+  - name: search-notes
+    description: "List all notes that contain a given keyword.
+
+      The result does not include entire note bodies as they are truncated in
+      200 characters.
+
+      You have to retrieve the full note content by calling `read-note`.
+
+      Here are tips to specify keywords effectively:
+
+
+      ## Use special qualifiers to narrow down results
+
+
+      You can use special qualifiers to get more accurate results. See the
+      qualifiers and their usage examples:
+
+
+      - **book** \ 
+
+      \  `book:Blog`: Searches for notes in the 'Blog' notebook.
+
+      \  `book:\"Desktop App\"`: Searches for notes in the 'Desktop App'
+      notebook.
+
+      - **bookId**
+
+      \  `bookId:kGlLniaV`: Searches for notes in the notebook ID
+      'book:kGlLniaV'.
+
+      - **tag** \ 
+
+      \  `tag:JavaScript`: Searches for all notes having the 'JavaScript' tag.
+      Read more about
+      [tags](https://docs.inkdrop.app/manual/write-notes#tag-notes).
+
+      - **status** \ 
+
+      \  `status:onHold`: Searches for all notes with the 'On hold' status. Read
+      more about [statuses](/reference/note-statuses).
+
+      - **title** \ 
+
+      \  `title:\"JavaScript setTimeout\"`: Searches for the note with the
+      specified title.
+
+      - **body** \ 
+
+      \  `body:KEYWORD`: Searches for a specific word in all notes. Equivalent
+      to a [global search](#search-for-notes-across-all-notebooks).
+
+
+      ### Combine qualifiers
+
+
+      You can combine the filter qualifiers to refine data even more.
+
+
+      **Find notes that contain the word 'Hello' and have the 'Issue' tag.**
+
+
+      ```text
+
+      Hello tag:Issue
+
+      ```
+
+
+      **Find notes that contain the word 'Typescript,' have the 'Contribution'
+      tag, and the 'Completed' status**
+
+
+      ```text
+
+      Typescript tag:Contribution status:Completed
+
+      ```
+
+
+      ## Search for text with spaces
+
+
+      To find the text that includes spaces, put the text into the double
+      quotation marks (\"):
+
+
+      ```text
+
+      \"database associations\"
+
+      ```
+
+
+      ## Exclude text from search
+
+
+      To exclude text from the search results or ignore a specific qualifier,
+      put the minus sign (-) before it. You can also combine the exclusions. See
+      the examples:
+
+
+      - `-book:Backend \"closure functions\"`: Ignores the 'Backend' notebook
+      while searching for the 'closure functions' phrase.
+
+      - `-tag:JavaScript`: Ignores all notes having the 'JavaScript' tag.
+
+      - `-book:Typescript tag:work \"Data types\"`: Ignores the 'Typescript'
+      notebook and the 'work' tag while searching for the 'Data types' phrase.
+
+      - `-status:dropped title:\"Sprint 10.0\" debounce`: Ignores notes with the
+      'Dropped' status while searching for the 'debounce' word in the note with
+      the 'Sprint 10.0' title.
+
+      - `-\"Phrase to ignore\" \"in the rest of a sentence\"`: Ignores the
+      'Phrase to ignore' part while searching for 'in the rest of a sentence'.
+
+
+      Note that you can't specify excluding modifiers only without including
+      conditions.
+
+
+      **WARNING**: Make sure to enter a text to search for after the exclusion
+      modifier.
+
+
+      - ✅ Will work \ 
+
+      \  `-book:Backend \"closure functions\"`
+
+
+      - ⛔️ Won't work \ 
+
+      \   `-book:Backend`. There's no query. Inkdrop doesn't understand what to
+      search for.
+
+      \    "
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: Keyword to search for.
+      additionalProperties: false
+  - name: list-notes
+    description: >
+      List all notes in a specified notebook with ID.
+
+      The result does not include entire note bodies as they are truncated in
+      200 characters.
+
+      You have to retrieve the full note content by calling `read-note`.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - bookId
+      properties:
+        sort:
+          enum:
+            - updatedAt
+            - createdAt
+            - title
+          type: string
+          default: updatedAt
+          description: Sort the documents by the specified field
+        bookId:
+          type: string
+          description: ID of the notebook. It always starts with 'book:'. You can retrieve
+            a list of notebooks with `list-notebooks`
+        tagIds:
+          type: array
+          items:
+            type: string
+          default: []
+          description: An array of tag IDs to filter. It always starts with 'tag:'. You
+            can retrieve a list of available tags from `list-tags`.
+        keyword:
+          type: string
+          description: Keyword to filter notes
+        descending:
+          type: boolean
+          default: true
+          description: Reverse the order of the output documents
+      additionalProperties: false
+  - name: create-note
+    description: Create a new note in the database
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - bookId
+        - title
+        - body
+      properties:
+        body:
+          type: string
+          maxLength: 1048576
+          description: The content of the note represented with Markdown
+        title:
+          type: string
+          maxLength: 128
+          description: The note title
+        bookId:
+          type: string
+          pattern: ^(book:|trash$)
+          maxLength: 128
+          minLength: 5
+          description: The notebook ID
+        status:
+          enum:
+            - none
+            - active
+            - onHold
+            - completed
+            - dropped
+          type: string
+          description: The status of the note
+      additionalProperties: false
+  - name: update-note
+    description: Update the existing note in the database. You should retrieve the
+      existing note with `read-note` first. When updating the note, you must
+      specify not only the changed fields but also all the un-changed fields.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - _id
+        - _rev
+        - bookId
+        - title
+        - body
+      properties:
+        _id:
+          type: string
+          pattern: "^note:"
+          maxLength: 128
+          minLength: 6
+          description: The unique document ID which should start with `note:` and the
+            remains are randomly generated string
+        _rev:
+          type: string
+          description: This is a CouchDB specific field. The current MVCC-token/revision
+            of this document (mandatory and immutable).
+        body:
+          type: string
+          maxLength: 1048576
+          description: "The content of the note in Markdown. NOTE: Do not escape special
+            characters like `\\n`."
+        title:
+          type: string
+          maxLength: 128
+          description: The note title
+        bookId:
+          type: string
+          pattern: ^(book:|trash$)
+          maxLength: 128
+          minLength: 5
+          description: The notebook ID
+        status:
+          enum:
+            - none
+            - active
+            - onHold
+            - completed
+            - dropped
+          type: string
+          description: The status of the note
+      additionalProperties: false
+  - name: list-notebooks
+    description: Retrieve a list of all notebooks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list-tags
+    description: Retrieve a list of all tags
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

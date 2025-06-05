@@ -1,0 +1,19 @@
+identifier: trtyr/mcp-gateway/mcp-gateway
+repo:
+  provider: github.com
+  url: https://github.com/trtyr/MCP-Gateway
+  name: MCP-Gateway
+  owner: trtyr
+server:
+  subdirectory: /
+  name: MCP Gateway
+  description: Aggregate and unify multiple backend MCP servers into a single SSE
+    endpoint, simplifying client connections and enabling orchestration of
+    diverse MCP tools. Connect to local or remote MCP servers via stdio or SSE
+    protocols and expose their combined capabilities seamlessly. Build powerful,
+    customized agents by leveraging aggregated MCP functionalities through one
+    centralized gateway.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

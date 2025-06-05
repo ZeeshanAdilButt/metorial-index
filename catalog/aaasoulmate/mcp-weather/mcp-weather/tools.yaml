@@ -1,0 +1,20 @@
+tools:
+  - name: query_weather
+    description: "
+
+      \    Input an English city name to get today's weather information.
+
+      \    :param city: City name (use English names)
+
+      \    :return: Formatted weather information
+
+      \    "
+    inputSchema:
+      type: object
+      title: query_weatherArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City

@@ -1,0 +1,18 @@
+identifier: leonskenidy/omi-mcp/omi-mcp
+repo:
+  provider: github.com
+  url: https://github.com/leonskenidy/omi-mcp
+  name: omi-mcp
+  owner: leonskenidy
+server:
+  subdirectory: /
+  name: Omi API Server
+  description: Provide seamless access to Omi conversations and memories through a
+    standardized MCP interface. Enable users to read, create, and manage
+    conversations and memories efficiently within their LLM workflows. Integrate
+    easily with Claude, Cursor, and other MCP-compatible clients to enhance
+    contextual understanding and interaction.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

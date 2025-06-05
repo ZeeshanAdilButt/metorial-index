@@ -1,0 +1,48 @@
+tools:
+  - name: web_app_ux_evaluator
+    description: "Evaluate the user experience of a web application.
+
+      \   \ 
+
+      \    This tool allows the AI to assess the quality of user experience and
+      interface design
+
+      \    of a web application by performing specific tasks and analyzing the
+      interaction flow.
+
+      \   \ 
+
+      \    Args:
+
+      \        url: Required. The URL of the web application to evaluate
+
+      \        task: Required. The specific UX/UI aspect to test (e.g., \"test
+      the checkout flow\",\ 
+
+      \             \"evaluate the navigation menu usability\", \"check form
+      validation feedback\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        list[TextContent]: A detailed evaluation of the web application's
+      UX/UI, including
+
+      \                         observations, issues found, and recommendations
+      for improvement
+
+      \    "
+    inputSchema:
+      type: object
+      title: web_app_ux_evaluatorArguments
+      required:
+        - url
+        - task
+      properties:
+        url:
+          type: string
+          title: Url
+        task:
+          type: string
+          title: Task

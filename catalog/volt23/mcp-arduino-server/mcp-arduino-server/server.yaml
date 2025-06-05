@@ -1,0 +1,19 @@
+identifier: volt23/mcp-arduino-server/mcp-arduino-server
+repo:
+  provider: github.com
+  url: https://github.com/Volt23/mcp-arduino-server
+  name: mcp-arduino-server
+  owner: Volt23
+server:
+  subdirectory: /
+  name: Arduino CLI Server
+  description: Expose Arduino CLI functionality through a standardized protocol to
+    manage sketches, boards, libraries, and files efficiently. Generate
+    AI-powered circuit diagrams from natural language to streamline hardware
+    development workflows. Simplify Arduino project management and integration
+    with LLM-based clients by providing a versatile and extensible server
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

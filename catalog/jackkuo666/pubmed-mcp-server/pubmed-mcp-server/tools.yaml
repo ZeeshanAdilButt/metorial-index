@@ -1,0 +1,88 @@
+tools:
+  - name: search_pubmed_key_words
+    description: ""
+    inputSchema:
+      type: object
+      title: search_pubmed_key_wordsArguments
+      required:
+        - key_words
+      properties:
+        key_words:
+          type: string
+          title: Key Words
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+  - name: search_pubmed_advanced
+    description: ""
+    inputSchema:
+      type: object
+      title: search_pubmed_advancedArguments
+      properties:
+        term:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Term
+          default: null
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        author:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Author
+          default: null
+        journal:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Journal
+          default: null
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+  - name: get_pubmed_article_metadata
+    description: ""
+    inputSchema:
+      type: object
+      title: get_pubmed_article_metadataArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Pmid
+  - name: download_pubmed_pdf
+    description: ""
+    inputSchema:
+      type: object
+      title: download_pubmed_pdfArguments
+      required:
+        - pmid
+      properties:
+        pmid:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Pmid

@@ -1,0 +1,16 @@
+identifier: zxsimple/mcp-sample/mcp-sample
+repo:
+  provider: github.com
+  url: https://github.com/zxsimple/mcp-sample
+  name: mcp-sample
+  owner: zxsimple
+server:
+  subdirectory: /examples/servers/simple-tool
+  name: Simple Website Fetching Tool
+  description: Fetch website content effortlessly with this server. Use it to
+    automate web data retrieval in your applications. Start the server and
+    integrate it with your LLM client for seamless web interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

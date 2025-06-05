@@ -1,0 +1,18 @@
+identifier: bosun-a11y/mcp_test/mcp_test
+repo:
+  provider: github.com
+  url: https://github.com/BOSUN-a11y/mcp_test
+  name: mcp_test
+  owner: BOSUN-a11y
+server:
+  subdirectory: /
+  name: MCP Test Server
+  description: Provide a test implementation of the Model Context Protocol to
+    facilitate development and integration of LLM applications with external
+    tools and resources. Enable dynamic interaction with tools, resources, and
+    prompts through a standardized JSON-RPC interface. Simplify testing and
+    prototyping of MCP features in a controlled environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

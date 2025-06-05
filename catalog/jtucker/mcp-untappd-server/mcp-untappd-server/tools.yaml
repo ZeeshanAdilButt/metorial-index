@@ -1,0 +1,32 @@
+tools:
+  - name: get_beer_info
+    description: Get information about a specific beer by its ID
+    inputSchema:
+      type: object
+      required:
+        - beer_id
+      properties:
+        beer_id:
+          type: string
+          description: The ID of the beer
+  - name: search_beer
+    description: Search for beers by name
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The name of the beer to search for
+  - name: get_user_checkins
+    description: Get the authenticated user's check-ins
+    inputSchema:
+      type: object
+      required:
+        - user_id
+      properties:
+        limit:
+          type: number
+          default: 25
+          description: The number of check-ins to retrieve

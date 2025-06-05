@@ -1,0 +1,18 @@
+identifier: dynamicendpoints/autogen_mcp/autogen_mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/Autogen_MCP
+  name: Autogen_MCP
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: AutoGen Server
+  description: Create and manage AI agents that collaborate and solve problems
+    through natural language interactions. Enable multi-agent conversations and
+    orchestrate group chats with customizable configurations. Enhance your
+    applications with built-in error handling and response validation for
+    seamless communication between agents.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

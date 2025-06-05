@@ -1,0 +1,16 @@
+identifier: giptilabs/mcp-stock-analysis/mcp-stock-analysis
+repo:
+  provider: github.com
+  url: https://github.com/giptilabs/mcp-stock-analysis
+  name: mcp-stock-analysis
+  owner: giptilabs
+server:
+  subdirectory: /
+  name: Stock Analysis Server
+  description: Retrieve real-time and historical stock data for Indian markets.
+    Access current stock quotes and detailed historical data effortlessly,
+    enhancing your local LLM's capabilities with financial insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

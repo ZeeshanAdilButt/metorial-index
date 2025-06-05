@@ -1,0 +1,15 @@
+identifier: apinetwork/piapi-mcp-server/piapi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/apinetwork/piapi-mcp-server
+  name: piapi-mcp-server
+  owner: apinetwork
+server:
+  subdirectory: /
+  name: PiAPI MCP Server
+  description: MCP Server for PiAPI image generation, supporting media content
+    creation through various services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: genomoncology/biomcp/biomcp
+repo:
+  provider: github.com
+  url: https://github.com/genomoncology/biomcp
+  name: biomcp
+  owner: genomoncology
+server:
+  subdirectory: /
+  name: BioMCP
+  description: Access critical biomedical databases with structured queries.
+    Enhance your LLM's capabilities by integrating with PubMed,
+    ClinicalTrials.gov, and MyVariant.info for comprehensive biomedical
+    insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

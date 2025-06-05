@@ -1,0 +1,14 @@
+identifier: nickbaumann98/release-notes-server/release-notes-server
+repo:
+  provider: github.com
+  url: https://github.com/nickbaumann98/release-notes-server
+  name: release-notes-server
+  owner: nickbaumann98
+server:
+  subdirectory: /
+  name: Release Notes Server
+  description: Generate beautiful release notes from GitHub repositories.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

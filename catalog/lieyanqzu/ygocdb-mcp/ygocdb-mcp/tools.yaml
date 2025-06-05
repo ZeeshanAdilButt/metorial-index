@@ -1,0 +1,31 @@
+tools:
+  - name: search_cards
+    description: 通过关键字搜索游戏王卡牌，可以搜索卡牌名称、效果文本等。
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: 搜索关键字，可以是卡牌名称、效果描述等
+  - name: get_card_by_id
+    description: 通过卡牌ID获取单张游戏王卡牌的详细信息
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 游戏王卡牌ID，通常为八位数字
+  - name: get_card_image
+    description: 通过卡牌ID获取游戏王卡牌的图片
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 游戏王卡牌ID，可以使用search_cards工具搜索

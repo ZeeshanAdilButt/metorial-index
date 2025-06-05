@@ -1,0 +1,16 @@
+identifier: takashito/linode-mcp-server/linode-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/takashito/linode-mcp-server
+  name: linode-mcp-server
+  owner: takashito
+server:
+  subdirectory: /
+  name: Linode MCP Server
+  description: Connect to Linode's services seamlessly. Manage your Linode
+    instances, volumes, domains, and more through a simple interface. Enhance
+    your Claude Desktop experience with powerful cloud capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

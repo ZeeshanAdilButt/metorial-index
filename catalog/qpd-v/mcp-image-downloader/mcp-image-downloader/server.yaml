@@ -1,0 +1,14 @@
+identifier: qpd-v/mcp-image-downloader/mcp-image-downloader
+repo:
+  provider: github.com
+  url: https://github.com/qpd-v/mcp-image-downloader
+  name: mcp-image-downloader
+  owner: qpd-v
+server:
+  subdirectory: /
+  name: Image Downloader
+  description: MCP server for downloading and optimizing images.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

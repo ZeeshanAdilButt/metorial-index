@@ -1,0 +1,143 @@
+tools:
+  - name: raccoonai_lam_tool
+    description: "
+
+      \    The Raccoon LAM Tool enables AI agents to browse and interact with
+      the web to perform tasks like:
+
+      \    - Executing simple and complex web tasks and workflows across
+      multiple sites
+
+      \    - Web navigation and form submission
+
+      \    - Data extraction from websites
+
+      \    - Online research and information gathering
+
+
+      \    ## Key Features
+
+      \    - **Web Browsing and Web Tasks**: Automated navigation of web pages
+      and completion of user defined tasks
+
+      \    - **Data Extraction**: Structured data extraction from websites
+
+      \    - **Schema Definition**: Define the structure of data you want
+      extracted
+
+
+      \    ## Capabilities
+
+      \    - Search and browse websites
+
+      \    - Fill out forms and navigate UI elements
+
+      \    - Extract structured data based on defined schemas
+
+      \    - Handle multistep tasks across websites
+
+
+      \    ## Schemas and Deepsearch
+
+      \    - Schemas are used only when you want to extract information from the
+      web.
+
+      \    - Deepsearch is only used if answering the query involves gathering
+      data from multiple sources and detailed reports.
+
+      \    - Schemas can be used alongside deepsearch.
+
+      \    - Schemas should not be used when the user query is about performing
+      actions/task rather than data collection
+
+
+
+      \    Args:
+
+      \        query: The input query string for the request
+
+      \        response_schema: The expected schema for the response (optional)
+
+      \        app_url: The entrypoint URL for the web agent (optional)
+
+      \        chat_history: Chat history as list of messages (optional)
+
+      \        max_count: Maximum number of results (default: 1)
+
+      \        stream: Whether to stream responses (default: True)
+
+      \        mode: Mode of execution (\"default\" or \"deepsearch\")
+
+      \        advanced: Advanced configuration options
+
+      \        ctx: The context
+
+
+      \    Returns:
+
+      \        The LAM results as a formatted string
+
+      \    "
+    inputSchema:
+      type: object
+      title: lam_runArguments
+      required:
+        - query
+        - response_schema
+      properties:
+        mode:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Mode
+          default: default
+        query:
+          type: string
+          title: Query
+        stream:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Stream
+          default: true
+        app_url:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: App Url
+          default: ""
+        advanced:
+          anyOf:
+            - type: object
+            - type: "null"
+          title: Advanced
+          default: null
+        max_count:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Max Count
+          default: 1
+        chat_history:
+          anyOf:
+            - type: array
+              items:
+                type: object
+            - type: "null"
+          title: Chat History
+          default: null
+        response_schema:
+          anyOf:
+            - type: object
+            - type: "null"
+          title: Response Schema
+  - name: sample_lam_query
+    description: "
+
+      \    Return a sample LAM query to demonstrate the API functionality.
+
+      \    "
+    inputSchema:
+      type: object
+      title: sample_lam_queryArguments
+      properties: {}

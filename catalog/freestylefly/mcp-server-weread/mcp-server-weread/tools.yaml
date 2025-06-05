@@ -1,0 +1,49 @@
+tools:
+  - name: get_bookshelf
+    description: Get the user's bookshelf information
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_notebooks
+    description: Get the list of books with notes
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_book_notes
+    description: Get all notes for a specific book
+    inputSchema:
+      type: object
+      required:
+        - bookId
+      properties:
+        bookId:
+          type: string
+          description: The ID of the book
+  - name: get_book_info
+    description: Get detailed information about a book
+    inputSchema:
+      type: object
+      required:
+        - bookId
+      properties:
+        bookId:
+          type: string
+          description: The ID of the book
+  - name: search_notes
+    description: Search for notes containing a specific keyword
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: The keyword to search for
+  - name: get_recent_reads
+    description: Get the user's recent reading records
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

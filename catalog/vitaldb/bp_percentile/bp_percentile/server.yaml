@@ -1,0 +1,16 @@
+identifier: vitaldb/bp_percentile/bp_percentile
+repo:
+  provider: github.com
+  url: https://github.com/vitaldb/bp_percentile
+  name: bp_percentile
+  owner: vitaldb
+server:
+  subdirectory: /
+  name: BP Percentile
+  description: Analyze blood pressure data to determine percentile rankings. Gain
+    insights into patient health by comparing individual readings against
+    population benchmarks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: gto1seoul/openai-mcp/openai-mcp
+repo:
+  provider: github.com
+  url: https://github.com/gto1seoul/openai-mcp
+  name: openai-mcp
+  owner: gto1seoul
+server:
+  subdirectory: /
+  name: OpenAI Server
+  description: Integrate OpenAI's chat models into your applications effortlessly.
+    Communicate with various models like gpt-4o and o1 directly from Claude,
+    enhancing your AI interactions. Experience seamless message passing and
+    basic error handling for a smooth user experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

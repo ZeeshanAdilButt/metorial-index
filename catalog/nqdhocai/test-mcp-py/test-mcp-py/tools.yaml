@@ -1,0 +1,79 @@
+tools:
+  - name: create_user
+    description: Create a new user in the database
+    inputSchema:
+      type: object
+      title: create_userArguments
+      required:
+        - email
+        - password
+        - full_name
+      properties:
+        role:
+          type: string
+          title: role
+          default: user
+        email:
+          type: string
+          title: email
+        password:
+          type: string
+          title: password
+        full_name:
+          type: string
+          title: full_name
+        is_email_verified:
+          type: string
+          title: is_email_verified
+          default: false
+  - name: find_user
+    description: Find a user in the database by email.
+    inputSchema:
+      type: object
+      title: find_userArguments
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          title: Email
+  - name: find_all_users
+    description: Retrieve all users from the database.
+    inputSchema:
+      type: object
+      title: find_all_usersArguments
+      properties: {}
+  - name: get_crypto_price
+    description: Get the current price of a cryptocurrency
+    inputSchema:
+      type: object
+      title: get_crypto_priceArguments
+      properties:
+        crypto_id:
+          type: string
+          title: crypto_id
+          default: bitcoin
+        vs_currency:
+          type: string
+          title: vs_currency
+          default: usd
+  - name: get_binance_price
+    description: Get the current price of a cryptocurrency from Binance
+    inputSchema:
+      type: object
+      title: get_binance_priceArguments
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+          default: BTCUSDT
+  - name: get_greeting
+    description: Return a greeting message.
+    inputSchema:
+      type: object
+      title: get_greetingArguments
+      properties:
+        name:
+          type: string
+          title: Name
+          default: World

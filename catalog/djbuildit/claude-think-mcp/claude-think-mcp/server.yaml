@@ -1,0 +1,18 @@
+identifier: djbuildit/claude-think-mcp/claude-think-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DJBuildIt/Claude-Think-MCP
+  name: Claude-Think-MCP
+  owner: DJBuildIt
+server:
+  subdirectory: /
+  name: Cursor Claude Think Tool
+  description: Enable Claude's explicit reasoning mode in Cursor to see
+    step-by-step thinking processes before final answers. Enhance your chat
+    interactions by starting messages with 'think' to trigger detailed problem
+    solving and analysis. Easily integrate this tool globally or per project for
+    improved AI reasoning transparency.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: wolkwork/knmi-mcp/knmi-mcp
+repo:
+  provider: github.com
+  url: https://github.com/wolkwork/knmi-mcp
+  name: knmi-mcp
+  owner: wolkwork
+server:
+  subdirectory: /
+  name: KNMI Weather
+  description: Fetch real-time weather data from KNMI weather stations in the Netherlands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

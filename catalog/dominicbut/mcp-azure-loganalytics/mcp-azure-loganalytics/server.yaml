@@ -1,0 +1,18 @@
+identifier: dominicbut/mcp-azure-loganalytics/mcp-azure-loganalytics
+repo:
+  provider: github.com
+  url: https://github.com/DominicBut/mcp-azure-loganalytics
+  name: mcp-azure-loganalytics
+  owner: DominicBut
+server:
+  subdirectory: /
+  name: Azure Log Analytics Server
+  description: Provide tools to retrieve and analyze Azure activity logs and run
+    Kusto Query Language queries against Log Analytics workspaces. Enable
+    efficient log error analysis and activity log summarization through
+    predefined prompts. Facilitate enhanced log analysis workflows leveraging
+    Azure Monitor services.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,28 @@
+tools:
+  - name: get_leech_cards
+    description: Retrieve cards tagged as leeches from Anki
+    inputSchema:
+      type: object
+      properties:
+        count:
+          type: number
+          minimum: 1
+          description: Number of random cards to return (defaults to all)
+        detailed:
+          type: boolean
+          description: Whether to return detailed card information or just IDs
+  - name: tag_reviewed_cards
+    description: Add a 'reviewed on date' tag to specified cards
+    inputSchema:
+      type: object
+      required:
+        - card_ids
+      properties:
+        card_ids:
+          type: array
+          items:
+            type: number
+          description: Array of card IDs to tag as reviewed
+        custom_tag_prefix:
+          type: string
+          description: "Custom prefix for the tag (default: '見直し')"

@@ -1,0 +1,18 @@
+tools:
+  - name: get-usage
+    description: Get cloud usage summary for multiple vendors and products
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        vendors:
+          type: array
+          items:
+            type: string
+          description: List of cloud vendor names (e.g. ['AWS', 'Azure'])
+        products:
+          type: array
+          items:
+            type: string
+          description: List of cloud product names (e.g. ['EC2', 'VM'])
+      additionalProperties: false

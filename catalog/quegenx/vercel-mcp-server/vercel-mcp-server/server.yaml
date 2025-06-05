@@ -1,0 +1,15 @@
+identifier: quegenx/vercel-mcp-server/vercel-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Quegenx/vercel-mcp-server
+  name: vercel-mcp-server
+  owner: Quegenx
+server:
+  subdirectory: /
+  name: Vercel MCP Server
+  description: Manage your Vercel deployments seamlessly. Control projects,
+    domains, environment variables, and more through an intuitive interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

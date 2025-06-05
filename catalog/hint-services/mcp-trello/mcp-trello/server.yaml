@@ -1,0 +1,15 @@
+identifier: hint-services/mcp-trello/mcp-trello
+repo:
+  provider: github.com
+  url: https://github.com/Hint-Services/mcp-trello
+  name: mcp-trello
+  owner: Hint-Services
+server:
+  subdirectory: /
+  name: Trello
+  description: Covers main interactions with Trello boards. Managing and moving
+    cards, list interactions, and board activities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

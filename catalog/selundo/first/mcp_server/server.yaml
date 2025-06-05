@@ -1,0 +1,18 @@
+identifier: selundo/first/mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/selundo/first
+  name: first
+  owner: selundo
+server:
+  subdirectory: /
+  name: First MCP Server
+  description: Enable seamless integration of language models with external data
+    and tools through a standardized protocol. Facilitate dynamic access to
+    resources, execution of actions, and use of prompt templates to enhance AI
+    applications. Simplify the connection between LLMs and real-world context
+    for improved interaction and automation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

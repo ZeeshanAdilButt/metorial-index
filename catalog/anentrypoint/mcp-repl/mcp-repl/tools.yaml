@@ -1,0 +1,17 @@
+tools:
+  - name: execute
+    description: Execute JavaScript code in a secure sandbox and return the result.
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: JavaScript code to execute
+  - name: info
+    description: Get information about the REPL environment.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

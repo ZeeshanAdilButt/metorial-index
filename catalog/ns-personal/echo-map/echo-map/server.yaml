@@ -1,0 +1,17 @@
+identifier: ns-personal/echo-map/echo-map
+repo:
+  provider: github.com
+  url: https://github.com/ns-personal/echo-map
+  name: echo-map
+  owner: ns-personal
+server:
+  subdirectory: /
+  name: Echo Map
+  description: Build and customize your own Model Context Protocol server with
+    ease. Start with a basic setup and extend it with new functions to create
+    powerful MCP-compatible applications. Enjoy features like graceful shutdown
+    handling and development configurations for a smooth development experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,55 @@
+tools:
+  - name: search_google_scholar_key_words
+    description: ""
+    inputSchema:
+      type: object
+      title: search_google_scholar_key_wordsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        num_results:
+          type: integer
+          title: Num Results
+          default: 5
+  - name: search_google_scholar_advanced
+    description: ""
+    inputSchema:
+      type: object
+      title: search_google_scholar_advancedArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        author:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Author
+          default: null
+        year_range:
+          anyOf:
+            - type: array
+              items: {}
+            - type: "null"
+          title: Year Range
+          default: null
+        num_results:
+          type: integer
+          title: Num Results
+          default: 5
+  - name: get_author_info
+    description: ""
+    inputSchema:
+      type: object
+      title: get_author_infoArguments
+      required:
+        - author_name
+      properties:
+        author_name:
+          type: string
+          title: Author Name

@@ -1,0 +1,18 @@
+identifier: video-creator/ffmpeg-mcp/ffmpeg-mcp
+repo:
+  provider: github.com
+  url: https://github.com/video-creator/ffmpeg-mcp
+  name: ffmpeg-mcp
+  owner: video-creator
+server:
+  subdirectory: /
+  name: FFmpeg Video Processor
+  description: Enable local video search, trimming, stitching, and playback
+    through conversational commands using ffmpeg. Easily manipulate video files
+    with tools for finding, clipping, concatenating, and playing videos.
+    Streamline video editing tasks on macOS platforms with a simple MCP server
+    interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

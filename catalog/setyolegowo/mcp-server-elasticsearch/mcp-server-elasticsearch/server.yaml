@@ -1,0 +1,17 @@
+identifier: setyolegowo/mcp-server-elasticsearch/mcp-server-elasticsearch
+repo:
+  provider: github.com
+  url: https://github.com/setyolegowo/mcp-server-elasticsearch
+  name: mcp-server-elasticsearch
+  owner: setyolegowo
+server:
+  subdirectory: /
+  name: Elasticsearch MCP Server
+  description: Connect to Elasticsearch to efficiently manage and retrieve MCP
+    data. Leverage a RESTful API for seamless interaction with your data,
+    enabling powerful searching and indexing capabilities. Start quickly with a
+    lightweight and scalable server setup.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

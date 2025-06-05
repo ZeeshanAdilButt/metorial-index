@@ -1,0 +1,17 @@
+identifier: qing-turnaround/mcp-ip-geo/mcp-ip-geo
+repo:
+  provider: github.com
+  url: https://github.com/qing-turnaround/mcp-ip-geo
+  name: mcp-ip-geo
+  owner: qing-turnaround
+server:
+  subdirectory: /
+  name: IP Geolocation Lookup Server
+  description: Provide IP geolocation lookup services including country, region,
+    and city information using the ip-api.com service. Enable integration via
+    local executable or HTTP for seamless IP data retrieval. Enhance your
+    applications with accurate and easy-to-access IP location data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

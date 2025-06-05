@@ -1,0 +1,156 @@
+tools:
+  - name: cribl_listWorkerGroups
+    description: Lists available worker groups in the Cribl deployment, optionally
+      filtered by product type (stream, edge, search, or all).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        productType:
+          enum:
+            - stream
+            - edge
+            - search
+            - all
+          type: string
+          default: stream
+          description: Filter groups by product type (stream, edge, search, all). Defaults
+            to stream.
+      additionalProperties: false
+  - name: cribl_getPipelines
+    description: Fetches pipeline definitions in a specified worker group.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        groupName:
+          type: string
+          description: "Optional: The name of the Worker Group/Fleet. If omitted, defaults
+            to attempting to use Cribl Stream and if only one group exists for
+            Stream, it will use that sole group."
+      additionalProperties: false
+  - name: cribl_getSources
+    description: Fetches source configurations in a specified worker group.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        groupName:
+          type: string
+          description: "Optional: The name of the Worker Group/Fleet. If omitted, defaults
+            to attempting to use Cribl Stream and if only one group exists for
+            Stream, it will use that sole group."
+      additionalProperties: false
+  - name: cribl_getPipelineConfig
+    description: Retrieves full configuration JSON for a specified pipeline in a
+      worker group.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pipelineId
+      properties:
+        groupName:
+          type: string
+          description: "Optional: The name of the Worker Group/Fleet. If omitted, defaults
+            to attempting to use Cribl Stream and if only one group exists for
+            Stream, it will use that sole group."
+        pipelineId:
+          type: string
+          description: The ID of the pipeline to retrieve configuration for.
+      additionalProperties: false
+  - name: cribl_setPipelineConfig
+    description: Applies a new configuration payload to a specified pipeline in a
+      worker group.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pipelineId
+        - config
+      properties:
+        config:
+          type: object
+          properties: {}
+          description: "The pipeline configuration payload expected by the API, typically
+            structured as { id: 'pipeline-id', conf: { ... actual config ... }
+            }. Note: 'pipelineId' argument is used for URL, but API might
+            require it in body too."
+          additionalProperties: true
+        groupName:
+          type: string
+          description: "Optional: The name of the Worker Group/Fleet. If omitted, defaults
+            to attempting to use Cribl Stream and if only one group exists for
+            Stream, it will use that sole group."
+        pipelineId:
+          type: string
+          description: The ID of the pipeline to configure.
+      additionalProperties: false
+  - name: cribl_restartWorkerGroup
+    description: Restarts all workers within the default or specified worker group.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: cribl_getSystemMetrics
+    description: >-
+      Retrieves system metrics from the Cribl deployment. 
+
+      IMPORTANT: To avoid excessively large responses, please use the optional
+      parameters (filterExpr, metricNameFilter, earliest, latest, numBuckets,
+      wp) to narrow down your query whenever possible. 
+
+      If no parameters are provided, the server will default to fetching only
+      the most recent data bucket (numBuckets=1) to prevent performance issues.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        wp:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+          description: "Optional: Worker process filter."
+        latest:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+          description: "Optional: End time for the query (e.g., 'now',
+            '2023-10-26T10:15:00Z')."
+        earliest:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+          description: "Optional: Start time for the query (e.g., '-15m',
+            '2023-10-26T10:00:00Z')."
+        filterExpr:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+          description: "Optional: A JS expression to filter metrics (e.g.,
+            \"model.pipeline === 'test'\" or \"host == 'myhost'\")."
+        numBuckets:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: integer
+            - type: "null"
+          description: "Optional: The number of time buckets for aggregation."
+        metricNameFilter:
+          anyOf:
+            - anyOf:
+                - not: {}
+                - type: string
+            - type: "null"
+          description: 'Optional: Regex or array of metric names (e.g.,limit to "pipe.*" ,
+            "total.in_bytes", or "os.cpu.perc,os.mem.*").'
+      additionalProperties: false

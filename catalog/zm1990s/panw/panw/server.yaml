@@ -1,0 +1,18 @@
+identifier: zm1990s/panw/panw
+repo:
+  provider: github.com
+  url: https://github.com/zm1990s/panw
+  name: panw
+  owner: zm1990s
+server:
+  subdirectory: /panw-mcp-server/local-version
+  name: PANW AIRS MCP Server
+  description: Provide a server implementation that integrates with the Model
+    Context Protocol to expose tools, resources, and prompts for enhanced LLM
+    interactions. Enable dynamic access to external data and actions through a
+    standardized interface. Facilitate seamless communication between LLM
+    clients and backend services for improved context-aware AI applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

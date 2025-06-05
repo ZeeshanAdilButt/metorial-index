@@ -1,0 +1,16 @@
+identifier: kukapay/whoami-mcp/whoami-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/whoami-mcp
+  name: whoami-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: WhoAmI
+  description: Retrieve your system username effortlessly. This lightweight server
+    provides quick and synchronous access to your identity, making it perfect
+    for local LLM integration. Get to know who you are with just a simple call.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: sirmews/mcp-remote-server/mcp-remote-server
+repo:
+  provider: github.com
+  url: https://github.com/sirmews/mcp-remote-server
+  name: mcp-remote-server
+  owner: sirmews
+server:
+  subdirectory: /
+  name: Remote Server
+  description: Bridge between MCP clients and remote APIs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

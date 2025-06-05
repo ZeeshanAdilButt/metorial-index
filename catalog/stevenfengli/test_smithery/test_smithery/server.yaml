@@ -1,0 +1,17 @@
+identifier: stevenfengli/test_smithery/test_smithery
+repo:
+  provider: github.com
+  url: https://github.com/StevenFengLi/test_smithery
+  name: test_smithery
+  owner: StevenFengLi
+server:
+  subdirectory: /
+  name: Smithery Test Server
+  description: Provide a testing environment for Smithery MCP implementations to
+    validate tool and resource integrations. Enable developers to simulate MCP
+    interactions and verify protocol compliance easily. Facilitate rapid
+    development and debugging of MCP clients and servers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

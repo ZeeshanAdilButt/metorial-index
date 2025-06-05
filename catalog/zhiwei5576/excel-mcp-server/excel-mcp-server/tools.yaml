@@ -1,0 +1,152 @@
+tools:
+  - name: analyzeExcelStructure
+    description: Get Excel file structure including sheet list and column headers in
+      JSON format
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+      properties:
+        headerRows:
+          type: number
+          default: 1
+          description: "Number of header rows to read (default: 1)"
+        fileAbsolutePath:
+          type: string
+          description: The absolute path of the Excel file
+      additionalProperties: false
+  - name: exportExcelStructure
+    description: Export Excel file structure (sheets and headers) to a new Excel
+      template file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sourceFilePath
+        - targetFilePath
+      properties:
+        headerRows:
+          type: number
+          default: 1
+          description: "Number of header rows to analyze (default: 1)"
+        sourceFilePath:
+          type: string
+          description: The source Excel file path to analyze
+        targetFilePath:
+          type: string
+          description: The target Excel file path to save structure
+      additionalProperties: false
+  - name: readSheetNames
+    description: Get all sheet names from the Excel file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+      properties:
+        fileAbsolutePath:
+          type: string
+          description: The absolute path of the Excel file
+      additionalProperties: false
+  - name: readDataBySheetName
+    description: Get data from a specific sheet in the Excel file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+        - sheetName
+      properties:
+        headerRow:
+          type: number
+          default: 1
+          description: "tThe row number to use as field names (default: 1)"
+        sheetName:
+          type: string
+          description: tThe name of the sheet to read
+        dataStartRow:
+          type: number
+          default: 2
+          description: "The row number to start reading data from (default: 2)"
+        fileAbsolutePath:
+          type: string
+          description: The absolute path of the Excel file
+      additionalProperties: false
+  - name: readSheetData
+    description: Get data from all sheets in the Excel file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+      properties:
+        headerRow:
+          type: number
+          default: 1
+          description: "The row number to use as field names (default: 1)"
+        dataStartRow:
+          type: number
+          default: 2
+          description: "The row number to start reading data from (default: 2)"
+        fileAbsolutePath:
+          type: string
+          description: The absolute path of the Excel file
+      additionalProperties: false
+  - name: writeDataBySheetName
+    description: Write data to a specific sheet in the Excel file (overwrites if
+      sheet exists)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+        - sheetName
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          description: Array of objects to write to the sheet
+        sheetName:
+          type: string
+          description: The name of the sheet to write
+        fileAbsolutePath:
+          type: string
+          description: The absolute path of the Excel file
+      additionalProperties: false
+  - name: writeSheetData
+    description: Create a new Excel file with provided data
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+        - data
+      properties:
+        data:
+          type: object
+          description: Data object with dynamic sheet names and column names
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties: {}
+        fileAbsolutePath:
+          type: string
+          description: The absolute path for the new Excel file
+      additionalProperties: false
+  - name: clearFileCache
+    description: Clear cached data for the specified Excel file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fileAbsolutePath
+      properties:
+        fileAbsolutePath:
+          type: string
+          description: The absolute path of the Excel file to clear from cache
+      additionalProperties: false

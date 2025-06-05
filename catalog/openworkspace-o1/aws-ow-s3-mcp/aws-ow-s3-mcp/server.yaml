@@ -1,0 +1,17 @@
+identifier: openworkspace-o1/aws-ow-s3-mcp/aws-ow-s3-mcp
+repo:
+  provider: github.com
+  url: https://github.com/OpenWorkspace-o1/aws-ow-s3-mcp
+  name: aws-ow-s3-mcp
+  owner: OpenWorkspace-o1
+server:
+  subdirectory: /
+  name: AWS S3 Operations Server
+  description: Access and manage your S3 buckets securely with pre-signed URLs.
+    List, upload, download, and delete objects effortlessly, enhancing your
+    cloud storage capabilities. Simplify your AWS S3 interactions with this
+    dedicated MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

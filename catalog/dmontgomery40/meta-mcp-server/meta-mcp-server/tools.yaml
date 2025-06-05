@@ -1,0 +1,24 @@
+tools:
+  - name: write_mcp_server
+    description: Write files for an MCP server based on our discussion with the user
+    inputSchema:
+      type: object
+      required:
+        - outputDir
+        - files
+      properties:
+        files:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - content
+            properties:
+              path:
+                type: string
+              content:
+                type: string
+        outputDir:
+          type: string
+          description: Directory where server files should be created

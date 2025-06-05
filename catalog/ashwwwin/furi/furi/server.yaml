@@ -1,0 +1,17 @@
+identifier: ashwwwin/furi/furi
+repo:
+  provider: github.com
+  url: https://github.com/ashwwwin/furi
+  name: furi
+  owner: ashwwwin
+server:
+  subdirectory: /
+  name: Furikake CLI
+  description: Manage MCP servers locally with an easy-to-use CLI and HTTP API.
+    Download, start, stop, restart, and call MCPs from public GitHub
+    repositories with simple commands. Access running MCPs via HTTP routes for
+    monitoring and tool invocation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

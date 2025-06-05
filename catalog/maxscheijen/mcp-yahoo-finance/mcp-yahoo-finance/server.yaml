@@ -1,0 +1,18 @@
+identifier: maxscheijen/mcp-yahoo-finance/mcp-yahoo-finance
+repo:
+  provider: github.com
+  url: https://github.com/maxscheijen/mcp-yahoo-finance
+  name: mcp-yahoo-finance
+  owner: maxscheijen
+server:
+  subdirectory: /
+  name: Yahoo Finance Data Server
+  description: Provide real-time and historical financial data from Yahoo Finance
+    to enhance your LLM applications. Access stock prices, company information,
+    and perform comparative financial queries seamlessly. Enable your agents to
+    interact with financial markets data effortlessly through standardized
+    tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

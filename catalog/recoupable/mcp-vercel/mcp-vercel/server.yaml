@@ -1,0 +1,17 @@
+identifier: recoupable/mcp-vercel/mcp-vercel
+repo:
+  provider: github.com
+  url: https://github.com/recoupable/mcp-vercel
+  name: mcp-vercel
+  owner: recoupable
+server:
+  subdirectory: /
+  name: Big Brain Mantle Network Stats Server
+  description: Provide real-time statistics from top protocols in the Mantle
+    Network to empower better investment decisions. Easily integrate with your
+    LLM agents to fetch and analyze blockchain protocol data. Deploy seamlessly
+    on Vercel with Redis support and optimized compute settings.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

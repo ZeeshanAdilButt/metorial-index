@@ -1,0 +1,18 @@
+identifier: richardblythman/automcp-example-openai/automcp-example-openai
+repo:
+  provider: github.com
+  url: https://github.com/richardblythman/automcp-example-openai
+  name: automcp-example-openai
+  owner: richardblythman
+server:
+  subdirectory: /
+  name: OpenAI Agent MCP Server
+  description: Enable your OpenAI agents to interact with external tools and
+    resources through a standardized MCP server interface. Facilitate dynamic
+    integration of AI models with real-world data and actions to enhance agent
+    capabilities. Simplify building intelligent agents that can call tools, read
+    resources, and use prompt templates seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

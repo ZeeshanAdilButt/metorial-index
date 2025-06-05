@@ -1,0 +1,188 @@
+tools:
+  - name: navigate
+    description: Navigate to a URL
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The URL to navigate to
+      additionalProperties: false
+  - name: click
+    description: Perform click on a web page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - coordinate
+      properties:
+        coordinate:
+          type: string
+          description: Coordinates to click (x,y)
+      additionalProperties: false
+  - name: type
+    description: Type text into focused element
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Text to type
+      additionalProperties: false
+  - name: press_key
+    description: Press a key on the keyboard
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Name of the key to press, such as 'ArrowLeft' or 'Enter'
+      additionalProperties: false
+  - name: close
+    description: Close the browser
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - purpose
+      properties:
+        purpose:
+          type: string
+          description: give any string, workaround for no-parameter tools.
+      additionalProperties: false
+  - name: scroll
+    description: Scroll the page in a specified direction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - direction
+      properties:
+        selector:
+          type: string
+          description: CSS selector for the element to scroll (optional)
+        direction:
+          type: string
+          description: "Direction to scroll: up, down, left, or right"
+      additionalProperties: false
+  - name: save_html
+    description: Save the current page HTML to a file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        filename:
+          type: string
+          description: Optional filename to save the HTML to
+      additionalProperties: false
+  - name: set_viewport
+    description: Set the viewport configuration of the browser
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - width
+        - height
+      properties:
+        width:
+          type: number
+          description: Width of the browser viewport
+        height:
+          type: number
+          description: Height of the browser viewport
+      additionalProperties: false
+  - name: area_screenshot
+    description: Take a screenshot of a specific area of the current page
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - topLeft
+        - bottomRight
+      properties:
+        topLeft:
+          type: string
+          description: Top-left coordinate (x,y) of the area to capture
+        bottomRight:
+          type: string
+          description: Bottom-right coordinate (x,y) of the area to capture
+      additionalProperties: false
+  - name: get_saved_screenshots
+    description: Get a list of all saved screenshots
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - purpose
+      properties:
+        purpose:
+          type: string
+          description: give any string, workaround for no-parameter tools.
+      additionalProperties: false
+  - name: wait
+    description: Wait for a specified number of seconds, with a screenshot of the
+      current page state after waiting
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - seconds
+      properties:
+        seconds:
+          type: number
+          description: Number of seconds to wait
+      additionalProperties: false
+  - name: tab_list
+    description: List browser tabs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - purpose
+      properties:
+        purpose:
+          type: string
+          description: give any string, workaround for no-parameter tools.
+      additionalProperties: false
+  - name: tab_new
+    description: Open a new tab
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        url:
+          type: string
+          description: The URL to navigate to in the new tab. If not provided, the new tab
+            will be blank.
+      additionalProperties: false
+  - name: tab_select
+    description: Select a tab by index
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - index
+      properties:
+        index:
+          type: number
+          description: The index of the tab to select
+      additionalProperties: false
+  - name: tab_close
+    description: Close a tab
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        index:
+          type: number
+          description: The index of the tab to close. Closes current tab if not provided.
+      additionalProperties: false

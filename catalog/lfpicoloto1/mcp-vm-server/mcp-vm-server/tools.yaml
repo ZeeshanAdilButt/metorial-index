@@ -1,0 +1,145 @@
+tools:
+  - name: list_machine_types
+    description: "
+
+      \    List all available machine types.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict containing the list of machine types and pagination info
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_machine_typesArguments
+      properties: {}
+  - name: list_images
+    description: "
+
+      \    List all available images.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict containing the list of images and pagination info
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_imagesArguments
+      properties: {}
+  - name: list_vms
+    description: "
+
+      \    List all virtual machines in the current tenant.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict containing the list of VMs and pagination info
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_vmsArguments
+      properties: {}
+  - name: get_vm
+    description: "
+
+      \    Get details of a specific virtual machine.
+
+      \   \ 
+
+      \    Args:
+
+      \        vm_id: ID of the virtual machine to get details for
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict containing the VM details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_vmArguments
+      required:
+        - vm_id
+      properties:
+        vm_id:
+          type: string
+          title: Vm Id
+  - name: create_vm
+    description: "
+
+      \    Create a new virtual machine.
+
+      \   \ 
+
+      \    Args:
+
+      \        name: Name of the VM
+
+      \        machine_type_name: Name of the machine type
+
+      \        ssh_key_name: Name of the SSH key to use
+
+      \        image_name: Name of the image to use
+
+      \        availability_zone: Optional availability zone
+
+      \        vpc_id: Optional VPC ID
+
+      \        user_data: Optional user data script (base64 encoded)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict containing the VM creation response
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_vmArguments
+      required:
+        - name
+        - machine_type_name
+        - ssh_key_name
+        - image_name
+      properties:
+        name:
+          type: string
+          title: Name
+        vpc_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Vpc Id
+          default: null
+        user_data:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: User Data
+          default: null
+        image_name:
+          type: string
+          title: Image Name
+        ssh_key_name:
+          type: string
+          title: Ssh Key Name
+        availability_zone:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Availability Zone
+          default: null
+        machine_type_name:
+          type: string
+          title: Machine Type Name

@@ -1,0 +1,16 @@
+identifier: jmp0x7c00/echo-mcp/my-echo-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jmp0x7c00/echo-mcp
+  name: echo-mcp
+  owner: jmp0x7c00
+server:
+  subdirectory: /
+  name: Echo Server
+  description: Echo back any message you send, including special characters and
+    emojis. Perfect for testing and verifying MCP functionality with a simple
+    and reliable response mechanism.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

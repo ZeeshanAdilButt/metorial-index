@@ -1,0 +1,17 @@
+identifier: mjbeauty/iris-classifier-kubernetes/iris-classifier-kubernetes
+repo:
+  provider: github.com
+  url: https://github.com/MJBeauty/iris-classifier-kubernetes
+  name: iris-classifier-kubernetes
+  owner: MJBeauty
+server:
+  subdirectory: /
+  name: Iris Classifier Kubernetes Service
+  description: Deploy a scalable iris classification model on Kubernetes with a
+    lightweight Python API. Easily integrate machine learning predictions into
+    your applications using a RESTful interface. Simplify model serving and
+    management in containerized environments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

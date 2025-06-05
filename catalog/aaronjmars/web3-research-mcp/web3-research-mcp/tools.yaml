@@ -1,0 +1,159 @@
+tools:
+  - name: search
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        searchType:
+          enum:
+            - web
+            - news
+            - images
+            - videos
+          type: string
+          default: web
+          description: Type of search
+      additionalProperties: false
+  - name: create-research-plan
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenName
+        - tokenTicker
+      properties:
+        tokenName:
+          type: string
+          description: Token name
+        tokenTicker:
+          type: string
+          description: Token ticker symbol
+      additionalProperties: false
+  - name: research-with-keywords
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenName
+        - tokenTicker
+        - keywords
+      properties:
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Keywords to search for
+        tokenName:
+          type: string
+          description: Name of the token
+        tokenTicker:
+          type: string
+          description: Ticker symbol of the token
+      additionalProperties: false
+  - name: update-status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - section
+        - status
+      properties:
+        status:
+          enum:
+            - planned
+            - in_progress
+            - completed
+          type: string
+          description: New status for the section
+        section:
+          type: string
+          description: Section name to update (e.g., 'projectInfo', 'technicalFundamentals')
+      additionalProperties: false
+  - name: fetch-content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL to fetch content from (can be a resource:// URL)
+        format:
+          enum:
+            - text
+            - html
+            - markdown
+            - json
+          type: string
+          default: markdown
+          description: Output format
+      additionalProperties: false
+  - name: search-source
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenName
+        - tokenTicker
+        - source
+      properties:
+        source:
+          type: string
+          description: Source to search (e.g., 'Dune', 'IQ Wiki', 'News')
+        tokenName:
+          type: string
+          description: Name of the token
+        tokenTicker:
+          type: string
+          description: Ticker symbol of the token
+      additionalProperties: false
+  - name: list-resources
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: research-source
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenName
+        - tokenTicker
+        - source
+      properties:
+        source:
+          type: string
+          description: Single source to research
+        tokenName:
+          type: string
+          description: Name of the token
+        tokenTicker:
+          type: string
+          description: Ticker symbol of the token
+      additionalProperties: false
+  - name: research-token
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tokenName
+        - tokenTicker
+        - source
+      properties:
+        source:
+          type: string
+          description: Source to research (e.g., 'IQ Wiki', 'CoinMarketCap')
+        tokenName:
+          type: string
+          description: Name of the token
+        tokenTicker:
+          type: string
+          description: Ticker symbol of the token
+      additionalProperties: false

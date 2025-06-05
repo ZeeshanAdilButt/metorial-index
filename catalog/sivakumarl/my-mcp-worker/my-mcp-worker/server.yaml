@@ -1,0 +1,17 @@
+identifier: sivakumarl/my-mcp-worker/my-mcp-worker
+repo:
+  provider: github.com
+  url: https://github.com/sivakumarl/my-mcp-worker
+  name: my-mcp-worker
+  owner: sivakumarl
+server:
+  subdirectory: /
+  name: MCP Server with Cloudflare Workers
+  description: Build and deploy a scalable MCP server to enable AI assistants to
+    interact with your APIs seamlessly. Leverage Cloudflare Workers for a
+    powerful solution that enhances your AI capabilities. Start integrating your
+    services with ease and security.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,483 @@
+tools:
+  - name: get_pods
+    description: Get all pods in the specified namespace
+    inputSchema:
+      type: object
+      title: get_podsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_failing_pods
+    description: Get all pods with issues in the specified namespace
+    inputSchema:
+      type: object
+      title: get_failing_podsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_services
+    description: Get all services in the specified namespace
+    inputSchema:
+      type: object
+      title: get_servicesArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: describe_pod
+    description: Describe a specific pod
+    inputSchema:
+      type: object
+      title: describe_podArguments
+      required:
+        - pod_name
+      properties:
+        pod_name:
+          type: string
+          title: Pod Name
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_namespaces
+    description: Get all namespaces in the cluster
+    inputSchema:
+      type: object
+      title: get_namespacesArguments
+      properties: {}
+  - name: get_nodes
+    description: Get all nodes in the cluster
+    inputSchema:
+      type: object
+      title: get_nodesArguments
+      properties: {}
+  - name: get_deployments
+    description: Get all deployments in the specified namespace
+    inputSchema:
+      type: object
+      title: get_deploymentsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_jobs
+    description: Get all jobs in the specified namespace
+    inputSchema:
+      type: object
+      title: get_jobsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_cronjobs
+    description: Get all cronjobs in the specified namespace
+    inputSchema:
+      type: object
+      title: get_cronjobsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_statefulsets
+    description: Get all statefulsets in the specified namespace
+    inputSchema:
+      type: object
+      title: get_statefulsetsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_daemonsets
+    description: Get all daemonsets in the specified namespace
+    inputSchema:
+      type: object
+      title: get_daemonsetsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: expose_service
+    description: "Expose a resource as a new kubernetes service
+
+      \       k8s_object can be pod (po), service (svc), replicationcontroller
+      (rc), deployment (deploy), replicaset (rs)
+
+      \       Type for this service: ClusterIP, NodePort, LoadBalancer, or
+      ExternalName. Default is 'ClusterIP'.
+
+      \    "
+    inputSchema:
+      type: object
+      title: expose_serviceArguments
+      required:
+        - k8s_object
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        port:
+          type: integer
+          title: Port
+          default: 80
+        type:
+          type: string
+          title: Type
+          default: ClusterIP
+        protocol:
+          type: string
+          title: Protocol
+          default: TCP
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        k8s_object:
+          type: string
+          title: K8S Object
+        target_port:
+          type: integer
+          title: Target Port
+          default: 80
+  - name: port_forward
+    description: "Port forward a resource to the outside world
+
+      \        k8s_object can be a pod, deployment or a service and it should be
+      in the format pod/<name>, deployment/<name>, service/<name>
+
+      \    "
+    inputSchema:
+      type: object
+      title: port_forwardArguments
+      required:
+        - k8s_object
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        port:
+          type: integer
+          title: Port
+          default: 80
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        k8s_object:
+          type: string
+          title: K8S Object
+        target_port:
+          type: integer
+          title: Target Port
+          default: 80
+  - name: get_logs
+    description: Get the logs of a specific pod
+    inputSchema:
+      type: object
+      title: get_logsArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        tail:
+          type: integer
+          title: Tail
+          default: 1000
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_events
+    description: Get the events of a specific namespace
+    inputSchema:
+      type: object
+      title: get_eventsArguments
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: create_deployment
+    description: Create a Kubernetes deployment with specified name, image,
+      namespace and replicas
+    inputSchema:
+      type: object
+      title: create_deploymentArguments
+      required:
+        - name
+        - image
+      properties:
+        name:
+          type: string
+          title: Name
+        image:
+          type: string
+          title: Image
+        replicas:
+          type: integer
+          title: Replicas
+          default: 1
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: get_current_context
+    description: Get the current Kubernetes context
+    inputSchema:
+      type: object
+      title: get_current_contextArguments
+      properties: {}
+  - name: list_contexts
+    description: List all available Kubernetes contexts
+    inputSchema:
+      type: object
+      title: list_contextsArguments
+      properties: {}
+  - name: use_context
+    description: "Switch to a specific Kubernetes context
+
+      \    Args:
+
+      \        context_name: The name of the Kubernetes context to switch to
+
+      \    "
+    inputSchema:
+      type: object
+      title: use_contextArguments
+      required:
+        - context_name
+      properties:
+        context_name:
+          type: string
+          title: Context Name
+  - name: annotate_resource
+    description: "Annotate a Kubernetes resource with the specified annotation
+
+
+      \    Args:
+
+      \        resource_type: Type of the resource (e.g., pod, service,
+      deployment)
+
+      \        resource_name: Name of the resource to annotate
+
+      \        annotation: Annotation to add (e.g., key=value)
+
+      \        namespace: Namespace of the resource
+
+      \    "
+    inputSchema:
+      type: object
+      title: annotate_resourceArguments
+      required:
+        - resource_type
+        - resource_name
+        - annotation
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        annotation:
+          type: string
+          title: Annotation
+        resource_name:
+          type: string
+          title: Resource Name
+        resource_type:
+          type: string
+          title: Resource Type
+  - name: remove_annotation
+    description: "Remove an annotation from a Kubernetes resource
+
+
+      \    Args:
+
+      \        resource_type: Type of the resource (e.g., pod, service,
+      deployment)
+
+      \        resource_name: Name of the resource to remove the annotation from
+
+      \        annotation_key: Key of the annotation to remove
+
+      \        namespace: Namespace of the resource
+
+      \    "
+    inputSchema:
+      type: object
+      title: remove_annotationArguments
+      required:
+        - resource_type
+        - resource_name
+        - annotation_key
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        resource_name:
+          type: string
+          title: Resource Name
+        resource_type:
+          type: string
+          title: Resource Type
+        annotation_key:
+          type: string
+          title: Annotation Key
+  - name: label_resource
+    description: "Label a Kubernetes resource with the specified label
+
+
+      \    Args:
+
+      \        resource_type: Type of the resource (e.g., pod, service,
+      deployment)
+
+      \        resource_name: Name of the resource to label
+
+      \        label: Label to add (e.g., key=value)
+
+      \        namespace: Namespace of the resource
+
+      \    "
+    inputSchema:
+      type: object
+      title: label_resourceArguments
+      required:
+        - resource_type
+        - resource_name
+        - label
+      properties:
+        label:
+          type: string
+          title: Label
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        resource_name:
+          type: string
+          title: Resource Name
+        resource_type:
+          type: string
+          title: Resource Type
+  - name: remove_label
+    description: "Remove a label from a Kubernetes resource
+
+
+      \    Args:
+
+      \        resource_type: Type of the resource (e.g., pod, service,
+      deployment)
+
+      \        resource_name: Name of the resource to remove the label from
+
+      \        label_key: Key of the label to remove
+
+      \        namespace: Namespace of the resource
+
+      \    "
+    inputSchema:
+      type: object
+      title: remove_labelArguments
+      required:
+        - resource_type
+        - resource_name
+        - label_key
+      properties:
+        label_key:
+          type: string
+          title: Label Key
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        resource_name:
+          type: string
+          title: Resource Name
+        resource_type:
+          type: string
+          title: Resource Type
+  - name: update_deployment
+    description: "Update a Kubernetes deployment with new replicas count and/or
+      image
+
+      \   \ 
+
+      \    Args:
+
+      \        name: Name of the deployment to update
+
+      \        namespace: Namespace of the deployment
+
+      \        replicas: New number of replicas (optional)
+
+      \        image: New container image (optional)
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_deploymentArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+        image:
+          type: string
+          title: Image
+          default: null
+        replicas:
+          type: integer
+          title: Replicas
+          default: null
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+  - name: delete_resource
+    description: "Delete a Kubernetes resource
+
+
+      \    Args:
+
+      \        resource_type: Type of the resource (e.g., pod, service,
+      deployment,configmap,secret,ingress,statefulset,replicaset,damonset,newto\
+      rkpolicy,rolebinding,role,serviceaccount,job,cronjob)
+
+      \        resource_name: Name of the resource to delete
+
+      \        namespace: Namespace of the resource
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_resourceArguments
+      required:
+        - resource_type
+        - resource_name
+      properties:
+        namespace:
+          type: string
+          title: Namespace
+          default: default
+        resource_name:
+          type: string
+          title: Resource Name
+        resource_type:
+          type: string
+          title: Resource Type

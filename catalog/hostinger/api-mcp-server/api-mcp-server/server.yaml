@@ -1,0 +1,17 @@
+identifier: hostinger/api-mcp-server/api-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hostinger/api-mcp-server
+  name: api-mcp-server
+  owner: hostinger
+server:
+  subdirectory: /
+  name: Hostinger API Server
+  description: Provide seamless access to Hostinger's extensive API through a
+    Model Context Protocol server. Manage billing, DNS, domains, VPS, and more
+    with a unified interface that integrates easily with MCP-compatible clients.
+    Enhance automation and control over your Hostinger services efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

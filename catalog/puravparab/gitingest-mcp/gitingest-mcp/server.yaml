@@ -1,0 +1,17 @@
+identifier: puravparab/gitingest-mcp/gitingest-mcp
+repo:
+  provider: github.com
+  url: https://github.com/puravparab/Gitingest-MCP
+  name: Gitingest-MCP
+  owner: puravparab
+server:
+  subdirectory: /
+  name: Gitingest MCP Server
+  description: An MCP server for gitingest. It allows MCP clients like Claude
+    Desktop, Cursor, Cline etc to quickly extract information about Github
+    repositories including repository summaries, project directory structure,
+    file contents, etc
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

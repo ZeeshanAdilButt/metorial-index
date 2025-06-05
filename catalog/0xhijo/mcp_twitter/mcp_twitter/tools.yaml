@@ -1,0 +1,146 @@
+tools:
+  - name: create_twitter_post
+    description: Create new X/Twitter post
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - post
+      properties:
+        post:
+          type: string
+          description: This is the string you want to post on X
+      additionalProperties: false
+  - name: reply_twitter_tweet
+    description: Reply to specific X/Twitter post by ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tweet_id
+        - response_text
+      properties:
+        tweet_id:
+          type: string
+          description: The tweet id you want to reply
+        response_text:
+          type: string
+          description: This is the response you will send to the tweet
+      additionalProperties: false
+  - name: get_last_tweet
+    description: Get most recent post from specified X/Twitter account
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - account_name
+      properties:
+        account_name:
+          type: string
+          description: This is the account_name you want to get the latest tweet
+      additionalProperties: false
+  - name: get_last_tweets_options
+    description: Get specified number of posts matching search query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+        - maxTeets
+        - reply
+      properties:
+        query:
+          type: string
+          description: The search query . Any Twitter-compatible query format can be used
+        reply:
+          type: boolean
+          description: If you want to include replyed tweet in your request
+        maxTeets:
+          type: number
+          description: The max tweets you want to get
+      additionalProperties: false
+  - name: create_and_post_twitter_thread
+    description: Create and publish X/Twitter thread
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - thread
+      properties:
+        thread:
+          type: array
+          items:
+            type: string
+          description: This is the array of where every index of this array contain a part
+            of your thread
+      additionalProperties: false
+  - name: follow_twitter_from_username
+    description: Follow X/Twitter user by username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: The username you want to follow
+      additionalProperties: false
+  - name: get_twitter_profile_from_username
+    description: Get full X/Twitter profile data by username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: The username you want to get the profile
+      additionalProperties: false
+  - name: get_twitter_user_id_from_username
+    description: Get X/Twitter user ID from username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: The username you want get the user_id
+      additionalProperties: false
+  - name: get_last_tweet_and_replies_from_user
+    description: Get recent X/Twitter posts and replies from user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: The username you want to get last tweets and replies
+        maxTweets:
+          type: number
+          description: The number of tweets/replies you want to get from a User
+      additionalProperties: false
+  - name: get_last_tweet_from_user
+    description: Get recent X/Twitter posts from user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: The username you want to get last tweets
+        maxTweets:
+          type: number
+          description: The number of tweets you want to get from a User
+      additionalProperties: false
+  - name: get_own_twitter_account_info
+    description: Get current account profile data
+    inputSchema:
+      type: object

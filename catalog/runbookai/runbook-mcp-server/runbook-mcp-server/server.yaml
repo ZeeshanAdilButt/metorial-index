@@ -1,0 +1,17 @@
+identifier: runbookai/runbook-mcp-server/runbook-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/runbookai/runbook-mcp-server
+  name: runbook-mcp-server
+  owner: runbookai
+server:
+  subdirectory: /
+  name: Runbook MCP Server
+  description: Enable your agents to execute operational runbooks and manual test
+    plans seamlessly. Automate tasks like deploying services or running
+    integration tests with ease. Enhance your workflow by integrating with
+    Claude Desktop for efficient runbook management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

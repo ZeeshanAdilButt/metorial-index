@@ -1,0 +1,19 @@
+identifier: lance2016/mcp_weather/mcp_weather
+repo:
+  provider: github.com
+  url: https://github.com/lance2016/mcp_weather
+  name: mcp_weather
+  owner: lance2016
+server:
+  subdirectory: /
+  name: Slack Server
+  description: Enable seamless interaction with Slack workspaces by listing
+    channels, posting messages, replying to threads, adding reactions, and
+    retrieving user and message information. Integrate Slack capabilities
+    directly into your applications to automate communication workflows and
+    enhance collaboration. Simplify Slack workspace management with easy-to-use
+    tools accessible via the Model Context Protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

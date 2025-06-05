@@ -1,0 +1,146 @@
+tools:
+  - name: upsertSummary
+    description: Create or update a detailed session summary with metadata
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - summary
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Keywords or tags to categorize the session.
+        title:
+          type: string
+          description: A short, descriptive title for the session.
+        summary:
+          type: string
+          description: "**Mandatory.** The detailed content of the session chronicle/log."
+        sessionId:
+          type: string
+          minLength: 1
+          description: "**Mandatory.** A unique identifier for the conversation session."
+      additionalProperties: false
+  - name: getSummaryTool
+    description: Retrieves a specific summary by sessionId or lists all available
+      summaries if no ID is provided.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        maxLength:
+          type: integer
+          description: If provided, truncate the retrieved summary text to this maximum
+            length.
+          exclusiveMinimum: 0
+        sessionId:
+          type: string
+          minLength: 1
+          description: The unique ID of the session summary to retrieve.
+      additionalProperties: false
+  - name: listSummariesTool
+    description: Lists available summaries with support for filtering, sorting, and
+      pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        tag:
+          type: string
+          description: Filter sessions by a specific tag.
+        limit:
+          type: integer
+          description: Limit results.
+          exclusiveMinimum: 0
+        order:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sort order.
+        offset:
+          type: integer
+          minimum: 0
+          description: Offset for pagination.
+        sortBy:
+          enum:
+            - lastUpdated
+            - title
+          type: string
+          description: Sort field.
+      additionalProperties: false
+  - name: updateMetadata
+    description: Updates only the metadata (title and/or tags) without changing the
+      summary content or timestamp.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: New tags array. If omitted, tags remain unchanged.
+        title:
+          type: string
+          description: New title. If omitted, title remains unchanged.
+        sessionId:
+          type: string
+          minLength: 1
+          description: "**Mandatory.** The unique ID of the session whose metadata to
+            update."
+      additionalProperties: false
+  - name: listAllSummariesTool
+    description: Simple tool to list all available summaries.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: appendSummary
+    description: Simple reliable tool to append content to a session summary.
+      Creates a new version that includes previous content plus new content.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+        - content
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional tags for categorizing the session.
+        title:
+          type: string
+          description: Optional title for the session.
+        content:
+          type: string
+          description: The content to append to the session. This will be added to the
+            existing content and saved as a new version.
+        sessionId:
+          type: string
+          minLength: 1
+          description: Unique identifier for the conversation session.
+      additionalProperties: false
+  - name: getSessionHistory
+    description: Retrieves all historical versions of a session in chronological order.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+          minLength: 1
+          description: The unique ID of the session to retrieve history for.
+      additionalProperties: false

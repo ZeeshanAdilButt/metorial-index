@@ -1,0 +1,17 @@
+identifier: kukapay/whattimeisit-mcp/whattimeisit-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/whattimeisit-mcp
+  name: whattimeisit-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: WhatTimeIsIt
+  description: Get the current time based on your IP address in ISO 8601 format.
+    Easily integrate time-checking capabilities into your applications with this
+    lightweight server. Perfect for developers needing accurate time data
+    without complex setups.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

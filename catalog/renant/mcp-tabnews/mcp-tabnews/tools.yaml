@@ -1,0 +1,113 @@
+tools:
+  - name: get status
+    description: get status from tabnews api
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get contents
+    description: get contents from tabnews api
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: The page number to get
+        per_page:
+          type: number
+          description: The number of contents per page
+        strategy:
+          enum:
+            - relevant
+            - new
+            - old
+          type: string
+          description: The strategy to get the contents
+      additionalProperties: false
+  - name: get contents by user
+    description: get contents by user from tabnews api
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        page:
+          type: number
+          description: The page number to get
+        per_page:
+          type: number
+          description: The number of contents per page
+        strategy:
+          enum:
+            - relevant
+            - new
+            - old
+          type: string
+          description: The strategy to get the contents
+        username:
+          type: string
+          description: The username to get the contents
+      additionalProperties: false
+  - name: get content
+    description: get content from tabnews api
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - slug
+      properties:
+        slug:
+          type: string
+          description: The slug to get the content
+        username:
+          type: string
+          description: The username to get the content
+      additionalProperties: false
+  - name: get comments
+    description: get comments from a content on tabnews api
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+        - slug
+      properties:
+        slug:
+          type: string
+          description: The slug to get the content
+        username:
+          type: string
+          description: The username to get the content
+      additionalProperties: false
+  - name: get analytics user created
+    description: To get how many users were created (per day) in tabnews
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get analytics root content published
+    description: To get how many posts were made (per day) in tabnews
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get analytics child content published
+    description: To get how many comments were made (per day) in tabnews
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get rss feed
+    description: To get the rss feed from tabnews
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

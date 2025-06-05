@@ -1,0 +1,245 @@
+tools:
+  - name: zoho_create_customer
+    description: Create a new customer contact in Zoho Books
+    inputSchema:
+      type: object
+      required:
+        - contact_name
+      properties:
+        email:
+          type: string
+          description: Customer's email address
+        notes:
+          type: string
+          description: Additional notes about the customer
+        phone:
+          type: string
+          description: Customer's phone number
+        currency_id:
+          type: string
+          description: Currency ID for this customer
+        company_name:
+          type: string
+          description: Company name
+        contact_name:
+          type: string
+          description: Name of the customer (required)
+        contact_type:
+          enum:
+            - customer
+            - vendor
+          type: string
+          default: customer
+          description: Type of contact
+        customer_name:
+          type: string
+          description: Alternative name field (if needed)
+        billing_address:
+          type: object
+          properties:
+            zip:
+              type: string
+              description: Zip/Postal code
+            city:
+              type: string
+              description: City
+            state:
+              type: string
+              description: State
+            address:
+              type: string
+              description: Street address
+            country:
+              type: string
+              description: Country
+          description: Customer's billing address
+  - name: zoho_create_invoice
+    description: Create a new invoice in Zoho Books (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - customer_id
+        - line_items
+      properties:
+        line_items:
+          type: array
+          items:
+            type: object
+          description: Array of line item objects for the invoice
+        customer_id:
+          type: string
+          description: ID of the customer the invoice is for
+      additionalProperties: true
+  - name: zoho_generate_payment_link
+    description: Generate a payment link for a specific invoice (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - transaction_id
+        - transaction_type
+        - expiry_time
+      properties:
+        link_type:
+          enum:
+            - public
+            - protected
+          type: string
+          default: public
+          description: Type of link
+        expiry_time:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          description: "Expiry date for the payment link (format: YYYY-MM-DD)"
+        transaction_id:
+          type: string
+          description: Transaction ID (e.g., invoice ID)
+        transaction_type:
+          enum:
+            - invoice
+            - customer_payment
+            - creditnote
+            - vendorcredit
+          type: string
+          description: Type of transaction
+  - name: zoho_get_chart_of_accounts
+    description: Get list of chart of accounts (organization_id is fixed)
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: zoho_get_employee
+    description: Get a specific employee’s details by employee_id (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - employee_id
+      properties:
+        employee_id:
+          type: string
+          description: ID of the employee to fetch
+  - name: zoho_get_expense
+    description: Get details of a specific expense (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - expense_id
+      properties:
+        expense_id:
+          type: string
+          description: Expense ID
+  - name: zoho_get_expenses
+    description: Get a list of all expenses (organization_id is fixed)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        filter_by:
+          enum:
+            - Status.All
+            - Status.Billable
+            - Status.Nonbillable
+            - Status.Reimbursed
+            - Status.Invoiced
+            - Status.Unbilled
+          type: string
+          description: Filter expenses by status (e.g., 'Status.All', 'Status.Billable',
+            'Status.Nonbillable')
+        customer_id:
+          type: string
+          description: Filter expenses by customer ID
+        sort_column:
+          enum:
+            - date
+            - account_name
+            - total
+            - bcy_total
+            - reference_number
+            - customer_name
+            - created_time
+          type: string
+          description: Column to sort results by
+  - name: zoho_get_invoice_email
+    description: Get payment reminder email content for a specific invoice
+      (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+      properties:
+        invoice_id:
+          type: string
+          description: ID of the invoice to fetch email content for
+  - name: zoho_get_invoice
+    description: Get details of a specific invoice (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+      properties:
+        invoice_id:
+          type: string
+          description: Invoice ID
+  - name: zoho_list_contacts
+    description: Lists all contacts (customers) given the organization_id.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        params:
+          type: object
+          description: Optional query parameters for listing contacts.
+          additionalProperties: true
+  - name: zoho_list_credits_applied
+    description: Get a list of credits applied to a specific invoice
+      (organization_id is fixed)
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+      properties:
+        invoice_id:
+          type: string
+          description: Invoice ID for which to retrieve applied credits
+  - name: zoho_list_customer_names
+    description: List all customer names and IDs in Zoho Books (organization_id is fixed)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        params:
+          type: object
+          description: Optional query parameters for listing customers
+  - name: zoho_list_employees
+    description: List all employees in the organization (organization_id is fixed)
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: zoho_list_invoice_payments
+    description: List all payments made against a specific invoice (organization_id
+      is fixed)
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+      properties:
+        invoice_id:
+          type: string
+          description: Invoice ID for which to retrieve payments
+  - name: zoho_list_invoices
+    description: List invoices in Zoho Books (organization_id is fixed)
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        params:
+          type: object
+          description: Query parameters (optional)
+          additionalProperties: true
+  - name: zoho_list_recurring_invoices
+    description: List all recurring invoices (organization_id is fixed)
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+      additionalProperties: false

@@ -1,0 +1,14 @@
+identifier: laulauland/bluesky-context-server/bluesky-context-server
+repo:
+  provider: github.com
+  url: https://github.com/laulauland/bluesky-context-server
+  name: bluesky-context-server
+  owner: laulauland
+server:
+  subdirectory: /
+  name: Bluesky Context Server
+  description: A simple MCP server that enables querying Bluesky instances.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/m365-bookings-mcp/m365-bookings-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/m365-bookings-mcp
+  name: m365-bookings-mcp
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Microsoft 365 Bookings
+  description: Interact with Microsoft Bookings seamlessly through the Microsoft
+    Graph API. Access and manage your bookings, staff, services, and
+    appointments effortlessly. Enhance your scheduling capabilities with
+    powerful tools designed for efficiency and ease of use.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

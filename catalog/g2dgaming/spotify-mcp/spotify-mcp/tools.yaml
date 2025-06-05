@@ -1,0 +1,114 @@
+tools:
+  - name: SpotifyPlayback
+    description: "Manages the current playback with the following actions:
+
+      \    - get: Get information about user's current track.
+
+      \    - start: Starts playing new item or resumes current playback if
+      called with no uri.
+
+      \    - pause: Pauses current playback.
+
+      \    - skip: Skips current track.
+
+      \    "
+    inputSchema:
+      type: object
+      title: Playback
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'get', 'start', 'pause' or 'skip'."
+        num_skips:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Num Skips
+          default: 1
+          description: Number of tracks to skip for `skip` action.
+        spotify_uri:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Spotify Uri
+          default: null
+          description: Spotify uri of item to play for 'start' action. If omitted, resumes
+            current playback.
+      description: >-
+        Manages the current playback with the following actions:
+
+        - get: Get information about user's current track.
+
+        - start: Starts playing new item or resumes current playback if called
+        with no uri.
+
+        - pause: Pauses current playback.
+
+        - skip: Skips current track.
+  - name: SpotifySearch
+    description: Search for tracks, albums, artists, or playlists on Spotify.
+    inputSchema:
+      type: object
+      title: Search
+      required:
+        - query
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+          description: Maximum number of items to return
+        qtype:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Qtype
+          default: track
+          description: Type of items to search for (track, album, artist, playlist, or
+            comma-separated combination)
+        query:
+          type: string
+          title: Query
+          description: query term
+      description: Search for tracks, albums, artists, or playlists on Spotify.
+  - name: SpotifyQueue
+    description: Manage the playback queue - get the queue or add tracks.
+    inputSchema:
+      type: object
+      title: Queue
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+          description: "Action to perform: 'add' or 'get'."
+        track_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Track Id
+          default: null
+          description: Track ID to add to queue (required for add action)
+      description: Manage the playback queue - get the queue or add tracks.
+  - name: SpotifyGetInfo
+    description: Get detailed information about a Spotify item (track, album,
+      artist, or playlist).
+    inputSchema:
+      type: object
+      title: GetInfo
+      required:
+        - item_uri
+      properties:
+        item_uri:
+          type: string
+          title: Item Uri
+          description: URI of the item to get information about. If 'playlist' or 'album',
+            returns its tracks. If 'artist', returns albums and top tracks.
+      description: Get detailed information about a Spotify item (track, album,
+        artist, or playlist).

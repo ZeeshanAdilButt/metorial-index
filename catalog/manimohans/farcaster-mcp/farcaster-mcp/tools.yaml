@@ -1,0 +1,46 @@
+tools:
+  - name: get-user-casts
+    description: Get casts from a specific Farcaster user by FID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fid
+      properties:
+        fid:
+          type: number
+          description: Farcaster user ID (FID)
+        limit:
+          type: number
+          description: "Maximum number of casts to return (default: 10)"
+      additionalProperties: false
+  - name: get-channel-casts
+    description: Get casts from a specific Farcaster channel
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - channel
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of casts to return (default: 10)"
+        channel:
+          type: string
+          description: Channel name (e.g., 'aichannel') or URL
+      additionalProperties: false
+  - name: get-username-casts
+    description: Get casts from a specific Farcaster username
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - username
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of casts to return (default: 10)"
+        username:
+          type: string
+          description: Farcaster username
+      additionalProperties: false

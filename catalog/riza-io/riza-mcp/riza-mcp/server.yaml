@@ -1,0 +1,15 @@
+identifier: riza-io/riza-mcp/riza-mcp
+repo:
+  provider: github.com
+  url: https://github.com/riza-io/riza-mcp
+  name: riza-mcp
+  owner: riza-io
+server:
+  subdirectory: /
+  name: Riza MCP Server
+  description: Wrap Riza API endpoints as tools for your LLM. Enable secure code
+    execution and management for LLM-generated code.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

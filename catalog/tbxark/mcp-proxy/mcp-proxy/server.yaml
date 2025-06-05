@@ -1,0 +1,18 @@
+identifier: tbxark/mcp-proxy/mcp-proxy
+repo:
+  provider: github.com
+  url: https://github.com/TBXark/mcp-proxy
+  name: mcp-proxy
+  owner: TBXark
+server:
+  subdirectory: /
+  name: MCP Proxy Server
+  description: Aggregate and serve multiple MCP resource servers through a single
+    HTTP server to unify access to various MCP clients. Enable real-time updates
+    with SSE support and flexible configuration for different client types.
+    Simplify management of MCP tools and capabilities by proxying them via one
+    endpoint.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

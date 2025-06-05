@@ -1,0 +1,17 @@
+tools:
+  - name: send-sms
+    description: Send an SMS message via Twilio
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - to
+        - message
+      properties:
+        to:
+          type: string
+          description: The Twilio To number in +E.164 format (+XXXXXXXXXX)
+        message:
+          type: string
+          description: The message to send
+      additionalProperties: false

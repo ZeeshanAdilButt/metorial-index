@@ -1,0 +1,16 @@
+identifier: hosakakeigo/spreadsheet-mcp-server/spreadsheet-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/HosakaKeigo/spreadsheet-mcp-server
+  name: spreadsheet-mcp-server
+  owner: HosakaKeigo
+server:
+  subdirectory: /
+  name: Spreadsheet MCP Server
+  description: Access Google Spreadsheet data seamlessly. Retrieve spreadsheet
+    information and specific sheet data in a user-friendly markdown format,
+    enhancing your LLM's capabilities with real-time data integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

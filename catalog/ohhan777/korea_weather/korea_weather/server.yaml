@@ -1,0 +1,36 @@
+identifier: ohhan777/korea_weather/korea_weather
+repo:
+  provider: github.com
+  url: https://github.com/ohhan777/korea_weather
+  name: korea_weather
+  owner: ohhan777
+server:
+  subdirectory: /
+  name: Korea Weather
+  description: >-
+    Korea Weather MCP Server는 대한민국 기상청의 단기 예보 API를 활용하여 날씨 정보를 수집하고, 이를 MCP 형식으로
+    변환하여 제공하는 서버입니다. 이 서버는 Claude, Cursor 등과 같은 MCP 클라이언트(호스트)에게 실시간 또는 요청 기반의
+    기상 데이터를 전달하는 용도로 사용됩니다. 다양한 기상 응용 서비스의 백엔드로 활용될 수 있도록 설계되었습니다.
+
+
+    이 서버의 주요 기능은 기상청의 단기 예보 API와 연동하여 데이터를 수신하고, 해당 정보를 MCP 프로토콜 형식으로 가공하여
+    클라이언트에게 제공하는 것입니다.
+
+
+    서버를 사용하기 위해서는 먼저 대한민국 공공데이터 포털(data.go.kr)에서 기상청 단기 예보 API 활용 신청을 한 뒤, API
+    키를 발급받아야 합니다. 이후 서버 설정 파일에서 MCP 서버 관련 항목을 등록하고, 발급받은 API 키는 환경변수로 설정하여 시스템에
+    반영합니다.
+
+
+    본 서버는 Python 3.x 기반으로 개발되었으며, 외부 패키지로는 requests 등을 사용합니다. 보다 상세한 의존성 목록은
+    pyproject.toml 파일에서 확인할 수 있습니다.
+
+
+    이 프로젝트는 내부 시험용으로 개발되었으며, 별도의 라이선스 제한 없이 자유롭게 사용, 수정, 배포가 가능합니다.
+
+
+    서버 관련 문의는 한국항공우주연구원의 오한(ohhan@kari.re.kr)에게 연락 주시기 바랍니다.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

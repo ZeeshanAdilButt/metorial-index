@@ -1,0 +1,17 @@
+identifier: trilogy-group/aws-pricing-mcp/aws-pricing-mcp
+repo:
+  provider: github.com
+  url: https://github.com/trilogy-group/aws-pricing-mcp
+  name: aws-pricing-mcp
+  owner: trilogy-group
+server:
+  subdirectory: /
+  name: AWS EC2 Pricing
+  description: Query real-time AWS EC2 instance pricing and specifications with a
+    single call. Find the cheapest instances matching specific criteria, compare
+    CPU speeds, discounts, and software options effortlessly. Enable LLMs or
+    automation scripts to access up-to-date EC2 pricing data instantly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

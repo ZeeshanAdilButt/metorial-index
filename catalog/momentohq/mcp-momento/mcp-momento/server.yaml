@@ -1,0 +1,18 @@
+identifier: momentohq/mcp-momento/mcp-momento
+repo:
+  provider: github.com
+  url: https://github.com/momentohq/mcp-momento
+  name: mcp-momento
+  owner: momentohq
+server:
+  subdirectory: /
+  name: Momento Cache
+  description: Leverage a powerful caching solution to store and retrieve data
+    efficiently. Use this server to seamlessly integrate caching capabilities
+    into your applications, ensuring quick access to frequently used data.
+    Simplify your data management with easy-to-use commands for setting and
+    getting cache values.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,1041 @@
+tools:
+  - name: get_historical_k_data
+    description: "
+
+      \        Fetches historical K-line (OHLCV) data for a Chinese A-share
+      stock.
+
+
+      \        Args:
+
+      \            code: The stock code in Baostock format (e.g., 'sh.600000',
+      'sz.000001').
+
+      \            start_date: Start date in 'YYYY-MM-DD' format.
+
+      \            end_date: End date in 'YYYY-MM-DD' format.
+
+      \            frequency: Data frequency. Valid options (from Baostock):
+
+      \                         'd': daily
+
+      \                         'w': weekly
+
+      \                         'm': monthly
+
+      \                         '5': 5 minutes
+
+      \                         '15': 15 minutes
+
+      \                         '30': 30 minutes
+
+      \                         '60': 60 minutes
+
+      \                       Defaults to 'd'.
+
+      \            adjust_flag: Adjustment flag for price/volume. Valid options
+      (from Baostock):
+
+      \                           '1': Forward adjusted (后复权)
+
+      \                           '2': Backward adjusted (前复权)
+
+      \                           '3': Non-adjusted (不复权)
+
+      \                         Defaults to '3'.
+
+      \            fields: Optional list of specific data fields to retrieve
+      (must be valid Baostock fields).
+
+      \                    If None or empty, default fields will be used (e.g.,
+      date, code, open, high, low, close, volume, amount, pctChg).
+
+
+      \        Returns:
+
+      \            A Markdown formatted string containing the K-line data table,
+      or an error message.
+
+      \            The table might be truncated if the result set is too large.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_historical_k_dataArguments
+      required:
+        - code
+        - start_date
+        - end_date
+      properties:
+        code:
+          type: string
+          title: Code
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        end_date:
+          type: string
+          title: End Date
+        frequency:
+          type: string
+          title: Frequency
+          default: d
+        start_date:
+          type: string
+          title: Start Date
+        adjust_flag:
+          type: string
+          title: Adjust Flag
+          default: "3"
+  - name: get_stock_basic_info
+    description: "
+
+      \        Fetches basic information for a given Chinese A-share stock.
+
+
+      \        Args:
+
+      \            code: The stock code in Baostock format (e.g., 'sh.600000',
+      'sz.000001').
+
+      \            fields: Optional list to select specific columns from the
+      available basic info
+
+      \                    (e.g., ['code', 'code_name', 'industry',
+      'listingDate']).
+
+      \                    If None or empty, returns all available basic info
+      columns from Baostock.
+
+
+      \        Returns:
+
+      \            A Markdown formatted string containing the basic stock
+      information table,
+
+      \            or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_stock_basic_infoArguments
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          title: Code
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+  - name: get_dividend_data
+    description: "
+
+      \        Fetches dividend information for a given stock code and year.
+
+
+      \        Args:
+
+      \            code: The stock code in Baostock format (e.g., 'sh.600000',
+      'sz.000001').
+
+      \            year: The year to query (e.g., '2023').
+
+      \            year_type: Type of year. Valid options (from Baostock):
+
+      \                         'report': Announcement year (预案公告年份)
+
+      \                         'operate': Ex-dividend year (除权除息年份)
+
+      \                       Defaults to 'report'.
+
+
+      \        Returns:
+
+      \            A Markdown formatted string containing the dividend data
+      table,
+
+      \            or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_dividend_dataArguments
+      required:
+        - code
+        - year
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        year_type:
+          type: string
+          title: Year Type
+          default: report
+  - name: get_adjust_factor_data
+    description: "
+
+      \        Fetches adjustment factor data for a given stock code and date
+      range.
+
+      \        Uses Baostock's \"涨跌幅复权算法\" factors. Useful for calculating
+      adjusted prices.
+
+
+      \        Args:
+
+      \            code: The stock code in Baostock format (e.g., 'sh.600000',
+      'sz.000001').
+
+      \            start_date: Start date in 'YYYY-MM-DD' format.
+
+      \            end_date: End date in 'YYYY-MM-DD' format.
+
+
+      \        Returns:
+
+      \            A Markdown formatted string containing the adjustment factor
+      data table,
+
+      \            or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_adjust_factor_dataArguments
+      required:
+        - code
+        - start_date
+        - end_date
+      properties:
+        code:
+          type: string
+          title: Code
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_profit_data
+    description: "
+
+      \        Fetches quarterly profitability data (e.g., ROE, net profit
+      margin) for a stock.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            year: The 4-digit year (e.g., '2023').
+
+      \            quarter: The quarter (1, 2, 3, or 4).
+
+
+      \        Returns:
+
+      \            Markdown table with profitability data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_profit_dataArguments
+      required:
+        - code
+        - year
+        - quarter
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        quarter:
+          type: integer
+          title: Quarter
+  - name: get_operation_data
+    description: "
+
+      \        Fetches quarterly operation capability data (e.g., turnover
+      ratios) for a stock.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            year: The 4-digit year (e.g., '2023').
+
+      \            quarter: The quarter (1, 2, 3, or 4).
+
+
+      \        Returns:
+
+      \            Markdown table with operation capability data or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_operation_dataArguments
+      required:
+        - code
+        - year
+        - quarter
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        quarter:
+          type: integer
+          title: Quarter
+  - name: get_growth_data
+    description: "
+
+      \        Fetches quarterly growth capability data (e.g., YOY growth rates)
+      for a stock.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            year: The 4-digit year (e.g., '2023').
+
+      \            quarter: The quarter (1, 2, 3, or 4).
+
+
+      \        Returns:
+
+      \            Markdown table with growth capability data or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_growth_dataArguments
+      required:
+        - code
+        - year
+        - quarter
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        quarter:
+          type: integer
+          title: Quarter
+  - name: get_balance_data
+    description: "
+
+      \        Fetches quarterly balance sheet / solvency data (e.g., current
+      ratio, debt ratio) for a stock.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            year: The 4-digit year (e.g., '2023').
+
+      \            quarter: The quarter (1, 2, 3, or 4).
+
+
+      \        Returns:
+
+      \            Markdown table with balance sheet data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_balance_dataArguments
+      required:
+        - code
+        - year
+        - quarter
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        quarter:
+          type: integer
+          title: Quarter
+  - name: get_cash_flow_data
+    description: "
+
+      \        Fetches quarterly cash flow data (e.g., CFO/Operating Revenue
+      ratio) for a stock.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            year: The 4-digit year (e.g., '2023').
+
+      \            quarter: The quarter (1, 2, 3, or 4).
+
+
+      \        Returns:
+
+      \            Markdown table with cash flow data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_cash_flow_dataArguments
+      required:
+        - code
+        - year
+        - quarter
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        quarter:
+          type: integer
+          title: Quarter
+  - name: get_dupont_data
+    description: "
+
+      \        Fetches quarterly DuPont analysis data (ROE decomposition) for a
+      stock.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            year: The 4-digit year (e.g., '2023').
+
+      \            quarter: The quarter (1, 2, 3, or 4).
+
+
+      \        Returns:
+
+      \            Markdown table with DuPont analysis data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_dupont_dataArguments
+      required:
+        - code
+        - year
+        - quarter
+      properties:
+        code:
+          type: string
+          title: Code
+        year:
+          type: string
+          title: Year
+        quarter:
+          type: integer
+          title: Quarter
+  - name: get_performance_express_report
+    description: "
+
+      \        Fetches performance express reports (业绩快报) for a stock within a
+      date range.
+
+      \        Note: Companies are not required to publish these except in
+      specific cases.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            start_date: Start date (for report publication/update) in
+      'YYYY-MM-DD' format.
+
+      \            end_date: End date (for report publication/update) in
+      'YYYY-MM-DD' format.
+
+
+      \        Returns:
+
+      \            Markdown table with performance express report data or an
+      error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_performance_express_reportArguments
+      required:
+        - code
+        - start_date
+        - end_date
+      properties:
+        code:
+          type: string
+          title: Code
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_forecast_report
+    description: "
+
+      \        Fetches performance forecast reports (业绩预告) for a stock within a
+      date range.
+
+      \        Note: Companies are not required to publish these except in
+      specific cases.
+
+
+      \        Args:
+
+      \            code: The stock code (e.g., 'sh.600000').
+
+      \            start_date: Start date (for report publication/update) in
+      'YYYY-MM-DD' format.
+
+      \            end_date: End date (for report publication/update) in
+      'YYYY-MM-DD' format.
+
+
+      \        Returns:
+
+      \            Markdown table with performance forecast report data or an
+      error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_forecast_reportArguments
+      required:
+        - code
+        - start_date
+        - end_date
+      properties:
+        code:
+          type: string
+          title: Code
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+  - name: get_stock_industry
+    description: "
+
+      \        Fetches industry classification for a specific stock or all
+      stocks on a given date.
+
+
+      \        Args:
+
+      \            code: Optional. The stock code (e.g., 'sh.600000'). If None,
+      fetches for all stocks.
+
+      \            date: Optional. The date in 'YYYY-MM-DD' format. If None,
+      uses the latest available date.
+
+
+      \        Returns:
+
+      \            Markdown table with industry classification data or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_stock_industryArguments
+      properties:
+        code:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Code
+          default: null
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+  - name: get_sz50_stocks
+    description: "
+
+      \        Fetches the constituent stocks of the SZSE 50 Index for a given
+      date.
+
+
+      \        Args:
+
+      \            date: Optional. The date in 'YYYY-MM-DD' format. If None,
+      uses the latest available date.
+
+
+      \        Returns:
+
+      \            Markdown table with SZSE 50 constituent stocks or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_sz50_stocksArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+  - name: get_hs300_stocks
+    description: "
+
+      \        Fetches the constituent stocks of the CSI 300 Index for a given
+      date.
+
+
+      \        Args:
+
+      \            date: Optional. The date in 'YYYY-MM-DD' format. If None,
+      uses the latest available date.
+
+
+      \        Returns:
+
+      \            Markdown table with CSI 300 constituent stocks or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_hs300_stocksArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+  - name: get_zz500_stocks
+    description: "
+
+      \        Fetches the constituent stocks of the CSI 500 Index for a given
+      date.
+
+
+      \        Args:
+
+      \            date: Optional. The date in 'YYYY-MM-DD' format. If None,
+      uses the latest available date.
+
+
+      \        Returns:
+
+      \            Markdown table with CSI 500 constituent stocks or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_zz500_stocksArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+  - name: get_trade_dates
+    description: "
+
+      \        Fetches trading dates information within a specified range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start date in 'YYYY-MM-DD' format.
+      Defaults to 2015-01-01 if None.
+
+      \            end_date: Optional. End date in 'YYYY-MM-DD' format. Defaults
+      to the current date if None.
+
+
+      \        Returns:
+
+      \            Markdown table indicating whether each date in the range was
+      a trading day (1) or not (0).
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_trade_datesArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_all_stock
+    description: "
+
+      \        Fetches a list of all stocks (A-shares and indices) and their
+      trading status for a given date.
+
+
+      \        Args:
+
+      \            date: Optional. The date in 'YYYY-MM-DD' format. If None,
+      uses the current date.
+
+
+      \        Returns:
+
+      \            Markdown table listing stock codes, names, and their trading
+      status (1=trading, 0=suspended).
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_all_stockArguments
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+  - name: get_deposit_rate_data
+    description: "
+
+      \        Fetches benchmark deposit rates (活期, 定期) within a date range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start date in 'YYYY-MM-DD' format.
+
+      \            end_date: Optional. End date in 'YYYY-MM-DD' format.
+
+
+      \        Returns:
+
+      \            Markdown table with deposit rate data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_deposit_rate_dataArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_loan_rate_data
+    description: "
+
+      \        Fetches benchmark loan rates (贷款利率) within a date range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start date in 'YYYY-MM-DD' format.
+
+      \            end_date: Optional. End date in 'YYYY-MM-DD' format.
+
+
+      \        Returns:
+
+      \            Markdown table with loan rate data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_loan_rate_dataArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_required_reserve_ratio_data
+    description: "
+
+      \        Fetches required reserve ratio data (存款准备金率) within a date range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start date in 'YYYY-MM-DD' format.
+
+      \            end_date: Optional. End date in 'YYYY-MM-DD' format.
+
+      \            year_type: Optional. Year type for date filtering. '0' for
+      announcement date (公告日期, default),
+
+      \                    '1' for effective date (生效日期).
+
+
+      \        Returns:
+
+      \            Markdown table with required reserve ratio data or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_required_reserve_ratio_dataArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        year_type:
+          type: string
+          title: Year Type
+          default: "0"
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_money_supply_data_month
+    description: "
+
+      \        Fetches monthly money supply data (M0, M1, M2) within a date
+      range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start date in 'YYYY-MM' format.
+
+      \            end_date: Optional. End date in 'YYYY-MM' format.
+
+
+      \        Returns:
+
+      \            Markdown table with monthly money supply data or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_money_supply_data_monthArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_money_supply_data_year
+    description: "
+
+      \        Fetches yearly money supply data (M0, M1, M2 - year end balance)
+      within a date range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start year in 'YYYY' format.
+
+      \            end_date: Optional. End year in 'YYYY' format.
+
+
+      \        Returns:
+
+      \            Markdown table with yearly money supply data or an error
+      message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_money_supply_data_yearArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_shibor_data
+    description: "
+
+      \        Fetches SHIBOR (Shanghai Interbank Offered Rate) data within a
+      date range.
+
+
+      \        Args:
+
+      \            start_date: Optional. Start date in 'YYYY-MM-DD' format.
+
+      \            end_date: Optional. End date in 'YYYY-MM-DD' format.
+
+
+      \        Returns:
+
+      \            Markdown table with SHIBOR data or an error message.
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_shibor_dataArguments
+      properties:
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+  - name: get_latest_trading_date
+    description: "
+
+      \        获取最近的交易日期。如果当天是交易日，则返回当天日期；否则返回最近的交易日。
+
+
+      \        Returns:
+
+      \            最近的交易日期，格式为'YYYY-MM-DD'。
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_latest_trading_dateArguments
+      properties: {}
+  - name: get_market_analysis_timeframe
+    description: "
+
+      \        获取适合市场分析的时间范围，基于当前真实日期而不是训练数据。
+
+      \        这个工具应该在进行市场分析或大盘分析时首先调用，以确保使用最新的实际数据。
+
+
+      \        Args:
+
+      \            period: 时间范围类型，可选值:
+
+      \                   \"recent\": 最近1-2个月(默认)
+
+      \                   \"quarter\": 最近一个季度
+
+      \                   \"half_year\": 最近半年
+
+      \                   \"year\": 最近一年
+
+
+      \        Returns:
+
+      \            包含分析时间范围的详细描述字符串，格式为\"YYYY年M月-YYYY年M月\"。
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_market_analysis_timeframeArguments
+      properties:
+        period:
+          type: string
+          title: Period
+          default: recent
+  - name: get_stock_analysis
+    description: "
+
+      \        提供基于数据的股票分析报告，而非投资建议。
+
+
+      \        Args:
+
+      \            code: 股票代码，如'sh.600000'
+
+      \            analysis_type:
+      分析类型，可选'fundamental'(基本面)、'technical'(技术面)或'comprehensive'(综合)
+
+
+      \        Returns:
+
+      \            数据驱动的分析报告，包含关键财务指标、历史表现和同行业比较
+
+      \        "
+    inputSchema:
+      type: object
+      title: get_stock_analysisArguments
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          title: Code
+        analysis_type:
+          type: string
+          title: Analysis Type
+          default: fundamental

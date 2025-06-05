@@ -1,0 +1,14 @@
+identifier: r-huijts/ns-mcp-server/ns-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/r-huijts/ns-mcp-server
+  name: ns-mcp-server
+  owner: r-huijts
+server:
+  subdirectory: /
+  name: NS Travel Information Server
+  description: An MCP server that provides access to NS (Dutch Railways) travel information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: yuki777/mysql-mcp-server/mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/yuki777/mysql-mcp-server
+  name: mysql-mcp-server
+  owner: yuki777
+server:
+  subdirectory: /
+  name: MySQL MCP Server
+  description: Enable large language models to execute SQL queries and retrieve
+    database information from your local MySQL environment. Seamlessly integrate
+    MySQL databases with LLMs using a secure stdio communication mode without
+    port binding. Save and reuse connection settings automatically for efficient
+    database interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

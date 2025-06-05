@@ -1,0 +1,14 @@
+identifier: moonray/mcp-figma/mcp-figma
+repo:
+  provider: github.com
+  url: https://github.com/moonray/mcp-figma
+  name: mcp-figma
+  owner: moonray
+server:
+  subdirectory: /
+  name: Figma MCP Server
+  description: Analyze Figma files to extract node hierarchies.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,26 @@
+identifier: norman-finance/norman-mcp-server/norman-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/norman-finance/norman-mcp-server
+  name: norman-mcp-server
+  owner: norman-finance
+server:
+  subdirectory: /
+  name: Norman Finance MCP Server
+  description: >-
+    Norman Finance is an accounting and tax filing autopilot designed for
+    entrepreneurs in Germany. The Norman Finance MCP server enables new ways of
+    interacting with Norman Finance's accounting, tax, and invoicing services.
+    Simplifying financial workflows by integrating Norman Finance API
+    capabilities directly into the LLM environment.
+
+
+    It’s like having a personal accounting & tax manager — but built into
+    Claude, Cursor, or any favorite LLMs
+
+
+    See the README.md in the GitHub repo for manual installation instructions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,23 @@
+identifier: gitmotion/ntfy-me-mcp/ntfy-me-mcp
+repo:
+  provider: github.com
+  url: https://github.com/gitmotion/ntfy-me-mcp
+  name: ntfy-me-mcp
+  owner: gitmotion
+server:
+  subdirectory: /
+  name: ntfy-me-mcp
+  description: >-
+    Send real-time notifications to your devices via the ntfy service, enabling
+    AI assistants to notify you upon task completion, errors, or milestones
+    without constant monitoring. 
+
+
+    Benefit from intelligent features like automatic URL detection for clickable
+    actions and smart markdown formatting for rich notifications. Securely
+    support both public and self-hosted ntfy servers with token authentication
+    and easy setup via npm, Docker, or VS Code integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

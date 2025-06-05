@@ -1,0 +1,16 @@
+identifier: seanpjlab/dataeval_dingo/dingo
+repo:
+  provider: github.com
+  url: https://github.com/seanpjlab/dataeval_dingo
+  name: dataeval_dingo
+  owner: seanpjlab
+server:
+  subdirectory: /
+  name: Dingo MCP Server
+  description: MCP server for Dingo is a comprehensive data quality evaluation
+    tool. The server enables interaction with Dingo's rule-based and LLM-based
+    evaluation capabilities, as well as listing of rules and prompts.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

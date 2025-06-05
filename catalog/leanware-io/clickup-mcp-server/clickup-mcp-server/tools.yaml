@@ -1,0 +1,446 @@
+tools:
+  - name: clickup_get_task_by_custom_id
+    description: Get a task by its custom ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - custom_id
+      properties:
+        custom_id:
+          type: string
+      additionalProperties: false
+  - name: clickup_get_task
+    description: Get a task by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+      additionalProperties: false
+  - name: clickup_create_task
+    description: Create a new task in ClickUp
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - list_id
+      properties:
+        name:
+          type: string
+          description: Task name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Array of tag names to add to the task
+        parent:
+          type: string
+          description: Parent task ID to create this task as a subtask
+        list_id:
+          type: string
+          description: ClickUp list ID
+        due_date:
+          type: number
+          description: Due date as Unix timestamp in milliseconds
+        priority:
+          type: number
+          description: "Task priority (1-4): 1=Urgent, 2=High, 3=Normal, 4=Low"
+        assignees:
+          type: array
+          items:
+            type: number
+          description: Array of user IDs to assign to the task
+        custom_fields:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - value
+            properties:
+              id:
+                type: string
+                description: Custom field ID
+              value:
+                anyOf:
+                  - type: string
+                  - type: number
+                  - type: boolean
+                  - type: array
+                    items: {}
+                  - type: object
+                    additionalProperties: {}
+                description: Value for the custom field
+            additionalProperties: false
+          description: Custom fields to set on task creation
+        time_estimate:
+          type: number
+          description: Time estimate in milliseconds
+        markdown_description:
+          type: string
+          description: Task description in markdown format
+      additionalProperties: false
+  - name: clickup_update_task
+    description: Update a task by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task_id
+      properties:
+        name:
+          type: string
+          description: Task name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Array of tag names to add to the task
+        parent:
+          type: string
+          description: Parent task ID to move this task as a subtask
+        task_id:
+          type: string
+          description: ClickUp task ID
+        due_date:
+          type: number
+          description: Due date as Unix timestamp in milliseconds
+        priority:
+          type: number
+          description: "Task priority (1-4): 1=Urgent, 2=High, 3=Normal, 4=Low"
+        assignees:
+          type: object
+          properties:
+            add:
+              type: array
+              items:
+                type: number
+              description: Array of user IDs to add to the task
+            rem:
+              type: array
+              items:
+                type: number
+              description: Array of user IDs to remove from the task
+          description: User IDs to add or remove from the task
+          additionalProperties: false
+        time_estimate:
+          type: number
+          description: Time estimate in milliseconds
+        markdown_description:
+          type: string
+          description: Task description in markdown format
+      additionalProperties: false
+  - name: clickup_update_task_by_custom_id
+    description: Update a task by its custom ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - custom_id
+      properties:
+        name:
+          type: string
+          description: Task name
+        tags:
+          type: array
+          items:
+            type: string
+          description: Array of tag names to add to the task
+        parent:
+          type: string
+          description: Parent task ID to move this task as a subtask
+        due_date:
+          type: number
+          description: Due date as Unix timestamp in milliseconds
+        priority:
+          type: number
+          description: "Task priority (1-4): 1=Urgent, 2=High, 3=Normal, 4=Low"
+        assignees:
+          type: object
+          properties:
+            add:
+              type: array
+              items:
+                type: number
+              description: Array of user IDs to add to the task
+            rem:
+              type: array
+              items:
+                type: number
+              description: Array of user IDs to remove from the task
+          description: User IDs to add or remove from the task
+          additionalProperties: false
+        custom_id:
+          type: string
+          description: ClickUp custom task ID
+        time_estimate:
+          type: number
+          description: Time estimate in milliseconds
+        markdown_description:
+          type: string
+          description: Task description in markdown format
+      additionalProperties: false
+  - name: get_spaces
+    description: Get all spaces in the workspace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_folders
+    description: Get all folders in a space
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - space_id
+      properties:
+        space_id:
+          type: string
+          description: ClickUp space ID
+      additionalProperties: false
+  - name: get_lists
+    description: Get all lists in a folder
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - folder_id
+      properties:
+        folder_id:
+          type: string
+          description: ClickUp folder ID
+      additionalProperties: false
+  - name: create_list
+    description: Create a new list in a folder
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - folder_id
+        - name
+      properties:
+        name:
+          type: string
+          description: List name
+        folder_id:
+          type: string
+          description: ClickUp folder ID
+      additionalProperties: false
+  - name: clickup_get_list_custom_fields
+    description: Get all accessible custom fields for a list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - list_id
+      properties:
+        list_id:
+          type: string
+          description: ClickUp list ID
+      additionalProperties: false
+  - name: clickup_set_custom_field_value
+    description: Set a value for a custom field on a task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task_id
+        - custom_field_id
+        - value
+      properties:
+        value:
+          anyOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: array
+              items: {}
+            - type: object
+              additionalProperties: {}
+          description: Value to set for the custom field. Type depends on the custom field
+            type.
+        task_id:
+          type: string
+          description: ClickUp task ID
+        custom_field_id:
+          type: string
+          description: Custom field ID
+      additionalProperties: false
+  - name: clickup_set_custom_field_value_by_custom_id
+    description: Set a value for a custom field on a task using the task's custom ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - custom_id
+        - custom_field_id
+        - value
+      properties:
+        value:
+          anyOf:
+            - type: string
+            - type: number
+            - type: boolean
+            - type: array
+              items: {}
+            - type: object
+              additionalProperties: {}
+          description: Value to set for the custom field. Type depends on the custom field
+            type.
+        custom_id:
+          type: string
+          description: ClickUp custom task ID
+        custom_field_id:
+          type: string
+          description: Custom field ID
+      additionalProperties: false
+  - name: get_list_assignees
+    description: Get all members (potential assignees) of a list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - list_id
+      properties:
+        list_id:
+          type: string
+          description: ClickUp list ID
+      additionalProperties: false
+  - name: clickup_search_docs
+    description: Search for docs in a specific parent
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - parent_type
+        - parent_id
+      properties:
+        parent_id:
+          type: string
+          description: ID of the parent
+        parent_type:
+          type: string
+          description: Type of parent (SPACE, FOLDER, LIST, EVERYTHING, WORKSPACE)
+      additionalProperties: false
+  - name: clickup_create_doc
+    description: Create a new doc in ClickUp
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - parent
+      properties:
+        name:
+          type: string
+          description: The name of the new Doc
+        parent:
+          type: object
+          required:
+            - id
+            - type
+          properties:
+            id:
+              type: string
+              description: Parent ID
+            type:
+              type: number
+              description: "Parent type: 4 for Space, 5 for Folder, 6 for List, 7 for
+                Everything, 12 for Workspace"
+          description: Parent object
+          additionalProperties: false
+        visibility:
+          type: string
+          description: Doc visibility (PUBLIC or PRIVATE), PRIVATE by default
+        create_page:
+          type: boolean
+          description: Whether to create a initial page (false by default)
+      additionalProperties: false
+  - name: clickup_get_doc_pages
+    description: Get pages from a ClickUp doc
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - doc_id
+      properties:
+        doc_id:
+          type: string
+          description: ClickUp doc ID
+      additionalProperties: false
+  - name: clickup_get_page
+    description: Get a page from a ClickUp doc
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - doc_id
+        - page_id
+      properties:
+        doc_id:
+          type: string
+          description: ClickUp doc ID
+        page_id:
+          type: string
+          description: ClickUp page ID
+      additionalProperties: false
+  - name: clickup_create_page
+    description: Create a new page in a ClickUp doc
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - doc_id
+        - name
+        - content
+      properties:
+        name:
+          type: string
+          description: Page name
+        doc_id:
+          type: string
+          description: ClickUp doc ID
+        content:
+          type: string
+          description: Page content in markdown format
+        sub_title:
+          type: string
+          description: Page subtitle
+        parent_page_id:
+          type: string
+          description: Parent page ID (null for root page)
+      additionalProperties: false
+  - name: clickup_edit_page
+    description: Edit a page in a ClickUp doc
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - doc_id
+        - page_id
+      properties:
+        name:
+          type: string
+          description: Page name
+        doc_id:
+          type: string
+          description: ClickUp doc ID
+        content:
+          type: string
+          description: Page content in markdown format
+        page_id:
+          type: string
+          description: ClickUp page ID
+        sub_title:
+          type: string
+          description: Page subtitle
+        content_edit_mode:
+          type: string
+          description: Content edit mode (replace, append, prepend), default is replace
+      additionalProperties: false

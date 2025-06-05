@@ -1,0 +1,14 @@
+identifier: berlinbra/bluesky-mcp/bluesky-mcp
+repo:
+  provider: github.com
+  url: https://github.com/berlinbra/BlueSky-MCP
+  name: BlueSky-MCP
+  owner: berlinbra
+server:
+  subdirectory: /
+  name: BlueSky MCP Server
+  description: Access BlueSky social network data through its official API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

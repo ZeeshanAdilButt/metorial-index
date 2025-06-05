@@ -1,0 +1,17 @@
+identifier: ogoldberg/gemini-context-mcp-server/gemini-context-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ogoldberg/gemini-context-mcp-server
+  name: gemini-context-mcp-server
+  owner: ogoldberg
+server:
+  subdirectory: /
+  name: Gemini Context MCP Server
+  description: Leverage Gemini's extensive context capabilities to manage and
+    cache large conversational contexts efficiently. Maintain session-based
+    conversations with automatic context tracking and cleanup, while optimizing
+    costs through intelligent caching strategies.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

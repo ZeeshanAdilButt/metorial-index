@@ -1,0 +1,19 @@
+identifier: machine-to-machine/m2m-mcp-server-ssh-client/m2m-mcp-server-ssh-client
+repo:
+  provider: github.com
+  url: https://github.com/Machine-To-Machine/m2m-mcp-server-ssh-client
+  name: m2m-mcp-server-ssh-client
+  owner: Machine-To-Machine
+server:
+  subdirectory: /
+  name: MCP Server SSH Client
+  description: Connect securely to remote MCP servers over SSH to access and
+    utilize MCP tools, prompts, and resources as if they were local. Proxy all
+    MCP protocol commands through a secure SSH channel with support for
+    key-based authentication and seamless integration with AI platforms like
+    Claude Desktop. Simplify remote MCP server usage with automatic key exchange
+    and robust connection management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

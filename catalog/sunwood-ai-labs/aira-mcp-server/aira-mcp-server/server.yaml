@@ -1,0 +1,15 @@
+identifier: sunwood-ai-labs/aira-mcp-server/aira-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Sunwood-ai-labs/aira-mcp-server
+  name: aira-mcp-server
+  owner: Sunwood-ai-labs
+server:
+  subdirectory: /
+  name: Aira MCP Server
+  description: A Model Context Protocol server for creating commit messages from
+    git staged files.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

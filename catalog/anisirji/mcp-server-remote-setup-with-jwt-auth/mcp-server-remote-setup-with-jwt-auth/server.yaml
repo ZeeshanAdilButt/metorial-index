@@ -1,0 +1,17 @@
+identifier: anisirji/mcp-server-remote-setup-with-jwt-auth/mcp-server-remote-setup-with-jwt-auth
+repo:
+  provider: github.com
+  url: https://github.com/anisirji/mcp-server-remote-setup-with-jwt-auth
+  name: mcp-server-remote-setup-with-jwt-auth
+  owner: anisirji
+server:
+  subdirectory: /
+  name: SSE Server with JWT Authentication
+  description: Securely expose multiple AI tools over SSE transport using
+    JWT-based authentication. Easily integrate and manage your AI capabilities
+    with dynamic tool registration and session management. Enjoy a fully tested
+    and extendable server ready for production use.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

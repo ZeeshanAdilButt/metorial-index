@@ -1,0 +1,129 @@
+tools:
+  - name: generate_image
+    description: Generate an image using DALL-E based on a text prompt
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        n:
+          type: number
+          maximum: 10
+          minimum: 1
+          description: Number of images to generate (1-10)
+        size:
+          enum:
+            - 256x256
+            - 512x512
+            - 1024x1024
+            - 1792x1024
+            - 1024x1792
+          type: string
+          description: Size of the generated image
+        model:
+          enum:
+            - dall-e-2
+            - dall-e-3
+          type: string
+          description: DALL-E model to use (dall-e-2 or dall-e-3)
+        style:
+          enum:
+            - vivid
+            - natural
+          type: string
+          description: Style of the generated image (dall-e-3 only)
+        prompt:
+          type: string
+          description: Text description of the desired image
+        quality:
+          enum:
+            - standard
+            - hd
+          type: string
+          description: Quality of the generated image (dall-e-3 only)
+        saveDir:
+          type: string
+          description: Directory to save the generated images
+        fileName:
+          type: string
+          description: Base filename for the generated images (without extension)
+  - name: edit_image
+    description: Edit an existing image using DALL-E based on a text prompt
+    inputSchema:
+      type: object
+      required:
+        - prompt
+        - imagePath
+      properties:
+        n:
+          type: number
+          maximum: 10
+          minimum: 1
+          description: Number of images to generate (1-10)
+        mask:
+          type: string
+          description: Path to the mask image (white areas will be edited, black areas
+            preserved)
+        size:
+          enum:
+            - 256x256
+            - 512x512
+            - 1024x1024
+          type: string
+          description: Size of the generated image
+        model:
+          enum:
+            - dall-e-2
+          type: string
+          description: DALL-E model to use (currently only dall-e-2 supports editing)
+        prompt:
+          type: string
+          description: Text description of the desired edits
+        saveDir:
+          type: string
+          description: Directory to save the edited images
+        fileName:
+          type: string
+          description: Base filename for the edited images (without extension)
+        imagePath:
+          type: string
+          description: Path to the image to edit
+  - name: create_variation
+    description: Create variations of an existing image using DALL-E
+    inputSchema:
+      type: object
+      required:
+        - imagePath
+      properties:
+        n:
+          type: number
+          maximum: 10
+          minimum: 1
+          description: Number of variations to generate (1-10)
+        size:
+          enum:
+            - 256x256
+            - 512x512
+            - 1024x1024
+          type: string
+          description: Size of the generated image
+        model:
+          enum:
+            - dall-e-2
+          type: string
+          description: DALL-E model to use (currently only dall-e-2 supports variations)
+        saveDir:
+          type: string
+          description: Directory to save the variation images
+        fileName:
+          type: string
+          description: Base filename for the variation images (without extension)
+        imagePath:
+          type: string
+          description: Path to the image to create variations of
+  - name: validate_key
+    description: Validate the OpenAI API key
+    inputSchema:
+      type: object
+      required: []
+      properties: {}

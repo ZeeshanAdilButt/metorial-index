@@ -1,0 +1,236 @@
+tools:
+  - name: list_workflows
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        perPage:
+          type: number
+          description: Results per page (max 100)
+      additionalProperties: false
+  - name: get_workflow
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - workflowId
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        workflowId:
+          type: string
+          description: The ID of the workflow or filename (string or number)
+      additionalProperties: false
+  - name: get_workflow_usage
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - workflowId
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        workflowId:
+          type: string
+          description: The ID of the workflow or filename (string or number)
+      additionalProperties: false
+  - name: list_workflow_runs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        repo:
+          type: string
+          description: Repository name
+        actor:
+          type: string
+          description: Returns someone's workflow runs. Use the login for the user
+        event:
+          type: string
+          description: Returns workflow runs triggered by the event
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        branch:
+          type: string
+          description: Returns workflow runs associated with a branch
+        status:
+          enum:
+            - completed
+            - action_required
+            - cancelled
+            - failure
+            - neutral
+            - skipped
+            - stale
+            - success
+            - timed_out
+            - in_progress
+            - queued
+            - requested
+            - waiting
+            - pending
+          type: string
+          description: Returns workflow runs with the check run status
+        created:
+          type: string
+          description: Returns workflow runs created within date range (YYYY-MM-DD)
+        perPage:
+          type: number
+          description: Results per page (max 100)
+        workflowId:
+          type: string
+          description: The ID of the workflow or filename (string or number)
+        checkSuiteId:
+          type: number
+          description: Returns workflow runs with the check_suite_id
+        excludePullRequests:
+          type: boolean
+          description: If true, pull requests are omitted from the response
+      additionalProperties: false
+  - name: get_workflow_run
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - runId
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        runId:
+          type: number
+          description: The ID of the workflow run
+      additionalProperties: false
+  - name: get_workflow_run_jobs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - runId
+      properties:
+        page:
+          type: number
+          description: Page number for pagination
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        runId:
+          type: number
+          description: The ID of the workflow run
+        filter:
+          enum:
+            - latest
+            - all
+          type: string
+          description: Filter jobs by their completed_at date
+        perPage:
+          type: number
+          description: Results per page (max 100)
+      additionalProperties: false
+  - name: trigger_workflow
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - workflowId
+        - ref
+      properties:
+        ref:
+          type: string
+          description: The reference of the workflow run (branch, tag, or SHA)
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        inputs:
+          type: object
+          description: Input parameters for the workflow
+          additionalProperties:
+            type: string
+        workflowId:
+          type: string
+          description: The ID of the workflow or filename (string or number)
+      additionalProperties: false
+  - name: cancel_workflow_run
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - runId
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        runId:
+          type: number
+          description: The ID of the workflow run
+      additionalProperties: false
+  - name: rerun_workflow
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - runId
+      properties:
+        repo:
+          type: string
+          description: Repository name
+        owner:
+          type: string
+          description: Repository owner (username or organization)
+        runId:
+          type: number
+          description: The ID of the workflow run
+      additionalProperties: false

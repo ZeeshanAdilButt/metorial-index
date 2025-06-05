@@ -1,0 +1,275 @@
+tools:
+  - name: index_repository
+    description: "Index a repository for code search and querying.
+
+      \   \ 
+
+      \    This tool initiates the processing of a repository, making it
+      available for future queries.
+
+      \    A repository must be indexed before it can be queried or searched.
+
+      \   \ 
+
+      \    Args:
+
+      \        ctx: The MCP server provided context which includes the Greptile
+      client
+
+      \        remote: The repository host, either \"github\" or \"gitlab\"
+
+      \        repository: The repository in owner/repo format (e.g.,
+      \"coleam00/mcp-mem0\")
+
+      \        branch: The branch to index (e.g., \"main\")
+
+      \        reload: Whether to force reprocessing of the repository (default:
+      False)
+
+      \        notify: Whether to send an email notification when indexing is
+      complete (default: False)
+
+      \    "
+    inputSchema:
+      type: object
+      title: index_repositoryArguments
+      required:
+        - remote
+        - repository
+        - branch
+      properties:
+        branch:
+          type: string
+          title: Branch
+        notify:
+          type: boolean
+          title: Notify
+          default: false
+        reload:
+          type: boolean
+          title: Reload
+          default: false
+        remote:
+          type: string
+          title: Remote
+        repository:
+          type: string
+          title: Repository
+  - name: query_repository
+    description: "
+
+      \    Query repositories to get an answer with code references.
+
+
+      \    Supports both single-turn and multi-turn (conversational) context.
+
+
+      \    Args:
+
+      \        ctx: MCP server provided context
+
+      \        query: The natural language query about the codebase
+
+      \        repositories: List of repositories to query
+
+      \        session_id: Used for multi-turn conversations; generates new if
+      not provided
+
+      \        stream: Enable streaming for long queries (returns async
+      generator)
+
+      \        genius: Use enhanced answer quality (may take longer)
+
+      \        timeout: Optional per-query timeout (seconds)
+
+      \        previous_messages: Optional prior conversation messages for this
+      session
+
+
+      \    Returns:
+
+      \        - For streaming: async generator yielding JSON strings.
+
+      \        - For non-streaming: formatted JSON string (single result).
+
+      \    "
+    inputSchema:
+      type: object
+      title: query_repositoryArguments
+      required:
+        - query
+        - repositories
+      properties:
+        query:
+          type: string
+          title: Query
+        genius:
+          type: boolean
+          title: Genius
+          default: true
+        stream:
+          type: boolean
+          title: Stream
+          default: false
+        timeout:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Timeout
+          default: null
+        session_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Session Id
+          default: null
+        repositories:
+          type: array
+          items: {}
+          title: Repositories
+        previous_messages:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Previous Messages
+          default: null
+  - name: search_repository
+    description: "Search repositories for relevant files without generating a full
+      answer.
+
+      \   \ 
+
+      \    This tool returns a list of relevant files based on a query without
+      generating
+
+      \    a complete answer. The repositories must have been indexed first.
+
+      \   \ 
+
+      \    Args:
+
+      \        ctx: The MCP server provided context which includes the Greptile
+      client
+
+      \        query: The natural language query about the codebase
+
+      \        repositories: List of repositories to search, each with format
+      {\"remote\": \"github\", \"repository\": \"owner/repo\", \"branch\":
+      \"main\"}
+
+      \        session_id: Optional session ID for continuing a conversation
+
+      \        genius: Whether to use the enhanced search capabilities (default:
+      True)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_repositoryArguments
+      required:
+        - query
+        - repositories
+      properties:
+        query:
+          type: string
+          title: Query
+        genius:
+          type: boolean
+          title: Genius
+          default: true
+        session_id:
+          type: string
+          title: Session Id
+          default: null
+        repositories:
+          type: array
+          items: {}
+          title: Repositories
+  - name: get_repository_info
+    description: "Get information about an indexed repository.
+
+      \   \ 
+
+      \    This tool retrieves information about a specific repository that has
+      been indexed,
+
+      \    including its status and other metadata.
+
+      \   \ 
+
+      \    The tool handles proper URL encoding internally to ensure repository
+      identifiers
+
+      \    with special characters (like '/') are correctly processed.
+
+      \   \ 
+
+      \    Args:
+
+      \        ctx: The MCP server provided context which includes the Greptile
+      client
+
+      \        remote: The repository host, either \"github\" or \"gitlab\"
+
+      \        repository: The repository in owner/repo format (e.g.,
+      \"coleam00/mcp-mem0\")
+
+      \        branch: The branch that was indexed (e.g., \"main\")
+
+      \       \ 
+
+      \    Returns:
+
+      \        A JSON string containing repository information such as status,
+      last indexed time,
+
+      \        and other metadata. If the repository is still being indexed, the
+      status will\ 
+
+      \        indicate the current progress.
+
+      \       \ 
+
+      \    Example Response:
+
+      \        {
+
+      \          \"id\": \"github:main:owner/repo\",
+
+      \          \"status\": \"COMPLETED\",
+
+      \          \"repository\": \"owner/repo\",
+
+      \          \"remote\": \"github\",
+
+      \          \"branch\": \"main\",
+
+      \          \"private\": false,
+
+      \          \"filesProcessed\": 234,
+
+      \          \"numFiles\": 234
+
+      \        }
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_repository_infoArguments
+      required:
+        - remote
+        - repository
+        - branch
+      properties:
+        branch:
+          type: string
+          title: Branch
+        remote:
+          type: string
+          title: Remote
+        repository:
+          type: string
+          title: Repository

@@ -1,0 +1,149 @@
+tools:
+  - name: create_project
+    description: Create a new Node.js project with enhanced configuration
+    inputSchema:
+      type: object
+      required:
+        - name
+        - type
+        - path
+      properties:
+        name:
+          type: string
+          description: Project name
+        path:
+          type: string
+          description: Project directory path
+        type:
+          enum:
+            - react
+            - node
+            - next
+            - express
+            - fastify
+          type: string
+          description: Project type
+        typescript:
+          type: boolean
+          default: true
+          description: Enable TypeScript support
+  - name: install_packages
+    description: Install npm packages with version management
+    inputSchema:
+      type: object
+      required:
+        - packages
+        - path
+      properties:
+        dev:
+          type: boolean
+          default: false
+          description: Install as dev dependency
+        path:
+          type: string
+          description: Project directory path
+        packages:
+          type: array
+          items:
+            type: string
+          description: Package names to install
+  - name: generate_component
+    description: Generate a new React component with TypeScript support
+    inputSchema:
+      type: object
+      required:
+        - name
+        - path
+        - type
+      properties:
+        name:
+          type: string
+          description: Component name
+        path:
+          type: string
+          description: Component directory path
+        type:
+          enum:
+            - functional
+            - class
+          type: string
+          description: Component type
+        props:
+          type: object
+          description: Component props with types
+          additionalProperties:
+            type: string
+  - name: create_type_definition
+    description: Create TypeScript type definitions or interfaces
+    inputSchema:
+      type: object
+      required:
+        - name
+        - path
+        - properties
+      properties:
+        name:
+          type: string
+          description: Type name
+        path:
+          type: string
+          description: File path
+        properties:
+          type: object
+          description: Type properties and their types
+          additionalProperties:
+            type: string
+  - name: add_script
+    description: Add a new npm script to package.json
+    inputSchema:
+      type: object
+      required:
+        - path
+        - name
+        - command
+      properties:
+        name:
+          type: string
+          description: Script name
+        path:
+          type: string
+          description: Project directory path
+        command:
+          type: string
+          description: Script command
+  - name: update_tsconfig
+    description: Update TypeScript configuration
+    inputSchema:
+      type: object
+      required:
+        - path
+        - options
+      properties:
+        path:
+          type: string
+          description: Project directory path
+        options:
+          type: object
+          description: TypeScript compiler options
+          additionalProperties: true
+  - name: create_documentation
+    description: Generate project documentation
+    inputSchema:
+      type: object
+      required:
+        - path
+        - type
+      properties:
+        name:
+          type: string
+          description: Component or API name for specific documentation
+        path:
+          type: string
+          description: Project directory path
+        type:
+          enum:
+            - readme
+            - api
+            - component
+          type: string
+          description: Documentation type

@@ -1,0 +1,17 @@
+identifier: openlinksoftware/mcp-sqlalchemy-server/mcp-sqlalchemy-server
+repo:
+  provider: github.com
+  url: https://github.com/OpenLinkSoftware/mcp-sqlalchemy-server
+  name: mcp-sqlalchemy-server
+  owner: OpenLinkSoftware
+server:
+  subdirectory: /
+  name: ODBC SQLAlchemy Server
+  description: Connect to various databases using ODBC and SQLAlchemy. Retrieve
+    schemas, tables, and execute queries seamlessly, enhancing your data
+    management capabilities. Leverage the power of FastAPI for efficient
+    database interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

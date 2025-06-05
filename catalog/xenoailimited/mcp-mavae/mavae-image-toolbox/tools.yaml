@@ -1,0 +1,726 @@
+tools:
+  - name: image_raw_generate
+    description: Generate an image using raw AIGC configuration. Usually, check the
+      generation status 10 seconds after starting the image generation to allow
+      sufficient time for the process.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+        - aigc_config
+      properties:
+        prompt:
+          type: string
+          description: The prompt to generate the image.
+        aigc_config:
+          type: object
+          required:
+            - model
+          properties:
+            ar:
+              type: string
+              description: Aspect ratio of the image in width:height format, e.g., 1:1, 16:9.
+                Must be two positive integers separated by a colon.
+            cfg:
+              type: number
+              description: "Controls how strongly the image follows the prompt. Higher = more
+                faithful, but too high may distort. Suggested: 4–10."
+            seed:
+              type: string
+              description: "Controls randomness of image generation. Same seed = same image.
+                Use -1 for random. Range: 0-4294967295 or -1."
+            step:
+              type: number
+              description: "Number of sampling steps. Higher steps = clearer, more detailed
+                images, but slower. Suggested: 20-40."
+            model:
+              type: string
+              description: Base model for image generation. Can be model name (e.g.,
+                animagineXl40Opt.Mt5n), hash (e.g., 6327eca98b), or full title
+                (e.g., animagineXl40Opt.Mt5n.safetensors [6327eca98b]).
+                Different models affect style and quality.
+            width:
+              type: number
+              description: "Image width (pixels). Set along with width. Range: 64-2000."
+            height:
+              type: number
+              description: "Image height (pixels). Set along with width. Range: 64-2000."
+            n_iter:
+              type: string
+              description: Number of iterations (batch count). Integer (≥1). Defines how many
+                times the model runs, generating batch_size images per
+                iteration. For example, with n_iter=3 and batch_size=2, a total
+                of 6 images are produced.
+            sampler:
+              enum:
+                - DPM++ 2M
+                - DPM++ SDE
+                - DPM++ 2M SDE
+                - DPM++ 2M SDE Heun
+                - DPM++ 2S a
+                - DPM++ 3M SDE
+                - Euler a
+                - Euler
+                - LMS
+                - Heun
+                - DPM2
+                - DPM2 a
+                - DPM fast
+                - DPM adaptive
+                - Restart
+                - DDIM
+                - DDIM CFG++
+                - PLMS
+                - UniPC
+                - LCM
+              type: string
+              description: "Sampling algorithm. Affects image quality, speed, and style.
+                Recommended: DPM++ series like DPM++ 2M Karras."
+            hr_scale:
+              type: string
+              description: Upscaling factor for Hires Fix. Float (1.0-4.0, 1 decimal place).
+                Determines final image resolution. For example, hr_scale=2.0
+                doubles the image size.
+            upscaler:
+              enum:
+                - 4x-UltraSharp
+                - R-ESRGAN
+                - ESRGAN
+              type: string
+              description: "Select the upscaling algorithm for increasing image resolution.
+                Options: Latent, ESRGAN, R-ESRGAN, 4x-UltraSharp, etc."
+            enable_hr:
+              enum:
+                - "True"
+                - "False"
+              type: string
+              description: "Enable Hires Fix (high-resolution repair). String format: 'True' /
+                'False'. Should be 'True' if hr_scale or related parameters are
+                set."
+            image_url:
+              type: string
+              description: Upload reference image for ControlNet (e.g., sketch, depth, pose).
+                Guides the image generation.
+            save_meta:
+              enum:
+                - "True"
+                - "False"
+              type: string
+              description: "Whether to save metadata (e.g. prompt and settings) into the image
+                file. String format: 'True' / 'False'. Useful for
+                reproducibility and reference."
+            pass_steps:
+              type: string
+              description: Number of sampling steps in the second pass of Hires Fix. Integer
+                format (e.g., 0, 10, 20). Higher values improve detail but
+                increase processing time.
+            control_image:
+              type: string
+              description: Upload reference image for ControlNet (e.g., sketch, depth, pose).
+                Helps guide image generation.
+            control_units:
+              type: array
+              items:
+                type: object
+                properties:
+                  model:
+                    type: string
+                    description: Specifies the model used by ControlNet. Accepts model name (e.g.
+                      control_v11p_sd15_openpose), hash (e.g. 8e4777ac), or full
+                      title (e.g. control_v11p_sd15_openpose [8e4777ac]).
+                  module:
+                    type: string
+                    description: Defines the ControlNet preprocessor module type. String format,
+                      e.g., 'ip-adapter_clip_sd15' etc. Determines how the input
+                      image is interpreted.
+                  weight:
+                    type: number
+                    description: Defines how strongly the ControlNet input affects the final image.
+                      Float (usually 0.0-2.0, 1 decimal place). Higher =
+                      stronger control. Default is 1.0.
+                  resize_mode:
+                    enum:
+                      - Just Resize
+                      - Crop and Resize
+                      - Resize and Fill
+                    type: string
+                    description: "Defines how the input image is resized to match the generation
+                      size. String format, common values: 'Just Resize' - resize
+                      directly to target size, 'Crop and Resize' - crop and
+                      scale while preserving aspect ratio, 'Resize and Fill' -
+                      scale and pad the image to fit"
+                  threshold_a:
+                    type: number
+                    default: 0.5
+                    description: First threshold value for preprocessing module (e.g., edge
+                      detection). Float format (usually 0.0-255.0, 1 decimal
+                      place). Exact behavior depends on the module.
+                  threshold_b:
+                    type: number
+                    default: 0.5
+                    description: Second threshold value for preprocessing module (e.g., edge
+                      detection). Float format (usually 0.0-255.0, 1 decimal
+                      place). Used with threshold_a to define sensitivity.
+                  control_mode:
+                    type: number
+                    default: 0
+                    description: "Sets the control priority mode for ControlNet. Integer format: 0 -
+                      Balanced (equal influence), 1 - My prompt is more
+                      important, 2 - ControlNet is more important"
+                  guidance_end:
+                    type: number
+                    default: 1
+                    description: Defines when ControlNet influence stops during sampling. Float
+                      (0.0-1.0, 1 decimal place). For example, 0.8 means control
+                      ends at 80% of the process.
+                  pixel_perfect:
+                    enum:
+                      - "True"
+                      - "False"
+                    type: string
+                    description: "Enables Pixel Perfect mode, which auto-adjusts preprocessor
+                      settings (e.g. resizing). String format: 'True' or
+                      'False'. Preserves input image details more accurately."
+                  guidance_start:
+                    type: number
+                    default: 0
+                    description: Defines when ControlNet influence starts during sampling. Float
+                      (0.0-1.0, 1 decimal place). For example, 0.1 means control
+                      starts at 10% of the process.
+                additionalProperties: false
+              description: An array of ControlNet units. List format, where each item includes
+                parameters like input_image, model, module, weight, etc. Allows
+                multiple ControlNet modules to be applied together.
+            restore_faces:
+              enum:
+                - "True"
+                - "False"
+              type: string
+              description: "Enable face restoration (typically using GFPGAN or CodeFormer).
+                String format: 'True' / 'False'. Improves facial features in
+                portraits when enabled."
+            denoising_strength:
+              type: string
+              description: Controls how much the image changes. Float (0.0–1.0, 1 decimal
+                place). Higher = more change. 0.3–0.7 is typical, 0.8+ may alter
+                too much.
+          additionalProperties: false
+        negative_prompt:
+          type: string
+          description: The negative prompt to generate the image.
+      additionalProperties: false
+  - name: image_collection_generate
+    description: Generate an image using a collection's AIGC configuration. You need
+      to first check the collection details to understand its variables so you
+      can call it correctly. Usually, check the generation status 10 seconds
+      after starting the image generation to allow sufficient time for the
+      process.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          description: A key-value map used to replace variable placeholders (e.g.
+            $gender, $bg) in the collection's prompt. Keys should match variable
+            names defined in the collection (without $), and values are their
+            replacements.
+          additionalProperties:
+            type: string
+        collection_id:
+          type: number
+          description: The collection id used to generate the image.
+        collection_name:
+          type: string
+          description: The collection name used to generate the image.
+      additionalProperties: false
+  - name: image_retry_generate
+    description: Retry a failed image generation. Usually, check the generation
+      status 10 seconds after starting the image generation to allow sufficient
+      time for the process.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image_id
+      properties:
+        image_id:
+          type: string
+          description: The image id to retry.
+      additionalProperties: false
+  - name: image_state
+    description: Get the details of an owned image.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image_id
+      properties:
+        image_id:
+          type: string
+          description: The image id.
+      additionalProperties: false
+  - name: list_images
+    description: Get the list of owned images.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: The page number.
+        page_size:
+          type: number
+          description: The page size.
+      additionalProperties: false
+  - name: generate_task_state
+    description: Get the generation state of an image by task id. Usually, check the
+      generation status 10 seconds after starting the image generation to allow
+      sufficient time for the process.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - task_id
+      properties:
+        refresh:
+          type: string
+          default: "true"
+          description: When image is generated, refresh the image state.
+        task_id:
+          type: string
+          description: The generation task id.
+      additionalProperties: false
+  - name: list_loras
+    description: Get the list of available loras.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_models
+    description: Get the list of available models.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: collection_create
+    description: Create a new collection.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - prompt
+        - aigc_config
+      properties:
+        name:
+          type: string
+          description: The name of the collection.
+        prompt:
+          type: string
+          description: The base prompt string that supports variable placeholders using
+            $variable syntax, e.g., 'portrait, 1 $gender, $clothing $style'.
+            Variables will be dynamically replaced at image generation time.
+        public:
+          type: boolean
+          default: true
+          description: Whether the collection is public.
+        variables:
+          type: array
+          items:
+            type: string
+          description: A list of variable names (without $) that are used in the prompt
+            string, e.g., ['gender', 'clothing', 'style']. These will be
+            replaced by values at generation time.
+        aigc_config:
+          type: object
+          required:
+            - model
+          properties:
+            ar:
+              type: string
+              description: Aspect ratio of the image in width:height format, e.g., 1:1, 16:9.
+                Must be two positive integers separated by a colon.
+            cfg:
+              type: number
+              description: "Controls how strongly the image follows the prompt. Higher = more
+                faithful, but too high may distort. Suggested: 4–10."
+            seed:
+              type: string
+              description: "Controls randomness of image generation. Same seed = same image.
+                Use -1 for random. Range: 0-4294967295 or -1."
+            step:
+              type: number
+              description: "Number of sampling steps. Higher steps = clearer, more detailed
+                images, but slower. Suggested: 20-40."
+            model:
+              type: string
+              description: Base model for image generation. Can be model name (e.g.,
+                animagineXl40Opt.Mt5n), hash (e.g., 6327eca98b), or full title
+                (e.g., animagineXl40Opt.Mt5n.safetensors [6327eca98b]).
+                Different models affect style and quality.
+            width:
+              type: number
+              description: "Image width (pixels). Set along with width. Range: 64-2000."
+            height:
+              type: number
+              description: "Image height (pixels). Set along with width. Range: 64-2000."
+            n_iter:
+              type: string
+              description: Number of iterations (batch count). Integer (≥1). Defines how many
+                times the model runs, generating batch_size images per
+                iteration. For example, with n_iter=3 and batch_size=2, a total
+                of 6 images are produced.
+            sampler:
+              enum:
+                - DPM++ 2M
+                - DPM++ SDE
+                - DPM++ 2M SDE
+                - DPM++ 2M SDE Heun
+                - DPM++ 2S a
+                - DPM++ 3M SDE
+                - Euler a
+                - Euler
+                - LMS
+                - Heun
+                - DPM2
+                - DPM2 a
+                - DPM fast
+                - DPM adaptive
+                - Restart
+                - DDIM
+                - DDIM CFG++
+                - PLMS
+                - UniPC
+                - LCM
+              type: string
+              description: "Sampling algorithm. Affects image quality, speed, and style.
+                Recommended: DPM++ series like DPM++ 2M Karras."
+            hr_scale:
+              type: string
+              description: Upscaling factor for Hires Fix. Float (1.0-4.0, 1 decimal place).
+                Determines final image resolution. For example, hr_scale=2.0
+                doubles the image size.
+            upscaler:
+              enum:
+                - 4x-UltraSharp
+                - R-ESRGAN
+                - ESRGAN
+              type: string
+              description: "Select the upscaling algorithm for increasing image resolution.
+                Options: Latent, ESRGAN, R-ESRGAN, 4x-UltraSharp, etc."
+            enable_hr:
+              enum:
+                - "True"
+                - "False"
+              type: string
+              description: "Enable Hires Fix (high-resolution repair). String format: 'True' /
+                'False'. Should be 'True' if hr_scale or related parameters are
+                set."
+            image_url:
+              type: string
+              description: Upload reference image for ControlNet (e.g., sketch, depth, pose).
+                Guides the image generation.
+            save_meta:
+              enum:
+                - "True"
+                - "False"
+              type: string
+              description: "Whether to save metadata (e.g. prompt and settings) into the image
+                file. String format: 'True' / 'False'. Useful for
+                reproducibility and reference."
+            pass_steps:
+              type: string
+              description: Number of sampling steps in the second pass of Hires Fix. Integer
+                format (e.g., 0, 10, 20). Higher values improve detail but
+                increase processing time.
+            control_image:
+              type: string
+              description: Upload reference image for ControlNet (e.g., sketch, depth, pose).
+                Helps guide image generation.
+            control_units:
+              type: array
+              items:
+                type: object
+                properties:
+                  model:
+                    type: string
+                    description: Specifies the model used by ControlNet. Accepts model name (e.g.
+                      control_v11p_sd15_openpose), hash (e.g. 8e4777ac), or full
+                      title (e.g. control_v11p_sd15_openpose [8e4777ac]).
+                  module:
+                    type: string
+                    description: Defines the ControlNet preprocessor module type. String format,
+                      e.g., 'ip-adapter_clip_sd15' etc. Determines how the input
+                      image is interpreted.
+                  weight:
+                    type: number
+                    description: Defines how strongly the ControlNet input affects the final image.
+                      Float (usually 0.0-2.0, 1 decimal place). Higher =
+                      stronger control. Default is 1.0.
+                  resize_mode:
+                    enum:
+                      - Just Resize
+                      - Crop and Resize
+                      - Resize and Fill
+                    type: string
+                    description: "Defines how the input image is resized to match the generation
+                      size. String format, common values: 'Just Resize' - resize
+                      directly to target size, 'Crop and Resize' - crop and
+                      scale while preserving aspect ratio, 'Resize and Fill' -
+                      scale and pad the image to fit"
+                  threshold_a:
+                    type: number
+                    default: 0.5
+                    description: First threshold value for preprocessing module (e.g., edge
+                      detection). Float format (usually 0.0-255.0, 1 decimal
+                      place). Exact behavior depends on the module.
+                  threshold_b:
+                    type: number
+                    default: 0.5
+                    description: Second threshold value for preprocessing module (e.g., edge
+                      detection). Float format (usually 0.0-255.0, 1 decimal
+                      place). Used with threshold_a to define sensitivity.
+                  control_mode:
+                    type: number
+                    default: 0
+                    description: "Sets the control priority mode for ControlNet. Integer format: 0 -
+                      Balanced (equal influence), 1 - My prompt is more
+                      important, 2 - ControlNet is more important"
+                  guidance_end:
+                    type: number
+                    default: 1
+                    description: Defines when ControlNet influence stops during sampling. Float
+                      (0.0-1.0, 1 decimal place). For example, 0.8 means control
+                      ends at 80% of the process.
+                  pixel_perfect:
+                    enum:
+                      - "True"
+                      - "False"
+                    type: string
+                    description: "Enables Pixel Perfect mode, which auto-adjusts preprocessor
+                      settings (e.g. resizing). String format: 'True' or
+                      'False'. Preserves input image details more accurately."
+                  guidance_start:
+                    type: number
+                    default: 0
+                    description: Defines when ControlNet influence starts during sampling. Float
+                      (0.0-1.0, 1 decimal place). For example, 0.1 means control
+                      starts at 10% of the process.
+                additionalProperties: false
+              description: An array of ControlNet units. List format, where each item includes
+                parameters like input_image, model, module, weight, etc. Allows
+                multiple ControlNet modules to be applied together.
+            restore_faces:
+              enum:
+                - "True"
+                - "False"
+              type: string
+              description: "Enable face restoration (typically using GFPGAN or CodeFormer).
+                String format: 'True' / 'False'. Improves facial features in
+                portraits when enabled."
+            denoising_strength:
+              type: string
+              description: Controls how much the image changes. Float (0.0–1.0, 1 decimal
+                place). Higher = more change. 0.3–0.7 is typical, 0.8+ may alter
+                too much.
+          additionalProperties: false
+        description:
+          type: string
+          description: The description of the collection.
+        train_server:
+          type: string
+          default: sd
+          description: The used aigc server of the collection.
+        negative_prompt:
+          type: string
+          description: The negative prompt.
+      additionalProperties: false
+  - name: collection_delete
+    description: Delete a collection.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        collection_id:
+          type: number
+          description: The collection id to delete.
+        collection_name:
+          type: string
+          description: The collection name to delete.
+      additionalProperties: false
+  - name: collection_toggle_public
+    description: Toggle the public status of a collection.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        collection_id:
+          type: number
+          description: The collection id to toggle public.
+        collection_name:
+          type: string
+          description: The collection name to toggle public.
+      additionalProperties: false
+  - name: collection_list
+    description: Get the list of owned collections.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: The page.
+        page_size:
+          type: number
+          description: The page size.
+        collection_name:
+          type: string
+          description: The collection name to filter.
+      additionalProperties: false
+  - name: collection_state
+    description: Get the details of an owned collection.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - collection_id
+      properties:
+        collection_id:
+          type: number
+          description: The collection id.
+      additionalProperties: false
+  - name: token_state
+    description: Get the x-api-token state.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: compress_image
+    description: Lossless compression of images (PNG, JPEG, WebP, GIF), support for
+      local paths and URLs.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inputs
+      properties:
+        inputs:
+          type: array
+          items:
+            type: string
+          description: The URLs or full paths to the images to compress.
+        quality:
+          type: number
+          default: 80
+          description: The quality of the compressed image.
+        outputPath:
+          type: string
+          description: The full path to save the compressed image.
+      additionalProperties: false
+  - name: crop_image
+    description: Crop images (PNG, JPEG, WebP, GIF) with local path and URL support
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inputs
+      properties:
+        top:
+          type: number
+          default: 0
+          description: The left position of the cropped image.
+        left:
+          type: number
+          default: 0
+          description: The top position of the cropped image.
+        width:
+          type: number
+          default: 512
+          description: The width of the cropped image.
+        height:
+          type: number
+          default: 512
+          description: The height of the cropped image.
+        inputs:
+          type: array
+          items:
+            type: string
+          description: The URLs or full paths to the images to crop.
+        outputPath:
+          type: string
+          description: The full path to save the cropped image.
+      additionalProperties: false
+  - name: web3_image_tokenization
+    description: Tokenize images to become NFT (Non-Fungible Token) on the blockchain.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - image_id
+        - recipient
+      properties:
+        image_id:
+          type: number
+          description: The image id.
+        recipient:
+          type: string
+          description: The recipient of the NFT, it should be an ethereum address,
+            starting at 0x, length 42.
+      additionalProperties: false
+  - name: web3_job_state
+    description: Get the state of a job by job id.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          description: The job id.
+        job_type:
+          enum:
+            - image_tokenization_queue
+          type: string
+          default: image_tokenization_queue
+          description: The type of job.
+      additionalProperties: false
+  - name: resize_image
+    description: Resize images with proportional or fixed dimensions, supports local
+      paths and URLs.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - inputs
+      properties:
+        fit:
+          enum:
+            - cover
+            - contain
+            - fill
+            - inside
+            - outside
+          type: string
+          default: contain
+          description: How the image should be resized to fit the target dimensions.
+        width:
+          type: number
+          description: The target width of the resized image in pixels.
+        height:
+          type: number
+          description: The target height of the resized image in pixels.
+        inputs:
+          type: array
+          items:
+            type: string
+          description: The URLs or full paths to the images to resize.
+        outputPath:
+          type: string
+          description: The full path to save the resized image.
+      additionalProperties: false

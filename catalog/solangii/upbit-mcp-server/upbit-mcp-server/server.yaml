@@ -1,0 +1,19 @@
+identifier: solangii/upbit-mcp-server/upbit-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/solangii/upbit-mcp-server
+  name: upbit-mcp-server
+  owner: solangii
+server:
+  subdirectory: /
+  name: upbit mcp server
+  description: A server implementation for Upbit Cryptocurrency Exchange OpenAPI
+    using the Model Context Protocol (MCP). This project provides tools to
+    interact with Upbit exchange services, such as retrieving market data
+    (quotes, orderbooks, trade history, chart data), account information,
+    creating and canceling orders, managing deposits/withdrawals, and performing
+    technical analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

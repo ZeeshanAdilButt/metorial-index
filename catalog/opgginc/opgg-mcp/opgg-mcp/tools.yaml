@@ -1,0 +1,819 @@
+tools:
+  - name: lol-champion-leader-board
+    description: Fetch that champion's rank.
+    inputSchema:
+      type: object
+      required:
+        - region
+        - champion
+      properties:
+        region:
+          enum:
+            - KR
+            - BR
+            - EUNE
+            - EUW
+            - LAN
+            - LAS
+            - NA
+            - OCE
+            - RU
+            - TR
+            - JP
+            - PH
+            - SG
+            - TH
+            - TW
+            - VN
+            - ME
+            - SEA
+          type: string
+          description: Regions in the game League of Legends.
+        champion:
+          enum:
+            - ANNIE
+            - OLAF
+            - GALIO
+            - TWISTED_FATE
+            - XIN_ZHAO
+            - URGOT
+            - LEBLANC
+            - VLADIMIR
+            - FIDDLESTICKS
+            - KAYLE
+            - MASTER_YI
+            - ALISTAR
+            - RYZE
+            - SION
+            - SIVIR
+            - SORAKA
+            - TEEMO
+            - TRISTANA
+            - WARWICK
+            - NUNU_WILLUMP
+            - MISS_FORTUNE
+            - ASHE
+            - TRYNDAMERE
+            - JAX
+            - MORGANA
+            - ZILEAN
+            - SINGED
+            - EVELYNN
+            - TWITCH
+            - KARTHUS
+            - CHOGATH
+            - AMUMU
+            - RAMMUS
+            - ANIVIA
+            - SHACO
+            - DR_MUNDO
+            - SONA
+            - KASSADIN
+            - IRELIA
+            - JANNA
+            - GANGPLANK
+            - CORKI
+            - KARMA
+            - TARIC
+            - VEIGAR
+            - TRUNDLE
+            - SWAIN
+            - CAITLYN
+            - BLITZCRANK
+            - MALPHITE
+            - KATARINA
+            - NOCTURNE
+            - MAOKAI
+            - RENEKTON
+            - JARVAN_IV
+            - ELISE
+            - ORIANNA
+            - WUKONG
+            - BRAND
+            - LEE_SIN
+            - VAYNE
+            - RUMBLE
+            - CASSIOPEIA
+            - SKARNER
+            - HEIMERDINGER
+            - NASUS
+            - NIDALEE
+            - UDYR
+            - POPPY
+            - GRAGAS
+            - PANTHEON
+            - EZREAL
+            - MORDEKAISER
+            - YORICK
+            - AKALI
+            - KENNEN
+            - GAREN
+            - LEONA
+            - MALZAHAR
+            - TALON
+            - RIVEN
+            - KOGMAW
+            - SHEN
+            - LUX
+            - XERATH
+            - SHYVANA
+            - AHRI
+            - GRAVES
+            - FIZZ
+            - VOLIBEAR
+            - RENGAR
+            - VARUS
+            - NAUTILUS
+            - VIKTOR
+            - SEJUANI
+            - FIORA
+            - ZIGGS
+            - LULU
+            - DRAVEN
+            - HECARIM
+            - KHAZIX
+            - DARIUS
+            - JAYCE
+            - LISSANDRA
+            - DIANA
+            - QUINN
+            - SYNDRA
+            - AURELION_SOL
+            - KAYN
+            - ZOE
+            - ZYRA
+            - KAISA
+            - SERAPHINE
+            - GNAR
+            - ZAC
+            - YASUO
+            - VELKOZ
+            - TALIYAH
+            - CAMILLE
+            - AKSHAN
+            - BELVETH
+            - BRAUM
+            - JHIN
+            - KINDRED
+            - ZERI
+            - JINX
+            - TAHM_KENCH
+            - BRIAR
+            - VIEGO
+            - SENNA
+            - LUCIAN
+            - ZED
+            - KLED
+            - EKKO
+            - QIYANA
+            - VI
+            - AATROX
+            - NAMI
+            - AZIR
+            - YUUMI
+            - SAMIRA
+            - THRESH
+            - ILLAOI
+            - REKSAI
+            - IVERN
+            - KALISTA
+            - BARD
+            - RAKAN
+            - XAYAH
+            - ORNN
+            - SYLAS
+            - NEEKO
+            - APHELIOS
+            - RELL
+            - PYKE
+            - VEX
+            - YONE
+            - AMBESSA
+            - SETT
+            - LILLIA
+            - GWEN
+            - RENATA_GLASC
+            - AURORA
+            - NILAH
+            - KSANTE
+            - SMOLDER
+            - MILIO
+            - HWEI
+            - NAAFIRI
+          type: string
+          description: These are the champion names in the game League of Legends.
+  - name: lol-champion-analysis
+    description: Fetch analysis data for a specific champion.
+    inputSchema:
+      type: object
+      required:
+        - champion
+        - champion_position
+      properties:
+        champion:
+          enum:
+            - ANNIE
+            - OLAF
+            - GALIO
+            - TWISTED_FATE
+            - XIN_ZHAO
+            - URGOT
+            - LEBLANC
+            - VLADIMIR
+            - FIDDLESTICKS
+            - KAYLE
+            - MASTER_YI
+            - ALISTAR
+            - RYZE
+            - SION
+            - SIVIR
+            - SORAKA
+            - TEEMO
+            - TRISTANA
+            - WARWICK
+            - NUNU_WILLUMP
+            - MISS_FORTUNE
+            - ASHE
+            - TRYNDAMERE
+            - JAX
+            - MORGANA
+            - ZILEAN
+            - SINGED
+            - EVELYNN
+            - TWITCH
+            - KARTHUS
+            - CHOGATH
+            - AMUMU
+            - RAMMUS
+            - ANIVIA
+            - SHACO
+            - DR_MUNDO
+            - SONA
+            - KASSADIN
+            - IRELIA
+            - JANNA
+            - GANGPLANK
+            - CORKI
+            - KARMA
+            - TARIC
+            - VEIGAR
+            - TRUNDLE
+            - SWAIN
+            - CAITLYN
+            - BLITZCRANK
+            - MALPHITE
+            - KATARINA
+            - NOCTURNE
+            - MAOKAI
+            - RENEKTON
+            - JARVAN_IV
+            - ELISE
+            - ORIANNA
+            - WUKONG
+            - BRAND
+            - LEE_SIN
+            - VAYNE
+            - RUMBLE
+            - CASSIOPEIA
+            - SKARNER
+            - HEIMERDINGER
+            - NASUS
+            - NIDALEE
+            - UDYR
+            - POPPY
+            - GRAGAS
+            - PANTHEON
+            - EZREAL
+            - MORDEKAISER
+            - YORICK
+            - AKALI
+            - KENNEN
+            - GAREN
+            - LEONA
+            - MALZAHAR
+            - TALON
+            - RIVEN
+            - KOGMAW
+            - SHEN
+            - LUX
+            - XERATH
+            - SHYVANA
+            - AHRI
+            - GRAVES
+            - FIZZ
+            - VOLIBEAR
+            - RENGAR
+            - VARUS
+            - NAUTILUS
+            - VIKTOR
+            - SEJUANI
+            - FIORA
+            - ZIGGS
+            - LULU
+            - DRAVEN
+            - HECARIM
+            - KHAZIX
+            - DARIUS
+            - JAYCE
+            - LISSANDRA
+            - DIANA
+            - QUINN
+            - SYNDRA
+            - AURELION_SOL
+            - KAYN
+            - ZOE
+            - ZYRA
+            - KAISA
+            - SERAPHINE
+            - GNAR
+            - ZAC
+            - YASUO
+            - VELKOZ
+            - TALIYAH
+            - CAMILLE
+            - AKSHAN
+            - BELVETH
+            - BRAUM
+            - JHIN
+            - KINDRED
+            - ZERI
+            - JINX
+            - TAHM_KENCH
+            - BRIAR
+            - VIEGO
+            - SENNA
+            - LUCIAN
+            - ZED
+            - KLED
+            - EKKO
+            - QIYANA
+            - VI
+            - AATROX
+            - NAMI
+            - AZIR
+            - YUUMI
+            - SAMIRA
+            - THRESH
+            - ILLAOI
+            - REKSAI
+            - IVERN
+            - KALISTA
+            - BARD
+            - RAKAN
+            - XAYAH
+            - ORNN
+            - SYLAS
+            - NEEKO
+            - APHELIOS
+            - RELL
+            - PYKE
+            - VEX
+            - YONE
+            - AMBESSA
+            - SETT
+            - LILLIA
+            - GWEN
+            - RENATA_GLASC
+            - AURORA
+            - NILAH
+            - KSANTE
+            - SMOLDER
+            - MILIO
+            - HWEI
+            - NAAFIRI
+          type: string
+          description: These are the champion names in the game League of Legends.
+        champion_position:
+          enum:
+            - TOP
+            - MID
+            - JUNGLE
+            - ADC
+            - SUPPORT
+            - NONE
+          type: string
+          description: These are the champion positions in the game League of Legends.
+  - name: esports-lol-schedules
+    description: Get upcoming LoL match schedules.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: esports-lol-team-standings
+    description: Get team standings for a LoL league.
+    inputSchema:
+      type: object
+      required:
+        - shortName
+      properties:
+        shortName:
+          enum:
+            - lck
+            - lpl
+            - lec
+            - lcs
+            - ljl
+            - vcs
+            - cblol
+            - lcl
+            - lla
+            - tcl
+            - pcs
+            - lco
+            - lta south
+            - lta north
+            - lcp
+            - first stand
+            - fst
+            - al
+            - msi
+            - worlds
+          type: string
+          description: League short name (LCK, LPL, Worlds, ...)
+  - name: tft-meta-trend-deck-list
+    description: TFT deck list tool for retrieving current meta decks.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: tft-meta-item-combinations
+    description: TFT tool for retrieving information about item combinations and recipes.
+    inputSchema:
+      type: object
+      required:
+        - language
+      properties:
+        language:
+          enum:
+            - AR_AE
+            - CS_CZ
+            - DE_DE
+            - EL_GR
+            - EN_AU
+            - EN_GB
+            - EN_PH
+            - EN_SG
+            - EN_US
+            - ES_AR
+            - ES_ES
+            - ES_MX
+            - FR_FR
+            - HU_HU
+            - IT_IT
+            - JA_JP
+            - KO_KR
+            - PL_PL
+            - PT_BR
+            - RO_RO
+            - RU_RU
+            - TH_TH
+            - TR_TR
+            - VI_VN
+            - ZH_CN
+            - ZH_MY
+            - ZH_TW
+          type: string
+          description: These are the champion names in the game League of Legends.
+  - name: tft-champion-item-build
+    description: TFT tool for retrieving champion item build information.
+    inputSchema:
+      type: object
+      required:
+        - championId
+      properties:
+        championId:
+          enum:
+            - TFT14_Neeko
+            - TFT14_Illaoi
+            - TFT14_Senna
+            - TFT14_Yuumi
+            - TFT14_Viego
+            - TFT14_Morgana
+            - TFT14_Zeri
+            - TFT14_Zed
+            - TFT14_SummonLevel2
+            - TFT14_Aphelios
+            - TFT14_KogMaw
+            - TFT14_Shaco
+            - TFT14_DrMundo
+            - TFT14_Varus
+            - TFT14_Vi
+            - TFT14_Jinx
+            - TFT14_Sejuani
+            - TFT14_Ekko
+            - TFT14_Kindred
+            - TFT14_Urgot
+            - TFT14_Rhaast
+            - TFT14_Naafiri
+            - TFT14_Gragas
+            - TFT14_Fiddlesticks
+            - TFT14_Ziggs
+            - TFT14_Alistar
+            - TFT14_Brand
+            - TFT14_Seraphine
+            - TFT14_Renekton
+            - TFT14_Mordekaiser
+            - TFT14_NidaleeCougar
+            - TFT14_Annie
+            - TFT14_LeBlanc
+            - TFT14_Elise
+            - TFT14_Kobuko
+            - TFT14_Poppy
+            - TFT14_Jax
+            - TFT14_Jarvan
+            - TFT14_Aurora
+            - TFT14_Graves
+            - TFT14_Vayne
+            - TFT14_Galio
+            - TFT14_Chogath
+            - TFT14_Xayah
+            - TFT14_Samira
+            - TFT14_Garen
+            - TFT14_Rengar
+            - TFT14_TwistedFate
+            - TFT14_Summon_Turret
+            - TFT14_Vex
+            - TFT14_Braum
+            - TFT14_MissFortune
+            - TFT14_Shyvana
+            - TFT14_SummonLevel4
+            - TFT14_Sylas
+            - TFT14_Darius
+            - TFT14_Jhin
+            - TFT14_Zac
+            - TFT14_Zyra
+            - TFT14_Draven
+            - TFT14_Skarner
+            - TFT14_Veigar
+            - TFT14_Leona
+          type: string
+          description: TFT champion ID to retrieve item build for
+  - name: tft-recommend-champion-for-item
+    description: TFT tool for retrieving champion recommendations for a specific item.
+    inputSchema:
+      type: object
+      required:
+        - itemId
+      properties:
+        itemId:
+          enum:
+            - TFT14_Item_DarkWebEmblemItem
+            - TFT_Item_PowerGauntlet
+            - TFT_Item_EternalFlame
+            - TFT_Item_Shroud
+            - TFT9_Item_OrnnTrickstersGlass
+            - TFT_Item_SupportKnightsVow
+            - TFT_Item_MadredsBloodrazor
+            - TFT5_Item_ArchangelsStaffRadiant
+            - TFT_Item_SparringGloves
+            - TFT_Item_FryingPan
+            - TFT14_MordekaiserCyberneticItem
+            - TFT5_Item_RapidFirecannonRadiant
+            - TFT_Item_TearOfTheGoddess
+            - TFT_Item_Artifact_RapidFirecannon
+            - TFT_Item_ChainVest
+            - TFT5_Item_RunaansHurricaneRadiant
+            - TFT5_Item_AdaptiveHelmRadiant
+            - TFT_Item_Artifact_BlightingJewel
+            - TFT14_Item_ImmortalEmblemItem
+            - TFT7_Item_ShimmerscaleHeartOfGold
+            - TFT14_ZeriCyberneticItem
+            - TFT_Item_AegisOfTheLegion
+            - TFT5_Item_BrambleVestRadiant
+            - TFT5_Item_DragonsClawRadiant
+            - TFT_Item_SpearOfShojin
+            - TFT_Item_ForceOfNature
+            - TFT4_Item_OrnnInfinityForce
+            - TFT_Item_DragonsClaw
+            - TFT5_Item_SteraksGageRadiant
+            - TFT4_Item_OrnnMuramana
+            - TFT_Item_Artifact_ProwlersClaw
+            - TFT5_Item_SunfireCapeRadiant
+            - TFT_Item_Spite
+            - TFT_Item_Artifact_LudensTempest
+            - TFT5_Item_RedemptionRadiant
+            - TFT5_Item_NightHarvesterRadiant
+            - TFT_Item_Artifact_WitsEnd
+            - TFT_Item_Artifact_HorizonFocus
+            - TFT7_Item_ShimmerscaleMogulsMail
+            - TFT14_Item_StreetDemonEmblemItem
+            - TFT5_Item_BloodthirsterRadiant
+            - TFT14_NaafiriCyberneticItem
+            - TFT_Item_Artifact_InnervatingLocket
+            - TFT14_ZeriCyberneticItem_Radiant
+            - TFT_Item_Spatula
+            - TFT_Item_GargoyleStoneplate
+            - TFT5_Item_TitansResolveRadiant
+            - TFT_Item_GuinsoosRageblade
+            - TFT5_Item_BlueBuffRadiant
+            - TFT14_Item_MobEmblemItem
+            - TFT7_Item_ShimmerscaleGamblersBlade
+            - TFT14_Item_CutterEmblemItem
+            - TFT_Item_LastWhisper
+            - TFT14_Item_TechieEmblemItem
+            - TFT_Item_ZekesHerald
+            - TFT9_Item_OrnnHorizonFocus
+            - TFT4_Item_OrnnTheCollector
+            - TFT_Item_Crownguard
+            - TFT_Item_UnstableTreasureChest
+            - TFT_Item_RedBuff
+            - TFT5_Item_HextechGunbladeRadiant
+            - TFT5_Item_InfinityEdgeRadiant
+            - TFT_Item_Zephyr
+            - TFT5_Item_GuardianAngelRadiant
+            - TFT4_Item_OrnnAnimaVisage
+            - TFT14_Item_ThirstyEmblemItem
+            - TFT5_Item_HandOfJusticeRadiant
+            - TFT_Item_UnstableConcoction
+            - TFT_Item_TacticiansScepter
+            - TFT5_Item_MorellonomiconRadiant
+            - TFT5_Item_GuinsoosRagebladeRadiant
+            - TFT14_Item_ControllerEmblemItem
+            - TFT_Item_Artifact_SeekersArmguard
+            - TFT_Item_Bloodthirster
+            - TFT5_Item_FrozenHeartRadiant
+            - TFT14_SejuaniCyberneticItem_Radiant
+            - TFT14_Item_BallistekEmblemItem
+            - TFT14_Item_EdgeRunnerEmblemItem
+            - TFT5_Item_JeweledGauntletRadiant
+            - TFT_Item_Artifact_SuspiciousTrenchCoat
+            - TFT4_Item_OrnnObsidianCleaver
+            - TFT14_JhinCyberneticItem_Radiant
+            - TFT9_Item_OrnnHullbreaker
+            - TFT_Item_JeweledGauntlet
+            - TFT14_VarusCyberneticItem
+            - TFT_Item_ArchangelsStaff
+            - TFT_Item_Artifact_SilvermereDawn
+            - TFT_Item_GuardianAngel
+            - TFT_Item_TitansResolve
+            - TFT14_Item_SwiftEmblemItem
+            - TFT_Item_TacticiansRing
+            - TFT_Item_RunaansHurricane
+            - TFT_Item_SpectralGauntlet
+            - TFT_Item_Deathblade
+            - TFT_Item_WarmogsArmor
+            - TFT5_Item_GiantSlayerRadiant
+            - TFT_Item_HextechGunblade
+            - TFT_Item_NegatronCloak
+            - TFT14_NaafiriCyberneticItem_Radiant
+            - TFT_Item_Artifact_LightshieldCrest
+            - TFT_Item_BansheesVeil
+            - TFT4_Item_OrnnDeathsDefiance
+            - TFT5_Item_QuicksilverRadiant
+            - TFT5_Item_IonicSparkRadiant
+            - TFT_Item_RecurveBow
+            - TFT14_JaxCyberneticItem
+            - TFT_Item_BrambleVest
+            - TFT_Item_RabadonsDeathcap
+            - TFT_Item_FrozenHeart
+            - TFT14_Item_BruiserEmblemItem
+            - TFT_Item_Artifact_Mittens
+            - TFT14_JhinCyberneticItem
+            - TFT5_Item_LeviathanRadiant
+            - TFT5_Item_TrapClawRadiant
+            - TFT_Item_Artifact_LichBane
+            - TFT5_Item_LastWhisperRadiant
+            - TFT_Item_GiantsBelt
+            - TFT_Item_ThiefsGloves
+            - TFT5_Item_SpearOfShojinRadiant
+            - TFT_Item_NightHarvester
+            - TFT_Item_RapidFireCannon
+            - TFT_Item_Artifact_TalismanOfAscension
+            - TFT14_MordekaiserCyberneticItem_Radiant
+            - TFT_Item_Quicksilver
+            - TFT4_Item_OrnnZhonyasParadox
+            - TFT5_Item_ThiefsGlovesRadiant
+            - TFT_Item_RadiantVirtue
+            - TFT_Item_Leviathan
+            - TFT5_Item_ZzRotPortalRadiant
+            - TFT_Item_BlueBuff
+            - TFT14_Item_MarksmanEmblemItem
+            - TFT14_Item_StrongEmblemItem
+            - TFT14_SejuaniCyberneticItem
+            - TFT5_Item_WarmogsArmorRadiant
+            - TFT_Item_LocketOfTheIronSolari
+            - TFT_Item_Morellonomicon
+            - TFT_Item_SteraksGage
+            - TFT_Item_Artifact_Fishbones
+            - TFT_Item_NeedlesslyLargeRod
+            - TFT14_VarusCyberneticItem_Radiant
+            - TFT14_Item_Nitro_ChromeCounter
+            - TFT_Item_Artifact_UnendingDespair
+            - TFT_Item_Artifact_SpectralCutlass
+            - TFT_Item_Redemption
+            - TFT_Item_Chalice
+            - TFT_Item_IonicSpark
+            - TFT9_Item_OrnnDeathfireGrasp
+            - TFT5_Item_CrownguardRadiant
+            - TFT4_Item_OrnnRanduinsSanctum
+            - TFT5_Item_RabadonsDeathcapRadiant
+            - TFT14_Item_ArmorcladEmblemItem
+            - TFT_Item_BFSword
+            - TFT_Item_Moonstone
+            - TFT5_Item_StatikkShivRadiant
+            - TFT5_Item_SpectralGauntletRadiant
+            - TFT_Item_InfinityEdge
+            - TFT5_Item_GargoyleStoneplateRadiant
+            - TFT5_Item_DeathbladeRadiant
+            - TFT14_Item_GuardianEmblemItem
+            - TFT_Item_AdaptiveHelm
+            - TFT14_JaxCyberneticItem_Radiant
+            - TFT_Item_StatikkShiv
+            - TFT14_Item_DivinicorpEmblemItem
+          type: string
+          description: TFT item ID to get champion recommendations for
+  - name: tft-play-style-comment
+    description: This tool provides comments on the playstyle of TFT champions.
+    inputSchema:
+      type: object
+      required:
+        - region
+        - puuid
+      properties:
+        puuid:
+          type: string
+          description: Riot unique puuid value
+        region:
+          enum:
+            - KR
+            - BR
+            - EUNE
+            - EUW
+            - LAN
+            - LAS
+            - NA
+            - OCE
+            - RU
+            - TR
+            - JP
+            - PH
+            - SG
+            - TH
+            - TW
+            - VN
+            - ME
+          type: string
+          description: TFT region
+  - name: valorant-meta-maps
+    description: Valorant map meta data
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: valorant-meta-characters
+    description: Valorant character meta data
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: valorant-leaderboard
+    description: Fetch Valorant leaderboard by region
+    inputSchema:
+      type: object
+      required:
+        - region
+      properties:
+        region:
+          enum:
+            - AP
+            - BR
+            - EU
+            - KR
+            - LATAM
+            - NA
+          type: string
+          description: Regions in Valorant
+  - name: valorant-agents-composition-with-map
+    description: Retrieve agent composition data for a Valorant map.
+    inputSchema:
+      type: object
+      required:
+        - mapId
+      properties:
+        mapId:
+          type: string
+          description: Map ID in Valorant
+  - name: valorant-characters-statistics
+    description: Retrieve character statistics data for Valorant, optionally
+      filtered by map.
+    inputSchema:
+      type: object
+      properties:
+        mapId:
+          type: string
+          description: Optional Map ID in Valorant
+  - name: valorant-player-matches
+    description: Retrieve match history for a Valorant player using their game name
+      and tag line.
+    inputSchema:
+      type: object
+      required:
+        - gameName
+        - tagLine
+      properties:
+        tagLine:
+          type: string
+          description: Tag line of the player
+        gameName:
+          type: string
+          description: Game name of the player

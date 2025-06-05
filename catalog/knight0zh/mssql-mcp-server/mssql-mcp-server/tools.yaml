@@ -1,0 +1,42 @@
+tools:
+  - name: query
+    description: Execute a SQL query on a MSSQL database
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - connectionString
+        - required:
+            - host
+            - username
+            - password
+      required:
+        - query
+      properties:
+        host:
+          type: string
+          description: Database server hostname
+        port:
+          type: number
+          description: "Database server port (default: 1433)"
+        query:
+          type: string
+          description: SQL query to execute
+        encrypt:
+          type: boolean
+          description: "Enable encryption (default: false)"
+        database:
+          type: string
+          description: "Database name (default: master)"
+        password:
+          type: string
+          description: Database password
+        username:
+          type: string
+          description: Database username
+        connectionString:
+          type: string
+          description: Full connection string (alternative to individual parameters)
+        trustServerCertificate:
+          type: boolean
+          description: "Trust server certificate (default: true)"

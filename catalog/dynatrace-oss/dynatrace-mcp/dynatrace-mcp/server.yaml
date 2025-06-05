@@ -1,0 +1,18 @@
+identifier: dynatrace-oss/dynatrace-mcp/dynatrace-mcp
+repo:
+  provider: github.com
+  url: https://github.com/dynatrace-oss/dynatrace-mcp
+  name: dynatrace-mcp
+  owner: dynatrace-oss
+server:
+  subdirectory: /
+  name: Dynatrace Observability Server
+  description: Bring real-time observability data from Dynatrace directly into
+    your development workflow. Query production problems, security
+    vulnerabilities, logs, and events using natural language and automate
+    notifications via Slack and workflows. Enhance debugging and monitoring with
+    seamless integration of Dynatrace data in your IDE or agent environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

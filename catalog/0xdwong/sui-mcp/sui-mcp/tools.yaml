@@ -1,0 +1,115 @@
+tools:
+  - name: faucet
+    description: Get faucet from sui networks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - addresses
+      properties:
+        network:
+          enum:
+            - testnet
+            - devnet
+            - localnet
+          type: string
+          default: devnet
+        addresses:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+  - name: sui-balance
+    description: Get balance of an address from sui networks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - addresses
+      properties:
+        network:
+          enum:
+            - mainnet
+            - testnet
+            - devnet
+            - localnet
+          type: string
+          default: mainnet
+        addresses:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+  - name: sui-transfer
+    description: transfer SUI(in mist) to single or multiple addresses
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - amounts
+        - recipients
+      properties:
+        amounts:
+          type: array
+          items:
+            type: number
+          minItems: 1
+        network:
+          enum:
+            - mainnet
+            - testnet
+            - devnet
+            - localnet
+          type: string
+          default: mainnet
+        recipients:
+          type: array
+          items:
+            type: string
+          minItems: 1
+      additionalProperties: false
+  - name: random-sui-account
+    description: Create random SUI account, do not use it in production.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        num:
+          type: number
+          default: 1
+      additionalProperties: false
+  - name: gen_mnemonic
+    description: Generate mnemonic(Not recommended for production)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        num:
+          type: number
+          default: 1
+      additionalProperties: false
+  - name: gen_sui_accounts_by_mnemonic
+    description: Create SUI accounts from mnemonic(Not recommended for production)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mnemonic
+      properties:
+        num:
+          type: number
+          default: 1
+        mnemonic:
+          type: string
+      additionalProperties: false
+  - name: get_account_info_by_private_key
+    description: Get account info by private key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - privateKey
+      properties:
+        privateKey:
+          type: string
+      additionalProperties: false

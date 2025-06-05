@@ -1,0 +1,121 @@
+tools:
+  - name: search_crates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          description: Page number (starts at 1)
+        query:
+          type: string
+          minLength: 1
+          description: Search query for crates
+        perPage:
+          type: number
+          description: Results per page
+      additionalProperties: false
+  - name: get_crate_documentation
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - crateName
+      properties:
+        version:
+          type: string
+          description: Specific version (defaults to latest)
+        crateName:
+          type: string
+          minLength: 1
+          description: Name of the crate
+      additionalProperties: false
+  - name: get_type_info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - crateName
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: Path to the type (e.g., "std/vec/struct.Vec.html")
+        version:
+          type: string
+          description: Specific version (defaults to latest)
+        crateName:
+          type: string
+          minLength: 1
+          description: Name of the crate
+      additionalProperties: false
+  - name: get_feature_flags
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - crateName
+      properties:
+        version:
+          type: string
+          description: Specific version (defaults to latest)
+        crateName:
+          type: string
+          minLength: 1
+          description: Name of the crate
+      additionalProperties: false
+  - name: get_crate_versions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - crateName
+      properties:
+        crateName:
+          type: string
+          minLength: 1
+          description: Name of the crate
+      additionalProperties: false
+  - name: get_source_code
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - crateName
+        - path
+      properties:
+        path:
+          type: string
+          minLength: 1
+          description: Path to the source file
+        version:
+          type: string
+          description: Specific version (defaults to latest)
+        crateName:
+          type: string
+          minLength: 1
+          description: Name of the crate
+      additionalProperties: false
+  - name: search_symbols
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - crateName
+        - query
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: Search query for symbols
+        version:
+          type: string
+          description: Specific version (defaults to latest)
+        crateName:
+          type: string
+          minLength: 1
+          description: Name of the crate
+      additionalProperties: false

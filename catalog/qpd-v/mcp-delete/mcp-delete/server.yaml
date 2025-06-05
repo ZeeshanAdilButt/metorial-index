@@ -1,0 +1,16 @@
+identifier: qpd-v/mcp-delete/mcp-delete
+repo:
+  provider: github.com
+  url: https://github.com/qpd-v/mcp-delete
+  name: mcp-delete
+  owner: qpd-v
+server:
+  subdirectory: /
+  name: File Deletion
+  description: A Model Context Protocol (MCP) server that provides file deletion
+    capabilities, allowing AI assistants to safely delete files with support for
+    both relative and absolute paths.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

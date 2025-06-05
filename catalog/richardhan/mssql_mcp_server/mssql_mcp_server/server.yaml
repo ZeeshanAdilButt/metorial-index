@@ -1,0 +1,17 @@
+identifier: richardhan/mssql_mcp_server/mssql_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/RichardHan/mssql_mcp_server
+  name: mssql_mcp_server
+  owner: RichardHan
+server:
+  subdirectory: /
+  name: Microsoft SQL Server MCP Server
+  description: Enable secure interaction with Microsoft SQL Server databases. List
+    tables, read data, and execute SQL queries through a controlled interface,
+    enhancing database exploration and analysis. Ensure safe and structured
+    access to your SQL Server resources.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

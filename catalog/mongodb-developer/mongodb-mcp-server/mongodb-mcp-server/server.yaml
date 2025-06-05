@@ -1,0 +1,17 @@
+identifier: mongodb-developer/mongodb-mcp-server/mongodb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mongodb-developer/mongodb-mcp-server
+  name: mongodb-mcp-server
+  owner: mongodb-developer
+server:
+  subdirectory: /
+  name: MongoDB MCP Server
+  description: Access and query your MongoDB databases effortlessly. Execute
+    aggregation pipelines and inspect collection schemas to gain insights from
+    your data. Enhance your LLM applications with powerful database capabilities
+    without compromising security.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

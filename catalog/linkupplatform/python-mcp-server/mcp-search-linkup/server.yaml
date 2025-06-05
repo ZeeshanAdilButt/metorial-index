@@ -1,0 +1,15 @@
+identifier: linkupplatform/python-mcp-server/mcp-search-linkup
+repo:
+  provider: github.com
+  url: https://github.com/LinkupPlatform/python-mcp-server
+  name: python-mcp-server
+  owner: LinkupPlatform
+server:
+  subdirectory: /
+  name: Linkup Search
+  description: Provides web search capability using the LinkupClient to fetch
+    real-time information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

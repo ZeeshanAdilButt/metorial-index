@@ -1,0 +1,17 @@
+identifier: javader/mcp-sentry-custom/mcp-sentry-custom
+repo:
+  provider: github.com
+  url: https://github.com/javaDer/mcp-sentry-custom
+  name: mcp-sentry-custom
+  owner: javaDer
+server:
+  subdirectory: /
+  name: Sentry Issue Analyzer
+  description: Retrieve and analyze issues from your Sentry account effortlessly.
+    Inspect error reports, stack traces, and debugging information to enhance
+    your application's reliability. Streamline your debugging process with easy
+    access to detailed issue insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

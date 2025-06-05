@@ -1,0 +1,18 @@
+identifier: adexltd/mcp-google-suite/mcp-suiteg
+repo:
+  provider: github.com
+  url: https://github.com/adexltd/mcp-google-suite
+  name: mcp-google-suite
+  owner: adexltd
+server:
+  subdirectory: /
+  name: Google Workspace Server
+  description: Enable AI agents to interact seamlessly with Google Workspace
+    services including Drive, Docs, and Sheets. Perform operations such as
+    searching files, creating folders, managing documents, and manipulating
+    spreadsheets through a standardized protocol. Support multiple transport
+    modes for flexible integration with MCP-compatible clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

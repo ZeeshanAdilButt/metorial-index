@@ -1,0 +1,89 @@
+tools:
+  - name: list_meetings
+    description: List upcoming Google Meet meetings
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        time_max:
+          type: string
+          description: End time in ISO format (optional)
+        time_min:
+          type: string
+          description: "Start time in ISO format (default: now)"
+        max_results:
+          type: number
+          description: "Maximum number of results to return (default: 10)"
+  - name: get_meeting
+    description: Get details of a specific Google Meet meeting
+    inputSchema:
+      type: object
+      required:
+        - meeting_id
+      properties:
+        meeting_id:
+          type: string
+          description: ID of the meeting to retrieve
+  - name: create_meeting
+    description: Create a new Google Meet meeting
+    inputSchema:
+      type: object
+      required:
+        - summary
+        - start_time
+        - end_time
+      properties:
+        summary:
+          type: string
+          description: Title of the meeting
+        end_time:
+          type: string
+          description: End time in ISO format
+        attendees:
+          type: array
+          items:
+            type: string
+          description: List of email addresses for attendees (optional)
+        start_time:
+          type: string
+          description: Start time in ISO format
+        description:
+          type: string
+          description: Description for the meeting (optional)
+  - name: update_meeting
+    description: Update an existing Google Meet meeting
+    inputSchema:
+      type: object
+      required:
+        - meeting_id
+      properties:
+        summary:
+          type: string
+          description: Updated title of the meeting (optional)
+        end_time:
+          type: string
+          description: Updated end time in ISO format (optional)
+        attendees:
+          type: array
+          items:
+            type: string
+          description: Updated list of email addresses for attendees (optional)
+        meeting_id:
+          type: string
+          description: ID of the meeting to update
+        start_time:
+          type: string
+          description: Updated start time in ISO format (optional)
+        description:
+          type: string
+          description: Updated description for the meeting (optional)
+  - name: delete_meeting
+    description: Delete a Google Meet meeting
+    inputSchema:
+      type: object
+      required:
+        - meeting_id
+      properties:
+        meeting_id:
+          type: string
+          description: ID of the meeting to delete

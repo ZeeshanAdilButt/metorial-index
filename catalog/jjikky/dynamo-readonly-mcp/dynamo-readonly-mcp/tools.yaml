@@ -1,0 +1,138 @@
+tools:
+  - name: list-tables
+    description: Get a list of all DynamoDB tables
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: describe-table
+    description: Get detailed information about a DynamoDB table
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        tableName:
+          type: string
+          description: Name of the table to get details for
+      additionalProperties: false
+  - name: scan-table
+    description: Scan items from a DynamoDB table
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        limit:
+          type: number
+          description: "Maximum number of items to return (default: 20)"
+        tableName:
+          type: string
+          description: Name of the table to scan
+        filterExpression:
+          type: string
+          description: "Filter expression (e.g: 'age > :minAge')"
+        projectionExpression:
+          type: string
+          description: 'Projection expression (e.g: "id")'
+        expressionAttributeValues:
+          type: object
+          description: Filter expression attribute values (JSON format)
+          additionalProperties: {}
+      additionalProperties: false
+  - name: query-table
+    description: Query items from a DynamoDB table based on conditions
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - keyConditionExpression
+        - expressionAttributeValues
+      properties:
+        limit:
+          type: number
+          description: Maximum number of items to return
+        indexName:
+          type: string
+          description: Name of the index to use (optional)
+        tableName:
+          type: string
+          description: Name of the table to query
+        filterExpression:
+          type: string
+          description: Filter expression (optional)
+        projectionExpression:
+          type: string
+          description: Projection expression (optional)
+        keyConditionExpression:
+          type: string
+          description: "Key condition expression (e.g: 'PK = :pk')"
+        expressionAttributeValues:
+          type: object
+          description: Filter expression attribute values (JSON format)
+          additionalProperties: {}
+      additionalProperties: false
+  - name: paginate-query-table
+    description: Paginate query results
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - keyConditionExpression
+        - expressionAttributeValues
+      properties:
+        tableName:
+          type: string
+          description: Table name
+        projectionExpression:
+          type: string
+          description: Projection expression (optional)
+        keyConditionExpression:
+          type: string
+          description: "Key condition expression (e.g: 'PK = :pk')"
+        expressionAttributeValues:
+          type: object
+          description: Filter expression attribute values (JSON format)
+          additionalProperties: {}
+      additionalProperties: false
+  - name: get-item
+    description: Get an item from a DynamoDB table based on a specific key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+        - key
+      properties:
+        key:
+          type: object
+          description: Item key (JSON format)
+          additionalProperties: {}
+        tableName:
+          type: string
+          description: Table name
+      additionalProperties: false
+  - name: count-items
+    description: Count items in a DynamoDB table
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - tableName
+      properties:
+        tableName:
+          type: string
+          description: Table name
+        filterExpression:
+          type: string
+          description: Filter expression (optional)
+        expressionAttributeValues:
+          type: object
+          description: Filter expression attribute values (optional)
+          additionalProperties: {}
+      additionalProperties: false

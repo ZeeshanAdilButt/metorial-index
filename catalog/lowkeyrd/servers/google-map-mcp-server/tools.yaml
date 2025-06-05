@@ -1,0 +1,124 @@
+tools:
+  - name: maps_geocode
+    description: Convert an address into geographic coordinates
+    inputSchema:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          description: The address to geocode
+  - name: maps_reverse_geocode
+    description: Convert coordinates into an address
+    inputSchema:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          description: Latitude coordinate
+        longitude:
+          type: number
+          description: Longitude coordinate
+  - name: maps_search_places
+    description: Search for places using Google Places API
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+        radius:
+          type: number
+          description: Search radius in meters (max 50000)
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+          description: Optional center point for the search
+  - name: maps_place_details
+    description: Get detailed information about a specific place
+    inputSchema:
+      type: object
+      required:
+        - place_id
+      properties:
+        place_id:
+          type: string
+          description: The place ID to get details for
+  - name: maps_distance_matrix
+    description: Calculate travel distance and time for multiple origins and destinations
+    inputSchema:
+      type: object
+      required:
+        - origins
+        - destinations
+      properties:
+        mode:
+          enum:
+            - driving
+            - walking
+            - bicycling
+            - transit
+          type: string
+          description: Travel mode (driving, walking, bicycling, transit)
+        origins:
+          type: array
+          items:
+            type: string
+          description: Array of origin addresses or coordinates
+        destinations:
+          type: array
+          items:
+            type: string
+          description: Array of destination addresses or coordinates
+  - name: maps_elevation
+    description: Get elevation data for locations on the earth
+    inputSchema:
+      type: object
+      required:
+        - locations
+      properties:
+        locations:
+          type: array
+          items:
+            type: object
+            required:
+              - latitude
+              - longitude
+            properties:
+              latitude:
+                type: number
+              longitude:
+                type: number
+          description: Array of locations to get elevation for
+  - name: maps_directions
+    description: Get directions between two points
+    inputSchema:
+      type: object
+      required:
+        - origin
+        - destination
+      properties:
+        mode:
+          enum:
+            - driving
+            - walking
+            - bicycling
+            - transit
+          type: string
+          description: Travel mode (driving, walking, bicycling, transit)
+        origin:
+          type: string
+          description: Starting point address or coordinates
+        destination:
+          type: string
+          description: Ending point address or coordinates

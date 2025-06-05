@@ -1,0 +1,19 @@
+identifier: roboulos/remote-mcp-server/remote-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/roboulos/remote-mcp-server
+  name: remote-mcp-server
+  owner: roboulos
+server:
+  subdirectory: /
+  name: Snappy Server with Xano Integration
+  description: Provide a remote MCP server that integrates with Xano for tool
+    management, session tracking, and OAuth authentication. Enable seamless
+    connection with clients using the latest Streamable HTTP transport protocol
+    for efficient and secure communication. Facilitate easy deployment on
+    Cloudflare Workers and support multiple authentication methods for flexible
+    usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

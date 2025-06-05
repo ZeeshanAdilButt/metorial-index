@@ -1,0 +1,16 @@
+identifier: bright8192/esxi-mcp-server/esxi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/bright8192/esxi-mcp-server
+  name: esxi-mcp-server
+  owner: bright8192
+server:
+  subdirectory: /
+  name: ESXi Management Server
+  description: Manage your VMware ESXi and vCenter environments effortlessly.
+    Create, clone, and monitor virtual machines with a simple REST API
+    interface, ensuring real-time performance insights and secure operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: tadata-org/fastapi_mcp/fastapi_mcp
+repo:
+  provider: github.com
+  url: https://github.com/tadata-org/fastapi_mcp
+  name: fastapi_mcp
+  owner: tadata-org
+server:
+  subdirectory: /
+  name: FastAPI-MCP
+  description: Automatically expose your FastAPI endpoints as tools for LLM
+    integration. Simplify the process of creating an MCP server with zero
+    configuration and enjoy automatic discovery of your API endpoints. Enhance
+    your applications with seamless integration of real-time data and actions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

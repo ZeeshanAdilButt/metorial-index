@@ -1,0 +1,17 @@
+identifier: jfrog/mcp-jfrog/mcp-jfrog
+repo:
+  provider: github.com
+  url: https://github.com/jfrog/mcp-jfrog
+  name: mcp-jfrog
+  owner: jfrog
+server:
+  subdirectory: /
+  name: JFrog MCP Server
+  description: Manage your repositories, track builds, and oversee the release
+    lifecycle seamlessly. Leverage powerful AQL queries to search for artifacts
+    and monitor runtime clusters effectively. Enhance your JFrog platform
+    experience with this integrated MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

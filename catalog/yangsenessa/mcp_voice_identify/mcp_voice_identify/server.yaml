@@ -1,0 +1,17 @@
+identifier: yangsenessa/mcp_voice_identify/mcp_voice_identify
+repo:
+  provider: github.com
+  url: https://github.com/yangsenessa/mcp_voice_identify
+  name: mcp_voice_identify
+  owner: yangsenessa
+server:
+  subdirectory: /
+  name: Voice Recognition Service
+  description: Provide voice recognition and text extraction capabilities with
+    structured results. Support both stdio and MCP modes for flexible
+    integration. Enable processing of voice data from files or base64 encoded
+    inputs with detailed labeling of language, emotion, audio type, and speaker.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

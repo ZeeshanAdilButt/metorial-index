@@ -1,0 +1,18 @@
+identifier: sandst1/mcp-server-midi/mcp-server-midi
+repo:
+  provider: github.com
+  url: https://github.com/sandst1/mcp-server-midi
+  name: mcp-server-midi
+  owner: sandst1
+server:
+  subdirectory: /
+  name: MIDI Server
+  description: Send MIDI sequences and control messages to any software or
+    hardware that supports MIDI input. Create virtual MIDI output ports to
+    integrate with digital audio workstations, synthesizers, and other
+    MIDI-compatible applications. Sequence MIDI events with precise timing for
+    dynamic musical control.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: crazyrabbitltc/mcp-etherscan-server/mcp-etherscan-server
+repo:
+  provider: github.com
+  url: https://github.com/crazyrabbitLTC/mcp-etherscan-server
+  name: mcp-etherscan-server
+  owner: crazyrabbitLTC
+server:
+  subdirectory: /
+  name: Etherscan Tools
+  description: Access Ethereum blockchain data via Etherscan's API, including
+    balances, transactions, token transfers, contract ABIs, gas prices, and ENS
+    resolution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

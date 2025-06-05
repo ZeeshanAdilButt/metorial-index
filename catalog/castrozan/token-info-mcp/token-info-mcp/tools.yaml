@@ -1,0 +1,13 @@
+tools:
+  - name: verify_betha_token
+    description: Verify an OAuth token on Betha services and get its information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - accessToken
+      properties:
+        accessToken:
+          type: string
+          description: The OAuth access token to verify
+      additionalProperties: false

@@ -1,0 +1,17 @@
+tools:
+  - name: rewrite_coding_prompt
+    description: Rewrites user's coding prompts before passing to AI IDE (e.g.
+      Cursor AI) to get the best results from AI IDE.
+    inputSchema:
+      type: object
+      title: rewrite_coding_promptArguments
+      required:
+        - prompt
+        - language
+      properties:
+        prompt:
+          type: string
+          description: The raw user's prompt that needs rewriting
+        language:
+          type: string
+          description: The programming language of the code

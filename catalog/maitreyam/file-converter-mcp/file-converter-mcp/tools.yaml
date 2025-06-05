@@ -1,0 +1,75 @@
+tools:
+  - name: convert_document
+    description: "
+
+      \    Converts a document from one format to another using Pandoc.
+
+
+      \    Args:
+
+      \        input_file_path: The absolute or relative path to the input
+      document file.
+
+      \        output_file_path: The absolute or relative path where the
+      converted output file should be saved.
+
+      \                          The directory will be created if it doesn't
+      exist.
+
+      \        to_format: The target format for the conversion (e.g.,
+      'markdown', 'docx', 'pdf', 'html', 'rst', 'epub').
+
+      \                   See pandoc documentation for full list.
+
+      \        from_format: The format of the input file. If None, pandoc will
+      try to guess from the file extension.
+
+      \                     Specify if the extension is ambiguous (e.g., 'md'
+      for markdown). Defaults to None.
+
+      \        extra_args: A list of additional command-line arguments to pass
+      directly to pandoc
+
+      \                    (e.g., ['--toc'] for table of contents, ['-V',
+      'geometry:margin=1.5cm'] for PDF margins).
+
+      \                    Defaults to None.
+
+
+      \    Returns:
+
+      \        A string indicating success (including the output path) or an
+      error message.
+
+      \    "
+    inputSchema:
+      type: object
+      title: convert_documentArguments
+      required:
+        - input_file_path
+        - output_file_path
+        - to_format
+      properties:
+        to_format:
+          type: string
+          title: To Format
+        extra_args:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Extra Args
+          default: null
+        from_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: From Format
+          default: null
+        input_file_path:
+          type: string
+          title: Input File Path
+        output_file_path:
+          type: string
+          title: Output File Path

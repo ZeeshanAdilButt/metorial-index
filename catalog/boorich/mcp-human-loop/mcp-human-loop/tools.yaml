@@ -1,0 +1,16 @@
+tools:
+  - name: evaluate_need_for_human
+    description: Evaluate if a task requires human intervention
+    inputSchema:
+      type: object
+      required:
+        - taskDescription
+      properties:
+        taskDescription:
+          type: string
+          description: Description of the task to be evaluated
+        modelCapabilities:
+          type: array
+          items:
+            type: string
+          description: List of model capabilities

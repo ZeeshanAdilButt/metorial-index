@@ -1,0 +1,137 @@
+tools:
+  - name: get_file
+    description: Get information about a Figma file
+    inputSchema:
+      type: object
+      required:
+        - file_key
+      properties:
+        file_key:
+          type: string
+          description: The Figma file key
+  - name: get_file_comments
+    description: Get comments from a Figma file
+    inputSchema:
+      type: object
+      required:
+        - file_key
+      properties:
+        file_key:
+          type: string
+          description: The Figma file key
+  - name: post_comment
+    description: Post a comment to a Figma file
+    inputSchema:
+      type: object
+      required:
+        - file_key
+        - message
+      properties:
+        message:
+          type: string
+          description: The comment message
+        file_key:
+          type: string
+          description: The Figma file key
+  - name: delete_comment
+    description: Delete a comment from a Figma file
+    inputSchema:
+      type: object
+      required:
+        - file_key
+        - comment_id
+      properties:
+        file_key:
+          type: string
+          description: The Figma file key
+        comment_id:
+          type: string
+          description: The comment ID
+  - name: get_team_projects
+    description: Get projects for a team
+    inputSchema:
+      type: object
+      required:
+        - team_id
+      properties:
+        team_id:
+          type: string
+          description: The team ID
+  - name: get_project_files
+    description: Get files in a project
+    inputSchema:
+      type: object
+      required:
+        - project_id
+      properties:
+        project_id:
+          type: string
+          description: The project ID
+  - name: get_file_components
+    description: Get components in a file
+    inputSchema:
+      type: object
+      required:
+        - file_key
+      properties:
+        file_key:
+          type: string
+          description: The Figma file key
+  - name: get_component_styles
+    description: Get published styles
+    inputSchema:
+      type: object
+      required:
+        - team_id
+      properties:
+        team_id:
+          type: string
+          description: The team ID
+  - name: get_file_versions
+    description: Get version history of a file
+    inputSchema:
+      type: object
+      required:
+        - file_key
+      properties:
+        file_key:
+          type: string
+          description: The Figma file key
+  - name: create_webhook
+    description: Create a webhook
+    inputSchema:
+      type: object
+      required:
+        - team_id
+        - event_type
+        - callback_url
+      properties:
+        team_id:
+          type: string
+          description: The team ID
+        event_type:
+          type: string
+          description: The event type to listen for
+        callback_url:
+          type: string
+          description: The callback URL
+  - name: get_webhooks
+    description: List webhooks
+    inputSchema:
+      type: object
+      required:
+        - team_id
+      properties:
+        team_id:
+          type: string
+          description: The team ID
+  - name: delete_webhook
+    description: Delete a webhook
+    inputSchema:
+      type: object
+      required:
+        - webhook_id
+      properties:
+        webhook_id:
+          type: string
+          description: The webhook ID

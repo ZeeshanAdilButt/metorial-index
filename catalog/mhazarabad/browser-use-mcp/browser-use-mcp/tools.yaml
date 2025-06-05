@@ -1,0 +1,103 @@
+tools:
+  - name: run task
+    description: |-
+      Run a browser automation task with instructions and wait for completion.
+      Returns the task's final output when complete.
+    inputSchema:
+      type: object
+      title: run_taskArguments
+      required:
+        - instructions
+      properties:
+        parameters:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Parameters
+          default: null
+        instructions:
+          type: string
+          title: Instructions
+        structured_output:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Structured Output
+          default: null
+  - name: get task
+    description: Retrieve details of a browser automation task by its ID, including
+      steps and output.
+    inputSchema:
+      type: object
+      title: get_taskArguments
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          title: Task Id
+  - name: get task status
+    description: Check the current status of a browser automation task without
+      retrieving full details.
+    inputSchema:
+      type: object
+      title: get_task_statusArguments
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          title: Task Id
+  - name: stop task
+    description: Stop a running browser automation task. A stopped task cannot be resumed.
+    inputSchema:
+      type: object
+      title: stop_taskArguments
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          title: Task Id
+  - name: pause task
+    description: Pause a running browser automation task so it can be resumed later
+      using the resume_task tool.
+    inputSchema:
+      type: object
+      title: pause_taskArguments
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          title: Task Id
+  - name: resume task
+    description: Resume a previously paused browser automation task to continue
+      execution from where it left off.
+    inputSchema:
+      type: object
+      title: resume_taskArguments
+      required:
+        - task_id
+      properties:
+        task_id:
+          type: string
+          title: Task Id
+  - name: list tasks
+    description: >-
+      List all browser automation tasks in your account with their current
+      status.
+
+      Use get_task to retrieve full details for a specific task.
+    inputSchema:
+      type: object
+      title: list_tasksArguments
+      properties: {}
+  - name: check_balance
+    description: Check your Browser Use account balance, usage limits, and available
+      credits.
+    inputSchema:
+      type: object
+      title: check_balanceArguments
+      properties: {}

@@ -1,0 +1,15 @@
+identifier: lsemenenko/openhue-mcp-server/claude-mcp-openhue
+repo:
+  provider: github.com
+  url: https://github.com/lsemenenko/openhue-mcp-server
+  name: openhue-mcp-server
+  owner: lsemenenko
+server:
+  subdirectory: /
+  name: OpenHue MCP Server
+  description: Control Philips Hue lights through Claude and other LLM interfaces
+    using the OpenHue CLI.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

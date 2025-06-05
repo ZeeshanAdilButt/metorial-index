@@ -1,0 +1,25 @@
+tools:
+  - name: get-pull-request-data
+    description: Get detailed information about a GitHub Pull Request including
+      files, diff, comments, and reviews
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - owner
+        - repo
+        - pullNumber
+      properties:
+        repo:
+          type: string
+          description: GitHub repository name
+        owner:
+          type: string
+          description: GitHub repository owner
+        token:
+          type: string
+          description: GitHub personal access token (optional)
+        pullNumber:
+          type: number
+          description: Pull request number
+      additionalProperties: false

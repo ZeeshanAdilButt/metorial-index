@@ -1,0 +1,18 @@
+identifier: mongodb-js/mongodb-mcp-server/mongodb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mongodb-js/mongodb-mcp-server
+  name: mongodb-mcp-server
+  owner: mongodb-js
+server:
+  subdirectory: /smithery
+  name: MongoDB MCP Server
+  description: MongoDB MCP Server allows any MCP-aware LLM to connect to MongoDB
+    Atlas for admin tasks and to MongoDB databases for data operations, all
+    through natural language. It exposes over 30 tools spanning cluster
+    management and database querying, with granular safety controls like
+    read-only mode and tool disabling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

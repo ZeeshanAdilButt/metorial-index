@@ -1,0 +1,14 @@
+identifier: fengin/search-server/search-server
+repo:
+  provider: github.com
+  url: https://github.com/fengin/search-server
+  name: search-server
+  owner: fengin
+server:
+  subdirectory: /
+  name: Search Service
+  description: Provide online and local search capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

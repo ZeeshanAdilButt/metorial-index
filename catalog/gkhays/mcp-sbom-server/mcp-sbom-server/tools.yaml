@@ -1,0 +1,28 @@
+tools:
+  - name: scan
+    description: "
+
+      \    Execute Trivy scanner to generate SPDX SBOM for a container image.
+
+      \    Supports the SPDX JSON format.
+
+
+      \    Args:
+
+      \        image (str): The container image name/reference to scan
+
+
+      \    Returns:
+
+      \        str: Test response or error message
+
+      \    "
+    inputSchema:
+      type: object
+      title: scanArguments
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          title: Image

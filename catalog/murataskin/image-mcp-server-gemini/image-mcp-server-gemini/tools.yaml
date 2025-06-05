@@ -1,0 +1,76 @@
+tools:
+  - name: analyze_image
+    description: Receives one or more image URLs and analyzes the image contents
+      using Flash 2.0. Can analyze relationships between multiple images.
+    inputSchema:
+      type: object
+      required:
+        - imageUrls
+      properties:
+        imageUrls:
+          type: array
+          items:
+            type: string
+          description: An array of URLs for the images to analyze
+  - name: analyze_image_from_path
+    description: Loads one or more images from local file paths and analyzes their
+      contents using Flash 2.0. Can analyze relationships between multiple
+      images. Provide valid paths for the server environment.
+    inputSchema:
+      type: object
+      required:
+        - imagePaths
+      properties:
+        imagePaths:
+          type: array
+          items:
+            type: string
+          description: An array of local file paths for the images to analyze (must be
+            accessible from the server)
+  - name: analyze_video
+    description: Downloads videos from URLs, analyzes content using Gemini 2.0
+      Flash. Best for small videos (<20MB). Can analyze multiple videos
+      together.
+    inputSchema:
+      type: object
+      required:
+        - videoUrls
+      properties:
+        prompt:
+          type: string
+          description: Optional text prompt (e.g., "Summarize this video.")
+        videoUrls:
+          type: array
+          items:
+            type: string
+          description: Array of video URLs to analyze (small videos recommended).
+  - name: analyze_video_from_path
+    description: Loads videos from local paths, analyzes content using Gemini 2.0
+      Flash. Best for small videos (<20MB). Can analyze multiple videos
+      together.
+    inputSchema:
+      type: object
+      required:
+        - videoPaths
+      properties:
+        prompt:
+          type: string
+          description: Optional text prompt (e.g., "What happens at 0:15?")
+        videoPaths:
+          type: array
+          items:
+            type: string
+          description: Array of local video file paths (small videos recommended).
+  - name: analyze_youtube_video
+    description: Analyzes a video directly from a YouTube URL using Gemini 2.0 Flash.
+    inputSchema:
+      type: object
+      required:
+        - youtubeUrl
+      properties:
+        prompt:
+          type: string
+          description: Optional text prompt (e.g., "Summarize this video.")
+        youtubeUrl:
+          type: string
+          description: The YouTube video URL to analyze.

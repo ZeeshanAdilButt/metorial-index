@@ -1,0 +1,78 @@
+tools:
+  - name: whois_lookup
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          title: Target
+      additionalProperties: false
+  - name: nmap_scan
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          title: Target
+      additionalProperties: false
+  - name: dnsrecon_lookup
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          title: Target
+      additionalProperties: false
+  - name: dnstwist_lookup
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          title: Domain
+      additionalProperties: false
+  - name: dig_lookup
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          title: Target
+      additionalProperties: false
+  - name: host_lookup
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          title: Target
+      additionalProperties: false
+  - name: osint_overview
+    description: ""
+    inputSchema:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          title: Target
+      additionalProperties: false

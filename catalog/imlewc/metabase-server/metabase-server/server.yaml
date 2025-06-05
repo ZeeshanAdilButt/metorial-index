@@ -1,0 +1,16 @@
+identifier: imlewc/metabase-server/metabase-server
+repo:
+  provider: github.com
+  url: https://github.com/imlewc/metabase-server
+  name: metabase-server
+  owner: imlewc
+server:
+  subdirectory: /
+  name: Metabase Integration Server
+  description: Interact with Metabase seamlessly. Access dashboards, execute
+    queries, and retrieve data directly from your Metabase instance, enhancing
+    your AI assistant's capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

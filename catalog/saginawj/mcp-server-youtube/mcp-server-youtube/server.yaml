@@ -1,0 +1,17 @@
+identifier: saginawj/mcp-server-youtube/mcp-server-youtube
+repo:
+  provider: github.com
+  url: https://github.com/saginawj/mcp-server-youtube
+  name: mcp-server-youtube
+  owner: saginawj
+server:
+  subdirectory: /
+  name: YouTube Feed via OAuth
+  description: Enable natural language interaction with your personal YouTube
+    feed. Fetch trending videos, recent uploads from subscribed channels, and
+    interact with YouTube content seamlessly through your favorite LLM client.
+    Simplify access to YouTube data without manual API handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: snjyor/binance-mcp/binance-mcp-data
+repo:
+  provider: github.com
+  url: https://github.com/snjyor/binance-mcp
+  name: binance-mcp
+  owner: snjyor
+server:
+  subdirectory: /
+  name: Binance Cryptocurrency Market Data Service
+  description: Provide real-time cryptocurrency market data from Binance directly
+    to AI agents. Access current prices, order books, candlestick charts,
+    trading history, and price statistics seamlessly. Enable AI-driven queries
+    about the latest market trends without visiting external sites.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

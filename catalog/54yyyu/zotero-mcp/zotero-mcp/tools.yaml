@@ -1,0 +1,273 @@
+tools:
+  - name: zotero_search_items
+    description: Search for items in your Zotero library, given a query string.
+    inputSchema:
+      type: object
+      title: search_itemsArguments
+      required:
+        - query
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 10
+        qmode:
+          enum:
+            - titleCreatorYear
+            - everything
+          type: string
+          title: Qmode
+          default: titleCreatorYear
+        query:
+          type: string
+          title: Query
+        item_type:
+          type: string
+          title: Item Type
+          default: -attachment
+  - name: zotero_get_item_metadata
+    description: Get detailed metadata for a specific Zotero item by its key.
+    inputSchema:
+      type: object
+      title: get_item_metadataArguments
+      required:
+        - item_key
+      properties:
+        item_key:
+          type: string
+          title: Item Key
+        include_abstract:
+          type: boolean
+          title: Include Abstract
+          default: true
+  - name: zotero_get_item_fulltext
+    description: Get the full text content of a Zotero item by its key.
+    inputSchema:
+      type: object
+      title: get_item_fulltextArguments
+      required:
+        - item_key
+      properties:
+        item_key:
+          type: string
+          title: Item Key
+  - name: zotero_get_collections
+    description: List all collections in your Zotero library.
+    inputSchema:
+      type: object
+      title: get_collectionsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+  - name: zotero_get_collection_items
+    description: Get all items in a specific Zotero collection.
+    inputSchema:
+      type: object
+      title: get_collection_itemsArguments
+      required:
+        - collection_key
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 50
+        collection_key:
+          type: string
+          title: Collection Key
+  - name: zotero_get_item_children
+    description: Get all child items (attachments, notes) for a specific Zotero item.
+    inputSchema:
+      type: object
+      title: get_item_childrenArguments
+      required:
+        - item_key
+      properties:
+        item_key:
+          type: string
+          title: Item Key
+  - name: zotero_get_tags
+    description: Get all tags used in your Zotero library.
+    inputSchema:
+      type: object
+      title: get_tagsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+  - name: zotero_get_recent
+    description: Get recently added items to your Zotero library.
+    inputSchema:
+      type: object
+      title: get_recentArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: zotero_batch_update_tags
+    description: Batch update tags across multiple items matching a search query.
+    inputSchema:
+      type: object
+      title: batch_update_tagsArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 50
+        query:
+          type: string
+          title: Query
+        add_tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Add Tags
+          default: null
+        remove_tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Remove Tags
+          default: null
+  - name: zotero_advanced_search
+    description: Perform an advanced search with multiple criteria.
+    inputSchema:
+      type: object
+      title: advanced_searchArguments
+      required:
+        - conditions
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 50
+        sort_by:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort By
+          default: null
+        join_mode:
+          enum:
+            - all
+            - any
+          type: string
+          title: Join Mode
+          default: all
+        conditions:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+          title: Conditions
+        sort_direction:
+          enum:
+            - asc
+            - desc
+          type: string
+          title: Sort Direction
+          default: asc
+  - name: zotero_get_annotations
+    description: Get all annotations for a specific item or across your entire
+      Zotero library.
+    inputSchema:
+      type: object
+      title: get_annotationsArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        item_key:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Item Key
+          default: null
+        use_pdf_extraction:
+          type: boolean
+          title: Use Pdf Extraction
+          default: false
+  - name: zotero_get_notes
+    description: Retrieve notes from your Zotero library, with options to filter by
+      parent item.
+    inputSchema:
+      type: object
+      title: get_notesArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 20
+        item_key:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Item Key
+          default: null
+  - name: zotero_search_notes
+    description: Search for notes across your Zotero library.
+    inputSchema:
+      type: object
+      title: search_notesArguments
+      required:
+        - query
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+  - name: zotero_create_note
+    description: Create a new note for a Zotero item.
+    inputSchema:
+      type: object
+      title: create_noteArguments
+      required:
+        - item_key
+        - note_title
+        - note_text
+      properties:
+        tags:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Tags
+          default: null
+        item_key:
+          type: string
+          title: Item Key
+        note_text:
+          type: string
+          title: Note Text
+        note_title:
+          type: string
+          title: Note Title

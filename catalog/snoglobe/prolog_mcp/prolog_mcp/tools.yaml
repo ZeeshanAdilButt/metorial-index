@@ -1,0 +1,26 @@
+tools:
+  - name: discover
+    description: Shows the available predicates in the prolog engine
+    inputSchema:
+      type: object
+      properties: {}
+  - name: exec
+    description: Execute a prolog program
+    inputSchema:
+      type: object
+      required:
+        - program
+      properties:
+        program:
+          type: string
+          description: The prolog program to execute
+  - name: query
+    description: Query the prolog engine
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The query to execute

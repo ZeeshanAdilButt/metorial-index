@@ -1,0 +1,16 @@
+identifier: cyreslab-ai/flightradar-mcp-server/flightradar-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Cyreslab-AI/flightradar-mcp-server
+  name: flightradar-mcp-server
+  owner: Cyreslab-AI
+server:
+  subdirectory: /
+  name: FlightRadar
+  description: Access real-time flight tracking and status information
+    effortlessly. Get detailed flight data, search for flights by various
+    criteria, and receive human-readable status summaries with ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

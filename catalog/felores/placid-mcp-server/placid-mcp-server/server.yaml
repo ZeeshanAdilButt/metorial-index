@@ -1,0 +1,14 @@
+identifier: felores/placid-mcp-server/placid-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/felores/placid-mcp-server
+  name: placid-mcp-server
+  owner: felores
+server:
+  subdirectory: /
+  name: Placid
+  description: Integrate with Placid.app to list templates and generate creatives.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: qdrant/mcp-server-qdrant/mcp-server-qdrant
+repo:
+  provider: github.com
+  url: https://github.com/qdrant/mcp-server-qdrant
+  name: mcp-server-qdrant
+  owner: qdrant
+server:
+  subdirectory: /
+  name: Qdrant Server
+  description: A semantic memory layer that stores and retrieves information using
+    the Qdrant vector search engine. It enables storing memories and finding
+    relevant information through semantic search.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

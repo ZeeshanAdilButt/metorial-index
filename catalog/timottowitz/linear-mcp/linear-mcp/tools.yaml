@@ -1,0 +1,293 @@
+tools:
+  - name: linear_auth
+    description: Initialize OAuth flow with Linear
+    inputSchema:
+      type: object
+      required:
+        - clientId
+        - clientSecret
+        - redirectUri
+      properties:
+        clientId:
+          type: string
+          description: Linear OAuth client ID
+        redirectUri:
+          type: string
+          description: OAuth redirect URI
+        clientSecret:
+          type: string
+          description: Linear OAuth client secret
+  - name: linear_auth_callback
+    description: Handle OAuth callback
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: OAuth authorization code
+  - name: linear_create_issue
+    description: Create a new issue in Linear
+    inputSchema:
+      type: object
+      required:
+        - title
+        - description
+        - teamId
+      properties:
+        title:
+          type: string
+          description: Issue title
+        teamId:
+          type: string
+          description: Team ID
+        estimate:
+          type: number
+          optional: true
+          description: Issue estimate points (typically 1, 2, 3, 5, 8, etc.)
+        priority:
+          type: number
+          optional: true
+          description: Issue priority (0-4)
+        projectId:
+          type: string
+          optional: true
+          description: Project ID
+        assigneeId:
+          type: string
+          optional: true
+          description: Assignee user ID
+        description:
+          type: string
+          description: Issue description
+        createAsUser:
+          type: string
+          optional: true
+          description: Name to display for the created issue
+        displayIconUrl:
+          type: string
+          optional: true
+          description: URL of the avatar to display
+  - name: linear_create_project_with_issues
+    description: "Create a new project with associated issues. Note: Project
+      requires teamIds (array) not teamId (single value)."
+    inputSchema:
+      type: object
+      required:
+        - project
+        - issues
+      properties:
+        issues:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - description
+              - teamId
+            properties:
+              title:
+                type: string
+                description: Issue title
+              teamId:
+                type: string
+                description: Team ID (must match one of the project teamIds)
+              description:
+                type: string
+                description: Issue description
+          description: List of issues to create with this project
+        project:
+          type: object
+          required:
+            - name
+            - teamIds
+          properties:
+            name:
+              type: string
+              description: Project name
+            teamIds:
+              type: array
+              items:
+                type: string
+              minItems: 1
+              description: Array of team IDs this project belongs to (Required). Use
+                linear_get_teams to get available team IDs.
+            description:
+              type: string
+              description: Project description (optional)
+  - name: linear_bulk_update_issues
+    description: Update multiple issues at once
+    inputSchema:
+      type: object
+      required:
+        - issueIds
+        - update
+      properties:
+        update:
+          type: object
+          properties:
+            stateId:
+              type: string
+              optional: true
+              description: New state ID
+            estimate:
+              type: number
+              optional: true
+              description: Issue estimate points (typically 1, 2, 3, 5, 8, etc.)
+            priority:
+              type: number
+              optional: true
+              description: New priority (0-4)
+            assigneeId:
+              type: string
+              optional: true
+              description: New assignee ID
+        issueIds:
+          type: array
+          items:
+            type: string
+          description: List of issue IDs to update
+  - name: linear_search_issues
+    description: Search for issues with filtering and pagination
+    inputSchema:
+      type: object
+      properties:
+        after:
+          type: string
+          optional: true
+          description: Cursor for pagination
+        first:
+          type: number
+          optional: true
+          description: "Number of issues to return (default: 50)"
+        query:
+          type: string
+          optional: true
+          description: Search query string
+        states:
+          type: array
+          items:
+            type: string
+          optional: true
+          description: Filter by state names
+        orderBy:
+          type: string
+          optional: true
+          description: "Field to order by (default: updatedAt)"
+        teamIds:
+          type: array
+          items:
+            type: string
+          optional: true
+          description: Filter by team IDs
+        priority:
+          type: number
+          optional: true
+          description: Filter by priority (0-4)
+        assigneeIds:
+          type: array
+          items:
+            type: string
+          optional: true
+          description: Filter by assignee IDs
+  - name: linear_get_teams
+    description: Get all teams with their states and labels
+    inputSchema:
+      type: object
+      properties: {}
+  - name: linear_get_user
+    description: Get current user information
+    inputSchema:
+      type: object
+      properties: {}
+  - name: linear_delete_issue
+    description: Delete an issue
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Issue identifier (e.g., ENG-123)
+  - name: linear_delete_issues
+    description: Delete multiple issues
+    inputSchema:
+      type: object
+      required:
+        - ids
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: List of issue identifiers to delete
+  - name: linear_get_project
+    description: Get project information
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Project identifier
+  - name: linear_search_projects
+    description: Search for projects by name
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Project name to search for (exact match)
+  - name: linear_create_issues
+    description: Create multiple issues at once
+    inputSchema:
+      type: object
+      required:
+        - issues
+      properties:
+        issues:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - description
+              - teamId
+            properties:
+              title:
+                type: string
+                description: Issue title
+              teamId:
+                type: string
+                description: Team ID
+              estimate:
+                type: number
+                optional: true
+                description: Issue estimate points (typically 1, 2, 3, 5, 8, etc.)
+              labelIds:
+                type: array
+                items:
+                  type: string
+                optional: true
+                description: Label IDs to apply
+              priority:
+                type: number
+                optional: true
+                description: Issue priority (0-4)
+              projectId:
+                type: string
+                optional: true
+                description: Project ID
+              assigneeId:
+                type: string
+                optional: true
+                description: Assignee user ID
+              description:
+                type: string
+                description: Issue description
+          description: List of issues to create

@@ -1,0 +1,16 @@
+identifier: oakenai/mcp-edit-file-lines/mcp-edit-file-lines
+repo:
+  provider: github.com
+  url: https://github.com/oakenai/mcp-edit-file-lines
+  name: mcp-edit-file-lines
+  owner: oakenai
+server:
+  subdirectory: /
+  name: Edit File Lines
+  description: Make precise line-based edits to your text files effortlessly.
+    Utilize string or regex pattern matching to replace lines while preserving
+    formatting, and preview changes before applying them for added safety.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: ai00-x/ai00_server/ai00_server
+repo:
+  provider: github.com
+  url: https://github.com/Ai00-X/ai00_server
+  name: ai00_server
+  owner: Ai00-X
+server:
+  subdirectory: /
+  name: AI00 RWKV Server
+  description: Provide a fast, efficient, and easy-to-use inference API for the
+    RWKV language model. Enjoy GPU acceleration without the need for bulky
+    runtimes like PyTorch or CUDA, making it accessible for various tasks such
+    as chatbots, text generation, and translation. Experience seamless
+    integration with OpenAI's ChatGPT API interface for enhanced functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,298 @@
+tools:
+  - name: generate_uml
+    description: "生成UML图并返回代码、URL和本地路径。
+
+
+      \    Args:
+
+      \        diagram_type: UML图类型 (class, sequence, activity, usecase, state,
+      component, deployment, object)
+
+      \        code: 完整的PlantUML代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码、URL和本地路径的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_umlArguments
+      required:
+        - diagram_type
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+        diagram_type:
+          type: string
+          title: Diagram Type
+  - name: generate_class_diagram
+    description: "生成类图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML类图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_class_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_sequence_diagram
+    description: "生成序列图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML序列图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_sequence_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_activity_diagram
+    description: "生成活动图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML活动图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_activity_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_usecase_diagram
+    description: "生成用例图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML用例图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_usecase_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_state_diagram
+    description: "生成状态图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML状态图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_state_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_component_diagram
+    description: "生成组件图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML组件图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_component_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_deployment_diagram
+    description: "生成部署图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML部署图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_deployment_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_object_diagram
+    description: "生成对象图并返回代码和URL。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML对象图代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码和URL的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_object_diagramArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir
+  - name: generate_uml_from_code
+    description: "从PlantUML代码生成UML图并返回URL和本地路径。
+
+
+      \    Args:
+
+      \        code: 完整的PlantUML代码
+
+      \        output_dir: 输出目录路径，必须显式提供
+
+
+      \    Returns:
+
+      \        包含PlantUML代码、URL和本地路径的JSON字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_uml_from_codeArguments
+      required:
+        - code
+        - output_dir
+      properties:
+        code:
+          type: string
+          title: Code
+        output_dir:
+          type: string
+          title: Output Dir

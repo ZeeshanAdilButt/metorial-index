@@ -1,0 +1,18 @@
+identifier: janwilmake/openapi-mcp-server/openapi-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/janwilmake/openapi-mcp-server
+  name: openapi-mcp-server
+  owner: janwilmake
+server:
+  subdirectory: /
+  name: OpenAPI MCP Server
+  description: Enable exploration and understanding of OpenAPI specifications
+    through a simple interface. Retrieve overviews and detailed explanations of
+    API operations in plain language to assist with API code generation and
+    comprehension. Supports both JSON and YAML formats and integrates seamlessly
+    with Claude Desktop and Cursor clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

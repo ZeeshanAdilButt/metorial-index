@@ -1,0 +1,147 @@
+tools:
+  - name: check
+    description: "Check if a user is authorized to access an object.
+
+
+      \    Args:
+
+      \        user: User ID
+
+      \        relation: Relation
+
+      \        object: Object ID
+
+
+      \    Returns:
+
+      \        A formatted string containing the result of the authorization
+      check.
+
+      \    "
+    inputSchema:
+      type: object
+      title: checkArguments
+      required:
+        - user
+        - relation
+        - object
+      properties:
+        user:
+          type: string
+          title: User
+        object:
+          type: string
+          title: Object
+        relation:
+          type: string
+          title: Relation
+  - name: list_objects
+    description: "Get all objects of the given type that the user has a relation
+      with.
+
+
+      \    Args:
+
+      \        user: User ID
+
+      \        relation: Relation
+
+      \        type: Type
+
+
+      \    Returns:
+
+      \        A formatted string containing the result of the authorization
+      check.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_objectsArguments
+      required:
+        - user
+        - relation
+        - type
+      properties:
+        type:
+          type: string
+          title: Type
+        user:
+          type: string
+          title: User
+        relation:
+          type: string
+          title: Relation
+  - name: list_relations
+    description: "Get all relations for which the user has a relationship with the
+      object.
+
+
+      \    Args:
+
+      \        user: User ID
+
+      \        relations: Comma-separated list of relations
+
+      \        object: Object
+
+
+      \    Returns:
+
+      \        A list of relations for which the specifieduser has a
+      relationship with the object.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_relationsArguments
+      required:
+        - user
+        - relations
+        - object
+      properties:
+        user:
+          type: string
+          title: User
+        object:
+          type: string
+          title: Object
+        relations:
+          type: string
+          title: Relations
+  - name: list_users
+    description: "Get all users that have a given relationship with a given object.
+
+
+      \    Args:
+
+      \        object: Object
+
+      \        type: Object Type
+
+      \        relation: Relation
+
+
+      \    Returns:
+
+      \        A list of users that have the given relationship with the given
+      object.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_usersArguments
+      required:
+        - object
+        - type
+        - relation
+      properties:
+        type:
+          type: string
+          title: Type
+        object:
+          type: string
+          title: Object
+        relation:
+          type: string
+          title: Relation

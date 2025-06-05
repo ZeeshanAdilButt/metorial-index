@@ -1,0 +1,95 @@
+tools:
+  - name: echo
+    description: Echoes back the input
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Message to echo
+      additionalProperties: false
+  - name: add
+    description: Adds two numbers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - a
+        - b
+      properties:
+        a:
+          type: number
+          description: First number
+        b:
+          type: number
+          description: Second number
+      additionalProperties: false
+  - name: printEnv
+    description: Prints all environment variables, helpful for debugging MCP server
+      configuration
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: longRunningOperation
+    description: Demonstrates a long running operation with progress updates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        steps:
+          type: number
+          default: 5
+          description: Number of steps in the operation
+        duration:
+          type: number
+          default: 10
+          description: Duration of the operation in seconds
+      additionalProperties: false
+  - name: sampleLLM
+    description: Samples from an LLM using MCP's sampling feature
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: The prompt to send to the LLM
+        maxTokens:
+          type: number
+          default: 100
+          description: Maximum number of tokens to generate
+      additionalProperties: false
+  - name: getTinyImage
+    description: Returns the MCP_TINY_IMAGE
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: annotatedMessage
+    description: Demonstrates how annotations can be used to provide metadata about content
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - messageType
+      properties:
+        messageType:
+          enum:
+            - error
+            - success
+            - debug
+          type: string
+          description: Type of message to demonstrate different annotation patterns
+        includeImage:
+          type: boolean
+          default: false
+          description: Whether to include an example image
+      additionalProperties: false

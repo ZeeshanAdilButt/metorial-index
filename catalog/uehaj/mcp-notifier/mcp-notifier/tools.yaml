@@ -1,0 +1,59 @@
+tools:
+  - name: notify
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        icon:
+          type: string
+          description: Optional icon path
+        wait:
+          type: boolean
+          description: Wait for the notification to be closed before continuing
+        sound:
+          type: boolean
+          description: Play a sound with the notification
+        title:
+          type: string
+          description: The notification title
+        message:
+          type: string
+          description: The notification message
+      additionalProperties: false
+  - name: notify-advanced
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - message
+      properties:
+        type:
+          enum:
+            - info
+            - success
+            - warning
+            - error
+          type: string
+          description: Notification type
+        title:
+          type: string
+          description: The notification title
+        actions:
+          type: array
+          items:
+            type: string
+          description: Array of action button labels (macOS only)
+        message:
+          type: string
+          description: The notification message
+        timeout:
+          type: number
+          description: Auto-close timeout in milliseconds
+        closeLabel:
+          type: string
+          description: Text for close button (macOS only)
+      additionalProperties: false

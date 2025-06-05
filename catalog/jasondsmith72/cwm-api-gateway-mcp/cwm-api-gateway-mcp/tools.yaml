@@ -1,0 +1,297 @@
+tools:
+  - name: search_api_endpoints
+    description: "
+
+      \    Search for available API endpoints based on a query.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Search string to find matching endpoints
+
+      \        max_results: Maximum number of results to return
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_api_endpointsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 10
+  - name: get_api_endpoint_details
+    description: "
+
+      \    Get detailed information about a specific API endpoint.
+
+      \   \ 
+
+      \    Args:
+
+      \        path: API path (e.g., /service/tickets)
+
+      \        method: HTTP method (GET, POST, PUT, PATCH, DELETE)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_api_endpoint_detailsArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+        method:
+          type: string
+          title: Method
+          default: GET
+  - name: execute_api_call
+    description: "
+
+      \    Execute an API call to the ConnectWise API.
+
+      \   \ 
+
+      \    Args:
+
+      \        path: API endpoint path (e.g., /service/tickets)
+
+      \        method: HTTP method (GET, POST, PUT, PATCH, DELETE)
+
+      \        params: Query parameters for the request
+
+      \        data: Request body data (for POST, PUT, PATCH)
+
+      \    "
+    inputSchema:
+      type: object
+      title: execute_api_callArguments
+      required:
+        - path
+      properties:
+        data:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Data
+          default: null
+        path:
+          type: string
+          title: Path
+        method:
+          type: string
+          title: Method
+          default: GET
+        params:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Params
+          default: null
+  - name: natural_language_api_search
+    description: "
+
+      \    Search for API endpoints using natural language.
+
+      \   \ 
+
+      \    Args:
+
+      \        query: Natural language description of what you're looking for
+
+      \        max_results: Maximum number of results to return
+
+      \    "
+    inputSchema:
+      type: object
+      title: natural_language_api_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+  - name: list_api_categories
+    description: "
+
+      \    List all available API categories.
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_api_categoriesArguments
+      properties: {}
+  - name: get_category_endpoints
+    description: "
+
+      \    Get all endpoints for a specific API category.
+
+      \   \ 
+
+      \    Args:
+
+      \        category: Category name (use list_api_categories to see available
+      categories)
+
+      \        max_results: Maximum number of results to return
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_category_endpointsArguments
+      required:
+        - category
+      properties:
+        category:
+          type: string
+          title: Category
+        max_results:
+          type: integer
+          title: Max Results
+          default: 20
+  - name: send_raw_api_request
+    description: "
+
+      \    Send a raw API request to the ConnectWise API.
+
+      \   \ 
+
+      \    Args:
+
+      \        raw_request: Raw API request in the format \"METHOD /path?params
+      [JSON body]\"
+
+      \                     Example: \"GET
+      /service/tickets?conditions=status/name='Open'\"
+
+      \                     Example: \"POST /service/tickets { \"summary\":
+      \"Test ticket\" }\"
+
+      \    "
+    inputSchema:
+      type: object
+      title: send_raw_api_requestArguments
+      required:
+        - raw_request
+      properties:
+        raw_request:
+          type: string
+          title: Raw Request
+  - name: save_to_fast_memory
+    description: "
+
+      \    Save an API query to Fast Memory.
+
+      \   \ 
+
+      \    Args:
+
+      \        path: API endpoint path
+
+      \        method: HTTP method
+
+      \        description: User-friendly description of the query
+
+      \        params: Query parameters
+
+      \        data: Request body data
+
+      \    "
+    inputSchema:
+      type: object
+      title: save_to_fast_memoryArguments
+      required:
+        - path
+        - method
+        - description
+      properties:
+        data:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Data
+          default: null
+        path:
+          type: string
+          title: Path
+        method:
+          type: string
+          title: Method
+        params:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Params
+          default: null
+        description:
+          type: string
+          title: Description
+  - name: list_fast_memory
+    description: "
+
+      \    List queries saved in Fast Memory.
+
+      \   \ 
+
+      \    Args:
+
+      \        search_term: Optional search term to filter queries
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_fast_memoryArguments
+      properties:
+        search_term:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search Term
+          default: null
+  - name: delete_from_fast_memory
+    description: "
+
+      \    Delete a query from Fast Memory.
+
+      \   \ 
+
+      \    Args:
+
+      \        query_id: ID of the query to delete
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_from_fast_memoryArguments
+      required:
+        - query_id
+      properties:
+        query_id:
+          type: integer
+          title: Query Id
+  - name: clear_fast_memory
+    description: "
+
+      \    Clear all queries from Fast Memory.
+
+      \    "
+    inputSchema:
+      type: object
+      title: clear_fast_memoryArguments
+      properties: {}

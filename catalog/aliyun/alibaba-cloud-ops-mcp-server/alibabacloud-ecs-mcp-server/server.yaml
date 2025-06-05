@@ -1,0 +1,17 @@
+identifier: aliyun/alibaba-cloud-ops-mcp-server/alibabacloud-ecs-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/aliyun/alibaba-cloud-ops-mcp-server
+  name: alibaba-cloud-ops-mcp-server
+  owner: aliyun
+server:
+  subdirectory: /
+  name: Alibaba Cloud MCP Server
+  description: Manage and monitor Alibaba Cloud ECS and VPC resources through a
+    standardized MCP interface. Perform operations such as starting, stopping,
+    rebooting instances, and retrieving monitoring metrics seamlessly. Enhance
+    cloud resource automation and control with integrated Alibaba Cloud tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

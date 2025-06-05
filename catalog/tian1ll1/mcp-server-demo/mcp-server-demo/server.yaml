@@ -1,0 +1,17 @@
+identifier: tian1ll1/mcp-server-demo/mcp-server-demo
+repo:
+  provider: github.com
+  url: https://github.com/tian1ll1/mcp-server-demo
+  name: mcp-server-demo
+  owner: tian1ll1
+server:
+  subdirectory: /
+  name: MCP Server Demo
+  description: Demonstrate a Model Context Protocol server that enables real-time
+    communication between AI models and external tools with context awareness.
+    Manage conversation history, tool registries, and message processing
+    seamlessly. Use WebSocket for interactive client-server communication.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

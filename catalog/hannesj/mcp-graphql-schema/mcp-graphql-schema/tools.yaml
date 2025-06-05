@@ -1,0 +1,55 @@
+tools:
+  - name: list-query-fields
+    description: Lists all of the available root-level fields for a GraphQL query.
+    inputSchema:
+      type: object
+  - name: get-query-field
+    description: Gets a single GraphQL query field definition in GraphQL Schema
+      Definition Language.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fieldName
+      properties:
+        fieldName:
+          type: string
+      additionalProperties: false
+  - name: list-types
+    description: Lists all of the types defined in the GraphQL schema.
+    inputSchema:
+      type: object
+  - name: get-type
+    description: Gets a single GraphQL type from the schema in the GraphQL Schema
+      Definition Language
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - typeName
+      properties:
+        typeName:
+          type: string
+      additionalProperties: false
+  - name: get-type-fields
+    description: Gets a simplified list of fields for a specific GraphQL type
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - typeName
+      properties:
+        typeName:
+          type: string
+      additionalProperties: false
+  - name: search-schema
+    description: Search for types or fields in the schema by name pattern
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pattern
+      properties:
+        pattern:
+          type: string
+      additionalProperties: false

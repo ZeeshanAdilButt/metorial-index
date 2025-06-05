@@ -1,0 +1,91 @@
+tools:
+  - name: search_biorxiv_key_words
+    description: ""
+    inputSchema:
+      type: object
+      title: search_biorxiv_key_wordsArguments
+      required:
+        - key_words
+      properties:
+        key_words:
+          type: string
+          title: Key Words
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+  - name: search_biorxiv_advanced
+    description: ""
+    inputSchema:
+      type: object
+      title: search_biorxiv_advancedArguments
+      properties:
+        term:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Term
+          default: null
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        author1:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Author1
+          default: null
+        author2:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Author2
+          default: null
+        section:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Section
+          default: null
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+        abstract_title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Abstract Title
+          default: null
+        text_abstract_title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Text Abstract Title
+          default: null
+  - name: get_biorxiv_metadata
+    description: ""
+    inputSchema:
+      type: object
+      title: get_biorxiv_metadataArguments
+      required:
+        - doi
+      properties:
+        doi:
+          type: string
+          title: Doi

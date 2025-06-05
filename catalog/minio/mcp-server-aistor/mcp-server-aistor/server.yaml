@@ -1,0 +1,17 @@
+identifier: minio/mcp-server-aistor/mcp-server-aistor
+repo:
+  provider: github.com
+  url: https://github.com/minio/mcp-server-aistor
+  name: mcp-server-aistor
+  owner: minio
+server:
+  subdirectory: /
+  name: AIStor Object Store Server
+  description: Interact with AIStor object stores to manage your data efficiently.
+    Perform operations like listing buckets, uploading files, and retrieving
+    metadata seamlessly. Enhance your data management capabilities with
+    AI-driven insights and operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

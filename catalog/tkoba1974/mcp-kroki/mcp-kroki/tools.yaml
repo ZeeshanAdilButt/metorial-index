@@ -1,0 +1,65 @@
+tools:
+  - name: generate_diagram_url
+    description: Generate a URL for a diagram using Kroki.io. This tool takes
+      Mermaid diagram code or other supported diagram formats and returns a URL
+      to the rendered diagram. The URL can be used to display the diagram in web
+      browsers or embedded in documents.
+    inputSchema:
+      type: object
+      required:
+        - type
+        - content
+      properties:
+        type:
+          type: string
+          description: Diagram type (e.g., "mermaid" for Mermaid diagrams, "plantuml" for
+            PlantUML, "graphviz" for GraphViz DOT, "c4plantuml" for C4
+            architecture diagrams, and many more). See Kroki.io documentation
+            for all supported formats.
+        content:
+          type: string
+          description: The diagram content in the specified format. For Mermaid diagrams,
+            this would be the Mermaid syntax code (e.g., "graph TD; A-->B;
+            B-->C;").
+        outputFormat:
+          type: string
+          description: 'The format of the output image. Options are: "svg" (vector
+            graphics, default), "png" (raster image), "pdf" (document format),
+            "jpeg" (compressed raster image), or "base64" (base64-encoded SVG
+            for direct embedding in HTML).'
+  - name: download_diagram
+    description: Download a diagram image to a local file. This tool converts
+      diagram code (such as Mermaid) into an image file and saves it to the
+      specified location on your filesystem. Useful for generating diagrams for
+      presentations, documentation, or other offline use.
+    inputSchema:
+      type: object
+      required:
+        - type
+        - content
+        - outputPath
+      properties:
+        type:
+          type: string
+          description: Diagram type (e.g., "mermaid" for Mermaid diagrams, "plantuml" for
+            PlantUML, "graphviz" for GraphViz DOT). Supports the same diagram
+            types as Kroki.io, including mermaid, plantuml, graphviz,
+            c4plantuml, excalidraw, and many others.
+        content:
+          type: string
+          description: The diagram content in the specified format. This is the actual
+            diagram code that will be converted to an image (e.g., the Mermaid
+            syntax for a flowchart or sequence diagram).
+        outputPath:
+          type: string
+          description: The complete file path where the diagram image should be saved,
+            including the filename and extension (e.g.,
+            "/Users/username/Documents/diagram.svg"). The directory must exist
+            or be creatable by the system.
+        outputFormat:
+          type: string
+          description: 'The format of the output image. If not specified, the format will
+            be determined from the file extension of the outputPath. Options
+            are: "svg" (vector graphics, best for web and scaling), "png"
+            (raster image, good for presentations), "pdf" (document format, good
+            for printing), or "jpeg" (compressed raster image).'

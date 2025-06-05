@@ -1,0 +1,17 @@
+identifier: danielrsnell/postgres-mcp/postgres-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DanielRSnell/postgres-mcp
+  name: postgres-mcp
+  owner: DanielRSnell
+server:
+  subdirectory: /
+  name: PostgreSQL
+  description: Enable your LLMs to interact with PostgreSQL databases
+    effortlessly. Execute read-only SQL queries and inspect database schemas to
+    enhance your data-driven applications. Streamline your database interactions
+    with a secure and efficient Model Context Protocol server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

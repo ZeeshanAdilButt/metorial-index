@@ -1,0 +1,17 @@
+identifier: klara-research/mcp-analyzer/mcp-analyzer
+repo:
+  provider: github.com
+  url: https://github.com/klara-research/MCP-Analyzer
+  name: MCP-Analyzer
+  owner: klara-research
+server:
+  subdirectory: /
+  name: Log Reader
+  description: Analyze and debug your Model Context Protocol logs effortlessly.
+    Filter, paginate, and retrieve log entries from standard locations across
+    all platforms to troubleshoot integrations and understand tool interactions.
+    Seamlessly integrate with Claude Desktop for direct log access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

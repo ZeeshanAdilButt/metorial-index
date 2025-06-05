@@ -1,0 +1,16 @@
+identifier: qpd-v/mcp-ragdocs/mcp-server-ragdocs
+repo:
+  provider: github.com
+  url: https://github.com/qpd-v/mcp-ragdocs
+  name: mcp-ragdocs
+  owner: qpd-v
+server:
+  subdirectory: /
+  name: RAGDocs
+  description: A Model Context Protocol server for fetching and storing
+    documentation in a vector database, enabling semantic search and retrieval
+    to augment LLM capabilities with relevant documentation context.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

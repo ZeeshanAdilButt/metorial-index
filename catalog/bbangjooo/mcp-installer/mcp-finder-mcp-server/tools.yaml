@@ -1,0 +1,54 @@
+tools:
+  - name: find_mcp
+    description: Find the MCP servers by given name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mcpServerName
+      properties:
+        mcpServerName:
+          type: string
+          description: The name of the MCP server to find
+      additionalProperties: false
+  - name: collect_config
+    description: Collect the config to be used for connection to mcp server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - qualifiedName
+      properties:
+        qualifiedName:
+          type: string
+          description: The qualified name of the config to collect
+      additionalProperties: false
+  - name: install_mcp
+    description: Install the MCP server on your local machine. You can install the
+      MCP server with configuration.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - qualifiedName
+        - client
+      properties:
+        client:
+          enum:
+            - cursor
+            - claude
+            - windsurf
+            - cline
+            - enconvo
+            - witsy
+          type: string
+          description: The client to install
+        config:
+          type: object
+          description: Configuration schema
+          additionalProperties: {}
+        qualifiedName:
+          type: string
+          description: The qualified name of the MCP server to install. ex)
+            @bbangjooo/mcp-finder-mcp-server
+      additionalProperties: false

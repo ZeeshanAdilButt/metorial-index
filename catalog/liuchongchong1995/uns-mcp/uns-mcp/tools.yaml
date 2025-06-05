@@ -1,0 +1,1700 @@
+tools:
+  - name: create_source_connector
+    description: "Create a source connector based on type.
+
+
+      \    Args:
+
+      \        ctx: Context object with the request and lifespan context
+
+      \        name: A unique name for this connector
+
+      \        source_type: The type of source being created (e.g., 'azure',
+      'onedrive',
+
+      \                     'salesforce', 'gdrive', 's3', 'sharepoint')
+
+
+      \        type_specific_config:
+
+      \            azure:
+
+      \                remote_url: The Azure Storage remote URL with the format
+
+      \                            az://<container-name>/<path/to/file/or/folde\
+      r/in/container/as/needed>
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \            gdrive:
+
+      \                drive_id: The Drive ID for the Google Drive source
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \                extensions: (Optional[list[str]]) File extensions to
+      filter
+
+      \            onedrive:
+
+      \                path: The path to the target folder in the OneDrive
+      account
+
+      \                user_pname: The User Principal Name (UPN) for the
+      OneDrive user account
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \                authority_url: (Optional[str]) The authentication token
+      provider URL
+
+      \            s3:
+
+      \                remote_url: The S3 URI to the bucket or folder (e.g.,
+      s3://my-bucket/)
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \            salesforce:
+
+      \                username: The Salesforce username
+
+      \                categories: (Optional[list[str]]) Optional Salesforce
+      domain,the names of the
+
+      \                            Salesforce categories (objects) that you want
+      to access, specified as
+
+      \                            a comma-separated list. Available categories
+      include Account, Campaign,
+
+      \                            Case, EmailMessage, and Lead.
+
+      \            sharepoint:
+
+      \                site: The SharePoint site to connect to
+
+      \                user_pname: The username for the SharePoint site
+
+      \                path: (Optional) The path within the SharePoint site
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \                authority_url: (Optional[str]) The authority URL for
+      authentication
+
+
+      \    Returns:
+
+      \        String containing the created source connector information
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_source_connectorArguments
+      required:
+        - name
+        - source_type
+        - type_specific_config
+      properties:
+        name:
+          type: string
+          title: Name
+        source_type:
+          enum:
+            - azure
+            - onedrive
+            - salesforce
+            - gdrive
+            - s3
+            - sharepoint
+          type: string
+          title: Source Type
+        type_specific_config:
+          type: object
+          title: Type Specific Config
+          additionalProperties: true
+  - name: update_source_connector
+    description: "Update a source connector based on type.
+
+
+      \    Args:
+
+      \        ctx: Context object with the request and lifespan context
+
+      \        source_id: ID of the source connector to update
+
+      \        source_type: The type of source being updated (e.g., 'azure',
+      'onedrive',
+
+      \                     'salesforce', 'gdrive', 's3', 'sharepoint')
+
+
+      \        type_specific_config:
+
+      \            azure:
+
+      \                remote_url: (Optional[str]) The Azure Storage remote URL
+      with the format
+
+      \                            az://<container-name>/<path/to/file/or/folde\
+      r/in/container/as/needed>
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \            gdrive:
+
+      \                drive_id: (Optional[str]) The Drive ID for the Google
+      Drive source
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \                extensions: (Optional[list[str]]) File extensions to
+      filter
+
+      \            onedrive:
+
+      \                path: (Optional[str]) The path to the target folder in
+      the OneDrive account
+
+      \                user_pname: (Optional[str]) The User Principal Name (UPN)
+      for the OneDrive
+
+      \                            user account
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \                authority_url: (Optional[str]) The authentication token
+      provider URL
+
+      \            s3:
+
+      \                remote_url: (Optional[str]) The S3 URI to the bucket or
+      folder
+
+      \                            (e.g., s3://my-bucket/)
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \            salesforce:
+
+      \                username: (Optional[str]) The Salesforce username
+
+      \                categories: (Optional[list[str]]) Optional Salesforce
+      domain,the names of the
+
+      \                            Salesforce categories (objects) that you want
+      to access, specified as
+
+      \                            a comma-separated list. Available categories
+      include Account, Campaign,
+
+      \                            Case, EmailMessage, and Lead.
+
+      \            sharepoint:
+
+      \                site: Optional([str]) The SharePoint site to connect to
+
+      \                user_pname: Optional([str]) The username for the
+      SharePoint site
+
+      \                path: (Optional) The path within the SharePoint site
+
+      \                recursive: (Optional[bool]) Whether to access subfolders
+
+      \                authority_url: (Optional[str]) The authority URL for
+      authentication
+
+
+      \    Returns:
+
+      \        String containing the updated source connector information
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_source_connectorArguments
+      required:
+        - source_id
+        - source_type
+        - type_specific_config
+      properties:
+        source_id:
+          type: string
+          title: Source Id
+        source_type:
+          enum:
+            - azure
+            - onedrive
+            - salesforce
+            - gdrive
+            - s3
+            - sharepoint
+          type: string
+          title: Source Type
+        type_specific_config:
+          type: object
+          title: Type Specific Config
+          additionalProperties: true
+  - name: delete_source_connector
+    description: "Delete a source connector.
+
+
+      \    Args:
+
+      \        source_id: ID of the source connector to delete
+
+
+      \    Returns:
+
+      \        String containing the result of the deletion
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_source_connectorArguments
+      required:
+        - source_id
+      properties:
+        source_id:
+          type: string
+          title: Source Id
+  - name: create_destination_connector
+    description: "Create a destination connector based on type.
+
+
+      \    Args:
+
+      \        ctx: Context object with the request and lifespan context
+
+      \        name: A unique name for this connector
+
+      \        destination_type: The type of destination being created
+
+
+      \        type_specific_config:
+
+      \            astradb:
+
+      \                collection_name: The AstraDB collection name
+
+      \                keyspace: The AstraDB keyspace
+
+      \                batch_size: (Optional[int]) The batch size for inserting
+      documents
+
+      \            databricks_delta_table:
+
+      \                catalog: Name of the catalog in Databricks Unity Catalog
+
+      \                database: The database in Unity Catalog
+
+      \                http_path: The cluster’s or SQL warehouse’s HTTP Path
+      value
+
+      \                server_hostname: The Databricks cluster’s or SQL
+      warehouse’s Server Hostname value
+
+      \                table_name: The name of the table in the schema
+
+      \                volume: Name of the volume associated with the schema.
+
+      \                schema: (Optional[str]) Name of the schema associated
+      with the volume
+
+      \                volume_path: (Optional[str]) Any target folder path
+      within the volume, starting
+
+      \                            from the root of the volume.
+
+      \            databricks_volumes:
+
+      \                catalog: Name of the catalog in Databricks
+
+      \                host: The Databricks host URL
+
+      \                volume: Name of the volume associated with the schema
+
+      \                schema: (Optional[str]) Name of the schema associated
+      with the volume. The default
+
+      \                         value is \"default\".
+
+      \                volume_path: (Optional[str]) Any target folder path
+      within the volume,
+
+      \                            starting from the root of the volume.
+
+      \            mongodb:
+
+      \                database: The name of the MongoDB database
+
+      \                collection: The name of the MongoDB collection
+
+      \            neo4j:
+
+      \                database: The Neo4j database, e.g. \"neo4j\"
+
+      \                uri: The Neo4j URI e.g.
+      neo4j+s://<neo4j_instance_id>.databases.neo4j.io
+
+      \                batch_size: (Optional[int]) The batch size for the
+      connector
+
+      \            pinecone:
+
+      \                index_name: The Pinecone index name
+
+      \                namespace: (Optional[str]) The pinecone namespace, a
+      folder inside the
+
+      \                           pinecone index
+
+      \                batch_size: (Optional[int]) The batch size
+
+      \            s3:
+
+      \                remote_url: The S3 URI to the bucket or folder
+
+      \            weaviate:
+
+      \                cluster_url: URL of the Weaviate cluster
+
+      \                collection: Name of the collection in the Weaviate
+      cluster
+
+
+      \                Note: Minimal schema is required for the collection, e.g.
+      record_id: Text
+
+
+      \    Returns:
+
+      \        String containing the created destination connector information
+
+      \    "
+    inputSchema:
+      type: object
+      title: create_destination_connectorArguments
+      required:
+        - name
+        - destination_type
+        - type_specific_config
+      properties:
+        name:
+          type: string
+          title: Name
+        destination_type:
+          enum:
+            - astradb
+            - databricks_delta_table
+            - databricks_volumes
+            - mongodb
+            - neo4j
+            - pinecone
+            - s3
+            - weaviate
+          type: string
+          title: Destination Type
+        type_specific_config:
+          type: object
+          title: Type Specific Config
+          additionalProperties: true
+  - name: update_destination_connector
+    description: "Update a destination connector based on type.
+
+
+      \    Args:
+
+      \        ctx: Context object with the request and lifespan context
+
+      \        destination_id: ID of the destination connector to update
+
+      \        destination_type: The type of destination being updated
+
+
+      \        type_specific_config:
+
+      \            astradb:
+
+      \                collection_name: (Optional[str]): The AstraDB collection
+      name
+
+      \                keyspace: (Optional[str]): The AstraDB keyspace
+
+      \                batch_size: (Optional[int]) The batch size for inserting
+      documents
+
+      \            databricks_delta_table:
+
+      \                catalog: (Optional[str]): Name of the catalog in
+      Databricks Unity Catalog
+
+      \                database: (Optional[str]): The database in Unity Catalog
+
+      \                http_path: (Optional[str]): The cluster’s or SQL
+      warehouse’s HTTP Path value
+
+      \                server_hostname: (Optional[str]): The Databricks
+      cluster’s or SQL warehouse’s
+
+      \                                 Server Hostname value
+
+      \                table_name: (Optional[str]): The name of the table in the
+      schema
+
+      \                volume: (Optional[str]): Name of the volume associated
+      with the schema.
+
+      \                schema: (Optional[str]) Name of the schema associated
+      with the volume
+
+      \                volume_path: (Optional[str]) Any target folder path
+      within the volume, starting
+
+      \                            from the root of the volume.
+
+      \            databricks_volumes:
+
+      \                catalog: (Optional[str]): Name of the catalog in
+      Databricks
+
+      \                host: (Optional[str]): The Databricks host URL
+
+      \                volume: (Optional[str]): Name of the volume associated
+      with the schema
+
+      \                schema: (Optional[str]) Name of the schema associated
+      with the volume. The default
+
+      \                         value is \"default\".
+
+      \                volume_path: (Optional[str]) Any target folder path
+      within the volume,
+
+      \                            starting from the root of the volume.
+
+      \            mongodb:
+
+      \                database: (Optional[str]): The name of the MongoDB
+      database
+
+      \                collection: (Optional[str]): The name of the MongoDB
+      collection
+
+      \            neo4j:
+
+      \                database: (Optional[str]): The Neo4j database, e.g.
+      \"neo4j\"
+
+      \                uri: (Optional[str]): The Neo4j URI
+
+      \                      e.g.
+      neo4j+s://<neo4j_instance_id>.databases.neo4j.io
+
+      \                batch_size: (Optional[int]) The batch size for the
+      connector
+
+      \            pinecone:
+
+      \                index_name: (Optional[str]): The Pinecone index name
+
+      \                namespace: (Optional[str]) The pinecone namespace, a
+      folder inside the
+
+      \                           pinecone index
+
+      \                batch_size: (Optional[int]) The batch size
+
+      \            s3:
+
+      \                remote_url: (Optional[str]): The S3 URI to the bucket or
+      folder
+
+      \            weaviate:
+
+      \                cluster_url: (Optional[str]): URL of the Weaviate cluster
+
+      \                collection: (Optional[str]): Name of the collection in
+      the Weaviate cluster
+
+
+      \                Note: Minimal schema is required for the collection, e.g.
+      record_id: Text
+
+
+      \    Returns:
+
+      \        String containing the updated destination connector information
+
+      \    "
+    inputSchema:
+      type: object
+      title: update_destination_connectorArguments
+      required:
+        - destination_id
+        - destination_type
+        - type_specific_config
+      properties:
+        destination_id:
+          type: string
+          title: Destination Id
+        destination_type:
+          enum:
+            - astradb
+            - databricks_delta_table
+            - databricks_volumes
+            - mongodb
+            - neo4j
+            - pinecone
+            - s3
+            - weaviate
+          type: string
+          title: Destination Type
+        type_specific_config:
+          type: object
+          title: Type Specific Config
+          additionalProperties: true
+  - name: delete_destination_connector
+    description: "Delete a destination connector.
+
+
+      \    Args:
+
+      \        destination_id: ID of the destination connector to delete
+
+
+      \    Returns:
+
+      \        String containing the result of the deletion
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_destination_connectorArguments
+      required:
+        - destination_id
+      properties:
+        destination_id:
+          type: string
+          title: Destination Id
+  - name: invoke_firecrawl_crawlhtml
+    description: "Start an asynchronous web crawl job using Firecrawl to retrieve
+      HTML content.
+
+
+      \    Args:
+
+      \        url: URL to crawl
+
+      \        s3_uri: S3 URI where results will be uploaded
+
+      \        limit: Maximum number of pages to crawl (default: 100)
+
+
+      \    Returns:
+
+      \        Dictionary with crawl job information including the job ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: invoke_firecrawl_crawlhtmlArguments
+      required:
+        - url
+        - s3_uri
+      properties:
+        url:
+          type: string
+          title: Url
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        s3_uri:
+          type: string
+          title: S3 Uri
+  - name: check_crawlhtml_status
+    description: "Check the status of an existing Firecrawl HTML crawl job.
+
+
+      \    Args:
+
+      \        crawl_id: ID of the crawl job to check
+
+
+      \    Returns:
+
+      \        Dictionary containing the current status of the crawl job
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_crawlhtml_statusArguments
+      required:
+        - crawl_id
+      properties:
+        crawl_id:
+          type: string
+          title: Crawl Id
+  - name: invoke_firecrawl_llmtxt
+    description: "Start an asynchronous llmfull.txt generation job using Firecrawl.
+
+      \    This file is a standardized markdown file containing information to
+      help LLMs
+
+      \    use a website at inference time.
+
+      \    The llmstxt endpoint leverages Firecrawl to crawl your website and
+      extracts data
+
+      \    using gpt-4o-mini
+
+      \    Args:
+
+      \        url: URL to crawl
+
+      \        s3_uri: S3 URI where results will be uploaded
+
+      \        max_urls: Maximum number of pages to crawl (1-100, default: 10)
+
+
+      \    Returns:
+
+      \        Dictionary with job information including the job ID
+
+      \    "
+    inputSchema:
+      type: object
+      title: invoke_firecrawl_llmtxtArguments
+      required:
+        - url
+        - s3_uri
+      properties:
+        url:
+          type: string
+          title: Url
+        s3_uri:
+          type: string
+          title: S3 Uri
+        max_urls:
+          type: integer
+          title: Max Urls
+          default: 10
+  - name: check_llmtxt_status
+    description: "Check the status of an existing llmfull.txt generation job.
+
+
+      \    Args:
+
+      \        job_id: ID of the llmfull.txt generation job to check
+
+
+      \    Returns:
+
+      \        Dictionary containing the current status of the job and text
+      content if completed
+
+      \    "
+    inputSchema:
+      type: object
+      title: check_llmtxt_statusArguments
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+  - name: cancel_crawlhtml_job
+    description: "Cancel an in-progress Firecrawl HTML crawl job.
+
+
+      \    Args:
+
+      \        crawl_id: ID of the crawl job to cancel
+
+
+      \    Returns:
+
+      \        Dictionary containing the result of the cancellation
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_crawlhtml_jobArguments
+      required:
+        - crawl_id
+      properties:
+        crawl_id:
+          type: string
+          title: Crawl Id
+  - name: partition_local_file
+    description: "
+
+      \    Transform a local file into structured data using the Unstructured
+      API.
+
+
+      \    Args:
+
+      \        input_file_path: The absolute path to the file.
+
+      \        output_file_dir: The absolute path to the directory where the
+      output file should be saved.
+
+      \        strategy: The strategy for transformation.
+
+      \            Available strategies:
+
+      \                VLM - most advanced transformation suitable for difficult
+      PDFs and Images
+
+      \                hi_res - high resolution transformation suitable for most
+      document types
+
+      \                fast - fast transformation suitable for PDFs with
+      extractable text
+
+      \                auto - automatically choose the best strategy based on
+      the input file
+
+      \        vlm_model: The VLM model to use for the transformation.
+
+      \        vlm_model_provider: The VLM model provider to use for the
+      transformation.
+
+      \        output_type: The type of output to generate. Options: 'json' for
+      json
+
+      \                     or 'md' for markdown.
+
+
+      \    Returns:
+
+      \        A string containing the structured data or a message indicating
+      the output file
+
+      \        path with the structured data.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        Strategy:
+          enum:
+            - fast
+            - hi_res
+            - auto
+            - ocr_only
+            - od_only
+            - vlm
+          type: string
+          title: Strategy
+          description: "The strategy to use for partitioning PDF/image. Options are fast,
+            hi_res, auto. Default: hi_res"
+        VLMModel:
+          enum:
+            - claude-3-5-sonnet-20241022
+            - claude-3-7-sonnet-20250219
+            - gpt-4o
+            - gemini-1.5-pro
+            - us.amazon.nova-pro-v1:0
+            - us.amazon.nova-lite-v1:0
+            - us.anthropic.claude-3-5-sonnet-20241022-v2:0
+            - us.anthropic.claude-3-opus-20240229-v1:0
+            - us.anthropic.claude-3-haiku-20240307-v1:0
+            - us.anthropic.claude-3-sonnet-20240229-v1:0
+            - us.meta.llama3-2-90b-instruct-v1:0
+            - us.meta.llama3-2-11b-instruct-v1:0
+            - gemini-2.0-flash-001
+          type: string
+          title: VLMModel
+          description: The VLM Model to use.
+        VLMModelProvider:
+          enum:
+            - openai
+            - anthropic
+            - bedrock
+            - anthropic_bedrock
+            - vertexai
+            - google
+            - azure_openai
+          type: string
+          title: VLMModelProvider
+          description: The VLM Model provider to use.
+      title: partition_local_fileArguments
+      required:
+        - input_file_path
+        - output_file_dir
+      properties:
+        strategy:
+          $ref: "#/$defs/Strategy"
+          default: vlm
+        vlm_model:
+          $ref: "#/$defs/VLMModel"
+          default: claude-3-5-sonnet-20241022
+        output_type:
+          enum:
+            - json
+            - md
+          type: string
+          title: Output Type
+          default: json
+        input_file_path:
+          type: string
+          title: Input File Path
+        output_file_dir:
+          type: string
+          title: Output File Dir
+        vlm_model_provider:
+          $ref: "#/$defs/VLMModelProvider"
+          default: anthropic
+  - name: list_sources
+    description: "
+
+      \    List available sources from the Unstructured API.
+
+
+      \    Args:
+
+      \        source_type: Optional source connector type to filter by
+
+
+      \    Returns:
+
+      \        String containing the list of sources
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        SourceConnectorType:
+          enum:
+            - azure
+            - box
+            - confluence
+            - couchbase
+            - databricks_volumes
+            - dropbox
+            - elasticsearch
+            - gcs
+            - google_drive
+            - kafka-cloud
+            - mongodb
+            - onedrive
+            - outlook
+            - postgres
+            - s3
+            - salesforce
+            - sharepoint
+            - snowflake
+            - jira
+            - zendesk
+          type: string
+          title: SourceConnectorType
+      title: list_sourcesArguments
+      properties:
+        source_type:
+          anyOf:
+            - $ref: "#/$defs/SourceConnectorType"
+            - type: string
+            - type: "null"
+          title: Source Type
+          default: null
+  - name: get_source_info
+    description: "Get detailed information about a specific source connector.
+
+
+      \    Args:
+
+      \        source_id: ID of the source connector to get information for,
+      should be valid UUID
+
+
+      \    Returns:
+
+      \        String containing the source connector information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_source_infoArguments
+      required:
+        - source_id
+      properties:
+        source_id:
+          type: string
+          title: Source Id
+  - name: list_destinations
+    description: "List available destinations from the Unstructured API.
+
+
+      \    Args:
+
+      \        destination_type: Optional destination connector type to filter
+      by
+
+
+      \    Returns:
+
+      \        String containing the list of destinations
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        DestinationConnectorType:
+          enum:
+            - astradb
+            - azure_ai_search
+            - couchbase
+            - databricks_volumes
+            - databricks_volume_delta_tables
+            - delta_table
+            - elasticsearch
+            - gcs
+            - kafka-cloud
+            - milvus
+            - mongodb
+            - motherduck
+            - neo4j
+            - onedrive
+            - pinecone
+            - postgres
+            - redis
+            - qdrant-cloud
+            - s3
+            - snowflake
+            - weaviate-cloud
+          type: string
+          title: DestinationConnectorType
+      title: list_destinationsArguments
+      properties:
+        destination_type:
+          anyOf:
+            - $ref: "#/$defs/DestinationConnectorType"
+            - type: string
+            - type: "null"
+          title: Destination Type
+          default: null
+  - name: get_destination_info
+    description: "Get detailed information about a specific destination connector.
+
+
+      \    Args:
+
+      \        destination_id: ID of the destination connector to get
+      information for
+
+
+      \    Returns:
+
+      \        String containing the destination connector information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_destination_infoArguments
+      required:
+        - destination_id
+      properties:
+        destination_id:
+          type: string
+          title: Destination Id
+  - name: list_workflows
+    description: "
+
+      \    List workflows from the Unstructured API.
+
+
+      \    Args:
+
+      \        destination_id: Optional destination connector ID to filter by
+
+      \        source_id: Optional source connector ID to filter by
+
+      \        status: Optional workflow status to filter by
+
+
+      \    Returns:
+
+      \        String containing the list of workflows
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        WorkflowState:
+          enum:
+            - active
+            - inactive
+          type: string
+          title: WorkflowState
+      title: list_workflowsArguments
+      properties:
+        status:
+          anyOf:
+            - $ref: "#/$defs/WorkflowState"
+            - type: string
+            - type: "null"
+          title: Status
+          default: null
+        source_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Source Id
+          default: null
+        destination_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Destination Id
+          default: null
+  - name: get_workflow_info
+    description: "Get detailed information about a specific workflow.
+
+
+      \    Args:
+
+      \        workflow_id: ID of the workflow to get information for
+
+
+      \    Returns:
+
+      \        String containing the workflow information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_workflow_infoArguments
+      required:
+        - workflow_id
+      properties:
+        workflow_id:
+          type: string
+          title: Workflow Id
+  - name: create_workflow
+    description: >
+      Create a new workflow.
+
+          Args:
+              workflow_config: A Typed Dictionary containing required fields (destination_id - should be a
+              valid UUID, name, source_id - should be a valid UUID, workflow_type) and non-required fields
+              (schedule, and workflow_nodes). Note workflow_nodes is only enabled when workflow_type
+              is `custom` and is a list of WorkflowNodeTypedDict: partition, prompter,chunk, embed
+              Below is an example of a partition workflow node:
+                  {
+                      "name": "vlm-partition",
+                      "type": "partition",
+                      "sub_type": "vlm",
+                      "settings": {
+                                  "provider": "your favorite provider",
+                                  "model": "your favorite model"
+                                  }
+                  }
+
+
+          Returns:
+              String containing the created workflow information
+
+          
+
+      Custom workflow DAG nodes
+
+      - If WorkflowType is set to custom, you must also specify the settings for
+      the workflow’s
+
+      directed acyclic graph (DAG) nodes. These nodes’ settings are specified in
+      the workflow_nodes array.
+
+      - A Source node is automatically created when you specify the source_id
+      value outside of the
+
+      workflow_nodes array.
+
+      - A Destination node is automatically created when you specify the
+      destination_id value outside
+
+      of the workflow_nodes array.
+
+      - You can specify Partitioner, Chunker, Prompter, and Embedder nodes.
+
+      - The order of the nodes in the workflow_nodes array will be the same
+      order that these nodes appear
+
+      in the DAG, with the first node in the array added directly after the
+      Source node.
+
+      The Destination node follows the last node in the array.
+
+      - Be sure to specify nodes in the allowed order. The following DAG
+      placements are all allowed:
+          - Source -> Partitioner -> Destination,
+          - Source -> Partitioner -> Chunker -> Destination,
+          - Source -> Partitioner -> Chunker -> Embedder -> Destination,
+          - Source -> Partitioner -> Prompter -> Chunker -> Destination,
+          - Source -> Partitioner -> Prompter -> Chunker -> Embedder -> Destination
+
+      Partitioner node
+
+      A Partitioner node has a type of partition and a subtype of auto, vlm,
+      hi_res, or fast.
+
+
+      Examples:
+
+      - auto strategy:
+
+      {
+          "name": "Partitioner",
+          "type": "partition",
+          "subtype": "vlm",
+          "settings": {
+              "provider": "anthropic", (required)
+              "model": "claude-3-5-sonnet-20241022", (required)
+              "output_format": "text/html",
+              "user_prompt": null,
+              "format_html": true,
+              "unique_element_ids": true,
+              "is_dynamic": true,
+              "allow_fast": true
+          }
+      }
+
+
+      - vlm strategy:
+          Allowed values are provider and model. Below are examples:
+              - "provider": "anthropic" "model": "claude-3-5-sonnet-20241022",
+              - "provider": "openai" "model": "gpt-4o"
+
+
+      - hi_res strategy:
+
+      {
+          "name": "Partitioner",
+          "type": "partition",
+          "subtype": "unstructured_api",
+          "settings": {
+              "strategy": "hi_res",
+              "include_page_breaks": <true|false>,
+              "pdf_infer_table_structure": <true|false>,
+              "exclude_elements": [
+                  "<element-name>",
+                  "<element-name>"
+              ],
+              "xml_keep_tags": <true|false>,
+              "encoding": "<encoding>",
+              "ocr_languages": [
+                  "<language>",
+                  "<language>"
+              ],
+              "extract_image_block_types": [
+                  "image",
+                  "table"
+              ],
+              "infer_table_structure": <true|false>
+          }
+      }
+
+      - fast strategy
+
+      {
+          "name": "Partitioner",
+          "type": "partition",
+          "subtype": "unstructured_api",
+          "settings": {
+              "strategy": "fast",
+              "include_page_breaks": <true|false>,
+              "pdf_infer_table_structure": <true|false>,
+              "exclude_elements": [
+                  "<element-name>",
+                  "<element-name>"
+              ],
+              "xml_keep_tags": <true|false>,
+              "encoding": "<encoding>",
+              "ocr_languages": [
+                  "<language-code>",
+                  "<language-code>"
+              ],
+              "extract_image_block_types": [
+                  "image",
+                  "table"
+              ],
+              "infer_table_structure": <true|false>
+          }
+      }
+
+
+
+      Chunker node
+
+      A Chunker node has a type of chunk and subtype of chunk_by_character or
+      chunk_by_title.
+
+
+      - chunk_by_character
+
+      {
+          "name": "Chunker",
+          "type": "chunk",
+          "subtype": "chunk_by_character",
+          "settings": {
+              "include_orig_elements": <true|false>,
+              "new_after_n_chars": <new-after-n-chars>, (required, if not provided
+      set same as max_characters)
+              "max_characters": <max-characters>, (required)
+              "overlap": <overlap>, (required, if not provided set default to 0)
+              "overlap_all": <true|false>,
+              "contextual_chunking_strategy": "v1"
+          }
+      }
+
+
+      - chunk_by_title
+
+      {
+          "name": "Chunker",
+          "type": "chunk",
+          "subtype": "chunk_by_title",
+          "settings": {
+              "multipage_sections": <true|false>,
+              "combine_text_under_n_chars": <combine-text-under-n-chars>,
+              "include_orig_elements": <true|false>,
+              "new_after_n_chars": <new-after-n-chars>,  (required, if not provided
+      set same as max_characters)
+              "max_characters": <max-characters>, (required)
+              "overlap": <overlap>,  (required, if not provided set default to 0)
+              "overlap_all": <true|false>,
+              "contextual_chunking_strategy": "v1"
+          }
+      }
+
+
+
+      Prompter node
+
+      An Prompter node has a type of prompter and subtype of:
+
+      - openai_image_description,
+
+      - anthropic_image_description,
+
+      - bedrock_image_description,
+
+      - vertexai_image_description,
+
+      - openai_table_description,
+
+      - anthropic_table_description,
+
+      - bedrock_table_description,
+
+      - vertexai_table_description,
+
+      - openai_table2html,
+
+      - openai_ner
+
+
+      Example:
+
+      {
+          "name": "Prompter",
+          "type": "prompter",
+          "subtype": "<subtype>",
+          "settings": {}
+      }
+
+
+
+      Embedder node
+
+      An Embedder node has a type of embed
+
+
+      Allowed values for subtype and model_name include:
+
+
+      - "subtype": "azure_openai"
+          - "model_name": "text-embedding-3-small"
+          - "model_name": "text-embedding-3-large"
+          - "model_name": "text-embedding-ada-002"
+      - "subtype": "bedrock"
+          - "model_name": "amazon.titan-embed-text-v2:0"
+          - "model_name": "amazon.titan-embed-text-v1"
+          - "model_name": "amazon.titan-embed-image-v1"
+          - "model_name": "cohere.embed-english-v3"
+          - "model_name": "cohere.embed-multilingual-v3"
+      - "subtype": "togetherai":
+          - "model_name": "togethercomputer/m2-bert-80M-2k-retrieval"
+          - "model_name": "togethercomputer/m2-bert-80M-8k-retrieval"
+          - "model_name": "togethercomputer/m2-bert-80M-32k-retrieval"
+
+      Example:
+
+      {
+          "name": "Embedder",
+          "type": "embed",
+          "subtype": "<subtype>",
+          "settings": {
+              "model_name": "<model-name>"
+          }
+      }
+    inputSchema:
+      type: object
+      $defs:
+        Schedule:
+          enum:
+            - every 15 minutes
+            - every hour
+            - every 2 hours
+            - every 4 hours
+            - every 6 hours
+            - every 8 hours
+            - every 10 hours
+            - every 12 hours
+            - daily
+            - weekly
+            - monthly
+          type: string
+          title: Schedule
+        WorkflowType:
+          enum:
+            - basic
+            - advanced
+            - platinum
+            - custom
+          type: string
+          title: WorkflowType
+        Nullable_str_:
+          anyOf:
+            - type: string
+            - type: "null"
+        Nullable_bool_:
+          anyOf:
+            - type: boolean
+            - type: "null"
+        Nullable_Schedule_:
+          anyOf:
+            - $ref: "#/$defs/Schedule"
+            - type: "null"
+        WorkflowNodeTypedDict:
+          type: object
+          title: WorkflowNodeTypedDict
+          required:
+            - name
+            - subtype
+            - type
+          properties:
+            id:
+              $ref: "#/$defs/Nullable_str_"
+            name:
+              type: string
+              title: Name
+            type:
+              type: string
+              title: Type
+            subtype:
+              type: string
+              title: Subtype
+            settings:
+              $ref: "#/$defs/Nullable_Dict_str__Any__"
+        CreateWorkflowTypedDict:
+          type: object
+          title: CreateWorkflowTypedDict
+          required:
+            - name
+            - workflow_type
+          properties:
+            name:
+              type: string
+              title: Name
+            schedule:
+              $ref: "#/$defs/Nullable_Schedule_"
+            source_id:
+              $ref: "#/$defs/Nullable_str_"
+            reprocess_all:
+              $ref: "#/$defs/Nullable_bool_"
+            workflow_type:
+              $ref: "#/$defs/WorkflowType"
+            destination_id:
+              $ref: "#/$defs/Nullable_str_"
+            workflow_nodes:
+              $ref: "#/$defs/Nullable_List_WorkflowNodeTypedDict__"
+        Nullable_Dict_str__Any__:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+        Nullable_List_WorkflowNodeTypedDict__:
+          anyOf:
+            - type: array
+              items:
+                $ref: "#/$defs/WorkflowNodeTypedDict"
+            - type: "null"
+      title: create_workflowArguments
+      required:
+        - workflow_config
+      properties:
+        workflow_config:
+          $ref: "#/$defs/CreateWorkflowTypedDict"
+  - name: run_workflow
+    description: "Run a specific workflow.
+
+
+      \    Args:
+
+      \        workflow_id: ID of the workflow to run
+
+
+      \    Returns:
+
+      \        String containing the response from the workflow execution
+
+      \    "
+    inputSchema:
+      type: object
+      title: run_workflowArguments
+      required:
+        - workflow_id
+      properties:
+        workflow_id:
+          type: string
+          title: Workflow Id
+  - name: update_workflow
+    description: "Update an existing workflow.
+
+
+      \    Args:
+
+      \        workflow_id: ID of the workflow to update
+
+      \        workflow_config: A Typed Dictionary containing required fields
+      (destination_id,
+
+      \        name, source_id, workflow_type) and non-required fields
+      (schedule, and workflow_nodes)
+
+
+      \    Returns:
+
+      \        String containing the updated workflow information
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        Schedule:
+          enum:
+            - every 15 minutes
+            - every hour
+            - every 2 hours
+            - every 4 hours
+            - every 6 hours
+            - every 8 hours
+            - every 10 hours
+            - every 12 hours
+            - daily
+            - weekly
+            - monthly
+          type: string
+          title: Schedule
+        WorkflowType:
+          enum:
+            - basic
+            - advanced
+            - platinum
+            - custom
+          type: string
+          title: WorkflowType
+        Nullable_str_:
+          anyOf:
+            - type: string
+            - type: "null"
+        Nullable_bool_:
+          anyOf:
+            - type: boolean
+            - type: "null"
+        Nullable_Schedule_:
+          anyOf:
+            - $ref: "#/$defs/Schedule"
+            - type: "null"
+        WorkflowNodeTypedDict:
+          type: object
+          title: WorkflowNodeTypedDict
+          required:
+            - name
+            - subtype
+            - type
+          properties:
+            id:
+              $ref: "#/$defs/Nullable_str_"
+            name:
+              type: string
+              title: Name
+            type:
+              type: string
+              title: Type
+            subtype:
+              type: string
+              title: Subtype
+            settings:
+              $ref: "#/$defs/Nullable_Dict_str__Any__"
+        CreateWorkflowTypedDict:
+          type: object
+          title: CreateWorkflowTypedDict
+          required:
+            - name
+            - workflow_type
+          properties:
+            name:
+              type: string
+              title: Name
+            schedule:
+              $ref: "#/$defs/Nullable_Schedule_"
+            source_id:
+              $ref: "#/$defs/Nullable_str_"
+            reprocess_all:
+              $ref: "#/$defs/Nullable_bool_"
+            workflow_type:
+              $ref: "#/$defs/WorkflowType"
+            destination_id:
+              $ref: "#/$defs/Nullable_str_"
+            workflow_nodes:
+              $ref: "#/$defs/Nullable_List_WorkflowNodeTypedDict__"
+        Nullable_Dict_str__Any__:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+        Nullable_List_WorkflowNodeTypedDict__:
+          anyOf:
+            - type: array
+              items:
+                $ref: "#/$defs/WorkflowNodeTypedDict"
+            - type: "null"
+      title: update_workflowArguments
+      required:
+        - workflow_id
+        - workflow_config
+      properties:
+        workflow_id:
+          type: string
+          title: Workflow Id
+        workflow_config:
+          $ref: "#/$defs/CreateWorkflowTypedDict"
+  - name: delete_workflow
+    description: "Delete a specific workflow.
+
+
+      \    Args:
+
+      \        workflow_id: ID of the workflow to delete
+
+
+      \    Returns:
+
+      \        String containing the response from the workflow deletion
+
+      \    "
+    inputSchema:
+      type: object
+      title: delete_workflowArguments
+      required:
+        - workflow_id
+      properties:
+        workflow_id:
+          type: string
+          title: Workflow Id
+  - name: list_jobs
+    description: "
+
+      \    List jobs via the Unstructured API.
+
+
+      \    Args:
+
+      \        workflow_id: Optional workflow ID to filter by
+
+      \        status: Optional job status to filter by
+
+
+      \    Returns:
+
+      \        String containing the list of jobs
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        JobStatus:
+          enum:
+            - SCHEDULED
+            - IN_PROGRESS
+            - COMPLETED
+            - STOPPED
+            - FAILED
+          type: string
+          title: JobStatus
+      title: list_jobsArguments
+      properties:
+        status:
+          anyOf:
+            - $ref: "#/$defs/JobStatus"
+            - type: string
+            - type: "null"
+          title: Status
+          default: null
+        workflow_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Workflow Id
+          default: null
+  - name: get_job_info
+    description: "Get detailed information about a specific job.
+
+
+      \    Args:
+
+      \        job_id: ID of the job to get information for
+
+
+      \    Returns:
+
+      \        String containing the job information
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_job_infoArguments
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+  - name: cancel_job
+    description: "Delete a specific job.
+
+
+      \    Args:
+
+      \        job_id: ID of the job to cancel
+
+
+      \    Returns:
+
+      \        String containing the response from the job cancellation
+
+      \    "
+    inputSchema:
+      type: object
+      title: cancel_jobArguments
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          title: Job Id

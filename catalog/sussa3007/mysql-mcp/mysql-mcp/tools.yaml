@@ -1,0 +1,106 @@
+tools:
+  - name: status
+    description: Check the current database connection status.
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: connect
+    description: Connect to a MySQL database.
+    inputSchema:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Database server hostname or IP address
+        port:
+          type: string
+          description: Database server port
+        user:
+          type: string
+          description: Database username
+        database:
+          type: string
+          description: Database name to connect to
+        password:
+          type: string
+          description: Database password
+  - name: disconnect
+    description: Close the current MySQL database connection.
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: query
+    description: Execute an SQL query on the connected database.
+    inputSchema:
+      type: object
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          description: SQL query to execute
+        params:
+          type: array
+          items:
+            type: string
+          description: Parameters for prepared statements
+  - name: list_tables
+    description: Get a list of tables in the current database.
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: describe_table
+    description: Get the structure of a specific table.
+    inputSchema:
+      type: object
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          description: Name of the table to describe
+  - name: list_databases
+    description: Get a list of all accessible databases on the server.
+    inputSchema:
+      type: object
+      required:
+        - random_string
+      properties:
+        random_string:
+          type: string
+          description: Dummy parameter for no-parameter tools
+  - name: use_database
+    description: Switch to a different database.
+    inputSchema:
+      type: object
+      required:
+        - database
+      properties:
+        database:
+          type: string
+          description: Name of the database to switch to
+  - name: set_readonly
+    description: Enable or disable read-only mode
+    inputSchema:
+      type: object
+      required:
+        - readonly
+      properties:
+        readonly:
+          type: boolean
+          description: Set to true to enable read-only mode, false to disable

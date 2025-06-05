@@ -1,0 +1,165 @@
+tools:
+  - name: list_tables
+    description: List all tables in the database
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: describe_table
+    description: Get structure of a specific table
+    inputSchema:
+      type: object
+      required:
+        - table_name
+      properties:
+        table_name:
+          type: string
+  - name: read_query
+    description: Execute a SELECT SQL query (for multiple statements at once, use
+      execute_script tool instead)
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+  - name: write_query
+    description: Execute a non-SELECT SQL query (INSERT, UPDATE, DELETE) (for
+      multiple statements at once, use execute_script tool instead)
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+  - name: create_table
+    description: Create a new table in the database (for multiple statements at
+      once, use execute_script tool instead)
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+  - name: execute_script
+    description: Execute multiple SQL statements provided as a single script string.
+      Use for batch operations like multiple INSERTS or complex transactions.
+    inputSchema:
+      type: object
+      required:
+        - script
+      properties:
+        script:
+          type: string
+          description: A single string containing multiple SQL statements separated by
+            semicolons (;).
+  - name: record_case_entry
+    description: Record a new case file entry for a matter
+    inputSchema:
+      type: object
+      required:
+        - matter_id
+        - type
+        - title
+        - content
+      properties:
+        date:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        synopsis:
+          type: string
+        to_party:
+          type: string
+        matter_id:
+          type: integer
+        from_party:
+          type: string
+  - name: record_billable_time
+    description: Record billable time for a matter
+    inputSchema:
+      type: object
+      required:
+        - matter_id
+        - substantiating_entry_id_1
+        - billing_category
+        - billing_start
+        - billing_stop
+        - billing_description
+      properties:
+        matter_id:
+          type: integer
+        billing_stop:
+          type: string
+        billing_hours:
+          type: number
+        billing_start:
+          type: string
+        billing_category:
+          type: string
+        billing_description:
+          type: string
+        substantiating_entry_id_1:
+          type: integer
+  - name: get_unbilled_time
+    description: Get unbilled time entries for a client or matter
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        client_id:
+          type: integer
+        matter_id:
+          type: integer
+  - name: create_invoice
+    description: Create a new invoice for a matter
+    inputSchema:
+      type: object
+      required:
+        - client_id
+        - matter_id
+        - invoice_number
+      properties:
+        client_id:
+          type: integer
+        matter_id:
+          type: integer
+        invoice_number:
+          type: string
+  - name: add_billing_to_invoice
+    description: Add a billing entry to an invoice
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+        - billing_id
+      properties:
+        billing_id:
+          type: integer
+        invoice_id:
+          type: integer
+  - name: submit_invoice
+    description: Submit an invoice (changes status from draft to submitted)
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+      properties:
+        invoice_id:
+          type: integer
+  - name: check_invoice_validity
+    description: Check if an invoice has any time conflicts
+    inputSchema:
+      type: object
+      required:
+        - invoice_id
+      properties:
+        invoice_id:
+          type: integer

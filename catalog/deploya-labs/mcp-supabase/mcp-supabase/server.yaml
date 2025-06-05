@@ -1,0 +1,17 @@
+identifier: deploya-labs/mcp-supabase/mcp-supabase
+repo:
+  provider: github.com
+  url: https://github.com/Deploya-labs/mcp-supabase
+  name: mcp-supabase
+  owner: Deploya-labs
+server:
+  subdirectory: /
+  name: Supabase MCP Server (used by Deploya.dev)
+  description: Manage your Supabase databases and execute SQL queries autonomously
+    and securely. Leverage built-in safety controls while interacting with your
+    database through Cursor and Windsurf. Simplify your database management with
+    a feature-rich interface that enhances productivity.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: sammcj/mcp-github-issue/mcp-github-issue
+repo:
+  provider: github.com
+  url: https://github.com/sammcj/mcp-github-issue
+  name: mcp-github-issue
+  owner: sammcj
+server:
+  subdirectory: /
+  name: GitHub Issue
+  description: Fetch GitHub issue details and use them as task descriptions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

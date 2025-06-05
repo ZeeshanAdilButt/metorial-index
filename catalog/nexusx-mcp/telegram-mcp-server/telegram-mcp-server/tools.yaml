@@ -1,0 +1,97 @@
+tools:
+  - name: get_bot_info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: send_message
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - chatId
+        - text
+      properties:
+        text:
+          type: string
+          description: Text of the message to be sent
+        chatId:
+          type:
+            - string
+            - number
+          description: Unique identifier for the target chat
+        params:
+          type: object
+          description: Additional parameters for the message
+          additionalProperties: {}
+      additionalProperties: false
+  - name: get_updates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        params:
+          type: object
+          properties:
+            limit:
+              type: number
+              maximum: 100
+              minimum: 1
+              description: Limits the number of updates to be retrieved (1-100)
+            offset:
+              type: number
+              description: Identifier of the first update to be returned
+            timeout:
+              type: number
+              description: Timeout in seconds for long polling
+            allowed_updates:
+              type: array
+              items:
+                type: string
+              description: Array of update types to receive
+          description: Optional parameters for the getUpdates method
+          additionalProperties: false
+      additionalProperties: false
+  - name: forward_message
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - chatId
+        - fromChatId
+        - messageId
+      properties:
+        chatId:
+          type:
+            - string
+            - number
+          description: Unique identifier for the target chat or username of the target
+            channel
+        params:
+          type: object
+          properties:
+            protect_content:
+              type: boolean
+              description: Protects the contents of the forwarded message from forwarding and
+                saving
+            message_thread_id:
+              type: number
+              description: Unique identifier for the target message thread (topic) of the
+                forum
+            disable_notification:
+              type: boolean
+              description: Sends the message silently
+            video_start_timestamp:
+              type: number
+              description: New start timestamp for the forwarded video in the message
+          additionalProperties: false
+        messageId:
+          type: number
+          description: Message identifier in the chat specified in from_chat_id
+        fromChatId:
+          type:
+            - string
+            - number
+          description: Unique identifier for the chat where the original message was sent
+      additionalProperties: false

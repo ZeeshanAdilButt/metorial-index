@@ -1,0 +1,43 @@
+tools:
+  - name: get_alerts
+    description: "Get weather alerts for a US state.
+
+
+      \    Args:
+
+      \        state: Two-letter US state code (e.g. CA, NY)
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_alertsArguments
+      required:
+        - state
+      properties:
+        state:
+          type: string
+          title: State
+  - name: get_forecast
+    description: "Get weather forecast for a location.
+
+
+      \    Args:
+
+      \        latitude: Latitude of the location
+
+      \        longitude: Longitude of the location
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_forecastArguments
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          title: Latitude
+        longitude:
+          type: number
+          title: Longitude

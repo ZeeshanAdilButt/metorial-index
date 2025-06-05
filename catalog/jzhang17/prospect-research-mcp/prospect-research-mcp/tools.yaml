@@ -1,0 +1,90 @@
+tools:
+  - name: web-search
+    description: >-
+      A semantic search engine (Tavily) that understands the contextual meaning
+      and intent behind queries.
+
+
+      This tool excels at:
+
+      - Understanding complex or ambiguous queries
+
+      - Interpreting natural language questions
+
+      - Finding relevant content even when exact keywords aren't present
+
+      - Comprehending relationships between concepts
+
+
+      Use this as your primary search tool for research questions, conceptual
+      understanding, and when seeking comprehensive results.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query to look up
+      additionalProperties: false
+  - name: scrape-webpages
+    description: >-
+      Scrape the provided web pages for detailed information.
+
+
+      Use with less than 20 links (most optimally less than 10).
+
+
+      This tool fetches the content of multiple web pages, processes them to
+      remove images, and returns their combined content. It's useful for
+      obtaining detailed information from specific web pages that you already
+      have links to.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - links
+      properties:
+        links:
+          type: array
+          items:
+            type: string
+          description: A list of URLs to scrape (optimally less than 10)
+      additionalProperties: false
+  - name: batch-web-search
+    description: >-
+      Traditional keyword-based search (Google via Search1API) that processes
+      multiple queries simultaneously.
+
+
+      This tool excels at:
+
+      - Finding exact keyword matches across multiple queries
+
+      - Syntactic/lexical matching rather than semantic understanding
+
+      - Processing multiple different search queries in parallel
+
+      - Finding specific terms or direct information
+
+
+      Use this tool when you need to search for multiple distinct pieces of
+      information simultaneously or when exact keyword matching is more
+      important than contextual understanding.
+
+
+      Use with less than 50 queries (most optimally less than 30).
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - queries
+      properties:
+        queries:
+          type: array
+          items:
+            type: string
+          description: List of search queries to process in parallel (optimally less than
+            30)
+      additionalProperties: false

@@ -1,0 +1,17 @@
+identifier: chroma-core/chroma-mcp/chroma-mcp
+repo:
+  provider: github.com
+  url: https://github.com/chroma-core/chroma-mcp
+  name: chroma-mcp
+  owner: chroma-core
+server:
+  subdirectory: /
+  name: Chroma MCP Server
+  description: Integrate vector database capabilities into your LLM applications.
+    Effortlessly manage collections, perform semantic searches, and retrieve
+    data with advanced filtering. Enhance your AI models with powerful data
+    retrieval features for improved context and performance.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

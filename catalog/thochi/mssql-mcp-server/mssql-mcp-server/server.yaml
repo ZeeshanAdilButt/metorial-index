@@ -1,0 +1,14 @@
+identifier: thochi/mssql-mcp-server/mssql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/thochi/mssql-mcp-server
+  name: mssql-mcp-server
+  owner: thochi
+server:
+  subdirectory: /
+  name: MSSQL MCP Server
+  description: Connect to Microsoft SQL Server databases and execute SQL queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

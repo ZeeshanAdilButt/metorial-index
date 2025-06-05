@@ -1,0 +1,132 @@
+tools:
+  - name: enqueue
+    description: Enqueue a message to a queue hosted on RabbitMQ
+    inputSchema:
+      type: object
+      title: Enqueue
+      required:
+        - message
+        - queue
+      properties:
+        queue:
+          type: string
+          title: Queue
+          description: The name of the queue
+        message:
+          type: string
+          title: Message
+          description: The message to publish
+  - name: fanout
+    description: Publish a message to an exchange with fanout type
+    inputSchema:
+      type: object
+      title: Fanout
+      required:
+        - message
+        - exchange
+      properties:
+        message:
+          type: string
+          title: Message
+          description: The message to publish
+        exchange:
+          type: string
+          title: Exchange
+          description: The name of the exchange
+  - name: list_queues
+    description: List all the queues in the broker
+    inputSchema:
+      type: object
+      title: ListQueues
+      properties: {}
+  - name: list_exchanges
+    description: List all the exchanges in the broker
+    inputSchema:
+      type: object
+      title: ListExchanges
+      properties: {}
+  - name: get_queue_info
+    description: Get detailed information about a specific queue
+    inputSchema:
+      type: object
+      title: GetQueueInfo
+      required:
+        - queue
+      properties:
+        queue:
+          type: string
+          title: Queue
+          description: The name of the queue to get info about
+        vhost:
+          type: string
+          title: Vhost
+          default: /
+          description: The virtual host where the queue exists
+  - name: delete_queue
+    description: Delete a specific queue
+    inputSchema:
+      type: object
+      title: DeleteQueue
+      required:
+        - queue
+      properties:
+        queue:
+          type: string
+          title: Queue
+          description: The name of the queue to delete
+        vhost:
+          type: string
+          title: Vhost
+          default: /
+          description: The virtual host where the queue exists
+  - name: purge_queue
+    description: Remove all messages from a specific queue
+    inputSchema:
+      type: object
+      title: PurgeQueue
+      required:
+        - queue
+      properties:
+        queue:
+          type: string
+          title: Queue
+          description: The name of the queue to purge
+        vhost:
+          type: string
+          title: Vhost
+          default: /
+          description: The virtual host where the queue exists
+  - name: delete_exchange
+    description: Delete a specific exchange
+    inputSchema:
+      type: object
+      title: DeleteExchange
+      required:
+        - exchange
+      properties:
+        vhost:
+          type: string
+          title: Vhost
+          default: /
+          description: The virtual host where the exchange exists
+        exchange:
+          type: string
+          title: Exchange
+          description: The name of the exchange to delete
+  - name: get_exchange_info
+    description: Get detailed information about a specific exchange
+    inputSchema:
+      type: object
+      title: GetExchangeInfo
+      required:
+        - exchange
+      properties:
+        vhost:
+          type: string
+          title: Vhost
+          default: /
+          description: The virtual host where the exchange exists
+        exchange:
+          type: string
+          title: Exchange
+          description: The name of the exchange to get info about

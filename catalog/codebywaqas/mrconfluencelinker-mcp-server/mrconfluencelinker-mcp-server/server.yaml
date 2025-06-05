@@ -1,0 +1,16 @@
+identifier: codebywaqas/mrconfluencelinker-mcp-server/mrconfluencelinker-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/CodeByWaqas/MRConfluenceLinker-mcp-server
+  name: MRConfluenceLinker-mcp-server
+  owner: CodeByWaqas
+server:
+  subdirectory: /
+  name: GitLab PR Analysis Server
+  description: Fetch and analyze GitLab merge requests, then store the results in
+    Confluence documentation. Streamline your code review process by integrating
+    detailed analysis directly into your documentation workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

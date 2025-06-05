@@ -1,0 +1,17 @@
+identifier: agentsworkingtogether/mcp-sleep/mcp-sleep
+repo:
+  provider: github.com
+  url: https://github.com/AgentsWorkingTogether/mcp-sleep
+  name: mcp-sleep
+  owner: AgentsWorkingTogether
+server:
+  subdirectory: /
+  name: Sleep Tool
+  description: Pause execution for a specified duration to control the flow of
+    your agents. Enhance your automation by introducing timed delays, ensuring
+    tasks are executed in the desired sequence. Ideal for managing workflows
+    that require waiting periods between actions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

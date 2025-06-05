@@ -1,0 +1,75 @@
+tools:
+  - name: write-data
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - org
+        - bucket
+        - data
+      properties:
+        org:
+          type: string
+          description: The organization name
+        data:
+          type: string
+          description: Data in InfluxDB line protocol format
+        bucket:
+          type: string
+          description: The bucket name
+        precision:
+          enum:
+            - ns
+            - us
+            - ms
+            - s
+          type: string
+          description: Timestamp precision (ns, us, ms, s)
+      additionalProperties: false
+  - name: query-data
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - org
+        - query
+      properties:
+        org:
+          type: string
+          description: The organization name
+        query:
+          type: string
+          description: Flux query string
+      additionalProperties: false
+  - name: create-bucket
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - orgID
+      properties:
+        name:
+          type: string
+          description: The bucket name
+        orgID:
+          type: string
+          description: The organization ID
+        retentionPeriodSeconds:
+          type: number
+          description: Retention period in seconds (optional)
+      additionalProperties: false
+  - name: create-org
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The organization name
+        description:
+          type: string
+          description: Organization description (optional)
+      additionalProperties: false

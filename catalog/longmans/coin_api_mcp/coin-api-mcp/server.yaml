@@ -1,0 +1,15 @@
+identifier: longmans/coin_api_mcp/coin-api-mcp
+repo:
+  provider: github.com
+  url: https://github.com/longmans/coin_api_mcp
+  name: coin_api_mcp
+  owner: longmans
+server:
+  subdirectory: /
+  name: Cryptocurrency Data
+  description: Access CoinMarketCap's cryptocurrency data including listings,
+    quotes, and detailed coin information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

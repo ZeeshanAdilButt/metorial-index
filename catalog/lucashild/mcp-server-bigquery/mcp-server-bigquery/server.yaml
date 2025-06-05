@@ -1,0 +1,15 @@
+identifier: lucashild/mcp-server-bigquery/mcp-server-bigquery
+repo:
+  provider: github.com
+  url: https://github.com/LucasHild/mcp-server-bigquery
+  name: mcp-server-bigquery
+  owner: LucasHild
+server:
+  subdirectory: /
+  name: BigQuery Server
+  description: A Model Context Protocol server that provides access to BigQuery,
+    enabling LLMs to inspect database schemas and execute queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

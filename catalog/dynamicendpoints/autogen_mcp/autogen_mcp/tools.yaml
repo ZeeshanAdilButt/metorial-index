@@ -1,0 +1,97 @@
+tools:
+  - name: create_agent
+    description: Create a new AutoGen agent
+    inputSchema:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Agent name
+        type:
+          enum:
+            - assistant
+            - user
+          type: string
+          description: Agent type
+        llm_config:
+          type: object
+          description: LLM configuration
+        description:
+          type: string
+          description: Agent description
+        system_message:
+          type: string
+          description: System message for the agent
+        code_execution_config:
+          type: object
+          description: Code execution settings
+  - name: execute_chat
+    description: Execute a chat between two agents
+    inputSchema:
+      type: object
+      required:
+        - initiator
+        - responder
+        - message
+      properties:
+        message:
+          type: string
+          description: Initial message
+        initiator:
+          type: string
+          description: Name of the initiating agent
+        responder:
+          type: string
+          description: Name of the responding agent
+        llm_config:
+          type: object
+          description: Override default LLM settings
+  - name: execute_group_chat
+    description: Execute a group chat with multiple agents
+    inputSchema:
+      type: object
+      required:
+        - agent_names
+        - initiator
+        - message
+      properties:
+        message:
+          type: string
+          description: Initial message
+        initiator:
+          type: string
+          description: Name of the initiating agent
+        max_round:
+          type: number
+          description: Maximum conversation rounds
+        llm_config:
+          type: object
+          description: Override default LLM settings
+        agent_names:
+          type: array
+          items:
+            type: string
+          description: List of agent names
+  - name: execute_workflow
+    description: Execute a predefined workflow
+    inputSchema:
+      type: object
+      required:
+        - workflow_name
+        - input_data
+      properties:
+        input_data:
+          type: object
+          description: Workflow-specific input data
+        llm_config:
+          type: object
+          description: Override default LLM settings
+        workflow_name:
+          enum:
+            - code_generation
+            - research
+          type: string
+          description: Workflow to execute

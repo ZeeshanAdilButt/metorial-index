@@ -1,0 +1,18 @@
+identifier: aliyun/mcp-server-esa/mcp-server-esa
+repo:
+  provider: github.com
+  url: https://github.com/aliyun/mcp-server-esa
+  name: mcp-server-esa
+  owner: aliyun
+server:
+  subdirectory: /
+  name: ESA Server for Edge Security Acceleration
+  description: Enable AI models to seamlessly interact with Alibaba Cloud's Edge
+    Security Acceleration services through a standardized protocol. Manage
+    routines, deployments, routes, records, and site configurations efficiently
+    via MCP tool calls. Integrate easily with MCP-enabled clients to leverage
+    ESA OpenAPI capabilities for enhanced security and acceleration workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

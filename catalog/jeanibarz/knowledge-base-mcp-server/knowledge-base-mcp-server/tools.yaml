@@ -1,0 +1,29 @@
+tools:
+  - name: list_knowledge_bases
+    description: Lists the available knowledge bases.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: retrieve_knowledge
+    description: Retrieves similar chunks from the knowledge base based on a query.
+      Optionally, if a knowledge base is specified, only that one is searched;
+      otherwise, all available knowledge bases are considered. By default, at
+      most 10 documents are returned with a score below a threshold of 2. A
+      different threshold can optionally be provided.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The query text to use for semantic search.
+        threshold:
+          type: number
+          description: Optional. The maximum similarity score to return.
+        knowledge_base_name:
+          type: string
+          description: Optional. Name of the knowledge base to query (e.g., 'company',
+            'it_support', 'onboarding'). If omitted, the search is performed
+            across all available knowledge bases.

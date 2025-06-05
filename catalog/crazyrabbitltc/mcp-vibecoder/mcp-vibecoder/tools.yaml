@@ -1,0 +1,173 @@
+tools:
+  - name: start_feature_clarification
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureName
+      properties:
+        featureName:
+          type: string
+          maxLength: 100
+          minLength: 2
+        initialDescription:
+          type: string
+          default: ""
+      additionalProperties: false
+  - name: provide_clarification
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - question
+        - answer
+      properties:
+        answer:
+          type: string
+          minLength: 1
+        question:
+          type: string
+          minLength: 1
+        featureId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: generate_prd
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+      properties:
+        featureId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: create_phase
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          minLength: 1
+        featureId:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: update_phase_status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - phaseId
+        - status
+      properties:
+        status:
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - reviewed
+          type: string
+        phaseId:
+          type: string
+          minLength: 1
+        featureId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: add_task
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - phaseId
+        - description
+      properties:
+        phaseId:
+          type: string
+          minLength: 1
+        featureId:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: update_task_status
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - phaseId
+        - taskId
+        - completed
+      properties:
+        taskId:
+          type: string
+          minLength: 1
+        phaseId:
+          type: string
+          minLength: 1
+        completed:
+          type: boolean
+        featureId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_next_phase_action
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+      properties:
+        featureId:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: get_document_path
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - documentType
+      properties:
+        featureId:
+          type: string
+          minLength: 1
+        documentType:
+          type: string
+          minLength: 1
+      additionalProperties: false
+  - name: save_document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - featureId
+        - documentType
+      properties:
+        filePath:
+          type: string
+          minLength: 1
+        featureId:
+          type: string
+          minLength: 1
+        documentType:
+          type: string
+          minLength: 1
+      additionalProperties: false

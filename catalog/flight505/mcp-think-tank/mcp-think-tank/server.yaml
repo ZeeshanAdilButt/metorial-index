@@ -1,0 +1,435 @@
+identifier: flight505/mcp-think-tank/mcp-think-tank
+repo:
+  provider: github.com
+  url: https://github.com/flight505/mcp-think-tank
+  name: mcp-think-tank
+  owner: flight505
+server:
+  subdirectory: /
+  name: Think Tank
+  description: >-
+    ## Overview
+
+
+    MCP Think Tank provides **Cursor** and **Claude @Web** with a sophisticated
+    environment for enhanced reasoning capabilities. It features advanced
+    **Sequential Thinking & Chained Reasoning** processes, a robust **Knowledge
+    Graph Memory** system with versioning, and intelligent **Tool Orchestration
+    with Call-Limit Safeguards**.
+
+
+    This platform enables AI assistants to approach complex problems through
+    structured multi-step reasoning, maintain persistent knowledge across
+    conversations, and utilize web research and task management capabilities—all
+    while ensuring responsible and efficient tool usage through built-in
+    safeguards.
+
+
+    ## 🎯 Philosophy
+
+
+    MCP Think Tank is built on three core principles:
+
+
+    1. **Elegant Simplicity**: Minimal, well-designed tools that work with
+    Claude's natural capabilities rather than trying to replicate or override
+    them.
+
+
+    2. **Enhanced Reflection**: Gentle guidance rather than rigid structure,
+    enabling better reasoning and self-reflection without constraining Claude's
+    thinking process.
+
+
+    3. **Persistent Context**: Knowledge graph provides memory across
+    conversations while maintaining simplicity in both storage and retrieval.
+
+
+    ## 🚀 Key Features
+
+
+    - 💭 **Think Tool**: Dedicated space for structured reasoning and
+    self-reflection
+
+    - 🧩 **Knowledge Graph**: Simple but effective persistent memory 
+
+    - 📝 **Task Management**: Plan, track, and update tasks with knowledge graph
+    integration
+
+    - 🌐 **Web Research (Exa)**: Search the web and get sourced answers
+
+    - 🔒 **Tool Orchestration**: Built-in safeguards with configurable limits
+    (default: 25 calls)
+
+    - ⚡ **Content Caching**: Performance optimization for file/URL operations
+
+
+    ### Sequential Thinking & Chained Reasoning
+
+
+    - **Step-by-Step Planning**: Break down complex problems into manageable
+    sequential steps
+
+    - **Progress Tracking**: Monitor progress through multi-step reasoning with
+    step counters
+
+    - **Self-Reflection**: Automatically evaluate reasoning quality with
+    optional reflection passes
+
+    - **Research Integration**: Incorporate web research seamlessly within
+    reasoning chains
+
+    - **Structured Formatting**: Output reasoning in clean, organized formats
+    for better understanding
+
+
+    ### Enhanced Knowledge Graph Memory
+
+
+    - **Timestamped Observations**: All memory entries include metadata for
+    better tracking
+
+    - **Duplicate Prevention**: Intelligent entity matching to avoid redundant
+    entries
+
+    - **Automatic Linkage**: Heuristic-based relation creation between related
+    entities
+
+    - **Advanced Querying**: Filter memory by time, tags, keywords, and more
+
+    - **Memory Maintenance**: Tools for pruning and managing memory growth over
+    time
+
+
+    ## 📦 Installation & Configuration
+
+
+    ### Quick Start (Recommended)
+
+
+    1. **Install MCP Think Tank via NPX**:
+       ```bash
+       npx mcp-think-tank@latest
+       ```
+
+    2. **Get your Exa API Key** (required for web search):
+       - Sign up at [exa.ai](https://exa.ai/) and copy your API key
+
+    3. **Configure your MCP server** (for Cursor, add to `.cursor/mcp.json`):
+       ```json
+       {
+         "mcpServers": {
+           "think-tool": {
+             "command": "npx",
+             "args": ["-y", "mcp-think-tank"],
+             "type": "stdio",
+             "env": {
+               "MEMORY_PATH": "/absolute/path/to/your/memory.jsonl",
+               "EXA_API_KEY": "your-exa-api-key-here"
+             }
+           }
+         }
+       }
+       ```
+
+    > ⚠️ **Important:**
+
+    > Always set a unique `MEMORY_PATH` for each project to avoid knowledge
+    graph conflicts.
+
+    > If omitted, defaults to `~/.mcp-think-tank/memory.jsonl`.
+
+
+    ### Alternative Installation Methods
+
+
+    - **Global Installation**:
+      ```bash
+      npm install -g mcp-think-tank
+      mcp-think-tank
+      ```
+
+    ### Environment Variables
+
+
+    #### Essential Variables
+
+    - `MEMORY_PATH`: Path to memory storage file (default:
+    `~/.mcp-think-tank/memory.jsonl`)
+
+    - `EXA_API_KEY`: Enables web search tools (required for Exa search
+    functionality)
+
+
+    #### Advanced Configuration
+
+    - `MCP_DEBUG`: Enable debug logging (default: `false`)
+
+    - `MCP_LISTEN_PORT`: Set custom port for MCP server (default: `3399`) 
+
+    - `LOG_LEVEL`: Set logging level (default: `info`)
+
+    - `AUTO_LINK`: Enable automatic entity linking (default: `true`)
+
+    - `TOOL_LIMIT`: Maximum tool calls per session (default: `25`)
+
+    - `CACHE_TOOL_CALLS`: Enable duplicate tool call caching (default: `true`)
+
+    - `CACHE_CONTENT`: Enable content-based file/URL caching (default: `true`)
+
+    - `CONTENT_CACHE_SIZE`: Maximum content cache items (default: `50`)
+
+    - `CONTENT_CACHE_TTL`: Cache time-to-live in ms (default: `300000` - 5
+    minutes)
+
+
+    ## 🧠 Using MCP Think Tank
+
+
+    ### Tools Overview
+
+
+    #### 1. Think Tool (Structured Reasoning)
+
+
+    Use `think` for complex decisions, architecture planning, and
+    problem-solving with:
+
+    - Clear step-by-step reasoning
+
+    - Self-reflection capabilities
+
+    - Persistent memory storage
+
+    - Research integration
+
+
+    ```javascript
+
+    // Complex architecture decision with memory storage
+
+    mcp_think-tool_think({
+      structuredReasoning: "Analyzing database options for our user management system...",
+      category: "architecture",
+      storeInMemory: true
+    })
+
+    ```
+
+
+    #### 2. Memory & Knowledge Graph
+
+
+    Store and retrieve important information across conversations:
+
+
+    | Tool | When to Use |
+
+    |------|-------------|
+
+    | `upsert_entities` | Document important concepts or update existing
+    entities |
+
+    | `add_observations` | Add new facts to existing entities |
+
+    | `create_relations` | Connect related concepts |
+
+    | `search_nodes` | Find relevant knowledge |
+
+    | `open_nodes` | Retrieve specific entity details |
+
+
+    #### 3. Task Management
+
+
+    Manage project workflows with:
+
+    - `plan_tasks`: Create multiple tasks at once
+
+    - `list_tasks`: See current work status
+
+    - `next_task`: Get highest priority task
+
+    - `complete_task`: Mark tasks as finished
+
+    - `update_tasks`: Change task priorities or details
+
+
+    #### 4. Web Research (Exa)
+
+
+    Access current information when needed:
+
+    - `exa_search`: Find web information with customizable parameters
+
+    - `exa_answer`: Get factual answers with cited sources
+
+
+    ### How To Save Important Thoughts
+
+
+    When using the `think` tool for important reasoning:
+
+
+    1. **Simple Storage**: Tell the agent "Please save this reasoning in memory
+    for future reference" to automatically save with `storeInMemory: true`
+
+
+    2. **Multi-Step Reasoning**: Break down complex problems into logical steps
+    with progress tracking
+       ```javascript
+       // Example parameters
+       plannedSteps: 5,  // Total steps planned
+       currentStep: 2    // Current step number
+       ```
+
+    3. **Self-Reflection**: Request reflection by saying "Please analyze this
+    reasoning and provide a reflection on potential improvements"
+       ```javascript
+       // Enabled with 
+       selfReflect: true,
+       reflectPrompt: "Custom reflection instructions" // Optional
+       ```
+
+    4. **Research Integration**: Include research queries directly in reasoning
+       ```javascript
+       // Enable with
+       allowResearch: true
+       
+       // Then use syntax:
+       "I need to understand [research: your search query] before continuing..."
+       ```
+
+    ## ⚡ Performance Optimization
+
+
+    MCP Think Tank includes built-in performance optimizations:
+
+
+    ### Content Caching
+
+    - Automatic caching of file and URL content based on cryptographic hashing
+
+    - Prevents redundant file reads and network requests
+
+    - In tests, cached URL fetches were over 1000× faster than the initial fetch
+
+    - File reads showed significant improvements with 2-5× speedup on subsequent
+    reads
+
+    - Cache size and TTL are configurable via environment variables
+
+
+    ### Tool Call Optimization
+
+    - Identical tool calls are automatically cached to prevent counting
+    duplicates against your limit
+
+    - Intelligent error handling, especially for Exa search, prevents failures
+    from non-JSON responses
+
+    - Tool limit safeguards prevent runaway tool usage while providing graceful
+    degradation
+
+
+    ## 🛡️ Tool Orchestration & Safeguards
+
+
+    MCP Think Tank v2.0.2 includes comprehensive tool management features to
+    ensure responsible and efficient usage:
+
+
+    ### Usage Limits & Monitoring
+
+    - **Default limit**: 25 tool calls per session (configurable via
+    `TOOL_LIMIT` environment variable)
+
+    - **Automatic tracking**: All tool calls are logged with timestamps, agent
+    IDs, and parameters
+
+    - **Graceful degradation**: When limits are reached, the system returns
+    partial results rather than failing completely
+
+    - **Status tracking**: Tool calls that exceed limits are tagged with
+    `HALTED_LIMIT` status
+
+
+    ### Intelligent Caching
+
+    - **Duplicate detection**: Identical tool calls are automatically detected
+    and served from cache
+
+    - **Content hashing**: File and URL operations use SHA-1 hashing to identify
+    unchanged content
+
+    - **Configurable caching**: Enable/disable caching behavior through
+    environment variables
+
+    - **Cache statistics**: Monitor cache hit/miss rates for performance
+    analysis
+
+
+    ### Tool Access Control
+
+    - **Configurable whitelists**: Restrict which tools can be used in specific
+    contexts
+
+    - **Permission errors**: Clear error messages when disallowed tools are
+    requested
+
+    - **Orchestration strategies**: Multiple coordination strategies for
+    sequential or parallel execution
+
+    - **Agent isolation**: Tool usage tracked per agent to prevent
+    cross-contamination
+
+
+    ### Implementation
+
+    The safeguards are implemented through a dedicated `ToolManager` that wraps
+    all tool calls:
+
+    - Atomic counters ensure accurate tracking even in concurrent environments
+
+    - LRU cache prevents redundant operations while maintaining memory
+    efficiency
+
+    - Comprehensive error handling provides meaningful feedback rather than
+    cryptic failures
+
+    - All limits and caching behavior are configurable without code changes
+
+
+    > 🔒 **Security note:**
+
+    > The tool orchestration system ensures that even if a prompt attempts to
+    force excessive tool usage, it will be gracefully limited according to your
+    configuration.
+
+
+    ---
+
+
+    **Best Practices for Cursor/Claude and Large Projects:**
+
+    - Use the `think` tool liberally for all non-trivial reasoning and always
+    persist important thoughts.
+
+    - Integrate research and task management into your coding workflow for
+    seamless project development.
+
+    - Regularly review and update your knowledge graph to keep project memory
+    relevant and actionable.
+
+    - Reference and build upon previous decisions and patterns for consistent,
+    high-quality code.
+
+    - Be mindful of tool limits in complex workflows, and use the cache stats
+    utilities to monitor usage.
+
+
+    ---
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

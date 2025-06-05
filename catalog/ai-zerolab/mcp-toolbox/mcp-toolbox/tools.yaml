@@ -1,0 +1,490 @@
+tools:
+  - name: execute_command
+    description: "Execute a command line instruction. Args: command (required, The
+      command to execute as a list of strings), timeout_seconds (optional,
+      Maximum execution time in seconds), working_dir (optional, Directory to
+      execute the command in)"
+    inputSchema:
+      type: object
+      title: execute_commandArguments
+      required:
+        - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          title: Command
+        working_dir:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Working Dir
+          default: null
+        timeout_seconds:
+          type: integer
+          title: Timeout Seconds
+          default: 30
+  - name: figma_get_file
+    description: "Get a Figma file by key. Args: fileKey (required, The key of the
+      file to get), version (optional, A specific version ID to get), depth
+      (optional, Depth of nodes to return 1-4), branch_data (optional, Include
+      branch data if true)"
+    inputSchema:
+      type: object
+      title: figma_get_fileArguments
+      required:
+        - fileKey
+      properties:
+        depth:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Depth
+          default: null
+        fileKey:
+          type: string
+          title: Filekey
+        version:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Version
+          default: null
+        branch_data:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Branch Data
+          default: null
+  - name: figma_get_file_nodes
+    description: "Get specific nodes from a Figma file. Args: fileKey (required, The
+      key of the file to get nodes from), node_ids (required, Array of node IDs
+      to get), depth (optional, Depth of nodes to return 1-4), version
+      (optional, A specific version ID to get)"
+    inputSchema:
+      type: object
+      title: figma_get_file_nodesArguments
+      required:
+        - fileKey
+        - node_ids
+      properties:
+        depth:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Depth
+          default: null
+        fileKey:
+          type: string
+          title: Filekey
+        version:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Version
+          default: null
+        node_ids:
+          type: array
+          items:
+            type: string
+          title: Node Ids
+  - name: figma_get_image
+    description: "Get images for nodes in a Figma file. Args: fileKey (required, The
+      key of the file to get images from), ids (required, Array of node IDs to
+      render), scale (optional, Scale factor to render at 0.01-4), format_type
+      (optional, Image format jpg/png/svg/pdf), svg_include_id (optional,
+      Include IDs in SVG output), svg_simplify_stroke (optional, Simplify
+      strokes in SVG output), use_absolute_bounds (optional, Use absolute
+      bounds)"
+    inputSchema:
+      type: object
+      title: figma_get_imageArguments
+      required:
+        - fileKey
+        - ids
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          title: Ids
+        scale:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Scale
+          default: null
+        fileKey:
+          type: string
+          title: Filekey
+        format_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Format Type
+          default: null
+        svg_include_id:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Svg Include Id
+          default: null
+        svg_simplify_stroke:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Svg Simplify Stroke
+          default: null
+        use_absolute_bounds:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Use Absolute Bounds
+          default: null
+  - name: figma_get_image_fills
+    description: "Get URLs for images used in a Figma file. Args: fileKey (required,
+      The key of the file to get image fills from)"
+    inputSchema:
+      type: object
+      title: figma_get_image_fillsArguments
+      required:
+        - fileKey
+      properties:
+        fileKey:
+          type: string
+          title: Filekey
+  - name: figma_get_comments
+    description: "Get comments on a Figma file. Args: fileKey (required, The key of
+      the file to get comments from)"
+    inputSchema:
+      type: object
+      title: figma_get_commentsArguments
+      required:
+        - fileKey
+      properties:
+        fileKey:
+          type: string
+          title: Filekey
+  - name: figma_post_comment
+    description: "Post a comment on a Figma file. Args: fileKey (required, The key
+      of the file to comment on), message (required, Comment message text),
+      client_meta (optional, Position of the comment x/y/node_id/node_offset),
+      comment_id (optional, ID of comment to reply to)"
+    inputSchema:
+      type: object
+      title: figma_post_commentArguments
+      required:
+        - fileKey
+        - message
+      properties:
+        fileKey:
+          type: string
+          title: Filekey
+        message:
+          type: string
+          title: Message
+        comment_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Comment Id
+          default: null
+        client_meta:
+          anyOf:
+            - type: object
+            - type: "null"
+          title: Client Meta
+          default: null
+  - name: figma_delete_comment
+    description: "Delete a comment from a Figma file. Args: fileKey (required, The
+      key of the file to delete a comment from), comment_id (required, ID of the
+      comment to delete)"
+    inputSchema:
+      type: object
+      title: figma_delete_commentArguments
+      required:
+        - fileKey
+        - comment_id
+      properties:
+        fileKey:
+          type: string
+          title: Filekey
+        comment_id:
+          type: string
+          title: Comment Id
+  - name: figma_get_team_projects
+    description: "Get projects for a team. Args: team_id (required, The team ID),
+      page_size (optional, Number of items per page), cursor (optional, Cursor
+      for pagination)"
+    inputSchema:
+      type: object
+      title: figma_get_team_projectsArguments
+      required:
+        - team_id
+      properties:
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        team_id:
+          type: string
+          title: Team Id
+        page_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page Size
+          default: null
+  - name: figma_get_project_files
+    description: "Get files for a project. Args: project_id (required, The project
+      ID), page_size (optional, Number of items per page), cursor (optional,
+      Cursor for pagination), branch_data (optional, Include branch data if
+      true)"
+    inputSchema:
+      type: object
+      title: figma_get_project_filesArguments
+      required:
+        - project_id
+      properties:
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        page_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page Size
+          default: null
+        project_id:
+          type: string
+          title: Project Id
+        branch_data:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Branch Data
+          default: null
+  - name: figma_get_team_components
+    description: "Get components for a team. Args: team_id (required, The team ID),
+      page_size (optional, Number of items per page), cursor (optional, Cursor
+      for pagination)"
+    inputSchema:
+      type: object
+      title: figma_get_team_componentsArguments
+      required:
+        - team_id
+      properties:
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        team_id:
+          type: string
+          title: Team Id
+        page_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page Size
+          default: null
+  - name: figma_get_file_components
+    description: "Get components from a file. Args: fileKey (required, The key of
+      the file to get components from)"
+    inputSchema:
+      type: object
+      title: figma_get_file_componentsArguments
+      required:
+        - fileKey
+      properties:
+        fileKey:
+          type: string
+          title: Filekey
+  - name: figma_get_component
+    description: "Get a component by key. Args: key (required, The component key)"
+    inputSchema:
+      type: object
+      title: figma_get_componentArguments
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+  - name: figma_get_team_component_sets
+    description: "Get component sets for a team. Args: team_id (required, The team
+      ID), page_size (optional, Number of items per page), cursor (optional,
+      Cursor for pagination)"
+    inputSchema:
+      type: object
+      title: figma_get_team_component_setsArguments
+      required:
+        - team_id
+      properties:
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        team_id:
+          type: string
+          title: Team Id
+        page_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page Size
+          default: null
+  - name: figma_get_team_styles
+    description: "Get styles for a team. Args: team_id (required, The team ID),
+      page_size (optional, Number of items per page), cursor (optional, Cursor
+      for pagination)"
+    inputSchema:
+      type: object
+      title: figma_get_team_stylesArguments
+      required:
+        - team_id
+      properties:
+        cursor:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Cursor
+          default: null
+        team_id:
+          type: string
+          title: Team Id
+        page_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Page Size
+          default: null
+  - name: figma_get_file_styles
+    description: "Get styles from a file. Args: fileKey (required, The key of the
+      file to get styles from)"
+    inputSchema:
+      type: object
+      title: figma_get_file_stylesArguments
+      required:
+        - fileKey
+      properties:
+        fileKey:
+          type: string
+          title: Filekey
+  - name: figma_get_style
+    description: "Get a style by key. Args: key (required, The style key)"
+    inputSchema:
+      type: object
+      title: figma_get_styleArguments
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          title: Key
+  - name: read_file_content
+    description: "Read file content. Args: path (required, Path to the file to
+      read), encoding (optional, File encoding)"
+    inputSchema:
+      type: object
+      title: read_file_contentArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+        encoding:
+          type: string
+          title: Encoding
+          default: utf-8
+  - name: write_file_content
+    description: "Write content to a file. Args: path (required, Path to the file to
+      write), content (required, Content to write), encoding (optional, File
+      encoding), append (optional, Whether to append to the file)"
+    inputSchema:
+      type: object
+      title: write_file_contentArguments
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          title: Path
+        append:
+          type: boolean
+          title: Append
+          default: false
+        content:
+          type: string
+          title: Content
+        encoding:
+          type: string
+          title: Encoding
+          default: utf-8
+  - name: replace_in_file
+    description: "Replace content in a file using regular expressions. Args: path
+      (required, Path to the file), pattern (required, Regular expression
+      pattern), replacement (required, Replacement string), encoding (optional,
+      File encoding), count (optional, Maximum number of replacements)"
+    inputSchema:
+      type: object
+      title: replace_in_fileArguments
+      required:
+        - path
+        - pattern
+        - replacement
+      properties:
+        path:
+          type: string
+          title: Path
+        count:
+          type: integer
+          title: Count
+          default: 0
+        pattern:
+          type: string
+          title: Pattern
+        encoding:
+          type: string
+          title: Encoding
+          default: utf-8
+        replacement:
+          type: string
+          title: Replacement
+  - name: list_directory
+    description: "List directory contents with detailed information. Args: path
+      (required, Directory path), recursive (optional, Whether to list
+      recursively), max_depth (optional, Maximum recursion depth),
+      include_hidden (optional, Whether to include hidden files)"
+    inputSchema:
+      type: object
+      title: list_directoryArguments
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+        max_depth:
+          type: integer
+          title: Max Depth
+          default: -1
+        recursive:
+          type: boolean
+          title: Recursive
+          default: false
+        include_hidden:
+          type: boolean
+          title: Include Hidden
+          default: false

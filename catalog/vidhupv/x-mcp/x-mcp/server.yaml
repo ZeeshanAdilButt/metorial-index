@@ -1,0 +1,15 @@
+identifier: vidhupv/x-mcp/x-mcp
+repo:
+  provider: github.com
+  url: https://github.com/vidhupv/x-mcp
+  name: x-mcp
+  owner: vidhupv
+server:
+  subdirectory: /
+  name: X(Twitter) MCP Server
+  description: A server to create drafts of X(Twitter) posts, threads using LLMs
+    and post directly from the chat.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

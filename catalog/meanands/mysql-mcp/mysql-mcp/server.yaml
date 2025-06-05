@@ -1,0 +1,17 @@
+identifier: meanands/mysql-mcp/mysql-mcp
+repo:
+  provider: github.com
+  url: https://github.com/meanands/mysql-mcp
+  name: mysql-mcp
+  owner: meanands
+server:
+  subdirectory: /
+  name: SQL Server for Claude Desktop
+  description: Interact with your local MySQL databases using natural language.
+    Execute SQL queries seamlessly through Claude Desktop, enhancing your
+    database management experience. Enjoy secure connections, transaction
+    management, and support for all SQL query types.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

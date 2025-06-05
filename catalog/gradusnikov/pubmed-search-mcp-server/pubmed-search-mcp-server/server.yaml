@@ -1,0 +1,17 @@
+identifier: gradusnikov/pubmed-search-mcp-server/pubmed-search-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/gradusnikov/pubmed-search-mcp-server
+  name: pubmed-search-mcp-server
+  owner: gradusnikov
+server:
+  subdirectory: /
+  name: PubMedSearch
+  description: Search and retrieve academic papers from the PubMed database
+    effortlessly. Access detailed information including titles, authors,
+    journals, abstracts, and DOIs with ease. Enhance your research capabilities
+    by integrating this server into your workflow.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

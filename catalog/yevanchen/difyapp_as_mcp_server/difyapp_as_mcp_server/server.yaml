@@ -1,0 +1,16 @@
+identifier: yevanchen/difyapp_as_mcp_server/difyapp_as_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/Yevanchen/difyapp_as_mcp_server
+  name: difyapp_as_mcp_server
+  owner: Yevanchen
+server:
+  subdirectory: /
+  name: Dify
+  description: Expose your Dify applications as an MCP server to enable direct
+    calls from Claude and other MCP clients. Simplify integration with chat and
+    workflow applications without the need for additional scripts.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: zukai-mcp/neon-mcp/neon-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ZukAi-MCP/neon-mcp
+  name: neon-mcp
+  owner: ZukAi-MCP
+server:
+  subdirectory: /
+  name: Neon API Integration Server
+  description: Enable your agents to seamlessly interact with the Neon REST API
+    through a lightweight MCP server deployed on Cloudflare Workers. Easily
+    manage and extend tools to enhance your agent's capabilities with Neon
+    database operations. Simplify integration and deployment with automated
+    scripts and secure API key management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

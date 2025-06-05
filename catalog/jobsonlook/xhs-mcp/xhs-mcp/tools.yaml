@@ -1,0 +1,86 @@
+tools:
+  - name: check_cookie
+    description: "检测cookie是否失效\n\n    "
+    inputSchema:
+      type: object
+      title: check_cookieArguments
+      properties: {}
+  - name: search_notes
+    description: "根据关键词搜索笔记
+
+
+      \        Args:
+
+      \            keywords: 搜索关键词
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_notesArguments
+      required:
+        - keywords
+      properties:
+        keywords:
+          type: string
+          title: Keywords
+  - name: get_note_content
+    description: "获取笔记内容
+
+
+      \    Args:
+
+      \        url: 笔记 URL
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_note_contentArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: get_note_comments
+    description: "获取笔记评论
+
+
+      \    Args:
+
+      \        url: 笔记 URL
+
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_note_commentsArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: post_comment
+    description: "发布评论到指定笔记
+
+
+      \    Args:
+
+      \        url: 笔记 URL
+
+      \        comment: 要发布的评论内容
+
+      \    "
+    inputSchema:
+      type: object
+      title: post_commentArguments
+      required:
+        - comment
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+        comment:
+          type: string
+          title: Comment

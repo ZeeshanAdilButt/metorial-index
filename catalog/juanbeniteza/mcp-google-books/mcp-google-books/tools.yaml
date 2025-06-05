@@ -1,0 +1,39 @@
+tools:
+  - name: book_search
+    description: "Performs a search for books on Google Books by their title based
+      on a query.
+
+
+      \    Args:
+
+      \        query: Title of the book (required)
+
+      \    "
+    inputSchema:
+      type: object
+      title: book_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: author_search
+    description: "Performs a search for books on Google Books by their author based
+      on a query.
+
+
+      \    Args:
+
+      \        query: Author name (required)
+
+      \    "
+    inputSchema:
+      type: object
+      title: author_searchArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query

@@ -1,0 +1,132 @@
+tools:
+  - name: delete_issue
+    description: Delete a Jira issue or subtask
+    inputSchema:
+      type: object
+      required:
+        - issueKey
+      properties:
+        issueKey:
+          type: string
+          description: Key of the issue to delete
+  - name: get_issues
+    description: Get all issues and subtasks for a project
+    inputSchema:
+      type: object
+      required:
+        - projectKey
+      properties:
+        jql:
+          type: string
+          description: Optional JQL to filter issues
+        projectKey:
+          type: string
+          description: Project key (e.g., "PP")
+  - name: update_issue
+    description: Update an existing Jira issue
+    inputSchema:
+      type: object
+      required:
+        - issueKey
+      properties:
+        status:
+          type: string
+          description: New status
+        summary:
+          type: string
+          description: New summary/title
+        assignee:
+          type: string
+          description: Email of new assignee
+        issueKey:
+          type: string
+          description: Key of the issue to update
+        priority:
+          type: string
+          description: New priority
+        description:
+          type: string
+          description: New description
+  - name: list_fields
+    description: List all available Jira fields
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_issue_types
+    description: List all available issue types
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_link_types
+    description: List all available issue link types
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_user
+    description: Get a user's account ID by email address
+    inputSchema:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: User's email address
+  - name: create_issue
+    description: Create a new Jira issue
+    inputSchema:
+      type: object
+      required:
+        - projectKey
+        - summary
+        - issueType
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+          description: Array of labels to apply
+        summary:
+          type: string
+          description: Issue summary/title
+        assignee:
+          type: string
+          description: Email of the assignee
+        priority:
+          type: string
+          description: Issue priority
+        issueType:
+          type: string
+          description: Type of issue (e.g., "Task", "Bug", "Story")
+        components:
+          type: array
+          items:
+            type: string
+          description: Array of component names
+        projectKey:
+          type: string
+          description: Project key (e.g., "PP")
+        description:
+          type: string
+          description: Detailed description of the issue
+  - name: create_issue_link
+    description: Create a link between two issues
+    inputSchema:
+      type: object
+      required:
+        - inwardIssueKey
+        - outwardIssueKey
+        - linkType
+      properties:
+        linkType:
+          type: string
+          description: Type of link (e.g., 'blocks')
+        inwardIssueKey:
+          type: string
+          description: Key of the inward issue (e.g., blocked issue)
+        outwardIssueKey:
+          type: string
+          description: Key of the outward issue (e.g., blocking issue)

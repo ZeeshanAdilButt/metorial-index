@@ -1,0 +1,15 @@
+tools:
+  - name: get_crypto_news
+    description: ""
+    inputSchema:
+      type: object
+      title: get_crypto_newsArguments
+      properties:
+        kind:
+          type: string
+          title: Kind
+          default: news
+        num_pages:
+          type: integer
+          title: Num Pages
+          default: 1

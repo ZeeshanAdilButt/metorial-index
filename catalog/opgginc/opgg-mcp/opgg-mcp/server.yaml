@@ -1,0 +1,21 @@
+identifier: opgginc/opgg-mcp/opgg-mcp
+repo:
+  provider: github.com
+  url: https://github.com/opgginc/opgg-mcp
+  name: opgg-mcp
+  owner: opgginc
+server:
+  subdirectory: /
+  name: OP.GG
+  description: The OP.GG MCP Server provides AI agents with a comprehensive suite
+    of tools that deliver gaming data across popular titles, including champion
+    analysis and rankings for League of Legends, match schedules and team
+    standings for LoL esports, meta deck compositions, item combinations,
+    champion build recommendations and playstyle insights for Teamfight Tactics,
+    as well as map meta, character statistics, leaderboards, agent compositions
+    and player match history for Valorant, along with various other gaming
+    information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

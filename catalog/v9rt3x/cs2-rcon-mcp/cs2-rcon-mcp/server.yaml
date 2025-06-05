@@ -1,0 +1,17 @@
+identifier: v9rt3x/cs2-rcon-mcp/cs2-rcon-mcp
+repo:
+  provider: github.com
+  url: https://github.com/v9rt3x/cs2-rcon-mcp
+  name: cs2-rcon-mcp
+  owner: v9rt3x
+server:
+  subdirectory: /
+  name: CS2 RCON Server Manager
+  description: Manage your CS2 game server using natural language commands through
+    a standardized protocol. Execute RCON commands, monitor server status, and
+    control game settings remotely with ease. Supports SSE communication and
+    Docker deployment for flexible integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

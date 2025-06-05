@@ -1,0 +1,18 @@
+identifier: co-browser/attestable-mcp-server/attestable-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/co-browser/attestable-mcp-server
+  name: attestable-mcp-server
+  owner: co-browser
+server:
+  subdirectory: /
+  name: Remotely Attestable MCP Server
+  description: Enable secure and verifiable interactions between MCP clients and
+    servers. Leverage remote attestation to ensure the integrity of the code
+    running on your MCP server, enhancing trust and security in your
+    applications. Simplify compliance and governance with independently
+    verifiable code execution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

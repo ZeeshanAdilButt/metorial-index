@@ -1,0 +1,17 @@
+identifier: akaramanapp/greeting/greeting
+repo:
+  provider: github.com
+  url: https://github.com/akaramanapp/greeting
+  name: greeting
+  owner: akaramanapp
+server:
+  subdirectory: /
+  name: Greeting
+  description: Enhance your applications with personalized greeting capabilities.
+    Easily integrate and customize greetings to improve user engagement and
+    experience. Leverage the power of the Model Context Protocol to create
+    dynamic interactions effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

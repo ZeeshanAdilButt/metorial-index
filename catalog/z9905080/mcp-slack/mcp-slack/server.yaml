@@ -1,0 +1,18 @@
+identifier: z9905080/mcp-slack/mcp-slack
+repo:
+  provider: github.com
+  url: https://github.com/z9905080/mcp-slack
+  name: mcp-slack
+  owner: z9905080
+server:
+  subdirectory: /
+  name: Slack Integration Server
+  description: Enable AI assistants to seamlessly interact with Slack workspaces
+    by listing channels, sending messages, replying to threads, adding
+    reactions, and retrieving user and message data. Enhance your AI's
+    collaboration capabilities within Slack environments effortlessly. Simplify
+    Slack workspace management through AI-driven tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

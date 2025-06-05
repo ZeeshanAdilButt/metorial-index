@@ -1,0 +1,81 @@
+tools:
+  - name: get_project_structure
+    description: Get project structure standards for React Native development
+    inputSchema:
+      type: object
+  - name: get_api_communication
+    description: Get API communication standards for React Native development
+    inputSchema:
+      type: object
+  - name: get_component_design
+    description: Get component design standards for React Native development
+    inputSchema:
+      type: object
+  - name: get_state_management
+    description: Get state management standards for React Native development
+    inputSchema:
+      type: object
+  - name: get_component_example
+    description: Get a React Native component example
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - component_name
+      properties:
+        component_name:
+          type: string
+          description: Component Name
+      additionalProperties: false
+  - name: get_hook_example
+    description: Get a React Native hook example
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - hook_name
+      properties:
+        hook_name:
+          type: string
+          description: Hook Name
+      additionalProperties: false
+  - name: get_service_example
+    description: Get a React Native service example
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - service_name
+      properties:
+        service_name:
+          type: string
+          description: Service Name
+      additionalProperties: false
+  - name: get_screen_example
+    description: Get a React Native screen example
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - screen_name
+      properties:
+        screen_name:
+          type: string
+          description: Screen Name
+      additionalProperties: false
+  - name: get_theme_example
+    description: Get code for a React Native theme
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - theme_name
+      properties:
+        theme_name:
+          type: string
+          description: Theme Name
+      additionalProperties: false
+  - name: list_available_examples
+    description: List all available code examples by category
+    inputSchema:
+      type: object

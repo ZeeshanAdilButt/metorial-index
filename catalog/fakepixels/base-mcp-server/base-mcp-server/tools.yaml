@@ -1,0 +1,32 @@
+tools:
+  - name: process_command
+    description: Process a natural language command for Base network operations
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: Natural language command (e.g., "Send 0.1 ETH to 0x123...")
+  - name: create_wallet
+    description: Create a new wallet
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Optional name for the wallet
+  - name: check_balance
+    description: Check wallet balance
+    inputSchema:
+      type: object
+      properties:
+        wallet:
+          type: string
+          description: Wallet name or address (defaults to primary wallet)
+  - name: list_wallets
+    description: List all available wallets
+    inputSchema:
+      type: object
+      properties: {}

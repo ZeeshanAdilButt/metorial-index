@@ -1,0 +1,11 @@
+tools:
+  - name: execute_query
+    description: Execute a SQL query on Snowflake
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: SQL query to execute

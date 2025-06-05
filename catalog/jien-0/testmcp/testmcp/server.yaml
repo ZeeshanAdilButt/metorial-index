@@ -1,0 +1,18 @@
+identifier: jien-0/testmcp/testmcp
+repo:
+  provider: github.com
+  url: https://github.com/jien-0/testMCP
+  name: testMCP
+  owner: jien-0
+server:
+  subdirectory: /
+  name: Test MCP Server
+  description: Provide a test implementation of the Model Context Protocol server
+    to facilitate integration and experimentation with LLM applications. Enable
+    dynamic interaction with tools, resources, and prompts through a
+    standardized JSON-RPC interface. Simplify development and testing of MCP
+    clients and servers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

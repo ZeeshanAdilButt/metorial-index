@@ -1,0 +1,16 @@
+identifier: meeting-baas/meeting-mcp/meeting-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Meeting-Baas/meeting-mcp
+  name: meeting-mcp
+  owner: Meeting-Baas
+server:
+  subdirectory: /
+  name: Meeting BaaS
+  description: Manage your meeting data effortlessly. Invite bots to record and
+    transcribe meetings, search through transcripts, and organize calendar
+    events seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

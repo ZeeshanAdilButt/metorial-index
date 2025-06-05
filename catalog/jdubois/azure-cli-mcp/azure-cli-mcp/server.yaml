@@ -1,0 +1,19 @@
+identifier: jdubois/azure-cli-mcp/azure-cli-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jdubois/azure-cli-mcp
+  name: azure-cli-mcp
+  owner: jdubois
+server:
+  subdirectory: /
+  name: Azure CLI MCP Server
+  description: >-
+    An MCP Server that wraps the Azure CLI.
+
+    You can use it to list your resources, create/update/delete them, secure
+    them, in fact everything you can do with the Azure CLI, but powered by an
+    LLM!
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

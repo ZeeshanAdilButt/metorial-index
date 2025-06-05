@@ -1,0 +1,15 @@
+identifier: yodakeisuke/mcp-memory-domain-knowledge/mcp-memory-domain-knowledge
+repo:
+  provider: github.com
+  url: https://github.com/yodakeisuke/mcp-memory-domain-knowledge
+  name: mcp-memory-domain-knowledge
+  owner: yodakeisuke
+server:
+  subdirectory: /
+  name: Knowledge Graph Memory Server
+  description: Enable Claude to remember user information across chats using a
+    local knowledge graph.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

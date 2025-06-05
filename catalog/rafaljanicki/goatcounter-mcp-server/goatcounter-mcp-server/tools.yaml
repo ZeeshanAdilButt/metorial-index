@@ -1,0 +1,427 @@
+tools:
+  - name: get_me
+    description: Get information about the current Goatcounter user and API key.
+    inputSchema:
+      type: object
+      title: get_meArguments
+      properties: {}
+  - name: list_sites
+    description: List all Goatcounter sites accessible with the current API key.
+    inputSchema:
+      type: object
+      title: list_sitesArguments
+      properties: {}
+  - name: list_paths
+    description: Get an overview of paths on this site (without statistics).
+    inputSchema:
+      type: object
+      $defs:
+        ListPathsParams:
+          type: object
+          title: ListPathsParams
+          properties:
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Only select paths after this ID, for pagination.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+      title: list_pathsArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/ListPathsParams"
+  - name: get_stats_total
+    description: Get total number of pageviews and visitors for the site.
+    inputSchema:
+      type: object
+      $defs:
+        StatsParams:
+          type: object
+          title: StatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_totalArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/StatsParams"
+  - name: get_stats_hits
+    description: List page statistics (pageviews and visitors per path).
+    inputSchema:
+      type: object
+      $defs:
+        PaginatedStatsParams:
+          type: object
+          title: PaginatedStatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Pagination cursor (specific meaning depends on endpoint).
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_hitsArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/PaginatedStatsParams"
+  - name: get_stats_refs
+    description: List referrer statistics.
+    inputSchema:
+      type: object
+      $defs:
+        PaginatedStatsParams:
+          type: object
+          title: PaginatedStatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Pagination cursor (specific meaning depends on endpoint).
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_refsArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/PaginatedStatsParams"
+  - name: get_stats_browsers
+    description: List browser statistics.
+    inputSchema:
+      type: object
+      $defs:
+        PaginatedStatsParams:
+          type: object
+          title: PaginatedStatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Pagination cursor (specific meaning depends on endpoint).
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_browsersArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/PaginatedStatsParams"
+  - name: get_stats_systems
+    description: List operating system statistics.
+    inputSchema:
+      type: object
+      $defs:
+        PaginatedStatsParams:
+          type: object
+          title: PaginatedStatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Pagination cursor (specific meaning depends on endpoint).
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_systemsArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/PaginatedStatsParams"
+  - name: get_stats_sizes
+    description: List screen size statistics.
+    inputSchema:
+      type: object
+      $defs:
+        PaginatedStatsParams:
+          type: object
+          title: PaginatedStatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Pagination cursor (specific meaning depends on endpoint).
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_sizesArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/PaginatedStatsParams"
+  - name: get_stats_locations
+    description: List location statistics.
+    inputSchema:
+      type: object
+      $defs:
+        PaginatedStatsParams:
+          type: object
+          title: PaginatedStatsParams
+          properties:
+            end:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: End
+              default: null
+              description: End date (YYYY-MM-DD or relative e.g., 'yesterday').
+            after:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: After
+              default: null
+              description: Pagination cursor (specific meaning depends on endpoint).
+            daily:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Daily
+              default: false
+              description: Show daily statistics instead of totals.
+            limit:
+              anyOf:
+                - type: integer
+                - type: "null"
+              title: Limit
+              default: 20
+              description: Limit number of returned results (1-200, default 20).
+            start:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Start
+              default: null
+              description: Start date (YYYY-MM-DD or relative e.g., '7 days ago').
+            filter:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Filter
+              default: null
+              description: Filter paths (e.g., '/blog*').
+      title: get_stats_locationsArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/PaginatedStatsParams"

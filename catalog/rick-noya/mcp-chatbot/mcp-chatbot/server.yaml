@@ -1,0 +1,19 @@
+identifier: rick-noya/mcp-chatbot/mcp-chatbot
+repo:
+  provider: github.com
+  url: https://github.com/rick-noya/mcp-chatbot
+  name: mcp-chatbot
+  owner: rick-noya
+server:
+  subdirectory: /
+  name: Chatbot SQL Query Backend
+  description: Provide a backend service that generates and executes SQL queries
+    on a Postgres database using OpenAI's GPT models, returning structured JSON
+    responses optimized for chatbot UIs. Enable easy integration with frontends
+    through a REST API and support deployment on AWS Lambda or local
+    environments. Facilitate interactive, data-driven conversations with your
+    database via natural language queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

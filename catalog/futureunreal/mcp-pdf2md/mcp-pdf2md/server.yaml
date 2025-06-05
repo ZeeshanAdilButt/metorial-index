@@ -1,0 +1,17 @@
+identifier: futureunreal/mcp-pdf2md/mcp-pdf2md
+repo:
+  provider: github.com
+  url: https://github.com/FutureUnreal/mcp-pdf2md
+  name: mcp-pdf2md
+  owner: FutureUnreal
+server:
+  subdirectory: /
+  name: PDF to Markdown Conversion Service
+  description: Convert PDF files to structured Markdown format effortlessly.
+    Process local files and URLs in batches while preserving the original
+    document structure and layout. Integrate seamlessly with LLM clients for
+    enhanced functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

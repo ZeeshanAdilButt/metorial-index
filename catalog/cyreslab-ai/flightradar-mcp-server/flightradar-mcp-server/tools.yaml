@@ -1,0 +1,65 @@
+tools:
+  - name: get_flight_data
+    description: Get real-time data for a specific flight by flight number
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - flight_iata
+        - required:
+            - flight_icao
+      properties:
+        flight_iata:
+          type: string
+          description: IATA flight code (e.g., 'BA123')
+        flight_icao:
+          type: string
+          description: ICAO flight code (e.g., 'BAW123')
+  - name: search_flights
+    description: Search for flights by various criteria
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: "Maximum number of results to return (default: 10, max: 100)"
+        arr_iata:
+          type: string
+          description: IATA code of arrival airport (e.g., 'JFK')
+        dep_iata:
+          type: string
+          description: IATA code of departure airport (e.g., 'LHR')
+        airline_iata:
+          type: string
+          description: IATA airline code (e.g., 'BA' for British Airways)
+        airline_icao:
+          type: string
+          description: ICAO airline code (e.g., 'BAW' for British Airways)
+        flight_status:
+          enum:
+            - scheduled
+            - active
+            - landed
+            - cancelled
+            - incident
+            - diverted
+          type: string
+          description: Flight status (e.g., 'scheduled', 'active', 'landed', 'cancelled')
+  - name: get_flight_status
+    description: Get the current status of a flight by flight number
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - flight_iata
+        - required:
+            - flight_icao
+      properties:
+        flight_iata:
+          type: string
+          description: IATA flight code (e.g., 'BA123')
+        flight_icao:
+          type: string
+          description: ICAO flight code (e.g., 'BAW123')

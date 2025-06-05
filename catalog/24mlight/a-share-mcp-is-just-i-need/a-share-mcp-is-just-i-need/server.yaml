@@ -1,0 +1,19 @@
+identifier: 24mlight/a-share-mcp-is-just-i-need/a-share-mcp-is-just-i-need
+repo:
+  provider: github.com
+  url: https://github.com/24mlight/a-share-mcp-is-just-i-need
+  name: a-share-mcp-is-just-i-need
+  owner: 24mlight
+server:
+  subdirectory: /
+  name: A-Share Market Data Server
+  description: Provide comprehensive A-share market data including stock basics,
+    historical K-line data, financial reports, macroeconomic indicators, index
+    constituents, and data analysis reports. Enable answering any questions
+    related to the A-share market for both the overall market and specific
+    stocks. Facilitate seamless integration with MCP clients for real-time
+    financial data queries.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

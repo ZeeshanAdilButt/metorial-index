@@ -1,0 +1,45 @@
+tools:
+  - name: sf_cache_clear
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: sf_cache_refresh
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: sf_detect_project_directory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: sf_set_project_directory
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - directory
+      properties:
+        name:
+          type: string
+          description: Optional name for this project root
+        directory:
+          type: string
+          description: The absolute path to a directory containing an sfdx-project.json file
+        isDefault:
+          type: boolean
+          description: Set this root as the default for command execution
+        description:
+          type: string
+          description: Optional description for this project root
+      additionalProperties: false
+  - name: sf_list_roots
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

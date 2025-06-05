@@ -1,0 +1,18 @@
+identifier: datalayer/jupyter-earth-mcp-server/jupyter-earth-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/datalayer/jupyter-earth-mcp-server
+  name: jupyter-earth-mcp-server
+  owner: datalayer
+server:
+  subdirectory: /
+  name: Jupyter Earth MCP Server
+  description: Enable geospatial analysis within Jupyter notebooks by downloading
+    and analyzing Earth data granules from NASA Earthdata. Add code cells to
+    your notebooks to fetch datasets and perform AI-powered geospatial workflows
+    seamlessly. Integrate with Claude Desktop for enhanced interactive data
+    exploration and analysis.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

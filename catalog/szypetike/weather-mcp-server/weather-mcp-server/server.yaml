@@ -1,0 +1,17 @@
+identifier: szypetike/weather-mcp-server/weather-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/szypetike/weather-mcp-server
+  name: weather-mcp-server
+  owner: szypetike
+server:
+  subdirectory: /
+  name: Weather Server
+  description: Retrieve real-time weather information for cities worldwide. Get
+    detailed insights including temperature, humidity, and wind conditions, with
+    a fallback to mock data if needed. Enhance your AI assistant's capabilities
+    with accurate weather data at your fingertips.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

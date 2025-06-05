@@ -1,0 +1,131 @@
+tools:
+  - name: lotuswisdom
+    description: >-
+      A tool for problem-solving using the Lotus Sutra's wisdom framework.
+
+      This tool helps analyze problems through multiple approaches while
+      recognizing inherent wisdom.
+
+      Each step can utilize different techniques for understanding and
+      expression.
+
+
+      When to use this tool:
+
+      - Breaking down complex problems requiring multi-faceted understanding
+
+      - Questions that benefit from both direct and gradual approaches
+
+      - Problems where apparent contradictions need integration
+
+      - Situations requiring both analytical and intuitive understanding
+
+      - Tasks that benefit from meditative pauses to allow insight
+
+      - Questions containing their own inherent wisdom
+
+
+      Key features:
+
+      - Multiple approaches through Skillful Means (upaya, expedient, direct,
+      gradual, sudden)
+
+      - Non-Dual Recognition (recognize, transform, integrate, transcend,
+      embody)
+
+      - Meta-Cognitive Awareness (examine, reflect, verify, refine, complete)
+
+      - Process Steps (open, engage, transform, express)
+
+      - Meditative Space (meditate)
+
+      - Final Output (OUTPUT)
+
+
+      Process methodology:
+
+      1. Initial Opening <open> - Recognize the question's nature
+
+      2. Skillful Engagement <engage> - Choose appropriate methods
+
+      3. Transformation <transform> - Convert confusion to clarity
+
+      4. Natural Expression <express> - Allow understanding to flow
+
+      5. Final Integration <OUTPUT> - Present clear, beneficial response
+
+
+      Parameters explained:
+
+      - tag: The current processing technique (must be one of the core tags)
+
+      - content: The content of the current processing step
+
+      - stepNumber: Current number in sequence
+
+      - totalSteps: Current estimate of steps needed
+
+      - nextStepNeeded: Whether another step is needed
+
+      - isMeditation: Whether this step is a meditative pause
+
+      - meditationDuration: Optional duration for meditation
+
+
+      Every inquiry concludes with a final <OUTPUT> tag containing the complete
+      response.
+    inputSchema:
+      type: object
+      required:
+        - tag
+        - content
+        - stepNumber
+        - totalSteps
+        - nextStepNeeded
+      properties:
+        tag:
+          enum:
+            - upaya
+            - expedient
+            - direct
+            - gradual
+            - sudden
+            - recognize
+            - transform
+            - integrate
+            - transcend
+            - embody
+            - examine
+            - reflect
+            - verify
+            - refine
+            - complete
+            - open
+            - engage
+            - transform
+            - express
+            - meditate
+            - OUTPUT
+          type: string
+          description: Current processing technique
+        content:
+          type: string
+          description: Content of the current processing step
+        stepNumber:
+          type: integer
+          minimum: 1
+          description: Current step number
+        totalSteps:
+          type: integer
+          minimum: 1
+          description: Estimated total steps needed
+        isMeditation:
+          type: boolean
+          description: Whether this step is a meditative pause
+        nextStepNeeded:
+          type: boolean
+          description: Whether another step is needed
+        meditationDuration:
+          type: integer
+          minimum: 1
+          description: Duration for meditation in seconds

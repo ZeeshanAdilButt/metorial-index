@@ -1,0 +1,18 @@
+identifier: danhussey/transportnsw-mcp/transportnsw-mcp
+repo:
+  provider: github.com
+  url: https://github.com/danhussey/transportnsw-mcp
+  name: transportnsw-mcp
+  owner: danhussey
+server:
+  subdirectory: /
+  name: Transport NSW API Client
+  description: Provide seamless access to Transport NSW data including stops,
+    alerts, and real-time departures through a standardized AI model interface.
+    Enable AI applications to query transport information efficiently using the
+    Transport NSW API. Simplify integration of transport data into AI workflows
+    with this MCP service.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

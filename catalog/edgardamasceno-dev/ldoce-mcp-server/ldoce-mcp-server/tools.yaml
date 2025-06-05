@@ -1,0 +1,12 @@
+tools:
+  - name: get_dictionary_entry
+    description: Busca o HTML do Longman para uma palavra e retorna JSON parseado
+      (dictionaryEntries, simpleForm, continuousForm)
+    inputSchema:
+      type: object
+      required:
+        - word
+      properties:
+        word:
+          type: string
+          description: "A palavra a ser consultada (ex: rot)"

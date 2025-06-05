@@ -1,0 +1,15 @@
+identifier: angheljf/nyt/nyt
+repo:
+  provider: github.com
+  url: https://github.com/angheljf/nyt
+  name: nyt
+  owner: angheljf
+server:
+  subdirectory: /
+  name: NYTimes Article Search
+  description: A TypeScript-based MCP server that searches New York Times articles
+    from the last 30 days based on a keyword.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

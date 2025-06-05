@@ -1,0 +1,14 @@
+identifier: sakce/mcp-server-monday/mcp-server-monday
+repo:
+  provider: github.com
+  url: https://github.com/sakce/mcp-server-monday
+  name: mcp-server-monday
+  owner: sakce
+server:
+  subdirectory: /
+  name: Monday.com MCP Server
+  description: Enable interaction with Monday.com boards and items.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

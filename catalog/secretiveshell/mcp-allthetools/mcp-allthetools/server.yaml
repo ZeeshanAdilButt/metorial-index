@@ -1,0 +1,18 @@
+identifier: secretiveshell/mcp-allthetools/mcp-allthetools
+repo:
+  provider: github.com
+  url: https://github.com/SecretiveShell/MCP-allthetools
+  name: MCP-allthetools
+  owner: SecretiveShell
+server:
+  subdirectory: /
+  name: All the Tools Server
+  description: Consolidate access to a vast array of tools from the Glama API.
+    Explore a comprehensive collection of functionalities in one place,
+    enhancing your development experience. Please note that this is a test
+    server and should not be used in production environments due to potential
+    instability.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

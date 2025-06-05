@@ -1,0 +1,51 @@
+tools:
+  - name: get_python_code
+    description: "
+
+      \    Extract Python code from a target file, along with related imported
+      files.
+
+      \   \ 
+
+      \    This tool analyzes a Python file's imports and returns the most
+      relevant
+
+      \    code in a structured format suitable for LLMs. It always includes
+      README.md
+
+      \    (or variants) as additional files to provide project context.
+
+      \   \ 
+
+      \    Args:
+
+      \        target_file: Path to the Python file to analyze.
+
+      \        root_repo_path: Root directory of the repository. If not
+      provided,
+
+      \                      the directory of the target file will be used.
+
+      \   \ 
+
+      \    Returns:
+
+      \        A dictionary containing the target file, related code files, and
+      README files.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_python_codeArguments
+      required:
+        - target_file
+      properties:
+        target_file:
+          type: string
+          title: Target File
+        root_repo_path:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Root Repo Path
+          default: null

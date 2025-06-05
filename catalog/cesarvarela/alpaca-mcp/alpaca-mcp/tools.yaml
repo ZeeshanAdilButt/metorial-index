@@ -1,0 +1,65 @@
+tools:
+  - name: get-assets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        assetClass:
+          enum:
+            - us_equity
+            - crypto
+          type: string
+          default: us_equity
+      additionalProperties: false
+  - name: get-stock-bars
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - symbols
+        - start
+        - end
+        - timeframe
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+        symbols:
+          type: array
+          items:
+            type: string
+        timeframe:
+          type: string
+      additionalProperties: false
+  - name: get-market-days
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - start
+        - end
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+      additionalProperties: false
+  - name: get-news
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - start
+        - end
+        - symbols
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+        symbols:
+          type: array
+          items:
+            type: string
+      additionalProperties: false

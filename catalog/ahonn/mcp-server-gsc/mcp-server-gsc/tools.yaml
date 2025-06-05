@@ -1,0 +1,128 @@
+tools:
+  - name: list_sites
+    description: List all sites in Google Search Console
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: search_analytics
+    description: Get search performance data from Google Search Console
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteUrl
+        - startDate
+        - endDate
+      properties:
+        type:
+          enum:
+            - web
+            - image
+            - video
+            - news
+          type: string
+          description: Type of search to filter by, such as web, image, video, news
+        endDate:
+          type: string
+          description: End date in YYYY-MM-DD format
+        siteUrl:
+          type: string
+          description: "The site URL as defined in Search Console. Example:
+            sc-domain:example.com (for domain resources) or
+            http://www.example.com/ (for site prefix resources)"
+        rowLimit:
+          type: number
+          default: 1000
+          description: Maximum number of rows to return
+        startDate:
+          type: string
+          description: Start date in YYYY-MM-DD format
+        dimensions:
+          type: string
+          description: Comma-separated list of dimensions to break down results by, such
+            as query, page, country, device, searchAppearance
+        aggregationType:
+          enum:
+            - auto
+            - byNewsShowcasePanel
+            - byProperty
+            - byPage
+          type: string
+          description: Type of aggregation, such as auto, byNewsShowcasePanel, byProperty,
+            byPage
+      additionalProperties: false
+  - name: index_inspect
+    description: Inspect a URL to see if it is indexed or can be indexed
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - siteUrl
+        - inspectionUrl
+      properties:
+        siteUrl:
+          type: string
+          description: "The site URL as defined in Search Console. Example:
+            sc-domain:example.com (for domain resources) or
+            http://www.example.com/ (for site prefix resources)"
+        languageCode:
+          type: string
+          default: en-US
+          description: An IETF BCP-47 language code representing the language of the
+            requested translated issue messages, such as "en-US" or "de-CH".
+            Default is "en-US"
+        inspectionUrl:
+          type: string
+          description: The fully-qualified URL to inspect. Must be under the property
+            specified in "siteUrl"
+      additionalProperties: false
+  - name: list_sitemaps
+    description: List sitemaps for a site in Google Search Console
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        siteUrl:
+          type: string
+          description: "The site's URL, including protocol. For example:
+            http://www.example.com/"
+        sitemapIndex:
+          type: string
+          description: "A URL of a site's sitemap index. For example:
+            http://www.example.com/sitemapindex.xml"
+      additionalProperties: false
+  - name: get_sitemap
+    description: Get a sitemap for a site in Google Search Console
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        siteUrl:
+          type: string
+          description: "The site's URL, including protocol. For example:
+            http://www.example.com/"
+        feedpath:
+          type: string
+          description: "The URL of the actual sitemap. For example:
+            http://www.example.com/sitemap.xml"
+      additionalProperties: false
+  - name: submit_sitemap
+    description: Submit a sitemap for a site in Google Search Console
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - feedpath
+        - siteUrl
+      properties:
+        siteUrl:
+          type: string
+          description: "The site's URL, including protocol. For example:
+            http://www.example.com/"
+        feedpath:
+          type: string
+          description: "The URL of the sitemap to add. For example:
+            http://www.example.com/sitemap.xml"
+      additionalProperties: false

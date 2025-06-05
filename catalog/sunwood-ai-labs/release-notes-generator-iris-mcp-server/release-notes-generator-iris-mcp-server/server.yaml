@@ -1,0 +1,17 @@
+identifier: sunwood-ai-labs/release-notes-generator-iris-mcp-server/release-notes-generator-iris-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Sunwood-ai-labs/release-notes-generator-iris-mcp-server
+  name: release-notes-generator-iris-mcp-server
+  owner: Sunwood-ai-labs
+server:
+  subdirectory: /
+  name: Iris MCP Server
+  description: Automatically generate structured release notes based on Git
+    repository tags. Detect differences between tags and save the output in
+    Markdown format for easy documentation. Customize templates for new
+    features, improvements, and bug fixes to streamline your release process.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,16 @@
+identifier: kubb-labs/kubb/kubb
+repo:
+  provider: github.com
+  url: https://github.com/kubb-labs/kubb
+  name: kubb
+  owner: kubb-labs
+server:
+  subdirectory: /tools/smithery
+  name: Kubb
+  description: Effortlessly generate fully typed API clients, TypeScript types,
+    and Zod schemas with Kubb. Just provide your OpenAPI/Swagger specification,
+    and let an LLM handle the logic and conversion.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,351 @@
+tools:
+  - name: list_spaces
+    description: >-
+      List available Confluence spaces with filtering options and pagination
+      support.
+
+              PURPOSE: Discovers accessible Confluence spaces, providing metadata about each space including ID, key, name, description, and status. This tool is essential for finding spaces before working with their content.
+
+              WHEN TO USE:
+              - When you need to discover what spaces exist in the Confluence instance.
+              - When you need to find a space's ID or key to use with other tools.
+              - When you need to filter spaces by type ('global', 'personal', 'archived').
+              - When you need to locate a space by partial name matching.
+              - When you need to browse available content sources.
+              - As a first step before using 'list_pages' or content search tools.
+
+              WHEN NOT TO USE:
+              - When you already know the specific space ID/key (use 'get_space' instead).
+              - When you need to search for page content (use 'search' instead).
+              - When you need to list pages within a known space (use 'list_pages' instead).
+              - When you need detailed information about a specific space (use 'get_space' instead).
+
+              RETURNS: Formatted list of spaces including:
+              - Numeric ID (used for most API operations)
+              - Space key (short identifier, e.g., 'DEV', 'HR', etc.)
+              - Display name and description
+              - Type (global, personal) and status (current, archived)
+              - Creation information and URL
+              
+              Results can be paginated using the 'limit' and 'cursor' parameters.
+              
+              SORTING: By default, spaces are sorted by name in descending order.
+
+              EXAMPLES:
+              - List all spaces: {}
+              - Filter by type: { type: ["global"] }
+              - Filter by status: { status: ["current"] }
+              - Search by name: { query: "Engineering" }
+              - With pagination: { limit: 20, cursor: "some-cursor-value" }
+
+              ERRORS:
+              - Authentication failures: Check Confluence credentials.
+              - Permission issues: Ensure you have access to view spaces.
+              - Invalid filter values: Verify type/status values match allowed options.
+              - No spaces found: May indicate permission issues or overly restrictive filters.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        type:
+          enum:
+            - global
+            - personal
+            - archived
+          type: string
+          description: 'Filter spaces by type. Options include: "global" (team spaces),
+            "personal" (user spaces), or "archived" (archived spaces). If
+            omitted, returns all types.'
+        limit:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return (1-100). Use this to control the
+            response size. Useful for pagination or when you only need a few
+            results. The Confluence API caps results at 100 items per request.
+        query:
+          type: string
+          description: Search filter to find spaces matching specific text in their name,
+            key, or description (text search).
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Use this
+            to navigate through large result sets. The cursor value can be
+            obtained from the pagination information in a previous response.
+        status:
+          enum:
+            - current
+            - archived
+          type: string
+          description: 'Filter spaces by status. Options include: "current" (active
+            spaces) or "archived" (archived spaces). If omitted, returns spaces
+            with all statuses.'
+      additionalProperties: false
+  - name: get_space
+    description: >-
+      Retrieve comprehensive details about a specific Confluence space by ID.
+
+              PURPOSE: Fetches complete metadata and configuration information for a space, identified by its numeric ID. Provides all available details about a space, including permissions, themes, and homepage.
+
+              WHEN TO USE:
+              - When you need detailed information about a specific space's configuration.
+              - When you need the numeric ID of a space's homepage to use with 'get_page'.
+              - When you need to verify permissions, status, or theme settings.
+              - When you need to analyze space metadata before working with its content.
+              - After finding a space through 'list_spaces' and needing more details.
+              - When you need to determine if a space is active, archived, or has specific restrictions.
+
+              WHEN NOT TO USE:
+              - When you need to discover spaces (use 'list_spaces' instead).
+              - When you need to list pages in a space (use 'list_pages' instead).
+              - When you need to search for content (use 'search' instead).
+              - When you only have a space key and need the ID (use 'list_spaces' first).
+
+              RETURNS: Comprehensive space details formatted in Markdown, including:
+              - Full name, key, and ID information
+              - Description and homepage details
+              - Type, status, and theme configuration
+              - Permissions and restrictions
+              - Creation and modification metadata
+              - URLs for accessing the space directly
+              
+              All available metadata is fetched by default to provide complete information.
+
+              EXAMPLES:
+              - Get space with ID 123456: { spaceId: "123456" }
+
+              ERRORS:
+              - Space not found (404): Verify the numeric space ID exists and is accessible.
+              - Permission denied (403): Check if you have access to the space.
+              - Authentication failure: Verify Confluence credentials.
+              - Invalid ID format: Ensure the spaceId is a valid numeric identifier.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - spaceKey
+      properties:
+        spaceKey:
+          type: string
+          description: The key of the Confluence space to retrieve (e.g., "DEV" or
+            "MARKETING"). The space key is a unique identifier for a space,
+            typically a short uppercase code.
+      additionalProperties: false
+  - name: list_pages
+    description: >-
+      List Confluence pages, optionally filtering by space ID(s), status, or
+      title/content/label query, with pagination.
+
+              PURPOSE: Discover pages within specific spaces or across the instance based on status or simple text matching. Provides page metadata and IDs needed for the 'get_page' tool.
+
+              WHEN TO USE:
+              - To list pages within one or more specific spaces (using 'spaceId').
+              - To find pages based on their status ('current', 'archived', etc.).
+              - To perform simple text searches on page titles or labels ('query').
+              - To get an overview of recent pages in a space before getting full content.
+              - To obtain 'pageId' values for use with 'get_page'.
+
+              WHEN NOT TO USE:
+              - When you need to search the *full content* of pages with complex logic (use 'search' with CQL).
+              - When you already know the 'pageId' and need details (use 'get_page').
+              - When you need space information (use space tools).
+              - If you only have the space *key* (use 'list-spaces' or 'get-space' to find the numeric 'spaceId' first).
+
+              RETURNS: Formatted list of pages including ID, title, space ID, status, author, creation date, version, and URL. Includes pagination details if applicable (Confluence uses cursor-based pagination).
+              
+              SORTING: By default, pages are sorted by modified date in descending order (most recently modified first). You can change this by specifying a different value in the 'sort' parameter (e.g., "title" for alphabetical sorting).
+
+              EXAMPLES:
+              - List pages in space 123456: { spaceId: ["123456"] }
+              - List archived pages in space 123456: { spaceId: ["123456"], status: ["archived"] }
+              - Find pages with "Project Plan" in title/label in space 123456: { spaceId: ["123456"], query: "Project Plan" }
+              - Paginate results: { limit: 10, cursor: "some-cursor-value" }
+              - Sort pages by title: { spaceId: ["123456"], sort: "title" }
+
+              ERRORS:
+              - Space ID not found: Verify the numeric 'spaceId' is correct.
+              - Invalid status: Ensure 'status' is one of the allowed values.
+              - Authentication failures: Check Confluence credentials.
+              - No pages found: Filters might be too restrictive, or the space is empty/inaccessible.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        sort:
+          enum:
+            - id
+            - -id
+            - created-date
+            - -created-date
+            - modified-date
+            - -modified-date
+            - title
+            - -title
+          type: string
+          description: 'Property to sort pages by. Default is "-modified-date" which
+            displays the most recently modified pages first. The "-" prefix
+            indicates descending order. Valid values: "id", "-id",
+            "created-date", "-created-date", "modified-date", "-modified-date",
+            "title", "-title".'
+        limit:
+          type: number
+          maximum: 250
+          minimum: 1
+          description: Maximum number of items to return (1-250). Use this to control the
+            response size. Useful for pagination or when you only need a few
+            results. The Confluence API caps results at 250 items per request.
+        query:
+          type: string
+          description: Filter pages by title, content, or labels (text search). Use this
+            to narrow down results to specific topics or content.
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Use this
+            to navigate through large result sets. The cursor value can be
+            obtained from the pagination information in a previous response.
+        status:
+          type: array
+          items:
+            enum:
+              - current
+              - trashed
+              - deleted
+              - draft
+              - archived
+              - historical
+            type: string
+          description: 'Filter pages by status. Options include: "current" (published
+            pages), "trashed" (pages in trash), "deleted" (permanently deleted),
+            "draft" (unpublished drafts), "archived" (archived pages), or
+            "historical" (previous versions). Defaults to "current" if not
+            specified. Provide as an array to include multiple statuses.'
+        spaceId:
+          type: array
+          items:
+            type: string
+          description: Filter pages by space IDs. Provide an array of space IDs (e.g.,
+            ["123456", "789012"]) to only show pages from specific spaces.
+            Useful when you want to focus on content from particular projects or
+            teams.
+      additionalProperties: false
+  - name: get_page
+    description: >-
+      Retrieve a Confluence page's full content and metadata by its numeric ID.
+
+              PURPOSE: Fetches the complete content (converted to Markdown) and comprehensive metadata for a specific Confluence page, identified by its numeric ID. The page content is properly formatted with headings, tables, lists, and other Markdown elements.
+
+              WHEN TO USE:
+              - When you need to read, analyze, or summarize the full content of a specific page.
+              - When you need detailed page metadata (author, version, status, etc.).
+              - After finding a page ID through 'list_pages' or 'search' and need its complete content.
+              - When you need the actual content of a page rather than just its metadata.
+
+              WHEN NOT TO USE:
+              - When you only have a space ID or space key (use 'list_pages' first).
+              - When you need to find pages based on criteria (use 'list_pages' or 'search').
+              - When you want to discover spaces rather than specific pages (use space tools).
+              - When you need to search across multiple pages (use 'search').
+
+              RETURNS: Comprehensive page details formatted in Markdown, including:
+              - Full title, space information, and creation metadata
+              - Complete page content (converted from Atlassian Document Format to Markdown)
+              - Version information, permissions status, and URL
+              - Metadata including labels, restrictions, and ancestors
+              
+              The page content is fetched using the Confluence Content REST API, with the body transformed from ADF (Atlassian Document Format) to readable Markdown.
+
+              EXAMPLES:
+              - Get page with ID 123456: { pageId: "123456" }
+
+              ERRORS:
+              - Page not found (404): Verify the numeric page ID exists and is accessible.
+              - Permission denied (403): Check if the page has view restrictions.
+              - Authentication failure: Verify API credentials.
+              - Content conversion failures: Some complex content elements may not convert perfectly to Markdown.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+      properties:
+        pageId:
+          type: string
+          description: The numeric ID of the Confluence page to retrieve (e.g., "456789").
+            This is required and must be a valid page ID from your Confluence
+            instance. The page content will be returned in Markdown format for
+            easy reading.
+      additionalProperties: false
+  - name: search
+    description: >-
+      Search Confluence content using CQL (Confluence Query Language) for
+      precise results.
+
+              PURPOSE: Performs advanced content searches across Confluence using CQL queries, allowing for complex search patterns, content filtering, and targeted results. This is the most powerful search tool for Confluence, supporting complex filtering and sorting.
+
+              WHEN TO USE:
+              - When you need to search for specific text or patterns within page content (not just titles).
+              - When you need to combine multiple search criteria (e.g., text + space + date + type).
+              - When you need to search using complex logical operators (AND, OR, NOT).
+              - When simple title/label searches via 'list_pages' are insufficient.
+              - When you need to search across all content types (pages, blog posts, attachments, etc.).
+              - When you need fine-grained sorting control over search results.
+
+              WHEN NOT TO USE:
+              - When you already know the page ID (use 'get_page' instead).
+              - When you only need to list pages in a space by title (use 'list_pages' with optional query).
+              - When you need to explore or browse spaces (use space-related tools).
+              - When you're not searching for actual content (e.g., for space metadata).
+
+              RETURNS: Formatted search results including:
+              - Result type (page, blog, attachment, etc.)
+              - Title and content excerpt with highlighted match terms
+              - Space information, creation metadata, and URL
+              - Content ID for use with other tools like 'get_page'
+              
+              Results can be paginated using the 'limit' and 'cursor' parameters.
+
+              CQL EXAMPLES:
+              - Basic text search: { cql: "text ~ 'project plan'" }
+              - Combined criteria: { cql: "text ~ 'quarterly report' AND space = DEV AND type = 'page'" }
+              - Date filtering: { cql: "created >= '2023-01-01' AND created <= '2023-12-31'" }
+              - Content by specific user: { cql: "creator = 'jsmith'" }
+              - Exact phrase with label: { cql: "text = 'API Documentation' AND label = 'public'" }
+              
+              Common CQL fields:
+              - text: Full-text content search
+              - title: Title search
+              - space: Space key
+              - type: Content type (page, blogpost, attachment)
+              - created/modified: Date criteria
+              - label: Content labels
+              - creator/contributor: User references
+
+              ERRORS:
+              - Invalid CQL syntax: Check query format against CQL documentation.
+              - No results: Try broadening search criteria.
+              - Authentication/permission failures: Ensure proper credentials.
+              - Rate limiting: For large result sets, use pagination and caching.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        cql:
+          type: string
+          description: Search query using Confluence Query Language (CQL). Use this to
+            search for content using standard CQL syntax (e.g., "text ~ 'project
+            plan' AND space = DEV"). If omitted, returns recent content sorted
+            by last modified date.
+        limit:
+          type: number
+          maximum: 100
+          minimum: 1
+          description: Maximum number of items to return (1-100). Use this to control the
+            response size. Useful for pagination or when you only need a few
+            results. The Confluence search API caps results at 100 items per
+            request.
+        cursor:
+          type: string
+          description: Pagination cursor for retrieving the next set of results. Use this
+            to navigate through large result sets. The cursor value can be
+            obtained from the pagination information in a previous response.
+      additionalProperties: false

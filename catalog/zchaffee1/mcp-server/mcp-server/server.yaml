@@ -1,0 +1,18 @@
+identifier: zchaffee1/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/zchaffee1/mcp-server
+  name: mcp-server
+  owner: zchaffee1
+server:
+  subdirectory: /
+  name: Scientific Computing Resource Server
+  description: Provide seamless access to scientific computing resources including
+    HDF5 file operations, Slurm job management, and node hardware information.
+    Enable compression and decompression of data and files using gzip or zlib.
+    Facilitate efficient management and querying of datasets, job submissions,
+    and system hardware details through a unified MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

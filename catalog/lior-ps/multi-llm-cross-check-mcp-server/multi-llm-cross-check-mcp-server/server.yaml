@@ -1,0 +1,18 @@
+identifier: lior-ps/multi-llm-cross-check-mcp-server/multi-llm-cross-check-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/lior-ps/multi-llm-cross-check-mcp-server
+  name: multi-llm-cross-check-mcp-server
+  owner: lior-ps
+server:
+  subdirectory: /
+  name: Multi LLM Cross-Check Server
+  description: Enable simultaneous querying of multiple LLM providers to
+    cross-check responses and improve reliability. Integrate easily with Claude
+    Desktop to get parallel responses from OpenAI, Anthropic, Perplexity AI, and
+    Google Gemini. Benefit from asynchronous processing for faster and
+    comprehensive LLM insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

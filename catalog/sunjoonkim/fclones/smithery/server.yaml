@@ -1,0 +1,18 @@
+identifier: sunjoonkim/fclones/smithery
+repo:
+  provider: github.com
+  url: https://github.com/sunjoonkim/fclones
+  name: fclones
+  owner: sunjoonkim
+server:
+  subdirectory: /
+  name: fclones
+  description: Find and remove duplicate files efficiently with a command line
+    utility that offers advanced filtering, high performance, and flexible
+    removal options. Inspect duplicates before deletion and integrate seamlessly
+    with Unix tools using JSON output. Optimize storage by replacing duplicates
+    with links or using native copy-on-write deduplication where supported.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

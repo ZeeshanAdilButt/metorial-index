@@ -1,0 +1,15 @@
+identifier: rebots-online/mcp-chat-analysis-server/mcp-server-chat-analysis
+repo:
+  provider: github.com
+  url: https://github.com/rebots-online/mcp-chat-analysis-server
+  name: mcp-chat-analysis-server
+  owner: rebots-online
+server:
+  subdirectory: /
+  name: Chat Analysis
+  description: Semantic analysis of chat conversations using vector embeddings and
+    knowledge graphs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

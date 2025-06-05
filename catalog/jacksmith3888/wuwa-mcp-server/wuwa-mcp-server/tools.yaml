@@ -1,0 +1,76 @@
+tools:
+  - name: get_artifact_info
+    description: "获取库街区上的声骸详细信息并以 Markdown 格式返回。
+
+
+      \    Args:
+
+      \        artifact_name: 要查询的声骸套装的中文名称。
+
+
+      \    Returns:
+
+      \        包含声骸信息的 Markdown 字符串，
+
+      \        或者在找不到声骸或获取数据失败时返回错误消息。
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_artifact_infoArguments
+      required:
+        - artifact_name
+      properties:
+        artifact_name:
+          type: string
+          title: Artifact Name
+  - name: get_character_info
+    description: "获取库街区上的角色详细信息包括角色技能，养成攻略等，并以 Markdown 格式返回。
+
+
+      \    Args:
+
+      \        character_name: 要查询的角色的中文名称。
+
+
+      \    Returns:
+
+      \        包含角色信息的 Markdown 字符串，
+
+      \        或者在找不到角色或获取数据失败时返回错误消息。
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_character_infoArguments
+      required:
+        - character_name
+      properties:
+        character_name:
+          type: string
+          title: Character Name
+  - name: get_character_profile
+    description: "获取库街区上的角色档案信息并以 Markdown 格式返回。
+
+
+      \    Args:
+
+      \        character_name: 要查询的角色的中文名称。
+
+
+      \    Returns:
+
+      \        包含角色档案信息的 Markdown 字符串，
+
+      \        或者在找不到角色或获取数据失败时返回错误消息。
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_character_profileArguments
+      required:
+        - character_name
+      properties:
+        character_name:
+          type: string
+          title: Character Name

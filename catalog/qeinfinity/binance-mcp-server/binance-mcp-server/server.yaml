@@ -1,0 +1,17 @@
+identifier: qeinfinity/binance-mcp-server/binance-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/qeinfinity/binance-mcp-server
+  name: binance-mcp-server
+  owner: qeinfinity
+server:
+  subdirectory: /
+  name: Binance Market Data Server
+  description: Stream real-time market data from Binance for both spot and futures
+    markets. Subscribe to various data streams like trades, tickers, and
+    candlestick data effortlessly. Enhance your trading applications with
+    reliable and type-safe WebSocket support.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,122 @@
+tools:
+  - name: "!pg"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - connection
+      properties:
+        connection:
+          type: object
+          required:
+            - host
+            - database
+            - user
+            - password
+          properties:
+            host:
+              type: string
+            port:
+              type: number
+            user:
+              type: string
+            database:
+              type: string
+            password:
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: "!mysql"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - connection
+      properties:
+        connection:
+          type: object
+          required:
+            - host
+            - database
+            - user
+            - password
+          properties:
+            host:
+              type: string
+            port:
+              type: number
+            user:
+              type: string
+            database:
+              type: string
+            password:
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: "!firestore"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - connection
+      properties:
+        connection:
+          type: object
+          required:
+            - projectId
+            - keyFilename
+          properties:
+            projectId:
+              type: string
+            keyFilename:
+              type: string
+          additionalProperties: false
+      additionalProperties: false
+  - name: "!tables"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: "!triggers"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: "!functions"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: "!query"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+      additionalProperties: false
+  - name: "!export-db"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - table
+      properties:
+        table:
+          type: string
+      additionalProperties: false
+  - name: "!export-data"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - table
+      properties:
+        table:
+          type: string
+      additionalProperties: false

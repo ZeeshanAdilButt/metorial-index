@@ -1,0 +1,12 @@
+tools:
+  - name: execute_query
+    description: Execute a query on Iceberg tables
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: "Query to execute (supports: LIST TABLES, DESCRIBE TABLE, SELECT,
+            CREATE TABLE)"

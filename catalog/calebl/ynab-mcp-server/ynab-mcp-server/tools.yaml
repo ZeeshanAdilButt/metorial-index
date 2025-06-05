@@ -1,0 +1,74 @@
+tools:
+  - name: budget_summary
+    description: Get a summary of the budget for a specific month highlighting
+      overspent categories that need attention and categories with a positive
+      balance that are doing well.
+    inputSchema:
+      type: object
+      properties:
+        month:
+          type: string
+          description: The budget month in ISO format (e.g. 2016-12-01). The string
+            'current' can also be used to specify the current calendar month
+            (UTC)
+        budgetId:
+          type: string
+          description: The ID of the budget to get a summary for (optional, defaults to
+            the budget set in the YNAB_BUDGET_ID environment variable)
+  - name: create_transaction
+    description: Creates a new transaction in your YNAB budget. Either payee_id or
+      payee_name must be provided in addition to the other required fields.
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: The date of the transaction in ISO format (e.g. 2024-03-24)
+        memo:
+          type: string
+          description: A memo/note for the transaction (optional)
+        amount:
+          type: number
+          description: The amount in dollars (e.g. 10.99)
+        cleared:
+          type: string
+          description: Whether the transaction is cleared (optional, defaults to false)
+        payeeId:
+          type: string
+          description: The id of the payee (optional if payee_name is provided)
+        approved:
+          type: string
+          description: Whether the transaction is approved (optional, defaults to false)
+        budgetId:
+          type: string
+          description: The id of the budget to create the transaction in (optional,
+            defaults to the budget set in the YNAB_BUDGET_ID environment
+            variable)
+        accountId:
+          type: string
+          description: The id of the account to create the transaction in
+        flagColor:
+          type: string
+          description: The transaction flag color (red, orange, yellow, green, blue,
+            purple) (optional)
+        payeeName:
+          type: string
+          description: The name of the payee (optional if payee_id is provided)
+        categoryId:
+          type: string
+          description: The category id for the transaction (optional)
+  - name: get_unapproved_transactions
+    description: Gets unapproved transactions from a budget. First time pulls last 3
+      days, subsequent pulls use server knowledge to get only changes.
+    inputSchema:
+      type: object
+      properties:
+        budgetId:
+          type: string
+          description: The ID of the budget to fetch transactions for (optional, defaults
+            to the budget set in the YNAB_BUDGET_ID environment variable)
+  - name: list_budgets
+    description: Lists all available budgets from YNAB API
+    inputSchema:
+      type: object
+      properties: {}

@@ -1,0 +1,9 @@
+tools:
+  - name: voicevox
+    description: VOICEVOXを使用して音声を合成し、ホストコンピュータで再生します
+    inputSchema:
+      type: object
+      properties:
+        text:
+          type: string
+          description: 合成する文章

@@ -1,0 +1,17 @@
+identifier: cam10001110101/remote-mcp-server/remote-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Cam10001110101/remote-mcp-server
+  name: remote-mcp-server
+  owner: Cam10001110101
+server:
+  subdirectory: /
+  name: Remote MCP Server
+  description: Deploy a remote MCP server on Cloudflare Workers with OAuth login
+    capabilities. Connect seamlessly with Claude Desktop and other MCP clients
+    to access and utilize defined tools. Experience a streamlined setup for
+    integrating LLMs with real-world data and actions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

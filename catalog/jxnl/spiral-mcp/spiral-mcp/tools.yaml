@@ -1,0 +1,90 @@
+tools:
+  - name: list_models
+    description: List available Spiral models with their capabilities.
+    inputSchema:
+      type: object
+      title: list_modelsArguments
+      properties: {}
+  - name: generate
+    description: Generate text using a Spiral model.
+    inputSchema:
+      type: object
+      $defs:
+        GenerateParams:
+          type: object
+          title: GenerateParams
+          required:
+            - model
+            - prompt
+          properties:
+            model:
+              type: string
+              title: Model
+              description: The ID or slug of the Spiral model to use
+            prompt:
+              type: string
+              title: Prompt
+              description: The input text to generate from
+      title: generateArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/GenerateParams"
+  - name: generate_from_file
+    description: Generate text using a Spiral model with input from a file.
+    inputSchema:
+      type: object
+      $defs:
+        GenerateFromFileParams:
+          type: object
+          title: GenerateFromFileParams
+          required:
+            - model
+            - file_path
+          properties:
+            model:
+              type: string
+              title: Model
+              description: The ID or slug of the Spiral model to use
+            file_path:
+              type: string
+              title: File Path
+              description: Path to the file to use as input
+      title: generate_from_fileArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/GenerateFromFileParams"
+  - name: generate_from_url
+    description: Generate text using a Spiral model with input from a URL.
+    inputSchema:
+      type: object
+      $defs:
+        GenerateFromUrlParams:
+          type: object
+          title: GenerateFromUrlParams
+          required:
+            - model
+            - url
+          properties:
+            url:
+              type: string
+              title: Url
+              description: URL to fetch content from
+            model:
+              type: string
+              title: Model
+              description: The ID or slug of the Spiral model to use
+            extract_article:
+              type: boolean
+              title: Extract Article
+              default: true
+              description: Whether to extract article content or use full HTML
+      title: generate_from_urlArguments
+      required:
+        - params
+      properties:
+        params:
+          $ref: "#/$defs/GenerateFromUrlParams"

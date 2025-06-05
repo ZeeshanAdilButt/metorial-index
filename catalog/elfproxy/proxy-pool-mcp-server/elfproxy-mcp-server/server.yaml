@@ -1,0 +1,19 @@
+identifier: elfproxy/proxy-pool-mcp-server/elfproxy-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/ElfProxy/proxy-pool-mcp-server
+  name: proxy-pool-mcp-server
+  owner: ElfProxy
+server:
+  subdirectory: /
+  name: ElfProxy Proxy Pool Server
+  description: Provide secure and scalable access to global residential proxies
+    with dynamic IP rotation and AI-optimized web interaction capabilities.
+    Enable AI systems to perform geo-targeted, anonymous, and reliable web data
+    extraction with adaptive rate limiting and intelligent content sanitization.
+    Seamlessly integrate proxy management and web scraping features via the
+    Model Context Protocol for enhanced AI workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

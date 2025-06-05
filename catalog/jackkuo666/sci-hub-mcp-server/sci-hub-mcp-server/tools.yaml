@@ -1,0 +1,64 @@
+tools:
+  - name: search_scihub_by_doi
+    description: ""
+    inputSchema:
+      type: object
+      title: search_scihub_by_doiArguments
+      required:
+        - doi
+      properties:
+        doi:
+          type: string
+          title: Doi
+  - name: search_scihub_by_title
+    description: ""
+    inputSchema:
+      type: object
+      title: search_scihub_by_titleArguments
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          title: Title
+  - name: search_scihub_by_keyword
+    description: ""
+    inputSchema:
+      type: object
+      title: search_scihub_by_keywordArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+        num_results:
+          type: integer
+          title: Num Results
+          default: 10
+  - name: download_scihub_pdf
+    description: ""
+    inputSchema:
+      type: object
+      title: download_scihub_pdfArguments
+      required:
+        - pdf_url
+        - output_path
+      properties:
+        pdf_url:
+          type: string
+          title: Pdf Url
+        output_path:
+          type: string
+          title: Output Path
+  - name: get_paper_metadata
+    description: ""
+    inputSchema:
+      type: object
+      title: get_paper_metadataArguments
+      required:
+        - doi
+      properties:
+        doi:
+          type: string
+          title: Doi

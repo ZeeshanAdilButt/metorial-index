@@ -1,0 +1,279 @@
+tools:
+  - name: runTestsOnBrowserStack
+    description: Use this tool to get instructions for running tests on BrowserStack.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - detectedBrowserAutomationFramework
+        - detectedTestingFramework
+        - detectedLanguage
+        - desiredPlatforms
+      properties:
+        desiredPlatforms:
+          type: array
+          items:
+            enum:
+              - windows
+              - macos
+              - android
+              - ios
+            type: string
+          description: The platforms the user wants to test on. Always ask this to the
+            user, do not try to infer this.
+        detectedLanguage:
+          type: string
+          description: "The programming language used in the project. Example: 'nodejs',
+            'python'"
+        detectedTestingFramework:
+          type: string
+          description: "The testing framework used in the project. Example: 'jest',
+            'pytest'"
+        detectedBrowserAutomationFramework:
+          type: string
+          description: "The automation framework configured in the project. Example:
+            'playwright', 'selenium'"
+      additionalProperties: false
+  - name: runAppLiveSession
+    description: Use this tool when user wants to manually check their app on a
+      particular mobile device using BrowserStack's cloud infrastructure. Can be
+      used to debug crashes, slow performance, etc.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - desiredPhone
+        - desiredPlatformVersion
+        - desiredPlatform
+        - appPath
+      properties:
+        appPath:
+          type: string
+          description: The path to the .ipa or .apk file to install on the device. Always
+            ask the user for the app path, do not assume it.
+        desiredPhone:
+          type: string
+          description: "The full name of the device to run the app on. Example: 'iPhone 12
+            Pro' or 'Samsung Galaxy S20' or 'Google Pixel 6'. Always ask the
+            user for the device they want to use, do not assume it. "
+        desiredPlatform:
+          enum:
+            - android
+            - ios
+          type: string
+          description: "Which platform to run on, examples: 'android', 'ios'. Set this
+            based on the app path provided."
+        desiredPlatformVersion:
+          type: string
+          description: Specifies the platform version to run the app on. For example, use
+            '12.0' for Android or '16.0' for iOS. If the user says 'latest',
+            'newest', or similar, normalize it to 'latest'. Likewise, convert
+            terms like 'earliest' or 'oldest' to 'oldest'.
+      additionalProperties: false
+  - name: runBrowserLiveSession
+    description: Use this tool when user wants to manually check their website on a
+      particular browser and OS combination using BrowserStack's cloud
+      infrastructure. Can be used to debug layout issues, compatibility
+      problems, etc.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - desiredBrowser
+        - desiredOSVersion
+        - desiredOS
+        - desiredURL
+        - desiredBrowserVersion
+      properties:
+        desiredOS:
+          enum:
+            - Windows
+            - OS X
+          type: string
+          description: "The operating system to run the browser on. Example: 'Windows',
+            'OS X'"
+        desiredURL:
+          type: string
+          description: The URL of the website to test. This can be a local URL (e.g.,
+            http://localhost:3000) or a public URL. Always ask the user for the
+            URL, do not assume it.
+        desiredBrowser:
+          enum:
+            - Chrome
+            - IE
+            - Firefox
+            - Safari
+            - Edge
+          type: string
+          description: "The browser to run the test on. Example: 'Chrome', 'IE', 'Safari',
+            'Edge'. Always ask the user for the browser they want to use, do not
+            assume it."
+        desiredOSVersion:
+          type: string
+          description: "The OS version to run the browser on. Example: '10' for Windows,
+            '12' for macOS, '14' for iOS"
+        desiredBrowserVersion:
+          type: string
+          description: "The version of the browser to use. Example: 133.0, 134.0, 87.0"
+      additionalProperties: false
+  - name: getFailuresInLastRun
+    description: Use this tool to debug failures in the last run of the test suite
+      on BrowserStack. Use only when browserstack.yml file is present in the
+      project root.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - buildName
+        - projectName
+      properties:
+        buildName:
+          type: string
+          description: Name of the build to get failures for. This is the 'build' key in
+            the browserstack.yml file. If not sure, ask the user for the build
+            name.
+        projectName:
+          type: string
+          description: Name of the project to get failures for. This is the 'projectName'
+            key in the browserstack.yml file. If not sure, ask the user for the
+            project name.
+      additionalProperties: false
+  - name: startAccessibilityScan
+    description: Use this tool to start an accessibility scan for a list of URLs on
+      BrowserStack.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - pageURL
+      properties:
+        name:
+          type: string
+          description: Name of the accessibility scan
+        pageURL:
+          type: string
+          description: The URL to scan for accessibility issues
+      additionalProperties: false
+  - name: getNetworkFailures
+    description: Use this tool to fetch failed network requests from a BrowserStack
+      Automate session.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - sessionId
+      properties:
+        sessionId:
+          type: string
+          description: The Automate session ID.
+      additionalProperties: false
+  - name: createProjectOrFolder
+    description: Create a project and/or folder in BrowserStack Test Management.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        parent_id:
+          type: number
+          description: Parent folder ID; if omitted, folder is created at root.
+        folder_name:
+          type: string
+          description: Name of the folder to create.
+        project_name:
+          type: string
+          description: Name of the project to create.
+        folder_description:
+          type: string
+          description: Description for the new folder.
+        project_identifier:
+          type: string
+          description: Existing project identifier to use for folder creation.
+        project_description:
+          type: string
+          description: Description for the new project.
+      additionalProperties: false
+  - name: createTestCase
+    description: Use this tool to create a test case in BrowserStack Test Management.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - project_identifier
+        - folder_id
+        - name
+        - test_case_steps
+      properties:
+        name:
+          type: string
+          description: Name of the test case.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to attach to the test case. This should be strictly in array
+            format not the string of json
+        owner:
+          type: string
+          format: email
+          description: Email of the test case owner.
+        issues:
+          type: array
+          items:
+            type: string
+          description: List of the linked Jira, Asana or Azure issues ID's. This should be
+            strictly in array format not the string of json.
+        folder_id:
+          type: string
+          description: The ID of the folder within the project where the test case should
+            be created. If not provided, ask the user if they would like to
+            create a new folder using the createProjectOrFolder tool.
+        description:
+          type: string
+          description: Brief description of the test case.
+        custom_fields:
+          type: object
+          description: Map of custom field names to values.
+          additionalProperties:
+            type: string
+        issue_tracker:
+          type: object
+          required:
+            - name
+            - host
+          properties:
+            host:
+              type: string
+              format: uri
+              description: Base URL of the issue tracker.
+            name:
+              type: string
+              description: Issue tracker name,  For example, use jira for Jira, azure for
+                Azure DevOps, or asana for Asana.
+          additionalProperties: false
+        preconditions:
+          type: string
+          description: Any preconditions (HTML allowed).
+        test_case_steps:
+          type: array
+          items:
+            type: object
+            required:
+              - step
+              - result
+            properties:
+              step:
+                type: string
+                description: Action to perform in this step.
+              result:
+                type: string
+                description: Expected result of this step.
+            additionalProperties: false
+          description: List of steps and expected results.
+        project_identifier:
+          type: string
+          description: The ID of the BrowserStack project where the test case should be
+            created. If no project identifier is provided, ask the user if they
+            would like to create a new project using the createProjectOrFolder
+            tool.
+      additionalProperties: false

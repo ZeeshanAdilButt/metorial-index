@@ -1,0 +1,296 @@
+tools:
+  - name: initialize_language_server
+    description: "
+
+      \    Initialize a language server for the specified language and project.
+
+
+      \    Parameters:
+
+      \        session_id: Unique identifier for this language server session
+
+      \        project_root: Absolute path to the project root directory
+
+      \        language: Programming language to initialize the server for
+      (e.g., \"python\", \"java\", \"typescript\")
+
+      \        debug: Enable debug logging
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dictionary containing session info and initialization status
+
+      \    "
+    inputSchema:
+      type: object
+      title: initialize_language_serverArguments
+      required:
+        - session_id
+        - project_root
+        - language
+      properties:
+        debug:
+          type: boolean
+          title: Debug
+          default: false
+        language:
+          type: string
+          title: Language
+        session_id:
+          type: string
+          title: Session Id
+        project_root:
+          type: string
+          title: Project Root
+  - name: shutdown_language_server
+    description: "
+
+      \    Shutdown a language server session.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        session_id: The session ID returned from
+      initialize_language_server
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dictionary indicating success or failure
+
+      \    "
+    inputSchema:
+      type: object
+      title: shutdown_language_serverArguments
+      required:
+        - session_id
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+  - name: request_definition
+    description: "
+
+      \    Find the definition of a symbol at the specified location.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        session_id: The session ID returned from
+      initialize_language_server
+
+      \        file_path: Path to the file containing the symbol, relative to
+      project root
+
+      \        line: Line number (0-indexed)
+
+      \        column: Column number (0-indexed)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Definition information for the symbol
+
+      \    "
+    inputSchema:
+      type: object
+      title: request_definitionArguments
+      required:
+        - session_id
+        - file_path
+        - line
+        - column
+      properties:
+        line:
+          type: integer
+          title: Line
+        column:
+          type: integer
+          title: Column
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id
+  - name: request_references
+    description: "
+
+      \    Find all references of a symbol at the specified location.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        session_id: The session ID returned from
+      initialize_language_server
+
+      \        file_path: Path to the file containing the symbol, relative to
+      project root
+
+      \        line: Line number (0-indexed)
+
+      \        column: Column number (0-indexed)
+
+      \   \ 
+
+      \    Returns:
+
+      \        References information for the symbol
+
+      \    "
+    inputSchema:
+      type: object
+      title: request_referencesArguments
+      required:
+        - session_id
+        - file_path
+        - line
+        - column
+      properties:
+        line:
+          type: integer
+          title: Line
+        column:
+          type: integer
+          title: Column
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id
+  - name: request_completions
+    description: "
+
+      \    Get completion suggestions for a location in the code.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        session_id: The session ID returned from
+      initialize_language_server
+
+      \        file_path: Path to the file containing the location, relative to
+      project root
+
+      \        line: Line number (0-indexed)
+
+      \        column: Column number (0-indexed)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Completion suggestions for the location
+
+      \    "
+    inputSchema:
+      type: object
+      title: request_completionsArguments
+      required:
+        - session_id
+        - file_path
+        - line
+        - column
+      properties:
+        line:
+          type: integer
+          title: Line
+        column:
+          type: integer
+          title: Column
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id
+  - name: request_hover
+    description: "
+
+      \    Get hover information for a symbol at the specified location.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        session_id: The session ID returned from
+      initialize_language_server
+
+      \        file_path: Path to the file containing the symbol, relative to
+      project root
+
+      \        line: Line number (0-indexed)
+
+      \        column: Column number (0-indexed)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Hover information for the symbol
+
+      \    "
+    inputSchema:
+      type: object
+      title: request_hoverArguments
+      required:
+        - session_id
+        - file_path
+        - line
+        - column
+      properties:
+        line:
+          type: integer
+          title: Line
+        column:
+          type: integer
+          title: Column
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id
+  - name: request_document_symbols
+    description: "
+
+      \    Get all symbols defined in a document.
+
+      \   \ 
+
+      \    Parameters:
+
+      \        session_id: The session ID returned from
+      initialize_language_server
+
+      \        file_path: Path to the file to analyze, relative to project root
+
+      \   \ 
+
+      \    Returns:
+
+      \        Symbols defined in the document
+
+      \    "
+    inputSchema:
+      type: object
+      title: request_document_symbolsArguments
+      required:
+        - session_id
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+        session_id:
+          type: string
+          title: Session Id

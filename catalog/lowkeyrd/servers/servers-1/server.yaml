@@ -1,0 +1,18 @@
+identifier: lowkeyrd/servers/servers-1
+repo:
+  provider: github.com
+  url: https://github.com/lowkeyrd/servers
+  name: servers
+  owner: lowkeyrd
+server:
+  subdirectory: /src/github
+  name: GitHub API Server
+  description: Manage your GitHub repositories effortlessly. Create, update, and
+    search repositories, issues, and pull requests with ease, all while
+    preserving your Git history. Automate your workflow and enhance
+    collaboration with advanced features like batch operations and comprehensive
+    error handling.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: donkeylichao/coin-mcp-server/coin-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/donkeylichao/coin-mcp-server
+  name: coin-mcp-server
+  owner: donkeylichao
+server:
+  subdirectory: /
+  name: Coin MCP Server
+  description: Provide a server implementation that integrates with the Model
+    Context Protocol to enable dynamic interaction with external data and tools.
+    Facilitate seamless communication between LLM clients and resources,
+    actions, and prompts. Enhance LLM applications by exposing structured
+    capabilities and data through a standardized interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

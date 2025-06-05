@@ -1,0 +1,18 @@
+identifier: akream/mcppython/mcppython
+repo:
+  provider: github.com
+  url: https://github.com/akream/mcppython
+  name: mcppython
+  owner: akream
+server:
+  subdirectory: /
+  name: Python Cat Facts Server
+  description: Provide real-time and on-demand cat facts via a FastAPI server
+    using Server-Sent Events (SSE) transport. Subscribe to a stream of cat facts
+    delivered every 10 seconds or request a single random fact instantly. Easily
+    integrate with VS Code or other clients supporting MCP over SSE for
+    interactive cat fact retrieval.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

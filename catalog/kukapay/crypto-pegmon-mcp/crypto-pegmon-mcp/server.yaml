@@ -1,0 +1,18 @@
+identifier: kukapay/crypto-pegmon-mcp/crypto-pegmon-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kukapay/crypto-pegmon-mcp
+  name: crypto-pegmon-mcp
+  owner: kukapay
+server:
+  subdirectory: /
+  name: Crypto Pegmon
+  description: Monitor stablecoin peg integrity across multiple blockchains to
+    detect depegging risks early. Generate detailed stability reports, fetch
+    real-time prices, and analyze historical data for 17 USD-pegged stablecoins.
+    Present all information in clean Markdown format for easy integration into
+    reports or dashboards.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

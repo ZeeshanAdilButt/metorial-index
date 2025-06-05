@@ -1,0 +1,17 @@
+identifier: dkvdm/onepassword-mcp-server/onepassword-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dkvdm/onepassword-mcp-server
+  name: onepassword-mcp-server
+  owner: dkvdm
+server:
+  subdirectory: /
+  name: 1Password Credential Retrieval Server
+  description: Enable secure retrieval of credentials from your 1Password vault
+    for use by AI agents. Seamlessly integrate your 1Password data with Agentic
+    AI workflows to automate authentication and credential management. Simplify
+    secure access to your stored secrets within AI-driven applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: zubeidhendricks/youtube-mcp-server/youtube
+repo:
+  provider: github.com
+  url: https://github.com/ZubeidHendricks/youtube-mcp-server
+  name: youtube-mcp-server
+  owner: ZubeidHendricks
+server:
+  subdirectory: /
+  name: YouTube Server
+  description: Interact with YouTube to search videos, get details, and manage transcripts.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

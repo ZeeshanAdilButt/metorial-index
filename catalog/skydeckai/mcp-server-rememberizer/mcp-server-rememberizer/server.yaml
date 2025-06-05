@@ -1,0 +1,15 @@
+identifier: skydeckai/mcp-server-rememberizer/mcp-server-rememberizer
+repo:
+  provider: github.com
+  url: https://github.com/skydeckai/mcp-server-rememberizer
+  name: mcp-server-rememberizer
+  owner: skydeckai
+server:
+  subdirectory: /
+  name: Rememberizer Server
+  description: Interact with Rememberizer's document and knowledge management API
+    for document search, retrieval, and management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

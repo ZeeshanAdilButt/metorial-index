@@ -1,0 +1,17 @@
+identifier: shaike1/mcp-server-ssh/mcp-server-ssh
+repo:
+  provider: github.com
+  url: https://github.com/shaike1/mcp-server-ssh
+  name: mcp-server-ssh
+  owner: shaike1
+server:
+  subdirectory: /
+  name: SSH Server
+  description: Enable secure remote command execution and file operations through
+    SSH. Manage connections effortlessly with password and key-based
+    authentication, while enjoying detailed logging and progress tracking for
+    file transfers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

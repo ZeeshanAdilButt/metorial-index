@@ -1,0 +1,18 @@
+identifier: haichaozheng/weather-mcp/weather-mcp
+repo:
+  provider: github.com
+  url: https://github.com/haichaozheng/weather-mcp
+  name: weather-mcp
+  owner: haichaozheng
+server:
+  subdirectory: /
+  name: Weather MCP Service
+  description: Provide real-time weather forecasts and alerts for US states and
+    specific locations using latitude and longitude. Query active weather alerts
+    by state code or get detailed weather forecasts for any geographic
+    coordinate. Enhance your applications with up-to-date weather information
+    through a simple MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

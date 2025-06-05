@@ -1,0 +1,18 @@
+identifier: albertshao/wiki_mcp_server/wiki_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/albertshao/wiki_mcp_server
+  name: wiki_mcp_server
+  owner: albertshao
+server:
+  subdirectory: /
+  name: Wiki MCP Server
+  description: Manage Confluence wiki pages efficiently by creating, updating,
+    deleting, and searching pages through a unified MCP interface. Automatically
+    select the appropriate Confluence knowledge base based on user queries to
+    streamline content management. Deploy easily with FastAPI and
+    containerization support for production environments.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

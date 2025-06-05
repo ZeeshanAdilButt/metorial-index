@@ -1,0 +1,745 @@
+tools:
+  - name: create_presentation
+    description: Create a new PowerPoint presentation.
+    inputSchema:
+      type: object
+      title: create_presentationArguments
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Id
+          default: null
+  - name: open_presentation
+    description: Open an existing PowerPoint presentation from a file.
+    inputSchema:
+      type: object
+      title: open_presentationArguments
+      required:
+        - file_path
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Id
+          default: null
+        file_path:
+          type: string
+          title: File Path
+  - name: save_presentation
+    description: Save a presentation to a file.
+    inputSchema:
+      type: object
+      title: save_presentationArguments
+      required:
+        - file_path
+      properties:
+        file_path:
+          type: string
+          title: File Path
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: get_presentation_info
+    description: Get information about a presentation.
+    inputSchema:
+      type: object
+      title: get_presentation_infoArguments
+      properties:
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: set_core_properties
+    description: Set core document properties.
+    inputSchema:
+      type: object
+      title: set_core_propertiesArguments
+      properties:
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        author:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Author
+          default: null
+        subject:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Subject
+          default: null
+        comments:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Comments
+          default: null
+        keywords:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Keywords
+          default: null
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_slide
+    description: Add a new slide to the presentation.
+    inputSchema:
+      type: object
+      title: add_slideArguments
+      properties:
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        layout_index:
+          type: integer
+          title: Layout Index
+          default: 1
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: get_slide_info
+    description: Get information about a specific slide.
+    inputSchema:
+      type: object
+      title: get_slide_infoArguments
+      required:
+        - slide_index
+      properties:
+        slide_index:
+          type: integer
+          title: Slide Index
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: populate_placeholder
+    description: Populate a placeholder with text.
+    inputSchema:
+      type: object
+      title: populate_placeholderArguments
+      required:
+        - slide_index
+        - placeholder_idx
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+        slide_index:
+          type: integer
+          title: Slide Index
+        placeholder_idx:
+          type: integer
+          title: Placeholder Idx
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_bullet_points
+    description: Add bullet points to a placeholder.
+    inputSchema:
+      type: object
+      title: add_bullet_pointsArguments
+      required:
+        - slide_index
+        - placeholder_idx
+        - bullet_points
+      properties:
+        slide_index:
+          type: integer
+          title: Slide Index
+        bullet_points:
+          type: array
+          items:
+            type: string
+          title: Bullet Points
+        placeholder_idx:
+          type: integer
+          title: Placeholder Idx
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_textbox
+    description: Add a textbox to a slide.
+    inputSchema:
+      type: object
+      title: add_textboxArguments
+      required:
+        - slide_index
+        - left
+        - top
+        - width
+        - height
+        - text
+      properties:
+        top:
+          type: number
+          title: Top
+        bold:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Bold
+          default: null
+        left:
+          type: number
+          title: Left
+        text:
+          type: string
+          title: Text
+        color:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Color
+          default: null
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+        italic:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Italic
+          default: null
+        alignment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Alignment
+          default: null
+        font_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Font Name
+          default: null
+        font_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Font Size
+          default: null
+        slide_index:
+          type: integer
+          title: Slide Index
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_image
+    description: Add an image to a slide with graceful error recovery.
+    inputSchema:
+      type: object
+      title: add_imageArguments
+      required:
+        - slide_index
+        - image_path
+        - left
+        - top
+      properties:
+        top:
+          type: number
+          title: Top
+        left:
+          type: number
+          title: Left
+        width:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Width
+          default: null
+        height:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Height
+          default: null
+        image_path:
+          type: string
+          title: Image Path
+        slide_index:
+          type: integer
+          title: Slide Index
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_image_from_base64
+    description: Add an image from a base64 encoded string to a slide.
+    inputSchema:
+      type: object
+      title: add_image_from_base64Arguments
+      required:
+        - slide_index
+        - base64_string
+        - left
+        - top
+      properties:
+        top:
+          type: number
+          title: Top
+        left:
+          type: number
+          title: Left
+        width:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Width
+          default: null
+        height:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Height
+          default: null
+        slide_index:
+          type: integer
+          title: Slide Index
+        base64_string:
+          type: string
+          title: Base64 String
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_table
+    description: Add a table to a slide with comprehensive parameter validation.
+    inputSchema:
+      type: object
+      title: add_tableArguments
+      required:
+        - slide_index
+        - rows
+        - cols
+        - left
+        - top
+        - width
+        - height
+      properties:
+        top:
+          type: number
+          title: Top
+        cols:
+          type: integer
+          title: Cols
+        data:
+          anyOf:
+            - type: array
+              items:
+                type: array
+                items:
+                  type: string
+            - type: "null"
+          title: Data
+          default: null
+        left:
+          type: number
+          title: Left
+        rows:
+          type: integer
+          title: Rows
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+        filename:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Filename
+          default: null
+        slide_index:
+          type: integer
+          title: Slide Index
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: format_table_cell
+    description: "Format a table cell with comprehensive error handling and
+      parameter validation.
+
+      \   \ 
+
+      \    This function applies formatting to a cell in a table on a slide. It
+      provides options
+
+      \    for text formatting (font size, name, style, color), cell background
+      color, and
+
+      \    text alignment.
+
+      \   \ 
+
+      \    Args:
+
+      \        slide_index: Index of the slide containing the table (0-based)
+
+      \        shape_index: Index of the table shape on the slide (0-based)
+
+      \        row: Row index of the cell to format (0-based)
+
+      \        col: Column index of the cell to format (0-based)
+
+      \        font_size: Font size in points
+
+      \        font_name: Font name/family (e.g., 'Arial', 'Calibri')
+
+      \        bold: Whether text should be bold (True/False)
+
+      \        italic: Whether text should be italic (True/False)
+
+      \        color: RGB color list for text [R, G, B] (0-255 for each value)
+
+      \        bg_color: RGB color list for cell background [R, G, B] (0-255 for
+      each value)
+
+      \        alignment: Text alignment ('left', 'center', 'right', 'justify')
+
+      \        vertical_alignment: Vertical text alignment ('top', 'middle',
+      'bottom')
+
+      \        presentation_id: ID of the presentation to use (uses current
+      presentation if not specified)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict with keys:
+
+      \            - message: Success message
+
+      \            - error: Error message if operation failed
+
+      \            - warning: Warning message if some formatting was applied but
+      some failed
+
+      \   \ 
+
+      \    Examples:
+
+      \        To format a header cell with bold text and gray background:
+
+      \            format_table_cell(0, 1, 0, 1, font_size=14, bold=True,
+      bg_color=[200, 200, 200])
+
+      \           \ 
+
+      \        To center text in a cell:
+
+      \            format_table_cell(0, 1, 2, 3, alignment=\"center\",
+      vertical_alignment=\"middle\")
+
+      \    "
+    inputSchema:
+      type: object
+      title: format_table_cellArguments
+      required:
+        - slide_index
+        - shape_index
+        - row
+        - col
+      properties:
+        col:
+          type: integer
+          title: Col
+        row:
+          type: integer
+          title: Row
+        bold:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Bold
+          default: null
+        color:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Color
+          default: null
+        italic:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Italic
+          default: null
+        bg_color:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Bg Color
+          default: null
+        alignment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Alignment
+          default: null
+        font_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Font Name
+          default: null
+        font_size:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Font Size
+          default: null
+        shape_index:
+          type: integer
+          title: Shape Index
+        slide_index:
+          type: integer
+          title: Slide Index
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+        vertical_alignment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Vertical Alignment
+          default: null
+  - name: add_shape
+    description: "Add an auto shape to a slide.
+
+      \   \ 
+
+      \    This function adds a shape to a slide in the presentation. It
+      supports various shape types
+
+      \    and allows customization of fill color, line color, and line width.
+
+      \   \ 
+
+      \    Args:
+
+      \        slide_index: Index of the slide to add the shape to (0-based)
+
+      \        shape_type: Type of shape to add. Supported types include:
+
+      \            - Basic shapes: 'rectangle', 'rounded_rectangle', 'oval',
+      'triangle', 'diamond'
+
+      \            - Polygons: 'pentagon', 'hexagon', 'heptagon', 'octagon'
+
+      \            - Stars and arrows: 'star', 'arrow'
+
+      \            - Misc: 'cloud', 'heart', 'lightning_bolt', 'sun', 'moon',
+      'smiley_face', 'no_symbol'
+
+      \            - Flowchart: 'flowchart_process', 'flowchart_decision',
+      'flowchart_data'
+
+      \        left: Left position in inches
+
+      \        top: Top position in inches
+
+      \        width: Width in inches
+
+      \        height: Height in inches
+
+      \        fill_color: RGB color list for shape fill [R, G, B] (0-255 for
+      each value)
+
+      \        line_color: RGB color list for shape outline [R, G, B] (0-255 for
+      each value)
+
+      \        line_width: Width of the shape outline in points
+
+      \        presentation_id: ID of the presentation to use (uses current
+      presentation if not specified)
+
+      \    "
+    inputSchema:
+      type: object
+      title: add_shapeArguments
+      required:
+        - slide_index
+        - shape_type
+        - left
+        - top
+        - width
+        - height
+      properties:
+        top:
+          type: number
+          title: Top
+        left:
+          type: number
+          title: Left
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+        fill_color:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Fill Color
+          default: null
+        line_color:
+          anyOf:
+            - type: array
+              items:
+                type: integer
+            - type: "null"
+          title: Line Color
+          default: null
+        line_width:
+          anyOf:
+            - type: number
+            - type: "null"
+          title: Line Width
+          default: null
+        shape_type:
+          type: string
+          title: Shape Type
+        slide_index:
+          type: integer
+          title: Slide Index
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null
+  - name: add_chart
+    description: Add a chart to a slide with comprehensive error handling.
+    inputSchema:
+      type: object
+      title: add_chartArguments
+      required:
+        - slide_index
+        - chart_type
+        - left
+        - top
+        - width
+        - height
+        - categories
+        - series_names
+        - series_values
+      properties:
+        top:
+          type: number
+          title: Top
+        left:
+          type: number
+          title: Left
+        title:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Title
+          default: null
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+        categories:
+          type: array
+          items:
+            type: string
+          title: Categories
+        chart_type:
+          type: string
+          title: Chart Type
+        has_legend:
+          type: boolean
+          title: Has Legend
+          default: true
+        slide_index:
+          type: integer
+          title: Slide Index
+        series_names:
+          type: array
+          items:
+            type: string
+          title: Series Names
+        series_values:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+          title: Series Values
+        has_data_labels:
+          type: boolean
+          title: Has Data Labels
+          default: false
+        legend_position:
+          type: string
+          title: Legend Position
+          default: right
+        presentation_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Presentation Id
+          default: null

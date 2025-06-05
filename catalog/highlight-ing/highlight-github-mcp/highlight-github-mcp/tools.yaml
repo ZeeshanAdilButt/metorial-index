@@ -1,0 +1,19 @@
+tools:
+  - name: get_pr_diff
+    description: Get the diff of a pull request
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - repo
+        - pullNumber
+      properties:
+        repo:
+          type: string
+          description: The repository name
+        owner:
+          type: string
+          description: The owner of the repository
+        pullNumber:
+          type: number
+          description: The pull request number

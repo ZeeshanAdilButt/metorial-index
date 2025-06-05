@@ -1,0 +1,14 @@
+identifier: tsuchijo/sandbox-mcp/sandbox-server
+repo:
+  provider: github.com
+  url: https://github.com/Tsuchijo/sandbox-mcp
+  name: sandbox-mcp
+  owner: Tsuchijo
+server:
+  subdirectory: /
+  name: Sandbox
+  description: Provides isolated Docker environments for code execution.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

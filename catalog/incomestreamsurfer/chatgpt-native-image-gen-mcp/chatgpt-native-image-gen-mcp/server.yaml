@@ -1,0 +1,18 @@
+identifier: incomestreamsurfer/chatgpt-native-image-gen-mcp/chatgpt-native-image-gen-mcp
+repo:
+  provider: github.com
+  url: https://github.com/IncomeStreamSurfer/chatgpt-native-image-gen-mcp
+  name: chatgpt-native-image-gen-mcp
+  owner: IncomeStreamSurfer
+server:
+  subdirectory: /
+  name: OpenAI Image Generation Server
+  description: Generate and edit images using OpenAI's advanced image generation
+    model directly from your AI assistant. Easily create images from text
+    prompts or modify existing images with inpainting and variations. Save
+    generated images automatically with customizable filenames for seamless
+    integration into your workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

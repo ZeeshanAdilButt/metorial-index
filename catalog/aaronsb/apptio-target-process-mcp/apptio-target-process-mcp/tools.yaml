@@ -1,0 +1,246 @@
+tools:
+  - name: search_entities
+    description: Search Target Process entities with powerful filtering capabilities
+      and preset filters for common scenarios
+    inputSchema:
+      type: object
+      required:
+        - type
+      properties:
+        take:
+          type: number
+          maximum: 1000
+          minimum: 1
+          description: "Number of items to return (default: 100)"
+        type:
+          enum:
+            - UserStory
+            - Bug
+            - Task
+            - Feature
+            - Epic
+            - PortfolioEpic
+            - Solution
+            - Request
+            - Impediment
+            - TestCase
+            - TestPlan
+            - Project
+            - Team
+            - Iteration
+            - TeamIteration
+            - Release
+            - Program
+          type: string
+          description: Type of entity to search
+        where:
+          type: string
+          description: >-
+            Filter expression using Target Process query language. Common preset
+            filters available:
+
+            - Status filters: searchPresets.open, .inProgress, .done
+
+            - Assignment filters: searchPresets.myTasks, .unassigned
+
+            - Time-based filters: searchPresets.createdToday, .modifiedToday,
+            .createdThisWeek
+
+            - Priority filters: searchPresets.highPriority
+
+            - Combined filters: searchPresets.myOpenTasks,
+            .highPriorityUnassigned
+
+
+            Example: searchPresets.open or "EntityState.Name eq 'Open'"
+        include:
+          type: array
+          items:
+            type: string
+          description: Related data to include in results (e.g., ["Project", "Team",
+            "AssignedUser"])
+        orderBy:
+          type: array
+          items:
+            type: string
+          description: Sort order for results (e.g., ["CreateDate desc", "Name asc"])
+  - name: get_entity
+    description: Get details of a specific Target Process entity
+    inputSchema:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        id:
+          type: number
+          description: ID of the entity
+        type:
+          enum:
+            - UserStory
+            - Bug
+            - Task
+            - Feature
+            - Epic
+            - PortfolioEpic
+            - Solution
+            - Request
+            - Impediment
+            - TestCase
+            - TestPlan
+            - Project
+            - Team
+            - Iteration
+            - TeamIteration
+            - Release
+            - Program
+          type: string
+          description: Type of entity to retrieve
+        include:
+          type: array
+          items:
+            type: string
+          description: Related data to include
+        allow_informative_errors:
+          type: boolean
+          default: false
+          description: When true, returns useful metadata even when operation fails
+  - name: create_entity
+    description: Create a new Target Process entity
+    inputSchema:
+      type: object
+      required:
+        - type
+        - name
+        - project
+      properties:
+        name:
+          type: string
+          description: Name/title of the entity
+        team:
+          type: object
+          properties:
+            id:
+              type: number
+              description: Team ID
+        type:
+          enum:
+            - UserStory
+            - Bug
+            - Task
+            - Feature
+            - Epic
+            - PortfolioEpic
+            - Solution
+            - Request
+            - Impediment
+            - TestCase
+            - TestPlan
+            - Project
+            - Team
+            - Iteration
+            - TeamIteration
+            - Release
+            - Program
+          type: string
+          description: Type of entity to create
+        project:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: number
+              description: Project ID
+        description:
+          type: string
+          description: Description of the entity
+        assignedUser:
+          type: object
+          properties:
+            id:
+              type: number
+              description: User ID to assign
+  - name: update_entity
+    description: Update an existing Target Process entity
+    inputSchema:
+      type: object
+      required:
+        - type
+        - id
+        - fields
+      properties:
+        id:
+          type: number
+          description: ID of the entity to update
+        type:
+          enum:
+            - UserStory
+            - Bug
+            - Task
+            - Feature
+            - Epic
+            - PortfolioEpic
+            - Solution
+            - Request
+            - Impediment
+            - TestCase
+            - TestPlan
+            - Project
+            - Team
+            - Iteration
+            - TeamIteration
+            - Release
+            - Program
+          type: string
+          description: Type of entity to update
+        fields:
+          type: object
+          properties:
+            name:
+              type: string
+              description: New name for the entity
+            status:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: number
+                  description: Status ID to set
+            description:
+              type: string
+              description: New description for the entity
+            assignedUser:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: number
+                  description: User ID to assign
+  - name: inspect_object
+    description: Inspect Target Process objects and properties through the API. This
+      tool also provides API discovery capabilities through error messages when
+      used with unsupported entity types.
+    inputSchema:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          enum:
+            - list_types
+            - get_properties
+            - get_property_details
+            - discover_api_structure
+          type: string
+          description: Action to perform
+        entityType:
+          type: string
+          description: Type of entity to inspect (required for get_properties and
+            get_property_details)
+        propertyName:
+          type: string
+          description: Name of property to get details for (required for
+            get_property_details)

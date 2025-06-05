@@ -1,0 +1,17 @@
+identifier: din-djarin2/memory-bank-mcp/memory-bank-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Din-djarin2/memory-bank-mcp
+  name: memory-bank-mcp
+  owner: Din-djarin2
+server:
+  subdirectory: /
+  name: Memory Bank Server
+  description: Manage and access project memory banks remotely with centralized
+    control. Enable multi-project support with secure isolation and consistent
+    file structure enforcement. Simplify memory bank operations such as reading,
+    writing, and listing files across projects via a type-safe MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

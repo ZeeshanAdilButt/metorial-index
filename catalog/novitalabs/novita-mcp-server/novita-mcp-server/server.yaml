@@ -1,0 +1,18 @@
+identifier: novitalabs/novita-mcp-server/novita-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/novitalabs/novita-mcp-server
+  name: novita-mcp-server
+  owner: novitalabs
+server:
+  subdirectory: /
+  name: Novita AI
+  description: Manage your GPU instance resources effortlessly with Novita Server.
+    Perform operations like listing clusters, creating and controlling GPU
+    instances, and managing templates and network storage through a seamless
+    interface. Enhance your AI workflows by integrating with Novita's GPU
+    platform via compatible MCP clients.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

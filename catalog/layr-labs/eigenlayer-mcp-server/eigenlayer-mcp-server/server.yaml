@@ -1,0 +1,17 @@
+identifier: layr-labs/eigenlayer-mcp-server/eigenlayer-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Layr-Labs/eigenlayer-mcp-server
+  name: eigenlayer-mcp-server
+  owner: Layr-Labs
+server:
+  subdirectory: /
+  name: EigenLayer Documentation Server
+  description: Provide detailed EigenLayer documentation to AI assistants through
+    a dedicated server interface. Enable seamless integration with AI tools like
+    Claude for querying EigenLayer concepts and mechanisms. Run locally or
+    deploy serverlessly for flexible access to EigenLayer knowledge.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

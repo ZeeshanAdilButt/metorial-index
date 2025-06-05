@@ -1,0 +1,142 @@
+tools:
+  - name: press_up
+    description: Press the UP button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_down
+    description: Press the DOWN button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_left
+    description: Press the LEFT button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_right
+    description: Press the RIGHT button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_a
+    description: Press the A button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_b
+    description: Press the B button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_start
+    description: Press the START button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: press_select
+    description: Press the SELECT button on the GameBoy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 5
+          description: Number of frames to hold the button
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: wait_frames
+    description: Wait for a specified number of frames
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        duration_frames:
+          type: integer
+          default: 100
+          description: Number of frames to wait
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: load_rom
+    description: Load a GameBoy ROM file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - romPath
+      properties:
+        romPath:
+          type: string
+          description: Path to the ROM file
+      additionalProperties: false
+  - name: get_screen
+    description: Get the current GameBoy screen (advances one frame)
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: is_rom_loaded
+    description: Check if a ROM is currently loaded in the emulator
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: list_roms
+    description: List all available GameBoy ROM files
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

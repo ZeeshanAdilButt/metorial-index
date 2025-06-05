@@ -1,0 +1,17 @@
+identifier: alexandercohen/postgres-mcp/postgres-mcp
+repo:
+  provider: github.com
+  url: https://github.com/AlexanderCohen/postgres-mcp
+  name: postgres-mcp
+  owner: AlexanderCohen
+server:
+  subdirectory: /
+  name: Remote MCP Server on Cloudflare Workers
+  description: Deploy a remote MCP server effortlessly on Cloudflare Workers
+    without requiring authentication. Customize and extend your server with your
+    own tools to enhance LLM integrations. Connect seamlessly with Cloudflare AI
+    Playground or local clients like Claude Desktop for interactive tool usage.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

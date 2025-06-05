@@ -1,0 +1,15 @@
+identifier: 8bit-wraith/mcp/server-enhanced-ssh
+repo:
+  provider: github.com
+  url: https://github.com/8bit-wraith/mcp
+  name: mcp
+  owner: 8bit-wraith
+server:
+  subdirectory: /
+  name: Enhanced SSH
+  description: A powerful SSH server enabling secure remote command execution with
+    persistent TMUX sessions, multi-window support, and smart session recovery.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

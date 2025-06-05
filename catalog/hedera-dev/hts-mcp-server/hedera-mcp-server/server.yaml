@@ -1,0 +1,17 @@
+identifier: hedera-dev/hts-mcp-server/hedera-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hedera-dev/hts-mcp-server
+  name: hts-mcp-server
+  owner: hedera-dev
+server:
+  subdirectory: /
+  name: Hedera MCP Server
+  description: Interact with the Hedera network seamlessly. Create wallets, check
+    balances, and send transactions with ease using this powerful server.
+    Simplify your blockchain operations and enhance your applications with
+    Hedera's capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

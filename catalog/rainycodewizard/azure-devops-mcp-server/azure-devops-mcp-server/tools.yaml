@@ -1,0 +1,370 @@
+tools:
+  - name: get_work_item
+    description: Get work items by IDs
+    inputSchema:
+      type: object
+      required:
+        - ids
+      properties:
+        ids:
+          type: array
+          items:
+            type: number
+          description: Work item IDs
+        asOf:
+          type: string
+          format: date-time
+          description: As of a specific date (ISO 8601)
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields to include (e.g., "System.Title", "System.State")
+        $expand:
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+          type: number
+          description: Expand options (None=0, Relations=1, Fields=2, Links=3, All=4)
+        errorPolicy:
+          enum:
+            - 1
+            - 2
+          type: number
+          description: Error policy (Fail=1, Omit=2)
+  - name: list_work_items
+    description: List work items from a board
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: WIQL query to filter work items
+  - name: create_work_item
+    description: Create a new work item using JSON patch operations
+    inputSchema:
+      type: object
+      required:
+        - type
+        - document
+      properties:
+        type:
+          type: string
+          description: Work item type (e.g., "Bug", "Task", "User Story")
+        document:
+          type: array
+          items:
+            type: object
+            required:
+              - op
+              - path
+            properties:
+              op:
+                enum:
+                  - add
+                  - remove
+                  - replace
+                  - move
+                  - copy
+                  - test
+                type: string
+                description: The patch operation to perform
+              path:
+                type: string
+                description: The path for the operation (e.g., /fields/System.Title)
+              value:
+                description: The value for the operation
+          description: Array of JSON patch operations to apply
+  - name: update_work_item
+    description: Update an existing work item using JSON patch operations
+    inputSchema:
+      type: object
+      required:
+        - id
+        - document
+      properties:
+        id:
+          type: number
+          description: ID of the work item to update
+        document:
+          type: array
+          items:
+            type: object
+            required:
+              - op
+              - path
+            properties:
+              op:
+                enum:
+                  - add
+                  - remove
+                  - replace
+                  - move
+                  - copy
+                  - test
+                type: string
+                description: The patch operation to perform
+              path:
+                type: string
+                description: The path for the operation (e.g., /fields/System.Title)
+              value:
+                description: The value for the operation
+          description: Array of JSON patch operations to apply
+  - name: get_boards
+    description: List available boards in the project
+    inputSchema:
+      type: object
+      properties:
+        team:
+          type: string
+          description: Team name (optional)
+  - name: get_wikis
+    description: List all wikis in the project
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_wiki_page
+    description: Get a wiki page by path
+    inputSchema:
+      type: object
+      required:
+        - wikiIdentifier
+        - path
+      properties:
+        path:
+          type: string
+          description: Page path
+        version:
+          type: string
+          description: Version (optional, defaults to main)
+        includeContent:
+          type: boolean
+          description: Include page content (optional, defaults to true)
+        wikiIdentifier:
+          type: string
+          description: Wiki identifier
+  - name: create_wiki
+    description: Create a new wiki
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Wiki name
+        projectId:
+          type: string
+          description: Project ID (optional, defaults to current project)
+        mappedPath:
+          type: string
+          description: Mapped path (optional, defaults to /)
+  - name: update_wiki_page
+    description: Create or update a wiki page
+    inputSchema:
+      type: object
+      required:
+        - wikiIdentifier
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          description: Page path
+        comment:
+          type: string
+          description: Comment for the update (optional)
+        content:
+          type: string
+          description: Page content in markdown format
+        wikiIdentifier:
+          type: string
+          description: Wiki identifier
+  - name: list_projects
+    description: List all projects in the Azure DevOps organization
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: list_pipelines
+    description: List all pipelines in the project
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Filter pipelines by name (optional)
+        folder:
+          type: string
+          description: Filter pipelines by folder path (optional)
+  - name: trigger_pipeline
+    description: Trigger a pipeline run
+    inputSchema:
+      type: object
+      required:
+        - pipelineId
+      properties:
+        branch:
+          type: string
+          description: Branch to run the pipeline on (optional, defaults to default branch)
+        variables:
+          type: object
+          description: Pipeline variables to override (optional)
+          additionalProperties:
+            type: string
+        pipelineId:
+          type: number
+          description: Pipeline ID to trigger
+  - name: list_pull_requests
+    description: List all pull requests in the project
+    inputSchema:
+      type: object
+      required:
+        - repositoryId
+      properties:
+        status:
+          enum:
+            - active
+            - completed
+            - abandoned
+          type: string
+          description: Filter by PR status (active, completed, abandoned)
+        creatorId:
+          type: string
+          description: Filter by creator ID (optional)
+        repositoryId:
+          type: string
+          description: Filter by repository ID
+  - name: get_pull_request
+    description: Get a specific pull request by ID
+    inputSchema:
+      type: object
+      required:
+        - pullRequestId
+      properties:
+        pullRequestId:
+          type: number
+          description: Pull Request ID to retrieve
+  - name: create_pull_request
+    description: Create a new pull request
+    inputSchema:
+      type: object
+      required:
+        - repositoryId
+        - sourceRefName
+        - targetRefName
+        - title
+      properties:
+        title:
+          type: string
+          description: Pull request title
+        reviewers:
+          type: array
+          items:
+            type: string
+          description: List of reviewer IDs (optional)
+        description:
+          type: string
+          description: Pull request description
+        repositoryId:
+          type: string
+          description: Repository ID
+        sourceRefName:
+          type: string
+          description: Source branch name (e.g. refs/heads/feature)
+        targetRefName:
+          type: string
+          description: Target branch name (e.g. refs/heads/main)
+  - name: update_pull_request
+    description: Update an existing pull request
+    inputSchema:
+      type: object
+      required:
+        - pullRequestId
+      properties:
+        title:
+          type: string
+          description: New title (optional)
+        status:
+          enum:
+            - active
+            - abandoned
+            - completed
+          type: string
+          description: New status (active, abandoned, completed)
+        description:
+          type: string
+          description: New description (optional)
+        mergeStrategy:
+          enum:
+            - squash
+            - rebase
+            - merge
+          type: string
+          description: Merge strategy (optional)
+        pullRequestId:
+          type: number
+          description: Pull Request ID
+  - name: list_repositories
+    description: List all Git repositories in the project
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_file
+    description: Get the content of a specific file from the repository
+    inputSchema:
+      type: object
+      required:
+        - repositoryId
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the file in the repository (e.g., "src/index.ts")
+        branch:
+          type: string
+          description: Branch name to get the file from (optional, defaults to main)
+        version:
+          type: string
+          description: Specific version (commit ID) to get the file from (optional)
+        repositoryId:
+          type: string
+          description: ID of the repository
+  - name: compare_branches
+    description: Compare two branches and get commit history between them
+    inputSchema:
+      type: object
+      required:
+        - repositoryId
+        - sourceBranch
+        - targetBranch
+      properties:
+        maxCommits:
+          type: number
+          description: Maximum number of commits to return (optional, defaults to 100)
+        historyMode:
+          enum:
+            - simplified
+            - first-parent
+            - full
+            - full-simplify-merges
+          type: string
+          description: Git history mode to use (optional, defaults to simplified)
+        repositoryId:
+          type: string
+          description: ID of the repository to compare branches in
+        sourceBranch:
+          type: string
+          description: Source branch name (e.g., develop)
+        targetBranch:
+          type: string
+          description: Target branch name (e.g., main)
+        includeDetails:
+          type: boolean
+          description: Include detailed commit information including full message and
+            changes (optional, defaults to false)

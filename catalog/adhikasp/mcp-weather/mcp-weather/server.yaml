@@ -1,0 +1,14 @@
+identifier: adhikasp/mcp-weather/mcp-weather
+repo:
+  provider: github.com
+  url: https://github.com/adhikasp/mcp-weather
+  name: mcp-weather
+  owner: adhikasp
+server:
+  subdirectory: /
+  name: Weather Server
+  description: Provides hourly weather forecasts using the AccuWeather API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

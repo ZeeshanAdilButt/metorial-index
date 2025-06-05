@@ -1,0 +1,15 @@
+identifier: resend/mcp-send-email/mcp-send-emails
+repo:
+  provider: github.com
+  url: https://github.com/resend/mcp-send-email
+  name: mcp-send-email
+  owner: resend
+server:
+  subdirectory: /
+  name: Email sending server
+  description: Send emails directly from your LLM applications using Resend's API.
+    Compose and dispatch emails seamlessly without manual copying and pasting.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

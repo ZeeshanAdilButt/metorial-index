@@ -1,0 +1,18 @@
+identifier: komer3/linode-mcp/linode-mcp
+repo:
+  provider: github.com
+  url: https://github.com/komer3/linode-mcp
+  name: linode-mcp
+  owner: komer3
+server:
+  subdirectory: /
+  name: Linode Cloud Manager
+  description: Manage your Linode cloud resources seamlessly through a
+    standardized interface. List regions, instance types, and instances, and
+    perform actions like creating, rebooting, or deleting Linode instances.
+    Enable AI assistants to interact with your Linode infrastructure securely
+    and efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

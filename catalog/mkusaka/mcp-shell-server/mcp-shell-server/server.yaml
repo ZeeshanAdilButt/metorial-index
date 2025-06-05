@@ -1,0 +1,17 @@
+identifier: mkusaka/mcp-shell-server/mcp-shell-server
+repo:
+  provider: github.com
+  url: https://github.com/mkusaka/mcp-shell-server
+  name: mcp-shell-server
+  owner: mkusaka
+server:
+  subdirectory: /
+  name: Shell Command Executor
+  description: Execute shell commands safely and efficiently through AI agents.
+    Leverage multi-shell support and detailed error handling to enhance your
+    command execution capabilities. Simplify your workflow by integrating shell
+    command execution directly into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

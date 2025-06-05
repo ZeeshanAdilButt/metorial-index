@@ -1,0 +1,17 @@
+identifier: dynamicendpoints/paloalto-device-server/paloalto-device-server
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/paloalto-device-server
+  name: paloalto-device-server
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Palo Alto Device Server
+  description: Manage your Palo Alto firewalls effortlessly through their REST
+    API. Retrieve system information, perform upgrades, and manage certificates
+    with ease. Streamline your firewall operations and ensure your systems are
+    always up-to-date and secure.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

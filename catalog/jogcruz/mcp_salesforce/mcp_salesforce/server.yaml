@@ -1,0 +1,18 @@
+identifier: jogcruz/mcp_salesforce/mcp_salesforce
+repo:
+  provider: github.com
+  url: https://github.com/jogcruz/mcp_salesforce
+  name: mcp_salesforce
+  owner: jogcruz
+server:
+  subdirectory: /
+  name: Salesforce Integration Server
+  description: Enable seamless interaction with Salesforce data by executing SOQL
+    queries through a standardized MCP interface. Connect securely to your
+    Salesforce org using environment variables and retrieve or process
+    Salesforce records efficiently. Simplify Salesforce data access and
+    manipulation within your LLM applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

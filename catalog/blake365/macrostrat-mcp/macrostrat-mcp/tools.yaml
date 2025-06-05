@@ -1,0 +1,105 @@
+tools:
+  - name: find-columns
+    description: Query Macrostrat stratigraphic columns
+    inputSchema:
+      type: object
+      required:
+        - lat
+        - lng
+        - responseType
+      properties:
+        lat:
+          type: number
+          description: A valid latitude in decimal degrees
+        lng:
+          type: number
+          description: A valid longitude in decimal degrees
+        adjacents:
+          type: boolean
+          description: Include adjacent columns
+        responseType:
+          enum:
+            - long
+            - short
+          type: string
+          default: long
+          description: The length of response long or short
+  - name: find-units
+    description: Query Macrostrat geologic units
+    inputSchema:
+      type: object
+      required:
+        - lat
+        - lng
+        - responseType
+      properties:
+        lat:
+          type: number
+          description: A valid latitude in decimal degrees
+        lng:
+          type: number
+          description: A valid longitude in decimal degrees
+        responseType:
+          enum:
+            - long
+            - short
+          type: string
+          default: long
+          description: The length of response long or short. Long provides lots of good
+            details
+  - name: defs
+    description: Routes giving access to standard fields and dictionaries used in Macrostrat
+    inputSchema:
+      type: object
+      required:
+        - endpoint
+        - parameters
+      properties:
+        endpoint:
+          enum:
+            - lithologies
+            - structures
+            - columns
+            - econs
+            - minerals
+            - timescales
+            - environments
+            - strat_names
+            - measurements
+            - intervals
+          type: string
+          description: The endpoint to query
+        parameters:
+          type: string
+          description: parameters to pass to the endpoint
+  - name: defs-autocomplete
+    description: Quickly retrieve all definitions matching a query. Limited to 100 results
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: the search term
+  - name: mineral-info
+    description: Get information about a mineral, use one property
+    inputSchema:
+      type: object
+      properties:
+        element:
+          type: string
+          description: An element that the mineral is made of
+        mineral:
+          type: string
+          description: The name of the mineral
+        mineral_type:
+          type: string
+          description: The type of mineral
+  - name: timescale
+    description: Get information about a time period
+    inputSchema:
+      type: object
+      properties:
+        age:
+          type: number

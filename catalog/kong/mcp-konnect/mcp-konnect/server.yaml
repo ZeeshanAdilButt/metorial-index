@@ -1,0 +1,17 @@
+identifier: kong/mcp-konnect/mcp-konnect
+repo:
+  provider: github.com
+  url: https://github.com/Kong/mcp-konnect
+  name: mcp-konnect
+  owner: Kong
+server:
+  subdirectory: /
+  name: Kong Konnect MCP Server
+  description: Enable AI assistants to interact with Kong Konnect APIs for
+    querying and analyzing API Gateway configurations, traffic, and analytics.
+    Streamline your API management and gain insights through natural language
+    conversations with your AI assistant.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

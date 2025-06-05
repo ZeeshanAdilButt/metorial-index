@@ -1,0 +1,16 @@
+identifier: posthog/posthog-mcp/posthog-mcp
+repo:
+  provider: github.com
+  url: https://github.com/PostHog/posthog-mcp
+  name: posthog-mcp
+  owner: PostHog
+server:
+  subdirectory: /
+  name: PostHog MCP Server
+  description: Manage your PostHog projects and create annotations seamlessly.
+    Interact with your data directly through Claude Desktop for enhanced project
+    management and insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

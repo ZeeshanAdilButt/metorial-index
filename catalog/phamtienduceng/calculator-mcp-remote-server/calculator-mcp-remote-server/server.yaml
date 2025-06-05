@@ -1,0 +1,18 @@
+identifier: phamtienduceng/calculator-mcp-remote-server/calculator-mcp-remote-server
+repo:
+  provider: github.com
+  url: https://github.com/phamtienduceng/calculator-mcp-remote-server
+  name: calculator-mcp-remote-server
+  owner: phamtienduceng
+server:
+  subdirectory: /
+  name: SSE Calculator Server
+  description: Provide real-time, stateful calculator operations with history
+    tracking via Server-Sent Events. Enable seamless integration with AI
+    assistants through the Model Context Protocol for dynamic calculation
+    sessions. Access a web-based interface and manage multiple active sessions
+    efficiently.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

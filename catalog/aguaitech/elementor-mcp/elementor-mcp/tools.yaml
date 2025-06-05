@@ -1,0 +1,165 @@
+tools:
+  - name: create_page
+    description: Creates a new page in WordPress with Elementor data, it will return
+      the created page ID.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - elementor_data
+      properties:
+        title:
+          type: string
+          description: The title for the new page (required).
+        status:
+          enum:
+            - publish
+            - future
+            - draft
+            - pending
+            - private
+          type: string
+          description: The status for the page (e.g., 'publish', 'draft'). Defaults to
+            'draft' on create.
+        content:
+          type: string
+          description: The standard WordPress content for the page (optional).
+        elementor_data:
+          type: string
+          description: The Elementor page data as a JSON string (required for create).
+      additionalProperties: false
+  - name: get_page
+    description: Retrieves a specific page from WordPress by its ID, including meta
+      fields like _elementor_data.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+      properties:
+        pageId:
+          type: integer
+          description: The ID of the page to retrieve.
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: download_page_to_file
+    description: Downloads a specific page from WordPress by its ID, including meta
+      fields like _elementor_data, and saves it to a file.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+        - filePath
+      properties:
+        pageId:
+          type: integer
+          description: The ID of the page to download.
+          exclusiveMinimum: 0
+        filePath:
+          type: string
+          description: The path to save the file to, have to be the absolute path.
+        onlyElementorData:
+          type: boolean
+          default: false
+          description: Whether to only save the _elementor_data field to the file,
+            defaults to false.
+      additionalProperties: false
+  - name: update_page
+    description: Updates an existing page in WordPress with Elementor data, it will
+      return a boolean value to indicate if the update was successful.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+      properties:
+        title:
+          type: string
+          description: The title for the page.
+        pageId:
+          type: integer
+          description: The ID of the page to update.
+          exclusiveMinimum: 0
+        status:
+          enum:
+            - publish
+            - future
+            - draft
+            - pending
+            - private
+          type: string
+          description: The status for the page (e.g., 'publish', 'draft').
+        content:
+          type: string
+          description: The standard WordPress content for the page (optional).
+        elementor_data:
+          type: string
+          description: The Elementor page data as a JSON string. Optional for update.
+      additionalProperties: false
+  - name: update_page_from_file
+    description: Updates an existing page in WordPress with Elementor data from a
+      file, it will return a boolean value to indicate if the update was
+      successful.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+        - elementorFilePath
+      properties:
+        title:
+          type: string
+          description: The title for the page.
+        pageId:
+          type: integer
+          description: The ID of the page to update.
+          exclusiveMinimum: 0
+        status:
+          enum:
+            - publish
+            - future
+            - draft
+            - pending
+            - private
+          type: string
+          description: The status for the page (e.g., 'publish', 'draft').
+        contentFilePath:
+          type: string
+          description: The absolute path to the file to update the WordPress content from,
+            optional.
+        elementorFilePath:
+          type: string
+          description: The absolute path to the file to update the Elementor data from.
+      additionalProperties: false
+  - name: delete_page
+    description: Deletes a specific page from WordPress, it will return a boolean
+      value to indicate if the deletion was successful.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pageId
+      properties:
+        force:
+          type: boolean
+          default: false
+          description: Whether to bypass the trash and force deletion. Defaults to false.
+        pageId:
+          type: integer
+          description: The ID of the page to delete.
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: get_page_id_by_slug
+    description: Retrieves the ID of a specific WordPress page by its slug.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: The slug (URL-friendly name) of the page to find.
+      additionalProperties: false

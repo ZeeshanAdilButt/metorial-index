@@ -1,0 +1,18 @@
+identifier: ymgeva/kanka-mcp/kanka-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ymgeva/kanka-mcp
+  name: kanka-mcp
+  owner: ymgeva
+server:
+  subdirectory: /
+  name: Kanka API Server
+  description: Manage your Kanka worldbuilding projects through AI assistants by
+    listing, retrieving, creating, updating, and deleting campaigns, characters,
+    locations, posts, notes, and journals. Seamlessly handle HTML content and
+    privacy settings for your entities. Enhance your creative workflow by
+    integrating Kanka API capabilities directly into your MCP environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

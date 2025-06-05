@@ -1,0 +1,17 @@
+identifier: srobbin/opengov-mcp-server/opengov-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/srobbin/opengov-mcp-server
+  name: opengov-mcp-server
+  owner: srobbin
+server:
+  subdirectory: /
+  name: OpenGov Data Access Server
+  description: Enable seamless access to public government datasets from
+    Socrata-powered portals. Search, retrieve, and analyze open data from
+    cities, states, and federal agencies without requiring API keys. Empower
+    your applications to query and explore government data effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

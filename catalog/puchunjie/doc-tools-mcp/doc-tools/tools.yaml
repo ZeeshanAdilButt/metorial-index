@@ -1,0 +1,127 @@
+tools:
+  - name: create_document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: open_document
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: add_paragraph
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - text
+      properties:
+        text:
+          type: string
+        style:
+          type: string
+        filePath:
+          type: string
+        alignment:
+          enum:
+            - left
+            - center
+            - right
+            - start
+            - end
+            - both
+            - mediumKashida
+            - distribute
+            - numTab
+            - highKashida
+            - lowKashida
+            - thaiDistribute
+          type: string
+      additionalProperties: false
+  - name: add_table
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - rows
+        - cols
+      properties:
+        cols:
+          type: number
+        data:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        rows:
+          type: number
+        headers:
+          type: array
+          items:
+            type: string
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: search_and_replace
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+        - searchText
+        - replaceText
+      properties:
+        filePath:
+          type: string
+        matchCase:
+          type: boolean
+        searchText:
+          type: string
+        replaceText:
+          type: string
+      additionalProperties: false
+  - name: set_page_margins
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        top:
+          type: number
+        left:
+          type: number
+        right:
+          type: number
+        bottom:
+          type: number
+        filePath:
+          type: string
+      additionalProperties: false
+  - name: get_document_info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+      additionalProperties: false

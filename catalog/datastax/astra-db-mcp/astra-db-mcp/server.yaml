@@ -1,0 +1,17 @@
+identifier: datastax/astra-db-mcp/astra-db-mcp
+repo:
+  provider: github.com
+  url: https://github.com/datastax/astra-db-mcp
+  name: astra-db-mcp
+  owner: datastax
+server:
+  subdirectory: /
+  name: Astra DB MCP Server
+  description: Connect your Large Language Models to Astra DB for seamless data
+    interaction. Perform operations like creating, updating, and deleting
+    collections and records directly from your LLM. Enhance your applications
+    with powerful database capabilities effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

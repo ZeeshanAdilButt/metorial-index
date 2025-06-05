@@ -1,0 +1,14 @@
+identifier: anjor/coinmarket-mcp-server/coinmarket-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/anjor/coinmarket-mcp-server
+  name: coinmarket-mcp-server
+  owner: anjor
+server:
+  subdirectory: /
+  name: Coinmarket Server
+  description: Access Coinmarket API endpoints for currency listings and token quotes.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

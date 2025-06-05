@@ -1,0 +1,15 @@
+identifier: dynamicendpoints/supabase-mcp/supabase-server
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/supabase-mcp
+  name: supabase-mcp
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: Supabase Server
+  description: A Model Context Protocol server for interacting with Supabase
+    databases, storage, and edge functions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

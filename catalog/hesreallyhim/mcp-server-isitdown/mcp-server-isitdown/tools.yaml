@@ -1,0 +1,33 @@
+tools:
+  - name: get_website_status
+    description: "
+
+      \    Check the status of a website.
+
+
+      \    This function takes a root domain as input and checks whether the
+      website is up or down
+
+      \    by making a request to isitdownrightnow.com
+
+
+      \    Args:
+
+      \        root_domain (str): The root domain of the website to check.
+
+
+      \    Returns:
+
+      \        str: A message indicating whether the website is up or down, or
+      if the status could not be determined.
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_website_statusArguments
+      required:
+        - root_domain
+      properties:
+        root_domain:
+          type: string
+          title: Root Domain

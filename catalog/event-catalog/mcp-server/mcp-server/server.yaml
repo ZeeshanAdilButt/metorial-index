@@ -1,0 +1,26 @@
+identifier: event-catalog/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/event-catalog/mcp-server
+  name: mcp-server
+  owner: event-catalog
+server:
+  subdirectory: /
+  name: EventCatalog
+  description: >-
+    Document your architecture with https://www.eventcatalog.dev/. Create
+    domains, services and messages and document them for your teams and
+    stakeholders.
+
+
+    Use the MCP server to ask questions about your architecture in your
+    favourite tools.
+
+
+    Ask questions about your architectures, services, and messages to enhance
+    your event-driven development. Integrate seamlessly with MCP clients to
+    unlock the full potential of your EventCatalog data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

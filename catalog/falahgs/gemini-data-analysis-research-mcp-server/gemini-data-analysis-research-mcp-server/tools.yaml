@@ -1,0 +1,75 @@
+tools:
+  - name: generate-thinking
+    description: Generate detailed thinking process text using Gemini Flash 2 model
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Prompt for generating thinking process text
+        outputDir:
+          type: string
+          description: Directory to save output responses (optional)
+  - name: send-email
+    description: Send an email with AI-generated subject using Gemini Flash 2
+    inputSchema:
+      type: object
+      required:
+        - to
+        - subjectPrompt
+        - text
+      properties:
+        to:
+          type: string
+          description: Recipient email address
+        html:
+          type: string
+          description: HTML version of the email (optional)
+        text:
+          type: string
+          description: Plain text version of the email
+        images:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - data
+            properties:
+              data:
+                type: string
+                description: Base64 encoded image data with mime type
+                  (data:image/jpeg;base64,...)
+              name:
+                type: string
+                description: Image filename
+          description: Images to attach to the email (optional)
+        subjectPrompt:
+          type: string
+          description: Prompt for Gemini to generate email subject
+  - name: analyze-data
+    description: Analyze Excel/CSV data using EDA and Gemini AI
+    inputSchema:
+      type: object
+      required:
+        - fileData
+        - fileName
+        - analysisType
+      properties:
+        fileData:
+          type: string
+          description: Base64 encoded file data
+        fileName:
+          type: string
+          description: Name of the file (must be .xlsx, .xls, or .csv)
+        outputDir:
+          type: string
+          description: Directory to save analysis results (optional)
+        analysisType:
+          enum:
+            - basic
+            - detailed
+          type: string
+          description: Type of analysis to perform

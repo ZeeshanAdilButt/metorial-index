@@ -1,0 +1,17 @@
+identifier: asusevski/opendota-mcp-server/opendota-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/asusevski/opendota-mcp-server
+  name: opendota-mcp-server
+  owner: asusevski
+server:
+  subdirectory: /
+  name: OpenDota API Server
+  description: Access real-time Dota 2 statistics and player information through a
+    standard interface. Retrieve match data, player profiles, and hero
+    statistics effortlessly to enhance your AI assistants. Integrate Dota 2 data
+    into your applications and provide users with up-to-date insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

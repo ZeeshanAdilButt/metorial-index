@@ -1,0 +1,18 @@
+identifier: serverless-dna/powertools-mcp/powertools-mcp
+repo:
+  provider: github.com
+  url: https://github.com/serverless-dna/powertools-mcp
+  name: powertools-mcp
+  owner: serverless-dna
+server:
+  subdirectory: /
+  name: Powertools Search Server
+  description: Provide efficient search capabilities for AWS Lambda Powertools
+    documentation across multiple runtimes. Enable Large Language Models to
+    query and retrieve relevant documentation content quickly using local
+    lunr.js indexes. Support version-specific searches to keep results
+    up-to-date with the latest documentation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

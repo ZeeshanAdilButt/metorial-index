@@ -1,0 +1,13 @@
+tools:
+  - name: 高德天气查询助手
+    description: 高德天气查询，输入城市名，返回该城市的天气情况，例如：北京
+    inputSchema:
+      type: object
+      title: query_logisticsArguments
+      required:
+        - city
+      properties:
+        city:
+          type: string
+          title: City
+          description: 要查询天气的城市名称

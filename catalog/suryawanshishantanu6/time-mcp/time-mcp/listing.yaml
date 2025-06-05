@@ -1,0 +1,12 @@
+description: Integrates a tool-augmented LLM pipeline to provide answers to
+  time-related and general inquiries. Utilizes a Flask API for current
+  timestamps and employs an MCP Agent for intent detection and interaction with
+  an LLM via OpenRouter.
+skills:
+  - Provide current timestamp
+  - Answer time-related questions
+  - Detect user intent
+  - Call external tools (time API)
+  - Interact with LLMs (OpenRouter)
+  - Customizable intent detection
+  - Offer chat interface via Streamlit

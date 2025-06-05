@@ -1,0 +1,17 @@
+identifier: crate/cratedb-mcp/cratedb-mcp
+repo:
+  provider: github.com
+  url: https://github.com/crate/cratedb-mcp
+  name: cratedb-mcp
+  owner: crate
+server:
+  subdirectory: /
+  name: CrateDB MCP Server
+  description: Enable LLMs to interact directly with CrateDB for optimized query
+    handling and data insights. Answer questions about your database and enhance
+    your data management experience with intelligent assistance. Leverage the
+    power of LLMs to debug and optimize your database queries effectively.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

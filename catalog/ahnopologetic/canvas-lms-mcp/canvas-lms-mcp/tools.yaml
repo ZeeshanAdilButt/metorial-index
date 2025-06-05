@@ -1,0 +1,324 @@
+tools:
+  - name: get_assignment
+    description: |
+      
+      Get a single assignment by ID.
+
+      Args:
+          course_id: Course ID
+          assignment_id: Assignment ID
+
+      Returns:
+          Assignment object
+    inputSchema:
+      type: object
+      title: get_assignmentArguments
+      required:
+        - course_id
+        - assignment_id
+      properties:
+        course_id:
+          type: integer
+          title: Course Id
+        assignment_id:
+          type: integer
+          title: Assignment Id
+  - name: get_course_modules
+    description: |
+      
+      Get modules for a course.
+
+      Args:
+          course_id: Course ID
+          include: Optional list of additional data to include
+
+      Returns:
+          List of Module objects
+    inputSchema:
+      type: object
+      title: get_course_modulesArguments
+      required:
+        - course_id
+      properties:
+        include:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include
+          default: null
+        course_id:
+          type: integer
+          title: Course Id
+  - name: get_course_syllabus
+    description: |
+      
+      Get a course's syllabus.
+
+      Args:
+          course_id: Course ID
+
+      Returns:
+          Course syllabus as string
+    inputSchema:
+      type: object
+      title: get_course_syllabusArguments
+      required:
+        - course_id
+      properties:
+        course_id:
+          type: integer
+          title: Course Id
+  - name: get_course
+    description: |
+      
+      Get a single course by ID.
+
+      Args:
+          course_id: Course ID
+          include: Optional list of additional data to include
+
+      Returns:
+          Course object
+    inputSchema:
+      type: object
+      title: get_courseArguments
+      required:
+        - course_id
+      properties:
+        include:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include
+          default: null
+        course_id:
+          type: integer
+          title: Course Id
+  - name: get_quiz
+    description: |
+      
+      Get a single quiz by ID.
+
+      Args:
+          course_id: Course ID
+          quiz_id: Quiz ID
+
+      Returns:
+          Quiz object
+    inputSchema:
+      type: object
+      title: get_quizArguments
+      required:
+        - course_id
+        - quiz_id
+      properties:
+        quiz_id:
+          type: integer
+          title: Quiz Id
+        course_id:
+          type: integer
+          title: Course Id
+  - name: list_assignments
+    description: >
+      
+      List assignments for a course.
+
+
+      Args:
+          course_id: Course ID
+          bucket: Bucket to filter assignments by (past, overdue, undated, ungraded, unsubmitted, upcoming, future)
+          order_by: Field to order assignments by (due_at, position, name)
+          page: Page number (1-indexed)
+          items_per_page: Number of items per page
+
+      Returns:
+          PaginatedResponse containing assignments
+    inputSchema:
+      type: object
+      title: list_assignmentsArguments
+      required:
+        - course_id
+        - bucket
+        - order_by
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        bucket:
+          enum:
+            - past
+            - overdue
+            - undated
+            - ungraded
+            - unsubmitted
+            - upcoming
+            - future
+          type: string
+          title: Bucket
+        order_by:
+          enum:
+            - due_at
+            - position
+            - name
+          type: string
+          title: Order By
+        course_id:
+          type: integer
+          title: Course Id
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+  - name: list_courses
+    description: |
+      
+      List courses that the user is actively enrolled in.
+
+      Args:
+          page: Page number (1-indexed)
+          items_per_page: Number of items per page
+
+      Returns:
+          PaginatedResponse containing courses
+    inputSchema:
+      type: object
+      title: list_coursesArguments
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+  - name: list_files
+    description: |
+      
+      List files for a course or folder.
+
+      Args:
+          course_id: Optional Course ID
+          folder_id: Optional Folder ID
+          include: Optional list of additional data to include
+          page: Page number (1-indexed)
+          items_per_page: Number of items per page
+
+      Returns:
+          PaginatedResponse[File]
+    inputSchema:
+      type: object
+      title: list_filesArguments
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        include:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include
+          default: null
+        course_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Course Id
+          default: null
+        folder_id:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Folder Id
+          default: null
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+  - name: list_planner_items
+    description: |
+      
+      List planner items for the authenticated user.
+
+      Args:
+          start_date: start date in ISO 8601 format
+          end_date: end date in ISO 8601 format
+          context_codes: list of context codes (e.g., ["course_123"])
+          page: Page number (1-indexed)
+          items_per_page: Number of items per page
+
+      Returns:
+          PaginatedResponse[PlannerItem]
+    inputSchema:
+      type: object
+      title: list_planner_itemsArguments
+      required:
+        - start_date
+        - end_date
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        end_date:
+          type: string
+          title: End Date
+        start_date:
+          type: string
+          title: Start Date
+        context_codes:
+          type: array
+          items:
+            type: string
+          title: Context Codes
+          default: null
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10
+  - name: list_quizzes
+    description: |
+      
+      List quizzes for a course.
+
+      Args:
+          course_id: Course ID
+          include: Optional list of additional data to include
+          page: Page number (1-indexed)
+          items_per_page: Number of items per page
+
+      Returns:
+          PaginatedResponse containing quizzes
+    inputSchema:
+      type: object
+      title: list_quizzesArguments
+      required:
+        - course_id
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+        include:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include
+          default: null
+        course_id:
+          type: integer
+          title: Course Id
+        items_per_page:
+          type: integer
+          title: Items Per Page
+          default: 10

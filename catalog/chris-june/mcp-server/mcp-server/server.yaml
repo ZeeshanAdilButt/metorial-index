@@ -1,0 +1,17 @@
+identifier: chris-june/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Chris-June/MCP-Server
+  name: MCP-Server
+  owner: Chris-June
+server:
+  subdirectory: /
+  name: Role-Specific Context Server
+  description: Manage AI agents with tailored roles and contextual boundaries.
+    Create and customize roles, ensuring relevant memory and tone for each
+    agent. Enhance interactions by dynamically adapting to the needs of
+    different roles in your system.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

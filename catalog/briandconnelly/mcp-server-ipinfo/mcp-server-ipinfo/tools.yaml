@@ -1,0 +1,38 @@
+tools:
+  - name: get_ip_details
+    description: >
+      Get information about an IP address.
+
+
+      Use this tool to:
+
+      - Determine the user's geographic location to coarse granularity
+
+      - Get information about the user's internet service provider
+
+      - Get information about a specific IP address
+
+
+      Args:
+          ip (str | None): The IP address to look up. If None, returns information
+              about the requesting client's IP address.
+          ctx (Context): The MCP request context.
+
+      Returns:
+          IPDetails: Object containing information about the IP address,
+              including geographic location, network operator, and more.
+
+      Note:
+          This tool requires an IPInfo API Token specified via the IPINFO_API_TOKEN
+          environment variable for full functionality.
+    inputSchema:
+      type: object
+      title: get_ip_detailsArguments
+      required:
+        - ip
+      properties:
+        ip:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Ip

@@ -1,0 +1,17 @@
+identifier: xiaok/etherscan-mcp/etherscan-mcp
+repo:
+  provider: github.com
+  url: https://github.com/xiaok/etherscan-mcp
+  name: etherscan-mcp
+  owner: xiaok
+server:
+  subdirectory: /
+  name: Etherscan API Integration Server
+  description: Enable dynamic interaction with Etherscan's API and blockchain data
+    through a standardized MCP interface. Quickly test and debug your server
+    with built-in CLI tools and inspect it via a web UI. Support multiple
+    blockchain networks with up-to-date chain lists and API endpoints.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,22 @@
+tools:
+  - name: check_website
+    description: Check if a website has llms.txt files
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the website to check
+  - name: list_websites
+    description: List known websites with llms.txt files
+    inputSchema:
+      type: object
+      properties:
+        filter_llms_txt:
+          type: boolean
+          description: Only show websites with llms.txt
+        filter_llms_full_txt:
+          type: boolean
+          description: Only show websites with llms-full.txt

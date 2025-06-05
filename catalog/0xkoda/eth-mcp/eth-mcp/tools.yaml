@@ -1,0 +1,175 @@
+tools:
+  - name: eth_getCode
+    description: Retrieves the code at a given Ethereum address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The Ethereum address to get code from
+        blockParameter:
+          type: string
+          default: latest
+          description: 'Block parameter (default: "latest")'
+      additionalProperties: false
+  - name: eth_gasPrice
+    description: Retrieves the current gas price in wei
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: eth_getBalance
+    description: Retrieves the balance of a given Ethereum address
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: The Ethereum address to check balance
+        blockParameter:
+          type: string
+          default: latest
+          description: 'Block parameter (default: "latest")'
+      additionalProperties: false
+  - name: eth_call
+    description: Executes a call to a contract function without creating a transaction
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - transaction
+      properties:
+        transaction:
+          type: object
+          required:
+            - to
+            - data
+          properties:
+            to:
+              type: string
+              pattern: ^0x[a-fA-F0-9]{40}$
+              description: The address the transaction is directed to
+            gas:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of the gas provided for the transaction execution in hex
+            data:
+              type: string
+              pattern: ^0x[a-fA-F0-9]*$
+              description: The compiled code of a contract OR the hash of the invoked method
+                signature and encoded parameters
+            from:
+              type: string
+              pattern: ^0x[a-fA-F0-9]{40}$
+              description: The address the transaction is sent from
+            value:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of the value sent with this transaction in hex
+            gasPrice:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of the gas price used for each paid gas in hex
+          description: The transaction call object
+          additionalProperties: false
+        blockParameter:
+          type: string
+          default: latest
+          description: 'Block parameter (default: "latest")'
+      additionalProperties: false
+  - name: eth_getLogs
+    description: Retrieves logs matching the given filter criteria
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - filter
+      properties:
+        filter:
+          type: object
+          properties:
+            topics:
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                    pattern: ^0x[a-fA-F0-9]{64}$
+                  - type: array
+                    items:
+                      type: string
+                      pattern: ^0x[a-fA-F0-9]{64}$
+                  - type: "null"
+              description: Array of 32 Bytes DATA topics
+            address:
+              anyOf:
+                - type: string
+                  pattern: ^0x[a-fA-F0-9]{40}$
+                - type: array
+                  items:
+                    type: string
+                    pattern: ^0x[a-fA-F0-9]{40}$
+              description: Contract address or a list of addresses from which logs should
+                originate
+            toBlock:
+              type: string
+              description: Block number in hex or "latest", "earliest" or "pending"
+            fromBlock:
+              type: string
+              description: Block number in hex or "latest", "earliest" or "pending"
+          description: The filter options
+          additionalProperties: false
+      additionalProperties: false
+  - name: eth_sendTransaction
+    description: Sends a transaction to the Ethereum network
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - transaction
+      properties:
+        transaction:
+          type: object
+          required:
+            - from
+          properties:
+            to:
+              type: string
+              pattern: ^0x[a-fA-F0-9]{40}$
+              description: The address the transaction is directed to
+            gas:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of the gas provided for the transaction execution in hex
+            data:
+              type: string
+              pattern: ^0x[a-fA-F0-9]*$
+              description: The compiled code of a contract OR the hash of the invoked method
+                signature and encoded parameters
+            from:
+              type: string
+              pattern: ^0x[a-fA-F0-9]{40}$
+              description: The address the transaction is sent from
+            nonce:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of a nonce used to prevent transaction replay
+            value:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of the value sent with this transaction in hex
+            gasPrice:
+              type: string
+              pattern: ^0x[a-fA-F0-9]+$
+              description: Integer of the gas price used for each paid gas in hex
+          description: The transaction object
+          additionalProperties: false
+      additionalProperties: false

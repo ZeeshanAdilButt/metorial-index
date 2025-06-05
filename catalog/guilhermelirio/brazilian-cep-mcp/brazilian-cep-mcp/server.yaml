@@ -1,0 +1,17 @@
+identifier: guilhermelirio/brazilian-cep-mcp/brazilian-cep-mcp
+repo:
+  provider: github.com
+  url: https://github.com/guilhermelirio/brazilian-cep-mcp
+  name: brazilian-cep-mcp
+  owner: guilhermelirio
+server:
+  subdirectory: /
+  name: Brazilian Postal Code Server
+  description: Query Brazilian postal code (CEP) information effortlessly.
+    Retrieve complete address details including street, neighborhood, city,
+    state, and more using just the postal code. Integrate seamlessly with AI
+    agents through the Model Context Protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

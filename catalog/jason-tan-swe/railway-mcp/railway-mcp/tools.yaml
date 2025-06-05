@@ -1,0 +1,1220 @@
+tools:
+  - name: database_list_types
+    description: >-
+      [QUERY] List all available database types that can be deployed using
+      Railway's official templates
+
+
+      ⚡️ Best for:
+        ✓ Discovering supported database types
+        ✓ Planning database deployments
+        ✓ Checking template availability
+
+      ⚠️ Not for:
+        × Listing existing databases
+        × Getting database connection details
+
+      → Alternatives: service_create_from_image
+
+
+      → Next steps: database_deploy
+
+
+      → Related: database_deploy, service_create_from_image
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: database_deploy_from_template
+    description: >-
+      [WORKFLOW] Deploy a pre-configured database using Railway's official
+      templates and best practices
+
+
+      ⚡️ Best for:
+        ✓ Standard database deployments
+        ✓ Quick setup with security defaults
+        ✓ Common database types (PostgreSQL, MongoDB, Redis)
+
+      ⚠️ Not for:
+        × Custom database versions
+        × Complex configurations
+        × Unsupported database types
+
+      → Prerequisites: database_list_types
+
+
+      → Alternatives: service_create_from_image
+
+
+      → Next steps: variable_list, service_info
+
+
+      → Related: volume_create, service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - type
+        - region
+        - environmentId
+      properties:
+        name:
+          type: string
+          description: "Optional custom name for the database service. Default:
+            {type}-database"
+        type:
+          enum:
+            - postgres
+            - mysql
+            - mongodb
+            - redis
+            - minio
+            - sqlite3
+            - pocketbase
+            - clickhouse
+            - mariadb
+            - pgvector
+          type: string
+          description: Type of database to deploy (e.g., postgresql, mongodb, redis). Use
+            service_create_from_image for other types.
+        region:
+          enum:
+            - asia-southeast1
+            - asia-southeast1-eqsg3a
+            - europe-west4
+            - europe-west4-drams3a
+            - us-east4
+            - us-east4-eqdc4a
+            - us-west1
+            - us-west2
+          type: string
+          description: Region where the database should be deployed, try us-west1 before
+            all other regions
+        projectId:
+          type: string
+          description: ID of the project where the database will be deployed
+        environmentId:
+          type: string
+          description: Environment ID where the database will be deployed (usually
+            obtained from project_info)
+      additionalProperties: false
+  - name: deployment_list
+    description: |-
+      [API] List recent deployments for a service in a specific environment
+
+      ⚡️ Best for:
+        ✓ Viewing deployment history
+        ✓ Monitoring service updates
+
+      → Prerequisites: service_list
+
+      → Next steps: deployment_logs, deployment_trigger
+
+      → Related: service_info, service_restart
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - serviceId
+        - environmentId
+      properties:
+        limit:
+          type: number
+          description: "Optional: Maximum number of deployments to return (default: 10)"
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: ID of the service to list deployments for
+        environmentId:
+          type: string
+          description: ID of the environment to list deployments from (usually obtained
+            from service_list)
+      additionalProperties: false
+  - name: deployment_trigger
+    description: |-
+      [API] Trigger a new deployment for a service
+
+      ⚡️ Best for:
+        ✓ Deploying code changes
+        ✓ Applying configuration updates
+        ✓ Rolling back to previous states
+
+      ⚠️ Not for:
+        × Restarting services (use service_restart)
+        × Updating service config (use service_update)
+        × Database changes
+
+      → Prerequisites: service_list
+
+      → Alternatives: service_restart
+
+      → Next steps: deployment_logs, deployment_status
+
+      → Related: variable_set, service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - serviceId
+        - environmentId
+        - commitSha
+      properties:
+        commitSha:
+          type: string
+          description: Specific commit SHA from the Git repository
+        projectId:
+          type: string
+          description: ID of the project
+        serviceId:
+          type: string
+          description: ID of the service
+        environmentId:
+          type: string
+          description: ID of the environment
+      additionalProperties: false
+  - name: deployment_logs
+    description: |-
+      [API] Get logs for a specific deployment
+
+      ⚡️ Best for:
+        ✓ Debugging deployment issues
+        ✓ Monitoring deployment progress
+        ✓ Checking build output
+
+      ⚠️ Not for:
+        × Service runtime logs
+        × Database logs
+
+      → Prerequisites: deployment_list
+
+      → Next steps: deployment_status
+
+      → Related: service_info, deployment_trigger
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        limit:
+          type: number
+          description: Maximum number of log entries to fetch
+        deploymentId:
+          type: string
+          description: ID of the deployment to get logs for
+      additionalProperties: false
+  - name: deployment_status
+    description: |-
+      [API] Check the current status of a deployment
+
+      ⚡️ Best for:
+        ✓ Monitoring deployment progress
+        ✓ Verifying successful deployments
+        ✓ Checking for deployment failures
+
+      ⚠️ Not for:
+        × Service runtime logs
+        × Database logs
+
+      → Prerequisites: deployment_list, deployment_trigger
+
+      → Next steps: deployment_logs
+
+      → Related: service_info, service_restart, deployment_wait
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - deploymentId
+      properties:
+        deploymentId:
+          type: string
+          description: ID of the deployment to check status for
+      additionalProperties: false
+  - name: domain_list
+    description: |-
+      [API] List all domains (both service and custom) for a service
+
+      ⚡️ Best for:
+        ✓ Viewing service endpoints
+        ✓ Managing domain configurations
+        ✓ Auditing domain settings
+
+      → Prerequisites: service_list
+
+      → Next steps: domain_create, domain_update
+
+      → Related: service_info, tcp_proxy_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - environmentId
+        - serviceId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: ID of the service to list domains for
+        environmentId:
+          type: string
+          description: ID of the environment that the service is in to list domains from
+            (usually obtained from service_list)
+      additionalProperties: false
+  - name: domain_create
+    description: |-
+      [API] Create a new domain for a service
+
+      ⚡️ Best for:
+        ✓ Setting up custom domains
+        ✓ Configuring service endpoints
+        ✓ Adding HTTPS endpoints
+
+      ⚠️ Not for:
+        × TCP proxy setup (use tcp_proxy_create)
+        × Internal service communication
+
+      → Prerequisites: service_list, domain_check
+
+      → Alternatives: tcp_proxy_create
+
+      → Next steps: domain_update
+
+      → Related: service_info, domain_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environmentId
+        - serviceId
+      properties:
+        domain:
+          type: string
+          description: Custom domain name (optional, as railway will generate one for you
+            and is generally better to leave it up to railway to generate one.
+            There's usually no need to specify this and there are no use cases
+            for overriding it.)
+        suffix:
+          type: string
+          description: Suffix for the domain (optional, railway will generate one for you
+            and is generally better to leave it up to railway to generate one.)
+        serviceId:
+          type: string
+          description: ID of the service
+        targetPort:
+          type: number
+          description: Target port for the domain (optional, as railway will use the
+            default port for the service and detect it automatically.)
+        environmentId:
+          type: string
+          description: ID of the environment
+      additionalProperties: false
+  - name: domain_check
+    description: |-
+      [API] Check if a domain is available for use
+
+      ⚡️ Best for:
+        ✓ Validating domain availability
+        ✓ Pre-deployment checks
+        ✓ Domain planning
+
+      → Next steps: domain_create
+
+      → Related: domain_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: Domain name to check availability for
+      additionalProperties: false
+  - name: domain_update
+    description: |-
+      [API] Update a domain's configuration
+
+      ⚡️ Best for:
+        ✓ Changing target ports
+        ✓ Updating domain settings
+        ✓ Reconfiguring endpoints
+
+      ⚠️ Not for:
+        × Changing domain names (delete and recreate instead)
+        × TCP proxy configuration
+
+      → Prerequisites: domain_list
+
+      → Next steps: domain_list
+
+      → Related: service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - targetPort
+      properties:
+        id:
+          type: string
+          description: ID of the domain to update
+        targetPort:
+          type: number
+          description: New port number to route traffic to
+      additionalProperties: false
+  - name: domain_delete
+    description: |-
+      [API] Delete a domain from a service
+
+      ⚡️ Best for:
+        ✓ Removing unused domains
+        ✓ Cleaning up configurations
+        ✓ Domain management
+
+      ⚠️ Not for:
+        × Temporary domain disabling
+        × Port updates (use domain_update)
+
+      → Prerequisites: domain_list
+
+      → Alternatives: domain_update
+
+      → Related: service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of the domain to delete
+      additionalProperties: false
+  - name: project_list
+    description: |-
+      [API] List all projects in your Railway account
+
+      ⚡️ Best for:
+        ✓ Getting an overview of all projects
+        ✓ Finding project IDs
+        ✓ Project discovery and management
+
+      → Next steps: project_info, service_list
+
+      → Related: project_create, project_delete
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: project_info
+    description: |-
+      [API] Get detailed information about a specific Railway project
+
+      ⚡️ Best for:
+        ✓ Viewing project details and status
+        ✓ Checking environments and services
+        ✓ Project configuration review
+
+      → Prerequisites: project_list
+
+      → Next steps: service_list, variable_list
+
+      → Related: project_update, project_delete
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project to get information about
+      additionalProperties: false
+  - name: project_create
+    description: >-
+      [API] Create a new Railway project
+
+
+      ⚡️ Best for:
+        ✓ Starting new applications
+        ✓ Setting up development environments
+        ✓ Creating project spaces
+
+      ⚠️ Not for:
+        × Duplicating existing projects
+
+      → Next steps: service_create_from_repo, service_create_from_image,
+      database_deploy
+
+
+      → Related: project_delete, project_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the new project
+        teamId:
+          type: string
+          description: Optional team ID to create the project under
+      additionalProperties: false
+  - name: project_delete
+    description: |-
+      [API] Delete a Railway project and all its resources
+
+      ⚡️ Best for:
+        ✓ Removing unused projects
+        ✓ Cleaning up test projects
+
+      ⚠️ Not for:
+        × Temporary project deactivation
+        × Service-level cleanup (use service_delete)
+
+      → Prerequisites: project_list, project_info
+
+      → Alternatives: service_delete
+
+      → Related: project_create
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project to delete
+      additionalProperties: false
+  - name: project_environments
+    description: List all environments in a project
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project
+      additionalProperties: false
+  - name: service_list
+    description: |-
+      [API] List all services in a specific Railway project
+
+      ⚡️ Best for:
+        ✓ Getting an overview of a project's services
+        ✓ Finding service IDs
+        ✓ Checking service status
+
+      → Prerequisites: project_list
+
+      → Next steps: service_info, deployment_list
+
+      → Related: project_info, variable_list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project to list services from
+      additionalProperties: false
+  - name: service_info
+    description: |-
+      [API] Get detailed information about a specific service
+
+      ⚡️ Best for:
+        ✓ Viewing service configuration and status
+        ✓ Checking deployment details
+        ✓ Monitoring service health
+
+      → Prerequisites: service_list
+
+      → Next steps: deployment_list, variable_list
+
+      → Related: service_update, deployment_trigger
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - serviceId
+        - environmentId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: ID of the service to get information about
+        environmentId:
+          type: string
+          description: ID of the environment to check (usually obtained from service_list)
+      additionalProperties: false
+  - name: service_create_from_repo
+    description: |-
+      [API] Create a new service from a GitHub repository
+
+      ⚡️ Best for:
+        ✓ Deploying applications from source code
+        ✓ Services that need build processes
+        ✓ GitHub-hosted projects
+
+      ⚠️ Not for:
+        × Pre-built Docker images (use service_create_from_image)
+        × Database deployments (use database_deploy)
+        × Static file hosting
+
+      → Prerequisites: project_list
+
+      → Alternatives: service_create_from_image, database_deploy
+
+      → Next steps: variable_set, service_update
+
+      → Related: deployment_trigger, service_info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - repo
+      properties:
+        name:
+          type: string
+          description: Optional custom name for the service
+        repo:
+          type: string
+          description: GitHub repository URL or name (e.g., 'owner/repo')
+        projectId:
+          type: string
+          description: ID of the project to create the service in
+      additionalProperties: false
+  - name: service_create_from_image
+    description: |-
+      [API] Create a new service from a Docker image
+
+      ⚡️ Best for:
+        ✓ Custom database deployments
+        ✓ Pre-built container deployments
+        ✓ Specific version requirements
+
+      ⚠️ Not for:
+        × Standard database deployments (use database_deploy)
+        × GitHub repository deployments (use service_create_from_repo)
+        × Services needing build process
+
+      → Prerequisites: project_list
+
+      → Alternatives: database_deploy, service_create_from_repo
+
+      → Next steps: variable_set, service_update, tcp_proxy_create
+
+      → Related: volume_create, deployment_trigger
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - image
+      properties:
+        name:
+          type: string
+          description: Optional custom name for the service
+        image:
+          type: string
+          description: Docker image to use (e.g., 'postgres:13-alpine')
+        projectId:
+          type: string
+          description: ID of the project to create the service in
+      additionalProperties: false
+  - name: service_update
+    description: |-
+      [API] Update a service's configuration
+
+      ⚡️ Best for:
+        ✓ Changing service settings
+        ✓ Updating resource limits
+        ✓ Modifying deployment configuration
+
+      ⚠️ Not for:
+        × Updating environment variables (use variable_set)
+        × Restarting services (use service_restart)
+        × Triggering new deployments (use deployment_trigger)
+
+      → Prerequisites: service_list, service_info
+
+      → Next steps: deployment_trigger
+
+      → Related: service_restart, variable_set
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - serviceId
+        - environmentId
+      properties:
+        region:
+          enum:
+            - asia-southeast1
+            - asia-southeast1-eqsg3a
+            - europe-west4
+            - europe-west4-drams3a
+            - us-east4
+            - us-east4-eqdc4a
+            - us-west1
+            - us-west2
+          type: string
+          description: "Optional: Region to deploy the service in"
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: ID of the service to update
+        numReplicas:
+          type: number
+          description: "Optional: Number of service replicas to run"
+        buildCommand:
+          type: string
+          description: "Optional: Command to build the service"
+        startCommand:
+          type: string
+          description: "Optional: Command to start the service"
+        environmentId:
+          type: string
+          description: ID of the environment to update (usually obtained from service_info)
+        rootDirectory:
+          type: string
+          description: "Optional: Root directory containing the service code"
+        healthcheckPath:
+          type: string
+          description: "Optional: Path for health checks"
+        sleepApplication:
+          type: boolean
+          description: "Optional: Whether to enable sleep mode"
+      additionalProperties: false
+  - name: service_delete
+    description: |-
+      [API] Delete a service from a project
+
+      ⚡️ Best for:
+        ✓ Removing unused services
+        ✓ Cleaning up test services
+        ✓ Project reorganization
+
+      ⚠️ Not for:
+        × Temporary service stoppage (use service_restart)
+        × Updating service configuration (use service_update)
+
+      → Prerequisites: service_list, service_info
+
+      → Alternatives: service_restart
+
+      → Related: project_delete
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - serviceId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: ID of the service to delete
+      additionalProperties: false
+  - name: service_restart
+    description: |-
+      [API] Restart a service in a specific environment
+
+      ⚡️ Best for:
+        ✓ Applying configuration changes
+        ✓ Clearing service state
+        ✓ Resolving runtime issues
+
+      ⚠️ Not for:
+        × Deploying new code (use deployment_trigger)
+        × Updating service config (use service_update)
+        × Long-term service stoppage (use service_delete)
+
+      → Prerequisites: service_list
+
+      → Alternatives: deployment_trigger
+
+      → Related: service_info, deployment_logs
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - serviceId
+        - environmentId
+      properties:
+        serviceId:
+          type: string
+          description: ID of the service to restart
+        environmentId:
+          type: string
+          description: ID of the environment where the service should be restarted
+            (usually obtained from service_info)
+      additionalProperties: false
+  - name: tcp_proxy_list
+    description: |-
+      [API] List all TCP proxies for a service in a specific environment
+
+      ⚡️ Best for:
+        ✓ Viewing TCP proxy configurations
+        ✓ Managing external access
+        ✓ Auditing service endpoints
+
+      → Prerequisites: service_list
+
+      → Next steps: tcp_proxy_create
+
+      → Related: domain_list, service_info
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environmentId
+        - serviceId
+      properties:
+        serviceId:
+          type: string
+          description: ID of the service to list TCP proxies for
+        environmentId:
+          type: string
+          description: ID of the environment containing the service
+      additionalProperties: false
+  - name: tcp_proxy_create
+    description: |-
+      [API] Create a new TCP proxy for a service
+
+      ⚡️ Best for:
+        ✓ Setting up database access
+        ✓ Configuring external connections
+        ✓ Exposing TCP services
+
+      ⚠️ Not for:
+        × HTTP/HTTPS endpoints (use domain_create)
+        × Internal service communication
+
+      → Prerequisites: service_list
+
+      → Alternatives: domain_create
+
+      → Next steps: tcp_proxy_list
+
+      → Related: service_info, service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environmentId
+        - serviceId
+        - applicationPort
+      properties:
+        serviceId:
+          type: string
+          description: ID of the service
+        environmentId:
+          type: string
+          description: ID of the environment (usually obtained from service_info)
+        applicationPort:
+          type: number
+          description: Port of application/service to proxy, usually based off of the
+            service's Dockerfile or designated running port.
+      additionalProperties: false
+  - name: tcp_proxy_delete
+    description: |-
+      [API] Delete a TCP proxy
+
+      ⚡️ Best for:
+        ✓ Removing unused proxies
+        ✓ Security management
+        ✓ Endpoint cleanup
+
+      ⚠️ Not for:
+        × Temporary proxy disabling
+        × Port updates
+
+      → Prerequisites: tcp_proxy_list
+
+      → Related: service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - proxyId
+      properties:
+        proxyId:
+          type: string
+          description: ID of the TCP proxy to delete
+      additionalProperties: false
+  - name: list_service_variables
+    description: |-
+      [API] List all environment variables for a service
+
+      ⚡️ Best for:
+        ✓ Viewing service configuration
+        ✓ Auditing environment variables
+        ✓ Checking connection strings
+
+      → Prerequisites: service_list
+
+      → Next steps: variable_set, variable_delete
+
+      → Related: service_info, variable_bulk_set
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - environmentId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: "Optional: ID of the service to list variables for, if not
+            provided, shared variables across all services will be listed"
+        environmentId:
+          type: string
+          description: ID of the environment to list variables from (usually obtained from
+            service_list)
+      additionalProperties: false
+  - name: variable_set
+    description: |-
+      [API] Create or update an environment variable
+
+      ⚡️ Best for:
+        ✓ Setting configuration values
+        ✓ Updating connection strings
+        ✓ Managing service secrets
+
+      ⚠️ Not for:
+        × Bulk variable updates (use variable_bulk_set)
+        × Temporary configuration changes
+
+      → Prerequisites: service_list
+
+      → Alternatives: variable_bulk_set
+
+      → Next steps: deployment_trigger, service_restart
+
+      → Related: variable_list, variable_delete
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - environmentId
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          description: Name of the environment variable
+        value:
+          type: string
+          description: Value to set for the variable
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: "Optional: ID of the service for the variable, if omitted
+            creates/updates a shared variable"
+        environmentId:
+          type: string
+          description: ID of the environment for the variable (usually obtained from
+            service_list)
+      additionalProperties: false
+  - name: variable_delete
+    description: |-
+      [API] Delete a variable for a service in a specific environment
+
+      ⚡️ Best for:
+        ✓ Removing unused configuration
+        ✓ Security cleanup
+        ✓ Configuration management
+
+      ⚠️ Not for:
+        × Temporary variable disabling
+        × Bulk variable removal
+
+      → Prerequisites: service_list
+
+      → Next steps: deployment_trigger, service_restart
+
+      → Related: variable_list, variable_set
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - environmentId
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the variable to delete
+        projectId:
+          type: string
+          description: ID of the project
+        serviceId:
+          type: string
+          description: ID of the service (optional, if omitted deletes a shared variable)
+        environmentId:
+          type: string
+          description: ID of the environment to delete the variable from (usually obtained
+            from service_list)
+      additionalProperties: false
+  - name: variable_bulk_set
+    description: |-
+      [WORKFLOW] Create or update multiple environment variables at once
+
+      ⚡️ Best for:
+        ✓ Migrating configuration between services
+        ✓ Initial service setup
+        ✓ Bulk configuration updates
+
+      ⚠️ Not for:
+        × Single variable updates (use variable_set)
+        × Temporary configuration changes
+
+      → Prerequisites: service_list
+
+      → Alternatives: variable_set
+
+      → Next steps: deployment_trigger, service_restart
+
+      → Related: variable_list, service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - environmentId
+        - variables
+      properties:
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: "Optional: ID of the service for the variables, if omitted updates
+            shared variables)"
+        variables:
+          type: object
+          description: Object mapping variable names to values
+          additionalProperties:
+            type: string
+        environmentId:
+          type: string
+          description: ID of the environment for the variables (usually obtained from
+            service_list)
+      additionalProperties: false
+  - name: variable_copy
+    description: |-
+      [WORKFLOW] Copy variables from one environment to another
+
+      ⚡️ Best for:
+        ✓ Environment migration
+        ✓ Configuration sharing
+        ✓ Environment duplication
+
+      ⚠️ Not for:
+        × Single variable updates (use variable_set)
+        × Temporary configuration changes
+
+      → Prerequisites: service_list
+
+      → Alternatives: variable_set
+
+      → Next steps: deployment_trigger, service_restart
+
+      → Related: variable_list, service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - sourceEnvironmentId
+        - targetEnvironmentId
+      properties:
+        overwrite:
+          type: boolean
+          default: false
+          description: Whether to overwrite existing variables in the target environment
+        projectId:
+          type: string
+          description: ID of the project
+        serviceId:
+          type: string
+          description: ID of the service (optional, if omitted copies shared variables)
+        sourceEnvironmentId:
+          type: string
+          description: ID of the source environment (usually obtained from project_info)
+        targetEnvironmentId:
+          type: string
+          description: ID of the target environment (usually obtained from project_info)
+      additionalProperties: false
+  - name: configure_api_token
+    description: >-
+      [UTILITY] Configure the Railway API token for authentication (only needed
+      if not set in environment variables)
+
+
+      ⚡️ Best for:
+        ✓ Initial setup
+        ✓ Token updates
+        ✓ Authentication configuration
+
+      ⚠️ Not for:
+        × Project configuration
+        × Service settings
+        × Environment variables
+
+      → Next steps: project_list, service_list
+
+
+      → Related: project_create
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: Railway API token (create one at https://railway.app/account/tokens)
+      additionalProperties: false
+  - name: volume_list
+    description: |-
+      [API] List all volumes in a project
+
+      ⚡️ Best for:
+        ✓ Viewing persistent storage configurations
+        ✓ Managing data volumes
+        ✓ Auditing storage usage
+
+      → Prerequisites: project_list
+
+      → Next steps: volume_create
+
+      → Related: service_info, database_deploy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          description: ID of the project to list volumes for
+      additionalProperties: false
+  - name: volume_create
+    description: |-
+      [API] Create a new persistent volume for a service
+
+      ⚡️ Best for:
+        ✓ Setting up database storage
+        ✓ Configuring persistent data
+        ✓ Adding file storage
+
+      ⚠️ Not for:
+        × Temporary storage needs
+        × Static file hosting
+        × Memory caching
+
+      → Prerequisites: service_list
+
+      → Next steps: volume_list
+
+      → Related: service_update, database_deploy
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - projectId
+        - environmentId
+        - serviceId
+        - mountPath
+      properties:
+        mountPath:
+          type: string
+          description: Path where the volume should be mounted in the container
+        projectId:
+          type: string
+          description: ID of the project containing the service
+        serviceId:
+          type: string
+          description: ID of the service to attach volume to
+        environmentId:
+          type: string
+          description: ID of the environment for the volume (usually obtained from
+            service_info)
+      additionalProperties: false
+  - name: volume_update
+    description: Update a volume's properties
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - volumeId
+        - name
+      properties:
+        name:
+          type: string
+          description: New name for the volume
+        volumeId:
+          type: string
+          description: ID of the volume to update
+      additionalProperties: false
+  - name: volume_delete
+    description: |-
+      [API] Delete a volume from a service
+
+      ⚡️ Best for:
+        ✓ Removing unused storage
+        ✓ Storage cleanup
+        ✓ Resource management
+
+      ⚠️ Not for:
+        × Temporary data removal
+        × Data backup (use volume_backup first)
+
+      → Prerequisites: volume_list
+
+      → Related: service_update
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - volumeId
+      properties:
+        volumeId:
+          type: string
+          description: ID of the volume to delete
+      additionalProperties: false

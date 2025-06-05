@@ -1,0 +1,17 @@
+tools:
+  - name: get_currency_listings
+    description: Get latest cryptocurrency listings
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: get_quotes
+    description: Get cryptocurrency quotes
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        slug:
+          type: string
+        symbol:
+          type: string

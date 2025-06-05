@@ -1,0 +1,15 @@
+tools:
+  - name: kagi_search
+    description: Perform web search using Kagi
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          default: 10
+          maximum: 100
+          minimum: 1
+        query:
+          type: string

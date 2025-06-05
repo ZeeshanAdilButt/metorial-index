@@ -1,0 +1,172 @@
+tools:
+  - name: show_create_table
+    description: Show the CREATE TABLE statement for a specific table
+    inputSchema:
+      type: object
+      title: show_create_tableArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        schema:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Schema
+          default: null
+        catalog:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Catalog
+          default: null
+  - name: show_create_view
+    description: Show the CREATE VIEW statement for a specific view
+    inputSchema:
+      type: object
+      title: show_create_viewArguments
+      required:
+        - view
+      properties:
+        view:
+          type: string
+          title: View
+        schema:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Schema
+          default: null
+        catalog:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Catalog
+          default: null
+  - name: execute_query
+    description: Execute a SQL query and return results in a readable format
+    inputSchema:
+      type: object
+      title: execute_queryArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: optimize
+    description: Optimize an Iceberg table's data files
+    inputSchema:
+      type: object
+      title: optimizeArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        schema:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Schema
+          default: null
+        catalog:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Catalog
+          default: null
+  - name: optimize_manifests
+    description: Optimize manifest files for an Iceberg table
+    inputSchema:
+      type: object
+      title: optimize_manifestsArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        schema:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Schema
+          default: null
+        catalog:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Catalog
+          default: null
+  - name: expire_snapshots
+    description: Remove old snapshots from an Iceberg table
+    inputSchema:
+      type: object
+      title: expire_snapshotsArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        schema:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Schema
+          default: null
+        catalog:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Catalog
+          default: null
+        retention_threshold:
+          type: string
+          title: Retention Threshold
+          default: 7d
+  - name: show_stats
+    description: Show statistics for a table
+    inputSchema:
+      type: object
+      title: show_statsArguments
+      required:
+        - table
+      properties:
+        table:
+          type: string
+          title: Table
+        schema:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Schema
+          default: null
+        catalog:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Catalog
+          default: null
+  - name: show_query_history
+    description: Get the history of executed queries
+    inputSchema:
+      type: object
+      title: show_query_historyArguments
+      properties:
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+  - name: show_catalog_tree
+    description: Show a hierarchical tree view of catalogs, schemas, and tables
+    inputSchema:
+      type: object
+      title: show_catalog_treeArguments
+      properties: {}

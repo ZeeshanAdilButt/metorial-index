@@ -1,0 +1,17 @@
+identifier: block/vscode-mcp/vscode-mcp
+repo:
+  provider: github.com
+  url: https://github.com/block/vscode-mcp
+  name: vscode-mcp
+  owner: block
+server:
+  subdirectory: /
+  name: VSCode MCP Server
+  description: Enable AI agents to seamlessly interact with VS Code, enhancing
+    their capabilities to modify files, open projects, and check extension
+    statuses. Streamline your development workflow by integrating AI assistance
+    directly into your coding environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

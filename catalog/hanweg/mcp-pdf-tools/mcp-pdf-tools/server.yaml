@@ -1,0 +1,15 @@
+identifier: hanweg/mcp-pdf-tools/mcp-pdf-tools
+repo:
+  provider: github.com
+  url: https://github.com/hanweg/mcp-pdf-tools
+  name: mcp-pdf-tools
+  owner: hanweg
+server:
+  subdirectory: /
+  name: PDF Tools Server
+  description: Provides PDF manipulation tools, such as merging and extracting
+    pages, accessible through MCP.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

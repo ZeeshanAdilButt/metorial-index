@@ -1,0 +1,18 @@
+identifier: lowkeyrd/servers/servers
+repo:
+  provider: github.com
+  url: https://github.com/lowkeyrd/servers
+  name: servers
+  owner: lowkeyrd
+server:
+  subdirectory: /src/github
+  name: GitHub API MCP Server
+  description: Enable seamless file operations, repository management, and
+    advanced search functionalities on GitHub. Automate your workflows with
+    automatic branch creation and comprehensive error handling, all while
+    preserving Git history. Enhance your development experience by integrating
+    GitHub capabilities directly into your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

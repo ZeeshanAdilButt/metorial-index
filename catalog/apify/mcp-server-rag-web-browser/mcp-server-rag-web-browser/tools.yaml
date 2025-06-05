@@ -1,0 +1,20 @@
+tools:
+  - name: search
+    description: Search phrase or a URL at Google and return crawled web pages as
+      text or Markdown
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Google Search keywords or a URL of a specific web page
+        maxResults:
+          type: integer
+          default: 1
+          description: The maximum number of top organic Google Search results whose web
+            pages will be extracted
+          exclusiveMinimum: 0
+      additionalProperties: false

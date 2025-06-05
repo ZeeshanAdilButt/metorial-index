@@ -1,0 +1,63 @@
+tools:
+  - name: list_docs
+    description: List all available Laravel documentation files.
+    inputSchema:
+      type: object
+      title: list_docsArguments
+      properties: {}
+  - name: search_docs
+    description: Search through all Laravel documentation for a specific term.
+    inputSchema:
+      type: object
+      title: search_docsArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+  - name: update_docs
+    description: "
+
+      \        Update Laravel documentation from official GitHub repository.
+
+      \       \ 
+
+      \        Args:
+
+      \            version: Laravel version branch (e.g., \"12.x\")
+
+      \            force: Force update even if already up to date
+
+      \        "
+    inputSchema:
+      type: object
+      title: update_docsArguments
+      properties:
+        force:
+          type: boolean
+          title: Force
+          default: false
+        version:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Version
+          default: null
+  - name: docs_info
+    description: Get information about the documentation version and status.
+    inputSchema:
+      type: object
+      title: docs_infoArguments
+      properties: {}
+  - name: echo
+    description: Simple echo tool for testing.
+    inputSchema:
+      type: object
+      title: echoArguments
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          title: Message

@@ -1,0 +1,18 @@
+identifier: opensvm/dexscreener-mcp-server/dexscreener-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/openSVM/dexscreener-mcp-server
+  name: dexscreener-mcp-server
+  owner: openSVM
+server:
+  subdirectory: /
+  name: DexScreener API Access
+  description: Access real-time DEX pair data, token information, and market
+    statistics across multiple blockchains. Leverage comprehensive error
+    handling and type-safe interfaces to interact with the DexScreener API
+    seamlessly. Ideal for developers looking to integrate on-chain crypto market
+    data into their applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

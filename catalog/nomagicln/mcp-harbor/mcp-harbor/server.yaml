@@ -1,0 +1,17 @@
+identifier: nomagicln/mcp-harbor/mcp-harbor
+repo:
+  provider: github.com
+  url: https://github.com/nomagicln/mcp-harbor
+  name: mcp-harbor
+  owner: nomagicln
+server:
+  subdirectory: /
+  name: Harbor Container Registry Interface
+  description: Provide seamless interaction with Harbor container registry through
+    a Model Context Protocol server. Manage projects, repositories, tags, and
+    Helm charts efficiently using exposed tools. Enhance automation and
+    integration capabilities for Harbor operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

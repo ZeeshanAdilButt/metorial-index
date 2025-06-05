@@ -1,0 +1,18 @@
+identifier: cyanheads/git-mcp-server/git-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cyanheads/git-mcp-server
+  name: git-mcp-server
+  owner: cyanheads
+server:
+  subdirectory: /
+  name: Git MCP Server
+  description: Enable Large Language Models to seamlessly interact with Git
+    repositories through a robust API. Perform Git operations like cloning,
+    committing, and pushing with ease, enhancing your development workflow.
+    Optimize performance and error handling while ensuring secure command
+    execution and repository management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

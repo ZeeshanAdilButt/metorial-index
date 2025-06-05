@@ -1,0 +1,16 @@
+identifier: mark3labs/mcp-filesystem-server/mcp-filesystem-server
+repo:
+  provider: github.com
+  url: https://github.com/mark3labs/mcp-filesystem-server
+  name: mcp-filesystem-server
+  owner: mark3labs
+server:
+  subdirectory: /
+  name: Filesystem Server
+  description: Go server implementing Model Context Protocol (MCP) for filesystem
+    operations, allowing read, write, and other operations within specified
+    directories.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

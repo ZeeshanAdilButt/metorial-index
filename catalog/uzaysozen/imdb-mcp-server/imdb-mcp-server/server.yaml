@@ -1,0 +1,16 @@
+identifier: uzaysozen/imdb-mcp-server/imdb-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/uzaysozen/imdb-mcp-server
+  name: imdb-mcp-server
+  owner: uzaysozen
+server:
+  subdirectory: /
+  name: IMDb Server
+  description: Access comprehensive movie and TV show information effortlessly.
+    Retrieve detailed data about films, actors, and upcoming releases using the
+    IMDb API. Enhance your applications with rich media content and insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

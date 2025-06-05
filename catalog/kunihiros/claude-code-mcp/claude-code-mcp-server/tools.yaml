@@ -1,0 +1,99 @@
+tools:
+  - name: explain_code
+    description: Provides detailed explanation of the given code.
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Target code
+        context:
+          type: string
+          default: ""
+          description: Additional context
+  - name: review_code
+    description: Reviews the given code.
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Code to review
+        focus_areas:
+          type: string
+          default: ""
+          description: Areas to focus on
+  - name: fix_code
+    description: Fixes bugs or issues in the given code.
+    inputSchema:
+      type: object
+      required:
+        - code
+        - issue_description
+      properties:
+        code:
+          type: string
+          description: Code to fix
+        issue_description:
+          type: string
+          description: Description of the issue
+  - name: edit_code
+    description: Edits the given code based on instructions.
+    inputSchema:
+      type: object
+      required:
+        - code
+        - instructions
+      properties:
+        code:
+          type: string
+          description: Code to edit
+        instructions:
+          type: string
+          description: Editing instructions
+  - name: test_code
+    description: Generates tests for the given code.
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Code to test
+        test_framework:
+          type: string
+          default: ""
+          description: Test framework to use
+  - name: simulate_command
+    description: Simulates the execution of a given command.
+    inputSchema:
+      type: object
+      required:
+        - command
+      properties:
+        input:
+          type: string
+          default: ""
+          description: Input data
+        command:
+          type: string
+          description: Command to execute
+  - name: your_own_query
+    description: Sends a custom query with context.
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Query text
+        context:
+          type: string
+          default: ""
+          description: Additional context

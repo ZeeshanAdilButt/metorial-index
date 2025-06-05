@@ -1,0 +1,18 @@
+identifier: pinecone-io/assistant-mcp/assistant-mcp
+repo:
+  provider: github.com
+  url: https://github.com/pinecone-io/assistant-mcp
+  name: assistant-mcp
+  owner: pinecone-io
+server:
+  subdirectory: /
+  name: Pinecone Assistant Server
+  description: Retrieve information efficiently from Pinecone Assistant with
+    support for multiple configurable results. Easily integrate with your
+    applications to access Pinecone's vector database assistant capabilities.
+    Simplify querying and data retrieval through a dedicated MCP server
+    implementation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

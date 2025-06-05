@@ -1,0 +1,18 @@
+identifier: houtj/dlis_mcp_server/dlis_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/houtj/dlis_mcp_server
+  name: dlis_mcp_server
+  owner: houtj
+server:
+  subdirectory: /
+  name: DLIS File Analysis Server
+  description: Provide advanced analysis of DLIS (Digital Log Interchange
+    Standard) files by extracting channel data and metadata with hierarchical
+    support. Enable LLM applications to easily integrate and query detailed
+    information from DLIS files. Simplify the process of exploring and utilizing
+    DLIS file contents for data-driven insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

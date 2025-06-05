@@ -1,0 +1,281 @@
+tools:
+  - name: npmVersions
+    description: Get all available versions of an NPM package
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get versions for
+      additionalProperties: false
+  - name: npmLatest
+    description: Get the latest version and changelog of an NPM package
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get latest versions for
+      additionalProperties: false
+  - name: npmDeps
+    description: Analyze dependencies and devDependencies of an NPM package
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to analyze dependencies for
+      additionalProperties: false
+  - name: npmTypes
+    description: Check TypeScript types availability and version for a package
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to check types for
+      additionalProperties: false
+  - name: npmSize
+    description: Get package size information including dependencies and bundle size
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get size information for
+      additionalProperties: false
+  - name: npmVulnerabilities
+    description: Check for known vulnerabilities in packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to check for vulnerabilities
+      additionalProperties: false
+  - name: npmTrends
+    description: Get download trends and popularity metrics for packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        period:
+          enum:
+            - last-week
+            - last-month
+            - last-year
+          type: string
+          default: last-month
+          description: 'Time period for trends. Options: "last-week", "last-month",
+            "last-year"'
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get trends for
+      additionalProperties: false
+  - name: npmCompare
+    description: Compare multiple NPM packages based on various metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to compare
+      additionalProperties: false
+  - name: npmMaintainers
+    description: Get maintainers information for NPM packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get maintainers for
+      additionalProperties: false
+  - name: npmScore
+    description: Get consolidated package score based on quality, maintenance, and
+      popularity metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get scores for
+      additionalProperties: false
+  - name: npmPackageReadme
+    description: Get the README content for NPM packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get READMEs for
+      additionalProperties: false
+  - name: npmSearch
+    description: Search for NPM packages with optional limit
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        limit:
+          type: number
+          maximum: 50
+          minimum: 1
+          description: "Maximum number of results to return (default: 10)"
+        query:
+          type: string
+          description: Search query for packages
+      additionalProperties: false
+  - name: npmLicenseCompatibility
+    description: Check license compatibility between multiple packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: List of package names to check for license compatibility
+      additionalProperties: false
+  - name: npmRepoStats
+    description: Get repository statistics for NPM packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to get repository stats for
+      additionalProperties: false
+  - name: npmDeprecated
+    description: Check if packages are deprecated
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to check for deprecation
+      additionalProperties: false
+  - name: npmChangelogAnalysis
+    description: Analyze changelog and release history of packages
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to analyze changelogs for
+      additionalProperties: false
+  - name: npmAlternatives
+    description: Find alternative packages with similar functionality
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to find alternatives for
+      additionalProperties: false
+  - name: npmQuality
+    description: Analyze package quality metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to analyze
+      additionalProperties: false
+  - name: npmMaintenance
+    description: Analyze package maintenance metrics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - packages
+      properties:
+        packages:
+          type: array
+          items:
+            type: string
+          description: List of package names to analyze
+      additionalProperties: false

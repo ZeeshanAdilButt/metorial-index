@@ -1,0 +1,16 @@
+identifier: designcomputer/mysql_mcp_server/mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/designcomputer/mysql_mcp_server
+  name: mysql_mcp_server
+  owner: designcomputer
+server:
+  subdirectory: /
+  name: MySQL Server
+  description: A Model Context Protocol (MCP) server that enables secure
+    interaction with MySQL databases, allowing AI assistants to list tables,
+    read data, and execute SQL queries through a controlled interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

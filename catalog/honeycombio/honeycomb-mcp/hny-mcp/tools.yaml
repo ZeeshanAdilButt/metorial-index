@@ -1,0 +1,338 @@
+tools:
+  - name: list_datasets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+      properties:
+        environment:
+          type: string
+      additionalProperties: false
+  - name: get_columns
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+      properties:
+        dataset:
+          type: string
+          description: The dataset to fetch columns from
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: run_query
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+        - calculations
+      properties:
+        limit:
+          type: number
+        having:
+          type: array
+          items:
+            type: object
+            required:
+              - calculate_op
+              - op
+              - value
+            properties:
+              op:
+                enum:
+                  - =
+                  - "!="
+                  - ">"
+                  - ">="
+                  - <
+                  - <=
+                type: string
+              value:
+                type: number
+              column:
+                type: string
+              calculate_op:
+                enum:
+                  - COUNT
+                  - CONCURRENCY
+                  - SUM
+                  - AVG
+                  - COUNT_DISTINCT
+                  - MAX
+                  - MIN
+                  - P001
+                  - P01
+                  - P05
+                  - P10
+                  - P20
+                  - P25
+                  - P50
+                  - P75
+                  - P80
+                  - P90
+                  - P95
+                  - P99
+                  - P999
+                  - RATE_AVG
+                  - RATE_SUM
+                  - RATE_MAX
+                type: string
+            additionalProperties: false
+        orders:
+          type: array
+          items:
+            type: object
+            required:
+              - op
+              - order
+            properties:
+              op:
+                type: string
+              order:
+                enum:
+                  - ascending
+                  - descending
+                type: string
+              column:
+                type: string
+            additionalProperties: false
+        dataset:
+          type: string
+        filters:
+          type: array
+          items:
+            type: object
+            required:
+              - column
+              - op
+            properties:
+              op:
+                enum:
+                  - =
+                  - "!="
+                  - ">"
+                  - ">="
+                  - <
+                  - <=
+                  - starts-with
+                  - does-not-start-with
+                  - ends-with
+                  - does-not-end-with
+                  - exists
+                  - does-not-exist
+                  - contains
+                  - does-not-contain
+                  - in
+                  - not-in
+                type: string
+              value:
+                anyOf:
+                  - type: string
+                  - type: number
+                  - type: boolean
+                  - type: array
+                    items:
+                      type: string
+                  - type: array
+                    items:
+                      type: number
+              column:
+                type: string
+            additionalProperties: false
+        end_time:
+          type: number
+        breakdowns:
+          type: array
+          items:
+            type: string
+        start_time:
+          type: number
+        time_range:
+          type: number
+        environment:
+          type: string
+        granularity:
+          type: number
+        calculations:
+          type: array
+          items:
+            type: object
+            required:
+              - op
+            properties:
+              op:
+                enum:
+                  - COUNT
+                  - CONCURRENCY
+                  - SUM
+                  - AVG
+                  - COUNT_DISTINCT
+                  - MAX
+                  - MIN
+                  - P001
+                  - P01
+                  - P05
+                  - P10
+                  - P20
+                  - P25
+                  - P50
+                  - P75
+                  - P80
+                  - P90
+                  - P95
+                  - P99
+                  - P999
+                  - RATE_AVG
+                  - RATE_SUM
+                  - RATE_MAX
+                  - HEATMAP
+                type: string
+              column:
+                type: string
+            additionalProperties: false
+        filter_combination:
+          enum:
+            - AND
+            - OR
+          type: string
+      additionalProperties: false
+  - name: analyze_column
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+        - column
+      properties:
+        column:
+          type: string
+        dataset:
+          type: string
+        timeRange:
+          type: number
+        environment:
+          type: string
+      additionalProperties: false
+  - name: list_boards
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+      properties:
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: get_board
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - boardId
+      properties:
+        boardId:
+          type: string
+          description: The ID of the board to retrieve
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: list_markers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+      properties:
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: list_recipients
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+      properties:
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: list_slos
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+      properties:
+        dataset:
+          type: string
+          description: The dataset to fetch SLOs from
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: get_slo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+        - sloId
+      properties:
+        sloId:
+          type: string
+          description: The ID of the SLO to retrieve
+        dataset:
+          type: string
+          description: The dataset containing the SLO
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: list_triggers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+      properties:
+        dataset:
+          type: string
+          description: The dataset to fetch triggers from
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false
+  - name: get_trigger
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - environment
+        - dataset
+        - triggerId
+      properties:
+        dataset:
+          type: string
+          description: The dataset containing the trigger
+        triggerId:
+          type: string
+          description: The ID of the trigger to retrieve
+        environment:
+          type: string
+          description: The Honeycomb environment
+      additionalProperties: false

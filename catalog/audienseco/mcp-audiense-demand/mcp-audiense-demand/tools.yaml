@@ -1,0 +1,286 @@
+tools:
+  - name: initiate-device-auth
+    description: Start the device authorization flow to get a device code for authentication
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: create-demand-report
+    description: Create a new demand report
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - entitiesReferences
+        - userEmail
+      properties:
+        title:
+          type: string
+          description: Title of the demand report
+        userEmail:
+          type: string
+          format: email
+          description: Email of the user creating the report
+        entitiesReferences:
+          type: array
+          items:
+            type: string
+          description: Array of entity names for the report
+      additionalProperties: false
+  - name: get-demand-reports
+    description: Get demand reports for the authorized user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        paginationEnd:
+          type: number
+          description: Pagination end index
+        paginationStart:
+          type: number
+          description: Pagination start index
+      additionalProperties: false
+  - name: get-demand-report-info
+    description: Get detailed information about a specific demand report
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+      properties:
+        reportId:
+          type: string
+          description: The ID of the report to get information for
+      additionalProperties: false
+  - name: request-entities
+    description: Request not found entities
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entityNames
+        - userEmail
+      properties:
+        userEmail:
+          type: string
+          format: email
+          description: Email of the user requesting the entities
+        entityNames:
+          type: array
+          items:
+            type: string
+          description: Array of entity names to request
+      additionalProperties: false
+  - name: check-entities
+    description: Check if entities exist
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - entities
+      properties:
+        entities:
+          type: array
+          items:
+            type: string
+          description: Array of entity names to check
+      additionalProperties: false
+  - name: get-demand-report-summary-by-channels
+    description: Get a summary of the demand report broken down by channels
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+      properties:
+        offset:
+          type: number
+          default: 0
+          description: Pagination offset
+        country:
+          enum:
+            - Weighted-Total
+            - Weighted-Total
+            - Global
+            - US
+            - GB
+            - AU
+            - CA
+            - DE
+            - FR
+            - IN
+            - JP
+            - IT
+            - ES
+            - BR
+            - MX
+            - AR
+            - NL
+            - SE
+            - DK
+            - NO
+            - PL
+            - TR
+          type: string
+          default: Weighted-Total
+          description: The country to filter by.
+        reportId:
+          type: string
+          description: The ID of the report to get the summary for
+        entityNames:
+          type: array
+          items:
+            type: string
+          description: Optional array of entity names to filter by
+      additionalProperties: false
+  - name: get-demand-report-summary-by-countries
+    description: Get a summary of the demand report broken down by countries
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+        - countries
+      properties:
+        offset:
+          type: number
+          description: Pagination offset
+        platform:
+          enum:
+            - youtube
+            - tiktok
+            - instagram
+            - twitter
+            - youtube_search_term
+            - google
+            - google_growth
+            - url
+            - all_platforms
+          type: string
+          default: all_platforms
+          description: Platform name to analyze.
+        reportId:
+          type: string
+          description: The ID of the report to get the summary for
+        countries:
+          type: array
+          items:
+            enum:
+              - Weighted-Total
+              - Weighted-Total
+              - Global
+              - US
+              - GB
+              - AU
+              - CA
+              - DE
+              - FR
+              - IN
+              - JP
+              - IT
+              - ES
+              - BR
+              - MX
+              - AR
+              - NL
+              - SE
+              - DK
+              - NO
+              - PL
+              - TR
+            type: string
+          description: Array of country codes to analyze.
+        entityNames:
+          type: array
+          items:
+            type: string
+          description: Optional array of entity names to filter by
+      additionalProperties: false
+  - name: get-youtube-search-volume-summary
+    description: Get YouTube search volume summary for entities in a demand report
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+      properties:
+        country:
+          enum:
+            - Weighted-Total
+            - Global
+            - US
+            - GB
+            - AU
+            - CA
+            - DE
+            - FR
+            - IN
+            - JP
+            - IT
+            - ES
+            - BR
+            - MX
+            - AR
+            - NL
+            - SE
+            - DK
+            - NO
+            - PL
+            - TR
+          type: string
+          default: Global
+          description: Country code to analyze
+        reportId:
+          type: string
+          description: The ID of the report to get the summary for
+        entityNames:
+          type: array
+          items:
+            type: string
+          description: Optional array of entity names to filter by
+      additionalProperties: false
+  - name: get-google-search-volume-summary
+    description: Get Google search volume summary for entities in a demand report
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - reportId
+      properties:
+        country:
+          enum:
+            - Weighted-Total
+            - Global
+            - US
+            - GB
+            - AU
+            - CA
+            - DE
+            - FR
+            - IN
+            - JP
+            - IT
+            - ES
+            - BR
+            - MX
+            - AR
+            - NL
+            - SE
+            - DK
+            - NO
+            - PL
+            - TR
+          type: string
+          default: Global
+          description: Country code to analyze
+        reportId:
+          type: string
+          description: The ID of the report to get the summary for
+        entityNames:
+          type: array
+          items:
+            type: string
+          description: Optional array of entity names to filter by
+      additionalProperties: false

@@ -1,0 +1,159 @@
+tools:
+  - name: get_recent_data
+    description: "
+
+      \    获取最近N期的双色球数据
+
+
+      \    Args:
+
+      \        limit: 获取的期数，默认为10
+
+      \        ctx: MCP上下文
+
+
+      \    Returns:
+
+      \        SSQDataList: 双色球数据列表
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_recent_dataArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+  - name: get_data_by_issue_range
+    description: "
+
+      \    获取指定期号范围的双色球数据
+
+
+      \    Args:
+
+      \        start_issue: 起始期号
+
+      \        end_issue: 结束期号
+
+      \        ctx: MCP上下文
+
+
+      \    Returns:
+
+      \        SSQDataList: 双色球数据列表
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_data_by_issue_rangeArguments
+      required:
+        - start_issue
+        - end_issue
+      properties:
+        end_issue:
+          type: string
+          title: End Issue
+        start_issue:
+          type: string
+          title: Start Issue
+  - name: get_data_by_issue
+    description: "
+
+      \    获取指定期号的双色球数据
+
+
+      \    Args:
+
+      \        issue: 期号
+
+      \        ctx: MCP上下文
+
+
+      \    Returns:
+
+      \        SSQDataList: 双色球数据列表
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_data_by_issueArguments
+      required:
+        - issue
+      properties:
+        issue:
+          type: string
+          title: Issue
+  - name: analyze_frequency
+    description: "
+
+      \    分析双色球号码出现频率
+
+
+      \    Args:
+
+      \        limit: 分析的期数，默认为100
+
+      \        ctx: MCP上下文
+
+
+      \    Returns:
+
+      \        FrequencyAnalysis: 频率分析结果
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_frequencyArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+  - name: analyze_missing_periods
+    description: "
+
+      \    分析双色球号码遗漏期数
+
+
+      \    Args:
+
+      \        limit: 分析的期数，默认为100
+
+      \        ctx: MCP上下文
+
+
+      \    Returns:
+
+      \        MissingAnalysis: 遗漏期数分析结果
+
+      \    "
+    inputSchema:
+      type: object
+      title: analyze_missing_periodsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+  - name: get_proxy_status
+    description: "
+
+      \    获取当前代理配置状态
+
+
+      \    Args:
+
+      \        ctx: MCP上下文
+
+
+      \    Returns:
+
+      \        Dict: 代理配置信息
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_proxy_statusArguments
+      properties: {}

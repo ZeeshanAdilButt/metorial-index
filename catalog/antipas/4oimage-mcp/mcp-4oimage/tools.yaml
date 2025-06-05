@@ -1,0 +1,35 @@
+tools:
+  - name: generateImage
+    description: >-
+      Generate images using the 4o-image API and automatically open the results
+      in your browser.
+
+
+      This tool generates images based on your prompt and automatically opens
+      them in your default browser, while also returning a clickable link.
+
+
+      The tool supports two modes:
+
+      1. Text-to-image - Create new images using just a text prompt
+
+      2. Image editing - Provide a base image and prompt for editing or style
+      transfer
+
+
+      The response will include a direct link to the generated image and
+      detailed information.
+
+
+      Visit our website: https://4o-image.app/
+    inputSchema:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text description of the desired image content
+        imageBase64:
+          type: string
+          description: Optional base image (Base64 encoded) for image editing or upscaling

@@ -1,0 +1,121 @@
+tools:
+  - name: bash
+    description: Execute a shell command
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - command
+      properties:
+        command:
+          type: string
+          description: The shell command to execute
+        timeout:
+          type: number
+          description: Optional timeout in milliseconds (max 600000)
+      additionalProperties: false
+  - name: readFile
+    description: Read a file from the local filesystem
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - file_path
+      properties:
+        limit:
+          type: number
+          description: The number of lines to read
+        offset:
+          type: number
+          description: The line number to start reading from
+        file_path:
+          type: string
+          description: The absolute path to the file to read
+      additionalProperties: false
+  - name: listFiles
+    description: Lists files and directories in a given path
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: The absolute path to the directory to list
+      additionalProperties: false
+  - name: searchGlob
+    description: Search for files matching a pattern
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pattern
+      properties:
+        path:
+          type: string
+          description: The directory to search in. Defaults to the current working
+            directory.
+        pattern:
+          type: string
+          description: The glob pattern to match files against
+      additionalProperties: false
+  - name: grep
+    description: Search for text in files
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pattern
+      properties:
+        path:
+          type: string
+          description: The directory to search in. Defaults to the current working
+            directory.
+        include:
+          type: string
+          description: File pattern to include in the search (e.g. "*.js", "*.{ts,tsx}")
+        pattern:
+          type: string
+          description: The regular expression pattern to search for in file contents
+      additionalProperties: false
+  - name: think
+    description: A tool for thinking through complex problems
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - thought
+      properties:
+        thought:
+          type: string
+          description: Your thoughts
+      additionalProperties: false
+  - name: codeReview
+    description: Review code for bugs, security issues, and best practices
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: The code to review
+      additionalProperties: false
+  - name: editFile
+    description: Create or edit a file
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - file_path
+        - content
+      properties:
+        content:
+          type: string
+          description: The new content for the file
+        file_path:
+          type: string
+          description: The absolute path to the file to edit
+      additionalProperties: false

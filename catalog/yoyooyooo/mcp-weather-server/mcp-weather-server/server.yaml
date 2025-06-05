@@ -1,0 +1,17 @@
+identifier: yoyooyooo/mcp-weather-server/mcp-weather-server
+repo:
+  provider: github.com
+  url: https://github.com/yoyooyooo/mcp-weather-server
+  name: mcp-weather-server
+  owner: yoyooyooo
+server:
+  subdirectory: /
+  name: Weather API Server
+  description: Provide real-time weather data and forecasts for any location.
+    Access current conditions, hourly forecasts, and city information seamlessly
+    through a standardized API. Customize your experience with options for units
+    and language to suit your needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

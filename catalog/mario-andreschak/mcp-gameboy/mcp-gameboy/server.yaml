@@ -1,0 +1,18 @@
+identifier: mario-andreschak/mcp-gameboy/mcp-gameboy
+repo:
+  provider: github.com
+  url: https://github.com/mario-andreschak/mcp-gameboy
+  name: mcp-gameboy
+  owner: mario-andreschak
+server:
+  subdirectory: /
+  name: GameBoy Emulator Server
+  description: Enable LLMs to interact with a GameBoy emulator by providing
+    controls, ROM loading, and screen capture tools. Control the emulator via
+    standard input/output or server-sent events transports, with real-time
+    screen feedback. Enhance your AI applications with classic gaming context
+    and visual outputs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

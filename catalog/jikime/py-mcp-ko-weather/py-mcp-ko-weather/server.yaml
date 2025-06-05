@@ -1,0 +1,18 @@
+identifier: jikime/py-mcp-ko-weather/py-mcp-ko-weather
+repo:
+  provider: github.com
+  url: https://github.com/jikime/py-mcp-ko-weather
+  name: py-mcp-ko-weather
+  owner: jikime
+server:
+  subdirectory: /
+  name: Korea Weather
+  description: Provide accurate and up-to-date weather forecasts for Korean
+    regions using official meteorological data. Query location grid coordinates
+    and retrieve detailed short-term weather forecasts to assist in planning and
+    decision-making. Access comprehensive usage instructions and structured
+    prompts to facilitate effective interaction with the weather data tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

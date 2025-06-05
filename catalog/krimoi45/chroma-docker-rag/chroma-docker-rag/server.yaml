@@ -1,0 +1,17 @@
+identifier: krimoi45/chroma-docker-rag/chroma-docker-rag
+repo:
+  provider: github.com
+  url: https://github.com/krimoi45/chroma-docker-rag
+  name: chroma-docker-rag
+  owner: krimoi45
+server:
+  subdirectory: /
+  name: Chroma Docker RAG
+  description: Enable semantic similarity search and vector collection management
+    using ChromaDB within a Dockerized environment. Easily create and query
+    vector collections for retrieval-augmented generation workflows. Customize
+    document collections and search queries through a Python script.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

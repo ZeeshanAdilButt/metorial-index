@@ -1,0 +1,18 @@
+identifier: chat-prompt/gpters-search-mcp-server/gpters-search-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/chat-prompt/gpters-search-mcp-server
+  name: gpters-search-mcp-server
+  owner: chat-prompt
+server:
+  subdirectory: /
+  name: GPTers AI Knowledge Search Server
+  description: >-
+    GPTers AI 스터디 커뮤니티의 지식에 쉽고 빠르게 접근할 수 있습니다. 유용한 인사이트를 효율적으로 검색하고 활용하여, 방대한
+    정보를 바탕으로 학습 경험을 향상시킬 수 있습니다.
+
+    API 키는 GPTers 운영자에게 요청하여 발급받으시기 바랍니다.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

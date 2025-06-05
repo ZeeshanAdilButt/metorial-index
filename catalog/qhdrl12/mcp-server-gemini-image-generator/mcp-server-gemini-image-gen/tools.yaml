@@ -1,0 +1,98 @@
+tools:
+  - name: generate_image_from_text
+    description: "Generate an image based on the given text prompt using Google's
+      Gemini model.
+
+
+      \    Args:
+
+      \        prompt: User's text prompt describing the desired image to
+      generate
+
+      \       \ 
+
+      \    Returns:
+
+      \        Path to the generated image file using Gemini's image generation
+      capabilities
+
+      \    "
+    inputSchema:
+      type: object
+      title: generate_image_from_textArguments
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+  - name: transform_image_from_encoded
+    description: "Transform an existing image based on the given text prompt using
+      Google's Gemini model.
+
+
+      \    Args:
+
+      \        encoded_image: Base64 encoded image data with header. Must be in
+      format:
+
+      \                    \"data:image/[format];base64,[data]\"
+
+      \                    Where [format] can be: png, jpeg, jpg, gif, webp,
+      etc.
+
+      \        prompt: Text prompt describing the desired transformation or
+      modifications
+
+      \       \ 
+
+      \    Returns:
+
+      \        Path to the transformed image file saved on the server
+
+      \    "
+    inputSchema:
+      type: object
+      title: transform_image_from_encodedArguments
+      required:
+        - encoded_image
+        - prompt
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+        encoded_image:
+          type: string
+          title: Encoded Image
+  - name: transform_image_from_file
+    description: "Transform an existing image file based on the given text prompt
+      using Google's Gemini model.
+
+
+      \    Args:
+
+      \        image_file_path: Path to the image file to be transformed
+
+      \        prompt: Text prompt describing the desired transformation or
+      modifications
+
+      \       \ 
+
+      \    Returns:
+
+      \        Path to the transformed image file saved on the server
+
+      \    "
+    inputSchema:
+      type: object
+      title: transform_image_from_fileArguments
+      required:
+        - image_file_path
+        - prompt
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+        image_file_path:
+          type: string
+          title: Image File Path

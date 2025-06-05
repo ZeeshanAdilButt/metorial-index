@@ -1,0 +1,389 @@
+tools:
+  - name: search
+    description: >-
+      the search tool can be used to search the octomind documentation for a
+      given query.
+          The search results are returned as a list of links to the documentation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+      additionalProperties: false
+  - name: getTestCase
+    description: >-
+      the getTestCase tool can retrieve a test case for a given test target and
+      test case id.
+          A test case id is unique to the test target. The test case includes a set of interactions and assertions.
+          it is the result of a discovery or a manual creation.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testCaseId
+        - testTargetId
+      properties:
+        testCaseId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test case
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+      additionalProperties: false
+  - name: executeTests
+    description: >-
+      the executeTests tool can trigger a set of tests for a given test target.
+          The test target id is unique to the test target. The tests are executed on the provided url.
+          The context object is used to provide information about the source of the test execution.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL where the tests will be executed
+        tags:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of tags used for filtering the tests to execute
+        description:
+          type: string
+          description: Optional description of the test execution
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+        environmentName:
+          type: string
+          default: default
+          description: Name of the environment to use for test execution
+        variablesToOverwrite:
+          type: object
+          description: Optional variables to override during test execution
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: false
+  - name: getEnvironments
+    description: >-
+      the getEnvironments tool can retrieve environments for a given test
+      target.
+         an environment represents a specific setup or deployments for a test target. It include a test account when necsesary
+          to login, a header configuration, a discovery url and a set of variables.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+      properties:
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+      additionalProperties: false
+  - name: createEnvironment
+    description: >-
+      the createEnvironment tool can create an environment for a given test
+      target.
+          an environment represents a specific setup or deployments for a test target. It include a test account when necsesary
+          to login, a header configuration, a discovery url and a set of variables.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+        - name
+        - discoveryUrl
+      properties:
+        name:
+          type: string
+          description: Name of the environment
+        basicAuth:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            password:
+              type: string
+              description: Password for basic auth, if discovery needs authentication
+            username:
+              type: string
+              description: "Username for basic auth, if discovery needs authentication "
+          description: Optional basic authentication credentials, if discovery needs
+            authentication
+          additionalProperties: false
+        testAccount:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            password:
+              type: string
+              description: Password for test account, if discovery needs authentication
+            username:
+              type: string
+              description: Username for test account, if discovery needs authentication
+            otpInitializerKey:
+              type: string
+              description: Optional OTP initializer key, if discovery needs authentication
+                with otp
+          description: Optional test account credentials, if discovery needs authentication
+          additionalProperties: false
+        discoveryUrl:
+          type: string
+          format: uri
+          description: URL used for test discovery
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+        privateLocationName:
+          type: string
+          description: Optional name of the private location, if discovery         needs
+            to discover in a private location e.g. behind a firewall or VPN
+        additionalHeaderFields:
+          type: object
+          description: Optional additional HTTP header fields,         if discovery needs
+            additional headers to be set
+          additionalProperties:
+            type: string
+      additionalProperties: false
+  - name: updateEnvironment
+    description: >-
+      the updateEnvironment tool can update an environment for a given test
+      target.
+          an environment represents a specific setup or deployments for a test target. It include a test account when necsesary
+          to login, a header configuration, a discovery url and a set of variables.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+        - environmentId
+      properties:
+        name:
+          type: string
+          description: Optional new name for the environment
+        basicAuth:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            password:
+              type: string
+              description: Password for basic auth, if discovery needs authentication
+            username:
+              type: string
+              description: "Username for basic auth, if discovery needs authentication "
+          description: Optional basic authentication credentials, if discovery needs
+            authentication
+          additionalProperties: false
+        testAccount:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            password:
+              type: string
+              description: Password for test account, if discovery needs authentication
+            username:
+              type: string
+              description: Username for test account, if discovery needs authentication
+            otpInitializerKey:
+              type: string
+              description: Optional OTP initializer key, if discovery needs authentication
+                with otp
+          description: Optional test account credentials, if discovery needs authentication
+          additionalProperties: false
+        discoveryUrl:
+          type: string
+          format: uri
+          description: Optional new discovery URL
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+        environmentId:
+          type: string
+          format: uuid
+          description: Unique identifier of the environment
+        privateLocationName:
+          type: string
+          description: Optional name of the private location, if discovery needs to
+            discover in a private location e.g. behind a firewall or VPN
+        additionalHeaderFields:
+          type: object
+          description: Optional additional HTTP header fields, if discovery needs
+            additional headers to be set
+          additionalProperties:
+            type: string
+      additionalProperties: false
+  - name: deleteEnvironment
+    description: >-
+      deleteEnvironment tool can delete an environment for a given test target.
+          The environment id is unique to the test target. The call is not reversible.
+          an environment represents a specific setup or deployments for a test target. It include a test account when necsesary
+          to login, a header configuration, a discovery url and a set of variables.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+        - environmentId
+      properties:
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+        environmentId:
+          type: string
+          format: uuid
+          description: Unique identifier of the environment to delete
+      additionalProperties: false
+  - name: getTestReports
+    description: >-
+      the getTestReports tool can retrieve test reports for a given test target.
+          Test reports are generated when set of tests are executed. The test report id is unique to the test target.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+      properties:
+        key:
+          type: object
+          required:
+            - createdAt
+          properties:
+            createdAt:
+              type: string
+              format: date-time
+              description: Creation timestamp for filtering reports
+          description: Optional key for filtering test reports
+          additionalProperties: false
+        filter:
+          type: array
+          items:
+            type: object
+            required:
+              - key
+              - operator
+              - value
+            properties:
+              key:
+                type: string
+                description: Filter key
+              value:
+                type: string
+                description: Filter value
+              operator:
+                enum:
+                  - EQUALS
+                type: string
+                description: Filter operator, currently only EQUALS is supported
+            additionalProperties: false
+          description: Optional filters for test reports
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+      additionalProperties: false
+  - name: getTestReport
+    description: >-
+      the getTestReport tool can retrieve a test report for a given test target
+      and test report id.
+          A test report id is generated when a set of test are executed on
+          a test target. The test report id is unique to the test target.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - testTargetId
+        - testReportId
+      properties:
+        testReportId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test report
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+      additionalProperties: false
+  - name: discovery
+    description: >-
+      the discovery tool can create a test case on a giver test target with a
+      test case description or prompt.
+          one can either start from the predefined url for that test case or provide a new entry point url.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - testTargetId
+        - prompt
+      properties:
+        name:
+          type: string
+          description: Name of the test case to create
+        prompt:
+          type: string
+          description: Description or prompt used for test case generation
+        folderId:
+          type: string
+          description: Optional folder ID for organizing test cases
+        externalId:
+          type: string
+          description: Optional external identifier. E.g. a ticket number or test rail id
+        testTargetId:
+          type: string
+          format: uuid
+          description: Unique identifier of the test target
+        assignedTagIds:
+          type: array
+          items:
+            type: string
+          description: Optional list of tag IDs to assign
+        prerequisiteId:
+          type: string
+          description: Optional prerequisite test case ID. If set all steps of the
+            prerequisite will be executed before the test case discovery starts
+        entryPointUrlPath:
+          type: string
+          description: Optional entry point URL path, if not provided the predefined url
+            of the test target will be used
+      additionalProperties: false
+  - name: getPrivateLocations
+    description: >-
+      the getPrivateLocations tool can retrieve all private locations configured
+      for that org. 
+          A private location is a server that can be used to access a test target behind a firewall or VPN.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: getVersion
+    description: Returns the current version of the Octomind MCP server
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

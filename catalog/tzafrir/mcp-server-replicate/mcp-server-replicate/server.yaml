@@ -1,0 +1,17 @@
+identifier: tzafrir/mcp-server-replicate/mcp-server-replicate
+repo:
+  provider: github.com
+  url: https://github.com/tzafrir/mcp-server-replicate
+  name: mcp-server-replicate
+  owner: tzafrir
+server:
+  subdirectory: /
+  name: Replicate Interface Server
+  description: Access various AI models hosted on Replicate through a standardized
+    interface. Generate images with customizable parameters and optimize outputs
+    seamlessly. Stay tuned for upcoming features like text and video generation,
+    enhancing your creative capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: isaacgounton/sqlite-mcp-server/sqlite-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/isaacgounton/sqlite-mcp-server
+  name: sqlite-mcp-server
+  owner: isaacgounton
+server:
+  subdirectory: /
+  name: SQLite Database Server
+  description: Provide standardized SQLite database operations including querying,
+    table management, and business insights memo tracking through a simple MCP
+    interface. Easily deploy locally or with Docker for seamless integration
+    with your applications. Execute SQL commands and manage your database schema
+    efficiently via MCP tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

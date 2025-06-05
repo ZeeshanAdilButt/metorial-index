@@ -1,0 +1,305 @@
+tools:
+  - name: get_population_data
+    description: "
+
+      \    Get refugee population data from UNHCR.
+
+      \   \ 
+
+      \    Args:
+
+      \        coo: Country of origin (ISO3 code) - Use for questions about
+      refugees FROM a specific country
+
+      \        coa: Country of asylum (ISO3 code) - Use for questions about
+      refugees IN a specific country
+
+      \        year: Year to filter by (defaults to 2024)
+
+      \        coo_all: Set to True when breaking down results by ORIGIN country
+
+      \        coa_all: Set to True when breaking down results by ASYLUM country
+
+      \   \ 
+
+      \    Important:
+
+      \        - For \"Where are refugees from COUNTRY living?\" use
+      coo=\"COUNTRY\" and coa_all=True
+
+      \        - For \"How many refugees are living in COUNTRY?\" use
+      coa=\"COUNTRY\"
+
+      \        - For \"What countries do refugees in COUNTRY come from?\" use
+      coa=\"COUNTRY\" and coo_all=True
+
+      \       \ 
+
+      \    Returns:
+
+      \        Population data from UNHCR
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_population_dataArguments
+      properties:
+        coa:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Coa
+          default: null
+        coo:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Coo
+          default: null
+        year:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Year
+          default: null
+        coa_all:
+          type: boolean
+          title: Coa All
+          default: false
+        coo_all:
+          type: boolean
+          title: Coo All
+          default: false
+  - name: get_rsd_applications
+    description: "
+
+      \    Get RSD application data from UNHCR.
+
+      \   \ 
+
+      \    Args:
+
+      \        coo: Country of origin filter (ISO3 code, comma-separated for
+      multiple) - Use for questions about asylum seekers FROM a specific country
+
+      \        coa: Country of asylum filter (ISO3 code, comma-separated for
+      multiple) - Use for questions about asylum applications IN a specific
+      country
+
+      \        year: Year filter (comma-separated for multiple years) - defaults
+      to 2024 if not provided
+
+      \        coo_all:  Set to True when analyzing the ORIGIN COUNTRIES of
+      asylum seekers
+
+      \            - Use when answering: \"Which nationalities applied for
+      asylum in Germany?\"
+
+      \        coa_all: Set to True when analyzing the ASYLUM COUNTRIES where
+      applications were filed
+
+      \            - Use when answering: \"Where did Syrians apply for asylum?\"
+      (breakdown by country)
+
+      \            - Do NOT use when answering: \"How many asylum applications
+      were filed in Germany?\"
+
+      \       \ 
+
+      \        Important query patterns:
+
+      \        - \"How many [nationality] people applied for asylum in
+      [country]?\"
+
+      \            → Use coo=\"[nationality code]\" and coa=\"[country code]\"
+
+      \       \ 
+
+      \        - \"Where did [nationality] people apply for asylum?\"
+
+      \            → Use coo=\"[nationality code]\" and coa_all=True
+
+      \       \ 
+
+      \        - \"Who applied for asylum in [country]?\"
+
+      \            → Use coa=\"[country code]\" and coo_all=True
+
+      \       \ 
+
+      \        - \"How many asylum applications were there in [year]?\"
+
+      \            → Use year=\"[year]\" with appropriate coo/coa filters if
+      needed
+
+      \       \ 
+
+      \    Returns:
+
+      \        UNHCR RSD Applications data in a country of asylum
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_rsd_applicationsArguments
+      properties:
+        coa:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Coa
+          default: null
+        coo:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Coo
+          default: null
+        year:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Year
+          default: null
+        coa_all:
+          type: boolean
+          title: Coa All
+          default: false
+        coo_all:
+          type: boolean
+          title: Coo All
+          default: false
+  - name: get_rsd_decisions
+    description: "
+
+      \    Get Refugee Status Determination (RSD) decision data from UNHCR.
+
+      \   \ 
+
+      \    Args:
+
+      \        coo: Country of origin filter (ISO3 code, comma-separated for
+      multiple) - Use for questions about asylum decisions FOR people FROM a
+      specific country
+
+      \             Example: \"SYR\" for Syria, \"AFG,IRQ\" for Afghanistan and
+      Iraq
+
+      \       \ 
+
+      \        coa: Country of asylum filter (ISO3 code, comma-separated for
+      multiple) - Use for questions about asylum decisions MADE IN a specific
+      country
+
+      \             Example: \"DEU\" for Germany, \"FRA,ITA\" for France and
+      Italy
+
+      \       \ 
+
+      \        year: Year filter (comma-separated for multiple years) - defaults
+      to 2024 if not provided
+
+      \             Example: \"2023\" or \"2022,2023,2024\" for multiple years
+
+      \       \ 
+
+      \        coo_all: Set to True when analyzing decisions breakdown BY
+      NATIONALITY of asylum seekers
+
+      \            - Use when answering: \"Which nationalities received asylum
+      decisions in Germany?\"
+
+      \            - Use when answering: \"What was the approval rate for
+      different nationalities in France?\"
+
+      \       \ 
+
+      \        coa_all: Set to True when analyzing decisions breakdown BY
+      COUNTRY where decisions were made
+
+      \            - Use when answering: \"Where did Syrians receive asylum
+      decisions?\" (breakdown by country)
+
+      \            - Use when answering: \"Which countries approved/rejected the
+      most Eritrean asylum claims?\"
+
+      \       \ 
+
+      \    Important query patterns:
+
+      \        - \"How many [nationality] people were granted/rejected asylum in
+      [country]?\"
+
+      \            → Use coo=\"[nationality code]\" and coa=\"[country code]\"
+
+      \       \ 
+
+      \        - \"Where did [nationality] people receive positive/negative
+      asylum decisions?\"
+
+      \            → Use coo=\"[nationality code]\" and coa_all=True
+
+      \       \ 
+
+      \        - \"What was the asylum approval rate for different nationalities
+      in [country]?\"
+
+      \            → Use coa=\"[country code]\" and coo_all=True
+
+      \       \ 
+
+      \        - \"How many asylum decisions were made in [year]?\"
+
+      \            → Use year=\"[year]\" with appropriate coo/coa filters if
+      needed
+
+      \       \ 
+
+      \        - \"What was the recognition rate for [nationality] refugees in
+      [country]?\"
+
+      \            → Use coo=\"[nationality code]\" and coa=\"[country code]\"
+
+      \       \ 
+
+      \    Returns:
+
+      \        UNHCR RSD Decision data including counts of recognized, rejected,
+      and otherwise closed cases
+
+      \        with statistics on recognition rates and processing efficiency
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_rsd_decisionsArguments
+      properties:
+        coa:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Coa
+          default: null
+        coo:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Coo
+          default: null
+        year:
+          anyOf:
+            - type: string
+            - type: integer
+            - type: "null"
+          title: Year
+          default: null
+        coa_all:
+          type: boolean
+          title: Coa All
+          default: false
+        coo_all:
+          type: boolean
+          title: Coo All
+          default: false

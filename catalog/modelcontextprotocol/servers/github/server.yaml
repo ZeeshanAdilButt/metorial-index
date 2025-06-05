@@ -1,0 +1,15 @@
+identifier: modelcontextprotocol/servers/github
+repo:
+  provider: github.com
+  url: https://github.com/modelcontextprotocol/servers
+  name: servers
+  owner: modelcontextprotocol
+server:
+  subdirectory: /src/github
+  name: GitHub MCP Server
+  description: An MCP server for GitHub. It allows you to interact with GitHub
+    repositories using the Model Context Protocol (MCP).
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

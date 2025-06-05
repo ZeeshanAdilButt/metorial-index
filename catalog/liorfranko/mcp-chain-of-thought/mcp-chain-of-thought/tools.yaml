@@ -1,0 +1,518 @@
+tools:
+  - name: plan_task
+    description: >
+      Initialize and detail the task flow, establish clear goals and success
+      criteria, optionally reference existing tasks for continuation planning
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          minLength: 10
+          description: Complete detailed task problem description, should include task
+            objectives, background and expected outcomes
+        requirements:
+          type: string
+          description: Specific technical requirements, business constraints or quality
+            standards for the task (optional)
+        existingTasksReference:
+          type: boolean
+          default: false
+          description: Whether to reference existing tasks as a planning basis, used for
+            task adjustment and continuity planning
+      additionalProperties: false
+  - name: analyze_task
+    description: >
+      Deeply analyze task requirements and systematically check the codebase,
+      evaluate technical feasibility and potential risks. If code is needed, use
+      pseudocode format providing only high-level logic flow and key steps,
+      avoiding complete code.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - summary
+        - initialConcept
+      properties:
+        summary:
+          type: string
+          minLength: 10
+          description: Structured task summary including task objectives, scope and key
+            technical challenges, minimum 10 characters
+        initialConcept:
+          type: string
+          minLength: 50
+          description: At least 50 characters of initial solution concept, including
+            technical solution, architectural design and implementation
+            strategy, if code is needed use pseudocode format and only provide
+            high-level logic flow and key steps avoiding complete code
+        previousAnalysis:
+          type: string
+          description: Analysis results from previous iterations, used for continuous
+            improvement of solutions (only required for reanalysis)
+      additionalProperties: false
+  - name: reflect_task
+    description: >
+      Critically review analysis results, evaluate solution completeness and
+      identify optimization opportunities, ensuring the solution aligns with
+      best practices. If code is needed, use pseudocode format providing only
+      high-level logic flow and key steps, avoiding complete code.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - summary
+        - analysis
+      properties:
+        summary:
+          type: string
+          minLength: 10
+          description: Structured task summary, keeping consistent with the analysis phase
+            to ensure continuity
+        analysis:
+          type: string
+          minLength: 100
+          description: Comprehensive technical analysis results, including all technical
+            details, dependent components and implementation plans, if code is
+            needed use pseudocode format and only provide high-level logic flow
+            and key steps avoiding complete code
+      additionalProperties: false
+  - name: split_tasks
+    description: >
+      Decompose complex tasks into independent subtasks, establishing
+      dependencies and priorities.
+
+
+      ## updateMode
+
+
+      - **append**: Keep existing tasks and add new ones
+
+      - **overwrite**: Delete unfinished tasks, keep completed ones
+
+      - **selective**: Intelligently match and update existing tasks based on
+      name
+
+      - **clearAllTasks**: Clear all tasks and create a backup (preferred mode)
+
+
+      ## Key Requirements
+
+
+      - **Provide concise pseudocode**: Only provide high-level logic flow and
+      key steps, avoid complete code
+
+      - **Consolidate when necessary**: Simple modifications can be integrated
+      with other tasks to avoid excessive task count
+
+      - **Submit in batches**: If there are too many tasks, use the
+      "split_tasks" tool with parameters not exceeding 5000 characters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - updateMode
+        - tasks
+      properties:
+        tasks:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - description
+              - implementationGuide
+            properties:
+              name:
+                type: string
+                maxLength: 100
+                description: Brief and clear task name, should be able to express the purpose of
+                  the task
+              notes:
+                type: string
+                description: Supplementary notes, special processing requirements or
+                  implementation suggestions (optional)
+              description:
+                type: string
+                minLength: 10
+                description: Detailed task description, including implementation points,
+                  technical details and acceptance standards
+              dependencies:
+                type: array
+                items:
+                  type: string
+                description: List of previous task IDs or task names this task depends on,
+                  supports two referencing methods, name referencing is more
+                  intuitive, and is a string array
+              relatedFiles:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - path
+                    - type
+                    - description
+                  properties:
+                    path:
+                      type: string
+                      minLength: 1
+                      description: File path, can be a path relative to the project root directory or
+                        an absolute path
+                    type:
+                      enum:
+                        - TO_MODIFY
+                        - REFERENCE
+                        - CREATE
+                        - DEPENDENCY
+                        - OTHER
+                      type: string
+                      description: "File type (TO_MODIFY: to be modified, REFERENCE: reference
+                        material, CREATE: to be created, DEPENDENCY: dependency
+                        file, OTHER: other)"
+                    lineEnd:
+                      type: integer
+                      description: Ending line of the relevant code block (optional)
+                      exclusiveMinimum: 0
+                    lineStart:
+                      type: integer
+                      description: Starting line of the relevant code block (optional)
+                      exclusiveMinimum: 0
+                    description:
+                      type: string
+                      minLength: 1
+                      description: File description, used to explain the purpose and content of the
+                        file
+                  additionalProperties: false
+                description: List of files related to the task, used to record code files,
+                  reference materials, files to be created, etc. related to the
+                  task (optional)
+              implementationGuide:
+                type: string
+                description: Specific implementation method and steps for this task, please
+                  refer to previous analysis results and provide simplified
+                  pseudocode
+              verificationCriteria:
+                type: string
+                description: Verification criteria and inspection methods for this specific task
+            additionalProperties: false
+          minItems: 1
+          description: Structured task list, each task should be atomic and have a clear
+            completion standard, avoid overly simple tasks, simple modifications
+            can be integrated with other tasks, avoid too many tasks
+        updateMode:
+          enum:
+            - append
+            - overwrite
+            - selective
+            - clearAllTasks
+          type: string
+          description: >-
+            Task update mode selection: 'append' (preserve all existing tasks
+            and add new tasks), 'overwrite' (clear all unfinished tasks and
+            completely replace, preserve completed tasks), 'selective'
+            (intelligent update: match and update existing tasks by name,
+            preserve tasks not in the list, recommended for minor task
+            adjustments), 'clearAllTasks' (clear all tasks and create a backup).
+
+            Default is 'clearAllTasks' mode, only use other modes when the user
+            requests changes or modifications to the plan content
+        globalAnalysisResult:
+          type: string
+          description: "Global analysis result: complete analysis result from
+            reflect_task, applicable to the common parts of all tasks"
+      additionalProperties: false
+  - name: list_tasks
+    description: >
+      Generate a structured task list, including complete status tracking,
+      priority, and dependencies
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - status
+      properties:
+        status:
+          enum:
+            - all
+            - pending
+            - in_progress
+            - completed
+          type: string
+          description: Task status to list, can choose 'all' to list all tasks, or specify
+            specific status
+      additionalProperties: false
+  - name: execute_task
+    description: >
+      Execute a specific task according to the predefined plan, ensuring the
+      output of each step meets quality standards
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          format: uuid
+          description: Unique identifier of the task to execute, must be an existing valid
+            task ID in the system
+      additionalProperties: false
+  - name: verify_task
+    description: >
+      Comprehensively verify task completion, ensuring all requirements and
+      technical standards are met without missing details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          format: uuid
+          description: Unique identifier of the task to verify, must be an existing valid
+            task ID in the system
+      additionalProperties: false
+  - name: complete_task
+    description: >
+      Formally mark a task as completed, generate a detailed completion report,
+      and update the dependency status of related tasks
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          format: uuid
+          description: Unique identifier of the task to mark as completed, must be a valid
+            unfinished task ID in the status of "in progress"
+        summary:
+          type: string
+          minLength: 30
+          description: Task completion summary, concise description of implementation
+            results and important decisions (optional, will be automatically
+            generated if not provided)
+      additionalProperties: false
+  - name: delete_task
+    description: >
+      Delete unfinished tasks, but does not allow deleting completed tasks,
+      ensuring the integrity of system records
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          format: uuid
+          description: Unique identifier of the task to delete, must be an existing
+            unfinished task ID in the system
+      additionalProperties: false
+  - name: clear_all_tasks
+    description: |
+      Clear unfinished tasks and reset the task list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - confirm
+      properties:
+        confirm:
+          type: boolean
+          description: Confirm to delete all unfinished tasks (this operation is
+            irreversible)
+      additionalProperties: false
+  - name: update_task
+    description: >
+      Update task content, including name, description and notes, dependent
+      tasks, related files, implementation guide and verification criteria.
+      Completed tasks only allow updating summary and related files
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        name:
+          type: string
+          description: New name for the task (optional)
+        notes:
+          type: string
+          description: New supplementary notes for the task (optional)
+        taskId:
+          type: string
+          format: uuid
+          description: Unique identifier of the task to update, must be an existing and
+            unfinished task ID in the system
+        description:
+          type: string
+          description: New description content for the task (optional)
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: New dependency relationships for the task (optional)
+        relatedFiles:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - type
+            properties:
+              path:
+                type: string
+                minLength: 1
+                description: File path, can be a path relative to the project root directory or
+                  an absolute path
+              type:
+                enum:
+                  - TO_MODIFY
+                  - REFERENCE
+                  - CREATE
+                  - DEPENDENCY
+                  - OTHER
+                type: string
+                description: Relationship type between the file and task (TO_MODIFY, REFERENCE,
+                  CREATE, DEPENDENCY, OTHER)
+              lineEnd:
+                type: integer
+                description: Ending line of the relevant code block (optional)
+                exclusiveMinimum: 0
+              lineStart:
+                type: integer
+                description: Starting line of the relevant code block (optional)
+                exclusiveMinimum: 0
+              description:
+                type: string
+                description: Supplementary description of the file (optional)
+            additionalProperties: false
+          description: List of files related to the task, used to record code files,
+            reference materials, files to be created, etc. related to the task
+            (optional)
+        implementationGuide:
+          type: string
+          description: New implementation guide for the task (optional)
+        verificationCriteria:
+          type: string
+          description: New verification criteria for the task (optional)
+      additionalProperties: false
+  - name: query_task
+    description: |
+      Search tasks by keyword or ID, displaying abbreviated task information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        isId:
+          type: boolean
+          default: false
+          description: Specify whether it's ID query mode, default is no (keyword mode)
+        page:
+          type: integer
+          default: 1
+          description: Page number, default is page 1
+          exclusiveMinimum: 0
+        query:
+          type: string
+          minLength: 1
+          description: Search query text, can be task ID or multiple keywords (space
+            separated)
+        pageSize:
+          type: integer
+          default: 5
+          maximum: 20
+          minimum: 1
+          description: Number of tasks to display per page, default is 5, maximum 20
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: get_task_detail
+    description: >
+      Get the complete detailed information of a task based on its ID, including
+      unabridged implementation guides and verification criteria, etc.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          minLength: 1
+          description: Task ID to view details
+      additionalProperties: false
+  - name: process_thought
+    description: >
+      Engage in a flexible and evolving thinking process by creating,
+      questioning, validating, and refining ideas to progressively deepen
+      understanding and generate effective solutions. When needing to gather
+      data, analyze, or research, prioritize reviewing relevant project code; if
+      such code doesn't exist, search the web rather than speculating. Set
+      nextThoughtNeeded to false when thinking is sufficient, otherwise adjust
+      total_thoughts to extend the process
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - thought
+        - thought_number
+        - total_thoughts
+        - next_thought_needed
+        - stage
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Thought tags, an array of strings
+        stage:
+          type: string
+          minLength: 1
+          description: "Thinking stage, available stages include: problem definition,
+            information gathering, research, analysis, synthesis, conclusion,
+            questioning, planning"
+        thought:
+          type: string
+          minLength: 1
+          description: Thought content
+        axioms_used:
+          type: array
+          items:
+            type: string
+          description: Axioms used, an array of strings
+        thought_number:
+          type: integer
+          description: Current thought number
+          exclusiveMinimum: 0
+        total_thoughts:
+          type: integer
+          description: Estimated total number of thoughts, can be changed anytime if more
+            thinking is needed
+          exclusiveMinimum: 0
+        next_thought_needed:
+          type: boolean
+          description: Whether next thought step is needed
+        assumptions_challenged:
+          type: array
+          items:
+            type: string
+          description: Assumptions challenged, an array of strings
+      additionalProperties: false
+  - name: init_project_rules
+    description: >
+      Initialize project rules. Call this tool when the user requests to
+      generate or initialize the project specification file, or if the user
+      requests to change or update the project specification.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

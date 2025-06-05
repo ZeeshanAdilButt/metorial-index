@@ -1,0 +1,17 @@
+identifier: dperussina/mssql-mcp-server/mssql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dperussina/mssql-mcp-server
+  name: mssql-mcp-server
+  owner: dperussina
+server:
+  subdirectory: /
+  name: MS SQL Server Integration
+  description: Explore and query your Microsoft SQL Server databases effortlessly.
+    Generate SQL queries from natural language and execute them safely without
+    needing coding skills. Discover your database structure and interact with it
+    directly through AI assistants like Claude.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

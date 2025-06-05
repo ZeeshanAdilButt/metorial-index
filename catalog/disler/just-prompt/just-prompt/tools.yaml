@@ -1,0 +1,92 @@
+tools:
+  - name: prompt
+    description: Send a prompt to multiple LLM models
+    inputSchema:
+      type: object
+      title: PromptSchema
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          title: Text
+          description: The prompt text
+        models_prefixed_by_provider:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Models Prefixed By Provider
+          default: null
+          description: List of models with provider prefixes (e.g., 'openai:gpt-4o' or
+            'o:gpt-4o'). If not provided, uses default models.
+  - name: prompt_from_file
+    description: Send a prompt from a file to multiple LLM models
+    inputSchema:
+      type: object
+      title: PromptFromFileSchema
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          title: File
+          description: Path to the file containing the prompt
+        models_prefixed_by_provider:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Models Prefixed By Provider
+          default: null
+          description: List of models with provider prefixes (e.g., 'openai:gpt-4o' or
+            'o:gpt-4o'). If not provided, uses default models.
+  - name: prompt_from_file_to_file
+    description: Send a prompt from a file to multiple LLM models and save responses
+      to files
+    inputSchema:
+      type: object
+      title: PromptFromFileToFileSchema
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          title: File
+          description: Path to the file containing the prompt
+        output_dir:
+          type: string
+          title: Output Dir
+          default: .
+          description: "Directory to save the response files to (default: current
+            directory)"
+        models_prefixed_by_provider:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Models Prefixed By Provider
+          default: null
+          description: List of models with provider prefixes (e.g., 'openai:gpt-4o' or
+            'o:gpt-4o'). If not provided, uses default models.
+  - name: list_providers
+    description: List all available LLM providers
+    inputSchema:
+      type: object
+      title: ListProvidersSchema
+      properties: {}
+  - name: list_models
+    description: List all available models for a specific LLM provider
+    inputSchema:
+      type: object
+      title: ListModelsSchema
+      required:
+        - provider
+      properties:
+        provider:
+          type: string
+          title: Provider
+          description: Provider to list models for (e.g., 'openai' or 'o')

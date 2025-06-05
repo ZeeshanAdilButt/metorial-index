@@ -1,0 +1,18 @@
+identifier: ramuzes/mcp-jena/mcp-jena
+repo:
+  provider: github.com
+  url: https://github.com/ramuzes/mcp-jena
+  name: mcp-jena
+  owner: ramuzes
+server:
+  subdirectory: /
+  name: Apache Jena SPARQL MCP Server
+  description: Enable AI agents to query and update RDF data stored in Apache Jena
+    using SPARQL through a standardized protocol. Execute SPARQL queries and
+    updates, list named graphs, and integrate securely with Jena Fuseki servers.
+    Simplify semantic web data access for AI applications with HTTP Basic
+    authentication support.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

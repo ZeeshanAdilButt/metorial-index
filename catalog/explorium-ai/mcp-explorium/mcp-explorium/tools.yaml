@@ -1,0 +1,1750 @@
+tools:
+  - name: match_businesses
+    description: "
+
+      \    Get the Explorium business IDs from business name and/or domain in
+      bulk.
+
+      \    Use this when:
+
+      \    - Need company size/revenue/industry
+
+      \    - Analyzing overall business metrics
+
+      \    - Researching company background
+
+      \    - Looking for specific employees (use fetch_prospects next)
+
+
+      \    Do NOT use when:
+
+      \    - Looking for specific employees
+
+      \    - Getting executive contact info
+
+      \    - Finding team member details
+
+      \    - You already called fetch_businesses - the response already contains
+      business IDs
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        MatchBusinessInput:
+          type: object
+          title: MatchBusinessInput
+          required:
+            - name
+            - domain
+          properties:
+            name:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Name
+            domain:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Domain
+          description: Input for matching businesses. Use multiple identifiers for higher
+            match accuracy.
+      title: match_businessesArguments
+      required:
+        - businesses_to_match
+      properties:
+        businesses_to_match:
+          type: array
+          items:
+            $ref: "#/$defs/MatchBusinessInput"
+          title: Businesses To Match
+          maxItems: 50
+          minItems: 1
+  - name: fetch_businesses
+    description: "
+
+      \    Fetch businesses from the Explorium API filtered by various criteria.
+
+      \    You MUST call the autocomplete tool to get the list of possible
+      values for
+
+      \    filters specified in the autocomplete tool's description.
+
+
+      \    Do NOT use this tool first if you do not have a list of available
+      values for
+
+      \    mandatory filters specified in the autocomplete tool's description.
+
+
+      \    This tool returns Business IDs, which can be used to fetch more
+      information.
+
+      \    Do NOT call match_businesses afterwards.
+
+
+      \    If a requested filter is not supported by the Explorium API, stop the
+
+      \    execution and notify the user.
+
+
+      \    If you are looking for employees at a company, use fetch_prospects
+      next.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        CompanyAge:
+          enum:
+            - 0-3
+            - 4-10
+            - 11-20
+            - 20+
+          type: string
+          title: CompanyAge
+          description: |-
+            All available company age ranges in years:
+            AGE_0_3: 0-3 years
+            AGE_4_10: 4-10 years
+            AGE_11_20: 11-20 years
+            AGE_20_PLUS: 20+ years
+        CompanySize:
+          enum:
+            - 1-10
+            - 11-50
+            - 51-200
+            - 201-500
+            - 501-1000
+            - 1001-5000
+            - 5001-10000
+            - 10001+
+          type: string
+          title: CompanySize
+          description: |-
+            All available company size ranges.
+            Possible values:
+            SIZE_1_10: 1-10 employees
+            SIZE_11_50: 11-50 employees
+            SIZE_51_200: 51-200 employees
+            SIZE_201_500: 201-500 employees
+            SIZE_501_1000: 501-1000 employees
+            SIZE_1001_5000: 1001-5000 employees
+            SIZE_5001_10000: 5001-10000 employees
+            SIZE_10001_PLUS: 10001+ employees
+        CompanyRevenue:
+          enum:
+            - 0-500K
+            - 500k-1M
+            - 1M-5M
+            - 5M-10M
+            - 10M-25M
+            - 25M-75M
+            - 75M-200M
+            - 200M-500M
+            - 500M-1B
+            - 1B-10B
+            - 10B-100B
+            - 100B-1T
+            - 1T-10T
+            - 10T+
+          type: string
+          title: CompanyRevenue
+          description: |-
+            All available revenue ranges in annual $:
+            REV_0_500K: $0-500K yearly revenue
+            REV_500K_1M: $500k-1M yearly revenue
+            REV_1M_5M: $1M-5M yearly revenue
+            REV_5M_10M: $5M-10M yearly revenue
+            REV_10M_25M: $10M-25M yearly revenue
+            REV_25M_75M: $25M-75M yearly revenue
+            REV_75M_200M: $75M-200M yearly revenue
+            REV_200M_500M: $200M-500M yearly revenue
+            REV_500M_1B: $500M-1B yearly revenue
+            REV_1B_10B: $1B-10B yearly revenue
+            REV_10B_100B: $10B-100B yearly revenue
+            REV_100B_1T: $100B-1T yearly revenue
+            REV_1T_10T: $1T-10T yearly revenue
+            REV_10T_PLUS: $10T+ yearly revenue
+        FetchBusinessesFilters:
+          type: object
+          title: FetchBusinessesFilters
+          properties:
+            company_age:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/CompanyAge"
+                - type: "null"
+              title: Company Age
+              default: null
+              description: Filters accounts by the age of the company in years.
+            company_size:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/CompanySize"
+                - type: "null"
+              title: Company Size
+              default: null
+              description: Filters accounts based on the number of employees.
+            country_code:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Country Code
+              default: null
+              description: A list of lowercase two-letter ISO country codes.
+            naics_category:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Naics Category
+              default: null
+              description: 'Filters accounts by the North American Industry Classification
+                System categories. Example: ["23", "5611"]'
+            company_revenue:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/CompanyRevenue"
+                - type: "null"
+              title: Company Revenue
+              default: null
+              description: Filters accounts based on the annual revenue.
+            google_category:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Google Category
+              default: null
+              description: Filters accounts by categories as classified in Google.
+            linkedin_category:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Linkedin Category
+              default: null
+              description: Filters accounts by categories as used in LinkedIn.
+            region_country_code:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Region Country Code
+              default: null
+              description: A list of lowercase region-country codes in the format 'REGION-CC'
+                where CC is the two-letter ISO country code.
+          description: >-
+            Business search filters.
+
+            Before calling a tool that uses this filter, call the autocomplete
+            tool to get the list of available values,
+
+            especially when using linkedin_category, google_category,
+            naics_category, and region_country_code.
+
+            Only one category can be present at a time (google_category,
+            naics_category, or linkedin_category).
+      title: fetch_businessesArguments
+      required:
+        - filters
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: The page number to return
+        size:
+          type: integer
+          title: Size
+          default: 1000
+          maximum: 1000
+          description: The number of businesses to return
+        filters:
+          $ref: "#/$defs/FetchBusinessesFilters"
+        page_size:
+          type: integer
+          title: Page Size
+          default: 100
+          maximum: 100
+          description: The number of businesses to return per page
+  - name: autocomplete
+    description: "
+
+      \    Autocomplete values for various business fields based on a query
+      string.
+
+      \    You MUST call this tool before using any of the following filters:
+
+      \    - linkedin_category
+
+      \    - google_category
+
+      \    - naics_category
+
+      \    - region_country_code
+
+
+      \    Prefer to use linkedin_category over google_category.
+
+
+      \    Do NOT use this tool if you already have a list of available values
+
+      \    for emum fields, such as:
+
+      \    - company_size
+
+      \    - company_age
+
+      \    - company_revenue
+
+
+      \    Hints:
+
+      \    - When looking for 'saas' in categories, use 'software'
+
+      \    - Use 'country' to get the country code
+
+      \    "
+    inputSchema:
+      type: object
+      title: autocompleteArguments
+      required:
+        - field
+        - query
+      properties:
+        field:
+          enum:
+            - country
+            - region_country_code
+            - google_category
+            - naics_category
+            - linkedin_category
+            - company_tech_stack_tech
+            - job_title
+            - company_size
+            - company_revenue
+            - company_age
+            - job_department
+            - job_level
+          type: string
+          title: Field
+        query:
+          anyOf:
+            - type: string
+            - type: integer
+          title: Query
+          description: The query to autocomplete
+  - name: fetch_businesses_events
+    description: "
+
+      \    Retrieves business-related events from the Explorium API in bulk.
+
+      \    If you're looking for events related to role changes, you should use
+      the
+
+      \    prospects events tool instead.
+
+
+      \    This is a VERY useful tool for researching a company's events and
+      history.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        BusinessEventType:
+          enum:
+            - ipo_announcement
+            - new_funding_round
+            - new_investment
+            - new_product
+            - new_office
+            - closing_office
+            - new_partnership
+            - increase_in_engineering_department
+            - increase_in_sales_department
+            - increase_in_marketing_department
+            - increase_in_operations_department
+            - increase_in_customer_service_department
+            - increase_in_all_departments
+            - decrease_in_engineering_department
+            - decrease_in_sales_department
+            - decrease_in_marketing_department
+            - decrease_in_operations_department
+            - decrease_in_customer_service_department
+            - decrease_in_all_departments
+            - employee_joined_company
+            - hiring_in_creative_department
+            - hiring_in_education_department
+            - hiring_in_engineering_department
+            - hiring_in_finance_department
+            - hiring_in_health_department
+            - hiring_in_human_resources_department
+            - hiring_in_legal_department
+            - hiring_in_marketing_department
+            - hiring_in_operations_department
+            - hiring_in_professional_service_department
+            - hiring_in_sales_department
+            - hiring_in_support_department
+            - hiring_in_trade_department
+            - hiring_in_unknown_department
+          type: string
+          title: BusinessEventType
+          description: >-
+            Valid event types for the Explorium Business Events API.
+
+
+            IPO_ANNOUNCEMENT: Company announces plans to go public through an
+            initial public offering
+
+            - link: str - Link to article
+
+            - ipo_date: datetime - Date of IPO
+
+            - event_id: str - News event ID
+
+            - company_name: str - Company name
+
+            - offer_amount: float - Company valuation
+
+            - number_of_shares: int - Number of issued shares
+
+            - stock_exchange: str - IPO stock exchange
+
+            - event_time: datetime - News event timestamp
+
+            - price_per_share: float - Price per share
+
+            - ticker: str - Ticker
+
+
+            NEW_FUNDING_ROUND: Company secures a new round of investment funding
+
+            - founding_date: datetime - Date of funding round
+
+            - amount_raised: float - Amount raised in funding
+
+            - link: str - Link to article
+
+            - founding_stage: str - Funding round stage
+
+            - event_id: str - News event ID
+
+            - event_time: datetime - News event timestamp
+
+            - investors: str - Investors in funding round
+
+            - lead_investor: str - Lead investor
+
+
+            NEW_INVESTMENT: Company makes an investment in another business or
+            venture
+
+            - investment_date: datetime - News event timestamp
+
+            - investment_type: str - Type of investment
+
+            - event_time: datetime - News report publishing date
+
+            - event_id: str - News event ID
+
+            - investment_target: str - Target of investment
+
+            - link: str - Link to article
+
+            - investment_amount: float - Amount of investment
+
+
+            NEW_PRODUCT: Company launches a new product or service
+
+            - event_time: datetime - News event timestamp
+
+            - event_id: str - News event ID
+
+            - link: str - Link to article
+
+            - product_name: str - Name of new product
+
+            - product_description: str - Description of new product
+
+            - product_category: str - Category of new product
+
+            - product_launch_date: datetime - Launch date of new product
+
+
+            NEW_OFFICE: Company opens a new office location
+
+            - purpose_of_new_office: str - Purpose of new office
+
+            - link: str - Link to article
+
+            - opening_date: datetime - Date of office opening
+
+            - event_id: str - News event ID
+
+            - office_location: str - Location of new office
+
+            - event_time: datetime - News report publishing date
+
+            - number_of_employees: int - Number of employees at new office
+
+
+            CLOSING_OFFICE: Company closes an existing office location
+
+            - reason_for_closure: str - Reason for office closing
+
+            - event_time: datetime - News report publishing date
+
+            - office_location: str - Location of closing office
+
+            - closure_date: datetime - Date of office closing
+
+            - event_id: str - News event ID
+
+            - number_of_employees_affected: int - Number of employees impacted
+
+            - link: str - Link to article
+
+
+            NEW_PARTNERSHIP: Company forms a strategic partnership with another
+            organization
+
+            - link: str - Link to article
+
+            - partner_company: str - Name of partnering company
+
+            - partnership_date: datetime - Date of partnership
+
+            - event_time: datetime - News report publishing date
+
+            - purpose_of_partnership: str - Partnership purpose
+
+            - event_id: str - News event ID
+
+
+            DEPARTMENT_INCREASE_*: Company announces an increase in a specific
+            department
+
+            DEPARTMENT_DECREASE_*: Company announces a decrease in a specific
+            department
+
+            Possible input departments: ENGINEERING, SALES, MARKETING,
+            OPERATIONS, CUSTOMER_SERVICE, ALL
+
+            - department_change: float - Quarterly change in department
+            headcount
+
+            - event_time: datetime - Department event timestamp
+
+            - event_id: str - Department event ID
+
+            - quarter_partition: str - Quarter when change occurred
+
+            - insertion_time: str - Event collection timestamp
+
+            - department: str - Name of department
+
+            - change_type: str - Type of department change
+
+
+            DEPARTMENT_HIRING_*: Company announces a hiring initiative in a
+            specific department
+
+            Possible input departments: CREATIVE, EDUCATION, ENGINEERING,
+            FINANCE, HEALTH, HR, LEGAL, MARKETING, OPERATIONS, PROFESSIONAL,
+            SALES, SUPPORT, TRADE, UNKNOWN
+
+            - location: str - Location of hiring initiative
+
+            - event_id: str - Company hiring event ID
+
+            - event_time: datetime - When role was published
+
+            - job_count: int - Number of open positions
+
+            - job_titles: str - Job titles being hired for
+
+            - department: str - Department hiring is occurring in
+
+
+            EMPLOYEE_JOINED: Employee is hired by an organization
+
+            - job_department: str - Employee's current job department
+
+            - full_name: str - Employee's full name
+
+            - job_role_title: str - Employee's current job title
+
+            - event_id: str - Employee's event ID
+
+            - linkedin_url: str - Employee's LinkedIn URL
+      title: fetch_businesses_eventsArguments
+      required:
+        - business_ids
+        - event_types
+        - timestamp_from
+      properties:
+        event_types:
+          type: array
+          items:
+            $ref: "#/$defs/BusinessEventType"
+          title: Event Types
+          description: List of event types to fetch
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 20
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+        timestamp_from:
+          type: string
+          title: Timestamp From
+          description: ISO 8601 timestamp
+  - name: fetch_businesses_statistics
+    description: "
+
+      \    Fetch aggregated insights into businesses by industry, revenue,
+      employee count, and geographic distribution.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        CompanyAge:
+          enum:
+            - 0-3
+            - 4-10
+            - 11-20
+            - 20+
+          type: string
+          title: CompanyAge
+          description: |-
+            All available company age ranges in years:
+            AGE_0_3: 0-3 years
+            AGE_4_10: 4-10 years
+            AGE_11_20: 11-20 years
+            AGE_20_PLUS: 20+ years
+        CompanySize:
+          enum:
+            - 1-10
+            - 11-50
+            - 51-200
+            - 201-500
+            - 501-1000
+            - 1001-5000
+            - 5001-10000
+            - 10001+
+          type: string
+          title: CompanySize
+          description: |-
+            All available company size ranges.
+            Possible values:
+            SIZE_1_10: 1-10 employees
+            SIZE_11_50: 11-50 employees
+            SIZE_51_200: 51-200 employees
+            SIZE_201_500: 201-500 employees
+            SIZE_501_1000: 501-1000 employees
+            SIZE_1001_5000: 1001-5000 employees
+            SIZE_5001_10000: 5001-10000 employees
+            SIZE_10001_PLUS: 10001+ employees
+        CompanyRevenue:
+          enum:
+            - 0-500K
+            - 500k-1M
+            - 1M-5M
+            - 5M-10M
+            - 10M-25M
+            - 25M-75M
+            - 75M-200M
+            - 200M-500M
+            - 500M-1B
+            - 1B-10B
+            - 10B-100B
+            - 100B-1T
+            - 1T-10T
+            - 10T+
+          type: string
+          title: CompanyRevenue
+          description: |-
+            All available revenue ranges in annual $:
+            REV_0_500K: $0-500K yearly revenue
+            REV_500K_1M: $500k-1M yearly revenue
+            REV_1M_5M: $1M-5M yearly revenue
+            REV_5M_10M: $5M-10M yearly revenue
+            REV_10M_25M: $10M-25M yearly revenue
+            REV_25M_75M: $25M-75M yearly revenue
+            REV_75M_200M: $75M-200M yearly revenue
+            REV_200M_500M: $200M-500M yearly revenue
+            REV_500M_1B: $500M-1B yearly revenue
+            REV_1B_10B: $1B-10B yearly revenue
+            REV_10B_100B: $10B-100B yearly revenue
+            REV_100B_1T: $100B-1T yearly revenue
+            REV_1T_10T: $1T-10T yearly revenue
+            REV_10T_PLUS: $10T+ yearly revenue
+        FetchBusinessesFilters:
+          type: object
+          title: FetchBusinessesFilters
+          properties:
+            company_age:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/CompanyAge"
+                - type: "null"
+              title: Company Age
+              default: null
+              description: Filters accounts by the age of the company in years.
+            company_size:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/CompanySize"
+                - type: "null"
+              title: Company Size
+              default: null
+              description: Filters accounts based on the number of employees.
+            country_code:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Country Code
+              default: null
+              description: A list of lowercase two-letter ISO country codes.
+            naics_category:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Naics Category
+              default: null
+              description: 'Filters accounts by the North American Industry Classification
+                System categories. Example: ["23", "5611"]'
+            company_revenue:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/CompanyRevenue"
+                - type: "null"
+              title: Company Revenue
+              default: null
+              description: Filters accounts based on the annual revenue.
+            google_category:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Google Category
+              default: null
+              description: Filters accounts by categories as classified in Google.
+            linkedin_category:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Linkedin Category
+              default: null
+              description: Filters accounts by categories as used in LinkedIn.
+            region_country_code:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Region Country Code
+              default: null
+              description: A list of lowercase region-country codes in the format 'REGION-CC'
+                where CC is the two-letter ISO country code.
+          description: >-
+            Business search filters.
+
+            Before calling a tool that uses this filter, call the autocomplete
+            tool to get the list of available values,
+
+            especially when using linkedin_category, google_category,
+            naics_category, and region_country_code.
+
+            Only one category can be present at a time (google_category,
+            naics_category, or linkedin_category).
+      title: fetch_businesses_statisticsArguments
+      required:
+        - filters
+      properties:
+        filters:
+          $ref: "#/$defs/FetchBusinessesFilters"
+  - name: enrich_businesses_firmographics
+    description: "
+
+      \    Get firmographics data in bulk.
+
+      \    Returns:
+
+      \    - Business ID and name
+
+      \    - Detailed business description
+
+      \    - Website URL
+
+      \    - Geographic information (country, region)
+
+      \    - Industry classification (NAICS code and description)
+
+      \    - SIC code and description
+
+      \    - Stock ticker symbol (for public companies)
+
+      \    - Company size (number of employees range)
+
+      \    - Annual revenue range
+
+      \    - LinkedIn industry category and profile URL
+
+
+      \    Do NOT use when:
+
+      \    - You need to find a specific employee at a company
+
+      \    - Looking for leadership info of a company
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_firmographicsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_technographics
+    description: "
+
+      \    Get technographics data in bulk.
+
+      \    Returns:
+
+      \    - Full technology stack used by the business
+
+      \    - Nested technology stack categorized by function (e.g., Sales,
+      Marketing, DevOps)
+
+      \    - Detailed breakdown by categories including:
+
+      \      - Testing and QA tools
+
+      \      - Sales software
+
+      \      - Programming languages and frameworks
+
+      \      - Productivity and operations tools
+
+      \      - Product and design software
+
+      \      - Platform and storage solutions
+
+      \      - Operations software
+
+      \      - Operations management tools
+
+      \      - Marketing technologies
+
+      \      - IT security solutions
+
+      \      - IT management systems
+
+      \      - HR software
+
+      \      - Health tech applications
+
+      \      - Finance and accounting tools
+
+      \      - E-commerce platforms
+
+      \      - DevOps and development tools
+
+      \      - Customer management systems
+
+      \      - Computer networks
+
+      \      - Communications tools
+
+      \      - Collaboration platforms
+
+      \      - Business intelligence and analytics
+
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_technographicsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_company_ratings
+    description: "
+
+      \    Get internal company ratings in bulk.
+
+      \    Returns:
+
+      \    - Employee satisfaction ratings across multiple categories
+
+      \    - Company culture and work-life balance assessments
+
+      \    - Management and leadership quality ratings
+
+      \    - Career growth and advancement opportunities metrics
+
+      \    - Interview experience feedback from candidates
+
+      \    - Overall company reputation scores from current and former employees
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_company_ratingsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_financial_metrics
+    description: "
+
+      \    Get financial metrics for public companies in bulk.
+
+      \    You may also use this tool when looking for leadership information
+      (CEO, CTO, CFO, etc.)
+
+
+      \    Returns:
+
+      \    - Financial metrics including EBITDA, revenue, and cost of goods sold
+      (COGS)
+
+      \    - Profitability indicators like ROA (Return on Assets) and ROC
+      (Return on Capital)
+
+      \    - Asset turnover and working capital figures
+
+      \    - Price-to-earnings ratio and enterprise value metrics
+
+      \    - Executive leadership details including names, titles, and
+      compensation
+
+      \    - Earnings surprises with actual vs. estimated results
+
+      \    - Peer companies for competitive analysis
+
+      \    - Total shareholder return (TSR) metrics for various time periods
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_financial_metricsArguments
+      required:
+        - business_ids
+      properties:
+        date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date
+          default: null
+          description: Optional ISO 8601 timestamp for financial metrics
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_funding_and_acquisitions
+    description: "
+
+      \    Get businesses funding and acquisition history in bulk.
+
+      \    Returns:
+
+      \    - Detailed funding history including dates, amounts, and round types
+
+      \    - IPO information including date and size
+
+      \    - List of investors and lead investors for each funding round
+
+      \    - Total known funding value
+
+      \    - Current board members and advisors
+
+      \    - Acquisition information (if applicable)
+
+      \    - First and latest funding round details
+
+      \    - Number of funding rounds and investors
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_funding_and_acquisitionsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_challenges
+    description: "
+
+      \    Get insights on the challenges, breaches, and competition of public
+      companies.
+
+      \    Returns:
+
+      \    - Technological disruption challenges identified in SEC filings
+
+      \    - Data security breaches and cybersecurity vulnerabilities
+
+      \    - Market saturation concerns and competitive pressures
+
+      \    - Data security and privacy regulatory compliance issues
+
+      \    - Competitive landscape and market position challenges
+
+      \    - Customer adoption risks and third-party dependencies
+
+      \    - Links to official SEC filings and documents
+
+      \    - Company identifiers including ticker symbols and CIK numbers
+
+      \    - Filing dates and form types for regulatory submissions
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_challengesArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_competitive_landscape
+    description: "
+
+      \    Get insights on the market landscape of public companies.
+
+      \    Returns:
+
+      \    - Competitive differentiation strategies from SEC filings
+
+      \    - Key competitors identified in public disclosures
+
+      \    - Company ticker symbols and CIK identifiers
+
+      \    - Links to official SEC filings and documents
+
+      \    - Filing dates and form types for regulatory submissions
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_competitive_landscapeArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_strategic_insights
+    description: "
+
+      \    Get strategic insights for public companies.
+
+      \    Returns:
+
+      \    - Strategic focus areas and company value propositions from SEC
+      filings
+
+      \    - Target market segments and customer demographics
+
+      \    - Product development roadmaps and innovation initiatives
+
+      \    - Marketing and sales strategies from public disclosures
+
+      \    - Strategic partnerships and acquisition information
+
+      \    - Company identifiers including ticker symbols and CIK numbers
+
+      \    - Links to official SEC filings and documents
+
+      \    - Filing dates and form types for regulatory submissions
+
+
+      \    Do NOT use this when you need to find employees at a company.
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_strategic_insightsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_workforce_trends
+    description: "
+
+      \    Get workforce trends and department composition for companies.
+
+      \    Returns:
+
+      \    - Percentage breakdown of employees across different departments
+      (engineering, sales, marketing, etc.)
+
+      \    - Changes in department composition compared to previous quarter
+
+      \    - Total employee profiles found per quarter
+
+      \    - Quarterly timestamp information for trend analysis
+
+      \    - Insights into company structure and hiring priorities
+
+      \    - Department growth or reduction indicators
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_workforce_trendsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_linkedin_posts
+    description: "
+
+      \    Get LinkedIn posts for public companies.
+
+      \    Returns:
+
+      \    - Post text content from company LinkedIn posts
+
+      \    - Post URLs for direct access to original content
+
+      \    - Engagement metrics including number of likes and comments
+
+      \    - Publication dates and time since posting
+
+      \    - Company display names when available
+
+      \    - Historical social media content for trend analysis
+
+      \    - Marketing messaging and brand voice examples
+
+      \    - Product announcements and company updates
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_linkedin_postsArguments
+      required:
+        - business_ids
+      properties:
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_website_changes
+    description: "
+
+      \    Get website changes for public companies.
+
+      \    Returns:
+
+      \    - Website content changes with before and after text comparisons
+
+      \    - Strategic implications of content modifications
+
+      \    - Dates when changes were detected
+
+      \    - Changes in featured products, services, or content
+
+      \    - Shifts in marketing messaging or positioning
+
+      \    - Updates to promotional content and featured items
+
+      \    - Changes in top charts or featured content listings
+
+      \    - Insights into business strategy and market focus
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_website_changesArguments
+      required:
+        - business_ids
+      properties:
+        keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Keywords
+          default: null
+          description: List of keywords to search for in website changes
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: enrich_businesses_website_keywords
+    description: "
+
+      \    Get website keywords for public companies.
+
+      \    For each keyword, input multiple search terms separated by commas
+      (\",\"), which simulates a logical \"AND\" operation.
+
+      \    Returns:
+
+      \    - Website URL
+
+      \    - Keywords indicator showing if keywords were found
+
+      \    - Text results containing:
+
+      \        - Position/rank of the result
+
+      \        - Text snippet showing keyword matches
+
+      \        - URL where the keyword was found
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_businesses_website_keywordsArguments
+      required:
+        - business_ids
+      properties:
+        keywords:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Keywords
+          default: null
+          description: List of keywords to search for in website keywords
+        business_ids:
+          type: array
+          items:
+            type: string
+          title: Business Ids
+          maxItems: 50
+          minItems: 1
+          description: List of Explorium business IDs from match_businesses
+  - name: match_prospects
+    description: "
+
+      \    Get the Explorium prospect ID from a prospect's email, full name, and
+      company.
+
+      \    At least email OR (full name AND company) must be provided.
+
+      \    You MUST use this tool if the input is about someone working at a
+      specific company.
+
+
+      \    Use this when:
+
+      \    - Need prospect enrichment tools
+
+      \    - Getting contact information
+
+      \    - Analyzing an individual's social media presence
+
+      \    - Gathering information on a person's professional profile and
+      workplace
+
+
+      \    Do NOT use for:
+
+      \    - Finding leadership information (CEO, CTO, CFO, etc.)
+
+      \    - Looking for employees at a company
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        ProspectMatchInput:
+          type: object
+          title: ProspectMatchInput
+          properties:
+            email:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Email
+              default: null
+              description: The prospect's email address.
+            linkedin:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Linkedin
+              default: null
+              description: Linkedin url.
+            full_name:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Full Name
+              default: null
+              description: The prospect's full name (can only be used together with
+                company_name).
+            business_id:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Business Id
+              default: null
+              description: Filters the prospect to match the given business id.
+            company_name:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Company Name
+              default: null
+              description: The prospect's company name (can only be used together with
+                full_name).
+            phone_number:
+              anyOf:
+                - type: string
+                - type: "null"
+              title: Phone Number
+              default: null
+              description: The prospect's phone number.
+          description: Prospect match identifiers.
+      title: match_prospectsArguments
+      required:
+        - prospects_to_match
+      properties:
+        prospects_to_match:
+          type: array
+          items:
+            $ref: "#/$defs/ProspectMatchInput"
+          title: Prospects To Match
+          maxItems: 40
+          minItems: 1
+  - name: fetch_prospects
+    description: "
+
+      \    Get a list of prospects according to filters such as job level,
+      department, or other professional attributes.
+
+      \    For leadership information, consider using
+      enrich_businesses_financial_metrics first.
+
+
+      \    Use this tool to find prospects/employees at a specific company.
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        JobLevel:
+          enum:
+            - director
+            - manager
+            - vp
+            - partner
+            - cxo
+            - non-managerial
+            - senior
+            - entry
+            - training
+            - unpaid
+          type: string
+          title: JobLevel
+          description: All available job levels.
+        JobDepartment:
+          enum:
+            - customer service
+            - design
+            - education
+            - engineering
+            - finance
+            - general
+            - health
+            - human resources
+            - legal
+            - marketing
+            - media
+            - operations
+            - public relations
+            - real estate
+            - sales
+            - trades
+            - unknown
+          type: string
+          title: JobDepartment
+          description: All available job departments.
+        FetchProspectsFilters:
+          type: object
+          title: FetchProspectsFilters
+          properties:
+            has_email:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Has Email
+              default: false
+              description: Filters for only prospects that have an email.
+            job_level:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/JobLevel"
+                - type: "null"
+              title: Job Level
+              default: null
+              description: Filter for prospects by their job level.
+            business_id:
+              anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: "null"
+              title: Business Id
+              default: null
+              description: Filters for prospects working at a specific business, by their
+                Explorium Business ID.
+            job_department:
+              anyOf:
+                - type: array
+                  items:
+                    $ref: "#/$defs/JobDepartment"
+                - type: "null"
+              title: Job Department
+              default: null
+              description: Filter for prospects by their job department.
+            has_phone_number:
+              anyOf:
+                - type: boolean
+                - type: "null"
+              title: Has Phone Number
+              default: null
+              description: Filters for only prospects that have a phone number.
+          description: Prospect search filters.
+      title: fetch_prospectsArguments
+      required:
+        - filters
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          description: The page number to return
+        size:
+          type: integer
+          title: Size
+          default: 1000
+          maximum: 1000
+          description: The number of prospects to return
+        filters:
+          $ref: "#/$defs/FetchProspectsFilters"
+        page_size:
+          type: integer
+          title: Page Size
+          default: 100
+          maximum: 100
+          description: "The number of prospects to return per page - recommended: 100"
+  - name: fetch_prospects_events
+    description: "
+
+      \    Retrieves prospect-related events from the Explorium API in bulk.
+
+      \    Use this when querying for prospect-related events about businesses:
+
+      \    Example workflow:
+
+      \    Fetch businesses > Fetch prospects > Fetch prospects events
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        ProspectEventType:
+          enum:
+            - prospect_changed_role
+            - prospect_changed_company
+            - prospect_job_start_anniversary
+          type: string
+          title: ProspectEventType
+          description: >-
+            Valid event types for the Explorium Prospects Events API.
+
+
+            JOB_TITLE_CHANGE: Individual transitioned to a new job title within
+            their current company
+
+            - previous_job_title: str - Employee's previous job title
+
+            - event_time: datetime - Employee left previous role timestamp
+
+            - current_job_title: str - Employee's current job title
+
+            - current_company_name: str - Employee's current workplace
+
+            - current_company_id: str - Current workplace entity ID
+
+            - event_id: str - Job change event ID
+
+
+            COMPANY_CHANGE: Individual transitioned to a new company
+
+            - previous_company_name: str - Employee's previous workplace name
+
+            - previous_company_id: str - Previous workplace entity ID
+
+            - previous_job_title: str - Employee's previous job title
+
+            - event_time: datetime - Employee left previous company timestamp
+
+            - current_company_name: str - Employee's current workplace name
+
+            - current_company_id: str - Current workplace entity ID
+
+            - current_job_title: str - Employee's current job title
+
+            - event_id: str - Company change event ID
+
+
+            WORKPLACE_ANNIVERSARY: Individual reached an annual milestone at
+            their current company.
+
+            - full_name: str - Employee's full name
+
+            - event_id: str - Employee event ID
+
+            - company_name: str - Workplace company name
+
+            - years_at_company: int - Number of years at company
+
+            - job_title: str - Employee's job title
+
+            - job_anniversary_date: datetime - Employee event timestamp
+
+            - event_time: datetime - Workplace anniversary date
+
+            - linkedin_url: str - Employee LinkedIn URL
+      title: fetch_prospects_eventsArguments
+      required:
+        - prospect_ids
+        - event_types
+        - timestamp_from
+      properties:
+        event_types:
+          type: array
+          items:
+            $ref: "#/$defs/ProspectEventType"
+          title: Event Types
+          description: List of event types to fetch
+        prospect_ids:
+          type: array
+          items:
+            type: string
+          title: Prospect Ids
+          maxItems: 20
+          minItems: 1
+          description: List of up to 50 Explorium prospect IDs from match_prospects
+        timestamp_from:
+          type: string
+          title: Timestamp From
+          description: ISO 8601 timestamp
+  - name: enrich_prospects_contacts_information
+    description: "
+
+      \    Enrich prospect contact information with additional details.
+
+      \    Returns:
+
+      \    - Professional and personal email addresses
+
+      \    - Email type (professional/personal)
+
+      \    - Phone numbers
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_prospects_contacts_informationArguments
+      required:
+        - prospect_ids
+      properties:
+        prospect_ids:
+          type: array
+          items:
+            type: string
+          title: Prospect Ids
+          maxItems: 50
+          minItems: 1
+          description: List of up to 50 Explorium prospect IDs from match_prospects
+  - name: enrich_prospects_linkedin_posts
+    description: "
+
+      \    Enrich prospect LinkedIn posts with additional details.
+
+      \    Returns:
+
+      \    - Post text content
+
+      \    - Post engagement metrics (likes, comments)
+
+      \    - Post URLs
+
+      \    - Post creation dates
+
+      \    - Days since posted
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_prospects_linkedin_postsArguments
+      required:
+        - prospect_ids
+      properties:
+        prospect_ids:
+          type: array
+          items:
+            type: string
+          title: Prospect Ids
+          maxItems: 50
+          minItems: 1
+          description: List of up to 50 Explorium prospect IDs from match_prospects
+  - name: enrich_prospects_profiles
+    description: "
+
+      \    Get detailed profile information for prospects.
+
+      \    Returns:
+
+      \    - Full name and demographic details (age group, gender)
+
+      \    - Location information (country, region, city)
+
+      \    - LinkedIn profile URL
+
+      \    - Current role details:
+
+      \      - Company name and website
+
+      \      - Job title, department and seniority level
+
+      \    - Work experience history:
+
+      \      - Company names and websites
+
+      \      - Job titles with role classifications
+
+      \      - Start/end dates
+
+      \      - Primary role indicator
+
+      \    - Education background:
+
+      \      - Schools attended with dates
+
+      \      - Degrees, majors and minors
+
+      \    - Skills and interests when available
+
+      \    "
+    inputSchema:
+      type: object
+      title: enrich_prospects_profilesArguments
+      required:
+        - prospect_ids
+      properties:
+        prospect_ids:
+          type: array
+          items:
+            type: string
+          title: Prospect Ids
+          maxItems: 50
+          minItems: 1
+          description: List of up to 50 Explorium prospect IDs from match_prospects

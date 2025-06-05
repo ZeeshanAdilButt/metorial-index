@@ -1,0 +1,286 @@
+tools:
+  - name: nixos_search
+    description: "Search for NixOS packages, options, or programs.
+
+
+      \        Args:
+
+      \            query: The search term
+
+      \            type: The type to search (packages, options, or programs)
+
+      \            limit: Maximum number of results to return (default: 20)
+
+      \            channel: NixOS channel to use (default: unstable)
+
+
+      \        Returns:
+
+      \            Results formatted as text
+
+      \        "
+    inputSchema:
+      type: object
+      title: nixos_searchArguments
+      required:
+        - ctx
+        - query
+      properties:
+        ctx:
+          type: string
+          title: ctx
+        type:
+          type: string
+          title: Type
+          default: packages
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+        channel:
+          type: string
+          title: Channel
+          default: unstable
+  - name: nixos_info
+    description: "Get detailed information about a NixOS package or option.
+
+
+      \        Args:
+
+      \            name: The name of the package or option
+
+      \            type: Either \"package\" or \"option\"
+
+      \            channel: NixOS channel to use (default: unstable)
+
+
+      \        Returns:
+
+      \            Detailed information about the package or option
+
+      \        "
+    inputSchema:
+      type: object
+      title: nixos_infoArguments
+      required:
+        - ctx
+        - name
+      properties:
+        ctx:
+          type: string
+          title: ctx
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+          default: package
+        channel:
+          type: string
+          title: Channel
+          default: unstable
+  - name: nixos_stats
+    description: "Get statistics about available NixOS packages and options.
+
+
+      \        Args:
+
+      \            channel: NixOS channel to use (default: unstable)
+
+
+      \        Returns:
+
+      \            Statistics about packages and options
+
+      \        "
+    inputSchema:
+      type: object
+      title: nixos_statsArguments
+      required:
+        - ctx
+      properties:
+        ctx:
+          type: string
+          title: ctx
+        channel:
+          type: string
+          title: Channel
+          default: unstable
+  - name: home_manager_search
+    description: "Search for Home Manager options.
+
+
+      \        Args:
+
+      \            query: The search term
+
+      \            limit: Maximum number of results to return (default: 20)
+
+
+      \        Returns:
+
+      \            Results formatted as text
+
+      \        "
+    inputSchema:
+      type: object
+      title: home_manager_searchArguments
+      required:
+        - ctx
+        - query
+      properties:
+        ctx:
+          type: string
+          title: ctx
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+  - name: home_manager_info
+    description: "Get detailed information about a Home Manager option.
+
+
+      \        Args:
+
+      \            name: The name of the option
+
+
+      \        Returns:
+
+      \            Detailed information formatted as text
+
+      \        "
+    inputSchema:
+      type: object
+      title: home_manager_infoArguments
+      required:
+        - ctx
+        - name
+      properties:
+        ctx:
+          type: string
+          title: ctx
+        name:
+          type: string
+          title: Name
+  - name: home_manager_stats
+    description: "Get statistics about Home Manager options.
+
+
+      \        Returns:
+
+      \            Statistics about Home Manager options
+
+      \        "
+    inputSchema:
+      type: object
+      title: home_manager_statsArguments
+      required:
+        - ctx
+      properties:
+        ctx:
+          type: string
+          title: ctx
+  - name: home_manager_list_options
+    description: "List all top-level Home Manager option categories.
+
+
+      \        Returns:
+
+      \            Formatted list of top-level option categories and their
+      statistics
+
+      \        "
+    inputSchema:
+      type: object
+      title: home_manager_list_optionsArguments
+      required:
+        - ctx
+      properties:
+        ctx:
+          type: string
+          title: ctx
+  - name: home_manager_options_by_prefix
+    description: "Get all Home Manager options under a specific prefix.
+
+
+      \        Args:
+
+      \            option_prefix: The option prefix to search for (e.g.,
+      \"programs\", \"programs.git\")
+
+
+      \        Returns:
+
+      \            Formatted list of options under the given prefix
+
+      \        "
+    inputSchema:
+      type: object
+      title: home_manager_options_by_prefixArguments
+      required:
+        - ctx
+        - option_prefix
+      properties:
+        ctx:
+          type: string
+          title: ctx
+        option_prefix:
+          type: string
+          title: Option Prefix
+  - name: darwin_search
+    description: ""
+    inputSchema:
+      type: object
+      title: darwin_search_handlerArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+  - name: darwin_info
+    description: ""
+    inputSchema:
+      type: object
+      title: darwin_info_handlerArguments
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: Name
+  - name: darwin_stats
+    description: ""
+    inputSchema:
+      type: object
+      title: darwin_stats_handlerArguments
+      properties: {}
+  - name: darwin_list_options
+    description: ""
+    inputSchema:
+      type: object
+      title: darwin_list_options_handlerArguments
+      properties: {}
+  - name: darwin_options_by_prefix
+    description: ""
+    inputSchema:
+      type: object
+      title: darwin_options_by_prefix_handlerArguments
+      required:
+        - option_prefix
+      properties:
+        option_prefix:
+          type: string
+          title: Option Prefix

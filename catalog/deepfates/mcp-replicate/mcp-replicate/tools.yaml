@@ -1,0 +1,132 @@
+tools:
+  - name: search_models
+    description: Search for models using semantic search
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query
+  - name: list_models
+    description: List available models with optional filtering
+    inputSchema:
+      type: object
+      properties:
+        owner:
+          type: string
+          description: Filter by model owner
+        cursor:
+          type: string
+          description: Pagination cursor
+  - name: list_collections
+    description: List available model collections
+    inputSchema:
+      type: object
+      properties:
+        cursor:
+          type: string
+          description: Pagination cursor
+  - name: get_collection
+    description: Get details of a specific collection
+    inputSchema:
+      type: object
+      required:
+        - slug
+      properties:
+        slug:
+          type: string
+          description: Collection slug
+  - name: create_prediction
+    description: Create a new prediction using either a model version (for community
+      models) or model name (for official models)
+    inputSchema:
+      type: object
+      oneOf:
+        - required:
+            - version
+            - input
+        - required:
+            - model
+            - input
+      properties:
+        input:
+          type: object
+          description: Input parameters for the model
+          additionalProperties: true
+        model:
+          type: string
+          description: Model name to use (for official models)
+        version:
+          type: string
+          description: Model version ID to use (for community models)
+        webhook_url:
+          type: string
+          description: Optional webhook URL for notifications
+  - name: cancel_prediction
+    description: Cancel a running prediction
+    inputSchema:
+      type: object
+      required:
+        - prediction_id
+      properties:
+        prediction_id:
+          type: string
+          description: ID of the prediction to cancel
+  - name: get_prediction
+    description: Get details about a specific prediction
+    inputSchema:
+      type: object
+      required:
+        - prediction_id
+      properties:
+        prediction_id:
+          type: string
+          description: ID of the prediction to get details for
+  - name: list_predictions
+    description: List recent predictions
+    inputSchema:
+      type: object
+      properties:
+        limit:
+          type: number
+          default: 10
+          description: Maximum number of predictions to return
+        cursor:
+          type: string
+          description: Cursor for pagination
+  - name: get_model
+    description: Get details of a specific model including available versions
+    inputSchema:
+      type: object
+      required:
+        - owner
+        - name
+      properties:
+        name:
+          type: string
+          description: Model name
+        owner:
+          type: string
+          description: Model owner
+  - name: view_image
+    description: Display an image in the system's default web browser
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the image to display
+  - name: clear_image_cache
+    description: Clear the image viewer cache
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_image_cache_stats
+    description: Get statistics about the image cache
+    inputSchema:
+      type: object
+      properties: {}

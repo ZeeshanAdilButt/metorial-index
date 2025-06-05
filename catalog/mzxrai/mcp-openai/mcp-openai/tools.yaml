@@ -1,0 +1,39 @@
+tools:
+  - name: openai_chat
+    description: Use this tool when a user specifically requests to use one of
+      OpenAI's models (gpt-4o, gpt-4o-mini, o1-preview, o1-mini). This tool
+      sends messages to OpenAI's chat completion API using the specified model.
+    inputSchema:
+      type: object
+      required:
+        - messages
+      properties:
+        model:
+          enum:
+            - gpt-4o
+            - gpt-4o-mini
+            - o1-preview
+            - o1-mini
+          type: string
+          default: gpt-4o
+          description: Model to use for completion (gpt-4o, gpt-4o-mini, o1-preview,
+            o1-mini)
+        messages:
+          type: array
+          items:
+            type: object
+            required:
+              - role
+              - content
+            properties:
+              role:
+                enum:
+                  - system
+                  - user
+                  - assistant
+                type: string
+                description: Role of the message sender
+              content:
+                type: string
+                description: Content of the message
+          description: Array of messages to send to the API

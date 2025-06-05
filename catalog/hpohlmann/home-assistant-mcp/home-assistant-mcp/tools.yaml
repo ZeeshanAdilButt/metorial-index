@@ -1,0 +1,99 @@
+tools:
+  - name: control_device
+    description: "Control a Home Assistant entity by turning it on or off.
+
+      \   \ 
+
+      \    Args:
+
+      \        entity_id: The Home Assistant entity ID to control (format:
+      domain.entity)
+
+      \        state: The desired state ('on' or 'off')
+
+      \    "
+    inputSchema:
+      type: object
+      title: control_deviceArguments
+      required:
+        - entity_id
+        - state
+      properties:
+        state:
+          type: string
+          title: State
+        entity_id:
+          type: string
+          title: Entity Id
+  - name: search_entities
+    description: "Search for Home Assistant entities matching a natural language
+      description.
+
+      \   \ 
+
+      \    Args:
+
+      \        description: Natural language description of the entity (e.g.,
+      \"office light\", \"kitchen fan\")
+
+      \   \ 
+
+      \    Returns:
+
+      \        A list of matching entity IDs with their friendly names, or an
+      error message
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_entitiesArguments
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          title: Description
+  - name: set_device_color
+    description: "Set the color and optionally brightness of a light entity.
+
+      \   \ 
+
+      \    Args:
+
+      \        entity_id: The Home Assistant entity ID to control (format:
+      light.entity)
+
+      \        red: Red component (0-255)
+
+      \        green: Green component (0-255)
+
+      \        blue: Blue component (0-255)
+
+      \        brightness: Optional brightness level (0-255)
+
+      \    "
+    inputSchema:
+      type: object
+      title: set_device_colorArguments
+      required:
+        - entity_id
+        - red
+        - green
+        - blue
+      properties:
+        red:
+          type: integer
+          title: Red
+        blue:
+          type: integer
+          title: Blue
+        green:
+          type: integer
+          title: Green
+        entity_id:
+          type: string
+          title: Entity Id
+        brightness:
+          type: integer
+          title: Brightness
+          default: null

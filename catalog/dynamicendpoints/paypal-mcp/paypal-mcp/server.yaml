@@ -1,0 +1,14 @@
+identifier: dynamicendpoints/paypal-mcp/paypal-mcp
+repo:
+  provider: github.com
+  url: https://github.com/DynamicEndpoints/Paypal-MCP
+  name: Paypal-MCP
+  owner: DynamicEndpoints
+server:
+  subdirectory: /
+  name: PayPal MCP Server
+  description: Integrate with PayPal's APIs for payment processing and business management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

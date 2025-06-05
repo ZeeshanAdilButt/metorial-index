@@ -1,0 +1,14 @@
+identifier: ad-veritas/mcp-server-truerag/gql
+repo:
+  provider: github.com
+  url: https://github.com/Ad-Veritas/mcp-server-trueRAG
+  name: mcp-server-trueRAG
+  owner: Ad-Veritas
+server:
+  subdirectory: /
+  name: GraphQL Policies API
+  description: MCP server implementation for a GraphQL API that provides access to policies.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

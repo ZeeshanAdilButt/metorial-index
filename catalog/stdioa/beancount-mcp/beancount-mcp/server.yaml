@@ -1,0 +1,17 @@
+identifier: stdioa/beancount-mcp/beancount-mcp
+repo:
+  provider: github.com
+  url: https://github.com/StdioA/beancount-mcp
+  name: beancount-mcp
+  owner: StdioA
+server:
+  subdirectory: /
+  name: Beancount Server
+  description: Execute Beancount queries and submit transactions to your ledger
+    seamlessly. Enhance your financial management with real-time data processing
+    and integration. Simplify your accounting tasks with a powerful and flexible
+    MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

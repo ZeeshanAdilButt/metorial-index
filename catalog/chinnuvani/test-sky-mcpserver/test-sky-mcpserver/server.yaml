@@ -1,0 +1,17 @@
+identifier: chinnuvani/test-sky-mcpserver/test-sky-mcpserver
+repo:
+  provider: github.com
+  url: https://github.com/chinnuvani/test-sky-mcpserver
+  name: test-sky-mcpserver
+  owner: chinnuvani
+server:
+  subdirectory: /
+  name: Centralized Control Server
+  description: Manage and coordinate distributed agents and tasks seamlessly.
+    Register agents, create tasks, and monitor their status through a secure
+    API. Enhance your workflow orchestration with a robust and extensible server
+    framework.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

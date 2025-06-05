@@ -1,0 +1,16 @@
+tools:
+  - name: translation
+    description: Translate text quickly and easily with JigsawStack, we support over
+      180+ language pairs.
+    inputSchema:
+      type: object
+      required:
+        - text
+        - target_language
+      properties:
+        text:
+          type: string
+          description: Text in current langauge.
+        target_language:
+          type: string
+          description: Current Langauge code in en | es | jp format.

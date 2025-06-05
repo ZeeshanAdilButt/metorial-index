@@ -1,0 +1,19 @@
+identifier: liuchongchong1995/deepseek-mcp-server/deepseek-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/liuchongchong1995/deepseek-mcp-server
+  name: deepseek-mcp-server
+  owner: liuchongchong1995
+server:
+  subdirectory: /
+  name: DeepSeek Server
+  description: Enable seamless integration of DeepSeek's advanced language models
+    with MCP-compatible applications, providing multi-turn conversation support
+    and dynamic model configuration. Automatically handle model fallback and
+    maintain conversation context for complex interactions and training
+    scenarios. Easily query available models and configuration options to tailor
+    AI responses to your needs.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

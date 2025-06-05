@@ -1,0 +1,16 @@
+identifier: fisher1006/time-mcp/time-mcp-4
+repo:
+  provider: github.com
+  url: https://github.com/fisher1006/time-mcp
+  name: time-mcp
+  owner: fisher1006
+server:
+  subdirectory: /
+  name: Time Server
+  description: Get current time information and perform timezone conversions
+    effortlessly. Leverage IANA timezone names for accurate time queries and
+    automatic system timezone detection to enhance your applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

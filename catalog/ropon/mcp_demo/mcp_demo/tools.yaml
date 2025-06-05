@@ -1,0 +1,16 @@
+tools:
+  - name: get_current_ip_info
+    description: |-
+      This is a tool from the demo MCP server.
+      Get information about the current ip info
+    inputSchema:
+      type: object
+      properties: {}
+  - name: get_ip_info
+    description: Get IP information
+    inputSchema:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IP address

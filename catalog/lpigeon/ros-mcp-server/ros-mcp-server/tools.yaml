@@ -1,0 +1,40 @@
+tools:
+  - name: pub_twist
+    description: ""
+    inputSchema:
+      type: object
+      title: pub_twistArguments
+      required:
+        - linear
+        - angular
+      properties:
+        linear:
+          type: array
+          items: {}
+          title: Linear
+        angular:
+          type: array
+          items: {}
+          title: Angular
+  - name: pub_twist_seq
+    description: ""
+    inputSchema:
+      type: object
+      title: pub_twist_seqArguments
+      required:
+        - linear
+        - angular
+        - duration
+      properties:
+        linear:
+          type: array
+          items: {}
+          title: Linear
+        angular:
+          type: array
+          items: {}
+          title: Angular
+        duration:
+          type: array
+          items: {}
+          title: Duration

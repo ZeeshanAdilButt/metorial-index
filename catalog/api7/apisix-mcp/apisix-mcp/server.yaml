@@ -1,0 +1,17 @@
+identifier: api7/apisix-mcp/apisix-mcp
+repo:
+  provider: github.com
+  url: https://github.com/api7/apisix-mcp
+  name: apisix-mcp
+  owner: api7
+server:
+  subdirectory: /
+  name: APISIX Model Context Protocol Server
+  description: Enable natural language-based interaction for managing resources in
+    APISIX through AI clients. Streamline your API management tasks by
+    leveraging the power of large language models to interact with your APISIX
+    setup effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

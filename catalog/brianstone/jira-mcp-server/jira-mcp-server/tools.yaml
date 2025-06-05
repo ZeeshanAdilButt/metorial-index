@@ -1,0 +1,989 @@
+tools:
+  - name: get_issue_by_key
+    description: Get an issue by key
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: The key of the issue (e.g. ABC-1)
+      additionalProperties: false
+  - name: search_issues
+    description: Search for issues using JQL
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - jql
+        - properties
+      properties:
+        jql:
+          type: string
+        expand:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        maxResults:
+          type: number
+          default: 50
+        properties:
+          type: array
+          items:
+            type: string
+          maxItems: 5
+          minItems: 5
+        fieldsByKeys:
+          type: boolean
+          default: false
+        nextPageToken:
+          type: string
+        reconcileIssues:
+          type: array
+          items:
+            type: number
+      additionalProperties: false
+  - name: create_issue
+    description: Create a new issue
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - fields
+      properties:
+        fields:
+          type: object
+          required:
+            - description
+            - project
+            - issuetype
+          properties:
+            labels:
+              type: array
+              items:
+                type: string
+            duedate:
+              type: string
+            project:
+              type: object
+              properties:
+                key:
+                  type: string
+                  default: string
+              additionalProperties: false
+            summary:
+              type: string
+            assignee:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+              additionalProperties: false
+            issuetype:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+              additionalProperties: false
+            components:
+              type: array
+              items:
+                type: object
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                additionalProperties: false
+            description:
+              type: object
+              required:
+                - content
+              properties:
+                type:
+                  type: string
+                  default: doc
+                content:
+                  type: array
+                  items:
+                    anyOf:
+                      - type: object
+                        required:
+                          - type
+                          - content
+                        properties:
+                          type:
+                            type: string
+                            const: paragraph
+                          content:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - text
+                                - marks
+                              properties:
+                                text:
+                                  type: string
+                                type:
+                                  type: string
+                                  default: text
+                                marks:
+                                  type: array
+                                  items:
+                                    anyOf:
+                                      - not: {}
+                                      - anyOf:
+                                          - type: object
+                                            required:
+                                              - type
+                                              - attrs
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: backgroundColor
+                                              attrs:
+                                                type: object
+                                                required:
+                                                  - color
+                                                properties:
+                                                  color:
+                                                    type: string
+                                                    description: Hexadecimal color code
+                                                additionalProperties: false
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: code
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: em
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                              - attrs
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: link
+                                              attrs:
+                                                type: object
+                                                required:
+                                                  - href
+                                                  - title
+                                                properties:
+                                                  href:
+                                                    type: string
+                                                  title:
+                                                    type: string
+                                                additionalProperties: false
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: strike
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: strong
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                              - attrs
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: subsup
+                                              attrs:
+                                                type: object
+                                                required:
+                                                  - type
+                                                properties:
+                                                  type:
+                                                    enum:
+                                                      - sub
+                                                      - sup
+                                                    type: string
+                                                additionalProperties: false
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                              - attrs
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: textColor
+                                              attrs:
+                                                type: object
+                                                required:
+                                                  - color
+                                                properties:
+                                                  color:
+                                                    type: string
+                                                    description: Hexadecimal color code
+                                                additionalProperties: false
+                                            additionalProperties: false
+                                          - type: object
+                                            required:
+                                              - type
+                                            properties:
+                                              type:
+                                                type: string
+                                                const: underline
+                                            additionalProperties: false
+                              additionalProperties: false
+                        additionalProperties: false
+                      - type: object
+                        required:
+                          - type
+                          - attrs
+                          - content
+                        properties:
+                          type:
+                            type: string
+                            const: heading
+                          attrs:
+                            type: object
+                            required:
+                              - level
+                            properties:
+                              level:
+                                type: number
+                            additionalProperties: false
+                          content:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - text
+                                - marks
+                              properties:
+                                text:
+                                  type: string
+                                type:
+                                  type: string
+                                  default: text
+                                marks:
+                                  type: array
+                                  items:
+                                    anyOf:
+                                      - not: {}
+                                      - anyOf:
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              0"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              1"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              2"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              3"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              4"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              5"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              6"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              7"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              8"
+                              additionalProperties: false
+                        additionalProperties: false
+                      - type: object
+                        required:
+                          - type
+                          - content
+                        properties:
+                          type:
+                            type: string
+                            const: bulletList
+                          content:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - content
+                              properties:
+                                type:
+                                  type: string
+                                  default: listItem
+                                content:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                      - content
+                                    properties:
+                                      type:
+                                        type: string
+                                        default: paragraph
+                                      content:
+                                        type: array
+                                        items:
+                                          type: object
+                                          required:
+                                            - text
+                                            - marks
+                                          properties:
+                                            text:
+                                              type: string
+                                            type:
+                                              type: string
+                                              default: text
+                                            marks:
+                                              type: array
+                                              items:
+                                                anyOf:
+                                                  - not: {}
+                                                  - anyOf:
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/0"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/1"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/2"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/3"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/4"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/5"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/6"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/7"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/8"
+                                          additionalProperties: false
+                                    additionalProperties: false
+                              additionalProperties: false
+                        additionalProperties: false
+                      - type: object
+                        required:
+                          - type
+                          - attrs
+                          - content
+                        properties:
+                          type:
+                            type: string
+                            const: orderedList
+                          attrs:
+                            type: object
+                            required:
+                              - order
+                            properties:
+                              order:
+                                type: number
+                                minimum: 0
+                                description: The number of the first item in the list
+                            additionalProperties: false
+                          content:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - content
+                              properties:
+                                type:
+                                  type: string
+                                  default: listItem
+                                content:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                      - content
+                                    properties:
+                                      type:
+                                        type: string
+                                        default: paragraph
+                                      content:
+                                        type: array
+                                        items:
+                                          type: object
+                                          required:
+                                            - text
+                                            - marks
+                                          properties:
+                                            text:
+                                              type: string
+                                            type:
+                                              type: string
+                                              default: text
+                                            marks:
+                                              type: array
+                                              items:
+                                                anyOf:
+                                                  - not: {}
+                                                  - anyOf:
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/0"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/1"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/2"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/3"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/4"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/5"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/6"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/7"
+                                                      - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                                          f/0/properties/conten\
+                                                          t/items/properties/ma\
+                                                          rks/items/anyOf/1/any\
+                                                          Of/8"
+                                          additionalProperties: false
+                                    additionalProperties: false
+                              additionalProperties: false
+                        additionalProperties: false
+                      - type: object
+                        required:
+                          - type
+                          - attrs
+                          - content
+                        properties:
+                          type:
+                            type: string
+                            const: codeBlock
+                          attrs:
+                            type: object
+                            required:
+                              - language
+                            properties:
+                              language:
+                                enum:
+                                  - abap
+                                  - abnf
+                                  - actionscript
+                                  - ada
+                                  - agda
+                                  - al
+                                  - antlr4
+                                  - apacheconf
+                                  - apex
+                                  - apl
+                                  - applescript
+                                  - aql
+                                  - arduino
+                                  - arff
+                                  - asciidoc
+                                  - asm6502
+                                  - asmatmel
+                                  - aspnet
+                                  - autohotkey
+                                  - autoit
+                                  - avisynth
+                                  - avroIdl
+                                  - bash
+                                  - basic
+                                  - batch
+                                  - bbcode
+                                  - bicep
+                                  - birb
+                                  - bison
+                                  - bnf
+                                  - brainfuck
+                                  - brightscript
+                                  - bro
+                                  - bsl
+                                  - c
+                                  - cfscript
+                                  - chaiscript
+                                  - cil
+                                  - clike
+                                  - clojure
+                                  - cmake
+                                  - cobol
+                                  - coffeescript
+                                  - concurnas
+                                  - coq
+                                  - cpp
+                                  - crystal
+                                  - csharp
+                                  - cshtml
+                                  - csp
+                                  - cssExtras
+                                  - css
+                                  - csv
+                                  - cypher
+                                  - d
+                                  - dart
+                                  - dataweave
+                                  - dax
+                                  - dhall
+                                  - diff
+                                  - django
+                                  - dnsZoneFile
+                                  - docker
+                                  - dot
+                                  - ebnf
+                                  - editorconfig
+                                  - eiffel
+                                  - ejs
+                                  - elixir
+                                  - elm
+                                  - erb
+                                  - erlang
+                                  - etlua
+                                  - excelFormula
+                                  - factor
+                                  - falselang
+                                  - firestoreSecurityRules
+                                  - flow
+                                  - fortran
+                                  - fsharp
+                                  - ftl
+                                  - gap
+                                  - gcode
+                                  - gdscript
+                                  - gedcom
+                                  - gherkin
+                                  - git
+                                  - glsl
+                                  - gml
+                                  - gn
+                                  - goModule
+                                  - go
+                                  - graphql
+                                  - groovy
+                                  - haml
+                                  - handlebars
+                                  - haskell
+                                  - haxe
+                                  - hcl
+                                  - hlsl
+                                  - hoon
+                                  - hpkp
+                                  - hsts
+                                  - http
+                                  - ichigojam
+                                  - icon
+                                  - icuMessageFormat
+                                  - idris
+                                  - iecst
+                                  - ignore
+                                  - inform7
+                                  - ini
+                                  - io
+                                  - j
+                                  - java
+                                  - javadoc
+                                  - javadoclike
+                                  - javascript
+                                  - javastacktrace
+                                  - jexl
+                                  - jolie
+                                  - jq
+                                  - jsExtras
+                                  - jsTemplates
+                                  - jsdoc
+                                  - json
+                                  - json5
+                                  - jsonp
+                                  - jsstacktrace
+                                  - jsx
+                                  - julia
+                                  - keepalived
+                                  - keyman
+                                  - kotlin
+                                  - kumir
+                                  - kusto
+                                  - latex
+                                  - latte
+                                  - less
+                                  - lilypond
+                                  - liquid
+                                  - lisp
+                                  - livescript
+                                  - llvm
+                                  - log
+                                  - lolcode
+                                  - lua
+                                  - magma
+                                  - makefile
+                                  - markdown
+                                  - markupTemplating
+                                  - markup
+                                  - matlab
+                                  - maxscript
+                                  - mel
+                                  - mermaid
+                                  - mizar
+                                  - mongodb
+                                  - monkey
+                                  - moonscript
+                                  - n1ql
+                                  - n4js
+                                  - nand2tetrisHdl
+                                  - naniscript
+                                  - nasm
+                                  - neon
+                                  - nevod
+                                  - nginx
+                                  - nim
+                                  - nix
+                                  - nsis
+                                  - objectivec
+                                  - ocaml
+                                  - opencl
+                                  - openqasm
+                                  - oz
+                                  - parigp
+                                  - parser
+                                  - pascal
+                                  - pascaligo
+                                  - pcaxis
+                                  - peoplecode
+                                  - perl
+                                  - phpExtras
+                                  - php
+                                  - phpdoc
+                                  - plsql
+                                  - powerquery
+                                  - powershell
+                                  - processing
+                                  - prolog
+                                  - promql
+                                  - properties
+                                  - protobuf
+                                  - psl
+                                  - pug
+                                  - puppet
+                                  - pure
+                                  - purebasic
+                                  - purescript
+                                  - python
+                                  - q
+                                  - qml
+                                  - qore
+                                  - qsharp
+                                  - r
+                                  - racket
+                                  - reason
+                                  - regex
+                                  - rego
+                                  - renpy
+                                  - rest
+                                  - rip
+                                  - roboconf
+                                  - robotframework
+                                  - ruby
+                                  - rust
+                                  - sas
+                                  - sass
+                                  - scala
+                                  - scheme
+                                  - scss
+                                  - shellSession
+                                  - smali
+                                  - smalltalk
+                                  - smarty
+                                  - sml
+                                  - solidity
+                                  - solutionFile
+                                  - soy
+                                  - sparql
+                                  - splunkSpl
+                                  - sqf
+                                  - sql
+                                  - squirrel
+                                  - stan
+                                  - stylus
+                                  - swift
+                                  - systemd
+                                  - t4Cs
+                                  - t4Templating
+                                  - t4Vb
+                                  - tap
+                                  - tcl
+                                  - textile
+                                  - toml
+                                  - tremor
+                                  - tsx
+                                  - tt2
+                                  - turtle
+                                  - twig
+                                  - typescript
+                                  - typoscript
+                                  - unrealscript
+                                  - uorazor
+                                  - uri
+                                  - v
+                                  - vala
+                                  - vbnet
+                                  - velocity
+                                  - verilog
+                                  - vhdl
+                                  - vim
+                                  - visualBasic
+                                  - warpscript
+                                  - wasm
+                                  - webIdl
+                                  - wiki
+                                  - wolfram
+                                  - wren
+                                  - xeora
+                                  - xmlDoc
+                                  - xojo
+                                  - xquery
+                                  - yaml
+                                  - yang
+                                  - zig
+                                type: string
+                            additionalProperties: false
+                          content:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - text
+                              properties:
+                                text:
+                                  type: string
+                                type:
+                                  type: string
+                                  default: text
+                              additionalProperties: false
+                        additionalProperties: false
+                      - type: object
+                        required:
+                          - type
+                          - content
+                        properties:
+                          type:
+                            type: string
+                            const: blockquote
+                          content:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - text
+                                - marks
+                              properties:
+                                text:
+                                  type: string
+                                type:
+                                  type: string
+                                  default: text
+                                marks:
+                                  type: array
+                                  items:
+                                    anyOf:
+                                      - not: {}
+                                      - anyOf:
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              0"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              1"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              2"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              3"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              4"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              5"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              6"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              7"
+                                          - $ref: "#/properties/fields/properties/description/properties/content/items/anyO\
+                                              f/0/properties/content/items/prop\
+                                              erties/marks/items/anyOf/1/anyOf/\
+                                              8"
+                              additionalProperties: false
+                        additionalProperties: false
+                version:
+                  type: number
+                  default: 1
+              additionalProperties: false
+            fixVersions:
+              type: array
+              items:
+                type: object
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                additionalProperties: false
+          additionalProperties: false
+      description: The schema to use for creating a new Jira issue.
+      additionalProperties: false
+  - name: assign_issue
+    description: Assign an issue to a user.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueKey
+        - userQuery
+      properties:
+        issueKey:
+          type: string
+        userQuery:
+          type: string
+      additionalProperties: false
+  - name: unassign_issue
+    description: Unassign an issue.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueKey
+      properties:
+        issueKey:
+          type: string
+      additionalProperties: false
+  - name: edit_issue
+    description: Edit the fields of an issue.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - issueKey
+        - fieldsToUpdate
+      properties:
+        issueKey:
+          type: string
+        fieldsToUpdate:
+          type: array
+          items:
+            type: object
+            required:
+              - fieldName
+              - operation
+              - value
+            properties:
+              value:
+                type:
+                  - string
+                  - number
+              fieldName:
+                type: string
+              operation:
+                enum:
+                  - set
+                  - add
+                  - remove
+                type: string
+            additionalProperties: false
+      additionalProperties: false

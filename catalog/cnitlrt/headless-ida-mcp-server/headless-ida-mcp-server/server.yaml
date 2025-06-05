@@ -1,0 +1,17 @@
+identifier: cnitlrt/headless-ida-mcp-server/headless-ida-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/cnitlrt/headless-ida-mcp-server
+  name: headless-ida-mcp-server
+  owner: cnitlrt
+server:
+  subdirectory: /
+  name: Headless IDA Server
+  description: Analyze binary files and manage functions and variables remotely
+    with ease. Leverage the power of IDA Pro's headless mode to enhance your
+    analysis capabilities. Connect seamlessly through the Multi-Client Protocol
+    for efficient remote operations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

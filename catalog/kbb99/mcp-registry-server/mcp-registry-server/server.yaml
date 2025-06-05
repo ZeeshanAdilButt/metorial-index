@@ -1,0 +1,14 @@
+identifier: kbb99/mcp-registry-server/mcp-registry-server
+repo:
+  provider: github.com
+  url: https://github.com/KBB99/mcp-registry-server
+  name: mcp-registry-server
+  owner: KBB99
+server:
+  subdirectory: /
+  name: MCP Registry Server
+  description: Retrieve MCP Servers using semantic search.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

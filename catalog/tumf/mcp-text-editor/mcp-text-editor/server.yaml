@@ -1,0 +1,15 @@
+identifier: tumf/mcp-text-editor/mcp-text-editor
+repo:
+  provider: github.com
+  url: https://github.com/tumf/mcp-text-editor
+  name: mcp-text-editor
+  owner: tumf
+server:
+  subdirectory: /
+  name: Text Editor Server
+  description: Provides line-oriented text file editing capabilities through a
+    standardized API, optimized for LLM tools.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

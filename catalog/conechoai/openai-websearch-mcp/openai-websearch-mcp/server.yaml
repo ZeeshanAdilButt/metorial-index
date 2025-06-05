@@ -1,0 +1,18 @@
+identifier: conechoai/openai-websearch-mcp/openai-websearch-mcp
+repo:
+  provider: github.com
+  url: https://github.com/ConechoAI/openai-websearch-mcp
+  name: openai-websearch-mcp
+  owner: ConechoAI
+server:
+  subdirectory: /
+  name: OpenAI WebSearch Server
+  description: Enable your AI assistants to access real-time web search
+    capabilities during conversations. This server enhances the assistant's
+    knowledge with up-to-date information, ensuring users receive accurate and
+    relevant responses. Easily install and configure it for use with popular
+    applications like Claude.app or Zed editor.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

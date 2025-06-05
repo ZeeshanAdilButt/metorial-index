@@ -1,0 +1,39 @@
+identifier: buyitsydney/codingbaby-browser-mcp/codingbaby-browser-mcp
+repo:
+  provider: github.com
+  url: https://github.com/buyitsydney/CodingBaby-Browser-MCP
+  name: CodingBaby-Browser-MCP
+  owner: buyitsydney
+server:
+  subdirectory: /
+  name: CodingBaby Browser-Use MCP
+  description: >-
+    CodingBaby Browser-Use MCP (Model Context Protocol) is a tool that bridges
+    an AI assistant with the Chrome browser, enabling the AI assistant to
+    directly control Chrome for web browsing, interaction, and data collection.
+    It communicates with a Chrome extension via the WebSocket protocol to
+    achieve precise browser control.
+
+
+    Compared to traditional browser automation tools like Puppeteer or
+    Playwright, CodingBaby Browser-Use MCP offers several advantages:
+
+
+    1. Higher Privileges: Running as a Chrome extension provides higher browser
+    privileges.
+
+    2. Anti-Bot Evasion: Uses a real Chrome browser and user session,
+    effectively bypassing many website anti-bot mechanisms.
+
+    3. Closer to Real User Behavior: Operations mimic real user interactions,
+    reducing the likelihood of detection.
+
+    4. Session Persistence: Can maintain login states and cookies, facilitating
+    access to authenticated pages.
+
+    5. Lightweight Deployment: Only requires installing the extension in the
+    browser, eliminating the need for separate browser instances or WebDrivers.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

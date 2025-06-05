@@ -1,0 +1,15 @@
+identifier: rawveg/ollama-mcp/ollama-mcp
+repo:
+  provider: github.com
+  url: https://github.com/rawveg/ollama-mcp
+  name: ollama-mcp
+  owner: rawveg
+server:
+  subdirectory: /
+  name: Ollama MCP Server
+  description: Enable seamless integration between Ollama's local LLM models and
+    MCP-compatible applications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

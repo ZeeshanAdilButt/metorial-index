@@ -1,0 +1,23 @@
+tools:
+  - name: list_tables
+    description: Lists all accessible tables in the connected database, grouped by schema.
+    inputSchema:
+      type: object
+      required: []
+      properties: {}
+  - name: execute_sql
+    description: Executes an arbitrary SQL query against the database, primarily
+      using the execute_sql RPC function.
+    inputSchema:
+      type: object
+      required:
+        - sql
+      properties:
+        sql:
+          type: string
+          description: The SQL query to execute.
+        read_only:
+          type: boolean
+          default: false
+          description: Hint for the RPC function whether the query is read-only (best
+            effort).

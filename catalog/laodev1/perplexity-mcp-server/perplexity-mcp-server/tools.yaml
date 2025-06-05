@@ -1,0 +1,55 @@
+tools:
+  - name: perplexity_chat
+    description: Generate a chat completion using Perplexity AI
+    inputSchema:
+      type: object
+      required:
+        - messages
+      properties:
+        model:
+          enum:
+            - mixtral-8x7b-instruct
+            - codellama-34b-instruct
+            - sonar-small-chat
+            - sonar-small-online
+          type: string
+          description: The model to use for completion
+        messages:
+          type: array
+          items:
+            type: object
+            required:
+              - role
+              - content
+            properties:
+              role:
+                enum:
+                  - system
+                  - user
+                  - assistant
+                type: string
+              content:
+                type: string
+          description: Array of messages in the conversation
+        temperature:
+          type: number
+          maximum: 2
+          minimum: 0
+          description: Sampling temperature (0-2)
+  - name: perplexity_ask
+    description: Send a simple query to Perplexity AI
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        model:
+          enum:
+            - llama-3.1-sonar-small-128k-online
+            - llama-3.1-sonar-large-128k-online
+            - llama-3.1-sonar-huge-128k-online
+          type: string
+          description: The model to use for completion
+        query:
+          type: string
+          description: The question or prompt to send

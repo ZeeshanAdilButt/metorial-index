@@ -1,0 +1,26 @@
+tools:
+  - name: rock_paper_scissors
+    description: "
+
+      \    Play rock paper scissors with Josh.
+
+
+      \    Args:
+
+      \        user_choice: The choice of the user.
+
+
+      \    Returns:
+
+      \        The result of the game.
+
+      \    "
+    inputSchema:
+      type: object
+      title: rock_paper_scissorsArguments
+      required:
+        - user_choice
+      properties:
+        user_choice:
+          type: string
+          title: User Choice

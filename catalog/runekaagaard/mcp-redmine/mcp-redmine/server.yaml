@@ -1,0 +1,15 @@
+identifier: runekaagaard/mcp-redmine/mcp-redmine
+repo:
+  provider: github.com
+  url: https://github.com/runekaagaard/mcp-redmine
+  name: mcp-redmine
+  owner: runekaagaard
+server:
+  subdirectory: /
+  name: Redmine Assistant
+  description: Connect Claude to your Redmine instance to manage projects and
+    issues seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

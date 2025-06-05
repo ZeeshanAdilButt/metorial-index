@@ -1,0 +1,50 @@
+tools:
+  - name: search_gpters
+    description: "
+
+      \    GPTers AI 스터디 커뮤니티의 지식을 검색합니다.
+
+      \   \ 
+
+      \    Args:
+
+      \        query (str): 검색 쿼리
+
+      \        top_k (int): 반환할 결과 수 (기본값: 5)
+
+      \        space_name (str): 게시판 이름 (선택 사항)
+
+      \        owner_name (str): 작성자 이름 (선택 사항)
+
+      \        created_within_days (int): 작성일 기준 일수 (선택 사항), 예: 최근 30일 이내 검색
+
+      \    Returns:
+
+      \        str: 검색 결과를 포맷팅한 문자열
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_gptersArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        top_k:
+          type: integer
+          title: Top K
+          default: 5
+        owner_name:
+          type: string
+          title: Owner Name
+          default: null
+        space_name:
+          type: string
+          title: Space Name
+          default: null
+        created_within_days:
+          type: integer
+          title: Created Within Days
+          default: null

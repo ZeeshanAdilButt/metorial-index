@@ -1,0 +1,180 @@
+tools:
+  - name: tavily_web_search
+    description: >-
+      Performs a comprehensive web search using Tavily's AI-powered search
+      engine. 
+                      Excels at extracting and summarizing relevant content from web pages, making it ideal for research, 
+                      fact-finding, and gathering detailed information. Can run in either 'basic' mode for faster, simpler searches 
+                      or 'advanced' mode for more thorough analysis. Basic is cheaper and good for most use cases. 
+                      Supports filtering results by including or excluding specific domains.
+                      Use include_domains/exclude_domains parameters to filter by specific websites.
+                      Returns multiple search results with AI-extracted relevant content.
+    inputSchema:
+      type: object
+      title: GeneralSearch
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+          description: Search query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+          description: Maximum number of results to return
+          exclusiveMaximum: 20
+          exclusiveMinimum: 0
+        search_depth:
+          enum:
+            - basic
+            - advanced
+          type: string
+          title: Search Depth
+          default: basic
+          description: Depth of search - 'basic' or 'advanced'
+        exclude_domains:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Exclude Domains
+          default: null
+          description: List of domains to specifically exclude from the search results
+            (e.g. ['example.com', 'test.org'] or 'example.com')
+        include_domains:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include Domains
+          default: null
+          description: List of domains to specifically include in the search results (e.g.
+            ['example.com', 'test.org'] or 'example.com')
+      description: Parameters for general web search.
+  - name: tavily_answer_search
+    description: >-
+      Performs a web search using Tavily's AI search engine and generates a
+      direct answer to the query, 
+                      along with supporting search results. Best used for questions that need concrete answers backed by current web sources. 
+                      Uses advanced search depth by default for comprehensive analysis.
+
+                      Features powerful source control through domain filtering:
+                      - For academic research: exclude_domains=["wikipedia.org"] for more scholarly sources
+                      - For financial analysis: include_domains=["wsj.com", "bloomberg.com", "ft.com"]
+                      - For technical documentation: include_domains=["docs.python.org", "developer.mozilla.org"]
+                      - For scientific papers: include_domains=["nature.com", "sciencedirect.com"]
+                      - Can combine includes and excludes to fine-tune your sources
+
+                      Particularly effective for factual queries, technical questions, and queries requiring synthesis of multiple sources.
+    inputSchema:
+      type: object
+      title: AnswerSearch
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+          description: Search query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+          description: Maximum number of results to return
+          exclusiveMaximum: 20
+          exclusiveMinimum: 0
+        search_depth:
+          enum:
+            - basic
+            - advanced
+          type: string
+          title: Search Depth
+          default: advanced
+          description: Depth of search - 'basic' or 'advanced'
+        exclude_domains:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Exclude Domains
+          default: null
+          description: List of domains to specifically exclude from the search results
+            (e.g. ['example.com', 'test.org'] or 'example.com')
+        include_domains:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include Domains
+          default: null
+          description: List of domains to specifically include in the search results (e.g.
+            ['example.com', 'test.org'] or 'example.com')
+      description: Parameters for search with answer.
+  - name: tavily_news_search
+    description: >-
+      Searches recent news articles using Tavily's specialized news search
+      functionality. 
+                      Ideal for current events, recent developments, and trending topics. Can filter results by recency 
+                      (number of days back to search) and by including or excluding specific news domains.
+
+                      Powerful domain filtering for news sources:
+                      - For mainstream news: include_domains=["reuters.com", "apnews.com", "bbc.com"]
+                      - For financial news: include_domains=["bloomberg.com", "wsj.com", "ft.com"]
+                      - For tech news: include_domains=["techcrunch.com", "theverge.com"]
+                      - To exclude paywalled content: exclude_domains=["wsj.com", "ft.com"]
+                      - To focus on specific regions: include_domains=["bbc.co.uk"] for UK news
+
+                      Returns news articles with publication dates and relevant excerpts.
+    inputSchema:
+      type: object
+      title: NewsSearch
+      required:
+        - query
+      properties:
+        days:
+          anyOf:
+            - type: integer
+              maximum: 365
+              exclusiveMinimum: 0
+            - type: "null"
+          title: Days
+          default: null
+          description: Number of days back to search (default is 3)
+        query:
+          type: string
+          title: Query
+          description: Search query
+        max_results:
+          type: integer
+          title: Max Results
+          default: 5
+          description: Maximum number of results to return
+          exclusiveMaximum: 20
+          exclusiveMinimum: 0
+        exclude_domains:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Exclude Domains
+          default: null
+          description: List of domains to specifically exclude from the search results
+            (e.g. ['example.com', 'test.org'] or 'example.com')
+        include_domains:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Include Domains
+          default: null
+          description: List of domains to specifically include in the search results (e.g.
+            ['example.com', 'test.org'] or 'example.com')
+      description: Parameters for news search.

@@ -1,0 +1,184 @@
+tools:
+  - name: weather_current
+    description: |
+      
+      Get current weather for a location.
+      Args:
+          q (str): Location query (city name, lat/lon, postal code, etc).
+          aqi (str): Include air quality data ('yes' or 'no').
+      Returns:
+          dict: WeatherAPI current weather JSON.
+    inputSchema:
+      type: object
+      title: weather_currentArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+        aqi:
+          type: string
+          title: Aqi
+          default: no
+  - name: weather_forecast
+    description: |
+      
+      Get weather forecast (1–14 days) for a location.
+      Args:
+          q (str): Location query (city name, lat/lon, postal code, etc).
+          days (int): Number of days (1–14).
+          aqi (str): Include air quality ('yes' or 'no').
+          alerts (str): Include weather alerts ('yes' or 'no').
+      Returns:
+          dict: WeatherAPI forecast JSON.
+    inputSchema:
+      type: object
+      title: weather_forecastArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+        aqi:
+          type: string
+          title: Aqi
+          default: no
+        days:
+          type: integer
+          title: Days
+          default: 1
+        alerts:
+          type: string
+          title: Alerts
+          default: no
+  - name: weather_history
+    description: |
+      
+      Get historical weather for a location on a given date (YYYY-MM-DD).
+      Args:
+          q (str): Location query.
+          dt (str): Date in YYYY-MM-DD format.
+      Returns:
+          dict: WeatherAPI history JSON.
+    inputSchema:
+      type: object
+      title: weather_historyArguments
+      required:
+        - q
+        - dt
+      properties:
+        q:
+          type: string
+          title: Q
+        dt:
+          type: string
+          title: Dt
+  - name: weather_alerts
+    description: |
+      
+      Get weather alerts for a location.
+      Args:
+          q (str): Location query.
+      Returns:
+          dict: WeatherAPI alerts JSON.
+    inputSchema:
+      type: object
+      title: weather_alertsArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+  - name: weather_airquality
+    description: |
+      
+      Get air quality for a location.
+      Args:
+          q (str): Location query.
+      Returns:
+          dict: WeatherAPI air quality JSON.
+    inputSchema:
+      type: object
+      title: weather_airqualityArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+  - name: weather_astronomy
+    description: |
+      
+      Get astronomy data (sunrise, sunset, moon) for a date (YYYY-MM-DD).
+      Args:
+          q (str): Location query.
+          dt (str): Date in YYYY-MM-DD format.
+      Returns:
+          dict: WeatherAPI astronomy JSON.
+    inputSchema:
+      type: object
+      title: weather_astronomyArguments
+      required:
+        - q
+        - dt
+      properties:
+        q:
+          type: string
+          title: Q
+        dt:
+          type: string
+          title: Dt
+  - name: weather_search
+    description: |
+      
+      Search for locations matching query.
+      Args:
+          q (str): Location query.
+      Returns:
+          dict: WeatherAPI search JSON.
+    inputSchema:
+      type: object
+      title: weather_searchArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+  - name: weather_timezone
+    description: |
+      
+      Get timezone info for a location.
+      Args:
+          q (str): Location query.
+      Returns:
+          dict: WeatherAPI timezone JSON.
+    inputSchema:
+      type: object
+      title: weather_timezoneArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q
+  - name: weather_sports
+    description: |
+      
+      Get sports events (e.g., football, cricket) for a location.
+      Args:
+          q (str): Location query.
+      Returns:
+          dict: WeatherAPI sports JSON.
+    inputSchema:
+      type: object
+      title: weather_sportsArguments
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          title: Q

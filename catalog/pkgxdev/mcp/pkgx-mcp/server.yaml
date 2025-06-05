@@ -1,0 +1,18 @@
+identifier: pkgxdev/mcp/pkgx-mcp
+repo:
+  provider: github.com
+  url: https://github.com/pkgxdev/mcp
+  name: mcp
+  owner: pkgxdev
+server:
+  subdirectory: /
+  name: pkgx Tool Runner
+  description: Run any open source tool seamlessly through pkgx integration.
+    Enable AI agents to execute a wide range of commands and gather data from
+    your system securely within a sandboxed environment. Enhance your workflows
+    by leveraging powerful tool execution capabilities with caution advised due
+    to broad file read access.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

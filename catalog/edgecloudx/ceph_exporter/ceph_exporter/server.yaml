@@ -1,0 +1,17 @@
+identifier: edgecloudx/ceph_exporter/ceph_exporter
+repo:
+  provider: github.com
+  url: https://github.com/EdgeCloudX/ceph_exporter
+  name: ceph_exporter
+  owner: EdgeCloudX
+server:
+  subdirectory: /
+  name: Ceph Exporter
+  description: Collect and expose detailed metrics from your Ceph cluster for
+    Prometheus monitoring. Easily integrate with your existing Ceph setup
+    without additional configuration. Enable real-time cluster insights to
+    optimize performance and reliability.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

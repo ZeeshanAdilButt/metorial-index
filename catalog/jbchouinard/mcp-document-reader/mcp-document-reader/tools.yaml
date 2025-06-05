@@ -1,0 +1,253 @@
+tools:
+  - name: get_epub_metadata
+    description: "Get metadata from an EPUB file.
+
+
+      \    Args:
+
+      \        epub_path: Path to the EPUB file
+
+
+      \    Returns:
+
+      \        Formatted string containing the EPUB metadata
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_epub_metadataArguments
+      required:
+        - epub_path
+      properties:
+        epub_path:
+          type: string
+          title: Epub Path
+  - name: read_epub_page_range
+    description: "Read a range of pages from an EPUB file.
+
+
+      \    Args:
+
+      \        epub_path: Path to the EPUB file
+
+      \        start_page: First page to read (inclusive)
+
+      \        end_page: Last page to read (inclusive)
+
+
+      \    Returns:
+
+      \        Formatted string containing the content of the specified page
+      range
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_epub_page_rangeArguments
+      required:
+        - epub_path
+        - start_page
+        - end_page
+      properties:
+        end_page:
+          type: integer
+          title: End Page
+        epub_path:
+          type: string
+          title: Epub Path
+        start_page:
+          type: integer
+          title: Start Page
+  - name: read_epub_pages
+    description: "Read specific pages from an EPUB file.
+
+
+      \    Args:
+
+      \        epub_path: Path to the EPUB file
+
+      \        pages: List of page numbers to read
+
+
+      \    Returns:
+
+      \        Formatted string containing the content of the specified pages
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_epub_pagesArguments
+      required:
+        - epub_path
+        - pages
+      properties:
+        pages:
+          type: array
+          items:
+            type: integer
+          title: Pages
+        epub_path:
+          type: string
+          title: Epub Path
+  - name: get_pdf_metadata
+    description: "Get metadata from a PDF file.
+
+
+      \    Args:
+
+      \        pdf_path: Path to the PDF file
+
+
+      \    Returns:
+
+      \        Formatted string containing the PDF metadata
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_pdf_metadataArguments
+      required:
+        - pdf_path
+      properties:
+        pdf_path:
+          type: string
+          title: Pdf Path
+  - name: read_pdf_page_range
+    description: "Read a range of pages from a PDF file.
+
+
+      \    Args:
+
+      \        pdf_path: Path to the PDF file
+
+      \        start_page: First page to read (inclusive)
+
+      \        end_page: Last page to read (inclusive)
+
+
+      \    Returns:
+
+      \        Formatted string containing the content of the specified page
+      range
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_pdf_page_rangeArguments
+      required:
+        - pdf_path
+        - start_page
+        - end_page
+      properties:
+        end_page:
+          type: integer
+          title: End Page
+        pdf_path:
+          type: string
+          title: Pdf Path
+        start_page:
+          type: integer
+          title: Start Page
+  - name: read_pdf_pages
+    description: "Read specific pages from a PDF file.
+
+
+      \    Args:
+
+      \        pdf_path: Path to the PDF file
+
+      \        pages: List of page numbers to read
+
+
+      \    Returns:
+
+      \        Formatted string containing the content of the specified pages
+
+      \    "
+    inputSchema:
+      type: object
+      title: read_pdf_pagesArguments
+      required:
+        - pdf_path
+        - pages
+      properties:
+        pages:
+          type: array
+          items:
+            type: integer
+          title: Pages
+        pdf_path:
+          type: string
+          title: Pdf Path
+  - name: search_pdf
+    description: "Search for terms in a PDF file and return pages containing them.
+
+
+      \    Args:
+
+      \        pdf_path: Path to the PDF file
+
+      \        terms: Search term(s) - either a single term as a string or
+      multiple terms as a
+
+      \            comma-separated string
+
+
+      \    Returns:
+
+      \        Formatted search results showing page numbers and matching terms
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_pdfArguments
+      required:
+        - pdf_path
+        - terms
+      properties:
+        terms:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          title: Terms
+        pdf_path:
+          type: string
+          title: Pdf Path
+  - name: search_epub
+    description: "Search for terms in an EPUB file and return pages containing them.
+
+
+      \    Args:
+
+      \        epub_path: Path to the EPUB file
+
+      \        terms: Search term(s) - either a single term as a string or
+      multiple terms as a
+
+      \            comma-separated string
+
+
+      \    Returns:
+
+      \        Formatted search results showing page numbers and matching terms
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_epubArguments
+      required:
+        - epub_path
+        - terms
+      properties:
+        terms:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          title: Terms
+        epub_path:
+          type: string
+          title: Epub Path

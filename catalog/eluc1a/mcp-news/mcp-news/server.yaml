@@ -1,0 +1,18 @@
+identifier: eluc1a/mcp-news/mcp-news
+repo:
+  provider: github.com
+  url: https://github.com/eluc1a/mcp-news
+  name: mcp-news
+  owner: eluc1a
+server:
+  subdirectory: /
+  name: News Server
+  description: Provide access to the latest news articles across various
+    categories and enable summarization of news content. Retrieve curated news
+    data efficiently to support informed decision-making and content generation.
+    Simplify integration of up-to-date news into your applications via a
+    standardized protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

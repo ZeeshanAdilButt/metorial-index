@@ -1,0 +1,19 @@
+identifier: kelvinqiu802/mcp-sse/mcp-sse
+repo:
+  provider: github.com
+  url: https://github.com/KelvinQiu802/mcp-sse
+  name: mcp-sse
+  owner: KelvinQiu802
+server:
+  subdirectory: /
+  name: SSE MCP Server
+  description: Provide a secure and authenticated MCP server implementation using
+    Server-Sent Events (SSE) transport. Enable LLM applications to interact with
+    MCP servers over HTTP+SSE with features like tool listing and calling,
+    supporting real-time streaming of JSON-RPC messages. Facilitate integration
+    with MCP Inspector and other tools for debugging and monitoring MCP
+    communications.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

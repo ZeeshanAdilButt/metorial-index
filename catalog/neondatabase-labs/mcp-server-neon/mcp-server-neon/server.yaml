@@ -1,0 +1,16 @@
+identifier: neondatabase-labs/mcp-server-neon/mcp-server-neon
+repo:
+  provider: github.com
+  url: https://github.com/neondatabase-labs/mcp-server-neon
+  name: mcp-server-neon
+  owner: neondatabase-labs
+server:
+  subdirectory: /
+  name: Neon Database
+  description: Control Neon serverless Postgres databases using natural language.
+    Create and manage databases, run SQL queries, handle migrations, and manage
+    projects.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: jwalsh/mcp-server-qrcode/mcp-server-qrcode
+repo:
+  provider: github.com
+  url: https://github.com/jwalsh/mcp-server-qrcode
+  name: mcp-server-qrcode
+  owner: jwalsh
+server:
+  subdirectory: /
+  name: QR Code Server
+  description: Generate QR codes effortlessly for various content types like URLs,
+    WiFi credentials, and contact information. Customize size and format to suit
+    your needs, and integrate seamlessly with your applications using the Model
+    Context Protocol.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

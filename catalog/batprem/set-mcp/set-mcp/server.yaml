@@ -1,0 +1,17 @@
+identifier: batprem/set-mcp/set-mcp
+repo:
+  provider: github.com
+  url: https://github.com/batprem/set-mcp
+  name: set-mcp
+  owner: batprem
+server:
+  subdirectory: /
+  name: SET-MCP
+  description: Retrieve comprehensive financial statements for SET-listed
+    companies with ease. Access income statements, balance sheets, and cash flow
+    statements through a simple command-line interface or programmatically in
+    Python. Enhance your AI agents' financial data capabilities effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

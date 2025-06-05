@@ -1,0 +1,14 @@
+identifier: sammcj/mcp-snyk/mcp-snyk
+repo:
+  provider: github.com
+  url: https://github.com/sammcj/mcp-snyk
+  name: mcp-snyk
+  owner: sammcj
+server:
+  subdirectory: /
+  name: Snyk MCP Server
+  description: Enable security scanning for repositories using Snyk's functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

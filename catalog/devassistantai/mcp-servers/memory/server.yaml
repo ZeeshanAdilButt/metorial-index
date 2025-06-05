@@ -1,0 +1,18 @@
+identifier: devassistantai/mcp-servers/memory
+repo:
+  provider: github.com
+  url: https://github.com/devassistantai/mcp-servers
+  name: mcp-servers
+  owner: devassistantai
+server:
+  subdirectory: /src/memory
+  name: Knowledge Memory Server
+  description: Enable persistent memory for your assistant by storing and
+    retrieving user information across chats using a local knowledge graph.
+    Create, update, and query entities, relations, and observations to
+    personalize interactions effectively. Seamlessly integrate with Claude
+    Desktop to enhance chat personalization and memory management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

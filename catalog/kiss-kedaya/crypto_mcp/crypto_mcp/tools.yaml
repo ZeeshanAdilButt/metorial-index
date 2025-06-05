@@ -1,0 +1,311 @@
+tools:
+  - name: get_coin_price
+    description: "获取指定虚拟币的当前价格
+
+
+      \    Args:
+
+      \        coin_id: 虚拟币的ID (例如 bitcoin, ethereum, dogecoin)
+
+      \        currency: 货币单位 (默认为人民币cny, 也可以是usd等)
+
+
+      \    Returns:
+
+      \        包含价格信息的字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_coin_priceArguments
+      required:
+        - coin_id
+      properties:
+        coin_id:
+          type: string
+          title: Coin Id
+        currency:
+          type: string
+          title: Currency
+          default: cny
+  - name: get_trending_coins
+    description: "获取当前热门虚拟币列表
+
+
+      \    Returns:
+
+      \        包含热门虚拟币信息的字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_trending_coinsArguments
+      properties: {}
+  - name: get_coin_detail
+    description: "获取虚拟币的详细信息
+
+
+      \    Args:
+
+      \        coin_id: 虚拟币的ID (例如 bitcoin, ethereum)
+
+
+      \    Returns:
+
+      \        包含详细信息的字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_coin_detailArguments
+      required:
+        - coin_id
+      properties:
+        coin_id:
+          type: string
+          title: Coin Id
+  - name: get_global_market_data
+    description: "获取全球加密货币市场数据
+
+
+      \    Returns:
+
+      \        包含市场数据的字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_global_market_dataArguments
+      properties: {}
+  - name: search_coins
+    description: "搜索虚拟币
+
+
+      \    Args:
+
+      \        query: 搜索关键词
+
+      \        limit: 返回结果数量上限, 默认10
+
+
+      \    Returns:
+
+      \        包含搜索结果的字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_coinsArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+        query:
+          type: string
+          title: Query
+  - name: get_common_coins_prices
+    description: "获取常见虚拟币的价格信息
+
+
+      \    Returns:
+
+      \        包含常见虚拟币价格的字符串
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_common_coins_pricesArguments
+      properties: {}
+  - name: get_coin_info
+    description: "获取虚拟币的合约市场信息 (Coinglass API)
+
+
+      \    Args:
+
+      \        symbol: 币种符号，例如BTC、ETH
+
+
+      \    Returns:
+
+      \        包含币种在合约市场的详细信息
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_coin_infoArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+  - name: get_kline_data
+    description: "获取虚拟币合约的K线数据 (Coinglass API)
+
+
+      \    Args:
+
+      \        symbol: 币种符号，例如BTC、ETH
+
+      \        granularity: K线粒度，默认1h (可选: 1m, 3m, 5m, 15m, 30m, 1h, 4h, 6h,
+      12h, 24h, 1d, 1w等)
+
+      \        lookback_count: 需要获取的K线数量，默认100条
+
+
+      \    Returns:
+
+      \        包含K线数据的格式化信息
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_kline_dataArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+        granularity:
+          type: string
+          title: Granularity
+          default: 1h
+        lookback_count:
+          type: integer
+          title: Lookback Count
+          default: 100
+  - name: get_position_info
+    description: "获取虚拟币合约的持仓信息 (Coinglass API)
+
+
+      \    Args:
+
+      \        symbol: 币种符号，例如BTC、ETH
+
+      \        granularity: K线粒度，默认1h (可选: 1m, 3m, 5m, 15m, 30m, 1h, 4h, 6h,
+      12h, 24h, 1d, 1w等)
+
+      \        lookback_count: 需要获取的K线数量，默认100条
+
+
+      \    Returns:
+
+      \        包含持仓信息的格式化数据
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_position_infoArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+        granularity:
+          type: string
+          title: Granularity
+          default: 1h
+        lookback_count:
+          type: integer
+          title: Lookback Count
+          default: 100
+  - name: get_trade_volume
+    description: "获取虚拟币合约的成交量信息 (Coinglass API)
+
+
+      \    Args:
+
+      \        symbol: 币种符号，例如BTC、ETH
+
+      \        granularity: K线粒度，默认1h (可选: 1m, 3m, 5m, 15m, 30m, 1h, 4h, 6h,
+      12h, 24h, 1d, 1w等)
+
+      \        lookback_count: 需要获取的K线数量，默认100条
+
+
+      \    Returns:
+
+      \        包含成交量信息的格式化数据
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_trade_volumeArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+        granularity:
+          type: string
+          title: Granularity
+          default: 1h
+        lookback_count:
+          type: integer
+          title: Lookback Count
+          default: 100
+  - name: get_trade_amount
+    description: "获取虚拟币的成交额信息 (Coinglass API)
+
+
+      \    Args:
+
+      \        symbol: 币种符号，例如BTC、ETH
+
+      \        granularity: K线粒度，默认1h (可选: 1m, 3m, 5m, 15m, 30m, 1h, 4h, 6h,
+      12h, 24h, 1d, 1w等)
+
+      \        lookback_count: 需要获取的K线数量，默认100条
+
+
+      \    Returns:
+
+      \        包含成交额信息的格式化数据
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_trade_amountArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol
+        granularity:
+          type: string
+          title: Granularity
+          default: 1h
+        lookback_count:
+          type: integer
+          title: Lookback Count
+          default: 100
+  - name: get_exchange_position
+    description: "获取虚拟币在各交易所的持仓分布 (Coinglass API)
+
+
+      \    Args:
+
+      \        symbol: 币种符号，例如BTC、ETH
+
+
+      \    Returns:
+
+      \        包含各交易所持仓分布的格式化信息
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_exchange_positionArguments
+      required:
+        - symbol
+      properties:
+        symbol:
+          type: string
+          title: Symbol

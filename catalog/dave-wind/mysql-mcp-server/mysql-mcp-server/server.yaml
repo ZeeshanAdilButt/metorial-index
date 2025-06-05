@@ -1,0 +1,18 @@
+identifier: dave-wind/mysql-mcp-server/mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dave-wind/mysql-mcp-server
+  name: mysql-mcp-server
+  owner: dave-wind
+server:
+  subdirectory: /
+  name: MySQL Read-Only Database Access Server
+  description: Enable LLMs to inspect MySQL database schemas and execute read-only
+    SQL queries securely. Access detailed table schema information and run
+    queries within read-only transactions to ensure data integrity. Simplify
+    database exploration and querying for AI applications without risking data
+    modification.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

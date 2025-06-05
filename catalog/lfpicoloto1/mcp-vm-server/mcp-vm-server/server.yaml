@@ -1,0 +1,18 @@
+identifier: lfpicoloto1/mcp-vm-server/mcp-vm-server
+repo:
+  provider: github.com
+  url: https://github.com/lfpicoloto1/mcp-vm-server
+  name: mcp-vm-server
+  owner: lfpicoloto1
+server:
+  subdirectory: /
+  name: MCP VM Server
+  description: Provide a virtual machine environment accessible via the Model
+    Context Protocol to enable execution of code and interaction with
+    virtualized resources. Facilitate integration of LLMs with a sandboxed VM
+    for running tools and accessing resources securely. Enhance agent
+    capabilities by offering a programmable and isolated execution context.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

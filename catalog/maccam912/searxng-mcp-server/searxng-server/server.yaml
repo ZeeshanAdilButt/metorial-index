@@ -1,0 +1,14 @@
+identifier: maccam912/searxng-mcp-server/searxng-server
+repo:
+  provider: github.com
+  url: https://github.com/maccam912/searxng-mcp-server
+  name: searxng-mcp-server
+  owner: maccam912
+server:
+  subdirectory: /
+  name: SearXNG
+  description: Interact with SearXNG instances for search capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

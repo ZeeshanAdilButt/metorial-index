@@ -1,0 +1,18 @@
+identifier: waldzellai/model-enhancement-servers/decision-framework
+repo:
+  provider: github.com
+  url: https://github.com/waldzellai/model-enhancement-servers
+  name: model-enhancement-servers
+  owner: waldzellai
+server:
+  subdirectory: /src/decision-framework
+  name: Decision Framework Server
+  description: Provide structured decision support by externalizing complex
+    decision-making processes. Enable models to systematically analyze options,
+    criteria, probabilities, and uncertainties for transparent and personalized
+    recommendations. Enhance decision quality across personal, business, risk
+    management, and policy domains.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,17 @@
+identifier: adrianozagallo-home/mcp-server/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/adrianozagallo-home/mcp-server
+  name: mcp-server
+  owner: adrianozagallo-home
+server:
+  subdirectory: /
+  name: MCP Server
+  description: Deploy and manage your Model Context Protocol server effortlessly
+    on Azure Kubernetes Service. Ensure secure and scalable interactions with
+    your LLM applications while leveraging Kubernetes for monitoring and health
+    checks.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

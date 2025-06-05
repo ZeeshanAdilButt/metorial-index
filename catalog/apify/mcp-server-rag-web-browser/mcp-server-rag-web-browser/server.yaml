@@ -1,0 +1,15 @@
+identifier: apify/mcp-server-rag-web-browser/mcp-server-rag-web-browser
+repo:
+  provider: github.com
+  url: https://github.com/apify/mcp-server-rag-web-browser
+  name: mcp-server-rag-web-browser
+  owner: apify
+server:
+  subdirectory: /
+  name: RAG Web Browser Server
+  description: This server allows AI models to perform web searches and scrape
+    content, returning it in Markdown format via the RAG Web Browser Actor.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,15 @@
+identifier: astromined/pygithub-mcp-server/pygithub-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/AstroMined/pygithub-mcp-server
+  name: pygithub-mcp-server
+  owner: AstroMined
+server:
+  subdirectory: /
+  name: PyGithub MCP Server
+  description: Interact with the GitHub API through a Model Context Protocol
+    server. Manage issues, repositories, and pull requests seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

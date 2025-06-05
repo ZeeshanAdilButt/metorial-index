@@ -1,0 +1,18 @@
+identifier: sazboxai/mcp_metabase/mcp_metabase
+repo:
+  provider: github.com
+  url: https://github.com/sazboxai/MCP_MetaBase
+  name: MCP_MetaBase
+  owner: sazboxai
+server:
+  subdirectory: /
+  name: Metabase Server Connector
+  description: Enable AI assistants to explore and interact with Metabase
+    databases seamlessly. List databases, retrieve detailed schema metadata,
+    visualize table relationships, and execute Metabase actions securely through
+    a user-friendly interface. Simplify database operations and enhance
+    AI-driven data insights with easy deployment options including Docker.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

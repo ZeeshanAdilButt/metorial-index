@@ -1,0 +1,18 @@
+identifier: mcpdotdirect/template-mcp-server/template-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mcpdotdirect/template-mcp-server
+  name: template-mcp-server
+  owner: mcpdotdirect
+server:
+  subdirectory: /
+  name: Create MCP Server
+  description: Build custom servers that enable AI agents to interact with
+    external systems and data sources. Start your project quickly with a
+    template that supports both stdio and HTTP transports, ensuring flexibility
+    and ease of use. Enhance your applications with TypeScript support and a
+    structured approach to defining tools, resources, and prompts.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

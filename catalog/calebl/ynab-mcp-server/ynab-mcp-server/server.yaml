@@ -1,0 +1,16 @@
+identifier: calebl/ynab-mcp-server/ynab-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/calebl/ynab-mcp-server
+  name: ynab-mcp-server
+  owner: calebl
+server:
+  subdirectory: /
+  name: YNAB Budget Assistant
+  description: Interact with your YNAB budget through AI conversations. Manage
+    your finances effortlessly by adding transactions, approving expenses, and
+    checking your budget status with simple commands.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

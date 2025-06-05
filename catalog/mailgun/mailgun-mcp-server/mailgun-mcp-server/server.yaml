@@ -1,0 +1,17 @@
+identifier: mailgun/mailgun-mcp-server/mailgun-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/mailgun/mailgun-mcp-server
+  name: mailgun-mcp-server
+  owner: mailgun
+server:
+  subdirectory: /
+  name: Mailgun MCP Server
+  description: Enable seamless interaction with Mailgun's email services through
+    AI clients. Send emails, fetch statistics, and visualize data effortlessly.
+    Enhance your applications with powerful email capabilities using this MCP
+    server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

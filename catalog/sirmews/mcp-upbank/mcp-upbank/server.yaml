@@ -1,0 +1,18 @@
+identifier: sirmews/mcp-upbank/mcp-upbank
+repo:
+  provider: github.com
+  url: https://github.com/sirmews/mcp-upbank
+  name: mcp-upbank
+  owner: sirmews
+server:
+  subdirectory: /
+  name: Up Bank API Access Server
+  description: Provide seamless access to your Up Bank account data through a
+    Model Context Protocol server. Retrieve transaction lists, analyze spending
+    habits, and integrate banking data into your daily workflows securely and
+    read-only. Enhance your LLM applications with real-time financial insights
+    without risk of account mutations.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

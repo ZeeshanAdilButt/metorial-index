@@ -1,0 +1,17 @@
+identifier: doggybee/mcp-server-leetcode/mcp-server-leetcode
+repo:
+  provider: github.com
+  url: https://github.com/doggybee/mcp-server-leetcode
+  name: mcp-server-leetcode
+  owner: doggybee
+server:
+  subdirectory: /
+  name: LeetCode MCP Server
+  description: Access LeetCode problems, user information, and contest data
+    seamlessly. Enhance your AI assistants with fast and efficient queries to
+    LeetCode's extensive resources. Utilize both CLI and programmable API for
+    flexible integration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

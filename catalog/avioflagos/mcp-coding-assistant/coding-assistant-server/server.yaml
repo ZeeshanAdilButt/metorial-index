@@ -1,0 +1,16 @@
+identifier: avioflagos/mcp-coding-assistant/coding-assistant-server
+repo:
+  provider: github.com
+  url: https://github.com/AviOfLagos/MCP-coding-assistant
+  name: MCP-coding-assistant
+  owner: AviOfLagos
+server:
+  subdirectory: /
+  name: Coding Assistant Server
+  description: An MCP server providing coding assistance by offering code
+    suggestions, integrating project documentation, and detecting technologies
+    used in your codebase.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,33 @@
+tools:
+  - name: list_projects
+    description: ""
+    inputSchema:
+      type: object
+      title: list_projectsArguments
+      properties: {}
+  - name: list_services
+    description: ""
+    inputSchema:
+      type: object
+      title: list_servicesArguments
+      required:
+        - project_name
+      properties:
+        project_name:
+          type: string
+          title: project_name
+  - name: get_service_details
+    description: ""
+    inputSchema:
+      type: object
+      title: get_service_detailsArguments
+      required:
+        - project_name
+        - service_name
+      properties:
+        project_name:
+          type: string
+          title: project_name
+        service_name:
+          type: string
+          title: service_name

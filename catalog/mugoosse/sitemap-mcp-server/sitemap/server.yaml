@@ -1,0 +1,18 @@
+identifier: mugoosse/sitemap-mcp-server/sitemap
+repo:
+  provider: github.com
+  url: https://github.com/mugoosse/sitemap-mcp-server
+  name: sitemap-mcp-server
+  owner: mugoosse
+server:
+  subdirectory: /
+  name: Sitemap MCP
+  description: Fetch, parse, analyze, and visualize website sitemaps to empower AI
+    agents and MCP clients with comprehensive sitemap insights. Handle all
+    standard sitemap formats including XML, Google News, and plain text
+    sitemaps. Utilize ready-to-use prompts for sitemap analysis, health checks,
+    URL extraction, content gap identification, and structure visualization.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

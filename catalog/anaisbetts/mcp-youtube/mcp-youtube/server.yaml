@@ -1,0 +1,15 @@
+identifier: anaisbetts/mcp-youtube/mcp-youtube
+repo:
+  provider: github.com
+  url: https://github.com/anaisbetts/mcp-youtube
+  name: mcp-youtube
+  owner: anaisbetts
+server:
+  subdirectory: /
+  name: YouTube
+  description: YouTube MCP Server utilizes yt-dlp to download subtitles from
+    YouTube and interfaces with Claude.ai.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

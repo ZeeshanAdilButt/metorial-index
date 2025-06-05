@@ -1,0 +1,17 @@
+identifier: tomokiishimine/dify-mcp-server/dify-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/TomokiIshimine/dify-mcp-server
+  name: dify-mcp-server
+  owner: TomokiIshimine
+server:
+  subdirectory: /
+  name: Dify Workflow Tool Server
+  description: Integrate seamlessly with Dify Workflow to enhance your
+    applications. Retrieve and manage workflow parameters dynamically while
+    leveraging multiple API keys for flexible tool creation. Simplify your setup
+    with easy configuration through environment variables.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

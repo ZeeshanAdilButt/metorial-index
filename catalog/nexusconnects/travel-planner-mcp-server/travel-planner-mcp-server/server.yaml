@@ -1,0 +1,19 @@
+identifier: nexusconnects/travel-planner-mcp-server/travel-planner-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nexusconnects/TRAVEL-PLANNER-MCP-Server
+  name: TRAVEL-PLANNER-MCP-Server
+  owner: nexusconnects
+server:
+  subdirectory: /
+  name: Travel Planner Server
+  description: Enable your LLMs to perform travel-related tasks such as searching
+    locations, retrieving place details, calculating routes, and obtaining
+    timezone information using Google Maps services. Simplify travel planning by
+    integrating these capabilities directly into your applications. Easily
+    configure and run with your Google Maps API key for seamless travel
+    itinerary management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

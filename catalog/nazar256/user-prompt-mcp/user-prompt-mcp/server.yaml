@@ -1,0 +1,18 @@
+identifier: nazar256/user-prompt-mcp/user-prompt-mcp
+repo:
+  provider: github.com
+  url: https://github.com/nazar256/user-prompt-mcp
+  name: user-prompt-mcp
+  owner: nazar256
+server:
+  subdirectory: /
+  name: User Prompt
+  description: Enable interactive user input requests during AI model generation
+    to create a more engaging and dynamic experience. Present input prompts via
+    a simple GUI dialog box that works cross-platform on Linux and macOS.
+    Seamlessly integrate with MCP-compatible clients like Cursor using stdio
+    transport.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

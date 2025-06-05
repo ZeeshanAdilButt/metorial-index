@@ -1,0 +1,15 @@
+identifier: lamemind/mcp-server-multiverse/mcp-server-multiverse
+repo:
+  provider: github.com
+  url: https://github.com/lamemind/mcp-server-multiverse
+  name: mcp-server-multiverse
+  owner: lamemind
+server:
+  subdirectory: /
+  name: Multiverse MCP Server
+  description: Enable multiple isolated instances of MCP servers to run
+    independently and simultaneously.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

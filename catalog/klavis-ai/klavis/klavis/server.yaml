@@ -1,0 +1,17 @@
+identifier: klavis-ai/klavis/klavis
+repo:
+  provider: github.com
+  url: https://github.com/Klavis-AI/klavis
+  name: klavis
+  owner: Klavis-AI
+server:
+  subdirectory: /mcp_servers/report_generation
+  name: Klavis ReportGen Server
+  description: Generate visually appealing, AI-powered web reports from simple
+    search queries. Integrate up-to-date web search results and store reports
+    for easy access. Quickly deploy locally or with Docker for seamless report
+    generation workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

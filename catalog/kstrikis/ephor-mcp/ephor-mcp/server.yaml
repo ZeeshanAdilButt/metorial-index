@@ -1,0 +1,17 @@
+identifier: kstrikis/ephor-mcp/ephor-mcp
+repo:
+  provider: github.com
+  url: https://github.com/kstrikis/ephor-mcp
+  name: ephor-mcp
+  owner: kstrikis
+server:
+  subdirectory: /
+  name: LLM Responses Server
+  description: Enable multiple AI agents to collaborate by sharing and reflecting
+    on their responses to the same prompts. Submit and retrieve responses
+    seamlessly, enhancing the interaction between different LLMs. This server
+    facilitates a richer dialogue and understanding among AI agents.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

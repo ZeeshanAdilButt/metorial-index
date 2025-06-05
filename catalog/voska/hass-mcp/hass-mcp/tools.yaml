@@ -1,0 +1,382 @@
+tools:
+  - name: get_version
+    description: |
+      
+      Get the Home Assistant version
+
+      Returns:
+          A string with the Home Assistant version (e.g., "2025.3.0")
+    inputSchema:
+      type: object
+      title: get_versionArguments
+      properties: {}
+  - name: get_entity
+    description: >
+      
+      Get the state of a Home Assistant entity with optional field filtering
+
+
+      Args:
+          entity_id: The entity ID to get (e.g. 'light.living_room')
+          fields: Optional list of fields to include (e.g. ['state', 'attr.brightness'])
+          detailed: If True, returns all entity fields without filtering
+
+                  
+      Examples:
+          entity_id="light.living_room" - basic state check
+          entity_id="light.living_room", fields=["state", "attr.brightness"] - specific fields
+          entity_id="light.living_room", detailed=True - all details
+    inputSchema:
+      type: object
+      title: get_entityArguments
+      required:
+        - entity_id
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        detailed:
+          type: boolean
+          title: Detailed
+          default: false
+        entity_id:
+          type: string
+          title: Entity Id
+  - name: entity_action
+    description: >
+      
+      Perform an action on a Home Assistant entity (on, off, toggle)
+
+
+      Args:
+          entity_id: The entity ID to control (e.g. 'light.living_room')
+          action: The action to perform ('on', 'off', 'toggle')
+          **params: Additional parameters for the service call
+
+      Returns:
+          The response from Home Assistant
+
+      Examples:
+          entity_id="light.living_room", action="on", brightness=255
+          entity_id="switch.garden_lights", action="off"
+          entity_id="climate.living_room", action="on", temperature=22.5
+
+      Domain-Specific Parameters:
+          - Lights: brightness (0-255), color_temp, rgb_color, transition, effect
+          - Covers: position (0-100), tilt_position
+          - Climate: temperature, target_temp_high, target_temp_low, hvac_mode
+          - Media players: source, volume_level (0-1)
+    inputSchema:
+      type: object
+      title: entity_actionArguments
+      required:
+        - entity_id
+        - action
+        - params
+      properties:
+        action:
+          type: string
+          title: Action
+        params:
+          type: string
+          title: params
+        entity_id:
+          type: string
+          title: Entity Id
+  - name: list_entities
+    description: >
+      
+      Get a list of Home Assistant entities with optional filtering
+
+
+      Args:
+          domain: Optional domain to filter by (e.g., 'light', 'switch', 'sensor')
+          search_query: Optional search term to filter entities by name, id, or attributes
+                       (Note: Does not support wildcards. To get all entities, leave this empty)
+          limit: Maximum number of entities to return (default: 100)
+          fields: Optional list of specific fields to include in each entity
+          detailed: If True, returns all entity fields without filtering
+
+      Returns:
+          A list of entity dictionaries with lean formatting by default
+
+      Examples:
+          domain="light" - get all lights
+          search_query="kitchen", limit=20 - search entities
+          domain="sensor", detailed=True - full sensor details
+
+      Best Practices:
+          - Use lean format (default) for most operations
+          - Prefer domain filtering over no filtering
+          - For domain overviews, use domain_summary_tool instead of list_entities
+          - Only request detailed=True when necessary for full attribute inspection
+          - To get all entity types/domains, use list_entities without a domain filter, 
+            then extract domains from entity_ids
+    inputSchema:
+      type: object
+      title: list_entitiesArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 100
+        domain:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Domain
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        detailed:
+          type: boolean
+          title: Detailed
+          default: false
+        search_query:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Search Query
+          default: null
+  - name: search_entities_tool
+    description: >+
+      
+      Search for entities matching a query string
+
+
+      Args:
+          query: The search query to match against entity IDs, names, and attributes.
+                (Note: Does not support wildcards. To get all entities, leave this blank or use list_entities tool)
+          limit: Maximum number of results to return (default: 20)
+
+      Returns:
+          A dictionary containing search results and metadata:
+          - count: Total number of matching entities found
+          - results: List of matching entities with essential information
+          - domains: Map of domains with counts (e.g. {"light": 3, "sensor": 2})
+
+          
+      Examples:
+          query="temperature" - find temperature entities
+          query="living room", limit=10 - find living room entities
+          query="", limit=500 - list all entity types
+          
+    inputSchema:
+      type: object
+      title: search_entities_toolArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 20
+        query:
+          type: string
+          title: Query
+  - name: domain_summary_tool
+    description: >-
+      
+      Get a summary of entities in a specific domain
+
+
+      Args:
+          domain: The domain to summarize (e.g., 'light', 'switch', 'sensor')
+          example_limit: Maximum number of examples to include for each state
+
+      Returns:
+          A dictionary containing:
+          - total_count: Number of entities in the domain
+          - state_distribution: Count of entities in each state
+          - examples: Sample entities for each state
+          - common_attributes: Most frequently occurring attributes
+
+          
+      Examples:
+          domain="light" - get light summary
+          domain="climate", example_limit=5 - climate summary with more examples
+      Best Practices:
+          - Use this before retrieving all entities in a domain to understand what's available    
+    inputSchema:
+      type: object
+      title: domain_summary_toolArguments
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          title: Domain
+        example_limit:
+          type: integer
+          title: Example Limit
+          default: 3
+  - name: system_overview
+    description: >
+      
+      Get a comprehensive overview of the entire Home Assistant system
+
+
+      Returns:
+          A dictionary containing:
+          - total_entities: Total count of all entities
+          - domains: Dictionary of domains with their entity counts and state distributions
+          - domain_samples: Representative sample entities for each domain (2-3 per domain)
+          - domain_attributes: Common attributes for each domain
+          - area_distribution: Entities grouped by area (if available)
+
+          
+      Examples:
+          Returns domain counts, sample entities, and common attributes
+      Best Practices:
+          - Use this as the first call when exploring an unfamiliar Home Assistant instance
+          - Perfect for building context about the structure of the smart home
+          - After getting an overview, use domain_summary_tool to dig deeper into specific domains
+    inputSchema:
+      type: object
+      title: system_overviewArguments
+      properties: {}
+  - name: list_automations
+    description: |+
+      
+      Get a list of all automations from Home Assistant
+
+      This function retrieves all automations configured in Home Assistant,
+      including their IDs, entity IDs, state, and display names.
+
+      Returns:
+          A list of automation dictionaries, each containing id, entity_id, 
+          state, and alias (friendly name) fields.
+          
+      Examples:
+          Returns all automation objects with state and friendly names
+
+    inputSchema:
+      type: object
+      title: list_automationsArguments
+      properties: {}
+  - name: restart_ha
+    description: |
+      
+      Restart Home Assistant
+
+      ⚠️ WARNING: Temporarily disrupts all Home Assistant operations
+
+      Returns:
+          Result of restart operation
+    inputSchema:
+      type: object
+      title: restart_haArguments
+      properties: {}
+  - name: call_service_tool
+    description: >+
+      
+      Call any Home Assistant service (low-level API access)
+
+
+      Args:
+          domain: The domain of the service (e.g., 'light', 'switch', 'automation')
+          service: The service to call (e.g., 'turn_on', 'turn_off', 'toggle')
+          data: Optional data to pass to the service (e.g., {'entity_id': 'light.living_room'})
+
+      Returns:
+          The response from Home Assistant (usually empty for successful calls)
+
+      Examples:
+          domain='light', service='turn_on', data={'entity_id': 'light.x', 'brightness': 255}
+          domain='automation', service='reload'
+          domain='fan', service='set_percentage', data={'entity_id': 'fan.x', 'percentage': 50}
+
+    inputSchema:
+      type: object
+      title: call_service_toolArguments
+      required:
+        - domain
+        - service
+      properties:
+        data:
+          anyOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+          title: Data
+          default: null
+        domain:
+          type: string
+          title: Domain
+        service:
+          type: string
+          title: Service
+  - name: get_history
+    description: >
+      
+      Get the history of an entity's state changes
+
+
+      Args:
+          entity_id: The entity ID to get history for
+          hours: Number of hours of history to retrieve (default: 24)
+
+      Returns:
+          A dictionary containing:
+          - entity_id: The entity ID requested
+          - states: List of state objects with timestamps
+          - count: Number of state changes found
+          - first_changed: Timestamp of earliest state change
+          - last_changed: Timestamp of most recent state change
+
+          
+      Examples:
+          entity_id="light.living_room" - get 24h history
+          entity_id="sensor.temperature", hours=168 - get 7 day history
+      Best Practices:
+          - Keep hours reasonable (24-72) for token efficiency
+          - Use for entities with discrete state changes rather than continuously changing sensors
+          - Consider the state distribution rather than every individual state    
+    inputSchema:
+      type: object
+      title: get_historyArguments
+      required:
+        - entity_id
+      properties:
+        hours:
+          type: integer
+          title: Hours
+          default: 24
+        entity_id:
+          type: string
+          title: Entity Id
+  - name: get_error_log
+    description: |
+      
+      Get the Home Assistant error log for troubleshooting
+
+      Returns:
+          A dictionary containing:
+          - log_text: The full error log text
+          - error_count: Number of ERROR entries found
+          - warning_count: Number of WARNING entries found
+          - integration_mentions: Map of integration names to mention counts
+          - error: Error message if retrieval failed
+          
+      Examples:
+          Returns errors, warnings count and integration mentions
+      Best Practices:
+          - Use this tool when troubleshooting specific Home Assistant errors
+          - Look for patterns in repeated errors
+          - Pay attention to timestamps to correlate errors with events
+          - Focus on integrations with many mentions in the log    
+    inputSchema:
+      type: object
+      title: get_error_logArguments
+      properties: {}

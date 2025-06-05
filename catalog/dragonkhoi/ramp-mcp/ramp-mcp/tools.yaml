@@ -1,0 +1,95 @@
+tools:
+  - name: get_credit_card_transactions
+    description: Retrieve information about your Ramp credit card transactions.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        start:
+          type: string
+        state:
+          type: string
+        card_id:
+          type: string
+          format: uuid
+        to_date:
+          type: string
+          format: date-time
+        trip_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        limit_id:
+          type: string
+          format: uuid
+        entity_id:
+          type: string
+          format: uuid
+        from_date:
+          type: string
+          format: date-time
+        page_size:
+          type: number
+        max_amount:
+          type:
+            - string
+            - number
+        min_amount:
+          type:
+            - string
+            - number
+        sync_ready:
+          type: boolean
+        location_id:
+          type: string
+          format: uuid
+        merchant_id:
+          type: string
+          format: uuid
+        statement_id:
+          type: string
+          format: uuid
+        synced_after:
+          type: string
+          format: date-time
+        department_id:
+          type: string
+          format: uuid
+        requires_memo:
+          type: boolean
+        sk_category_id:
+          type: string
+        order_by_date_asc:
+          type: boolean
+        order_by_date_desc:
+          type: boolean
+        has_no_sync_commits:
+          type: boolean
+        order_by_amount_asc:
+          type: boolean
+        order_by_amount_desc:
+          type: boolean
+        include_merchant_data:
+          type: boolean
+      additionalProperties: false
+  - name: get_ramp_statements
+    description: Retrieve Ramp statements with optional date filtering and pagination.
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        start:
+          type: string
+          description: Token for pagination
+        to_date:
+          type: string
+          description: End date in ISO format (YYYY-MM-DD)
+        from_date:
+          type: string
+          description: Start date in ISO format (YYYY-MM-DD)
+        page_size:
+          type: number
+          description: Number of results per page
+      additionalProperties: false

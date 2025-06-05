@@ -1,0 +1,16 @@
+identifier: jtucker/mcp-untappd-server/mcp-untappd-server
+repo:
+  provider: github.com
+  url: https://github.com/jtucker/mcp-untappd-server
+  name: mcp-untappd-server
+  owner: jtucker
+server:
+  subdirectory: /
+  name: Untappd Server
+  description: Query the Untappd API to find beers and get detailed information
+    about them. Easily integrate beer search capabilities into your applications
+    and enhance user experiences with beer-related data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

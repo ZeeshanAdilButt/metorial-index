@@ -1,0 +1,22 @@
+identifier: dlwjdtn535/mcp-bybit-server/mcp-bybit-server
+repo:
+  provider: github.com
+  url: https://github.com/dlwjdtn535/mcp-bybit-server
+  name: mcp-bybit-server
+  owner: dlwjdtn535
+server:
+  subdirectory: /
+  name: Bybit Server
+  description: >-
+    Interact seamlessly with the Bybit API to fetch market data, manage your
+    account, and execute trades. Leverage powerful tools to enhance your trading
+    experience and automate your strategies effortlessly.
+
+
+    If you wish to use an API key restricted to your personal IP address, you
+    must configure the MCP server using Docker. Please refer to the README.md
+    file in the GitHub repository for guidelines.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

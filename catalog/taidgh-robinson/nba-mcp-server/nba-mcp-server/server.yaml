@@ -1,0 +1,17 @@
+identifier: taidgh-robinson/nba-mcp-server/nba-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Taidgh-Robinson/nba-mcp-server
+  name: nba-mcp-server
+  owner: Taidgh-Robinson
+server:
+  subdirectory: /
+  name: NBA Stats Server
+  description: Provide up-to-date NBA game scores and player statistics to enhance
+    your LLM's knowledge of recent basketball events. Retrieve detailed game
+    summaries, player performance metrics, and advanced analytics effortlessly.
+    Keep your model informed with accurate and timely NBA data.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

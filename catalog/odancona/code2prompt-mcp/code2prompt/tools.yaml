@@ -1,0 +1,84 @@
+tools:
+  - name: get_context
+    description: >
+      
+      Retrieve context from a codebase using code2prompt with the specified
+      parameters.
+
+
+      Args:
+          path: Path to the codebase
+          include_patterns: List of glob patterns for files to include
+          exclude_patterns: List of glob patterns for files to exclude
+          include_priority: Give priority to include patterns
+          line_numbers: Add line numbers to code
+          absolute_paths: Use absolute paths instead of relative paths
+          full_directory_tree: List the full directory tree
+          code_blocks: Wrap code in markdown code blocks
+          follow_symlinks: Follow symbolic links
+          include_hidden: Include hidden directories and files
+          template: Custom Handlebars template
+          encoding: Token encoding (cl100k, gpt2, p50k_base)
+
+      Returns:
+          Dictionary with the prompt and metadata
+    inputSchema:
+      type: object
+      title: get_contextArguments
+      properties:
+        path:
+          type: string
+          title: Path
+          default: .
+        encoding:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Encoding
+          default: cl100k
+        template:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Template
+          default: null
+        code_blocks:
+          type: boolean
+          title: Code Blocks
+          default: true
+        line_numbers:
+          type: boolean
+          title: Line Numbers
+          default: true
+        absolute_paths:
+          type: boolean
+          title: Absolute Paths
+          default: false
+        include_hidden:
+          type: boolean
+          title: Include Hidden
+          default: false
+        follow_symlinks:
+          type: boolean
+          title: Follow Symlinks
+          default: false
+        exclude_patterns:
+          type: array
+          items:
+            type: string
+          title: Exclude Patterns
+          default: []
+        include_patterns:
+          type: array
+          items:
+            type: string
+          title: Include Patterns
+          default: []
+        include_priority:
+          type: boolean
+          title: Include Priority
+          default: false
+        full_directory_tree:
+          type: boolean
+          title: Full Directory Tree
+          default: false

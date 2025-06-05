@@ -1,0 +1,17 @@
+identifier: odysseus0/mcp-server-shell/mcp-server-shell
+repo:
+  provider: github.com
+  url: https://github.com/odysseus0/mcp-server-shell
+  name: mcp-server-shell
+  owner: odysseus0
+server:
+  subdirectory: /
+  name: Shell Command Execution Server
+  description: Enable your LLMs to execute shell commands and retrieve their
+    outputs securely. This server provides a controlled environment for running
+    commands, enhancing your applications with real-time system interactions.
+    Use it to automate tasks and gather system information effortlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

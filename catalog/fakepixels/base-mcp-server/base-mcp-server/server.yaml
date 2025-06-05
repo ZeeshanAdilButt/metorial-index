@@ -1,0 +1,17 @@
+identifier: fakepixels/base-mcp-server/base-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/fakepixels/base-mcp-server
+  name: base-mcp-server
+  owner: fakepixels
+server:
+  subdirectory: /
+  name: Base Network MCP Server
+  description: Enable LLMs to interact with the Base blockchain through natural
+    language commands. Manage wallets, check balances, and execute transactions
+    seamlessly. Simplify blockchain operations with intuitive commands and
+    secure handling of private keys.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,18 @@
+identifier: navisbio/aact_mcp/aact_mcp
+repo:
+  provider: github.com
+  url: https://github.com/navisbio/AACT_MCP
+  name: AACT_MCP
+  owner: navisbio
+server:
+  subdirectory: /
+  name: AACT Clinical Trials Server
+  description: Provide AI assistants with direct access to clinical trial data
+    from the ClinicalTrials.gov database. Query and analyze clinical trial
+    information using SQL queries and gain insights to support research and
+    decision-making. Easily integrate with Semantic Kernel for enhanced
+    AI-driven data exploration.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

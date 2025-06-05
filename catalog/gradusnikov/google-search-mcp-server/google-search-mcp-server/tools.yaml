@@ -1,0 +1,53 @@
+tools:
+  - name: search_google
+    description: "
+
+      \    Perform a Google search and return formatted results.
+
+      \   \ 
+
+      \    This function uses Google Custom Search API to search the web based
+      on the provided query.
+
+      \    It formats the results into a consistent structure and handles
+      potential errors.
+
+      \   \ 
+
+      \    Args:
+
+      \        query (str): The search query string
+
+      \        num_results (int, optional): Number of search results to return.
+      Defaults to 5.
+
+      \       \ 
+
+      \    Returns:
+
+      \        Dict[str, Any]: A dictionary containing:
+
+      \            - success (bool): Whether the search was successful
+
+      \            - results (list): List of dictionaries with title, link, and
+      snippet
+
+      \            - total_results (str): Total number of results found (when
+      successful)
+
+      \            - error (str): Error message (when unsuccessful)
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_googleArguments
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          title: Query
+        num_results:
+          type: integer
+          title: Num Results
+          default: 5

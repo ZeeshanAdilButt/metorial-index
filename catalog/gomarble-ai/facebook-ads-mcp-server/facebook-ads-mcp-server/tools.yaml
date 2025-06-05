@@ -1,0 +1,4437 @@
+tools:
+  - name: list_ad_accounts
+    description: List down the ad accounts and their names associated with your
+      Facebook account
+    inputSchema:
+      type: object
+      title: list_ad_accountsArguments
+      properties: {}
+  - name: get_details_of_ad_account
+    description: "Get details of a specific ad account as per the fields provided
+
+      \    Args:
+
+      \        act_id: The act ID of the ad account, example: act_1234567890
+
+      \        fields: The fields to get from the ad account. If None, defaults
+      are used.
+
+      \                Available fields include: name, business_name, age,
+      account_status,
+
+      \                balance, amount_spent, attribution_spec, account_id,
+      business,
+
+      \                business_city, brand_safety_content_filter_levels,
+      currency,
+
+      \                created_time, id.
+
+      \    Returns:   \ 
+
+      \        A dictionary containing the details of the ad account
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_details_of_ad_accountArguments
+      required:
+        - act_id
+      properties:
+        act_id:
+          type: string
+          title: Act Id
+        fields:
+          type: array
+          items:
+            type: string
+          title: Fields
+          default: null
+  - name: get_adaccount_insights
+    description: "Retrieves performance insights for a specified Facebook ad
+      account.
+
+
+      \    This tool interfaces with the Facebook Graph API's Insights edge to
+      fetch comprehensive
+
+      \    performance data, such as impressions, reach, cost, conversions, and
+      more. It supports
+
+      \    various options for filtering, time breakdowns, and attribution
+      settings. Note that
+
+      \    some metrics returned might be estimated or in development.
+
+
+      \    Args:
+
+      \        act_id (str): The target ad account ID, prefixed with 'act_',
+      e.g., 'act_1234567890'.
+
+      \        fields (Optional[List[str]]): A list of specific metrics and
+      fields to retrieve.
+
+      \            If omitted, a default set is returned by the API. Common
+      examples include:
+
+      \                - 'account_currency', 'account_id', 'account_name'
+
+      \                - 'actions', 'clicks', 'conversions'
+
+      \                - 'cpc', 'cpm', 'cpp', 'ctr'
+
+      \                - 'frequency', 'impressions', 'reach', 'spend'.
+
+      \        date_preset (str): A predefined relative time range for the
+      report.
+
+      \            Options: 'today', 'yesterday', 'this_month', 'last_month',
+      'this_quarter',
+
+      \            'maximum', 'last_3d', 'last_7d', 'last_14d', 'last_28d',
+      'last_30d',
+
+      \            'last_90d', 'last_week_mon_sun', 'last_week_sun_sat',
+      'last_quarter',
+
+      \            'last_year', 'this_week_mon_today', 'this_week_sun_today',
+      'this_year'.
+
+      \            Default: 'last_30d'. This parameter is ignored if
+      'time_range', 'time_ranges',
+
+      \            'since', or 'until' is provided.
+
+      \        time_range (Optional[Dict[str, str]]): A specific time range
+      defined by 'since' and 'until'
+
+      \            dates in 'YYYY-MM-DD' format, e.g., {'since': '2023-10-01',
+      'until': '2023-10-31'}.
+
+      \            Overrides 'date_preset'. Ignored if 'time_ranges' is
+      provided.
+
+      \        time_ranges (Optional[List[Dict[str, str]]]): An array of time
+      range objects
+
+      \            ({'since': '...', 'until': '...'}) for comparing multiple
+      periods. Overrides
+
+      \            'time_range' and 'date_preset'. Time ranges can overlap.
+
+      \        time_increment (str | int): Specifies the granularity of the time
+      breakdown.
+
+      \            - An integer from 1 to 90 indicates the number of days per
+      data point.
+
+      \            - 'monthly': Aggregates data by month.
+
+      \            - 'all_days': Provides a single summary row for the entire
+      period.
+
+      \            Default: 'all_days'.
+
+      \        level (str): The level of aggregation for the insights.
+
+      \            Options: 'account', 'campaign', 'adset', 'ad'.
+
+      \            Default: 'account'.
+
+      \        action_attribution_windows (Optional[List[str]]): Specifies the
+      attribution windows
+
+      \            to consider for actions (conversions). Examples: '1d_view',
+      '7d_view',
+
+      \            '28d_view', '1d_click', '7d_click', '28d_click', 'dda',
+      'default'.
+
+      \            The API default may vary; ['7d_click', '1d_view'] is common.
+
+      \        action_breakdowns (Optional[List[str]]): Segments the 'actions'
+      results based on
+
+      \            specific dimensions. Examples: 'action_device',
+      'action_type',
+
+      \            'conversion_destination', 'action_destination'. Default:
+      ['action_type'].
+
+      \        action_report_time (Optional[str]): Determines when actions are
+      counted.
+
+      \            - 'impression': Actions are attributed to the time of the ad
+      impression.
+
+      \            - 'conversion': Actions are attributed to the time the
+      conversion occurred.
+
+      \            - 'mixed': Uses 'impression' time for paid metrics,
+      'conversion' time for organic.
+
+      \            Default: 'mixed'.
+
+      \        breakdowns (Optional[List[str]]): Segments the results by
+      dimensions like demographics
+
+      \            or placement. Examples: 'age', 'gender', 'country', 'region',
+      'dma',
+
+      \            'impression_device', 'publisher_platform',
+      'platform_position', 'device_platform'.
+
+      \            Note: Not all breakdowns can be combined.
+
+      \        default_summary (bool): If True, includes an additional summary
+      row in the response.
+
+      \            Default: False.
+
+      \        use_account_attribution_setting (bool): If True, forces the
+      report to use the
+
+      \            attribution settings defined at the ad account level.
+      Default: False.
+
+      \        use_unified_attribution_setting (bool): If True, uses the unified
+      attribution
+
+      \            settings defined at the ad set level. This is generally
+      recommended for
+
+      \            consistency with Ads Manager reporting. Default: True.
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \            Each object should have 'field', 'operator', and 'value'
+      keys.
+
+      \            Example: [{'field': 'spend', 'operator': 'GREATER_THAN',
+      'value': 50}].
+
+      \        sort (Optional[str]): Specifies the field and direction for
+      sorting the results.
+
+      \            Format: '{field_name}_ascending' or
+      '{field_name}_descending'.
+
+      \            Example: 'impressions_descending'.
+
+      \        limit (Optional[int]): The maximum number of results to return in
+      one API response page.
+
+      \        after (Optional[str]): A pagination cursor pointing to the next
+      page of results.
+
+      \            Obtained from the 'paging.cursors.after' field of a previous
+      response.
+
+      \        before (Optional[str]): A pagination cursor pointing to the
+      previous page of results.
+
+      \            Obtained from the 'paging.cursors.before' field of a previous
+      response.
+
+      \        offset (Optional[int]): An alternative pagination method; skips
+      the specified
+
+      \            number of results. Use cursor-based pagination
+      ('after'/'before') when possible.
+
+      \        since (Optional[str]): For time-based pagination (used if
+      'time_range' and 'time_ranges'
+
+      \            are not set), the start timestamp (Unix or strtotime value).
+
+      \        until (Optional[str]): For time-based pagination (used if
+      'time_range' and 'time_ranges'
+
+      \            are not set), the end timestamp (Unix or strtotime value).
+
+      \        locale (Optional[str]): The locale for text responses (e.g.,
+      'en_US'). This controls\ 
+
+      \            language and formatting of text fields in the response.
+
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad account insights.
+      The main results
+
+      \              are in the 'data' list, and pagination info is in the
+      'paging' object.
+
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic ad account performance for the last 30 days
+
+      \        insights = get_adaccount_insights(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"impressions\", \"clicks\", \"spend\", \"ctr\"],
+
+      \            limit=25
+
+      \        )
+
+
+      \        # Fetch the next page if available using the pagination tool
+
+      \        next_page_url = insights.get(\"paging\", {}).get(\"next\")
+
+      \        if next_page_url:
+
+      \            next_page_results = fetch_pagination_url(url=next_page_url)
+
+      \            print(\"Fetched next page results.\")
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_adaccount_insightsArguments
+      required:
+        - act_id
+      properties:
+        sort:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort
+          default: null
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        level:
+          type: string
+          title: Level
+          default: account
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        act_id:
+          type: string
+          title: Act Id
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        locale:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Locale
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Breakdowns
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        date_preset:
+          type: string
+          title: Date Preset
+          default: last_30d
+        time_ranges:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties:
+                  type: string
+            - type: "null"
+          title: Time Ranges
+          default: null
+        time_increment:
+          type: string
+          title: Time Increment
+          default: all_days
+        default_summary:
+          type: boolean
+          title: Default Summary
+          default: false
+        action_breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Breakdowns
+          default: null
+        action_report_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Action Report Time
+          default: null
+        action_attribution_windows:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Attribution Windows
+          default: null
+        use_account_attribution_setting:
+          type: boolean
+          title: Use Account Attribution Setting
+          default: false
+        use_unified_attribution_setting:
+          type: boolean
+          title: Use Unified Attribution Setting
+          default: true
+  - name: get_campaign_insights
+    description: "Retrieves performance insights for a specific Facebook ad
+      campaign.
+
+
+      \    Fetches statistics for a given campaign ID, allowing analysis of
+      metrics like
+
+      \    impressions, clicks, conversions, spend, etc. Supports time range
+      definitions,
+
+      \    breakdowns, and attribution settings.
+
+
+      \    Args:
+
+      \        campaign_id (str): The ID of the target Facebook ad campaign,
+      e.g., '23843xxxxx'.
+
+      \        fields (Optional[List[str]]): A list of specific metrics and
+      fields to retrieve.
+
+      \            Common examples: 'campaign_name', 'account_id',
+      'impressions', 'clicks',
+
+      \            'spend', 'ctr', 'reach', 'actions', 'objective',
+      'cost_per_action_type',
+
+      \            'conversions', 'cpc', 'cpm', 'cpp', 'frequency',
+      'date_start', 'date_stop'.
+
+      \        date_preset (str): A predefined relative time range for the
+      report.
+
+      \            Options: 'today', 'yesterday', 'this_month', 'last_month',
+      'this_quarter',
+
+      \            'maximum', 'last_3d', 'last_7d', 'last_14d', 'last_28d',
+      'last_30d',
+
+      \            'last_90d', 'last_week_mon_sun', 'last_week_sun_sat',
+      'last_quarter',
+
+      \            'last_year', 'this_week_mon_today', 'this_week_sun_today',
+      'this_year'.
+
+      \            Default: 'last_30d'. Ignored if 'time_range', 'time_ranges',
+      'since', or 'until' is used.
+
+      \        time_range (Optional[Dict[str, str]]): A specific time range
+      {'since':'YYYY-MM-DD','until':'YYYY-MM-DD'}.
+
+      \            Overrides 'date_preset'. Ignored if 'time_ranges' is
+      provided.
+
+      \        time_ranges (Optional[List[Dict[str, str]]]): An array of time
+      range objects for comparison.
+
+      \            Overrides 'time_range' and 'date_preset'.
+
+      \        time_increment (str | int): Specifies the granularity of the time
+      breakdown.
+
+      \            - Integer (1-90): number of days per data point.
+
+      \            - 'monthly': Aggregates data by month.
+
+      \            - 'all_days': Single summary row for the period.
+
+      \            Default: 'all_days'.
+
+      \        action_attribution_windows (Optional[List[str]]): Specifies
+      attribution windows for actions.
+
+      \            Examples: '1d_view', '7d_click', '28d_click', etc. Default
+      depends on API/settings.
+
+      \        action_breakdowns (Optional[List[str]]): Segments 'actions'
+      results. Examples: 'action_device', 'action_type'.
+
+      \            Default: ['action_type'].
+
+      \        action_report_time (Optional[str]): Determines when actions are
+      counted ('impression', 'conversion', 'mixed').
+
+      \            Default: 'mixed'.
+
+      \        breakdowns (Optional[List[str]]): Segments results by dimensions.
+      Examples: 'age', 'gender', 'country',
+
+      \            'publisher_platform', 'impression_device'.
+
+      \        default_summary (bool): If True, includes an additional summary
+      row. Default: False.
+
+      \        use_account_attribution_setting (bool): If True, uses the ad
+      account's attribution settings. Default: False.
+
+      \        use_unified_attribution_setting (bool): If True, uses unified
+      attribution settings. Default: True.
+
+      \        level (Optional[str]): Level of aggregation ('campaign', 'adset',
+      'ad'). Default: 'campaign'.
+
+      \        filtering (Optional[List[dict]]): List of filter objects
+      {'field': '...', 'operator': '...', 'value': '...'}.
+
+      \        sort (Optional[str]): Field and direction for sorting
+      ('{field}_ascending'/'_descending').
+
+      \        limit (Optional[int]): Maximum number of results per page.
+
+      \        after (Optional[str]): Pagination cursor for the next page.
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+
+      \        offset (Optional[int]): Alternative pagination: skips N results.
+
+      \        since (Optional[str]): Start timestamp for time-based pagination
+      (if time ranges absent).
+
+      \        until (Optional[str]): End timestamp for time-based pagination
+      (if time ranges absent).
+
+      \        locale (Optional[str]): The locale for text responses (e.g.,
+      'en_US'). This controls\ 
+
+      \            language and formatting of text fields in the response.
+
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested campaign insights,
+      with 'data' and 'paging' keys.
+
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic campaign performance for the last 7 days
+
+      \        insights = get_campaign_insights(
+
+      \            campaign_id=\"23843xxxxx\",
+
+      \            fields=[\"campaign_name\", \"impressions\", \"clicks\",
+      \"spend\"],
+
+      \            date_preset=\"last_7d\",
+
+      \            limit=50
+
+      \        )
+
+
+      \        # Fetch the next page if available
+
+      \        next_page_url = insights.get(\"paging\", {}).get(\"next\")
+
+      \        if next_page_url:
+
+      \            next_page_results = fetch_pagination_url(url=next_page_url)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_campaign_insightsArguments
+      required:
+        - campaign_id
+      properties:
+        sort:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort
+          default: null
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        level:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Level
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        locale:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Locale
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Breakdowns
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        campaign_id:
+          type: string
+          title: Campaign Id
+        date_preset:
+          type: string
+          title: Date Preset
+          default: last_30d
+        time_ranges:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties:
+                  type: string
+            - type: "null"
+          title: Time Ranges
+          default: null
+        time_increment:
+          type: string
+          title: Time Increment
+          default: all_days
+        default_summary:
+          type: boolean
+          title: Default Summary
+          default: false
+        action_breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Breakdowns
+          default: null
+        action_report_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Action Report Time
+          default: null
+        action_attribution_windows:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Attribution Windows
+          default: null
+        use_account_attribution_setting:
+          type: boolean
+          title: Use Account Attribution Setting
+          default: false
+        use_unified_attribution_setting:
+          type: boolean
+          title: Use Unified Attribution Setting
+          default: true
+  - name: get_adset_insights
+    description: "Retrieves performance insights for a specific Facebook ad set.
+
+
+      \    Provides advertising performance statistics for an ad set, allowing
+      for analysis
+
+      \    of metrics across its child ads. Supports time range definitions,
+      breakdowns,
+
+      \    filtering, sorting, and attribution settings. Some metrics may be
+      estimated
+
+      \    or in development.
+
+      \   \ 
+
+      \    Args:
+
+      \        adset_id (str): The ID of the target ad set, e.g.,
+      '6123456789012'.
+
+      \        fields (Optional[List[str]]): A list of specific metrics and
+      fields. Common examples:
+
+      \            'adset_name', 'campaign_name', 'account_id', 'impressions',
+      'clicks', 'spend',
+
+      \            'ctr', 'reach', 'frequency', 'actions', 'conversions', 'cpc',
+      'cpm', 'cpp',
+
+      \            'cost_per_action_type', 'video_p25_watched_actions',
+      'website_purchases'.
+
+      \        date_preset (str): A predefined relative time range ('last_30d',
+      'last_7d', etc.).
+
+      \            Default: 'last_30d'. Ignored if 'time_range', 'time_ranges',
+      'since', or 'until' is used.
+
+      \        time_range (Optional[Dict[str, str]]): Specific time range
+      {'since':'YYYY-MM-DD','until':'YYYY-MM-DD'}.
+
+      \            Overrides 'date_preset'. Ignored if 'time_ranges' is
+      provided.
+
+      \        time_ranges (Optional[List[Dict[str, str]]]): Array of time range
+      objects for comparison.
+
+      \            Overrides 'time_range' and 'date_preset'.
+
+      \        time_increment (str | int): Granularity of the time breakdown
+      ('all_days', 'monthly', 1-90 days).
+
+      \            Default: 'all_days'.
+
+      \        action_attribution_windows (Optional[List[str]]): Specifies
+      attribution windows for actions.
+
+      \            Examples: '1d_view', '7d_click'. Default depends on
+      API/settings.
+
+      \        action_breakdowns (Optional[List[str]]): Segments 'actions'
+      results. Examples: 'action_device', 'action_type'.
+
+      \            Default: ['action_type'].
+
+      \        action_report_time (Optional[str]): Time basis for action stats
+      ('impression', 'conversion', 'mixed').
+
+      \            Default: 'mixed'.
+
+      \        breakdowns (Optional[List[str]]): Segments results by dimensions.
+      Examples: 'age', 'gender', 'country',
+
+      \            'publisher_platform', 'impression_device',
+      'platform_position'.
+
+      \        default_summary (bool): If True, includes an additional summary
+      row. Default: False.
+
+      \        use_account_attribution_setting (bool): If True, uses the ad
+      account's attribution settings. Default: False.
+
+      \        use_unified_attribution_setting (bool): If True, uses unified
+      attribution settings. Default: True.
+
+      \        level (Optional[str]): Level of aggregation ('adset', 'ad').
+      Default: 'adset'.
+
+      \        filtering (Optional[List[dict]]): List of filter objects
+      {'field': '...', 'operator': '...', 'value': '...'}.
+
+      \        sort (Optional[str]): Field and direction for sorting
+      ('{field}_ascending'/'_descending').
+
+      \        limit (Optional[int]): Maximum number of results per page.
+
+      \        after (Optional[str]): Pagination cursor for the next page.
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+
+      \        offset (Optional[int]): Alternative pagination: skips N results.
+
+      \        since (Optional[str]): Start timestamp for time-based pagination
+      (if time ranges absent).
+
+      \        until (Optional[str]): End timestamp for time-based pagination
+      (if time ranges absent).
+
+      \        locale (Optional[str]): The locale for text responses (e.g.,
+      'en_US'). This controls\ 
+
+      \            language and formatting of text fields in the response.
+
+      \   \ 
+
+      \    Returns:   \ 
+
+      \        Dict: A dictionary containing the requested ad set insights, with
+      'data' and 'paging' keys.
+
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get ad set performance with breakdown by device for last 14
+      days
+
+      \        insights = get_adset_insights(
+
+      \            adset_id=\"6123456789012\",
+
+      \            fields=[\"adset_name\", \"impressions\", \"spend\"],
+
+      \            breakdowns=[\"impression_device\"],
+
+      \            date_preset=\"last_14d\"
+
+      \        )
+
+
+      \        # Fetch the next page if available
+
+      \        next_page_url = insights.get(\"paging\", {}).get(\"next\")
+
+      \        if next_page_url:
+
+      \            next_page_results = fetch_pagination_url(url=next_page_url)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_adset_insightsArguments
+      required:
+        - adset_id
+      properties:
+        sort:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort
+          default: null
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        level:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Level
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        locale:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Locale
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        adset_id:
+          type: string
+          title: Adset Id
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Breakdowns
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        date_preset:
+          type: string
+          title: Date Preset
+          default: last_30d
+        time_ranges:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties:
+                  type: string
+            - type: "null"
+          title: Time Ranges
+          default: null
+        time_increment:
+          type: string
+          title: Time Increment
+          default: all_days
+        default_summary:
+          type: boolean
+          title: Default Summary
+          default: false
+        action_breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Breakdowns
+          default: null
+        action_report_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Action Report Time
+          default: null
+        action_attribution_windows:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Attribution Windows
+          default: null
+        use_account_attribution_setting:
+          type: boolean
+          title: Use Account Attribution Setting
+          default: false
+        use_unified_attribution_setting:
+          type: boolean
+          title: Use Unified Attribution Setting
+          default: true
+  - name: get_ad_insights
+    description: "Retrieves detailed performance insights for a specific Facebook
+      ad.
+
+
+      \    Fetches performance metrics for an individual ad (ad group), such as
+      impressions,
+
+      \    clicks, conversions, engagement, video views, etc. Allows for
+      customization via
+
+      \    time periods, breakdowns, filtering, sorting, and attribution
+      settings. Note that
+
+      \    some metrics may be estimated or in development.
+
+      \   \ 
+
+      \    Args:
+
+      \        ad_id (str): The ID of the target ad (ad group), e.g.,
+      '6123456789012'.
+
+      \        fields (Optional[List[str]]): A list of specific metrics and
+      fields. Common examples:
+
+      \            'ad_name', 'adset_name', 'campaign_name', 'account_id',
+      'impressions', 'clicks',
+
+      \            'spend', 'ctr', 'cpc', 'cpm', 'cpp', 'reach', 'frequency',
+      'actions', 'conversions',
+
+      \            'cost_per_action_type', 'inline_link_clicks',
+      'inline_post_engagement', 'unique_clicks',
+
+      \            'video_p25_watched_actions', 'video_p50_watched_actions',
+      'video_p75_watched_actions',
+
+      \            'video_p95_watched_actions', 'video_p100_watched_actions',
+      'video_avg_time_watched_actions',
+
+      \            'website_ctr', 'website_purchases'.
+
+      \        date_preset (str): A predefined relative time range ('last_30d',
+      'last_7d', etc.).
+
+      \            Default: 'last_30d'. Ignored if 'time_range', 'time_ranges',
+      'since', or 'until' is used.
+
+      \        time_range (Optional[Dict[str, str]]): Specific time range
+      {'since':'YYYY-MM-DD','until':'YYYY-MM-DD'}.
+
+      \            Overrides 'date_preset'. Ignored if 'time_ranges' is
+      provided.
+
+      \        time_ranges (Optional[List[Dict[str, str]]]): Array of time range
+      objects for comparison.
+
+      \            Overrides 'time_range' and 'date_preset'.
+
+      \        time_increment (str | int): Granularity of the time breakdown
+      ('all_days', 'monthly', 1-90 days).
+
+      \            Default: 'all_days'.
+
+      \        action_attribution_windows (Optional[List[str]]): Specifies
+      attribution windows for actions.
+
+      \            Examples: '1d_view', '7d_click'. Default depends on
+      API/settings.
+
+      \        action_breakdowns (Optional[List[str]]): Segments 'actions'
+      results. Examples: 'action_device', 'action_type'.
+
+      \            Default: ['action_type'].
+
+      \        action_report_time (Optional[str]): Time basis for action stats
+      ('impression', 'conversion', 'mixed').
+
+      \            Default: 'mixed'.
+
+      \        breakdowns (Optional[List[str]]): Segments results by dimensions.
+      Examples: 'age', 'gender', 'country',
+
+      \            'publisher_platform', 'impression_device',
+      'platform_position', 'device_platform'.
+
+      \        default_summary (bool): If True, includes an additional summary
+      row. Default: False.
+
+      \        use_account_attribution_setting (bool): If True, uses the ad
+      account's attribution settings. Default: False.
+
+      \        use_unified_attribution_setting (bool): If True, uses unified
+      attribution settings. Default: True.
+
+      \        level (Optional[str]): Level of aggregation. Should typically be
+      'ad'. Default: 'ad'.
+
+      \        filtering (Optional[List[dict]]): List of filter objects
+      {'field': '...', 'operator': '...', 'value': '...'}.
+
+      \        sort (Optional[str]): Field and direction for sorting
+      ('{field}_ascending'/'_descending').
+
+      \        limit (Optional[int]): Maximum number of results per page.
+
+      \        after (Optional[str]): Pagination cursor for the next page.
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+
+      \        offset (Optional[int]): Alternative pagination: skips N results.
+
+      \        since (Optional[str]): Start timestamp for time-based pagination
+      (if time ranges absent).
+
+      \        until (Optional[str]): End timestamp for time-based pagination
+      (if time ranges absent).
+
+      \        locale (Optional[str]): The locale for text responses (e.g.,
+      'en_US'). This controls\ 
+
+      \            language and formatting of text fields in the response.
+
+      \   \ 
+
+      \    Returns:   \ 
+
+      \        Dict: A dictionary containing the requested ad insights, with
+      'data' and 'paging' keys.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic ad performance for the last 30 days
+
+      \        ad_insights = get_ad_insights(
+
+      \            ad_id=\"6123456789012\",\ 
+
+      \            fields=[\"ad_name\", \"impressions\", \"clicks\", \"spend\",
+      \"ctr\", \"reach\"],
+
+      \            limit=10
+
+      \        )
+
+      \       \ 
+
+      \        # Get ad performance with platform breakdown for last 14 days
+
+      \        platform_insights = get_ad_insights(
+
+      \            ad_id=\"6123456789012\",
+
+      \            fields=[\"ad_name\", \"impressions\", \"clicks\", \"spend\"],
+
+      \            breakdowns=[\"publisher_platform\", \"platform_position\"],
+
+      \            date_preset=\"last_14d\"
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page of basic performance if available
+
+      \        next_page_url = ad_insights.get(\"paging\", {}).get(\"next\")
+
+      \        if next_page_url:
+
+      \            next_page = fetch_pagination_url(url=next_page_url)
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ad_insightsArguments
+      required:
+        - ad_id
+      properties:
+        sort:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sort
+          default: null
+        ad_id:
+          type: string
+          title: Ad Id
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        level:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Level
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        locale:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Locale
+          default: null
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Breakdowns
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        date_preset:
+          type: string
+          title: Date Preset
+          default: last_30d
+        time_ranges:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties:
+                  type: string
+            - type: "null"
+          title: Time Ranges
+          default: null
+        time_increment:
+          type: string
+          title: Time Increment
+          default: all_days
+        default_summary:
+          type: boolean
+          title: Default Summary
+          default: false
+        action_breakdowns:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Breakdowns
+          default: null
+        action_report_time:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Action Report Time
+          default: null
+        action_attribution_windows:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Action Attribution Windows
+          default: null
+        use_account_attribution_setting:
+          type: boolean
+          title: Use Account Attribution Setting
+          default: false
+        use_unified_attribution_setting:
+          type: boolean
+          title: Use Unified Attribution Setting
+          default: true
+  - name: fetch_pagination_url
+    description: "Fetch data from a Facebook Graph API pagination URL
+
+      \   \ 
+
+      \    Use this to get the next/previous page of results from an insights
+      API call.
+
+      \   \ 
+
+      \    Args:
+
+      \        url: The complete pagination URL (e.g., from
+      response['paging']['next'] or response['paging']['previous']).
+
+      \             It includes the necessary token and parameters.
+
+      \            \ 
+
+      \    Returns:
+
+      \        The dictionary containing the next/previous page of results.
+
+      \       \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Assuming 'initial_results' is the dict from a previous insights
+      call
+
+      \        if \"paging\" in initial_results and \"next\" in
+      initial_results[\"paging\"]:
+
+      \            next_page_data =
+      fetch_pagination_url(url=initial_results[\"paging\"][\"next\"])
+
+
+      \        if \"paging\" in initial_results and \"previous\" in
+      initial_results[\"paging\"]:
+
+      \            prev_page_data =
+      fetch_pagination_url(url=initial_results[\"paging\"][\"previous\"])
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: fetch_pagination_urlArguments
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          title: Url
+  - name: get_ad_creative_by_id
+    description: "Retrieves detailed information about a specific Facebook ad
+      creative.
+
+
+      \    This tool interfaces with the Facebook Graph API to fetch
+      comprehensive details
+
+      \    about an ad creative, such as its name, status, specifications,
+      engagement metrics,
+
+      \    and associated objects (like images, videos, and pages).
+
+
+      \    Args:
+
+      \        creative_id (str): The ID of the ad creative to retrieve.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve. If None,\ 
+
+      \            returns the default set of fields. Available fields include
+      (but are not limited to):
+
+      \            - 'account_id': Ad account ID the creative belongs to
+
+      \            - 'actor_id': ID of the Facebook actor (page/app/person)
+      associated with this creative
+
+      \            - 'adlabels': Ad labels associated with this creative
+
+      \            - 'applink_treatment': App link treatment type
+
+      \            - 'asset_feed_spec': Specifications for dynamic ad creatives
+
+      \            - 'authorization_category': For political ads, shows
+      authorization category
+
+      \            - 'body': Ad body text content
+
+      \            - 'branded_content_sponsor_page_id': ID of the sponsor page
+      for branded content
+
+      \            - 'call_to_action_type': Type of call to action button
+
+      \            - 'effective_authorization_category': Effective authorization
+      category for the ad
+
+      \            - 'effective_instagram_media_id': Instagram media ID used in
+      the ad
+
+      \            - 'effective_instagram_story_id': Instagram story ID used in
+      the ad
+
+      \            - 'effective_object_story_id': Object story ID used for the
+      ad
+
+      \            - 'id': Creative ID
+
+      \            - 'image_hash': Hash of the image used in the creative
+
+      \            - 'image_url': URL of the image used
+
+      \            - 'instagram_actor_id': Instagram actor ID associated with
+      creative (deprecated)
+
+      \            - 'instagram_permalink_url': Instagram permalink URL
+
+      \            - 'instagram_story_id': Instagram story ID
+
+      \            - 'instagram_user_id': Instagram user ID associated with
+      creative
+
+      \            - 'link_og_id': Open Graph ID for the link
+
+      \            - 'link_url': URL being advertised
+
+      \            - 'name': Name of the creative in the ad account library
+
+      \            - 'object_id': ID of the Facebook object being advertised
+
+      \            - 'object_story_id': ID of the page post used in the ad
+
+      \            - 'object_story_spec': Specification for the page post to
+      create for the ad
+
+      \            - 'object_type': Type of the object being advertised
+
+      \            - 'object_url': URL of the object being advertised
+
+      \            - 'platform_customizations': Custom specifications for
+      different platforms
+
+      \            - 'product_set_id': ID of the product set for product ads
+
+      \            - 'status': Status of this creative (ACTIVE, IN_PROCESS,
+      WITH_ISSUES, DELETED)
+
+      \            - 'template_url': URL of the template used
+
+      \            - 'thumbnail_url': URL of the creative thumbnail
+
+      \            - 'title': Ad headline/title text
+
+      \            - 'url_tags': URL tags appended to landing pages for tracking
+
+      \            - 'use_page_actor_override': Use the page actor instead of ad
+      account actor
+
+      \            - 'video_id': ID of the video used in the ad
+
+      \       \ 
+
+      \        thumbnail_width (Optional[int]): Width of the thumbnail in
+      pixels. Default: 64.
+
+      \        thumbnail_height (Optional[int]): Height of the thumbnail in
+      pixels. Default: 64.
+
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad creative details.
+
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic information about an ad creative
+
+      \        creative = get_ad_creative_details(
+
+      \            creative_id=\"23842312323312\",
+
+      \            fields=[\"name\", \"status\", \"object_story_id\",
+      \"thumbnail_url\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get a larger thumbnail with specific dimensions
+
+      \        creative_with_thumbnail = get_ad_creative_details(
+
+      \            creative_id=\"23842312323312\",\ 
+
+      \            fields=[\"name\", \"thumbnail_url\"],
+
+      \            thumbnail_width=300,
+
+      \            thumbnail_height=200
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ad_creative_by_idArguments
+      required:
+        - creative_id
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        creative_id:
+          type: string
+          title: Creative Id
+        thumbnail_width:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Thumbnail Width
+          default: null
+        thumbnail_height:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Thumbnail Height
+          default: null
+  - name: get_ad_creatives_by_ad_id
+    description: "Retrieves the ad creatives associated with a specific Facebook ad.
+
+      \   \ 
+
+      \    This function accesses the Facebook Graph API to retrieve the
+      creative objects
+
+      \    used by a specific ad, including details about the creative content,
+      media,\ 
+
+      \    and specifications.
+
+      \   \ 
+
+      \    Args:
+
+      \        ad_id (str): The ID of the ad to retrieve creatives for.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each creative.
+
+      \            If None, a default set of fields will be returned. Available
+      fields include:
+
+      \            - 'id': The creative's ID
+
+      \            - 'name': The creative's name
+
+      \            - 'account_id': The ID of the ad account this creative
+      belongs to
+
+      \            - 'actor_id': ID of the Facebook actor associated with
+      creative
+
+      \            - 'adlabels': Ad labels applied to the creative
+
+      \            - 'applink_treatment': App link treatment type
+
+      \            - 'asset_feed_spec': Specifications for dynamic ad creatives
+
+      \            - 'authorization_category': Political ad authorization
+      category
+
+      \            - 'body': Ad body text content
+
+      \            - 'branded_content_sponsor_page_id': ID of sponsoring page
+      for branded content
+
+      \            - 'call_to_action_type': Type of call to action button
+
+      \            - 'effective_authorization_category': Effective authorization
+      category
+
+      \            - 'effective_instagram_media_id': Instagram media ID used
+
+      \            - 'effective_instagram_story_id': Instagram story ID used
+
+      \            - 'effective_object_story_id': Object story ID used
+
+      \            - 'image_hash': Hash of the image used in the creative
+
+      \            - 'image_url': URL of the image used
+
+      \            - 'instagram_actor_id': Instagram actor ID (deprecated)
+
+      \            - 'instagram_permalink_url': Instagram permalink URL
+
+      \            - 'instagram_story_id': Instagram story ID
+
+      \            - 'instagram_user_id': Instagram user ID associated with
+      creative
+
+      \            - 'link_og_id': Open Graph ID for the link
+
+      \            - 'link_url': URL being advertised
+
+      \            - 'object_id': ID of the Facebook object being advertised
+
+      \            - 'object_story_id': ID of the page post used in the ad
+
+      \            - 'object_story_spec': Specification for the page post\ 
+
+      \            - 'object_type': Type of the object being advertised ('PAGE',
+      'DOMAIN', etc.)
+
+      \            - 'object_url': URL of the object being advertised
+
+      \            - 'platform_customizations': Custom specifications for
+      different platforms
+
+      \            - 'product_set_id': ID of the product set for product ads
+
+      \            - 'status': Status of this creative ('ACTIVE', 'IN_PROCESS',
+      etc.)
+
+      \            - 'template_url': URL of the template used
+
+      \            - 'thumbnail_url': URL of the creative thumbnail
+
+      \            - 'title': Ad headline/title text
+
+      \            - 'url_tags': URL tags appended to landing pages for tracking
+
+      \            - 'use_page_actor_override': Whether to use the page actor
+      instead of account actor
+
+      \            - 'video_id': ID of the video used in the ad
+
+      \        limit (Optional[int]): Maximum number of creatives to return per
+      page. Default is 25.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \            - 'U': Unix timestamp (seconds since epoch)
+
+      \            - 'Y-m-d H:i:s': MySQL datetime format
+
+      \            - None: ISO 8601 format (default)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad creatives. The
+      main results are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic creative information for an ad
+
+      \        creatives = get_ad_creatives(
+
+      \            ad_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"image_url\", \"body\", \"title\",
+      \"status\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get detailed creative specifications with pagination
+
+      \        detailed_creatives = get_ad_creatives(
+
+      \            ad_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"object_story_spec\", \"image_url\",
+      \"call_to_action_type\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = creatives.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_ad_creatives(
+
+      \                ad_id=\"23843211234567\",
+
+      \                fields=[\"name\", \"image_url\", \"body\", \"title\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ad_creatives_by_ad_idArguments
+      required:
+        - ad_id
+      properties:
+        ad_id:
+          type: string
+          title: Ad Id
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+  - name: get_ad_by_id
+    description: "Retrieves detailed information about a specific Facebook ad by its
+      ID.
+
+      \   \ 
+
+      \    This function accesses the Facebook Graph API to retrieve information
+      about a
+
+      \    single ad object, including details about its status, targeting,
+      creative, budget,
+
+      \    and performance metrics.
+
+      \   \ 
+
+      \    Args:
+
+      \        ad_id (str): The ID of the ad to retrieve information for.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve. If None,
+
+      \            a default set of fields will be returned. Available fields
+      include:
+
+      \            - 'id': The ad's ID
+
+      \            - 'name': The ad's name
+
+      \            - 'account_id': The ID of the ad account this ad belongs to
+
+      \            - 'adset_id': The ID of the ad set this ad belongs to
+
+      \            - 'campaign_id': The ID of the campaign this ad belongs to
+
+      \            - 'adlabels': Labels applied to the ad
+
+      \            - 'bid_amount': The bid amount for this ad
+
+      \            - 'bid_type': The bid type of this ad
+
+      \            - 'bid_info': The bid info for this ad
+
+      \            - 'configured_status': The configured status of this ad
+
+      \            - 'conversion_domain': The conversion domain for this ad
+
+      \            - 'created_time': When the ad was created
+
+      \            - 'creative': The ad creative
+
+      \            - 'effective_status': The effective status of this ad
+
+      \            - 'issues_info': Information about issues with this ad
+
+      \            - 'recommendations': Recommendations for improving this ad
+
+      \            - 'status': The status of this ad
+
+      \            - 'tracking_specs': The tracking specs for this ad
+
+      \            - 'updated_time': When this ad was last updated
+
+      \            - 'preview_shareable_link': Link for previewing this ad
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad information.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic ad information
+
+      \        ad = get_ad_by_id(
+
+      \            ad_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"adset_id\", \"campaign_id\",
+      \"effective_status\", \"creative\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ad_by_idArguments
+      required:
+        - ad_id
+      properties:
+        ad_id:
+          type: string
+          title: Ad Id
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+  - name: get_ads_by_adaccount
+    description: "Retrieves ads from a specific Facebook ad account.
+
+      \   \ 
+
+      \    This function allows querying all ads belonging to a specific ad
+      account with
+
+      \    various filtering options, pagination, and field selection.
+
+      \   \ 
+
+      \    Args:
+
+      \        act_id (str): The ID of the ad account to retrieve ads from,
+      prefixed with 'act_',\ 
+
+      \                      e.g., 'act_1234567890'.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each ad.\ 
+
+      \                                      If None, a default set of fields
+      will be returned.
+
+      \                                      Common fields include:
+
+      \            - 'id': The ad's ID
+
+      \            - 'name': The ad's name
+
+      \            - 'adset_id': The ID of the ad set this ad belongs to
+
+      \            - 'campaign_id': The ID of the campaign this ad belongs to
+
+      \            - 'creative': The ad creative details
+
+      \            - 'status': The current status of the ad
+
+      \            - 'effective_status': The effective status including review
+      status
+
+      \            - 'bid_amount': The bid amount for this ad
+
+      \            - 'configured_status': The configured status
+
+      \            - 'created_time': When the ad was created
+
+      \            - 'updated_time': When the ad was last updated
+
+      \            - 'targeting': Targeting criteria
+
+      \            - 'conversion_specs': Conversion specs
+
+      \            - 'recommendations': Recommendations for improving the ad
+
+      \            - 'preview_shareable_link': Link for previewing the ad
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \                                         Each object should have 'field',
+      'operator', and 'value' keys.
+
+      \        limit (Optional[int]): Maximum number of ads to return per page.
+      Default is 25.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        date_preset (Optional[str]): A predefined relative date range for
+      selecting ads.
+
+      \                                    Options include 'today', 'yesterday',
+      'this_week', etc.
+
+      \        time_range (Optional[Dict[str, str]]): A custom time range with
+      'since' and 'until'\ 
+
+      \                                              dates in 'YYYY-MM-DD'
+      format.
+
+      \        updated_since (Optional[int]): Return ads that have been updated
+      since this Unix timestamp.
+
+      \        effective_status (Optional[List[str]]): Filter ads by their
+      effective status.\ 
+
+      \                                               Options include: 'ACTIVE',
+      'PAUSED', 'DELETED',\ 
+
+      \                                               'PENDING_REVIEW',
+      'DISAPPROVED', 'PREAPPROVED',\ 
+
+      \                                               'PENDING_BILLING_INFO',
+      'CAMPAIGN_PAUSED', 'ARCHIVED',\ 
+
+      \                                               'ADSET_PAUSED',
+      'IN_PROCESS', 'WITH_ISSUES'.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ads. The main results
+      are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get active ads from an ad account
+
+      \        ads = get_ads_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"name\", \"adset_id\", \"campaign_id\",
+      \"effective_status\", \"created_time\"],
+
+      \            effective_status=[\"ACTIVE\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = ads.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_ads_by_adaccount(
+
+      \                act_id=\"act_123456789\",
+
+      \                fields=[\"name\", \"adset_id\", \"campaign_id\",
+      \"effective_status\", \"created_time\"],
+
+      \                effective_status=[\"ACTIVE\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ads_by_adaccountArguments
+      required:
+        - act_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        act_id:
+          type: string
+          title: Act Id
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        date_preset:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Preset
+          default: null
+        updated_since:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Updated Since
+          default: null
+        effective_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Effective Status
+          default: null
+  - name: get_ads_by_campaign
+    description: "Retrieves ads associated with a specific Facebook campaign.
+
+      \   \ 
+
+      \    This function allows querying all ads belonging to a specific
+      campaign,
+
+      \    with filtering options, pagination, and field selection.
+
+      \   \ 
+
+      \    Args:
+
+      \        campaign_id (str): The ID of the campaign to retrieve ads from.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each ad.
+
+      \                                      If None, a default set of fields
+      will be returned.
+
+      \                                      Common fields include:
+
+      \            - 'id': The ad's ID
+
+      \            - 'name': The ad's name
+
+      \            - 'adset_id': The ID of the ad set this ad belongs to
+
+      \            - 'creative': The ad creative details
+
+      \            - 'status': The current status of the ad
+
+      \            - 'effective_status': The effective status including review
+      status
+
+      \            - 'bid_amount': The bid amount for this ad
+
+      \            - 'created_time': When the ad was created
+
+      \            - 'updated_time': When the ad was last updated
+
+      \            - 'targeting': Targeting criteria
+
+      \            - 'preview_shareable_link': Link for previewing the ad
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \                                         Each object should have 'field',
+      'operator', and 'value' keys.
+
+      \        limit (Optional[int]): Maximum number of ads to return per page.
+      Default is 25.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        effective_status (Optional[List[str]]): Filter ads by their
+      effective status.
+
+      \                                               Options include: 'ACTIVE',
+      'PAUSED', 'DELETED',
+
+      \                                               'PENDING_REVIEW',
+      'DISAPPROVED', 'PREAPPROVED',
+
+      \                                               'PENDING_BILLING_INFO',
+      'ADSET_PAUSED', 'ARCHIVED',
+
+      \                                               'IN_PROCESS',
+      'WITH_ISSUES'.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ads. The main results
+      are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get all active ads from a campaign
+
+      \        ads = get_ads_by_campaign(
+
+      \            campaign_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"adset_id\", \"effective_status\",
+      \"created_time\"],
+
+      \            effective_status=[\"ACTIVE\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = ads.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_ads_by_campaign(
+
+      \                campaign_id=\"23843211234567\",
+
+      \                fields=[\"name\", \"adset_id\", \"effective_status\",
+      \"created_time\"],
+
+      \                effective_status=[\"ACTIVE\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ads_by_campaignArguments
+      required:
+        - campaign_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        campaign_id:
+          type: string
+          title: Campaign Id
+        effective_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Effective Status
+          default: null
+  - name: get_ads_by_adset
+    description: "Retrieves ads associated with a specific Facebook ad set.
+
+      \   \ 
+
+      \    This function allows querying all ads belonging to a specific ad set,
+
+      \    with filtering options, pagination, and field selection.
+
+      \   \ 
+
+      \    Args:
+
+      \        adset_id (str): The ID of the ad set to retrieve ads from.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each ad.
+
+      \                                      If None, a default set of fields
+      will be returned.
+
+      \                                      See get_ad_by_id for a
+      comprehensive list of available fields.
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \                                         Each object should have 'field',
+      'operator', and 'value' keys.
+
+      \                                         Operators include: 'EQUAL',
+      'NOT_EQUAL', 'GREATER_THAN',
+
+      \                                         'GREATER_THAN_OR_EQUAL',
+      'LESS_THAN', 'LESS_THAN_OR_EQUAL',
+
+      \                                         'IN_RANGE', 'NOT_IN_RANGE',
+      'CONTAIN', 'NOT_CONTAIN',
+
+      \                                         'IN', 'NOT_IN', 'EMPTY',
+      'NOT_EMPTY'.
+
+      \        limit (Optional[int]): Maximum number of ads to return per page.
+      Default is 25, max is 100.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        effective_status (Optional[List[str]]): Filter ads by their
+      effective status.
+
+      \                                               Options include: 'ACTIVE',
+      'PAUSED', 'DELETED',
+
+      \                                               'PENDING_REVIEW',
+      'DISAPPROVED', 'PREAPPROVED',
+
+      \                                               'PENDING_BILLING_INFO',
+      'CAMPAIGN_PAUSED', 'ARCHIVED',
+
+      \                                               'IN_PROCESS',
+      'WITH_ISSUES'.
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \                                    - 'U': Unix timestamp (seconds since
+      epoch)
+
+      \                                    - 'Y-m-d H:i:s': MySQL datetime
+      format
+
+      \                                    - None: ISO 8601 format (default)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ads. The main results
+      are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get all active ads from an ad set
+
+      \        ads = get_ads_by_adset(
+
+      \            adset_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"campaign_id\", \"effective_status\",
+      \"created_time\", \"creative\"],
+
+      \            effective_status=[\"ACTIVE\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Get ads with specific fields and date format
+
+      \        time_ads = get_ads_by_adset(
+
+      \            adset_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"created_time\", \"updated_time\",
+      \"status\"],
+
+      \            date_format=\"Y-m-d H:i:s\"
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = ads.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_ads_by_adset(
+
+      \                adset_id=\"23843211234567\",
+
+      \                fields=[\"name\", \"campaign_id\", \"effective_status\",
+      \"created_time\", \"creative\"],
+
+      \                effective_status=[\"ACTIVE\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_ads_by_adsetArguments
+      required:
+        - adset_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        adset_id:
+          type: string
+          title: Adset Id
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+        effective_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Effective Status
+          default: null
+  - name: get_adset_by_id
+    description: "Retrieves detailed information about a specific Facebook ad set by
+      its ID.
+
+      \   \ 
+
+      \    This function accesses the Facebook Graph API to retrieve information
+      about a
+
+      \    single ad set, including details about its targeting, budget,
+      scheduling, and status.
+
+      \   \ 
+
+      \    Args:
+
+      \        adset_id (str): The ID of the ad set to retrieve information for.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve. If None,
+
+      \            a default set of fields will be returned. Available fields
+      include:
+
+      \            - 'id': The ad set's ID
+
+      \            - 'name': The ad set's name
+
+      \            - 'account_id': The ID of the ad account this ad set belongs
+      to
+
+      \            - 'campaign_id': The ID of the campaign this ad set belongs
+      to
+
+      \            - 'bid_amount': The bid amount for this ad set
+
+      \            - 'bid_strategy': Strategy used for bidding. Options include:
+      'LOWEST_COST_WITHOUT_CAP',\ 
+
+      \                'LOWEST_COST_WITH_BID_CAP', 'COST_CAP'
+
+      \            - 'billing_event': The billing event type. Options include:
+      'APP_INSTALLS',\ 
+
+      \                'CLICKS', 'IMPRESSIONS', 'LINK_CLICKS', 'NONE',
+      'OFFER_CLAIMS',\ 
+
+      \                'PAGE_LIKES', 'POST_ENGAGEMENT', 'THRUPLAY'
+
+      \            - 'budget_remaining': The remaining budget for this ad set
+      (in cents/smallest currency unit)
+
+      \            - 'configured_status': The status set by the user. Options
+      include: 'ACTIVE',\ 
+
+      \                'PAUSED', 'DELETED', 'ARCHIVED'
+
+      \            - 'created_time': When the ad set was created
+
+      \            - 'daily_budget': The daily budget for this ad set (in
+      cents/smallest currency unit)
+
+      \            - 'daily_min_spend_target': The minimum daily spend target
+      (in cents/smallest currency unit)
+
+      \            - 'daily_spend_cap': The daily spend cap (in cents/smallest
+      currency unit)
+
+      \            - 'destination_type': Type of destination for the ads
+
+      \            - 'effective_status': The effective status (actual status).
+      Options include: 'ACTIVE',\ 
+
+      \                'PAUSED', 'DELETED', 'PENDING_REVIEW', 'DISAPPROVED',
+      'PREAPPROVED',\ 
+
+      \                'PENDING_BILLING_INFO', 'CAMPAIGN_PAUSED', 'ARCHIVED',
+      'ADSET_PAUSED',\ 
+
+      \                'IN_PROCESS', 'WITH_ISSUES'
+
+      \            - 'end_time': When the ad set will end (in ISO 8601 format)
+
+      \            - 'frequency_control_specs': Specifications for frequency
+      control
+
+      \            - 'lifetime_budget': The lifetime budget (in cents/smallest
+      currency unit)
+
+      \            - 'lifetime_imps': The maximum number of lifetime impressions
+
+      \            - 'lifetime_min_spend_target': The minimum lifetime spend
+      target
+
+      \            - 'lifetime_spend_cap': The lifetime spend cap
+
+      \            - 'optimization_goal': The optimization goal for this ad set.
+      Options include:\ 
+
+      \                'APP_INSTALLS', 'BRAND_AWARENESS', 'CLICKS',
+      'ENGAGED_USERS', 'EVENT_RESPONSES',\ 
+
+      \                'IMPRESSIONS', 'LEAD_GENERATION', 'LINK_CLICKS', 'NONE',
+      'OFFER_CLAIMS',\ 
+
+      \                'OFFSITE_CONVERSIONS', 'PAGE_ENGAGEMENT', 'PAGE_LIKES',
+      'POST_ENGAGEMENT',\ 
+
+      \                'QUALITY_LEAD', 'REACH', 'REPLIES', 'SOCIAL_IMPRESSIONS',
+      'THRUPLAY',\ 
+
+      \                'VALUE', 'VISIT_INSTAGRAM_PROFILE'
+
+      \            - 'pacing_type': List of pacing types. Options include:
+      'standard', 'no_pacing'
+
+      \            - 'promoted_object': The object this ad set is promoting
+
+      \            - 'recommendations': Recommendations for improving this ad
+      set
+
+      \            - 'rf_prediction_id': The Reach and Frequency prediction ID
+
+      \            - 'source_adset_id': ID of the source ad set if this is a
+      copy
+
+      \            - 'start_time': When the ad set starts (in ISO 8601 format)
+
+      \            - 'status': Deprecated. The ad set's status. Use
+      'effective_status' instead.
+
+      \            - 'targeting': The targeting criteria for this ad set
+      (complex object)
+
+      \            - 'time_based_ad_rotation_id_blocks': Time-based ad rotation
+      blocks
+
+      \            - 'time_based_ad_rotation_intervals': Time-based ad rotation
+      intervals in seconds
+
+      \            - 'updated_time': When this ad set was last updated
+
+      \            - 'use_new_app_click': Whether to use the newer app click
+      tracking
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad set information.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic ad set information
+
+      \        adset = get_adset_by_id(
+
+      \            adset_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"campaign_id\", \"effective_status\",
+      \"targeting\", \"budget_remaining\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get detailed scheduling information
+
+      \        adset_schedule = get_adset_by_id(
+
+      \            adset_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"start_time\", \"end_time\",
+      \"daily_budget\", \"lifetime_budget\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_adset_by_idArguments
+      required:
+        - adset_id
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        adset_id:
+          type: string
+          title: Adset Id
+  - name: get_adsets_by_ids
+    description: "Retrieves detailed information about multiple Facebook ad sets by
+      their IDs.
+
+      \   \ 
+
+      \    This function allows batch retrieval of multiple ad sets in a single
+      API call,
+
+      \    improving efficiency when you need data for several ad sets.
+
+      \   \ 
+
+      \    Args:
+
+      \        adset_ids (List[str]): A list of ad set IDs to retrieve
+      information for.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each ad set.
+
+      \            If None, a default set of fields will be returned. See
+      get_adset_by_id for
+
+      \            a comprehensive list of available fields.
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \            - 'U': Unix timestamp (seconds since epoch)
+
+      \            - 'Y-m-d H:i:s': MySQL datetime format
+
+      \            - None: ISO 8601 format (default)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary where keys are the ad set IDs and values are
+      the
+
+      \              corresponding ad set details.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get information for multiple ad sets
+
+      \        adsets = get_adsets_by_ids(
+
+      \            adset_ids=[\"23843211234567\", \"23843211234568\",
+      \"23843211234569\"],
+
+      \            fields=[\"name\", \"campaign_id\", \"effective_status\",
+      \"budget_remaining\"],
+
+      \            date_format=\"U\"  # Get dates as Unix timestamps
+
+      \        )
+
+      \       \ 
+
+      \        # Access information for a specific ad set
+
+      \        if \"23843211234567\" in adsets:
+
+      \            print(adsets[\"23843211234567\"][\"name\"])
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_adsets_by_idsArguments
+      required:
+        - adset_ids
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        adset_ids:
+          type: array
+          items:
+            type: string
+          title: Adset Ids
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+  - name: get_adsets_by_adaccount
+    description: "Retrieves ad sets from a specific Facebook ad account.
+
+      \   \ 
+
+      \    This function allows querying all ad sets belonging to a specific ad
+      account with
+
+      \    various filtering options, pagination, and field selection.
+
+      \   \ 
+
+      \    Args:
+
+      \        act_id (str): The ID of the ad account to retrieve ad sets from,
+      prefixed with 'act_',\ 
+
+      \                      e.g., 'act_1234567890'.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each ad set.\ 
+
+      \                                      If None, a default set of fields
+      will be returned.
+
+      \                                      See get_adset_by_id for a
+      comprehensive list of available fields.
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \                                         Each object should have 'field',
+      'operator', and 'value' keys.
+
+      \                                         Operators include: 'EQUAL',
+      'NOT_EQUAL', 'GREATER_THAN',
+
+      \                                         'GREATER_THAN_OR_EQUAL',
+      'LESS_THAN', 'LESS_THAN_OR_EQUAL',
+
+      \                                         'IN_RANGE', 'NOT_IN_RANGE',
+      'CONTAIN', 'NOT_CONTAIN',
+
+      \                                         'IN', 'NOT_IN', 'EMPTY',
+      'NOT_EMPTY'.
+
+      \                                         Example: [{'field':
+      'daily_budget', 'operator': 'GREATER_THAN', 'value': 1000}]
+
+      \        limit (Optional[int]): Maximum number of ad sets to return per
+      page. Default is 25, max is 100.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        date_preset (Optional[str]): A predefined relative date range for
+      selecting ad sets.
+
+      \                                    Options include: 'today',
+      'yesterday', 'this_month', 'last_month',\ 
+
+      \                                    'this_quarter', 'lifetime',
+      'last_3d', 'last_7d', 'last_14d',\ 
+
+      \                                    'last_28d', 'last_30d', 'last_90d',
+      'last_quarter', 'last_year',\ 
+
+      \                                    'this_week_mon_today',
+      'this_week_sun_today', 'this_year'.
+
+      \        time_range (Optional[Dict[str, str]]): A custom time range with
+      'since' and 'until'\ 
+
+      \                                              dates in 'YYYY-MM-DD'
+      format.
+
+      \                                              Example: {'since':
+      '2023-01-01', 'until': '2023-01-31'}
+
+      \        updated_since (Optional[int]): Return ad sets that have been
+      updated since this Unix timestamp.
+
+      \        effective_status (Optional[List[str]]): Filter ad sets by their
+      effective status.\ 
+
+      \                                               Options include: 'ACTIVE',
+      'PAUSED', 'DELETED',\ 
+
+      \                                               'PENDING_REVIEW',
+      'DISAPPROVED', 'PREAPPROVED',\ 
+
+      \                                               'PENDING_BILLING_INFO',
+      'CAMPAIGN_PAUSED', 'ARCHIVED',\ 
+
+      \                                               'WITH_ISSUES'.
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \                                    - 'U': Unix timestamp (seconds since
+      epoch)
+
+      \                                    - 'Y-m-d H:i:s': MySQL datetime
+      format
+
+      \                                    - None: ISO 8601 format (default)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad sets. The main
+      results are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get active ad sets from an ad account
+
+      \        adsets = get_adsets_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"name\", \"campaign_id\", \"effective_status\",
+      \"daily_budget\", \"targeting\"],
+
+      \            effective_status=[\"ACTIVE\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Get ad sets with daily budget above a certain amount
+
+      \        high_budget_adsets = get_adsets_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"name\", \"daily_budget\", \"lifetime_budget\"],
+
+      \            filtering=[{'field': 'daily_budget', 'operator':
+      'GREATER_THAN', 'value': 5000}],
+
+      \            limit=100
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = adsets.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_adsets_by_adaccount(
+
+      \                act_id=\"act_123456789\",
+
+      \                fields=[\"name\", \"campaign_id\", \"effective_status\",
+      \"daily_budget\"],
+
+      \                effective_status=[\"ACTIVE\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_adsets_by_adaccountArguments
+      required:
+        - act_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        act_id:
+          type: string
+          title: Act Id
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+        date_preset:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Preset
+          default: null
+        updated_since:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Updated Since
+          default: null
+        effective_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Effective Status
+          default: null
+  - name: get_adsets_by_campaign
+    description: "Retrieves ad sets associated with a specific Facebook campaign.
+
+      \   \ 
+
+      \    This function allows querying all ad sets belonging to a specific
+      campaign,
+
+      \    with filtering options, pagination, and field selection.
+
+      \   \ 
+
+      \    Args:
+
+      \        campaign_id (str): The ID of the campaign to retrieve ad sets
+      from.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each ad set.
+
+      \                                      If None, a default set of fields
+      will be returned.
+
+      \                                      See get_adset_by_id for a
+      comprehensive list of available fields.
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \                                         Each object should have 'field',
+      'operator', and 'value' keys.
+
+      \                                         Operators include: 'EQUAL',
+      'NOT_EQUAL', 'GREATER_THAN',
+
+      \                                         'GREATER_THAN_OR_EQUAL',
+      'LESS_THAN', 'LESS_THAN_OR_EQUAL',
+
+      \                                         'IN_RANGE', 'NOT_IN_RANGE',
+      'CONTAIN', 'NOT_CONTAIN',
+
+      \                                         'IN', 'NOT_IN', 'EMPTY',
+      'NOT_EMPTY'.
+
+      \                                         Example: [{'field':
+      'daily_budget', 'operator': 'GREATER_THAN', 'value': 1000}]
+
+      \        limit (Optional[int]): Maximum number of ad sets to return per
+      page. Default is 25, max is 100.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        effective_status (Optional[List[str]]): Filter ad sets by their
+      effective status.
+
+      \                                               Options include: 'ACTIVE',
+      'PAUSED', 'DELETED',
+
+      \                                               'PENDING_REVIEW',
+      'DISAPPROVED', 'PREAPPROVED',
+
+      \                                               'PENDING_BILLING_INFO',
+      'ARCHIVED', 'WITH_ISSUES'.
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \                                    - 'U': Unix timestamp (seconds since
+      epoch)
+
+      \                                    - 'Y-m-d H:i:s': MySQL datetime
+      format
+
+      \                                    - None: ISO 8601 format (default)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested ad sets. The main
+      results are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get all active ad sets from a campaign
+
+      \        adsets = get_adsets_by_campaign(
+
+      \            campaign_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"effective_status\", \"daily_budget\",
+      \"targeting\", \"optimization_goal\"],
+
+      \            effective_status=[\"ACTIVE\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Get ad sets with specific optimization goals
+
+      \        conversion_adsets = get_adsets_by_campaign(
+
+      \            campaign_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"optimization_goal\", \"billing_event\",
+      \"bid_amount\"],
+
+      \            filtering=[{
+
+      \                'field': 'optimization_goal',\ 
+
+      \                'operator': 'IN',\ 
+
+      \                'value': ['OFFSITE_CONVERSIONS', 'VALUE']
+
+      \            }]
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = adsets.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_adsets_by_campaign(
+
+      \                campaign_id=\"23843211234567\",
+
+      \                fields=[\"name\", \"effective_status\", \"daily_budget\",
+      \"targeting\"],
+
+      \                effective_status=[\"ACTIVE\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_adsets_by_campaignArguments
+      required:
+        - campaign_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        campaign_id:
+          type: string
+          title: Campaign Id
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+        effective_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Effective Status
+          default: null
+  - name: get_campaign_by_id
+    description: "Retrieves detailed information about a specific Facebook ad
+      campaign by its ID.
+
+      \   \ 
+
+      \    This function accesses the Facebook Graph API to retrieve information
+      about a
+
+      \    single campaign, including details about its objective, status,
+      budget settings,
+
+      \    and other campaign-level configurations.
+
+      \   \ 
+
+      \    Args:
+
+      \        campaign_id (str): The ID of the campaign to retrieve information
+      for.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve. If None,
+
+      \            a default set of fields will be returned. Available fields
+      include:
+
+      \            - 'id': The campaign's ID
+
+      \            - 'name': The campaign's name
+
+      \            - 'account_id': The ID of the ad account this campaign
+      belongs to
+
+      \            - 'adlabels': Labels applied to the campaign
+
+      \            - 'bid_strategy': The bid strategy for the campaign. Options
+      include:
+
+      \                'LOWEST_COST_WITHOUT_CAP', 'LOWEST_COST_WITH_BID_CAP',
+      'COST_CAP'
+
+      \            - 'boosted_object_id': The ID of the boosted object
+
+      \            - 'brand_lift_studies': Brand lift studies associated with
+      this campaign
+
+      \            - 'budget_rebalance_flag': Whether budget rebalancing is
+      enabled
+
+      \            - 'budget_remaining': The remaining budget (in cents/smallest
+      currency unit)
+
+      \            - 'buying_type': The buying type. Options include:
+
+      \                'AUCTION', 'RESERVED', 'DEPRECATED_REACH_BLOCK'
+
+      \            - 'can_create_brand_lift_study': Whether a brand lift study
+      can be created
+
+      \            - 'can_use_spend_cap': Whether a spend cap can be used
+
+      \            - 'configured_status': Status set by the user. Options
+      include:
+
+      \                'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'
+
+      \            - 'created_time': When the campaign was created
+
+      \            - 'daily_budget': The daily budget (in cents/smallest
+      currency unit)
+
+      \            - 'effective_status': The effective status accounting for the
+      ad account and other factors.
+
+      \                Options include: 'ACTIVE', 'PAUSED', 'DELETED',
+      'PENDING_REVIEW', 'DISAPPROVED',
+
+      \                'PREAPPROVED', 'PENDING_BILLING_INFO', 'CAMPAIGN_PAUSED',
+      'ARCHIVED', 'IN_PROCESS',
+
+      \                'WITH_ISSUES'
+
+      \            - 'has_secondary_skadnetwork_reporting': Whether secondary
+      SKAdNetwork reporting is available
+
+      \            - 'is_budget_schedule_enabled': Whether budget scheduling is
+      enabled
+
+      \            - 'is_skadnetwork_attribution': Whether the campaign uses
+      SKAdNetwork attribution (iOS 14.5+)
+
+      \            - 'issues_info': Information about issues with this campaign
+
+      \            - 'last_budget_toggling_time': Last time the budget was
+      toggled
+
+      \            - 'lifetime_budget': The lifetime budget (in cents/smallest
+      currency unit)
+
+      \            - 'objective': The campaign's advertising objective. Options
+      include:
+
+      \                'APP_INSTALLS', 'BRAND_AWARENESS', 'CONVERSIONS',
+      'EVENT_RESPONSES',
+
+      \                'LEAD_GENERATION', 'LINK_CLICKS', 'LOCAL_AWARENESS',
+      'MESSAGES',
+
+      \                'OFFER_CLAIMS', 'PAGE_LIKES', 'POST_ENGAGEMENT',
+      'PRODUCT_CATALOG_SALES',
+
+      \                'REACH', 'STORE_VISITS', 'VIDEO_VIEWS'
+
+      \            - 'pacing_type': List of pacing types. Options include:
+      'standard', 'no_pacing'
+
+      \            - 'primary_attribution': Primary attribution settings
+
+      \            - 'promoted_object': The object this campaign is promoting
+
+      \            - 'recommendations': Recommendations for improving this
+      campaign
+
+      \            - 'smart_promotion_type': Smart promotion type if applicable
+
+      \            - 'source_campaign': Source campaign if this was created by
+      copying
+
+      \            - 'source_campaign_id': ID of the source campaign if copied
+
+      \            - 'special_ad_categories': Array of special ad categories.
+      Options include:
+
+      \                'EMPLOYMENT', 'HOUSING', 'CREDIT',
+      'ISSUES_ELECTIONS_POLITICS', 'NONE'
+
+      \            - 'special_ad_category': Special ad category (deprecated in
+      favor of special_ad_categories)
+
+      \            - 'spend_cap': The spending cap (in cents/smallest currency
+      unit)
+
+      \            - 'start_time': When the campaign starts (in ISO 8601 format
+      unless date_format specified)
+
+      \            - 'status': Deprecated. Use 'configured_status' or
+      'effective_status' instead
+
+      \            - 'stop_time': When the campaign stops (in ISO 8601 format
+      unless date_format specified)
+
+      \            - 'topline_id': Topline ID for this campaign
+
+      \            - 'updated_time': When this campaign was last updated
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \            - 'U': Unix timestamp (seconds since epoch)
+
+      \            - 'Y-m-d H:i:s': MySQL datetime format
+
+      \            - None: ISO 8601 format (default)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested campaign information.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get basic campaign information
+
+      \        campaign = get_campaign_by_id(
+
+      \            campaign_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"objective\", \"effective_status\",
+      \"budget_remaining\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get detailed budget information with Unix timestamps
+
+      \        campaign_budget_details = get_campaign_by_id(
+
+      \            campaign_id=\"23843211234567\",
+
+      \            fields=[\"name\", \"daily_budget\", \"lifetime_budget\",
+      \"start_time\", \"stop_time\"],
+
+      \            date_format=\"U\"
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_campaign_by_idArguments
+      required:
+        - campaign_id
+      properties:
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        campaign_id:
+          type: string
+          title: Campaign Id
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+  - name: get_campaigns_by_adaccount
+    description: "Retrieves campaigns from a specific Facebook ad account.
+
+      \   \ 
+
+      \    This function allows querying all campaigns belonging to a specific
+      ad account with
+
+      \    various filtering options, pagination, and field selection.
+
+      \   \ 
+
+      \    Args:
+
+      \        act_id (str): The ID of the ad account to retrieve campaigns
+      from, prefixed with 'act_',\ 
+
+      \                      e.g., 'act_1234567890'.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve for each campaign.
+
+      \                                      If None, a default set of fields
+      will be returned.
+
+      \                                      See get_campaign_by_id for a
+      comprehensive list of available fields.
+
+      \        filtering (Optional[List[dict]]): A list of filter objects to
+      apply to the data.
+
+      \                                         Each object should have 'field',
+      'operator', and 'value' keys.
+
+      \                                         Operators include: 'EQUAL',
+      'NOT_EQUAL', 'GREATER_THAN',
+
+      \                                         'GREATER_THAN_OR_EQUAL',
+      'LESS_THAN', 'LESS_THAN_OR_EQUAL',
+
+      \                                         'IN_RANGE', 'NOT_IN_RANGE',
+      'CONTAIN', 'NOT_CONTAIN',
+
+      \                                         'IN', 'NOT_IN', 'EMPTY',
+      'NOT_EMPTY'.
+
+      \                                         Example: [{'field':
+      'daily_budget', 'operator': 'GREATER_THAN', 'value': 1000}]
+
+      \        limit (Optional[int]): Maximum number of campaigns to return per
+      page. Default is 25, max is 100.
+
+      \        after (Optional[str]): Pagination cursor for the next page. From
+      response['paging']['cursors']['after'].
+
+      \        before (Optional[str]): Pagination cursor for the previous page.
+      From response['paging']['cursors']['before'].
+
+      \        date_preset (Optional[str]): A predefined relative date range for
+      selecting campaigns.
+
+      \                                    Options include: 'today',
+      'yesterday', 'this_month', 'last_month',\ 
+
+      \                                    'this_quarter', 'maximum', 'last_3d',
+      'last_7d', 'last_14d',\ 
+
+      \                                    'last_28d', 'last_30d', 'last_90d',
+      'last_week_mon_sun',\ 
+
+      \                                    'last_week_sun_sat', 'last_quarter',
+      'last_year',\ 
+
+      \                                    'this_week_mon_today',
+      'this_week_sun_today', 'this_year'.
+
+      \        time_range (Optional[Dict[str, str]]): A custom time range with
+      'since' and 'until'\ 
+
+      \                                              dates in 'YYYY-MM-DD'
+      format.
+
+      \                                              Example: {'since':
+      '2023-01-01', 'until': '2023-01-31'}
+
+      \        updated_since (Optional[int]): Return campaigns that have been
+      updated since this Unix timestamp.
+
+      \        effective_status (Optional[List[str]]): Filter campaigns by their
+      effective status.\ 
+
+      \                                               Options include: 'ACTIVE',
+      'PAUSED', 'DELETED',\ 
+
+      \                                               'PENDING_REVIEW',
+      'DISAPPROVED', 'PREAPPROVED',\ 
+
+      \                                               'PENDING_BILLING_INFO',
+      'ARCHIVED', 'WITH_ISSUES'.
+
+      \        is_completed (Optional[bool]): If True, returns only completed
+      campaigns. If False, returns\ 
+
+      \                                      only active campaigns. If None,
+      returns both.
+
+      \        special_ad_categories (Optional[List[str]]): Filter campaigns by
+      special ad categories.
+
+      \                                                   Options include:
+      'EMPLOYMENT', 'HOUSING', 'CREDIT',\ 
+
+      \                                                   'ISSUES_ELECTIONS_POL\
+      ITICS', 'NONE'.
+
+      \        objective (Optional[List[str]]): Filter campaigns by advertising
+      objective.
+
+      \                                      Options include: 'APP_INSTALLS',
+      'BRAND_AWARENESS',\ 
+
+      \                                      'CONVERSIONS', 'EVENT_RESPONSES',
+      'LEAD_GENERATION',\ 
+
+      \                                      'LINK_CLICKS', 'LOCAL_AWARENESS',
+      'MESSAGES', 'OFFER_CLAIMS',\ 
+
+      \                                      'PAGE_LIKES', 'POST_ENGAGEMENT',
+      'PRODUCT_CATALOG_SALES',\ 
+
+      \                                      'REACH', 'STORE_VISITS',
+      'VIDEO_VIEWS'.
+
+      \        buyer_guarantee_agreement_status (Optional[List[str]]): Filter
+      campaigns by buyer guarantee agreement status.
+
+      \                                                              Options
+      include: 'APPROVED', 'NOT_APPROVED'.
+
+      \        date_format (Optional[str]): Format for date responses. Options:
+
+      \                                    - 'U': Unix timestamp (seconds since
+      epoch)
+
+      \                                    - 'Y-m-d H:i:s': MySQL datetime
+      format
+
+      \                                    - None: ISO 8601 format (default)
+
+      \        include_drafts (Optional[bool]): If True, includes draft
+      campaigns in the results.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested campaigns. The main
+      results are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get active campaigns from an ad account
+
+      \        campaigns = get_campaigns_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"name\", \"objective\", \"effective_status\",
+      \"created_time\"],
+
+      \            effective_status=[\"ACTIVE\"],
+
+      \            limit=50
+
+      \        )
+
+      \       \ 
+
+      \        # Get campaigns with specific objectives
+
+      \        lead_gen_campaigns = get_campaigns_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"name\", \"objective\", \"spend_cap\",
+      \"daily_budget\"],
+
+      \            objective=[\"LEAD_GENERATION\", \"CONVERSIONS\"],
+
+      \            date_format=\"U\"
+
+      \        )
+
+      \       \ 
+
+      \        # Get campaigns created in a specific date range
+
+      \        date_filtered_campaigns = get_campaigns_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"name\", \"created_time\", \"objective\"],
+
+      \            time_range={\"since\": \"2023-01-01\", \"until\":
+      \"2023-01-31\"}
+
+      \        )
+
+      \       \ 
+
+      \        # Fetch the next page if available using the pagination cursor
+
+      \        next_page_cursor = campaigns.get(\"paging\", {}).get(\"cursors\",
+      {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_campaigns_by_adaccount(
+
+      \                act_id=\"act_123456789\",
+
+      \                fields=[\"name\", \"objective\", \"effective_status\",
+      \"created_time\"],
+
+      \                effective_status=[\"ACTIVE\"],
+
+      \                limit=50,
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_campaigns_by_adaccountArguments
+      required:
+        - act_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: 25
+        act_id:
+          type: string
+          title: Act Id
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        filtering:
+          anyOf:
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+            - type: "null"
+          title: Filtering
+          default: null
+        objective:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Objective
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+        date_format:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Format
+          default: null
+        date_preset:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Date Preset
+          default: null
+        is_completed:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Is Completed
+          default: null
+        updated_since:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Updated Since
+          default: null
+        include_drafts:
+          anyOf:
+            - type: boolean
+            - type: "null"
+          title: Include Drafts
+          default: null
+        effective_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Effective Status
+          default: null
+        special_ad_categories:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Special Ad Categories
+          default: null
+        buyer_guarantee_agreement_status:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Buyer Guarantee Agreement Status
+          default: null
+  - name: get_activities_by_adaccount
+    description: "Retrieves activities for a Facebook ad account.
+
+      \   \ 
+
+      \    This function accesses the Facebook Graph API to retrieve information
+      about\ 
+
+      \    key updates to an ad account and ad objects associated with it. By
+      default,\ 
+
+      \    this API returns one week's data. Information returned includes major
+      account\ 
+
+      \    status changes, updates made to budget, campaign, targeting,
+      audiences and more.
+
+      \   \ 
+
+      \    Args:
+
+      \        act_id (str): The ID of the ad account, prefixed with 'act_',
+      e.g., 'act_1234567890'.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve. If None,
+
+      \            all available fields will be returned. Available fields
+      include:
+
+      \            - 'actor_id': ID of the user who made the change
+
+      \            - 'actor_name': Name of the user who made the change
+
+      \            - 'application_id': ID of the application used to make the
+      change
+
+      \            - 'application_name': Name of the application used to make
+      the change
+
+      \            - 'changed_data': Details about what was changed in JSON
+      format
+
+      \            - 'date_time_in_timezone': The timestamp in the account's
+      timezone
+
+      \            - 'event_time': The timestamp of when the event occurred
+
+      \            - 'event_type': The specific type of change that was made
+      (numeric code)
+
+      \            - 'extra_data': Additional data related to the change in JSON
+      format
+
+      \            - 'object_id': ID of the object that was changed (ad,
+      campaign, etc.)
+
+      \            - 'object_name': Name of the object that was changed
+
+      \            - 'object_type': Type of object being modified, values
+      include:
+
+      \              'AD', 'ADSET', 'CAMPAIGN', 'ACCOUNT', 'IMAGE', 'REPORT',
+      etc.
+
+      \            - 'translated_event_type': Human-readable description of the
+      change made,
+
+      \              examples include: 'ad created', 'campaign budget
+      updated',\ 
+
+      \              'targeting updated', 'ad status changed', etc.
+
+      \        limit (Optional[int]): Maximum number of activities to return per
+      page.
+
+      \            Default behavior returns a server-determined number of
+      results.
+
+      \        after (Optional[str]): Pagination cursor for the next page of
+      results.
+
+      \            Obtained from the 'paging.cursors.after' field in the
+      previous response.
+
+      \        before (Optional[str]): Pagination cursor for the previous page
+      of results.
+
+      \            Obtained from the 'paging.cursors.before' field in the
+      previous response.
+
+      \        time_range (Optional[Dict[str, str]]): A custom time range with
+      'since' and 'until'
+
+      \            dates in 'YYYY-MM-DD' format. Example: {'since':
+      '2023-01-01', 'until': '2023-01-31'}
+
+      \            This parameter overrides the since/until parameters if both
+      are provided.
+
+      \        since (Optional[str]): Start date in YYYY-MM-DD format. Defines
+      the beginning\ 
+
+      \            of the time range for returned activities. Ignored if
+      'time_range' is provided.
+
+      \        until (Optional[str]): End date in YYYY-MM-DD format. Defines the
+      end\ 
+
+      \            of the time range for returned activities. Ignored if
+      'time_range' is provided.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested activities. The main
+      results are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object. Each
+      activity object contains
+
+      \              information about who made the change, what was changed,
+      when it occurred, and
+
+      \              the specific details of the change.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get recent activities for an ad account with default one week
+      of data
+
+      \        activities = get_activities_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            fields=[\"event_time\", \"actor_name\", \"object_type\",
+      \"translated_event_type\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get all activities from a specific date range
+
+      \        dated_activities = get_activities_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            time_range={\"since\": \"2023-01-01\", \"until\":
+      \"2023-01-31\"},
+
+      \            fields=[\"event_time\", \"actor_name\", \"object_type\",
+      \"translated_event_type\", \"extra_data\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Paginate through activity results
+
+      \        paginated_activities = get_activities_by_adaccount(
+
+      \            act_id=\"act_123456789\",
+
+      \            limit=50,
+
+      \            fields=[\"event_time\", \"actor_name\", \"object_type\",
+      \"translated_event_type\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get the next page using the cursor from the previous response
+
+      \        next_page_cursor = paginated_activities.get(\"paging\",
+      {}).get(\"cursors\", {}).get(\"after\")
+
+      \        if next_page_cursor:
+
+      \            next_page = get_activities_by_adaccount(
+
+      \                act_id=\"act_123456789\",
+
+      \                fields=[\"event_time\", \"actor_name\", \"object_type\",
+      \"translated_event_type\"],
+
+      \                after=next_page_cursor
+
+      \            )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_activities_by_adaccountArguments
+      required:
+        - act_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        act_id:
+          type: string
+          title: Act Id
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null
+  - name: get_activities_by_adset
+    description: "Retrieves activities for a Facebook ad set.
+
+      \   \ 
+
+      \    This function accesses the Facebook Graph API to retrieve information
+      about\ 
+
+      \    key updates to an ad set. By default, this API returns one week's
+      data.\ 
+
+      \    Information returned includes status changes, budget updates,
+      targeting changes, and more.
+
+      \   \ 
+
+      \    Args:
+
+      \        adset_id (str): The ID of the ad set, e.g., '123456789'.
+
+      \        fields (Optional[List[str]]): A list of specific fields to
+      retrieve. If None,
+
+      \            all available fields will be returned. Available fields
+      include:
+
+      \            - 'actor_id': ID of the user who made the change
+
+      \            - 'actor_name': Name of the user who made the change
+
+      \            - 'application_id': ID of the application used to make the
+      change
+
+      \            - 'application_name': Name of the application used to make
+      the change
+
+      \            - 'changed_data': Details about what was changed in JSON
+      format
+
+      \            - 'date_time_in_timezone': The timestamp in the account's
+      timezone
+
+      \            - 'event_time': The timestamp of when the event occurred
+
+      \            - 'event_type': The specific type of change that was made
+      (numeric code)
+
+      \            - 'extra_data': Additional data related to the change in JSON
+      format
+
+      \            - 'object_id': ID of the object that was changed
+
+      \            - 'object_name': Name of the object that was changed
+
+      \            - 'object_type': Type of object being modified
+
+      \            - 'translated_event_type': Human-readable description of the
+      change made,
+
+      \              examples include: 'adset created', 'adset budget
+      updated',\ 
+
+      \              'targeting updated', 'adset status changed', etc.
+
+      \        limit (Optional[int]): Maximum number of activities to return per
+      page.
+
+      \            Default behavior returns a server-determined number of
+      results.
+
+      \        after (Optional[str]): Pagination cursor for the next page of
+      results.
+
+      \            Obtained from the 'paging.cursors.after' field in the
+      previous response.
+
+      \        before (Optional[str]): Pagination cursor for the previous page
+      of results.
+
+      \            Obtained from the 'paging.cursors.before' field in the
+      previous response.
+
+      \        time_range (Optional[Dict[str, str]]): A custom time range with
+      'since' and 'until'
+
+      \            dates in 'YYYY-MM-DD' format. Example: {'since':
+      '2023-01-01', 'until': '2023-01-31'}
+
+      \            This parameter overrides the since/until parameters if both
+      are provided.
+
+      \        since (Optional[str]): Start date in YYYY-MM-DD format. Defines
+      the beginning\ 
+
+      \            of the time range for returned activities. Ignored if
+      'time_range' is provided.
+
+      \        until (Optional[str]): End date in YYYY-MM-DD format. Defines the
+      end\ 
+
+      \            of the time range for returned activities. Ignored if
+      'time_range' is provided.
+
+      \   \ 
+
+      \    Returns:
+
+      \        Dict: A dictionary containing the requested activities. The main
+      results are in the 'data'
+
+      \              list, and pagination info is in the 'paging' object. Each
+      activity object contains
+
+      \              information about who made the change, what was changed,
+      when it occurred, and
+
+      \              the specific details of the change.
+
+      \   \ 
+
+      \    Example:
+
+      \        ```python
+
+      \        # Get recent activities for an ad set with default one week of
+      data
+
+      \        activities = get_activities_by_adset(
+
+      \            adset_id=\"123456789\",
+
+      \            fields=[\"event_time\", \"actor_name\",
+      \"translated_event_type\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Get all activities from a specific date range
+
+      \        dated_activities = get_activities_by_adset(
+
+      \            adset_id=\"123456789\",
+
+      \            time_range={\"since\": \"2023-01-01\", \"until\":
+      \"2023-01-31\"},
+
+      \            fields=[\"event_time\", \"actor_name\",
+      \"translated_event_type\", \"extra_data\"]
+
+      \        )
+
+      \       \ 
+
+      \        # Paginate through activity results
+
+      \        paginated_activities = get_activities_by_adset(
+
+      \            adset_id=\"123456789\",
+
+      \            limit=50,
+
+      \            fields=[\"event_time\", \"actor_name\",
+      \"translated_event_type\"]
+
+      \        )
+
+      \        ```
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_activities_by_adsetArguments
+      required:
+        - adset_id
+      properties:
+        after:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: After
+          default: null
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          default: null
+        since:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Since
+          default: null
+        until:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Until
+          default: null
+        before:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Before
+          default: null
+        fields:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: "null"
+          title: Fields
+          default: null
+        adset_id:
+          type: string
+          title: Adset Id
+        time_range:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Time Range
+          default: null

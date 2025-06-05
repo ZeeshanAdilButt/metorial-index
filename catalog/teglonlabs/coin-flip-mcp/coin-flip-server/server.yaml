@@ -1,0 +1,14 @@
+identifier: teglonlabs/coin-flip-mcp/coin-flip-server
+repo:
+  provider: github.com
+  url: https://github.com/TeglonLabs/coin-flip-mcp
+  name: coin-flip-mcp
+  owner: TeglonLabs
+server:
+  subdirectory: /
+  name: Coin Flip
+  description: Provides true random coin flips using random.org's randomness API.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

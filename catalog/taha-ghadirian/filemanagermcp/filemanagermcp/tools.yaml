@@ -1,0 +1,99 @@
+tools:
+  - name: ListFiles
+    description: Return list of files in the given directory.
+    inputSchema:
+      type: object
+      title: ListFiles
+      properties:
+        directory:
+          type: string
+          default: '"/"'
+          description: The directory to list files from.
+        recursive:
+          type: boolean
+          default: "false"
+          description: Whether to list files recursively.
+      description: Return list of files in the given directory.
+  - name: DeleteDirectory
+    description: Delete a directory from the given path.
+    inputSchema:
+      type: object
+      title: DeleteDirectory
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: "The path to delete the directory from. Example:
+            '/path/to/directory'"
+      description: Delete a directory from the given path.
+  - name: DownloadFile
+    description: Download a file from the given directory.
+    inputSchema:
+      type: object
+      title: DownloadFile
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: "The file path to download. Example: '/path/to/file.txt'"
+        localPath:
+          type: string
+          default: '"."'
+          description: "The local path to download the file to, example:
+            'downloads/file.txt'"
+      description: Download a file from the given directory.
+  - name: UploadFile
+    description: Upload a file to the given directory.
+    inputSchema:
+      type: object
+      title: UploadFile
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: "The file path to upload. Example: 'downloads/file.txt'"
+        remotePath:
+          type: string
+          default: '"/"'
+          description: "The remote path to upload the file to. Example: '/path/to/file.txt'"
+      description: Upload a file to the given directory.
+  - name: DeleteFile
+    description: Delete a file from the given directory.
+    inputSchema:
+      type: object
+      title: DeleteFile
+      required:
+        - filePath
+      properties:
+        filePath:
+          type: string
+          description: "The file path to delete. Example: '/path/to/file.txt'"
+      description: Delete a file from the given directory.
+  - name: CreateDirectory
+    description: Create a directory in the given path.
+    inputSchema:
+      type: object
+      title: CreateDirectory
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: "The path to create the directory in. Example: '/path/to/directory'"
+      description: Create a directory in the given path.
+  - name: DeleteFiles
+    description: Delete multiple files from the given paths.
+    inputSchema:
+      type: object
+      title: DeleteFiles
+      required:
+        - filePaths
+      properties:
+        filePaths:
+          type: string
+          description: "The file paths to delete, separated by commas. Example:
+            '/path/file1.txt,/path/file2.txt'"
+      description: Delete multiple files from the given paths.

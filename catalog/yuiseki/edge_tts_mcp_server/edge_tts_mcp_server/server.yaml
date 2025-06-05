@@ -1,0 +1,18 @@
+identifier: yuiseki/edge_tts_mcp_server/edge_tts_mcp_server
+repo:
+  provider: github.com
+  url: https://github.com/yuiseki/edge_tts_mcp_server
+  name: edge_tts_mcp_server
+  owner: yuiseki
+server:
+  subdirectory: /
+  name: Edge-TTS Voice Synthesis Server
+  description: Provide natural text-to-speech conversion using Microsoft Edge's
+    speech synthesis capabilities. Enable AI agents to respond with
+    high-quality, customizable voice output supporting multiple languages and
+    voice options. Stream audio data with adjustable speed and pitch for
+    flexible voice interactions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

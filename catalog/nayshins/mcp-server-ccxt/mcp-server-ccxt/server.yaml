@@ -1,0 +1,15 @@
+identifier: nayshins/mcp-server-ccxt/mcp-server-ccxt
+repo:
+  provider: github.com
+  url: https://github.com/Nayshins/mcp-server-ccxt
+  name: mcp-server-ccxt
+  owner: Nayshins
+server:
+  subdirectory: /
+  name: Cryptocurrency Market Data Server
+  description: An MCP server that provides real-time and historical cryptocurrency
+    market data through integration with major exchanges, powered by CCXT.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

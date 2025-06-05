@@ -1,0 +1,17 @@
+identifier: swonixs/weatherapi-mcp/weatherapi-mcp
+repo:
+  provider: github.com
+  url: https://github.com/swonixs/weatherapi-mcp
+  name: weatherapi-mcp
+  owner: swonixs
+server:
+  subdirectory: /
+  name: WeatherAPI Server
+  description: Fetch real-time weather and air quality data effortlessly.
+    Integrate with various MCP clients to enhance your applications with
+    accurate weather insights. Start using it today to provide users with
+    up-to-date environmental information.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

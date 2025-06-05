@@ -1,0 +1,17 @@
+identifier: hongsw/hello-mcp/hello-mcp
+repo:
+  provider: github.com
+  url: https://github.com/hongsw/hello-mcp
+  name: hello-mcp
+  owner: hongsw
+server:
+  subdirectory: /
+  name: Hello-MCP
+  description: Simplify the integration of Claude Desktop with external tools
+    using the Model Context Protocol. Easily set up and run an MCP server with
+    built-in sample tools and extend it with your own. Enhance your Claude AI
+    experience with seamless tool interaction and multi-language support.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

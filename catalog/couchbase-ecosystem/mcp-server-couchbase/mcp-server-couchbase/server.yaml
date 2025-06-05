@@ -1,0 +1,18 @@
+identifier: couchbase-ecosystem/mcp-server-couchbase/mcp-server-couchbase
+repo:
+  provider: github.com
+  url: https://github.com/Couchbase-Ecosystem/mcp-server-couchbase
+  name: mcp-server-couchbase
+  owner: Couchbase-Ecosystem
+server:
+  subdirectory: /
+  name: Couchbase Server Integration
+  description: Enable natural language querying and CRUD operations on Couchbase
+    clusters directly from your LLM applications. Seamlessly interact with
+    Couchbase scopes, collections, and documents using SQL++ queries or document
+    IDs. Enhance your AI workflows by integrating Couchbase data access and
+    manipulation capabilities through a standardized MCP server interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

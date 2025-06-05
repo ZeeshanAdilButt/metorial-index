@@ -1,0 +1,17 @@
+identifier: dpflucas/mysql-mcp-server/mysql-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/dpflucas/mysql-mcp-server
+  name: mysql-mcp-server
+  owner: dpflucas
+server:
+  subdirectory: /
+  name: MySQL Database Access
+  description: Access your MySQL databases securely and efficiently. List
+    databases, tables, and execute read-only SQL queries without the risk of
+    data modification. Simplify your database interactions with a robust,
+    read-only interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

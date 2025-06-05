@@ -1,0 +1,14 @@
+identifier: delorenj/mcp-server-trello/trello
+repo:
+  provider: github.com
+  url: https://github.com/delorenj/mcp-server-trello
+  name: mcp-server-trello
+  owner: delorenj
+server:
+  subdirectory: /
+  name: Trello Server
+  description: Interact with Trello boards and manage cards, lists, and activities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

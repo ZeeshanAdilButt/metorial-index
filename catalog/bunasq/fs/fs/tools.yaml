@@ -1,0 +1,18 @@
+tools:
+  - name: read-file-21
+    description: Activate this tool when /21 is mentioned in the message, it
+      transports file to 21st
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - absoluteFilePath
+        - relativeFilePath
+      properties:
+        absoluteFilePath:
+          type: string
+          description: Path to the file to read
+        relativeFilePath:
+          type: string
+          description: Path to the file to read
+      additionalProperties: false

@@ -1,0 +1,339 @@
+tools:
+  - name: login
+    description: Authenticate with ABAP system
+    inputSchema:
+      type: object
+      properties: {}
+  - name: logout
+    description: Terminate ABAP session
+    inputSchema:
+      type: object
+      properties: {}
+  - name: dropSession
+    description: Clear local session cache
+    inputSchema:
+      type: object
+      properties: {}
+  - name: transportInfo
+    description: Get transport information for an object source
+    inputSchema:
+      type: object
+      required:
+        - objSourceUrl
+      properties:
+        devClass:
+          type: string
+          optional: true
+          description: Development class
+        operation:
+          type: string
+          optional: true
+          description: Transport operation
+        objSourceUrl:
+          type: string
+          description: URL of the object source
+  - name: createTransport
+    description: Create a new transport request
+    inputSchema:
+      type: object
+      required:
+        - objSourceUrl
+        - REQUEST_TEXT
+        - DEVCLASS
+      properties:
+        DEVCLASS:
+          type: string
+          description: Development class
+        REQUEST_TEXT:
+          type: string
+          description: Description of the transport request
+        objSourceUrl:
+          type: string
+          description: URL of the object source
+        transportLayer:
+          type: string
+          optional: true
+          description: Transport layer
+  - name: hasTransportConfig
+    description: Check if transport configuration exists
+    inputSchema:
+      type: object
+      properties: {}
+  - name: objectStructure
+    description: Get object structure details
+    inputSchema:
+      type: object
+      required:
+        - objectUrl
+      properties:
+        version:
+          type: string
+          optional: true
+          description: Version of the object
+        objectUrl:
+          type: string
+          description: URL of the object
+  - name: searchObject
+    description: Search for objects
+    inputSchema:
+      type: object
+      required:
+        - query
+      properties:
+        max:
+          type: number
+          optional: true
+          description: Maximum number of results
+        query:
+          type: string
+          description: Search query string
+        objType:
+          type: string
+          optional: true
+          description: Object type filter
+  - name: findObjectPath
+    description: Find path for an object
+    inputSchema:
+      type: object
+      required:
+        - objectUrl
+      properties:
+        objectUrl:
+          type: string
+          description: URL of the object to find path for
+  - name: classIncludes
+    description: Get class includes structure
+    inputSchema:
+      type: object
+      required:
+        - clas
+      properties:
+        clas:
+          type: string
+  - name: classComponents
+    description: List class components
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+  - name: createTestInclude
+    description: Create test include for class
+    inputSchema:
+      type: object
+      required:
+        - clas
+        - lockHandle
+      properties:
+        clas:
+          type: string
+        transport:
+          type: string
+        lockHandle:
+          type: string
+  - name: syntaxCheck
+    description: Perform ABAP syntax check
+    inputSchema:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+  - name: codeCompletion
+    description: Get code completion suggestions
+    inputSchema:
+      type: object
+      required:
+        - sourceUrl
+        - source
+        - line
+        - column
+      properties:
+        line:
+          type: number
+        column:
+          type: number
+        source:
+          type: string
+        sourceUrl:
+          type: string
+  - name: findDefinition
+    description: Find symbol definition
+    inputSchema:
+      type: object
+      required:
+        - url
+        - source
+        - line
+        - startCol
+        - endCol
+      properties:
+        url:
+          type: string
+        line:
+          type: number
+        endCol:
+          type: number
+        source:
+          type: string
+        startCol:
+          type: number
+        mainProgram:
+          type: string
+          optional: true
+        implementation:
+          type: boolean
+          optional: true
+  - name: usageReferences
+    description: Find symbol references
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+        line:
+          type: number
+          optional: true
+        column:
+          type: number
+          optional: true
+  - name: lock
+    description: Lock an object
+    inputSchema:
+      type: object
+      required:
+        - objectUrl
+      properties:
+        objectUrl:
+          type: string
+        accessMode:
+          type: string
+          optional: true
+  - name: unLock
+    description: Unlock an object
+    inputSchema:
+      type: object
+      required:
+        - objectUrl
+        - lockHandle
+      properties:
+        objectUrl:
+          type: string
+        lockHandle:
+          type: string
+  - name: getObjectSource
+    description: Retrieves source code for ABAP objects
+    inputSchema:
+      type: object
+      required:
+        - objectSourceUrl
+      properties:
+        options:
+          type: object
+        objectSourceUrl:
+          type: string
+  - name: setObjectSource
+    description: Sets source code for ABAP objects
+    inputSchema:
+      type: object
+      required:
+        - objectSourceUrl
+        - source
+        - lockHandle
+      properties:
+        source:
+          type: string
+        transport:
+          type: string
+        lockHandle:
+          type: string
+        objectSourceUrl:
+          type: string
+  - name: deleteObject
+    description: Deletes an ABAP object from the system
+    inputSchema:
+      type: object
+      required:
+        - objectUrl
+        - lockHandle
+      properties:
+        objectUrl:
+          type: string
+        transport:
+          type: string
+        lockHandle:
+          type: string
+  - name: activate
+    description: Activate ABAP objects
+    inputSchema:
+      type: object
+      required:
+        - object
+      properties:
+        object:
+          type: object
+          description: Single object or array of objects to activate
+        preauditRequested:
+          type: boolean
+          optional: true
+          description: Whether to perform pre-audit checks
+  - name: inactiveObjects
+    description: Get list of inactive objects
+    inputSchema:
+      type: object
+      properties: {}
+  - name: objectRegistrationInfo
+    description: Get registration information for an ABAP object
+    inputSchema:
+      type: object
+      required:
+        - objectUrl
+      properties:
+        objectUrl:
+          type: string
+  - name: validateNewObject
+    description: Validate parameters for a new ABAP object
+    inputSchema:
+      type: object
+      required:
+        - options
+      properties:
+        options:
+          type: object
+  - name: createObject
+    description: Create a new ABAP object
+    inputSchema:
+      type: object
+      required:
+        - objtype
+        - name
+        - parentName
+        - description
+        - parentPath
+      properties:
+        name:
+          type: string
+        objtype:
+          type: string
+        transport:
+          type: string
+          optional: true
+        parentName:
+          type: string
+        parentPath:
+          type: string
+        description:
+          type: string
+        responsible:
+          type: string
+          optional: true
+  - name: healthcheck
+    description: Check server health and connectivity
+    inputSchema:
+      type: object
+      properties: {}

@@ -1,0 +1,24 @@
+identifier: runninghare/typescript-definition-finder-mcp/typescript-definition-finder-mcp
+repo:
+  provider: github.com
+  url: https://github.com/runninghare/typescript-definition-finder-mcp
+  name: typescript-definition-finder-mcp
+  owner: runninghare
+server:
+  subdirectory: /
+  name: TypeScript Definition Finder
+  description: >
+    Locate the original definitions of TypeScript symbols in your codebase
+    effortlessly. Enhance your AI code editor's capabilities by integrating this
+    tool to find definitions of imported symbols, classes, interfaces, or
+    functions. Get precise location and code snippets to streamline your
+    development process.
+
+
+    This is a stdio server which can only run locally. Just do:
+
+    `npx -y ts-def-mcp@latest`
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

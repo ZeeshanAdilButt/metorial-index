@@ -1,0 +1,78 @@
+tools:
+  - name: generate_3d_cartoon
+    description: Generates a 3D style cartoon image for kids based on the given prompt
+    inputSchema:
+      type: object
+      required:
+        - prompt
+        - fileName
+      properties:
+        prompt:
+          type: string
+          description: The prompt describing the 3D cartoon image to generate
+        fileName:
+          type: string
+          description: The name of the output file (without extension)
+  - name: read_file
+    description: Read the contents of a file
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the file to read
+  - name: write_file
+    description: Write content to a file
+    inputSchema:
+      type: object
+      required:
+        - path
+        - content
+      properties:
+        path:
+          type: string
+          description: Path to the file to write
+        content:
+          type: string
+          description: Content to write to the file
+  - name: list_directory
+    description: List the contents of a directory
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the directory to list
+  - name: create_directory
+    description: Create a new directory
+    inputSchema:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+          description: Path to the directory to create
+  - name: search_files
+    description: Search for files matching a pattern
+    inputSchema:
+      type: object
+      required:
+        - path
+        - pattern
+      properties:
+        path:
+          type: string
+          description: Base directory to search from
+        pattern:
+          type: string
+          description: Search pattern (glob format)
+        excludePatterns:
+          type: array
+          items:
+            type: string
+          description: Patterns to exclude from search (glob format)

@@ -1,0 +1,316 @@
+tools:
+  - name: get_markets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        tag:
+          type: string
+          maxLength: 100
+          minLength: 1
+          description: Filter markets by tag
+        live:
+          type: boolean
+          default: false
+          description: Filter for live markets only
+        limit:
+          type: number
+          description: Number of results to return per page
+        offset:
+          type: number
+          description: The initial index from which to return the results
+        search:
+          type: string
+          maxLength: 100
+          minLength: 1
+          description: Search query string
+        status:
+          enum:
+            - open
+            - closed
+            - resolved
+          type: string
+          description: Filter markets by status
+        ordering:
+          enum:
+            - ""
+            - relevance
+            - -created_on
+            - bet_end_date
+            - -wagers_count
+            - -volume
+          type: string
+          default: ""
+          description: Field to order results by
+        categories:
+          type: array
+          items:
+            type: number
+          description: Array of category IDs to filter markets
+        hide_my_bets:
+          type: boolean
+          default: false
+          description: Whether to hide markets the user has bet on
+        currency_mode:
+          enum:
+            - play_money
+            - real_money
+          type: string
+          default: play_money
+          description: "Currency mode: play_money or real_money"
+        resolved_only:
+          type: boolean
+          default: false
+          description: Filter for resolved markets only
+        only_markets_i_follow:
+          type: boolean
+          default: false
+          description: Filter for markets the user follows
+      additionalProperties: false
+  - name: get_market_details
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: A unique integer value identifying this market
+      additionalProperties: false
+  - name: get_related_markets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: A unique integer value identifying this market
+      additionalProperties: false
+  - name: suggest_market
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - title
+        - description
+        - outcomes
+      properties:
+        title:
+          type: string
+          maxLength: 150
+          minLength: 1
+          description: Title of the market
+        category:
+          type: string
+          maxLength: 75
+          minLength: 1
+          description: Category of the market
+        outcomes:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - price
+            properties:
+              price:
+                type: number
+                maximum: 100
+                minimum: 0
+                description: Price of the outcome (0-100, all prices should add up to 100)
+              title:
+                type: string
+                description: Title of the outcome
+              description:
+                type: string
+                description: Description of the outcome
+            additionalProperties: false
+          minItems: 2
+          description: Possible outcomes for the market (prices should add up to 100)
+        description:
+          type: string
+          maxLength: 800
+          minLength: 1
+          description: Description of the market
+        end_bet_date:
+          type: string
+          description: End date for betting in format YYYY-MM-DDTHH:MM:SSZ
+      additionalProperties: false
+  - name: get_categories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_category_by_id
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: A unique integer value identifying this category
+      additionalProperties: false
+  - name: get_featured_categories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_root_categories
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_root_categories_and_main_children
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - currency_mode
+      properties:
+        search:
+          type: string
+          description: Optional search term to filter categories
+        currency_mode:
+          enum:
+            - play_money
+            - real_money
+          type: string
+          description: "Currency mode: play_money or real_money"
+      additionalProperties: false
+  - name: get_user_profile
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_user_bets
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - limit
+        - offset
+        - currency_mode
+      properties:
+        user:
+          type: number
+          description: Filter by user ID
+        limit:
+          type: number
+          description: Maximum number of bets to return
+        active:
+          type: boolean
+          description: Filter by active wagers (wagers with status purchased)
+        offset:
+          type: number
+          description: Offset for pagination
+        question:
+          type: number
+          description: Filter by question ID
+        following:
+          type: boolean
+          description: Filter by bets made by users you follow
+        past_bets:
+          type: boolean
+          description: Filter by not active wagers (wagers with status sold, won, lost,
+            disabled)
+        currency_mode:
+          enum:
+            - play_money
+            - real_money
+            - ""
+          type: string
+          description: Filter by currency mode
+      additionalProperties: false
+  - name: place_bet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - outcome
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Amount to bet (must be positive)
+          exclusiveMinimum: 0
+        shares:
+          type: number
+          description: Number of shares to purchase
+        outcome:
+          type: number
+          description: ID of the outcome to bet on
+        currency:
+          type: string
+          default: OOM
+          maxLength: 11
+          description: Currency to use for the bet
+        position:
+          enum:
+            - l
+            - s
+          type: string
+          default: l
+          description: "Position type: 'l' for long (bet in favor) or 's' for short (bet
+            against)"
+        bet_location:
+          type: string
+          default: LLM
+          description: Location where the bet was placed
+        outcomes_type:
+          enum:
+            - yesno
+            - custom
+          type: string
+          description: Type of market outcomes
+        fiat_equivalent_mode:
+          type: boolean
+          default: false
+          description: Whether to use fiat equivalent mode
+      additionalProperties: false
+  - name: sell_bet
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: ID of the bet to sell
+        amount:
+          type: number
+          description: Amount to receive (for partial sell)
+        shares:
+          type: number
+          description: Number of shares to sell (for partial sell)
+      additionalProperties: false
+  - name: get_partial_sell_amount
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - shares
+      properties:
+        id:
+          type: number
+          description: ID of the bet
+        shares:
+          type: number
+          description: Number of shares to sell
+      additionalProperties: false
+  - name: get_rates
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false

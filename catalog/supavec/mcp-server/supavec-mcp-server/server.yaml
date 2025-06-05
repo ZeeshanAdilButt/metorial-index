@@ -1,0 +1,17 @@
+identifier: supavec/mcp-server/supavec-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/supavec/mcp-server
+  name: mcp-server
+  owner: supavec
+server:
+  subdirectory: /
+  name: Supavec
+  description: Fetch relevant content and embeddings from Supavec to enhance your
+    applications. Integrate seamlessly with Claude for Desktop or run it
+    standalone to access powerful data retrieval capabilities. Simplify your
+    workflow by leveraging the Supavec API for enriched content generation.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

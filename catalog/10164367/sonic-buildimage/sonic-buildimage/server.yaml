@@ -1,0 +1,18 @@
+identifier: 10164367/sonic-buildimage/sonic-buildimage
+repo:
+  provider: github.com
+  url: https://github.com/10164367/sonic-buildimage
+  name: sonic-buildimage
+  owner: "10164367"
+server:
+  subdirectory: /
+  name: SONiC Buildimage
+  description: Build ONIE-compatible network operating system installer images and
+    docker images for network switches based on ASIC platforms. Streamline the
+    creation of SONiC images tailored to various ASIC vendors and architectures,
+    enabling efficient deployment on supported devices. Facilitate debugging and
+    customization with support for debug tools and symbols.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

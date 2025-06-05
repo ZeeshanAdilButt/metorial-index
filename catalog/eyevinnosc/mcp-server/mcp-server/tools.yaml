@@ -1,0 +1,73 @@
+tools:
+  - name: osc_create_db
+    description: Create a new database instance in Eyevinn Open Source Cloud
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          pattern: ^[a-z0-9]+$
+          description: Name of the database
+        type:
+          type: string
+          description: Type of database [SQL, NoSQL, MemoryDb]
+      additionalProperties: false
+  - name: osc_create_bucket
+    description: Create an S3 compatible bucket in Eyevinn Open Source Cloud
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          pattern: ^[a-z0-9]+$
+          description: Name of the bucket
+      additionalProperties: false
+  - name: osc_create_vod
+    description: Create a VOD package using a VOD pipeline in Eyevinn Open Source Cloud
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - pipeline
+        - source
+      properties:
+        source:
+          type: string
+          description: Source video URL
+        pipeline:
+          type: string
+          pattern: ^[a-z0-9]+$
+          description: Name of the pipeline
+      additionalProperties: false
+  - name: osc_create_vod_pipeline
+    description: Create a VOD pipeline in Eyevinn Open Source Cloud
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          pattern: ^[a-z0-9]+$
+          description: Name of the pipeline
+      additionalProperties: false
+  - name: osc_remove_vod_pipeline
+    description: Remove a VOD pipeline in Eyevinn Open Source Cloud
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the pipeline
+      additionalProperties: false

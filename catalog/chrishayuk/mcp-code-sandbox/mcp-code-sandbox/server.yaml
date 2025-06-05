@@ -1,0 +1,18 @@
+identifier: chrishayuk/mcp-code-sandbox/mcp-code-sandbox
+repo:
+  provider: github.com
+  url: https://github.com/chrishayuk/mcp-code-sandbox
+  name: mcp-code-sandbox
+  owner: chrishayuk
+server:
+  subdirectory: /
+  name: Code Sandbox Server
+  description: Provide secure and isolated Python code execution environments with
+    file management and package installation capabilities. Manage sandbox
+    lifecycles and execute code safely within modular, extensible sandboxes.
+    Integrate seamlessly with Claude for Desktop and other MCP clients to
+    enhance code execution workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

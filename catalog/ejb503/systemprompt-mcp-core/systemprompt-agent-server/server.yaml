@@ -1,0 +1,18 @@
+identifier: ejb503/systemprompt-mcp-core/systemprompt-agent-server
+repo:
+  provider: github.com
+  url: https://github.com/Ejb503/systemprompt-mcp-core
+  name: systemprompt-mcp-core
+  owner: Ejb503
+server:
+  subdirectory: /
+  name: Systemprompt MCP Core
+  description: >
+    A specialized MCP server that enables you to create, manage, and extend AI
+    agents through a prompt and tool management system. This server integrates
+    with systemprompt.io to provide seamless creation, management, and
+    versioning of system prompts through MCP. 
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

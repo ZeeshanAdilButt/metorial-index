@@ -1,0 +1,17 @@
+identifier: scaryrawr/strawberry-mcp/strawberry-mcp
+repo:
+  provider: github.com
+  url: https://github.com/scaryrawr/strawberry-mcp
+  name: strawberry-mcp
+  owner: scaryrawr
+server:
+  subdirectory: /
+  name: Letter Counter Server
+  description: Count the occurrences of a specified letter within a given word.
+    Enable LLMs to perform letter counting tasks easily through a dedicated
+    tool. Simplify text analysis by providing quick and accurate letter
+    frequency results.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

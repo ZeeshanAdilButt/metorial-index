@@ -1,0 +1,17 @@
+identifier: gyhongyu/test/test
+repo:
+  provider: github.com
+  url: https://github.com/gyhongyu/test
+  name: test
+  owner: gyhongyu
+server:
+  subdirectory: /test
+  name: Test MCP Server
+  description: Provide a simple MCP server implementation for testing and
+    development purposes. Enable interaction with tools, resources, and prompts
+    through the MCP protocol. Facilitate experimentation with MCP features in a
+    controlled environment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

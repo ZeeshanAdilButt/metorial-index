@@ -1,0 +1,136 @@
+tools:
+  - name: remote_macos_get_screen
+    description: Connect to a remote MacOs machine and get a screenshot of the
+      remote desktop. Uses environment variables for connection details.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: remote_macos_mouse_scroll
+    description: Perform a mouse scroll at specified coordinates on a remote MacOs
+      machine, with automatic coordinate scaling. Uses environment variables for
+      connection details.
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+          description: X coordinate for mouse position (in source dimensions)
+        y:
+          type: integer
+          description: Y coordinate for mouse position (in source dimensions)
+        direction:
+          enum:
+            - up
+            - down
+          type: string
+          default: down
+          description: Scroll direction
+        source_width:
+          type: integer
+          default: 1366
+          description: Width of the reference screen for coordinate scaling
+        source_height:
+          type: integer
+          default: 768
+          description: Height of the reference screen for coordinate scaling
+  - name: remote_macos_send_keys
+    description: Send keyboard input to a remote MacOs machine. Uses environment
+      variables for connection details.
+    inputSchema:
+      type: object
+      required: []
+      properties:
+        text:
+          type: string
+          description: Text to send as keystrokes
+        special_key:
+          type: string
+          description: Special key to send (e.g., 'enter', 'backspace', 'tab', 'escape',
+            etc.)
+        key_combination:
+          type: string
+          description: Key combination to send (e.g., 'ctrl+c', 'cmd+q',
+            'ctrl+alt+delete', etc.)
+  - name: remote_macos_mouse_move
+    description: Move the mouse cursor to specified coordinates on a remote MacOs
+      machine, with automatic coordinate scaling. Uses environment variables for
+      connection details.
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+          description: X coordinate for mouse position (in source dimensions)
+        y:
+          type: integer
+          description: Y coordinate for mouse position (in source dimensions)
+        source_width:
+          type: integer
+          default: 1366
+          description: Width of the reference screen for coordinate scaling
+        source_height:
+          type: integer
+          default: 768
+          description: Height of the reference screen for coordinate scaling
+  - name: remote_macos_mouse_click
+    description: Perform a mouse click at specified coordinates on a remote MacOs
+      machine, with automatic coordinate scaling. Uses environment variables for
+      connection details.
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+          description: X coordinate for mouse position (in source dimensions)
+        y:
+          type: integer
+          description: Y coordinate for mouse position (in source dimensions)
+        button:
+          type: integer
+          default: 1
+          description: Mouse button (1=left, 2=middle, 3=right)
+        source_width:
+          type: integer
+          default: 1366
+          description: Width of the reference screen for coordinate scaling
+        source_height:
+          type: integer
+          default: 768
+          description: Height of the reference screen for coordinate scaling
+  - name: remote_macos_mouse_double_click
+    description: Perform a mouse double-click at specified coordinates on a remote
+      MacOs machine, with automatic coordinate scaling. Uses environment
+      variables for connection details.
+    inputSchema:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+          description: X coordinate for mouse position (in source dimensions)
+        y:
+          type: integer
+          description: Y coordinate for mouse position (in source dimensions)
+        button:
+          type: integer
+          default: 1
+          description: Mouse button (1=left, 2=middle, 3=right)
+        source_width:
+          type: integer
+          default: 1366
+          description: Width of the reference screen for coordinate scaling
+        source_height:
+          type: integer
+          default: 768
+          description: Height of the reference screen for coordinate scaling

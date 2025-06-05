@@ -1,0 +1,64 @@
+tools:
+  - name: get_github_trending
+    description: "
+
+      \    获取 GitHub 当日热门仓库，包括名称、链接、描述和README内容。
+
+
+      \    参数:
+
+      \    - repo_limit: 要获取的仓库数量，默认为5
+
+      \    - use_proxy: 是否使用代理，默认为False
+
+      \    - save_to_file: 是否保存结果到文件，默认为True
+
+
+      \    返回:
+
+      \    - Markdown 格式的热门仓库信息
+
+      \    "
+    inputSchema:
+      type: object
+      $defs:
+        TrendingRequest:
+          type: object
+          title: TrendingRequest
+          properties:
+            use_proxy:
+              type: boolean
+              title: Use Proxy
+              default: false
+              description: 是否使用代理
+            repo_limit:
+              type: integer
+              title: Repo Limit
+              default: 5
+              description: 要获取的仓库数量
+            save_to_file:
+              type: boolean
+              title: Save To File
+              default: true
+              description: 是否保存结果到文件
+      title: get_github_trendingArguments
+      required:
+        - request
+      properties:
+        request:
+          $ref: "#/$defs/TrendingRequest"
+  - name: get_proxy_status
+    description: "
+
+      \    获取当前代理配置状态
+
+
+      \    返回:
+
+      \    - 包含代理配置信息的字典
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_proxy_statusArguments
+      properties: {}

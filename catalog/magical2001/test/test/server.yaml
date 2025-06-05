@@ -1,0 +1,15 @@
+identifier: magical2001/test/test
+repo:
+  provider: github.com
+  url: https://github.com/Magical2001/test
+  name: test
+  owner: Magical2001
+server:
+  subdirectory: /
+  name: Test Server
+  description: Provide a simple test implementation of an MCP server to validate
+    protocol integration and basic functionality.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

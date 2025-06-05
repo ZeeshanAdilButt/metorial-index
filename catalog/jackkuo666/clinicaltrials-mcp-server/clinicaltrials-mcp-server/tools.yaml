@@ -1,0 +1,240 @@
+tools:
+  - name: search_clinical_trials_and_save_studies_to_csv
+    description: "
+
+      \    Search for clinical trials using a search expression and save the
+      results to a CSV file
+
+      \   \ 
+
+      \    Args:
+
+      \        search_expr: Search expression (e.g., \"Coronavirus+COVID\")
+
+      \        max_studies: Maximum number of studies to return (default: 10)
+
+      \        save_csv: Whether to save the results as a CSV file (default:
+      False)
+
+      \        filename: Name of the CSV file to save (default:
+      search_results.csv)
+
+      \        fields: List of fields to include (default: NCT Number,
+      Conditions, Study Title, Brief Summary)
+
+      \   \ 
+
+      \    Returns:
+
+      \        String representation of the search results
+
+      \    "
+    inputSchema:
+      type: object
+      title: search_clinical_trials_and_save_studies_to_csvArguments
+      required:
+        - search_expr
+      properties:
+        fields:
+          type: array
+          items: {}
+          title: Fields
+          default: null
+        filename:
+          type: string
+          title: Filename
+          default: corona_fields.csv
+        save_csv:
+          type: boolean
+          title: Save Csv
+          default: true
+        max_studies:
+          type: integer
+          title: Max Studies
+          default: 10
+        search_expr:
+          type: string
+          title: Search Expr
+  - name: get_full_study_details
+    description: "
+
+      \    Get detailed information about a specific clinical trial
+
+      \   \ 
+
+      \    Args:
+
+      \        nct_id: The NCT ID of the clinical trial
+
+      \   \ 
+
+      \    Returns:
+
+      \        String representation of the study details
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_full_study_detailsArguments
+      required:
+        - nct_id
+      properties:
+        nct_id:
+          type: string
+          title: Nct Id
+  - name: get_studies_by_keyword
+    description: "
+
+      \    Get studies related to a specific keyword
+
+      \   \ 
+
+      \    Args:
+
+      \        keyword: Keyword to search for
+
+      \        max_studies: Maximum number of studies to return (default: 20)
+
+      \        save_csv: Whether to save the results as a CSV file (default:
+      False)
+
+      \        filename: Name of the CSV file to save (default:
+      keyword_results.csv)
+
+      \   \ 
+
+      \    Returns:
+
+      \        String representation of the studies
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_studies_by_keywordArguments
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          title: Keyword
+        filename:
+          type: string
+          title: Filename
+          default: null
+        save_csv:
+          type: boolean
+          title: Save Csv
+          default: true
+        max_studies:
+          type: integer
+          title: Max Studies
+          default: 20
+  - name: get_study_statistics
+    description: "
+
+      \    Get statistics about clinical trials
+
+      \   \ 
+
+      \    Args:
+
+      \        condition: Optional condition to filter by
+
+      \   \ 
+
+      \    Returns:
+
+      \        String representation of the statistics
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_study_statisticsArguments
+      properties:
+        condition:
+          type: string
+          title: Condition
+          default: null
+  - name: get_full_studies_and_save
+    description: "
+
+      \    Get full studies data and save to CSV
+
+      \   \ 
+
+      \    Args:
+
+      \        search_expr: Search expression (e.g., \"Coronavirus+COVID\")
+
+      \        max_studies: Maximum number of studies to return (default: 20)
+
+      \        filename: Name of the CSV file to save (default:
+      full_studies.csv)
+
+      \   \ 
+
+      \    Returns:
+
+      \        Message indicating the results were saved
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_full_studies_and_saveArguments
+      required:
+        - search_expr
+      properties:
+        filename:
+          type: string
+          title: Filename
+          default: full_studies.csv
+        max_studies:
+          type: integer
+          title: Max Studies
+          default: 20
+        search_expr:
+          type: string
+          title: Search Expr
+  - name: load_csv_data
+    description: "
+
+      \    Load and display data from a CSV file
+
+      \   \ 
+
+      \    Args:
+
+      \        filename: Name of the CSV file to load
+
+      \   \ 
+
+      \    Returns:
+
+      \        String representation of the CSV data
+
+      \    "
+    inputSchema:
+      type: object
+      title: load_csv_dataArguments
+      required:
+        - filename
+      properties:
+        filename:
+          type: string
+          title: Filename
+  - name: list_saved_csv_files
+    description: "
+
+      \    List all available CSV files in the current directory
+
+      \   \ 
+
+      \    Returns:
+
+      \        String representation of the available CSV files
+
+      \    "
+    inputSchema:
+      type: object
+      title: list_saved_csv_filesArguments
+      properties: {}

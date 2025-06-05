@@ -1,0 +1,16 @@
+identifier: maxteabag/githubworkflowmcp/githubworkflowmcp
+repo:
+  provider: github.com
+  url: https://github.com/Maxteabag/GithubWorkflowMCP
+  name: GithubWorkflowMCP
+  owner: Maxteabag
+server:
+  subdirectory: /
+  name: GitHub Workflow Debugger
+  description: Diagnose and fix GitHub Actions workflow failures using a
+    structured decision tree. Fetch workflow run information, analyze failures,
+    and receive actionable solutions to streamline your CI/CD process.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,25 @@
+tools:
+  - name: get_markdown
+    description: Get markdown content from a webpage using skrape.ai
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: URL of the webpage to scrape
+        options:
+          type: object
+          default:
+            renderJs: true
+          properties:
+            renderJs:
+              type: boolean
+              default: true
+              description: Whether to render the JavaScript content of the website
+          description: Additional scraping options
+        returnJson:
+          type: boolean
+          default: false
+          description: Whether to return JSON response (true) or raw markdown (false)

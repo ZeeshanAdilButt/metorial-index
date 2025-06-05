@@ -1,0 +1,522 @@
+tools:
+  - name: manage_script
+    description: "Manages C# scripts in Unity (create, read, update, delete).
+
+      \        Make reference variables public for easier access in the Unity
+      Editor.
+
+
+      \        Args:
+
+      \            action: Operation ('create', 'read', 'update', 'delete').
+
+      \            name: Script name (no .cs extension).
+
+      \            path: Asset path (default: \"Assets/\").
+
+      \            contents: C# code for 'create'/'update'.
+
+      \            script_type: Type hint (e.g., 'MonoBehaviour').
+
+      \            namespace: Script namespace.
+
+
+      \        Returns:
+
+      \            Dictionary with results ('success', 'message', 'data').
+
+      \        "
+    inputSchema:
+      type: object
+      title: manage_scriptArguments
+      required:
+        - action
+        - name
+        - path
+        - contents
+        - script_type
+        - namespace
+      properties:
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+        action:
+          type: string
+          title: Action
+        contents:
+          type: string
+          title: Contents
+        namespace:
+          type: string
+          title: Namespace
+        script_type:
+          type: string
+          title: Script Type
+  - name: manage_scene
+    description: "Manages Unity scenes (load, save, create, get hierarchy, etc.).
+
+
+      \        Args:
+
+      \            action: Operation (e.g., 'load', 'save', 'create',
+      'get_hierarchy').
+
+      \            name: Scene name (no extension) for create/load/save.
+
+      \            path: Asset path for scene operations (default: \"Assets/\").
+
+      \            build_index: Build index for load/build settings actions.
+
+      \            # Add other action-specific args as needed (e.g., for
+      hierarchy depth)
+
+
+      \        Returns:
+
+      \            Dictionary with results ('success', 'message', 'data').
+
+      \        "
+    inputSchema:
+      type: object
+      title: manage_sceneArguments
+      required:
+        - action
+        - name
+        - path
+        - build_index
+      properties:
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+        action:
+          type: string
+          title: Action
+        build_index:
+          type: integer
+          title: Build Index
+  - name: manage_editor
+    description: "Controls and queries the Unity editor's state and settings.
+
+
+      \        Args:
+
+      \            action: Operation (e.g., 'play', 'pause', 'get_state',
+      'set_active_tool', 'add_tag').
+
+      \            wait_for_completion: Optional. If True, waits for certain
+      actions.
+
+      \            Action-specific arguments (e.g., tool_name, tag_name,
+      layer_name).
+
+
+      \        Returns:
+
+      \            Dictionary with operation results ('success', 'message',
+      'data').
+
+      \        "
+    inputSchema:
+      type: object
+      title: manage_editorArguments
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          title: Action
+        tag_name:
+          type: string
+          title: Tag Name
+          default: null
+        tool_name:
+          type: string
+          title: Tool Name
+          default: null
+        layer_name:
+          type: string
+          title: Layer Name
+          default: null
+        wait_for_completion:
+          type: boolean
+          title: Wait For Completion
+          default: null
+  - name: manage_gameobject
+    description: "Manages GameObjects: create, modify, delete, find, and component
+      operations.
+
+
+      \        Args:
+
+      \            action: Operation (e.g., 'create', 'modify', 'find',
+      'add_component', 'remove_component', 'set_component_property').
+
+      \            target: GameObject identifier (name or path string) for
+      modify/delete/component actions.
+
+      \            search_method: How to find objects ('by_name', 'by_id',
+      'by_path', etc.). Used with 'find' and some 'target' lookups.
+
+      \            name: GameObject name - used for both 'create' (initial name)
+      and 'modify' (rename).
+
+      \            tag: Tag name - used for both 'create' (initial tag) and
+      'modify' (change tag).
+
+      \            parent: Parent GameObject reference - used for both 'create'
+      (initial parent) and 'modify' (change parent).
+
+      \            layer: Layer name - used for both 'create' (initial layer)
+      and 'modify' (change layer).
+
+      \            component_properties: Dict mapping Component names to their
+      properties to set.
+
+      \                                  Example: {\"Rigidbody\": {\"mass\":
+      10.0, \"useGravity\": True}},
+
+      \                                  To set references:
+
+      \                                  - Use asset path string for
+      Prefabs/Materials, e.g., {\"MeshRenderer\": {\"material\":
+      \"Assets/Materials/MyMat.mat\"}}
+
+      \                                  - Use a dict for scene
+      objects/components, e.g.:
+
+      \                                    {\"MyScript\": {\"otherObject\":
+      {\"find\": \"Player\", \"method\": \"by_name\"}}} (assigns GameObject)
+
+      \                                    {\"MyScript\": {\"playerHealth\":
+      {\"find\": \"Player\", \"component\": \"HealthComponent\"}}} (assigns
+      Component)
+
+      \                                  Example set nested property:
+
+      \                                  - Access shared material:
+      {\"MeshRenderer\": {\"sharedMaterial.color\": [1, 0, 0, 1]}}
+
+      \            components_to_add: List of component names to add.
+
+      \            Action-specific arguments (e.g., position, rotation, scale
+      for create/modify;
+
+      \                     component_name for component actions;
+
+      \                     search_term, find_all for 'find').
+
+
+      \        Returns:
+
+      \            Dictionary with operation results ('success', 'message',
+      'data').
+
+      \        "
+    inputSchema:
+      type: object
+      title: manage_gameobjectArguments
+      required:
+        - action
+      properties:
+        tag:
+          type: string
+          title: Tag
+          default: null
+        name:
+          type: string
+          title: Name
+          default: null
+        layer:
+          type: string
+          title: Layer
+          default: null
+        scale:
+          type: array
+          items:
+            type: number
+          title: Scale
+          default: null
+        action:
+          type: string
+          title: Action
+        parent:
+          type: string
+          title: Parent
+          default: null
+        target:
+          type: string
+          title: Target
+          default: null
+        find_all:
+          type: boolean
+          title: Find All
+          default: false
+        position:
+          type: array
+          items:
+            type: number
+          title: Position
+          default: null
+        rotation:
+          type: array
+          items:
+            type: number
+          title: Rotation
+          default: null
+        set_active:
+          type: boolean
+          title: Set Active
+          default: null
+        prefab_path:
+          type: string
+          title: Prefab Path
+          default: null
+        search_term:
+          type: string
+          title: Search Term
+          default: null
+        prefab_folder:
+          type: string
+          title: Prefab Folder
+          default: Assets/Prefabs
+        search_method:
+          type: string
+          title: Search Method
+          default: null
+        component_name:
+          type: string
+          title: Component Name
+          default: null
+        primitive_type:
+          type: string
+          title: Primitive Type
+          default: null
+        save_as_prefab:
+          type: boolean
+          title: Save As Prefab
+          default: false
+        search_inactive:
+          type: boolean
+          title: Search Inactive
+          default: false
+        components_to_add:
+          type: array
+          items:
+            type: string
+          title: Components To Add
+          default: null
+        search_in_children:
+          type: boolean
+          title: Search In Children
+          default: false
+        component_properties:
+          type: object
+          title: Component Properties
+          default: null
+          additionalProperties:
+            type: object
+            additionalProperties: true
+        components_to_remove:
+          type: array
+          items:
+            type: string
+          title: Components To Remove
+          default: null
+  - name: manage_asset
+    description: "Performs asset operations (import, create, modify, delete, etc.)
+      in Unity.
+
+
+      \        Args:
+
+      \            ctx: The MCP context.
+
+      \            action: Operation to perform (e.g., 'import', 'create',
+      'modify', 'delete', 'duplicate', 'move', 'rename', 'search', 'get_info',
+      'create_folder', 'get_components').
+
+      \            path: Asset path (e.g., \"Materials/MyMaterial.mat\") or
+      search scope.
+
+      \            asset_type: Asset type (e.g., 'Material', 'Folder') -
+      required for 'create'.
+
+      \            properties: Dictionary of properties for 'create'/'modify'.
+
+      \            destination: Target path for 'duplicate'/'move'.
+
+      \            search_pattern: Search pattern (e.g., '*.prefab').
+
+      \            filter_*: Filters for search (type, date).
+
+      \            page_*: Pagination for search.
+
+
+      \        Returns:
+
+      \            A dictionary with operation results ('success', 'data',
+      'error').
+
+      \        "
+    inputSchema:
+      type: object
+      title: manage_assetArguments
+      required:
+        - action
+        - path
+      properties:
+        path:
+          type: string
+          title: Path
+        action:
+          type: string
+          title: Action
+        page_size:
+          type: integer
+          title: Page Size
+          default: null
+        asset_type:
+          type: string
+          title: Asset Type
+          default: null
+        properties:
+          type: object
+          title: Properties
+          default: null
+          additionalProperties: true
+        destination:
+          type: string
+          title: Destination
+          default: null
+        filter_type:
+          type: string
+          title: Filter Type
+          default: null
+        page_number:
+          type: integer
+          title: Page Number
+          default: null
+        search_pattern:
+          type: string
+          title: Search Pattern
+          default: null
+        generate_preview:
+          type: boolean
+          title: Generate Preview
+          default: false
+        filter_date_after:
+          type: string
+          title: Filter Date After
+          default: null
+  - name: read_console
+    description: "Gets messages from or clears the Unity Editor console.
+
+
+      \        Args:
+
+      \            ctx: The MCP context.
+
+      \            action: Operation ('get' or 'clear').
+
+      \            types: Message types to get ('error', 'warning', 'log',
+      'all').
+
+      \            count: Max messages to return.
+
+      \            filter_text: Text filter for messages.
+
+      \            since_timestamp: Get messages after this timestamp (ISO
+      8601).
+
+      \            format: Output format ('plain', 'detailed', 'json').
+
+      \            include_stacktrace: Include stack traces in output.
+
+
+      \        Returns:
+
+      \            Dictionary with results. For 'get', includes 'data'
+      (messages).
+
+      \        "
+    inputSchema:
+      type: object
+      title: read_consoleArguments
+      properties:
+        count:
+          type: integer
+          title: Count
+          default: null
+        types:
+          type: array
+          items:
+            type: string
+          title: Types
+          default: null
+        action:
+          type: string
+          title: Action
+          default: null
+        format:
+          type: string
+          title: Format
+          default: null
+        filter_text:
+          type: string
+          title: Filter Text
+          default: null
+        since_timestamp:
+          type: string
+          title: Since Timestamp
+          default: null
+        include_stacktrace:
+          type: boolean
+          title: Include Stacktrace
+          default: null
+  - name: execute_menu_item
+    description: "Executes a Unity Editor menu item via its path (e.g., \"File/Save
+      Project\").
+
+
+      \        Args:
+
+      \            ctx: The MCP context.
+
+      \            menu_path: The full path of the menu item to execute.
+
+      \            action: The operation to perform (default: 'execute').
+
+      \            parameters: Optional parameters for the menu item (rarely
+      used).
+
+
+      \        Returns:
+
+      \            A dictionary indicating success or failure, with optional
+      message/error.
+
+      \        "
+    inputSchema:
+      type: object
+      title: execute_menu_itemArguments
+      required:
+        - menu_path
+      properties:
+        action:
+          type: string
+          title: Action
+          default: execute
+        menu_path:
+          type: string
+          title: Menu Path
+        parameters:
+          type: object
+          title: Parameters
+          default: null
+          additionalProperties: true

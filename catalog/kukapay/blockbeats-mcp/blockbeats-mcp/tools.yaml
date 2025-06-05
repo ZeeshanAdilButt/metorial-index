@@ -1,0 +1,79 @@
+tools:
+  - name: get_latest_news
+    description: "
+
+      \    Fetch the latest blockchain fast news articles up to max_pages.
+
+
+      \    Parameters:
+
+      \        size (int): Number of articles per page (default: 5).
+
+      \        max_pages (int): Maximum number of pages to fetch (default: 1).
+
+      \        type (str): News type filter, e.g., 'push' for important news
+      (default: 'push').
+
+      \        lang (str): Language of the news, 'en' for English, 'cn' for
+      Simplified Chinese, 'cht' for Traditional Chinese (default: 'en').
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_latest_newsArguments
+      properties:
+        lang:
+          type: string
+          title: Lang
+          default: en
+        size:
+          type: integer
+          title: Size
+          default: 5
+        type:
+          type: string
+          title: Type
+          default: push
+        max_pages:
+          type: integer
+          title: Max Pages
+          default: 1
+  - name: get_latest_articles
+    description: "
+
+      \    Fetch the latest blockchain in-depth articles up to max_pages.
+
+
+      \    Parameters:
+
+      \        size (int): Number of articles per page (default: 5).
+
+      \        max_pages (int): Maximum number of pages to fetch (default: 1).
+
+      \        type (str): Article type filter, e.g., 'push' for important
+      articles (default: 'push').
+
+      \        lang (str): Language of the articles, 'en' for English, 'cn' for
+      Simplified Chinese, 'cht' for Traditional Chinese (default: 'en').
+
+      \    "
+    inputSchema:
+      type: object
+      title: get_latest_articlesArguments
+      properties:
+        lang:
+          type: string
+          title: Lang
+          default: en
+        size:
+          type: integer
+          title: Size
+          default: 5
+        type:
+          type: string
+          title: Type
+          default: push
+        max_pages:
+          type: integer
+          title: Max Pages
+          default: 1

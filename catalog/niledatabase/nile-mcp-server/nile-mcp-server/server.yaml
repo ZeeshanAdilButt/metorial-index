@@ -1,0 +1,17 @@
+identifier: niledatabase/nile-mcp-server/nile-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/niledatabase/nile-mcp-server
+  name: nile-mcp-server
+  owner: niledatabase
+server:
+  subdirectory: /
+  name: Nile MCP Server
+  description: Interact with the Nile database platform through a standardized
+    interface. Manage databases, execute SQL queries, and handle credentials
+    seamlessly. Enhance your LLM applications with powerful database
+    capabilities.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

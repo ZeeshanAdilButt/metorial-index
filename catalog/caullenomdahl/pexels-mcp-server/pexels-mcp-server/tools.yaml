@@ -1,0 +1,252 @@
+tools:
+  - name: searchPhotos
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          description: Page number
+          exclusiveMinimum: 0
+        size:
+          enum:
+            - large
+            - medium
+            - small
+          type: string
+          description: Minimum photo size
+        color:
+          type: string
+          description: Desired photo color (e.g., 'red', 'blue', '#ff0000')
+        query:
+          type: string
+          description: The search query. Use descriptive keywords for relevant results
+            (e.g., 'Thai hotel reception', 'red sports car driving', not just
+            'hotel' or 'car'). Combine with parameters like 'orientation',
+            'size', and 'color' for refined results.
+        locale:
+          type: string
+          description: The locale of the search query (e.g., 'en-US', 'es-ES').
+        perPage:
+          type: number
+          maximum: 80
+          minimum: 1
+          description: Results per page (max 80)
+        orientation:
+          enum:
+            - landscape
+            - portrait
+            - square
+          type: string
+          description: Desired photo orientation
+      additionalProperties: false
+  - name: downloadPhoto
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the photo to download
+          exclusiveMinimum: 0
+        size:
+          enum:
+            - original
+            - large2x
+            - large
+            - medium
+            - small
+            - portrait
+            - landscape
+            - tiny
+          type: string
+          default: original
+          description: Desired photo size/version to download
+      additionalProperties: false
+  - name: downloadVideo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the video to download
+          exclusiveMinimum: 0
+        quality:
+          enum:
+            - hd
+            - sd
+          type: string
+          default: hd
+          description: Preferred video quality (hd or sd)
+      additionalProperties: false
+  - name: getCuratedPhotos
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number
+          exclusiveMinimum: 0
+        perPage:
+          type: number
+          maximum: 80
+          minimum: 1
+          description: Results per page (max 80)
+      additionalProperties: false
+  - name: getPhoto
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the photo to retrieve
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: searchVideos
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - query
+      properties:
+        page:
+          type: number
+          description: Page number
+          exclusiveMinimum: 0
+        size:
+          enum:
+            - large
+            - medium
+            - small
+          type: string
+          description: Minimum video size
+        query:
+          type: string
+          description: The search query. Use descriptive keywords for relevant results
+            (e.g., 'drone footage beach sunset', 'time lapse city traffic', not
+            just 'beach' or 'city'). Combine with parameters like 'orientation'
+            and 'size' for refined results.
+        locale:
+          type: string
+          description: The locale of the search query (e.g., 'en-US', 'es-ES').
+        perPage:
+          type: number
+          maximum: 80
+          minimum: 1
+          description: Results per page (max 80)
+        orientation:
+          enum:
+            - landscape
+            - portrait
+            - square
+          type: string
+          description: Desired video orientation
+      additionalProperties: false
+  - name: getPopularVideos
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number
+          exclusiveMinimum: 0
+        perPage:
+          type: number
+          maximum: 80
+          minimum: 1
+          description: Results per page (max 80)
+        minWidth:
+          type: number
+          description: Minimum video width in pixels
+        minHeight:
+          type: number
+          description: Minimum video height in pixels
+        maxDuration:
+          type: number
+          description: Maximum video duration in seconds
+        minDuration:
+          type: number
+          description: Minimum video duration in seconds
+      additionalProperties: false
+  - name: getVideo
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The ID of the video to retrieve
+          exclusiveMinimum: 0
+      additionalProperties: false
+  - name: getFeaturedCollections
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          description: Page number
+          exclusiveMinimum: 0
+        perPage:
+          type: number
+          maximum: 80
+          minimum: 1
+          description: Results per page (max 80)
+      additionalProperties: false
+  - name: getCollectionMedia
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The ID of the collection
+        page:
+          type: number
+          description: Page number
+          exclusiveMinimum: 0
+        sort:
+          enum:
+            - asc
+            - desc
+          type: string
+          description: Sort order
+        type:
+          enum:
+            - photos
+            - videos
+          type: string
+          description: Filter by media type
+        perPage:
+          type: number
+          maximum: 80
+          minimum: 1
+          description: Results per page (max 80)
+      additionalProperties: false
+  - name: setApiKey
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - apiKey
+      properties:
+        apiKey:
+          type: string
+          description: Your Pexels API key
+      additionalProperties: false

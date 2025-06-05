@@ -1,0 +1,16 @@
+identifier: mdwooky/logstash-input-pluginname/logstash-input-pluginname
+repo:
+  provider: github.com
+  url: https://github.com/mdwooky/logstash-input-pluginname
+  name: logstash-input-pluginname
+  owner: mdwooky
+server:
+  subdirectory: /
+  name: Logstash Input Plugin
+  description: Streamline data ingestion into your Logstash pipelines. Enhance
+    your data processing capabilities by integrating various input sources
+    seamlessly.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

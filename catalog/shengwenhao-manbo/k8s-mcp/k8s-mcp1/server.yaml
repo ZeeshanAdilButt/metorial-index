@@ -1,0 +1,18 @@
+identifier: shengwenhao-manbo/k8s-mcp/k8s-mcp1
+repo:
+  provider: github.com
+  url: https://github.com/Shengwenhao-manbo/k8s-mcp
+  name: k8s-mcp
+  owner: Shengwenhao-manbo
+server:
+  subdirectory: /
+  name: Kubernetes MCP Server
+  description: Manage and interact with Kubernetes clusters through a Model
+    Context Protocol server that supports SSE transport. Enable seamless
+    integration of Kubernetes operations into LLM workflows, enhancing
+    automation and cluster management. Simplify Kubernetes resource handling
+    with a standardized MCP interface.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

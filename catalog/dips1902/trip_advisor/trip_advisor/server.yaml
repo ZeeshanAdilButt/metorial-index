@@ -1,0 +1,18 @@
+identifier: dips1902/trip_advisor/trip_advisor
+repo:
+  provider: github.com
+  url: https://github.com/Dips1902/Trip_Advisor
+  name: Trip_Advisor
+  owner: Dips1902
+server:
+  subdirectory: /
+  name: Trip Planner
+  description: Automate and enhance your trip planning experience with an
+    AI-powered assistant that collaboratively crafts personalized itineraries
+    based on your preferences. Access the functionality via a CLI, FASTAPI
+    server, or a user-friendly Streamlit interface. Easily switch between
+    different LLM models to customize your planning experience.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: false

@@ -1,0 +1,18 @@
+identifier: jgamblin/epss-mcp/epss-mcp
+repo:
+  provider: github.com
+  url: https://github.com/jgamblin/EPSS-MCP
+  name: EPSS-MCP
+  owner: jgamblin
+server:
+  subdirectory: /
+  name: EPSS Vulnerability Scoring Server
+  description: Provide comprehensive vulnerability information by retrieving CVE
+    details and EPSS scores to assess exploitation likelihood. Integrate
+    seamlessly with developer tools like VS Code for real-time vulnerability
+    insights and prioritization. Deploy easily via Docker or run locally for
+    enhanced cybersecurity workflows.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

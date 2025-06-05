@@ -1,0 +1,96 @@
+tools:
+  - name: CB_version
+    description: Return the version of the CB.
+    inputSchema:
+      type: object
+      title: CB_versionArguments
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 1026
+        address:
+          type: string
+          title: Address
+          default: localhost
+  - name: get_all_entities
+    description: Get all entities from the Context Broker.
+    inputSchema:
+      type: object
+      title: get_all_entitiesArguments
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 1026
+        limit:
+          type: string
+          title: limit
+          default: 1000
+        address:
+          type: string
+          title: Address
+          default: localhost
+        extra_headers:
+          type: string
+          title: Extra Headers
+          default: ""
+  - name: query_CB
+    description: Query the CB.
+    inputSchema:
+      type: object
+      title: query_CBArguments
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 1026
+        query:
+          type: string
+          title: Query
+          default: ""
+        address:
+          type: string
+          title: Address
+          default: localhost
+  - name: get_entity_types
+    description: Get entity types from the Context Broker.
+    inputSchema:
+      type: object
+      title: get_entity_typesArguments
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 1026
+        limit:
+          type: string
+          title: limit
+          default: 1000
+        address:
+          type: string
+          title: Address
+          default: localhost
+        extra_headers:
+          type: string
+          title: Extra Headers
+          default: ""
+  - name: publish_to_CB
+    description: Publish an entity to the CB.
+    inputSchema:
+      type: object
+      title: publish_to_CBArguments
+      properties:
+        port:
+          type: integer
+          title: Port
+          default: 1026
+        address:
+          type: string
+          title: Address
+          default: localhost
+        entity_data:
+          type: object
+          title: Entity Data
+          default: null
+          additionalProperties: true

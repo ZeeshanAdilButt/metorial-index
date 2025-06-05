@@ -1,0 +1,14 @@
+identifier: deepfates/mcp-replicate/mcp-replicate
+repo:
+  provider: github.com
+  url: https://github.com/deepfates/mcp-replicate
+  name: mcp-replicate
+  owner: deepfates
+server:
+  subdirectory: /
+  name: Replicate
+  description: Access Replicate models and predictions.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

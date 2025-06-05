@@ -1,0 +1,18 @@
+identifier: pratham-svg/mcp-oauth/mcp-oauth
+repo:
+  provider: github.com
+  url: https://github.com/pratham-svg/MCP-OAuth
+  name: MCP-OAuth
+  owner: pratham-svg
+server:
+  subdirectory: /
+  name: OAuth-Enabled MCP Server
+  description: Enable secure user authentication and authorization for MCP servers
+    using OAuth. Facilitate calling protected APIs on behalf of authenticated
+    users, ensuring safe and seamless access to user-specific data and actions.
+    Simplify integration with Auth0 and Cloudflare Workers for robust identity
+    management.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

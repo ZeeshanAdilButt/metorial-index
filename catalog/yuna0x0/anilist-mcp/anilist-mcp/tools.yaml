@@ -1,0 +1,1816 @@
+tools:
+  - name: favourite_studio
+    description: "[Requires Login] Favourite or unfavourite a studio by its ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the studio to favourite/unfavourite
+      additionalProperties: false
+  - name: get_genres
+    description: Get all available genres on AniList
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_media_tags
+    description: Get all available media tags on AniList
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_site_statistics
+    description: Get AniList site statistics over the last seven days
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_studio
+    description: Get information about a studio by its AniList ID or name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - studio
+      properties:
+        studio:
+          type:
+            - string
+            - number
+          description: The studio ID or name
+      additionalProperties: false
+  - name: delete_activity
+    description: "[Requires Login] Delete the current authorized user's activity post"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList activity ID to delete
+      additionalProperties: false
+  - name: get_activity
+    description: Get a specific AniList activity by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - activityID
+      properties:
+        activityID:
+          type: number
+          description: The AniList activity ID
+      additionalProperties: false
+  - name: get_user_activity
+    description: Fetch activities from a user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        page:
+          type: number
+          default: 1
+          description: The page number to display
+        user:
+          type: number
+          description: The user's AniList ID
+        perPage:
+          type: number
+          default: 25
+          description: How many entries to display on one page (max 25)
+      additionalProperties: false
+  - name: post_message_activity
+    description: "[Requires Login] Post a new message activity or update an existing one"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+        - recipientId
+        - id
+      properties:
+        id:
+          type:
+            - number
+            - "null"
+          description: AniList Activity ID (null to create new, number to update)
+        text:
+          type: string
+          description: The activity message text
+        isPrivate:
+          type: boolean
+          default: false
+          description: Set to true if it is a private message
+        recipientId:
+          type: number
+          description: The target user to send the message to
+      additionalProperties: false
+  - name: post_text_activity
+    description: "[Requires Login] Post a new text activity or update an existing one"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - text
+        - id
+      properties:
+        id:
+          type:
+            - number
+            - "null"
+          description: AniList Activity ID (null to create new, number to update)
+        text:
+          type: string
+          description: The content of the activity
+      additionalProperties: false
+  - name: add_list_entry
+    description: "[Requires Login] Add an entry to the authorized user's list"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - options
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the media entry to add
+        options:
+          type: object
+          required:
+            - id
+            - mediaId
+            - status
+            - score
+            - scoreRaw
+            - progress
+            - progressVolumes
+            - repeat
+            - priority
+            - private
+            - notes
+            - hiddenFromStatusLists
+            - customLists
+            - advancedScores
+            - startedAt
+            - completedAt
+          properties:
+            id:
+              type: number
+              description: The ID of the list entry
+            notes:
+              type: string
+              description: Text notes about the media
+            score:
+              type: number
+              description: The score given to the media
+            repeat:
+              type: number
+              description: Amount of times the media has been repeated
+            status:
+              enum:
+                - CURRENT
+                - PLANNING
+                - COMPLETED
+                - DROPPED
+                - PAUSED
+                - REPEATING
+              type: string
+              description: The status of the media on the list
+            mediaId:
+              type: number
+              description: The ID of the media to add
+            private:
+              type: boolean
+              description: Whether the entry should be private
+            priority:
+              type: number
+              description: Priority level of the media
+            progress:
+              type: number
+              description: The amount of episodes/chapters consumed
+            scoreRaw:
+              type: number
+              description: The raw score in 100 point format
+            startedAt:
+              type: object
+              required:
+                - year
+                - month
+                - day
+              properties:
+                day:
+                  type: number
+                year:
+                  type: number
+                month:
+                  type: number
+              description: When the user started the media
+              additionalProperties: false
+            completedAt:
+              type: object
+              required:
+                - year
+                - month
+                - day
+              properties:
+                day:
+                  type: number
+                year:
+                  type: number
+                month:
+                  type: number
+              description: When the user completed the media
+              additionalProperties: false
+            customLists:
+              type: array
+              items:
+                type: string
+              description: Array of custom list names for the media
+            advancedScores:
+              type: array
+              items:
+                type: number
+              description: Advanced scores as an object
+            progressVolumes:
+              type: number
+              description: The amount of volumes read (manga only)
+            hiddenFromStatusLists:
+              type: boolean
+              description: Whether the entry should be hidden from non-custom lists
+          description: Values to save with the entry
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_user_anime_list
+    description: Get a user's anime list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        user:
+          type:
+            - number
+            - string
+          description: Username or user ID
+      additionalProperties: false
+  - name: get_user_manga_list
+    description: Get a user's manga list
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        user:
+          type:
+            - number
+            - string
+          description: Username or user ID
+      additionalProperties: false
+  - name: remove_list_entry
+    description: "[Requires Login] Remove an entry from the authorized user's list"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList list ID of the entry to remove
+      additionalProperties: false
+  - name: update_list_entry
+    description: "[Requires Login] Update an entry on the authorized user's list"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+        - options
+      properties:
+        id:
+          type: number
+          description: The AniList list ID of the entry to edit
+        options:
+          type: object
+          required:
+            - id
+            - mediaId
+            - status
+            - score
+            - scoreRaw
+            - progress
+            - progressVolumes
+            - repeat
+            - priority
+            - private
+            - notes
+            - hiddenFromStatusLists
+            - customLists
+            - advancedScores
+            - startedAt
+            - completedAt
+          properties:
+            id:
+              type: number
+              description: The ID of the list entry
+            notes:
+              type: string
+              description: Text notes about the media
+            score:
+              type: number
+              description: The score given to the media
+            repeat:
+              type: number
+              description: Amount of times the media has been repeated
+            status:
+              enum:
+                - CURRENT
+                - PLANNING
+                - COMPLETED
+                - DROPPED
+                - PAUSED
+                - REPEATING
+              type: string
+              description: The status of the media on the list
+            mediaId:
+              type: number
+              description: The ID of the media to add
+            private:
+              type: boolean
+              description: Whether the entry should be private
+            priority:
+              type: number
+              description: Priority level of the media
+            progress:
+              type: number
+              description: The amount of episodes/chapters consumed
+            scoreRaw:
+              type: number
+              description: The raw score in 100 point format
+            startedAt:
+              type: object
+              required:
+                - year
+                - month
+                - day
+              properties:
+                day:
+                  type: number
+                year:
+                  type: number
+                month:
+                  type: number
+              description: When the user started the media
+              additionalProperties: false
+            completedAt:
+              type: object
+              required:
+                - year
+                - month
+                - day
+              properties:
+                day:
+                  type: number
+                year:
+                  type: number
+                month:
+                  type: number
+              description: When the user completed the media
+              additionalProperties: false
+            customLists:
+              type: array
+              items:
+                type: string
+              description: Array of custom list names for the media
+            advancedScores:
+              type: array
+              items:
+                type: number
+              description: Advanced scores as an object
+            progressVolumes:
+              type: number
+              description: The amount of volumes read (manga only)
+            hiddenFromStatusLists:
+              type: boolean
+              description: Whether the entry should be hidden from non-custom lists
+          description: Values to save with the entry
+          additionalProperties: false
+      additionalProperties: false
+  - name: get_anime
+    description: Get detailed information about an anime by its AniList ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the anime
+      additionalProperties: false
+  - name: favourite_anime
+    description: "[Requires Login] Favourite or unfavourite an anime by its ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the anime to favourite/unfavourite
+      additionalProperties: false
+  - name: favourite_manga
+    description: "[Requires Login] Favourite or unfavourite a manga by its ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the manga to favourite/unfavourite
+      additionalProperties: false
+  - name: get_manga
+    description: Get detailed information about a manga by its AniList ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the manga
+      additionalProperties: false
+  - name: get_character
+    description: Get information about a character by their AniList ID or name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type:
+            - number
+            - string
+          description: The AniList ID of the character
+      additionalProperties: false
+  - name: favourite_character
+    description: "[Requires Login] Favourite or unfavourite a character by its ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the character to favourite/unfavourite
+      additionalProperties: false
+  - name: favourite_staff
+    description: "[Requires Login] Favourite or unfavourite a staff member by their ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the staff member to favourite/unfavourite
+      additionalProperties: false
+  - name: get_todays_birthday_characters
+    description: Get all characters whose birthday is today
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: What page in the search to target
+      additionalProperties: false
+  - name: get_todays_birthday_staff
+    description: Get all staff members whose birthday is today
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: What page in the search to target
+      additionalProperties: false
+  - name: get_staff
+    description: Get information about staff member by their AniList ID or name
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type:
+            - number
+            - string
+          description: The AniList ID or name of the staff member
+      additionalProperties: false
+  - name: get_recommendation
+    description: Get an AniList recommendation by its ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - recommendID
+      properties:
+        recommendID:
+          type: number
+          description: The AniList recommendation ID
+      additionalProperties: false
+  - name: get_recommendations_for_media
+    description: Get AniList recommendations for a specific media
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - mediaID
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Target a specific page number for recommendations
+        mediaID:
+          type: number
+          description: The AniList media ID
+        perPage:
+          type: number
+          default: 25
+          description: Limit the page amount (max 25 per AniList limits)
+      additionalProperties: false
+  - name: search_activity
+    description: Search for activities on AniList
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        filter:
+          type: object
+          properties:
+            id:
+              type: number
+              description: The id of the activity
+            sort:
+              type: array
+              items:
+                enum:
+                  - ID
+                  - ID_DESC
+                type: string
+              description: Sort the query by the parameters given.
+            type:
+              enum:
+                - TEXT
+                - ANIME_LIST
+                - MANGA_LIST
+                - MESSAGE
+                - MEDIA_LIST
+              type: string
+              description: The type of activity
+            id_in:
+              type: array
+              items:
+                type: number
+              description: Include any activities with the given IDs
+            id_not:
+              type: number
+              description: Exclude an activity with the given ID
+            userId:
+              type: number
+              description: The userID of the account with the activity
+            mediaId:
+              type: number
+              description: The ID of the media
+            type_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/type"
+              description: Include any activity with the given ActivityTypes
+            type_not:
+              $ref: "#/properties/filter/properties/type"
+              description: Exclude any activity with the same ActivityType
+            createdAt:
+              type: number
+              description: The time at which the activity was created
+            id_not_in:
+              type: array
+              items:
+                type: number
+              description: Excludes any activities with the given IDs
+            userId_in:
+              type: array
+              items:
+                type: number
+              description: Includes any activity with the given userIDs
+            hasReplies:
+              type: boolean
+              description: Filter by which activities have replies
+            mediaId_in:
+              type: array
+              items:
+                type: number
+              description: Include any activity with the given media IDs
+            userId_not:
+              type: number
+              description: Exclude any activity with the given userID
+            isFollowing:
+              type: boolean
+              description: "[Requires Login] Filter users by who is following the authorized
+                user"
+            mediaId_not:
+              type: number
+              description: Exclude any activity with the given media ID
+            messengerId:
+              type: number
+              description: The ID of who sent the message
+            type_not_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/type"
+              description: Exclude any activity with the given ActivityTypes
+            userId_not_in:
+              type: array
+              items:
+                type: number
+              description: Exclude any activity with the given userIDs
+            mediaId_not_in:
+              type: array
+              items:
+                type: number
+              description: Exclude any activity with the given media IDs
+            messengerId_in:
+              type: array
+              items:
+                type: number
+              description: Include any activity with the given message sender IDs
+            messengerId_not:
+              type: number
+              description: Exclude any activity with the given message sender ID
+            createdAt_lesser:
+              type: number
+              description: Include any activity created at the given date or less recent
+            createdAt_greater:
+              type: number
+              description: Include any activity created at the given date or more recent
+            messengerId_not_in:
+              type: array
+              items:
+                type: number
+              description: Exclude any activity with the given message sender IDs
+            hasRepliesOrTypeText:
+              type: boolean
+              description: Filter by which activities have replies or text
+          description: Filter object for searching activities (leave it as undefined for
+            no specific filter)
+          additionalProperties: false
+        perPage:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+        activityID:
+          type: number
+          description: The activity ID to lookup (leave it as undefined for no specific ID)
+      additionalProperties: false
+  - name: search_anime
+    description: Search for anime with query term and filters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        term:
+          type: string
+          description: >-
+            Query term for finding anime (leave it as undefined when no query
+            term specified.)
+
+            Query term is used for searching with specific word or title in
+            mind.
+
+
+            You SHOULD not include things that can be found in the filter
+            object, such as genre or tag.
+
+            Those things should be included in the filter object instead.
+
+
+            To check whether a user requested term should be considered as a
+            query term or a filter term.
+
+            It is recommended to use tools like 'get_genres' and
+            'get_media_tags' first.
+        amount:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+        filter:
+          type: object
+          properties:
+            id:
+              type: number
+              description: The AniList ID
+            tag:
+              type: string
+              description: Filter by a specific tag
+            sort:
+              type: array
+              items:
+                enum:
+                  - ID
+                  - ID_DESC
+                  - TITLE_ROMAJI
+                  - TITLE_ROMAJI_DESC
+                  - TITLE_ENGLISH
+                  - TITLE_ENGLISH_DESC
+                  - TITLE_NATIVE
+                  - TITLE_NATIVE_DESC
+                  - TYPE
+                  - TYPE_DESC
+                  - FORMAT
+                  - FORMAT_DESC
+                  - START_DATE
+                  - START_DATE_DESC
+                  - END_DATE
+                  - END_DATE_DESC
+                  - SCORE
+                  - SCORE_DESC
+                  - POPULARITY
+                  - POPULARITY_DESC
+                  - TRENDING
+                  - TRENDING_DESC
+                  - EPISODES
+                  - EPISODES_DESC
+                  - DURATION
+                  - DURATION_DESC
+                  - STATUS
+                  - STATUS_DESC
+                  - CHAPTERS
+                  - CHAPTERS_DESC
+                  - VOLUMES
+                  - VOLUMES_DESC
+                  - UPDATED_AT
+                  - UPDATED_AT_DESC
+                  - SEARCH_MATCH
+                  - FAVOURITES
+                  - FAVOURITES_DESC
+                type: string
+              description: Sort the results by the provided sort options
+            type:
+              enum:
+                - ANIME
+                - MANGA
+              type: string
+              description: The type of the media (ANIME or MANGA)
+            genre:
+              type: string
+              description: Filter by a specific genre
+            idMal:
+              type: number
+              description: The MyAnimeList ID
+            id_in:
+              type: array
+              items:
+                type: number
+              description: Filter by media ID in array
+            format:
+              enum:
+                - TV
+                - TV_SHORT
+                - MOVIE
+                - SPECIAL
+                - OVA
+                - ONA
+                - MUSIC
+                - MANGA
+                - NOVEL
+                - ONE_SHOT
+              type: string
+              description: The format of the media
+            id_not:
+              type: number
+              description: Filter by media ID not equal to value
+            onList:
+              type: boolean
+              description: "[Requires Login] Filter by if the media is on the authenticated
+                user's list"
+            search:
+              type: string
+              description: Filter by search query
+            season:
+              enum:
+                - WINTER
+                - SPRING
+                - SUMMER
+                - FALL
+              type: string
+              description: The season the media aired
+            source:
+              $ref: "#/properties/filter/properties/format"
+              description: Filter by the media's source type
+            status:
+              enum:
+                - FINISHED
+                - RELEASING
+                - NOT_YET_RELEASED
+                - CANCELLED
+                - HIATUS
+              type: string
+              description: The current status of the media
+            tag_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tags in array
+            endDate:
+              $ref: "#/properties/filter/properties/startDate"
+              description: The end date of the media
+            isAdult:
+              type: boolean
+              description: If the media is intended for adult audiences
+            volumes:
+              type: number
+              description: The number of volumes in the media
+            chapters:
+              type: number
+              description: The number of chapters in the media
+            duration:
+              type: number
+              description: The duration of episodes in minutes
+            episodes:
+              type: number
+              description: The number of episodes in the media
+            genre_in:
+              type: array
+              items:
+                type: string
+              description: Filter by genres in array
+            idMal_in:
+              type: array
+              items:
+                type: number
+              description: Filter by MyAnimeList ID in array
+            format_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/format"
+              description: Filter by media format in array
+            idMal_not:
+              type: number
+              description: Filter by MyAnimeList ID not equal to value
+            id_not_in:
+              type: array
+              items:
+                type: number
+              description: Filter by media ID not in array
+            source_in:
+              type: array
+              items:
+                enum:
+                  - ORIGINAL
+                  - MANGA
+                  - LIGHT_NOVEL
+                  - VISUAL_NOVEL
+                  - VIDEO_GAME
+                  - OTHER
+                  - NOVEL
+                  - DOUJINSHI
+                  - ANIME
+                type: string
+              description: Filter by source types in array
+            startDate:
+              type: object
+              required:
+                - year
+                - month
+                - day
+              properties:
+                day:
+                  type:
+                    - number
+                    - "null"
+                year:
+                  type:
+                    - number
+                    - "null"
+                month:
+                  type:
+                    - number
+                    - "null"
+              description: The start date of the media
+              additionalProperties: false
+            status_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/status"
+              description: Filter by media status in array
+            format_not:
+              $ref: "#/properties/filter/properties/format"
+              description: Filter by media format not equal to value
+            licensedBy:
+              type: string
+              description: Filter by media licensed by a specific company
+            popularity:
+              type: number
+              description: Filter by the media's popularity
+            seasonYear:
+              type: number
+              description: The year of the season
+            status_not:
+              $ref: "#/properties/filter/properties/status"
+              description: Filter by media status not equal to value
+            tag_not_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tags not in array
+            tagCategory:
+              type: string
+              description: Filter by tag category
+            averageScore:
+              type: number
+              description: Filter by the media's average score
+            endDate_like:
+              type: string
+              description: Filter by end date that matches pattern
+            genre_not_in:
+              type: array
+              items:
+                type: string
+              description: Filter by genres not in array
+            idMal_not_in:
+              type: array
+              items:
+                type: number
+              description: Filter by MyAnimeList ID not in array
+            format_not_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/format"
+              description: Filter by media format not in array
+            licensedBy_in:
+              type: array
+              items:
+                type: string
+              description: Filter by media licensed by companies in array
+            status_not_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/status"
+              description: Filter by media status not in array
+            endDate_lesser:
+              type: number
+              description: Filter by end date less than value (FuzzyDateInt format)
+            minimumTagRank:
+              type: number
+              description: The minimum tag rank to filter by
+            popularity_not:
+              type: number
+              description: Filter by popularity not equal to value
+            startDate_like:
+              type: string
+              description: Filter by start date that matches pattern
+            tagCategory_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tag categories in array
+            volumes_lesser:
+              type: number
+              description: Filter by volume count less than value
+            chapters_lesser:
+              type: number
+              description: Filter by chapter count less than value
+            countryOfOrigin:
+              type: number
+              description: Filter by the country where the media was created (ISO 3166-1
+                alpha-2 country code)
+            duration_lesser:
+              type: number
+              description: Filter by episode duration less than value
+            endDate_greater:
+              type: number
+              description: Filter by end date greater than value (FuzzyDateInt format)
+            episodes_lesser:
+              type: number
+              description: Filter by episode count less than value
+            volumes_greater:
+              type: number
+              description: Filter by volume count greater than value
+            averageScore_not:
+              type: number
+              description: Filter by average score not equal to value
+            chapters_greater:
+              type: number
+              description: Filter by chapter count greater than value
+            duration_greater:
+              type: number
+              description: Filter by episode duration greater than value
+            episodes_greater:
+              type: number
+              description: Filter by episode count greater than value
+            startDate_lesser:
+              type: number
+              description: Filter by start date less than value (FuzzyDateInt format)
+            popularity_lesser:
+              type: number
+              description: Filter by popularity less than value
+            startDate_greater:
+              type: number
+              description: Filter by start date greater than value (FuzzyDateInt format)
+            popularity_greater:
+              type: number
+              description: Filter by popularity greater than value
+            tagCategory_not_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tag categories not in array
+            averageScore_lesser:
+              type: number
+              description: Filter by average score less than value
+            averageScore_greater:
+              type: number
+              description: Filter by average score greater than value
+          description: >-
+            Filter object for searching anime.
+
+            You MUST NOT include "{ "type": "ANIME" }" in the filter object. As
+            it is already included in the API call.
+
+            When no sorting method or any filter is specified, you SHOULD use
+            the site default: "{ "sort": ["SEARCH_MATCH"] }".
+
+            Otherwise, request is likely to fail or return no results.
+          additionalProperties: false
+      additionalProperties: false
+  - name: search_character
+    description: Search for characters based on a query term
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - term
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        term:
+          type: string
+          description: Search term for finding characters
+        amount:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+      additionalProperties: false
+  - name: search_manga
+    description: Search for manga with query term and filters
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        term:
+          type: string
+          description: >-
+            Query term for finding manga (leave it as undefined when no query
+            term specified.)
+
+            Query term is used for searching with specific word or title in
+            mind.
+
+
+            You SHOULD not include things that can be found in the filter
+            object, such as genre or tag.
+
+            Those things should be included in the filter object instead.
+
+
+            To check whether a user requested term should be considered as a
+            query term or a filter term.
+
+            It is recommended to use tools like 'get_genres' and
+            'get_media_tags' first.
+        amount:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+        filter:
+          type: object
+          properties:
+            id:
+              type: number
+              description: The AniList ID
+            tag:
+              type: string
+              description: Filter by a specific tag
+            sort:
+              type: array
+              items:
+                enum:
+                  - ID
+                  - ID_DESC
+                  - TITLE_ROMAJI
+                  - TITLE_ROMAJI_DESC
+                  - TITLE_ENGLISH
+                  - TITLE_ENGLISH_DESC
+                  - TITLE_NATIVE
+                  - TITLE_NATIVE_DESC
+                  - TYPE
+                  - TYPE_DESC
+                  - FORMAT
+                  - FORMAT_DESC
+                  - START_DATE
+                  - START_DATE_DESC
+                  - END_DATE
+                  - END_DATE_DESC
+                  - SCORE
+                  - SCORE_DESC
+                  - POPULARITY
+                  - POPULARITY_DESC
+                  - TRENDING
+                  - TRENDING_DESC
+                  - EPISODES
+                  - EPISODES_DESC
+                  - DURATION
+                  - DURATION_DESC
+                  - STATUS
+                  - STATUS_DESC
+                  - CHAPTERS
+                  - CHAPTERS_DESC
+                  - VOLUMES
+                  - VOLUMES_DESC
+                  - UPDATED_AT
+                  - UPDATED_AT_DESC
+                  - SEARCH_MATCH
+                  - FAVOURITES
+                  - FAVOURITES_DESC
+                type: string
+              description: Sort the results by the provided sort options
+            type:
+              enum:
+                - ANIME
+                - MANGA
+              type: string
+              description: The type of the media (ANIME or MANGA)
+            genre:
+              type: string
+              description: Filter by a specific genre
+            idMal:
+              type: number
+              description: The MyAnimeList ID
+            id_in:
+              type: array
+              items:
+                type: number
+              description: Filter by media ID in array
+            format:
+              enum:
+                - TV
+                - TV_SHORT
+                - MOVIE
+                - SPECIAL
+                - OVA
+                - ONA
+                - MUSIC
+                - MANGA
+                - NOVEL
+                - ONE_SHOT
+              type: string
+              description: The format of the media
+            id_not:
+              type: number
+              description: Filter by media ID not equal to value
+            onList:
+              type: boolean
+              description: "[Requires Login] Filter by if the media is on the authenticated
+                user's list"
+            search:
+              type: string
+              description: Filter by search query
+            season:
+              enum:
+                - WINTER
+                - SPRING
+                - SUMMER
+                - FALL
+              type: string
+              description: The season the media aired
+            source:
+              $ref: "#/properties/filter/properties/format"
+              description: Filter by the media's source type
+            status:
+              enum:
+                - FINISHED
+                - RELEASING
+                - NOT_YET_RELEASED
+                - CANCELLED
+                - HIATUS
+              type: string
+              description: The current status of the media
+            tag_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tags in array
+            endDate:
+              $ref: "#/properties/filter/properties/startDate"
+              description: The end date of the media
+            isAdult:
+              type: boolean
+              description: If the media is intended for adult audiences
+            volumes:
+              type: number
+              description: The number of volumes in the media
+            chapters:
+              type: number
+              description: The number of chapters in the media
+            duration:
+              type: number
+              description: The duration of episodes in minutes
+            episodes:
+              type: number
+              description: The number of episodes in the media
+            genre_in:
+              type: array
+              items:
+                type: string
+              description: Filter by genres in array
+            idMal_in:
+              type: array
+              items:
+                type: number
+              description: Filter by MyAnimeList ID in array
+            format_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/format"
+              description: Filter by media format in array
+            idMal_not:
+              type: number
+              description: Filter by MyAnimeList ID not equal to value
+            id_not_in:
+              type: array
+              items:
+                type: number
+              description: Filter by media ID not in array
+            source_in:
+              type: array
+              items:
+                enum:
+                  - ORIGINAL
+                  - MANGA
+                  - LIGHT_NOVEL
+                  - VISUAL_NOVEL
+                  - VIDEO_GAME
+                  - OTHER
+                  - NOVEL
+                  - DOUJINSHI
+                  - ANIME
+                type: string
+              description: Filter by source types in array
+            startDate:
+              type: object
+              required:
+                - year
+                - month
+                - day
+              properties:
+                day:
+                  type:
+                    - number
+                    - "null"
+                year:
+                  type:
+                    - number
+                    - "null"
+                month:
+                  type:
+                    - number
+                    - "null"
+              description: The start date of the media
+              additionalProperties: false
+            status_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/status"
+              description: Filter by media status in array
+            format_not:
+              $ref: "#/properties/filter/properties/format"
+              description: Filter by media format not equal to value
+            licensedBy:
+              type: string
+              description: Filter by media licensed by a specific company
+            popularity:
+              type: number
+              description: Filter by the media's popularity
+            seasonYear:
+              type: number
+              description: The year of the season
+            status_not:
+              $ref: "#/properties/filter/properties/status"
+              description: Filter by media status not equal to value
+            tag_not_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tags not in array
+            tagCategory:
+              type: string
+              description: Filter by tag category
+            averageScore:
+              type: number
+              description: Filter by the media's average score
+            endDate_like:
+              type: string
+              description: Filter by end date that matches pattern
+            genre_not_in:
+              type: array
+              items:
+                type: string
+              description: Filter by genres not in array
+            idMal_not_in:
+              type: array
+              items:
+                type: number
+              description: Filter by MyAnimeList ID not in array
+            format_not_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/format"
+              description: Filter by media format not in array
+            licensedBy_in:
+              type: array
+              items:
+                type: string
+              description: Filter by media licensed by companies in array
+            status_not_in:
+              type: array
+              items:
+                $ref: "#/properties/filter/properties/status"
+              description: Filter by media status not in array
+            endDate_lesser:
+              type: number
+              description: Filter by end date less than value (FuzzyDateInt format)
+            minimumTagRank:
+              type: number
+              description: The minimum tag rank to filter by
+            popularity_not:
+              type: number
+              description: Filter by popularity not equal to value
+            startDate_like:
+              type: string
+              description: Filter by start date that matches pattern
+            tagCategory_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tag categories in array
+            volumes_lesser:
+              type: number
+              description: Filter by volume count less than value
+            chapters_lesser:
+              type: number
+              description: Filter by chapter count less than value
+            countryOfOrigin:
+              type: number
+              description: Filter by the country where the media was created (ISO 3166-1
+                alpha-2 country code)
+            duration_lesser:
+              type: number
+              description: Filter by episode duration less than value
+            endDate_greater:
+              type: number
+              description: Filter by end date greater than value (FuzzyDateInt format)
+            episodes_lesser:
+              type: number
+              description: Filter by episode count less than value
+            volumes_greater:
+              type: number
+              description: Filter by volume count greater than value
+            averageScore_not:
+              type: number
+              description: Filter by average score not equal to value
+            chapters_greater:
+              type: number
+              description: Filter by chapter count greater than value
+            duration_greater:
+              type: number
+              description: Filter by episode duration greater than value
+            episodes_greater:
+              type: number
+              description: Filter by episode count greater than value
+            startDate_lesser:
+              type: number
+              description: Filter by start date less than value (FuzzyDateInt format)
+            popularity_lesser:
+              type: number
+              description: Filter by popularity less than value
+            startDate_greater:
+              type: number
+              description: Filter by start date greater than value (FuzzyDateInt format)
+            popularity_greater:
+              type: number
+              description: Filter by popularity greater than value
+            tagCategory_not_in:
+              type: array
+              items:
+                type: string
+              description: Filter by tag categories not in array
+            averageScore_lesser:
+              type: number
+              description: Filter by average score less than value
+            averageScore_greater:
+              type: number
+              description: Filter by average score greater than value
+          description: >-
+            Filter object for searching manga.
+
+            You MUST NOT include "{ "type": "MANGA" }" in the filter object. As
+            it is already included in the API call.
+
+            When no sorting method or any filter is specified, you SHOULD use
+            the site default: "{ "sort": ["SEARCH_MATCH"] }".
+
+            Otherwise, request is likely to fail or return no results.
+          additionalProperties: false
+      additionalProperties: false
+  - name: search_staff
+    description: Search for staff members based on a query term
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - term
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        term:
+          type: string
+          description: Search term for finding staff members
+        amount:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+      additionalProperties: false
+  - name: search_studio
+    description: Search for studios based on a query term
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - term
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        term:
+          type: string
+          description: Search term for finding studios
+        amount:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+      additionalProperties: false
+  - name: search_user
+    description: Search for users on AniList
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - term
+      properties:
+        page:
+          type: number
+          default: 1
+          description: Page number for results
+        term:
+          type: string
+          description: Search term for finding users
+        amount:
+          type: number
+          default: 5
+          description: Results per page (max 25)
+      additionalProperties: false
+  - name: delete_thread
+    description: "[Requires Login] Delete a thread by its ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList thread ID to delete
+      additionalProperties: false
+  - name: get_thread
+    description: Get a specific thread by its AniList ID
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList ID of the thread
+      additionalProperties: false
+  - name: get_thread_comments
+    description: Get comments for a specific thread
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - id
+      properties:
+        id:
+          type: number
+          description: The AniList thread ID
+        page:
+          type: number
+          default: 1
+          description: The page number
+        perPage:
+          type: number
+          default: 25
+          description: How many comments per page
+      additionalProperties: false
+  - name: get_full_user_info
+    description: Get a user's complete profile and stats information
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        user:
+          type:
+            - number
+            - string
+          description: Username or user ID
+      additionalProperties: false
+  - name: follow_user
+    description: "[Requires Login] Follow or unfollow a user by their ID"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - userID
+      properties:
+        userID:
+          type: number
+          description: The user ID of the account to follow/unfollow
+      additionalProperties: false
+  - name: get_authorized_user
+    description: "[Requires Login] Get profile information of the currently authorized user"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      properties: {}
+      additionalProperties: false
+  - name: get_user_recent_activity
+    description: Get recent activity from a user
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        user:
+          type: number
+          description: The user's AniList ID (Number ID only, DO NOT use username, any
+            kind of string or other types except for numbers.)
+      additionalProperties: false
+  - name: get_user_profile
+    description: Get a user's AniList profile
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        user:
+          type:
+            - number
+            - string
+          description: Username or user ID
+      additionalProperties: false
+  - name: get_user_stats
+    description: Get a user's AniList statistics
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - user
+      properties:
+        user:
+          type:
+            - number
+            - string
+          description: Username or user ID
+      additionalProperties: false
+  - name: update_user
+    description: "[Requires Login] Update user settings"
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - options
+      properties:
+        options:
+          type: object
+          required:
+            - about
+            - titleLanguage
+            - displayAdultContent
+            - airingNotifications
+            - profileColor
+            - activityMergeTime
+            - staffNameLanguage
+            - notificationOptions
+            - timezone
+            - scoreFormat
+            - rowOrder
+            - animeListOptions
+            - mangaListOptions
+          properties:
+            about:
+              type: string
+              description: The user's description
+            rowOrder:
+              type: string
+              description: The user's default list order
+            timezone:
+              type: string
+              description: The user's timezone offset format
+            scoreFormat:
+              enum:
+                - POINT_100
+                - POINT_10_DECIMAL
+                - POINT_10
+                - POINT_5
+                - POINT_3
+              type: string
+              description: The user's score format
+            profileColor:
+              type: string
+              description: The user's profile highlight color
+            titleLanguage:
+              enum:
+                - ROMAJI
+                - ENGLISH
+                - NATIVE
+                - ROMAJI_STYLISED
+                - ENGLISH_STYLISED
+                - NATIVE_STYLISED
+              type: string
+              description: The user's preferred title language
+            animeListOptions:
+              type: object
+              required:
+                - sectionOrder
+                - splitCompletedSectionByFormat
+                - customLists
+                - advancedScoring
+                - advancedScoringEnabled
+                - theme
+              properties:
+                theme:
+                  type: string
+                customLists:
+                  type: array
+                  items:
+                    type: string
+                sectionOrder:
+                  type: array
+                  items:
+                    type: string
+                advancedScoring:
+                  type: array
+                  items:
+                    type: string
+                advancedScoringEnabled:
+                  type: boolean
+                splitCompletedSectionByFormat:
+                  type: boolean
+              description: The user's options for anime lists
+              additionalProperties: false
+            mangaListOptions:
+              type: object
+              required:
+                - sectionOrder
+                - splitCompletedSectionByFormat
+                - customLists
+                - advancedScoring
+                - advancedScoringEnabled
+                - theme
+              properties:
+                theme:
+                  $ref: "#/properties/options/properties/animeListOptions/properties/theme"
+                customLists:
+                  $ref: "#/properties/options/properties/animeListOptions/properties/customLists"
+                sectionOrder:
+                  $ref: "#/properties/options/properties/animeListOptions/properties/sectionOrder"
+                advancedScoring:
+                  $ref: "#/properties/options/properties/animeListOptions/properties/advancedScor\
+                    ing"
+                advancedScoringEnabled:
+                  $ref: "#/properties/options/properties/animeListOptions/properties/advancedScor\
+                    ingEnabled"
+                splitCompletedSectionByFormat:
+                  $ref: "#/properties/options/properties/animeListOptions/properties/splitComplet\
+                    edSectionByFormat"
+              description: The user's options for manga lists
+              additionalProperties: false
+            activityMergeTime:
+              type: number
+              description: The minutes between activity for them to be merged together. 0 is
+                Never, Above 2 weeks (20160 mins) is always.
+            staffNameLanguage:
+              enum:
+                - ROMAJI
+                - NATIVE
+                - ROMAJI_WESTERN
+              type: string
+              description: The user's preferred way to see staff and characters
+            airingNotifications:
+              type: boolean
+              description: True if the user wants airing notifications
+            displayAdultContent:
+              type: boolean
+              description: True if the user wants to display adult content
+            notificationOptions:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - enabled
+                properties:
+                  type:
+                    enum:
+                      - ACTIVITY_MESSAGE
+                      - ACTIVITY_REPLY
+                      - FOLLOWING
+                      - ACTIVITY_MENTION
+                      - THREAD_COMMENT_MENTION
+                      - THREAD_SUBSCRIBED
+                      - THREAD_COMMENT_REPLY
+                      - AIRING
+                      - ACTIVITY_LIKE
+                      - ACTIVITY_REPLY_LIKE
+                      - THREAD_LIKE
+                      - THREAD_COMMENT_LIKE
+                      - ACTIVITY_REPLY_SUBSCRIBED
+                      - RELATED_MEDIA_ADDITION
+                      - MEDIA_DATA_CHANGE
+                      - MEDIA_MERGE
+                      - MEDIA_DELETION
+                    type: string
+                  enabled:
+                    type: boolean
+                additionalProperties: false
+              description: The user's notification options
+          description: User options to update
+          additionalProperties: false
+      additionalProperties: false

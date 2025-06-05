@@ -1,0 +1,17 @@
+identifier: chatmcp/mcp-server-router/mcp-server-router
+repo:
+  provider: github.com
+  url: https://github.com/chatmcp/mcp-server-router
+  name: mcp-server-router
+  owner: chatmcp
+server:
+  subdirectory: /
+  name: MCP Router
+  description: Connect remote MCP servers seamlessly. Simplify your integration
+    with a proxy that manages server connections effortlessly. Enhance your LLM
+    applications by leveraging the capabilities of multiple MCP servers with
+    ease.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

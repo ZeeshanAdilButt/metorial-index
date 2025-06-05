@@ -1,0 +1,38 @@
+tools:
+  - name: list_netbird_groups
+    description: List all Netbird groups
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_netbird_nameservers
+    description: List all Netbird nameservers
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_netbird_networks
+    description: List all Netbird networks
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_netbird_peers
+    description: List all Netbird peers
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_netbird_policies
+    description: List all Netbird policies
+    inputSchema:
+      type: object
+      properties: {}
+  - name: list_netbird_port_allocations
+    description: List all Netbird port allocations
+    inputSchema:
+      type: object
+      properties:
+        PeerID:
+          type: string
+  - name: list_netbird_posture_checks
+    description: List all Netbird posture checks
+    inputSchema:
+      type: object
+      properties: {}

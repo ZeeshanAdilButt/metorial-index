@@ -1,0 +1,18 @@
+identifier: databutton/databutton-app-mcp/databutton-app-mcp
+repo:
+  provider: github.com
+  url: https://github.com/databutton/databutton-app-mcp
+  name: databutton-app-mcp
+  owner: databutton
+server:
+  subdirectory: /
+  name: Databutton App
+  description: Connect your Databutton app's API endpoints as tools for LLMs,
+    enabling seamless integration and interaction. Enhance your applications by
+    leveraging the power of LLMs to call your app's functionalities directly.
+    Securely run this proxy locally to bridge your Databutton app with any MCP
+    compatible client.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

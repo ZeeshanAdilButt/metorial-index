@@ -1,0 +1,19 @@
+identifier: nitish-raj/searxng-mcp-bridge/searxng-mcp-bridge
+repo:
+  provider: github.com
+  url: https://github.com/nitish-raj/searxng-mcp-bridge
+  name: searxng-mcp-bridge
+  owner: nitish-raj
+server:
+  subdirectory: /
+  name: SearXNG Bridge Server
+  description: >-
+    An MCP server that acts as a bridge to a SearxNG instance. Allows compatible
+    clients to perform searches using a configured SearxNG instance.
+
+
+    Requires the `searxngInstanceUrl` configuration to be set.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

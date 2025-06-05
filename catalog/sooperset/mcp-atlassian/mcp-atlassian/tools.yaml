@@ -1,0 +1,941 @@
+tools:
+  - name: jira_get_issue
+    description: Get details of a specific Jira issue including its Epic links and
+      relationship information
+    inputSchema:
+      type: object
+      title: get_issueArguments
+      required:
+        - issue_key
+      properties:
+        expand:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Expand
+          default: null
+          description: "Optional fields to expand. Examples: 'renderedFields' (for
+            rendered content), 'transitions' (for available status transitions),
+            'changelog' (for history)"
+        fields:
+          type: string
+          title: Fields
+          default: summary,description,status,assignee,reporter,labels,priority,created,updated,issuetype
+          description: Fields to return. Can be a comma-separated list (e.g.,
+            'summary,status,customfield_10010'), '*all' for all fields
+            (including custom fields), or omitted for essential fields only
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+        properties:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Properties
+          default: null
+          description: A comma-separated list of issue properties to return
+        comment_limit:
+          type: integer
+          title: Comment Limit
+          default: 10
+          maximum: 100
+          minimum: 0
+          description: Maximum number of comments to include (0 or null for no comments)
+        update_history:
+          type: boolean
+          title: Update History
+          default: true
+          description: Whether to update the issue view history for the requesting user
+  - name: jira_search
+    description: Search Jira issues using JQL (Jira Query Language)
+    inputSchema:
+      type: object
+      title: searchArguments
+      required:
+        - jql
+      properties:
+        jql:
+          type: string
+          title: Jql
+          description: |-
+            JQL query string (Jira Query Language). Examples:
+            - Find Epics: "issuetype = Epic AND project = PROJ"
+            - Find issues in Epic: "parent = PROJ-123"
+            - Find by status: "status = 'In Progress' AND project = PROJ"
+            - Find by assignee: "assignee = currentUser()"
+            - Find recently updated: "updated >= -7d AND project = PROJ"
+            - Find by label: "labels = frontend AND project = PROJ"
+            - Find by priority: "priority = High AND project = PROJ"
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        fields:
+          type: string
+          title: Fields
+          default: summary,description,status,assignee,reporter,labels,priority,created,updated,issuetype
+          description: Comma-separated fields to return in the results. Use '*all' for all
+            fields, or specify individual fields like
+            'summary,status,assignee,priority'
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+        projects_filter:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Projects Filter
+          default: null
+          description: Comma-separated list of project keys to filter results by.
+            Overrides the environment variable JIRA_PROJECTS_FILTER if provided.
+  - name: jira_get_project_issues
+    description: Get all issues for a specific Jira project
+    inputSchema:
+      type: object
+      title: get_project_issuesArguments
+      required:
+        - project_key
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+        project_key:
+          type: string
+          title: Project Key
+          description: The project key
+  - name: jira_get_epic_issues
+    description: Get all issues linked to a specific epic
+    inputSchema:
+      type: object
+      title: get_epic_issuesArguments
+      required:
+        - epic_key
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of issues to return (1-50)
+        epic_key:
+          type: string
+          title: Epic Key
+          description: The key of the epic (e.g., 'PROJ-123')
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+  - name: jira_get_transitions
+    description: Get available status transitions for a Jira issue
+    inputSchema:
+      type: object
+      title: get_transitionsArguments
+      required:
+        - issue_key
+      properties:
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+  - name: jira_get_worklog
+    description: Get worklog entries for a Jira issue
+    inputSchema:
+      type: object
+      title: get_worklogArguments
+      required:
+        - issue_key
+      properties:
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+  - name: jira_download_attachments
+    description: Download attachments from a Jira issue
+    inputSchema:
+      type: object
+      title: download_attachmentsArguments
+      required:
+        - issue_key
+        - target_dir
+      properties:
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+        target_dir:
+          type: string
+          title: Target Dir
+          description: Directory where attachments should be saved
+  - name: jira_get_agile_boards
+    description: Get jira agile boards by name, project key, or type
+    inputSchema:
+      type: object
+      title: get_agile_boardsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+        board_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Board Name
+          default: null
+          description: The name of board, support fuzzy search
+        board_type:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Board Type
+          default: null
+          description: The type of jira board (e.g., 'scrum', 'kanban')
+        project_key:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Project Key
+          default: null
+          description: Jira project key (e.g., 'PROJ-123')
+  - name: jira_get_board_issues
+    description: Get all issues linked to a specific board
+    inputSchema:
+      type: object
+      title: get_board_issuesArguments
+      required:
+        - board_id
+        - jql
+      properties:
+        jql:
+          type: string
+          title: Jql
+          description: |-
+            JQL query string (Jira Query Language). Examples:
+            - Find Epics: "issuetype = Epic AND project = PROJ"
+            - Find issues in Epic: "parent = PROJ-123"
+            - Find by status: "status = 'In Progress' AND project = PROJ"
+            - Find by assignee: "assignee = currentUser()"
+            - Find recently updated: "updated >= -7d AND project = PROJ"
+            - Find by label: "labels = frontend AND project = PROJ"
+            - Find by priority: "priority = High AND project = PROJ"
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        expand:
+          type: string
+          title: Expand
+          default: version
+          description: Fields to expand in the response (e.g., 'version', 'body.storage')
+        fields:
+          type: string
+          title: Fields
+          default: "*all"
+          description: Comma-separated fields to return in the results. Use '*all' for all
+            fields, or specify individual fields like
+            'summary,status,assignee,priority'
+        board_id:
+          type: string
+          title: Board Id
+          description: The id of the board (e.g., '1001')
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+  - name: jira_get_sprints_from_board
+    description: Get jira sprints from board by state
+    inputSchema:
+      type: object
+      title: get_sprints_from_boardArguments
+      required:
+        - board_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        state:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: State
+          default: null
+          description: Sprint state (e.g., 'active', 'future', 'closed')
+        board_id:
+          type: string
+          title: Board Id
+          description: The id of board (e.g., '1000')
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+  - name: jira_get_sprint_issues
+    description: Get jira issues from sprint
+    inputSchema:
+      type: object
+      title: get_sprint_issuesArguments
+      required:
+        - sprint_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        fields:
+          type: string
+          title: Fields
+          default: "*all"
+          description: Comma-separated fields to return in the results. Use '*all' for all
+            fields, or specify individual fields like
+            'summary,status,assignee,priority'
+        start_at:
+          type: integer
+          title: Start At
+          default: 0
+          minimum: 0
+          description: Starting index for pagination (0-based)
+        sprint_id:
+          type: string
+          title: Sprint Id
+          description: The id of sprint (e.g., '10001')
+  - name: jira_update_sprint
+    description: Update jira sprint
+    inputSchema:
+      type: object
+      title: update_sprintArguments
+      required:
+        - sprint_id
+      properties:
+        goal:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Goal
+          default: null
+          description: "Optional: New goal for the sprint"
+        state:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: State
+          default: null
+          description: "Optional: New state for the sprint (future|active|closed)"
+        end_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: End Date
+          default: null
+          description: "Optional: New end date for the sprint"
+        sprint_id:
+          type: string
+          title: Sprint Id
+          description: The id of sprint (e.g., '10001')
+        start_date:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Start Date
+          default: null
+          description: "Optional: New start date for the sprint"
+        sprint_name:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Sprint Name
+          default: null
+          description: "Optional: New name for the sprint"
+  - name: jira_create_issue
+    description: Create a new Jira issue with optional Epic link or parent for subtasks
+    inputSchema:
+      type: object
+      title: create_issueArguments
+      required:
+        - project_key
+        - summary
+        - issue_type
+      properties:
+        summary:
+          type: string
+          title: Summary
+          description: Summary/title of the issue
+        assignee:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Assignee
+          default: null
+          description: Assignee of the ticket (accountID, full name or e-mail)
+        components:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Components
+          default: null
+          description: Comma-separated list of component names to assign (e.g.,
+            'Frontend,API')
+        issue_type:
+          type: string
+          title: Issue Type
+          description: Issue type (e.g. 'Task', 'Bug', 'Story', 'Epic', 'Subtask'). The
+            available types depend on your project configuration. For subtasks,
+            use 'Subtask' (not 'Sub-task') and include parent in
+            additional_fields.
+        description:
+          type: string
+          title: Description
+          default: ""
+          description: Issue description
+        project_key:
+          type: string
+          title: Project Key
+          description: The JIRA project key (e.g. 'PROJ', 'DEV', 'SUPPORT'). This is the
+            prefix of issue keys in your project. Never assume what it might be,
+            always ask the user.
+        additional_fields:
+          type: string
+          title: Additional Fields
+          default: "{}"
+          description: |-
+            Optional JSON string of additional fields to set. Examples:
+            - Set priority: {"priority": {"name": "High"}}
+            - Add labels: {"labels": ["frontend", "urgent"]}
+            - Link to parent (for any issue type): {"parent": "PROJ-123"}
+            - Set Fix Version/s: {"fixVersions": [{"id": "10020"}]}
+            - Custom fields: {"customfield_10010": "value"}
+  - name: jira_batch_create_issues
+    description: Create multiple Jira issues in a batch
+    inputSchema:
+      type: object
+      title: batch_create_issuesArguments
+      required:
+        - issues
+      properties:
+        issues:
+          type: string
+          title: Issues
+          description: >-
+            JSON array of issue objects. Each object should contain:
+
+            - project_key (required): The project key (e.g., 'PROJ')
+
+            - summary (required): Issue summary/title
+
+            - issue_type (required): Type of issue (e.g., 'Task', 'Bug')
+
+            - description (optional): Issue description
+
+            - assignee (optional): Assignee username or email
+
+            - components (optional): Array of component names
+
+            Example: [
+              {"project_key": "PROJ", "summary": "Issue 1", "issue_type": "Task"},
+              {"project_key": "PROJ", "summary": "Issue 2", "issue_type": "Bug", "components": ["Frontend"]}
+            ]
+        validate_only:
+          type: boolean
+          title: Validate Only
+          default: false
+          description: If true, only validates the issues without creating them
+  - name: jira_update_issue
+    description: Update an existing Jira issue including changing status, adding
+      Epic links, updating fields, etc.
+    inputSchema:
+      type: object
+      title: update_issueArguments
+      required:
+        - issue_key
+        - fields
+      properties:
+        fields:
+          type: string
+          title: Fields
+          description: "A valid JSON object of fields to update as a string. Example:
+            '{\"summary\": \"New title\", \"description\": \"Updated
+            description\", \"priority\": {\"name\": \"High\"}, \"assignee\":
+            {\"name\": \"john.doe\"}}'"
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+        attachments:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Attachments
+          default: null
+          description: 'Optional JSON string or comma-separated list of file paths to
+            attach to the issue. Example:
+            "/path/to/file1.txt,/path/to/file2.txt" or
+            "["/path/to/file1.txt","/path/to/file2.txt"]"'
+        additional_fields:
+          type: string
+          title: Additional Fields
+          default: "{}"
+          description: Optional JSON string of additional fields to update. Use this for
+            custom fields or more complex updates.
+  - name: jira_delete_issue
+    description: Delete an existing Jira issue
+    inputSchema:
+      type: object
+      title: delete_issueArguments
+      required:
+        - issue_key
+      properties:
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g. PROJ-123)
+  - name: jira_add_comment
+    description: Add a comment to a Jira issue
+    inputSchema:
+      type: object
+      title: add_commentArguments
+      required:
+        - issue_key
+        - comment
+      properties:
+        comment:
+          type: string
+          title: Comment
+          description: Comment text in Markdown format
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+  - name: jira_add_worklog
+    description: Add a worklog entry to a Jira issue
+    inputSchema:
+      type: object
+      title: add_worklogArguments
+      required:
+        - issue_key
+        - time_spent
+      properties:
+        comment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Comment
+          default: null
+          description: Optional comment for the worklog in Markdown format
+        started:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Started
+          default: null
+          description: "Optional start time in ISO format. If not provided, the current
+            time will be used. Example: '2023-08-01T12:00:00.000+0000'"
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+        time_spent:
+          type: string
+          title: Time Spent
+          description: "Time spent in Jira format. Examples: '1h 30m' (1 hour and 30
+            minutes), '1d' (1 day), '30m' (30 minutes), '4h' (4 hours)"
+  - name: jira_link_to_epic
+    description: Link an existing issue to an epic
+    inputSchema:
+      type: object
+      title: link_to_epicArguments
+      required:
+        - issue_key
+        - epic_key
+      properties:
+        epic_key:
+          type: string
+          title: Epic Key
+          description: The key of the epic to link to (e.g., 'PROJ-456')
+        issue_key:
+          type: string
+          title: Issue Key
+          description: The key of the issue to link (e.g., 'PROJ-123')
+  - name: jira_create_issue_link
+    description: Create a link between two Jira issues
+    inputSchema:
+      type: object
+      title: create_issue_linkArguments
+      required:
+        - link_type
+        - inward_issue_key
+        - outward_issue_key
+      properties:
+        comment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Comment
+          default: null
+          description: Optional comment to add to the link
+        link_type:
+          type: string
+          title: Link Type
+          description: The type of link to create (e.g., 'Duplicate', 'Blocks', 'Relates
+            to')
+        inward_issue_key:
+          type: string
+          title: Inward Issue Key
+          description: The key of the inward issue (e.g., 'PROJ-123')
+        outward_issue_key:
+          type: string
+          title: Outward Issue Key
+          description: The key of the outward issue (e.g., 'PROJ-456')
+        comment_visibility:
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: "null"
+          title: Comment Visibility
+          default: null
+          description: Optional visibility settings for the comment
+  - name: jira_remove_issue_link
+    description: Remove a link between two Jira issues
+    inputSchema:
+      type: object
+      title: remove_issue_linkArguments
+      required:
+        - link_id
+      properties:
+        link_id:
+          type: string
+          title: Link Id
+          description: The ID of the link to remove
+  - name: jira_transition_issue
+    description: Transition a Jira issue to a new status
+    inputSchema:
+      type: object
+      title: transition_issueArguments
+      required:
+        - issue_key
+        - transition_id
+      properties:
+        fields:
+          type: string
+          title: Fields
+          default: "{}"
+          description: "JSON string of fields to update during the transition. Some
+            transitions require specific fields to be set. Example:
+            '{\"resolution\": {\"name\": \"Fixed\"}}'"
+        comment:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Comment
+          default: null
+          description: Comment to add during the transition (optional). This will be
+            visible in the issue history.
+        issue_key:
+          type: string
+          title: Issue Key
+          description: Jira issue key (e.g., 'PROJ-123')
+        transition_id:
+          type: string
+          title: Transition Id
+          description: "ID of the transition to perform. Use the jira_get_transitions tool
+            first to get the available transition IDs for the issue. Example
+            values: '11', '21', '31'"
+  - name: jira_search_fields
+    description: Search Jira fields by keyword with fuzzy match
+    inputSchema:
+      type: object
+      title: search_fieldsArguments
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          minimum: 1
+          description: Maximum number of results
+        keyword:
+          type: string
+          title: Keyword
+          default: ""
+          description: Keyword for fuzzy search. If left empty, lists the first 'limit'
+            available fields in their default order.
+        refresh:
+          type: boolean
+          title: Refresh
+          default: false
+          description: Whether to force refresh the field list
+  - name: confluence_search
+    description: Search Confluence content using simple terms or CQL
+    inputSchema:
+      type: object
+      title: searchArguments
+      required:
+        - query
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 10
+          maximum: 50
+          minimum: 1
+          description: Maximum number of results (1-50)
+        query:
+          type: string
+          title: Query
+          description: >-
+            Search query - can be either a simple text (e.g. 'project
+            documentation') or a CQL query string. Simple queries use
+            'siteSearch' by default, to mimic the WebUI search, with an
+            automatic fallback to 'text' search if not supported. Examples of
+            CQL:
+
+            - Basic search: 'type=page AND space=DEV'
+
+            - Personal space search: 'space="~username"' (note: personal space
+            keys starting with ~ must be quoted)
+
+            - Search by title: 'title~"Meeting Notes"'
+
+            - Use siteSearch: 'siteSearch ~ "important concept"'
+
+            - Use text search: 'text ~ "important concept"'
+
+            - Recent content: 'created >= "2023-01-01"'
+
+            - Content with specific label: 'label=documentation'
+
+            - Recently modified content: 'lastModified > startOfMonth("-1M")'
+
+            - Content modified this year: 'creator = currentUser() AND
+            lastModified > startOfYear()'
+
+            - Content you contributed to recently: 'contributor = currentUser()
+            AND lastModified > startOfWeek()'
+
+            - Content watched by user: 'watcher = "user@domain.com" AND type =
+            page'
+
+            - Exact phrase in content: 'text ~ "\"Urgent Review Required\"" AND
+            label = "pending-approval"'
+
+            - Title wildcards: 'title ~ "Minutes*" AND (space = "HR" OR space =
+            "Marketing")'
+
+            Note: Special identifiers need proper quoting in CQL: personal space
+            keys (e.g., "~username"), reserved words, numeric IDs, and
+            identifiers with special characters.
+        spaces_filter:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Spaces Filter
+          default: null
+          description: Comma-separated list of space keys to filter results by. Overrides
+            the environment variable CONFLUENCE_SPACES_FILTER if provided.
+  - name: confluence_get_page
+    description: Get content of a specific Confluence page by ID
+    inputSchema:
+      type: object
+      title: get_pageArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+          description: Confluence page ID (numeric ID, can be found in the page URL). For
+            example, in the URL
+            'https://example.atlassian.net/wiki/spaces/TEAM/pages/123456789/Page+Title',
+            the page ID is '123456789'
+        include_metadata:
+          type: boolean
+          title: Include Metadata
+          default: true
+          description: Whether to include page metadata such as creation date, last
+            update, version, and labels
+        convert_to_markdown:
+          type: boolean
+          title: Convert To Markdown
+          default: true
+          description: "Whether to convert page to markdown (true) or keep it in raw HTML
+            format (false). Raw HTML can reveal macros (like dates) not visible
+            in markdown, but CAUTION: using HTML significantly increases token
+            usage in AI responses."
+  - name: confluence_get_page_children
+    description: Get child pages of a specific Confluence page.
+    inputSchema:
+      type: object
+      title: get_page_childrenArguments
+      required:
+        - parent_id
+      properties:
+        limit:
+          type: integer
+          title: Limit
+          default: 25
+          maximum: 50
+          minimum: 1
+          description: Maximum number of child pages to return (1-50)
+        expand:
+          type: string
+          title: Expand
+          default: version
+          description: Fields to expand in the response (e.g., 'version', 'body.storage')
+        parent_id:
+          type: string
+          title: Parent Id
+          description: The ID of the parent page whose children you want to retrieve
+        include_content:
+          type: boolean
+          title: Include Content
+          default: false
+          description: Whether to include the page content in the response
+  - name: confluence_get_page_ancestors
+    description: Get ancestor (parent) pages of a specific Confluence page.
+    inputSchema:
+      type: object
+      title: get_page_ancestorsArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+          description: The ID of the page whose ancestors you want to retrieve
+  - name: confluence_get_comments
+    description: Get comments for a specific Confluence page
+    inputSchema:
+      type: object
+      title: get_commentsArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+          description: Confluence page ID (numeric ID, can be parsed from URL, e.g. from
+            'https://example.atlassian.net/wiki/spaces/TEAM/pages/123456789/Page+Title'
+            -> '123456789')
+  - name: confluence_create_page
+    description: Create a new Confluence page
+    inputSchema:
+      type: object
+      title: create_pageArguments
+      required:
+        - space_key
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          title: Title
+          description: The title of the page
+        content:
+          type: string
+          title: Content
+          description: The content of the page in Markdown format. Supports headings,
+            lists, tables, code blocks, and other Markdown syntax
+        parent_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Parent Id
+          default: null
+          description: Optional parent page ID. If provided, this page will be created as
+            a child of the specified page
+        space_key:
+          type: string
+          title: Space Key
+          description: The key of the space to create the page in (usually a short
+            uppercase code like 'DEV', 'TEAM', or 'DOC')
+  - name: confluence_update_page
+    description: Update an existing Confluence page.
+    inputSchema:
+      type: object
+      title: update_pageArguments
+      required:
+        - page_id
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          title: Title
+          description: The new title of the page
+        content:
+          type: string
+          title: Content
+          description: The new content of the page in Markdown format
+        page_id:
+          type: string
+          title: Page Id
+          description: The ID of the page to update
+        parent_id:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Parent Id
+          default: null
+          description: Optional the new parent page ID
+        is_minor_edit:
+          type: boolean
+          title: Is Minor Edit
+          default: false
+          description: Whether this is a minor edit
+        version_comment:
+          type: string
+          title: Version Comment
+          default: ""
+          description: Optional comment for this version
+  - name: confluence_delete_page
+    description: Delete an existing Confluence page.
+    inputSchema:
+      type: object
+      title: delete_pageArguments
+      required:
+        - page_id
+      properties:
+        page_id:
+          type: string
+          title: Page Id
+          description: The ID of the page to delete

@@ -1,0 +1,17 @@
+identifier: quintonwall/mcp-airbyte-list-sources/mcp-airbyte-list-sources
+repo:
+  provider: github.com
+  url: https://github.com/quintonwall/mcp-airbyte-list-sources
+  name: mcp-airbyte-list-sources
+  owner: quintonwall
+server:
+  subdirectory: /
+  name: Airbyte Status Checker
+  description: Check the status of your Airbyte connections seamlessly. Integrate
+    with Claude Desktop to monitor and manage your data pipelines effectively.
+    Simplify your workflow and ensure your data connections are always
+    operational.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

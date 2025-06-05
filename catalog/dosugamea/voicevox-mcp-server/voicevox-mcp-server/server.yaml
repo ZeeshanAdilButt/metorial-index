@@ -1,0 +1,18 @@
+identifier: dosugamea/voicevox-mcp-server/voicevox-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/Dosugamea/voicevox-mcp-server
+  name: voicevox-mcp-server
+  owner: Dosugamea
+server:
+  subdirectory: /
+  name: Voicevox Speech Synthesis Server
+  description: Provide seamless voice synthesis capabilities compatible with
+    VOICEVOX and similar engines through the Model Context Protocol. Enable
+    agents using Claude 3.7 or other MCP clients to generate speech audio
+    easily. Support both Windows and Docker environments for flexible
+    deployment.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

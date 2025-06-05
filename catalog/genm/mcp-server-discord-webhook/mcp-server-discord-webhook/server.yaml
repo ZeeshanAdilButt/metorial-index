@@ -1,0 +1,16 @@
+identifier: genm/mcp-server-discord-webhook/mcp-server-discord-webhook
+repo:
+  provider: github.com
+  url: https://github.com/genm/mcp-server-discord-webhook
+  name: mcp-server-discord-webhook
+  owner: genm
+server:
+  subdirectory: /
+  name: Discord Webhook MCP Server
+  description: Send messages to Discord effortlessly. Integrate your applications
+    with Discord webhooks to enhance communication and notifications. Simplify
+    your workflow by automating message delivery to your Discord channels.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

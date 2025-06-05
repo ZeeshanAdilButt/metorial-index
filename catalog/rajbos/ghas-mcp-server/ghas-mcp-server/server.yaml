@@ -1,0 +1,17 @@
+identifier: rajbos/ghas-mcp-server/ghas-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/rajbos/ghas-mcp-server
+  name: ghas-mcp-server
+  owner: rajbos
+server:
+  subdirectory: /
+  name: GitHub Advanced Security Server
+  description: Integrate GitHub Advanced Security features into your development
+    environment. Access and manage dependabot alerts, secret scanning alerts,
+    and code scanning alerts directly from your tools. Enhance your repository
+    security with streamlined access to critical alerts and insights.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

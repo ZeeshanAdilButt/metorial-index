@@ -1,0 +1,188 @@
+tools:
+  - name: add
+    description: Adds two numbers together
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firstNumber
+        - secondNumber
+      properties:
+        firstNumber:
+          type: number
+          description: The first addend
+        secondNumber:
+          type: number
+          description: The second addend
+      additionalProperties: false
+  - name: subtract
+    description: Subtracts the second number from the first number
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - minuend
+        - subtrahend
+      properties:
+        minuend:
+          type: number
+          description: The number to subtract from (minuend)
+        subtrahend:
+          type: number
+          description: The number being subtracted (subtrahend)
+      additionalProperties: false
+  - name: multiply
+    description: Multiplies two numbers together
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - firstNumber
+        - SecondNumber
+      properties:
+        firstNumber:
+          type: number
+          description: The first number
+        SecondNumber:
+          type: number
+          description: The second number
+      additionalProperties: false
+  - name: division
+    description: Divides the first number by the second number
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numerator
+        - denominator
+      properties:
+        numerator:
+          type: number
+          description: The number being divided (numerator)
+        denominator:
+          type: number
+          description: The number to divide by (denominator)
+      additionalProperties: false
+  - name: sum
+    description: Adds any number of numbers together
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numbers
+      properties:
+        numbers:
+          type: array
+          items:
+            type: number
+          minItems: 1
+          description: Array of numbers to sum
+      additionalProperties: false
+  - name: mean
+    description: Calculates the arithmetic mean of a list of numbers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numbers
+      properties:
+        numbers:
+          type: array
+          items:
+            type: number
+          minItems: 1
+          description: Array of numbers to find the mean of
+      additionalProperties: false
+  - name: median
+    description: Calculates the median of a list of numbers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numbers
+      properties:
+        numbers:
+          type: array
+          items:
+            type: number
+          minItems: 1
+          description: Array of numbers to find the median of
+      additionalProperties: false
+  - name: mode
+    description: Finds the most common number in a list of numbers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numbers
+      properties:
+        numbers:
+          type: array
+          items:
+            type: number
+          description: Array of numbers to find the mode of
+      additionalProperties: false
+  - name: min
+    description: Finds the minimum value from a list of numbers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numbers
+      properties:
+        numbers:
+          type: array
+          items:
+            type: number
+          description: Array of numbers to find the minimum of
+      additionalProperties: false
+  - name: max
+    description: Finds the maximum value from a list of numbers
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - numbers
+      properties:
+        numbers:
+          type: array
+          items:
+            type: number
+          description: Array of numbers to find the maximum of
+      additionalProperties: false
+  - name: floor
+    description: Rounds a number down to the nearest integer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - number
+      properties:
+        number:
+          type: number
+          description: The number to round down
+      additionalProperties: false
+  - name: ceiling
+    description: Rounds a number up to the nearest integer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - number
+      properties:
+        number:
+          type: number
+          description: The number to round up
+      additionalProperties: false
+  - name: round
+    description: Rounds a number to the nearest integer
+    inputSchema:
+      type: object
+      $schema: http://json-schema.org/draft-07/schema#
+      required:
+        - number
+      properties:
+        number:
+          type: number
+          description: The number to round
+      additionalProperties: false

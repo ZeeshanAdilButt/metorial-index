@@ -1,0 +1,1262 @@
+tools:
+  - name: /api/abbr
+    description: 能不能好好说话
+    inputSchema:
+      type: object
+      required:
+        - abbr
+      properties:
+        abbr:
+          type: string
+          description: 要查询的缩写
+  - name: /api/acg
+    description: ACG动漫图片
+    inputSchema:
+      type: object
+      properties:
+        format:
+          type: string
+          description: 返回数据格式,支持 json、image
+  - name: /api/ai/couplet
+    description: 智能对联生成
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: 上联
+  - name: /api/ai/poem
+    description: 藏头诗生成
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        num:
+          type: string
+          description: "诗句格式，5五言诗[默认]、7七言诗\t"
+        type:
+          type: string
+          description: "藏头位置，1藏头[默认]、2藏尾、3藏中、4递增、5递减\t"
+        rhyme:
+          type: string
+          description: "押韵类型，1双句一压[默认]、2双句押韵、3一三四押\t"
+        keyword:
+          type: string
+          description: "藏字内容，2-8个字\t"
+  - name: /api/ai/quick_asr
+    description: 短语音识别
+    inputSchema:
+      type: object
+      properties:
+        url:
+          type: string
+          description: 音频url，可公开下载的url地址， 与 base64 参数二选一传递
+        lang:
+          type: string
+          description: 音频的语言，支持中文zh,英文en
+        base64:
+          type: string
+          description: base64格式音频，与 url 参数二选一传递
+        format:
+          type: string
+          description: 音频格式，如：pcm，wav，mp3，m4a 等
+  - name: /api/avatar
+    description: 获取头像
+    inputSchema:
+      type: object
+      required:
+        - email
+      properties:
+        size:
+          type: string
+          description: 头像大小，默认100
+        email:
+          type: string
+          description: 头像邮箱地址
+        format:
+          type: string
+          description: 头像返回格式，默认bin,直接返回头像内容，支持 bin ,json
+  - name: /api/bilibili/cover
+    description: 哔哩哔哩封面获取
+    inputSchema:
+      type: object
+      required:
+        - c
+      properties:
+        c:
+          type: string
+          description: 哔哩哔哩链接，视频链接、番剧链接
+        format:
+          type: string
+          description: 返回格式，支持 ：json、img
+  - name: /api/bing
+    description: 必应美图
+    inputSchema:
+      type: object
+      required:
+        - format
+      properties:
+        format:
+          type: string
+          description: 返回数据类型，支持 json,image
+  - name: /api/censor/text
+    description: 文本审核
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: 要审核检查的文字
+  - name: /api/chat/completions
+    description: Chat对话模型
+    inputSchema:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: 模型
+        top_p:
+          type: string
+          description: 使用温度采样的替代方法称为核心采样，其中模型考虑具有top_p概率质量的令牌的结果。因此，0.1 意味着只考虑包含前 10%
+            概率质量的代币。
+        stream:
+          type: string
+          description: 是否流传输
+        messages:
+          type: string
+          description: 消息
+        max_tokens:
+          type: string
+          description: ""
+        temperature:
+          type: string
+          description: 使用什么采样温度，介于 0 和 2 之间。较高的值（如 0.8）将使输出更加随机，而较低的值（如 0.2）将使其更加集中和确定。
+        presence_penalty:
+          type: string
+          description: 介于 -2.0 和 2.0 之间的数字。正值会根据新标记到目前为止是否出现在文本中来惩罚它们，从而增加模型讨论新主题的可能性。
+  - name: /api/ciword
+    description: 词语字典
+    inputSchema:
+      type: object
+      required:
+        - word
+      properties:
+        word:
+          type: string
+          description: 要查询的词语，支持前缀匹配
+  - name: /api/comment
+    description: 网易云乐评
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/crypto_currency
+    description: 加密货币行情价格
+    inputSchema:
+      type: object
+      required:
+        - inst
+      properties:
+        inst:
+          type: string
+          description: 货币代码
+  - name: /api/crypto_currency/type
+    description: 货币代码列表
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/dog
+    description: 舔狗日记
+    inputSchema:
+      type: object
+      properties:
+        format:
+          type: string
+          description: 返回数据格式，支持 ：json,text
+  - name: /api/domain/checkssl
+    description: SSL证书检测
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: 要检查的域名
+  - name: /api/domain/dns
+    description: 域名DNS解析查询
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: 要查询的域名
+        dns_type:
+          type: string
+          description: DNS查询类型，ALL查询所有，其他类型：A，CNAME，TXT，AAAA，MX，NS，CAA
+  - name: /api/doutu
+    description: 表情包搜索
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        page:
+          type: string
+          description: 分页，默认1
+        keyword:
+          type: string
+          description: 搜索关键词
+  - name: /api/encrypt
+    description: 内容加解密
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        type:
+          type: string
+          description: 加解密类型，默认md5
+        secret:
+          type: string
+          description: 加密秘钥，hmac加密 需要填写
+        content:
+          type: string
+          description: 要加密或者解密的内容
+  - name: /api/ent/check_four_name
+    description: 企业四要素验证
+    inputSchema:
+      type: object
+      required:
+        - name
+        - oper
+        - start
+        - code
+        - end
+      properties:
+        end:
+          type: string
+          description: 营业期限至，请严格按照以下格式传入，如： 20300302 否则可能导致比对有误差 如果执照上的截至日期是"长期"，则无需传入本参数
+        code:
+          type: string
+          description: 统一社会信用代码
+        name:
+          type: string
+          description: 企业全名
+        oper:
+          type: string
+          description: 法定代表人姓名
+        start:
+          type: string
+          description: 营业期限始，请严格按照以下格式传入，如：20100303 否则可能导致比对有误差
+  - name: /api/ent/check_three_name
+    description: 企业三要素验证
+    inputSchema:
+      type: object
+      required:
+        - name
+        - oper
+        - code
+      properties:
+        code:
+          type: string
+          description: 统一社会信用代码
+        name:
+          type: string
+          description: 企业全称
+        oper:
+          type: string
+          description: 法定代表人姓名，如法人实际为空，则填写“-”代替
+  - name: /api/ent/contact_info
+    description: 企业联系方式
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: 企业全名/注册号/统一社会信用代码
+  - name: /api/ent/domains
+    description: 企业域名信息
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 企业全名/注册号/统一社会信用代码
+  - name: /api/ent/trademark
+    description: 商标搜索
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        skip:
+          type: string
+          description: 跳过条目数（skip默认为0，每页条数为20）
+        date_to:
+          type: string
+          description: 申请日期止，yyyy-mm-dd
+        keyword:
+          type: string
+          description: ""
+        type_num:
+          type: string
+          description: 国际分类号，1 化学原料 2 颜料油漆 3 日化用品 4 染料油脂 5 医药 6 金属材料 7 机械设备 8 手工器械 9 科学仪器
+            10 医疗器械 11 灯具空调 12 运输工具 13 军火烟火 14 珠宝钟表 15 乐器 16 办公品 17 橡胶制品 18 皮革皮具
+            19 建筑材料 20 家具 21 厨房洁具 22 绳网袋篷 23 纱线丝 24 布料床单 25 服装鞋帽 26 纽扣拉链 27 地毯席垫
+            28 健身器材 29 食品 30 方便食品 31 饲料种籽 32 啤酒饮料 33 酒 34 烟草烟具 35 广告销售 36 金融物管
+            37 建筑修理 38 通讯服务 39 运输贮藏 40 材料加工 41 教育娱乐 42 设计研究 43 餐饮住宿 44 医疗园艺 45
+            社会法律
+        date_from:
+          type: string
+          description: 申请日期起，格式为yyyy-mm-dd
+        trademark_status_simplified:
+          type: string
+          description: 商标状态，已注册；商标被撤销；商标已失效；期满未续展；无效宣告审查中；商标被注销；等待实质审查；驳回复审；申请撤回；异议中；初审公告；其他
+  - name: /api/enterprise/simple_search
+    description: 企业工商信息搜索
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        skip:
+          type: string
+          description: 跳过条目数（默认为0，单页返回10条数据，取11到20条的数据，skip=10，以此类推进行取数）
+        keyword:
+          type: string
+          description: 企业名称关键字/注册号/统一社会信用代码
+  - name: /api/eventHistory
+    description: 历史上的今天
+    inputSchema:
+      type: object
+      properties:
+        day:
+          type: string
+          description: 日期，指定数据的日期，默认当天
+        month:
+          type: string
+          description: 月份，指定数据的月份，默认本月
+  - name: /api/eventHistory/get
+    description: 历史上的今天详情
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 历史上的今天Id
+  - name: /api/exchange
+    description: 汇率实时转换查询
+    inputSchema:
+      type: object
+      properties:
+        to:
+          type: string
+          description: 转换汇率成的货币代码，默认USD
+        from:
+          type: string
+          description: 转换汇率前的货币代码,默认CNY
+        money:
+          type: string
+          description: 转换的金额，默认1
+  - name: /api/exchange/type
+    description: 支持的货币代码列表
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/fanyi
+    description: 文本翻译
+    inputSchema:
+      type: object
+      required:
+        - q
+      properties:
+        q:
+          type: string
+          description: 要翻译的文本
+        to:
+          type: string
+          description: "翻译语种，默认en\t"
+        from:
+          type: string
+          description: 来源语种。默认 zh
+  - name: /api/garbage
+    description: 垃圾分类
+    inputSchema:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: 垃圾名称
+  - name: /api/gold
+    description: 黄金实时价格
+    inputSchema:
+      type: object
+      required:
+        - market
+      properties:
+        market:
+          type: string
+          description: 类型,支持：LF 实时黄金价格, SH 上海黄金交易所
+  - name: /api/gold/brand
+    description: 品牌黄金价格
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/hitokoto
+    description: Hitokoto一言
+    inputSchema:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 一言类型,a动画,b漫画,c游戏,d文学,e原创,f来自网络,g其他,h影视,i诗词,j网易云,k哲学,l抖机灵
+        format:
+          type: string
+          description: 返回类型
+  - name: /api/holiday
+    description: 节假日查询
+    inputSchema:
+      type: object
+      properties:
+        year:
+          type: string
+          description: 要查询的年份，默认当年，不能超过当前年份
+  - name: /api/holiday/workday
+    description: 工作日查询
+    inputSchema:
+      type: object
+      required:
+        - start
+      properties:
+        end:
+          type: string
+          description: 查询开始时间
+        need:
+          type: string
+          description: 是否返回详细的工作日期, 1是，0否
+        start:
+          type: string
+          description: 查询开始时间
+  - name: /api/icp
+    description: 域名ICP备案查询
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: 要查询的域名
+  - name: /api/idcard
+    description: 身份证信息查询
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 身份证号
+  - name: /api/idcard/upgrade
+    description: 身份证升级
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 要升级的15位身份证
+  - name: /api/idiom
+    description: 成语词典
+    inputSchema:
+      type: object
+      required:
+        - word
+      properties:
+        word:
+          type: string
+          description: 要查询的成语，支持前缀匹配
+  - name: /api/ip
+    description: IP地址查询
+    inputSchema:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: 要查询的IP，默认获取请求客户端的IP
+  - name: /api/joke
+    description: 笑话列表
+    inputSchema:
+      type: object
+      properties:
+        num:
+          type: string
+          description: 分页大小
+        page:
+          type: string
+          description: 分页
+  - name: /api/joke/random
+    description: 随机笑话
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/kd
+    description: 快递查询
+    inputSchema:
+      type: object
+      required:
+        - number
+      properties:
+        com:
+          type: string
+          description: 快递公司编码，默认自动识别，不用填写
+        phone:
+          type: string
+          description: 寄/收件人手机号后四位，顺丰快递和中通快递必填
+        number:
+          type: string
+          description: 要查询的快递编号
+  - name: /api/kd/com
+    description: 快递公司列表
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/lanzou
+    description: 蓝奏云直连解析
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        pwd:
+          type: string
+          description: 密码，默认为空，不需要密码
+        url:
+          type: string
+          description: 蓝奏云链接，支持单个文件或者文件夹，如果是文件夹则只能返回json
+        format:
+          type: string
+          description: 返回格式，支持json，和直接跳转，默认直接跳转到直连地址
+  - name: /api/lunar
+    description: 农历查询
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: 日历日期，如：2024-12-12 12:00
+        unix_time:
+          type: string
+          description: 10位时间戳，与date二选一传入
+  - name: /api/mingyan
+    description: 名人名言
+    inputSchema:
+      type: object
+      properties:
+        format:
+          type: string
+          description: "返回格式,支持json,text\t"
+        typeid:
+          type: string
+          description: 名言类型
+  - name: /api/mingyan/type
+    description: 名人名言类型
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/models
+    description: 可用模型
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/mryw
+    description: 每日一文
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/mryw/list
+    description: 美文列表
+    inputSchema:
+      type: object
+      properties:
+        cate:
+          type: string
+          description: 美文分类，目前支持：everyday，yilin
+  - name: /api/mryw/random
+    description: 随机美文
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/music/comment/hot
+    description: 获取歌曲热评
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 歌曲ID
+  - name: /api/music/detail
+    description: 歌曲详情
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 歌曲ID，支持多个，多个用英文逗号分隔
+  - name: /api/music/lyric
+    description: 歌词获取
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 网易云歌曲ID
+  - name: /api/music/playlist
+    description: 获取歌单列表
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 歌单ID
+  - name: /api/music/search
+    description: 歌曲搜索
+    inputSchema:
+      type: object
+      required:
+        - keyword
+      properties:
+        page:
+          type: string
+          description: 分页偏移
+        type:
+          type: string
+          description: "类型，默认1，取值意义 :1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV,
+            1006: 歌词, 1009: 电台, 1014: 视频, 1018:综合"
+        limit:
+          type: string
+          description: 返回数据数量
+        keyword:
+          type: string
+          description: 搜索关键词
+  - name: /api/music/url
+    description: 网易云歌曲直链
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 歌曲ID
+        cookie:
+          type: string
+          description: 网易云登录的cookie,可用于获取VIP歌曲的链接
+  - name: /api/new/hanfu
+    description: 汉服新闻
+    inputSchema:
+      type: object
+      required:
+        - page
+      properties:
+        page:
+          type: string
+          description: 分页
+  - name: /api/new/toutiao
+    description: 新闻头条
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: string
+          description: 分页
+        type:
+          type: string
+          description: 新闻类型
+  - name: /api/new/toutiao/type
+    description: 头条类型
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/new/wbtop
+    description: 微博热搜榜
+    inputSchema:
+      type: object
+      properties:
+        num:
+          type: string
+          description: 返回数量，最大50
+  - name: /api/nlp/keyword
+    description: 关键词提取
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        num:
+          type: string
+          description: 返回词语个数,默认3个
+        text:
+          type: string
+          description: 要提取的句子
+  - name: /api/nlp/phrase
+    description: 短语提取
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        num:
+          type: string
+          description: 提取短语的数量
+        text:
+          type: string
+          description: 要提取的短语
+  - name: /api/nlp/summary
+    description: 自动摘要
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        num:
+          type: string
+          description: 要返回的摘要个数
+        text:
+          type: string
+          description: 要提取的文本文章
+  - name: /api/nlp/word
+    description: 智能分词
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: 要分词的内容
+        type:
+          type: string
+          description: 分词方式,默认nlp,支持nlp,crf,nostopword,index,short，nshort,speed，standard
+  - name: /api/oil
+    description: 油价查询
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/one
+    description: ONE · 一个 文章
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: 日期，默认当天
+  - name: /api/one/photo
+    description: ONE · 一个 摄影
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: 日期，默认当天
+  - name: /api/one/question
+    description: ONE · 一个 问答
+    inputSchema:
+      type: object
+      properties:
+        date:
+          type: string
+          description: 日期，默认当天
+  - name: /api/phone
+    description: 手机号归属地查询
+    inputSchema:
+      type: object
+      required:
+        - phone
+      properties:
+        phone:
+          type: string
+          description: 手机号
+  - name: /api/phonecheck
+    description: 空号检测
+    inputSchema:
+      type: object
+      required:
+        - mobiles
+      properties:
+        mobiles:
+          type: string
+          description: 要检测的手机号，多个号码以英文逗号隔开，最大50个
+  - name: /api/pinyin
+    description: 中文转拼音
+    inputSchema:
+      type: object
+      required:
+        - word
+      properties:
+        de:
+          type: string
+          description: 拼音间隔，默认为一个空格
+        abbr:
+          type: string
+          description: 是否为首字母格式，默认为否，如果为是，则只会返回首字母
+        tone:
+          type: string
+          description: 是否返回音标，默认否
+        word:
+          type: string
+          description: 要转换的中文字符
+  - name: /api/qinghua
+    description: 土味情话
+    inputSchema:
+      type: object
+      properties:
+        format:
+          type: string
+          description: 返回格式，支持 json,text
+  - name: /api/qr
+    description: 二维码生成
+    inputSchema:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: 要生成的二维码内容
+  - name: /api/qr/decode
+    description: 二维码识别
+    inputSchema:
+      type: object
+      properties:
+        url:
+          type: string
+          description: 二维码的图片地址，与 image 二选一传递
+        image:
+          type: string
+          description: 二维码的base64图片，与url二选一传递
+  - name: /api/riddle
+    description: 谜语大全列表
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: string
+          description: 分页
+        type:
+          type: string
+          description: 谜语类型
+  - name: /api/riddle/random
+    description: 随机谜语
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/riddle/type
+    description: 谜语类型
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/shici
+    description: 随机诗词
+    inputSchema:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 诗词类型,默认随机，支持的类型：shuqing:抒情,siji:四季,shanshui:山水,tianqi:天气,renwu:人物,shenghuo:生活,jieri:节日,dongwu:动物,zhiwu:植物,shiwu:食物
+        format:
+          type: string
+          description: 返回数据格式，默认json，支持 json、text
+  - name: /api/solarTerm
+    description: 24节气查询（年份）
+    inputSchema:
+      type: object
+      required:
+        - year
+      properties:
+        year:
+          type: string
+          description: 要查询的年份，默认当年
+  - name: /api/solarTerm/search
+    description: 二十四节气（日期）
+    inputSchema:
+      type: object
+      required:
+        - date
+      properties:
+        date:
+          type: string
+          description: 要查询的日期
+  - name: /api/soul
+    description: 心灵毒鸡汤
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/star
+    description: 星座运势
+    inputSchema:
+      type: object
+      required:
+        - star
+      properties:
+        star:
+          type: string
+          description: 要查询的星座，支持：aries 白羊座, taurus 金牛座, gemini 双子座, cancer 巨蟹座, leo 狮子座,
+            virgo 处女座, libra 天秤座, scorpio 天蝎座, sagittarius 射手座, capricorn 摩羯座,
+            aquarius 水瓶座, pisces 双鱼座
+  - name: /api/tianqi
+    description: 实况天气查询
+    inputSchema:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: 根据ip查询所在城市的天气，默认为当前请求接口的IP
+        lat:
+          type: string
+          description: 纬度，通过经纬度查询
+        lon:
+          type: string
+          description: 经度，通过经纬度查询
+        city:
+          type: string
+          description: 城市名称，如：南昌
+        city_id:
+          type: string
+          description: 城市ID
+        province:
+          type: string
+          description: 省份，如：江西；和city配合使用。传入该参数则会查询该省份下面的城市
+  - name: /api/tianqi/forty
+    description: 40天天气查询
+    inputSchema:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: 根据ip查询所在城市的天气，默认为当前请求接口的IP
+        lat:
+          type: string
+          description: 纬度，通过经纬度查询
+        lon:
+          type: string
+          description: 经度，通过经纬度查询
+        city:
+          type: string
+          description: 城市名称，如：南昌
+        city_id:
+          type: string
+          description: 城市ID
+        province:
+          type: string
+          description: 省份，如：江西；和city配合使用。传入该参数则会查询该省份下面的城市
+  - name: /api/tianqi/index
+    description: 天气指数
+    inputSchema:
+      type: object
+      required:
+        - city_id
+      properties:
+        city_id:
+          type: string
+          description: ""
+  - name: /api/tianqi/seven
+    description: 7天天气查询
+    inputSchema:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: 根据ip查询所在城市的天气，默认为当前请求接口的IP
+        lat:
+          type: string
+          description: 纬度，通过经纬度查询
+        lon:
+          type: string
+          description: 经度，通过经纬度查询
+        city:
+          type: string
+          description: 城市名称，如：南昌
+        city_id:
+          type: string
+          description: 城市ID
+        province:
+          type: string
+          description: 省份，如：江西；和city配合使用。传入该参数则会查询该省份下面的城市
+  - name: /api/tophub
+    description: 今日热榜
+    inputSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 热榜ID
+        date:
+          type: string
+          description: 指定日期的热榜数据，默认为当天的数据，时间格式为：2025-03-27
+        type:
+          type: string
+          description: 热榜类型，和ID参数二选一	，默认为 weibo
+  - name: /api/tophub/site
+    description: 今日热榜站点列表
+    inputSchema:
+      type: object
+      properties:
+        page:
+          type: string
+          description: 分页，1
+        page_size:
+          type: string
+          description: 分页大小
+  - name: /api/tracking
+    description: 快递查询
+    inputSchema:
+      type: object
+      required:
+        - number
+      properties:
+        com:
+          type: string
+          description: 快递公司编号，默认为auto,自动识别
+        phone:
+          type: string
+          description: 收寄件人手机号后4位，只有顺丰需要填写
+        number:
+          type: string
+          description: 快递单号
+  - name: /api/tts/free
+    description: 语音合成
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: 要合成语音的文本
+        format:
+          type: string
+          description: 数据返回格式，支持：json, wav
+        voice_type:
+          type: string
+          description: 音色类型，支持：female_zhubo,male_rap,female_sichuan,male_db,male_zhubo
+  - name: /api/tts/pro
+    description: 语音合成
+    inputSchema:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: 要转换的文本，最高1024字节，大概500字
+        format:
+          type: string
+          description: "返回的数据格式：json, raw\t"
+        encoding:
+          type: string
+          description: "音频格式：支持wav,pcm,ogg_opus,mp3\t"
+        text_type:
+          type: string
+          description: "文本类型，支持：plain, ssml\t"
+        voice_type:
+          type: string
+          description: "音色类型\t"
+        speed_ratio:
+          type: string
+          description: "语速, 0.2 - 3 ，默认1\t"
+        volume_ratio:
+          type: string
+          description: "音量：0.1 - 3， 默认1\t"
+  - name: /api/tts/voice_type
+    description: 音色列表
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/url
+    description: 短网址生成
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 长网址
+        type:
+          type: string
+          description: 短网址平台类型,默认随机
+  - name: /api/url/batchQuery
+    description: 批量短网址还原
+    inputSchema:
+      type: object
+      required:
+        - urls
+      properties:
+        urls:
+          type: string
+          description: 短网址，多个用英文逗号分隔，不能超过50个
+  - name: /api/url/query
+    description: 短网址还原
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 要还原的短网址
+  - name: /api/url/type
+    description: 短网址类型
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/urlcheck/qq
+    description: QQ网址拦截查询
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 要查询的网址或者域名
+  - name: /api/urlcheck/wx
+    description: 微信链接拦截查询
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 要查询的域名或者网址
+  - name: /api/video/url
+    description: 短视频解析
+    inputSchema:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: 短视频分享的URL
+  - name: /api/whois
+    description: 域名Whois查询
+    inputSchema:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: 要查询的域名
+  - name: /api/word
+    description: 新华字典
+    inputSchema:
+      type: object
+      required:
+        - word
+      properties:
+        word:
+          type: string
+          description: 要查询的字
+  - name: /api/xhy
+    description: 歇后语搜索
+    inputSchema:
+      type: object
+      required:
+        - word
+      properties:
+        page:
+          type: string
+          description: 分页
+        word:
+          type: string
+          description: 歇后语搜索关键词
+  - name: /api/xhy/random
+    description: 随机歇后语
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/zaobao
+    description: 每日早报
+    inputSchema:
+      type: object
+      required:
+        - format
+      properties:
+        format:
+          type: string
+          description: 返回格式，支持json,image，如果是image则会跳转到真实图片地址
+  - name: /api/zhihu
+    description: 知乎日报
+    inputSchema:
+      type: object
+      properties: {}
+  - name: /api/zhihu/get
+    description: 指定日期日报
+    inputSchema:
+      type: object
+      required:
+        - date
+      properties:
+        date:
+          type: string
+          description: ""
+  - name: /api/zhihu/long_comments
+    description: 获取日报长评论列表
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 日报ID
+  - name: /api/zhihu/news
+    description: 获取日报详情
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 日报ID
+  - name: /api/zhihu/short_comments
+    description: 获取日报短评论列表
+    inputSchema:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: 日报ID

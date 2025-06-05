@@ -1,0 +1,15 @@
+identifier: tommybez/dbt-semantic-layer-mcp-server/dbt-semantic-layer-mcp
+repo:
+  provider: github.com
+  url: https://github.com/TommyBez/dbt-semantic-layer-mcp-server
+  name: dbt-semantic-layer-mcp-server
+  owner: TommyBez
+server:
+  subdirectory: /
+  name: DBT Semantic Layer Server
+  description: Query the DBT Semantic Layer API seamlessly. Enhance your data
+    querying capabilities with a robust MCP server.
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true
