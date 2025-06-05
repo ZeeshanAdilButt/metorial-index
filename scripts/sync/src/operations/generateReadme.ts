@@ -7,7 +7,7 @@ let shortenString = (str: string, maxLength: number) => {
 };
 
 let getServerListItem = (item: ReadmeItem) => {
-  return `- <img src="https://github.com/${item.repository.providerOwnerIdentifier}.png?size=120" width="12px" height="12px" /> **[${item.server.name}](${item.repository.providerUrl})** - ${shortenString(item.server.description?.split('\n').join(' ') ?? '', 100)}`;
+  return `- <img src="https://github.com/${item.repository.providerOwnerIdentifier}.png?size=120" width="12px" height="12px" /> **[${item.server.name}](${item.repository.providerUrl})** - ${shortenString(item.server.description?.split('\n').join(' ') ?? '', 1000)}`;
 };
 
 let getServerList = (name: string, items: ReadmeItem[]) => {
