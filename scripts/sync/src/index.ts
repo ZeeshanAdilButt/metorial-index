@@ -81,3 +81,7 @@ await forEachServer(async ({ serverPath }) => {
 
 let readmePath = path.join(__dirname, '../../../README.md');
 await fs.writeFile(readmePath, await generateReadme(readmeItems), 'utf-8');
+
+console.log('Readme generated successfully!');
+
+console.log('Syncing complete!');
