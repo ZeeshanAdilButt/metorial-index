@@ -37,7 +37,7 @@ let header = `
 
 <h1 align="center">MCP Index</h1>
 
-<p align="center">An every growing list of <a href="https://modelcontextprotocol.io">MCP servers</a> 📡 📁</p>
+<p align="center">An ever growing list of <a href="https://modelcontextprotocol.io">MCP servers</a> 📡 📁</p>
 `;
 
 let footer = `
