@@ -38,6 +38,11 @@ let header = `
 <h1 align="center">MCP Index</h1>
 
 <p align="center">An ever growing list of <a href="https://modelcontextprotocol.io">MCP servers</a> 📡 📁</p>
+
+> [!TIP]
+> *Hosted MCP Containers:* Skip local setup and go hosted. [Metorial's](https://metorial.com) serverless hosted MCP service allows you to integrate the MCP servers listed in this repo in a single line of code. Built for devs; with logging, monitoring and SDKs included.
+> 
+> ➡️ **[Get Early Access (with free tier)](https://metorial.com/early-access)**
 `;
 
 let footer = `
