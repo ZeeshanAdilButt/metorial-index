@@ -1,0 +1,31 @@
+tools:
+  - name: sap_successfactors_get_tables
+    description: Retrieves a list of tables available in the SAP SuccessFactors data source.
+      Use the sap_successfactors_get_columns tool to list available columns on a table.
+      The output of the tool will be returned in CSV format, with the first line containing column headers.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: sap_successfactors_get_columns
+    description: Retrieves a list of columns for a table in SAP SuccessFactors.
+      Use the sap_successfactors_get_tables tool to get a list of available tables.
+      The output of the tool will be returned in CSV format, with the first line containing column headers.
+    inputSchema:
+      type: object
+      properties:
+        table:
+          type: string
+          description: The name of the table to get columns for
+      required:
+        - table
+  - name: sap_successfactors_run_query
+    description: Execute a SQL SELECT query against the SAP SuccessFactors data source.
+      Returns the results in CSV format with column headers.
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The SQL SELECT query to execute
+      required:
+        - query
