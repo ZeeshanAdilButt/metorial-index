@@ -1,0 +1,76 @@
+tools:
+  - name: sf-list-all-orgs
+    description: List all authenticated Salesforce orgs available to the current user.
+      Shows org details including usernames, aliases, and connection status for
+      easy org management and selection.
+    inputSchema:
+      type: object
+      properties: {}
+  - name: sf-org-open
+    description: Open a Salesforce org in the browser for direct web-based interaction.
+      Provides quick access to the Salesforce web interface for the specified org.
+    inputSchema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username or alias of the Salesforce org to open
+      required:
+        - username
+  - name: sf-query-org
+    description: Execute SOQL queries against Salesforce org data to retrieve records
+      and information. Supports complex queries with filters, joins, and aggregations
+      for comprehensive data analysis.
+    inputSchema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username or alias of the Salesforce org to query
+        query:
+          type: string
+          description: The SOQL query string to execute against the org
+      required:
+        - username
+        - query
+  - name: sf-deploy-metadata
+    description: Deploy Salesforce metadata components to an org. Supports deployment
+      of various metadata types including Apex classes, triggers, custom objects,
+      flows, and other Salesforce components.
+    inputSchema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username or alias of the target Salesforce org
+        sourcePath:
+          type: string
+          description: The path to the metadata source files to deploy
+        checkOnly:
+          type: boolean
+          description: Whether to perform a validation-only deployment (check only)
+          default: false
+      required:
+        - username
+        - sourcePath
+  - name: sf-retrieve-metadata
+    description: Retrieve Salesforce metadata components from an org to local file system.
+      Allows downloading and syncing of metadata components for development and
+      version control purposes.
+    inputSchema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username or alias of the source Salesforce org
+        targetPath:
+          type: string
+          description: The local path where retrieved metadata should be saved
+        metadataTypes:
+          type: array
+          items:
+            type: string
+          description: Specific metadata types to retrieve (optional, retrieves all if not specified)
+      required:
+        - username
+        - targetPath

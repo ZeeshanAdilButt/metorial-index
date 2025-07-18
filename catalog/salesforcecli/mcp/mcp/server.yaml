@@ -1,0 +1,19 @@
+identifier: salesforcecli/mcp/mcp
+repo:
+  provider: github.com
+  url: https://github.com/salesforcecli/mcp
+  name: mcp
+  owner: salesforcecli
+server:
+  subdirectory: /
+  name: Salesforce DX MCP Server
+  description: Official Salesforce DX Model Context Protocol server for secure interaction
+    with Salesforce orgs through LLMs. Provides direct access to Salesforce resources
+    using TypeScript libraries with enhanced security features including encrypted auth,
+    granular access control, and org allowlisting. Enables natural language-driven
+    Salesforce development tasks including metadata operations, data queries, and
+    org management.
+  flags:
+    isOfficial: true
+    isCommunity: false
+    isHostable: true
