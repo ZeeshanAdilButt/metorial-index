@@ -1,0 +1,14 @@
+identifier: openbnb-org/mcp-server-airbnb
+repo:
+  provider: github.com
+  url: https://github.com/openbnb-org/mcp-server-airbnb
+  name: mcp-server-airbnb
+  owner: openbnb-org
+server:
+  subdirectory: /
+  name: Mcp Server Airbnb
+  description: "Docker MCP server for mcp-server-airbnb operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,12 @@
+identifier: stefanoamorelli/nasdaq-data-link-mcp::docker-mcp
+provider:
+  identifier: docker/mcp-registry
+  name: Docker - MCP Registry
+  website: https://github.com/docker/mcp-registry
+  imageUrl: https://avatars.githubusercontent.com/u/5429470?s=200&v=4
+  description: A collection of containerized MCP servers, maintained by Docker.
+source:
+  type: docker
+  image: mcp/nasdaq-data-link
+  provider:
+    identifier: stefanoamorelli/nasdaq-data-link-mcp

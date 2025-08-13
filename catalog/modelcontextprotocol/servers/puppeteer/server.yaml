@@ -1,17 +1,14 @@
-identifier: modelcontextprotocol/servers/puppeteer
+identifier: modelcontextprotocol/servers
 repo:
   provider: github.com
   url: https://github.com/modelcontextprotocol/servers
   name: servers
   owner: modelcontextprotocol
 server:
-  subdirectory: /src/puppeteer
-  name: Puppeteer
-  description: A Model Context Protocol server that provides browser automation
-    capabilities using Puppeteer. This server enables LLMs to interact with web
-    pages, take screenshots, and execute JavaScript in a real browser
-    environment.
+  subdirectory: /
+  name: Servers
+  description: "Docker MCP server for servers operations."
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: false
+    isHostable: true

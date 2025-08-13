@@ -1,0 +1,14 @@
+identifier: bitrefill/bitrefill-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/bitrefill/bitrefill-mcp-server
+  name: bitrefill-mcp-server
+  owner: bitrefill
+server:
+  subdirectory: /
+  name: Bitrefill Mcp Server
+  description: "Docker MCP server for bitrefill-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

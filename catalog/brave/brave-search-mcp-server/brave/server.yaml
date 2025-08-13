@@ -1,0 +1,14 @@
+identifier: brave/brave-search-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/brave/brave-search-mcp-server
+  name: brave-search-mcp-server
+  owner: brave
+server:
+  subdirectory: /
+  name: Brave Search Mcp Server
+  description: "Docker MCP server for brave-search-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

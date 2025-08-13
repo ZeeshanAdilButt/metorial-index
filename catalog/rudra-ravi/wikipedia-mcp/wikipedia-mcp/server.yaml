@@ -1,4 +1,4 @@
-identifier: rudra-ravi/wikipedia-mcp/wikipedia-mcp
+identifier: Rudra-ravi/wikipedia-mcp
 repo:
   provider: github.com
   url: https://github.com/Rudra-ravi/wikipedia-mcp
@@ -6,13 +6,9 @@ repo:
   owner: Rudra-ravi
 server:
   subdirectory: /
-  name: Wikipedia Information Server
-  description: Provide real-time access to Wikipedia content to enhance AI
-    assistants with accurate and up-to-date factual information. Enable LLMs to
-    search articles, retrieve full content, summaries, sections, links, and
-    related topics from Wikipedia in multiple languages. Facilitate grounded and
-    reliable responses by integrating Wikipedia data seamlessly.
+  name: Wikipedia Mcp
+  description: "Docker MCP server for wikipedia-mcp operations."
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: false
+    isHostable: true

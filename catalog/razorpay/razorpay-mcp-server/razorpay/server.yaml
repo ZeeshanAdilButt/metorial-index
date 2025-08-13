@@ -1,0 +1,14 @@
+identifier: razorpay/razorpay-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/razorpay/razorpay-mcp-server
+  name: razorpay-mcp-server
+  owner: razorpay
+server:
+  subdirectory: /
+  name: Razorpay Mcp Server
+  description: "Docker MCP server for razorpay-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

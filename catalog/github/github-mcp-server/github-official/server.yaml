@@ -1,0 +1,14 @@
+identifier: github/github-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/github/github-mcp-server
+  name: github-mcp-server
+  owner: github
+server:
+  subdirectory: /
+  name: Github Mcp Server
+  description: "Docker MCP server for github-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

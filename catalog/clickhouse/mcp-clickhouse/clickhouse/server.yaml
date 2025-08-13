@@ -1,0 +1,14 @@
+identifier: ClickHouse/mcp-clickhouse
+repo:
+  provider: github.com
+  url: https://github.com/ClickHouse/mcp-clickhouse
+  name: mcp-clickhouse
+  owner: ClickHouse
+server:
+  subdirectory: /
+  name: Mcp Clickhouse
+  description: "Docker MCP server for mcp-clickhouse operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

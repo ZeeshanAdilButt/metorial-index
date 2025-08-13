@@ -1,0 +1,14 @@
+identifier: sooperset/mcp-atlassian
+repo:
+  provider: github.com
+  url: https://github.com/sooperset/mcp-atlassian
+  name: mcp-atlassian
+  owner: sooperset
+server:
+  subdirectory: /
+  name: Mcp Atlassian
+  description: "Docker MCP server for mcp-atlassian operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

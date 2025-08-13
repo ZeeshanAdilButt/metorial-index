@@ -1,0 +1,14 @@
+identifier: buildkite/buildkite-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/buildkite/buildkite-mcp-server
+  name: buildkite-mcp-server
+  owner: buildkite
+server:
+  subdirectory: /
+  name: Buildkite Mcp Server
+  description: "Docker MCP server for buildkite-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

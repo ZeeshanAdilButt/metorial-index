@@ -1,0 +1,14 @@
+identifier: line/line-bot-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/line/line-bot-mcp-server
+  name: line-bot-mcp-server
+  owner: line
+server:
+  subdirectory: /
+  name: Line Bot Mcp Server
+  description: "Docker MCP server for line-bot-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

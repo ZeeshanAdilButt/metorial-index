@@ -1,4 +1,4 @@
-identifier: e2b-dev/mcp-server/e2b
+identifier: e2b-dev/mcp-server
 repo:
   provider: github.com
   url: https://github.com/e2b-dev/mcp-server
@@ -6,8 +6,8 @@ repo:
   owner: e2b-dev
 server:
   subdirectory: /
-  name: E2B
-  description: Add code execution and interpreting capabilities to your agents.
+  name: Mcp Server
+  description: "Docker MCP server for mcp-server operations."
   flags:
     isOfficial: false
     isCommunity: true

@@ -1,4 +1,4 @@
-identifier: wonderwhy-er/desktopcommandermcp/desktop-commander
+identifier: wonderwhy-er/DesktopCommanderMCP
 repo:
   provider: github.com
   url: https://github.com/wonderwhy-er/DesktopCommanderMCP
@@ -6,10 +6,9 @@ repo:
   owner: wonderwhy-er
 server:
   subdirectory: /
-  name: Desktop Commander
-  description: Execute terminal commands and manage files with diff editing
-    capabilities. Coding, shell and terminal, task automation
+  name: DesktopCommanderMCP
+  description: "Docker MCP server for desktopcommandermcp operations."
   flags:
     isOfficial: false
-    isCommunity: false
-    isHostable: false
+    isCommunity: true
+    isHostable: true

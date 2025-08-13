@@ -1,0 +1,14 @@
+identifier: rflpazini/mcp-api-gateway
+repo:
+  provider: github.com
+  url: https://github.com/rflpazini/mcp-api-gateway
+  name: mcp-api-gateway
+  owner: rflpazini
+server:
+  subdirectory: /
+  name: Mcp Api Gateway
+  description: "Docker MCP server for mcp-api-gateway operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

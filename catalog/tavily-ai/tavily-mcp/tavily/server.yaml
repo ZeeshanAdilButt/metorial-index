@@ -1,0 +1,14 @@
+identifier: tavily-ai/tavily-mcp
+repo:
+  provider: github.com
+  url: https://github.com/tavily-ai/tavily-mcp
+  name: tavily-mcp
+  owner: tavily-ai
+server:
+  subdirectory: /
+  name: Tavily Mcp
+  description: "Docker MCP server for tavily-mcp operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

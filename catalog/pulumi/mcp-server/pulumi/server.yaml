@@ -1,0 +1,14 @@
+identifier: pulumi/mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/pulumi/mcp-server
+  name: mcp-server
+  owner: pulumi
+server:
+  subdirectory: /
+  name: Mcp Server
+  description: "Docker MCP server for mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

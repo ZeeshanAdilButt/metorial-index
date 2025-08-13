@@ -1,15 +1,14 @@
-identifier: modelcontextprotocol/servers/gitlab
+identifier: modelcontextprotocol/servers
 repo:
   provider: github.com
   url: https://github.com/modelcontextprotocol/servers
   name: servers
   owner: modelcontextprotocol
 server:
-  subdirectory: /src/gitlab
-  name: GitLab MCP Server
-  description: MCP Server for the GitLab API, enabling project management, file
-    operations, and more.
+  subdirectory: /
+  name: Servers
+  description: "Docker MCP server for servers operations."
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: false
+    isHostable: true

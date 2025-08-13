@@ -1,0 +1,14 @@
+identifier: Shopify/dev-mcp
+repo:
+  provider: github.com
+  url: https://github.com/Shopify/dev-mcp
+  name: dev-mcp
+  owner: Shopify
+server:
+  subdirectory: /
+  name: Dev Mcp
+  description: "Docker MCP server for dev-mcp operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

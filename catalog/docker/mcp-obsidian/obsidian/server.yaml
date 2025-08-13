@@ -1,0 +1,14 @@
+identifier: docker/mcp-obsidian
+repo:
+  provider: github.com
+  url: https://github.com/docker/mcp-obsidian
+  name: mcp-obsidian
+  owner: docker
+server:
+  subdirectory: /
+  name: Mcp Obsidian
+  description: "Docker MCP server for mcp-obsidian operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

@@ -1,0 +1,14 @@
+identifier: mschneider82/mcp-openweather
+repo:
+  provider: github.com
+  url: https://github.com/mschneider82/mcp-openweather
+  name: mcp-openweather
+  owner: mschneider82
+server:
+  subdirectory: /
+  name: Mcp Openweather
+  description: "Docker MCP server for mcp-openweather operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

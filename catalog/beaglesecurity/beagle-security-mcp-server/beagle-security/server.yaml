@@ -1,0 +1,14 @@
+identifier: beaglesecurity/beagle-security-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/beaglesecurity/beagle-security-mcp-server
+  name: beagle-security-mcp-server
+  owner: beaglesecurity
+server:
+  subdirectory: /
+  name: Beagle Security Mcp Server
+  description: "Docker MCP server for beagle-security-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

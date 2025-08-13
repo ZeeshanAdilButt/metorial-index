@@ -1,0 +1,14 @@
+identifier: hashicorp/terraform-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/hashicorp/terraform-mcp-server
+  name: terraform-mcp-server
+  owner: hashicorp
+server:
+  subdirectory: /
+  name: Terraform Mcp Server
+  description: "Docker MCP server for terraform-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

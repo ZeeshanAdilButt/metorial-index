@@ -1,17 +1,14 @@
-identifier: modelcontextprotocol/servers/sqlite
+identifier: modelcontextprotocol/servers
 repo:
   provider: github.com
   url: https://github.com/modelcontextprotocol/servers
   name: servers
   owner: modelcontextprotocol
 server:
-  subdirectory: /src/sqlite
-  name: SQLite MCP Server
-  description: A Model Context Protocol (MCP) server implementation that provides
-    database interaction and business intelligence capabilities through SQLite.
-    This server enables running SQL queries, analyzing business data, and
-    automatically generating business insight memos.
+  subdirectory: /
+  name: Servers
+  description: "Docker MCP server for servers operations."
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: false
+    isHostable: true

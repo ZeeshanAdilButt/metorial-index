@@ -1,0 +1,14 @@
+identifier: BasedHardware/omi
+repo:
+  provider: github.com
+  url: https://github.com/BasedHardware/omi
+  name: omi
+  owner: BasedHardware
+server:
+  subdirectory: /
+  name: Omi
+  description: "Docker MCP server for omi operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

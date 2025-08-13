@@ -1,0 +1,14 @@
+identifier: nota/gyazo-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/nota/gyazo-mcp-server
+  name: gyazo-mcp-server
+  owner: nota
+server:
+  subdirectory: /
+  name: Gyazo Mcp Server
+  description: "Docker MCP server for gyazo-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

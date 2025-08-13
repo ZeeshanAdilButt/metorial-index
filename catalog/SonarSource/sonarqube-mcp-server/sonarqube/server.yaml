@@ -1,0 +1,14 @@
+identifier: SonarSource/sonarqube-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/SonarSource/sonarqube-mcp-server
+  name: sonarqube-mcp-server
+  owner: SonarSource
+server:
+  subdirectory: /
+  name: Sonarqube Mcp Server
+  description: "Docker MCP server for sonarqube-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

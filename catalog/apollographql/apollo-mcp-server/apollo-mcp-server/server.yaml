@@ -1,0 +1,14 @@
+identifier: apollographql/apollo-mcp-server
+repo:
+  provider: github.com
+  url: https://github.com/apollographql/apollo-mcp-server
+  name: apollo-mcp-server
+  owner: apollographql
+server:
+  subdirectory: /
+  name: Apollo Mcp Server
+  description: "Docker MCP server for apollo-mcp-server operations."
+  flags:
+    isOfficial: false
+    isCommunity: true
+    isHostable: true

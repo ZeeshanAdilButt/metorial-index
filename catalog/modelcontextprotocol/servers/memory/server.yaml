@@ -1,15 +1,14 @@
-identifier: modelcontextprotocol/servers/memory
+identifier: modelcontextprotocol/servers
 repo:
   provider: github.com
   url: https://github.com/modelcontextprotocol/servers
   name: servers
   owner: modelcontextprotocol
 server:
-  subdirectory: /src/memory
-  name: Knowledge Graph Memory Server
-  description: A basic implementation of persistent memory using a local knowledge
-    graph. This lets Claude remember information about the user across chats.
+  subdirectory: /
+  name: Servers
+  description: "Docker MCP server for servers operations."
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: false
+    isHostable: true
