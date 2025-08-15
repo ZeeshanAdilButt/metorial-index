@@ -1,14 +1,16 @@
-identifier: modelcontextprotocol/servers
+identifier: modelcontextprotocol/servers/fetch
 repo:
   provider: github.com
   url: https://github.com/modelcontextprotocol/servers
   name: servers
   owner: modelcontextprotocol
 server:
-  subdirectory: /
-  name: Servers
-  description: "Docker MCP server for servers operations."
+  subdirectory: /src/fetch
+  name: Fetch MCP Server
+  description: A Model Context Protocol server that provides web content fetching
+    capabilities. This server enables LLMs to retrieve and process content from
+    web pages, converting HTML to markdown for easier consumption.
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: true
+    isHostable: false

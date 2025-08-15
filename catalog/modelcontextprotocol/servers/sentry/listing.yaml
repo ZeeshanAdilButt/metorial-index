@@ -1,10 +1,8 @@
-description: Docker-based reference implementations for the Model Context
-  Protocol (MCP), facilitating interactions between Large Language Models (LLMs)
-  and various tools or data sources. These servers illustrate MCP's flexibility
-  and extensibility, enabling secure and controlled access to operations across
-  multiple programming languages.
+description: Interact with Sentry to retrieve and analyze error reports and
+  debugging information. Inspect issues through their IDs or URLs, including
+  details like status, timestamps, and stack traces.
 skills:
-  - Connect to various tools and data sources
-  - Execute server operations via MCP SDKs
-  - Manage LLM interactions
-  - Implement multi-language support (C#, Go, Java, Kotlin, Python)
+  - Retrieve Sentry issue details by ID or URL
+  - Analyze error reports
+  - Inspect stack traces
+  - Fetch issue status and metadata

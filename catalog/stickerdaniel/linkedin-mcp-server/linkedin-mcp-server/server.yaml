@@ -1,4 +1,4 @@
-identifier: stickerdaniel/linkedin-mcp-server
+identifier: stickerdaniel/linkedin-mcp-server/linkedin-mcp-server
 repo:
   provider: github.com
   url: https://github.com/stickerdaniel/linkedin-mcp-server
@@ -6,8 +6,10 @@ repo:
   owner: stickerdaniel
 server:
   subdirectory: /
-  name: Linkedin Mcp Server
-  description: "Docker MCP server for linkedin-mcp-server operations."
+  name: LinkedIn MCP Server
+  description: Interact with LinkedIn through AI assistants to scrape profiles,
+    analyze companies, and search for jobs. Leverage the power of AI to gather
+    insights and recommendations from LinkedIn data effortlessly.
   flags:
     isOfficial: false
     isCommunity: true

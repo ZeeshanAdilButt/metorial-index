@@ -1,14 +1,14 @@
-identifier: modelcontextprotocol/servers
+identifier: modelcontextprotocol/servers/google-maps
 repo:
   provider: github.com
   url: https://github.com/modelcontextprotocol/servers
   name: servers
   owner: modelcontextprotocol
 server:
-  subdirectory: /
-  name: Servers
-  description: "Docker MCP server for servers operations."
+  subdirectory: /src/google-maps
+  name: Google Maps MCP Server
+  description: MCP Server for the Google Maps API.
   flags:
     isOfficial: false
     isCommunity: true
-    isHostable: true
+    isHostable: false

@@ -1,4 +1,4 @@
-identifier: rohitg00/kubectl-mcp-server
+identifier: rohitg00/kubectl-mcp-server/kubectl-mcp-server
 repo:
   provider: github.com
   url: https://github.com/rohitg00/kubectl-mcp-server
@@ -6,8 +6,12 @@ repo:
   owner: rohitg00
 server:
   subdirectory: /
-  name: Kubectl Mcp Server
-  description: "Docker MCP server for kubectl-mcp-server operations."
+  name: Kubectl MCP Tool
+  description: Connect to Kubernetes clusters and manage resources using natural
+    language commands. Simplify your Kubernetes operations with intelligent
+    command construction and context-aware interactions. Enhance your AI
+    assistants with seamless Kubernetes integration for efficient cluster
+    management.
   flags:
     isOfficial: false
     isCommunity: true

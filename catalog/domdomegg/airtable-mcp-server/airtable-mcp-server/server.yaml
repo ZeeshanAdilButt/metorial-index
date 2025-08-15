@@ -1,4 +1,4 @@
-identifier: domdomegg/airtable-mcp-server
+identifier: domdomegg/airtable-mcp-server/airtable-mcp-server
 repo:
   provider: github.com
   url: https://github.com/domdomegg/airtable-mcp-server
@@ -6,8 +6,9 @@ repo:
   owner: domdomegg
 server:
   subdirectory: /
-  name: Airtable Mcp Server
-  description: "Docker MCP server for airtable-mcp-server operations."
+  name: Airtable Server
+  description: A Model Context Protocol server that provides read and write access
+    to Airtable databases.
   flags:
     isOfficial: false
     isCommunity: true
